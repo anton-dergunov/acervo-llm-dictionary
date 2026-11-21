@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "dibujar; correr; tirar de",
+    "primaryGloss": "dibujar",
+    "emotion": "focused and quiet, lost in a creative task",
+    "notes": [
+      "Verbo irregular: el pasado es 'drew' (/druː/) y el participio es 'drawn' (/drɔːn/).",
+      "No confundas 'draw' (dibujar con lápiz o bolígrafo) con 'paint' (pintar con pintura y pincel)."
+    ],
+    "senses": [
+      {
+        "id": "isd8ec4a0wm259i",
+        "order": 0,
+        "definition": "Hacer imágenes o figuras sobre una superficie usando un lápiz o bolígrafo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dibujar"
+            ]
+          }
+        ],
+        "domain": "arte",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "28f6w5cothziqu5",
+            "text": "I like to draw portraits of my friends.",
+            "textLang": "en",
+            "translation": "Me gusta dibujar retratos de mis amigos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, sharing a simple hobby",
+            "note": null,
+            "matchedForm": "draw",
+            "matchedTranslationForm": "dibujar"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e2crymm0lvj3cjw",
+        "order": 1,
+        "definition": "Tirar de algo para moverlo hacia una posición, como una cortina para abrirla o cerrarla.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "correr",
+              "tirar de",
+              "jalar"
+            ]
+          }
+        ],
+        "domain": "movimiento",
+        "emoji": "🫳",
+        "examples": [
+          {
+            "id": "uuvdvjeju2l949w",
+            "text": "She drew the curtains to let the sunlight in.",
+            "textLang": "en",
+            "translation": "Corrió las cortinas para dejar entrar la luz del sol.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and intentional, performing a small household chore",
+            "note": null,
+            "matchedForm": "drew",
+            "matchedTranslationForm": "Corrió"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "draw",
+    "lemma": "draw",
+    "reading": null,
+    "ipa": "/drɔː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✏️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "dibujar; atraer; sacar",
     "primaryGloss": "dibujar",
     "emotion": "focused and quiet, lost in a creative task",
@@ -161,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "dibujar; atraer; sacar",
+        "why": "'sacar' is not in any sense's glosses; 'atraer' is an abstract sense not covered."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past forms (drew, drawn), which an A2 learner needs."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "En contextos de movimiento, 'draw' significa jalar o tirar de algo",
+        "why": "Merely restates sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "jalar, tirar de, atraer",
+        "why": "'atraer' (to attract attention/crowds) does not fit physical pulling and curtains."
+      }
+    ],
+    "growth": 0.875
   }
 }

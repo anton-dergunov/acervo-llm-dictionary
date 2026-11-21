@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "cup, coffee cup, teacup",
+    "primaryGloss": "cup",
+    "emotion": "warm and welcoming, holding a hot drink on a quiet morning",
+    "notes": [
+      "Differs from كُوب (kūb), which is larger and used for water, juice, or mugs. Plural: فَنَاجِين (fanājīn)."
+    ],
+    "senses": [
+      {
+        "id": "a50ym2m9u8rpcbp",
+        "order": 0,
+        "definition": "A small cup used for serving hot drinks such as coffee or tea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "coffee cup",
+              "teacup"
+            ]
+          }
+        ],
+        "domain": "tableware",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "oevpc1360jcc42f",
+            "text": "شَرِبْتُ فِنْجَانَ قَهْوَةٍ صَبَاحًا.",
+            "textLang": "ar",
+            "translation": "I drank a cup of coffee in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "فِنْجَانَ",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "فِنْجَان",
+    "lemma": "فِنْجَان",
+    "reading": null,
+    "ipa": "/finˈdʒaːn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "cup; small container with a handle for hot drinks",
     "primaryGloss": "cup",
     "emotion": "warm and welcoming, holding a hot drink on a quiet morning",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "small cups with handles, often used for Arabic coffee",
+        "why": "Arabic coffee cups (فناجين) characteristically do not have handles."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cup; small container with a handle for hot drinks",
+        "why": "Includes a full definition in the shortGloss instead of concise translations."
+      }
+    ],
+    "growth": 0.72
   }
 }

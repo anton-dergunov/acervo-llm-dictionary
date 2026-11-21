@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "food; meal",
+    "primaryGloss": "food",
+    "emotion": "warm and welcoming, looking forward to a meal",
+    "notes": [
+      "Formed from the verb 'makan' (to eat) + the noun-forming suffix '-an'.",
+      "Refers to solid food; drinks are called 'minuman'."
+    ],
+    "senses": [
+      {
+        "id": "lgz984gzkpuhsdf",
+        "order": 0,
+        "definition": "Things that people or animals eat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "food",
+              "meal"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "pg52ff257rtgvio",
+            "text": "Makanan di warung itu sangat enak.",
+            "textLang": "id",
+            "translation": "The food at that small stall is very delicious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and hungry, recommending a favorite dish",
+            "note": null,
+            "matchedForm": "Makanan",
+            "matchedTranslationForm": "food"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "makanan",
+    "lemma": "makanan",
+    "reading": null,
+    "ipa": "/maˈkanan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "food; something you eat",
     "primaryGloss": "food",
     "emotion": "warm and welcoming, looking forward to a meal",
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Any substance that people or animals eat or drink, or that plants",
+        "why": "False for Indonesian: 'makanan' only refers to solid food, not drinks ('minuman') or plant nutrients."
+      }
+    ],
+    "growth": 0.628
   }
 }

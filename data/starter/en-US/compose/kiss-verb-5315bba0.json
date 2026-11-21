@@ -72,6 +72,74 @@
     "primaryGloss": "besar",
     "emotion": "warm and intimate, reflecting a moment of connection or affection",
     "notes": [
+      "A diferencia del español ('besar a alguien'), en inglés no lleva preposición antes de la persona ('She kissed him')."
+    ],
+    "senses": [
+      {
+        "id": "4nd0e6xvopa7m50",
+        "order": 0,
+        "definition": "Tocar a alguien o algo con los labios como muestra de afecto o saludo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "besar",
+              "dar un beso"
+            ]
+          }
+        ],
+        "domain": "afecto",
+        "emoji": "💋",
+        "examples": [
+          {
+            "id": "270jkwp4w41vbqj",
+            "text": "She likes to kiss her children before they go to school.",
+            "textLang": "en",
+            "translation": "Le gusta besar a sus hijos antes de que vayan a la escuela.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and caring, showing a sweet everyday routine",
+            "note": null,
+            "matchedForm": "kiss",
+            "matchedTranslationForm": "besar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "kiss",
+    "lemma": "kiss",
+    "reading": null,
+    "ipa": "/kɪs/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "besar; dar un beso",
+    "primaryGloss": "besar",
+    "emotion": "warm and intimate, reflecting a moment of connection or affection",
+    "notes": [
       "No debe confundirse con 'kiss' como sustantivo (un beso).",
       "Es un verbo regular en pasado: kissed."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "senses[0].domain",
+        "quote": "affection",
+        "why": "Domain is in English instead of Spanish."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "No debe confundirse con 'kiss' como sustantivo (un beso).",
+        "why": "Both notes state the obvious instead of noting that 'kiss' takes no preposition in English."
+      }
+    ],
+    "growth": 1.081
   }
 }

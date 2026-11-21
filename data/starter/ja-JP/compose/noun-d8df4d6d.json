@@ -58,6 +58,74 @@
     "headword": "鼻",
     "lemma": "鼻",
     "reading": "はな",
+    "ipa": "haꜜna",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "nose",
+    "primaryGloss": "nose",
+    "emotion": "a neutral, objective observation of a physical feature",
+    "notes": [
+      "Same reading as 花 (はな, flower), though their pitch accents differ in standard Tokyo Japanese.",
+      "The expression 鼻が高い (literally 'one's nose is high') is a common idiom meaning 'proud'."
+    ],
+    "senses": [
+      {
+        "id": "uzk9bmn44j144o7",
+        "order": 0,
+        "definition": "The part of the face above the mouth, used for breathing and smelling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nose"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "aeyub5zlkah82d1",
+            "text": "犬は鼻がいいです。",
+            "textLang": "ja",
+            "translation": "Dogs have a good sense of smell.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "鼻",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "鼻",
+    "lemma": "鼻",
+    "reading": "はな",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -96,5 +164,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Often used with verbs like takai (high/tall) to describe someone with a",
+        "why": "高い (takai) is an adjective, not a verb, and 鼻が高い usually means proud/boastful."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should warn about the homophone 花 (hana, flower) and common idioms like 鼻が高い."
+      }
+    ],
+    "growth": 1.365
   }
 }

@@ -57,6 +57,115 @@
     "language": "ja",
     "headword": "耳",
     "lemma": "耳",
+    "reading": "みみ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "ear; hearing",
+    "primaryGloss": "ear",
+    "emotion": "matter-of-fact and neutral, pointing to or referencing a part of the body",
+    "notes": [
+      "The idiom 耳が痛い (mimi ga itai, literally 'my ears hurt') means that a criticism hits home and is painful to hear.",
+      "Can also refer to the crust of a slice of bread (パンの耳)."
+    ],
+    "senses": [
+      {
+        "id": "xr1bpmmaza8blh5",
+        "order": 0,
+        "definition": "The organ on the side of the head used for hearing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "lbyp7n79vgmmuu3",
+            "text": "ゾウは耳が大きいです。",
+            "textLang": "ja",
+            "translation": "Elephants have big ears.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "耳",
+            "matchedTranslationForm": "ears"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "44jsij0ly6sdz60",
+        "order": 1,
+        "definition": "The ability or sense of hearing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hearing",
+              "ear"
+            ]
+          }
+        ],
+        "domain": "sense",
+        "emoji": "🔊",
+        "examples": [
+          {
+            "id": "0687tms21fxoof5",
+            "text": "祖母は耳が遠くなりました。",
+            "textLang": "ja",
+            "translation": "My grandmother has become hard of hearing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "耳",
+            "matchedTranslationForm": "hearing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "耳",
+    "lemma": "耳",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji word is missing its hiragana reading (みみ)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While primarily referring to the body part, the word is also used",
+        "why": "Restates the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The ears are big.",
+        "why": "Unnatural translation out of context; 'He/She has big ears' is natural."
+      }
+    ],
+    "growth": 0.694
   }
 }

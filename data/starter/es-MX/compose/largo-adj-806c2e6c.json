@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "long; lengthy",
+    "primaryGloss": "long",
+    "emotion": "a deliberate, steady assessment of space or time, calm and observant",
+    "notes": [
+      "False friend: 'largo' means 'long', not 'large' (which is 'grande').",
+      "To describe a person's height, use 'alto' ('tall'), never 'largo'."
+    ],
+    "senses": [
+      {
+        "id": "gs3n6qozucv7baa",
+        "order": 0,
+        "definition": "Measuring a great distance from one end to the other.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "long"
+            ]
+          }
+        ],
+        "domain": "length",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "o4i8f5f5i31dyr2",
+            "text": "El camino es muy largo.",
+            "textLang": "es",
+            "translation": "The path is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary, contemplating a journey ahead",
+            "note": null,
+            "matchedForm": "largo",
+            "matchedTranslationForm": "long"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9a7kdyw02ttsuou",
+        "order": 1,
+        "definition": "Lasting for a great amount of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "long",
+              "lengthy"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "mnd6vncem71zld7",
+            "text": "Tuvimos una reunión larga.",
+            "textLang": "es",
+            "translation": "We had a long meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and tired from sitting too long",
+            "note": null,
+            "matchedForm": "larga",
+            "matchedTranslationForm": "long"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "largo",
+    "lemma": "largo",
+    "reading": null,
+    "ipa": "/ˈlaɾɣo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "long; lengthy; tall",
     "primaryGloss": "long",
     "emotion": "a deliberate, steady assessment of space or time, calm and observant",
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "long; lengthy; tall",
+        "why": "'Tall' is false for 'largo' (which the note itself points out) and absent from senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should warn English speakers that 'largo' is a false friend for 'large' ('grande')."
+      }
+    ],
+    "growth": 1.024
   }
 }

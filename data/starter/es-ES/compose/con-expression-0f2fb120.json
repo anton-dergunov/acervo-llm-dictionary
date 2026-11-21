@@ -72,6 +72,136 @@
     "primaryGloss": "with",
     "emotion": null,
     "notes": [
+      "With 'mí' (me) and 'ti' (you), 'con' combines into single special words: 'conmigo' (with me) and 'contigo' (with you). Never say 'con mí' or 'con ti'."
+    ],
+    "senses": [
+      {
+        "id": "tobpqkouc1cgixe",
+        "order": 0,
+        "definition": "In the company of someone or something, or having something included.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with"
+            ]
+          }
+        ],
+        "domain": "company",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "r3mx40v57zxi6v9",
+            "text": "Voy al cine con mis amigos.",
+            "textLang": "es",
+            "translation": "I am going to the cinema with my friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and anticipating a good time out",
+            "note": null,
+            "matchedForm": "con",
+            "matchedTranslationForm": "with"
+          },
+          {
+            "id": "lxl6ft7omou72v6",
+            "text": "Quiero un café con leche, por favor.",
+            "textLang": "es",
+            "translation": "I want a coffee with milk, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "con",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zmk4h2vwjhp6y0p",
+        "order": 1,
+        "definition": "Using something as a tool or means to do an action.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "by means of",
+              "using"
+            ]
+          }
+        ],
+        "domain": "instrument",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "g8lghjangtwvb5i",
+            "text": "Corté el pan con un cuchillo.",
+            "textLang": "es",
+            "translation": "I cut the bread with a knife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the task",
+            "note": null,
+            "matchedForm": "con",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "con",
+    "lemma": "con",
+    "reading": null,
+    "ipa": "/kon/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "with; by means of",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
       "Used to show accompaniment or the tool used to do something.",
       "Be careful: it is followed by the preposition 'mí' (me) and 'ti' (you) instead of the expected 'yo' or 'tú'."
     ],
@@ -160,5 +290,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "it is followed by the preposition 'mí' (me) and 'ti' (you)",
+        "why": "False grammar: 'con' combines with 'mí' and 'ti' into 'conmigo' and 'contigo', never 'con mí/ti'."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'con' is a single-word preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to show accompaniment or the tool used to do something.",
+        "why": "Merely restates the two senses defined below."
+      }
+    ],
+    "growth": 1.231
   }
 }

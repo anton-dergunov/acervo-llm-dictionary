@@ -72,6 +72,115 @@
     "primaryGloss": "oil",
     "emotion": "a practical and steady feeling, like measuring out ingredients in a kitchen",
     "notes": [
+      "Usually uncountable in everyday use; the plural die Öle refers to different types of oil."
+    ],
+    "senses": [
+      {
+        "id": "93okdq09pu4gf36",
+        "order": 0,
+        "definition": "A smooth, thick liquid made from plants or animals, used in cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "oil",
+              "cooking oil"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "bqj615dfyo0icuq",
+            "text": "Ich brauche etwas Öl für den Salat.",
+            "textLang": "de",
+            "translation": "I need some oil for the salad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and matter-of-fact, like checking a grocery list",
+            "note": null,
+            "matchedForm": "Öl",
+            "matchedTranslationForm": "oil"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lkekpu9j6xcss0e",
+        "order": 1,
+        "definition": "A thick liquid from the ground or made artificially, used as fuel or to make machines run smoothly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "oil",
+              "petroleum"
+            ]
+          }
+        ],
+        "domain": "fuel",
+        "emoji": "⚙️",
+        "examples": [
+          {
+            "id": "bn9ks9v3reuc8o2",
+            "text": "Das Auto braucht neues Öl.",
+            "textLang": "de",
+            "translation": "The car needs new oil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and responsible, like dealing with a car repair",
+            "note": null,
+            "matchedForm": "Öl",
+            "matchedTranslationForm": "oil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Öl",
+    "lemma": "Öl",
+    "reading": null,
+    "ipa": "/øːl/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "oil",
+    "primaryGloss": "oil",
+    "emotion": "a practical and steady feeling, like measuring out ingredients in a kitchen",
+    "notes": [
       "Note that 'Öl' is used both for cooking oil and for machine lubricants or fuel. The context will always make clear which one is meant.",
       "Unlike in some languages, German speakers use the same word for olive oil, sunflower oil, and engine oil."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Note that 'Öl' is used both for cooking oil and for machine",
+        "why": "Both notes merely repeat the two senses; English 'oil' works the exact same way."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Cooking oil and engine/fuel oil are one general concept ('oil'), or at minimum need no note."
+      }
+    ],
+    "growth": 0.836
   }
 }

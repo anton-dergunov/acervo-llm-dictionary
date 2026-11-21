@@ -58,6 +58,97 @@
     "headword": "menceritakan",
     "lemma": "cerita",
     "reading": null,
+    "ipa": "/mənt͡ʃəriˈtakan/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to tell; to recount; to be about",
+    "primaryGloss": "to tell",
+    "emotion": "warm and engaging, sharing a story with someone",
+    "notes": [
+      "Formed from 'cerita' (story). As a transitive verb, 'menceritakan' takes the story or topic as its direct object, whereas intransitive 'bercerita' (to tell a story) usually takes 'tentang' (about)."
+    ],
+    "senses": [
+      {
+        "id": "7k6tdb4ptxvxqnd",
+        "order": 0,
+        "definition": "To tell or recount a story, event, or experience, or (of a book or film) to tell the story of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to tell",
+              "to recount",
+              "to narrate",
+              "to tell the story of"
+            ]
+          }
+        ],
+        "domain": "narration",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "see41cfktkjbcni",
+            "text": "Dia menceritakan pengalamannya selama liburan di Bali.",
+            "textLang": "id",
+            "translation": "He recounted his experiences from his holiday in Bali.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and lively, recalling a fun trip",
+            "note": null,
+            "matchedForm": "menceritakan",
+            "matchedTranslationForm": "recounted"
+          },
+          {
+            "id": "qz00ua1mb4rec7n",
+            "text": "Film ini menceritakan perjuangan seorang guru di desa terpencil.",
+            "textLang": "id",
+            "translation": "This film tells the story of a teacher's struggle in a remote village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and thoughtful, describing a touching film",
+            "note": null,
+            "matchedForm": "menceritakan",
+            "matchedTranslationForm": "tells the story of"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "menceritakan",
+    "lemma": "cerita",
+    "reading": null,
     "ipa": "/mən.t͡ʃə.ri.ta.kan/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "He told about his experience during his vacation in Bali.",
+        "why": "'Told about' without an object is awkward in English; 'talked about' or 'recounted' is natural."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "A person telling a story and a film telling a story are the same sense."
+      }
+    ],
+    "growth": 0.986
   }
 }

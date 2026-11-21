@@ -58,6 +58,76 @@
     "headword": "τηλεφωνώ",
     "lemma": "τηλεφωνώ",
     "reading": null,
+    "ipa": "/tilefoˈno/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to call; to phone",
+    "primaryGloss": "call",
+    "emotion": "matter-of-fact and direct, describing a routine task or plan",
+    "notes": [
+      "The person called is expressed with the genitive of a weak pronoun ('σου τηλεφωνώ') or with 'σε' + accusative ('τηλεφωνώ στη Μαρία').",
+      "In everyday speech, the phrase 'παίρνω τηλέφωνο' (+ accusative) is very common: 'Θα πάρω τηλέφωνο τη Μαρία'."
+    ],
+    "senses": [
+      {
+        "id": "fb1cnty468hrk64",
+        "order": 0,
+        "definition": "To speak to or contact someone by telephone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "call",
+              "phone",
+              "telephone"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "csuj26jrzf8ajsy",
+            "text": "Θα σου τηλεφωνήσω αύριο το πρωί.",
+            "textLang": "el",
+            "translation": "I will call you tomorrow morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reassuring and calm, promising future contact",
+            "note": null,
+            "matchedForm": "τηλεφωνήσω",
+            "matchedTranslationForm": "call"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "τηλεφωνώ",
+    "lemma": "τηλεφωνώ",
+    "reading": null,
     "ipa": "/tilifoˈno/",
     "pos": "verb",
     "gender": null,
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tilifoˈno/",
+        "why": "Standard Modern Greek pronunciation is /tilefoˈno/, not northern dialectal /tilifoˈno/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note that this verb takes the accusative case for the person",
+        "why": "False grammar: 'τηλεφωνώ' takes the genitive (μου/σου/του) or 'σε' + accusative, not bare accusative (unlike 'παίρνω τηλέφωνο')."
+      }
+    ],
+    "growth": 1.008
   }
 }

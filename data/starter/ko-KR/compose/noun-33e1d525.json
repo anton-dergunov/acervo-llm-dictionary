@@ -74,6 +74,73 @@
     "primaryGloss": "coffee",
     "emotion": null,
     "notes": [
+      "Cups of coffee are counted with 잔 (e.g., 커피 한 잔 'a cup of coffee')."
+    ],
+    "senses": [
+      {
+        "id": "9nlfxm4260jpvv2",
+        "order": 0,
+        "definition": "A hot or cold drink made from roasted coffee beans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffee"
+            ]
+          }
+        ],
+        "domain": "beverage",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "gzgxhui0gbsb4j8",
+            "text": "아침마다 따뜻한 커피를 한 잔 마셔요.",
+            "textLang": "ko",
+            "translation": "I drink a cup of hot coffee every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and routine, starting the day with a familiar habit",
+            "note": null,
+            "matchedForm": "커피",
+            "matchedTranslationForm": "coffee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "커피",
+    "lemma": "커피",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "coffee",
+    "primaryGloss": "coffee",
+    "emotion": null,
+    "notes": [
       "Used as a loanword from English, it is the standard term in all regions.",
       "Commonly followed by various suffixes to indicate the type, such as '커피를 마시다' (to drink coffee) or '커피숍' (coffee shop)."
     ],
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a loanword from English, it is the standard term",
+        "why": "Obvious filler note."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Commonly followed by various suffixes to indicate the type, such as '커피를 마시다'",
+        "why": "'커피를 마시다' is a verb phrase (object particle + verb), not a suffix indicating type."
+      }
+    ],
+    "growth": 0.609
   }
 }

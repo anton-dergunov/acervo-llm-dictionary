@@ -68,6 +68,116 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "country; land; countryside",
+    "primaryGloss": "country",
+    "emotion": "matter-of-fact and geographical, describing where a place is",
+    "notes": [
+      "In the phrase 'op het land' (in the countryside / on the farmland), it refers to rural areas as opposed to the city ('het platteland')."
+    ],
+    "senses": [
+      {
+        "id": "7l6bnqs9cz1vdsu",
+        "order": 0,
+        "definition": "A nation with its own government and borders.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "country",
+              "nation"
+            ]
+          }
+        ],
+        "domain": "nation",
+        "emoji": "🏳️",
+        "examples": [
+          {
+            "id": "jmbeas1r3uot7af",
+            "text": "Frankrijk is een prachtig land.",
+            "textLang": "nl",
+            "translation": "France is a beautiful country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and appreciative, sharing a travel memory",
+            "note": null,
+            "matchedForm": "land",
+            "matchedTranslationForm": "country"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "961u8tazt82727n",
+        "order": 1,
+        "definition": "The solid part of the earth's surface not covered by water, or an area of ground used for farming.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "land",
+              "ground",
+              "countryside"
+            ]
+          }
+        ],
+        "domain": "ground",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "uu61oxum7obyo43",
+            "text": "Na de lange zeereis zagen we eindelijk weer land.",
+            "textLang": "nl",
+            "translation": "After the long sea voyage we finally saw land again.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "land",
+            "matchedTranslationForm": "land"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het land",
+    "lemma": "land",
+    "reading": null,
+    "ipa": "/lɑnt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "country; land",
     "primaryGloss": "country",
     "emotion": "matter-of-fact and geographical, describing where a place is",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "when referring to a political entity, use 'het land'",
+        "why": "'Land' is always neuter ('het land') in every sense, not only for a country."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "zagen we eindelijk het land.",
+        "why": "In the sense 'land as opposed to sea', Dutch uses 'land' without an article."
+      }
+    ],
+    "growth": 1.01
   }
 }

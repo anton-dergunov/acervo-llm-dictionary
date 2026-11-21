@@ -70,6 +70,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "light; mild; gentle",
+    "primaryGloss": "light",
+    "emotion": null,
+    "notes": [
+      "Plural: خِفَاف (khifāf). Antonym: ثَقِيل (thaqīl, 'heavy').",
+      "In the idiom خَفِيف الدَّم (khafīf ad-dam, literally 'light-blooded'), it means charming, witty, or pleasant to be around."
+    ],
+    "senses": [
+      {
+        "id": "pxwo2oxum6gkpd8",
+        "order": 0,
+        "definition": "Having little weight; not heavy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lightweight"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "wxa559x7gdmuqj5",
+            "text": "هَذِهِ الحَقِيبَةُ خَفِيفَةٌ.",
+            "textLang": "ar",
+            "translation": "This suitcase is light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "خَفِيفَةٌ",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8auh48dljh5nsqc",
+        "order": 1,
+        "definition": "Not intense, heavy, or severe; mild or easy to digest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "mild",
+              "gentle"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "nnenmklcgzzclmr",
+            "text": "هُنَاكَ مَطَرٌ خَفِيفٌ بِالخَارِجِ.",
+            "textLang": "ar",
+            "translation": "There is light rain outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "خَفِيفٌ",
+            "matchedTranslationForm": "light"
+          },
+          {
+            "id": "68bn96lx5lnuw91",
+            "text": "أُحِبُّ تَنَاوُلَ عَشَاءٍ خَفِيفٍ.",
+            "textLang": "ar",
+            "translation": "I like to eat a light dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "خَفِيفٍ",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "خَفِيف",
+    "lemma": "خَفِيف",
+    "reading": null,
+    "ipa": "/xaˈfiːf/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "light; easy; gentle",
     "primaryGloss": "light",
     "emotion": null,
@@ -203,5 +335,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Khaseef refers primarily to weight",
+        "why": "Wrong romanization 'Khaseef' (خسيف) instead of 'Khafeef' (خفيف); also restates the senses."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "light; easy; gentle",
+        "why": "'easy' is not a gloss in any sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Food being light is just a standard use of non-heavy/mild, or can be kept concise."
+      }
+    ],
+    "growth": 1.027
   }
 }

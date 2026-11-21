@@ -58,6 +58,73 @@
     "headword": "비",
     "lemma": "비",
     "reading": null,
+    "ipa": "pi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌧️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "rain",
+    "primaryGloss": "rain",
+    "emotion": "a soft, rhythmic patter that invites staying inside and feeling cozy",
+    "notes": [
+      "In Korean, 'to rain' is expressed by pairing 비 with the verbs 오다 (to come) or 내리다 (to fall): 비가 오다 / 비가 내리다."
+    ],
+    "senses": [
+      {
+        "id": "cp2jntg10y9u4xj",
+        "order": 0,
+        "definition": "Water that falls in drops from the clouds in the sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rain"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌧️",
+        "examples": [
+          {
+            "id": "e8e3w1u126leyyc",
+            "text": "밖에 비가 많이 와요.",
+            "textLang": "ko",
+            "translation": "It is raining a lot outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "비가",
+            "matchedTranslationForm": "raining"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "비",
+    "lemma": "비",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A tool with a long handle and bristles used for sweeping",
+        "why": "Modern everyday Korean uses '빗자루' for broom; standalone '비' is rare for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with '비(가) 오다' (to rain), where '비'",
+        "why": "Confusing note: telling learners not to confuse a noun with its main collocation."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "비를 들고 마당을 쓸어요.",
+        "why": "Unnatural; native speakers say '빗자루로 마당을 쓸어요' and the translation is a calque."
+      }
+    ],
+    "growth": 0.471
   }
 }

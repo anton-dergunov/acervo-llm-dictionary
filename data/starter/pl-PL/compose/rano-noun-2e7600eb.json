@@ -72,6 +72,94 @@
     "primaryGloss": "morning",
     "emotion": "a fresh, quiet start to the day with a sense of potential",
     "notes": [
+      "Most commonly used as an adverb meaning 'in the morning' (e.g., 'wstaję rano'). When describing a specific morning with an adjective, use the masculine noun 'poranek' instead (e.g., 'zimny poranek')."
+    ],
+    "senses": [
+      {
+        "id": "w4nsfk7dael1nvs",
+        "order": 0,
+        "definition": "The early part of the day, from sunrise until noon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "morning"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "s5hkrj561kxfm8r",
+            "text": "Od rana pada deszcz.",
+            "textLang": "pl",
+            "translation": "It has been raining since morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rana",
+            "matchedTranslationForm": "morning"
+          },
+          {
+            "id": "pykeuret95m802s",
+            "text": "Zobaczymy się jutro rano.",
+            "textLang": "pl",
+            "translation": "We will see each other tomorrow morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rano",
+            "matchedTranslationForm": "morning"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "rano",
+    "lemma": "rano",
+    "reading": null,
+    "ipa": "/ˈra.nɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "morning",
+    "primaryGloss": "morning",
+    "emotion": "a fresh, quiet start to the day with a sense of potential",
+    "notes": [
       "While 'rano' functions as a noun, it is very commonly used as an adverb meaning 'in the morning'. Unlike many other Polish nouns, it does not change its form when used this way.",
       "It refers specifically to the time from dawn until around midday, unlike 'przedpołudnie', which is more formal and refers strictly to the time before noon."
     ],
@@ -140,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "To rano jest bardzo zimne.",
+        "why": "Unnatural in Polish; 'poranek' is used with adjectives, while 'rano' is mostly adverbial."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Lubię pić kawę, kiedy jest rano.",
+        "why": "Awkward phrasing forced to make 'rano' look like a noun; native speakers say 'Lubię pić kawę rano'."
+      }
+    ],
+    "growth": 0.732
   }
 }

@@ -68,6 +68,51 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "flor",
+    "primaryGloss": "flor",
+    "emotion": "gentle and bright, admiring something pretty in the garden",
+    "notes": [
+      "Se pronuncia exactamente igual que 'flour' (harina)."
+    ],
+    "senses": [
+      {
+        "id": "1f3g3t0p1hvoxz1",
+        "order": 0,
+        "definition": "La parte de una planta que tiene pétalos de colores y de la que después sale el fruto o la semilla.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "flor"
+            ]
+          }
+        ],
+        "domain": "planta",
+        "emoji": "🌸",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "flower",
+    "lemma": "flower",
+    "reading": null,
+    "ipa": "/ˈflaʊ.ər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "flor; florecer",
     "primaryGloss": "flor",
     "emotion": "gentle and bright, admiring something pretty in the garden",
@@ -115,5 +160,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "flor; florecer",
+        "why": "'florecer' is a verb, but this entry is for the noun 'flower'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "El estado en el que una planta produce flores.",
+        "why": "Mostly restricted to 'in flower', not a core standalone sense for A2."
+      }
+    ],
+    "growth": 0.537
   }
 }

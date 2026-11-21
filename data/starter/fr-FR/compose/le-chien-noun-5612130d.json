@@ -72,6 +72,73 @@
     "primaryGloss": "dog",
     "emotion": "warm and affectionate, calling a friendly pet over",
     "notes": [
+      "The feminine form is la chienne, used specifically for a female dog (avoid using it for people, as it is a strong insult)."
+    ],
+    "senses": [
+      {
+        "id": "94a59z1ikb8enqw",
+        "order": 0,
+        "definition": "A common four-legged animal kept as a pet or for guarding and hunting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "iatvqtam05gopu7",
+            "text": "Le chien court dans le jardin.",
+            "textLang": "fr",
+            "translation": "The dog is running in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and bright, watching a pet play outside",
+            "note": null,
+            "matchedForm": "chien",
+            "matchedTranslationForm": "dog"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le chien",
+    "lemma": "chien",
+    "reading": null,
+    "ipa": "/ʃjɛ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐕",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "dog",
+    "primaryGloss": "dog",
+    "emotion": "warm and affectionate, calling a friendly pet over",
+    "notes": [
       "Use 'le chien' for the male animal, but 'la chienne' is the female dog.",
       "Do not confuse with 'le chat', which is a cat."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'le chat', which is a cat.",
+        "why": "Unhelpful filler note; learners do not confuse 'chien' and 'chat'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'le chien' for the male animal, but 'la chienne'",
+        "why": "Misleading: 'chien' is also the general word for any dog; 'chienne' has vulgar slang meanings."
+      }
+    ],
+    "growth": 1.203
   }
 }

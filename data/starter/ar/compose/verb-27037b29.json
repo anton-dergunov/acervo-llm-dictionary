@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to hold, to grasp; to catch",
+    "primaryGloss": "to hold",
+    "emotion": "focused and deliberate, hands closing around an object",
+    "notes": [
+      "Takes either a direct object or the preposition بِـ (bi-) with no change in meaning: أَمْسَكَ الكُرَةَ or أَمْسَكَ بِالكُرَةِ.",
+      "Differs from أَخَذَ (to take), as أَمْسَكَ focuses on holding onto or seizing something rather than taking or receiving it."
+    ],
+    "senses": [
+      {
+        "id": "86yem7gxaawdg31",
+        "order": 0,
+        "definition": "To take and keep something or someone in your hand or grip.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hold",
+              "to grasp",
+              "to grip"
+            ]
+          }
+        ],
+        "domain": "holding",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "rcpkcbm0v0ohtig",
+            "text": "أَمْسَكَتِ الأُمُّ بِيَدِ ابْنَتِهَا.",
+            "textLang": "ar",
+            "translation": "The mother held her daughter's hand.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَمْسَكَتِ",
+            "matchedTranslationForm": "held"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tajdy48vjtrfa4u",
+        "order": 1,
+        "definition": "To intercept and hold something that is moving or trying to escape.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to catch",
+              "to seize",
+              "to capture"
+            ]
+          }
+        ],
+        "domain": "catching",
+        "emoji": "👐",
+        "examples": [
+          {
+            "id": "6nn0tcxzqr91cpm",
+            "text": "أَمْسَكَ الكُرَةَ بِكِلْتَا يَدَيْهِ.",
+            "textLang": "ar",
+            "translation": "He caught the ball with both hands.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quick and reactive, the moment of successful impact",
+            "note": null,
+            "matchedForm": "أَمْسَكَ",
+            "matchedTranslationForm": "caught"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَمْسَكَ",
+    "lemma": "أَمْسَكَ",
+    "reading": null,
+    "ipa": "/ʔamsaka/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to hold; to catch; to grasp",
     "primaryGloss": "hold",
     "emotion": "focused and deliberate, hands closing around an object",
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To take and keep something in your hand ... To maintain a physical hold",
+        "why": "Holding and grasping are one sense; separate 'to catch/capture' instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "أَمْسَكَتْ أُمُّهَا بِيَدِ ابْنَتِهَا.",
+        "why": "Awkward coreference ('her mother held her daughter's hand'); should be الأُمُّ."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "Used when you stop something moving with your hands",
+        "why": "Filler repeating definitions; misses that أَمْسَكَ takes either a direct object or بِـ."
+      }
+    ],
+    "growth": 0.859
   }
 }

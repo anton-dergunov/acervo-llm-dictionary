@@ -60,6 +60,138 @@
     "headword": "ถือ",
     "lemma": "ถือ",
     "reading": null,
+    "ipa": "/tʰɯː˩˩˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hold; to carry; to consider; to observe",
+    "primaryGloss": "hold",
+    "emotion": null,
+    "notes": [
+      "Often combined with ว่า as ถือว่า (thǔue wâa) to mean 'to consider (that)' or 'to count as'.",
+      "Do not confuse with หิ้ว (hîu, to carry hanging from the hand) or แบก (bàaek, to carry something heavy on the shoulder or back)."
+    ],
+    "senses": [
+      {
+        "id": "wtqhquxvurf0qpe",
+        "order": 0,
+        "definition": "To grasp or carry something in the hands or arms.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hold",
+              "carry"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "6snf1iz7qrsg02w",
+            "text": "เขากำลังถือกระเป๋าใบใหญ่",
+            "textLang": "th",
+            "translation": "He is holding a big bag.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and descriptive",
+            "note": null,
+            "matchedForm": "ถือ",
+            "matchedTranslationForm": "holding"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dwx86hp14gw8woz",
+        "order": 1,
+        "definition": "To regard or treat in a specified way, or to observe a rule, custom, or belief.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "consider",
+              "observe",
+              "take offense"
+            ]
+          }
+        ],
+        "domain": "attitude",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "s6lc9s0s3h470xm",
+            "text": "เรื่องแค่นี้ไม่ต้องไปถือเขาหรอก",
+            "textLang": "th",
+            "translation": "For such a small thing, you shouldn't hold it against him.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ถือ",
+            "matchedTranslationForm": "hold"
+          },
+          {
+            "id": "r0t98hx3czhmiki",
+            "text": "วันนี้ฉันถือศีล",
+            "textLang": "th",
+            "translation": "Today I am observing the religious precepts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ถือ",
+            "matchedTranslationForm": "observing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ถือ",
+    "lemma": "ถือ",
+    "reading": null,
     "ipa": "/tʰɯ̌ː/",
     "pos": "verb",
     "gender": null,
@@ -206,5 +338,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "เขานับถือศาสนาพุทธ",
+        "why": "Uses the distinct compound verb นับถือ instead of the headword ถือ."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hold; to carry; to believe; to respect",
+        "why": "'Respect' belongs to นับถือ, not standalone ถือ, and is absent from senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To have a belief, opinion, or follow a religion.",
+        "why": "Senses 1 and 2 overlap and muddle ถือ with นับถือ and ถือว่า."
+      }
+    ],
+    "growth": 0.777
   }
 }

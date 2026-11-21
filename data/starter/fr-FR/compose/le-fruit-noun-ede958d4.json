@@ -72,6 +72,116 @@
     "primaryGloss": "fruit",
     "emotion": "fresh and healthy, enjoying a crisp bite",
     "notes": [
+      "Unlike in English, 'fruit' is countable in French: 'un fruit' means 'a piece of fruit'.",
+      "The final '-t' is always silent."
+    ],
+    "senses": [
+      {
+        "id": "wryvjlpjog3np5g",
+        "order": 0,
+        "definition": "The sweet, fleshy part of a tree or plant that contains seeds and is eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "agz1qfafora33ho",
+            "text": "Je mange un fruit tous les soirs après le dîner.",
+            "textLang": "fr",
+            "translation": "I eat a piece of fruit every evening after dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "healthy and satisfied, enjoying a light evening snack",
+            "note": null,
+            "matchedForm": "fruit",
+            "matchedTranslationForm": "fruit"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g8mp3jttz0unhea",
+        "order": 1,
+        "definition": "The good result or reward of effort or work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit",
+              "result",
+              "outcome"
+            ]
+          }
+        ],
+        "domain": "result",
+        "emoji": "🏆",
+        "examples": [
+          {
+            "id": "r9ybo1gcnce5lkc",
+            "text": "Ce succès est le fruit d'un long travail.",
+            "textLang": "fr",
+            "translation": "This success is the fruit of long hard work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fruit",
+            "matchedTranslationForm": "fruit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le fruit",
+    "lemma": "fruit",
+    "reading": null,
+    "ipa": "/fʁɥi/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fruit; result",
+    "primaryGloss": "fruit",
+    "emotion": "fresh and healthy, enjoying a crisp bite",
+    "notes": [
       "Like in English, 'fruit' can be used literally for food or metaphorically for the result or reward of hard work (les fruits de son travail)."
     ],
     "senses": [
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Like in English, 'fruit' can be used literally for food",
+        "why": "Restates the two senses; misses silent final -t and countability contrast with English."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "I eat a fruit every evening after dinner.",
+        "why": "Calqued translation; 'fruit' is usually uncountable in English ('a piece of fruit')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ces efforts sont les fruits de sa longue recherche.",
+        "why": "Illogical: results are the fruit of efforts, not efforts the fruit of research."
+      }
+    ],
+    "growth": 0.903
   }
 }

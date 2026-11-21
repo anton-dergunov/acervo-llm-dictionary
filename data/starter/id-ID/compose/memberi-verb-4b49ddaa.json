@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to give; to provide",
+    "primaryGloss": "to give",
+    "emotion": "warm and welcoming, extending a hand to help someone out",
+    "notes": [
+      "'Memberi' is usually followed directly by the recipient and then the object ('memberi adik hadiah'). When the object comes first, 'memberikan' with 'kepada' is preferred ('memberikan hadiah kepada adik').",
+      "In casual conversation, 'kasih' or 'ngasih' is much more common than 'memberi'."
+    ],
+    "senses": [
+      {
+        "id": "uyax2x543pjgm36",
+        "order": 0,
+        "definition": "To hand over or let someone have something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to give",
+              "to hand"
+            ]
+          }
+        ],
+        "domain": "transfer",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "ycw3zkiu2gy31ev",
+            "text": "Ibu memberi anak itu sebuah buku baru.",
+            "textLang": "id",
+            "translation": "Mother gave that child a new book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and loving, presenting a gift to a child",
+            "note": null,
+            "matchedForm": "memberi",
+            "matchedTranslationForm": "gave"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hsxtymuqha4dw74",
+        "order": 1,
+        "definition": "To provide something useful, such as help, permission, or information.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to provide",
+              "to give",
+              "to offer"
+            ]
+          }
+        ],
+        "domain": "provision",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "4499otizo677arh",
+            "text": "Guru itu selalu memberi penjelasan yang jelas.",
+            "textLang": "id",
+            "translation": "That teacher always gives a clear explanation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and clear, acknowledging helpful guidance",
+            "note": null,
+            "matchedForm": "memberi",
+            "matchedTranslationForm": "gives"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "memberi",
+    "lemma": "beri",
+    "reading": null,
+    "ipa": "/məmˈbəri/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to give; to hand over; to provide",
     "primaryGloss": "give",
     "emotion": "warm and welcoming, extending a hand to help someone out",
@@ -203,5 +314,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tolong memberi saya kunci itu.",
+        "why": "Imperatives with 'tolong' drop the 'meN-' prefix ('Tolong beri/berikan...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To physically pass or hand an object to someone.",
+        "why": "Passing/handing an object is not a distinct lexical sense of 'memberi' from giving."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When you give something TO a specific person, you typically combine it",
+        "why": "'Memberi' normally takes the recipient directly ('memberi saya buku'); 'memberikan' takes 'kepada'."
+      }
+    ],
+    "growth": 0.88
   }
 }

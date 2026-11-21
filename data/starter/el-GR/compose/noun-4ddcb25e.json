@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "door",
+    "primaryGloss": "door",
+    "emotion": "welcoming and open, inviting someone to step inside",
+    "notes": [
+      "Also used for the door of a vehicle or appliance (η πόρτα του αυτοκινήτου, η πόρτα του ψυγείου). The formal counterpart η θύρα appears mainly on signs and in official terms (e.g., θύρα επιβίβασης, 'boarding gate')."
+    ],
+    "senses": [
+      {
+        "id": "ppx8ehvx8jmq1k7",
+        "order": 0,
+        "definition": "A hinged or sliding barrier that you open and close to enter or leave a room, building, or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door"
+            ]
+          }
+        ],
+        "domain": "door",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "s2rxhqtwwn2bcja",
+            "text": "Άνοιξε την πόρτα για να μπει φρέσκος αέρας.",
+            "textLang": "el",
+            "translation": "Open the door so fresh air can come in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πόρτα",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η πόρτα",
+    "lemma": "πόρτα",
+    "reading": null,
+    "ipa": "/ˈpoɾta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "door; gate",
     "primaryGloss": "door",
     "emotion": "welcoming and open, inviting someone to step inside",
@@ -159,5 +226,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Άνοιξε την πόρτα για να μπει φρέσκο αέρας.",
+        "why": "Wrong adjective agreement: masculine 'αέρας' requires 'φρέσκος', not neuter 'φρέσκο'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Κλείσε την αυλόπορτα όταν φύγεις.",
+        "why": "Uses the compound 'αυλόπορτα' instead of the headword 'πόρτα'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large opening or gate in a fence or wall",
+        "why": "Πόρτα means door (of a room, house, or car); gate is αυλόπορτα or πύλη."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "door; gate",
+        "why": "'gate' is not an accurate primary gloss for 'πόρτα'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Πόρτα is the standard everyday word for both an interior door",
+        "why": "Pure filler; English 'door' already covers both interior and entrance doors."
+      }
+    ],
+    "growth": 0.882
   }
 }

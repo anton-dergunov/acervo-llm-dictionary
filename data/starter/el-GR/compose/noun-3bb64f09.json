@@ -60,6 +60,73 @@
     "headword": "το αυτί",
     "lemma": "αυτί",
     "reading": null,
+    "ipa": "/afˈti/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "ear",
+    "primaryGloss": "ear",
+    "emotion": null,
+    "notes": [
+      "Also commonly spelled 'αφτί'. Notice that 'υ' before 'τ' is pronounced /f/."
+    ],
+    "senses": [
+      {
+        "id": "orhlge12kf8px2d",
+        "order": 0,
+        "definition": "The organ on the side of the head used for hearing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "cs2fhaouozcc9bo",
+            "text": "Πονάει το αυτί μου.",
+            "textLang": "el",
+            "translation": "My ear hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "discomforted and wincing slightly while describing a sharp pain",
+            "note": null,
+            "matchedForm": "αυτί",
+            "matchedTranslationForm": "ear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το αυτί",
+    "lemma": "αυτί",
+    "reading": null,
     "ipa": "/avˈti/",
     "pos": "noun",
     "gender": "neuter",
@@ -163,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/avˈti/",
+        "why": "'υ' before voiceless 'τ' is pronounced /f/, so /afˈti/, not /avˈti/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A part of an object that resembles the shape of an ear",
+        "why": "Secondary metaphorical sense ('lug/handle', usually diminutive αυτάκι) is not essential for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a neuter noun; make sure to use the correct article",
+        "why": "Restates the gender and article already shown in the headword."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'αυτί' is used for both the biological organ and, metaphorically",
+        "why": "Merely restates the senses while omitting the common alternative spelling 'αφτί'."
+      }
+    ],
+    "growth": 0.334
   }
 }

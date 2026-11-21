@@ -63,6 +63,96 @@
     "language": "ja",
     "headword": "時計",
     "lemma": "時計",
+    "reading": "とけい",
+    "ipa": "tokeː",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Time",
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "clock; watch",
+    "primaryGloss": "clock",
+    "emotion": "practical and observant, checking the time to stay on schedule",
+    "notes": [
+      "Covers both clocks and watches. To be specific, use 壁掛け時計 (kabekake-dokei, wall clock) or 腕時計 (udedokei, wristwatch)."
+    ],
+    "senses": [
+      {
+        "id": "96sgkow1b0joa6g",
+        "order": 0,
+        "definition": "A device that measures and shows the time, either placed in a room or worn on a person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clock",
+              "watch"
+            ]
+          }
+        ],
+        "domain": "timepiece",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "d6ng52cy9myy812",
+            "text": "壁に時計が掛かっています。",
+            "textLang": "ja",
+            "translation": "There is a clock hanging on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, noticing a detail in the room",
+            "note": null,
+            "matchedForm": "時計",
+            "matchedTranslationForm": "clock"
+          },
+          {
+            "id": "bvexwnzqdjxmtox",
+            "text": "時計を見るのを忘れました。",
+            "textLang": "ja",
+            "translation": "I forgot to look at my watch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "時計",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "時計",
+    "lemma": "時計",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -167,5 +257,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (とけい) for a word written in kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "時計 (tōkei) is a general term",
+        "why": "Wrong romanization/pronunciation: it is 'tokei' (short 'o'), not 'tōkei'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Japanese 時計 is a single concept covering both clocks and watches, as the note itself says."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "新しい腕時計を買いました。",
+        "why": "Uses the compound 腕時計 (udedokei) rather than the headword 時計 (tokei)."
+      }
+    ],
+    "growth": 0.526
   }
 }

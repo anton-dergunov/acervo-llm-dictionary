@@ -68,6 +68,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to arrive; to come; to, until",
+    "primaryGloss": "arrive",
+    "emotion": "welcoming and expectant, calling someone closer",
+    "notes": [
+      "Followed directly by a destination without a preposition: 'đến trường' (arrive at school / go to school).",
+      "Frequently used after 'từ' in the pattern 'từ ... đến ...' (from ... to/until ...)."
+    ],
+    "senses": [
+      {
+        "id": "opggr7wxgtzq0gq",
+        "order": 0,
+        "definition": "To reach or come to a place or time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arrive",
+              "come",
+              "reach"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "05o5n2ek0t2t2il",
+            "text": "Tàu đã đến ga Hà Nội.",
+            "textLang": "vi",
+            "translation": "The train has arrived at Hanoi station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đến",
+            "matchedTranslationForm": "arrived"
+          },
+          {
+            "id": "54i7ctz3sjflkl6",
+            "text": "Xin hãy đến đây.",
+            "textLang": "vi",
+            "translation": "Please come here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and inviting, gesturing for someone to join",
+            "note": null,
+            "matchedForm": "đến",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mpowlv1ocwzxuir",
+        "order": 1,
+        "definition": "Used to mark the end point of a journey, range, or period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to",
+              "until",
+              "up to"
+            ]
+          }
+        ],
+        "domain": "extent",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "rq3mxo4icmrerfr",
+            "text": "Anh ấy làm việc từ sáng đến tối.",
+            "textLang": "vi",
+            "translation": "He works from morning until night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đến",
+            "matchedTranslationForm": "until"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đến",
+    "lemma": "đến",
+    "reading": null,
+    "ipa": "/ɗen˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to come; to arrive; until",
     "primaryGloss": "come",
     "emotion": "welcoming and expectant, calling someone closer",
@@ -160,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To move towards here.",
+        "why": "'Đến' means to arrive at or come to any place, not just 'here'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To reach a certain time or place.",
+        "why": "Example and gloss 'until' use 'đến' as a preposition ('to/until'), not a verb."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often used together with 'với' (đến với)",
+        "why": "'Đến với' is poetic/abstract; note should explain direct object usage ('đến Hà Nội')."
+      }
+    ],
+    "growth": 1.87
   }
 }

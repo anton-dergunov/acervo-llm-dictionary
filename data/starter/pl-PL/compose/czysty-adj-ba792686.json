@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "clean; pure; clear",
+    "primaryGloss": "clean",
+    "emotion": "satisfied and fresh, noting the neatness of a space",
+    "notes": [
+      "Opposite: brudny (dirty)."
+    ],
+    "senses": [
+      {
+        "id": "fhqv0n1km3vurmf",
+        "order": 0,
+        "definition": "Free from dirt, marks, or stains.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "g7nl1a1gk9dndqq",
+            "text": "Po sprzątaniu cały pokój jest czysty.",
+            "textLang": "pl",
+            "translation": "After cleaning, the whole room is clean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "czysty",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k0ufxdj5srlv5o3",
+        "order": 1,
+        "definition": "Not mixed with anything else; free from harmful or unwanted substances.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pure",
+              "clear",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "purity",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "nk9md5lrwptt9nw",
+            "text": "W górach jest czyste powietrze.",
+            "textLang": "pl",
+            "translation": "There is clean, pure air in the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "czyste",
+            "matchedTranslationForm": "pure"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "czysty",
+    "lemma": "czysty",
+    "reading": null,
+    "ipa": "/ˈt͡ʂɨ.stɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "clean; pure; sheer",
     "primaryGloss": "clean",
     "emotion": "satisfied and fresh, noting the neatness of a space",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "clean; pure; sheer",
+        "why": "Includes 'sheer', which is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Mam czysty pokój po całym sprzątaniu.",
+        "why": "Unnatural phrasing ('po całym sprzątaniu' sounds like a calque of 'after all the cleaning')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "czysty primarily means clean or free from dirt, but it is",
+        "why": "Just repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.794
   }
 }

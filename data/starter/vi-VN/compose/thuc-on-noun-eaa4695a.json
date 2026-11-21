@@ -58,6 +58,73 @@
     "headword": "thực đơn",
     "lemma": "thực đơn",
     "reading": null,
+    "ipa": "/tʰɨk̚˧˨ˀ ɗəːn˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📄",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "menu",
+    "primaryGloss": "menu",
+    "emotion": "helpful and polite, handing the menu over at the table",
+    "notes": [
+      "In everyday casual speech, people very often say 'menu' (pronounced /mə˧˧ nu˧˧/) instead."
+    ],
+    "senses": [
+      {
+        "id": "wjbuvmtibd1vv88",
+        "order": 0,
+        "definition": "A list of food and drinks available in a restaurant or at a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "ij8n6t9b6xmtbtq",
+            "text": "Cho em xem thực đơn với ạ.",
+            "textLang": "vi",
+            "translation": "Could I see the menu, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "thực đơn",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "thực đơn",
+    "lemma": "thực đơn",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Thực đơn is a Sino-Vietnamese word (from 寔單)",
+        "why": "Wrong Chinese character: 'thực' (food/eat) is 食 (食單), not 寔."
+      },
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "people often use chữ 'menu' borrowed from French.",
+        "why": "Untranslated Vietnamese word 'chữ' left in an English note."
+      }
+    ],
+    "growth": 0.603
   }
 }

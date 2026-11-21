@@ -68,6 +68,91 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "moon",
+    "primaryGloss": "moon",
+    "emotion": "quiet and contemplative, looking out a window at the dark sky",
+    "notes": [
+      "Common expressions include 'luna llena' (full moon) and 'luna de miel' (honeymoon)."
+    ],
+    "senses": [
+      {
+        "id": "cs5umt0alaibyjq",
+        "order": 0,
+        "definition": "The round natural object that moves around the Earth and shines in the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "moon"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "🌕",
+        "examples": [
+          {
+            "id": "wz2mbybsuwrptys",
+            "text": "Esta noche la luna está muy brillante en el cielo.",
+            "textLang": "es",
+            "translation": "Tonight the moon is very bright in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "awed and peaceful, pointing out the glowing night sky",
+            "note": null,
+            "matchedForm": "luna",
+            "matchedTranslationForm": "moon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "cs5umt0alaibyjq",
+      "from": "Astro que brilla en el cielo por la noche reflejando la luz del sol.",
+      "to": "A celestial body that shines in the night sky by reflecting light.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    },
+    {
+      "sense": "tj5rj5pjy3g54ou",
+      "from": "Pieza grande de cristal o vidrio plano, especialmente la de un espejo o un escaparate.",
+      "to": "A large piece of flat glass, especially in a mirror or shop window.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la luna",
+    "lemma": "luna",
+    "reading": null,
+    "ipa": "/ˈlu.na/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌕",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "moon; looking glass",
     "primaryGloss": "moon",
     "emotion": "quiet and contemplative, looking out a window at the dark sky",
@@ -161,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "cs5umt0alaibyjq",
-      "from": "Astro que brilla en el cielo por la noche reflejando la luz del sol.",
-      "to": "A celestial body that shines in the night sky by reflecting light.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    },
-    {
-      "sense": "tj5rj5pjy3g54ou",
-      "from": "Pieza grande de cristal o vidrio plano, especialmente la de un espejo o un escaparate.",
-      "to": "A large piece of flat glass, especially in a mirror or shop window.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large piece of flat glass, especially in a mirror or shop",
+        "why": "'Looking glass' is archaic; windshield/shop-window sense is marginal for A2 compared to 'cristal' or 'parabrisas'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "moon; looking glass",
+        "why": "'Looking glass' is archaic and not an A2 priority sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used in the plural 'lunas' to mean months in poetic or literary",
+        "why": "Poetic/literary usage and restating sense [1] are unhelpful for an A2 learner."
+      }
+    ],
+    "growth": 0.523
+  }
 }

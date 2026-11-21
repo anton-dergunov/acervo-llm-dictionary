@@ -58,6 +58,117 @@
     "headword": "лазить",
     "lemma": "лазить",
     "reading": null,
+    "ipa": "/ˈlazʲɪtʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to climb; to crawl into",
+    "primaryGloss": "climb",
+    "emotion": "energetic and physical, focused on the effort of the movement",
+    "notes": [
+      "Multidirectional imperfective verb used for repeated, habitual, or aimless climbing. Its unidirectional partner (climbing in one direction right now) is 'лезть' (also imperfective).",
+      "Takes 'по' + dative for climbing around on something (лазить по деревьям) and 'в' / 'под' + accusative for getting into or under a space."
+    ],
+    "senses": [
+      {
+        "id": "anm9eaooyoz9rsz",
+        "order": 0,
+        "definition": "To go up, down, or over something using one's hands and feet, repeatedly or in various directions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to climb",
+              "to clamber"
+            ]
+          }
+        ],
+        "domain": "climbing",
+        "emoji": "🧗",
+        "examples": [
+          {
+            "id": "pymgn3uhb5cgchv",
+            "text": "Дети любят лазить по деревьям.",
+            "textLang": "ru",
+            "translation": "Children love to climb trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and observant, watching children play outdoors",
+            "note": null,
+            "matchedForm": "лазить",
+            "matchedTranslationForm": "climb"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "76acl55b4jzvfaq",
+        "order": 1,
+        "definition": "To crawl or reach into a tight space or container repeatedly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to crawl",
+              "to get into",
+              "to reach into"
+            ]
+          }
+        ],
+        "domain": "tight spaces",
+        "emoji": "🕳️",
+        "examples": [
+          {
+            "id": "m4bna01ffh8hj9i",
+            "text": "Кот постоянно лазит под кровать.",
+            "textLang": "ru",
+            "translation": "The cat is constantly crawling under the bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "лазит",
+            "matchedTranslationForm": "crawling"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "лазить",
+    "lemma": "лазить",
+    "reading": null,
     "ipa": "/ˈla.zʲɪtʲ/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "This is an 'imperfective' verb indicating a repeated or habitual action",
+        "why": "Misleading: both 'лазить' and 'лезть' are imperfective; they differ in directionality, not aspect."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ему пришлось лазить под кровать за игрушкой.",
+        "why": "Unnatural verb choice: a single action of getting a toy requires 'лезть' or 'залезть', not multidirectional 'лазить'."
+      }
+    ],
+    "growth": 1.391
   }
 }

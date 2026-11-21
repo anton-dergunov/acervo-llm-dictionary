@@ -68,6 +68,115 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "hour; lesson, class",
+    "primaryGloss": "hour",
+    "emotion": "a measured and steady sense of time passing",
+    "notes": [
+      "Use 'Stunde' for a duration ('zwei Stunden lang' — for two hours), but 'Uhr' for clock times ('Es ist zwei Uhr' — it is two o'clock)."
+    ],
+    "senses": [
+      {
+        "id": "m86is8ydzyyxedq",
+        "order": 0,
+        "definition": "A period of time lasting sixty minutes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hour"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "n4rh14o1jj5nk2l",
+            "text": "Ich warte schon eine Stunde auf den Bus.",
+            "textLang": "de",
+            "translation": "I have been waiting for the bus for an hour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impatient and a little tired from waiting",
+            "note": null,
+            "matchedForm": "Stunde",
+            "matchedTranslationForm": "hour"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "il3rwn4o3iniisy",
+        "order": 1,
+        "definition": "A scheduled teaching period or lesson at school or with a tutor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lesson",
+              "class",
+              "period"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "078hlrh075b67fo",
+            "text": "Die nächste Stunde beginnt um zehn Uhr.",
+            "textLang": "de",
+            "translation": "The next class begins at ten o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Stunde",
+            "matchedTranslationForm": "class"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Stunde",
+    "lemma": "Stunde",
+    "reading": null,
+    "ipa": "/ˈʃtʊndə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "hour",
     "primaryGloss": "hour",
     "emotion": "a measured and steady sense of time passing",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or a point in time on a clock when referring to",
+        "why": "Contradicts itself: clock times use 'Uhr', not 'Stunde', in everyday German."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A specific time of day or a scheduled lesson or session.",
+        "why": "Conflates 'school lesson/class' with an archaic 'time of day' sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hour",
+        "why": "Omits 'lesson; class', which is sense [1]."
+      }
+    ],
+    "growth": 0.914
   }
 }

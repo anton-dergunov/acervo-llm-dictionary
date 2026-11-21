@@ -68,6 +68,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "enfermero, enfermera",
+    "primaryGloss": "enfermero",
+    "emotion": "un tono profesional, cálido y compasivo al brindar cuidados",
+    "notes": [
+      "En inglés el sustantivo sirve para ambos géneros ('enfermero' y 'enfermera')."
+    ],
+    "senses": [
+      {
+        "id": "8l31zxkttu55esi",
+        "order": 0,
+        "definition": "Persona cuya profesión es cuidar y atender a personas enfermas o heridas, especialmente en un hospital o clínica.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "enfermero",
+              "enfermera"
+            ]
+          }
+        ],
+        "domain": "profesión",
+        "emoji": "🏥",
+        "examples": [
+          {
+            "id": "lhvwxrs8xrre6zq",
+            "text": "The nurse checked his temperature.",
+            "textLang": "en",
+            "translation": "La enfermera le tomó la temperatura.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "atento, calmo y eficiente durante una rutina hospitalaria",
+            "note": null,
+            "matchedForm": "nurse",
+            "matchedTranslationForm": "enfermera"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "nurse",
+    "lemma": "nurse",
+    "reading": null,
+    "ipa": "/nɜrs/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏥",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "enfermero/a; cuidador/a",
     "primaryGloss": "enfermero",
     "emotion": "un tono profesional, cálido y compasivo al brindar cuidados",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Persona que cuida a alguien que está enfermo en su propia casa.",
+        "why": "A private-duty nurse is still a nurse; 'cuidador' is 'caregiver', not 'nurse'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "A diferencia de 'doctor', el 'nurse' se enfoca más en el cuidado",
+        "why": "Explains real-world medical roles that learners already know in their own language."
+      }
+    ],
+    "growth": 0.438
   }
 }

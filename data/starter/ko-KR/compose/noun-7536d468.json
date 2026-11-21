@@ -68,6 +68,74 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "child; kid",
+    "primaryGloss": "child",
+    "emotion": "warm and affectionate, looking at someone with kindness",
+    "notes": [
+      "In casual conversation, it is very often contracted to 애 (plural 애들). Do not confuse with 아기 (baby)."
+    ],
+    "senses": [
+      {
+        "id": "15sqm3x0uh0l3mx",
+        "order": 0,
+        "definition": "A young person who is not yet an adult.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "kid"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🧒",
+        "examples": [
+          {
+            "id": "e0r7wmz5ujezj5m",
+            "text": "공원에서 아이들이 뛰어놀고 있어요.",
+            "textLang": "ko",
+            "translation": "The children are running and playing in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "아이",
+            "matchedTranslationForm": "children"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "아이",
+    "lemma": "아이",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👶",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "child; kid; baby",
     "primaryGloss": "child",
     "emotion": "warm and affectionate, looking at someone with kindness",
@@ -117,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(baby) A very young child or infant. | glosses en: baby, infant",
+        "why": "'아이' means child; 'baby/infant' is '아기'. Oversplit and misleading gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use '애' only with friends or people younger than you.",
+        "why": "'애' is informal/spoken, not restricted to speaking with friends or younger people."
+      }
+    ],
+    "growth": 0.658
   }
 }

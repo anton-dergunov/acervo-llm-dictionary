@@ -59,6 +59,116 @@
     "language": "ja",
     "headword": "恥ずかしい",
     "lemma": "恥ずかしい",
+    "reading": "はずかしい",
+    "ipa": "hazɯkaɕiː",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "embarrassed; shy; embarrassing",
+    "primaryGloss": "embarrassed",
+    "emotion": null,
+    "notes": [
+      "An i-adjective. It can describe both the person feeling embarrassed or shy (私は恥ずかしい, I am embarrassed) and the thing that causes embarrassment or shame (恥ずかしい話, an embarrassing story)."
+    ],
+    "senses": [
+      {
+        "id": "ice12beofp5w22o",
+        "order": 0,
+        "definition": "Feeling uncomfortable, self-conscious, or timid in front of others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "embarrassed",
+              "shy",
+              "ashamed"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😳",
+        "examples": [
+          {
+            "id": "eyrc466o1gyqjn6",
+            "text": "人前で歌うのは恥ずかしいです。",
+            "textLang": "ja",
+            "translation": "I feel embarrassed singing in front of people.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "恥ずかしい",
+            "matchedTranslationForm": "embarrassed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "oyyykc1waohd6qg",
+        "order": 1,
+        "definition": "Causing a feeling of shame or embarrassment; disgraceful.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "embarrassing",
+              "shameful"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "🙈",
+        "examples": [
+          {
+            "id": "wqxhnsgvv91ena4",
+            "text": "そんな恥ずかしいことはしないでください。",
+            "textLang": "ja",
+            "translation": "Please don't do such a shameful thing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "恥ずかしい",
+            "matchedTranslationForm": "shameful"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "恥ずかしい",
+    "lemma": "恥ずかしい",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -120,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (はずかしい) for a word written in kanji."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "Feeling shame because of an action or situation that is socially unacceptable",
+        "why": "Defines feeling ashamed, whereas the glosses are 'shameful, embarrassing' (causing shame)."
+      },
+      {
+        "severity": 2,
+        "category": "new:example.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "No examples provided for a multi-sense word with both subjective and objective uses."
+      }
+    ],
+    "growth": 0.963
   }
 }

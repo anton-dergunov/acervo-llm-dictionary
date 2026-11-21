@@ -58,6 +58,96 @@
     "headword": "कूदना",
     "lemma": "कूदना",
     "reading": null,
+    "ipa": "/kuːd̪naː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦘",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to jump; to leap",
+    "primaryGloss": "to jump",
+    "emotion": "energetic and lively, full of movement",
+    "notes": [
+      "Intransitive; in the perfective (past) tenses, the subject does not take ने (ne)."
+    ],
+    "senses": [
+      {
+        "id": "whxz1chyskmhqi6",
+        "order": 0,
+        "definition": "To push oneself off the ground or from a surface into the air using the legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to jump",
+              "to leap",
+              "to hop"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🦘",
+        "examples": [
+          {
+            "id": "749gi0wux41w3o3",
+            "text": "वह खुशी से कूदने लगा।",
+            "textLang": "hi",
+            "translation": "He started jumping with joy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and happy, celebrating a moment of joy",
+            "note": null,
+            "matchedForm": "कूदने",
+            "matchedTranslationForm": "jumping"
+          },
+          {
+            "id": "yvwvcl3jr1ikj44",
+            "text": "बिल्ली दीवार से कूद गई।",
+            "textLang": "hi",
+            "translation": "The cat jumped off the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quick and agile, watching something move fast",
+            "note": null,
+            "matchedForm": "कूद",
+            "matchedTranslationForm": "jumped"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "कूदना",
+    "lemma": "कूदना",
+    "reading": null,
     "ipa": "/kuːd̪nɑː/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To move quickly over an obstacle or down from a height.",
+        "why": "Jumping up, over, or down are the same core meaning of कूदना."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to jump; to leap; to bounce",
+        "why": "'to bounce' is उछलना, not covered by the senses here."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for any action where the body leaves the ground",
+        "why": "Restates the basic definition of jumping."
+      }
+    ],
+    "growth": 0.78
   }
 }

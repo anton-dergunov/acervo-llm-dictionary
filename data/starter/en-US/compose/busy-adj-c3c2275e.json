@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "ocupado; concurrido",
+    "primaryGloss": "ocupado",
+    "emotion": "a slightly rushed but capable person who has many things to finish",
+    "notes": [
+      "Se usa con 'with' más un sustantivo o directamente con un verbo en '-ing' (sin preposición): 'busy with work', 'busy cooking'.",
+      "No confundas 'busy' con el sustantivo 'business' (negocio, empresa)."
+    ],
+    "senses": [
+      {
+        "id": "y5v558mkniii0v7",
+        "order": 0,
+        "definition": "De una persona: que tiene mucho trabajo o muchas cosas que hacer.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ocupado",
+              "atareado"
+            ]
+          }
+        ],
+        "domain": "personas",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "9lwwqyegnrgyp25",
+            "text": "I am very busy today because I have many meetings.",
+            "textLang": "en",
+            "translation": "Estoy muy ocupado hoy porque tengo muchas reuniones.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit stressed but organized, explaining a schedule to someone else",
+            "note": null,
+            "matchedForm": "busy",
+            "matchedTranslationForm": "ocupado"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8ii2v35mzwe8sf9",
+        "order": 1,
+        "definition": "De un lugar o momento: que tiene mucha gente o mucha actividad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "concurrido",
+              "animado"
+            ]
+          }
+        ],
+        "domain": "lugares",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "jbj2n7k5efvfx02",
+            "text": "The downtown street is very busy in the afternoon.",
+            "textLang": "en",
+            "translation": "La calle del centro está muy concurrida por la tarde.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and observant, describing a part of the city",
+            "note": null,
+            "matchedForm": "busy",
+            "matchedTranslationForm": "concurrida"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "busy",
+    "lemma": "busy",
+    "reading": null,
+    "ipa": "/ˈbɪzi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏃",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "ocupado; atareado",
     "primaryGloss": "ocupado",
     "emotion": "a slightly rushed but capable person who has many things to finish",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ocupado; atareado",
+        "why": "Omits the second sense ('concurrido')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Un lugar donde hay mucha gente o mucha actividad.",
+        "why": "Defines an adjective as a noun ('Un lugar...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Usa 'busy' para describir a una persona que tiene mucho trabajo",
+        "why": "Merely restates the first definition without adding usage information."
+      }
+    ],
+    "growth": 1.114
   }
 }

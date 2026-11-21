@@ -58,6 +58,156 @@
     "headword": "nghe",
     "lemma": "nghe",
     "reading": null,
+    "ipa": "/ŋɛ˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hear; to listen; to obey",
+    "primaryGloss": "hear",
+    "emotion": "attentive and focused, catching every sound",
+    "notes": [
+      "Use 'nghe' for both hearing and listening; use 'nghe thấy' to emphasize actually perceiving a sound, and 'lắng nghe' for listening attentively.",
+      "Often used in 'nghe lời' (to obey / follow someone's advice)."
+    ],
+    "senses": [
+      {
+        "id": "8pq3hwidzw6wlvr",
+        "order": 0,
+        "definition": "To perceive a sound through the ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear"
+            ]
+          }
+        ],
+        "domain": "hearing",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "6uo0xcikh8m76uy",
+            "text": "Em có nghe tiếng gì ngoài vườn không?",
+            "textLang": "vi",
+            "translation": "Do you hear a sound in the garden?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nghe",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yh5ko2u9ie2czzo",
+        "order": 1,
+        "definition": "To pay attention to a sound or to what someone is saying.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "listen",
+              "listen to"
+            ]
+          }
+        ],
+        "domain": "attention",
+        "emoji": "🎧",
+        "examples": [
+          {
+            "id": "etj2k4aqnfz4xl7",
+            "text": "Hãy nghe thầy giáo giảng bài.",
+            "textLang": "vi",
+            "translation": "Listen to the teacher explain the lesson.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and focused on the instruction",
+            "note": null,
+            "matchedForm": "nghe",
+            "matchedTranslationForm": "Listen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i20nhcrxh2cjy93",
+        "order": 2,
+        "definition": "To follow advice or obey someone's instructions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "obey",
+              "listen to"
+            ]
+          }
+        ],
+        "domain": "obedience",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "ta8z4axjya54x7j",
+            "text": "Con phải nghe lời bố mẹ.",
+            "textLang": "vi",
+            "translation": "You must listen to your parents.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nghe",
+            "matchedTranslationForm": "listen"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "nghe",
+    "lemma": "nghe",
+    "reading": null,
     "ipa": "/ŋē/",
     "pos": "verb",
     "gender": null,
@@ -202,5 +352,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋē/",
+        "why": "Wrong vowel (/e/ instead of /ɛ/) and non-standard tone diacritic."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "hear, listen",
+        "why": "Sense 0 is passive perception ('hear'); 'listen' belongs to sense 1."
+      }
+    ],
+    "growth": 0.965
   }
 }

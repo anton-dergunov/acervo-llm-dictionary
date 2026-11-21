@@ -68,6 +68,136 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "money, wealth; paisa",
+    "primaryGloss": "money",
+    "emotion": "counted carefully from a worn leather wallet, practical and serious",
+    "notes": [
+      "Both the singular पैसा and the plural पैसे (paise) are used to mean 'money' in general; the plural is especially common when talking about a specific amount or cash in hand."
+    ],
+    "senses": [
+      {
+        "id": "0cexr79apz4koao",
+        "order": 0,
+        "definition": "Coins or notes used to buy things, or financial wealth in general.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money",
+              "cash",
+              "wealth"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "gwy0fl9yxorhknm",
+            "text": "मेरे पास ज़्यादा पैसे नहीं हैं।",
+            "textLang": "hi",
+            "translation": "I do not have much money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पैसे",
+            "matchedTranslationForm": "money"
+          },
+          {
+            "id": "o08aw1d6fsyus09",
+            "text": "जीवन में पैसा ही सब कुछ नहीं होता।",
+            "textLang": "hi",
+            "translation": "Money is not everything in life.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पैसा",
+            "matchedTranslationForm": "Money"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q7zqxwp04npsskl",
+        "order": 1,
+        "definition": "A unit of currency in India and several other countries, equal to one hundredth of a rupee.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paisa"
+            ]
+          }
+        ],
+        "domain": "currency unit",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "dodz3mly3ofpejh",
+            "text": "एक रुपये में सौ पैसे होते हैं।",
+            "textLang": "hi",
+            "translation": "There are one hundred paise in one rupee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पैसे",
+            "matchedTranslationForm": "paise"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पैसा",
+    "lemma": "पैसा",
+    "reading": null,
+    "ipa": "/pɛː.sɑː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪙",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "money; coin; wealth",
     "primaryGloss": "money",
     "emotion": "counted carefully from a worn leather wallet, practical and serious",
@@ -162,5 +292,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "जीवन में पैसा ही सब کچھ نہیں होता।",
+        "why": "Example switches from Devanagari to Perso-Arabic (Urdu) script mid-sentence."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Wealth, riches, or financial resources owned by a person.",
+        "why": "Money and wealth are one everyday sense for पैसा."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "money; coin; wealth",
+        "why": "shortGloss lists 'coin', which is absent from the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on the very common plural use पैसे (paise) for money/cash."
+      }
+    ],
+    "growth": 1.288
   }
 }

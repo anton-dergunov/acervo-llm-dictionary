@@ -57,6 +57,117 @@
     "language": "ja",
     "headword": "風",
     "lemma": "風",
+    "reading": "かぜ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌬️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "wind; way, style",
+    "primaryGloss": "wind",
+    "emotion": "refreshing and light, feeling the breeze on a warm afternoon",
+    "notes": [
+      "Pronounced かぜ (kaze) when meaning 'wind', and ふう (fū) when meaning 'style' or 'way' (as in そんな風に, sonna fū ni, 'in that way').",
+      "Do not confuse かぜ with its homophone 風邪 (かぜ, kaze), which means a cold (illness)."
+    ],
+    "senses": [
+      {
+        "id": "gzk7av6wb5c995c",
+        "order": 0,
+        "definition": "Moving air, especially a natural current of air outside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wind",
+              "breeze"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌬️",
+        "examples": [
+          {
+            "id": "umn6sshkwz6pub5",
+            "text": "強い風が吹いています。",
+            "textLang": "ja",
+            "translation": "A strong wind is blowing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and a bit cautious, noting the changing weather",
+            "note": null,
+            "matchedForm": "風",
+            "matchedTranslationForm": "wind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d1nyqpcpfxxk1rv",
+        "order": 1,
+        "definition": "(read ふう) A particular manner, way, or style.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "style",
+              "manner"
+            ]
+          }
+        ],
+        "domain": "manner",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "c7gkob0a19hyk10",
+            "text": "そんな風に言わないで。",
+            "textLang": "ja",
+            "translation": "Don't say it like that.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit hurt or defensive, wanting the other person to stop",
+            "note": null,
+            "matchedForm": "風",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "風",
+    "lemma": "風",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "(e.g., 'kaze ni' meaning 'in the style of')",
+        "why": "False reading: 風に meaning 'in the style/way of' is read 'fū ni', never 'kaze ni'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "wind; style; tendency",
+        "why": "'tendency' is not covered by the senses."
+      }
+    ],
+    "growth": 0.799
   }
 }

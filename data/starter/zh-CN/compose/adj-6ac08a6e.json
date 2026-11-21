@@ -72,6 +72,73 @@
     "primaryGloss": "yellow",
     "emotion": "bright and clear, pointing out a sunny colour",
     "notes": [
+      "Before a noun, 黄 often attaches directly without 的 (e.g. 黄头发, yellow hair), or is replaced by 黄色 + 的 (黄色的花)."
+    ],
+    "senses": [
+      {
+        "id": "kec6zo8o6xbnnnq",
+        "order": 0,
+        "definition": "Having the colour of a lemon, gold, or a ripe banana.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🟡",
+        "examples": [
+          {
+            "id": "6nzn7plwz3g6a90",
+            "text": "秋天的树叶变黄了。",
+            "textLang": "zh",
+            "translation": "The autumn leaves have turned yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "黄",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "黄",
+    "lemma": "黄",
+    "reading": "huáng",
+    "ipa": "/xu̯aŋ˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow",
+    "primaryGloss": "yellow",
+    "emotion": "bright and clear, pointing out a sunny colour",
+    "notes": [
       "黄 describes the colour yellow, ranging from bright lemon to deep gold."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "黄 describes the colour yellow, ranging from bright lemon to deep gold.",
+        "why": "Restates the definition; should instead explain how 黄 vs 黄色 are used as modifiers."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "这朵花是黄色的。",
+        "why": "Uses the noun 黄色 instead of showing 黄 itself functioning as an adjective."
+      }
+    ],
+    "growth": 1.47
   }
 }

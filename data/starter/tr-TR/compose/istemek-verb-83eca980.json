@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to want; to ask for",
+    "primaryGloss": "want",
+    "emotion": "earnest and eager, wanting something clearly",
+    "notes": [
+      "When asking someone for something, the person asked takes the ablative case (-den/-dan / -ten/-tan): 'senden bir şey istiyorum' (I want/am asking for something from you)."
+    ],
+    "senses": [
+      {
+        "id": "kpc8qeaypwztwgy",
+        "order": 0,
+        "definition": "To wish to have or do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "want",
+              "wish",
+              "would like"
+            ]
+          }
+        ],
+        "domain": "desire",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "ncu6hp1bt01dyxn",
+            "text": "Ne içmek istersin?",
+            "textLang": "tr",
+            "translation": "What would you like to drink?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and attentive, offering a choice",
+            "note": null,
+            "matchedForm": "istersin",
+            "matchedTranslationForm": "would you like"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fjwzdt9nfbnwoxb",
+        "order": 1,
+        "definition": "To ask someone to give you something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ask for",
+              "request"
+            ]
+          }
+        ],
+        "domain": "request",
+        "emoji": "🙋",
+        "examples": [
+          {
+            "id": "fsh3hglub929r5f",
+            "text": "Garsondan hesabı istedim.",
+            "textLang": "tr",
+            "translation": "I asked the waiter for the bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "istedim",
+            "matchedTranslationForm": "asked"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "istemek",
+    "lemma": "istemek",
+    "reading": null,
+    "ipa": "/is.teˈmek/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to want; to ask for; to invite",
     "primaryGloss": "want",
     "emotion": "earnest and eager, wanting something clearly",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or the dative case (-e / -a) when asking someone for something.",
+        "why": "False grammar rule: 'istemek' takes the ablative case (-den/-dan) for the person asked, never dative."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Garsona hesap istedim.",
+        "why": "Ungrammatical case: must be ablative 'Garsondan hesabı istedim', not dative 'Garsona'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to want; to ask for; to invite",
+        "why": "'to invite' is not in the senses and is not a standard meaning of 'istemek'."
+      }
+    ],
+    "growth": 1.088
   }
 }

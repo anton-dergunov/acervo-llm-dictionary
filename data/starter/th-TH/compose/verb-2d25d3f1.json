@@ -58,6 +58,116 @@
     "headword": "คิด",
     "lemma": "คิด",
     "reading": null,
+    "ipa": "/kʰít/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to think; to calculate, to charge",
+    "primaryGloss": "think",
+    "emotion": "reflective and focused, as if processing a thought in real time",
+    "notes": [
+      "Followed by ว่า (wâa) to mean 'to think that': คิดว่า... (I think that...).",
+      "Forms common compounds such as คิดถึง (to miss someone/something) and คิดเงิน (to calculate the bill)."
+    ],
+    "senses": [
+      {
+        "id": "w5i7guc4goo3txt",
+        "order": 0,
+        "definition": "To use the mind to consider something, form an opinion, or plan.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "think",
+              "consider"
+            ]
+          }
+        ],
+        "domain": "cognition",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "iijd1cm5fr6lubw",
+            "text": "ฉันคิดว่าพรุ่งนี้ฝนจะตก",
+            "textLang": "th",
+            "translation": "I think it will rain tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casually offering a personal prediction about the weather",
+            "note": null,
+            "matchedForm": "คิด",
+            "matchedTranslationForm": "think"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o54fxnc7pwpmoor",
+        "order": 1,
+        "definition": "To work out an amount by mathematics, or to ask an amount as a price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calculate",
+              "charge"
+            ]
+          }
+        ],
+        "domain": "calculation",
+        "emoji": "🧮",
+        "examples": [
+          {
+            "id": "9q75b9xyxbyr2kf",
+            "text": "ร้านนี้คิดราคาไม่แพง",
+            "textLang": "th",
+            "translation": "This shop does not charge a high price.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and satisfied with a good deal",
+            "note": null,
+            "matchedForm": "คิด",
+            "matchedTranslationForm": "charge"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "คิด",
+    "lemma": "คิด",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -200,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(emotion) To feel sadness or longing because someone is away.",
+        "why": "คิด alone does not mean 'to miss'; that is the compound verb คิดถึง."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'คิด' primarily means 'to think'",
+        "why": "Restates the glosses and falsely claims คิด alone means 'to miss'."
+      }
+    ],
+    "growth": 0.723
   }
 }

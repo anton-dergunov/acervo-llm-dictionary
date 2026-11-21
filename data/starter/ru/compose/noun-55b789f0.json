@@ -72,6 +72,74 @@
     "primaryGloss": "pencil",
     "emotion": "focused and steady, sketching something on a piece of paper",
     "notes": [
+      "Stress is always on the ending in all inflected forms: карандаша́, карандашо́м, карандаши́.",
+      "An ordinary graphite pencil (as opposed to a coloured one, 'цветной карандаш') is called 'простой карандаш'."
+    ],
+    "senses": [
+      {
+        "id": "547namlqq736gpk",
+        "order": 0,
+        "definition": "A thin wooden tool with a stick of graphite inside, used for writing or drawing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pencil"
+            ]
+          }
+        ],
+        "domain": "stationery",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "xprcnfcmccfyf0n",
+            "text": "Он пишет письмо простым карандашом.",
+            "textLang": "ru",
+            "translation": "He is writing a letter with a lead pencil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and calm while writing down notes",
+            "note": null,
+            "matchedForm": "карандашом",
+            "matchedTranslationForm": "pencil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "карандаш",
+    "lemma": "карандаш",
+    "reading": null,
+    "ipa": "/kərənˈdaʂ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✏️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "pencil",
+    "primaryGloss": "pencil",
+    "emotion": "focused and steady, sketching something on a piece of paper",
+    "notes": [
       "Used for both writing and drawing on paper.",
       "Unlike a pen (ручка), mistakes made with a pencil can be erased with an eraser (ластик)."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for both writing and drawing on paper.",
+        "why": "World-knowledge filler about what a pencil is; misses the stress shift in oblique cases."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "He is writing a letter with a simple pencil.",
+        "why": "Calque: 'простой карандаш' means an ordinary lead/graphite pencil (as opposed to a coloured one)."
+      }
+    ],
+    "growth": 1.215
   }
 }

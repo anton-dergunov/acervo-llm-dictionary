@@ -60,6 +60,97 @@
     "headword": "mencintai",
     "lemma": "mencintai",
     "reading": null,
+    "ipa": "/mənt͡ʃinˈtai/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to love; to cherish",
+    "primaryGloss": "to love",
+    "emotion": "sincere and warm, expressing a deep connection to someone or something",
+    "notes": [
+      "Expresses deep love or devotion. In casual speech, the root 'cinta' is often used directly as a verb (e.g., 'Aku cinta kamu'), whereas 'mencintai' is more formal or used in full transitive sentences.",
+      "For simply liking or enjoying something, use 'suka' or 'menyukai' instead."
+    ],
+    "senses": [
+      {
+        "id": "9t2p4c34bdnpfjm",
+        "order": 0,
+        "definition": "To feel deep love, affection, or devotion towards someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to love",
+              "to cherish"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "4ca2a9guqnr091k",
+            "text": "Dia mencintai keluarganya dengan sepenuh hati.",
+            "textLang": "id",
+            "translation": "He loves his family with all his heart.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and earnest, speaking with genuine affection",
+            "note": null,
+            "matchedForm": "mencintai",
+            "matchedTranslationForm": "loves"
+          },
+          {
+            "id": "6pdatylptebg79i",
+            "text": "Kita harus mencintai lingkungan kita agar tetap bersih.",
+            "textLang": "id",
+            "translation": "We must love our environment so that it stays clean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and sincere, speaking with a sense of responsibility",
+            "note": null,
+            "matchedForm": "mencintai",
+            "matchedTranslationForm": "love"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "mencintai",
+    "lemma": "mencintai",
+    "reading": null,
     "ipa": "/mən.tʃi.nta.i/",
     "pos": "verb",
     "gender": null,
@@ -164,5 +255,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mən.tʃi.nta.i/",
+        "why": "Wrong syllable division (/n/ closes the second syllable: /mən.t͡ʃin.ta.i/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'cinta' which is the noun form",
+        "why": "In everyday Indonesian, 'cinta' is very commonly used as a verb too ('Aku cinta kamu')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Loving people and loving one's country or environment are shades of the same meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to love someone/something; to be fond of",
+        "why": "'To be fond of' is too weak and contradicts Note 0."
+      }
+    ],
+    "growth": 0.828
   }
 }

@@ -72,6 +72,158 @@
     "primaryGloss": "stand",
     "emotion": "upright, steady, and ready for movement",
     "notes": [
+      "Before endings starting with ㄴ, ㅂ, or ㅅ, the stem often combines with -어/-아, or in compound forms like 서 있다 (to be standing). Note that to describe someone currently standing, Korean uses the state form 서 있다 rather than the simple present 선다."
+    ],
+    "senses": [
+      {
+        "id": "oxmlo3c0yvc46l7",
+        "order": 0,
+        "definition": "To be upright on one's feet, or to rise to a standing position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stand",
+              "stand up",
+              "rise"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "cvzlgel26vohtjs",
+            "text": "사람들이 줄을 서서 기다려요.",
+            "textLang": "ko",
+            "translation": "People stand in line and wait.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "서서",
+            "matchedTranslationForm": "stand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8jttsej1ykyqzyo",
+        "order": 1,
+        "definition": "Of a vehicle or moving thing: to come to a halt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "halt"
+            ]
+          }
+        ],
+        "domain": "stopping",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "vcpssyd6yucmd7s",
+            "text": "버스가 정류장에 섰어요.",
+            "textLang": "ko",
+            "translation": "The bus stopped at the bus stop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "섰어요",
+            "matchedTranslationForm": "stopped"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "un2ddmkna0hxw5y",
+        "order": 2,
+        "definition": "Of a building, plan, or order: to be built, formed, or established.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be built",
+              "be established",
+              "be set up"
+            ]
+          }
+        ],
+        "domain": "establishment",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "tk1v2pgdol28qxs",
+            "text": "우리 동네에 새 학교가 섰어요.",
+            "textLang": "ko",
+            "translation": "A new school was built in our neighborhood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "섰어요",
+            "matchedTranslationForm": "was built"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "서다",
+    "lemma": "서다",
+    "reading": null,
+    "ipa": "/sʌ.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand; to stop; to be established",
+    "primaryGloss": "stand",
+    "emotion": "upright, steady, and ready for movement",
+    "notes": [
       "While '서다' covers the physical act of standing, it also implies coming to a complete stop, like a vehicle or clock, or being established, such as a rule or a building."
     ],
     "senses": [
@@ -157,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "버스가 정류장에 서다. — The bus stops at the station.",
+        "why": "Example shows the 'stop' sense (sense 1), not the 'stand' sense (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "버스가 정류장에 서다.",
+        "why": "Unconjugated dictionary form used as a sentence instead of a natural conjugated verb."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '서다' covers the physical act of standing, it also implies",
+        "why": "Merely restates the senses; misses the crucial ㄹ-irregular conjugation before ㄴ, ㅂ, ㅅ."
+      }
+    ],
+    "growth": 1.367
   }
 }

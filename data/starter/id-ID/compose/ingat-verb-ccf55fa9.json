@@ -58,6 +58,97 @@
     "headword": "ingat",
     "lemma": "ingat",
     "reading": null,
+    "ipa": "/ˈi.ŋat/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to remember",
+    "primaryGloss": "remember",
+    "emotion": "thoughtful and focused, recalling a past moment",
+    "notes": [
+      "In everyday speech, the root 'ingat' is commonly used instead of the formal 'mengingat'.",
+      "To say 'remind someone', use the suffix '-kan': 'ingatkan' / 'mengingatkan' (e.g., 'Tolong ingatkan saya' = Please remind me)."
+    ],
+    "senses": [
+      {
+        "id": "p0d2w45e8eo3put",
+        "order": 0,
+        "definition": "To have or keep a fact, event, or person in your mind; to not forget.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remember",
+              "recall",
+              "keep in mind"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "rw0d6xhzve3pvz6",
+            "text": "Saya masih ingat hari ulang tahunnya.",
+            "textLang": "id",
+            "translation": "I still remember her birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ingat",
+            "matchedTranslationForm": "remember"
+          },
+          {
+            "id": "u4ambkpce9pv0z0",
+            "text": "Ingat pesan saya sebelum pergi.",
+            "textLang": "id",
+            "translation": "Remember my message before you go.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and caring, giving advice to someone leaving",
+            "note": null,
+            "matchedForm": "Ingat",
+            "matchedTranslationForm": "Remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "ingat",
+    "lemma": "ingat",
+    "reading": null,
     "ipa": "/ˈiŋat/",
     "pos": "verb",
     "gender": null,
@@ -201,5 +292,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(reminder) To cause someone to remember something.",
+        "why": "'Ingat' means to remember; 'to remind' requires the transitive form 'mengingatkan'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Tolong ingat saya besok pagi.",
+        "why": "Ungrammatical for 'remind me' (which is 'Tolong ingatkan saya'); means 'remember me'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(mind) To keep something in your mind so you do not forget",
+        "why": "Merely the imperative use of sense 0 ('to remember')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse ingat with lupa, which means to forget.",
+        "why": "Unnecessary antonym filler; learners do not confuse 'ingat' and 'lupa'."
+      }
+    ],
+    "growth": 0.782
   }
 }

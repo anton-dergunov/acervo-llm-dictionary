@@ -58,6 +58,97 @@
     "headword": "登る",
     "lemma": "登る",
     "reading": "のぼる",
+    "ipa": "noboɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to climb; to go up",
+    "primaryGloss": "to climb",
+    "emotion": "a sense of exertion and steady progress toward a summit",
+    "notes": [
+      "Takes に when focusing on reaching the top (山に登る) and を when focusing on the path or surface traversed (坂を登る). Also spelled 上る for stairs or slopes.",
+      "Contrast with 上がる (あがる), which refers to going up in a more general sense (such as going upstairs or entering a home) and focuses on the final point reached."
+    ],
+    "senses": [
+      {
+        "id": "m42gtkiwahrt5c3",
+        "order": 0,
+        "definition": "To go up a mountain, slope, stairs, or vertical surface by one's own effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to climb",
+              "to go up",
+              "to ascend"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🧗",
+        "examples": [
+          {
+            "id": "vi2im25qgdycjet",
+            "text": "週末に山に登った。",
+            "textLang": "ja",
+            "translation": "I climbed a mountain on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "登った",
+            "matchedTranslationForm": "climbed"
+          },
+          {
+            "id": "zcw6xba1o8ddm5m",
+            "text": "この坂を登ると駅がある。",
+            "textLang": "ja",
+            "translation": "If you go up this slope, there is a station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "登る",
+            "matchedTranslationForm": "go up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "登る",
+    "lemma": "登る",
+    "reading": "のぼる",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -182,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(ascend) To go up a path, stairs, or slope.",
+        "why": "Climbing a mountain and going up a slope are one sense in Japanese for 登る."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on the common particles に (toward the top) vs を (along the route)."
+      }
+    ],
+    "growth": 1.04
   }
 }

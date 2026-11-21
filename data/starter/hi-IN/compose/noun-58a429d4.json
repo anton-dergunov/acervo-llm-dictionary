@@ -72,6 +72,114 @@
     "primaryGloss": "dream",
     "emotion": "wistful and slightly dreamy, as if sharing an intimate thought",
     "notes": [
+      "To say 'to have a dream' or 'to dream', Hindi uses सपना आना ('a dream comes', with को) or सपना देखना ('to see a dream')."
+    ],
+    "senses": [
+      {
+        "id": "n4eimg2qf5dn8ew",
+        "order": 0,
+        "definition": "A series of images or events that happen in your mind while you are sleeping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "go5ojxzwvdu8r6b",
+            "text": "कल रात मुझे एक अजीब सपना आया।",
+            "textLang": "hi",
+            "translation": "I had a strange dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "baffled and curious, still trying to make sense of the experience",
+            "note": null,
+            "matchedForm": "सपना",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kbnzlam9us4n86f",
+        "order": 1,
+        "definition": "Something that you strongly wish to happen or achieve in the future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream",
+              "aspiration"
+            ]
+          }
+        ],
+        "domain": "ambition",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "pyoaju3c3brpm7m",
+            "text": "मेरा सपना है कि मैं पूरी दुनिया देखूँ।",
+            "textLang": "hi",
+            "translation": "My dream is to see the whole world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and determined, looking toward a bright future",
+            "note": null,
+            "matchedForm": "सपना",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "सपना",
+    "lemma": "सपना",
+    "reading": null,
+    "ipa": "/səp.naː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "dream; aspiration",
+    "primaryGloss": "dream",
+    "emotion": "wistful and slightly dreamy, as if sharing an intimate thought",
+    "notes": [
       "Used both for the literal images seen during sleep and for a goal or ambition for the future.",
       "When referring to 'dreaming' as an action, use the verb form 'सपने देखना' (to see dreams)."
     ],
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the literal images seen during sleep and for a",
+        "why": "Just repeats the two senses listed directly below."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "My dream is that I see the whole world.",
+        "why": "Calqued translation; natural English is 'My dream is to see the whole world.'"
+      }
+    ],
+    "growth": 0.883
   }
 }

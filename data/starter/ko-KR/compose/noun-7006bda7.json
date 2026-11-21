@@ -68,6 +68,117 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person; counter for people",
+    "primaryGloss": "person",
+    "emotion": "a simple, grounding recognition of someone in a crowd",
+    "notes": [
+      "The honorific equivalent is '분' (both as a noun and as a counter).",
+      "After a country or place name, it means a person from there (e.g., '한국 사람', a Korean)."
+    ],
+    "senses": [
+      {
+        "id": "zadq3x5j6fdbfk7",
+        "order": 0,
+        "definition": "A human being or individual.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "human being",
+              "people"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "s7vsrlqp3q8zbdy",
+            "text": "그는 정말 좋은 사람이에요.",
+            "textLang": "ko",
+            "translation": "He is a really good person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm, sincere, and appreciative when talking about someone's character",
+            "note": null,
+            "matchedForm": "사람이에요",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n8feeykrvpboa76",
+        "order": 1,
+        "definition": "A unit used with native Korean numbers to count people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "people"
+            ]
+          }
+        ],
+        "domain": "counting",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "nuv80xqeucdmqpe",
+            "text": "방에 세 사람이 있어요.",
+            "textLang": "ko",
+            "translation": "There are three people in the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "사람이",
+            "matchedTranslationForm": "people"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "사람",
+    "lemma": "사람",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; human being",
     "primaryGloss": "person",
     "emotion": "a simple, grounding recognition of someone in a crowd",
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(character) An individual character or personality type.",
+        "why": "Same meaning as sense 0 ('a good/honest person'); 'personality' is a wrong gloss."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 usage as a counter noun for people (e.g., 세 사람)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "in a colloquial, affectionate way (e.g., '우리 사람')",
+        "why": "'우리 사람' is not the expression for a partner; '내 사람' or '그 사람' is."
+      }
+    ],
+    "growth": 0.78
   }
 }

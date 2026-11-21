@@ -74,6 +74,135 @@
     "primaryGloss": "bill",
     "emotion": null,
     "notes": [
+      "In a restaurant, ask for the check by saying 'A conta, por favor'. Also used for household bills ('conta de luz' — electricity bill)."
+    ],
+    "senses": [
+      {
+        "id": "727qg05tvl8azm3",
+        "order": 0,
+        "definition": "A statement of money owed for goods, services, or a meal at a restaurant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "9dd7lbzwqpiu7vg",
+            "text": "Você pode trazer a conta, por favor?",
+            "textLang": "pt",
+            "translation": "Could you bring the bill, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, trying to get the busy waiter's attention",
+            "note": null,
+            "matchedForm": "conta",
+            "matchedTranslationForm": "bill"
+          },
+          {
+            "id": "psxsu8ijdklvzwy",
+            "text": "Já paguei a conta de luz deste mês.",
+            "textLang": "pt",
+            "translation": "I already paid this month's electricity bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "conta",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "51pnhn780zr3ksy",
+        "order": 1,
+        "definition": "An arrangement to keep money in a bank, or a personal profile registered on a website or app.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "account"
+            ]
+          }
+        ],
+        "domain": "service",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "9r1h9z03mp8z6zl",
+            "text": "Preciso abrir uma conta no banco.",
+            "textLang": "pt",
+            "translation": "I need to open a bank account.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and serious, dealing with paperwork",
+            "note": null,
+            "matchedForm": "conta",
+            "matchedTranslationForm": "account"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a conta",
+    "lemma": "conta",
+    "reading": null,
+    "ipa": "/ˈkõ.tɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check; account",
+    "primaryGloss": "bill",
+    "emotion": null,
+    "notes": [
       "In a Brazilian restaurant, you ask for the bill by saying 'A conta, por favor'."
     ],
     "senses": [
@@ -161,5 +290,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "The paper that says what you owe for a meal.",
+        "why": "Too narrow: 'conta' also means utility bills (water, electricity, phone), not just restaurant checks."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A record of money paid or owed at a bank or business.",
+        "why": "Misses online/user accounts (email, social media), which A2 learners meet constantly."
+      }
+    ],
+    "growth": 1.59
   }
 }

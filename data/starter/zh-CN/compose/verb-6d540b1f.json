@@ -57,6 +57,75 @@
     "language": "zh",
     "headword": "想念",
     "lemma": "想念",
+    "reading": "xiǎngniàn",
+    "ipa": "/ɕi̯aŋ˨˩˦ ni̯ɛn˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to miss; to long for",
+    "primaryGloss": "miss",
+    "emotion": "warm and a little tender, thinking of someone far away",
+    "notes": [
+      "More emotional and formal than 想 (xiǎng). While 想 can also mean 'to want to' or 'to think', 想念 specifically means missing someone or something absent."
+    ],
+    "senses": [
+      {
+        "id": "zulpra7vl8tlgni",
+        "order": 0,
+        "definition": "To feel longing for someone or something that is far away or in the past.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "miss",
+              "long for",
+              "think of fondly"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "jeq83by4hqcaa4g",
+            "text": "我在国外的时候，常常想念我的家人。",
+            "textLang": "zh",
+            "translation": "When I was abroad, I often missed my family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somewhat melancholic and nostalgic, remembering home",
+            "note": null,
+            "matchedForm": "想念",
+            "matchedTranslationForm": "missed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "想念",
+    "lemma": "想念",
     "reading": "xiǎng niàn",
     "ipa": "/ɕi̯aŋ˨˩˦ ni̯ɛn˥˩/",
     "pos": "verb",
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(remember) To think of someone with care and remember them",
+        "why": "Shades of the same meaning ('to miss/think fondly of someone or something absent')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "老师一直在想念着他毕业的学生们。",
+        "why": "想念 is rarely used with 着, and 学生们 after a modifier is unnatural."
+      }
+    ],
+    "growth": 0.586
   }
 }

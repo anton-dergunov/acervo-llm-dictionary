@@ -68,6 +68,98 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "picture; photo; image",
+    "primaryGloss": "picture",
+    "emotion": "excited and nostalgic, capturing a happy memory on a trip",
+    "notes": [
+      "The broken plural is صُوَر (ṣuwar).",
+      "To say 'take a photo', use الْتَقَطَ صُورَةً (iltaqaṭa ṣūratan) in formal Arabic or أَخَذَ صُورَةً (ʾakhaḏa ṣūratan) in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "bvlvjoml4xsch6r",
+        "order": 0,
+        "definition": "A visual representation of someone or something, such as a photograph, drawing, or painting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "picture",
+              "photo",
+              "photograph",
+              "image"
+            ]
+          }
+        ],
+        "domain": "image",
+        "emoji": "📷",
+        "examples": [
+          {
+            "id": "7aqxdlm3epeh0i7",
+            "text": "أُرِيدُ أَنْ آخُذَ صُورَةً هُنَا.",
+            "textLang": "ar",
+            "translation": "I want to take a picture here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "صُورَةً",
+            "matchedTranslationForm": "picture"
+          },
+          {
+            "id": "0rdl41ktshedsfe",
+            "text": "هٰذِهِ الصُّورَةُ جَمِيلَةٌ جِدًّا.",
+            "textLang": "ar",
+            "translation": "This picture is very beautiful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الصُّورَةُ",
+            "matchedTranslationForm": "picture"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "صُورَة",
+    "lemma": "صُورَة",
+    "reading": null,
+    "ipa": "/ˈsˤuː.ra/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📷",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "picture; photo",
     "primaryGloss": "picture",
     "emotion": "excited and nostalgic, capturing a happy memory on a trip",
@@ -163,5 +255,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "صورة covers picture, photo, and image as one general concept; splitting photography and art is artificial."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "أريد أن أخذ صورة هنا.",
+        "why": "Spelling error: 1st person singular imperfect of أَخَذَ must be written with madda: آخُذَ (ʾākhuḏa)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is commonly used both for photographs taken with a camera",
+        "why": "Merely restates the glosses and definitions."
+      }
+    ],
+    "growth": 1.149
   }
 }

@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "大人",
     "lemma": "大人",
+    "reading": "おとな",
+    "ipa": "o̞to̞na̠",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "adult; grown-up",
+    "primaryGloss": "adult",
+    "emotion": "a sense of maturity and stability, looking back at childhood with clarity",
+    "notes": [
+      "Has the irregular reading おとな (not たいじん or だいじん).",
+      "Modifies nouns with の (e.g., 大人の人, 'an adult'), and can also mean 'mature' in phrases like 大人になる ('to grow up' or 'to act like an adult')."
+    ],
+    "senses": [
+      {
+        "id": "7b26liu14gao8fg",
+        "order": 0,
+        "definition": "A person who is fully grown; a mature individual.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "adult",
+              "grown-up"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "qwzuig4asonm5bn",
+            "text": "子供の時、大人はとても大きく見えました。",
+            "textLang": "ja",
+            "translation": "When I was a child, adults looked very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic, recalling a childhood perspective with gentle wonder",
+            "note": null,
+            "matchedForm": "大人",
+            "matchedTranslationForm": "adults"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "大人",
+    "lemma": "大人",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -160,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (おとな) for a kanji headword with an irregular reading."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Acting with the maturity, responsibility, or composure expected of a grown person.",
+        "why": "Sense 1 is just the figurative use of the noun in idioms like 大人になる."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike the English word 'adult,' which can sound slightly formal",
+        "why": "Vague filler; misses the essential irregular reading note (おとな)."
+      }
+    ],
+    "growth": 0.658
   }
 }

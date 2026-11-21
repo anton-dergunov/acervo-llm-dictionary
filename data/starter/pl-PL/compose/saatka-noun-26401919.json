@@ -72,6 +72,73 @@
     "primaryGloss": "salad",
     "emotion": "crisp and fresh, enjoying a healthy meal",
     "notes": [
+      "'Sałatka' refers to a prepared dish of mixed ingredients, whereas 'sałata' means lettuce."
+    ],
+    "senses": [
+      {
+        "id": "bf2mnrdycp7ljpz",
+        "order": 0,
+        "definition": "A cold dish of mixed raw or cooked vegetables, often with meat, eggs, or cheese, served with a dressing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salad"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "kxyyo4nb90gu8h3",
+            "text": "Jem zdrową sałatkę na obiad.",
+            "textLang": "pl",
+            "translation": "I am eating a healthy salad for lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sałatkę",
+            "matchedTranslationForm": "salad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sałatka",
+    "lemma": "sałatka",
+    "reading": null,
+    "ipa": "/saˈwat.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salad",
+    "primaryGloss": "salad",
+    "emotion": "crisp and fresh, enjoying a healthy meal",
+    "notes": [
       "Sałatka refers to a prepared dish of mixed ingredients, whereas sałata specifically means lettuce or leafy greens as a vegetable."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Jem zdrową sałatka na obiad.",
+        "why": "Ungrammatical case: direct object of 'jeść' must be in the accusative ('zdrową sałatkę'), not nominative."
+      }
+    ],
+    "growth": 0.838
   }
 }

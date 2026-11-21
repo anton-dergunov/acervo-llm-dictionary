@@ -58,6 +58,74 @@
     "headword": "öğrenci",
     "lemma": "öğrenci",
     "reading": null,
+    "ipa": "/œː.ɾenˈdʒi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑‍🎓",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "student",
+    "primaryGloss": "student",
+    "emotion": "focused and youthful, carrying a backpack to class",
+    "notes": [
+      "Formed from the verb 'öğrenmek' (to learn)."
+    ],
+    "senses": [
+      {
+        "id": "wjneu410qjw10yf",
+        "order": 0,
+        "definition": "A person who is studying at a school, university, or other place of education.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "student",
+              "pupil"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🧑‍🎓",
+        "examples": [
+          {
+            "id": "z03spvibjmog80h",
+            "text": "Üniversiteye her yıl binlerce yeni öğrenci kayıt yaptırıyor.",
+            "textLang": "tr",
+            "translation": "Thousands of new students register at the university every year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "öğrenci",
+            "matchedTranslationForm": "students"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "öğrenci",
+    "lemma": "öğrenci",
+    "reading": null,
     "ipa": "/œː.ɾænˈdʒi/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "with the suffix '-ci', which denotes a profession or habitual doer.",
+        "why": "False morphology: '-ci' attaches to nouns, not verbs; 'öğrenci' uses the deverbal suffix '-(y)ici'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Üniversitede her yıl binlerce yeni öğrenci kayıt yaptırıyor.",
+        "why": "'kayıt yaptırmak' takes the dative ('üniversiteye'), not the locative ('üniversitede')."
+      }
+    ],
+    "growth": 0.795
   }
 }

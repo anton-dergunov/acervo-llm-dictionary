@@ -58,6 +58,73 @@
     "headword": "โรงแรม",
     "lemma": "โรงแรม",
     "reading": null,
+    "ipa": "/roːŋ˧.rɛːm˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏨",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "hotel",
+    "primaryGloss": "hotel",
+    "emotion": "excited and relaxed, thinking about going on vacation",
+    "notes": [
+      "โรงแรม is a compound of โรง (building) and แรม (to stay overnight). Its classifier is แห่ง."
+    ],
+    "senses": [
+      {
+        "id": "b9sru0mt5du2exh",
+        "order": 0,
+        "definition": "A building where people pay to stay in rooms, especially while travelling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hotel"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🏨",
+        "examples": [
+          {
+            "id": "svchmzmsc8mpxhi",
+            "text": "ฉันจองโรงแรมนี้สำหรับวันหยุด",
+            "textLang": "th",
+            "translation": "I booked this hotel for the holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and satisfied, looking forward to the trip",
+            "note": null,
+            "matchedForm": "โรงแรม",
+            "matchedTranslationForm": "hotel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "โรงแรม",
+    "lemma": "โรงแรม",
+    "reading": null,
     "ipa": "/roːŋ˧.raːm˧/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/roːŋ˧.raːm˧/",
+        "why": "Wrong vowel in the second syllable; แรม has /ɛː/, so /roːŋ˧.rɛːm˧/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with รีสอร์ท, which specifically refers to a resort-style",
+        "why": "Trivial English loanword distinction; classifier แห่ง is much more useful for A2."
+      }
+    ],
+    "growth": 0.805
   }
 }

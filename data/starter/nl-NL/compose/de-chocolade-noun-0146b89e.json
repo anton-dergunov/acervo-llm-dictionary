@@ -71,6 +71,74 @@
     "shortGloss": "chocolate",
     "primaryGloss": "chocolate",
     "emotion": "craving and satisfied, thinking of a sweet treat",
+    "notes": [
+      "In everyday spoken Dutch, the shortened form 'chocola' is very common.",
+      "For hot chocolate (the drink), people in the Netherlands say 'warme chocolademelk' or 'warme chocomel'."
+    ],
+    "senses": [
+      {
+        "id": "dw2woerdv7puqoo",
+        "order": 0,
+        "definition": "A sweet brown food made from cocoa beans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chocolate"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍫",
+        "examples": [
+          {
+            "id": "a346htwxbnn3mox",
+            "text": "Ik eet graag pure chocolade bij de koffie.",
+            "textLang": "nl",
+            "translation": "I like eating dark chocolate with my coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a quiet moment",
+            "note": null,
+            "matchedForm": "chocolade",
+            "matchedTranslationForm": "chocolate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de chocolade",
+    "lemma": "chocolade",
+    "reading": null,
+    "ipa": "/ˌʃɔkoːˈlaːdə/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍫",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "chocolate",
+    "primaryGloss": "chocolate",
+    "emotion": "craving and satisfied, thinking of a sweet treat",
     "notes": [],
     "senses": [
       {
@@ -157,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(drink) A hot drink made with milk and chocolate",
+        "why": "In Netherlandic Dutch, the drink is 'chocolademelk', not 'warme chocolade' (Belgian Dutch)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the very common informal spoken form 'chocola'."
+      }
+    ],
+    "growth": 1.097
   }
 }

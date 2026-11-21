@@ -70,6 +70,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "big; large; loud",
+    "primaryGloss": "big",
+    "emotion": "matter-of-fact and direct, simply stating a size or intensity",
+    "notes": [
+      "Used mainly for concrete physical size or loud sounds; for abstract importance or scale, use 'lớn' instead.",
+      "Often used right after a verb as an adverb meaning 'loudly', as in 'nói to' (to speak loudly)."
+    ],
+    "senses": [
+      {
+        "id": "wlguu7blk2c4q11",
+        "order": 0,
+        "definition": "Of more than average physical size.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "big",
+              "large"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "1onlv2nihcfdotm",
+            "text": "Con voi này rất to.",
+            "textLang": "vi",
+            "translation": "This elephant is very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, describing the scale of the animal",
+            "note": null,
+            "matchedForm": "to",
+            "matchedTranslationForm": "big"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8sl5hhgmxvy6ptw",
+        "order": 1,
+        "definition": "Of a sound or voice: strong and easy to hear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "loud"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "j8n7waumcsn3l16",
+            "text": "Tiếng nhạc ở đây to quá.",
+            "textLang": "vi",
+            "translation": "The music here is too loud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "to",
+            "matchedTranslationForm": "loud"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "to",
+    "lemma": "to",
+    "reading": null,
+    "ipa": "/tɔ˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "large; loud",
     "primaryGloss": "large",
     "emotion": "matter-of-fact and direct, simply stating a size or intensity",
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'to' describes size, it can also refer to intensity in volume.",
+        "why": "Merely restates the two senses of the entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'to' (large) with 'tò' (as in 'tò",
+        "why": "'Tò' is not an independent word; warning against 'tò mò' is unhelpful filler."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Đừng nói to quá.",
+        "why": "Uses 'to' as an adverb ('loudly') modifying a verb, not as an adjective."
+      }
+    ],
+    "growth": 0.912
   }
 }

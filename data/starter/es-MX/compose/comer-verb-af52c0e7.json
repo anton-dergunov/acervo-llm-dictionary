@@ -71,6 +71,114 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat; to have lunch",
+    "primaryGloss": "to eat",
+    "emotion": "hungry and looking forward to a warm meal",
+    "notes": [
+      "In Mexico, 'comer' refers to the main midday meal (lunch), whereas 'almorzar' usually refers to a hearty late-morning meal or brunch."
+    ],
+    "senses": [
+      {
+        "id": "76mp25dmni1z2yb",
+        "order": 0,
+        "definition": "To put food in your mouth, chew it, and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to eat"
+            ]
+          }
+        ],
+        "domain": "eating",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "cpus02qjuoyj01d",
+            "text": "Voy a comer una manzana.",
+            "textLang": "es",
+            "translation": "I am going to eat an apple.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ready to bite into a fresh, crisp fruit",
+            "note": null,
+            "matchedForm": "comer",
+            "matchedTranslationForm": "eat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ghqakdt5c2odojo",
+        "order": 1,
+        "definition": "To have lunch, the main afternoon meal of the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have lunch"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "5p2qd2nxbvtvb81",
+            "text": "Siempre comemos a las dos de la tarde.",
+            "textLang": "es",
+            "translation": "We always have lunch at two in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and settled into the daily midday routine",
+            "note": null,
+            "matchedForm": "comemos",
+            "matchedTranslationForm": "have lunch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "comer",
+    "lemma": "comer",
+    "reading": null,
+    "ipa": "/koˈmeɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to have a meal",
     "primaryGloss": "to eat",
     "emotion": "hungry and looking forward to a warm meal",
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for any main meal, as well as the general act",
+        "why": "Merely restates the two senses; a contrast with 'almorzar' in Mexico is more helpful."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to have lunch, to dine",
+        "why": "'To dine' usually implies evening dinner (cenar) in modern English, whereas 'comer' is midday."
+      }
+    ],
+    "growth": 1.248
   }
 }

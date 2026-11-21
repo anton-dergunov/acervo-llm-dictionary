@@ -73,6 +73,118 @@
     "primaryGloss": "to work",
     "emotion": "focused and steady, a sense of purposeful daily activity",
     "notes": [
+      "Takes فِي (fī, 'in/at') for a workplace and كَـ (ka-, 'as') for a profession, or the accusative case (e.g. عَمِلَ مُعَلِّمًا 'he worked as a teacher').",
+      "For 'to do', فَعَلَ (faʿala) is more general in standard Arabic, whereas عَمِلَ focuses on putting in effort or performing a task."
+    ],
+    "senses": [
+      {
+        "id": "65f2dywolvn5ukx",
+        "order": 0,
+        "definition": "To have a job or do tasks and duties as part of a job.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to work",
+              "to be employed"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "l7w4dgdg4n11ozl",
+            "text": "عَمِلَ فِي شَرِكَةٍ كَبِيرَةٍ.",
+            "textLang": "ar",
+            "translation": "He worked at a big company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing someone's professional background",
+            "note": null,
+            "matchedForm": "عَمِلَ",
+            "matchedTranslationForm": "worked"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9j43sl4syll2n5k",
+        "order": 1,
+        "definition": "To perform an action or task, or to produce something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to do",
+              "to make",
+              "to perform"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "nv75r7zlxg300f0",
+            "text": "مَاذَا عَمِلْتَ اليَوْمَ؟",
+            "textLang": "ar",
+            "translation": "What did you do today?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "عَمِلْتَ",
+            "matchedTranslationForm": "do"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "عَمِلَ",
+    "lemma": "عَمِلَ",
+    "reading": null,
+    "ipa": "/ˈʕamila/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to work; to do; to make",
+    "primaryGloss": "to work",
+    "emotion": "focused and steady, a sense of purposeful daily activity",
+    "notes": [
       "Use 'عَمِلَ' primarily when talking about working a job or doing an action/task.",
       "Do not confuse this with 'فَعَلَ' (fa'ala), which is generally used for 'to do' or 'to act' in a more abstract or spontaneous way.",
       "When talking about working at a company or place, use the preposition 'فِي' (in) after the verb."
@@ -164,5 +276,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "عَمِلَ عَلَى هَذَا الْمَشْرُوعِ لِأَيَّامٍ.",
+        "why": "'Worked on this project' belongs to sense 0 (work), not sense 1 (do/make)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'عَمِلَ' primarily when talking about working a job or doing",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 0.915
   }
 }

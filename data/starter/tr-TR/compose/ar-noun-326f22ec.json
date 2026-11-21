@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bee",
+    "primaryGloss": "bee",
+    "emotion": "cautionary and alert, watching where the buzzing is coming from",
+    "notes": [
+      "Use 'bal arısı' specifically for a honeybee, and 'eşek arısı' for a wasp or hornet."
+    ],
+    "senses": [
+      {
+        "id": "mgwyuc5lhrg39rd",
+        "order": 0,
+        "definition": "A flying insect that collects nectar from flowers and makes honey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bee"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐝",
+        "examples": [
+          {
+            "id": "dkiqnsr3r9judeh",
+            "text": "Çiçeğin üzerinde bir arı var.",
+            "textLang": "tr",
+            "translation": "There is a bee on the flower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation, noting something in nature",
+            "note": null,
+            "matchedForm": "arı",
+            "matchedTranslationForm": "bee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "arı",
+    "lemma": "arı",
+    "reading": null,
+    "ipa": "/aˈɾɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐝",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "bee; pure, clean",
     "primaryGloss": "bee",
     "emotion": "cautionary and alert, watching where the buzzing is coming from",
@@ -138,5 +205,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Something that is pure, clean, or free from contamination.",
+        "why": "Wrong POS (adjective in a noun entry) and literary/archaic sense not for A2."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Learners often confuse this with 'arı' the verb root for cleaning",
+        "why": "There is no verb root 'arı-' in modern Turkish (the verb is 'arınmak'/'aroud' etc., etymologically related)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, this word refers to the honey-producing insect.",
+        "why": "Restates the definition and explains the dropped archaic adjective sense."
+      }
+    ],
+    "growth": 0.448
   }
 }

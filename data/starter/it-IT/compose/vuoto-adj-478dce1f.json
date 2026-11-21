@@ -68,6 +68,133 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "empty; hollow, meaningless",
+    "primaryGloss": "empty",
+    "emotion": "looking inside a box and finding nothing at all, light and hollow",
+    "notes": [],
+    "senses": [
+      {
+        "id": "hu3pbkdh5w90eqc",
+        "order": 0,
+        "definition": "Of a container or space: having nothing or no one inside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "vacant",
+              "blank"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "📭",
+        "examples": [
+          {
+            "id": "aiybbdex95ya5d3",
+            "text": "La scatola è completamente vuota.",
+            "textLang": "it",
+            "translation": "The box is completely empty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised to find the box completely bare and light",
+            "note": null,
+            "matchedForm": "vuota",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z1pxxkn1ulsgl8q",
+        "order": 1,
+        "definition": "Of words, promises, or feelings: lacking sincerity, meaning, or value.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "hollow",
+              "meaningless"
+            ]
+          }
+        ],
+        "domain": "meaning",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "w6zp9g6039oikpe",
+            "text": "Sono solo promesse vuote.",
+            "textLang": "it",
+            "translation": "They are just empty promises.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vuote",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "hu3pbkdh5w90eqc",
+      "from": "Che non contiene nulla all'interno.",
+      "to": "Containing nothing inside.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    },
+    {
+      "sense": "z1pxxkn1ulsgl8q",
+      "from": "Privo di contenuto significativo o di senso.",
+      "to": "Lacking meaningful content or sense.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "vuoto",
+    "lemma": "vuoto",
+    "reading": null,
+    "ipa": "/ˈvwɔ.to/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📭",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "empty; blank; hollow",
     "primaryGloss": "empty",
     "emotion": "looking inside a box and finding nothing at all, light and hollow",
@@ -162,22 +289,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "hu3pbkdh5w90eqc",
-      "from": "Che non contiene nulla all'interno.",
-      "to": "Containing nothing inside.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    },
-    {
-      "sense": "z1pxxkn1ulsgl8q",
-      "from": "Privo di contenuto significativo o di senso.",
-      "to": "Lacking meaningful content or sense.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for physical spaces with nothing inside and for abstract things",
+        "why": "Merely restates the two senses without adding useful grammatical or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Le sue parole sono rimaste vuote.",
+        "why": "Unnatural phrasing in Italian; 'promesse vuote' or 'parole vuote' is standard."
+      }
+    ],
+    "growth": 0.924
+  }
 }

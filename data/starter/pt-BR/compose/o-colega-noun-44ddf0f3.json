@@ -72,6 +72,97 @@
     "primaryGloss": "colleague",
     "emotion": "warm and professional, referring to someone you know well enough to trust",
     "notes": [
+      "The form does not change for gender: use 'o colega' for a man and 'a colega' for a woman.",
+      "Often followed by 'de' to specify the context: 'colega de trabalho' (coworker), 'colega de classe/faculdade' (classmate), 'colega de quarto' (roommate). Unlike 'amigo' (friend), it does not imply closeness."
+    ],
+    "senses": [
+      {
+        "id": "m6kwxsuscwk647y",
+        "order": 0,
+        "definition": "A person you work or study with.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "colleague",
+              "coworker",
+              "classmate"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "wqlspdprnrbs9uc",
+            "text": "O meu colega de trabalho me ajudou com o projeto.",
+            "textLang": "pt",
+            "translation": "My coworker helped me with the project.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and friendly, acknowledging someone's help",
+            "note": null,
+            "matchedForm": "colega",
+            "matchedTranslationForm": "coworker"
+          },
+          {
+            "id": "0lzaitniwvp3f4d",
+            "text": "Ela é uma colega da faculdade.",
+            "textLang": "pt",
+            "translation": "She is a classmate from college.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, introducing a peer",
+            "note": null,
+            "matchedForm": "colega",
+            "matchedTranslationForm": "classmate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o colega",
+    "lemma": "colega",
+    "reading": null,
+    "ipa": "/koˈlɛ.ɡɐ/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "colleague; classmate",
+    "primaryGloss": "colleague",
+    "emotion": "warm and professional, referring to someone you know well enough to trust",
+    "notes": [
       "In Portuguese, 'colega' is a gender-neutral noun. Use 'o colega' for a man and 'a colega' for a woman.",
       "While it often means a work colleague, it is also used for a classmate (colega de classe) or a fellow member of a group."
     ],
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'Colega' means a peer in an institution (work or school); splitting into two senses is artificial."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While it often means a work colleague, it is also used for",
+        "why": "Restates the glosses; better to note how it differs from 'amigo' and combines with prepositions."
+      }
+    ],
+    "growth": 0.991
   }
 }

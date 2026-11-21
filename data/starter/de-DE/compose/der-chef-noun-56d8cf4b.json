@@ -72,6 +72,76 @@
     "primaryGloss": "boss",
     "emotion": "authoritative yet expected, the person you report to daily",
     "notes": [
+      "Plural: 'die Chefs'. A female boss is 'die Chefin' (plural: 'die Chefinnen').",
+      "False friend: does not mean a restaurant cook ('der Koch'), though 'der Küchenchef' is the head chef."
+    ],
+    "senses": [
+      {
+        "id": "gd55zbkr8zjtya1",
+        "order": 0,
+        "definition": "The person who is in charge of a workplace, department, or company.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boss",
+              "manager",
+              "head"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "m6905se4lpsqa76",
+            "text": "Mein Chef ist heute leider nicht im Büro.",
+            "textLang": "de",
+            "translation": "My boss is unfortunately not in the office today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and slightly casual, sharing a small update",
+            "note": null,
+            "matchedForm": "Chef",
+            "matchedTranslationForm": "boss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Chef",
+    "lemma": "Chef",
+    "reading": null,
+    "ipa": "/ʃɛf/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👔",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "boss; manager; head",
+    "primaryGloss": "boss",
+    "emotion": "authoritative yet expected, the person you report to daily",
+    "notes": [
       "Used for both men and women, though 'die Chefin' specifically refers to a female boss.",
       "Commonly used in informal settings to refer to anyone in a position of leadership or even the person 'in charge' of a kitchen or household."
     ],
@@ -163,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A person who has the main authority or is the owner",
+        "why": "Both senses mean the same thing (boss/head of a workplace or company)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Misses the important English false friend ('chef' in a kitchen is 'der Koch' or 'der Küchenchef')."
+      }
+    ],
+    "growth": 0.602
   }
 }

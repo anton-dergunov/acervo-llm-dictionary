@@ -58,6 +58,73 @@
     "headword": "το πορτοκάλι",
     "lemma": "πορτοκάλι",
     "reading": null,
+    "ipa": "/poɾ.toˈka.li/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍊",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "orange",
+    "primaryGloss": "orange",
+    "emotion": "fresh and juicy, ready to peel and eat on a sunny afternoon",
+    "notes": [
+      "Do not confuse with πορτοκαλί (stress on the last syllable), which is the word for the color orange."
+    ],
+    "senses": [
+      {
+        "id": "bz04axyyb76o3a8",
+        "order": 0,
+        "definition": "A round citrus fruit with a tough bright reddish-yellow rind and sweet juicy flesh.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "orange"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍊",
+        "examples": [
+          {
+            "id": "rqt8r17g9v2drf9",
+            "text": "Έφαγαν ένα πορτοκάλι για απογευματινό.",
+            "textLang": "el",
+            "translation": "They ate an orange for an afternoon snack.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πορτοκάλι",
+            "matchedTranslationForm": "orange"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το πορτοκάλι",
+    "lemma": "πορτοκάλι",
+    "reading": null,
     "ipa": "/por.toˈka.li/",
     "pos": "noun",
     "gender": "neuter",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(color) The bright color between red and yellow, like the fruit.",
+        "why": "The color orange is 'το πορτοκαλί' (accent on final syllable), not 'το πορτοκάλι'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The noun 'πορτοκάλι' refers both to the citrus fruit and to the",
+        "why": "False claim; 'πορτοκάλι' only means the fruit, while 'πορτοκαλί' is the color."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "orange; orange color",
+        "why": "Includes the wrong color sense."
+      }
+    ],
+    "growth": 0.515
   }
 }

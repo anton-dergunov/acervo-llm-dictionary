@@ -72,6 +72,92 @@
     "primaryGloss": "guest",
     "emotion": "welcoming and warm, greeting someone at the door with a smile",
     "notes": [
+      "Use 'el invitado' for a man and 'la invitada' for a woman.",
+      "For a paying guest at a hotel, use 'el/la huésped' rather than 'invitado'."
+    ],
+    "senses": [
+      {
+        "id": "qis6h6t7yyxv1gv",
+        "order": 0,
+        "definition": "A person who is invited to a home, party, event, or show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🥳",
+        "examples": [
+          {
+            "id": "n0jxv6ehs2uyqzm",
+            "text": "Cada invitado trajo un regalo pequeño para la fiesta.",
+            "textLang": "es",
+            "translation": "Each guest brought a small gift for the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and observant, looking around a lively room",
+            "note": null,
+            "matchedForm": "invitado",
+            "matchedTranslationForm": "guest"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "qis6h6t7yyxv1gv",
+      "from": "Persona que ha sido convidada a una fiesta, evento o a la casa de alguien.",
+      "to": "A person who has been invited to a party, event, or someone's home.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:10Z"
+    },
+    {
+      "sense": "cghnno1a3cr3ay4",
+      "from": "Persona que participa en un programa de televisión, radio o evento público por invitación.",
+      "to": "A person who takes part in a television, radio show, or public event by invitation.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:10Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el invitado",
+    "lemma": "invitado",
+    "reading": null,
+    "ipa": "/in.biˈta.ðo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥳",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "guest",
+    "primaryGloss": "guest",
+    "emotion": "welcoming and warm, greeting someone at the door with a smile",
+    "notes": [
       "Use 'invitado' for anyone who is invited to your home, a party, or an event.",
       "Do not confuse it with 'cliente', which refers strictly to a customer in a business setting."
     ],
@@ -161,22 +247,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "qis6h6t7yyxv1gv",
-      "from": "Persona que ha sido convidada a una fiesta, evento o a la casa de alguien.",
-      "to": "A person who has been invited to a party, event, or someone's home.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:10Z"
-    },
-    {
-      "sense": "cghnno1a3cr3ay4",
-      "from": "Persona que participa en un programa de televisión, radio o evento público por invitación.",
-      "to": "A person who takes part in a television, radio show, or public event by invitation.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:10Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A person who takes part in a television, radio show, or public",
+        "why": "Shades of one meaning ('guest'); a media guest is just a guest at a show."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'invitado' for anyone who is invited to your home, a party,",
+        "why": "Merely repeats the definition instead of giving grammatical or usage help."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention 'la invitada' for a female guest and contrast with 'huésped' (hotel guest)."
+      }
+    ],
+    "growth": 0.527
+  }
 }

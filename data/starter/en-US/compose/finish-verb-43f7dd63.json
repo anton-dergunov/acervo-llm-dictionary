@@ -60,6 +60,138 @@
     "headword": "finish",
     "lemma": "finish",
     "reading": null,
+    "ipa": "/ˈfɪnɪʃ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "terminar; acabar",
+    "primaryGloss": "terminar",
+    "emotion": null,
+    "notes": [
+      "Cuando va seguido de otro verbo, este debe ir en la forma '-ing' (por ejemplo, 'I finished reading the book').",
+      "A diferencia de 'end', 'finish' suele implicar que se ha completado una tarea o que se ha consumido algo por completo."
+    ],
+    "senses": [
+      {
+        "id": "baipaaq0k52m998",
+        "order": 0,
+        "definition": "Completar una actividad, tarea o cosa que se está haciendo o consumiendo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "terminar",
+              "acabar",
+              "finalizar"
+            ]
+          }
+        ],
+        "domain": "completar",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "iuiwz6wgl0iag11",
+            "text": "I need to finish my homework before I go out.",
+            "textLang": "en",
+            "translation": "Necesito terminar mi tarea antes de salir.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and determined, wanting to get things done so you can enjoy yourself later",
+            "note": null,
+            "matchedForm": "finish",
+            "matchedTranslationForm": "terminar"
+          },
+          {
+            "id": "oihmso4n4goyhtk",
+            "text": "She finished her dinner and asked for the check.",
+            "textLang": "en",
+            "translation": "Terminó su cena y pidió la cuenta.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and satisfied, satisfied after a good meal",
+            "note": null,
+            "matchedForm": "finished",
+            "matchedTranslationForm": "Terminó"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u8208dnojt5slxz",
+        "order": 1,
+        "definition": "Llegar a su fin un evento, actividad o periodo de tiempo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "terminar",
+              "acabar"
+            ]
+          }
+        ],
+        "domain": "concluir",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "q78nmao75exp5nq",
+            "text": "What time does the movie finish?",
+            "textLang": "en",
+            "translation": "¿A qué hora termina la película?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "finish",
+            "matchedTranslationForm": "termina"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "finish",
+    "lemma": "finish",
+    "reading": null,
     "ipa": "/ˈfɪn.ɪʃ/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +295,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Dejar de hacer algo porque ya no queda nada más por hacer.",
+        "why": "Both senses are transitive uses meaning to complete; distinguish transitive vs intransitive instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Ella finalizó su cena y pidió la cuenta.",
+        "why": "'Finalizar la cena' is overly formal and unnatural in Spanish; 'terminó de cenar' or 'se terminó la cena' is natural."
+      }
+    ],
+    "growth": 1.084
   }
 }

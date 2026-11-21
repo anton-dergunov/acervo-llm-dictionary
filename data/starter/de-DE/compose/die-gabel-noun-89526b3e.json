@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "fork",
+    "primaryGloss": "fork",
+    "emotion": "a practical, everyday moment of setting the table or starting a meal",
+    "notes": [
+      "Plural: 'die Gabeln'. Note that a fork in a road is 'die Gabelung', not 'die Gabel'."
+    ],
+    "senses": [
+      {
+        "id": "l5w5eb7czdame7u",
+        "order": 0,
+        "definition": "A small tool with three or four points used for picking up and eating food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fork"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🍴",
+        "examples": [
+          {
+            "id": "90i0qqvf2yyovp1",
+            "text": "Ich habe die Gabel auf den Boden fallen lassen.",
+            "textLang": "de",
+            "translation": "I dropped the fork on the floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly clumsy and apologetic, feeling a bit sheepish",
+            "note": null,
+            "matchedForm": "Gabel",
+            "matchedTranslationForm": "fork"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Gabel",
+    "lemma": "Gabel",
+    "reading": null,
+    "ipa": "/ˈɡaːbl̩/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍴",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "fork; intersection",
     "primaryGloss": "fork",
     "emotion": "a practical, everyday moment of setting the table or starting a meal",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A point where a road or path divides into two.",
+        "why": "A fork in a road is 'Gabelung' in German, not 'Gabel'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can refer to a culinary utensil or the point where",
+        "why": "False claim; 'Gabel' is not used for road intersections ('Gabelung' is used instead)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fork; intersection",
+        "why": "'Gabel' does not mean intersection."
+      }
+    ],
+    "growth": 0.558
   }
 }

@@ -58,6 +58,117 @@
     "headword": "η χώρα",
     "lemma": "χώρα",
     "reading": null,
+    "ipa": "/ˈxo.ɾa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "country; main town",
+    "primaryGloss": "country",
+    "emotion": "a sense of belonging, whether speaking of one's home or a destination",
+    "notes": [
+      "Do not confuse with 'το κράτος', which refers specifically to the state as a political and administrative entity.",
+      "On Greek islands (usually capitalized as 'η Χώρα'), it refers to the island's capital or main town."
+    ],
+    "senses": [
+      {
+        "id": "x029mxt0gipl46p",
+        "order": 0,
+        "definition": "A nation with its own government and borders, or a distant land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "country",
+              "nation",
+              "land"
+            ]
+          }
+        ],
+        "domain": "nation",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "k7idg13wga4co46",
+            "text": "Η Ελλάδα είναι μια πανέμορφη χώρα.",
+            "textLang": "el",
+            "translation": "Greece is a very beautiful country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and admiring, expressing pride for a beautiful place",
+            "note": null,
+            "matchedForm": "χώρα",
+            "matchedTranslationForm": "country"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nalknyex727e4td",
+        "order": 1,
+        "definition": "The main town or capital of a Greek island.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "main town",
+              "Chora"
+            ]
+          }
+        ],
+        "domain": "town",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "h0y27exd4f2pki7",
+            "text": "Το βράδυ θα πάμε βόλτα στη Χώρα του νησιού.",
+            "textLang": "el",
+            "translation": "In the evening we will go for a walk in the island's main town.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Χώρα",
+            "matchedTranslationForm": "main town"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η χώρα",
+    "lemma": "χώρα",
+    "reading": null,
     "ipa": "/ˈço.ɾa/",
     "pos": "noun",
     "gender": "feminine",
@@ -162,5 +273,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈço.ɾa/",
+        "why": "Wrong initial consonant: before back vowel /o/, χ is velar /x/, not palatal /ç/."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "βορά",
+        "why": "Misspelled: 'north' in Greek is 'βορρά' (from βορράς), not 'βορά' (which means prey)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(land) A specific area, region, or stretch of land.",
+        "why": "Poetic/literary shade of 'country'; also misses the everyday island sense 'main town (Chora)'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While it can mean 'land' in a poetic or literary sense",
+        "why": "Restates the senses instead of giving useful grammar or usage advice."
+      }
+    ],
+    "growth": 1.011
   }
 }

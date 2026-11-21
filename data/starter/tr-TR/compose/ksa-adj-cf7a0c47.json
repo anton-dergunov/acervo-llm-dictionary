@@ -70,6 +70,135 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "short; brief",
+    "primaryGloss": "short",
+    "emotion": "matter-of-fact and direct, describing a physical quality",
+    "notes": [
+      "Do not confuse with 'küçük' (small/little), which refers to overall size rather than length or height."
+    ],
+    "senses": [
+      {
+        "id": "an7524bbe7tn8ol",
+        "order": 0,
+        "definition": "Measuring a small distance from one end to the other, or lasting a small amount of time; not long.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "short",
+              "brief"
+            ]
+          }
+        ],
+        "domain": "length, duration",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "fuoqnsnk0ux65ef",
+            "text": "Bu kısa bir hikâye.",
+            "textLang": "tr",
+            "translation": "This is a short story.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kısa",
+            "matchedTranslationForm": "short"
+          },
+          {
+            "id": "6i722hu6lcpwfwf",
+            "text": "Evden okula en kısa yol hangisi?",
+            "textLang": "tr",
+            "translation": "Which is the shortest way from home to school?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kısa",
+            "matchedTranslationForm": "shortest"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ptzs7i0uuskyi87",
+        "order": 1,
+        "definition": "Of a person: measuring a small height; not tall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "short"
+            ]
+          }
+        ],
+        "domain": "height",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "gqo4dka6iyz0xyy",
+            "text": "O çok kısa boylu bir adam.",
+            "textLang": "tr",
+            "translation": "He is a very short man.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kısa",
+            "matchedTranslationForm": "short"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kısa",
+    "lemma": "kısa",
+    "reading": null,
+    "ipa": "/kɯˈsa/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "short",
     "primaryGloss": "short",
     "emotion": "matter-of-fact and direct, describing a physical quality",
@@ -161,5 +290,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bu kısa bir hikaye.",
+        "why": "Example shows duration/extent ('short story'), not physical distance from end to end."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both physical objects that lack length and people",
+        "why": "Merely restates the two senses defined in the entry."
+      }
+    ],
+    "growth": 1.259
   }
 }

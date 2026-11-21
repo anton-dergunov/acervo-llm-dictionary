@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "fácil; tranquilo",
+    "primaryGloss": "fácil",
+    "emotion": "relaxed and confident, speaking with a light smile",
+    "notes": [
+      "A diferencia de 'simple', que suele indicar que algo tiene pocas partes o no es complicado, 'easy' se centra en que no cuesta esfuerzo hacerlo o entenderlo.",
+      "Su comparativo es 'easier' y su superlativo 'easiest'."
+    ],
+    "senses": [
+      {
+        "id": "juw1p7oxi145fys",
+        "order": 0,
+        "definition": "Que no requiere mucho esfuerzo ni presenta dificultad para hacerse o entenderse.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "fácil",
+              "sencillo"
+            ]
+          }
+        ],
+        "domain": "dificultad",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "h1p4pkbj8tt9yo9",
+            "text": "This math test was very easy.",
+            "textLang": "en",
+            "translation": "Este examen de matemáticas fue muy fácil.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and pleased after finishing a task",
+            "note": null,
+            "matchedForm": "easy",
+            "matchedTranslationForm": "fácil"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0gh8mnrwqxmjqxm",
+        "order": 1,
+        "definition": "Dicho de una situación o modo de vida: libre de preocupaciones, tensiones o dificultades.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tranquilo",
+              "cómodo",
+              "fácil"
+            ]
+          }
+        ],
+        "domain": "vida",
+        "emoji": "🌴",
+        "examples": [
+          {
+            "id": "vmn7x2no476c0x1",
+            "text": "He wants an easy life without hard work.",
+            "textLang": "en",
+            "translation": "Él quiere una vida tranquila sin trabajo duro.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and wishing for a relaxed lifestyle",
+            "note": null,
+            "matchedForm": "easy",
+            "matchedTranslationForm": "tranquila"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "easy",
+    "lemma": "easy",
+    "reading": null,
+    "ipa": "/ˈiːzi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧩",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "fácil; sencillo",
     "primaryGloss": "fácil",
     "emotion": "relaxed and confident, speaking with a light smile",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para hablar de algo que no requiere mucho esfuerzo",
+        "why": "Merely restates the definition of the first sense."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Que vive sin preocupaciones, tensiones o dificultades económicas.",
+        "why": "Defines a person who lives without worry, whereas the example modifies 'life'."
+      }
+    ],
+    "growth": 1.06
   }
 }

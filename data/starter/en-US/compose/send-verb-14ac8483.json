@@ -74,6 +74,96 @@
     "primaryGloss": "enviar",
     "emotion": null,
     "notes": [
+      "Es un verbo irregular: el pasado y el participio son 'sent'.",
+      "Admite dos estructuras: 'send someone something' (I sent her a letter) o 'send something to someone' (I sent a letter to her)."
+    ],
+    "senses": [
+      {
+        "id": "tiso5ydqk3lzvz7",
+        "order": 0,
+        "definition": "Hacer que algo llegue a otro lugar o a otra persona, por correo o por medios electrónicos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "enviar",
+              "mandar"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "📤",
+        "examples": [
+          {
+            "id": "c07n8sjarks0zyz",
+            "text": "I will send the document to you by email.",
+            "textLang": "en",
+            "translation": "Te enviaré el documento por correo electrónico.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and efficient, getting a task completed quickly",
+            "note": null,
+            "matchedForm": "send",
+            "matchedTranslationForm": "enviaré"
+          },
+          {
+            "id": "c4vk60dxah664ai",
+            "text": "They send gifts to their family every Christmas.",
+            "textLang": "en",
+            "translation": "Mandan regalos a su familia cada Navidad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and thoughtful, reflecting on a kind recurring tradition",
+            "note": null,
+            "matchedForm": "send",
+            "matchedTranslationForm": "Mandan"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "send",
+    "lemma": "send",
+    "reading": null,
+    "ipa": "/sɛnd/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "enviar; mandar",
+    "primaryGloss": "enviar",
+    "emotion": null,
+    "notes": [
       "Send se usa tanto para objetos físicos como para mensajes digitales.",
       "A diferencia de 'take' o 'bring', el énfasis aquí está en que el objeto se mueve hacia un destino sin que tú necesariamente lo acompañes.",
       "En contextos muy informales, se puede usar 'ship' para objetos grandes, pero 'send' es la palabra más general y común."
@@ -144,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Send se usa tanto para objetos físicos como para mensajes",
+        "why": "Obvious filler; Spanish 'enviar/mandar' works the exact same way."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[2]",
+        "quote": "En contextos muy informales, se puede usar 'ship' para objetos",
+        "why": "'Ship' is commercial/postal (despachar/enviar por paquetería), neither informal nor only for large items."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past and participle 'sent' and double-object pattern."
+      }
+    ],
+    "growth": 0.804
   }
 }

@@ -60,6 +60,74 @@
     "headword": "χαμογελώ",
     "lemma": "χαμογελώ",
     "reading": null,
+    "ipa": "/xa.mo.ʝeˈlo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to smile",
+    "primaryGloss": "smile",
+    "emotion": "warm and friendly, feeling happy and at ease",
+    "notes": [
+      "Also commonly conjugated as χαμογελάω in everyday speech (2nd sg: χαμογελάς, 3rd sg: χαμογελάει / χαμογελά). Past (aorist): χαμογέλασα.",
+      "Do not confuse with γελάω / γελώ, which means 'to laugh'."
+    ],
+    "senses": [
+      {
+        "id": "dahvwdylebx3qi7",
+        "order": 0,
+        "definition": "To curve the corners of your mouth upwards to show happiness, friendliness, or amusement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smile"
+            ]
+          }
+        ],
+        "domain": "expression",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "71vihn8eajs56jb",
+            "text": "Όταν με είδε, άρχισε να χαμογελάει.",
+            "textLang": "el",
+            "translation": "When she saw me, she started to smile.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "χαμογελάει",
+            "matchedTranslationForm": "smile"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "χαμογελώ",
+    "lemma": "χαμογελώ",
+    "reading": null,
     "ipa": "/xamoʝeˈlo/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Χαμογελώ is formed from χαίρομαι (to rejoice/be glad) and γελώ",
+        "why": "False etymology: χαμο- comes from χαμαί (low/on the ground), meaning a low/quiet laugh, not χαίρομαι."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Όταν με είδε, άρχισε να χαμογελώ.",
+        "why": "Ungrammatical person mismatch: άρχισε (3rd sg) cannot take να χαμογελώ (1st sg)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Η τύχη φαίνεται να μας χαμογελώ σήμερα.",
+        "why": "Ungrammatical person mismatch: Η τύχη φαίνεται (3rd sg) requires να χαμογελά(ει), not 1st sg χαμογελώ."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(expression) To show kindness, encouragement, or approval through a facial expression.",
+        "why": "Smiling to show happiness and smiling to show kindness are the same basic meaning."
+      }
+    ],
+    "growth": 0.816
   }
 }

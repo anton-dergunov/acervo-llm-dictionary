@@ -68,6 +68,76 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "cow, cattle",
+    "primaryGloss": "cow",
+    "emotion": "a calm, grounding presence that feels earthy and slow",
+    "notes": [
+      "Covers cows, bulls, and cattle in general. For beef, 牛肉 (ぎゅうにく) is usually used, though 牛 (うし or ぎゅう) appears on menus and in dish names like 牛丼 (ぎゅうどん, beef bowl)."
+    ],
+    "senses": [
+      {
+        "id": "7ma6eohz8s516k9",
+        "order": 0,
+        "definition": "A large farm animal kept for its milk or meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cow",
+              "cattle",
+              "ox",
+              "bull"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐄",
+        "examples": [
+          {
+            "id": "z4v3rnh0hnv3mcc",
+            "text": "牧場で牛を見ました。",
+            "textLang": "ja",
+            "translation": "I saw cows at the ranch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and slightly nostalgic, recalling a relaxed weekend trip",
+            "note": null,
+            "matchedForm": "牛",
+            "matchedTranslationForm": "cows"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "牛",
+    "lemma": "牛",
+    "reading": "うし",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐄",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "cow; cattle; beef",
     "primaryGloss": "cow",
     "emotion": "a calm, grounding presence that feels earthy and slow",
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cow; cattle; beef",
+        "why": "Lists 'beef', which is absent from the senses and contradicted by note [0]."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In casual contexts, 🐮 is often used to refer to a cow",
+        "why": "Trivial remark about emoji usage."
+      }
+    ],
+    "growth": 1.011
   }
 }

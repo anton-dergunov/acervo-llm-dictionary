@@ -58,6 +58,75 @@
     "headword": "ánh sáng",
     "lemma": "ánh sáng",
     "reading": null,
+    "ipa": "/aɲ˧˥ saːŋ˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "light; brightness",
+    "primaryGloss": "light",
+    "emotion": "calm and bright, noticing the morning sun",
+    "notes": [
+      "Formed from 'ánh' (ray, gleam) and 'sáng' (bright).",
+      "Refers to physical light itself (such as sunlight or lamplight), not to a lamp or light fixture, which is 'đèn'."
+    ],
+    "senses": [
+      {
+        "id": "jo1a4j2a1eikult",
+        "order": 0,
+        "definition": "The brightness from the sun, a lamp, or fire that allows you to see things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "brightness"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "fl8o6yftz4gfekz",
+            "text": "Ánh sáng mặt trời chiếu vào phòng qua cửa sổ.",
+            "textLang": "vi",
+            "translation": "Sunlight shines into the room through the window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and pleased with the nice weather",
+            "note": null,
+            "matchedForm": "Ánh sáng",
+            "matchedTranslationForm": "Sunlight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ánh sáng",
+    "lemma": "ánh sáng",
+    "reading": null,
     "ipa": "/aŋ˧˥ saːŋ˧˥/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aŋ˧˥ saːŋ˧˥/",
+        "why": "Wrong final consonant for northern Vietnamese 'ánh': should be palatal /aɲ˧˥/, not velar /aŋ˧˥/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cuốn sách này mang lại ánh sáng cho suy nghĩ của tôi.",
+        "why": "Reads like a literal English translation; metaphorically 'ánh sáng' usually means hope or civilization/truth."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(knowledge) A clear understanding or a new way of seeing",
+        "why": "The figurative sense is poetic/literary and not needed as a separate sense for A2."
+      }
+    ],
+    "growth": 0.657
   }
 }

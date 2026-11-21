@@ -70,6 +70,95 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": null,
+    "notes": [
+      "To ask the time, German uses 'Wie spät ist es?' (literally 'How late is it?').",
+      "'zu spät kommen' means 'to be late / to arrive late'. The comparative form 'später' means 'later'."
+    ],
+    "senses": [
+      {
+        "id": "pmvouynpu71m4nm",
+        "order": 0,
+        "definition": "Near the end of the day or a period of time, or after the expected time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "2710qmcas7v0341",
+            "text": "Es ist schon sehr spät.",
+            "textLang": "de",
+            "translation": "It is already very late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a quiet realization that the day has gone on long enough",
+            "note": null,
+            "matchedForm": "spät",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "osqo7t89tauxr6w",
+            "text": "Er kam zu spät zum Termin.",
+            "textLang": "de",
+            "translation": "He arrived late for the appointment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly apologetic but matter-of-fact",
+            "note": null,
+            "matchedForm": "spät",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "spät",
+    "lemma": "spät",
+    "reading": null,
+    "ipa": "/ʃpɛːt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕒",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "late; delayed",
     "primaryGloss": "late",
     "emotion": null,
@@ -142,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "late; delayed",
+        "why": "'delayed' is not in the sense glosses (and 'delayed' is usually 'verspätet')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'spät' to describe something happening after the expected time or deep into the day",
+        "why": "Merely restates the definition of the word."
+      }
+    ],
+    "growth": 0.804
   }
 }

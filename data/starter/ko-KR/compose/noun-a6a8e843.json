@@ -63,6 +63,73 @@
     "headword": "강",
     "lemma": "강",
     "reading": null,
+    "ipa": "ka̠ŋ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "河",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "river",
+    "primaryGloss": "river",
+    "emotion": null,
+    "notes": [
+      "강 is used for large rivers, while 천 or 내 is used for smaller streams or creeks."
+    ],
+    "senses": [
+      {
+        "id": "zodj5vtqbszll09",
+        "order": 0,
+        "definition": "A large natural stream of water flowing to the sea or a lake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "river"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "河",
+        "examples": [
+          {
+            "id": "v6wpi0anmbkep1d",
+            "text": "이 강은 아주 깊고 넓어요.",
+            "textLang": "ko",
+            "translation": "This river is very deep and wide.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "강",
+            "matchedTranslationForm": "river"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "강",
+    "lemma": "강",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -123,5 +190,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "강물이 아주 맑아요.",
+        "why": "Uses the compound noun 강물 (river water) instead of the headword 강 (river)."
+      }
+    ],
+    "growth": 0.604
   }
 }

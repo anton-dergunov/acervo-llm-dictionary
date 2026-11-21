@@ -68,6 +68,134 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "llegar",
+    "primaryGloss": "llegar",
+    "emotion": "aliviado y satisfecho, al terminar un largo viaje o tarea",
+    "notes": [
+      "Nunca se usa con 'to' (*arrive to*). Usa 'arrive in' para ciudades o países, 'arrive at' para lugares concretos (una estación, el trabajo), y 'arrive home' sin preposición."
+    ],
+    "senses": [
+      {
+        "id": "9aeufxsninx3gyo",
+        "order": 0,
+        "definition": "Alcanzar un lugar al final de un viaje o trayecto.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llegar"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "3gwk0egj1qc1x68",
+            "text": "What time does the train arrive at the station?",
+            "textLang": "en",
+            "translation": "¿A qué hora llega el tren a la estación?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curioso y esperando la información con impaciencia",
+            "note": null,
+            "matchedForm": "arrive",
+            "matchedTranslationForm": "llega"
+          },
+          {
+            "id": "wm3mrt8xlpp5mkk",
+            "text": "We arrived in London late at night.",
+            "textLang": "en",
+            "translation": "Llegamos a Londres tarde por la noche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cansado pero tranquilo tras haber terminado el viaje",
+            "note": null,
+            "matchedForm": "arrived",
+            "matchedTranslationForm": "Llegamos"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ydg29llmsga62m8",
+        "order": 1,
+        "definition": "Dicho de una fecha, momento o acontecimiento: producirse o empezar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llegar"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🎉",
+        "examples": [
+          {
+            "id": "8ziptngs75ebm03",
+            "text": "The day of the competition has finally arrived.",
+            "textLang": "en",
+            "translation": "El día de la competencia por fin ha llegado.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "emocionado por la llegada de un evento esperado",
+            "note": null,
+            "matchedForm": "arrived",
+            "matchedTranslationForm": "llegado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "arrive",
+    "lemma": "arrive",
+    "reading": null,
+    "ipa": "/əˈraɪv/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "llegar; alcanzar",
     "primaryGloss": "llegar",
     "emotion": "aliviado y satisfecho, al terminar un largo viaje o tarea",
@@ -181,5 +309,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "llegar, alcanzar",
+        "why": "'Arrive' is intransitive and does not mean 'alcanzar' (to reach); false gloss in shortGloss too."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "A diferencia del español 'llegar', 'arrive' es un verbo intransitivo.",
+        "why": "Spanish 'llegar' is also intransitive; the note's grammatical explanation is false and confusing."
+      }
+    ],
+    "growth": 0.921
   }
 }

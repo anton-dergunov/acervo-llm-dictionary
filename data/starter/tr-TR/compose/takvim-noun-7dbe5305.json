@@ -68,6 +68,71 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "calendar",
+    "primaryGloss": "calendar",
+    "emotion": "organized and planning ahead, looking forward to the coming weeks",
+    "notes": [],
+    "senses": [
+      {
+        "id": "9rbukpvsz0ucopb",
+        "order": 0,
+        "definition": "A chart, book, or app showing the days, weeks, and months of a year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calendar"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "x09ot6ww8buw2bg",
+            "text": "Duvara yeni bir takvim astık.",
+            "textLang": "tr",
+            "translation": "We hung a new calendar on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and neat, finishing a small home task",
+            "note": null,
+            "matchedForm": "takvim",
+            "matchedTranslationForm": "calendar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "takvim",
+    "lemma": "takvim",
+    "reading": null,
+    "ipa": "/takˈvim/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "calendar; a page of days, weeks and months",
     "primaryGloss": "calendar",
     "emotion": "organized and planning ahead, looking forward to the coming weeks",
@@ -158,5 +223,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A single page of days, weeks, and months",
+        "why": "'Takvim' means calendar; 'calendar page' is 'takvim yaprağı' (as the example itself shows)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "calendar; a page of days, weeks and months",
+        "why": "Includes the false 'calendar page' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the physical object hanging on the wall and",
+        "why": "Trivial filler; true of the English word 'calendar' too."
+      }
+    ],
+    "growth": 0.306
   }
 }

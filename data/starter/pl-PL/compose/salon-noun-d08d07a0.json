@@ -68,6 +68,117 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "living room; salon, showroom",
+    "primaryGloss": "living room",
+    "emotion": "relaxed and hospitable, welcoming someone into your comfortable home space",
+    "notes": [
+      "For the living room, 'salon' and 'pokój dzienny' are synonyms, though 'salon' is shorter and more common in everyday speech.",
+      "Also used for specialized shops and dealerships, such as 'salon samochodowy' (car dealership)."
+    ],
+    "senses": [
+      {
+        "id": "vl9okz2bs0wi0p2",
+        "order": 0,
+        "definition": "The main room in a home used for relaxing and entertaining guests.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "living room",
+              "lounge"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "hqx7vhs4wo15j4a",
+            "text": "W salonie mamy dużą, wygodną kanapę.",
+            "textLang": "pl",
+            "translation": "We have a large, comfortable sofa in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and satisfied, describing a cozy part of the home",
+            "note": null,
+            "matchedForm": "salonie",
+            "matchedTranslationForm": "living room"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4fj2ay6wezf3npc",
+        "order": 1,
+        "definition": "A business offering beauty or hairdressing services, or a showroom for high-end goods.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salon",
+              "parlor",
+              "showroom"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "✂️",
+        "examples": [
+          {
+            "id": "qscjvvak1dm3a3t",
+            "text": "Muszę umówić się do salonu fryzjerskiego.",
+            "textLang": "pl",
+            "translation": "I need to make an appointment at the hair salon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and organized, planning a regular task",
+            "note": null,
+            "matchedForm": "salonu",
+            "matchedTranslationForm": "salon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "salon",
+    "lemma": "salon",
+    "reading": null,
+    "ipa": "/ˈsa.lɔn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "living room; lounge",
     "primaryGloss": "living room",
     "emotion": "relaxed and hospitable, welcoming someone into your comfortable home space",
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "living room; lounge",
+        "why": "Does not cover the second sense (hair/beauty salon or showroom)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is distinct from 'pokój dzienny', which is often a smaller",
+        "why": "'Salon' and 'pokój dzienny' are synonyms for living room; 'salon' just sounds slightly more modern/upscale."
+      }
+    ],
+    "growth": 1.029
   }
 }

@@ -68,6 +68,75 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "door; gate",
+    "primaryGloss": "door",
+    "emotion": "solid and familiar, the feeling of arriving home after being out",
+    "notes": [
+      "In Mexican Spanish, 'tocar la puerta' is the standard phrase for 'to knock on the door', and 'puerta (de embarque)' is used for an airport boarding gate."
+    ],
+    "senses": [
+      {
+        "id": "ik92405g1u8qxri",
+        "order": 0,
+        "definition": "A movable barrier used to open and close the entrance to a building, room, or vehicle, or the doorway itself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door",
+              "doorway",
+              "gate"
+            ]
+          }
+        ],
+        "domain": "entrance",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "0nw02jlesm8sj99",
+            "text": "Cierra la puerta al salir de la habitación.",
+            "textLang": "es",
+            "translation": "Close the door when leaving the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, giving a simple instruction",
+            "note": null,
+            "matchedForm": "puerta",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la puerta",
+    "lemma": "puerta",
+    "reading": null,
+    "ipa": "/ˈpweɾta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "door; doorway",
     "primaryGloss": "door",
     "emotion": "solid and familiar, the feeling of arriving home after being out",
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "door; doorway",
+        "why": "'doorway' is in shortGloss, but the sense glosses only list 'door'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 'puerta' for the physical door that you open and close.",
+        "why": "Both notes merely restate the definition instead of giving useful usage help."
+      }
+    ],
+    "growth": 1.034
   }
 }

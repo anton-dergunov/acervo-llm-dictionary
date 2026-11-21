@@ -71,6 +71,71 @@
     "shortGloss": "minute",
     "primaryGloss": "minute",
     "emotion": "a practical and precise measure, matter-of-fact and focused on the passing time",
+    "notes": [],
+    "senses": [
+      {
+        "id": "1h6n6jp7we5q5ve",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds, or a very short period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "o65zzr4bidnkbe9",
+            "text": "Espera un minuto, por favor.",
+            "textLang": "es",
+            "translation": "Wait a minute, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "minuto",
+            "matchedTranslationForm": "minute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el minuto",
+    "lemma": "minuto",
+    "reading": null,
+    "ipa": "/miˈnuto/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "minute",
+    "primaryGloss": "minute",
+    "emotion": "a practical and precise measure, matter-of-fact and focused on the passing time",
     "notes": [
       "Used identically to the English 'minute' when talking about time. Do not confuse it with 'momento', which usually means 'a brief moment' rather than a precise unit of time."
     ],
@@ -118,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Espero un minuto, por favor.",
+        "why": "Confuses 1st person 'espero' with imperative 'espera'/'espere'; unidiomatic with 'por favor'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used identically to the English 'minute' when talking about time.",
+        "why": "Filler note stating the obvious."
+      }
+    ],
+    "growth": 0.473
   }
 }

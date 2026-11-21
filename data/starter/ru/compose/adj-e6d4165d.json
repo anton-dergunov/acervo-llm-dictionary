@@ -58,6 +58,158 @@
     "headword": "больной",
     "lemma": "больной",
     "reading": null,
+    "ipa": "/bɐlʲˈnoj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "sick, ill; sore; patient",
+    "primaryGloss": "sick",
+    "emotion": "a slightly tired and muted tone, conveying discomfort without being overly dramatic",
+    "notes": [
+      "To say someone is currently ill ('is sick'), Russian usually uses the short form: болен (masculine), больна (feminine), больны (plural).",
+      "Often used as a noun meaning 'patient' (masculine больной, feminine больная).",
+      "Related to the verb болеть ('to be ill' or 'to ache')."
+    ],
+    "senses": [
+      {
+        "id": "fzh39uuwb3hdikq",
+        "order": 0,
+        "definition": "Suffering from an illness; not in good health.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "ysl9zjp53vqmj6m",
+            "text": "Мама ухаживает за больным ребёнком.",
+            "textLang": "ru",
+            "translation": "Mom is taking care of the sick child.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "больным",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7ec2r4o3gpkuwv8",
+        "order": 1,
+        "definition": "Of a part of the body: hurting or affected by pain or disease.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sore",
+              "aching",
+              "bad"
+            ]
+          }
+        ],
+        "domain": "body part",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "arvp9zijgq7yeig",
+            "text": "У меня болит больной зуб.",
+            "textLang": "ru",
+            "translation": "My bad tooth hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "больной",
+            "matchedTranslationForm": "bad"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sfcat51mh05rpii",
+        "order": 2,
+        "definition": "(as a noun) A person receiving medical treatment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "patient"
+            ]
+          }
+        ],
+        "domain": "patient",
+        "emoji": "🏥",
+        "examples": [
+          {
+            "id": "d1bpibp12atd6cx",
+            "text": "Врач внимательно осмотрел больного.",
+            "textLang": "ru",
+            "translation": "The doctor carefully examined the patient.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and professional, describing a routine medical task",
+            "note": null,
+            "matchedForm": "больного",
+            "matchedTranslationForm": "patient"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "больной",
+    "lemma": "больной",
+    "reading": null,
     "ipa": "/bɐlʲˈnoɪ̯/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common adjective sense 'sore/aching' (for body parts), despite mentioning it in notes[0]."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он сегодня больной и не придет на работу.",
+        "why": "Predicate 'он сегодня больной' sounds colloquial; short form 'болен' or attributive use is much more natural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As an adjective, 'больной' describes a person who is sick",
+        "why": "Restates the definitions instead of giving grammar help (such as the short form 'болен')."
+      }
+    ],
+    "growth": 1.277
   }
 }

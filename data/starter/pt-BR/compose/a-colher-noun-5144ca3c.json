@@ -58,6 +58,83 @@
     "headword": "a colher",
     "lemma": "colher",
     "reading": null,
+    "ipa": "/koˈʎɛʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥄",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "spoon",
+    "primaryGloss": "spoon",
+    "emotion": "warm and domestic, setting the table for a simple meal",
+    "notes": [
+      "Pronounced with an open 'e' (/ɛ/). Do not confuse with the verb 'colher' (to harvest, to pick), which is spelled the same way but pronounced with a closed 'e' (/e/)."
+    ],
+    "senses": [
+      {
+        "id": "mg8b2d03z4mgyep",
+        "order": 0,
+        "definition": "A small bowl-shaped utensil on a handle, used for eating or stirring food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spoon"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🥄",
+        "examples": [
+          {
+            "id": "ryg9evlow0ayu6b",
+            "text": "Ela pegou a colher para tomar a sopa.",
+            "textLang": "pt",
+            "translation": "She grabbed the spoon to eat the soup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "colher",
+            "matchedTranslationForm": "spoon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "mg8b2d03z4mgyep",
+      "from": "Utensílio com uma pequena concha na ponta, usado para comer líquidos ou alimentos pastosos.",
+      "to": "A small bowl-shaped utensil on a handle, used for eating liquids or soft foods.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:22Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a colher",
+    "lemma": "colher",
+    "reading": null,
     "ipa": "/kuˈʎeʁ/",
     "pos": "noun",
     "gender": "feminine",
@@ -119,14 +196,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "mg8b2d03z4mgyep",
-      "from": "Utensílio com uma pequena concha na ponta, usado para comer líquidos ou alimentos pastosos.",
-      "to": "A small bowl-shaped utensil on a handle, used for eating liquids or soft foods.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:22Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kuˈʎeʁ/",
+        "why": "The stressed vowel in the noun 'colher' is open /ɛ/ (/kuˈʎɛʁ/ or /koˈʎɛʁ/), not closed /e/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the verb colher (to harvest, to pick), which is spelled the same way but has a different open vowel sound",
+        "why": "Backwards: the noun has an open /ɛ/ in the infinitive/lemma spelling, whereas the verb 'colher' has a closed /e/."
+      }
+    ],
+    "growth": 1.066
+  }
 }

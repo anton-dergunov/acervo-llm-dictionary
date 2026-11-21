@@ -83,6 +83,97 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "missed; longed for",
+    "primaryGloss": "missed",
+    "emotion": "a soft, aching ache in the chest, remembering someone far away",
+    "notes": [
+      "The person, place, or thing that is missed is marked with the particle が (e.g. 家族が恋しい, 'I miss my family').",
+      "Differs from 寂しい (sabishii), which describes a general feeling of loneliness rather than yearning for a specific absent person or place."
+    ],
+    "senses": [
+      {
+        "id": "o9hsr0hrhdjnxyd",
+        "order": 0,
+        "definition": "Dearly missed and longed for when absent or far away.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "missed",
+              "longed for",
+              "yearned for"
+            ]
+          }
+        ],
+        "domain": "longing",
+        "emoji": "🥺",
+        "examples": [
+          {
+            "id": "10u540knt8irtv4",
+            "text": "故郷の味がとても恋しい。",
+            "textLang": "ja",
+            "translation": "I miss the taste of my hometown very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "恋しい",
+            "matchedTranslationForm": "miss"
+          },
+          {
+            "id": "ipwe3u4htzaq33s",
+            "text": "遠くにいる家族が恋しいです。",
+            "textLang": "ja",
+            "translation": "I miss my family who are far away.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and melancholy, speaking of loved ones",
+            "note": null,
+            "matchedForm": "恋しい",
+            "matchedTranslationForm": "miss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "恋しい",
+    "lemma": "恋しい",
+    "reading": "こいしい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥺",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "yearned for; missed",
     "primaryGloss": "missed",
     "emotion": "a soft, aching ache in the chest, remembering someone far away",
@@ -157,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To feel deep longing or affection for someone who is absent",
+        "why": "An adjective is defined as a verb phrase ('To feel...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "故郷の味付けがとても恋しい。",
+        "why": "故郷の味 ('taste of home') is the natural collocation, not 味付け ('seasoning')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that the person or thing missed takes the particle が."
+      }
+    ],
+    "growth": 0.917
   }
 }

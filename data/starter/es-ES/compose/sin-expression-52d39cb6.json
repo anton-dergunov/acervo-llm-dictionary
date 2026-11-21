@@ -68,6 +68,95 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Followed by a noun, pronoun, or infinitive verb (unlike English 'without' + -ing: 'sin decir' = 'without saying').",
+      "Do not confuse with 'sino' ('but rather'), which introduces an alternative after a negative statement."
+    ],
+    "senses": [
+      {
+        "id": "byrj3x0v5p1fhwq",
+        "order": 0,
+        "definition": "Not having, using, or doing something; in the absence of.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "ena8071h7usvfxj",
+            "text": "Me gusta el café sin azúcar.",
+            "textLang": "es",
+            "translation": "I like coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and clear, stating a personal preference",
+            "note": null,
+            "matchedForm": "sin",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "uascmttcxrw291k",
+            "text": "Se fue sin decir adiós.",
+            "textLang": "es",
+            "translation": "He left without saying goodbye.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit cold and distant, describing a sudden departure",
+            "note": null,
+            "matchedForm": "sin",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "sin",
+    "lemma": "sin",
+    "reading": null,
+    "ipa": "/sin/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "without; lacking",
     "primaryGloss": "without",
     "emotion": null,
@@ -181,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'sin' is a preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to indicate the absence or lack of something.",
+        "why": "Restates the definition without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Preposition 'sin' has one core meaning; noun vs. infinitive belongs in notes."
+      }
+    ],
+    "growth": 0.775
   }
 }

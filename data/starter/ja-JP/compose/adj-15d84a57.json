@@ -71,6 +71,97 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "busy; occupied",
+    "primaryGloss": "busy",
+    "emotion": null,
+    "notes": [
+      "Describes people having a lot to do, or time periods/workplaces full of work. Do not use it for a crowded street or lively place (use にぎやか instead)."
+    ],
+    "senses": [
+      {
+        "id": "95of6igfi2ayozy",
+        "order": 0,
+        "definition": "Having a lot to do; occupied with many tasks, or full of work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "occupied",
+              "hectic"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "yvv2kg0f13z76wb",
+            "text": "最近、仕事がとても忙しいです。",
+            "textLang": "ja",
+            "translation": "I have been very busy with work lately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little tired and matter-of-fact while explaining a schedule",
+            "note": null,
+            "matchedForm": "忙しい",
+            "matchedTranslationForm": "busy"
+          },
+          {
+            "id": "o4c95dajj2z5z6x",
+            "text": "明日は忙しい一日になりそうだ。",
+            "textLang": "ja",
+            "translation": "Tomorrow looks like it will be a busy day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "忙しい",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "忙しい",
+    "lemma": "忙しい",
+    "reading": "いそがしい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏃",
+    "topics": [
+      "Describing",
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "busy; occupied; hectic",
     "primaryGloss": "busy",
     "emotion": null,
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Full of activity; crowded or hectic.",
+        "why": "English interference: 忙しい does not mean 'crowded/bustling' for a street (use にぎやか)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "この通りはいつも忙しいですね。",
+        "why": "Direct calque of English 'busy street'; unnatural in Japanese."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "like a busy street",
+        "why": "Teaches an English calque; a lively/crowded street is にぎやか, not 忙しい."
+      }
+    ],
+    "growth": 0.885
   }
 }

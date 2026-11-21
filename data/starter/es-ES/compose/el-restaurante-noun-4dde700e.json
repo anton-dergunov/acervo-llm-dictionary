@@ -73,6 +73,71 @@
     "shortGloss": "restaurant",
     "primaryGloss": "restaurant",
     "emotion": "hungry and anticipating a good meal, ready to look at the menu",
+    "notes": [],
+    "senses": [
+      {
+        "id": "mv6mfqdqoluy62f",
+        "order": 0,
+        "definition": "A place where you pay to eat a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "ce76gr3asmruoey",
+            "text": "Buscamos un restaurante italiano para cenar esta noche.",
+            "textLang": "es",
+            "translation": "We are looking for an Italian restaurant to have dinner tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and decisive, planning where to go for food",
+            "note": null,
+            "matchedForm": "restaurante",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el restaurante",
+    "lemma": "restaurante",
+    "reading": null,
+    "ipa": "/restauˈɾante/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "restaurant",
+    "primaryGloss": "restaurant",
+    "emotion": "hungry and anticipating a good meal, ready to look at the menu",
     "notes": [
       "Often shortened in casual speech to 'el resto' or simply 'el local' depending on context, though 'restaurante' is standard everywhere.",
       "Do not confuse with 'la taberna' or 'el bar', which usually imply a more informal drinking or snacking spot rather than a full meal service."
@@ -121,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Often shortened in casual speech to 'el resto'",
+        "why": "'Resto' for restaurant is River Plate/French usage, not used in Spain."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'la taberna' or 'el bar'",
+        "why": "Unnecessary filler note for an obvious cognate."
+      }
+    ],
+    "growth": 0.39
   }
 }

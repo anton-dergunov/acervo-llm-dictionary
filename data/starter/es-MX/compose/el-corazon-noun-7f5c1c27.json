@@ -72,6 +72,113 @@
     "primaryGloss": "heart",
     "emotion": "steady and warm, beating calmly in the chest",
     "notes": [
+      "The plural is 'los corazones' (drops the written accent)."
+    ],
+    "senses": [
+      {
+        "id": "mmfnhobkr1iicqs",
+        "order": 0,
+        "definition": "The organ in the chest that pumps blood through the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "organ",
+        "emoji": "🫀",
+        "examples": [
+          {
+            "id": "s3481dpzwnvqlil",
+            "text": "El corazón late más rápido cuando corres.",
+            "textLang": "es",
+            "translation": "The heart beats faster when you run.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exerted and breathless, feeling the pulse pounding after exercise",
+            "note": null,
+            "matchedForm": "corazón",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4leazu0t376lnqt",
+        "order": 1,
+        "definition": "The center of a person's emotions, feelings, and affections.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "feelings",
+        "emoji": "💖",
+        "examples": [
+          {
+            "id": "htrof3pzwo4drbt",
+            "text": "Mi abuela tiene un buen corazón.",
+            "textLang": "es",
+            "translation": "My grandmother has a good heart.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "corazón",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el corazón",
+    "lemma": "corazón",
+    "reading": null,
+    "ipa": "/koɾaˈson/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "heart",
+    "primaryGloss": "heart",
+    "emotion": "steady and warm, beating calmly in the chest",
+    "notes": [
       "Used both for the physical organ in the chest and for the emotional center of feelings, just like 'heart' in English."
     ],
     "senses": [
@@ -158,5 +265,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the physical organ in the chest",
+        "why": "Merely restates the two senses; missing irregular plural note (corazones)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "She speaks with her heart in her hand.",
+        "why": "Literal calque of the Spanish idiom; unnatural in English."
+      }
+    ],
+    "growth": 0.823
   }
 }

@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to know; to know how to",
+    "primaryGloss": "know",
+    "emotion": "confident and certain, stating a clear fact",
+    "notes": [
+      "Used for knowing facts, information, or skills; to know a person or be familiar with a place, use 'tanımak'.",
+      "Even though it refers to a state, its present meaning is expressed with the continuous tense ('biliyorum' = I know). To say 'know how to do something', use the verbal noun in the accusative (-meyi/-mayı) before 'bilmek'."
+    ],
+    "senses": [
+      {
+        "id": "9bysl0s0z6lajh3",
+        "order": 0,
+        "definition": "To have information or facts in your mind, or to be aware of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know",
+              "be aware of"
+            ]
+          }
+        ],
+        "domain": "knowledge",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "ds4pg28bs4t1uyf",
+            "text": "Cevabı biliyorum.",
+            "textLang": "tr",
+            "translation": "I know the answer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "certain and helpful, ready with the correct answer",
+            "note": null,
+            "matchedForm": "biliyorum",
+            "matchedTranslationForm": "know"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bhqs1j320ffl0n2",
+        "order": 1,
+        "definition": "To have learned a skill or language, or to know how to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know how to",
+              "speak",
+              "can"
+            ]
+          }
+        ],
+        "domain": "ability",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "lvmqd9ebapz9zyp",
+            "text": "Yüzmeyi biliyor musun?",
+            "textLang": "tr",
+            "translation": "Do you know how to swim?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "biliyor",
+            "matchedTranslationForm": "know how to"
+          },
+          {
+            "id": "9l5v8dgtvpuvolb",
+            "text": "İyi İngilizce biliyor.",
+            "textLang": "tr",
+            "translation": "She knows English well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "biliyor",
+            "matchedTranslationForm": "knows"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "bilmek",
+    "lemma": "bilmek",
+    "reading": null,
+    "ipa": "/bilˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to know; to be able to",
     "primaryGloss": "know",
     "emotion": "confident and certain, stating a clear fact",
@@ -159,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "İngilizce biliyor. — He knows English.",
+        "why": "Translates as 'knows', failing to show the 'know how to / can' verbal construction (-meyi bilmek)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Learners need the contrast with 'tanımak' (knowing a person/place) and the present tense form 'biliyor'."
+      }
+    ],
+    "growth": 2.174
   }
 }

@@ -73,6 +73,137 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "hot; warm, fervent",
+    "primaryGloss": "hot",
+    "emotion": "intense and immediate, reacting to a high temperature",
+    "notes": [
+      "Distinguish 'gorący' (hot) from 'ciepły' (warm). For weather, 'upalny' (scorching/sweltering) is also common for very hot days."
+    ],
+    "senses": [
+      {
+        "id": "kgzgdjwgk73xawt",
+        "order": 0,
+        "definition": "Having a high temperature; very warm to the touch or of the weather.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "taggwguwrkla1vw",
+            "text": "Uważaj, herbata jest bardzo gorąca.",
+            "textLang": "pl",
+            "translation": "Be careful, the tea is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and protective, warning someone of potential danger",
+            "note": null,
+            "matchedForm": "gorąca",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "7qy9eppib1venme",
+            "text": "To był wyjątkowo gorący dzień.",
+            "textLang": "pl",
+            "translation": "It was an exceptionally hot day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gorący",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bu812donubjzouh",
+        "order": 1,
+        "definition": "Of feelings, wishes, or a welcome: full of strong emotion, enthusiasm, or affection.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "warm",
+              "fervent",
+              "passionate"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "jc73ykd7o611riu",
+            "text": "Dziękujemy za gorące przyjęcie.",
+            "textLang": "pl",
+            "translation": "Thank you for the warm welcome.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gorące",
+            "matchedTranslationForm": "warm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "gorący",
+    "lemma": "gorący",
+    "reading": null,
+    "ipa": "/ɡɔˈrɔn.t͡sɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Describing",
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "hot; very warm",
     "primaryGloss": "hot",
     "emotion": "intense and immediate, reacting to a high temperature",
@@ -164,5 +295,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Characterized by high air temperature; describing the weather.",
+        "why": "Hot objects and hot weather are the same literal temperature sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When describing food or liquid, 'gorący' implies it could burn you",
+        "why": "Repeats note 0 and the example in sense 0."
+      }
+    ],
+    "growth": 0.994
   }
 }

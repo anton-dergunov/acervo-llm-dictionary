@@ -71,6 +71,118 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "beach; thing (colloquial)",
+    "primaryGloss": "beach",
+    "emotion": "relaxed and sunny, dreaming of a weekend by the ocean",
+    "notes": [
+      "With verbs of location and movement, use 'na' (at/on the beach) and 'à' or 'para a' (to the beach): 'estou na praia', 'vou à praia'.",
+      "In informal speech, 'ser a praia de alguém' means to be someone's thing or area of interest (e.g., 'Não é a minha praia')."
+    ],
+    "senses": [
+      {
+        "id": "ctaakjizgtnekem",
+        "order": 0,
+        "definition": "A sandy or stony shore by the sea, a lake, or a large river, especially as a place to swim and relax.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beach",
+              "seaside",
+              "shore"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "7o6n6sr9zelufj9",
+            "text": "Eu gosto de passar o domingo na praia.",
+            "textLang": "pt",
+            "translation": "I like to spend Sunday at the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and happy, feeling the sun on your skin",
+            "note": null,
+            "matchedForm": "praia",
+            "matchedTranslationForm": "beach"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "imx1fhyj7wh7gir",
+        "order": 1,
+        "definition": "Informally, something a person likes, knows well, or is good at.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thing",
+              "cup of tea"
+            ]
+          }
+        ],
+        "domain": "interest",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6kwmvmh1gjbpz9a",
+            "text": "Cozinhar não é muito a minha praia.",
+            "textLang": "pt",
+            "translation": "Cooking isn't really my thing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "praia",
+            "matchedTranslationForm": "thing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a praia",
+    "lemma": "praia",
+    "reading": null,
+    "ipa": "/ˈpɾa.jɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "beach; seaside; sand by the sea",
     "primaryGloss": "beach",
     "emotion": "relaxed and sunny, dreaming of a weekend by the ocean",
@@ -164,5 +276,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The physical area of sand, pebbles, or stones located directly",
+        "why": "Artificial split of 'beach' into leisure spot vs physical shore, with unnatural glosses."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "sand, stones by the sea",
+        "why": "'Praia' means 'beach', not 'sand' ('areia') or 'stones by the sea'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The sand and stones by the sea were covered in rocks",
+        "why": "Forced, unnatural translation written only to match the faulty gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "In Portuguese, 'a praia' covers both the sandy area",
+        "why": "Both notes are pure filler; English speakers do not confuse 'praia' with 'beira'."
+      }
+    ],
+    "growth": 0.922
   }
 }

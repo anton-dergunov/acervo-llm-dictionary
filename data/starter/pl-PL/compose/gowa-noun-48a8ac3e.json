@@ -72,6 +72,155 @@
     "primaryGloss": "head",
     "emotion": "matter-of-fact and focused on the physical body",
     "notes": [
+      "Common expressions: 'boli mnie głowa' (I have a headache), 'mieć dużo na głowie' (to have a lot on one's plate)."
+    ],
+    "senses": [
+      {
+        "id": "299jpqqgxg3ri9h",
+        "order": 0,
+        "definition": "The upper part of the body that contains the brain, eyes, nose, and mouth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "4luruzft4u179wg",
+            "text": "Dzisiaj bardzo boli mnie głowa.",
+            "textLang": "pl",
+            "translation": "I have a bad headache today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "głowa",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5dokjqcm3o1qukn",
+        "order": 1,
+        "definition": "A person's mind, memory, or ability to think.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mind",
+              "head"
+            ]
+          }
+        ],
+        "domain": "mind",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "6mtej0ns1dbyqob",
+            "text": "Mam dzisiaj bardzo dużo spraw na głowie.",
+            "textLang": "pl",
+            "translation": "I have a lot on my mind today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "głowie",
+            "matchedTranslationForm": "mind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "to07arf7c1zu9mu",
+        "order": 2,
+        "definition": "The person in charge of a family, group, or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head",
+              "leader"
+            ]
+          }
+        ],
+        "domain": "leadership",
+        "emoji": "👑",
+        "examples": [
+          {
+            "id": "vr2v1v18q0r7oij",
+            "text": "Prezydent jest głową państwa.",
+            "textLang": "pl",
+            "translation": "The president is the head of state.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "głową",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "głowa",
+    "lemma": "głowa",
+    "reading": null,
+    "ipa": "/ˈɡwɔ.va/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "head; mind; leader",
+    "primaryGloss": "head",
+    "emotion": "matter-of-fact and focused on the physical body",
+    "notes": [
       "In Polish, 'głowa' is the anatomical term for the head, just like in English. It is also used metaphorically for intelligence or being in charge of a group.",
       "Do not confuse this with 'kaptur' (hood) or 'czapka' (cap), which refer to what covers the head rather than the body part itself."
     ],
@@ -202,5 +351,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "On stoi na czele tej firmy.",
+        "why": "Does not contain the word 'głowa' at all."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'kaptur' (hood) or 'czapka' (cap)",
+        "why": "Unrelated words that look and sound nothing like 'głowa'; pure filler."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Polish, 'głowa' is the anatomical term for the head",
+        "why": "Merely restates the three definitions in prose."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Muszę to mieć w głowie.",
+        "why": "Awkward phrasing; a natural everyday idiom is 'mieć dużo na głowie' or 'mieć dobrą głowę'."
+      }
+    ],
+    "growth": 0.685
   }
 }

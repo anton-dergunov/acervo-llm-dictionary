@@ -72,6 +72,75 @@
     "primaryGloss": "trousers",
     "emotion": "casual and practical, getting dressed for the day",
     "notes": [
+      "Unlike English 'trousers' or 'pants', 'broek' is singular in Dutch ('een broek', plural 'broeken').",
+      "Shorts are called 'een korte broek' (literally 'a short trousers'), and underpants or bikini bottoms are 'een onderbroek' or 'een broekje'."
+    ],
+    "senses": [
+      {
+        "id": "3iy7ngvkzhmc9eq",
+        "order": 0,
+        "definition": "An outer garment covering the body from the waist to the ankles, with a separate part for each leg.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trousers",
+              "pants"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "81ykb1tz51mmdbi",
+            "text": "Ik koop een nieuwe blauwe broek.",
+            "textLang": "nl",
+            "translation": "I am buying a new pair of blue trousers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited about shopping for new clothes",
+            "note": null,
+            "matchedForm": "broek",
+            "matchedTranslationForm": "trousers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de broek",
+    "lemma": "broek",
+    "reading": null,
+    "ipa": "/bruk/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "trousers; pants",
+    "primaryGloss": "trousers",
+    "emotion": "casual and practical, getting dressed for the day",
+    "notes": [
       "In the Netherlands, 'broek' refers to trousers or pants worn on the lower body.",
       "Do not confuse with shorts, which are specifically called 'een korte broek'."
     ],
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I am buying a new blue trousers.",
+        "why": "Ungrammatical English: 'trousers' is plural and cannot take 'a'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In the Netherlands, 'broek' refers to trousers or pants",
+        "why": "Restates the definition and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 'broek' is countable singular in Dutch, unlike English 'trousers/pants'."
+      }
+    ],
+    "growth": 1.263
   }
 }

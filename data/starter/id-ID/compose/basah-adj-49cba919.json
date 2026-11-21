@@ -58,6 +58,74 @@
     "headword": "basah",
     "lemma": "basah",
     "reading": null,
+    "ipa": "/ˈba.sah/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "wet; soaked",
+    "primaryGloss": "wet",
+    "emotion": "shivering slightly after stepping into a sudden downpour, cold and uncomfortable",
+    "notes": [
+      "Do not confuse with 'lembap', which means 'damp' or 'humid' rather than thoroughly wet."
+    ],
+    "senses": [
+      {
+        "id": "syz5nv0lmtxfps3",
+        "order": 0,
+        "definition": "Covered or soaked with water or another liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wet",
+              "soaked"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "ls09tzux3lu9ssj",
+            "text": "Baju saya basah karena hujan.",
+            "textLang": "id",
+            "translation": "My clothes are wet because of the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed about getting caught in the rain without an umbrella",
+            "note": null,
+            "matchedForm": "basah",
+            "matchedTranslationForm": "wet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "basah",
+    "lemma": "basah",
+    "reading": null,
     "ipa": "/baˈsah/",
     "pos": "adj",
     "gender": null,
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Basah is the standard word for anything covered in liquid, most",
+        "why": "Merely restates the definition and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "wet, soaked, damp",
+        "why": "Contradicts note[1] which rightly states that 'damp' is 'lembap', not 'basah'."
+      }
+    ],
+    "growth": 0.745
   }
 }

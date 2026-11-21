@@ -69,6 +69,97 @@
     ],
     "status": "active",
     "shortGloss": "to see; to catch sight of",
+    "primaryGloss": "to see",
+    "emotion": "casual and direct, noticing something right in front of you",
+    "notes": [
+      "看见 is a resultative verb: 看 ('to look') expresses the action, while 见 ('to perceive') shows the result ('to see').",
+      "The negative form in the past or present is 没看见 ('did not see'), and 'cannot see' is 看不见."
+    ],
+    "senses": [
+      {
+        "id": "7rgl7stsjeuiqty",
+        "order": 0,
+        "definition": "To perceive or notice someone or something with your eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to catch sight of",
+              "to spot"
+            ]
+          }
+        ],
+        "domain": "sight",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "j7wxjrfx1tlzm1q",
+            "text": "我看见一只小猫在树上。",
+            "textLang": "zh",
+            "translation": "I saw a small cat in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and pointing something out to a friend",
+            "note": null,
+            "matchedForm": "看见",
+            "matchedTranslationForm": "saw"
+          },
+          {
+            "id": "5zf0o1s61m7waoh",
+            "text": "你看见桌子上的钥匙了吗？",
+            "textLang": "zh",
+            "translation": "Did you see the keys on the table?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "searching around and asking for help urgently",
+            "note": null,
+            "matchedForm": "看见",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "看见",
+    "lemma": "看见",
+    "reading": "kàn jiàn",
+    "ipa": "/kʰan˥˩ tɕi̯ɛn˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to see; to catch sight of",
     "primaryGloss": "see",
     "emotion": "casual and direct, noticing something right in front of you",
     "notes": [
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "You do not need to add 得 or 了 to show",
+        "why": "False grammar rule: 了 is frequently used after 看见 for completed past actions, and 看得见 is common."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "看到 often implies directing one's gaze toward a target or into",
+        "why": "Made-up distinction; 看见 and 看到 are largely interchangeable in everyday Mandarin."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'To see' and 'to notice with the eyes' are shades of one meaning for 看见."
+      }
+    ],
+    "growth": 0.656
   }
 }

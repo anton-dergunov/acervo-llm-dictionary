@@ -68,6 +68,95 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "suit jacket; coat",
+    "primaryGloss": "suit jacket",
+    "emotion": "formal and neat, getting dressed up for an important event",
+    "notes": [
+      "Alone, 'jas' refers to a formal suit jacket (for a casual jacket, use 'jaket'). It also appears in common compounds like 'jas hujan' (raincoat) and 'jas lab' (lab coat)."
+    ],
+    "senses": [
+      {
+        "id": "giodgre5gr6ttr4",
+        "order": 0,
+        "definition": "A formal tailored jacket, or a protective outer coat in compounds such as 'jas hujan' (raincoat).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "suit jacket",
+              "coat"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🧥",
+        "examples": [
+          {
+            "id": "h6j9we6y8c5fnqz",
+            "text": "Dia memakai jas hitam ke pesta pernikahan itu.",
+            "textLang": "id",
+            "translation": "He wore a black suit jacket to the wedding party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "approving and observant, admiring someone dressed sharply",
+            "note": null,
+            "matchedForm": "jas",
+            "matchedTranslationForm": "suit jacket"
+          },
+          {
+            "id": "3sd806z3ki8guir",
+            "text": "Jangan lupa membawa jas hujan karena langit mulai mendung.",
+            "textLang": "id",
+            "translation": "Don't forget to bring a raincoat because the sky is starting to get cloudy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and practical, reminding someone before heading out",
+            "note": null,
+            "matchedForm": "jas",
+            "matchedTranslationForm": "raincoat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "jas",
+    "lemma": "jas",
+    "reading": null,
+    "ipa": "/ˈdʒas/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧥",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "jacket; coat",
     "primaryGloss": "jacket",
     "emotion": "formal and neat, getting dressed up for an important event",
@@ -160,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "An outer garment worn over other clothing for warmth or protection",
+        "why": "'Jas' alone means suit jacket; it only means raincoat or lab coat in fixed compounds."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Jas specifically refers to a tailored, formal jacket",
+        "why": "Contradicts sense 1, which claims 'jas' means raincoat or coat in general."
+      }
+    ],
+    "growth": 0.869
   }
 }

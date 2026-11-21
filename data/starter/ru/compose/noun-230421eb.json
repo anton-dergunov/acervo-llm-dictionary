@@ -72,6 +72,74 @@
     "primaryGloss": "traffic light",
     "emotion": "waiting patiently at an intersection, watching the red light change to green",
     "notes": [
+      "Takes the preposition на for location: останови́ться на светофо́ре ('to stop at the traffic light')."
+    ],
+    "senses": [
+      {
+        "id": "jh262xiklt4vcyk",
+        "order": 0,
+        "definition": "A set of red, yellow, and green lights at a road junction that controls traffic and pedestrians.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traffic light",
+              "traffic lights"
+            ]
+          }
+        ],
+        "domain": "traffic",
+        "emoji": "🚦",
+        "examples": [
+          {
+            "id": "1pj3kwlubde8se7",
+            "text": "Мы остановились на светофоре.",
+            "textLang": "ru",
+            "translation": "We stopped at the traffic light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "светофоре",
+            "matchedTranslationForm": "traffic light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "светофор",
+    "lemma": "светофор",
+    "reading": null,
+    "ipa": "/svʲɪtəˈfor/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "traffic light",
+    "primaryGloss": "traffic light",
+    "emotion": "waiting patiently at an intersection, watching the red light change to green",
+    "notes": [
       "Used mainly for road traffic to control cars and pedestrians.",
       "Comes from 'свет' (light) and 'форус' (carrier/bearing)."
     ],
@@ -141,5 +209,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used mainly for road traffic to control cars and pedestrians.",
+        "why": "Restates the definition without useful grammar or usage details."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Comes from 'свет' (light) and 'форус' (carrier/bearing).",
+        "why": "Etymology is filler and 'форус' is not a Russian or Greek word (from Greek phoros)."
+      }
+    ],
+    "growth": 0.64
   }
 }

@@ -72,6 +72,95 @@
     "primaryGloss": "abroad",
     "emotion": "wide-eyed and adventurous, anticipating a change of scenery and new experiences",
     "notes": [
+      "Used for location ('in a foreign country', e.g. 'im Ausland leben'). For movement ('to a foreign country'), use 'ins Ausland' (e.g. 'ins Ausland reisen')."
+    ],
+    "senses": [
+      {
+        "id": "zyo3mtqnq38knl5",
+        "order": 0,
+        "definition": "In a foreign country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "abroad",
+              "in a foreign country"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "d0snjec8px9lzas",
+            "text": "Sie arbeitet für ein Jahr im Ausland.",
+            "textLang": "de",
+            "translation": "She is working abroad for a year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, describing a career move",
+            "note": null,
+            "matchedForm": "im Ausland",
+            "matchedTranslationForm": "abroad"
+          },
+          {
+            "id": "k20ho0mw6h6xffx",
+            "text": "Er hat lange im Ausland gelebt.",
+            "textLang": "de",
+            "translation": "He lived abroad for a long time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "im Ausland",
+            "matchedTranslationForm": "abroad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "im Ausland",
+    "lemma": "Ausland",
+    "reading": null,
+    "ipa": "/ˈaʊ̯slant/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "abroad; in a foreign country",
+    "primaryGloss": "abroad",
+    "emotion": "wide-eyed and adventurous, anticipating a change of scenery and new experiences",
+    "notes": [
       "Used to describe being in or moving to a place outside one's own country.",
       "Do not confuse with 'fremd', which describes things that are strange or belong to someone else; 'Ausland' specifically refers to the concept of foreign territory."
     ],
@@ -141,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "In or to a foreign country.",
+        "why": "'im Ausland' means only 'in a foreign country' (location); 'to' is 'ins Ausland'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used to describe being in or moving to a place",
+        "why": "'im Ausland' describes location only; movement requires 'ins Ausland'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "Ich möchte diesen Sommer ins Ausland reisen.",
+        "why": "Example uses 'ins Ausland' instead of the headword 'im Ausland'."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈaʊ̯slant/",
+        "why": "IPA omits 'im' from the headword 'im Ausland'."
+      }
+    ],
+    "growth": 0.59
   }
 }

@@ -69,6 +69,138 @@
     ],
     "status": "active",
     "shortGloss": "to fall; to drop",
+    "primaryGloss": "to fall",
+    "emotion": "concerned and cautious, watching something slip from the hands",
+    "notes": [
+      "Imperfective; the perfective pair is упасть.",
+      "Do not confuse with капать, which means 'to drip' (like water or rain)."
+    ],
+    "senses": [
+      {
+        "id": "xqki17r1gzd67n0",
+        "order": 0,
+        "definition": "To move downwards from a higher level or lose balance and drop to the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to drop"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🍂",
+        "examples": [
+          {
+            "id": "wv5htr0sqc2fyxl",
+            "text": "Осенью листья падают с деревьев.",
+            "textLang": "ru",
+            "translation": "In autumn, leaves fall from the trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "падают",
+            "matchedTranslationForm": "fall"
+          },
+          {
+            "id": "frtv2379eds4t0o",
+            "text": "Ребёнок учится ходить и часто падает.",
+            "textLang": "ru",
+            "translation": "The child is learning to walk and falls often.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "падает",
+            "matchedTranslationForm": "falls"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gw236s7k8qedehb",
+        "order": 1,
+        "definition": "To decrease in amount, value, or intensity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to drop",
+              "to decrease"
+            ]
+          }
+        ],
+        "domain": "decrease",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "0kw7mq0ohge6yz3",
+            "text": "Цены на овощи начинают падать летом.",
+            "textLang": "ru",
+            "translation": "Prices for vegetables begin to drop in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and relieved about saving money",
+            "note": null,
+            "matchedForm": "падать",
+            "matchedTranslationForm": "drop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "падать",
+    "lemma": "падать",
+    "reading": null,
+    "ipa": "/ˈpadətʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📉",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to fall; to drop",
     "primaryGloss": "fall",
     "emotion": "concerned and cautious, watching something slip from the hands",
     "notes": [
@@ -203,5 +335,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Осторожно на льду, можно легко падать.",
+        "why": "Wrong aspect: 'можно легко' with a single unintended fall requires perfective 'упасть', not 'падать'."
+      }
+    ],
+    "growth": 0.804
   }
 }

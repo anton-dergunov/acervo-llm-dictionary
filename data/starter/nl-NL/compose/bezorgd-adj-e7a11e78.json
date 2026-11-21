@@ -72,6 +72,97 @@
     "primaryGloss": "worried",
     "emotion": "furrowing the brow and thinking about a stressful situation",
     "notes": [
+      "Followed by the preposition 'over' or 'om' ('bezorgd over/om iemand').",
+      "Also the past participle of 'bezorgen' (to deliver): 'Het pakketje is bezorgd' (The parcel has been delivered)."
+    ],
+    "senses": [
+      {
+        "id": "uirhw5e500alggc",
+        "order": 0,
+        "definition": "Feeling anxious or troubled that something bad might happen to someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "worried",
+              "concerned",
+              "anxious"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😟",
+        "examples": [
+          {
+            "id": "bd2d2uy5jqqmhpb",
+            "text": "Ze is bezorgd over haar examen van morgen.",
+            "textLang": "nl",
+            "translation": "She is worried about her exam tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tense and uneasy while thinking about tomorrow",
+            "note": null,
+            "matchedForm": "bezorgd",
+            "matchedTranslationForm": "worried"
+          },
+          {
+            "id": "qxxzrr6qts2t7a9",
+            "text": "Mijn ouders zijn erg bezorgd als ik te laat thuis ben.",
+            "textLang": "nl",
+            "translation": "My parents are very worried when I get home late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and protective, thinking of someone's safety",
+            "note": null,
+            "matchedForm": "bezorgd",
+            "matchedTranslationForm": "worried"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "bezorgd",
+    "lemma": "bezorgd",
+    "reading": null,
+    "ipa": "/bəˈzɔrxt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😟",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "worried; concerned",
+    "primaryGloss": "worried",
+    "emotion": "furrowing the brow and thinking about a stressful situation",
+    "notes": [
       "Bezorgd comes from the verb bezorgen (to deliver), but as an adjective it means worried or concerned.",
       "Do not confuse it with erg (bad or very), even though they sound somewhat similar to beginners."
     ],
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are shades of the exact same meaning ('worried/concerned'), shown by identical examples."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with erg (bad or very)",
+        "why": "'bezorgd' and 'erg' do not look or sound alike; unhelpful filler note."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs the prepositions it takes: 'bezorgd over' or 'bezorgd om'."
+      }
+    ],
+    "growth": 0.857
   }
 }

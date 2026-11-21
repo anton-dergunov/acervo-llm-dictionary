@@ -68,6 +68,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old (in age)",
+    "primaryGloss": "old",
+    "emotion": "respectful and measured, observing the passage of time with kindness",
+    "notes": [
+      "A polite, natural way to say a person is old, unlike '늙다' (to age/be old), which sounds blunt or rude when used directly about someone.",
+      "When speaking respectfully about an older person, use the honorific noun '연세' and the suffix '-(으)시-': '연세가 많으시다'."
+    ],
+    "senses": [
+      {
+        "id": "uw4qm25mmo0pq84",
+        "order": 0,
+        "definition": "Of a person: having lived for many years.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "elderly",
+              "advanced in years"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "g53mffx3wv9ngbr",
+            "text": "그분은 나이가 많으시지만 여전히 건강하세요.",
+            "textLang": "ko",
+            "translation": "He is old, but he is still healthy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "나이가 많으시지만",
+            "matchedTranslationForm": "is old"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "나이가 많다",
+    "lemma": "나이가 많다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "to be old (of age)",
     "primaryGloss": "to be old",
     "emotion": "respectful and measured, observing the passage of time with kindness",
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "우리 할아버지는 나이가 많지만 여전히 건강하세요.",
+        "why": "Honorific '연세가 많으시지만' or '나이가 많으시지만' is needed when speaking of one's grandfather."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with '많다', which is a general quantifier",
+        "why": "Explains the literal parts rather than noting the required honorific form '연세가 많으시다'."
+      }
+    ],
+    "growth": 0.715
   }
 }

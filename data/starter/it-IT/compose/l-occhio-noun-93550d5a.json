@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "eye; watch",
+    "primaryGloss": "eye",
+    "emotion": "wide and watchful, taking in the room",
+    "notes": [
+      "The plural is gli occhi (only one -i). Used as an informal exclamation, 'Occhio!' means 'Watch out!'."
+    ],
+    "senses": [
+      {
+        "id": "pda1gnfpi2a44h1",
+        "order": 0,
+        "definition": "The organ of sight in humans and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eye"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "b7v7fbtlu3vga0q",
+            "text": "Ha gli occhi verdi come sua madre.",
+            "textLang": "it",
+            "translation": "He has green eyes like his mother.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "occhi",
+            "matchedTranslationForm": "eyes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "syl71wjyft7h3g0",
+        "order": 1,
+        "definition": "Watchful care or attention given to someone or something, especially in phrases like 'tenere d'occhio' (to keep an eye on).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eye",
+              "watch",
+              "attention"
+            ]
+          }
+        ],
+        "domain": "attention",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "flpna34coluqpbj",
+            "text": "Tieni d'occhio la borsa mentre vado a comprare i biglietti.",
+            "textLang": "it",
+            "translation": "Keep an eye on the bag while I go buy the tickets.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and protective, glancing back quickly",
+            "note": null,
+            "matchedForm": "occhio",
+            "matchedTranslationForm": "eye"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'occhio",
+    "lemma": "occhio",
+    "reading": null,
+    "ipa": "/ˈɔk.kjo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "eye; view; attention",
     "primaryGloss": "eye",
     "emotion": "wide and watchful, taking in the room",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "eye; view; attention",
+        "why": "'view' is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note the irregular plural: l'occhio becomes gli occhi.",
+        "why": "The plural 'occhi' is regular for nouns in '-io' with an unstressed 'i'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ha chiuso un occhio per stanchezza.",
+        "why": "'Chiudere un occhio' is the idiom 'to turn a blind eye'; people close both eyes."
+      }
+    ],
+    "growth": 1.279
   }
 }

@@ -73,6 +73,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "hot",
+    "primaryGloss": "hot",
+    "emotion": "sweaty and uncomfortable on a stifling afternoon, heavy and tired",
+    "notes": [
+      "Refers only to high temperature, never to chili-spicy food (which is เผ็ด). For pleasantly 'warm', use อุ่น."
+    ],
+    "senses": [
+      {
+        "id": "7i3k8c7u69msqb7",
+        "order": 0,
+        "definition": "Having a high temperature; producing or feeling heat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "te2y0wo32dgepie",
+            "text": "วันนี้อากาศร้อนมาก",
+            "textLang": "th",
+            "translation": "Today the weather is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exhausted by the blazing midday sun, wiping sweat from the forehead",
+            "note": null,
+            "matchedForm": "ร้อน",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "vh5o9b9asmzjtbo",
+            "text": "ระวัง กาแฟถ้วยนี้ร้อนมาก",
+            "textLang": "th",
+            "translation": "Be careful, this cup of coffee is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ร้อน",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ร้อน",
+    "lemma": "ร้อน",
+    "reading": null,
+    "ipa": "/rɔ́ːn/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "hot; warm",
     "primaryGloss": "hot",
     "emotion": "sweaty and uncomfortable on a stifling afternoon, heavy and tired",
@@ -166,5 +255,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It can also describe spicy food",
+        "why": "False friend with English 'hot': chili-spicy in Thai is เผ็ด, not ร้อน."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "hot, warm",
+        "why": "ร้อน means 'hot', not 'warm' (which is อุ่น, as note 0 itself says)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(weather) Having a high temperature ... (object) Having a high temperature",
+        "why": "Hot weather and hot objects are the same basic temperature sense."
+      }
+    ],
+    "growth": 0.668
   }
 }

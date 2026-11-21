@@ -68,6 +68,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "lake",
+    "primaryGloss": "lake",
+    "emotion": "peaceful and serene, looking out over a wide expanse of water",
+    "notes": [
+      "Plural: 'die Seen' (pronounced /ˈzeːən/).",
+      "Do not confuse masculine 'der See' (lake) with feminine 'die See' (the sea/ocean, though 'das Meer' is more common in everyday German) or the English false friend 'sea'."
+    ],
+    "senses": [
+      {
+        "id": "diftvrenwytov3v",
+        "order": 0,
+        "definition": "A large body of water surrounded by land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lake"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "湖",
+        "examples": [
+          {
+            "id": "fbrufl3sf1hg13j",
+            "text": "Wir schwimmen heute im See.",
+            "textLang": "de",
+            "translation": "We are swimming in the lake today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and eager, looking forward to a cool swim",
+            "note": null,
+            "matchedForm": "See",
+            "matchedTranslationForm": "lake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der See",
+    "lemma": "See",
+    "reading": null,
+    "ipa": "/zeː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "湖",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "lake; sea",
     "primaryGloss": "lake",
     "emotion": "peaceful and serene, looking out over a wide expanse of water",
@@ -159,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(sea) The ocean or sea.",
+        "why": "The masculine noun 'der See' means only 'lake'; 'die See' (sea) is feminine."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "lake; sea",
+        "why": "'der See' means only 'lake', not 'sea'."
+      }
+    ],
+    "growth": 0.643
   }
 }

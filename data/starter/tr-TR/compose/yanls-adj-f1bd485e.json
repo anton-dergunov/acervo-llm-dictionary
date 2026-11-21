@@ -68,6 +68,96 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "wrong; incorrect",
+    "primaryGloss": "wrong",
+    "emotion": "matter-of-fact and direct, pointing something out clearly",
+    "notes": [
+      "Also used as an adverb ('yanlış anlamak' — to misunderstand) and as a noun meaning 'mistake' ('yanlış yapmak' — to make a mistake).",
+      "Its opposite is 'doğru' (right, correct)."
+    ],
+    "senses": [
+      {
+        "id": "mrpzy6d8cjvce2v",
+        "order": 0,
+        "definition": "Not correct or true; containing an error.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "j9rm4ddkbsiuoos",
+            "text": "Bu soruya verdiğin cevap yanlış.",
+            "textLang": "tr",
+            "translation": "The answer you gave to this question is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and corrective, pointing out an error",
+            "note": null,
+            "matchedForm": "yanlış",
+            "matchedTranslationForm": "wrong"
+          },
+          {
+            "id": "soj228cave646il",
+            "text": "Sanırım yanlış otobüse bindik.",
+            "textLang": "tr",
+            "translation": "I think we got on the wrong bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yanlış",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yanlış",
+    "lemma": "yanlış",
+    "reading": null,
+    "ipa": "/janˈɫɯʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "wrong; incorrect; mistake",
     "primaryGloss": "wrong",
     "emotion": "matter-of-fact and direct, pointing something out clearly",
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "(mistake) An action, belief, or statement that is not right",
+        "why": "Entry POS is 'adj', so a noun sense ('mistake') does not belong in the senses list; mention noun use in notes."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with yavaş, which means slow.",
+        "why": "Unhelpful filler note."
+      }
+    ],
+    "growth": 0.863
   }
 }

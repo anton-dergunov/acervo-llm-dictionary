@@ -68,6 +68,133 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "price; prize",
+    "primaryGloss": "price",
+    "emotion": "calculating and attentive, checking the cost before buying",
+    "notes": [
+      "The final '-x' is silent, and the spelling does not change in the plural ('un prix', 'des prix')."
+    ],
+    "senses": [
+      {
+        "id": "0tbh6ugfzlavkis",
+        "order": 0,
+        "definition": "The amount of money needed to buy something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "price",
+              "cost"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "kocngeuc5fh8aoc",
+            "text": "Le prix de ce manteau est trop élevé.",
+            "textLang": "fr",
+            "translation": "The price of this coat is too high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and disappointed, noticing how expensive it is",
+            "note": null,
+            "matchedForm": "prix",
+            "matchedTranslationForm": "price"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hm75h5jg5w52bp1",
+        "order": 1,
+        "definition": "An award given to someone for winning a competition or for an achievement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "prize",
+              "award"
+            ]
+          }
+        ],
+        "domain": "award",
+        "emoji": "🏆",
+        "examples": [
+          {
+            "id": "t2wvjpt35hozarp",
+            "text": "Elle a gagné le premier prix du concours.",
+            "textLang": "fr",
+            "translation": "She won first prize in the competition.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and proud, celebrating a big victory",
+            "note": null,
+            "matchedForm": "prix",
+            "matchedTranslationForm": "prize"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "0tbh6ugfzlavkis",
+      "from": "La somme d'argent qu'il faut payer pour acheter quelque chose.",
+      "to": "The amount of money needed to buy something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:14Z"
+    },
+    {
+      "sense": "hm75h5jg5w52bp1",
+      "from": "Une récompense qu'on donne à quelqu'un pour son travail ou son succès.",
+      "to": "An award given to someone for their work or success.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:14Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le prix",
+    "lemma": "prix",
+    "reading": null,
+    "ipa": "/pʁi/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "price; prize; value",
     "primaryGloss": "price",
     "emotion": "calculating and attentive, checking the cost before buying",
@@ -162,22 +289,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "0tbh6ugfzlavkis",
-      "from": "La somme d'argent qu'il faut payer pour acheter quelque chose.",
-      "to": "The amount of money needed to buy something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:14Z"
-    },
-    {
-      "sense": "hm75h5jg5w52bp1",
-      "from": "Une récompense qu'on donne à quelqu'un pour son travail ou son succès.",
-      "to": "An award given to someone for their work or success.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:14Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "price; prize; value",
+        "why": "Includes 'value', which is not covered by the senses or glosses."
+      }
+    ],
+    "growth": 0.911
+  }
 }

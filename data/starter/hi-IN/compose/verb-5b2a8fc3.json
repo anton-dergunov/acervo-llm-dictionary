@@ -58,6 +58,115 @@
     "headword": "पहुँचना",
     "lemma": "पहुँचना",
     "reading": null,
+    "ipa": "/pə.ɦʊ̃tʃ.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛬",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "to reach; to arrive",
+    "primaryGloss": "to reach",
+    "emotion": "relieved and satisfied, having finally arrived at the destination",
+    "notes": [
+      "पहुँचना is intransitive, so it never takes ने in the past tense (e.g., मैं घर पहुँचा — I reached home). The destination usually takes no postposition."
+    ],
+    "senses": [
+      {
+        "id": "1v5i1ox0aw2rnkm",
+        "order": 0,
+        "definition": "To arrive at or get to a place or destination.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to reach",
+              "to arrive"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "uibztx2ru4venzz",
+            "text": "हम समय पर स्टेशन पहुँच गए।",
+            "textLang": "hi",
+            "translation": "We reached the station on time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and unhurried, glad to make it without rushing",
+            "note": null,
+            "matchedForm": "पहुँच",
+            "matchedTranslationForm": "reached"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nux7vdnsnr4w2oy",
+        "order": 1,
+        "definition": "To get to a particular level, stage, or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to reach",
+              "to attain"
+            ]
+          }
+        ],
+        "domain": "progress",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "81g865cipoy6fug",
+            "text": "बात बहुत आगे पहुँच गई है।",
+            "textLang": "hi",
+            "translation": "The matter has gone very far.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पहुँच",
+            "matchedTranslationForm": "gone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पहुँचना",
+    "lemma": "पहुँचना",
+    "reading": null,
     "ipa": "/pəˈɦũːtʃ.nɑː/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pəˈɦũːtʃ.nɑː/",
+        "why": "Incorrect vowel length; the second vowel in पहुँचना is short /ʊ̃/, not long /ũː/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "पहुँचना is an intransitive verb used to indicate arrival at a physical",
+        "why": "Restates the senses without explaining what being intransitive means for Hindi grammar (no ने)."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It typically takes the postposition पर (on/at) or तक (up to) with",
+        "why": "Misleading: destinations with पहुँचना usually take no postposition at all (घर पहुँचना, स्टेशन पहुँचना)."
+      }
+    ],
+    "growth": 0.923
   }
 }

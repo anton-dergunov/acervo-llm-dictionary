@@ -70,6 +70,97 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "bill; invoice",
+    "primaryGloss": "bill",
+    "emotion": null,
+    "notes": [
+      "Derived from the root 'tagih' (to demand payment). Commonly used for regular bills like electricity ('tagihan listrik') or water ('tagihan air').",
+      "In restaurants and cafes, people often ask for the 'bon' or 'bill' rather than 'tagihan'."
+    ],
+    "senses": [
+      {
+        "id": "h6233a1m4c0wn2a",
+        "order": 0,
+        "definition": "A statement of money owed for goods or services, such as utilities, credit cards, or a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "invoice",
+              "statement"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "gqqyxvsug4hv6ja",
+            "text": "Tagihan listrik bulan ini sudah datang.",
+            "textLang": "id",
+            "translation": "This month's electricity bill has arrived.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sighing at the cost of household utilities",
+            "note": null,
+            "matchedForm": "Tagihan",
+            "matchedTranslationForm": "bill"
+          },
+          {
+            "id": "xbz2ug1z736sexj",
+            "text": "Mbak, minta tagihannya, ya.",
+            "textLang": "id",
+            "translation": "Miss, could I have the bill, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tagihannya",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tagihan",
+    "lemma": "tagihan",
+    "reading": null,
+    "ipa": "/taˈɡihan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "bill; invoice; claim",
     "primaryGloss": "bill",
     "emotion": null,
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(bill) A written statement... / (invoice) A formal request...",
+        "why": "Both senses refer to a bill or statement of money owed; they are one sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Boleh minta tagihan, tolong?",
+        "why": "Adding ', tolong?' at the end is a direct calque of English ', please?'; 'minta bon/bill' is also much more natural in restaurants."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bill; invoice; claim",
+        "why": "'claim' is not covered in the senses."
+      }
+    ],
+    "growth": 0.981
   }
 }

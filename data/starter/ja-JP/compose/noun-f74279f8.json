@@ -72,6 +72,115 @@
     "primaryGloss": "year",
     "emotion": "matter-of-fact and steady, marking the passage of time",
     "notes": [
+      "Read とし (toshi) as a standalone word for 'year' or 'age', and ねん (nen) as a counter after numbers (e.g., 2024年, 三年).",
+      "Commonly used in the phrase 年をとる (toshi o toru, to get older)."
+    ],
+    "senses": [
+      {
+        "id": "wh842ycwukhw0jh",
+        "order": 0,
+        "definition": "A period of twelve months; a calendar year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "year"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "a5kxrv6cxnuviq6",
+            "text": "いい年になりますように。",
+            "textLang": "ja",
+            "translation": "I hope it will be a good year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "年",
+            "matchedTranslationForm": "year"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fgkb0bzr77w11wl",
+        "order": 1,
+        "definition": "The number of years a person has lived.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "age",
+              "years old"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "4nbbip5jevj0dco",
+            "text": "年を聞くのは失礼かもしれない。",
+            "textLang": "ja",
+            "translation": "It might be rude to ask someone's age.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and cautious, considering social etiquette",
+            "note": null,
+            "matchedForm": "年",
+            "matchedTranslationForm": "age"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "年",
+    "lemma": "年",
+    "reading": "とし",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "year; age",
+    "primaryGloss": "year",
+    "emotion": "matter-of-fact and steady, marking the passage of time",
+    "notes": [
       "While 'nen' (ねん) is used when counting years (e.g., 2024年), 'toshi' (とし) is the standard word used when speaking about the calendar year or a person's age.",
       "Use 'toshi' to talk about getting older (toshi o toru) or when referring to a specific year in a general sense."
     ],
@@ -160,5 +269,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "今年もよろしくお願いします。",
+        "why": "Uses compound 今年 (kotoshi), not the standalone noun 年 (toshi)."
+      }
+    ],
+    "growth": 0.717
   }
 }

@@ -58,6 +58,96 @@
     "headword": "tırmanmak",
     "lemma": "tırmanmak",
     "reading": null,
+    "ipa": "/tɯɾmanˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to climb; to ascend",
+    "primaryGloss": "climb",
+    "emotion": "focused and physically exerted, pushing upward step by step",
+    "notes": [
+      "Usually takes the dative case (-e/-a) for the destination or surface being climbed, as in 'dağa tırmanmak' (to climb a mountain)."
+    ],
+    "senses": [
+      {
+        "id": "h29jx6yom2vwxqo",
+        "order": 0,
+        "definition": "To go up a steep surface, tree, or slope, especially by using hands and feet or with effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "climb",
+              "climb up",
+              "ascend"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🧗",
+        "examples": [
+          {
+            "id": "x8dhmh9jmp6y2q7",
+            "text": "Çocuklar büyük ağaca tırmanmak istiyor.",
+            "textLang": "tr",
+            "translation": "The children want to climb the big tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and adventurous, pointing up at the branches",
+            "note": null,
+            "matchedForm": "tırmanmak",
+            "matchedTranslationForm": "climb"
+          },
+          {
+            "id": "p0z7q16ittetv7s",
+            "text": "Arabamız dik yokuşu yavaşça tırmanıyor.",
+            "textLang": "tr",
+            "translation": "Our car is slowly climbing the steep slope.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tırmanıyor",
+            "matchedTranslationForm": "climbing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tırmanmak",
+    "lemma": "tırmanmak",
+    "reading": null,
     "ipa": "/tɯɾ.manˈmak/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean to climb or go up a steep surface; oversplit."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To go up or down a vertical or sloping surface",
+        "why": "'Tırmanmak' only means to go up, never down ('inmek')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Arabamız dik yokuştan yavaşça tırmanıyor.",
+        "why": "Typically takes dative ('yokuşa') or accusative ('yokuşu'), not ablative ('yokuştan')."
+      }
+    ],
+    "growth": 0.871
   }
 }

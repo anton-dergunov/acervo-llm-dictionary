@@ -71,6 +71,113 @@
     "shortGloss": "incorrect; wrong; improper",
     "primaryGloss": "incorrect",
     "emotion": "matter-of-fact and corrective, pointing out a mistake without being unkind",
+    "notes": [],
+    "senses": [
+      {
+        "id": "jd1oxqdk8o93qem",
+        "order": 0,
+        "definition": "Not true, accurate, or in accordance with the facts or rules.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "incorrect",
+              "wrong"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "b0wuepcv3bmrrwf",
+            "text": "Tu respuesta es incorrecta.",
+            "textLang": "es",
+            "translation": "Your answer is incorrect.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "straightforward and helpful, identifying a simple error",
+            "note": null,
+            "matchedForm": "incorrecta",
+            "matchedTranslationForm": "incorrect"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cxyel6tnkp579vo",
+        "order": 1,
+        "definition": "Of behavior or manners: not following accepted social rules or standards.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "improper",
+              "inappropriate"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "2s3lqt47hxu9u92",
+            "text": "Fue un comportamiento incorrecto en una reunión de trabajo.",
+            "textLang": "es",
+            "translation": "It was improper behavior at a work meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and slightly disapproving, judging a social lapse",
+            "note": null,
+            "matchedForm": "incorrecto",
+            "matchedTranslationForm": "improper"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "incorrecto",
+    "lemma": "incorrecto",
+    "reading": null,
+    "ipa": "/inkoˈrekto/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "incorrect; wrong; improper",
+    "primaryGloss": "incorrect",
+    "emotion": "matter-of-fact and corrective, pointing out a mistake without being unkind",
     "notes": [
       "Use 'incorrecto' for things that are logically or factually wrong, like an answer on a test. Use 'inapropiado' or 'inadecuado' for behavior that is socially inappropriate."
     ],
@@ -160,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Behavior that does not follow social rules or is unsuitable",
+        "why": "Adjective defined as a noun ('Behavior that...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'inapropiado' or 'inadecuado' for behavior that is socially inappropriate.",
+        "why": "Contradicts sense 1; 'incorrecto' can in fact describe improper behavior or manners."
+      }
+    ],
+    "growth": 0.679
   }
 }

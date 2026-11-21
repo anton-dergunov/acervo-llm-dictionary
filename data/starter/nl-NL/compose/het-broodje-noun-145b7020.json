@@ -68,6 +68,96 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "bread roll; bun; sandwich",
+    "primaryGloss": "bread roll",
+    "emotion": "hungry and looking forward to lunch, warm and inviting",
+    "notes": [
+      "Formally the diminutive of 'brood' (bread), in everyday speech 'broodje' means an individual roll or bun, often sliced open with a filling (like 'een broodje kaas', a cheese roll/sandwich)."
+    ],
+    "senses": [
+      {
+        "id": "x6pfgzdwlo4ncl1",
+        "order": 0,
+        "definition": "A small, individual roll of bread, eaten either plain or sliced open with a filling such as cheese or meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bread roll",
+              "bun",
+              "sandwich"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥪",
+        "examples": [
+          {
+            "id": "ouvp6sig04gal6j",
+            "text": "Ik haal even een broodje kaas bij de bakker.",
+            "textLang": "nl",
+            "translation": "I'm just going to get a cheese roll at the bakery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and pleasant, heading out for a quick bite",
+            "note": null,
+            "matchedForm": "broodje",
+            "matchedTranslationForm": "roll"
+          },
+          {
+            "id": "1990b08ujluouyz",
+            "text": "De warme broodjes liggen vers in de mand.",
+            "textLang": "nl",
+            "translation": "The warm bread rolls are fresh in the basket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appetizing and warm, describing a fresh breakfast table",
+            "note": null,
+            "matchedForm": "broodjes",
+            "matchedTranslationForm": "bread rolls"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het broodje",
+    "lemma": "broodje",
+    "reading": null,
+    "ipa": "/ˈbroːt.jə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥖",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "bread roll; small loaf of bread",
     "primaryGloss": "bread roll",
     "emotion": "hungry and looking forward to lunch, warm and inviting",
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (food) A small loaf ... [1] (bakery) A small, individual loaf",
+        "why": "A roll is the same object whether plain or filled; merge into one sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bread roll; small loaf of bread",
+        "why": "Should include 'sandwich' as filled rolls are usually called sandwiches in English."
+      }
+    ],
+    "growth": 0.926
   }
 }

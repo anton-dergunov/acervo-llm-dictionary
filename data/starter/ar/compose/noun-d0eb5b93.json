@@ -58,6 +58,74 @@
     "headword": "زَاوِيَة شَارِع",
     "lemma": "زَاوِيَة شَارِع",
     "reading": null,
+    "ipa": "/ˈzaː.wi.jat ˈʃaː.riʕ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "street corner",
+    "primaryGloss": "street corner",
+    "emotion": "observant and navigational, picturing a familiar intersection in the city",
+    "notes": [
+      "A construct phrase (iḍāfa) of زَاوِيَة (corner) + شَارِع (street). To say 'the street corner', add الـ only to the second word: زَاوِيَة الشَّارِع (zāwiyat aš-šāriʿ)."
+    ],
+    "senses": [
+      {
+        "id": "0d8935bjt7562b5",
+        "order": 0,
+        "definition": "The place where two streets meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street corner",
+              "corner"
+            ]
+          }
+        ],
+        "domain": "places",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "eeqy8m6niotvtv0",
+            "text": "اِنْتَظِرْنِي عِنْدَ زَاوِيَةِ شَارِعِ المَلِكِ.",
+            "textLang": "ar",
+            "translation": "Wait for me at the corner of King Street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "زَاوِيَةِ شَارِعِ",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "زَاوِيَة شَارِع",
+    "lemma": "زَاوِيَة شَارِع",
+    "reading": null,
     "ipa": "/ˈzaː.wi.ja ˈʃaː.riʕ/",
     "pos": "noun",
     "gender": "feminine",
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈzaː.wi.ja ˈʃaː.riʕ/",
+        "why": "Missing the construct state (iḍāfa) -t ending on the first noun (/zaː.wi.jat/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used when giving directions or describing a meeting point in a town.",
+        "why": "Obvious from the meaning; does not explain the construct state (iḍāfa) grammar."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Wait for me at the King street corner.",
+        "why": "Unnatural English phrasing ('the King street corner' instead of 'the corner of King Street')."
+      }
+    ],
+    "growth": 1.147
   }
 }

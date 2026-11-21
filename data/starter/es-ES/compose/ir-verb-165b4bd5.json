@@ -72,6 +72,156 @@
     "primaryGloss": "go",
     "emotion": "in a hurry to get somewhere, purposeful and direct",
     "notes": [
+      "Highly irregular: present 'voy, vas, va...', preterite 'fui, fuiste, fue...' (identical to 'ser').",
+      "Takes the preposition 'a' for destinations ('ir a Madrid') and 'en' for means of transport ('ir en tren')."
+    ],
+    "senses": [
+      {
+        "id": "mbi74xux1uhemq1",
+        "order": 0,
+        "definition": "To move or travel to a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "go",
+              "travel"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "1xhoos5o65gfefr",
+            "text": "Voy a la tienda a comprar pan.",
+            "textLang": "es",
+            "translation": "I am going to the shop to buy bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused on a quick errand, ready to head out",
+            "note": null,
+            "matchedForm": "Voy",
+            "matchedTranslationForm": "going"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "80jjfi6f9qzwdl7",
+        "order": 1,
+        "definition": "(ir a + infinitive) To intend or be about to do something in the near future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be going to"
+            ]
+          }
+        ],
+        "domain": "future",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ya0835y0n5f2a1f",
+            "text": "Mañana vamos a visitar a mis abuelos.",
+            "textLang": "es",
+            "translation": "Tomorrow we are going to visit my grandparents.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vamos",
+            "matchedTranslationForm": "going"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6wwki07w2lfcpip",
+        "order": 2,
+        "definition": "(irse) To leave a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leave",
+              "go away"
+            ]
+          }
+        ],
+        "domain": "departure",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "n4zi00zmed0afq6",
+            "text": "Ya es tarde, me tengo que ir.",
+            "textLang": "es",
+            "translation": "It is late, I have to go.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reluctant to leave but conscious of the time",
+            "note": null,
+            "matchedForm": "ir",
+            "matchedTranslationForm": "go"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ir",
+    "lemma": "ir",
+    "reading": null,
+    "ipa": "/iɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go; to leave",
+    "primaryGloss": "go",
+    "emotion": "in a hurry to get somewhere, purposeful and direct",
+    "notes": [
       "Ir is an irregular verb and one of the most common words in Spanish. Its forms change completely, especially in the past and subjunctive tenses.",
       "When used with 'a' plus an infinitive (like 'voy a comer'), it means 'to be going to do something' in the near future."
     ],
@@ -162,5 +312,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential everyday sense 'ir a + infinitive' (going to do), only mentioned in notes."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To leave a place.",
+        "why": "Does not mention that the departure sense requires the reflexive form 'irse'."
+      }
+    ],
+    "growth": 1.235
   }
 }

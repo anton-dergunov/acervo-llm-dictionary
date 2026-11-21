@@ -58,6 +58,74 @@
     "headword": "ấm",
     "lemma": "ấm",
     "reading": null,
+    "ipa": "/ʔəm˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "warm",
+    "primaryGloss": "warm",
+    "emotion": "comfortably cozy and relaxed, enjoying a quiet moment",
+    "notes": [
+      "Often combined as 'ấm áp' to describe pleasantly warm weather, places, or a warm, welcoming atmosphere.",
+      "As a noun, the homonym 'ấm' means 'teapot' or 'kettle' (e.g. 'ấm trà')."
+    ],
+    "senses": [
+      {
+        "id": "zhrmvc4ojsrsima",
+        "order": 0,
+        "definition": "Of a pleasantly high temperature, between cool and hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "rp1w58qot29knjs",
+            "text": "Trời hôm nay rất ấm.",
+            "textLang": "vi",
+            "translation": "The weather is very warm today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised by the nice weather",
+            "note": null,
+            "matchedForm": "ấm",
+            "matchedTranslationForm": "warm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ấm",
+    "lemma": "ấm",
+    "reading": null,
     "ipa": "/əm˧˥/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "A container with a handle and spout used for boiling water",
+        "why": "Entry POS is adjective, but sense 1 is a noun ('teapot, kettle')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "warm; teapot",
+        "why": "Includes noun gloss 'teapot' in an adjective entry."
+      }
+    ],
+    "growth": 0.571
   }
 }

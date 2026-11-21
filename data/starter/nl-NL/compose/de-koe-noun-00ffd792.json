@@ -72,6 +72,73 @@
     "primaryGloss": "cow",
     "emotion": "calm and rural, standing peacefully in a green pasture",
     "notes": [
+      "Note the irregular plural spelling: 'koeien' (pronounced /ˈkujə(n)/)."
+    ],
+    "senses": [
+      {
+        "id": "vqlbomswc7fsjhw",
+        "order": 0,
+        "definition": "A large female farm animal kept for milk and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cow"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐄",
+        "examples": [
+          {
+            "id": "6uerkrb8q4zb82u",
+            "text": "De koe staat in de wei en eet gras.",
+            "textLang": "nl",
+            "translation": "The cow is standing in the meadow and eating grass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and observant, pointing out an animal on a country drive",
+            "note": null,
+            "matchedForm": "koe",
+            "matchedTranslationForm": "cow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de koe",
+    "lemma": "koe",
+    "reading": null,
+    "ipa": "/ku/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐄",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "cow",
+    "primaryGloss": "cow",
+    "emotion": "calm and rural, standing peacefully in a green pasture",
+    "notes": [
       "The plural of koe is koeien, which uses a standard Dutch plural ending.",
       "Do not confuse with kalf, which is a calf."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The plural of koe is koeien, which uses a standard Dutch plural ending.",
+        "why": "'koeien' has an irregular spelling change (adding 'i' before '-en'), not a standard ending."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with kalf, which is a calf.",
+        "why": "Learners do not confuse 'koe' with 'kalf'."
+      }
+    ],
+    "growth": 0.851
   }
 }

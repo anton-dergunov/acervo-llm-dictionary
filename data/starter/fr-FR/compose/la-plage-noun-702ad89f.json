@@ -71,6 +71,93 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "beach",
+    "primaryGloss": "beach",
+    "emotion": "warm and sunny, thinking of the sound of the waves",
+    "notes": [
+      "Do not confuse with 'la côte', which refers to the broader coastline or coastal region."
+    ],
+    "senses": [
+      {
+        "id": "60osm5d332uumuw",
+        "order": 0,
+        "definition": "A strip of sand or pebbles along the edge of the sea or a lake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beach",
+              "seashore"
+            ]
+          }
+        ],
+        "domain": "seashore",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "t9xxfq9j0qufn8c",
+            "text": "Nous aimons marcher sur la plage au coucher du soleil.",
+            "textLang": "fr",
+            "translation": "We love walking on the beach at sunset.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and relaxed, enjoying a quiet evening walk",
+            "note": null,
+            "matchedForm": "plage",
+            "matchedTranslationForm": "beach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "60osm5d332uumuw",
+      "from": "Bande de sable ou de galets au bord de la mer ou d'un lac.",
+      "to": "A strip of sand or pebbles along the edge of the sea or a lake.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    },
+    {
+      "sense": "x4lbxted0imwb2u",
+      "from": "Étendue ou intervalle entre deux limites, par exemple de valeurs ou de fréquences.",
+      "to": "An extent or interval between two limits, such as values or frequencies.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la plage",
+    "lemma": "plage",
+    "reading": null,
+    "ipa": "/plaʒ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "beach; range",
     "primaryGloss": "beach",
     "emotion": "warm and sunny, thinking of the sound of the waves",
@@ -166,22 +253,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "60osm5d332uumuw",
-      "from": "Bande de sable ou de galets au bord de la mer ou d'un lac.",
-      "to": "A strip of sand or pebbles along the edge of the sea or a lake.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    },
-    {
-      "sense": "x4lbxted0imwb2u",
-      "from": "Étendue ou intervalle entre deux limites, par exemple de valeurs ou de fréquences.",
-      "to": "An extent or interval between two limits, such as values or frequencies.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "An extent or interval between two limits, such as values or frequencies.",
+        "why": "Technical/advanced sense ('plage de fréquences') not needed at A2 level."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'la plage' primarily for the sandy or pebbled shore",
+        "why": "Simply repeats the definition of the word."
+      }
+    ],
+    "growth": 0.471
+  }
 }

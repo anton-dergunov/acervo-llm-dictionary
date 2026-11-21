@@ -72,6 +72,94 @@
     "primaryGloss": "water",
     "emotion": null,
     "notes": [
+      "Usually uncountable, like English 'water', though the plural 'águas' is used for bodies of water or bottles of water (e.g., 'duas águas')."
+    ],
+    "senses": [
+      {
+        "id": "qn3lo93p4mhwroc",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills rivers and seas, and is drunk by people and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "19bo732mzml72fg",
+            "text": "Eu bebo muita água durante o dia.",
+            "textLang": "pt",
+            "translation": "I drink a lot of water during the day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "healthy and focused on personal well-being",
+            "note": null,
+            "matchedForm": "água",
+            "matchedTranslationForm": "water"
+          },
+          {
+            "id": "uhs4s6tb378gl2c",
+            "text": "A água do mar está gelada hoje.",
+            "textLang": "pt",
+            "translation": "The sea water is cold today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shivering slightly and cautious of the cold temperature",
+            "note": null,
+            "matchedForm": "água",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a água",
+    "lemma": "água",
+    "reading": null,
+    "ipa": "/ˈa.ɡwɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": null,
+    "notes": [
       "Note that although 'água' starts with a, it is a feminine noun, so we use the article 'a' (a água).",
       "It is common to use 'água' as a mass noun. You do not usually pluralize it unless you are talking about different types or sources of water."
     ],
@@ -159,5 +247,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that although 'água' starts with a, it is a feminine noun",
+        "why": "Nouns starting with -a and ending in -a are regularly feminine in Portuguese; restates gender."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(nature) A large body of liquid, such as that found in oceans",
+        "why": "Drinking water and seawater are the same core meaning of H2O for an A2 learner."
+      }
+    ],
+    "growth": 0.646
   }
 }

@@ -72,6 +72,95 @@
     "primaryGloss": "smell",
     "emotion": "curious and sensory, leaning in to identify an aroma",
     "notes": [
+      "Use 'wąchać' (imperfective) or 'powąchać' (perfective) when actively trying to detect a scent. For passively sensing a smell, use 'czuć' (e.g., 'Czuję dym' — I smell smoke)."
+    ],
+    "senses": [
+      {
+        "id": "o4xiaw0425103v5",
+        "order": 0,
+        "definition": "To inhale through the nose in order to identify or enjoy a scent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smell",
+              "sniff"
+            ]
+          }
+        ],
+        "domain": "smell",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "s360dfrvknshk3c",
+            "text": "Lubię wąchać świeże kwiaty w ogrodzie.",
+            "textLang": "pl",
+            "translation": "I like to smell fresh flowers in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and appreciative of a pleasant scent",
+            "note": null,
+            "matchedForm": "wąchać",
+            "matchedTranslationForm": "smell"
+          },
+          {
+            "id": "jm5wjr1fw7qee1z",
+            "text": "Pies wąchał ślady na trawie.",
+            "textLang": "pl",
+            "translation": "The dog was sniffing the tracks on the grass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wąchał",
+            "matchedTranslationForm": "sniffing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wąchać",
+    "lemma": "wąchać",
+    "reading": null,
+    "ipa": "/ˈvɔ̃xat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to smell; to sniff",
+    "primaryGloss": "smell",
+    "emotion": "curious and sensory, leaning in to identify an aroma",
+    "notes": [
       "Use 'wąchać' when you are actively trying to detect a scent, like smelling a flower or testing food. It is distinct from 'czuć', which simply means 'to sense a smell' or 'to feel' something.",
       "Note that 'wąchać' is an imperfective verb; use it for ongoing actions or general habits."
     ],
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "Czy możesz powąchać to mleko, żeby sprawdzić, czy jest świeże?",
+        "why": "Example uses the perfective verb 'powąchać' instead of the headword 'wąchać'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[1]",
+        "quote": "Note that 'wąchać' is an imperfective verb; use it for ongoing",
+        "why": "Mentions imperfective aspect without giving the essential perfective partner 'powąchać'."
+      }
+    ],
+    "growth": 0.746
   }
 }

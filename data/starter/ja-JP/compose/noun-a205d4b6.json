@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "午後",
     "lemma": "午後",
+    "reading": "ごご",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕒",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "afternoon; p.m.",
+    "primaryGloss": "afternoon",
+    "emotion": "straightforward and organized, like checking the time on a clock",
+    "notes": [
+      "When telling time, 午後 is placed before the hour (e.g., 午後三時 for 3:00 p.m.), unlike English 'p.m.'",
+      "Contrasts with 午前 (gozen, morning / a.m.)."
+    ],
+    "senses": [
+      {
+        "id": "gelznwm9brclviy",
+        "order": 0,
+        "definition": "The period of time from 12:00 noon until evening, or after noon when telling time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon",
+              "p.m."
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🕒",
+        "examples": [
+          {
+            "id": "8ewmyh1bjpywm3z",
+            "text": "午後から雨が降ります。",
+            "textLang": "ja",
+            "translation": "It will rain in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calmly planning the rest of the day",
+            "note": null,
+            "matchedForm": "午後",
+            "matchedTranslationForm": "afternoon"
+          },
+          {
+            "id": "at0j3eaa3f0h4sv",
+            "text": "会議は午後二時からです。",
+            "textLang": "ja",
+            "translation": "The meeting starts at 2:00 p.m.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "午後",
+            "matchedTranslationForm": "p.m."
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "午後",
+    "lemma": "午後",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (ごご) for a kanji word."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "you say the time then the word, e.g., '午後三時' for 3:00 PM.",
+        "why": "Says the time comes before the word, which is false and contradicts its own example."
+      }
+    ],
+    "growth": 0.951
   }
 }

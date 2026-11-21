@@ -58,6 +58,73 @@
     "headword": "το σταφύλι",
     "lemma": "σταφύλι",
     "reading": null,
+    "ipa": "/staˈfi.li/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍇",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "grape",
+    "primaryGloss": "grape",
+    "emotion": "mouth-watering and sweet, enjoying a fresh bunch of fruit",
+    "notes": [
+      "Often used as an uncountable singular in Greek ('τρώω σταφύλι' = I eat grapes), as well as in the plural ('σταφύλια'). A single grape berry is 'μια ρώγα σταφύλι'."
+    ],
+    "senses": [
+      {
+        "id": "d01o3my9kc00jcl",
+        "order": 0,
+        "definition": "A small round green or dark purple fruit that grows in bunches on a vine and is eaten or used to make wine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grape"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍇",
+        "examples": [
+          {
+            "id": "pl89us6o5e19rm9",
+            "text": "Το φθινόπωρο τρώμε γλυκά σταφύλια.",
+            "textLang": "el",
+            "translation": "In autumn we eat sweet grapes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "σταφύλια",
+            "matchedTranslationForm": "grapes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το σταφύλι",
+    "lemma": "σταφύλι",
+    "reading": null,
     "ipa": "/staˈfili/",
     "pos": "noun",
     "gender": "neuter",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Μου αρέσει να τρώω ένα γλυκό σταφύλι το απόγευμα.",
+        "why": "Unnatural; in Greek 'ένα σταφύλι' sounds like eating a single berry or unspecified bunch."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "To σταφύλι generally refers to the fruit",
+        "why": "Uses Latin characters 'To' instead of Greek 'Το'."
+      }
+    ],
+    "growth": 0.9
   }
 }

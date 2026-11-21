@@ -58,6 +58,129 @@
     "headword": "il limone",
     "lemma": "limone",
     "reading": null,
+    "ipa": "/liˈmo.ne/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "lemon; lemon tree",
+    "primaryGloss": "lemon",
+    "emotion": "mouth-puckering and bright, smelling of fresh citrus zest",
+    "notes": [],
+    "senses": [
+      {
+        "id": "f9xnor62pon8eaw",
+        "order": 0,
+        "definition": "A yellow, oval citrus fruit with a thick skin and sour juice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lemon"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "s4veqdph51xzn02",
+            "text": "Spremo mezzo limone nell'acqua tiepida ogni mattina.",
+            "textLang": "it",
+            "translation": "I squeeze half a lemon into lukewarm water every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "healthy and routine, starting the morning fresh",
+            "note": null,
+            "matchedForm": "limone",
+            "matchedTranslationForm": "lemon"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iv3yvp22643lhsf",
+        "order": 1,
+        "definition": "The tree that produces lemons.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lemon tree"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "e06yr6u7cdgsw9y",
+            "text": "C'è un grande limone nel cortile della casa.",
+            "textLang": "it",
+            "translation": "There is a large lemon tree in the courtyard of the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, picturing a sunny courtyard",
+            "note": null,
+            "matchedForm": "limone",
+            "matchedTranslationForm": "lemon tree"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "f9xnor62pon8eaw",
+      "from": "Frutto giallo, ovale e molto acido, con buccia spessa e succo aspro.",
+      "to": "A yellow, oval fruit with a thick skin and sour juice.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "iv3yvp22643lhsf",
+      "from": "Albero che produce i limoni, con foglie verdi e lucide.",
+      "to": "A tree that produces lemons, with green and shiny leaves.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il limone",
+    "lemma": "limone",
+    "reading": null,
     "ipa": "/liˈmone/",
     "pos": "noun",
     "gender": "masculine",
@@ -159,22 +282,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "f9xnor62pon8eaw",
-      "from": "Frutto giallo, ovale e molto acido, con buccia spessa e succo aspro.",
-      "to": "A yellow, oval fruit with a thick skin and sour juice.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "iv3yvp22643lhsf",
-      "from": "Albero che produce i limoni, con foglie verdi e lucide.",
-      "to": "A tree that produces lemons, with green and shiny leaves.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "though the noun itself strictly refers to the fruit or the tree.",
+        "why": "False: in slang, 'limone' as a noun also means a French kiss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Italian slang, 'limonare' (derived from this noun) means to make out",
+        "why": "Irrelevant slang trivia about a derived verb for an A2 learner."
+      }
+    ],
+    "growth": 0.66
+  }
 }

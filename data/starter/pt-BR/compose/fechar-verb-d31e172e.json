@@ -70,6 +70,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to close; to shut; to finalize",
+    "primaryGloss": "close",
+    "emotion": null,
+    "notes": [
+      "To say 'to lock' with a key, use 'trancar'."
+    ],
+    "senses": [
+      {
+        "id": "j2zlcb3bacz9aro",
+        "order": 0,
+        "definition": "To move something so that an opening is covered, or to bring its parts together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to close",
+              "to shut"
+            ]
+          }
+        ],
+        "domain": "shutting",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "otj2ypqt26ggzh2",
+            "text": "Por favor, feche a porta ao sair.",
+            "textLang": "pt",
+            "translation": "Please close the door when leaving.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and routine, a simple request made in passing",
+            "note": null,
+            "matchedForm": "feche",
+            "matchedTranslationForm": "close"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ulcask23vtl8o21",
+        "order": 1,
+        "definition": "To stop operating for the day, or to go out of business permanently.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to close",
+              "to close down"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🔏",
+        "examples": [
+          {
+            "id": "0dj3120rcq9ht4j",
+            "text": "A loja vai fechar às oito da noite hoje.",
+            "textLang": "pt",
+            "translation": "The store will close at eight tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, providing helpful information about a schedule",
+            "note": null,
+            "matchedForm": "fechar",
+            "matchedTranslationForm": "close"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "38u0dbggn53ty4s",
+        "order": 2,
+        "definition": "To finalize or settle an agreement, deal, or bill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to close",
+              "to finalize",
+              "to settle"
+            ]
+          }
+        ],
+        "domain": "agreement",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5lbv8j6gmhfteyc",
+            "text": "Eles fecharam o negócio ontem.",
+            "textLang": "pt",
+            "translation": "They closed the deal yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fecharam",
+            "matchedTranslationForm": "closed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "fechar",
+    "lemma": "fechar",
+    "reading": null,
+    "ipa": "/feˈʃaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔒",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to close; to shut; to lock",
     "primaryGloss": "close",
     "emotion": null,
@@ -164,5 +315,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to close; to shut; to lock",
+        "why": "'to lock' is not in any sense's glosses (and is properly 'trancar')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "close down, shut down",
+        "why": "'Close down' implies permanent closure, but the sense and example cover daily closing."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to finalize/conclude' (a deal, bill, or agreement)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'fechar' for almost anything that moves into a closed position",
+        "why": "Merely restates the basic definitions."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'abrir', which is the opposite",
+        "why": "Trivial antonym note; learners do not confuse 'fechar' and 'abrir'."
+      }
+    ],
+    "growth": 0.871
   }
 }

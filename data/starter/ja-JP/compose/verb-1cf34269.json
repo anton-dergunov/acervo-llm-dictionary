@@ -57,6 +57,97 @@
     "language": "ja",
     "headword": "書く",
     "lemma": "書く",
+    "reading": "かく",
+    "ipa": "ka̠kɯ̟ᵝ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✍️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to write",
+    "primaryGloss": "to write",
+    "emotion": "focused and deliberate, like someone carefully penning a letter",
+    "notes": [
+      "Godan (u-verb) transitive verb taking を; the person written to takes に. Irregular て-form: 書いて (kaite).",
+      "Do not confuse with 描く (かく, to draw or paint an image), which shares the same pronunciation."
+    ],
+    "senses": [
+      {
+        "id": "6rrcxfxmujkbrtu",
+        "order": 0,
+        "definition": "To put words, characters, or numbers onto paper or a screen, or to compose a text such as a letter, report, or book.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to write",
+              "to compose",
+              "to jot down"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "📝",
+        "examples": [
+          {
+            "id": "u4hympxrni38j3i",
+            "text": "友達に手紙を書く。",
+            "textLang": "ja",
+            "translation": "I will write a letter to my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "書く",
+            "matchedTranslationForm": "write"
+          },
+          {
+            "id": "w1x3pz32n9mnp48",
+            "text": "彼は新しい小説を書いた。",
+            "textLang": "ja",
+            "translation": "He wrote a new novel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and accomplished, sharing a creative success",
+            "note": null,
+            "matchedForm": "書いた",
+            "matchedTranslationForm": "wrote"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "書く",
+    "lemma": "書く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -183,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a Japanese word containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(composition) To author or compose a book, article, or piece of music.",
+        "why": "Writing words on a surface and writing a book/report are shades of one meaning."
+      }
+    ],
+    "growth": 0.88
   }
 }

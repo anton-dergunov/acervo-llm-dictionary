@@ -60,6 +60,73 @@
     "headword": "جَبَل",
     "lemma": "جَبَل",
     "reading": null,
+    "ipa": "/ˈd͡ʒa.bal/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "mountain",
+    "primaryGloss": "mountain",
+    "emotion": "awed and quiet, looking up at something vast and high",
+    "notes": [
+      "The broken plural is جِبَال (jibāl), or أَجْبَال (ʔajbāl)."
+    ],
+    "senses": [
+      {
+        "id": "1yuevr5iy1yo75f",
+        "order": 0,
+        "definition": "A very high natural elevation of the earth's surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "ls6tb02m2evyv77",
+            "text": "الْمَنْظَرُ مِنْ قِمَّةِ الْجَبَلِ جَمِيلٌ جِدًّا.",
+            "textLang": "ar",
+            "translation": "The view from the top of the mountain is very beautiful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْجَبَلِ",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَبَل",
+    "lemma": "جَبَل",
+    "reading": null,
     "ipa": "/d͡ʒa.bal/",
     "pos": "noun",
     "gender": "masculine",
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both large mountains and very high hills.",
+        "why": "Restates the glosses without giving useful grammatical information like broken plurals."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "النَّظَرُ مِنْ قِمَّةِ الجَبَلِ",
+        "why": "الْمَنْظَرُ (the view/scenery) is required here, not النَّظَرُ (the act of looking/sight)."
+      }
+    ],
+    "growth": 1.031
   }
 }

@@ -68,6 +68,96 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "never",
+    "primaryGloss": "never",
+    "emotion": null,
+    "notes": [
+      "When 'nunca' comes before the verb, it is used alone ('Nunca voy'). When it comes after the verb, you must put 'no' before the verb ('No voy nunca').",
+      "To ask 'Have you ever...?' in a question, Spanish uses 'alguna vez', not 'nunca': '¿Has ido alguna vez a México?'"
+    ],
+    "senses": [
+      {
+        "id": "z6ak9ux3zivkcfg",
+        "order": 0,
+        "definition": "At no time in the past, present, or future; on no occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "never",
+              "not ever"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "khxhas1q3fj4kej",
+            "text": "Nunca he viajado fuera de mi país.",
+            "textLang": "es",
+            "translation": "I have never traveled outside of my country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and slightly wistful, sharing a personal fact",
+            "note": null,
+            "matchedForm": "Nunca",
+            "matchedTranslationForm": "never"
+          },
+          {
+            "id": "n3mkyhs3ul6mwly",
+            "text": "Eso no pasa nunca.",
+            "textLang": "es",
+            "translation": "That never happens.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and confident, correcting a misconception",
+            "note": null,
+            "matchedForm": "nunca",
+            "matchedTranslationForm": "never"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "nunca",
+    "lemma": "nunca",
+    "reading": null,
+    "ipa": "/ˈnuŋka/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "never; ever",
     "primaryGloss": "never",
     "emotion": null,
@@ -181,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "¿Has estado nunca en la capital?",
+        "why": "Unnatural calque of English 'ever'; Spanish uses 'alguna vez' in normal questions."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Used in questions to mean 'at any time'.",
+        "why": "Using 'nunca' for positive 'ever' in questions is rare and confuses A2 learners."
+      }
+    ],
+    "growth": 0.875
   }
 }

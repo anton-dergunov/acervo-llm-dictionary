@@ -75,6 +75,77 @@
     "primaryGloss": "police officer",
     "emotion": "respectful and formal, acknowledging someone in a position of authority",
     "notes": [
+      "警察 (けいさつ) refers to the police force as an institution, while 警察官 refers to an individual officer.",
+      "In everyday speech, local patrol officers are often affectionately called お巡りさん (おまわりさん)."
+    ],
+    "senses": [
+      {
+        "id": "38hy4inpnz5hbje",
+        "order": 0,
+        "definition": "A member of the police force.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "police officer",
+              "policeman",
+              "policewoman"
+            ]
+          }
+        ],
+        "domain": "law enforcement",
+        "emoji": "👮",
+        "examples": [
+          {
+            "id": "71o1qfsr3v349pv",
+            "text": "警察官が駅までの道を案内してくれた。",
+            "textLang": "ja",
+            "translation": "A police officer showed me the way to the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "警察官",
+            "matchedTranslationForm": "police officer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "警察官",
+    "lemma": "警察官",
+    "reading": "けいさつかん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👮",
+    "topics": [
+      "Work",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "police officer",
+    "primaryGloss": "police officer",
+    "emotion": "respectful and formal, acknowledging someone in a position of authority",
+    "notes": [
       "警察 (keisatsu) refers to the police force as an institution, while 警察官 (keisatsukan) refers specifically to the individual person who is an officer.",
       "You may also hear the word おまわりさん (omawari-san), which is a friendlier, more colloquial term often used by children to refer to local neighborhood patrol officers."
     ],
@@ -124,5 +195,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "A police officer guided me on the road.",
+        "why": "道を案内する means 'to give directions / show the way', not 'guide on the road'."
+      }
+    ],
+    "growth": 0.682
   }
 }

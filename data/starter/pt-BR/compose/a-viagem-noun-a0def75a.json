@@ -72,6 +72,96 @@
     "primaryGloss": "trip",
     "emotion": "anticipatory and bright, thinking of the excitement of a new destination",
     "notes": [
+      "Do not confuse the noun 'a viagem' (spelled with 'g') with 'viajem' (spelled with 'j'), which is a conjugated form of the verb 'viajar' (to travel)."
+    ],
+    "senses": [
+      {
+        "id": "uy2e1h51voa71qy",
+        "order": 0,
+        "definition": "An act of traveling from one place to another, or a journey made for pleasure, work, or another purpose.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey",
+              "travel"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "vp8i509ls4owldg",
+            "text": "Preparei tudo para a viagem de férias.",
+            "textLang": "pt",
+            "translation": "I prepared everything for the vacation trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "organized and enthusiastic, feeling ready for a break",
+            "note": null,
+            "matchedForm": "viagem",
+            "matchedTranslationForm": "trip"
+          },
+          {
+            "id": "yfldy89yw66nty0",
+            "text": "Boa viagem!",
+            "textLang": "pt",
+            "translation": "Have a good trip!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "viagem",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a viagem",
+    "lemma": "viagem",
+    "reading": null,
+    "ipa": "/viˈa.ʒẽj/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "trip; journey; travel",
+    "primaryGloss": "trip",
+    "emotion": "anticipatory and bright, thinking of the excitement of a new destination",
+    "notes": [
       "Note that the spelling ends in '-em', not '-en'.",
       "Distinguish this noun ('a viagem') from the verb 'viajar' (to travel).",
       "In Portuguese, 'viagem' refers to the act of traveling or a specific trip, while 'viajar' is the action itself."
@@ -163,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "round trip, journey",
+        "why": "'Viagem' alone does not mean 'round trip' ('viagem de ida e volta' does)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A journey to a place and back.",
+        "why": "Both senses refer to the same core meaning of a trip/journey."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Distinguish this noun ('a viagem') from the verb 'viajar'",
+        "why": "Notes 1 and 2 repeat each other and miss the real homophone trap 'viajem'."
+      }
+    ],
+    "growth": 0.778
   }
 }

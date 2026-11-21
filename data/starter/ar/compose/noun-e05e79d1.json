@@ -58,6 +58,115 @@
     "headword": "بَيْت",
     "lemma": "بَيْت",
     "reading": null,
+    "ipa": "/bajt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house, home; verse",
+    "primaryGloss": "house",
+    "emotion": "warm and welcoming, thinking of a safe and familiar place",
+    "notes": [
+      "The plural is بُيُوت (buyūt) for 'houses', and أَبْيَات (abyāt) for 'verses of poetry'."
+    ],
+    "senses": [
+      {
+        "id": "c8hrtwql8ko2kg8",
+        "order": 0,
+        "definition": "A building where a person or family lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "r0bcxx745rjwtlk",
+            "text": "هَذَا بَيْتٌ كَبِيرٌ وَجَمِيلٌ.",
+            "textLang": "ar",
+            "translation": "This is a big and beautiful house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and admiring while showing a place",
+            "note": null,
+            "matchedForm": "بَيْتٌ",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6cue05vlg3fcecs",
+        "order": 1,
+        "definition": "A single line of a poem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "verse",
+              "line"
+            ]
+          }
+        ],
+        "domain": "poetry",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "b2p50wuhofyr8zx",
+            "text": "حَفِظْتُ بَيْتًا مِنَ الشِّعْرِ.",
+            "textLang": "ar",
+            "translation": "I memorized a line of poetry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and pleased with a small accomplishment",
+            "note": null,
+            "matchedForm": "بَيْتًا",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَيْت",
+    "lemma": "بَيْت",
+    "reading": null,
     "ipa": "/ba.jiːt/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ba.jiːt/",
+        "why": "بَيْت is one syllable with a diphthong, /bajt/, not two syllables /ba.jiːt/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used commonly to mean both a physical house and a home.",
+        "why": "Restates the glosses without adding grammatical or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "house; home",
+        "why": "Omits sense 1 (verse of poetry)."
+      }
+    ],
+    "growth": 0.892
   }
 }

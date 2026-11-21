@@ -72,6 +72,75 @@
     "primaryGloss": "cold",
     "emotion": "sniffling and tired, reaching for a tissue",
     "notes": [
+      "Use 'avoir un rhume' (to have a cold) or 'attraper un rhume' (to catch a cold); a bad cold is 'un gros rhume'.",
+      "Do not confuse 'le rhume' (/ʁym/) with 'le rhum' (/ʁɔm/, rum), the alcoholic drink."
+    ],
+    "senses": [
+      {
+        "id": "74v1ijqpvsr6at8",
+        "order": 0,
+        "definition": "A common illness with a runny nose and sneezing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "common cold"
+            ]
+          }
+        ],
+        "domain": "illness",
+        "emoji": "🤧",
+        "examples": [
+          {
+            "id": "os2cshit6crbf5o",
+            "text": "J'ai un gros rhume et je dois rester au lit.",
+            "textLang": "fr",
+            "translation": "I have a bad cold and I have to stay in bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rhume",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le rhume",
+    "lemma": "rhume",
+    "reading": null,
+    "ipa": "/ʁym/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤧",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "cold",
+    "primaryGloss": "cold",
+    "emotion": "sniffling and tired, reaching for a tissue",
+    "notes": [
       "Use 'avoir un rhume' to say you have a cold.",
       "Do not confuse 'rhume' with 'rhum' (rum), which is the alcoholic drink."
     ],
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "J'ai un mauvais rhume et je dois rester au lit.",
+        "why": "'Un mauvais rhume' is an English calque; natural French is 'un gros rhume'."
+      }
+    ],
+    "growth": 1.289
   }
 }

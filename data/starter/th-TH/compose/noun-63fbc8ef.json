@@ -72,6 +72,73 @@
     "primaryGloss": "spoon",
     "emotion": "a simple, everyday kitchen tool, clean and ready for a meal",
     "notes": [
+      "The classifier for spoons (and forks) is คัน. In Thailand, the spoon is the main eating utensil, held in the right hand, with a fork (ส้อม) in the left to push food onto it."
+    ],
+    "senses": [
+      {
+        "id": "1p3scmd9f3tu997",
+        "order": 0,
+        "definition": "A small utensil with a shallow bowl on a handle, used for eating, stirring, or serving food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spoon"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🥄",
+        "examples": [
+          {
+            "id": "4a8zahp1rfehrks",
+            "text": "ขอช้อนกับส้อมอีกคู่หนึ่งครับ",
+            "textLang": "th",
+            "translation": "Could I have another spoon and fork, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ช้อน",
+            "matchedTranslationForm": "spoon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ช้อน",
+    "lemma": "ช้อน",
+    "reading": null,
+    "ipa": "/t͡ɕʰɔ́ːn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥄",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "spoon",
+    "primaryGloss": "spoon",
+    "emotion": "a simple, everyday kitchen tool, clean and ready for a meal",
+    "notes": [
       "In Thai, the spoon is the primary tool for eating, usually held in the right hand. It is typically paired with a fork (ส้อม) held in the left hand to push food onto the spoon."
     ],
     "senses": [
@@ -114,5 +181,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(soup) A specific type of spoon designed for eating soup",
+        "why": "ช้อน just means spoon; soup spoon is not a separate lexical sense"
+      }
+    ],
+    "growth": 1.055
   }
 }

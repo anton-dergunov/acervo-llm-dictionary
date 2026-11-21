@@ -58,6 +58,73 @@
     "headword": "象",
     "lemma": "象",
     "reading": "ぞう",
+    "ipa": "dzoː",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "elephant",
+    "primaryGloss": "elephant",
+    "emotion": "measured and observant, noting the sheer scale of the creature",
+    "notes": [
+      "Counted using the counter 頭 (とう) for large animals."
+    ],
+    "senses": [
+      {
+        "id": "vtm5ha6u93wf6q3",
+        "order": 0,
+        "definition": "A very large grey mammal with a long trunk, large ears, and tusks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "elephant"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "en17txnd8n5ixmj",
+            "text": "象の鼻は長いです。",
+            "textLang": "ja",
+            "translation": "An elephant's trunk is long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and descriptive, like stating a classic animal fact",
+            "note": null,
+            "matchedForm": "象",
+            "matchedTranslationForm": "elephant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "象",
+    "lemma": "象",
+    "reading": "ぞう",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(phenomenon) A phenomenon, occurrence, or visible sign of a situation.",
+        "why": "Confuses kanji reading しょう (bound morpheme in compounds) with standalone word ぞう (elephant)."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "不思議な現象が起きた。",
+        "why": "Uses the compound 現象 (げんしょう) instead of the headword 象 (ぞう)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "elephant; phenomenon; image",
+        "why": "Includes 'phenomenon' and 'image', which do not belong to the word ぞう."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "At an A2 level, you will encounter this character almost exclusively",
+        "why": "Meta-commentary about proficiency levels rather than useful linguistic usage."
+      }
+    ],
+    "growth": 0.312
   }
 }

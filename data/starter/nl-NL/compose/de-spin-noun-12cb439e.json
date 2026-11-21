@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "spider",
+    "primaryGloss": "spider",
+    "emotion": "creepy and startling, suddenly noticing something small on the wall",
+    "notes": [
+      "The plural is 'spinnen' (spiders), which is identical to the verb 'spinnen' (to spin a web, to purr)."
+    ],
+    "senses": [
+      {
+        "id": "hvg3mlho1z62z4t",
+        "order": 0,
+        "definition": "A small eight-legged creature that spins webs to catch insects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spider"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🕷️",
+        "examples": [
+          {
+            "id": "kkv0pclki0m8k2s",
+            "text": "Er zit een grote spin in de hoek van de kamer.",
+            "textLang": "nl",
+            "translation": "There is a big spider in the corner of the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alarmed and pointing out something unwelcome",
+            "note": null,
+            "matchedForm": "spin",
+            "matchedTranslationForm": "spider"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de spin",
+    "lemma": "spin",
+    "reading": null,
+    "ipa": "/spɪn/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕷️",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "spider; spinning",
     "primaryGloss": "spider",
     "emotion": "creepy and startling, suddenly noticing something small on the wall",
@@ -158,5 +225,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The act or process of spinning yarn or thread.",
+        "why": "False sense: spinning wool is 'het spinnen' (nominalized verb), never 'de spin'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De spin van wol vraagt veel geduld.",
+        "why": "Ungrammatical and nonsensical in Dutch ('Het spinnen van wol' is required)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "spider; spinning",
+        "why": "Includes the false meaning 'spinning'."
+      }
+    ],
+    "growth": 0.587
   }
 }

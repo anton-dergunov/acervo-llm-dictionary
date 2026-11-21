@@ -75,6 +75,76 @@
     "primaryGloss": "to buy",
     "emotion": "focused and practical, picking out what is needed at the market",
     "notes": [
+      "Formed from the root 'beli' with the active prefix 'meN-'. In casual speech, 'beli' is often used without the prefix.",
+      "To buy something for someone else, use 'membelikan' (e.g., 'membelikan adik baju' — to buy clothes for a younger sibling)."
+    ],
+    "senses": [
+      {
+        "id": "d6e7kpzimmp1a4r",
+        "order": 0,
+        "definition": "To get something by paying money for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to purchase"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "d1c5u8w80615lop",
+            "text": "Dia pergi ke toko untuk membeli buah segar.",
+            "textLang": "id",
+            "translation": "She went to the shop to buy fresh fruit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and purposeful, heading out with a clear task in mind",
+            "note": null,
+            "matchedForm": "membeli",
+            "matchedTranslationForm": "buy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "membeli",
+    "lemma": "beli",
+    "reading": null,
+    "ipa": "/məmˈbəli/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to buy; to purchase",
+    "primaryGloss": "to buy",
+    "emotion": "focused and practical, picking out what is needed at the market",
+    "notes": [
       "Membeli is the standard active form, built by adding meN- to the base word beli.",
       "Do not confuse with menjual, which means to sell rather than to buy."
     ],
@@ -164,5 +234,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To acquire or obtain something, not always by paying money.",
+        "why": "'Membeli' means to buy; it does not mean to acquire without paying."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Pengalaman itu membeli banyak pelajaran berharga.",
+        "why": "Nonsensical in Indonesian; 'memberi' (gave) would be used here, not 'membeli' (bought)."
+      }
+    ],
+    "growth": 0.826
   }
 }

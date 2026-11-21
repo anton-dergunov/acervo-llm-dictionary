@@ -60,6 +60,116 @@
     "reading": null,
     "ipa": "/vwa.tyʁ/",
     "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "car; carriage",
+    "primaryGloss": "car",
+    "emotion": "hurrying to get out the door on a busy morning",
+    "notes": [
+      "Use 'en voiture' to say 'by car' (e.g., 'aller au travail en voiture')."
+    ],
+    "senses": [
+      {
+        "id": "r9vlb7pmrnhy0ne",
+        "order": 0,
+        "definition": "A road vehicle with an engine and four wheels that carries a small number of people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "car",
+              "automobile"
+            ]
+          }
+        ],
+        "domain": "road vehicle",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "depg9im7rslva9h",
+            "text": "Je prends ma voiture pour aller au travail.",
+            "textLang": "fr",
+            "translation": "I take my car to go to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rushing out the door to beat the morning traffic",
+            "note": null,
+            "matchedForm": "voiture",
+            "matchedTranslationForm": "car"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bt8gr3dshjwsqpj",
+        "order": 1,
+        "definition": "An individual passenger section of a train.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "carriage",
+              "car",
+              "coach"
+            ]
+          }
+        ],
+        "domain": "train",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "gpyaao1hfpp5qlw",
+            "text": "Nos places sont dans la troisième voiture du train.",
+            "textLang": "fr",
+            "translation": "Our seats are in the third carriage of the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "voiture",
+            "matchedTranslationForm": "carriage"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la voiture",
+    "lemma": "voiture",
+    "reading": null,
+    "ipa": "/vwa.tyʁ/",
+    "pos": "noun",
     "gender": null,
     "register": "neutral",
     "dialect": null,
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "gender",
+        "quote": "",
+        "why": "Missing grammatical gender (feminine) for a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse it with 'camion' (truck) or 'vélo' (bicycle).",
+        "why": "Restates the definition and warns against words nobody confuses with 'voiture'."
+      }
+    ],
+    "growth": 0.863
   }
 }

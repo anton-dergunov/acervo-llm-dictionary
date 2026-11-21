@@ -62,6 +62,114 @@
     "headword": "cá",
     "lemma": "cá",
     "reading": null,
+    "ipa": "/kaː˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fish",
+    "primaryGloss": "fish",
+    "emotion": "hungry and looking forward to dinner, warm and eager",
+    "notes": [
+      "Takes the classifier 'con' when referring to a whole or live fish (e.g., 'một con cá'). Also used as the first element in names of fish species (e.g., 'cá hồi', salmon)."
+    ],
+    "senses": [
+      {
+        "id": "5mvt82262ru3zu5",
+        "order": 0,
+        "definition": "An animal that lives in water, breathes with gills, and has fins and a tail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "sr7bq588lgef435",
+            "text": "Con cá bơi trong hồ nước nhỏ.",
+            "textLang": "vi",
+            "translation": "The fish is swimming in the small pond.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching something peaceful",
+            "note": null,
+            "matchedForm": "cá",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q536p7xuak32qjr",
+        "order": 1,
+        "definition": "The flesh of a fish eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "voclh32ffn4xtud",
+            "text": "Tôi ăn cơm với cá kho vào buổi trưa.",
+            "textLang": "vi",
+            "translation": "I eat rice with braised fish for lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and ready to enjoy a good meal",
+            "note": null,
+            "matchedForm": "cá",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cá",
+    "lemma": "cá",
+    "reading": null,
     "ipa": "/kaː˧˥/",
     "pos": "noun",
     "gender": null,
@@ -164,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fish; to bet",
+        "why": "Includes verb meaning 'to bet' which is absent from the senses and wrong for POS noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As an animal, 'cá' refers to any fish living in water.",
+        "why": "Merely restates the definitions of the two senses without adding usage information."
+      }
+    ],
+    "growth": 0.925
   }
 }

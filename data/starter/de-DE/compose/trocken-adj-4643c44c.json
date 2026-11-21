@@ -68,6 +68,111 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry",
+    "primaryGloss": "dry",
+    "emotion": "straightforward and observational, noticing the absence of moisture",
+    "notes": [],
+    "senses": [
+      {
+        "id": "c5o9irslwq3xehl",
+        "order": 0,
+        "definition": "Free from moisture or liquid; not wet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "3fnz6w7ezba55kn",
+            "text": "Nach dem Regen ist der Boden schnell wieder trocken.",
+            "textLang": "de",
+            "translation": "After the rain, the ground is quickly dry again.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and calm, observing a change in the weather",
+            "note": null,
+            "matchedForm": "trocken",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yzf0i593p0fo5je",
+        "order": 1,
+        "definition": "Of wine: not sweet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "ba2hvjpvm43yzya",
+            "text": "Ich trinke am liebsten einen trockenen Weißwein.",
+            "textLang": "de",
+            "translation": "I prefer to drink a dry white wine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and relaxed, expressing a simple personal preference",
+            "note": null,
+            "matchedForm": "trockenen",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "trocken",
+    "lemma": "trocken",
+    "reading": null,
+    "ipa": "/ˈtʁɔkn̩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; not wet",
     "primaryGloss": "dry",
     "emotion": "straightforward and observational, noticing the absence of moisture",
@@ -158,5 +263,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A wine that does not taste sweet.",
+        "why": "Adjective defined as a noun phrase ('A wine that...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe something that is not wet (the primary sense)...",
+        "why": "Merely repeats the definitions of the two senses."
+      }
+    ],
+    "growth": 0.64
   }
 }

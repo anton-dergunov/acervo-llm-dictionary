@@ -58,6 +58,75 @@
     "headword": "pericoloso",
     "lemma": "pericoloso",
     "reading": null,
+    "ipa": "/perikoˈlozo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dangerous; risky",
+    "primaryGloss": "dangerous",
+    "emotion": "cautious and serious, warning someone about a real threat",
+    "notes": [
+      "Compare 'rischioso' (risky), which emphasizes taking a chance with an uncertain outcome rather than physical harm."
+    ],
+    "senses": [
+      {
+        "id": "fc4ocg2eyuj2ihq",
+        "order": 0,
+        "definition": "Likely to cause harm, injury, or a bad result.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "risky",
+              "unsafe"
+            ]
+          }
+        ],
+        "domain": "danger",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "5j56p3nyctg66lo",
+            "text": "Quella strada è molto pericolosa di notte.",
+            "textLang": "it",
+            "translation": "That road is very dangerous at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and warning, pointing out a hazard",
+            "note": null,
+            "matchedForm": "pericolosa",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "pericoloso",
+    "lemma": "pericoloso",
+    "reading": null,
     "ipa": "/periɡoˈlozo/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/periɡoˈlozo/",
+        "why": "Standard Italian has voiceless /k/, not /ɡ/: /perikoˈlozo/ or /perikoˈloso/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(risk) Involving risk or a high chance of a negative outcome.",
+        "why": "'Dangerous' and 'risky' are shades of one meaning for 'pericoloso'."
+      }
+    ],
+    "growth": 0.546
   }
 }

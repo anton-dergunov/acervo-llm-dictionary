@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "skin; hide, fur",
+    "primaryGloss": "skin",
+    "emotion": "gentle and mindful, touching the surface of the body",
+    "notes": [
+      "Do not confuse with 'o pelo', which is the hair or fur on a living animal's body (e.g., 'o pelo do gato'). 'Pele' means 'fur' only as a pelt or garment (such as 'casaco de pele', fur coat)."
+    ],
+    "senses": [
+      {
+        "id": "n0g0wubz6n75xod",
+        "order": 0,
+        "definition": "The natural outer layer that covers the body of a person or animal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skin"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "13knqrfy1fxcilz",
+            "text": "O sol forte queimou a minha pele.",
+            "textLang": "pt",
+            "translation": "The strong sun burned my skin.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncomfortable and stinging from the heat",
+            "note": null,
+            "matchedForm": "pele",
+            "matchedTranslationForm": "skin"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xlw03ua7seny7x9",
+        "order": 1,
+        "definition": "The skin of an animal, with or without the fur, removed to make clothing or leather.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hide",
+              "fur",
+              "pelt"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "🐾",
+        "examples": [
+          {
+            "id": "84szg0m6lit8sa7",
+            "text": "Ela estava usando um casaco de pele.",
+            "textLang": "pt",
+            "translation": "She was wearing a fur coat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pele",
+            "matchedTranslationForm": "fur"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a pele",
+    "lemma": "pele",
+    "reading": null,
+    "ipa": "/ˈpɛ.li/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "skin; fur",
     "primaryGloss": "skin",
     "emotion": "gentle and mindful, touching the surface of the body",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "O gato tem a pele macia.",
+        "why": "A living cat's soft coat is 'pelo', not 'pele' ('pele' as fur refers to detached pelts or fur clothing)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The natural covering or fur of an animal.",
+        "why": "Living human and animal skin are one sense; 'pele' as fur only refers to a pelt or fur garment."
+      }
+    ],
+    "growth": 1.908
   }
 }

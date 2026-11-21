@@ -60,6 +60,74 @@
     "headword": "أَكَلَ",
     "lemma": "أَكَلَ",
     "reading": null,
+    "ipa": "/ˈʔa.ka.la/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to eat",
+    "primaryGloss": "to eat",
+    "emotion": "hungry and ready for a meal, warm and welcoming",
+    "notes": [
+      "Imperfect: يَأْكُلُ (yaʾkulu). The imperative drops the initial hamza: كُلْ (kul, 'eat!')."
+    ],
+    "senses": [
+      {
+        "id": "pag96qy1jr8rsns",
+        "order": 0,
+        "definition": "To put food in the mouth, chew it, and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to eat",
+              "to consume"
+            ]
+          }
+        ],
+        "domain": "eating",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "tu2m83etf4xd566",
+            "text": "أَكَلَ الوَلَدُ التُّفَّاحَةَ.",
+            "textLang": "ar",
+            "translation": "The boy ate the apple.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَكَلَ",
+            "matchedTranslationForm": "ate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَكَلَ",
+    "lemma": "أَكَلَ",
+    "reading": null,
     "ipa": "/ʔaˈka.la/",
     "pos": "verb",
     "gender": null,
@@ -164,5 +232,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʔaˈka.la/",
+        "why": "Wrong stress placement; stress falls on the first syllable: /ˈʔa.ka.la/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike English, Arabic speakers often use this verb metaphorically to mean",
+        "why": "False contrast: English also uses 'eat' and 'eat away' for rust and corrosion."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the standard verb for eating meals, like breakfast or dinner.",
+        "why": "Pure filler; misses the irregular imperative كُلْ (kul) and imperfect يَأْكُلُ."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses",
+        "quote": "(damage) To corrode or damage something gradually.",
+        "why": "Corrosion is marginal for an A2 beginner; keep only the primary sense."
+      }
+    ],
+    "growth": 0.492
   }
 }

@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "enseñar; dar clases",
+    "primaryGloss": "enseñar",
+    "emotion": "helpful and clear, guiding someone step by step",
+    "notes": [
+      "Es un verbo irregular: su pasado y participio pasado es 'taught' (/tɔːt/).",
+      "No se debe confundir con 'learn' (aprender): 'teach' es dar conocimientos y 'learn' es recibirlos."
+    ],
+    "senses": [
+      {
+        "id": "l1r6kay6vabyhy6",
+        "order": 0,
+        "definition": "Ayudar a alguien a aprender algo transmitiendo conocimientos o explicando cómo hacerlo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "enseñar",
+              "dar clases",
+              "instruir"
+            ]
+          }
+        ],
+        "domain": "educación",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "rj7s6713fxjfnnq",
+            "text": "She wants to teach children how to read.",
+            "textLang": "en",
+            "translation": "Ella quiere enseñar a los niños a leer.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and encouraging, speaking with genuine care",
+            "note": null,
+            "matchedForm": "teach",
+            "matchedTranslationForm": "enseñar"
+          },
+          {
+            "id": "bkii6ulhppi8nix",
+            "text": "Can you teach me how to play this song?",
+            "textLang": "en",
+            "translation": "¿Puedes enseñarme a tocar esta canción?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager, asking a friendly favor",
+            "note": null,
+            "matchedForm": "teach",
+            "matchedTranslationForm": "enseñarme"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "teach",
+    "lemma": "teach",
+    "reading": null,
+    "ipa": "/tiːtʃ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩‍🏫",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "enseñar; educar",
     "primaryGloss": "enseñar",
     "emotion": "helpful and clear, guiding someone step by step",
@@ -162,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are shades of the exact same meaning ('to teach')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the irregular past tense and past participle form ('taught'), essential for A2 learners."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "A diferencia de 'show' (mostrar), 'teach' implica un proceso",
+        "why": "Filler note; 'show' is only confused if wrongly added as a gloss."
+      }
+    ],
+    "growth": 0.88
   }
 }

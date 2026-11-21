@@ -68,6 +68,136 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "office; firm",
+    "primaryGloss": "office",
+    "emotion": "professional and routine, heading into the daily grind",
+    "notes": [
+      "Note the fixed phrase 'op kantoor' (at the office), used without an article. Plural: 'kantoren'."
+    ],
+    "senses": [
+      {
+        "id": "m7ralak5oyeyn50",
+        "order": 0,
+        "definition": "A room or building where people work at desks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "office"
+            ]
+          }
+        ],
+        "domain": "workplace",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "8qcf4gvt4iqw5eo",
+            "text": "Ik werk vandaag op kantoor.",
+            "textLang": "nl",
+            "translation": "I am working at the office today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating your daily plans",
+            "note": null,
+            "matchedForm": "kantoor",
+            "matchedTranslationForm": "office"
+          },
+          {
+            "id": "18aghesklcw866s",
+            "text": "Zijn kantoor is op de derde verdieping.",
+            "textLang": "nl",
+            "translation": "His office is on the third floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative, giving clear directions",
+            "note": null,
+            "matchedForm": "kantoor",
+            "matchedTranslationForm": "office"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "70mkxm0y3exgm2b",
+        "order": 1,
+        "definition": "A business or agency that provides professional or administrative services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "firm",
+              "office",
+              "agency"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "nhkxuijuurjxvyg",
+            "text": "Zij werkt bij een groot juridisch kantoor.",
+            "textLang": "nl",
+            "translation": "She works at a large legal firm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kantoor",
+            "matchedTranslationForm": "firm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het kantoor",
+    "lemma": "kantoor",
+    "reading": null,
+    "ipa": "/kɑnˈtoːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "office; company",
     "primaryGloss": "office",
     "emotion": "professional and routine, heading into the daily grind",
@@ -181,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'kantoor' refers both to the physical space",
+        "why": "Restates the two senses; better to note the idiomatic 'op kantoor' without article."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Zij werkt bij een advocatenkantoor.",
+        "why": "Uses compound 'advocatenkantoor' instead of the headword 'kantoor'."
+      }
+    ],
+    "growth": 0.843
   }
 }

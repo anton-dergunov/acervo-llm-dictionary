@@ -68,6 +68,93 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to repair; to fix",
+    "primaryGloss": "repair",
+    "emotion": "focused and determined, bringing something back to life",
+    "notes": [
+      "Used mainly for machines, vehicles, and damage. In everyday speech, 'arreglar' is more common and also means 'to tidy up' or 'to sort out'."
+    ],
+    "senses": [
+      {
+        "id": "qzn87mziq7b771r",
+        "order": 0,
+        "definition": "To put something that is broken or damaged back into good condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "repair",
+              "fix",
+              "mend"
+            ]
+          }
+        ],
+        "domain": "fixing",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "1yk13hpyxpofu9h",
+            "text": "Voy a reparar la bicicleta este fin de semana.",
+            "textLang": "es",
+            "translation": "I am going to repair the bicycle this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "optimistic and ready to get to work",
+            "note": null,
+            "matchedForm": "reparar",
+            "matchedTranslationForm": "repair"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "qzn87mziq7b771r",
+      "from": "Arreglar algo que está roto o no funciona para que vuelva a funcionar.",
+      "to": "To fix something that is broken or not working so it works again.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    },
+    {
+      "sense": "8l2kk78gbifmduk",
+      "from": "Prestar atención o fijarse en algo.",
+      "to": "To pay attention to or notice something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "reparar",
+    "lemma": "reparar",
+    "reading": null,
+    "ipa": "/repaˈɾaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔧",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to repair; to fix; to notice; to make up for",
     "primaryGloss": "repair",
     "emotion": "focused and determined, bringing something back to life",
@@ -162,22 +249,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "qzn87mziq7b771r",
-      "from": "Arreglar algo que está roto o no funciona para que vuelva a funcionar.",
-      "to": "To fix something that is broken or not working so it works again.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    },
-    {
-      "sense": "8l2kk78gbifmduk",
-      "from": "Prestar atención o fijarse en algo.",
-      "to": "To pay attention to or notice something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to repair; to fix; to notice; to make up for",
+        "why": "'To make up for' is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To pay attention to or notice something.",
+        "why": "'Reparar en' meaning 'to notice' is literary/C1; an A2 learner only needs 'to repair'."
+      }
+    ],
+    "growth": 0.596
+  }
 }

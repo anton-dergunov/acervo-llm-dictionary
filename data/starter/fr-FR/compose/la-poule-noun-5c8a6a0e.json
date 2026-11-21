@@ -68,6 +68,93 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "hen; chicken",
+    "primaryGloss": "hen",
+    "emotion": "warm and down-to-earth, thinking of animals in the farmyard",
+    "notes": [
+      "Use 'poule' for the female bird that lays eggs. For chicken meat on a menu or a young bird raised for meat, use 'le poulet'.",
+      "The informal idiom 'une poule mouillée' (literally 'a wet hen') means a coward or a chicken."
+    ],
+    "senses": [
+      {
+        "id": "f4zs0hn8ho5cef3",
+        "order": 0,
+        "definition": "An adult female farm bird kept for its eggs and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hen",
+              "chicken"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐔",
+        "examples": [
+          {
+            "id": "t3kevizjek9w0h6",
+            "text": "La poule pond un œuf tous les matins dans le poulailler.",
+            "textLang": "fr",
+            "translation": "The hen lays an egg every morning in the henhouse.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and observant, watching the farm animals",
+            "note": null,
+            "matchedForm": "poule",
+            "matchedTranslationForm": "hen"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "f4zs0hn8ho5cef3",
+      "from": "Oiseau domestique élevé pour ses œufs et sa chair.",
+      "to": "A farm bird raised for its eggs and meat.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "ypd094dgza2ga5y",
+      "from": "Personne peureuse qui manque de courage.",
+      "to": "A person who is easily frightened and lacks courage.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la poule",
+    "lemma": "poule",
+    "reading": null,
+    "ipa": "/pul/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐔",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "hen; chicken; coward",
     "primaryGloss": "hen",
     "emotion": "warm and down-to-earth, thinking of animals in the farmyard",
@@ -162,22 +249,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "f4zs0hn8ho5cef3",
-      "from": "Oiseau domestique élevé pour ses œufs et sa chair.",
-      "to": "A farm bird raised for its eggs and meat.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "ypd094dgza2ga5y",
-      "from": "Personne peureuse qui manque de courage.",
-      "to": "A person who is easily frightened and lacks courage.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(personality) A person who is easily frightened and lacks courage.",
+        "why": "Only the idiom 'poule mouillée' means coward, not 'poule' by itself."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ne fais pas sa poule mouillée, ce manège n'est pas dangereux !",
+        "why": "Wrong possessive 'sa'; the expression with 'ne fais pas' is 'la poule mouillée'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hen; chicken; coward",
+        "why": "'Coward' requires the full phrase 'poule mouillée', not 'poule' alone."
+      }
+    ],
+    "growth": 0.693
+  }
 }

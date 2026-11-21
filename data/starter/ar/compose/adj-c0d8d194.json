@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "correct; true; healthy",
+    "primaryGloss": "correct",
+    "emotion": "confident and decisive, like ticking a box on a checklist",
+    "notes": [
+      "Often used on its own in conversation to mean 'That's right!' or, with rising intonation, 'Really?' / 'Is that true?'."
+    ],
+    "senses": [
+      {
+        "id": "y874pgp4ymb3g2c",
+        "order": 0,
+        "definition": "In accordance with fact or truth; without mistakes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "true",
+              "right"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "0q8msrhi8gp08to",
+            "text": "هَذَا الْجَوَابُ صَحِيحٌ.",
+            "textLang": "ar",
+            "translation": "This answer is correct.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and sure of the answer",
+            "note": null,
+            "matchedForm": "صَحِيحٌ",
+            "matchedTranslationForm": "correct"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0el9573mqymmp3s",
+        "order": 1,
+        "definition": "Free from illness or injury; in good physical condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "well",
+              "sound"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "iynlcfxvbaj4trg",
+            "text": "وُلِدَ الطِّفْلُ صَحِيحَ الْجِسْمِ.",
+            "textLang": "ar",
+            "translation": "The child was born with a healthy body.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "صَحِيحَ",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "صَحِيح",
+    "lemma": "صَحِيح",
+    "reading": null,
+    "ipa": "/sˤaˈħiːħ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "correct; true; real; healthy",
     "primaryGloss": "correct",
     "emotion": "confident and decisive, like ticking a box on a checklist",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "الْجِسْمُ السَّلِيمُ فِي الْعَقْلِ الصَّحِيحِ.",
+        "why": "Inverts the famous proverb الْعَقْلُ السَّلِيمُ فِي الْجِسْمِ السَّلِيمِ and swaps in الصَّحِيحِ."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "correct; true; real; healthy",
+        "why": "Contains 'real', which is not covered by the senses or sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'sahih' for both factual correctness ('that is correct') and moral integrity",
+        "why": "Mentions 'moral integrity', which is not a sense in the entry."
+      }
+    ],
+    "growth": 0.885
   }
 }

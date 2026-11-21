@@ -72,6 +72,95 @@
     "primaryGloss": "today",
     "emotion": "a fresh day beginning, noting the present moment with a calm readiness",
     "notes": [
+      "Also used as a noun meaning 'today'. As an adverb, it modifies the verb directly without a time particle (에), though topic or focus particles like 은 or 도 can attach."
+    ],
+    "senses": [
+      {
+        "id": "jvhzhtxbk2jxpcv",
+        "order": 0,
+        "definition": "On this present day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "today",
+              "on this day"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "mwlqhsy9zajh05u",
+            "text": "오늘 날씨가 참 좋습니다.",
+            "textLang": "ko",
+            "translation": "The weather is really nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and appreciative of the nice weather outside",
+            "note": null,
+            "matchedForm": "오늘",
+            "matchedTranslationForm": "today"
+          },
+          {
+            "id": "75tvcgrbfonmuxl",
+            "text": "오늘 뭐 해요?",
+            "textLang": "ko",
+            "translation": "What are you doing today?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "오늘",
+            "matchedTranslationForm": "today"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오늘",
+    "lemma": "오늘",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "today",
+    "primaryGloss": "today",
+    "emotion": "a fresh day beginning, noting the present moment with a calm readiness",
+    "notes": [
       "오늘 functions as both a noun (meaning 'today') and an adverb meaning 'today' or 'on this day'.",
       "It is often followed by particles like 은/는 for contrast or 도 for 'even today'."
     ],
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The present day or this current day.",
+        "why": "Defined as a noun rather than an adverb ('on this present day')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[1].text",
+        "quote": "오늘 무슨 요일이에요?",
+        "why": "Here 오늘 is used as a noun (subject with omitted particle), not an adverb."
+      }
+    ],
+    "growth": 0.894
   }
 }

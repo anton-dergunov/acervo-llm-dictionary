@@ -58,6 +58,75 @@
     "headword": "cơn đau",
     "lemma": "đau",
     "reading": null,
+    "ipa": "/ɗaw˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pain; ache; pang",
+    "primaryGloss": "pain",
+    "emotion": "wincing slightly, holding a sore spot on the body",
+    "notes": [
+      "Formed from the classifier 'cơn' (for sudden bouts or episodes) and 'đau' (to hurt); used for physical waves of pain, whereas emotional pain is 'nỗi đau'."
+    ],
+    "senses": [
+      {
+        "id": "xh60mf2ud9b34vx",
+        "order": 0,
+        "definition": "A bout or wave of physical pain in the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "ache",
+              "pang"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "og33xoogv6cy4g3",
+            "text": "Cơn đau đầu làm tôi không thể ngủ được.",
+            "textLang": "vi",
+            "translation": "The headache kept me from sleeping.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rubbing temples with eyes closed tightly in exhaustion",
+            "note": null,
+            "matchedForm": "Cơn đau",
+            "matchedTranslationForm": "ache"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cơn đau",
+    "lemma": "đau",
+    "reading": null,
     "ipa": "/ɗaʊ/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɗaʊ/",
+        "why": "IPA omits 'cơn' and tones; Hanoi IPA for 'cơn đau' is /kəːn˧˧ ɗaw˧˧/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(emotion) A strong feeling of emotional sadness or suffering.",
+        "why": "Emotional pain is normally 'nỗi đau'; 'cơn đau' is for physical bouts/pangs of pain."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cơn đau trong lòng khi phải chia tay.",
+        "why": "Sentence fragment, unnatural collocation ('nỗi đau' is used for heartache), and redundant translation."
+      }
+    ],
+    "growth": 0.626
   }
 }

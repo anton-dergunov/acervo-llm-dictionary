@@ -57,6 +57,96 @@
     "language": "zh",
     "headword": "尴尬",
     "lemma": "尴尬",
+    "reading": "gāngà",
+    "ipa": "/kaŋ˥ a˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "awkward; embarrassed",
+    "primaryGloss": "awkward",
+    "emotion": "cringing slightly, caught in a moment nobody knows how to handle",
+    "notes": [
+      "Can describe either a person feeling embarrassed (我很尴尬) or an awkward situation (场面很尴尬)."
+    ],
+    "senses": [
+      {
+        "id": "dlxxicriol09gk3",
+        "order": 0,
+        "definition": "Feeling embarrassed and uncomfortable, or causing people to feel this way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "awkward",
+              "embarrassed",
+              "embarrassing"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😳",
+        "examples": [
+          {
+            "id": "nzx1syw7b3e3dkw",
+            "text": "他突然叫错我的名字，场面十分尴尬。",
+            "textLang": "zh",
+            "translation": "He suddenly called me by the wrong name, and the situation became very awkward.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cringing at a social mistake, wishing to disappear",
+            "note": null,
+            "matchedForm": "尴尬",
+            "matchedTranslationForm": "awkward"
+          },
+          {
+            "id": "a2ud62rxvyolrfo",
+            "text": "那时候我感到很尴尬。",
+            "textLang": "zh",
+            "translation": "I felt very embarrassed at that time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "尴尬",
+            "matchedTranslationForm": "embarrassed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "尴尬",
+    "lemma": "尴尬",
     "reading": "gān gà",
     "ipa": "/kan˥ ka˥˩/",
     "pos": "adj",
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Feeling awkward and an awkward situation are one adjective sense; example 0 even describes a situation."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A situation that is difficult to deal with or resolve.",
+        "why": "Adjective defined as a noun ('A situation...')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "awkward, tricky, dilemma",
+        "why": "'Dilemma' is a noun, not an adjective."
+      }
+    ],
+    "growth": 0.72
   }
 }

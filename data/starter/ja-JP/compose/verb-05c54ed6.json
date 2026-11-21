@@ -59,6 +59,75 @@
     "language": "ja",
     "headword": "売る",
     "lemma": "売る",
+    "reading": "うる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "to sell",
+    "emotion": "matter-of-fact, focused on the transaction at hand",
+    "notes": [
+      "A Group 1 (godan) transitive verb (売ります, 売って), taking を for the item sold. Its opposite is 買う (kau, 'to buy')."
+    ],
+    "senses": [
+      {
+        "id": "nzhwzlhtbeyzjkp",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sell",
+              "sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "e7wgj9ez6kz9ypq",
+            "text": "この店は地元の野菜を売っています。",
+            "textLang": "ja",
+            "translation": "This shop sells local vegetables.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, pointing out what is available",
+            "note": null,
+            "matchedForm": "売っています",
+            "matchedTranslationForm": "sells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "売る",
+    "lemma": "売る",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Japanese word with kanji must have its hiragana reading (うる)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To betray someone for personal gain",
+        "why": "Idiomatic/advanced sense not needed at A2 level."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "売る is often used in the context of selling products",
+        "why": "Restates the gloss instead of giving grammar (transitive, takes を, Group 1 verb)."
+      }
+    ],
+    "growth": 0.478
   }
 }

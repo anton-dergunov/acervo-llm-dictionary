@@ -68,6 +68,158 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "day; sun; sunlight",
+    "primaryGloss": "day",
+    "emotion": null,
+    "notes": [
+      "Pronounced ひ (hi) as a standalone word. In compounds and when counting days or dates above ten, the kanji 日 is often read にち (nichi) or じつ (jitsu), with special native readings for days 1 to 10 (e.g., 二日 ふつか)."
+    ],
+    "senses": [
+      {
+        "id": "6g6plqnm06oic8m",
+        "order": 0,
+        "definition": "A twenty-four-hour period, or a particular date or occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "date"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "irz82mzyzczb452",
+            "text": "また別の日に会いましょう。",
+            "textLang": "ja",
+            "translation": "Let's meet on another day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "日",
+            "matchedTranslationForm": "day"
+          },
+          {
+            "id": "t27oi3176goy2ar",
+            "text": "引っ越しの日が決まりました。",
+            "textLang": "ja",
+            "translation": "The moving day has been decided.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "日",
+            "matchedTranslationForm": "day"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kh7phr8izdqxrek",
+        "order": 1,
+        "definition": "The sun in the sky, or the light and warmth that comes from it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sun",
+              "sunlight",
+              "daylight"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌞",
+        "examples": [
+          {
+            "id": "7pk650ion5ntytf",
+            "text": "冬は早く日が沈みます。",
+            "textLang": "ja",
+            "translation": "The sun sets early in winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "日",
+            "matchedTranslationForm": "sun"
+          },
+          {
+            "id": "0lt6zy3xf2yazp6",
+            "text": "この部屋はよく日が当たります。",
+            "textLang": "ja",
+            "translation": "This room gets plenty of sunlight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "日",
+            "matchedTranslationForm": "sunlight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "日",
+    "lemma": "日",
+    "reading": "ひ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "day; sun",
     "primaryGloss": "day",
     "emotion": null,
@@ -180,5 +332,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "replaced by 'nichi' (日) in compound words like 'tomorrow' (ashita/asu) or when counting dates (e.g., 'futsu-ka'",
+        "why": "Makes false claims: 明日 (ashita) and 二日 (futsuka) do not contain the reading 'nichi'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "今日は天気が良いです。",
+        "why": "Uses 今日 (きょう) and 一日中 (いちにちじゅう), neither of which is the word 日 (ひ)."
+      }
+    ],
+    "growth": 0.953
   }
 }

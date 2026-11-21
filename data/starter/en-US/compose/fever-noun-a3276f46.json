@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "fiebre",
+    "primaryGloss": "fiebre",
+    "emotion": "concerned and slightly uncomfortable, as if feeling unwell and needing rest",
+    "notes": [
+      "En el habla cotidiana, también es muy común decir 'have a temperature' para indicar que se tiene fiebre (por ejemplo, 'I have a temperature')."
+    ],
+    "senses": [
+      {
+        "id": "js08tuxj9h7j49b",
+        "order": 0,
+        "definition": "Temperatura corporal superior a lo normal, generalmente causada por una enfermedad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "fiebre",
+              "calentura"
+            ]
+          }
+        ],
+        "domain": "enfermedad",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "nrp3i6nadvnj4rw",
+            "text": "She has a high fever and needs to rest in bed.",
+            "textLang": "en",
+            "translation": "Tiene fiebre alta y necesita descansar en la cama.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and caring, speaking about someone who is sick",
+            "note": null,
+            "matchedForm": "fever",
+            "matchedTranslationForm": "fiebre"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "fever",
+    "lemma": "fever",
+    "reading": null,
+    "ipa": "/ˈfiːvər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "fiebre; excitación",
     "primaryGloss": "fiebre",
     "emotion": "concerned and slightly uncomfortable, as if feeling unwell and needing rest",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Usa 'fever' cuando la temperatura corporal es más alta de lo normal",
+        "why": "Restates the definition of sense 0 without adding useful usage info."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Un estado de mucha actividad o emoción intensa.",
+        "why": "Figurative sense is literary/idiomatic, not essential for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "La ciudad estaba en un estado de fiebre de emoción",
+        "why": "Unnatural calque in Spanish."
+      }
+    ],
+    "growth": 0.536
   }
 }

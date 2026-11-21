@@ -75,6 +75,118 @@
     "primaryGloss": "laugh",
     "emotion": "warm and amused, sharing a lighthearted moment with a friend",
     "notes": [
+      "Has a regular past tense ('lachte', 'lachten') but an irregular past participle ('heeft gelachen').",
+      "Use 'lachen om' for 'to laugh at' something funny, and 'lachen naar' for 'to smile at' someone.",
+      "Often used for smiling too, especially in photos; 'glimlachen' specifically means a silent smile."
+    ],
+    "senses": [
+      {
+        "id": "y6zkvhhc6xlnlsi",
+        "order": 0,
+        "definition": "To make sounds and movements of the face because something is funny.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "laugh",
+              "to laugh"
+            ]
+          }
+        ],
+        "domain": "laughing",
+        "emoji": "😄",
+        "examples": [
+          {
+            "id": "5zpao0a4n8rk1wl",
+            "text": "De grap was zo goed dat we moesten lachen.",
+            "textLang": "nl",
+            "translation": "The joke was so good that we had to laugh.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "joyful and unrestrained, remembering a genuinely funny joke",
+            "note": null,
+            "matchedForm": "lachen",
+            "matchedTranslationForm": "laugh"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i7ja8m2cuvky9jr",
+        "order": 1,
+        "definition": "To curve the corners of your mouth upwards to show friendliness or happiness, or for a photo.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smile",
+              "to smile"
+            ]
+          }
+        ],
+        "domain": "smiling",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "5dqnj739epmgnwz",
+            "text": "De baby lachte vriendelijk naar haar moeder.",
+            "textLang": "nl",
+            "translation": "The baby smiled kindly at her mother.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lachte",
+            "matchedTranslationForm": "smiled"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "lachen",
+    "lemma": "lachen",
+    "reading": null,
+    "ipa": "/ˈlɑ.xə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to laugh; to smile",
+    "primaryGloss": "laugh",
+    "emotion": "warm and amused, sharing a lighthearted moment with a friend",
+    "notes": [
       "Use 'lachen' when you make sounds because something is funny, or just 'om te lachen' for something amusing.",
       "Do not confuse with 'glimlachen', which specifically means to smile without making sound."
     ],
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ze keek naar de foto en begon zachtjes te lachen.",
+        "why": "'Zachtjes lachen' refers to an audible laugh/chuckle, contradicting 'without making sound'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular verb forms (lachte, heeft gelachen) and preposition 'om' (laugh at)."
+      }
+    ],
+    "growth": 1.206
   }
 }

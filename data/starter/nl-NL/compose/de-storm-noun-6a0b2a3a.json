@@ -72,6 +72,116 @@
     "primaryGloss": "storm",
     "emotion": "tense and bracing, feeling the power of the wind",
     "notes": [
+      "In Dutch, 'storm' focuses on very strong wind; for a thunderstorm with lightning and thunder, use 'het onweer'."
+    ],
+    "senses": [
+      {
+        "id": "4ro7bq1txlp4hja",
+        "order": 0,
+        "definition": "A period of very bad weather with strong winds and often rain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "storm",
+              "gale"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "⛈️",
+        "examples": [
+          {
+            "id": "22t7b2ll91huaq8",
+            "text": "De storm veroorzaakte veel schade aan de daken.",
+            "textLang": "nl",
+            "translation": "The storm caused a lot of damage to the roofs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and cautious, looking at the damage outside",
+            "note": null,
+            "matchedForm": "storm",
+            "matchedTranslationForm": "storm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zolbiqxi8eac4hz",
+        "order": 1,
+        "definition": "A sudden, strong reaction or outburst from a large number of people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "storm",
+              "outcry",
+              "uproar"
+            ]
+          }
+        ],
+        "domain": "reaction",
+        "emoji": "🌪️",
+        "examples": [
+          {
+            "id": "6p9q1gpgva95csc",
+            "text": "Er ontstond een storm van kritiek op het nieuwe plan.",
+            "textLang": "nl",
+            "translation": "A storm of criticism arose over the new plan.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and overwhelmed by sudden negative reactions",
+            "note": null,
+            "matchedForm": "storm",
+            "matchedTranslationForm": "storm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de storm",
+    "lemma": "storm",
+    "reading": null,
+    "ipa": "/stɔrm/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛈️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "storm; uproar",
+    "primaryGloss": "storm",
+    "emotion": "tense and bracing, feeling the power of the wind",
+    "notes": [
       "Use 'storm' when there is strong, disruptive weather with heavy winds and rain.",
       "Do not confuse with 'onwear', which specifically refers to a thunderstorm with lightning and thunder."
     ],
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'onwear', which specifically refers to a thunderstorm",
+        "why": "The Dutch word for thunderstorm is 'onweer', misspelled here as 'onwear'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'storm' when there is strong, disruptive weather with heavy winds and",
+        "why": "Restates sense 0's definition without adding anything new."
+      }
+    ],
+    "growth": 0.88
   }
 }

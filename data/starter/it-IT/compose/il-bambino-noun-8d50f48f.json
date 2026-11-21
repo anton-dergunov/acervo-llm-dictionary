@@ -58,6 +58,108 @@
     "headword": "il bambino",
     "lemma": "bambino",
     "reading": null,
+    "ipa": "/bamˈbi.no/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "child, boy, baby",
+    "primaryGloss": "child",
+    "emotion": "warm and affectionate, speaking of a young child with a gentle smile",
+    "notes": [
+      "Refers to a boy or a child of unspecified gender from infancy up to about ten years old; the feminine form for a girl is 'la bambina'.",
+      "Do not confuse with 'ragazzo', which refers to an older child, teenager, or young man."
+    ],
+    "senses": [
+      {
+        "id": "aope01mvkonqc4v",
+        "order": 0,
+        "definition": "A young child, from infancy up to about ten years old, especially a boy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "boy",
+              "kid",
+              "baby"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "7c6gbirfxbi58n7",
+            "text": "Il bambino gioca nel parco con la palla.",
+            "textLang": "it",
+            "translation": "The child is playing in the park with the ball.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and observant, watching a child play",
+            "note": null,
+            "matchedForm": "bambino",
+            "matchedTranslationForm": "child"
+          },
+          {
+            "id": "5j3ltegnkg7d1np",
+            "text": "La mamma tiene in braccio il bambino.",
+            "textLang": "it",
+            "translation": "The mother is holding the baby in her arms.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bambino",
+            "matchedTranslationForm": "baby"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "g35d8bdu8isule1",
+      "from": "Un neonato o un bambino molto piccolo.",
+      "to": "A very young child who has just been born.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il bambino",
+    "lemma": "bambino",
+    "reading": null,
     "ipa": "/bamˈbiːno/",
     "pos": "noun",
     "gender": "masculine",
@@ -163,14 +265,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "g35d8bdu8isule1",
-      "from": "Un neonato o un bambino molto piccolo.",
-      "to": "A very young child who has just been born.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (child) A young person... [1] (baby) A very young child",
+        "why": "'Bambino' covers one concept (young child from infancy to ~10); splitting baby/child is an English-driven oversplit."
+      }
+    ],
+    "growth": 1.164
+  }
 }

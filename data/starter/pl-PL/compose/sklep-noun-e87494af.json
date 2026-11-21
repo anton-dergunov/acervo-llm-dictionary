@@ -60,6 +60,76 @@
     "headword": "sklep",
     "lemma": "sklep",
     "reading": null,
+    "ipa": "/sklɛp/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "shop; store",
+    "primaryGloss": "shop",
+    "emotion": "matter-of-fact and purposeful, like someone running a quick errand",
+    "notes": [
+      "Used with 'do' + genitive for going to a shop ('iść do sklepu') and 'w' + locative for being at a shop ('być w sklepie').",
+      "False friend for speakers of Romance or Slavic languages where 'magazyn' means shop: in Polish, 'magazyn' is a warehouse or a magazine."
+    ],
+    "senses": [
+      {
+        "id": "6fguuajcxjrjx2j",
+        "order": 0,
+        "definition": "A building or room where goods are sold to the public.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "store"
+            ]
+          }
+        ],
+        "domain": "retail",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "b9wk62y71snzpv6",
+            "text": "Idę do sklepu po chleb.",
+            "textLang": "pl",
+            "translation": "I am going to the shop for bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and brief, just stating where one is heading",
+            "note": null,
+            "matchedForm": "sklepu",
+            "matchedTranslationForm": "shop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sklep",
+    "lemma": "sklep",
+    "reading": null,
     "ipa": "/skwɛp/",
     "pos": "noun",
     "gender": "masculine",
@@ -164,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/skwɛp/",
+        "why": "Wrong IPA: Polish 'l' is /l/, not /w/ ('ł'); correct is /sklɛp/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A vaulted ceiling, usually found in basements, old churches, or historic buildings.",
+        "why": "Archaic/architectural sense; modern Polish uses 'sklepienie' for a vaulted ceiling."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Sklep is the most common word for a retail store in Poland",
+        "why": "Merely restates the definition; should instead mention key prepositions ('w sklepie', 'do sklepu')."
+      }
+    ],
+    "growth": 0.703
   }
 }

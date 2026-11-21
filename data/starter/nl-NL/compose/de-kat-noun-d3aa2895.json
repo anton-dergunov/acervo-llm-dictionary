@@ -58,6 +58,73 @@
     "headword": "de kat",
     "lemma": "kat",
     "reading": null,
+    "ipa": "/kɑt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐈",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "cat",
+    "primaryGloss": "cat",
+    "emotion": "affectionate and warm, thinking of a soft pet",
+    "notes": [
+      "In everyday spoken Dutch, 'de poes' is also very commonly used for a pet cat."
+    ],
+    "senses": [
+      {
+        "id": "jcquz4l623oez6w",
+        "order": 0,
+        "definition": "A small furry domestic animal with four legs, a tail, and whiskers, often kept as a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐈",
+        "examples": [
+          {
+            "id": "l03ps8btblji9a1",
+            "text": "De kat slaapt op de bank.",
+            "textLang": "nl",
+            "translation": "The cat is sleeping on the couch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and gentle, watching a sleeping pet",
+            "note": null,
+            "matchedForm": "kat",
+            "matchedTranslationForm": "cat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de kat",
+    "lemma": "kat",
+    "reading": null,
     "ipa": "/kat/",
     "pos": "noun",
     "gender": "common",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kat/",
+        "why": "Dutch short 'a' is transcribed /ɑ/, not /a/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de' because 'kat' is a common gender noun in Dutch.",
+        "why": "Restates the gender and article already shown in the header."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'de kat' used in certain regional or nautical contexts",
+        "why": "Vague filler warning about obscure senses a beginner will never meet."
+      }
+    ],
+    "growth": 0.678
   }
 }

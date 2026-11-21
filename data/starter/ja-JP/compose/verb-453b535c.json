@@ -60,6 +60,97 @@
     "headword": "料理する",
     "lemma": "料理する",
     "reading": "りょうりする",
+    "ipa": "ɾʲoːɾi sɯɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cook; to prepare food",
+    "primaryGloss": "to cook",
+    "emotion": "a warm, busy feeling in the kitchen, focused on the task",
+    "notes": [
+      "Can also be used as 料理をする. For specific ingredients or dishes it is transitive (魚を料理する, 'to cook fish').",
+      "In everyday conversation, ご飯を作る (gohan o tsukuru, 'to make a meal') is often more natural than 料理する."
+    ],
+    "senses": [
+      {
+        "id": "9wexj47efd6a1ki",
+        "order": 0,
+        "definition": "To prepare food for eating by cutting, seasoning, or heating ingredients.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook",
+              "to prepare a meal"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "qq80scm2bkxeuer",
+            "text": "毎日自分で料理する。",
+            "textLang": "ja",
+            "translation": "I cook for myself every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and self-sufficient, feeling settled",
+            "note": null,
+            "matchedForm": "料理する",
+            "matchedTranslationForm": "cook"
+          },
+          {
+            "id": "x2t9em5fnijfjj5",
+            "text": "週末は家族のために料理する。",
+            "textLang": "ja",
+            "translation": "I cook for my family on the weekends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and thoughtful, looking forward to sharing a meal",
+            "note": null,
+            "matchedForm": "料理する",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "料理する",
+    "lemma": "料理する",
+    "reading": "りょうりする",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -144,5 +235,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To make food hot and ready to eat.",
+        "why": "Inaccurate: 料理する includes preparing cold dishes (e.g., sashimi, salad), not just heating food."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "This verb acts like a suru-verb, meaning you can also use",
+        "why": "Wordy and uses romaji; misses that ご飯を作る is more common in daily speech."
+      }
+    ],
+    "growth": 0.981
   }
 }

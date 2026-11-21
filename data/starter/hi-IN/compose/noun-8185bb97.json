@@ -62,6 +62,114 @@
     "headword": "मछली",
     "lemma": "मछली",
     "reading": null,
+    "ipa": "/mətʃʰ.liː/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fish",
+    "primaryGloss": "fish",
+    "emotion": "matter-of-fact and neutral, naming a common animal or ingredient",
+    "notes": [
+      "Takes the regular feminine plural मछलियाँ (machliyā̃) when referring to living fish, and is uncountable when referring to food."
+    ],
+    "senses": [
+      {
+        "id": "78czhq4a5thpfjz",
+        "order": 0,
+        "definition": "An animal that lives in water, breathes through gills, and swims with fins.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "nvgw3ykp4pimgdq",
+            "text": "नदी में बहुत सारी मछलियाँ हैं।",
+            "textLang": "hi",
+            "translation": "There are many fish in the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, pointing out something in nature",
+            "note": null,
+            "matchedForm": "मछलियाँ",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m968n1gwznh1emn",
+        "order": 1,
+        "definition": "The flesh of a fish eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "fxe0tuuwdh773yx",
+            "text": "मैंने आज रात खाने में मछली बनाई।",
+            "textLang": "hi",
+            "translation": "I made fish for dinner tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and satisfied, describing a prepared meal",
+            "note": null,
+            "matchedForm": "मछली",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "मछली",
+    "lemma": "मछली",
+    "reading": null,
     "ipa": "/mətʃ.liː/",
     "pos": "noun",
     "gender": "feminine",
@@ -163,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mətʃ.liː/",
+        "why": "छ is aspirated /tʃʰ/, not unaspirated /tʃ/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Māchlī is used both for the live creature swimming in water and",
+        "why": "Wrong romanization 'Māchlī' (implies long ā) and filler note repeating the two senses."
+      }
+    ],
+    "growth": 0.87
   }
 }

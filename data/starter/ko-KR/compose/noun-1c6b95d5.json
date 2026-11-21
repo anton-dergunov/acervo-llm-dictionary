@@ -58,6 +58,115 @@
     "headword": "불",
     "lemma": "불",
     "reading": null,
+    "ipa": "pul",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "fire; light",
+    "primaryGloss": "fire",
+    "emotion": "flickering, energetic, and slightly dangerous, commanding attention",
+    "notes": [
+      "Use '불을 켜다' (turn on) and '불을 끄다' (turn off/put out) for both electric lights and a fire or stove flame."
+    ],
+    "senses": [
+      {
+        "id": "ulmm69xr2uawkbq",
+        "order": 0,
+        "definition": "Flames that produce light and heat when something burns, or an accidental fire.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "fire",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "nibzzqoyr0d3lvv",
+            "text": "캠핑장에서 불을 피웠어요.",
+            "textLang": "ko",
+            "translation": "We built a fire at the campsite.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "불",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a4xxfnnrjza4o54",
+        "order": 1,
+        "definition": "Electric lighting in a room or building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lights"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "dlawe3lo2oschjt",
+            "text": "방이 어두우니까 불 좀 켜 주세요.",
+            "textLang": "ko",
+            "translation": "The room is dark, so please turn on the light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "불",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "불",
+    "lemma": "불",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -118,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "light, stove, heater",
+        "why": "'불' does not mean 'stove' or 'heater'; it means electric light or stove flame."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fire; light; stove",
+        "why": "'불' does not mean 'stove'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing common collocations like '불을 켜다/끄다' (to turn on/off the light or stove)."
+      }
+    ],
+    "growth": 0.938
   }
 }

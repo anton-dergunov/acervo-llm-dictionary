@@ -58,6 +58,156 @@
     "headword": "a luz",
     "lemma": "luz",
     "reading": null,
+    "ipa": "/ˈlus/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "light; electricity",
+    "primaryGloss": "light",
+    "emotion": "a warm and appreciative sense of clarity and relief after darkness",
+    "notes": [
+      "The plural is 'as luzes'. To say 'turn on/off the light', use 'acender a luz' and 'apagar a luz'."
+    ],
+    "senses": [
+      {
+        "id": "877je5mrh6jbl5y",
+        "order": 0,
+        "definition": "The brightness from the sun, fire, or lamps that allows us to see.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light"
+            ]
+          }
+        ],
+        "domain": "brightness",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "4ra7mu1tc0tpfj6",
+            "text": "Gosto de ler com a luz do sol.",
+            "textLang": "pt",
+            "translation": "I like to read by the light of the sun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "luz",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "80gh023z5r2600d",
+        "order": 1,
+        "definition": "An electric lamp or light fixture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lamp"
+            ]
+          }
+        ],
+        "domain": "lamp",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "n32g3hnh4y7cmj3",
+            "text": "Apague a luz antes de sair do quarto.",
+            "textLang": "pt",
+            "translation": "Turn off the light before leaving the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, giving a simple household instruction",
+            "note": null,
+            "matchedForm": "luz",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xwuukszivsuelc3",
+        "order": 2,
+        "definition": "Electrical power supplied to a home or building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "electricity",
+              "power",
+              "light"
+            ]
+          }
+        ],
+        "domain": "electricity",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "oykmt3ba7n34dui",
+            "text": "A conta de luz veio muito cara este mês.",
+            "textLang": "pt",
+            "translation": "The electricity bill was very expensive this month.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "luz",
+            "matchedTranslationForm": "electricity"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a luz",
+    "lemma": "luz",
+    "reading": null,
     "ipa": "/ˈluʃ/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈluʃ/",
+        "why": "Uses European/Carioca /ʃ/; standard general Brazilian IPA is /ˈlus/ or /ˈlujs/."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Apague a luz antes de sair do quarto.",
+        "why": "Turning off a room light illustrates sense 1 (electric light/lamp), not sense 0 (general brightness)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense of household electricity/power ('conta de luz', 'faltou luz')."
+      }
+    ],
+    "growth": 1.17
   }
 }

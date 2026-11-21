@@ -59,6 +59,96 @@
     "language": "ja",
     "headword": "見つける",
     "lemma": "見つける",
+    "reading": "みつける",
+    "ipa": "mitsɯkeɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to find; to discover; to spot",
+    "primaryGloss": "to find",
+    "emotion": null,
+    "notes": [
+      "Ichidan transitive verb (見つけます). Its intransitive pair is 見つかる (みつかる, to be found), which marks the found item with が."
+    ],
+    "senses": [
+      {
+        "id": "3vohhfgt5wxh3q3",
+        "order": 0,
+        "definition": "To find something you were looking for, or to spot something by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to find",
+              "to discover",
+              "to spot"
+            ]
+          }
+        ],
+        "domain": "finding",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "ww98wf13guvcnig",
+            "text": "なくした鍵を見つけた。",
+            "textLang": "ja",
+            "translation": "I found the lost key.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "見つけた",
+            "matchedTranslationForm": "found"
+          },
+          {
+            "id": "pv4lppq4gwxt4r9",
+            "text": "公園で珍しい鳥を見つけた。",
+            "textLang": "ja",
+            "translation": "I spotted a rare bird in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited, pointing out something interesting to a companion",
+            "note": null,
+            "matchedForm": "見つけた",
+            "matchedTranslationForm": "spotted"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "見つける",
+    "lemma": "見つける",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -164,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing required hiragana reading for a Japanese word containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(encounter) To happen to see or encounter something.",
+        "why": "Finding a lost item and spotting something are shades of one everyday meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "implies an active effort to find something",
+        "why": "見つける can also be used for finding or spotting something by chance."
+      }
+    ],
+    "growth": 0.761
   }
 }

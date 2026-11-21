@@ -71,6 +71,71 @@
     "shortGloss": "yellow",
     "primaryGloss": "yellow",
     "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "e1e4gefe8uiit4s",
+        "order": 0,
+        "definition": "Having the color of a ripe lemon or a sunflower.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "j5l5blngnjsha5j",
+            "text": "Die Zitrone ist gelb.",
+            "textLang": "de",
+            "translation": "The lemon is yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and simple",
+            "note": null,
+            "matchedForm": "gelb",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "gelb",
+    "lemma": "gelb",
+    "reading": null,
+    "ipa": "/ɡɛlp/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow",
+    "primaryGloss": "yellow",
+    "emotion": null,
     "notes": [
       "Gelb is a primary color. It is often used to describe things that are bright or sunny, but keep in mind that in some contexts, it can also describe jaundice or a sickly complexion."
     ],
@@ -118,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of a lemon or a sunflower.",
+        "why": "Defined as a noun ('The color...') instead of an adjective ('Having the color...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Gelb is a primary color. It is often used to describe",
+        "why": "Encyclopedic filler not useful for an A2 learner."
+      }
+    ],
+    "growth": 0.375
   }
 }

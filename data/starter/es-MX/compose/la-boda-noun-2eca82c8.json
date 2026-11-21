@@ -58,6 +58,73 @@
     "headword": "la boda",
     "lemma": "boda",
     "reading": null,
+    "ipa": "/ˈbo.da/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💍",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "wedding",
+    "primaryGloss": "wedding",
+    "emotion": "joyful and celebratory, anticipating a special day of gathering and love",
+    "notes": [
+      "'Boda' refers to the wedding ceremony and reception (also often used in the plural, 'las bodas', or in phrases like 'aniversario de bodas'). For the legal institution or state of being married, use 'el matrimonio'."
+    ],
+    "senses": [
+      {
+        "id": "jq5p6028pk4jfc4",
+        "order": 0,
+        "definition": "The ceremony and celebration when two people get married.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wedding"
+            ]
+          }
+        ],
+        "domain": "ceremony",
+        "emoji": "👰",
+        "examples": [
+          {
+            "id": "oh5361shtya9m5w",
+            "text": "La boda de mi hermana será en la playa.",
+            "textLang": "es",
+            "translation": "My sister's wedding will be on the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and warm, sharing good news with a friend",
+            "note": null,
+            "matchedForm": "boda",
+            "matchedTranslationForm": "wedding"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la boda",
+    "lemma": "boda",
+    "reading": null,
     "ipa": "/ˈβo.ða/",
     "pos": "noun",
     "gender": "feminine",
@@ -158,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(status) The legal union between two people.",
+        "why": "'Boda' means the wedding event, not the legal state of marriage ('matrimonio')."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ellos celebran el quinto aniversario de su matrimonio.",
+        "why": "The example does not contain the headword 'boda'."
+      }
+    ],
+    "growth": 0.634
   }
 }

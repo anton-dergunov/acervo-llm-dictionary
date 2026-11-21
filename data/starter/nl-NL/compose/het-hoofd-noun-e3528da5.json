@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "head; leader",
+    "primaryGloss": "head",
+    "emotion": "thoughtful and calm, focusing on a clear idea",
+    "notes": [
+      "Often used as the prefix 'hoofd-' in compound nouns to mean 'main' or 'chief', such as 'hoofdstraat' (main street) or 'hoofdstad' (capital city).",
+      "Do not confuse with 'kop', which is the normal word for an animal's head, and is very informal or rough when used for a person's head."
+    ],
+    "senses": [
+      {
+        "id": "xx1ukudu62684lm",
+        "order": 0,
+        "definition": "The top part of the human body that contains the eyes, nose, mouth, and brain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "kljxnjuqn46xco2",
+            "text": "Hij schudde zijn hoofd om nee te zeggen.",
+            "textLang": "nl",
+            "translation": "He shook his head to say no.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quietly determined, firmly refusing an offer",
+            "note": null,
+            "matchedForm": "hoofd",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ypv4r2kimghk50o",
+        "order": 1,
+        "definition": "The person in charge of an organization, school, or department.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head",
+              "director",
+              "chief"
+            ]
+          }
+        ],
+        "domain": "leader",
+        "emoji": "👔",
+        "examples": [
+          {
+            "id": "t3jg2aiqeaueuoi",
+            "text": "Zij is het hoofd van de afdeling.",
+            "textLang": "nl",
+            "translation": "She is the head of the department.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and professional, stating a clear fact",
+            "note": null,
+            "matchedForm": "hoofd",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het hoofd",
+    "lemma": "hoofd",
+    "reading": null,
+    "ipa": "/ɦoːft/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "head; leader; main part",
     "primaryGloss": "head",
     "emotion": "thoughtful and calm, focusing on a clear idea",
@@ -201,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(main) The most important or central part of something. | glosses en: main",
+        "why": "'Hoofd-' means 'main' only as a compound prefix ('hoofdstraat'), not as a standalone noun."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "Dat staat in de hoofdstraat van de stad.",
+        "why": "Uses the compound 'hoofdstraat' rather than the noun 'hoofd'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "head; leader; main part",
+        "why": "Includes 'main part', which belongs to the invalid sense."
+      }
+    ],
+    "growth": 1.146
   }
 }

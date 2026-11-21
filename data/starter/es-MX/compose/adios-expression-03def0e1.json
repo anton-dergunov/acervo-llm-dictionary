@@ -68,6 +68,54 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "goodbye; bye",
+    "primaryGloss": "goodbye",
+    "emotion": null,
+    "notes": [
+      "In Mexico, 'adiós' can sound quite final with friends or family; for everyday partings, 'hasta luego' or 'nos vemos' are more common.",
+      "Also used in Mexico as a polite greeting when walking past someone in the street without stopping."
+    ],
+    "senses": [
+      {
+        "id": "lqn6txqel36zivf",
+        "order": 0,
+        "definition": "Said when leaving someone or when someone is leaving.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "goodbye",
+              "bye",
+              "farewell"
+            ]
+          }
+        ],
+        "domain": "parting",
+        "emoji": "👋",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "adiós",
+    "lemma": "adiós",
+    "reading": null,
+    "ipa": "/aˈðjos/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👋",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "goodbye; see you later",
     "primaryGloss": "goodbye",
     "emotion": null,
@@ -99,5 +147,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "While it means 'goodbye', it is often used as a casual 'see",
+        "why": "Contradicts note[1]; in Mexico 'adiós' is not a casual 'see you later' with friends."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "goodbye; see you later",
+        "why": "'See you later' is misleading for 'adiós', which literally and typically means 'goodbye'."
+      }
+    ],
+    "growth": 0.72
   }
 }

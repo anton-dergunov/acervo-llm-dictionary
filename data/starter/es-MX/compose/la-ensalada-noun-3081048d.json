@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "salad",
+    "primaryGloss": "salad",
+    "emotion": "fresh and appetizing, getting ready for a healthy meal",
+    "notes": [
+      "Followed by 'de' to name the main ingredient, e.g., 'ensalada de pollo' (chicken salad) or 'ensalada de frutas' (fruit salad)."
+    ],
+    "senses": [
+      {
+        "id": "ltdhx05fh8p56wk",
+        "order": 0,
+        "definition": "A dish of raw or cooked vegetables, often served cold with a dressing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salad"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "3a33gzh09ueruod",
+            "text": "Voy a preparar una ensalada fresca para la cena.",
+            "textLang": "es",
+            "translation": "I am going to prepare a fresh salad for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and upbeat, looking forward to cooking",
+            "note": null,
+            "matchedForm": "ensalada",
+            "matchedTranslationForm": "salad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la ensalada",
+    "lemma": "ensalada",
+    "reading": null,
+    "ipa": "/en.saˈla.ða/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "salad; mix",
     "primaryGloss": "salad",
     "emotion": "fresh and appetizing, getting ready for a healthy meal",
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A messy mixture or confused assortment of different things.",
+        "why": "Figurative sense is marginal for an A2 beginner; keep only the food sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often ordered as a side dish (guarnición) alongside meat or chicken",
+        "why": "Obvious trivia about salads, not a useful language note."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also be used colloquially to mean a confusing mix",
+        "why": "Merely restates the second sense."
+      }
+    ],
+    "growth": 0.577
   }
 }

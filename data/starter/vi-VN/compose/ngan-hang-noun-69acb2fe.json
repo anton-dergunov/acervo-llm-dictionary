@@ -60,6 +60,73 @@
     "headword": "ngân hàng",
     "lemma": "ngân hàng",
     "reading": null,
+    "ipa": "/ŋən˧˧ haːŋ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bank",
+    "primaryGloss": "bank",
+    "emotion": "busy and purposeful, walking in to deposit some cash",
+    "notes": [
+      "Takes the classifier 'nhà' or 'cái' only rarely; usually used without a classifier."
+    ],
+    "senses": [
+      {
+        "id": "3oiora1yx3caumu",
+        "order": 0,
+        "definition": "An organization or building where people keep, borrow, and exchange money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "57yh0i61lv74irj",
+            "text": "Tôi cần đến ngân hàng để rút tiền mặt.",
+            "textLang": "vi",
+            "translation": "I need to go to the bank to withdraw cash.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and practical, stating a necessary errand",
+            "note": null,
+            "matchedForm": "ngân hàng",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ngân hàng",
+    "lemma": "ngân hàng",
+    "reading": null,
     "ipa": "/ŋən˧ t͡ɕaːŋ˨˩/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋən˧ t͡ɕaːŋ˨˩/",
+        "why": "Wrong consonant /t͡ɕ/ for 'hàng'; in Hanoi Vietnamese it is /haːŋ˨˩/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A place or a storehouse where things like data, blood, or organs",
+        "why": "Secondary compound usage ('blood bank'); unnecessary separate sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bank; depository",
+        "why": "'Depository' is unnatural and overly technical for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to mean both the financial institution and the physical building",
+        "why": "Works the same way as English 'bank'; no special learner note needed."
+      }
+    ],
+    "growth": 0.53
   }
 }

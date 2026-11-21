@@ -72,6 +72,114 @@
     "primaryGloss": "leaf",
     "emotion": "calm and observational, noticing nature outdoors",
     "notes": [
+      "The plural is листья for plant leaves (genitive листьев), but листы for sheets of paper or metal (genitive листов)."
+    ],
+    "senses": [
+      {
+        "id": "bawglwb4ik9bn57",
+        "order": 0,
+        "definition": "A flat green part of a plant that grows from a stem or branch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "iq5n9duztkxecum",
+            "text": "Жёлтый осенний лист упал с дерева на землю.",
+            "textLang": "ru",
+            "translation": "A yellow autumn leaf fell from the tree to the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "лист",
+            "matchedTranslationForm": "leaf"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8w4rke0e7xuz1yb",
+        "order": 1,
+        "definition": "A thin, flat piece of paper or other material.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheet",
+              "sheet of paper"
+            ]
+          }
+        ],
+        "domain": "paper",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "jhwpj9g2rp9c8zr",
+            "text": "Мне нужен чистый лист бумаги.",
+            "textLang": "ru",
+            "translation": "I need a clean sheet of paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "лист",
+            "matchedTranslationForm": "sheet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "лист",
+    "lemma": "лист",
+    "reading": null,
+    "ipa": "/lʲist/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "leaf; sheet of paper",
+    "primaryGloss": "leaf",
+    "emotion": "calm and observational, noticing nature outdoors",
+    "notes": [
       "The plural can be either листья (for plant leaves) or листы (for sheets of paper).",
       "Do not confuse 'лист' (a single leaf or sheet) with 'листва' (foliage as a mass)."
     ],
@@ -160,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Осенний листок упал с дерева на землю.",
+        "why": "Uses a different lemma (the diminutive листок) instead of the headword лист."
+      }
+    ],
+    "growth": 0.76
   }
 }

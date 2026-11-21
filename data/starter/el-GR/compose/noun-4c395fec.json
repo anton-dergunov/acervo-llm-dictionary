@@ -68,6 +68,113 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "minute; cent",
+    "primaryGloss": "minute",
+    "emotion": "a practical and precise focus on managing daily schedules",
+    "notes": [
+      "Do not confuse with 'λεπτό', the neuter singular form of the adjective 'λεπτός' (thin, delicate)."
+    ],
+    "senses": [
+      {
+        "id": "jnkeufjk3izn7ds",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏲️",
+        "examples": [
+          {
+            "id": "lqcnn4jxqregnvy",
+            "text": "Περίμενε ένα λεπτό, παρακαλώ.",
+            "textLang": "el",
+            "translation": "Wait one minute, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and mildly hurried, asking for a brief pause",
+            "note": null,
+            "matchedForm": "λεπτό",
+            "matchedTranslationForm": "minute"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n3zfdqoflepgz2l",
+        "order": 1,
+        "definition": "A unit of money equal to one hundredth of a euro.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cent"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "🪙",
+        "examples": [
+          {
+            "id": "i8240ar1chxrcde",
+            "text": "Κάνει πενήντα λεπτά.",
+            "textLang": "el",
+            "translation": "It costs fifty cents.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and transactional, stating a price",
+            "note": null,
+            "matchedForm": "λεπτά",
+            "matchedTranslationForm": "cents"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το λεπτό",
+    "lemma": "λεπτό",
+    "reading": null,
+    "ipa": "/leˈpto/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏲️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "minute; thin; delicate",
     "primaryGloss": "minute",
     "emotion": "a practical and precise focus on managing daily schedules",
@@ -200,5 +307,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(size) Having little thickness; not wide or heavy.",
+        "why": "Adjective sense of 'λεπτός' mixed into a noun entry ('το λεπτό')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "minute; thin; delicate",
+        "why": "Includes adjective meanings ('thin; delicate') instead of the noun sense 'cent'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, it almost always refers to time (a minute) or",
+        "why": "Restates the senses."
+      }
+    ],
+    "growth": 0.602
   }
 }

@@ -58,6 +58,96 @@
     "headword": "dimenticare",
     "lemma": "dimenticare",
     "reading": null,
+    "ipa": "/di.men.tiˈka.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to forget",
+    "primaryGloss": "to forget",
+    "emotion": "trying hard to pull a memory back into focus, slightly frustrated",
+    "notes": [
+      "Often used reflexively as 'dimenticarsi' + 'di' before a noun or infinitive (e.g., 'mi sono dimenticato di chiudere la porta').",
+      "Spelling takes an 'h' before 'i' and 'e' to keep the hard /k/ sound (tu dimentichi, che io dimentichi)."
+    ],
+    "senses": [
+      {
+        "id": "d0x7yvcb1qf87xj",
+        "order": 0,
+        "definition": "To fail to remember something, or to leave something behind by mistake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to forget",
+              "to leave behind"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "eo50ejbpo2w8rxq",
+            "text": "Ho dimenticato il suo nome.",
+            "textLang": "it",
+            "translation": "I forgot his name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dimenticato",
+            "matchedTranslationForm": "forgot"
+          },
+          {
+            "id": "hk4k0k2xr6cyfkk",
+            "text": "Ho dimenticato le chiavi sul tavolo.",
+            "textLang": "it",
+            "translation": "I left the keys on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "realizing a mistake suddenly with a slight groan",
+            "note": null,
+            "matchedForm": "dimenticato",
+            "matchedTranslationForm": "left"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "dimenticare",
+    "lemma": "dimenticare",
+    "reading": null,
     "ipa": "/dimen.tiˈka.re/",
     "pos": "verb",
     "gender": null,
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Failing to remember and leaving something behind are shades of 'to forget'; example 0 clashes."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ho dimenticato le chiavi sul tavolo.",
+        "why": "Example under sense 0 (memory) actually shows sense 1 (leaving belongings behind)."
+      }
+    ],
+    "growth": 0.993
   }
 }

@@ -72,6 +72,76 @@
     "primaryGloss": "tired",
     "emotion": "a soft, weary sigh, as if letting out a long day",
     "notes": [
+      "Usually used after a verb ('ik ben moe'). Before a noun, it takes the inflected form 'moede' or is replaced by 'vermoeid' ('een vermoeide glimlach').",
+      "To say you are tired after an activity, use 'moe van' ('Ik ben moe van het lopen'). For being fed up with something, 'iets beu zijn' or 'ergens genoeg van hebben' is more natural than 'iets moe zijn'."
+    ],
+    "senses": [
+      {
+        "id": "qs9fedo1e4oyxqw",
+        "order": 0,
+        "definition": "In need of sleep or rest; lacking energy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tired",
+              "weary",
+              "sleepy"
+            ]
+          }
+        ],
+        "domain": "tiredness",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "a37opo4rf952web",
+            "text": "Ik ben erg moe na een lange werkdag.",
+            "textLang": "nl",
+            "translation": "I am very tired after a long workday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and ready to head home for the night",
+            "note": null,
+            "matchedForm": "moe",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "moe",
+    "lemma": "moe",
+    "reading": null,
+    "ipa": "/mu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "tired; weary",
+    "primaryGloss": "tired",
+    "emotion": "a soft, weary sigh, as if letting out a long day",
+    "notes": [
       "Used to express that you need sleep or rest. Do not confuse this with 'moeizaam' (laborious/difficult).",
       "In Dutch, you can say 'ik ben moe' (I am tired). To express 'tired of' something, use 'moe van': 'Ik ben moe van het wachten' (I am tired of waiting)."
     ],
@@ -162,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij is moe van het constant zeuren.",
+        "why": "Ungrammatical and unnatural Dutch; 'fed up with X' is 'iets moe/beu zijn' or 'genoeg hebben van'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to express that you need sleep or rest.",
+        "why": "Restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.933
   }
 }

@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to kiss",
+    "primaryGloss": "kiss",
+    "emotion": "tender and affectionate, a soft smile on the lips",
+    "notes": [
+      "Also commonly used in the uncontracted present form φιλάω. Aorist (simple past): φίλησα.",
+      "Do not confuse in speech with φυλώ / φυλάω (pronounced identically, /fiˈlo/), which means 'to guard' or 'to keep'."
+    ],
+    "senses": [
+      {
+        "id": "jp6ymg3qzop6ryp",
+        "order": 0,
+        "definition": "To touch someone or something with your lips as a sign of love, affection, or greeting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "kiss"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "💋",
+        "examples": [
+          {
+            "id": "jcl60f6fxrwozgo",
+            "text": "Τον φιλώ στο μάγουλο.",
+            "textLang": "el",
+            "translation": "I kiss him on the cheek.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, showing comfort and closeness",
+            "note": null,
+            "matchedForm": "φιλώ",
+            "matchedTranslationForm": "kiss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "φιλώ",
+    "lemma": "φιλώ",
+    "reading": null,
+    "ipa": "/fiˈlo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to kiss; to love",
     "primaryGloss": "kiss",
     "emotion": "tender and affectionate, a soft smile on the lips",
@@ -160,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To feel deep affection or romantic love for someone.",
+        "why": "In Modern Greek, φιλώ only means 'to kiss'; 'to love' is Ancient Greek φιλέω."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Τον φιλώ πολύ σαν αδελφό μου.",
+        "why": "Means 'I kiss him a lot like my brother', not 'I love him'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "this is an active verb for an action or a deep, established feeling.",
+        "why": "False claim that φιλώ expresses a deep feeling in Modern Greek."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to kiss; to love",
+        "why": "Includes the false sense 'to love'."
+      }
+    ],
+    "growth": 0.512
   }
 }

@@ -68,6 +68,116 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "solo (triste); solitario",
+    "primaryGloss": "solo",
+    "emotion": "quiet and downcast, feeling a heavy absence of people",
+    "notes": [
+      "No confundas 'lonely' (triste por falta de compañía, 'sentirse solo') con 'alone' (físicamente sin nadie más, 'estar solo')."
+    ],
+    "senses": [
+      {
+        "id": "qsfbcndjylkz5ja",
+        "order": 0,
+        "definition": "Triste porque se está sin compañía y se echa de menos a otras personas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "solo",
+              "solitario"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "🥺",
+        "examples": [
+          {
+            "id": "zhpl4glj2taj7u8",
+            "text": "He felt very lonely in the new city after moving away from his friends.",
+            "textLang": "en",
+            "translation": "Se sintió muy solo en la nueva ciudad después de alejarse de sus amigos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "melancholic and quiet, missing home and old friends",
+            "note": null,
+            "matchedForm": "lonely",
+            "matchedTranslationForm": "solo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zs5m6fwhw4qif5v",
+        "order": 1,
+        "definition": "Dicho de un lugar: apartado y por donde pasa poca gente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "solitario",
+              "apartado",
+              "desierto"
+            ]
+          }
+        ],
+        "domain": "lugar",
+        "emoji": "🛤️",
+        "examples": [
+          {
+            "id": "b0lk106b1hp14ax",
+            "text": "They walked down a lonely road far away from the town.",
+            "textLang": "en",
+            "translation": "Caminaron por un camino solitario muy lejos del pueblo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful yet slightly eerie, surrounded by quiet nature",
+            "note": null,
+            "matchedForm": "lonely",
+            "matchedTranslationForm": "solitario"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "lonely",
+    "lemma": "lonely",
+    "reading": null,
+    "ipa": "/ˈloʊnli/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥺",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "solitario; triste por estar solo",
     "primaryGloss": "solitario",
     "emotion": "quiet and downcast, feeling a heavy absence of people",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Se sintió muy solitario en la nueva ciudad",
+        "why": "Unnatural calque in Spanish: 'sentirse solitario' is not used for feeling lonely; it is 'sentirse solo'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Lugar apartado donde hay poca gente o es difícil llegar.",
+        "why": "Adjective defined as a noun ('Lugar apartado...')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "solitario, sentirse solo",
+        "why": "In Spanish, 'estar/sentirse solo' is the standard translation for feeling lonely; 'solitario' means solitary/lone."
+      }
+    ],
+    "growth": 0.914
   }
 }

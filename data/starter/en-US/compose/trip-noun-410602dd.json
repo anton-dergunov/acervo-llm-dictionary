@@ -68,6 +68,74 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "viaje, excursión",
+    "primaryGloss": "viaje",
+    "emotion": "anticipatory and bright, thinking about a change of scenery",
+    "notes": [
+      "No confundas 'trip' con 'travel'. 'Travel' suele usarse como verbo (viajar) o sustantivo incontable para la actividad de viajar en general, mientras que 'a trip' es un viaje concreto de ida y vuelta (ej. 'Have a good trip!')."
+    ],
+    "senses": [
+      {
+        "id": "qzu0dce69rum4fl",
+        "order": 0,
+        "definition": "Desplazamiento que se hace a un lugar y de regreso, por placer, trabajo u otro motivo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "viaje",
+              "excursión"
+            ]
+          }
+        ],
+        "domain": "viajes",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "qhllmbsoqrs1omf",
+            "text": "We are planning a trip to the beach next summer.",
+            "textLang": "en",
+            "translation": "Estamos planeando un viaje a la playa el próximo verano.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "entusiasta y alegre, compartiendo planes futuros con ilusión",
+            "note": null,
+            "matchedForm": "trip",
+            "matchedTranslationForm": "viaje"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "trip",
+    "lemma": "trip",
+    "reading": null,
+    "ipa": "/trɪp/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "viaje; tropezón",
     "primaryGloss": "viaje",
     "emotion": "anticipatory and bright, thinking about a change of scenery",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "He had a bad trip on the stairs.",
+        "why": "'Bad trip' means a bad drug experience; 'trip' as a stumble is rare as a noun."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Acción de perder el equilibrio al golpearse el pie con algo.",
+        "why": "'Trip' as a noun for a stumble is rare; everyday English uses the verb."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "En contextos informales, 'trip' también puede referirse a un tropezón o caída",
+        "why": "Restates sense 1 and falsely claims it is informal."
+      }
+    ],
+    "growth": 0.656
   }
 }

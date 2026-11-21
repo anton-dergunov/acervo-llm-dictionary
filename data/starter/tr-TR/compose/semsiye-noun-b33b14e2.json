@@ -58,6 +58,74 @@
     "headword": "şemsiye",
     "lemma": "şemsiye",
     "reading": null,
+    "ipa": "/ʃemsiˈje/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☔",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "umbrella",
+    "primaryGloss": "umbrella",
+    "emotion": "hurried and cautious, stepping carefully through puddles on a rainy street",
+    "notes": [
+      "Takes the buffer consonant 'y' or 'n' when suffixes beginning with a vowel are added (e.g., 'şemsiyeyi' - the umbrella, 'şemsiyesini' - his/her umbrella)."
+    ],
+    "senses": [
+      {
+        "id": "os1839ckohsm18e",
+        "order": 0,
+        "definition": "A folding object that you hold over your head to protect yourself from rain or sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "umbrella",
+              "parasol"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "☔",
+        "examples": [
+          {
+            "id": "fwmi7yg84gu56rg",
+            "text": "Yağmur başladığı için şemsiyesini açtı.",
+            "textLang": "tr",
+            "translation": "He opened his umbrella because it started to rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "şemsiyesini",
+            "matchedTranslationForm": "umbrella"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "şemsiye",
+    "lemma": "şemsiye",
+    "reading": null,
     "ipa": "/ʃæm.siˈje/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yağmur başladığı için şemsiye mi açtı.",
+        "why": "Ungrammatical: 'şemsiye mi' is a question particle; 'his umbrella' in accusative is 'şemsiyesini'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While it is carried like an accessory, şemsiye belongs to weather protection",
+        "why": "Trivial semantic categorization of no practical use to a language learner."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʃæm.siˈje/",
+        "why": "Standard Turkish IPA uses /e/ here: /ʃemsiˈje/."
+      }
+    ],
+    "growth": 1.126
   }
 }

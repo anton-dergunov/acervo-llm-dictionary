@@ -72,6 +72,95 @@
     "primaryGloss": "year",
     "emotion": "reflecting on the passage of time, thoughtful and unhurried",
     "notes": [
+      "Placed directly before a number to name a calendar year: 'tahun 2000' (in 2000).",
+      "Do not confuse with 'tahu' (to know, or tofu)."
+    ],
+    "senses": [
+      {
+        "id": "zevn0ef1c5ombbp",
+        "order": 0,
+        "definition": "A period of twelve months, or a particular calendar year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "year"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "bhixz1tyd78ejni",
+            "text": "Saya tinggal di sini selama dua tahun.",
+            "textLang": "id",
+            "translation": "I have lived here for two years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and settled, stating a simple fact about one's life",
+            "note": null,
+            "matchedForm": "tahun",
+            "matchedTranslationForm": "years"
+          },
+          {
+            "id": "lophup1dtzse9uj",
+            "text": "Dia lahir pada tahun dua ribu.",
+            "textLang": "id",
+            "translation": "She was born in the year 2000.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, recalling a specific date",
+            "note": null,
+            "matchedForm": "tahun",
+            "matchedTranslationForm": "year"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tahun",
+    "lemma": "tahun",
+    "reading": null,
+    "ipa": "/ˈtahun/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "year",
+    "primaryGloss": "year",
+    "emotion": "reflecting on the passage of time, thoughtful and unhurried",
+    "notes": [
       "To say 'for years' (duration), use 'selama bertahun-tahun'.",
       "Do not confuse with 'tahu' (to know)."
     ],
@@ -159,5 +248,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A period of twelve months. ... A numbered year in the calendar",
+        "why": "Duration vs. calendar date are shades of one meaning ('year'); combine them."
+      }
+    ],
+    "growth": 0.93
   }
 }

@@ -59,6 +59,137 @@
     "lemma": "ต่างประเทศ",
     "reading": null,
     "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "foreign country; abroad; foreign",
+    "primaryGloss": "abroad",
+    "emotion": "matter-of-fact and informative, like telling someone your plans or your origin",
+    "notes": [
+      "Used directly after verbs like ไป (go) or อยู่ (be at) to mean 'abroad' without needing a preposition, or placed after another noun to mean 'foreign' (e.g. นักท่องเที่ยวต่างประเทศ, 'foreign tourist')."
+    ],
+    "senses": [
+      {
+        "id": "ve80p2ays0w0844",
+        "order": 0,
+        "definition": "A country other than one's own; abroad.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "abroad",
+              "foreign country",
+              "overseas"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "q9in4ctglc0uqgc",
+            "text": "ฉันอยากไปเที่ยวต่างประเทศปีหน้า",
+            "textLang": "th",
+            "translation": "I want to travel abroad next year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and hopeful, planning a future adventure",
+            "note": null,
+            "matchedForm": "ต่างประเทศ",
+            "matchedTranslationForm": "abroad"
+          },
+          {
+            "id": "5ut90oo2sf56bm6",
+            "text": "เขาสั่งซื้อสินค้ามาจากต่างประเทศ",
+            "textLang": "th",
+            "translation": "He ordered products from abroad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied, explaining where something came from",
+            "note": null,
+            "matchedForm": "ต่างประเทศ",
+            "matchedTranslationForm": "abroad"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3cptunk6de8ocq3",
+        "order": 1,
+        "definition": "Placed after a noun: from or relating to another country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foreign",
+              "international"
+            ]
+          }
+        ],
+        "domain": "origin",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "0zof7y8hndsr46d",
+            "text": "บริษัทนี้มีลูกค้าต่างประเทศเยอะ",
+            "textLang": "th",
+            "translation": "This company has many foreign customers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ต่างประเทศ",
+            "matchedTranslationForm": "foreign"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ต่างประเทศ",
+    "lemma": "ต่างประเทศ",
+    "reading": null,
+    "ipa": null,
     "pos": "adv",
     "gender": null,
     "register": "neutral",
@@ -160,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "ต่างประเทศ is a noun ('foreign country') that modifies nouns or follows prepositions/verbs, not an adverb."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "เขาสั่งซื้อสินค้ามาจากต่างประเทศ",
+        "why": "มาจากต่างประเทศ uses ต่างประเทศ as a noun ('a foreign country'), not as an attributive modifier ('foreign')."
+      }
+    ],
+    "growth": 1.314
   }
 }

@@ -72,6 +72,154 @@
     "primaryGloss": "day",
     "emotion": "looking up at a bright blue morning sky, feeling the fresh air",
     "notes": [
+      "When counting days (一天, 三天), 天 does not take a measure word before it. For calendar dates, use 号 (hào) or 日 (rì) instead."
+    ],
+    "senses": [
+      {
+        "id": "wearv056cw62tm7",
+        "order": 0,
+        "definition": "A period of twenty-four hours, or the daytime part of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "qhbf6mtvi5uqfnn",
+            "text": "他已经在北京住了三天了。",
+            "textLang": "zh",
+            "translation": "He has already lived in Beijing for three days.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflecting on a span of time that has passed quickly",
+            "note": null,
+            "matchedForm": "天",
+            "matchedTranslationForm": "days"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "51925sekofjq6yf",
+        "order": 1,
+        "definition": "The space above the earth where the sun, moon, and clouds appear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sky",
+              "heavens"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "x5fcaka1g8aiyye",
+            "text": "今天的蓝天真好看。",
+            "textLang": "zh",
+            "translation": "Today's blue sky is really pretty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciating a lovely afternoon with a clear view upwards",
+            "note": null,
+            "matchedForm": "天",
+            "matchedTranslationForm": "sky"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bhf6mag32wgsrqx",
+        "order": 2,
+        "definition": "The state of the air and atmosphere at a particular time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6n9o1lgjjvfe2er",
+            "text": "天太冷了，多穿点衣服吧。",
+            "textLang": "zh",
+            "translation": "The weather is too cold, put on some more clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "天",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "天",
+    "lemma": "天",
+    "reading": "tiān",
+    "ipa": "/tʰi̯ɛn˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "day; sky; weather",
+    "primaryGloss": "day",
+    "emotion": "looking up at a bright blue morning sky, feeling the fresh air",
+    "notes": [
       "天 refers both to the sky above and to the twenty-four hour period of a day, or just the daytime part of it.",
       "When counting days, 天 is often replaced by 号 when speaking about calendar dates."
     ],
@@ -160,5 +308,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "day; sky; weather",
+        "why": "Includes 'weather', which is missing from the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'weather' (e.g. 天很冷), which shortGloss itself lists."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "天 refers both to the sky above and to",
+        "why": "Merely restates the definitions of the senses."
+      }
+    ],
+    "growth": 1.149
   }
 }

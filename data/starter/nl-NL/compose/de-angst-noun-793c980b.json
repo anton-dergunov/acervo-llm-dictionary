@@ -72,6 +72,96 @@
     "primaryGloss": "fear",
     "emotion": "shaking and tense, whispering about what might happen in the dark",
     "notes": [
+      "Takes the preposition 'voor' to express what one is afraid of ('angst voor spinnen' — fear of spiders)."
+    ],
+    "senses": [
+      {
+        "id": "121tguubxvka1mn",
+        "order": 0,
+        "definition": "The feeling of being afraid or worried that something bad might happen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fear",
+              "anxiety",
+              "fright"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "y05bmpns3k93t2g",
+            "text": "De angst voor de hond hield hem tegen om naar binnen te gaan.",
+            "textLang": "nl",
+            "translation": "Fear of the dog kept him from going inside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and wary, backing away slowly",
+            "note": null,
+            "matchedForm": "angst",
+            "matchedTranslationForm": "Fear"
+          },
+          {
+            "id": "jkxrk03dzb8jv3r",
+            "text": "Ze voelde een diepe angst voor de toekomst.",
+            "textLang": "nl",
+            "translation": "She felt a deep anxiety about the future.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "heavy and troubled, thinking about uncertain days ahead",
+            "note": null,
+            "matchedForm": "angst",
+            "matchedTranslationForm": "anxiety"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de angst",
+    "lemma": "angst",
+    "reading": null,
+    "ipa": "/ɑŋst/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "fear; anxiety",
+    "primaryGloss": "fear",
+    "emotion": "shaking and tense, whispering about what might happen in the dark",
+    "notes": [
       "Angst is a common noun in Dutch, taking the article 'de'.",
       "It covers both momentary fear of a specific threat and general anxiety about the future."
     ],
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Angst is a common noun in Dutch, taking the article 'de'.",
+        "why": "Restates the gender and article already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Dutch 'angst' is a single concept covering both fear and anxiety; splitting is artificial."
+      }
+    ],
+    "growth": 0.769
   }
 }

@@ -68,6 +68,94 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to fly",
+    "primaryGloss": "to fly",
+    "emotion": "light and soaring, watching something lift up into the open sky",
+    "notes": [
+      "Can also take a destination directly as its object to mean traveling there by plane (e.g., 明天飞北京 — flying to Beijing tomorrow)."
+    ],
+    "senses": [
+      {
+        "id": "fr1wxl2q68jdzok",
+        "order": 0,
+        "definition": "To move through the air using wings or in an aircraft.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fly"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🦅",
+        "examples": [
+          {
+            "id": "3bvo2jevc287fzq",
+            "text": "小鸟在天上飞。",
+            "textLang": "zh",
+            "translation": "Little birds are flying in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "飞",
+            "matchedTranslationForm": "flying"
+          },
+          {
+            "id": "jkcb86vlr90iywc",
+            "text": "我明天飞上海。",
+            "textLang": "zh",
+            "translation": "I'm flying to Shanghai tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "飞",
+            "matchedTranslationForm": "flying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "飞",
+    "lemma": "飞",
+    "reading": "fēi",
+    "ipa": "/fei̯˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦅",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to fly; to hover; to pass quickly",
     "primaryGloss": "fly",
     "emotion": "light and soaring, watching something lift up into the open sky",
@@ -161,5 +249,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to fly; to hover; to pass quickly",
+        "why": "'to hover' is not in the senses and 飞 alone does not mean hover."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for animals or objects moving through the air and",
+        "why": "Simply repeats the definitions of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(speed) To pass or move very quickly.",
+        "why": "Figurative/compound use; '一天一下子就飞过去了' is unidiomatic in Mandarin."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "小鸟在蓝天飞。",
+        "why": "Missing locative particle; natural Mandarin is '小鸟在天上飞' or '在蓝天上飞'."
+      }
+    ],
+    "growth": 0.731
   }
 }

@@ -74,6 +74,74 @@
     "primaryGloss": "dance",
     "emotion": "joyful and carefree, moving to a favourite upbeat song",
     "notes": [
+      "Regular verb: past tense 'danste' / 'dansten', past participle 'gedanst' (takes 'hebben')."
+    ],
+    "senses": [
+      {
+        "id": "s1gtybtscn43fh1",
+        "order": 0,
+        "definition": "To move your body to the rhythm of music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to dance",
+              "dance"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "💃",
+        "examples": [
+          {
+            "id": "5k87vs15ov3jp8n",
+            "text": "We gaan vanavond lekker dansen in de club.",
+            "textLang": "nl",
+            "translation": "We are going to have a great time dancing at the club tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and energetic, looking forward to a fun night out",
+            "note": null,
+            "matchedForm": "dansen",
+            "matchedTranslationForm": "dancing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "dansen",
+    "lemma": "dansen",
+    "reading": null,
+    "ipa": "/ˈdɑnsə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💃",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to dance",
+    "primaryGloss": "dance",
+    "emotion": "joyful and carefree, moving to a favourite upbeat song",
+    "notes": [
       "Dansen is a regular weak verb. Its past tense uses 't': ik danste, wij danstten, and the past participle is gedanst."
     ],
     "senses": [
@@ -163,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "wij danstten",
+        "why": "Plural past tense of 'dansen' is 'wij dansten', not 'danstten'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "We are going to dance nicely in the club tonight.",
+        "why": "Calqued translation of Dutch 'lekker' as 'nicely', which is unnatural in English."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To move lightly, quickly, or in a lively way.",
+        "why": "Poetic metaphor unnecessary as a separate sense at A2."
+      }
+    ],
+    "growth": 0.643
   }
 }

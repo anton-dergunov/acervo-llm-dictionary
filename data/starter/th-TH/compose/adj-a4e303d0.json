@@ -58,6 +58,97 @@
     "headword": "กลัว",
     "lemma": "กลัว",
     "reading": null,
+    "ipa": "kluːa̯˧",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to fear; to be afraid (of)",
+    "primaryGloss": "to be afraid",
+    "emotion": "wide-eyed and tense, anticipating something unpleasant",
+    "notes": [
+      "Takes a direct object without a preposition: กลัวผี means 'to be afraid of ghosts'.",
+      "Followed by ว่า (wâa, 'that') when expressing fear or worry that something will happen."
+    ],
+    "senses": [
+      {
+        "id": "51s5sifwqhnn58y",
+        "order": 0,
+        "definition": "To feel fear or worry about something dangerous, unpleasant, or unwanted.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be afraid",
+              "to fear",
+              "to be scared"
+            ]
+          }
+        ],
+        "domain": "fear",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "tfcc59iq4nkemcl",
+            "text": "ฉันกลัวความมืด",
+            "textLang": "th",
+            "translation": "I am afraid of the dark.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "speaking softly and nervously in a dark room",
+            "note": null,
+            "matchedForm": "กลัว",
+            "matchedTranslationForm": "afraid"
+          },
+          {
+            "id": "envyo09rbj9g1a7",
+            "text": "เขากลัวว่าฝนจะตก",
+            "textLang": "th",
+            "translation": "He is afraid that it will rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking anxiously up at the grey clouds",
+            "note": null,
+            "matchedForm": "กลัว",
+            "matchedTranslationForm": "afraid"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "กลัว",
+    "lemma": "กลัว",
+    "reading": null,
     "ipa": "/klua/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adj",
+        "why": "กลัว is a transitive verb in Thai, taking direct objects without a preposition."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/klua/",
+        "why": "Missing tone mark and vowel length in Thai IPA (/kluːa̯˧/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same verb used with a noun vs. a clause."
+      }
+    ],
+    "growth": 0.773
   }
 }

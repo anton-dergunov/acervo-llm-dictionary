@@ -68,6 +68,138 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "man; guy; person",
+    "primaryGloss": "man",
+    "emotion": "a casual conversational mention of someone reliable and solid",
+    "notes": [
+      "Unlike 'erkek' (which emphasizes biological sex or gender), 'adam' refers to an adult male person in social contexts, or colloquially a 'guy'.",
+      "In fixed expressions and compounds (like 'bilim adamı', scientist, or 'adam başı', per person), it means 'human' or 'person' regardless of gender."
+    ],
+    "senses": [
+      {
+        "id": "hdkuipg5pokvi3v",
+        "order": 0,
+        "definition": "An adult male human being; in informal speech, a guy or fellow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "man",
+              "guy",
+              "fellow"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "lhmecfe6qc2hi1w",
+            "text": "Kapıda seni bekleyen bir adam var.",
+            "textLang": "tr",
+            "translation": "There is a man waiting for you at the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informing someone neutrally about a visitor",
+            "note": null,
+            "matchedForm": "adam",
+            "matchedTranslationForm": "man"
+          },
+          {
+            "id": "8emw2wrlxknew3l",
+            "text": "O çok iyi bir adam.",
+            "textLang": "tr",
+            "translation": "He is a very good guy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "adam",
+            "matchedTranslationForm": "guy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lueurrj5vnxlms8",
+        "order": 1,
+        "definition": "A human being or person in general, especially in idioms and compound nouns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "human"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "swrecld6j6l0bi4",
+            "text": "Yemek için adam başı yüz lira ödedik.",
+            "textLang": "tr",
+            "translation": "We paid a hundred liras per person for the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "adam",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "adam",
+    "lemma": "adam",
+    "reading": null,
+    "ipa": "/aˈdam/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "man; guy; husband",
     "primaryGloss": "man",
     "emotion": "a casual conversational mention of someone reliable and solid",
@@ -202,5 +334,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(person) A male person in general; a fellow or guy.",
+        "why": "Shades of the same meaning ('man' and 'guy') should be merged into one sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(relationship) A husband or romantic partner in colloquial speech.",
+        "why": "Marginal, old-fashioned/regional sense not appropriate for an A2 learner; example sounds unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Adam primarily means an adult male person, but it is also",
+        "why": "Merely restates the definitions and glosses."
+      }
+    ],
+    "growth": 1.172
   }
 }

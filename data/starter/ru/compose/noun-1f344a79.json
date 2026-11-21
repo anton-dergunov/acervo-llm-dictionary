@@ -68,6 +68,95 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "pillow, cushion",
+    "primaryGloss": "pillow",
+    "emotion": "soft and sleepy, sinking down into the bed at night",
+    "notes": [
+      "In the genitive plural, a fleeting -е- appears before -к-: пять подушек."
+    ],
+    "senses": [
+      {
+        "id": "mn793py26tk40gt",
+        "order": 0,
+        "definition": "A soft bag filled with feathers, foam, or other material, used to support the head in bed or for sitting and leaning on a sofa.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow",
+              "cushion"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "gn6b0b9gfh40u4y",
+            "text": "Я положила голову на мягкую подушку.",
+            "textLang": "ru",
+            "translation": "I put my head on the soft pillow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and relieved, finally lying down to rest",
+            "note": null,
+            "matchedForm": "подушку",
+            "matchedTranslationForm": "pillow"
+          },
+          {
+            "id": "innf7knxrtdzcry",
+            "text": "На диване лежат яркие подушки.",
+            "textLang": "ru",
+            "translation": "There are bright cushions on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "подушки",
+            "matchedTranslationForm": "cushions"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "подушка",
+    "lemma": "подушка",
+    "reading": null,
+    "ipa": "/pɐˈduʂkə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "pillow; cushion",
     "primaryGloss": "pillow",
     "emotion": "soft and sleepy, sinking down into the bed at night",
@@ -159,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(bed) A soft bag filled with feathers or other material",
+        "why": "Russian подушка is a single concept covering both English 'pillow' and 'cushion'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Not to be confused with 'покрывало' (bedspread) or 'простыня' (bedsheet).",
+        "why": "Note 0 warns against unrelated words; Note 1 just repeats the two glosses."
+      }
+    ],
+    "growth": 0.755
   }
 }

@@ -72,6 +72,95 @@
     "primaryGloss": "wash",
     "emotion": "thorough and methodical, focused on the task at hand",
     "notes": [
+      "Imperfect: يَغْسِلُ (yaɣsilu).",
+      "Unlike نَظَّفَ (naẓẓafa, 'to clean' in general), غَسَلَ specifically means washing with water."
+    ],
+    "senses": [
+      {
+        "id": "cp0yabvdrq2svn4",
+        "order": 0,
+        "definition": "To clean something with water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wash"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🚰",
+        "examples": [
+          {
+            "id": "lylb82zn769vn4j",
+            "text": "غَسَلْتُ يَدَيَّ قَبْلَ الأَكْلِ.",
+            "textLang": "ar",
+            "translation": "I washed my hands before eating.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "simple, healthy, and routine",
+            "note": null,
+            "matchedForm": "غَسَلْتُ",
+            "matchedTranslationForm": "washed"
+          },
+          {
+            "id": "9alkw05lh5e2a54",
+            "text": "يَغْسِلُ الأَبُ السَّيَّارَةَ كُلَّ يَوْمِ جُمُعَةٍ.",
+            "textLang": "ar",
+            "translation": "The father washes the car every Friday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "يَغْسِلُ",
+            "matchedTranslationForm": "washes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غَسَلَ",
+    "lemma": "غسل",
+    "reading": null,
+    "ipa": "/ˈɣasala/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wash",
+    "primaryGloss": "wash",
+    "emotion": "thorough and methodical, focused on the task at hand",
+    "notes": [
       "This verb is used for cleaning almost anything with water: hands, clothes, dishes, or even a car.",
       "Be careful not to confuse it with 'نَظَّفَ' (naẓẓafa), which generally means 'to clean' (often by wiping or dusting, not necessarily involving water)."
     ],
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "يَغْسِلُ الأَبُ السَّيَّارَةَ كُلَّ يَوْمٍ جُمُعَةٍ.",
+        "why": "Ungrammatical idafa: يَوْمٍ must be in the construct state without nunation (كُلَّ يَوْمِ جُمُعَةٍ)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb is used for cleaning almost anything with water",
+        "why": "Restates the definition without adding grammatical or usage information such as the imperfect vowel."
+      }
+    ],
+    "growth": 0.723
   }
 }

@@ -58,6 +58,96 @@
     "headword": "ülke",
     "lemma": "ülke",
     "reading": null,
+    "ipa": "/ylˈce/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗺️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "country",
+    "primaryGloss": "country",
+    "emotion": "proud and fond of one's homeland, warm and inviting",
+    "notes": [
+      "Refers to a state or nation; for one's native land or hometown, Turkish uses 'memleket' or 'vatan'."
+    ],
+    "senses": [
+      {
+        "id": "nc4sefvevrs8qlt",
+        "order": 0,
+        "definition": "A nation with its own government and territory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "country",
+              "nation",
+              "land"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "306oxxwkrcergl3",
+            "text": "Bu ülkede çok güzel dağlar var.",
+            "textLang": "tr",
+            "translation": "There are very beautiful mountains in this country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ülkede",
+            "matchedTranslationForm": "country"
+          },
+          {
+            "id": "suign6z3g8ut37s",
+            "text": "Uzak ülkelere seyahat etmeyi seviyorum.",
+            "textLang": "tr",
+            "translation": "I love traveling to distant countries.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and adventurous, longing for distant horizons",
+            "note": null,
+            "matchedForm": "ülkelere",
+            "matchedTranslationForm": "countries"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ülke",
+    "lemma": "ülke",
+    "reading": null,
     "ipa": "/ylyˈce/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ylyˈce/",
+        "why": "Wrong transcription with an extra vowel; 'ülke' is pronounced /ylˈce/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'Country' and 'land' are a single sense in modern everyday Turkish; 'homeland' is 'vatan/memleket'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer to both a sovereign nation-state and a broader geographical",
+        "why": "merely restates the definitions."
+      }
+    ],
+    "growth": 0.877
   }
 }

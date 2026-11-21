@@ -70,6 +70,116 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "letter; writing",
+    "primaryGloss": "letter",
+    "emotion": null,
+    "notes": [
+      "In the plural, the stress shifts to the first syllable: пи́сьма (nominative), пи́сем (genitive).",
+      "Sense 2 ('writing') is uncountable and used only in the singular, often for language skills (чтение и письмо — reading and writing)."
+    ],
+    "senses": [
+      {
+        "id": "jj802mohxxjdqni",
+        "order": 0,
+        "definition": "A written message sent by post or email.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter",
+              "email"
+            ]
+          }
+        ],
+        "domain": "correspondence",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "jfashf9lly42kxc",
+            "text": "Я получил письмо от друга.",
+            "textLang": "ru",
+            "translation": "I received a letter from a friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised and appreciative, acknowledging the personal connection",
+            "note": null,
+            "matchedForm": "письмо",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "742j890gaahs642",
+        "order": 1,
+        "definition": "The activity or skill of writing, or a system of writing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "writing",
+              "script"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "yl6wpf4wynapplw",
+            "text": "На уроке мы тренируем чтение и письмо.",
+            "textLang": "ru",
+            "translation": "In class we practice reading and writing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "письмо",
+            "matchedTranslationForm": "writing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "письмо",
+    "lemma": "письмо",
+    "reading": null,
+    "ipa": "/pʲɪˈsʲmo/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "letter; writing; script",
     "primaryGloss": "letter",
     "emotion": null,
@@ -163,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Её почерк — это красивое письмо.",
+        "why": "Unnatural Russian; 'письмо' is not used to describe someone's handwriting like this."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse this with 'книга' (book)",
+        "why": "Learners do not confuse 'письмо' with 'книга'; misses irregular plural 'пи́сьма' (genitive 'пи́сем')."
+      }
+    ],
+    "growth": 0.918
   }
 }

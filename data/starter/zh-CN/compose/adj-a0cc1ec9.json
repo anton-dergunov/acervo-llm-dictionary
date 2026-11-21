@@ -68,6 +68,114 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "white; blank",
+    "primaryGloss": "white",
+    "emotion": "clean and bright, noting the pure colour",
+    "notes": [
+      "When modifying a noun directly, a single-syllable adjective like 白 is often used without 的 for common items (e.g., 白衬衫 'white shirt', 白纸 'blank paper'), or as 白色 (báisè) with 的 (白色的衬衫)."
+    ],
+    "senses": [
+      {
+        "id": "9u02c9mnvrcx05d",
+        "order": 0,
+        "definition": "Having the colour of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "1h0x4ntq71ywmqm",
+            "text": "她穿着一件白衬衫。",
+            "textLang": "zh",
+            "translation": "She is wearing a white shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and observant, pointing out what someone has on",
+            "note": null,
+            "matchedForm": "白",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bouczst0xpf7bb9",
+        "order": 1,
+        "definition": "With nothing written, printed, or added.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blank",
+              "plain"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "tlozflu9yjww49x",
+            "text": "请在白纸上写下你的名字。",
+            "textLang": "zh",
+            "translation": "Please write your name on the blank paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, giving instructions to someone",
+            "note": null,
+            "matchedForm": "白",
+            "matchedTranslationForm": "blank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "白",
+    "lemma": "白",
+    "reading": "bái",
+    "ipa": "/pai̯˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤍",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "white; blank; clear",
     "primaryGloss": "white",
     "emotion": "clean and bright, noting the pure colour",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "white; blank; clear",
+        "why": "Includes 'clear', which is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow or milk.",
+        "why": "Noun definition ('the colour...') for an adjective; should be 'of the colour of...'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "白 is the standard word for white, as well as things that are blank or unfilled.",
+        "why": "Merely repeats the glosses of the two senses."
+      }
+    ],
+    "growth": 1.39
   }
 }

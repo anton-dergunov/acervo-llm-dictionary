@@ -58,6 +58,98 @@
     "headword": "luang",
     "lemma": "luang",
     "reading": null,
+    "ipa": "/ˈluaŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Describing",
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "spare; free; available",
+    "primaryGloss": "spare",
+    "emotion": "relaxed and unhurried, describing a moment of calm in a busy day",
+    "notes": [
+      "Most commonly used in the phrase 'waktu luang' (free/spare time) and the derived verb 'meluangkan waktu' (to make time).",
+      "In casual speech, 'kosong' (empty/free) is often used instead when talking about schedules (e.g., 'jadwal kosong')."
+    ],
+    "senses": [
+      {
+        "id": "wca85cz0zesmujc",
+        "order": 0,
+        "definition": "Of time or a schedule: free and unoccupied; available for other activities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spare",
+              "free",
+              "available"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "xk8lbgzsfc7zwjl",
+            "text": "Saya punya waktu luang sore ini untuk membaca.",
+            "textLang": "id",
+            "translation": "I have spare time this afternoon to read.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and content, looking forward to a quiet break",
+            "note": null,
+            "matchedForm": "luang",
+            "matchedTranslationForm": "spare"
+          },
+          {
+            "id": "gsxytkn4swr51p5",
+            "text": "Jadwalnya masih ada yang luang.",
+            "textLang": "id",
+            "translation": "There are still some free slots in the schedule.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "analytical and organized, pointing out where something can fit",
+            "note": null,
+            "matchedForm": "luang",
+            "matchedTranslationForm": "free"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "luang",
+    "lemma": "luang",
+    "reading": null,
     "ipa": "/lu.aŋ/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +255,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Jadwalnya masih ada yang luang.",
+        "why": "Example talks about a schedule (time, sense 0), not physical space (sense 1)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(space) Having space or a gap; not completely filled.",
+        "why": "Using 'luang' for physical space is rare in everyday Indonesian; 'lega' or 'kosong' is used."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "While 'kosong' describes a container with nothing inside",
+        "why": "'Kosong' is very commonly used for free time and schedules ('waktu kosong', 'jadwal kosong')."
+      }
+    ],
+    "growth": 0.881
   }
 }

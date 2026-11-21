@@ -62,6 +62,117 @@
     "headword": "đi",
     "lemma": "đi",
     "reading": null,
+    "ipa": "/ɗi˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go; to walk; to wear (footwear)",
+    "primaryGloss": "go",
+    "emotion": "ready to move, purposeful and direct",
+    "notes": [
+      "Takes a destination directly without a preposition: 'đi chợ' (go to the market), 'đi học' (go to school).",
+      "At the end of a sentence, 'đi' is also a common particle used to urge someone or say 'let's': 'Ăn đi!' (Eat!)."
+    ],
+    "senses": [
+      {
+        "id": "negycbvic7gcn58",
+        "order": 0,
+        "definition": "To move or travel from one place to another, or to walk on foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "go",
+              "walk",
+              "leave"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "h9ej5ngqoyuwxnu",
+            "text": "Sáng nay tôi muốn đi chợ.",
+            "textLang": "vi",
+            "translation": "This morning I want to go to the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đi",
+            "matchedTranslationForm": "go"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8j32zhsp8bg0t53",
+        "order": 1,
+        "definition": "To put on or wear footwear or socks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wear (footwear)",
+              "put on (footwear)"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "z7zgmlx6ba5k43a",
+            "text": "Con nhớ đi giày trước khi ra ngoài nhé.",
+            "textLang": "vi",
+            "translation": "Remember to put on your shoes before going outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đi",
+            "matchedTranslationForm": "put on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đi",
+    "lemma": "đi",
+    "reading": null,
     "ipa": "/di/",
     "pos": "verb",
     "gender": null,
@@ -166,5 +277,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/di/",
+        "why": "Vietnamese 'đ' is an implosive /ɗ/, not /d/, and tone is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "While 'đi' primarily means to go or to walk, it is also",
+        "why": "Note [0] restates the senses; Note [1] is trivial filler."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi muốn đi đến chợ.",
+        "why": "Unnatural phrasing; Vietnamese says 'đi chợ', without 'đến'."
+      }
+    ],
+    "growth": 1.169
   }
 }

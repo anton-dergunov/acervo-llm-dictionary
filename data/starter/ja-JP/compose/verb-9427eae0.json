@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "歩く",
     "lemma": "歩く",
+    "reading": "あるく",
+    "ipa": "aɾɯkɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to walk",
+    "primaryGloss": "to walk",
+    "emotion": "steady, rhythmic, and purposeful, as if moving toward a comfortable destination",
+    "notes": [
+      "Godan (u) verb. Takes the particle を (o) to mark the place or path one walks along (e.g., 町を歩く, 'to walk through town'), and まで (made) or に/へ (ni/e) for the destination.",
+      "Often used in the te-form 歩いて (aruite) to mean 'on foot' (e.g., 歩いて行く, 'to go on foot')."
+    ],
+    "senses": [
+      {
+        "id": "sr215eut7vpcsau",
+        "order": 0,
+        "definition": "To move forward on foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to walk",
+              "to stroll"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "jregcuba7q8g9hp",
+            "text": "駅まで歩きます。",
+            "textLang": "ja",
+            "translation": "I will walk to the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, providing a clear answer to a question",
+            "note": null,
+            "matchedForm": "歩きます",
+            "matchedTranslationForm": "walk"
+          },
+          {
+            "id": "s575ztrotmi23zg",
+            "text": "町を歩くのが好きです。",
+            "textLang": "ja",
+            "translation": "I like walking around the town.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and nostalgic, thinking about a pleasant pastime",
+            "note": null,
+            "matchedForm": "歩く",
+            "matchedTranslationForm": "walking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "歩く",
+    "lemma": "歩く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (あるく) for a headword containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "歩く (aruku) is the general verb for walking.",
+        "why": "Both notes are pure filler and omit the essential grammar: 歩く takes を for the path walked."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To walk around in a specific area, often for leisure or exploration.",
+        "why": "Shades of the same basic meaning; walking along a street/town just uses the particle を."
+      }
+    ],
+    "growth": 0.819
   }
 }

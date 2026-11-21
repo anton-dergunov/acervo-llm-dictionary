@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand",
+    "primaryGloss": "hand",
+    "emotion": "natural and everyday, pointing or reaching out",
+    "notes": [
+      "Feminine despite lacking the ة (-a) ending, as with most paired body parts.",
+      "Takes the dual يَدَان (yadān, 'two hands') and the irregular plural أَيْدٍ (ʔaydin; definite الْأَيْدِي al-ʔaydī)."
+    ],
+    "senses": [
+      {
+        "id": "n13nai2yjc9xyet",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the palm and fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "ggqnkbpshx7oven",
+            "text": "اِغْسِلْ يَدَيْكَ قَبْلَ الْأَكْلِ.",
+            "textLang": "ar",
+            "translation": "Wash your hands before eating.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "يَدَيْكَ",
+            "matchedTranslationForm": "hands"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "يَد",
+    "lemma": "يَد",
+    "reading": null,
+    "ipa": "/jad/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; arm",
     "primaryGloss": "hand",
     "emotion": "natural and everyday, pointing or reaching out",
@@ -118,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hand; arm",
+        "why": "Includes 'arm', which is not in the senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "اغسل يدك قبل الأكل.",
+        "why": "Unnatural in the singular; one washes both hands (يَدَيْكَ)."
+      }
+    ],
+    "growth": 1.575
   }
 }

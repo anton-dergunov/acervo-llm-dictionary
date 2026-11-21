@@ -58,6 +58,73 @@
     "headword": "trafik lambası",
     "lemma": "trafik lambası",
     "reading": null,
+    "ipa": "/tɾaˈfik ˈlambasɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "traffic light",
+    "primaryGloss": "traffic light",
+    "emotion": "waiting patiently at a red light in city traffic, calm and observant",
+    "notes": [
+      "In everyday speech, 'trafik ışığı' or simply 'ışıklar' (the lights) is also very common."
+    ],
+    "senses": [
+      {
+        "id": "ef9or6wzh4haqne",
+        "order": 0,
+        "definition": "A set of colored lights at a road junction that control the flow of traffic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traffic light"
+            ]
+          }
+        ],
+        "domain": "traffic",
+        "emoji": "🚦",
+        "examples": [
+          {
+            "id": "jpz9ujtewvnelwj",
+            "text": "Trafik lambası kırmızıya dönünce durduk.",
+            "textLang": "tr",
+            "translation": "We stopped when the traffic light turned red.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Trafik lambası",
+            "matchedTranslationForm": "traffic light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "trafik lambası",
+    "lemma": "trafik lambası",
+    "reading": null,
     "ipa": "/taˈfik lamˈbasɯ/",
     "pos": "noun",
     "gender": null,
@@ -116,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/taˈfik lamˈbasɯ/",
+        "why": "Missing /ɾ/ in 'trafik', and 'lambası' has initial stress /ˈlambasɯ/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Kırmızı trafik lambası yanınca durduk.",
+        "why": "Unnatural; Turkish says 'kırmızı ışık yanınca' or 'trafik lambasında durduk'."
+      }
+    ],
+    "growth": 1.403
   }
 }

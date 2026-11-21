@@ -68,6 +68,73 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "mouth",
+    "primaryGloss": "mouth",
+    "emotion": "open and relaxed, speaking clearly in a natural conversation",
+    "notes": [
+      "Declines with -τ- in the genitive and plural: του στόματος (of the mouth), τα στόματα (the mouths)."
+    ],
+    "senses": [
+      {
+        "id": "oadmgtbz897reho",
+        "order": 0,
+        "definition": "The part of the face used for eating, drinking, and speaking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouth"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👄",
+        "examples": [
+          {
+            "id": "lu6qswiud5klaec",
+            "text": "Άνοιξε το στόμα σου για να δω τον λαιμό σου.",
+            "textLang": "el",
+            "translation": "Open your mouth so I can see your throat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "kind and encouraging, talking to a patient",
+            "note": null,
+            "matchedForm": "στόμα",
+            "matchedTranslationForm": "mouth"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το στόμα",
+    "lemma": "στόμα",
+    "reading": null,
+    "ipa": "/ˈstoma/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👄",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "mouth; opening",
     "primaryGloss": "mouth",
     "emotion": "open and relaxed, speaking clearly in a natural conversation",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The opening or exit of a container, cave, river, or pipe.",
+        "why": "In Greek, a container or river mouth is 'στόμιο' or 'εκβολές', not 'στόμα'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Το ποτάμι χύνεται από το στόμα του στη θάλασσα.",
+        "why": "Calque from English; Greek uses 'εκβολές' or 'στόμιο' for a river's mouth."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a neuter noun, it takes the article 'το'",
+        "why": "Generic neuter rule; misses the irregular -α/-ατος/-ατα declension pattern."
+      }
+    ],
+    "growth": 0.606
   }
 }

@@ -58,6 +58,73 @@
     "headword": "το κρέας",
     "lemma": "κρέας",
     "reading": null,
+    "ipa": "/ˈkɾe.as/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat",
+    "primaryGloss": "meat",
+    "emotion": "hungry and looking forward to a hearty meal",
+    "notes": [
+      "Follows an irregular neuter declension: genitive singular του κρέατος, nominative/accusative plural τα κρέατα."
+    ],
+    "senses": [
+      {
+        "id": "kbkvm7x9yyhofo9",
+        "order": 0,
+        "definition": "The flesh of an animal eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "pod89ysz6hys6pl",
+            "text": "Το κρέας είναι πολύ τρυφερό.",
+            "textLang": "el",
+            "translation": "The meat is very tender.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised by how good the food tastes",
+            "note": null,
+            "matchedForm": "κρέας",
+            "matchedTranslationForm": "meat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το κρέας",
+    "lemma": "κρέας",
+    "reading": null,
     "ipa": "/ˈkɾeas/",
     "pos": "noun",
     "gender": "neuter",
@@ -158,5 +225,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ένιωσε το κεύος του να τρέμει.",
+        "why": "Contains gibberish word 'κεύος' instead of 'κρέας', missing the headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The soft tissue of the body of a human or animal",
+        "why": "In Greek, human/body flesh is 'σάρκα'; 'κρέας' for body flesh is marginal or idioms-only."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kreas is the standard word for meat you buy or eat.",
+        "why": "Restates the gloss without explaining the irregular declension (το κρέας, του κρέατος)."
+      }
+    ],
+    "growth": 0.529
   }
 }

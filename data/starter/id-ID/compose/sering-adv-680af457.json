@@ -72,6 +72,74 @@
     "primaryGloss": "often",
     "emotion": null,
     "notes": [
+      "Placed directly before the verb it modifies. Its opposite is 'jarang' (rarely, seldom)."
+    ],
+    "senses": [
+      {
+        "id": "q6fbs2zdki9hqy0",
+        "order": 0,
+        "definition": "Many times; on many occasions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔁",
+        "examples": [
+          {
+            "id": "mk7fm8deg683kp1",
+            "text": "Dia sering pergi ke pasar pada pagi hari.",
+            "textLang": "id",
+            "translation": "He often goes to the market in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sering",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "sering",
+    "lemma": "sering",
+    "reading": null,
+    "ipa": "/səˈriŋ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "often; frequently",
+    "primaryGloss": "often",
+    "emotion": null,
+    "notes": [
       "Use 'sering' to describe actions that happen with high frequency. It is the most common way to say 'often' in Indonesian.",
       "Do not confuse 'sering' with 'banyak'. 'Banyak' means 'many' (a large quantity of things), while 'sering' refers specifically to how frequently an action occurs over time."
     ],
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'sering' to describe actions that happen with high frequency.",
+        "why": "Restates the definition and gloss without adding useful grammar or usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'sering' with 'banyak'. 'Banyak' means 'many'",
+        "why": "Artificial confusion; English speakers do not confuse 'often' and 'many'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Happening many times at short intervals.",
+        "why": "Defined as an adjective ('Happening...') rather than an adverb ('Many times...')."
+      }
+    ],
+    "growth": 0.522
   }
 }

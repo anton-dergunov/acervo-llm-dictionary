@@ -68,6 +68,76 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "medicine; medication",
+    "primaryGloss": "medicine",
+    "emotion": "hopeful and seeking relief, reaching for the bottle on the shelf",
+    "notes": [
+      "Before a suffix starting with a vowel, the final 'ç' changes to 'c': 'ilacı' (the medicine).",
+      "In Turkish, you normally say 'ilaç içmek' (literally 'to drink medicine') or 'ilaç almak' for taking medicine, even for pills."
+    ],
+    "senses": [
+      {
+        "id": "7cqilk29hrfcwqe",
+        "order": 0,
+        "definition": "A substance, such as a pill, liquid, or cream, used to treat an illness or injury.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "medicine",
+              "medication",
+              "drug"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "as8ff9jpqep445g",
+            "text": "Yemekten sonra bu ilacı içmen gerekiyor.",
+            "textLang": "tr",
+            "translation": "You need to take this medicine after the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and instructional, advising someone on their recovery",
+            "note": null,
+            "matchedForm": "ilacı",
+            "matchedTranslationForm": "medicine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ilaç",
+    "lemma": "ilaç",
+    "reading": null,
+    "ipa": "/iˈlatʃ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "medicine; remedy",
     "primaryGloss": "medicine",
     "emotion": "hopeful and seeking relief, reaching for the bottle on the shelf",
@@ -161,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "İlaç is a general word for both medicine and medication, whether",
+        "why": "Repeats the definition and gloss; misses the useful collocation 'ilaç içmek/almak' and consonant voicing."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "A chemical substance used to treat plants against pests or diseases.",
+        "why": "Agricultural sense ('pesticide') is not priority for an A2 beginner, and mismatches 'shortGloss' ('remedy')."
+      }
+    ],
+    "growth": 1.005
   }
 }

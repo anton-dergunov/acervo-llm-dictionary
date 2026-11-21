@@ -58,6 +58,117 @@
     "headword": "집",
     "lemma": "집",
     "reading": null,
+    "ipa": "tɕip̚",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house; home; shop",
+    "primaryGloss": "house",
+    "emotion": "warm and comforting, a place where one feels safe and relaxed",
+    "notes": [
+      "When speaking politely about an older person's or someone else's home, use the honorific word 댁 instead.",
+      "Often attached to a type of food or goods to name a shop or restaurant: 빵집 (bakery), 꽃집 (flower shop), 술집 (bar)."
+    ],
+    "senses": [
+      {
+        "id": "8knef2z53chl8cb",
+        "order": 0,
+        "definition": "A building or place where a person or family lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "dwelling",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "mjhr1rb1tvk9t4l",
+            "text": "집에 가고 싶어요.",
+            "textLang": "ko",
+            "translation": "I want to go home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wistful and tired, longing for the comfort of one's own space",
+            "note": null,
+            "matchedForm": "집",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pmehnqzlv1lify2",
+        "order": 1,
+        "definition": "A shop, restaurant, or small business establishment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "place",
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "g9iekzc31abmr3v",
+            "text": "이 집은 냉면이 정말 맛있어요.",
+            "textLang": "ko",
+            "translation": "This place has really delicious cold noodles.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and recommending, sharing a favorite food spot with a friend",
+            "note": null,
+            "matchedForm": "집",
+            "matchedTranslationForm": "place"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "집",
+    "lemma": "집",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "house; home; building",
+        "why": "'building' is too general for 집 and is not in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '집' can refer to a physical building, it is very commonly",
+        "why": "Restates the glosses; a note on the honorific 댁 or counter 채 is more useful."
+      }
+    ],
+    "growth": 1.016
   }
 }

@@ -58,6 +58,73 @@
     "headword": "de brief",
     "lemma": "brief",
     "reading": null,
+    "ipa": "/brif/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "letter",
+    "primaryGloss": "letter",
+    "emotion": "excited and curious opening the mailbox",
+    "notes": [
+      "The plural is 'brieven' ('f' changes to 'v'). For a short informal note left for someone, use the diminutive 'het briefje'."
+    ],
+    "senses": [
+      {
+        "id": "m2n9hm5rpfvguey",
+        "order": 0,
+        "definition": "A written or printed message addressed to someone, usually sent in an envelope by post.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter"
+            ]
+          }
+        ],
+        "domain": "mail",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "u1frpu3rrz3jnz6",
+            "text": "Ik heb vandaag een brief gekregen van de bank.",
+            "textLang": "nl",
+            "translation": "I received a letter from the bank today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and a bit wary about official mail",
+            "note": null,
+            "matchedForm": "brief",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de brief",
+    "lemma": "brief",
+    "reading": null,
     "ipa": "/brit/",
     "pos": "noun",
     "gender": "common",
@@ -159,5 +226,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/brit/",
+        "why": "Wrong final consonant; 'brief' ends in /f/, so the IPA is /brif/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A short written note or message left for someone.",
+        "why": "A short note left on a table is called 'een briefje' (diminutive), not 'een brief'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ze liet een brief achter op de tafel voor haar huisgenoot.",
+        "why": "For a quick note on a table, Dutch speakers use 'een briefje', not 'een brief'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the irregular plural 'brieven' (f changes to v) and the everyday diminutive 'briefje'."
+      }
+    ],
+    "growth": 0.642
   }
 }

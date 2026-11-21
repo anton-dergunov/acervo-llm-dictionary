@@ -71,6 +71,96 @@
     ],
     "status": "active",
     "shortGloss": "to sleep; to be asleep",
+    "primaryGloss": "to sleep",
+    "emotion": null,
+    "notes": [
+      "Irregular '-ir' verb: the 'm' drops in singular present forms ('je dors, tu dors, il dort' vs. 'nous dormons').",
+      "Do not confuse with 's'endormir', which means to fall asleep."
+    ],
+    "senses": [
+      {
+        "id": "3q9jc5t8p7gbn30",
+        "order": 0,
+        "definition": "To rest with your eyes closed and your mind and body inactive, or to spend the night sleeping somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep",
+              "to be asleep"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "6ctwqfavoapahpc",
+            "text": "Les enfants dorment déjà dans leur chambre.",
+            "textLang": "fr",
+            "translation": "The children are already sleeping in their bedroom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "soft and whispering, careful not to wake the children",
+            "note": null,
+            "matchedForm": "dorment",
+            "matchedTranslationForm": "sleeping"
+          },
+          {
+            "id": "gltp38m74cgylpf",
+            "text": "Je vais dormir chez un ami ce soir.",
+            "textLang": "fr",
+            "translation": "I am going to sleep at a friend's place tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and relaxed, making plans for the weekend",
+            "note": null,
+            "matchedForm": "dormir",
+            "matchedTranslationForm": "sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "dormir",
+    "lemma": "dormir",
+    "reading": null,
+    "ipa": "/dɔʁ.miʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep; to be asleep",
     "primaryGloss": "sleep",
     "emotion": null,
     "notes": [
@@ -162,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To spend the night somewhere.",
+        "why": "'Dormir chez quelqu'un' is just the literal verb 'to sleep' used with a location."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Its past participle is dormi, and its auxiliary verb is",
+        "why": "'Dormi' and 'avoir' are regular; the learner needs the stem-changing present forms 'je dors, nous dormons'."
+      }
+    ],
+    "growth": 1.199
   }
 }

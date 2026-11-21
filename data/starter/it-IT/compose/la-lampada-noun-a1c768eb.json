@@ -72,6 +72,132 @@
     "primaryGloss": "lamp",
     "emotion": "warm and cozy, turning on the light as evening falls",
     "notes": [
+      "In the phrase 'farsi una lampada', it refers to having a tanning session on a sunbed."
+    ],
+    "senses": [
+      {
+        "id": "cgsq812hmgdefp0",
+        "order": 0,
+        "definition": "An object that produces electric light, usually standing on a table, desk, or the floor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lamp"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "4bhb87pcyphy5xt",
+            "text": "Accendo la lampada sul comodino prima di dormire.",
+            "textLang": "it",
+            "translation": "I turn on the lamp on the bedside table before going to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and drowsy, settling into bed for the night",
+            "note": null,
+            "matchedForm": "lampada",
+            "matchedTranslationForm": "lamp"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ak2firaed4vmcjd",
+        "order": 1,
+        "definition": "An ultraviolet lamp or session used for getting an artificial suntan.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sunbed",
+              "tanning bed"
+            ]
+          }
+        ],
+        "domain": "tanning",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "3lqketpy6s7xh8b",
+            "text": "Prima dell'estate mi faccio sempre una lampada.",
+            "textLang": "it",
+            "translation": "Before summer I always use a sunbed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lampada",
+            "matchedTranslationForm": "sunbed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "cgsq812hmgdefp0",
+      "from": "Oggetto che produce luce artificiale per illuminare una stanza.",
+      "to": "An object that produces artificial light to illuminate a room.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    },
+    {
+      "sense": "ak2firaed4vmcjd",
+      "from": "Apparecchio per prendere il sole artificialmente.",
+      "to": "A device used for getting an artificial suntan.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la lampada",
+    "lemma": "lampada",
+    "reading": null,
+    "ipa": "/ˈlam.pa.da/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "lamp; sunbed",
+    "primaryGloss": "lamp",
+    "emotion": "warm and cozy, turning on the light as evening falls",
+    "notes": [
       "Use 'lampada' for any standard light fixture placed on a table, desk, or floor.",
       "It can also refer to a tanning bed session ('fare una lampada'), unlike English."
     ],
@@ -161,22 +287,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "cgsq812hmgdefp0",
-      "from": "Oggetto che produce luce artificiale per illuminare una stanza.",
-      "to": "An object that produces artificial light to illuminate a room.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    },
-    {
-      "sense": "ak2firaed4vmcjd",
-      "from": "Apparecchio per prendere il sole artificialmente.",
-      "to": "A device used for getting an artificial suntan.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'lampada' for any standard light fixture placed on a table,",
+        "why": "Restates the basic meaning of 'lamp' already given in sense 0."
+      }
+    ],
+    "growth": 0.955
+  }
 }

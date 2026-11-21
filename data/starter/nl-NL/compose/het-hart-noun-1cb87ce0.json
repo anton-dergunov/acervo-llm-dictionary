@@ -68,6 +68,156 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "heart; center",
+    "primaryGloss": "heart",
+    "emotion": "warm and rhythmic, beating steadily and alive",
+    "notes": [
+      "Irregular plural: 'harten'.",
+      "Pronounced identically to 'hard' (hard, loud), as final 'd' is pronounced /t/ in Dutch."
+    ],
+    "senses": [
+      {
+        "id": "1hjblsvzzzbnu03",
+        "order": 0,
+        "definition": "The organ in the chest that pumps blood through the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "organ",
+        "emoji": "🫀",
+        "examples": [
+          {
+            "id": "waw8kvoa3gqg4jt",
+            "text": "Zijn hart klopt heel snel na het sporten.",
+            "textLang": "nl",
+            "translation": "His heart beats very fast after exercising.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, observing a physical reaction",
+            "note": null,
+            "matchedForm": "hart",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "omz6yf9se3x2jtt",
+        "order": 1,
+        "definition": "The seat of a person's feelings, kindness, or emotions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "emotions",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "5oxj4gyslam95ri",
+            "text": "Zij heeft een hart van goud.",
+            "textLang": "nl",
+            "translation": "She has a heart of gold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm, sincere, and appreciative",
+            "note": null,
+            "matchedForm": "hart",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6ynwt8cbvnndq6l",
+        "order": 2,
+        "definition": "The central or most important part of a place or thing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart",
+              "center",
+              "core"
+            ]
+          }
+        ],
+        "domain": "center",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "bbypif7879pwj0h",
+            "text": "Wij wonen in het hart van de stad.",
+            "textLang": "nl",
+            "translation": "We live in the heart of the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hart",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het hart",
+    "lemma": "hart",
+    "reading": null,
+    "ipa": "/ɦɑrt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "heart; core",
     "primaryGloss": "heart",
     "emotion": "warm and rhythmic, beating steadily and alive",
@@ -160,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "sounds almost identical but ends in a 'd' sound",
+        "why": "Dutch has final-obstruent devoicing: 'hart' and 'hard' are exact homophones ending in /t/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the physical organ and as the metaphorical center",
+        "why": "Merely restates the two senses already shown in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "The center of someone's feelings, emotions, or the most important part",
+        "why": "Conflates two distinct meanings (emotional seat vs. central part/core) into one sense."
+      }
+    ],
+    "growth": 1.052
   }
 }

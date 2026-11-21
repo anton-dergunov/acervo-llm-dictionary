@@ -72,6 +72,115 @@
     "primaryGloss": "forget",
     "emotion": "frustrated, realizing a mistake too late",
     "notes": [
+      "Takes the accusative case (-i/-ı/-u/-ü) for the person, thing, or action (-meyi/-mayı) forgotten."
+    ],
+    "senses": [
+      {
+        "id": "kp4f22lxz6j8m8v",
+        "order": 0,
+        "definition": "To fail to remember something, or to lose information from memory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to forget",
+              "not to remember"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "4hljjn38bz2czuc",
+            "text": "Onun adını tamamen unuttum.",
+            "textLang": "tr",
+            "translation": "I completely forgot his name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "unuttum",
+            "matchedTranslationForm": "forgot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lopo61a1tvp0vp1",
+        "order": 1,
+        "definition": "To leave something somewhere unintentionally.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to leave behind",
+              "to forget"
+            ]
+          }
+        ],
+        "domain": "belongings",
+        "emoji": "🎒",
+        "examples": [
+          {
+            "id": "u0gasmk5om5oiks",
+            "text": "Cüzdanımı evde unuttum.",
+            "textLang": "tr",
+            "translation": "I left my wallet at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "panicked and hurried, patting pockets in a sudden realization",
+            "note": null,
+            "matchedForm": "unuttum",
+            "matchedTranslationForm": "left"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "unutmak",
+    "lemma": "unutmak",
+    "reading": null,
+    "ipa": "/u.nutˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to forget; to leave behind",
+    "primaryGloss": "forget",
+    "emotion": "frustrated, realizing a mistake too late",
+    "notes": [
       "Takes the accusative case (-i/-ı/-u/-ü) for the thing forgotten.",
       "Do not confuse with hatırlamak, which means to remember."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Cüzdanımı evde unuttum.",
+        "why": "'I left my wallet at home' illustrates sense 1 (leaving belongings behind), not sense 0 (memory)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with hatırlamak, which means to remember.",
+        "why": "Simply names the antonym; the two words are not easily confused in form."
+      }
+    ],
+    "growth": 0.955
   }
 }

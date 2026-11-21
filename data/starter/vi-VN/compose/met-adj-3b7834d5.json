@@ -58,6 +58,117 @@
     "headword": "mệt",
     "lemma": "mệt",
     "reading": null,
+    "ipa": "/mḛt˨˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "tired; fed up",
+    "primaryGloss": "tired",
+    "emotion": "drained and heavy, like someone who just finished a very long day",
+    "notes": [
+      "Often intensified as 'mệt quá' (so tired) or used in the compound 'mệt mỏi' (exhausted, weary).",
+      "In colloquial speech, can also mean slightly unwell or sick."
+    ],
+    "senses": [
+      {
+        "id": "54hmru52o3u60jr",
+        "order": 0,
+        "definition": "Needing rest or sleep because of physical or mental effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tired",
+              "fatigued"
+            ]
+          }
+        ],
+        "domain": "fatigue",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "jmmvq296jtb5eov",
+            "text": "Tôi cảm thấy mệt sau một ngày làm việc dài.",
+            "textLang": "vi",
+            "translation": "I feel tired after a long day of work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slow and weary, exhaling a deep breath at the end of the day",
+            "note": null,
+            "matchedForm": "mệt",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d32q8fv0j9fcdnq",
+        "order": 1,
+        "definition": "Feeling weary or annoyed because of a situation or someone's behavior.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fed up",
+              "weary",
+              "tired"
+            ]
+          }
+        ],
+        "domain": "annoyance",
+        "emoji": "😒",
+        "examples": [
+          {
+            "id": "nvmjkqa3ctz9qhr",
+            "text": "Tôi mệt vì phải đợi anh ấy quá lâu.",
+            "textLang": "vi",
+            "translation": "I am tired of waiting for him for so long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impatient and slightly irritable, rolling one's eyes",
+            "note": null,
+            "matchedForm": "mệt",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "mệt",
+    "lemma": "mệt",
+    "reading": null,
     "ipa": "/mə̰t˨/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mə̰t˨/",
+        "why": "Wrong vowel in IPA; 'ê' in 'mệt' is /e/, not /ə/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tired; exhausted",
+        "why": "'exhausted' is not in any sense's glosses, while sense 1 ('weary, fed up') is omitted."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'mệt' when you feel physically drained or mentally worn out.",
+        "why": "Restates the definition without adding grammar or usage information."
+      }
+    ],
+    "growth": 0.874
   }
 }

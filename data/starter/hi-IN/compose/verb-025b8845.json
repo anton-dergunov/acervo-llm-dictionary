@@ -58,6 +58,117 @@
     "headword": "रखना",
     "lemma": "रखना",
     "reading": null,
+    "ipa": "/ɾəkʰnaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📥",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to put; to keep; to place",
+    "primaryGloss": "to put",
+    "emotion": "matter-of-fact and helpful, focusing on the simple task of tidying up",
+    "notes": [
+      "Transitive verb; takes ने (ne) in perfective tenses (जैसे: मैंने किताब रखी — I put the book).",
+      "Also used with nouns to mean 'to have' or 'to maintain', e.g., ध्यान रखना (to take care / pay attention), नाम रखना (to name)."
+    ],
+    "senses": [
+      {
+        "id": "3gpthbsa25jcq21",
+        "order": 0,
+        "definition": "To move something to a particular place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to place",
+              "to set"
+            ]
+          }
+        ],
+        "domain": "placement",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "vmcza25k4sv2yxc",
+            "text": "किताब मेज़ पर रखो।",
+            "textLang": "hi",
+            "translation": "Put the book on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "direct and instructive, giving a simple command",
+            "note": null,
+            "matchedForm": "रखो",
+            "matchedTranslationForm": "Put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pztynx6d8tfh92u",
+        "order": 1,
+        "definition": "To continue to have something in one's possession or store it for later.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to keep",
+              "to store"
+            ]
+          }
+        ],
+        "domain": "retention",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "ziy5dpyuj5fith3",
+            "text": "आप ये पैसे अपने पास रखिए।",
+            "textLang": "hi",
+            "translation": "Keep this money with you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "रखिए",
+            "matchedTranslationForm": "Keep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "रखना",
+    "lemma": "रखना",
+    "reading": null,
     "ipa": "/ɾəkʰnɑː/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "आप यह पैसे अपने पास रखो।",
+        "why": "Ungrammatical pronoun-verb agreement (आप takes रखिए, तुम takes रखो) and यह पैसे should be ये पैसे."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "रखना (rakhna) is one of the most versatile verbs in Hindi.",
+        "why": "Both notes are filler restating the glosses or comparing with an unrelated verb (लेना)."
+      }
+    ],
+    "growth": 0.794
   }
 }

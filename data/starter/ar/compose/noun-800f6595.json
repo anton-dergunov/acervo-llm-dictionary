@@ -68,6 +68,96 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "container, bowl, vessel",
+    "primaryGloss": "container",
+    "emotion": "matter-of-fact and steady, holding something carefully",
+    "notes": [
+      "Plural: أَوْعِيَة (aw'iya)."
+    ],
+    "senses": [
+      {
+        "id": "3wklpofcyj4yphu",
+        "order": 0,
+        "definition": "A hollow object, such as a bowl or pot, used for holding food or liquids.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "container",
+              "bowl",
+              "vessel"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "cd7jp11run4nnwp",
+            "text": "وَضَعَ الطَّعَامَ فِي وِعَاءٍ نَظِيفٍ.",
+            "textLang": "ar",
+            "translation": "He put the food in a clean container.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "وِعَاءٍ",
+            "matchedTranslationForm": "container"
+          },
+          {
+            "id": "w7m8lpsgn8dzpkj",
+            "text": "مَلَأَ وِعَاءَ الشُّورْبَةِ حَتَّى الحَافَّةِ.",
+            "textLang": "ar",
+            "translation": "He filled the soup bowl to the brim.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "وِعَاءَ",
+            "matchedTranslationForm": "bowl"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "وِعَاء",
+    "lemma": "وِعَاء",
+    "reading": null,
+    "ipa": "/wiˈʕaːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "container; bowl",
     "primaryGloss": "container",
     "emotion": "matter-of-fact and steady, holding something carefully",
@@ -158,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "ملأ وِعَاء الشوربة حتي الأافة.",
+        "why": "Corrupted Arabic spelling: 'حتي الأافة' instead of 'حَتَّى الحَافَّةِ'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'Container' and 'bowl' are translations of one general concept of a vessel/receptacle in Arabic."
+      }
+    ],
+    "growth": 0.987
   }
 }

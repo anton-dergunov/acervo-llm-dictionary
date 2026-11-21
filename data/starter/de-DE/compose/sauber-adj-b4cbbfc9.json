@@ -74,6 +74,116 @@
     "primaryGloss": "clean",
     "emotion": null,
     "notes": [
+      "Often used with 'machen' as 'sauber machen' (to clean): 'Ich muss noch die Küche sauber machen.'",
+      "Do not confuse with 'rein', which means pure or unmixed (e.g., pure water, pure gold)."
+    ],
+    "senses": [
+      {
+        "id": "751idhm7jw08sv0",
+        "order": 0,
+        "definition": "Not dirty; free from dust, stains, or dirt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean"
+            ]
+          }
+        ],
+        "domain": "hygiene",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "rme9qdirl72t07i",
+            "text": "Das Zimmer ist jetzt wieder sauber.",
+            "textLang": "de",
+            "translation": "The room is clean again now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied, taking a deep breath after finishing a chore",
+            "note": null,
+            "matchedForm": "sauber",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dk595r6ocsblwz4",
+        "order": 1,
+        "definition": "Done carefully and accurately; neat and tidy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "neat",
+              "tidy",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "order",
+        "emoji": "📁",
+        "examples": [
+          {
+            "id": "ie3ozr7hrlf84c7",
+            "text": "Er hat eine sehr saubere Handschrift.",
+            "textLang": "de",
+            "translation": "He has very neat handwriting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "saubere",
+            "matchedTranslationForm": "neat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "sauber",
+    "lemma": "sauber",
+    "reading": null,
+    "ipa": "/ˈzaʊ̯bɐ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "clean; neat",
+    "primaryGloss": "clean",
+    "emotion": null,
+    "notes": [
       "Sauber means 'clean' (not dirty). Use it for physical objects, rooms, or laundry.",
       "Do not confuse it with 'rein', which often implies purity or being unmixed (e.g., pure water or pure gold)."
     ],
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Er schreibt eine sehr saubere Handschrift.",
+        "why": "Unnatural German collocation; native speakers say 'Er hat eine sehr saubere Handschrift'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Sauber means 'clean' (not dirty). Use it for physical objects, rooms,",
+        "why": "Restates the gloss and definition of sense 0."
+      }
+    ],
+    "growth": 0.998
   }
 }

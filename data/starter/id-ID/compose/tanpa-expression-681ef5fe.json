@@ -72,6 +72,94 @@
     "primaryGloss": "without",
     "emotion": null,
     "notes": [
+      "Can be followed by a noun ('tanpa gula', without sugar) or a verb ('tanpa menunggu', without waiting)."
+    ],
+    "senses": [
+      {
+        "id": "7xdh7bc1bc4jrib",
+        "order": 0,
+        "definition": "Not having, using, or doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "lacking",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "h6i8td3egj22gfi",
+            "text": "Dia pergi tanpa payung.",
+            "textLang": "id",
+            "translation": "He left without an umbrella.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, factual observation of a situation",
+            "note": null,
+            "matchedForm": "tanpa",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "68pyhrarg5dpov4",
+            "text": "Saya minum kopi tanpa gula.",
+            "textLang": "id",
+            "translation": "I drink coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tanpa",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tanpa",
+    "lemma": "tanpa",
+    "reading": null,
+    "ipa": "/ˈtanpa/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
       "Tanpa is used to show the absence of something. It is always followed by a noun, never a verb.",
       "Do not confuse this with 'tidak', which is used to negate a verb or an adjective. Use 'tanpa' for 'without [noun]' and 'tidak' for 'not [action/quality]'."
     ],
@@ -140,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is always followed by a noun, never a verb.",
+        "why": "False: 'tanpa' is very commonly followed by verbs (e.g. 'tanpa berkata apa-apa', without saying anything)."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'tanpa' is a single-word preposition, not a multi-word expression."
+      }
+    ],
+    "growth": 0.662
   }
 }

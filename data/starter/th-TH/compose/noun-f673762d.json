@@ -58,6 +58,75 @@
     "headword": "เพื่อนบ้าน",
     "lemma": "เพื่อนบ้าน",
     "reading": null,
+    "ipa": "/pʰɯ̂an.bâːn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "neighbor",
+    "primaryGloss": "neighbor",
+    "emotion": "warm and friendly, acknowledging a familiar local face",
+    "notes": [
+      "Literally 'house-friend' (เพื่อน 'friend' + บ้าน 'house'), though it only indicates living nearby, not close friendship.",
+      "Also used in ประเทศเพื่อนบ้าน (neighboring country)."
+    ],
+    "senses": [
+      {
+        "id": "o6kbmygw2b6tds4",
+        "order": 0,
+        "definition": "A person who lives near you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "neighbor",
+              "next-door neighbor"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "ona5wgzu1eky16z",
+            "text": "เพื่อนบ้านของฉันใจดีมาก",
+            "textLang": "th",
+            "translation": "My neighbor is very kind.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm, appreciative, and speaking with genuine kindness",
+            "note": null,
+            "matchedForm": "เพื่อนบ้าน",
+            "matchedTranslationForm": "neighbor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เพื่อนบ้าน",
+    "lemma": "เพื่อนบ้าน",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A nearby area or community in relation to where you live.",
+        "why": "เพื่อนบ้าน means 'neighbor' (person or country), never 'neighborhood' (the area)."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The neighborhood around here is very quiet and peaceful.",
+        "why": "Mistranslates เพื่อนบ้านแถวนี้ ('the neighbors around here') as 'the neighborhood around here'."
+      }
+    ],
+    "growth": 0.444
   }
 }

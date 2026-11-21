@@ -72,6 +72,114 @@
     "primaryGloss": "to stand",
     "emotion": "still and quiet, holding a steady position without moving",
     "notes": [
+      "For 'to stand', the present tense is stoję, stoisz.",
+      "For 'to be able to afford', 'stać' is impersonal and does not conjugate (past: było stać). The person is in the accusative case, followed by 'na' + accusative (e.g. stać mnie na to)."
+    ],
+    "senses": [
+      {
+        "id": "77npvkwzik8g25i",
+        "order": 0,
+        "definition": "To be in an upright position on one's feet, or (of an object) to be placed somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stand"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "ryn2h2227cm4gc3",
+            "text": "Muszę stać w kolejce.",
+            "textLang": "pl",
+            "translation": "I have to stand in line.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and impatient while waiting in a long queue",
+            "note": null,
+            "matchedForm": "stać",
+            "matchedTranslationForm": "stand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "llfuns4sgwx01g6",
+        "order": 1,
+        "definition": "To have enough money to buy or pay for something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be able to afford"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "ivbyetfrzhbjxzi",
+            "text": "Nie stać mnie na nowy samochód.",
+            "textLang": "pl",
+            "translation": "I cannot afford a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly disappointed about not having enough money for a desired purchase",
+            "note": null,
+            "matchedForm": "stać",
+            "matchedTranslationForm": "afford"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "stać",
+    "lemma": "stać",
+    "reading": null,
+    "ipa": "/stat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand; to be able to afford",
+    "primaryGloss": "to stand",
+    "emotion": "still and quiet, holding a steady position without moving",
+    "notes": [
       "stać has two very common meanings: physical standing and being able to afford something financially.",
       "When used for affordability, it always takes the instrumental case (e.g., stać mnie na...) and the person who can afford it is in the accusative or dative depending on the pronoun structure."
     ],
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "it always takes the instrumental case (e.g., stać mnie na...) and the",
+        "why": "False grammar: the person is always in the accusative, and 'na' takes the accusative."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "stać has two very common meanings: physical standing and being able to",
+        "why": "Merely restates the two senses already shown in the entry."
+      }
+    ],
+    "growth": 0.958
   }
 }

@@ -68,6 +68,72 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dangerous",
+    "primaryGloss": "dangerous",
+    "emotion": "cautionary and serious, warning someone of a real risk",
+    "notes": [],
+    "senses": [
+      {
+        "id": "q7id5gpg1bkgrd7",
+        "order": 0,
+        "definition": "Likely to cause harm, injury, or damage.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "hazardous"
+            ]
+          }
+        ],
+        "domain": "danger",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "p3pny03jhjq86a8",
+            "text": "Es ist gefährlich, bei Gewitter unter einem Baum zu stehen.",
+            "textLang": "de",
+            "translation": "It is dangerous to stand under a tree during a thunderstorm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and protective, like a parent advising a child",
+            "note": null,
+            "matchedForm": "gefährlich",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "gefährlich",
+    "lemma": "gefährlich",
+    "reading": null,
+    "ipa": "/ɡəˈfɛːɐ̯lɪç/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dangerous; risky",
     "primaryGloss": "dangerous",
     "emotion": "cautionary and serious, warning someone of a real risk",
@@ -161,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Sense 1 is not a distinct meaning of 'gefährlich', and the example is unnatural."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "while 'gefährlich' describes a thing or a situation.",
+        "why": "False claim; 'gefährlich' can also describe a person or animal (e.g., ein gefährlicher Verbrecher)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'gefährlich' for situations or things that pose a physical threat",
+        "why": "merely restates the definition."
+      }
+    ],
+    "growth": 0.338
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "blue",
     "emotion": "bright and clear, looking up at a cloudless summer sky",
     "notes": [
+      "Combine with açık (açık mavi, light blue) or koyu (koyu mavi, dark blue) for shades, though very dark or navy blue is usually called lacivert.",
+      "The intensive form is masmavi (bright or deep blue)."
+    ],
+    "senses": [
+      {
+        "id": "eyypqmwxbhdcts3",
+        "order": 0,
+        "definition": "Having the color of a clear sky or the sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔵",
+        "examples": [
+          {
+            "id": "hlu480jra990uv8",
+            "text": "Bugün gökyüzü çok mavi ve temiz.",
+            "textLang": "tr",
+            "translation": "Today the sky is very blue and clear.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and relaxed, enjoying a sunny day outdoors",
+            "note": null,
+            "matchedForm": "mavi",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "mavi",
+    "lemma": "mavi",
+    "reading": null,
+    "ipa": "/maːˈvi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": "bright and clear, looking up at a cloudless summer sky",
+    "notes": [
       "Mavi is a direct borrowing from Arabic, but it is the standard and everyday word for blue in Turkish.",
       "Unlike some languages that have different native words for light and dark blue, Turkish uses mavi for the general color, and combines it with words like açık (light) or koyu (dark) to specify shades."
     ],
@@ -140,5 +208,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Mavi is a direct borrowing from Arabic, but it is the standard",
+        "why": "Etymology is unhelpful filler for an A2 learner."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike some languages that have different native words for light and dark",
+        "why": "Misleading: Turkish commonly uses a separate word, 'lacivert', for dark/navy blue."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "Deniz burada berrak ve masmavi.",
+        "why": "Uses the derived word 'masmavi' instead of the headword 'mavi'."
+      }
+    ],
+    "growth": 0.501
   }
 }

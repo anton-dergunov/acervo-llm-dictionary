@@ -68,6 +68,159 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "road; way; journey",
+    "primaryGloss": "road",
+    "emotion": "a long asphalt ribbon winding through the countryside, steady and endless",
+    "notes": [
+      "Do not confuse with 'ulica', which means a street lined with buildings inside a town or city.",
+      "In the dative and locative singular, 'g' changes to 'dz': 'drodze' (e.g., 'w drodze' — on the way)."
+    ],
+    "senses": [
+      {
+        "id": "0bl3xliyrsgrxr2",
+        "order": 0,
+        "definition": "A hard surface built for vehicles and people to travel on between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "way"
+            ]
+          }
+        ],
+        "domain": "infrastructure",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "gntk94rttavl8fw",
+            "text": "Ta droga prowadzi do dużego miasta.",
+            "textLang": "pl",
+            "translation": "This road leads to a big city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing out the horizon to a traveler, helpful and direct",
+            "note": null,
+            "matchedForm": "droga",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5hefe31sfnbpkdt",
+        "order": 1,
+        "definition": "A route, direction, or path taken to get from one place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "route",
+              "path"
+            ]
+          }
+        ],
+        "domain": "direction",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "zgollc6p5da2p50",
+            "text": "Szukamy najszybszej drogi do stacji benzynowej.",
+            "textLang": "pl",
+            "translation": "We are looking for the fastest way to the gas station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurried and focused while looking at a map in the car",
+            "note": null,
+            "matchedForm": "drogi",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6un7h7si68zb8ks",
+        "order": 2,
+        "definition": "The act or time of traveling from one place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "journey",
+              "trip",
+              "way"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "xkoksytel8xsyg6",
+            "text": "Jesteśmy już w drodze do domu.",
+            "textLang": "pl",
+            "translation": "We are already on our way home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "drodze",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "droga",
+    "lemma": "droga",
+    "reading": null,
+    "ipa": "/ˈdrɔ.ɡa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "road; way; path",
     "primaryGloss": "road",
     "emotion": "a long asphalt ribbon winding through the countryside, steady and endless",
@@ -163,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Droga covers both the physical road you drive on and the abstract...",
+        "why": "Simply repeats the definitions of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common A2 sense of 'journey, trip, way' (as in 'w drodze', 'Szczęśliwej drogi!')."
+      }
+    ],
+    "growth": 1.243
   }
 }

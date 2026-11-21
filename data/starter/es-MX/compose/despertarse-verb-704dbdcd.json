@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wake up",
+    "primaryGloss": "to wake up",
+    "emotion": "a groggy, slow realization that the day has finally started",
+    "notes": [
+      "Stem-changing verb (e → ie) in the present tense: me despierto, te despiertas, se despierta.",
+      "In Mexican Spanish, both 'despertarse' and non-reflexive 'despertar' are commonly used to mean 'to wake up', while 'despertar a alguien' means 'to wake someone up'."
+    ],
+    "senses": [
+      {
+        "id": "301xgvvo77ia732",
+        "order": 0,
+        "definition": "To stop sleeping and become awake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wake up",
+              "to awaken"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "3xd8uwholx3cuag",
+            "text": "Siempre me despierto muy temprano para ir a trabajar.",
+            "textLang": "es",
+            "translation": "I always wake up very early to go to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a disciplined and regular, if slightly weary, morning routine",
+            "note": null,
+            "matchedForm": "me despierto",
+            "matchedTranslationForm": "wake up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "despertarse",
+    "lemma": "despertarse",
+    "reading": null,
+    "ipa": "/des.peɾˈtaɾ.se/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wake up; to be startled",
     "primaryGloss": "wake up",
     "emotion": "a groggy, slow realization that the day has finally started",
@@ -162,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to be startled",
+        "why": "'Despertarse' does not mean 'to be startled' (that is 'asustarse' or 'sobresaltarse')."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to wake up; to be startled",
+        "why": "Includes the false gloss 'to be startled'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To become suddenly alert, aware, or excited about something.",
+        "why": "Literary/metaphorical usage; for an A2 learner, 'despertarse' simply means to wake up."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial stem-changing pattern (e → ie: me despierto) for A2 learners."
+      }
+    ],
+    "growth": 0.587
   }
 }

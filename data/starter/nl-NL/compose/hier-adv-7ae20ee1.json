@@ -68,6 +68,114 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "here; here you go",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
+      "Combines with prepositions to replace 'dit' (this) or 'deze' (these) for things: 'hiermee' (with this), 'hierover' (about this), 'hierin' (in this)."
+    ],
+    "senses": [
+      {
+        "id": "en2bq5s3qvu6w8o",
+        "order": 0,
+        "definition": "In, at, or to this place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "0rd2j0btguudr01",
+            "text": "Ik ben hier.",
+            "textLang": "nl",
+            "translation": "I am here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating where one is",
+            "note": null,
+            "matchedForm": "hier",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "627nledt0s0ovmu",
+        "order": 1,
+        "definition": "Used when pointing something out or handing something over to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here",
+              "here you go"
+            ]
+          }
+        ],
+        "domain": "presentation",
+        "emoji": "👉",
+        "examples": [
+          {
+            "id": "xix5tfnlq0yho2s",
+            "text": "Hier, alsjeblieft.",
+            "textLang": "nl",
+            "translation": "Here you go.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, offering something to another person",
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "Here you go"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "hier",
+    "lemma": "hier",
+    "reading": null,
+    "ipa": "/ɦiːr/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "here",
     "primaryGloss": "here",
     "emotion": null,
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to point to the speaker's location or something in their",
+        "why": "Restates the definition of sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike English, Dutch often uses 'hier' in phrases like 'hier is...'",
+        "why": "English also uses 'here is...'; a note about pronominal adverbs ('hiermee', 'hierover') is needed instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Here, please.",
+        "why": "Calque; 'alsjeblieft' when handing something over translates to 'here you go' or 'there you are'."
+      }
+    ],
+    "growth": 0.836
   }
 }

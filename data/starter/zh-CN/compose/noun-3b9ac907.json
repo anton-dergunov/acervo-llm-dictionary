@@ -70,6 +70,115 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sea; ocean",
+    "primaryGloss": "sea",
+    "emotion": "deep and steady, looking out over wide waters",
+    "notes": [
+      "In everyday speech, often used in two-syllable words like 大海 (dàhǎi, the sea) or 海边 (hǎibiān, the seaside/beach)."
+    ],
+    "senses": [
+      {
+        "id": "pmrpxy9li2tlgvn",
+        "order": 0,
+        "definition": "The large body of salt water that covers most of the Earth's surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea",
+              "ocean"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "vc8kw6nm6ujxgo2",
+            "text": "这是我第一次看海。",
+            "textLang": "zh",
+            "translation": "This is my first time seeing the sea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "海",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ql32j5zdcfdn3cj",
+        "order": 1,
+        "definition": "A vast expanse or huge gathering of something, such as people, flowers, or clouds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea of",
+              "vast expanse"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": "🌾",
+        "examples": [
+          {
+            "id": "f47cjgct1a3a21g",
+            "text": "广场上到处都是人，像一片人海。",
+            "textLang": "zh",
+            "translation": "There were people everywhere in the square, like a sea of people.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "海",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "海",
+    "lemma": "海",
+    "reading": "hǎi",
+    "ipa": "/xai̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sea; a great number or quantity",
     "primaryGloss": "sea",
     "emotion": "deep and steady, looking out over wide waters",
@@ -162,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "我们去海边看日出。",
+        "why": "Uses compound word 海边 (seaside) instead of 海 as an independent word."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "金黄色的麦浪像一片海洋。",
+        "why": "Uses a different word, 海洋 (ocean), rather than the headword 海."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A large lake or a great expanse of something.",
+        "why": "Mixes a literal地理 sense ('large lake' in place names) with the metaphorical 'vast expanse' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both literally for the ocean and metaphorically for anything vast and",
+        "why": "Merely restates the two senses; better to explain usage with 大海 / 海洋."
+      }
+    ],
+    "growth": 0.984
   }
 }

@@ -58,6 +58,117 @@
     "headword": "말",
     "lemma": "말",
     "reading": null,
+    "ipa": "ma̠l",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐎",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "speech; word; language; horse",
+    "primaryGloss": "word",
+    "emotion": "steady and grounded, like someone watching an animal move across a field",
+    "notes": [
+      "The 'speech/word' sense has an honorific form, 말씀, and is traditionally pronounced with a long vowel [말ː], whereas 'horse' has a short vowel [말].",
+      "Common collocations: 말을 하다 (to speak/talk) and 말을 타다 (to ride a horse)."
+    ],
+    "senses": [
+      {
+        "id": "e393lwp3o7a2yf6",
+        "order": 0,
+        "definition": "The words, speech, or language that people use to express thoughts and feelings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "word",
+              "speech",
+              "language",
+              "what one says"
+            ]
+          }
+        ],
+        "domain": "language",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "khlsppg7scbd6qr",
+            "text": "무슨 말을 하는지 모르겠어요.",
+            "textLang": "ko",
+            "translation": "I don't know what you are talking about.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly frustrated and confused by the communication gap",
+            "note": null,
+            "matchedForm": "말을",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g3rcf8n8cewkbrz",
+        "order": 1,
+        "definition": "A large animal with four legs, hooves, and a mane that people ride.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "horse"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐎",
+        "examples": [
+          {
+            "id": "y9cou8zh4g6apyb",
+            "text": "말을 타는 것은 재미있습니다.",
+            "textLang": "ko",
+            "translation": "Riding a horse is fun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and enthusiastic about the outdoor activity",
+            "note": null,
+            "matchedForm": "말을",
+            "matchedTranslationForm": "horse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "말",
+    "lemma": "말",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I don't understand what words you are saying.",
+        "why": "Unnatural literal translation; should be 'I don't know what you're talking about.'"
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "The word '말' is a classic example of a homonym in Korean.",
+        "why": "Both notes merely restate the definitions and state the obvious about context."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the vowel length distinction ([말] horse vs. [말ː] speech) and honorific 말씀."
+      }
+    ],
+    "growth": 0.876
   }
 }

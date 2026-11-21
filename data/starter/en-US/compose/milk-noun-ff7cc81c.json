@@ -78,6 +78,94 @@
       {
         "id": "zailippth82buxm",
         "order": 0,
+        "definition": "Líquido blanco que producen las vacas y otros mamíferos, o que se extrae de ciertas plantas, usado como alimento o bebida.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "leche"
+            ]
+          }
+        ],
+        "domain": "beverage",
+        "emoji": "🥛",
+        "examples": [
+          {
+            "id": "id4yx3knwk0fd30",
+            "text": "I like to drink milk with my cookies.",
+            "textLang": "en",
+            "translation": "Me gusta tomar leche con mis galletas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and cozy, enjoying a simple snack",
+            "note": null,
+            "matchedForm": "milk",
+            "matchedTranslationForm": "leche"
+          },
+          {
+            "id": "tznjkvspjq2i7rd",
+            "text": "She prefers almond milk in her coffee.",
+            "textLang": "en",
+            "translation": "Ella prefiere leche de almendras en su café.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and matter-of-fact, ordering a morning drink",
+            "note": null,
+            "matchedForm": "milk",
+            "matchedTranslationForm": "leche"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "milk",
+    "lemma": "milk",
+    "reading": null,
+    "ipa": "/mɪlk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥛",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "leche",
+    "primaryGloss": "leche",
+    "emotion": "simple and comforting, pouring a cold glass in the morning",
+    "notes": [
+      "Es un sustantivo incontable, por lo que no se dice 'a milk' sino 'some milk' o 'a glass of milk'."
+    ],
+    "senses": [
+      {
+        "id": "zailippth82buxm",
+        "order": 0,
         "definition": "Líquido blanco que producen las vacas y otros mamíferos, que se usa como alimento.",
         "definitionLang": "es",
         "glosses": [
@@ -158,5 +246,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Líquido de aspecto similar que producen algunas plantas.",
+        "why": "Plant-based milk is the same everyday concept for a beginner; merge with sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "leche vegetal",
+        "why": "'milk' alone translates to 'leche', not 'leche vegetal'."
+      }
+    ],
+    "growth": 0.93
   }
 }

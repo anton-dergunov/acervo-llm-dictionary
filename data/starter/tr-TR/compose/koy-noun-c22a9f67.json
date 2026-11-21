@@ -58,6 +58,71 @@
     "headword": "köy",
     "lemma": "köy",
     "reading": null,
+    "ipa": "/cœj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "village",
+    "primaryGloss": "village",
+    "emotion": "peaceful and nostalgic, remembering a quiet place away from the city",
+    "notes": [],
+    "senses": [
+      {
+        "id": "08y34v2j8iugn67",
+        "order": 0,
+        "definition": "A very small settlement in the country, smaller than a town, where people often farm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "village"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "1zs9p3i5d85cihf",
+            "text": "Yaz aylarında dedemin köyüne gidiyoruz.",
+            "textLang": "tr",
+            "translation": "In the summer months we go to my grandfather's village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and eager, looking forward to a relaxing visit",
+            "note": null,
+            "matchedForm": "köyüne",
+            "matchedTranslationForm": "village"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "köy",
+    "lemma": "köy",
+    "reading": null,
     "ipa": "/kœj/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +183,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kœj/",
+        "why": "Fronted velar before front vowel /œ/ requires /cœj/ in Turkish phonology."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "even if that place is a city",
+        "why": "False claim; 'memleket' is used for a home city/region, whereas 'köy' means an actual village."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "village; countryside",
+        "why": "'countryside' is not in the sense glosses."
+      }
+    ],
+    "growth": 0.524
   }
 }

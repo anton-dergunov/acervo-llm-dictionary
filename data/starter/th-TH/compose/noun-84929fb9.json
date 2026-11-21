@@ -68,6 +68,156 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "garden; park; orchard",
+    "primaryGloss": "garden",
+    "emotion": "calm and pleasant, enjoying the fresh air among the plants",
+    "notes": [
+      "The classifier for สวน is แห่ง (for parks and gardens) or สวน (for orchards and plantations).",
+      "Often used in compounds: สวนสาธารณะ (public park), สวนสัตว์ (zoo), and สวนผลไม้ (fruit orchard)."
+    ],
+    "senses": [
+      {
+        "id": "clcvkfwnfir84nb",
+        "order": 0,
+        "definition": "A piece of land next to a house planted with flowers, grass, or trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "garden",
+              "yard"
+            ]
+          }
+        ],
+        "domain": "garden",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "zdxtf42dw32viza",
+            "text": "ฉันปลูกดอกไม้ในสวนหน้าบ้าน",
+            "textLang": "th",
+            "translation": "I plant flowers in the garden in front of the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and happy about growing flowers at home",
+            "note": null,
+            "matchedForm": "สวน",
+            "matchedTranslationForm": "garden"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mky763dxlhg2hxm",
+        "order": 1,
+        "definition": "A public area with grass and trees where people go to walk and relax.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "park"
+            ]
+          }
+        ],
+        "domain": "park",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "jzezsko69ozm5h7",
+            "text": "เราไปเดินเล่นที่สวนสาธารณะ",
+            "textLang": "th",
+            "translation": "We went for a walk in the public park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and leisurely, enjoying a pleasant afternoon walk",
+            "note": null,
+            "matchedForm": "สวน",
+            "matchedTranslationForm": "park"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lrgkqd8l3n3ae15",
+        "order": 2,
+        "definition": "A large piece of land used for growing fruit trees or commercial crops.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "orchard",
+              "plantation"
+            ]
+          }
+        ],
+        "domain": "agriculture",
+        "emoji": "🌴",
+        "examples": [
+          {
+            "id": "yabkgxyagkz2kxr",
+            "text": "ครอบครัวของเขาทำงานในสวนมะพร้าว",
+            "textLang": "th",
+            "translation": "His family works on a coconut plantation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "สวน",
+            "matchedTranslationForm": "plantation"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สวน",
+    "lemma": "สวน",
+    "reading": null,
+    "ipa": "/sǔan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "garden; park; plantation",
     "primaryGloss": "garden",
     "emotion": "calm and pleasant, enjoying the fresh air among the plants",
@@ -199,5 +349,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "สวน can mean a domestic garden, a public park, or an agricultural",
+        "why": "Restates the glosses without adding usage or grammar information."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].text",
+        "quote": "เขา 5 คนทำงานในสวนมะพร้าว",
+        "why": "Unnatural Thai phrasing ('เขา 5 คน') and '5 people' is missing from the translation."
+      }
+    ],
+    "growth": 1.225
   }
 }

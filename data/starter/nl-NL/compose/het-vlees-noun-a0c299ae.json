@@ -72,6 +72,113 @@
     "primaryGloss": "meat",
     "emotion": "appetizing and hearty, thinking of a warm meal",
     "notes": [
+      "Uncountable; it does not have a plural form. For cold cuts or sliced meat for bread, use 'vleeswaren'."
+    ],
+    "senses": [
+      {
+        "id": "cfpdueuyrgjlp9d",
+        "order": 0,
+        "definition": "Animal flesh eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "2m7ojcnbc02a5p8",
+            "text": "Ik eet graag vlees bij het avondeten.",
+            "textLang": "nl",
+            "translation": "I like to eat meat with dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to dinner",
+            "note": null,
+            "matchedForm": "vlees",
+            "matchedTranslationForm": "meat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "givxzwfbi6jc6dc",
+        "order": 1,
+        "definition": "The soft tissue of the body of a human or animal, consisting of muscle and fat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flesh"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦴",
+        "examples": [
+          {
+            "id": "j7kkbalhxudx7u2",
+            "text": "Het mes sneed diep in het vlees.",
+            "textLang": "nl",
+            "translation": "The knife cut deep into the flesh.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vlees",
+            "matchedTranslationForm": "flesh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het vlees",
+    "lemma": "vlees",
+    "reading": null,
+    "ipa": "/vleːs/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat; flesh",
+    "primaryGloss": "meat",
+    "emotion": "appetizing and hearty, thinking of a warm meal",
+    "notes": [
       "Use 'vlees' when talking about animal tissue eaten as food, or simply flesh in a biological sense."
     ],
     "senses": [
@@ -158,5 +265,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'vlees' when talking about animal tissue eaten as food, or simply",
+        "why": "Restates the definitions without adding useful grammar or usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De wond deed pijn aan het vlees.",
+        "why": "Unidiomatic Dutch phrasing; 'tot op het vlees' or 'diep in het vlees' is natural."
+      }
+    ],
+    "growth": 1.037
   }
 }

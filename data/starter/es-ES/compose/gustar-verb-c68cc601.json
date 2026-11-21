@@ -70,6 +70,97 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to like; to be pleasing",
+    "primaryGloss": "to like",
+    "emotion": "warm and smiling, sharing something that brings joy",
+    "notes": [
+      "Gustar works the opposite way to English 'to like': the thing liked is the subject, and the person who likes it is an indirect object pronoun (me, te, le, nos, os, les).",
+      "Use 'gusta' with a singular noun or an infinitive ('me gusta el café', 'me gusta leer') and 'gustan' with plural nouns ('me gustan los gatos')."
+    ],
+    "senses": [
+      {
+        "id": "uki9iyko6sbau5u",
+        "order": 0,
+        "definition": "To be pleasing to someone; to be liked or enjoyed by someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to enjoy",
+              "to please"
+            ]
+          }
+        ],
+        "domain": "preference",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "4v54p53cib83qlb",
+            "text": "Me gusta viajar en tren.",
+            "textLang": "es",
+            "translation": "I like traveling by train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, thinking of a favorite journey",
+            "note": null,
+            "matchedForm": "gusta",
+            "matchedTranslationForm": "like"
+          },
+          {
+            "id": "qwm1lo4pvlr39jy",
+            "text": "¿Te gustan las películas de terror?",
+            "textLang": "es",
+            "translation": "Do you like horror movies?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gustan",
+            "matchedTranslationForm": "like"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "gustar",
+    "lemma": "gustar",
+    "reading": null,
+    "ipa": "/ɡusˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to like; to taste",
     "primaryGloss": "to like",
     "emotion": "warm and smiling, sharing something that brings joy",
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To taste food or drink to check its flavor.",
+        "why": "'Gustar' for tasting food is archaic/literary in Spain; 'probar' is used in everyday Spanish."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Voy a gustar la sopa antes de servirla.",
+        "why": "No modern Spanish speaker says 'gustar la sopa'; they say 'probar la sopa'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To find something pleasant or to enjoy it.",
+        "why": "Defines the English gloss 'to like' rather than the Spanish verb's meaning ('to please')."
+      }
+    ],
+    "growth": 1.01
   }
 }

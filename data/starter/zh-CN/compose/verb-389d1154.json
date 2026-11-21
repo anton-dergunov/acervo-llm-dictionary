@@ -57,6 +57,117 @@
     "language": "zh",
     "headword": "开车",
     "lemma": "开车",
+    "reading": "kāichē",
+    "ipa": "/kʰai̯˥ ʈʂʰɤ˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Actions",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "to drive a car; to depart (of a vehicle)",
+    "primaryGloss": "to drive a car",
+    "emotion": "focused and alert, paying attention to the road ahead",
+    "notes": [
+      "开车 is a separable verb (离合词): elements can be inserted between 开 (to operate) and 车 (vehicle), as in 开了一天车 ('drove for a whole day')."
+    ],
+    "senses": [
+      {
+        "id": "y5to28n1teb9k9g",
+        "order": 0,
+        "definition": "To operate and steer a motor vehicle, especially a car.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drive a car",
+              "to drive"
+            ]
+          }
+        ],
+        "domain": "driving",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "ltl65uaiyktsyir",
+            "text": "他每天早上开车去上班。",
+            "textLang": "zh",
+            "translation": "He drives to work every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a daily habit",
+            "note": null,
+            "matchedForm": "开车",
+            "matchedTranslationForm": "drives"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qaz7kbvi704fext",
+        "order": 1,
+        "definition": "Of a train, bus, or other vehicle: to depart or start moving.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to depart",
+              "to pull out",
+              "to start"
+            ]
+          }
+        ],
+        "domain": "departure",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "1xeioeco6bts1tw",
+            "text": "快点儿上车，马上就要开车了。",
+            "textLang": "zh",
+            "translation": "Hurry and get on, the bus is about to depart.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "开车",
+            "matchedTranslationForm": "depart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "开车",
+    "lemma": "开车",
     "reading": "kāi chē",
     "ipa": "/kʰai̯˥ ʈʂʰɤ˥/",
     "pos": "verb",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to drive a car; to start a vehicle; to run a joke",
+        "why": "Includes 'to run a joke', which is not in the senses (and is unnatural English)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "别着急，火车还有十分钟才开车。",
+        "why": "Saying 火车…开车 is redundant since 车 is already in 开车; native speakers say 火车还有十分钟才开."
+      }
+    ],
+    "growth": 0.858
   }
 }

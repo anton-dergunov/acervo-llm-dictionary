@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "come, arrive",
+    "primaryGloss": "come",
+    "emotion": "straightforward and direct, simply stating the movement of a person or event",
+    "notes": [
+      "Opposite of 'pergi' (to go). Takes the preposition 'ke' for destination and 'dari' for origin.",
+      "In more formal contexts, 'tiba' or 'sampai' is often used for 'to arrive'."
+    ],
+    "senses": [
+      {
+        "id": "qwdjyshaseitirk",
+        "order": 0,
+        "definition": "To move towards or reach a place, especially where the speaker is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "come",
+              "arrive"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "➡️",
+        "examples": [
+          {
+            "id": "w66rbbp8voms8cf",
+            "text": "Dia akan datang ke rumah saya besok.",
+            "textLang": "id",
+            "translation": "He will come to my house tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, planning a meeting",
+            "note": null,
+            "matchedForm": "datang",
+            "matchedTranslationForm": "come"
+          },
+          {
+            "id": "429mk5ll943dn8v",
+            "text": "Kereta sudah datang tepat waktu.",
+            "textLang": "id",
+            "translation": "The train arrived on time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "datang",
+            "matchedTranslationForm": "arrived"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "datang",
+    "lemma": "datang",
+    "reading": null,
+    "ipa": "/ˈda.taŋ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to come; to arrive",
     "primaryGloss": "come",
     "emotion": "straightforward and direct, simply stating the movement of a person or event",
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Pesta baru saja datang ketika kami sampai.",
+        "why": "Nonsensical Indonesian and English ('the party had just arrived' as an event)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'To come' and 'to arrive' are one sense for 'datang'."
+      }
+    ],
+    "growth": 0.785
   }
 }

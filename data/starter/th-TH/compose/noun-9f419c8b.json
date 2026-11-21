@@ -58,6 +58,75 @@
     "headword": "พายุ",
     "lemma": "พายุ",
     "reading": null,
+    "ipa": "/pʰaː˧.juʔ˦˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌪️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "storm; gale",
+    "primaryGloss": "storm",
+    "emotion": "heavy and dark, watching the sky turn black before the rain hits",
+    "notes": [
+      "The classifier for storms is ลูก (e.g., พายุหนึ่งลูก — one storm).",
+      "Often combined with specific types such as พายุฝน (rainstorm) or พายุไต้ฝุ่น (typhoon)."
+    ],
+    "senses": [
+      {
+        "id": "vzz9eiuayolxyzk",
+        "order": 0,
+        "definition": "Bad weather with very strong winds and often heavy rain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "storm",
+              "gale"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "⛈️",
+        "examples": [
+          {
+            "id": "xssl7z7yb65nlb4",
+            "text": "พายุพัดเข้ามาในเมืองทำให้ต้นไม้หักโค่น",
+            "textLang": "th",
+            "translation": "The storm blew into the city and knocked down trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "พายุ",
+            "matchedTranslationForm": "storm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "พายุ",
+    "lemma": "พายุ",
+    "reading": null,
     "ipa": "/pʰaː˧.juː˦/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʰaː˧.juː˦/",
+        "why": "Wrong vowel length and tone on the second syllable; should be /pʰaː˧.juʔ˦˥/."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "พายุ เข้า มา ใน เมือง ทำให้ ต้นไม้ หัก โค่น",
+        "why": "Thai text is written with unnatural spaces between every word."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use พายุ for any significant weather disturbance involving strong winds and precipitation.",
+        "why": "Merely restates the definition; classifier ลูก would be more useful."
+      }
+    ],
+    "growth": 0.851
   }
 }

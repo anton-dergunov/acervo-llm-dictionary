@@ -58,6 +58,115 @@
     "headword": "het geluk",
     "lemma": "geluk",
     "reading": null,
+    "ipa": "/ɣəˈlʏk/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍀",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "luck; happiness",
+    "primaryGloss": "luck",
+    "emotion": "warm and glowing, feeling a quiet sense of contentment",
+    "notes": [
+      "Uncountable. Very common in 'geluk hebben' (to be lucky) and 'veel geluk!' (good luck!)."
+    ],
+    "senses": [
+      {
+        "id": "ttub2v1z7zd7a0b",
+        "order": 0,
+        "definition": "Good things that happen by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "luck",
+              "good fortune"
+            ]
+          }
+        ],
+        "domain": "luck",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "sw2dvw38qh5cuuf",
+            "text": "We hadden veel geluk dat we het laatste kaartje kregen.",
+            "textLang": "nl",
+            "translation": "We were very lucky to get the last ticket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "geluk",
+            "matchedTranslationForm": "lucky"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qs4stgr0o39qtga",
+        "order": 1,
+        "definition": "A feeling of joy, satisfaction, and well-being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happiness",
+              "joy"
+            ]
+          }
+        ],
+        "domain": "happiness",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "5v12czyx3jlnau5",
+            "text": "Ze vond haar geluk in een rustig leven op het platteland.",
+            "textLang": "nl",
+            "translation": "She found her happiness in a quiet life in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and reflective, looking back on a good life",
+            "note": null,
+            "matchedForm": "geluk",
+            "matchedTranslationForm": "happiness"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het geluk",
+    "lemma": "geluk",
+    "reading": null,
     "ipa": "/ɡəˈlʏk/",
     "pos": "noun",
     "gender": "neuter",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡəˈlʏk/",
+        "why": "Dutch 'g' is /ɣ/ or /x/, not the plosive /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Geluk means both 'happiness' (an emotional state) and 'luck' (good fortune",
+        "why": "Restates the two senses; better to note common collocations and uncountability."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "We hadden veel geluk toen we de laatste kaart wisten te bemachtigen.",
+        "why": "'Kaart' means map/card; an event ticket is 'kaartje'."
+      }
+    ],
+    "growth": 0.842
   }
 }

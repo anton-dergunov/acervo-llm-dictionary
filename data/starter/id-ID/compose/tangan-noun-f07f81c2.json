@@ -70,6 +70,113 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand; arm",
+    "primaryGloss": "hand",
+    "emotion": "matter-of-fact, describing a physical part of the body",
+    "notes": [
+      "In everyday Indonesian, 'tangan' covers both the hand and the arm. 'Lengan' specifically refers to the arm (or a shirt sleeve)."
+    ],
+    "senses": [
+      {
+        "id": "993v3zvae1lxpeh",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the fingers and palm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "hand",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "rjkikosob3mt0cv",
+            "text": "Dia melambaikan tangan saat melihat saya.",
+            "textLang": "id",
+            "translation": "She waved her hand when she saw me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and cheerful, catching someone's attention",
+            "note": null,
+            "matchedForm": "tangan",
+            "matchedTranslationForm": "hand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "58tnrkg8m6pelnb",
+        "order": 1,
+        "definition": "The whole upper limb from the shoulder to the hand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm"
+            ]
+          }
+        ],
+        "domain": "arm",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "6wakvh80rk2d0ku",
+            "text": "Tangan saya pegal setelah mengangkat barang berat.",
+            "textLang": "id",
+            "translation": "My arm aches after lifting heavy things.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Tangan",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tangan",
+    "lemma": "tangan",
+    "reading": null,
+    "ipa": "/ˈtaŋan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; arm; sleeve; worker",
     "primaryGloss": "hand",
     "emotion": "matter-of-fact, describing a physical part of the body",
@@ -202,5 +309,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hand; arm; sleeve; worker",
+        "why": "'sleeve' is not in the senses (and means 'lengan baju')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "A person who performs manual labor or assists with work.",
+        "why": "Figurative sense ('tangan kanan' / 'buah tangan' idioms aside) is unnatural as presented in the example."
+      }
+    ],
+    "growth": 0.627
   }
 }

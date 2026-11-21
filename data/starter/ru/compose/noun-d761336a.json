@@ -68,6 +68,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sky",
+    "primaryGloss": "sky",
+    "emotion": "wide and open, looking up on a bright day",
+    "notes": [
+      "Has an irregular plural: небеса (skies, heavens)."
+    ],
+    "senses": [
+      {
+        "id": "1242qcq3frrdzhc",
+        "order": 0,
+        "definition": "The space above the earth, where the sun, moon, and clouds appear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sky",
+              "heavens"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "5rboz022wugdh4s",
+            "text": "На небе нет ни одной тучи.",
+            "textLang": "ru",
+            "translation": "There is not a single cloud in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and content, admiring the clear weather",
+            "note": null,
+            "matchedForm": "небе",
+            "matchedTranslationForm": "sky"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "небо",
+    "lemma": "небо",
+    "reading": null,
+    "ipa": "/ˈnʲebə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sky; roof of the mouth",
     "primaryGloss": "sky",
     "emotion": "wide and open, looking up on a bright day",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The upper part of the inside of the mouth.",
+        "why": "Confuses небо /ˈnʲebə/ (sky) with the distinct word нёбо /ˈnʲɵbə/ (palate)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Russian, 'небо' refers both to the sky above and the roof",
+        "why": "Teaches a false homonymy; 'palate' is нёбо (with ё and different pronunciation), not небо."
+      }
+    ],
+    "growth": 0.481
   }
 }

@@ -58,6 +58,74 @@
     "headword": "người lớn",
     "lemma": "người lớn",
     "reading": null,
+    "ipa": "/ŋɨəj˨˩ ləːn˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "adult; grown-up",
+    "primaryGloss": "adult",
+    "emotion": "matter-of-fact and steady, speaking about grown-up matters",
+    "notes": [
+      "Literally 'big person' ('người' = person, 'lớn' = big/grown). Compare with 'trẻ em' or 'trẻ con' (children)."
+    ],
+    "senses": [
+      {
+        "id": "nmcazuetmp02z1s",
+        "order": 0,
+        "definition": "A fully grown person, as opposed to a child.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "adult",
+              "grown-up"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "sspgb5ektoj23gr",
+            "text": "Người lớn cần phải bảo vệ trẻ em.",
+            "textLang": "vi",
+            "translation": "Adults need to protect children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Người lớn",
+            "matchedTranslationForm": "Adults"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "người lớn",
+    "lemma": "người lớn",
+    "reading": null,
     "ipa": "/ŋɨəj˨˩ lən˧˥/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋɨəj˨˩ lən˧˥/",
+        "why": "Wrong vowel length in 'lớn': 'ơ' is /əː/ (/ləːn˧˥/), whereas /ə/ is short 'â' ('lân')."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(behavior) Behaving in a mature, responsible way appropriate for an adult.",
+        "why": "Entry POS is noun, not adjective, and the example uses 'một người lớn' (a noun)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Trẻ em cần được bảo vệ bởi người lớn.",
+        "why": "Unnatural calque of English passive ('được ... bởi'); Vietnamese prefers active voice here."
+      }
+    ],
+    "growth": 0.53
   }
 }

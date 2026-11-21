@@ -68,6 +68,119 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "strong; powerful; heavy",
+    "primaryGloss": "strong",
+    "emotion": "assertive and self-assured, like someone flexing their muscles with confidence",
+    "notes": [
+      "Comparative and superlative forms take an umlaut: 'stärker', 'am stärksten'.",
+      "Also used for concentrated drinks ('starker Kaffee' = strong coffee) and heavy weather ('starker Regen' = heavy rain).",
+      "Do not confuse with 'streng', which means strict or severe."
+    ],
+    "senses": [
+      {
+        "id": "fx4xgjlhd0kyogf",
+        "order": 0,
+        "definition": "Having great physical power or muscle strength.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strong",
+              "powerful"
+            ]
+          }
+        ],
+        "domain": "strength",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "eyn5w5t3zbgw2ah",
+            "text": "Er ist ein sehr starker Mann.",
+            "textLang": "de",
+            "translation": "He is a very strong man.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and matter-of-fact, describing someone's physical ability",
+            "note": null,
+            "matchedForm": "starker",
+            "matchedTranslationForm": "strong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "787eywexadh1wf1",
+        "order": 1,
+        "definition": "Of weather, feelings, pain, or drinks: having a high degree of force, intensity, or concentration.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strong",
+              "heavy",
+              "intense",
+              "severe"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": "⚡",
+        "examples": [
+          {
+            "id": "6l2nzs0ut6x8c4k",
+            "text": "Wegen des starken Regens bleiben wir zu Hause.",
+            "textLang": "de",
+            "translation": "Because of the heavy rain, we are staying at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "starken",
+            "matchedTranslationForm": "heavy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "stark",
+    "lemma": "stark",
+    "reading": null,
+    "ipa": "/ʃtaʁk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "strong; powerful; intense",
     "primaryGloss": "strong",
     "emotion": "assertive and self-assured, like someone flexing their muscles with confidence",
@@ -162,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'stark' refers to physical strength, it is also used for intense",
+        "why": "Restates sense 1 while omitting the irregular umlaut comparative 'stärker, am stärksten'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Es gibt heute starken Wind.",
+        "why": "Natural German uses 'Es weht ein starker Wind' or illustrates 'starker Regen/Kaffee'."
+      }
+    ],
+    "growth": 1.233
   }
 }

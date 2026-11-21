@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "quiet; calm; peaceful",
+    "primaryGloss": "quiet",
+    "emotion": "a soft, gentle tone that respects the need for calm",
+    "notes": [
+      "The comparative form is irregular: 'тише' (quieter). For people's character or emotional state, 'спокойный' (calm) is more common than 'тихий'."
+    ],
+    "senses": [
+      {
+        "id": "iyl5t42n9e1db40",
+        "order": 0,
+        "definition": "Making little or no noise.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "silent",
+              "soft"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "c636dyd3e5vkmhw",
+            "text": "Он говорил тихим голосом.",
+            "textLang": "ru",
+            "translation": "He spoke in a quiet voice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and hushed, as if not wanting to be heard",
+            "note": null,
+            "matchedForm": "тихим",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x543om0bkrwaa1g",
+        "order": 1,
+        "definition": "Of a place, time, or weather: free from disturbance or strong movement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "calm",
+              "peaceful"
+            ]
+          }
+        ],
+        "domain": "calmness",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "v49e5133x5hr5z7",
+            "text": "Мы живём на тихой улице.",
+            "textLang": "ru",
+            "translation": "We live on a quiet street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "тихой",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "тихий",
+    "lemma": "тихий",
+    "reading": null,
+    "ipa": "/ˈtʲixʲɪj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "quiet; silent; low-volume",
     "primaryGloss": "quiet",
     "emotion": "a soft, gentle tone that respects the need for calm",
@@ -142,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'тихий' for things that produce little sound",
+        "why": "Restates the definition of sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "rather than volume",
+        "why": "Implies 'тихий' is only for volume, whereas it also commonly describes calm weather or places."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "В библиотеке очень тихо.",
+        "why": "Uses the adverb/predicative 'тихо' instead of a form of the adjective 'тихий'."
+      }
+    ],
+    "growth": 1.021
   }
 }

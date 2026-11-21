@@ -58,6 +58,74 @@
     "headword": "लेकिन",
     "lemma": "लेकिन",
     "reading": null,
+    "ipa": "/leːkɪn/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; however",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
+      "The most common everyday word for 'but', interchangeable with पर and मगर in conversation."
+    ],
+    "senses": [
+      {
+        "id": "09tj08q7raypary",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with what was said before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "however"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "🔀",
+        "examples": [
+          {
+            "id": "5dg9ksdxiu3f0vz",
+            "text": "वह बाहर गया, लेकिन बारिश होने लगी।",
+            "textLang": "hi",
+            "translation": "He went outside, but it started raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "लेकिन",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "लेकिन",
+    "lemma": "लेकिन",
+    "reading": null,
     "ipa": null,
     "pos": "expression",
     "gender": null,
@@ -118,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "लेकिन is a coordinating conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use lekin to connect two contrasting clauses or ideas",
+        "why": "Merely restates the definition and gloss; common synonyms (पर, मगर) are more useful."
+      }
+    ],
+    "growth": 1.267
   }
 }

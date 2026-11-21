@@ -68,6 +68,106 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip; journey; travel",
+    "primaryGloss": "trip",
+    "emotion": "excited and anticipatory, thinking about packing bags and leaving",
+    "notes": [
+      "Commonly used in 'faire un voyage' (to take a trip), 'partir en voyage' (to go on a trip), and 'Bon voyage !' (Have a good trip!)."
+    ],
+    "senses": [
+      {
+        "id": "uzgs4z5igsb45gv",
+        "order": 0,
+        "definition": "A journey from one place to another, or the act of traveling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey",
+              "travel"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🧳",
+        "examples": [
+          {
+            "id": "epfx944ieps34xc",
+            "text": "Le voyage en train dure quatre heures.",
+            "textLang": "fr",
+            "translation": "The train trip takes four hours.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and informative, looking out the window",
+            "note": null,
+            "matchedForm": "voyage",
+            "matchedTranslationForm": "trip"
+          },
+          {
+            "id": "k266ssegmff655e",
+            "text": "Nous préparons notre voyage pour l'été prochain.",
+            "textLang": "fr",
+            "translation": "We are planning our trip for next summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and hopeful, planning the itinerary together",
+            "note": null,
+            "matchedForm": "voyage",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "uzgs4z5igsb45gv",
+      "from": "Action de se déplacer d'un lieu à un autre, souvent avec un retour.",
+      "to": "The act of moving from one place to another, usually with a return.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:32Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le voyage",
+    "lemma": "voyage",
+    "reading": null,
+    "ipa": "/vwa.jaʒ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; travel; journey",
     "primaryGloss": "trip",
     "emotion": "excited and anticipatory, thinking about packing bags and leaving",
@@ -143,14 +243,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "uzgs4z5igsb45gv",
-      "from": "Action de se déplacer d'un lieu à un autre, souvent avec un retour.",
-      "to": "The act of moving from one place to another, usually with a return.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:32Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse it with 'le travel', which is not a French",
+        "why": "Both notes are filler; missing useful expressions like 'faire un voyage' and 'bon voyage'."
+      }
+    ],
+    "growth": 0.77
+  }
 }

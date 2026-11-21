@@ -58,6 +58,115 @@
     "headword": "le jour",
     "lemma": "jour",
     "reading": null,
+    "ipa": "/ʒuʁ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "day; daylight",
+    "primaryGloss": "day",
+    "emotion": "a bright, sunlit morning with the whole day ahead, warm and unhurried",
+    "notes": [
+      "Use 'jour' to count days or name a calendar day (trois jours, le jour de Noël), and 'journée' to focus on the duration or experience of the day (toute la journée, Bonne journée !)."
+    ],
+    "senses": [
+      {
+        "id": "d41311gi86bu3a4",
+        "order": 0,
+        "definition": "A period of twenty-four hours, used as a unit of time or a date on the calendar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "ennsdhd91dlpsws",
+            "text": "Je reste à Paris pendant trois jours.",
+            "textLang": "fr",
+            "translation": "I am staying in Paris for three days.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "jours",
+            "matchedTranslationForm": "days"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "v649374bfj5yftc",
+        "order": 1,
+        "definition": "The time between sunrise and sunset, or the natural light of that time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "daylight",
+              "daytime",
+              "day"
+            ]
+          }
+        ],
+        "domain": "daylight",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "rpjhlon9gf6ryfd",
+            "text": "Le jour commence à se lever sur la ville.",
+            "textLang": "fr",
+            "translation": "Daylight is starting to break over the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and observant, watching the early morning sky lighten",
+            "note": null,
+            "matchedForm": "jour",
+            "matchedTranslationForm": "Daylight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le jour",
+    "lemma": "jour",
+    "reading": null,
     "ipa": "/ˈʒuʁ/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +269,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (time) ... or the daylight part ... [1] (light) Light from the sun or daylight",
+        "why": "Daylight is included in both sense 0 and sense 1, causing confusing overlap."
+      }
+    ],
+    "growth": 0.974
   }
 }

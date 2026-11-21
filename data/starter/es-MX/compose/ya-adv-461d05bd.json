@@ -68,6 +68,157 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "already; right now; anymore",
+    "primaryGloss": "already",
+    "emotion": null,
+    "notes": [
+      "'Ya' shifts meaning with verb tense: with the past it means 'already' ('Ya comí', I already ate); with the present it often means 'now' ('Ya entiendo', Now I understand); with the future or present it can reassure someone that something is about to happen ('Ya voy', I'm coming!).",
+      "In negative sentences, 'ya no' means 'no longer' or 'not anymore' ('Ya no vivo ahí', I don't live there anymore)."
+    ],
+    "senses": [
+      {
+        "id": "sj5cka2c5qhlm3y",
+        "order": 0,
+        "definition": "Before now, or earlier than expected.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "completion",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "ki89gmrqn9dydpf",
+            "text": "Ya terminé la tarea.",
+            "textLang": "es",
+            "translation": "I already finished the homework.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Ya",
+            "matchedTranslationForm": "already"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x3mqif8judql0b8",
+        "order": 1,
+        "definition": "At this very moment; immediately.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "now",
+              "right now"
+            ]
+          }
+        ],
+        "domain": "present time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "4rwdg6vqpyqgstd",
+            "text": "Quiero irme ya.",
+            "textLang": "es",
+            "translation": "I want to leave right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ya",
+            "matchedTranslationForm": "right now"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5vfr1cz448jhta4",
+        "order": 2,
+        "definition": "Used with 'no' to show that a past situation has ended.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "anymore",
+              "any longer"
+            ]
+          }
+        ],
+        "domain": "cessation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "epuau9gdjasqse1",
+            "text": "Ya no trabajo en esa tienda.",
+            "textLang": "es",
+            "translation": "I don't work at that store anymore.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Ya",
+            "matchedTranslationForm": "anymore"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ya",
+    "lemma": "ya",
+    "reading": null,
+    "ipa": "/ˈʝa/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "already; now; soon",
     "primaryGloss": "already",
     "emotion": null,
@@ -203,5 +354,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "already; now; soon",
+        "why": "Includes 'soon', which is not covered in any of the senses' glosses."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[2].glosses",
+        "quote": "I see, oh well, yeah",
+        "why": "These are interjections (whole-phrase equivalents), not adverb glosses matching the POS."
+      }
+    ],
+    "growth": 1.415
   }
 }

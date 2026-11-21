@@ -60,6 +60,117 @@
     "headword": "ว่าง",
     "lemma": "ว่าง",
     "reading": null,
+    "ipa": "/waːŋ˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫙",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "free; available; vacant",
+    "primaryGloss": "free",
+    "emotion": "a calm, neutral observation of a space or a moment in time",
+    "notes": [
+      "Used for people having free time and for spaces, seats, or rooms being unoccupied. For an empty container (like a bottle or box), use เปล่า (plào)."
+    ],
+    "senses": [
+      {
+        "id": "ojot0slxzx708gr",
+        "order": 0,
+        "definition": "Of a person or time: not busy with work or other activities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "free",
+              "available",
+              "not busy"
+            ]
+          }
+        ],
+        "domain": "schedule",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "50mfdjwm84xkbv2",
+            "text": "พรุ่งนี้คุณว่างไหม",
+            "textLang": "th",
+            "translation": "Are you free tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and polite, checking someone's schedule",
+            "note": null,
+            "matchedForm": "ว่าง",
+            "matchedTranslationForm": "free"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lwz7otsjaxdq2w5",
+        "order": 1,
+        "definition": "Of a seat, room, or space: not being used or occupied.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vacant",
+              "available",
+              "empty"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "0enrwjms9ju9bbz",
+            "text": "ที่นั่งตรงนี้ว่างไหมครับ",
+            "textLang": "th",
+            "translation": "Is this seat taken?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ว่าง",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ว่าง",
+    "lemma": "ว่าง",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -204,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(empty) Containing nothing... / (available) Open or ready for use",
+        "why": "Senses 0 and 2 both mean 'unoccupied/vacant'; ว่าง alone rarely means 'empty' for containers."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ขวดนี้ว่างเปล่า",
+        "why": "Uses the compound ว่างเปล่า instead of ว่าง; for an empty bottle, เปล่า is used."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When you say someone is 'ว่าง', it means they are not busy",
+        "why": "Merely repeats the definition of sense 1."
+      }
+    ],
+    "growth": 0.722
   }
 }

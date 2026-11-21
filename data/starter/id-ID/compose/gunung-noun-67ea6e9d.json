@@ -71,6 +71,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "mountain",
+    "primaryGloss": "mountain",
+    "emotion": "awed and reverent, looking up at a towering peak",
+    "notes": [
+      "For a smaller elevation ('hill'), use 'bukit'. For a volcano, use 'gunung berapi' ('fire mountain').",
+      "often shortened to 'Gn.' in proper names, such as 'Gunung Agung' (Mount Agung)."
+    ],
+    "senses": [
+      {
+        "id": "ij3eoip1zokuk13",
+        "order": 0,
+        "definition": "A very high, large natural elevation of land, higher than a hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "mount"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "neo1ufnebt8jygv",
+            "text": "Dia mendaki gunung itu saat liburan.",
+            "textLang": "id",
+            "translation": "He climbed that mountain during the holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and active, describing a physical achievement",
+            "note": null,
+            "matchedForm": "gunung",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "gunung",
+    "lemma": "gunung",
+    "reading": null,
+    "ipa": "/ˈɡu.nʊŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "mountain; a very high hill",
     "primaryGloss": "mountain",
     "emotion": "awed and reverent, looking up at a towering peak",
@@ -161,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A very high hill that stands out prominently in the landscape.",
+        "why": "Gunung simply means mountain; 'very high hill' is an artificial split; hill is bukit."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "Desa itu terletak di balik gunung yang tinggi. — The village is located behind the very high hill.",
+        "why": "'Gunung yang tinggi' means 'a high mountain', forced into 'very high hill'."
+      }
+    ],
+    "growth": 0.599
   }
 }

@@ -68,6 +68,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "correct; right",
+    "primaryGloss": "correct",
+    "emotion": "certain and helpful, confirming that everything is as it should be",
+    "notes": [
+      "Its opposite is 错 (cuò, 'wrong'). Predicate adjectives like 对 are often used with 是……的: 这是对的 ('This is right').",
+      "对 is also very common as a preposition meaning 'to' or 'towards' (对我说, 'say to me') and as a measure word for a pair."
+    ],
+    "senses": [
+      {
+        "id": "lzg3bojca2tn3mo",
+        "order": 0,
+        "definition": "Free from error; conforming to fact or truth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "right",
+              "true"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "✔️",
+        "examples": [
+          {
+            "id": "3umjpr0j7h79ldk",
+            "text": "你的回答是对的。",
+            "textLang": "zh",
+            "translation": "Your answer is correct.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and affirming, nodding at a good response",
+            "note": null,
+            "matchedForm": "对",
+            "matchedTranslationForm": "correct"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "对",
+    "lemma": "对",
+    "reading": "duì",
+    "ipa": "/tu̯ei̯˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✔️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "correct; right; facing",
     "primaryGloss": "correct",
     "emotion": "certain and helpful, confirming that everything is as it should be",
@@ -162,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(position) Facing or opposite to someone or something.",
+        "why": "As 'facing/opposite', 对 is a verb or bound morpheme (as in 面对面), not a standalone adjective."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "我们面对面坐着。",
+        "why": "Uses the set phrase 面对面, not 对 as an adjective."
+      }
+    ],
+    "growth": 0.819
   }
 }

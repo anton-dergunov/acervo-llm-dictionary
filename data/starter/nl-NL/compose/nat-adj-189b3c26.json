@@ -68,6 +68,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "wet; rainy",
+    "primaryGloss": "wet",
+    "emotion": "chilled and shivering, pulling a damp coat tighter",
+    "notes": [
+      "The inflected form doubles the 't' to keep the vowel short: 'natte' (e.g. 'natte kleren').",
+      "Do not confuse with 'vochtig', which means slightly wet ('damp' or 'humid') rather than thoroughly wet."
+    ],
+    "senses": [
+      {
+        "id": "3pnhvpkwyicfnt7",
+        "order": 0,
+        "definition": "Covered or soaked in water or another liquid; rainy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wet",
+              "soaked",
+              "rainy"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "a1dg1ahxmjh7lie",
+            "text": "Mijn jas is helemaal nat door de regen.",
+            "textLang": "nl",
+            "translation": "My coat is completely wet from the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "miserable and cold, looking down at dripping sleeves",
+            "note": null,
+            "matchedForm": "nat",
+            "matchedTranslationForm": "wet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "nat",
+    "lemma": "nat",
+    "reading": null,
+    "ipa": "/nɑt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "wet; liquid",
     "primaryGloss": "wet",
     "emotion": "chilled and shivering, pulling a damp coat tighter",
@@ -163,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Liquid used as food, especially a broth or gravy.",
+        "why": "Part-of-speech mismatch and marginal sense: 'het nat' is a noun, not an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "wet; liquid",
+        "why": "As an adjective, 'nat' means 'wet' or 'rainy', not 'liquid'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe objects, clothing, or weather covered in liquid",
+        "why": "Restates the definition; misses the spelling rule that inflected form doubles the 't' ('natte')."
+      }
+    ],
+    "growth": 0.748
   }
 }

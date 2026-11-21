@@ -72,6 +72,115 @@
     "shortGloss": "lazy; rotten; decayed",
     "primaryGloss": "lazy",
     "emotion": "relaxed and unbothered, lying on the couch on a Sunday afternoon",
+    "notes": [],
+    "senses": [
+      {
+        "id": "lmehdwdft2j7udc",
+        "order": 0,
+        "definition": "Of a person: unwilling to work or make an effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lazy",
+              "idle"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "b5bs5wywix8r9sf",
+            "text": "Heute bin ich den ganzen Tag faul.",
+            "textLang": "de",
+            "translation": "Today I am being lazy all day long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying a lazy day off",
+            "note": null,
+            "matchedForm": "faul",
+            "matchedTranslationForm": "lazy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wue7z6a9dqwwrev",
+        "order": 1,
+        "definition": "Of food, wood, or teeth: decayed or spoiled and no longer good.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rotten",
+              "spoiled",
+              "decayed"
+            ]
+          }
+        ],
+        "domain": "decay",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "p2bf1jtbnk1gup5",
+            "text": "Der Apfel ist faul, du musst ihn wegwerfen.",
+            "textLang": "de",
+            "translation": "The apple is rotten; you have to throw it away.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disgusted and dismissive, holding up a bad apple",
+            "note": null,
+            "matchedForm": "faul",
+            "matchedTranslationForm": "rotten"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "faul",
+    "lemma": "faul",
+    "reading": null,
+    "ipa": "/faʊ̯l/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Feelings",
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "lazy; rotten; decayed",
+    "primaryGloss": "lazy",
+    "emotion": "relaxed and unbothered, lying on the couch on a Sunday afternoon",
     "notes": [
       "When describing a person, 'faul' means lazy or unwilling to work.",
       "When describing fruit, wood, or teeth, 'faul' means rotten or decayed."
@@ -163,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "When describing a person, 'faul' means lazy or unwilling to work.",
+        "why": "Both notes merely repeat the definitions and glosses of the two senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Today I am lazy all day long.",
+        "why": "Calqued tense; natural English uses 'I'm being lazy' or 'I've been lazy'."
+      }
+    ],
+    "growth": 0.727
   }
 }

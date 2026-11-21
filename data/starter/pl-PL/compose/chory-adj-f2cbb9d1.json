@@ -68,6 +68,96 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "ill; sick",
+    "primaryGloss": "ill",
+    "emotion": "concerned and sympathetic, acknowledging someone is not feeling well",
+    "notes": [
+      "To name the illness someone has, use 'chory na' followed by the accusative case (e.g., 'chory na grypę' — 'sick with the flu').",
+      "It can also be used as a noun meaning 'a sick person' or 'a patient'."
+    ],
+    "senses": [
+      {
+        "id": "f5ah8b4j3jfewju",
+        "order": 0,
+        "definition": "Of a person or body part: not in good health; suffering from an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ill",
+              "sick"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "y5sveks1g85m4rj",
+            "text": "Jestem chory i muszę zostać w domu.",
+            "textLang": "pl",
+            "translation": "I am sick and have to stay at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and a bit miserable, needing rest",
+            "note": null,
+            "matchedForm": "chory",
+            "matchedTranslationForm": "sick"
+          },
+          {
+            "id": "ypjlru3exe70500",
+            "text": "Ten pacjent jest chory na grypę.",
+            "textLang": "pl",
+            "translation": "This patient is sick with the flu.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, clinical and professional",
+            "note": null,
+            "matchedForm": "chory",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "chory",
+    "lemma": "chory",
+    "reading": null,
+    "ipa": "/ˈxɔrɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "ill; sick; diseased",
     "primaryGloss": "ill",
     "emotion": "concerned and sympathetic, acknowledging someone is not feeling well",
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(medical) Suffering from a specific disease or medical condition.",
+        "why": "Oversplit: 'chory' alone vs 'chory na...' is a grammatical valency difference, not a new meaning."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "diseased, affected",
+        "why": "'Chory' applied to a person with the flu means 'ill/sick (with)', not 'diseased'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should explain the preposition 'na' + accusative ('chory na grypę') instead of Sense 1."
+      }
+    ],
+    "growth": 0.772
   }
 }

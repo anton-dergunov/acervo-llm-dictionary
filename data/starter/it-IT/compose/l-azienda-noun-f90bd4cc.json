@@ -58,6 +58,75 @@
     "headword": "l'azienda",
     "lemma": "azienda",
     "reading": null,
+    "ipa": "/adˈdzjɛn.da/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "company; business; firm",
+    "primaryGloss": "company",
+    "emotion": "professional and focused, talking about where someone works",
+    "notes": [
+      "In the collocation 'azienda agricola' (agricultural business), it is the standard term for a commercial farm."
+    ],
+    "senses": [
+      {
+        "id": "bz7n6xjd5krpjdx",
+        "order": 0,
+        "definition": "An organization that produces goods or provides services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "company",
+              "business",
+              "firm"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "teou8hzb2jug1tz",
+            "text": "Lavora in una grande azienda di trasporti.",
+            "textLang": "it",
+            "translation": "He works in a large transport company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and steady, describing a workplace",
+            "note": null,
+            "matchedForm": "azienda",
+            "matchedTranslationForm": "company"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'azienda",
+    "lemma": "azienda",
+    "reading": null,
     "ipa": "/aˈtsjɛnda/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aˈtsjɛnda/",
+        "why": "Wrong voicing: 'z' in 'azienda' is voiced /ddz/, not voiceless /ts/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(agriculture) An agricultural enterprise or farm.",
+        "why": "'Azienda' alone does not mean farm; 'azienda agricola' is a collocation of sense 0."
+      }
+    ],
+    "growth": 0.664
   }
 }

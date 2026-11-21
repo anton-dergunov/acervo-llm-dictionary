@@ -72,6 +72,74 @@
     "primaryGloss": "cough",
     "emotion": "annoyed and slightly tired, feeling the strain in the throat",
     "notes": [
+      "Used equally often as a noun and as an intransitive verb ('to cough').",
+      "Note that the second syllable 嗽 (sou) is pronounced in the neutral tone."
+    ],
+    "senses": [
+      {
+        "id": "rix1beirqsshqzb",
+        "order": 0,
+        "definition": "The act or sound of forcing air out of the throat, or an illness that causes this.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cough"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "083psp9fstaupp0",
+            "text": "他的咳嗽还没好。",
+            "textLang": "zh",
+            "translation": "His cough hasn't gotten better yet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "咳嗽",
+            "matchedTranslationForm": "cough"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "咳嗽",
+    "lemma": "咳嗽",
+    "reading": "ké sou",
+    "ipa": "/kʰɤ˧˥ sou̯/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "cough",
+    "primaryGloss": "cough",
+    "emotion": "annoyed and slightly tired, feeling the strain in the throat",
+    "notes": [
       "While 咳嗽 functions as a noun, it is frequently used as a verb in spoken Chinese. When used as a verb, it often takes an object or is modified by frequency, like 咳嗽了两次 (coughed twice).",
       "Do not confuse 咳嗽 (ké sou) with 吐 (tù), which means to vomit or spit."
     ],
@@ -119,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When used as a verb, it often takes an object",
+        "why": "咳嗽 is an intransitive verb and cannot take a direct object."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 咳嗽 (ké sou) with 吐 (tù)",
+        "why": "咳嗽 and 吐 look and sound completely different; learners do not confuse them."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "他因为感冒而咳嗽。",
+        "why": "Entry POS is noun, but the example uses 咳嗽 as a verb after 而."
+      }
+    ],
+    "growth": 0.703
   }
 }

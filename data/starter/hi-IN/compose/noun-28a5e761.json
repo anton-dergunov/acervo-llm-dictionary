@@ -67,6 +67,95 @@
     "headword": "घड़ी",
     "lemma": "घड़ी",
     "reading": null,
+    "ipa": "/ɡʱə.ɽiː/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "clock; watch",
+    "primaryGloss": "watch",
+    "emotion": null,
+    "notes": [
+      "Covers both a wristwatch and a clock; to specify, use 'हाथ की घड़ी' (wristwatch) or 'दीवार घड़ी' (wall clock)."
+    ],
+    "senses": [
+      {
+        "id": "s6quz53rdcye5x5",
+        "order": 0,
+        "definition": "A device that shows the time, either worn on the wrist or placed on a wall or table.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "watch",
+              "clock"
+            ]
+          }
+        ],
+        "domain": "timepiece",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "dvsuim1aqmecfcs",
+            "text": "उसने नई घड़ी खरीदी है।",
+            "textLang": "hi",
+            "translation": "She has bought a new watch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sharing a bit of news about a purchase, pleased and conversational",
+            "note": null,
+            "matchedForm": "घड़ी",
+            "matchedTranslationForm": "watch"
+          },
+          {
+            "id": "u2fiws081ejvl89",
+            "text": "दीवार पर घड़ी लगी है।",
+            "textLang": "hi",
+            "translation": "There is a clock on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "noting a simple fact in a room, helpful and informative",
+            "note": null,
+            "matchedForm": "घड़ी",
+            "matchedTranslationForm": "clock"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "घड़ी",
+    "lemma": "घड़ी",
+    "reading": null,
     "ipa": "/ɡəɽiː/",
     "pos": "noun",
     "gender": "feminine",
@@ -167,5 +256,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡəɽiː/",
+        "why": "घ is breathy voiced /ɡʱ/, not plain /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "senses: [0] ... clock ... [1] ... watch",
+        "why": "Hindi घड़ी is a single concept covering both clocks and watches; English translation split."
+      }
+    ],
+    "growth": 0.662
   }
 }

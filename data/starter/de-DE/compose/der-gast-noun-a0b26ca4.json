@@ -72,6 +72,117 @@
     "primaryGloss": "guest",
     "emotion": "welcoming and attentive, thinking of someone who just arrived",
     "notes": [
+      "Plural: 'die Gäste'.",
+      "In a restaurant, bar, or hotel, paying customers are called 'Gäste', whereas in a shop they are 'Kunden'."
+    ],
+    "senses": [
+      {
+        "id": "zjfhptwrck9cbu1",
+        "order": 0,
+        "definition": "A person invited to visit someone's home or attend a social event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest",
+              "visitor"
+            ]
+          }
+        ],
+        "domain": "hospitality",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "s0onsoeo6gf8y6u",
+            "text": "Wir erwarten heute Abend einen Gast zum Essen.",
+            "textLang": "de",
+            "translation": "We are expecting a guest for dinner this evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and busy, preparing everything for a nice dinner",
+            "note": null,
+            "matchedForm": "Gast",
+            "matchedTranslationForm": "guest"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "29nbasyv63nu30k",
+        "order": 1,
+        "definition": "A paying customer in a restaurant, café, bar, or hotel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest",
+              "customer",
+              "patron"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "tjxxh5fdji65a25",
+            "text": "Der Kellner bringt dem Gast die Speisekarte.",
+            "textLang": "de",
+            "translation": "The waiter brings the customer the menu.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and polite, observing a service interaction",
+            "note": null,
+            "matchedForm": "Gast",
+            "matchedTranslationForm": "customer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Gast",
+    "lemma": "Gast",
+    "reading": null,
+    "ipa": "/ɡast/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "guest; visitor; customer",
+    "primaryGloss": "guest",
+    "emotion": "welcoming and attentive, thinking of someone who just arrived",
+    "notes": [
       "In German, 'Gast' is used for both a guest invited to your home and a customer in a restaurant or cafe (where they are called 'Restaurantgäste' or 'Hotelgäste').",
       "It is a versatile word, so if you are at a cafe, you are technically a 'Gast' there."
     ],
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "It is a versatile word, so if you are at a cafe",
+        "why": "Both notes merely repeat the definitions; umlaut plural 'die Gäste' is missing."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "in a restaurant, hotel, or shop.",
+        "why": "Shop customers are 'Kunden', not 'Gäste'; 'Gast' applies to hospitality."
+      }
+    ],
+    "growth": 0.804
   }
 }

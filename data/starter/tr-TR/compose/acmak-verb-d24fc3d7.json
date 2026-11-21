@@ -58,6 +58,157 @@
     "headword": "açmak",
     "lemma": "açmak",
     "reading": null,
+    "ipa": "/atʃˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to open; to turn on; to set up",
+    "primaryGloss": "open",
+    "emotion": "eager and helpful, reaching out to change things",
+    "notes": [
+      "Takes a direct object in the accusative case (e.g., 'kapıyı açmak' – to open the door). Its opposite in both 'open' and 'turn on' senses is 'kapatmak' (to close, to turn off)."
+    ],
+    "senses": [
+      {
+        "id": "joy815ezwuf61cg",
+        "order": 0,
+        "definition": "To move something from a closed position so that people or things can pass through or be seen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "open",
+              "unfasten"
+            ]
+          }
+        ],
+        "domain": "opening",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "3vj1ijabgwiluv2",
+            "text": "Hava çok sıcak, lütfen pencereyi açar mısın?",
+            "textLang": "tr",
+            "translation": "The weather is very hot, could you please open the window?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "açar mısın",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "locdz398uua2v9p",
+        "order": 1,
+        "definition": "To start the operation of a machine, light, tap, or electronic device.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "turn on",
+              "switch on"
+            ]
+          }
+        ],
+        "domain": "devices",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "ljrbmy6ck1a2tq0",
+            "text": "Hava kararınca lambayı açtım.",
+            "textLang": "tr",
+            "translation": "When it got dark, I turned on the lamp.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "açtım",
+            "matchedTranslationForm": "turned on"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6rgjcryagtzf0ri",
+        "order": 2,
+        "definition": "To start or establish a business, course, or account.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "open",
+              "start",
+              "set up"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "dto3w2b27pbcqj9",
+            "text": "Mahallede yeni bir dükkan açmak istiyorlar.",
+            "textLang": "tr",
+            "translation": "They want to open a new shop in the neighborhood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "interested and curious about the new neighborhood changes",
+            "note": null,
+            "matchedForm": "açmak",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "açmak",
+    "lemma": "açmak",
+    "reading": null,
     "ipa": "/aʧˈmak/",
     "pos": "verb",
     "gender": null,
@@ -202,5 +353,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Açmak is a very common verb with many meanings",
+        "why": "Pure filler restating the glosses without adding grammar or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with kapatmak, which means to close",
+        "why": "Simply states the antonym as a 'do not confuse' note."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Lütfen pencereyi açmak için yardım et.",
+        "why": "Awkward phrasing trained to force the infinitive 'açmak'; conjugated forms are much more natural."
+      }
+    ],
+    "growth": 1.057
   }
 }

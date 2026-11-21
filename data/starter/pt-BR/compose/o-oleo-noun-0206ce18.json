@@ -58,6 +58,114 @@
     "headword": "o óleo",
     "lemma": "óleo",
     "reading": null,
+    "ipa": "/ˈɔ.lju/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "oil",
+    "primaryGloss": "oil",
+    "emotion": "practical and everyday, getting ready to prepare a meal",
+    "notes": [
+      "In the kitchen, 'óleo' refers to vegetable or cooking oil, whereas olive oil is called 'azeite'."
+    ],
+    "senses": [
+      {
+        "id": "naxi7szjn6ux8tb",
+        "order": 0,
+        "definition": "A thick, smooth liquid obtained from plants, animals, or petroleum, used in cooking, cosmetics, or engines.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "oil",
+              "cooking oil",
+              "motor oil"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "m8c2az2kr63ob06",
+            "text": "Esquente um pouco de óleo na frigideira.",
+            "textLang": "pt",
+            "translation": "Heat a little oil in the pan.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and hurried, starting to cook",
+            "note": null,
+            "matchedForm": "óleo",
+            "matchedTranslationForm": "oil"
+          },
+          {
+            "id": "duqxskcclfbtnik",
+            "text": "Preciso trocar o óleo do carro.",
+            "textLang": "pt",
+            "translation": "I need to change the car's oil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and slightly annoyed by car maintenance",
+            "note": null,
+            "matchedForm": "óleo",
+            "matchedTranslationForm": "oil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "naxi7szjn6ux8tb",
+      "from": "Líquido graso que se usa para cozinhar.",
+      "to": "A greasy liquid used for cooking food.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:22Z"
+    },
+    {
+      "sense": "g1x3om3m4hr6u7k",
+      "from": "Líquido viscoso usado para lubrificar motores de carros.",
+      "to": "A thick liquid used to lubricate car engines.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:22Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o óleo",
+    "lemma": "óleo",
+    "reading": null,
     "ipa": "/ˈɔ.lu/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,22 +269,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "naxi7szjn6ux8tb",
-      "from": "Líquido graso que se usa para cozinhar.",
-      "to": "A greasy liquid used for cooking food.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:22Z"
-    },
-    {
-      "sense": "g1x3om3m4hr6u7k",
-      "from": "Líquido viscoso usado para lubrificar motores de carros.",
-      "to": "A thick liquid used to lubricate car engines.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:22Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɔ.lu/",
+        "why": "Missing the unstressed 'e' (/i/ or /j/); in Brazil it is /ˈɔ.li.u/ or /ˈɔ.lju/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A thick liquid used to lubricate car engines.",
+        "why": "Cooking oil and motor oil are applications of the same basic substance sense 'oil'."
+      }
+    ],
+    "growth": 1.0
+  }
 }

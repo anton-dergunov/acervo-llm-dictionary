@@ -60,6 +60,115 @@
     "headword": "양",
     "lemma": "양",
     "reading": null,
+    "ipa": "/jaŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "amount; quantity; sheep",
+    "primaryGloss": "amount",
+    "emotion": null,
+    "notes": [
+      "양 (amount, 量) and 양 (sheep, 羊) are unrelated homonyms.",
+      "In the 'amount' sense, it is pronounced and spelled 량 when attached as the second part of a compound word after certain consonants (e.g., 수량, 분량)."
+    ],
+    "senses": [
+      {
+        "id": "xb3yszsjvcg6qnd",
+        "order": 0,
+        "definition": "How much of something there is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "amount",
+              "quantity"
+            ]
+          }
+        ],
+        "domain": "amount",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "aetsy5k1tptn7mk",
+            "text": "음식의 양이 너무 많아요.",
+            "textLang": "ko",
+            "translation": "There is too much food.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly overwhelmed, looking at a large plate of food",
+            "note": null,
+            "matchedForm": "양",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "95m56qn2jv2lvxw",
+        "order": 1,
+        "definition": "A farm animal with thick wool kept for its wool and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "oxkd33sgvnun4c1",
+            "text": "목장에서 양을 보았다.",
+            "textLang": "ko",
+            "translation": "I saw sheep at the ranch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, recounting a pleasant visit to a farm",
+            "note": null,
+            "matchedForm": "양",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "양",
+    "lemma": "양",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -201,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[2].definition",
+        "quote": "A prefix indicating Western-style clothing or items.",
+        "why": "Entry is a noun, not a bound prefix, and the example uses a different word (양복)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sheep; amount; Western-style",
+        "why": "'Western-style' is a bound prefix, not a standalone noun sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word '양' is a homonym. Its most common meaning in daily",
+        "why": "Restates the senses; misses the initial-sound rule (량 -> 양) for the 'amount' sense."
+      }
+    ],
+    "growth": 0.723
   }
 }

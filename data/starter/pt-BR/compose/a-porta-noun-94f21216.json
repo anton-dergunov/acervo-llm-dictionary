@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "door",
+    "primaryGloss": "door",
+    "emotion": "waiting for someone to arrive, calm and everyday",
+    "notes": [
+      "Also used for a car door ('a porta do carro'). For a large outer gate or garage door, use 'o portão'."
+    ],
+    "senses": [
+      {
+        "id": "re74f66tslq9ti9",
+        "order": 0,
+        "definition": "A movable barrier used to close an opening in a wall, building, or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door"
+            ]
+          }
+        ],
+        "domain": "entrance",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "4ec4ihsq22cd4y5",
+            "text": "Abra a porta, por favor.",
+            "textLang": "pt",
+            "translation": "Open the door, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, asking for someone to let them in",
+            "note": null,
+            "matchedForm": "porta",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a porta",
+    "lemma": "porta",
+    "reading": null,
+    "ipa": "/ˈpɔʁ.tɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "door; gateway",
     "primaryGloss": "door",
     "emotion": "waiting for someone to arrive, calm and everyday",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "door; gateway",
+        "why": "Includes 'gateway', which is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both physical doors to enter a room or building",
+        "why": "Restates the definition without adding useful learner information."
+      }
+    ],
+    "growth": 1.06
   }
 }

@@ -71,6 +71,100 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "shop assistant; store clerk; server",
+    "primaryGloss": "shop assistant",
+    "emotion": "matter-of-fact and helpful, like someone ready to assist you in a store",
+    "notes": [
+      "Covers staff in both retail shops and restaurants or cafes.",
+      "To call a staff member over, say すみません (sumimasen, 'excuse me'). When referring to them politely, add さん: 店員さん (ten'in-san)."
+    ],
+    "senses": [
+      {
+        "id": "4dodx03go9n9rjc",
+        "order": 0,
+        "definition": "A person who works serving customers in a shop, store, restaurant, or cafe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop assistant",
+              "store clerk",
+              "server",
+              "waiter",
+              "waitress"
+            ]
+          }
+        ],
+        "domain": "occupation",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "k67hqjyo1s6gs03",
+            "text": "店員に服のサイズを聞きました。",
+            "textLang": "ja",
+            "translation": "I asked the shop assistant about the clothing size.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and curious, wanting to get the right fit",
+            "note": null,
+            "matchedForm": "店員",
+            "matchedTranslationForm": "shop assistant"
+          },
+          {
+            "id": "55ncwvubf43s2c5",
+            "text": "店員が注文した料理を持ってきました。",
+            "textLang": "ja",
+            "translation": "The server brought the food I ordered.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral observation of a routine service interaction",
+            "note": null,
+            "matchedForm": "店員",
+            "matchedTranslationForm": "server"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "店員",
+    "lemma": "店員",
+    "reading": "てんいん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑‍💼",
+    "topics": [
+      "Work",
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "shop assistant; store clerk; restaurant server",
     "primaryGloss": "shop assistant",
     "emotion": "matter-of-fact and helpful, like someone ready to assist you in a store",
@@ -165,5 +259,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (retail) ... [1] (restaurant) ...",
+        "why": "店員 is one concept in Japanese (staff at a shop or restaurant); splitting is English-driven."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike in English, you do not use 'ten-in' to address the person",
+        "why": "English speakers do not address staff as 'shop assistant' either; 店員さん can be used."
+      }
+    ],
+    "growth": 0.777
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "red",
     "emotion": "simple and direct, pointing out something vivid in the world",
     "notes": [
+      "An i-adjective used before nouns or as a predicate (赤いリンゴ, 'a red apple'). To name the color itself as a noun, use 赤 (aka)."
+    ],
+    "senses": [
+      {
+        "id": "wmfop2u0plmih2s",
+        "order": 0,
+        "definition": "Having the color of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "0z885s14hchyfq8",
+            "text": "彼女は赤いドレスを着ている。",
+            "textLang": "ja",
+            "translation": "She is wearing a red dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "赤い",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "赤い",
+    "lemma": "赤い",
+    "reading": "あかい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "simple and direct, pointing out something vivid in the world",
+    "notes": [
       "赤い (akai) is an i-adjective used for most things that are red. When describing the colour as a noun, use 赤 (aka) instead."
     ],
     "senses": [
@@ -115,5 +182,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (color) The basic color red. [1] (blood) The color of blood.",
+        "why": "Both senses describe the exact same color 'red'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The basic color red.",
+        "why": "An adjective is defined as a noun ('The basic color red')."
+      }
+    ],
+    "growth": 1.197
   }
 }

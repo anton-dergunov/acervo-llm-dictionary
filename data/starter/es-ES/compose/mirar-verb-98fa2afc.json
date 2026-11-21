@@ -68,6 +68,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to look at; to watch",
+    "primaryGloss": "to look at",
+    "emotion": "attentive and present, focusing one's senses on a specific object",
+    "notes": [
+      "Unlike English 'look at', 'mirar' takes a direct object without a preposition for things (e.g., 'Miro la foto', not *'Miro a la foto'*); use 'a' only before a person.",
+      "While 'mirar' means 'to look at' (focusing your attention), 'ver' means 'to see' and is also the verb used in Spain for watching TV or a movie ('ver la tele', 'ver una película')."
+    ],
+    "senses": [
+      {
+        "id": "1zqjgdsgmv36ffk",
+        "order": 0,
+        "definition": "To direct your eyes towards something or someone and pay attention to it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to look at",
+              "to look",
+              "to watch"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "gff9ojwuqenp0sn",
+            "text": "Mira esa foto en la pared.",
+            "textLang": "es",
+            "translation": "Look at that photo on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Mira",
+            "matchedTranslationForm": "Look at"
+          },
+          {
+            "id": "0di3036gt8zroub",
+            "text": "Tienes que mirar a la gente a los ojos cuando hablas.",
+            "textLang": "es",
+            "translation": "You have to look people in the eye when you speak.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mirar",
+            "matchedTranslationForm": "look"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h5wj20tcnif32kj",
+        "order": 1,
+        "definition": "To face or overlook a particular direction or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to face",
+              "to look out on",
+              "to overlook"
+            ]
+          }
+        ],
+        "domain": "orientation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "4ri10nls1fa15yt",
+            "text": "Mi habitación mira al mar.",
+            "textLang": "es",
+            "translation": "My room looks out on the sea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mira",
+            "matchedTranslationForm": "looks out on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "mirar",
+    "lemma": "mirar",
+    "reading": null,
+    "ipa": "/miˈɾaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to look at; to watch; to see",
     "primaryGloss": "look",
     "emotion": "attentive and present, focusing one's senses on a specific object",
@@ -159,5 +292,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to look at; to watch; to see",
+        "why": "'to see' is 'ver', not 'mirar', and is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Vamos a mirar una película esta noche.",
+        "why": "In Spain, one says 'ver una película', not 'mirar' (as note[0] even states)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "You have to look into the eyes when you speak.",
+        "why": "Calqued translation; natural English is 'look people in the eye'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention that 'mirar' is transitive (takes a direct object without 'a' for things)."
+      }
+    ],
+    "growth": 1.349
   }
 }

@@ -58,6 +58,74 @@
     "headword": "istasyon",
     "lemma": "istasyon",
     "reading": null,
+    "ipa": "/is.tasˈjon/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "station",
+    "primaryGloss": "station",
+    "emotion": "busy and purposeful, waiting for a journey to begin",
+    "notes": [
+      "Used for train and metro stations, as well as in 'benzin istasyonu' (petrol station). A bus or tram stop is 'durak', and an intercity bus station is 'otogar'."
+    ],
+    "senses": [
+      {
+        "id": "54mb5pxumnjqhwa",
+        "order": 0,
+        "definition": "A building and platforms where trains or metro trains stop for passengers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "station",
+              "train station"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚉",
+        "examples": [
+          {
+            "id": "806ewprem99wi3f",
+            "text": "Tren istasyona zamanında geldi.",
+            "textLang": "tr",
+            "translation": "The train arrived at the station on time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and punctual, watching the train pull in",
+            "note": null,
+            "matchedForm": "istasyona",
+            "matchedTranslationForm": "station"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "istasyon",
+    "lemma": "istasyon",
+    "reading": null,
     "ipa": "/is.ta.sjojn/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/is.ta.sjojn/",
+        "why": "Corrupt IPA transcription with an extraneous 'j'; should be /is.tasˈjon/."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for train, metro, and bus stations.",
+        "why": "In Turkish, bus stops are 'durak' and intercity bus terminals are 'otogar', not 'istasyon'."
+      }
+    ],
+    "growth": 1.217
   }
 }

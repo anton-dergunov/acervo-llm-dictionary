@@ -57,6 +57,76 @@
     "language": "ja",
     "headword": "上司",
     "lemma": "上司",
+    "reading": "じょうし",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👔",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "boss; supervisor; superior",
+    "primaryGloss": "boss",
+    "emotion": "a mix of respect and caution, as when acknowledging authority",
+    "notes": [
+      "The standard workplace term for one's superior in the hierarchy (unlike ボス, which sounds casual or refers to a gang leader).",
+      "Used when talking about your superior to others, not as a form of address; address them by their title (e.g., 部長) or name with さん."
+    ],
+    "senses": [
+      {
+        "id": "yfxpr6ghe6x50v6",
+        "order": 0,
+        "definition": "A person of higher rank who is in charge of you at work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boss",
+              "supervisor",
+              "superior"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "👔",
+        "examples": [
+          {
+            "id": "69824i25d8sdg1i",
+            "text": "明日の会議の予定を上司に確認しました。",
+            "textLang": "ja",
+            "translation": "I confirmed the schedule for tomorrow's meeting with my boss.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and diligent, reporting on a completed task",
+            "note": null,
+            "matchedForm": "上司",
+            "matchedTranslationForm": "boss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "上司",
+    "lemma": "上司",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (じょうし) for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "Unlike 'boss' (ボssu)",
+        "why": "Corrupted script mixing katakana and Latin letters in 'ボssu' (ボス)."
+      }
+    ],
+    "growth": 0.887
   }
 }

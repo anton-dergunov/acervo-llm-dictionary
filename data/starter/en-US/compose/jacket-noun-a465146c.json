@@ -70,6 +70,76 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "chaqueta; cazadora; saco",
+    "primaryGloss": "chaqueta",
+    "emotion": null,
+    "notes": [
+      "No confundir con 'coat', que suele referirse a un abrigo más largo y grueso para el invierno."
+    ],
+    "senses": [
+      {
+        "id": "ztz4xhp11v0swtr",
+        "order": 0,
+        "definition": "Prenda de vestir de manga larga que cubre el torso hasta la cintura o las caderas, usada como abrigo ligero o como parte de un traje.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "chaqueta",
+              "cazadora",
+              "saco",
+              "americana"
+            ]
+          }
+        ],
+        "domain": "ropa",
+        "emoji": "🧥",
+        "examples": [
+          {
+            "id": "hctzshat8fu5mcs",
+            "text": "Put on your jacket before you go outside.",
+            "textLang": "en",
+            "translation": "Ponte la chaqueta antes de salir.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and instructional, ensuring someone stays warm",
+            "note": null,
+            "matchedForm": "jacket",
+            "matchedTranslationForm": "chaqueta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "jacket",
+    "lemma": "jacket",
+    "reading": null,
+    "ipa": "/ˈdʒæk.ɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧥",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "chaqueta; americana; forro de libro",
     "primaryGloss": "chaqueta",
     "emotion": null,
@@ -160,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Outerwear jacket and suit jacket are shades of one upper-body garment sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2].definition",
+        "quote": "La cubierta protectora de papel de un libro.",
+        "why": "Dust jacket is not an everyday A2 sense worth a separate entry slot."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Aunque 'jacket' se usa normalmente para una prenda de abrigo, a veces",
+        "why": "Restates the senses instead of adding learner-relevant usage information."
+      }
+    ],
+    "growth": 0.579
   }
 }

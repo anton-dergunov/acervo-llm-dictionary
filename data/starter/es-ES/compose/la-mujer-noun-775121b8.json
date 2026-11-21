@@ -74,6 +74,131 @@
     "primaryGloss": "woman",
     "emotion": "warm and respectful, acknowledging someone with quiet dignity",
     "notes": [
+      "With a possessive ('mi mujer', 'tu mujer'), it means 'wife'. In Spain, 'mujer' is also used in conversation when speaking to a woman to soften a statement or show warmth, like 'hombre'."
+    ],
+    "senses": [
+      {
+        "id": "g2vw3x49i4q3ug4",
+        "order": 0,
+        "definition": "An adult female person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "woman"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "ghg6dlsosrf68yp",
+            "text": "Una mujer camina por el parque con su perro.",
+            "textLang": "es",
+            "translation": "A woman is walking through the park with her dog.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observational, describing a peaceful afternoon scene",
+            "note": null,
+            "matchedForm": "mujer",
+            "matchedTranslationForm": "woman"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vh4is9c3pc8slnz",
+        "order": 1,
+        "definition": "A woman to whom someone is married.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wife"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "💍",
+        "examples": [
+          {
+            "id": "mnso0xi9jcfo7ck",
+            "text": "Mi mujer trabaja en el hospital.",
+            "textLang": "es",
+            "translation": "My wife works at the hospital.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and affectionate when speaking about a loved one",
+            "note": null,
+            "matchedForm": "mujer",
+            "matchedTranslationForm": "wife"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "g2vw3x49i4q3ug4",
+      "from": "Persona adulta de sexo femenino.",
+      "to": "An adult female human.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    },
+    {
+      "sense": "vh4is9c3pc8slnz",
+      "from": "Persona con la que alguien está casado.",
+      "to": "A person to whom someone is married.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la mujer",
+    "lemma": "mujer",
+    "reading": null,
+    "ipa": "/muˈxeɾ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "woman; wife",
+    "primaryGloss": "woman",
+    "emotion": "warm and respectful, acknowledging someone with quiet dignity",
+    "notes": [
       "Depending on the context, \"mujer\" can mean either an adult female person or a wife.",
       "In Spain, it is also very common to use \"mujer\" as a conversational filler to soften a statement or show warmth when addressing someone directly, similar to \"hombre\" for a man."
     ],
@@ -163,22 +288,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "g2vw3x49i4q3ug4",
-      "from": "Persona adulta de sexo femenino.",
-      "to": "An adult female human.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    },
-    {
-      "sense": "vh4is9c3pc8slnz",
-      "from": "Persona con la que alguien está casado.",
-      "to": "A person to whom someone is married.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A person to whom someone is married.",
+        "why": "Defines 'spouse' rather than 'wife'; must specify a female spouse."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Depending on the context, \"mujer\" can mean either an adult female",
+        "why": "Merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.839
+  }
 }

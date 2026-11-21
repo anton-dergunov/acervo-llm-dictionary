@@ -68,6 +68,97 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "holiday, vacation",
+    "primaryGloss": "holiday",
+    "emotion": "excited and relaxed, looking forward to a break",
+    "notes": [
+      "Commonly used in the phrase 'op vakantie gaan' (to go on holiday/vacation).",
+      "Used both for a trip away and for a scheduled break from school or work."
+    ],
+    "senses": [
+      {
+        "id": "0wr27fynenop362",
+        "order": 0,
+        "definition": "A period of time off from work or school, or a trip taken for rest and pleasure.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "holiday",
+              "vacation",
+              "break"
+            ]
+          }
+        ],
+        "domain": "leisure",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "d7ido80bwq93w5q",
+            "text": "We gaan volgende week op vakantie naar Spanje.",
+            "textLang": "nl",
+            "translation": "We are going on holiday to Spain next week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and eager, planning a trip with friends",
+            "note": null,
+            "matchedForm": "vakantie",
+            "matchedTranslationForm": "holiday"
+          },
+          {
+            "id": "869dmpx2dhmizvr",
+            "text": "De kinderen hebben nu twee weken vakantie.",
+            "textLang": "nl",
+            "translation": "The children have two weeks of vacation now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vakantie",
+            "matchedTranslationForm": "vacation"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de vakantie",
+    "lemma": "vakantie",
+    "reading": null,
+    "ipa": "/vaːˈkɑntsi/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "holiday; vacation",
     "primaryGloss": "holiday",
     "emotion": "excited and relaxed, looking forward to a break",
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "School break and time off work or travel are the same everyday meaning of 'vakantie'."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "De kinderen hebben twee weken kerstvakantie.",
+        "why": "Uses the compound 'kerstvakantie' instead of the headword 'vakantie'."
+      }
+    ],
+    "growth": 0.871
   }
 }

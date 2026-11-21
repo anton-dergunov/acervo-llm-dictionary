@@ -68,6 +68,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "desk; agency; station",
+    "primaryGloss": "desk",
+    "emotion": "focused and orderly, ready to sit down and get things done",
+    "notes": [
+      "In the Netherlands, 'bureau' means a piece of furniture (desk) or an agency/station (such as the police station). For an office room or building where people work, use 'het kantoor'."
+    ],
+    "senses": [
+      {
+        "id": "slvir25wwuhxhg1",
+        "order": 0,
+        "definition": "A piece of furniture with a flat surface used for working, writing, or studying.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "desk"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🖥️",
+        "examples": [
+          {
+            "id": "awo6r7e3y3d08vy",
+            "text": "Hij zit achter zijn bureau te werken aan de computer.",
+            "textLang": "nl",
+            "translation": "He is sitting at his desk working on the computer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quietly concentrated, deep into daily tasks at the workspace",
+            "note": null,
+            "matchedForm": "bureau",
+            "matchedTranslationForm": "desk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kvk2uj18kam0989",
+        "order": 1,
+        "definition": "An organization, agency, or public department (especially a police station) that provides a specific service.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "agency",
+              "station",
+              "bureau",
+              "office"
+            ]
+          }
+        ],
+        "domain": "organization",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "be91rqk50fy5npn",
+            "text": "De dief werd door de agenten meegenomen naar het bureau.",
+            "textLang": "nl",
+            "translation": "The thief was taken to the station by the police officers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bureau",
+            "matchedTranslationForm": "station"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het bureau",
+    "lemma": "bureau",
+    "reading": null,
+    "ipa": "/byˈroː/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖥️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "desk; office; agency",
     "primaryGloss": "desk",
     "emotion": "focused and orderly, ready to sit down and get things done",
@@ -159,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik moet even bellen naar het reisbureau.",
+        "why": "Uses the compound 'reisbureau' instead of the standalone word 'bureau'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A room or department where professional business or services are conducted.",
+        "why": "Contradicts the note: 'bureau' in NL Dutch means an agency/station, not a room ('kantoor')."
+      }
+    ],
+    "growth": 1.113
   }
 }

@@ -68,6 +68,117 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "bebé; cariño",
+    "primaryGloss": "bebé",
+    "emotion": "tender and protective, often used with a soft, warm smile",
+    "notes": [
+      "El plural es 'babies'. También se usa delante de otro sustantivo para indicar que un animal es una cría (p. ej., 'a baby elephant')."
+    ],
+    "senses": [
+      {
+        "id": "v4q7oli7bnnwm2c",
+        "order": 0,
+        "definition": "Un niño recién nacido o muy pequeño que aún no camina ni habla bien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "bebé",
+              "nene",
+              "guagua"
+            ]
+          }
+        ],
+        "domain": "infancia",
+        "emoji": "👶",
+        "examples": [
+          {
+            "id": "smyamgn06810wfr",
+            "text": "The baby is crying because he is hungry.",
+            "textLang": "en",
+            "translation": "El bebé está llorando porque tiene hambre.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and empathetic, as if witnessing a small child in need",
+            "note": null,
+            "matchedForm": "baby",
+            "matchedTranslationForm": "bebé"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dof5ckbjuxah1j0",
+        "order": 1,
+        "definition": "Apelativo cariñoso usado para dirigirse a la pareja o a una persona muy querida.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cariño",
+              "amor",
+              "bebé"
+            ]
+          }
+        ],
+        "domain": "afecto",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "3r9qmr3az0ghnnd",
+            "text": "I will see you later, baby.",
+            "textLang": "en",
+            "translation": "Te veo más tarde, cariño.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "intimate and sweet, speaking to someone dear in a quiet moment",
+            "note": null,
+            "matchedForm": "baby",
+            "matchedTranslationForm": "cariño"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "baby",
+    "lemma": "baby",
+    "reading": null,
+    "ipa": "/ˈbeɪbi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👶",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "bebé; niño pequeño",
     "primaryGloss": "bebé",
     "emotion": "tender and protective, often used with a soft, warm smile",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bebé; niño pequeño",
+        "why": "Misses the second sense ('cariño') and includes 'niño pequeño' which is not in the glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Aunque 'baby' se refiere a un niño muy pequeño, en contextos",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.863
   }
 }

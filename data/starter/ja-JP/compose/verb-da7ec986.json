@@ -57,6 +57,118 @@
     "language": "ja",
     "headword": "思う",
     "lemma": "思う",
+    "reading": "おもう",
+    "ipa": "omoɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to think; to feel; to believe",
+    "primaryGloss": "to think",
+    "emotion": "reflective and thoughtful, as if weighing an idea in one's mind",
+    "notes": [
+      "Godan verb (思わない, 思います, 思って). Takes the quotation particle と after a plain-form clause (〜と思う).",
+      "In the present tense, 〜と思う expresses the speaker's own thought; for someone else's thoughts, use 〜と思っている.",
+      "Unlike 考える (かんがえる, to think over or figure out logically), 思う is for immediate impressions, feelings, and personal opinions."
+    ],
+    "senses": [
+      {
+        "id": "ds80fy176sh321k",
+        "order": 0,
+        "definition": "To have an opinion, belief, or supposition about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to think",
+              "to believe",
+              "to suppose"
+            ]
+          }
+        ],
+        "domain": "thought",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "6j9no3495bo6kyj",
+            "text": "私はこれが一番いいと思う。",
+            "textLang": "ja",
+            "translation": "I think this is the best one.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and steady, offering a personal viewpoint",
+            "note": null,
+            "matchedForm": "思う",
+            "matchedTranslationForm": "think"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lno3xeky3bffaxn",
+        "order": 1,
+        "definition": "To feel a certain way or have an impression about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to feel",
+              "to find"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "💖",
+        "examples": [
+          {
+            "id": "swyyyyp7jts4cnz",
+            "text": "それを聞いて不思議に思った。",
+            "textLang": "ja",
+            "translation": "I felt it was strange when I heard that.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "思った",
+            "matchedTranslationForm": "felt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "思う",
+    "lemma": "思う",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (おもう) for a word with kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "used for both deep cognitive thinking and expressing personal opinions",
+        "why": "False claim; deep cognitive thinking is 考える, which contradicts note[1]."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks essential grammar note on the quotation particle と and と思っている for third-person subjects."
+      }
+    ],
+    "growth": 0.901
   }
 }

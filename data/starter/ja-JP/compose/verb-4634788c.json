@@ -58,6 +58,115 @@
     "headword": "飛ぶ",
     "lemma": "飛ぶ",
     "reading": "とぶ",
+    "ipa": "tobɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to fly; to jump",
+    "primaryGloss": "to fly",
+    "emotion": "energetic and expansive, focusing on the freedom of movement through the air",
+    "notes": [
+      "Takes を for the space moved through (空を飛ぶ, 'to fly in the sky').",
+      "In the sense 'to jump' or 'to leap', it is also commonly written 跳ぶ. Do not confuse with 跳ねる (はねる), which implies hopping or bouncing."
+    ],
+    "senses": [
+      {
+        "id": "c7yix6qtuhvwfem",
+        "order": 0,
+        "definition": "To move through the air, such as a bird or airplane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fly"
+            ]
+          }
+        ],
+        "domain": "flight",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "8fiyrtk0vnzv3vj",
+            "text": "鳥が空を飛んでいる。",
+            "textLang": "ja",
+            "translation": "A bird is flying in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching a peaceful natural scene",
+            "note": null,
+            "matchedForm": "飛んでいる",
+            "matchedTranslationForm": "flying"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2qcdh3u7pnv4m13",
+        "order": 1,
+        "definition": "To push oneself off the ground into the air or across a gap.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to jump",
+              "to leap"
+            ]
+          }
+        ],
+        "domain": "jumping",
+        "emoji": "🤸",
+        "examples": [
+          {
+            "id": "1uwduyd904v5mhb",
+            "text": "犬が高く飛んだ。",
+            "textLang": "ja",
+            "translation": "The dog jumped high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "飛んだ",
+            "matchedTranslationForm": "jumped"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "飛ぶ",
+    "lemma": "飛ぶ",
+    "reading": "とぶ",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "彼は高いところから飛び降りた。",
+        "why": "Uses the compound verb 飛び降りる (to jump down) instead of the lemma 飛ぶ."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 飛ぶ primarily means to move through the air",
+        "why": "Restates the two senses; misses that the 'jump' sense is also written 跳ぶ."
+      }
+    ],
+    "growth": 0.974
   }
 }

@@ -74,6 +74,74 @@
     "primaryGloss": "spider",
     "emotion": null,
     "notes": [
+      "Masculine animate: the singular accusative matches the genitive ('Boję się tego pająka' – I'm afraid of this spider).",
+      "Do not confuse with 'pajęczyna', which is the spider's web."
+    ],
+    "senses": [
+      {
+        "id": "m0hsxw37ecrdvfi",
+        "order": 0,
+        "definition": "A small eight-legged creature that spins webs to catch insects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spider"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🕷️",
+        "examples": [
+          {
+            "id": "01xdi17dzuewu1p",
+            "text": "W kącie pokoju siedzi duży pająk.",
+            "textLang": "pl",
+            "translation": "A large spider is sitting in the corner of the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, pointing out a discovery to someone else",
+            "note": null,
+            "matchedForm": "pająk",
+            "matchedTranslationForm": "spider"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pająk",
+    "lemma": "pająk",
+    "reading": null,
+    "ipa": "/ˈpa.jɔŋk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕷️",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "spider",
+    "primaryGloss": "spider",
+    "emotion": null,
+    "notes": [
       "Note that the word is masculine and follows standard inflection patterns for animate nouns.",
       "Be careful not to confuse 'pająk' with 'pajęczyna', which refers specifically to the web the spider builds."
     ],
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large, decorative ceiling light fixture with many arms and bulbs.",
+        "why": "Dated/literary sense; everyday Polish for chandelier is 'żyrandol', not 'pająk'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that the word is masculine and follows standard inflection patterns",
+        "why": "Restates the gender field without giving concrete grammar help."
+      }
+    ],
+    "growth": 0.618
   }
 }

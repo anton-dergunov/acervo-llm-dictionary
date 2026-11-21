@@ -68,6 +68,92 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "expensive",
+    "primaryGloss": "expensive",
+    "emotion": "hesitant and cautious, looking at the price tag with concern",
+    "notes": [
+      "Often used as an adverb in the singular masculine form with verbs like 'costar' or 'salir' (e.g., 'sale muy caro' — it works out very expensive)."
+    ],
+    "senses": [
+      {
+        "id": "gr8gvuinqebqrc0",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "9gzwr69klzojdin",
+            "text": "Este restaurante es demasiado caro para cenar cada semana.",
+            "textLang": "es",
+            "translation": "This restaurant is too expensive to have dinner at every week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "caro",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "gr8gvuinqebqrc0",
+      "from": "Que cuesta mucho dinero.",
+      "to": "Costing a lot of money.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    },
+    {
+      "sense": "jqrt2dk56u6jil3",
+      "from": "Que se ama mucho o se aprecia con afecto.",
+      "to": "Loved very much and held in deep affection.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "caro",
+    "lemma": "caro",
+    "reading": null,
+    "ipa": "/ˈkaɾo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "expensive; dear",
     "primaryGloss": "expensive",
     "emotion": "hesitant and cautious, looking at the price tag with concern",
@@ -161,22 +247,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "gr8gvuinqebqrc0",
-      "from": "Que cuesta mucho dinero.",
-      "to": "Costing a lot of money.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    },
-    {
-      "sense": "jqrt2dk56u6jil3",
-      "from": "Que se ama mucho o se aprecia con afecto.",
-      "to": "Loved very much and held in deep affection.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Loved very much and held in deep affection.",
+        "why": "Literary/archaic sense in Spanish; everyday Spanish uses 'querido' for 'dear'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe something that costs a lot of money. Remember that",
+        "why": "Restates the definition and generic Spanish grammar rules while missing adverbial 'cuesta caro'."
+      }
+    ],
+    "growth": 0.655
+  }
 }

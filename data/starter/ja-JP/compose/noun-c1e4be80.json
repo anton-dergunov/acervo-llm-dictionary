@@ -77,6 +77,95 @@
     "primaryGloss": "fish",
     "emotion": "matter-of-fact and calm, like noting something present in the environment",
     "notes": [
+      "Covers both the living animal and fish as food. The reading うお is mainly seen in compounds (such as 金魚, きんぎょ, 'goldfish' or 魚市場, うおいちば, 'fish market')."
+    ],
+    "senses": [
+      {
+        "id": "zutoc7fy0t1rgm4",
+        "order": 0,
+        "definition": "A cold-blooded animal with gills and fins that lives in water, or its flesh eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animals",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "4104gk2k38opubg",
+            "text": "川に魚がたくさんいます。",
+            "textLang": "ja",
+            "translation": "There are many fish in the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly curious, pointing out something in the water",
+            "note": null,
+            "matchedForm": "魚",
+            "matchedTranslationForm": "fish"
+          },
+          {
+            "id": "d06rnvmrxgzfz4i",
+            "text": "今日の晩ごはんは焼き魚です。",
+            "textLang": "ja",
+            "translation": "Tonight's dinner is grilled fish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anticipatory and pleased, thinking about a meal",
+            "note": null,
+            "matchedForm": "魚",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "魚",
+    "lemma": "魚",
+    "reading": "さかな",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Food and drink",
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "fish",
+    "primaryGloss": "fish",
+    "emotion": "matter-of-fact and calm, like noting something present in the environment",
+    "notes": [
       "While 'さかな' is the common word for both the animal and the food, you might sometimes see 'うお' (uo) used in compound words or to sound more traditional or poetic when referring specifically to the living animal."
     ],
     "senses": [
@@ -164,5 +253,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The flesh of a fish used as food.",
+        "why": "Animal vs. food is an English countability distinction; in Japanese 魚 is a single sense."
+      }
+    ],
+    "growth": 0.838
   }
 }

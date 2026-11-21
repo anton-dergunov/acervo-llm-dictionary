@@ -58,6 +58,72 @@
     "headword": "συχνά",
     "lemma": "συχνά",
     "reading": null,
+    "ipa": "/siˈxna/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "often; frequently",
+    "primaryGloss": "often",
+    "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "gmpmcfm92zmaelo",
+        "order": 0,
+        "definition": "Many times or on many occasions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "nam5lfhwy9ukbif",
+            "text": "Πηγαίνει συχνά στην πόλη.",
+            "textLang": "el",
+            "translation": "He goes to the city often.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "συχνά",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "συχνά",
+    "lemma": "συχνά",
+    "reading": null,
     "ipa": "/siçˈna/",
     "pos": "adv",
     "gender": null,
@@ -120,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Πηγαινόρχεται συχνά στην πόλη.",
+        "why": "'Πηγαινόρχεται' is a misspelling of 'πηγαινοέρχεται' (goes back and forth), which also mismatches the translation."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/siçˈna/",
+        "why": "The velar fricative before /n/ is [x], not palatal [ç]: /siˈxna/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe actions that happen on a regular or repeated basis.",
+        "why": "Merely restates the meaning of 'often'."
+      }
+    ],
+    "growth": 0.54
   }
 }

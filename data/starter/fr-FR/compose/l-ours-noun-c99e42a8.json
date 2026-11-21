@@ -58,6 +58,91 @@
     "headword": "l'ours",
     "lemma": "ours",
     "reading": null,
+    "ipa": "/uʁs/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "heavy and grounded, plodding through the dark woods",
+    "notes": [
+      "The final 's' in 'ours' is pronounced /s/, both in the singular ('un ours' /œ̃.n‿uʁs/) and in the plural ('des ours' /de.z‿uʁs/)."
+    ],
+    "senses": [
+      {
+        "id": "6uh44coj03imr02",
+        "order": 0,
+        "definition": "A large wild animal with thick fur that lives in forests and mountains.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "d8mblq57dfyeelv",
+            "text": "On peut croiser un ours brun lors d'une randonnée en montagne.",
+            "textLang": "fr",
+            "translation": "You might run into a brown bear during a mountain hike.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and wary, warning a companion about potential danger",
+            "note": null,
+            "matchedForm": "ours",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "6uh44coj03imr02",
+      "from": "Grand mammifère plantigrade au pelage épais et dense, qui vit dans les forêts et les montagnes.",
+      "to": "A large wild animal with thick fur that lives in forests and mountains.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "hnwly0q66im3csm",
+      "from": "Personne peu sociable, renfrognée ou taciturne.",
+      "to": "An unfriendly person who does not like to talk to others.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'ours",
+    "lemma": "ours",
+    "reading": null,
     "ipa": "/uʁ/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,22 +246,41 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "6uh44coj03imr02",
-      "from": "Grand mammifère plantigrade au pelage épais et dense, qui vit dans les forêts et les montagnes.",
-      "to": "A large wild animal with thick fur that lives in forests and mountains.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "hnwly0q66im3csm",
-      "from": "Personne peu sociable, renfrognée ou taciturne.",
-      "to": "An unfriendly person who does not like to talk to others.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/uʁ/",
+        "why": "The final 's' is pronounced in modern French: /uʁs/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "(we say /uʁ/, not /u/)",
+        "why": "Gives the wrong IPA (/uʁ/ omits the /s/ sound)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "In the plural ('les ours'), the 's' remains silent, pronounced /uʁ/.",
+        "why": "In standard modern French, the 's' is pronounced /uʁs/ in both singular and plural."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "An unfriendly person who does not like to talk to others.",
+        "why": "Figurative idiom, marginal for an A2 core vocabulary entry."
+      }
+    ],
+    "growth": 0.558
+  }
 }

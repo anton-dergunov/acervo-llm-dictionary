@@ -72,6 +72,115 @@
     "primaryGloss": "leg",
     "emotion": "matter-of-fact and grounded, pointing out a basic physical part",
     "notes": [
+      "The plural is 'benen' for legs, and 'beenderen' for bones of the skeleton.",
+      "For a single bone (especially in food or for a dog), 'het bot' is much more common in everyday speech than 'het been'.",
+      "Used for human legs (and horses); for most other animals, use 'de poot'."
+    ],
+    "senses": [
+      {
+        "id": "m6rq4lxm0uoj4en",
+        "order": 0,
+        "definition": "One of the limbs of the body that a person uses for standing and walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg"
+            ]
+          }
+        ],
+        "domain": "limb",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "oblhm5fzwibxpt0",
+            "text": "Ik heb pijn in mijn been na het hardlopen.",
+            "textLang": "nl",
+            "translation": "My leg hurts after running.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and sore, rubbing the aching limb",
+            "note": null,
+            "matchedForm": "been",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cr19o4ouvtcsfm3",
+        "order": 1,
+        "definition": "One of the hard parts that make up the skeleton inside the body, or the material they are made of.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bone"
+            ]
+          }
+        ],
+        "domain": "skeleton",
+        "emoji": "🦴",
+        "examples": [
+          {
+            "id": "5hhat6gpsrotr5o",
+            "text": "De arts zag een breuk in het been.",
+            "textLang": "nl",
+            "translation": "The doctor saw a fracture in the bone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "been",
+            "matchedTranslationForm": "bone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het been",
+    "lemma": "been",
+    "reading": null,
+    "ipa": "/beːn/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg; bone",
+    "primaryGloss": "leg",
+    "emotion": "matter-of-fact and grounded, pointing out a basic physical part",
+    "notes": [
       "In Dutch, 'het been' can refer both to the limb used for walking and to the hard material inside the body (bone).",
       "Do not confuse 'het been' (leg/bone) with 'de been', which does not exist in standard Dutch with the same meaning since it is a neuter noun."
     ],
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'het been' can refer both to the limb used",
+        "why": "Merely restates the two senses; misses the two distinct plurals ('benen' vs 'beenderen')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "with 'de been', which does not exist in standard Dutch",
+        "why": "Filler gender note, and false in idioms like 'op de been zijn'."
+      }
+    ],
+    "growth": 1.046
   }
 }

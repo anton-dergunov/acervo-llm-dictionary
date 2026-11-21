@@ -72,6 +72,115 @@
     "primaryGloss": "drive",
     "emotion": "focused and alert, attentive to the road ahead",
     "notes": [
+      "In spoken Greek, the colloquial synonym οδηγάω is also heard; aorist οδήγησα."
+    ],
+    "senses": [
+      {
+        "id": "8s4pc3c0is1aq3u",
+        "order": 0,
+        "definition": "To control the movement of a car or other vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drive"
+            ]
+          }
+        ],
+        "domain": "drive",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "1a6qg6cflh4r93o",
+            "text": "Οδηγώ προσεκτικά στην πόλη.",
+            "textLang": "el",
+            "translation": "I drive carefully in the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and responsible, keeping a steady pace",
+            "note": null,
+            "matchedForm": "Οδηγώ",
+            "matchedTranslationForm": "drive"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kx9lu00pey2zdsw",
+        "order": 1,
+        "definition": "To take someone to a place, or (of a road or path) to go to a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lead",
+              "guide",
+              "direct"
+            ]
+          }
+        ],
+        "domain": "lead",
+        "emoji": "🧭",
+        "examples": [
+          {
+            "id": "x8rayofhhfagtds",
+            "text": "Αυτός ο δρόμος οδηγεί στο κέντρο.",
+            "textLang": "el",
+            "translation": "This road leads to the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, pointing out a direction",
+            "note": null,
+            "matchedForm": "οδηγεί",
+            "matchedTranslationForm": "leads"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "οδηγώ",
+    "lemma": "οδηγώ",
+    "reading": null,
+    "ipa": "/oðiˈɣo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to drive; to lead; to guide",
+    "primaryGloss": "drive",
+    "emotion": "focused and alert, attentive to the road ahead",
+    "notes": [
       "Note that 'οδηγώ' is used for driving any motorized vehicle, but it is also used more broadly for leading or guiding a person or a group of people.",
       "Do not confuse this with 'πηγαίνω' (to go), which is for the act of movement itself rather than the act of steering or directing."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse this with 'πηγαίνω' (to go)",
+        "why": "Note [0] restates the senses; note [1] warns against an implausible confusion with πηγαίνω."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To show someone the way or lead them to a specific destination.",
+        "why": "Defines leading a person, while the example is about a road leading somewhere."
+      }
+    ],
+    "growth": 0.658
   }
 }

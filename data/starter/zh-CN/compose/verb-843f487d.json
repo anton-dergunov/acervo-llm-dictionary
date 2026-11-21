@@ -71,6 +71,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat; to take (medicine); to suffer",
+    "primaryGloss": "eat",
+    "emotion": "casual and inviting, ready to enjoy a meal",
+    "notes": [
+      "Besides solid food, 吃 is used for taking medicine: 吃药 (chī yào).",
+      "For liquids (water, tea, soup), standard Mandarin uses 喝 (hē): 喝水 (drink water), 喝汤 (eat/drink soup)."
+    ],
+    "senses": [
+      {
+        "id": "zyfwd822ef5eazy",
+        "order": 0,
+        "definition": "To put food in your mouth and swallow it, or to have a meal; also used for taking medicine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eat",
+              "have",
+              "take"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "3llrhq8yrmlaem8",
+            "text": "我们去吃晚饭吧。",
+            "textLang": "zh",
+            "translation": "Let's go eat dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and upbeat, suggesting a nice evening plan",
+            "note": null,
+            "matchedForm": "吃",
+            "matchedTranslationForm": "eat"
+          },
+          {
+            "id": "noujh5yss3j83le",
+            "text": "饭后记得吃药。",
+            "textLang": "zh",
+            "translation": "Remember to take your medicine after the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and gentle, giving a helpful reminder",
+            "note": null,
+            "matchedForm": "吃",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "73i1yzypspnspbn",
+        "order": 1,
+        "definition": "To suffer from or endure something unpleasant (often in fixed expressions).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "suffer",
+              "endure"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "g3r2jpf8t8o6uzk",
+            "text": "这次创业他吃了很多苦。",
+            "textLang": "zh",
+            "translation": "He suffered a lot of hardship starting this business.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "吃",
+            "matchedTranslationForm": "suffered"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "吃",
+    "lemma": "吃",
+    "reading": "chī",
+    "ipa": "/ʈʂʰɻ̩˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to drink; to suffer",
     "primaryGloss": "eat",
     "emotion": "casual and inviting, ready to enjoy a meal",
@@ -205,5 +338,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to eat; to drink; to suffer",
+        "why": "'To drink' is not a standard Mandarin sense of 吃."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Besides food, 吃 is used for drinks that involve a spoon",
+        "why": "Neither 吃药 (pills) nor 吃面 (noodles) are drinks; soup takes 喝汤 in standard Mandarin."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To consume a liquid or take medication.",
+        "why": "吃 does not mean 'to consume a liquid' in standard Mandarin, and merges nicely with sense 0."
+      }
+    ],
+    "growth": 0.996
   }
 }

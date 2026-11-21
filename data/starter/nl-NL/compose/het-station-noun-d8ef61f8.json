@@ -58,6 +58,116 @@
     "headword": "het station",
     "lemma": "station",
     "reading": null,
+    "ipa": "/staˈʃɔn/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "station; channel",
+    "primaryGloss": "station",
+    "emotion": "busy and purposeful, waiting for a train to arrive",
+    "notes": [
+      "Plural: 'stations'. Notice that '-tion' is pronounced /ʃɔn/.",
+      "For a regular bus or tram stop along the street, use 'de halte' (or 'de bushalte', 'de tramhalte'), not 'station'."
+    ],
+    "senses": [
+      {
+        "id": "0eaysx074fy564e",
+        "order": 0,
+        "definition": "A building and area where trains, metros, or regional buses arrive and depart.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "station",
+              "train station"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "6o661vj215lv5dz",
+            "text": "Ik wacht op het station.",
+            "textLang": "nl",
+            "translation": "I am waiting at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and quiet, standing on the platform",
+            "note": null,
+            "matchedForm": "station",
+            "matchedTranslationForm": "station"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zxfo289oduy9qjo",
+        "order": 1,
+        "definition": "A company or channel that broadcasts radio or television programmes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "station",
+              "channel"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "eoqcbk6uu1ce45g",
+            "text": "Welk radiostation luister jij meestal?",
+            "textLang": "nl",
+            "translation": "Which radio station do you usually listen to?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "radiostation",
+            "matchedTranslationForm": "radio station"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het station",
+    "lemma": "station",
+    "reading": null,
     "ipa": "/staːˈt͡sjoːn/",
     "pos": "noun",
     "gender": "neuter",
@@ -160,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/staːˈt͡sjoːn/",
+        "why": "In Netherlands Dutch, '-tion' in 'station' is pronounced /ˈʃɔn/, not /ˈt͡sjoːn/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A place where buses or trams stop regularly along their route.",
+        "why": "A regular bus or tram stop along a route is 'de halte', not 'het station'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De bus stopt bij het volgende station.",
+        "why": "Buses stop at a 'halte' along their route; 'station' means a train or terminal station."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'radio or television station/channel'."
+      }
+    ],
+    "growth": 1.521
   }
 }

@@ -74,6 +74,75 @@
     "primaryGloss": "medicine",
     "emotion": null,
     "notes": [
+      "The broken plural is أَدْوِيَة (ʾadwiya)."
+    ],
+    "senses": [
+      {
+        "id": "r4w7wutn0k58mpq",
+        "order": 0,
+        "definition": "A substance taken or used to treat an illness or injury.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "medicine",
+              "medication",
+              "remedy"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "89wdsbsufgayhze",
+            "text": "أَخَذَ الدَّوَاءَ لِيَشْفَى.",
+            "textLang": "ar",
+            "translation": "He took the medicine to get well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الدَّوَاءَ",
+            "matchedTranslationForm": "medicine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "دَوَاء",
+    "lemma": "دواء",
+    "reading": null,
+    "ipa": "/daˈwaːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "medicine; remedy",
+    "primaryGloss": "medicine",
+    "emotion": null,
+    "notes": [
       "Used for both pills and liquid medicines.",
       "Differs from حَبَّة (pill), which refers only to the solid form."
     ],
@@ -123,5 +192,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both pills and liquid medicines.",
+        "why": "Obvious from English 'medicine' and repeats the definition; broken plural أَدْوِيَة is needed instead."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "أَخَذَ الدَّوَاءَ لِيَشْفِيَ.",
+        "why": "Wrong verb form: active يَشْفِي is transitive ('to heal someone'); intransitive 'recover' is يَشْفَى."
+      }
+    ],
+    "growth": 0.77
   }
 }

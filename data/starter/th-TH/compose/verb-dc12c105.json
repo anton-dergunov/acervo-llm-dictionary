@@ -58,6 +58,74 @@
     "headword": "ดมกลิ่น",
     "lemma": "ดมกลิ่น",
     "reading": null,
+    "ipa": "/dom˧ klin˨˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to smell; to sniff (a scent)",
+    "primaryGloss": "smell",
+    "emotion": "curious and sensory, focused on the scent in the air",
+    "notes": [
+      "Composed of ดม (dom, 'to smell/sniff') + กลิ่น (glìn, 'scent/odor'). When naming the thing being smelled (like a flower or food), use ดม alone before the noun."
+    ],
+    "senses": [
+      {
+        "id": "oof4g08n87jtso3",
+        "order": 0,
+        "definition": "To breathe in through the nose to detect or track a scent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smell",
+              "sniff"
+            ]
+          }
+        ],
+        "domain": "perception",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "k0amqkbzp9c68k5",
+            "text": "สุนัขชอบดมกลิ่นตามพื้น",
+            "textLang": "th",
+            "translation": "Dogs like to sniff around on the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and observant, like an animal tracking something",
+            "note": null,
+            "matchedForm": "ดมกลิ่น",
+            "matchedTranslationForm": "sniff"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ดมกลิ่น",
+    "lemma": "ดมกลิ่น",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -141,5 +209,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use 'ดม' (dom) for short, quick sniffs (like smelling a flower)",
+        "why": "ดม is the general verb for smelling; ดมกลิ่น is just verb + object ('smell a scent')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "เขากำลังดมกลิ่นดอกไม้ในสวน",
+        "why": "Unnatural with a specific object; native speakers say ดมดอกไม้."
+      }
+    ],
+    "growth": 0.711
   }
 }

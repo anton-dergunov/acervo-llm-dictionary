@@ -71,6 +71,71 @@
     "shortGloss": "cat",
     "primaryGloss": "cat",
     "emotion": "warm and fond, thinking of a small, soft animal",
+    "notes": [],
+    "senses": [
+      {
+        "id": "5bz1mum00lltskq",
+        "order": 0,
+        "definition": "A small furry mammal with whiskers and sharp claws, commonly kept as a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐱",
+        "examples": [
+          {
+            "id": "g3038j18bl3v16y",
+            "text": "Sokaktaki kedi çok aç görünüyor.",
+            "textLang": "tr",
+            "translation": "The cat on the street looks very hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and empathetic, wanting to help a stray",
+            "note": null,
+            "matchedForm": "kedi",
+            "matchedTranslationForm": "cat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kedi",
+    "lemma": "kedi",
+    "reading": null,
+    "ipa": "/ceˈdi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐱",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "cat",
+    "primaryGloss": "cat",
+    "emotion": "warm and fond, thinking of a small, soft animal",
     "notes": [
       "Kedi is the general word for cat, used for both house cats and wild felines.",
       "Do not confuse with 'kedi yavrusu', which specifically refers to a kitten."
@@ -119,5 +184,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kedi is the general word for cat, used for both",
+        "why": "Pure filler; states the obvious and learner wouldn't confuse 'kedi' with 'kedi yavrusu'."
+      }
+    ],
+    "growth": 0.445
   }
 }

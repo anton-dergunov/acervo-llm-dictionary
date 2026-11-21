@@ -71,6 +71,71 @@
     "shortGloss": "ensalada",
     "primaryGloss": "ensalada",
     "emotion": "fresh and crisp, ready to eat a healthy meal",
+    "notes": [],
+    "senses": [
+      {
+        "id": "kf5b7pdt1mtowsi",
+        "order": 0,
+        "definition": "Plato frío de verduras crudas, a menudo cortadas y mezcladas con un aderezo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ensalada"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "jd2sjodp73fvncp",
+            "text": "She ordered a fresh green salad for lunch.",
+            "textLang": "en",
+            "translation": "Pidió una ensalada verde fresca para el almuerzo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "salad",
+            "matchedTranslationForm": "ensalada"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "salad",
+    "lemma": "salad",
+    "reading": null,
+    "ipa": "/ˈsæləd/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "ensalada",
+    "primaryGloss": "ensalada",
+    "emotion": "fresh and crisp, ready to eat a healthy meal",
     "notes": [
       "A diferencia del español «salado» (que significa que tiene sal o sabor salado), en inglés «salad» se refiere exclusivamente al plato de comida."
     ],
@@ -118,5 +183,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia del español «salado» (que significa que tiene sal o sabor",
+        "why": "Unnecessary false-friend warning with 'salado', which Spanish speakers confuse with 'salty', not 'salad'."
+      }
+    ],
+    "growth": 0.555
   }
 }

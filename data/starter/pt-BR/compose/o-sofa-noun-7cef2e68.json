@@ -72,6 +72,74 @@
     "primaryGloss": "sofa",
     "emotion": "relaxed and comfortable, sinking into cushions at the end of the day",
     "notes": [
+      "The stress is on the last syllable (so-FÁ), unlike English 'SO-fa'."
+    ],
+    "senses": [
+      {
+        "id": "gaa7asak6w5mmkt",
+        "order": 0,
+        "definition": "A long, soft seat with a back and arms for two or more people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sofa",
+              "couch"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "df4y0dc0w95pbs0",
+            "text": "Ele comprou um sofá novo para a sala de estar.",
+            "textLang": "pt",
+            "translation": "He bought a new sofa for the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and proud of the new home furniture",
+            "note": null,
+            "matchedForm": "sofá",
+            "matchedTranslationForm": "sofa"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o sofá",
+    "lemma": "sofá",
+    "reading": null,
+    "ipa": "/soˈfa/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "sofa; couch",
+    "primaryGloss": "sofa",
+    "emotion": "relaxed and comfortable, sinking into cushions at the end of the day",
+    "notes": [
       "In Brazilian Portuguese, both 'sofá' and 'canapé' can refer to a couch, but 'sofá' is by far the most common everyday word."
     ],
     "senses": [
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/soˈfa/",
+        "why": "The stressed vowel 'á' has an open sound in Portuguese: /soˈfa/ works, wait—actually in pt-BR 'canapé' in the note is an appetizer, not a common word for couch."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "both 'sofá' and 'canapé' can refer to a couch",
+        "why": "Misleading for A2: in Brazil 'canapé' means a party appetizer; the furniture sense is obsolete."
+      }
+    ],
+    "growth": 0.795
   }
 }

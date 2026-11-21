@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "entender, comprender",
+    "primaryGloss": "entender",
+    "emotion": "earnest and clear, focused on making a connection with someone",
+    "notes": [
+      "Es un verbo irregular: su pasado y participio son 'understood' (/ˌʌndərˈstʊd/).",
+      "No suele usarse en formas continuas (se dice 'I don't understand', no 'I am not understanding')."
+    ],
+    "senses": [
+      {
+        "id": "d6avlodv4ynn83u",
+        "order": 0,
+        "definition": "Captar el significado de algo, cómo funciona o por qué ocurre.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "entender",
+              "comprender"
+            ]
+          }
+        ],
+        "domain": "cognición",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "sj79lxejo5tg2wt",
+            "text": "I don't understand the meaning of this word.",
+            "textLang": "en",
+            "translation": "No entiendo el significado de esta palabra.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly frustrated, needing clarification",
+            "note": null,
+            "matchedForm": "understand",
+            "matchedTranslationForm": "entiendo"
+          },
+          {
+            "id": "2w5580dzyqzu837",
+            "text": "It is hard to understand why he said that.",
+            "textLang": "en",
+            "translation": "Es difícil entender por qué dijo eso.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and perplexed, trying to analyze a situation",
+            "note": null,
+            "matchedForm": "understand",
+            "matchedTranslationForm": "entender"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "understand",
+    "lemma": "understand",
+    "reading": null,
+    "ipa": "/ˌʌndərˈstænd/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "entender; comprender",
     "primaryGloss": "entender",
     "emotion": "earnest and clear, focused on making a connection with someone",
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the irregular past and participle form ('understood') and that it is a stative verb."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Percibir el sentido de lo que alguien dice o sus motivos.",
+        "why": "Example 1 ('understand why he said that') is the same sense as 0; should be merged."
+      }
+    ],
+    "growth": 0.712
   }
 }

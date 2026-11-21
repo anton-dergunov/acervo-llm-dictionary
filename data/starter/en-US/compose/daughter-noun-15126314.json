@@ -58,6 +58,74 @@
     "headword": "daughter",
     "lemma": "daughter",
     "reading": null,
+    "ipa": "/ˈdɔtər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👧",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "hija",
+    "primaryGloss": "hija",
+    "emotion": "cariñoso y orgulloso, hablando de alguien a quien amas profundamente",
+    "notes": [
+      "Las letras 'gh' son mudas y no se pronuncian.",
+      "A diferencia del español, en inglés el plural de los hijos de ambos sexos no se hace con esta palabra, sino con 'children' (hijos)."
+    ],
+    "senses": [
+      {
+        "id": "gcvr3t240p8f6hr",
+        "order": 0,
+        "definition": "Mujer o niña con respecto a su madre o a su padre.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "hija"
+            ]
+          }
+        ],
+        "domain": "familia",
+        "emoji": "👧",
+        "examples": [
+          {
+            "id": "bwttq9yqz3mr5yt",
+            "text": "She is my daughter.",
+            "textLang": "en",
+            "translation": "Ella es mi hija.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "orgulloso y claro, presentando a alguien importante en tu vida",
+            "note": null,
+            "matchedForm": "daughter",
+            "matchedTranslationForm": "hija"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "daughter",
+    "lemma": "daughter",
+    "reading": null,
     "ipa": "/ˈdɔːtər/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "A diferencia del español, en inglés no se usa el artículo",
+        "why": "Spanish does not say 'mi la hija' either; false contrast and nonsensical rule."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Ten cuidado de no confundir 'daughter' (hija) con 'daught'",
+        "why": "Warns against a non-existent word ('daught'); only the silent 'gh' part is useful."
+      }
+    ],
+    "growth": 0.661
   }
 }

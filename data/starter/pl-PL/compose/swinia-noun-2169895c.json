@@ -72,6 +72,117 @@
     "primaryGloss": "pig",
     "emotion": "matter-of-fact and ordinary, describing a farm animal",
     "notes": [
+      "For the meat from a pig (pork), Polish uses a different word: 'wieprzowina'."
+    ],
+    "senses": [
+      {
+        "id": "f4fyxb0w25zzul9",
+        "order": 0,
+        "definition": "A pink or dark-skinned farm animal with short legs and a flat snout, kept for its meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "swine",
+              "hog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐖",
+        "examples": [
+          {
+            "id": "kzdqms6ikvpxdf2",
+            "text": "Na wsi widziałem dużą świnię.",
+            "textLang": "pl",
+            "translation": "I saw a big pig in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "świnię",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5olatf9k41xw9ec",
+        "order": 1,
+        "definition": "An unpleasant, disloyal, or mean person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "swine",
+              "jerk",
+              "bastard"
+            ]
+          }
+        ],
+        "domain": "insult",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "nvfda5gedeo8t7b",
+            "text": "On to zwykła świnia, że tak cię oszukał.",
+            "textLang": "pl",
+            "translation": "He is a total jerk for tricking you like that.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bitter and indignant, complaining about someone's bad behavior",
+            "note": null,
+            "matchedForm": "świnia",
+            "matchedTranslationForm": "jerk"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "świnia",
+    "lemma": "świnia",
+    "reading": null,
+    "ipa": "/ˈɕfi.ɲa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐖",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pig; swine, jerk",
+    "primaryGloss": "pig",
+    "emotion": "matter-of-fact and ordinary, describing a farm animal",
+    "notes": [
       "While 'świnia' is the literal word for the farm animal, it is also frequently used as an insult for a person (meaning 'swine' or 'jerk')."
     ],
     "senses": [
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Na farmie widziałem dużą świnia.",
+        "why": "Ungrammatical: direct object of 'widziałem' requires accusative 'świnię', not nominative 'świnia'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'świnia' is the literal word for the farm animal, it is",
+        "why": "Merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.861
   }
 }

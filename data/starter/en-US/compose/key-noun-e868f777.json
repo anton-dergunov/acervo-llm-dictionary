@@ -74,6 +74,154 @@
     "primaryGloss": "llave",
     "emotion": null,
     "notes": [
+      "Para indicar a qué pertenece la llave o de qué es la clave, se usa la preposición 'to' ('the key to the door', 'the key to success').",
+      "No confundir con 'lock', que es la cerradura."
+    ],
+    "senses": [
+      {
+        "id": "f57c7vatyu4y312",
+        "order": 0,
+        "definition": "Objeto pequeño de metal o tarjeta que sirve para abrir y cerrar una cerradura.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llave"
+            ]
+          }
+        ],
+        "domain": "cerradura",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "5tyr64yv1e2gjg2",
+            "text": "She left her house key on the kitchen table.",
+            "textLang": "en",
+            "translation": "Dejó la llave de su casa en la mesa de la cocina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed at having misplaced it earlier",
+            "note": null,
+            "matchedForm": "key",
+            "matchedTranslationForm": "llave"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k1e9ad7w8ys5gbs",
+        "order": 1,
+        "definition": "Cosa importante que ayuda a explicar, lograr o resolver algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "clave"
+            ]
+          }
+        ],
+        "domain": "solución",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "0nrtbb7s0t5wmrg",
+            "text": "Hard work is the key to success.",
+            "textLang": "en",
+            "translation": "El trabajo duro es la clave del éxito.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and inspiring, giving good advice",
+            "note": null,
+            "matchedForm": "key",
+            "matchedTranslationForm": "clave"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4jih0os248fxdny",
+        "order": 2,
+        "definition": "Cada uno de los botones o piezas que se presionan en un teclado o instrumento musical.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tecla"
+            ]
+          }
+        ],
+        "domain": "teclado",
+        "emoji": "⌨️",
+        "examples": [
+          {
+            "id": "ew9unxrkopgulv5",
+            "text": "Press any key to continue.",
+            "textLang": "en",
+            "translation": "Presiona cualquier tecla para continuar.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reading a computer screen quietly",
+            "note": null,
+            "matchedForm": "key",
+            "matchedTranslationForm": "tecla"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "key",
+    "lemma": "key",
+    "reading": null,
+    "ipa": "/kiː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "llave; clave; tecla",
+    "primaryGloss": "llave",
+    "emotion": null,
+    "notes": [
       "La palabra 'key' se usa tanto para objetos físicos como para conceptos abstractos. No confundir con 'lock', que es la cerradura."
     ],
     "senses": [
@@ -200,5 +348,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La palabra 'key' se usa tanto para objetos físicos como",
+        "why": "Filler note restating the senses; misses the preposition 'to' ('the key to...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Ella dejó su llave de la casa en la mesa",
+        "why": "Unnatural calque of 'her house key'; natural Spanish is 'la llave de su casa'."
+      }
+    ],
+    "growth": 1.121
   }
 }

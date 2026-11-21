@@ -58,6 +58,73 @@
     "headword": "곰",
     "lemma": "곰",
     "reading": null,
+    "ipa": "koːm",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "a heavy and lumbering presence, grounded and wild",
+    "notes": [
+      "Figuratively used (often as 곰 같다, 'like a bear') to describe someone who is slow,钝/blunt, or inflexible, in contrast to 여우 ('fox', someone clever or sly)."
+    ],
+    "senses": [
+      {
+        "id": "vqekp2wars5jubo",
+        "order": 0,
+        "definition": "A large, heavy wild mammal with thick fur.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "ep9dysbz3t3tj7r",
+            "text": "산에서 곰을 만났어요.",
+            "textLang": "ko",
+            "translation": "I saw a bear in the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a mix of shock and cautious relief",
+            "note": null,
+            "matchedForm": "곰",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "곰",
+    "lemma": "곰",
+    "reading": null,
     "ipa": "/ɡom/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡom/",
+        "why": "Word-initial ㄱ in standard Korean is voiceless [k], not voiced [ɡ]."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is similar to calling someone a 'bear' in English",
+        "why": "False comparison: calling someone a 'bear' in English means gruff or irritable, not slow-witted."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person who acts in a slow, clumsy, or not very",
+        "why": "Figurative use is better mentioned in a note than given a separate A2 sense."
+      }
+    ],
+    "growth": 0.55
   }
 }

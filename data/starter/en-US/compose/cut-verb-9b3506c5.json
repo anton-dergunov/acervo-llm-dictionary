@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "cortar; reducir",
+    "primaryGloss": "cortar",
+    "emotion": "matter-of-fact and direct, describing an action with precision",
+    "notes": [
+      "Es un verbo irregular: su pasado y su participio son iguales a la forma base ('cut' - 'cut' - 'cut'), y duplica la 't' en el gerundio ('cutting').",
+      "A diferencia de 'slice' (cortar en rebanadas o láminas), 'cut' es el término general para cortar."
+    ],
+    "senses": [
+      {
+        "id": "36u34u05pgtrw1o",
+        "order": 0,
+        "definition": "Dividir, abrir o herir algo utilizando un objeto afilado, como un cuchillo o unas tijeras.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cortar",
+              "cortarse"
+            ]
+          }
+        ],
+        "domain": "dividir",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "dgrdf1ayl354rz3",
+            "text": "She needs to cut the bread for breakfast.",
+            "textLang": "en",
+            "translation": "Ella necesita cortar el pan para el desayuno.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and steady, preparing food for a meal",
+            "note": null,
+            "matchedForm": "cut",
+            "matchedTranslationForm": "cortar"
+          },
+          {
+            "id": "ze504g1hu5qr5sr",
+            "text": "Be careful with that knife or you will cut yourself.",
+            "textLang": "en",
+            "translation": "Ten cuidado con ese cuchillo o te vas a cortar.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and warning, looking out for someone's safety",
+            "note": null,
+            "matchedForm": "cut",
+            "matchedTranslationForm": "cortar"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k3z7klr38q9mczj",
+        "order": 1,
+        "definition": "Hacer que una cantidad, un precio o un gasto sea menor.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "reducir",
+              "recortar",
+              "bajar"
+            ]
+          }
+        ],
+        "domain": "reducir",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fcgraueludu9oha",
+            "text": "The company wants to cut costs this year.",
+            "textLang": "en",
+            "translation": "La empresa quiere reducir los gastos este año.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cut",
+            "matchedTranslationForm": "reducir"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "cut",
+    "lemma": "cut",
+    "reading": null,
+    "ipa": "/kʌt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "cortar; herir",
     "primaryGloss": "cortar",
     "emotion": "matter-of-fact and direct, describing an action with precision",
@@ -160,5 +292,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to reduce or lower' (prices, taxes, costs)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Hacer una herida en la piel con un objeto punzante o cortante.",
+        "why": "Cutting skin with a knife is the same basic meaning as sense 0."
+      }
+    ],
+    "growth": 1.266
   }
 }

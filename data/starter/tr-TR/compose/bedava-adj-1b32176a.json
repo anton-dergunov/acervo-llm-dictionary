@@ -58,6 +58,115 @@
     "headword": "bedava",
     "lemma": "bedava",
     "reading": null,
+    "ipa": "/bedaːˈva/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "free of charge; dirt cheap",
+    "primaryGloss": "free",
+    "emotion": "pleased and enthusiastic, like someone sharing a great bargain",
+    "notes": [
+      "Unlike 'ücretsiz', which is more formal and common on signs, 'bedava' is the everyday spoken word. It is also used as an adverb ('bedava almak' — to get for free)."
+    ],
+    "senses": [
+      {
+        "id": "xy1mpw7p6z0bps4",
+        "order": 0,
+        "definition": "Not costing any money; provided without payment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "free",
+              "free of charge"
+            ]
+          }
+        ],
+        "domain": "cost",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "qb8i81o4982u8wk",
+            "text": "Bu ürün bugün bedava.",
+            "textLang": "tr",
+            "translation": "This product is free today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and helpful, letting someone know about a special deal",
+            "note": null,
+            "matchedForm": "bedava",
+            "matchedTranslationForm": "free"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uiykmevz1zcfnfu",
+        "order": 1,
+        "definition": "Sold or obtained at a very low price (especially in the dative, 'bedavaya').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dirt cheap",
+              "for next to nothing"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "n4twwcabzp9mov3",
+            "text": "Bu arabayı neredeyse bedavaya aldık.",
+            "textLang": "tr",
+            "translation": "We bought this car for next to nothing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bedavaya",
+            "matchedTranslationForm": "for next to nothing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "bedava",
+    "lemma": "bedava",
+    "reading": null,
     "ipa": "/beˈdava/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/beˈdava/",
+        "why": "Wrong stress and vowel length; Turkish 'bedava' is /bedaːˈva/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for things that cost no money. Don't confuse it with 'bedavaya'",
+        "why": "First sentence restates the gloss; 'bedavaya' is just the dative of Sense 2."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Evi resmen bedava fiyata sattı.",
+        "why": "'Bedava fiyata' is unnatural; Turkish uses 'bedavaya' or 'yok pahasına' here."
+      }
+    ],
+    "growth": 0.769
   }
 }

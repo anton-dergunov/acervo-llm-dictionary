@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to need; to require; to need to",
+    "primaryGloss": "need",
+    "emotion": "straightforward and practical, identifying a requirement without hesitation or fuss",
+    "notes": [
+      "With another verb, 'brauchen' is used almost only in negative sentences ('nicht'/'kein') or with 'nur' (only) to say something is not necessary: 'Du brauchst nicht zu warten.'",
+      "In standard German, it takes 'zu' before the infinitive, though 'zu' is often dropped in spoken German."
+    ],
+    "senses": [
+      {
+        "id": "5dz7mnothkkjmlt",
+        "order": 0,
+        "definition": "To require something or someone because they are necessary or important.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "need",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "mekrbqxfrmntqrr",
+            "text": "Ich brauche einen neuen Stift.",
+            "textLang": "de",
+            "translation": "I need a new pen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused, stating a simple lack",
+            "note": null,
+            "matchedForm": "brauche",
+            "matchedTranslationForm": "need"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3o42uxk914060fi",
+        "order": 1,
+        "definition": "(with negation or 'nur' and 'zu' + infinitive) To be required or obliged to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need to",
+              "to have to"
+            ]
+          }
+        ],
+        "domain": "obligation",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "uxwiyies1561nn4",
+            "text": "Wir brauchen heute nicht zur Arbeit zu gehen.",
+            "textLang": "de",
+            "translation": "We don't have to go to work today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and relaxed, noting an absence of obligation",
+            "note": null,
+            "matchedForm": "brauchen",
+            "matchedTranslationForm": "have to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "brauchen",
+    "lemma": "brauchen",
+    "reading": null,
+    "ipa": "/ˈbʁaʊxn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to need; to require; to have to",
     "primaryGloss": "need",
     "emotion": "straightforward and practical, identifying a requirement without hesitation or fuss",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To be obliged to have or do something.",
+        "why": "Used almost exclusively with negation or 'nur' ('need not' / 'only need to'), not positive obligation."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to have to, must",
+        "why": "'must' is misleading; 'brauchen' + 'zu' is used in negative/restrictive contexts ('not have to')."
+      }
+    ],
+    "growth": 0.981
   }
 }

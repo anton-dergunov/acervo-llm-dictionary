@@ -70,6 +70,161 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "town square; shopping mall; job position",
+    "primaryGloss": "town square",
+    "emotion": null,
+    "notes": [
+      "In Mexico, 'plaza' (or 'plaza comercial') is a very common everyday word for a shopping mall.",
+      "Do not confuse with 'parque', which refers specifically to a green park with trees and grass."
+    ],
+    "senses": [
+      {
+        "id": "wozc44eruxtzs5h",
+        "order": 0,
+        "definition": "An open public area in a town or city, often with trees and benches.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "town square",
+              "plaza",
+              "square"
+            ]
+          }
+        ],
+        "domain": "town square",
+        "emoji": "⛲",
+        "examples": [
+          {
+            "id": "xcy22uz0suhlij8",
+            "text": "Nos vemos en la plaza principal de la ciudad.",
+            "textLang": "es",
+            "translation": "I'll see you in the city's main square.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and relaxed, arranging a casual meetup",
+            "note": null,
+            "matchedForm": "plaza",
+            "matchedTranslationForm": "square"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z3gtwj4nrcn13pe",
+        "order": 1,
+        "definition": "A large building or complex containing many stores and restaurants.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shopping mall",
+              "mall",
+              "shopping center"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vo8expk3jwfp4ie",
+            "text": "Vamos a la plaza a comprar ropa y ver una película.",
+            "textLang": "es",
+            "translation": "Let's go to the mall to buy clothes and watch a movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "plaza",
+            "matchedTranslationForm": "mall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uhcsvg6lbk88axq",
+        "order": 2,
+        "definition": "A permanent job position or an available spot in an organization or school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "job position",
+              "post",
+              "vacancy",
+              "spot"
+            ]
+          }
+        ],
+        "domain": "vacancy",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "0cq8jte3594i6or",
+            "text": "Todavía hay una plaza libre en el curso de español.",
+            "textLang": "es",
+            "translation": "There is still one spot available in the Spanish course.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, giving someone a tip about a vacancy",
+            "note": null,
+            "matchedForm": "plaza",
+            "matchedTranslationForm": "spot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la plaza",
+    "lemma": "plaza",
+    "reading": null,
+    "ipa": "/ˈplasa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛲",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "town square; seat; job vacancy",
     "primaryGloss": "town square",
     "emotion": null,
@@ -165,5 +320,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday Mexican meaning 'shopping mall' (plaza comercial)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'plaza' is most commonly used for a public square...",
+        "why": "Merely restates the senses; also 'seat on a train/plane' is mainly Peninsular, not Mexican."
+      }
+    ],
+    "growth": 1.232
   }
 }

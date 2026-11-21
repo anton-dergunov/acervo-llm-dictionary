@@ -71,6 +71,93 @@
     "shortGloss": "minute",
     "primaryGloss": "minute",
     "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "3e9xrtddw6ncn10",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds, or a very short moment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute",
+              "moment"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "je59552f1dieded",
+            "text": "La clase termina en un minuto.",
+            "textLang": "es",
+            "translation": "The class ends in a minute.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the nearing end of the session",
+            "note": null,
+            "matchedForm": "minuto",
+            "matchedTranslationForm": "minute"
+          },
+          {
+            "id": "ldgfdd9gx3gxzit",
+            "text": "Espera un minuto, ya voy.",
+            "textLang": "es",
+            "translation": "Wait a minute, I'm coming.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly hurried but polite, asking for a brief pause",
+            "note": null,
+            "matchedForm": "minuto",
+            "matchedTranslationForm": "minute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el minuto",
+    "lemma": "minuto",
+    "reading": null,
+    "ipa": "/miˈnuto/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "minute",
+    "primaryGloss": "minute",
+    "emotion": null,
     "notes": [
       "Used exactly like the English 'minute' for both time and short moments.",
       "Do not confuse with 'momento', which usually refers to a specific point in time rather than the duration of sixty seconds."
@@ -160,5 +247,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used exactly like the English 'minute' for both time and short moments.",
+        "why": "Filler note that adds nothing beyond the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(duration) A very short period of time.",
+        "why": "Informal hyperbole for a short time is just a shade of the time unit."
+      }
+    ],
+    "growth": 0.478
   }
 }

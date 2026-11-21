@@ -59,6 +59,74 @@
     "language": "zh",
     "headword": "工作",
     "lemma": "工作",
+    "reading": "gōngzuò",
+    "ipa": "/kʊŋ˥ tsu̯o˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "to work",
+    "primaryGloss": "work",
+    "emotion": null,
+    "notes": [
+      "Refers to doing one's job. Do not use it to mean that a machine or plan 'works' (functions); use 能用 (néng yòng, 'can be used') or 有用 (yǒuyòng, 'is effective') instead.",
+      "Also commonly used as a noun meaning 'job' or 'work' (e.g., 找工作 'to look for a job')."
+    ],
+    "senses": [
+      {
+        "id": "rpnbzm1rgxoiv0x",
+        "order": 0,
+        "definition": "To do a job, especially for pay.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "work"
+            ]
+          }
+        ],
+        "domain": "employment",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "lvnb2ie46w2vgce",
+            "text": "我在一家银行工作。",
+            "textLang": "zh",
+            "translation": "I work at a bank.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, describing one's daily life",
+            "note": null,
+            "matchedForm": "工作",
+            "matchedTranslationForm": "work"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "工作",
+    "lemma": "工作",
     "reading": "gōng zuò",
     "ipa": "/kʊŋ˥ tsu̯o˥˩/",
     "pos": "verb",
@@ -163,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "这个电脑不工作了。",
+        "why": "English calque ('not working'); in Chinese a broken computer is 坏了 or 用不了了, not 不工作了."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(functioning) To function or operate correctly, as with a machine or a",
+        "why": "Misleading for beginners, who will overuse 工作 for broken everyday objects instead of 坏 or 能用."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to work; a job",
+        "why": "Entry is for the verb, but shortGloss includes the noun gloss 'a job'."
+      }
+    ],
+    "growth": 0.84
   }
 }

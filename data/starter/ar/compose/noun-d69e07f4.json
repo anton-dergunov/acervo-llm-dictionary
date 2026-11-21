@@ -58,6 +58,116 @@
     "headword": "ابْن",
     "lemma": "ابْن",
     "reading": null,
+    "ipa": "/ʔibn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "son; descendant",
+    "primaryGloss": "son",
+    "emotion": "warm and proud, speaking of a beloved child",
+    "notes": [
+      "Plural: أَبْنَاء (ʾabnāʾ). Feminine: ابْنَة (ibnah, 'daughter').",
+      "Starts with hamzat al-waṣl (silent in connected speech). Written بْن without alif directly between two personal names (e.g., عُمَر بْن الخَطَّاب)."
+    ],
+    "senses": [
+      {
+        "id": "rhlbfcy07kzl3h3",
+        "order": 0,
+        "definition": "A male child in relation to his parents.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "son"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "hritydbwprynuqo",
+            "text": "هَذَا ابْنِي الأَكْبَرُ.",
+            "textLang": "ar",
+            "translation": "This is my eldest son.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ابْنِي",
+            "matchedTranslationForm": "son"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6fkd5ife1qc33qu",
+        "order": 1,
+        "definition": "A descendant or member of a tribe, people, or country (usually in the plural أَبْنَاء).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "descendant",
+              "member",
+              "native"
+            ]
+          }
+        ],
+        "domain": "origin",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "rgs60xhnjylqgs7",
+            "text": "هُوَ مِنْ أَبْنَاءِ هَذِهِ القَبِيلَةِ.",
+            "textLang": "ar",
+            "translation": "He is one of the members of this tribe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَبْنَاءِ",
+            "matchedTranslationForm": "members"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "ابْن",
+    "lemma": "ابْن",
+    "reading": null,
     "ipa": "/ibn/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "son; boy",
+        "why": "'boy' is not in the senses (and means ولد, not ابن)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When followed by a definite noun, the hamzat al-wasl is often dropped",
+        "why": "False rule: alif is dropped (بْن) only between two proper names in lineage."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "هو من ابناء هذه القبيلة.",
+        "why": "Missing required hamzat al-qat' on the plural أَبْنَاء."
+      }
+    ],
+    "growth": 1.384
   }
 }

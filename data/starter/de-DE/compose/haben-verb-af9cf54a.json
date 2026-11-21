@@ -72,6 +72,156 @@
     "primaryGloss": "to have",
     "emotion": "matter-of-fact and direct, describing the current state of things",
     "notes": [
+      "Irregular in the present tense ('du hast', 'er/sie/es hat') and past ('ich hatte', 'gehabt').",
+      "Takes the accusative case. Used with nouns like 'Hunger' (hunger), 'Durst' (thirst), or 'Recht' (right) where English uses 'to be' with an adjective."
+    ],
+    "senses": [
+      {
+        "id": "oz44eatvyzl1u0i",
+        "order": 0,
+        "definition": "To own, possess, or hold something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to own"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "5woz2f6u30nenv4",
+            "text": "Ich habe einen neuen Laptop.",
+            "textLang": "de",
+            "translation": "I have a new laptop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and satisfied, sharing news about a purchase",
+            "note": null,
+            "matchedForm": "habe",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hggzz17pyuj1o39",
+        "order": 1,
+        "definition": "To experience a physical state, feeling, or illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to be"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "whruzconagabuu0",
+            "text": "Hast du Hunger?",
+            "textLang": "de",
+            "translation": "Are you hungry?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and friendly, checking in with a friend",
+            "note": null,
+            "matchedForm": "Hast",
+            "matchedTranslationForm": "Are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n35dzw7jlzlv6i5",
+        "order": 2,
+        "definition": "Used with a past participle to form the perfect tense of most verbs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have"
+            ]
+          }
+        ],
+        "domain": "grammar",
+        "emoji": "⚙️",
+        "examples": [
+          {
+            "id": "mdwrd1l006v7jwo",
+            "text": "Wir haben gestern Fußball gespielt.",
+            "textLang": "de",
+            "translation": "We played soccer yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "recounting a past event with simple, clear energy",
+            "note": null,
+            "matchedForm": "haben",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "haben",
+    "lemma": "haben",
+    "reading": null,
+    "ipa": "/ˈhaːbən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to have; to own",
+    "primaryGloss": "to have",
+    "emotion": "matter-of-fact and direct, describing the current state of things",
+    "notes": [
       "Haben is the most common verb in German to show possession. It is also used as an auxiliary verb to form the perfect tense for most other verbs, similar to 'have' in English.",
       "Do not confuse 'haben' (to have) with 'es gibt' (there is/there are). Use 'haben' when a specific subject owns or possesses something, and 'es gibt' when you are merely stating that something exists in a location."
     ],
@@ -200,5 +350,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular singular present and past forms ('du hast', 'er hat', 'hatte'), essential at A1/A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Haben is the most common verb in German to show possession. It",
+        "why": "Merely restates senses 0 and 2 without adding usage information."
+      }
+    ],
+    "growth": 0.709
   }
 }

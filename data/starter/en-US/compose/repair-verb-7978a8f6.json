@@ -72,6 +72,74 @@
     "primaryGloss": "reparar",
     "emotion": "focused and determined, getting the job done",
     "notes": [
+      "En la conversación diaria es más común usar 'fix' (arreglar); 'repair' suena un poco más formal o se usa para averías más complejas."
+    ],
+    "senses": [
+      {
+        "id": "uejnggukywzju4b",
+        "order": 0,
+        "definition": "Hacer que algo que está roto o dañado vuelva a funcionar o a estar en buen estado.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "reparar",
+              "arreglar"
+            ]
+          }
+        ],
+        "domain": "reparación",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "8wwx15k4phpg74o",
+            "text": "He needs to repair his car before the trip.",
+            "textLang": "en",
+            "translation": "Necesita reparar su carro antes del viaje.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned about the vehicle, needing to solve the problem",
+            "note": null,
+            "matchedForm": "repair",
+            "matchedTranslationForm": "reparar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "repair",
+    "lemma": "repair",
+    "reading": null,
+    "ipa": "/rɪˈpɛr/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔧",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "reparar; arreglar",
+    "primaryGloss": "reparar",
+    "emotion": "focused and determined, getting the job done",
+    "notes": [
       "Repair es un término formal y común para arreglar cosas rotas o dañadas.",
       "Fix es mucho más común y coloquial en el día a día."
     ],
@@ -120,5 +188,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "senses[0].domain",
+        "quote": "fix",
+        "why": "Domain is in English instead of Spanish."
+      }
+    ],
+    "growth": 1.018
   }
 }

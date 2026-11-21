@@ -60,6 +60,115 @@
     "headword": "문",
     "lemma": "문",
     "reading": null,
+    "ipa": "mun",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "door; gate",
+    "primaryGloss": "door",
+    "emotion": null,
+    "notes": [
+      "Commonly used with the verbs 열다 (to open), 닫다 (to close), and 잠그다 (to lock)."
+    ],
+    "senses": [
+      {
+        "id": "36iui1ks2bm7j6m",
+        "order": 0,
+        "definition": "A movable barrier used to open and close the entrance to a room, building, or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "bjod50dm68sdsam",
+            "text": "문을 열어 주세요.",
+            "textLang": "ko",
+            "translation": "Please open the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, making a simple request to someone nearby",
+            "note": null,
+            "matchedForm": "문",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9w7l0m0c6do9uma",
+        "order": 1,
+        "definition": "A gate or outer entrance to a large building, palace, or city wall, or the opening of a doorway.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gate",
+              "entrance",
+              "doorway"
+            ]
+          }
+        ],
+        "domain": "entrance",
+        "emoji": "⛩️",
+        "examples": [
+          {
+            "id": "899y6u6o036z4pw",
+            "text": "이 문으로 들어가면 고궁이 나와요.",
+            "textLang": "ko",
+            "translation": "If you go in through this gate, you will see the old palace.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "문",
+            "matchedTranslationForm": "gate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "문",
+    "lemma": "문",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "정문으로 들어오세요.",
+        "why": "Uses the compound word 정문 (main gate) instead of the headword 문."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "문 can also refer to a gateway or a doorway itself",
+        "why": "Merely restates the second sense without adding useful usage information."
+      }
+    ],
+    "growth": 1.294
   }
 }

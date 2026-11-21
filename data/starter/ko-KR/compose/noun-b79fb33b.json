@@ -72,6 +72,74 @@
     "primaryGloss": "cafe",
     "emotion": "relaxed and inviting, the anticipation of a warm drink",
     "notes": [
+      "In Korea, '카페' is also commonly used for online community forums (such as Naver Cafe or Daum Cafe)."
+    ],
+    "senses": [
+      {
+        "id": "xpyp5up1n4il0ck",
+        "order": 0,
+        "definition": "A place where people go to drink coffee and eat light snacks or desserts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cafe",
+              "coffee shop"
+            ]
+          }
+        ],
+        "domain": "coffee shop",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "9zu8yso99wdm07a",
+            "text": "친구와 카페에서 만나요.",
+            "textLang": "ko",
+            "translation": "I'm meeting a friend at the cafe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and friendly, making social plans with a friend",
+            "note": null,
+            "matchedForm": "카페",
+            "matchedTranslationForm": "cafe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "카페",
+    "lemma": "카페",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "cafe; coffee shop",
+    "primaryGloss": "cafe",
+    "emotion": "relaxed and inviting, the anticipation of a warm drink",
+    "notes": [
       "Used in South Korea as the standard term for a coffee shop, much more common than the traditional '다방' (dabang)."
     ],
     "senses": [
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "친구와 카페에서 만나요. — Let's meet at the cafe with my friend.",
+        "why": "Awkward English; declarative 'I meet my friend at the cafe' fits better."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "much more common than the traditional '다방' (dabang).",
+        "why": "Comparing with outdated '다방' is unhelpful for A2; online forum sense is worth mentioning."
+      }
+    ],
+    "growth": 0.954
   }
 }

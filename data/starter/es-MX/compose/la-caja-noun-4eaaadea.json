@@ -68,6 +68,114 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "box; checkout, cash register",
+    "primaryGloss": "box",
+    "emotion": "a practical moment of organizing, focused on where things go",
+    "notes": [],
+    "senses": [
+      {
+        "id": "r941k71sap26yb8",
+        "order": 0,
+        "definition": "A container with flat, stiff sides, usually made of cardboard, wood, or plastic, used for holding or moving things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "box",
+              "carton",
+              "crate"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "1zsxi23ixvhaj8k",
+            "text": "Guardé los libros viejos en una caja de cartón.",
+            "textLang": "es",
+            "translation": "I stored the old books in a cardboard box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a sense of relief from having tidied up and cleared space",
+            "note": null,
+            "matchedForm": "caja",
+            "matchedTranslationForm": "box"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cmsxhkcrcg72g6e",
+        "order": 1,
+        "definition": "The counter or machine in a store where you pay for your items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "checkout",
+              "cash register"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "zh1ga59mq8a9kwf",
+            "text": "Hay una fila muy larga en la caja.",
+            "textLang": "es",
+            "translation": "There is a very long line at the checkout.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly impatient, resigning oneself to a short wait",
+            "note": null,
+            "matchedForm": "caja",
+            "matchedTranslationForm": "checkout"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la caja",
+    "lemma": "caja",
+    "reading": null,
+    "ipa": "/ˈkaxa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "box; chest; cash register",
     "primaryGloss": "box",
     "emotion": "a practical moment of organizing, focused on where things go",
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "box; chest; cash register",
+        "why": "'chest' is not in any sense's glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Unlike 'bolsa' (bag), a 'caja' is typically rigid and has flat sides.",
+        "why": "Note [0] repeats sense 1; note [1] explains the English difference between box and bag."
+      }
+    ],
+    "growth": 0.734
   }
 }

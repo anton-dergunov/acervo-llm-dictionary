@@ -68,6 +68,114 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "ventana, ventanilla",
+    "primaryGloss": "ventana",
+    "emotion": null,
+    "notes": [
+      "En una tienda, 'shop window' o 'store window' significa 'escaparate' o 'vidriera'."
+    ],
+    "senses": [
+      {
+        "id": "iqj4ijazxwbl7cn",
+        "order": 0,
+        "definition": "Abertura con cristal en la pared de un edificio o en un vehículo, que permite ver hacia fuera y dejar pasar la luz y el aire.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ventana",
+              "ventanilla"
+            ]
+          }
+        ],
+        "domain": "construcción",
+        "emoji": "🪟",
+        "examples": [
+          {
+            "id": "uza6jhaftnbdlp7",
+            "text": "She opened the window to let some fresh air in.",
+            "textLang": "en",
+            "translation": "Abrió la ventana para dejar entrar aire fresco.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshed and glad to feel the morning breeze",
+            "note": null,
+            "matchedForm": "window",
+            "matchedTranslationForm": "ventana"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "r6nd5puc86rzvoz",
+        "order": 1,
+        "definition": "Recuadro en la pantalla de un ordenador o teléfono en el que se muestra un programa o documento.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ventana"
+            ]
+          }
+        ],
+        "domain": "informática",
+        "emoji": "💻",
+        "examples": [
+          {
+            "id": "nbz0aj9u37zedq1",
+            "text": "Close all open windows before shutting down the computer.",
+            "textLang": "en",
+            "translation": "Cierra todas las ventanas abiertas antes de apagar el ordenador.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and focused on finishing tasks quickly",
+            "note": null,
+            "matchedForm": "windows",
+            "matchedTranslationForm": "ventanas"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "window",
+    "lemma": "window",
+    "reading": null,
+    "ipa": "/ˈwɪndoʊ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪟",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "ventana; escaparate; intervalo",
     "primaryGloss": "ventana",
     "emotion": null,
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ventana; escaparate; intervalo",
+        "why": "shortGloss lists 'escaparate' and 'intervalo', which are absent from the entry's senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para la ventana de una casa como para la",
+        "why": "Note just repeats the two senses listed right below."
+      }
+    ],
+    "growth": 1.026
   }
 }

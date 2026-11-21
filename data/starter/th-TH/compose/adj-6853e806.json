@@ -68,6 +68,160 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old; mature; strong (of drinks or colors)",
+    "primaryGloss": "old",
+    "emotion": "matter-of-fact and neutral, simply describing an observed state of life",
+    "notes": [
+      "Use แก่ for living things (people, animals) and mature plants. For inanimate objects that are not new, use เก่า.",
+      "Calling a person แก่ can sound blunt; ผู้สูงอายุ (elderly person) is more polite."
+    ],
+    "senses": [
+      {
+        "id": "j5uhhao0yznxtkk",
+        "order": 0,
+        "definition": "Of a person or animal: having lived for a long time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "aged",
+              "elderly"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "ame371rn70v0w0f",
+            "text": "เขาเป็นคนแก่ที่ใจดีมาก",
+            "textLang": "th",
+            "translation": "He is a very kind old person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and respectful, describing someone you like",
+            "note": null,
+            "matchedForm": "แก่",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "remx4criir7k7s3",
+        "order": 1,
+        "definition": "Of fruit or vegetables: fully grown, mature, or tough with age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mature",
+              "old",
+              "tough"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "hzstp026vhnz3xe",
+            "text": "ผักพวกนี้แก่แล้ว กินไม่อร่อย",
+            "textLang": "th",
+            "translation": "These vegetables are too old and tough; they don't taste good.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แก่",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xat2xnw5bq7y8cj",
+        "order": 2,
+        "definition": "Of tea or coffee: strong; of a color: dark or deep.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strong",
+              "dark",
+              "deep"
+            ]
+          }
+        ],
+        "domain": "strength",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hug1zz8sgaee67c",
+            "text": "พ่อชอบดื่มกาแฟแก่ๆ",
+            "textLang": "th",
+            "translation": "Dad likes to drink strong coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แก่",
+            "matchedTranslationForm": "strong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แก่",
+    "lemma": "แก่",
+    "reading": null,
+    "ipa": "/kɛ̀ː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "old; aged",
     "primaryGloss": "old",
     "emotion": "matter-of-fact and neutral, simply describing an observed state of life",
@@ -161,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or objects that have been used or stored for a long time.",
+        "why": "Directly contradicts note 1 and Thai usage: old objects take เก่า, never แก่."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday food/drink/color sense 'strong, dark' (e.g. กาแฟแก่, สีเขียวแก่)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "มะม่วงลูกนี้แก่เกินไปที่จะกินสด",
+        "why": "Calqued English 'too ... to ...' structure; also mangoes are eaten raw when แก่ (mature)."
+      }
+    ],
+    "growth": 1.307
   }
 }

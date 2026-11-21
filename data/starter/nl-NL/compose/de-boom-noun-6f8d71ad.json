@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "tree",
+    "primaryGloss": "tree",
+    "emotion": "peaceful and grounded, looking up at the leaves in a quiet park",
+    "notes": [
+      "The plural is 'bomen', spelled with a single 'o' to keep the long vowel sound in an open syllable."
+    ],
+    "senses": [
+      {
+        "id": "yd6q46a7fg5n6ne",
+        "order": 0,
+        "definition": "A tall woody plant with a trunk and branches.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "xlazy6exfropzjx",
+            "text": "De grote boom in de tuin heeft heel veel bladeren.",
+            "textLang": "nl",
+            "translation": "The big tree in the garden has a lot of leaves.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, pointing out something nice in the yard",
+            "note": null,
+            "matchedForm": "boom",
+            "matchedTranslationForm": "tree"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de boom",
+    "lemma": "boom",
+    "reading": null,
+    "ipa": "/boːm/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "tree; beam; mast",
     "primaryGloss": "tree",
     "emotion": "peaceful and grounded, looking up at the leaves in a quiet park",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tree; beam; mast",
+        "why": "Lists 'beam' and 'mast', which are not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A long piece of timber or metal used on a ship",
+        "why": "Sailing sense is technical for A2 (and is normally called 'giek' in modern Dutch)."
+      }
+    ],
+    "growth": 0.581
   }
 }

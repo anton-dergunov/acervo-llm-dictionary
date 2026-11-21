@@ -77,6 +77,115 @@
     "primaryGloss": "fish",
     "emotion": "hungry and looking forward to a nice meal, warm and satisfied",
     "notes": [
+      "Do not confuse with 'le poison' (poison), which is spelled with a single 's' and pronounced with a /z/ sound (/pwa.zɔ̃/).",
+      "As an animal, it is countable ('un poisson', 'des poissons'); as food, it is usually used with the partitive article ('du poisson')."
+    ],
+    "senses": [
+      {
+        "id": "6kip02g4okehg0o",
+        "order": 0,
+        "definition": "An animal that lives in water, breathes through gills, and uses fins to swim.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐠",
+        "examples": [
+          {
+            "id": "nj6h3a8x8tbdhty",
+            "text": "Il y a des poissons colorés dans l'aquarium.",
+            "textLang": "fr",
+            "translation": "There are colorful fish in the aquarium.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fascinated and happy, watching something nice",
+            "note": null,
+            "matchedForm": "poissons",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rdhi52vf7cc1z59",
+        "order": 1,
+        "definition": "The flesh of this animal eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "6zaxtp4lt7kewro",
+            "text": "Je mange du poisson tous les vendredis.",
+            "textLang": "fr",
+            "translation": "I eat fish every Friday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and settled into a regular routine",
+            "note": null,
+            "matchedForm": "poisson",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le poisson",
+    "lemma": "poisson",
+    "reading": null,
+    "ipa": "/pwa.sɔ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Food and drink",
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "fish",
+    "primaryGloss": "fish",
+    "emotion": "hungry and looking forward to a nice meal, warm and satisfied",
+    "notes": [
       "Do not confuse with 'poison' (poison), which is spelled with an 'i' after the 's' and pronounced differently (/pwa.zɔ̃/)."
     ],
     "senses": [
@@ -163,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].definition",
+        "quote": "Animal vertebrado acuático que vive en el agua, respira por branquias",
+        "why": "Definition is written in Spanish instead of English."
+      },
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[1].definition",
+        "quote": "Carne de este animal que se come como alimento.",
+        "why": "Definition is written in Spanish instead of English."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "which is spelled with an 'i' after the 's'",
+        "why": "False claim: 'poison' is spelled with one 's', not an 'i' after the 's'."
+      }
+    ],
+    "growth": 1.282
   }
 }

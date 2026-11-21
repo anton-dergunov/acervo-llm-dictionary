@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "cup, teacup",
+    "primaryGloss": "cup",
+    "emotion": "warm and comforting, enjoying a hot drink in the morning",
+    "notes": [
+      "Used for small cups with a handle for hot drinks like coffee or tea. For a larger mug, use 'caneca'; for a glass or tumbler for cold drinks, use 'copo'."
+    ],
+    "senses": [
+      {
+        "id": "b4mhmupxh0acjev",
+        "order": 0,
+        "definition": "A small container with a handle, used for drinking hot liquids like coffee or tea, or the amount it holds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "teacup",
+              "cupful"
+            ]
+          }
+        ],
+        "domain": "vessel",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "tapzlem46b28d02",
+            "text": "Ela tomou uma xícara de café bem quente.",
+            "textLang": "pt",
+            "translation": "She drank a very hot cup of coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and relaxed, enjoying the warmth of the drink",
+            "note": null,
+            "matchedForm": "xícara",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a xícara",
+    "lemma": "xícara",
+    "reading": null,
+    "ipa": "/ˈʃi.ka.ɾɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "cup; mug",
     "primaryGloss": "cup",
     "emotion": "warm and comforting, enjoying a hot drink in the morning",
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cup; mug",
+        "why": "Senses do not include 'mug', and the note specifically says 'caneca' is used for mugs."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should contrast with 'copo' (drinking glass for cold drinks), which beginners confuse with 'cup'."
+      }
+    ],
+    "growth": 1.132
   }
 }

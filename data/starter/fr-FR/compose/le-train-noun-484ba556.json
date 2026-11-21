@@ -69,6 +69,75 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "train",
+    "primaryGloss": "train",
+    "emotion": "hurried and purposeful, catching a journey just in time",
+    "notes": [
+      "Use the preposition 'en' when talking about traveling by train: 'voyager en train' (to travel by train).",
+      "Also appears in the very common phrase 'être en train de' + infinitive, meaning to be in the middle of doing something."
+    ],
+    "senses": [
+      {
+        "id": "o0lu0nhgj1rvn0q",
+        "order": 0,
+        "definition": "A line of railway carriages pulled along a track by an engine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "train"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "qdeylpzuj4557rz",
+            "text": "Le train arrive à la gare à dix heures.",
+            "textLang": "fr",
+            "translation": "The train arrives at the station at ten o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "waiting expectantly on the platform, watching the tracks",
+            "note": null,
+            "matchedForm": "train",
+            "matchedTranslationForm": "train"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le train",
+    "lemma": "train",
+    "reading": null,
+    "ipa": "/tʁɛ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚆",
+    "topics": [
+      "Travel",
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "train; pace",
     "primaryGloss": "train",
     "emotion": "hurried and purposeful, catching a journey just in time",
@@ -160,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(pace) The speed or pace at which an activity or life is",
+        "why": "Literary or bound to fixed expressions; not an everyday standalone noun sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il faut soutenir le train de la discussion.",
+        "why": "Archaic and unnatural in modern everyday French."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When used to mean pace or speed (le train de vie)",
+        "why": "'Le train de vie' means standard of living / lifestyle, not pace or speed."
+      }
+    ],
+    "growth": 0.899
   }
 }

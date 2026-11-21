@@ -58,6 +58,73 @@
     "headword": "น้ำแข็ง",
     "lemma": "น้ำแข็ง",
     "reading": null,
+    "ipa": "/nám.kʰɛ̌ŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "ice",
+    "primaryGloss": "ice",
+    "emotion": "cold and refreshing, dropping cubes into a glass on a hot afternoon",
+    "notes": [
+      "Literally 'hard water', from น้ำ (nám, 'water') + แข็ง (kʰɛ̌ŋ, 'hard, solid'). For a single ice cube, use the classifier ก้อน (gâwn)."
+    ],
+    "senses": [
+      {
+        "id": "tevp8h64yn6plua",
+        "order": 0,
+        "definition": "Water that has frozen and become solid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ice"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "ir6rl56vwlckhak",
+            "text": "ขอใส่น้ำแข็งเยอะๆ ครับ",
+            "textLang": "th",
+            "translation": "Please put in a lot of ice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thirsty and eager for something cold, asking the vendor clearly",
+            "note": null,
+            "matchedForm": "น้ำแข็ง",
+            "matchedTranslationForm": "ice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "น้ำแข็ง",
+    "lemma": "น้ำแข็ง",
+    "reading": null,
     "ipa": "/nam.kʰɛŋ/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/nam.kʰɛŋ/",
+        "why": "Missing tone marks and vowel length in IPA; should be /nám.kʰɛ̌ŋ/."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "แแข็ง (khæng) means hard",
+        "why": "Typo in Thai script: 'แแข็ง' has a duplicated vowel sign (should be แข็ง)."
+      }
+    ],
+    "growth": 1.24
   }
 }

@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "letter",
+    "primaryGloss": "letter",
+    "emotion": "anticipatory and expectant, as if checking the mailbox for something important",
+    "notes": [
+      "False friend: 'list' means a letter sent by post. For a list of items (e.g. a shopping list), use the feminine noun 'lista'."
+    ],
+    "senses": [
+      {
+        "id": "tc2fgkxftkz472c",
+        "order": 0,
+        "definition": "A written or printed message sent to someone in an envelope by post.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter"
+            ]
+          }
+        ],
+        "domain": "correspondence",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "rhe73b1avpyqcj8",
+            "text": "Dostałem dzisiaj list od mojej babci.",
+            "textLang": "pl",
+            "translation": "I received a letter from my grandmother today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, feeling connected to a family member",
+            "note": null,
+            "matchedForm": "list",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "list",
+    "lemma": "list",
+    "reading": null,
+    "ipa": "/list/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "letter; list",
     "primaryGloss": "letter",
     "emotion": "anticipatory and expectant, as if checking the mailbox for something important",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A series of names, numbers, or items written down.",
+        "why": "'List' does not mean a list of items; that is the separate feminine noun 'lista'."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "letter; list",
+        "why": "'List' is a false friend and not a valid translation of Polish 'list'."
+      }
+    ],
+    "growth": 0.512
   }
 }

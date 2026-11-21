@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to paint; to depict; to picture",
+    "primaryGloss": "depict",
+    "emotion": "focused and creative, feeling the flow of the pen or brush",
+    "notes": [
+      "Godan verb. The kanji 描く has two readings: in everyday speech, drawing a picture is usually pronounced かく (kaku). The reading えがく (egaku) is more formal or literary, and is also used for portraying a theme in art or picturing something in one's mind."
+    ],
+    "senses": [
+      {
+        "id": "ot4o96hhhafqwl3",
+        "order": 0,
+        "definition": "To paint, draw, or portray a scene or subject in a work of art or writing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paint",
+              "draw",
+              "depict",
+              "portray"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "9f0ejmtlht8hy27",
+            "text": "この小説は家族の愛を描いている。",
+            "textLang": "ja",
+            "translation": "This novel depicts family love.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "描いて",
+            "matchedTranslationForm": "depicts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "06brnfvngumu0qg",
+        "order": 1,
+        "definition": "To imagine or visualize a scene or future in one's mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "picture",
+              "visualize",
+              "imagine"
+            ]
+          }
+        ],
+        "domain": "imagination",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "okpm7mkflu7iclr",
+            "text": "未来の姿を心に描く。",
+            "textLang": "ja",
+            "translation": "I picture the future in my mind.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and reflective, looking toward the horizon",
+            "note": null,
+            "matchedForm": "描く",
+            "matchedTranslationForm": "picture"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "描く",
+    "lemma": "描く",
+    "reading": "えがく",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✏️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to draw; to paint; to depict",
     "primaryGloss": "draw",
     "emotion": "focused and creative, feeling the flow of the pen or brush",
@@ -161,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "If you are just making a simple mark or a line, use 書く (kaku) instead.",
+        "why": "In everyday speech 描く is normally read かく for drawing pictures; えがく is literary/figurative."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "鉛筆で猫を描く。",
+        "why": "Under reading えがく, sketching a cat with a pencil is unnatural (that uses かく)."
+      }
+    ],
+    "growth": 1.333
   }
 }

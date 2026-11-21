@@ -58,6 +58,113 @@
     "headword": "배우다",
     "lemma": "배우다",
     "reading": null,
+    "ipa": "/pɛ.u.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to learn",
+    "primaryGloss": "learn",
+    "emotion": "curious and eager, ready to discover something new",
+    "notes": [
+      "Takes the object marker 을/를 for what is learned. Compare with 공부하다 (to study), which focuses on the effort of studying rather than acquiring a skill from someone."
+    ],
+    "senses": [
+      {
+        "id": "ynuzrzdt9eanh8u",
+        "order": 0,
+        "definition": "To gain knowledge, a skill, or a habit through study, practice, or being taught.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "learn",
+              "pick up"
+            ]
+          }
+        ],
+        "domain": "learning",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "rzfqputcwooca8i",
+            "text": "한국어를 배우고 싶어요.",
+            "textLang": "ko",
+            "translation": "I want to learn Korean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and determined, expressing a personal goal to a friend",
+            "note": null,
+            "matchedForm": "배우고",
+            "matchedTranslationForm": "learn"
+          },
+          {
+            "id": "9mawjc2oit7rplv",
+            "text": "어른들에게서 좋은 습관을 배웠어요.",
+            "textLang": "ko",
+            "translation": "I learned good habits from the adults.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "배웠어요",
+            "matchedTranslationForm": "learned"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "ynuzrzdt9eanh8u",
+      "from": "지식이나 기술을 익히다.",
+      "to": "To acquire knowledge or a skill.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:22Z"
+    },
+    {
+      "sense": "t84u3mgufuqferv",
+      "from": "다른 사람의 말이나 행동을 보고 그대로 하다.",
+      "to": "To copy someone else's words or actions.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:22Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "배우다",
+    "lemma": "배우다",
+    "reading": null,
     "ipa": "/pɛuda/",
     "pos": "verb",
     "gender": null,
@@ -164,22 +271,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "ynuzrzdt9eanh8u",
-      "from": "지식이나 기술을 익히다.",
-      "to": "To acquire knowledge or a skill.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:22Z"
-    },
-    {
-      "sense": "t84u3mgufuqferv",
-      "from": "다른 사람의 말이나 행동을 보고 그대로 하다.",
-      "to": "To copy someone else's words or actions.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:22Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To copy someone else's words or actions.",
+        "why": "Learning habits from elders is still 'learning / picking up', not a separate 'imitate/copy' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "배우다 means to acquire knowledge or a skill, often through a",
+        "why": "Restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.798
+  }
 }

@@ -72,6 +72,95 @@
     "primaryGloss": "dry",
     "emotion": "a dry, crisp observation, matter-of-fact and clear",
     "notes": [
+      "Can also be used figuratively to describe a cold, unfriendly manner or a dull style (e.g. أُسْلُوب جَافّ — a dry/curt manner)."
+    ],
+    "senses": [
+      {
+        "id": "ma0hmu42uilqwl1",
+        "order": 0,
+        "definition": "Free from moisture or liquid; not wet, or having very little rain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "arid"
+            ]
+          }
+        ],
+        "domain": "physical",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "2th0off04etaeub",
+            "text": "المِنْشَفَةُ جَافَّةٌ تَمَامًا.",
+            "textLang": "ar",
+            "translation": "The towel is completely dry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "جَافَّةٌ",
+            "matchedTranslationForm": "dry"
+          },
+          {
+            "id": "vm06h3cxk3pe6uf",
+            "text": "الصَّحْرَاءُ مَكَانٌ جَافٌّ جِدًّا.",
+            "textLang": "ar",
+            "translation": "The desert is a very dry place.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "جَافٌّ",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَافّ",
+    "lemma": "جَافّ",
+    "reading": null,
+    "ipa": "/dʒaːff/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏜️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dry; arid",
+    "primaryGloss": "dry",
+    "emotion": "a dry, crisp observation, matter-of-fact and clear",
+    "notes": [
       "Used to describe things that lack moisture or liquid, like the weather, land, or a towel.",
       "Do not confuse this with adjectives describing personality or texture; it strictly refers to physical dryness."
     ],
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with adjectives describing personality... strictly refers to physical dryness.",
+        "why": "False claim: جَافّ is commonly used metaphorically for a cold, unfriendly manner or dry style."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe things that lack moisture or liquid",
+        "why": "Restates the definitions of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Physical dryness of objects and dryness of climate are shades of the same literal meaning."
+      }
+    ],
+    "growth": 0.814
   }
 }

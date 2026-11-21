@@ -72,6 +72,74 @@
     "primaryGloss": "hot",
     "emotion": "pleasant and comforting, like wrapping your hands around a warm mug",
     "notes": [
+      "Used with 'estar' for things, food, or drinks that are hot to the touch. For hot weather in Spain, use 'caluroso' or 'hacer calor', not 'caliente'."
+    ],
+    "senses": [
+      {
+        "id": "aom2rpzkat8i0e5",
+        "order": 0,
+        "definition": "Having a high temperature; hot or warm to the touch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "i1fn0iq7u2f2lj7",
+            "text": "Ten cuidado con el plato, que está muy caliente.",
+            "textLang": "es",
+            "translation": "Be careful with the plate, it is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and helpful, looking out for someone else",
+            "note": null,
+            "matchedForm": "caliente",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "caliente",
+    "lemma": "caliente",
+    "reading": null,
+    "ipa": "/kaˈljente/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "hot; warm",
+    "primaryGloss": "hot",
+    "emotion": "pleasant and comforting, like wrapping your hands around a warm mug",
+    "notes": [
       "Caliente refers to the temperature of an object or the weather. Do not confuse it with 'cálido', which is usually used for a warm, pleasant climate or a friendly, affectionate person."
     ],
     "senses": [
@@ -180,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Describes weather that makes you feel heat.",
+        "why": "In Spain, hot weather is 'caluroso' (un día caluroso), not 'un día caliente'"
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hoy hace un día muy caliente.",
+        "why": "Unnatural in European Spanish; 'un día muy caluroso' or 'hace mucho calor' is used"
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Caliente refers to the temperature of an object or the weather.",
+        "why": "False for Castilian Spanish, where 'caliente' is not used for weather"
+      }
+    ],
+    "growth": 0.619
   }
 }

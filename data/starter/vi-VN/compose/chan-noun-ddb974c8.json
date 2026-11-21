@@ -58,6 +58,76 @@
     "headword": "chăn",
     "lemma": "chăn",
     "reading": null,
+    "ipa": "/t͡ɕan˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "blanket; duvet",
+    "primaryGloss": "blanket",
+    "emotion": "cozy and sleepy, getting ready for a good night's rest",
+    "notes": [
+      "Standard in northern Vietnam (usually with classifier 'cái' or 'chiếc'); in the South, 'mền' is commonly used instead.",
+      "Do not confuse with the homonym verb 'chăn' (to herd or graze livestock)."
+    ],
+    "senses": [
+      {
+        "id": "dp3cmj12x655sh3",
+        "order": 0,
+        "definition": "A warm cover used on a bed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blanket",
+              "duvet",
+              "quilt"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "wyx6yppjvapl6ur",
+            "text": "Trời lạnh quá, hãy đắp thêm chăn.",
+            "textLang": "vi",
+            "translation": "It's so cold, put on another blanket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shivering slightly and reaching for warmth",
+            "note": null,
+            "matchedForm": "chăn",
+            "matchedTranslationForm": "blanket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "chăn",
+    "lemma": "chăn",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To herd or tend livestock in a field.",
+        "why": "Verb sense included in a noun entry, contradicting both `pos` and `shortGloss`."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer to a warm bed cover.",
+        "why": "Restates the definition; a regional note ('chăn' in the North vs. 'mền' in the South) is more useful."
+      }
+    ],
+    "growth": 0.851
   }
 }

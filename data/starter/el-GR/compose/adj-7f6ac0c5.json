@@ -73,6 +73,117 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "warm; hot",
+    "primaryGloss": "warm",
+    "emotion": "pleasantly warm and comfortable, enjoying the pleasant weather or a hot drink",
+    "notes": [
+      "Covers both 'warm' and 'hot'; for 'boiling/scalding hot', καυτός is used."
+    ],
+    "senses": [
+      {
+        "id": "i08orldq388vybs",
+        "order": 0,
+        "definition": "Having a high or pleasant temperature; giving off heat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "warm",
+              "hot"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "soqnaxz6tl46a9p",
+            "text": "Ο καφές είναι πολύ ζεστός.",
+            "textLang": "el",
+            "translation": "The coffee is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "carefully blowing on a steaming mug before taking a sip",
+            "note": null,
+            "matchedForm": "ζεστός",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fsaa42ihxgdfp1w",
+        "order": 1,
+        "definition": "Friendly, kind, and welcoming in manner, or cosy and inviting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "warm",
+              "welcoming",
+              "cosy"
+            ]
+          }
+        ],
+        "domain": "manner",
+        "emoji": "🤗",
+        "examples": [
+          {
+            "id": "z4ibk69q8uatvae",
+            "text": "Μας υποδέχτηκαν με ζεστό χαμόγελο.",
+            "textLang": "el",
+            "translation": "They welcomed us with a warm smile.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "smiling and feeling genuinely welcome upon arriving somewhere",
+            "note": null,
+            "matchedForm": "ζεστό",
+            "matchedTranslationForm": "warm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ζεστός",
+    "lemma": "ζεστός",
+    "reading": null,
+    "ipa": "/zeˈstos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing",
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "hot; warm",
     "primaryGloss": "hot",
     "emotion": "pleasantly warm and comfortable, enjoying the pleasant weather or a hot drink",
@@ -206,5 +317,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Pleasantly warm, especially in reference to the weather or climate.",
+        "why": "Weather temperature is just physical temperature (sense 0), not a distinct lexical sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "ζεστός is used both for physical temperature, like hot water or weather",
+        "why": "Merely restates the senses; replace with a contrast with καυτός (boiling/scalding hot)."
+      }
+    ],
+    "growth": 0.724
   }
 }

@@ -58,6 +58,76 @@
     "headword": "het medicijn",
     "lemma": "medicijn",
     "reading": null,
+    "ipa": "/ˌmeː.diˈsɛin/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "medicine; medication",
+    "primaryGloss": "medicine",
+    "emotion": "hopeful and relieved, taking care of an illness",
+    "notes": [
+      "Usually used with the verb 'innemen' (to take/swallow) or 'slikken': 'medicijnen innemen'.",
+      "The plural 'medicijnen' is also used for the academic field of medicine (e.g., 'medicijnen studeren'), alongside 'geneeskunde'."
+    ],
+    "senses": [
+      {
+        "id": "wizmkxucub53vrw",
+        "order": 0,
+        "definition": "A substance, such as a pill or liquid, used to treat or cure an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "medicine",
+              "medication",
+              "remedy"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "ktrytn4c9j67pbm",
+            "text": "Ik moet dit medicijn twee keer per dag innemen.",
+            "textLang": "nl",
+            "translation": "I have to take this medicine twice a day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "medicijn",
+            "matchedTranslationForm": "medicine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het medicijn",
+    "lemma": "medicijn",
+    "reading": null,
     "ipa": "/ˌmeːdiˈkɛin/",
     "pos": "noun",
     "gender": "neuter",
@@ -161,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˌmeːdiˈkɛin/",
+        "why": "The 'c' in 'medicijn' is pronounced /s/, not /k/: /ˌmeː.diˈsɛin/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A chemical substance or treatment used to cure a disease.",
+        "why": "Both senses describe the exact same meaning of 'medicijn'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'medicijn' is neuter and takes the article 'het'.",
+        "why": "Restates the gender already shown in the headword and gender field."
+      }
+    ],
+    "growth": 0.909
   }
 }

@@ -58,6 +58,115 @@
     "headword": "kahve",
     "lemma": "kahve",
     "reading": null,
+    "ipa": "/kahˈve/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "coffee; coffeehouse",
+    "primaryGloss": "coffee",
+    "emotion": "warm and comforting, a relaxing moment in a busy day",
+    "notes": [
+      "For the strong, unfiltered traditional style, specify 'Türk kahvesi'.",
+      "As a place, 'kahve' (short for 'kahvehane') means a traditional neighbourhood coffeehouse where mostly men drink tea and play games; a modern cafe is 'kafe'."
+    ],
+    "senses": [
+      {
+        "id": "ldm7t01o1dfky7f",
+        "order": 0,
+        "definition": "A hot, dark drink made from roasted and ground coffee beans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffee"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "btbcj4uwnek7yx6",
+            "text": "Sabahları bir fincan kahve içerim.",
+            "textLang": "tr",
+            "translation": "I drink a cup of coffee in the mornings.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and peaceful, starting the day with a small habit",
+            "note": null,
+            "matchedForm": "kahve",
+            "matchedTranslationForm": "coffee"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7u4i85emmwqil3h",
+        "order": 1,
+        "definition": "A traditional neighbourhood coffeehouse where people gather to drink tea or coffee and play games.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffeehouse",
+              "teahouse"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "7o8gbzwnevgovkj",
+            "text": "Dedem her gün kahvede arkadaşlarıyla buluşur.",
+            "textLang": "tr",
+            "translation": "My grandfather meets his friends at the coffeehouse every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kahvede",
+            "matchedTranslationForm": "coffeehouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kahve",
+    "lemma": "kahve",
+    "reading": null,
     "ipa": "/cahˈve/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/cahˈve/",
+        "why": "Standard Turkish pronounces initial 'k' before back vowel 'a' as velar /k/, not palatal /c/: /kahˈve/."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A place where people go to drink coffee, tea, and socialize.",
+        "why": "'Kahve' (short for kahvehane) is a traditional men's coffeehouse, not a modern cafe ('kafe')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Turkish, 'kahve' refers both to the drink itself and to the",
+        "why": "Restates the two senses without explaining the crucial difference between 'kahve' (traditional) and 'kafe' (modern)."
+      }
+    ],
+    "growth": 1.164
   }
 }

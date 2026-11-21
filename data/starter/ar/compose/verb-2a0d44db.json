@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to understand, to grasp",
+    "primaryGloss": "to understand",
+    "emotion": "a moment of clarity when a confusing puzzle suddenly clicks into place",
+    "notes": [
+      "Present tense: يَفْهَمُ (yafhamu). It takes a direct object without a preposition."
+    ],
+    "senses": [
+      {
+        "id": "q3j2f2xllzel2w2",
+        "order": 0,
+        "definition": "To know or grasp the meaning of words, an idea, or a situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to understand",
+              "to grasp",
+              "to comprehend"
+            ]
+          }
+        ],
+        "domain": "cognition",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "xriy49skhiapeb1",
+            "text": "أَنَا أَفْهَمُ مَا تَقُولُهُ.",
+            "textLang": "ar",
+            "translation": "I understand what you are saying.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَفْهَمُ",
+            "matchedTranslationForm": "understand"
+          },
+          {
+            "id": "6m0ugv4gzv8cmm3",
+            "text": "هَلْ تَفْهَمُ مَعْنَى هَذِهِ الكَلِمَةِ؟",
+            "textLang": "ar",
+            "translation": "Do you understand the meaning of this word?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "inquisitive, leaning in slightly while waiting for an answer",
+            "note": null,
+            "matchedForm": "تَفْهَمُ",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "فَهِمَ",
+    "lemma": "فَهِمَ",
+    "reading": null,
+    "ipa": "/ˈfahima/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to understand; to grasp",
     "primaryGloss": "understand",
     "emotion": "a moment of clarity when a confusing puzzle suddenly clicks into place",
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use it with the preposition 'ب' (بـ) when you mean 'to understand something'",
+        "why": "False grammar: فَهِمَ takes a direct object (or عَنْ/مِنْ for a person), not بِـ."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To perceive the meaning of words ... To know the meaning or interpretation",
+        "why": "Both senses are identical; example 1 literally uses مَعْنَى ('meaning') for 'know the meaning'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb is used for both general comprehension and knowing the specific meaning",
+        "why": "Pure filler justifying the artificial sense split."
+      }
+    ],
+    "growth": 0.66
   }
 }

@@ -72,6 +72,132 @@
     "primaryGloss": "letter",
     "emotion": "nostalgic and quiet, holding a paper message from someone far away",
     "notes": [
+      "In the plural, 'les lettres' can also refer to literature or the humanities."
+    ],
+    "senses": [
+      {
+        "id": "oqd26amz3jydno7",
+        "order": 0,
+        "definition": "A written message sent by mail to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter"
+            ]
+          }
+        ],
+        "domain": "mail",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "guof4y35v35qhgx",
+            "text": "J'attends une lettre importante.",
+            "textLang": "fr",
+            "translation": "I am waiting for an important letter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and eager, waiting for news in the post",
+            "note": null,
+            "matchedForm": "lettre",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m8adeuvb2frs4ws",
+        "order": 1,
+        "definition": "Each of the graphic signs that make up an alphabet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter",
+              "character"
+            ]
+          }
+        ],
+        "domain": "alphabet",
+        "emoji": "🔤",
+        "examples": [
+          {
+            "id": "mm08zl8t7gd7cl4",
+            "text": "Ce mot commence par la lettre A.",
+            "textLang": "fr",
+            "translation": "This word starts with the letter A.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lettre",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "oqd26amz3jydno7",
+      "from": "Un message écrit envoyé par la poste à quelqu'un.",
+      "to": "A written message sent by mail to someone.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "m8adeuvb2frs4ws",
+      "from": "Chacun des signes graphiques qui composent l'alphabet.",
+      "to": "Each of the graphic signs that make up the alphabet.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la lettre",
+    "lemma": "lettre",
+    "reading": null,
+    "ipa": "/lɛtʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "letter; character",
+    "primaryGloss": "letter",
+    "emotion": "nostalgic and quiet, holding a paper message from someone far away",
+    "notes": [
       "While 'lettre' most commonly means a written message sent by post, it also refers to the written characters of the alphabet."
     ],
     "senses": [
@@ -160,22 +286,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "oqd26amz3jydno7",
-      "from": "Un message écrit envoyé par la poste à quelqu'un.",
-      "to": "A written message sent by mail to someone.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "m8adeuvb2frs4ws",
-      "from": "Chacun des signes graphiques qui composent l'alphabet.",
-      "to": "Each of the graphic signs that make up the alphabet.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'lettre' most commonly means a written message sent by post",
+        "why": "Merely restates the two senses already given in the entry."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ce mot commence par une grande lettre.",
+        "why": "'Une grande lettre' is unnatural for 'a capital letter' ('une majuscule' or 'une lettre majuscule')."
+      }
+    ],
+    "growth": 0.853
+  }
 }

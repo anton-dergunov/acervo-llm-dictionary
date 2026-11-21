@@ -68,6 +68,96 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip; journey",
+    "primaryGloss": "trip",
+    "emotion": "anticipatory and bright, thinking of the excitement of leaving",
+    "notes": [
+      "Plural: 'die Reisen'. Often used with 'machen': 'eine Reise machen' (to take a trip).",
+      "Use 'die Reise' for a longer trip or journey, 'der Ausflug' for a short excursion or day trip, and 'das Reisen' for the general activity of traveling."
+    ],
+    "senses": [
+      {
+        "id": "yb13ummtfu4p08o",
+        "order": 0,
+        "definition": "An act of traveling from one place to another, especially over a longer distance or for several days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "ork5zdnss72fyew",
+            "text": "Wir planen eine Reise nach Spanien.",
+            "textLang": "de",
+            "translation": "We are planning a trip to Spain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and hopeful, mapping out a future holiday",
+            "note": null,
+            "matchedForm": "Reise",
+            "matchedTranslationForm": "trip"
+          },
+          {
+            "id": "jrusuzbrrga8i28",
+            "text": "Gute Reise!",
+            "textLang": "de",
+            "translation": "Have a good trip!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Reise",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Reise",
+    "lemma": "Reise",
+    "reading": null,
+    "ipa": "/ˈʁaɪ̯zə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧳",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; journey; travel",
     "primaryGloss": "trip",
     "emotion": "anticipatory and bright, thinking of the excitement of leaving",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(travel) The general experience or process of traveling.",
+        "why": "'die Reise' is a countable trip; the general activity is 'das Reisen' (a different lemma)."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Reisen bildet.",
+        "why": "Uses the nominalized verb 'das Reisen', not the feminine noun 'die Reise'."
+      }
+    ],
+    "growth": 0.748
   }
 }

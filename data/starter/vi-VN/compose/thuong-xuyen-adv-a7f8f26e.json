@@ -58,6 +58,96 @@
     "headword": "thường xuyên",
     "lemma": "thường xuyên",
     "reading": null,
+    "ipa": "/tʰɨəŋ˨˩ swiən˧˧/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "frequently; regularly",
+    "primaryGloss": "frequently",
+    "emotion": null,
+    "notes": [
+      "Can be placed either before the verb (like 'thường') or after the verb phrase, and is also used as an adjective meaning 'regular, frequent'."
+    ],
+    "senses": [
+      {
+        "id": "ugo2ls0mlxbjldz",
+        "order": 0,
+        "definition": "Often or at regular intervals over a period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "frequently",
+              "regularly",
+              "often"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "4fh40wch8jowc5k",
+            "text": "Tôi thường xuyên tập thể dục vào buổi sáng.",
+            "textLang": "vi",
+            "translation": "I exercise frequently in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "upbeat and motivated, talking about a healthy daily routine",
+            "note": null,
+            "matchedForm": "thường xuyên",
+            "matchedTranslationForm": "frequently"
+          },
+          {
+            "id": "xkpaavd6b5rrdco",
+            "text": "Vấn đề này xảy ra rất thường xuyên.",
+            "textLang": "vi",
+            "translation": "This problem happens very frequently.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "thường xuyên",
+            "matchedTranslationForm": "frequently"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "thường xuyên",
+    "lemma": "thường xuyên",
+    "reading": null,
     "ipa": null,
     "pos": "adv",
     "gender": null,
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(many times) Happening many times.",
+        "why": "Shades of the same meaning ('frequently / regularly'); should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Happening often or at regular intervals over a period of time.",
+        "why": "Adverb is defined as an adjective ('Happening...') instead of an adverb ('Often or...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Thường xuyên indicates an action that happens on a regular basis",
+        "why": "Both notes merely restate the definition without adding usage or grammar help."
+      }
+    ],
+    "growth": 0.786
   }
 }

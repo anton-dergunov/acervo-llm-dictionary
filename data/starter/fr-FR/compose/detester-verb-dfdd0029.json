@@ -72,6 +72,115 @@
     ],
     "status": "active",
     "shortGloss": "to hate; to detest",
+    "primaryGloss": "to hate",
+    "emotion": "strong and genuine annoyance, speaking with a firm and uncompromising tone",
+    "notes": [
+      "Can be followed directly by a noun ('Je déteste le froid') or by an infinitive verb without a preposition ('Elle déteste attendre')."
+    ],
+    "senses": [
+      {
+        "id": "93q0oey1ab45gox",
+        "order": 0,
+        "definition": "To dislike someone or something very strongly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hate",
+              "to detest",
+              "can't stand"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😡",
+        "examples": [
+          {
+            "id": "kv1unzlte2gz9mw",
+            "text": "Je déteste le froid et la pluie en hiver.",
+            "textLang": "fr",
+            "translation": "I hate the cold and the rain in winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grumbling and shivering, expressing genuine displeasure",
+            "note": null,
+            "matchedForm": "déteste",
+            "matchedTranslationForm": "hate"
+          },
+          {
+            "id": "67hzyqek958kp32",
+            "text": "Elle déteste attendre le bus quand il pleut.",
+            "textLang": "fr",
+            "translation": "She hates waiting for the bus when it rains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and impatient, complaining about a daily annoyance",
+            "note": null,
+            "matchedForm": "déteste",
+            "matchedTranslationForm": "hates"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "93q0oey1ab45gox",
+      "from": "Éprouver une aversion très forte pour quelqu'un ou quelque chose.",
+      "to": "To feel a very strong aversion for someone or something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    },
+    {
+      "sense": "ob2bh3s2og8eud8",
+      "from": "Ne pas aimer du tout quelque chose.",
+      "to": "To dislike something completely.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "détester",
+    "lemma": "détester",
+    "reading": null,
+    "ipa": "/de.tɛs.te/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hate; to detest",
     "primaryGloss": "hate",
     "emotion": "strong and genuine annoyance, speaking with a firm and uncompromising tone",
     "notes": [
@@ -166,22 +275,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "93q0oey1ab45gox",
-      "from": "Éprouver une aversion très forte pour quelqu'un ou quelque chose.",
-      "to": "To feel a very strong aversion for someone or something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    },
-    {
-      "sense": "ob2bh3s2og8eud8",
-      "from": "Ne pas aimer du tout quelque chose.",
-      "to": "To dislike something completely.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are shades of the exact same meaning ('to hate / dislike strongly')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'dépenser' (to spend money) or 'descendre'",
+        "why": "Unlikely confusion with unrelated verbs; pure filler."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[1].glosses",
+        "quote": "cant stand",
+        "why": "Missing apostrophe in 'can't stand'."
+      }
+    ],
+    "growth": 0.658
+  }
 }

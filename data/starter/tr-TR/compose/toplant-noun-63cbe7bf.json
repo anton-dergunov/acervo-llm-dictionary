@@ -72,6 +72,75 @@
     "primaryGloss": "meeting",
     "emotion": "formal yet routine, professional and focused on the agenda at hand",
     "notes": [
+      "Refers to a planned or formal event to discuss something; do not confuse with 'buluşma', which is a social meet-up between friends or a date."
+    ],
+    "senses": [
+      {
+        "id": "4oay01oq8ihg2fy",
+        "order": 0,
+        "definition": "A planned gathering of people to discuss business, work, or shared matters.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meeting",
+              "gathering",
+              "assembly"
+            ]
+          }
+        ],
+        "domain": "event",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "oj1yx6ud1mokqbg",
+            "text": "Bugün saat üçte önemli bir toplantımız var.",
+            "textLang": "tr",
+            "translation": "We have an important meeting at three o'clock today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and busy, preparing for a professional commitment",
+            "note": null,
+            "matchedForm": "toplantımız",
+            "matchedTranslationForm": "meeting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "toplantı",
+    "lemma": "toplantı",
+    "reading": null,
+    "ipa": "/topɫanˈtɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "meeting; gathering",
+    "primaryGloss": "meeting",
+    "emotion": "formal yet routine, professional and focused on the agenda at hand",
+    "notes": [
       "Toplantı refers specifically to a planned event where people assemble for a purpose, unlike 'grup' (group) which is just a collection of people.",
       "Do not confuse this with 'buluşma,' which is a more personal or social meeting between friends."
     ],
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses refer to a planned meeting or assembly; oversplit into work vs general."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "unlike 'grup' (group) which is just a collection of people.",
+        "why": "Learners do not confuse 'meeting' with 'group'."
+      }
+    ],
+    "growth": 0.529
   }
 }

@@ -58,6 +58,96 @@
     "headword": "bertemu",
     "lemma": "bertemu",
     "reading": null,
+    "ipa": "/bərˈtə.mu/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to meet; to encounter",
+    "primaryGloss": "to meet",
+    "emotion": "warm and welcoming, glad to see someone after a while",
+    "notes": [
+      "Formed with 'ber-' + 'temu'. Often followed by the preposition 'dengan' (with) before the person you meet,though 'dengan' is often dropped.",
+      "In casual conversation, speakers often use 'ketemu' instead of 'bertemu'."
+    ],
+    "senses": [
+      {
+        "id": "r189cdvj98rf1n6",
+        "order": 0,
+        "definition": "To come together with someone, either by arrangement or by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to meet",
+              "to encounter"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "75849uh3g9aepis",
+            "text": "Saya ingin bertemu dengan teman lama saya besok.",
+            "textLang": "id",
+            "translation": "I want to meet my old friend tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and eager, looking forward to catching up",
+            "note": null,
+            "matchedForm": "bertemu",
+            "matchedTranslationForm": "meet"
+          },
+          {
+            "id": "lrtbbt5ini1ol92",
+            "text": "Kami tidak sengaja bertemu di stasiun kereta.",
+            "textLang": "id",
+            "translation": "We met by chance at the train station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bertemu",
+            "matchedTranslationForm": "met"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "bertemu",
+    "lemma": "bertemu",
+    "reading": null,
     "ipa": "/bərˈtəmu/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(find) To find something that was lost or to discover something.",
+        "why": "'Bertemu' means 'to meet'; 'to find' a lost object is 'menemukan' (or colloquial 'ketemu')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Akhirnya saya bertemu dompet yang hilang itu.",
+        "why": "Ungrammatical in Indonesian; 'bertemu' cannot mean finding an inanimate object like a wallet."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to meet; to find",
+        "why": "Includes the false sense 'to find'."
+      }
+    ],
+    "growth": 0.862
   }
 }

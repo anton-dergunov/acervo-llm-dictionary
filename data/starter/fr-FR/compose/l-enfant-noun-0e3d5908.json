@@ -58,6 +58,116 @@
     "headword": "l'enfant",
     "lemma": "enfant",
     "reading": null,
+    "ipa": "/ɑ̃.fɑ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👶",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "child; kid",
+    "primaryGloss": "child",
+    "emotion": "tender and affectionate, speaking of a little one with a warm smile",
+    "notes": [
+      "Can be masculine ('un enfant') or feminine ('une enfant') depending on the child's sex, though the masculine is used generically and in the plural."
+    ],
+    "senses": [
+      {
+        "id": "4xdnnoadxogjf21",
+        "order": 0,
+        "definition": "A young person, not yet grown up.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "kid"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🧒",
+        "examples": [
+          {
+            "id": "6452qoljidkf9xi",
+            "text": "L'enfant joue dans le parc avec son ballon.",
+            "textLang": "fr",
+            "translation": "The child is playing in the park with his ball.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lighthearted and cheerful, watching someone play",
+            "note": null,
+            "matchedForm": "enfant",
+            "matchedTranslationForm": "child"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6g40h0j7et4up6e",
+        "order": 1,
+        "definition": "A son or daughter of any age in relation to their parents.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "son",
+              "daughter"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨‍👩‍👧",
+        "examples": [
+          {
+            "id": "q5j8awmf8yn2wua",
+            "text": "Ils ont trois enfants qui habitent à Paris.",
+            "textLang": "fr",
+            "translation": "They have three children who live in Paris.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and proud, speaking of family",
+            "note": null,
+            "matchedForm": "enfants",
+            "matchedTranslationForm": "children"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'enfant",
+    "lemma": "enfant",
+    "reading": null,
     "ipa": "/l‿ɑ̃.fɑ̃/",
     "pos": "noun",
     "gender": "masculine",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/l‿ɑ̃.fɑ̃/",
+        "why": "IPA must be a transcription of the lemma without the article."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "L'enfant is grammatically masculine (un enfant) even when referring to a girl",
+        "why": "False: 'enfant' can be both masculine ('un enfant') and feminine ('une enfant')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with le bébé, which specifically means an infant",
+        "why": "Unnecessary distinction; 'bébé' is an obvious cognate."
+      }
+    ],
+    "growth": 0.821
   }
 }

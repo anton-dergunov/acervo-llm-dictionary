@@ -68,6 +68,71 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "awestruck and slightly nervous, talking about a wild encounter",
+    "notes": [],
+    "senses": [
+      {
+        "id": "jbxo95qd2cxq4js",
+        "order": 0,
+        "definition": "A large, heavy wild mammal with thick fur and sharp claws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "yirk06qt25wcg6p",
+            "text": "Είδα μια αρκούδα στο δάσος.",
+            "textLang": "el",
+            "translation": "I saw a bear in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and wide-eyed, whispering about a dangerous sight",
+            "note": null,
+            "matchedForm": "αρκούδα",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η αρκούδα",
+    "lemma": "αρκούδα",
+    "reading": null,
+    "ipa": "/arˈku.ða/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "bear; crane",
     "primaryGloss": "bear",
     "emotion": "awestruck and slightly nervous, talking about a wild encounter",
@@ -158,5 +223,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(machine) A large machine used for lifting and moving heavy construction materials.",
+        "why": "Hallucinated sense: 'αρκούδα' does not mean 'crane' (which is 'γερανός')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is also used colloquially to describe a heavy lifting crane",
+        "why": "False claim repeating the hallucinated 'crane' meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bear; crane",
+        "why": "Includes the false gloss 'crane'."
+      }
+    ],
+    "growth": 0.265
   }
 }

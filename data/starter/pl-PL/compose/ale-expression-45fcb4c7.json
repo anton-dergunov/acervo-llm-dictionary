@@ -68,6 +68,118 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "but; what a, how",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
+      "As a conjunction meaning 'but', it is always preceded by a comma.",
+      "Waiters and speakers often use 'ależ' as a stronger, more emphatic form in exclamations or polite denials (e.g., 'Ależ skąd!' – 'Of course not!')."
+    ],
+    "senses": [
+      {
+        "id": "pl2jmosgaundbyn",
+        "order": 0,
+        "definition": "Used to connect two contrasting or opposing statements.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "however",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "slb1xv06t7svceo",
+            "text": "Chciałbym pojechać w góry, ale nie mam czasu.",
+            "textLang": "pl",
+            "translation": "I would like to go to the mountains, but I don't have time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ale",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7rzzqwpn64tivax",
+        "order": 1,
+        "definition": "Used as a particle at the start of an exclamation to express strong surprise or admiration.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "what a",
+              "how",
+              "boy"
+            ]
+          }
+        ],
+        "domain": "emphasis",
+        "emoji": "😲",
+        "examples": [
+          {
+            "id": "y0u7h335a3fwwtw",
+            "text": "Ale piękny dzień!",
+            "textLang": "pl",
+            "translation": "What a beautiful day!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "amazed and delighted by the weather",
+            "note": null,
+            "matchedForm": "Ale",
+            "matchedTranslationForm": "What a"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ale",
+    "lemma": "ale",
+    "reading": null,
+    "ipa": "/ˈa.lɛ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "but; wow",
     "primaryGloss": "but",
     "emotion": null,
@@ -161,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Primarily a conjunction (spójnik) and particle, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "but; wow",
+        "why": "'wow' is not listed in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used as a simple coordinating conjunction, 'ale' joins two contrasting clauses",
+        "why": "Both notes merely restate the two definitions; missing the punctuation rule (preceded by comma)."
+      }
+    ],
+    "growth": 1.029
   }
 }

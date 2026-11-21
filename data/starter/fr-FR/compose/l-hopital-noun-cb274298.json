@@ -74,6 +74,74 @@
     "primaryGloss": "hospital",
     "emotion": "concerned and hurried, rushing to visit someone who is unwell",
     "notes": [
+      "Irregular plural: 'les hôpitaux' (/o.pi.to/).",
+      "The initial 'h' is mute, allowing elision ('l'hôpital') and liaison ('les hôpitaux' /le.z‿o.pi.to/)."
+    ],
+    "senses": [
+      {
+        "id": "7mlmgzwysgvhtog",
+        "order": 0,
+        "definition": "A building where sick or injured people are given medical treatment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hospital"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "🏥",
+        "examples": [
+          {
+            "id": "4t2s6d2hitt9fya",
+            "text": "Il doit aller à l'hôpital pour sa jambe cassée.",
+            "textLang": "fr",
+            "translation": "He has to go to the hospital for his broken leg.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and serious, explaining a sudden accident",
+            "note": null,
+            "matchedForm": "l'hôpital",
+            "matchedTranslationForm": "hospital"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'hôpital",
+    "lemma": "hôpital",
+    "reading": null,
+    "ipa": "/o.pi.tal/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏥",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "hospital",
+    "primaryGloss": "hospital",
+    "emotion": "concerned and hurried, rushing to visit someone who is unwell",
+    "notes": [
       "Note the liaison with the definite article: 'l'hôpital' is pronounced with a silent 'h' and a liaison if following certain prepositions, but simply starting with a vowel sound.",
       "Do not confuse with 'la pharmacie', which is where you buy medicines rather than staying for treatment."
     ],
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the liaison with the definite article: 'l'hôpital' is pronounced",
+        "why": "Confuses elision with liaison; poorly written and misses the irregular plural 'hôpitaux'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'la pharmacie'",
+        "why": "Learners do not confuse 'hôpital' and 'pharmacie'."
+      }
+    ],
+    "growth": 0.707
   }
 }

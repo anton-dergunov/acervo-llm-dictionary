@@ -58,6 +58,76 @@
     "headword": "건강하다",
     "lemma": "건강하다",
     "reading": null,
+    "ipa": "kʌnɡaŋɦada",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "healthy; well",
+    "primaryGloss": "healthy",
+    "emotion": "bubbly and sincere, full of genuine vitality and good cheer",
+    "notes": [
+      "Describes a person's state of health (or figuratively a mindset or society). For food or habits that are 'healthy' (good for you), use 건강에 좋다 instead.",
+      "Compare with 튼튼하다, which means 'sturdy' or 'strong' (used for teeth, bones, furniture, or a robust build)."
+    ],
+    "senses": [
+      {
+        "id": "j8cm6se1ojl9h2f",
+        "order": 0,
+        "definition": "In good physical or mental condition and free from illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "well",
+              "fit"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "djn0s6qd6zktu3f",
+            "text": "매일 운동해서 몸이 건강하다.",
+            "textLang": "ko",
+            "translation": "I am healthy because I exercise every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "건강하다",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "건강하다",
+    "lemma": "건강하다",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -162,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To be beneficial or good for one's physical well-being.",
+        "why": "English calque; Korean uses 건강에 좋다 for 'healthy/wholesome (for you)', not 건강하다."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "야채를 많이 먹는 것은 건강하다.",
+        "why": "Unnatural translationese; native Korean says 야채를 많이 먹는 것은 건강에 좋다."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While this adjective describes both physical and mental well-being, it is most",
+        "why": "Purely restates the definition."
+      }
+    ],
+    "growth": 0.629
   }
 }

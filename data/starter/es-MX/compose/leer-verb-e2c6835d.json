@@ -72,6 +72,94 @@
     "primaryGloss": "read",
     "emotion": "quiet and focused, lost in the pages of a good book",
     "notes": [
+      "Between vowels, the 'i' in endings changes to 'y' (for example: 'leyó', 'leyeron', 'leyendo'), and some endings take a written accent ('leí', 'leído')."
+    ],
+    "senses": [
+      {
+        "id": "4hy2kdkbjsaxo68",
+        "order": 0,
+        "definition": "To look at written words or symbols and understand their meaning.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "read"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "wumaw2qf05ciaws",
+            "text": "Me gusta leer novelas antes de dormir.",
+            "textLang": "es",
+            "translation": "I like to read novels before going to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and peaceful, winding down for the night",
+            "note": null,
+            "matchedForm": "leer",
+            "matchedTranslationForm": "read"
+          },
+          {
+            "id": "jjvc1stlxnhy5qm",
+            "text": "Ella está leyendo un artículo muy interesante.",
+            "textLang": "es",
+            "translation": "She is reading a very interesting article.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "engaged and curious about the content",
+            "note": null,
+            "matchedForm": "leyendo",
+            "matchedTranslationForm": "reading"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "leer",
+    "lemma": "leer",
+    "reading": null,
+    "ipa": "/leˈeɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to read",
+    "primaryGloss": "read",
+    "emotion": "quiet and focused, lost in the pages of a good book",
+    "notes": [
       "This is a regular -er verb, but note that the stem changes slightly in some past and present forms (leí, leyó, leyendo) to avoid three vowels in a row.",
       "Do not confuse 'leer' with 'ver' (to see). 'Ver' is for visual perception, while 'leer' is specifically for interpreting written language."
     ],
@@ -181,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the stem changes slightly in some past and present forms (leí, leyó, leyendo)",
+        "why": "Not a stem or present-tense change; unstressed 'i' becomes 'y' between vowels in endings."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'leer' with 'ver' (to see).",
+        "why": "English speakers do not confuse 'to read' with 'to see'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To interpret or understand someone's mood, intention, or a situation based on signs.",
+        "why": "Marginal figurative sense not needed at A2."
+      }
+    ],
+    "growth": 0.574
   }
 }

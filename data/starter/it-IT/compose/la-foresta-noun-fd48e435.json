@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "forest",
+    "primaryGloss": "forest",
+    "emotion": "peaceful and quiet, breathing in the fresh air among the tall trees",
+    "notes": [
+      "Refers to a large, dense, wild expanse of trees (e.g., 'la foresta tropicale'). For smaller local woods, 'il bosco' is much more common."
+    ],
+    "senses": [
+      {
+        "id": "gur4wghlncnvw4e",
+        "order": 0,
+        "definition": "A very large, dense area of land covered with trees and wild plants.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "forest"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌲",
+        "examples": [
+          {
+            "id": "jcmxhh43k6dhz8x",
+            "text": "Molti animali selvatici vivono nella foresta.",
+            "textLang": "it",
+            "translation": "Many wild animals live in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "foresta",
+            "matchedTranslationForm": "forest"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la foresta",
+    "lemma": "foresta",
+    "reading": null,
+    "ipa": "/foˈrɛ.sta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌲",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "forest; woods",
     "primaryGloss": "forest",
     "emotion": "peaceful and quiet, breathing in the fresh air among the tall trees",
@@ -119,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Gli alberi alti coprono la foresta.",
+        "why": "Tautological: a forest is made of trees, so trees do not 'cover' a forest."
+      }
+    ],
+    "growth": 1.187
   }
 }

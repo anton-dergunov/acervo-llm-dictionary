@@ -73,6 +73,136 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "frío; con frío",
+    "primaryGloss": "frío",
+    "emotion": "shivering slightly against a chilly wind, rubbing hands together for warmth",
+    "notes": [
+      "Para decir 'tener frío', en inglés se usa el verbo 'be' + 'cold' (ej. 'I am cold'), nunca el verbo 'have'."
+    ],
+    "senses": [
+      {
+        "id": "foa3mpe6aiezh7r",
+        "order": 0,
+        "definition": "Dicho del tiempo, de un lugar o de una cosa: que tiene una temperatura baja.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "frío"
+            ]
+          }
+        ],
+        "domain": "temperatura",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "mi6szhf9stu43su",
+            "text": "It is very cold outside today.",
+            "textLang": "en",
+            "translation": "Hace mucho frío afuera hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "huddled inside a thick jacket, glancing unhappily out the window at the frost",
+            "note": null,
+            "matchedForm": "cold",
+            "matchedTranslationForm": "frío"
+          },
+          {
+            "id": "rdxfpif4iv1eyde",
+            "text": "Please put the milk in the fridge so it stays cold.",
+            "textLang": "en",
+            "translation": "Por favor, pon la leche en el refrigerador para que se mantenga fría.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurrying to close the refrigerator door before the kitchen gets chilly",
+            "note": null,
+            "matchedForm": "cold",
+            "matchedTranslationForm": "fría"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "89te4ws1yj56uze",
+        "order": 1,
+        "definition": "Dicho de una persona o un animal: que siente frío.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con frío",
+              "frío"
+            ]
+          }
+        ],
+        "domain": "sensación",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hf1ftsrck9ae9mb",
+            "text": "Close the window, please; I am cold.",
+            "textLang": "en",
+            "translation": "Cierra la ventana, por favor; tengo frío.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cold",
+            "matchedTranslationForm": "frío"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "cold",
+    "lemma": "cold",
+    "reading": null,
+    "ipa": "/koʊld/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥶",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "frío; resfriado",
     "primaryGloss": "frío",
     "emotion": "shivering slightly against a chilly wind, rubbing hands together for warmth",
@@ -164,5 +294,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "frío; resfriado",
+        "why": "'resfriado' is the noun meaning (a cold); the adjective does not mean having a cold."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'feeling cold' (I am cold = tengo frío), crucial for Spanish speakers."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 (weather) and 1 (things) are both simply 'having a low temperature'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "No confundas 'cold' (frío, la temperatura) con 'flu' o 'cold'",
+        "why": "Misses the key Spanish learner trap: 'to be cold' vs 'tener frío'."
+      }
+    ],
+    "growth": 1.064
   }
 }

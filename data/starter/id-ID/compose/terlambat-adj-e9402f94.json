@@ -58,6 +58,97 @@
     "headword": "terlambat",
     "lemma": "terlambat",
     "reading": null,
+    "ipa": "/tərˈlam.bat/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late; too late",
+    "primaryGloss": "late",
+    "emotion": "apologetic and flustered, acknowledging that you kept someone waiting",
+    "notes": [
+      "Do not confuse with the root word 'lambat' (slow in speed). 'Terlambat' means behind schedule or past the proper time.",
+      "In everyday speech, the colloquial synonym 'telat' is very common."
+    ],
+    "senses": [
+      {
+        "id": "1xlr9pxcdtwt2s6",
+        "order": 0,
+        "definition": "Arriving, happening, or done after the expected, planned, or proper time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late",
+              "too late",
+              "behind schedule"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "4prfjr2aatvyxwn",
+            "text": "Maaf, saya terlambat karena macet.",
+            "textLang": "id",
+            "translation": "Sorry, I am late because of traffic.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and mildly stressed, trying to explain the delay",
+            "note": null,
+            "matchedForm": "terlambat",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "r48zrhjvyfj1g25",
+            "text": "Saya sadar saya sudah terlambat untuk mendaftar.",
+            "textLang": "id",
+            "translation": "I realized I was already too late to register.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "terlambat",
+            "matchedTranslationForm": "too late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "terlambat",
+    "lemma": "terlambat",
+    "reading": null,
     "ipa": "/tər.lam.bat/",
     "pos": "adj",
     "gender": null,
@@ -181,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when someone or something misses a deadline or arrives after",
+        "why": "Restates the definition of sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To become aware of something too late to take action",
+        "why": "Not a separate meaning; 'realizing' comes from 'sadar' in the example, and the definition is a verb."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "late; delayed",
+        "why": "Includes 'delayed', which does not appear in any sense's glosses."
+      }
+    ],
+    "growth": 0.786
   }
 }

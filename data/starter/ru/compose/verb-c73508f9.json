@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to open; to discover",
+    "primaryGloss": "to open",
+    "emotion": "helpful and practical, getting ready to let someone in",
+    "notes": [
+      "Imperfective; the perfective counterpart is 'открыть'.",
+      "Used for physical objects (doors, windows, books) and water/gas taps. For turning on electrical devices, use 'включать'."
+    ],
+    "senses": [
+      {
+        "id": "l8g6pa5596thw7c",
+        "order": 0,
+        "definition": "To move something so that it is no longer closed, or to unseal a container.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open"
+            ]
+          }
+        ],
+        "domain": "opening",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "hdem7j4ppjd2o2p",
+            "text": "Летом мы всегда открываем окна на ночь.",
+            "textLang": "ru",
+            "translation": "In the summer we always open the windows for the night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "открываем",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yoshn465pjj0cb7",
+        "order": 1,
+        "definition": "To start the operation of a business, institution, account, or event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open",
+              "to start"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "m71woh0w9xxjzl8",
+            "text": "Они планируют открывать новые магазины по всей стране.",
+            "textLang": "ru",
+            "translation": "They plan to open new shops across the country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "открывать",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vl1x6nnhjlcd60x",
+        "order": 2,
+        "definition": "To find or make known something previously unknown.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to discover",
+              "to reveal"
+            ]
+          }
+        ],
+        "domain": "discovery",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "ey9tcmyd223eyr7",
+            "text": "Учёные продолжают открывать новые тайны космоса.",
+            "textLang": "ru",
+            "translation": "Scientists continue to discover new secrets of space.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "открывать",
+            "matchedTranslationForm": "discover"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "открывать",
+    "lemma": "открывать",
+    "reading": null,
+    "ipa": "/ɐtkrɨˈvatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to open; to discover; to turn on",
     "primaryGloss": "to open",
     "emotion": "helpful and practical, getting ready to let someone in",
@@ -201,5 +351,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Я хочу открывать окно, потому что здесь жарко.",
+        "why": "A single desired action requires perfective 'открыть', not imperfective 'открывать'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to open; to discover; to turn on",
+        "why": "'to turn on' is not in the senses (and only applies to water/gas taps)."
+      }
+    ],
+    "growth": 1.0
   }
 }

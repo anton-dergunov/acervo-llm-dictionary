@@ -83,6 +83,153 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "mouth; opening; stove burner",
+    "primaryGloss": "mouth",
+    "emotion": "warm and natural, speaking face to face",
+    "notes": [],
+    "senses": [
+      {
+        "id": "09s2o9rytidq3d2",
+        "order": 0,
+        "definition": "The opening in the face used for eating, drinking, and speaking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouth"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👄",
+        "examples": [
+          {
+            "id": "13bqchzu7vxgjjn",
+            "text": "Ela abriu a boca para falar.",
+            "textLang": "pt",
+            "translation": "She opened her mouth to speak.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and attentive, watching someone about to speak",
+            "note": null,
+            "matchedForm": "boca",
+            "matchedTranslationForm": "mouth"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pen9hsguho9ss7f",
+        "order": 1,
+        "definition": "The opening or entrance of a container, bottle, tunnel, or cave.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "opening",
+              "mouth"
+            ]
+          }
+        ],
+        "domain": "opening",
+        "emoji": "🕳️",
+        "examples": [
+          {
+            "id": "bbaqaa538ti9v0p",
+            "text": "A boca da garrafa é muito estreita.",
+            "textLang": "pt",
+            "translation": "The mouth of the bottle is very narrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "boca",
+            "matchedTranslationForm": "mouth"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "j15wtrrd0uxlp9e",
+        "order": 2,
+        "definition": "A heating unit on top of a kitchen stove.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "burner",
+              "ring"
+            ]
+          }
+        ],
+        "domain": "appliance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "yftpbsb7awxk2im",
+            "text": "Comprei um fogão de quatro bocas.",
+            "textLang": "pt",
+            "translation": "I bought a four-burner stove.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bocas",
+            "matchedTranslationForm": "burner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a boca",
+    "lemma": "boca",
+    "reading": null,
+    "ipa": "/ˈbo.kɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👄",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "mouth; opening",
     "primaryGloss": "mouth",
     "emotion": "warm and natural, speaking face to face",
@@ -173,5 +320,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "O rio deságua na boca do mar.",
+        "why": "Brazilians say 'boca da garrafa' or 'boca da caverna', not 'boca do mar'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday Brazilian sense: stove burner ('boca do fogão')."
+      }
+    ],
+    "growth": 1.467
   }
 }

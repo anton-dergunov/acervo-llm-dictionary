@@ -74,6 +74,132 @@
     "primaryGloss": "woman",
     "emotion": "calm and matter-of-fact, speaking of an everyday person",
     "notes": [
+      "Pronounced /fam/: the first 'e' is pronounced like an 'a'.",
+      "Usually means 'wife' when used with a possessive (e.g., 'ma femme', 'sa femme')."
+    ],
+    "senses": [
+      {
+        "id": "ead4p5idw2u75d7",
+        "order": 0,
+        "definition": "An adult female human being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "woman"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "kih9rritm4ai9sw",
+            "text": "Cette femme marche dans la rue.",
+            "textLang": "fr",
+            "translation": "That woman is walking down the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and descriptive, pointing someone out casually",
+            "note": null,
+            "matchedForm": "femme",
+            "matchedTranslationForm": "woman"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c3ey3v70527osr3",
+        "order": 1,
+        "definition": "A woman to whom someone is married.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wife"
+            ]
+          }
+        ],
+        "domain": "marriage",
+        "emoji": "💍",
+        "examples": [
+          {
+            "id": "r7yoevgjiz71cud",
+            "text": "Il présente sa femme à ses collègues.",
+            "textLang": "fr",
+            "translation": "He introduces his wife to his colleagues.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and warm, introducing someone important to a group",
+            "note": null,
+            "matchedForm": "femme",
+            "matchedTranslationForm": "wife"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "ead4p5idw2u75d7",
+      "from": "Un être humain adulte de sexe féminin.",
+      "to": "An adult female human being.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:12Z"
+    },
+    {
+      "sense": "c3ey3v70527osr3",
+      "from": "La personne avec qui on est marié.",
+      "to": "The person to whom someone is married.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:12Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la femme",
+    "lemma": "femme",
+    "reading": null,
+    "ipa": "/fam/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "woman; wife",
+    "primaryGloss": "woman",
+    "emotion": "calm and matter-of-fact, speaking of an everyday person",
+    "notes": [
       "The word 'femme' has two distinct, very common meanings in French: both an adult female person and a wife. Context almost always makes it clear which one is meant.",
       "When referring to a wife, it is frequently preceded by a possessive determiner, such as 'ma femme' (my wife) or 'sa femme' (his wife)."
     ],
@@ -162,22 +288,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "ead4p5idw2u75d7",
-      "from": "Un être humain adulte de sexe féminin.",
-      "to": "An adult female human being.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:12Z"
-    },
-    {
-      "sense": "c3ey3v70527osr3",
-      "from": "La personne avec qui on est marié.",
-      "to": "The person to whom someone is married.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:12Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'femme' has two distinct, very common meanings in French:",
+        "why": "Restates the two senses; misses the irregular pronunciation of 'e' as /a/."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "The person to whom someone is married.",
+        "why": "Defines 'spouse' rather than specifically a female spouse ('wife')."
+      }
+    ],
+    "growth": 0.694
+  }
 }

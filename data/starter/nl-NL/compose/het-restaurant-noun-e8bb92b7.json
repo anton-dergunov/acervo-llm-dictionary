@@ -60,6 +60,74 @@
     "headword": "het restaurant",
     "lemma": "restaurant",
     "reading": null,
+    "ipa": "/rɛs.tɔˈrɑnt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "restaurant",
+    "primaryGloss": "restaurant",
+    "emotion": "hungry and looking forward to a nice meal out",
+    "notes": [
+      "To say 'at a restaurant', Dutch usually uses the preposition 'in' ('in een restaurant') or the phrase 'uit eten gaan' (to go out to eat)."
+    ],
+    "senses": [
+      {
+        "id": "5dg56gfjve6sm95",
+        "order": 0,
+        "definition": "A place where you can buy and eat a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "gisrqibi3sxlbfd",
+            "text": "We gaan vanavond naar een Italiaans restaurant in het centrum.",
+            "textLang": "nl",
+            "translation": "Tonight we are going to an Italian restaurant in the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "restaurant",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het restaurant",
+    "lemma": "restaurant",
+    "reading": null,
     "ipa": "/rɛstɔˈrɑnt/",
     "pos": "noun",
     "gender": "neuter",
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[0].text",
+        "quote": "We gaan tonight naar een Italiaans restaurant in het centrum.",
+        "why": "Contains the English word 'tonight' instead of Dutch 'vanavond'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'het restaurant' takes the neuter article 'het'",
+        "why": "Restates the gender already shown in the headword."
+      }
+    ],
+    "growth": 1.136
   }
 }

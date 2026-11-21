@@ -68,6 +68,115 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "here; this",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
+      "Often follows a preposition like 'ở' (ở đây = here) or a question word to add emphasis (ai đây? = who is this?).",
+      "Compare 'đó' / 'đấy' (there, near the listener) and 'kia' (over there)."
+    ],
+    "senses": [
+      {
+        "id": "ix8s5027wlv2btf",
+        "order": 0,
+        "definition": "In, at, or to this place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "vr6q2le1644kl6o",
+            "text": "Xin chờ ở đây.",
+            "textLang": "vi",
+            "translation": "Please wait here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đây",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5s70byyybld7nv2",
+        "order": 1,
+        "definition": "Used to point out or introduce a person or thing close to the speaker.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "this",
+              "here"
+            ]
+          }
+        ],
+        "domain": "pointing",
+        "emoji": "👉",
+        "examples": [
+          {
+            "id": "7c3gkhnogqlbvwu",
+            "text": "Đây là quyển sách của tôi.",
+            "textLang": "vi",
+            "translation": "This is my book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Đây",
+            "matchedTranslationForm": "This"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đây",
+    "lemma": "đây",
+    "reading": null,
+    "ipa": "/ɗəj˧/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "here; this; now",
     "primaryGloss": "here",
     "emotion": null,
@@ -159,5 +268,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Quyển sách này của tôi.",
+        "why": "Example uses 'này' instead of the headword 'đây'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "here; this; now",
+        "why": "'now' is in shortGloss, but there is no sense for it."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'đây' to indicate the speaker's current location, meaning 'here'.",
+        "why": "Restates the gloss and definition of sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "used after pronouns to mean 'this' (e.g., 'người đây' - this person).",
+        "why": "'người' is a noun, not a pronoun, and 'người này' is normal for 'this person'."
+      }
+    ],
+    "growth": 1.144
   }
 }

@@ -68,6 +68,94 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and essential, like a cold glass on a hot day",
+    "notes": [
+      "Commonly counted with container or portion measure words such as 杯 (bēi, cup/glass), 瓶 (píng, bottle), or 滴 (dī, drop): 一杯水 (a glass of water)."
+    ],
+    "senses": [
+      {
+        "id": "h57zcr3f71iyhyw",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, forms rivers and seas, and is drunk by people and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "xwd4tsze417nmj5",
+            "text": "我想喝一杯水。",
+            "textLang": "zh",
+            "translation": "I want to drink a glass of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "水",
+            "matchedTranslationForm": "water"
+          },
+          {
+            "id": "lo07ueksnmwbdjd",
+            "text": "地上有很多水。",
+            "textLang": "zh",
+            "translation": "There is a lot of water on the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation of a mess",
+            "note": null,
+            "matchedForm": "水",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "水",
+    "lemma": "水",
+    "reading": "shuǐ",
+    "ipa": "/ʂu̯ei̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "water; liquid",
     "primaryGloss": "water",
     "emotion": "refreshing and essential, like a cold glass on a hot day",
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Drinking water and water on the ground are the same everyday sense; standalone 水 does not mean any liquid."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'fruit juice' (shuǐguǒ zhī)",
+        "why": "Nobody confuses a one-syllable noun with a three-syllable compound; give common classifiers instead."
+      }
+    ],
+    "growth": 0.755
   }
 }

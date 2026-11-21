@@ -58,6 +58,76 @@
     "headword": "화나다",
     "lemma": "화나다",
     "reading": null,
+    "ipa": "ɸwaːnada",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to get angry; to be upset",
+    "primaryGloss": "to get angry",
+    "emotion": "frustrated and upset, bubbling over with sudden irritation",
+    "notes": [
+      "Formed from 화 (anger) + 나다 (to come out), and often used as two words with a subject particle: 화가 나다. In the present tense to mean 'I am angry right now', Korean commonly uses the past form 화났어요 ('I have gotten angry').",
+      "Do not confuse with 화내다 (화를 내다), which means to actively show or express anger toward someone."
+    ],
+    "senses": [
+      {
+        "id": "c9gswegdk4mvc2r",
+        "order": 0,
+        "definition": "To come to feel strong displeasure or anger.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get angry",
+              "to be angry",
+              "to be upset"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "5nd0mzwq7g7a9si",
+            "text": "그가 거짓말을 해서 정말 화났어요.",
+            "textLang": "ko",
+            "translation": "I got really angry because he lied.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "화났어요",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "화나다",
+    "lemma": "화나다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "그가 속 거짓말을 해서 정말 화났다.",
+        "why": "'속 거짓말' is nonsensical and ungrammatical in Korean."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 화나게 하다, which means 'to make",
+        "why": "Regular causative construction (-게 하다); better to note the transitive counterpart 화내다."
+      }
+    ],
+    "growth": 1.106
   }
 }

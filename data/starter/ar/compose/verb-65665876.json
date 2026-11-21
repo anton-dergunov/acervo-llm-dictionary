@@ -60,6 +60,115 @@
     "headword": "فَقَدَ",
     "lemma": "فَقَدَ",
     "reading": null,
+    "ipa": "/fa.qa.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to lose",
+    "primaryGloss": "lose",
+    "emotion": null,
+    "notes": [
+      "Present tense: يَفْقِدُ (yafqidu). Unlike ضَاعَ (ḍāʿa, 'to get lost'), where the lost item is the subject, فَقَدَ is transitive and the person who loses the item is the subject."
+    ],
+    "senses": [
+      {
+        "id": "8qud3x4085mijtw",
+        "order": 0,
+        "definition": "To no longer have something because you cannot find it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lose",
+              "misplace"
+            ]
+          }
+        ],
+        "domain": "misplacing",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "njaskp4mn9uy7iv",
+            "text": "فَقَدْتُ مِفْتَاحِي هَذَا الصَّبَاحَ.",
+            "textLang": "ar",
+            "translation": "I lost my key this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "فَقَدْتُ",
+            "matchedTranslationForm": "lost"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q4jiaqd4v7qy2up",
+        "order": 1,
+        "definition": "To stop having a person, ability, or quality, especially through death or misfortune.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lose",
+              "be deprived of"
+            ]
+          }
+        ],
+        "domain": "loss",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "fdcstrip5oidstq",
+            "text": "فَقَدَ جَدَّهُ فِي الحَرْبِ.",
+            "textLang": "ar",
+            "translation": "He lost his grandfather in the war.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and heavy with a deep sense of permanent loss",
+            "note": null,
+            "matchedForm": "فَقَدَ",
+            "matchedTranslationForm": "lost"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "فَقَدَ",
+    "lemma": "فَقَدَ",
+    "reading": null,
     "ipa": "/faˈqada/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/faˈqada/",
+        "why": "Wrong stress placement; stress in /faqada/ falls on the first syllable /ˈfa.qa.da/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "فَقَدْتُ مِفْتَاحِي هَذَا الصَّبَاحِ.",
+        "why": "Grammatical error in case ending: الصَّبَاحِ should be accusative الصَّبَاحَ (adverbial of time)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to lose; to be missing",
+        "why": "فَقَدَ is transitive ('to lose'); it does not mean 'to be missing' in active voice."
+      }
+    ],
+    "growth": 0.941
   }
 }

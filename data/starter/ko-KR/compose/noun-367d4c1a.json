@@ -70,6 +70,156 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "day; weather; blade",
+    "primaryGloss": "day",
+    "emotion": null,
+    "notes": [
+      "Used as a native Korean noun (좋은 날, 마지막 날). For numbered dates of the month or counting days with Sino-Korean numbers, '일' is used instead (1일, 3일)."
+    ],
+    "senses": [
+      {
+        "id": "ri51grhixn25n0o",
+        "order": 0,
+        "definition": "A twenty-four-hour period, or a particular day for an event or occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "date"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "bed0hfpt1wks665",
+            "text": "우리 만날 날을 정하자.",
+            "textLang": "ko",
+            "translation": "Let's set a day to meet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cooperative and decisive, looking forward to making plans",
+            "note": null,
+            "matchedForm": "날",
+            "matchedTranslationForm": "day"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bcztctaz49hkw1h",
+        "order": 1,
+        "definition": "The state of the weather on a given day, especially in expressions about how nice, cold, or warm it is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather",
+              "day"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "7y691xwhj8vmc68",
+            "text": "오늘은 날이 정말 좋네요.",
+            "textLang": "ko",
+            "translation": "The weather is really nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "날",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tr7il2hq3p08ucj",
+        "order": 2,
+        "definition": "The sharp cutting edge of a tool or weapon such as a knife.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blade",
+              "edge"
+            ]
+          }
+        ],
+        "domain": "tools",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "q7ki0cbufgmt2oh",
+            "text": "칼의 날이 매우 날카롭다.",
+            "textLang": "ko",
+            "translation": "The blade of the knife is very sharp.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "날",
+            "matchedTranslationForm": "blade"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "날",
+    "lemma": "날",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "day; date; blade",
     "primaryGloss": "day",
     "emotion": null,
@@ -203,5 +353,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'weather' (e.g. 날이 좋다 / 날이 춥다)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '날' often refers to a generic 'day', it can also mean",
+        "why": "Merely restates the senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "칼날이 매우 날카롭다.",
+        "why": "Uses the compound noun 칼날 instead of the standalone word 날."
+      }
+    ],
+    "growth": 0.995
   }
 }

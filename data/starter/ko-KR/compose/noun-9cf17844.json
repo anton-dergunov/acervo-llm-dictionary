@@ -75,6 +75,74 @@
     "primaryGloss": "birthday",
     "emotion": "warm and celebratory, looking forward to cake and candles",
     "notes": [
+      "When speaking about an elder's birthday or in formal situations, use the honorific word 생신 instead."
+    ],
+    "senses": [
+      {
+        "id": "jwldpeektxvmeq9",
+        "order": 0,
+        "definition": "The anniversary of the day on which a person was born.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "birthday"
+            ]
+          }
+        ],
+        "domain": "birthday",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "7nmldhswrgcjhlc",
+            "text": "제 생일은 삼월 삼일입니다.",
+            "textLang": "ko",
+            "translation": "My birthday is March third.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "생일",
+            "matchedTranslationForm": "birthday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "생일",
+    "lemma": "생일",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎂",
+    "topics": [
+      "Time",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "birthday",
+    "primaryGloss": "birthday",
+    "emotion": "warm and celebratory, looking forward to cake and candles",
+    "notes": [
       "생일 is used for anyone's birthday in everyday speech. When speaking to elders or in formal situations, the honorific form 생신 is used instead."
     ],
     "senses": [
@@ -121,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "내 생일은 삼월 삼일입니다.",
+        "why": "Mixing non-humble '내' with formal polite '입니다' is unnatural; use '제' with '입니다'."
+      }
+    ],
+    "growth": 0.906
   }
 }

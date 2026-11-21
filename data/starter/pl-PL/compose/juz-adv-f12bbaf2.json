@@ -73,6 +73,156 @@
     "primaryGloss": "already",
     "emotion": "matter-of-fact and focused on the state of things being complete",
     "notes": [
+      "Unlike 'teraz' (now), which simply names the present moment, 'już' highlights a change of state or that something has happened by this point (compare 'jeszcze' = still/yet)."
+    ],
+    "senses": [
+      {
+        "id": "aai2f2hgvdqlpuk",
+        "order": 0,
+        "definition": "Before now, or earlier than expected.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "z25jsbeqlqkuz5k",
+            "text": "Już zjadłem obiad.",
+            "textLang": "pl",
+            "translation": "I have already eaten lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and content, signaling the task is done",
+            "note": null,
+            "matchedForm": "Już",
+            "matchedTranslationForm": "already"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8513xmfxynj6g88",
+        "order": 1,
+        "definition": "By this time, following a change or wait.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "now",
+              "already"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "➡️",
+        "examples": [
+          {
+            "id": "t9px4ty720js09c",
+            "text": "Już rozumiem.",
+            "textLang": "pl",
+            "translation": "I understand now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved, like a puzzle finally clicking into place",
+            "note": null,
+            "matchedForm": "Już",
+            "matchedTranslationForm": "now"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "217zmwnhodbf5e4",
+        "order": 2,
+        "definition": "Used with 'nie' to show that something that used to be true has stopped.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "anymore",
+              "no longer"
+            ]
+          }
+        ],
+        "domain": "negation",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "4esapy9gbdyypir",
+            "text": "On tu już nie pracuje.",
+            "textLang": "pl",
+            "translation": "He does not work here anymore.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, delivering a piece of information clearly",
+            "note": null,
+            "matchedForm": "już",
+            "matchedTranslationForm": "anymore"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "już",
+    "lemma": "już",
+    "reading": null,
+    "ipa": "/juʂ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time",
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "already; now; no longer",
+    "primaryGloss": "already",
+    "emotion": "matter-of-fact and focused on the state of things being complete",
+    "notes": [
       "Już is often used to emphasize that something has happened earlier than expected.",
       "When used with a negative verb, such as 'nie', it means 'no longer' or 'not anymore' (e.g., 'Nie mieszkam tu już' - I don't live here anymore).",
       "It is different from 'teraz' (now), which focuses on the present moment, whereas 'już' focuses on the completion of an action relative to a point in time."
@@ -202,5 +352,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Something has happened or finished before the current time.",
+        "why": "Written as a full clause rather than an adverbial definition."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something is happening now, or is now true, usually following a change.",
+        "why": "Written as a full clause rather than an adverbial definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used with a negative verb, such as 'nie', it means 'no",
+        "why": "Duplicates Sense 2 instead of adding extra usage information."
+      }
+    ],
+    "growth": 0.666
   }
 }

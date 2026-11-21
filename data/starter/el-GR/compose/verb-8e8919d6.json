@@ -68,6 +68,96 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to hope",
+    "primaryGloss": "hope",
+    "emotion": "optimistic and forward-looking, with a gentle sense of quiet longing",
+    "notes": [
+      "Followed by 'να' + subjunctive (e.g., ελπίζω να έρθεις), 'ότι/πως' + indicative, or 'σε' + noun (to place hope in).",
+      "Simple past (aorist): έλπισα."
+    ],
+    "senses": [
+      {
+        "id": "lk5ji1sq5hzfjek",
+        "order": 0,
+        "definition": "To want something to happen or be true, and think that it is possible.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hope",
+              "hope for"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🤞",
+        "examples": [
+          {
+            "id": "gai3mwmbx7tt8gp",
+            "text": "Ελπίζω ότι θα έρθεις αύριο.",
+            "textLang": "el",
+            "translation": "I hope that you will come tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and inviting, looking forward to seeing someone",
+            "note": null,
+            "matchedForm": "Ελπίζω",
+            "matchedTranslationForm": "hope"
+          },
+          {
+            "id": "b5ib2zm4p98y7oz",
+            "text": "Ελπίζω να έχουμε καλό καιρό στις διακοπές.",
+            "textLang": "el",
+            "translation": "I hope we have good weather on vacation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wistful and positive, imagining a pleasant outcome",
+            "note": null,
+            "matchedForm": "Ελπίζω",
+            "matchedTranslationForm": "hope"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ελπίζω",
+    "lemma": "ελπίζω",
+    "reading": null,
+    "ipa": "/elˈpi.zo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to hope; to expect",
     "primaryGloss": "hope",
     "emotion": "optimistic and forward-looking, with a gentle sense of quiet longing",
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(believe) To believe or trust that something will happen.",
+        "why": "Senses 0 and 1 are the same meaning ('to hope') split by grammar (ότι vs να)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hope; to expect",
+        "why": "Includes 'to expect', which is absent from the senses' glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to express that you want something to be true",
+        "why": "Restates the definition instead of giving the aorist stem (έλπισα)."
+      }
+    ],
+    "growth": 0.845
   }
 }

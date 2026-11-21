@@ -68,6 +68,115 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "and; with",
+    "primaryGloss": "and",
+    "emotion": null,
+    "notes": [
+      "As 'and', 和 connects nouns or pronouns, never whole clauses or sentences.",
+      "When meaning 'with', 和 is interchangeable with 跟 (gēn), which is slightly more colloquial."
+    ],
+    "senses": [
+      {
+        "id": "e483kb7k2uqjnsh",
+        "order": 0,
+        "definition": "Used to connect two or more nouns or noun phrases.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "and"
+            ]
+          }
+        ],
+        "domain": "conjunction",
+        "emoji": "➕",
+        "examples": [
+          {
+            "id": "zx5tontejtmm3na",
+            "text": "我喜欢苹果和香蕉。",
+            "textLang": "zh",
+            "translation": "I like apples and bananas.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "和",
+            "matchedTranslationForm": "and"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s2lqq2q8ngahlka",
+        "order": 1,
+        "definition": "Used before a person or noun to indicate doing something together or in relation to them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "together with"
+            ]
+          }
+        ],
+        "domain": "accompaniment",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "x66q0gqysjdxpf2",
+            "text": "我想和你看电影。",
+            "textLang": "zh",
+            "translation": "I want to watch a movie with you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "和",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "和",
+    "lemma": "和",
+    "reading": "hé",
+    "ipa": "/xɤ˧˥/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "and; with; together with",
     "primaryGloss": "and",
     "emotion": null,
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "和 is a conjunction and preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "and, with",
+        "why": "'with' belongs to sense 1 (preposition), not sense 0 ('and')."
+      }
+    ],
+    "growth": 0.629
   }
 }

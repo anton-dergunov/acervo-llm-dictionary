@@ -72,6 +72,75 @@
     "primaryGloss": "baño",
     "emotion": "relieved and relaxed, ready to wash the day away",
     "notes": [
+      "En Estados Unidos, «bathroom» (o «restroom» en lugares públicos) se usa tanto para el cuarto de baño de una casa como para un aseo público. En el Reino Unido es más común decir «toilet» o «loo» para los públicos."
+    ],
+    "senses": [
+      {
+        "id": "gpmkl27ege9oomt",
+        "order": 0,
+        "definition": "Habitación con retrete y lavabo, y en una casa generalmente también con ducha o bañera.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "baño",
+              "cuarto de baño",
+              "aseo"
+            ]
+          }
+        ],
+        "domain": "hogar",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "h0can0t61yyzs7i",
+            "text": "The bathroom is down the hall on the left.",
+            "textLang": "en",
+            "translation": "El baño está al final del pasillo a la izquierda.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, pointing the way to a guest",
+            "note": null,
+            "matchedForm": "bathroom",
+            "matchedTranslationForm": "baño"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "bathroom",
+    "lemma": "bathroom",
+    "reading": null,
+    "ipa": "/ˈbæθ.rum/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛁",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "baño; cuarto de baño",
+    "primaryGloss": "baño",
+    "emotion": "relieved and relaxed, ready to wash the day away",
+    "notes": [
       "En Estados Unidos, 'bathroom' se usa tanto para el cuarto de baño de una casa como para un aseo público. En el Reino Unido es más común decir 'toilet' o 'loo' para los públicos."
     ],
     "senses": [
@@ -119,5 +188,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Habitación de una casa que tiene una bañera o una ducha",
+        "why": "Definition excludes public restrooms and half-baths without a shower, contradicting the note."
+      }
+    ],
+    "growth": 1.091
   }
 }

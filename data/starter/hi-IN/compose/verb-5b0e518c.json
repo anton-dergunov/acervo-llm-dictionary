@@ -58,6 +58,75 @@
     "headword": "ज़रूरत होना",
     "lemma": "ज़रूरत होना",
     "reading": null,
+    "ipa": "/zə.ɾuː.ɾət̪ ˈɦoː.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to be needed",
+    "primaryGloss": "to need",
+    "emotion": "earnest and straightforward, expressing a genuine requirement",
+    "notes": [
+      "The person who needs something takes को (e.g., मुझे, राम को), and the thing or action needed always takes की because ज़रूरत is a feminine noun (e.g., मुझे पैसों की ज़रूरत है — I need money)."
+    ],
+    "senses": [
+      {
+        "id": "tlzory4fd2q3ffk",
+        "order": 0,
+        "definition": "To require something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require",
+              "to be needed"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "vdugk02glz0qy3b",
+            "text": "मुझे इस काम के लिए एक अच्छे कंप्यूटर की ज़रूरत है।",
+            "textLang": "hi",
+            "translation": "I need a good computer for this work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ज़रूरत है",
+            "matchedTranslationForm": "need"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "ज़रूरत होना",
+    "lemma": "ज़रूरत होना",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "मुझे इस काम के लिए एक अच्छे कंप्यूटर की ज़रूरत होना तय है।",
+        "why": "Forced 'ज़रूरत होना तय है' to keep the infinitive; doesn't match the translation."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Misses the crucial grammar rule: the thing needed takes the feminine postposition की."
+      }
+    ],
+    "growth": 0.845
   }
 }

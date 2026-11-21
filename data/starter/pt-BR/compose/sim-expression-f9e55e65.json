@@ -72,6 +72,117 @@
     "primaryGloss": "yes",
     "emotion": "positive and direct, giving an immediate answer to a question",
     "notes": [
+      "In Brazilian Portuguese, yes/no questions are most naturally answered by repeating the verb rather than just saying 'sim': 'Você vai?' 'Vou.' ( or 'Vou, sim.').",
+      "Placed after the verb, 'sim' adds emphasis or contradicts a negative statement: 'Ele não vem.' 'Ele vem, sim!' (He won't come. He WILL come!)."
+    ],
+    "senses": [
+      {
+        "id": "we724muzwgi4asb",
+        "order": 0,
+        "definition": "Used to give an affirmative answer or express agreement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yes",
+              "yeah"
+            ]
+          }
+        ],
+        "domain": "agreement",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "1in4jias7kfsxxa",
+            "text": "Você vem à festa? — Sim, eu vou.",
+            "textLang": "pt",
+            "translation": "Are you coming to the party? — Yes, I am.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Sim",
+            "matchedTranslationForm": "Yes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yf5kio844b5dnrx",
+        "order": 1,
+        "definition": "Used after a verb to emphasize a positive statement or contradict a negative one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "indeed",
+              "do",
+              "really"
+            ]
+          }
+        ],
+        "domain": "emphasis",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "lng5s5n6qjljj90",
+            "text": "Eu gosto sim de estudar português!",
+            "textLang": "pt",
+            "translation": "I do like studying Portuguese!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sim",
+            "matchedTranslationForm": "do"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "sim",
+    "lemma": "sim",
+    "reading": null,
+    "ipa": "/sĩ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "yes; indeed",
+    "primaryGloss": "yes",
+    "emotion": "positive and direct, giving an immediate answer to a question",
+    "notes": [
       "In Portuguese, 'sim' is used to agree with a positive question, but it can also be used emphatically to contradict a negative statement: 'Não é verdade?' 'Sim, é!' (It is not true? Yes, it is!)."
     ],
     "senses": [
@@ -160,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Used at the end of a sentence to seek confirmation",
+        "why": "Fabricated sense; 'sim' at the end of a statement is emphatic ('indeed'), not a question tag."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "O filme foi incrível, não foi sim?",
+        "why": "Ungrammatical in Portuguese; 'não foi sim?' does not exist."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential Brazilian usage: yes/no questions are typically answered by repeating the verb."
+      }
+    ],
+    "growth": 0.916
   }
 }

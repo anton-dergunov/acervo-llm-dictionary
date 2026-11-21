@@ -70,6 +70,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "jugar; tocar; reproducir",
+    "primaryGloss": "jugar",
+    "emotion": "lighthearted and eager, ready to join in the fun",
+    "notes": [
+      "Con deportes y juegos no se usa artículo ni preposición: 'play soccer' (jugar al fútbol).",
+      "Con instrumentos musicales se puede usar con o sin 'the' en inglés estadounidense: 'play (the) guitar'."
+    ],
+    "senses": [
+      {
+        "id": "8nl00qoy83pp5xm",
+        "order": 0,
+        "definition": "Participar en un juego, deporte o actividad recreativa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "jugar",
+              "practicar"
+            ]
+          }
+        ],
+        "domain": "game",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "ozep7o1yyzuhi3x",
+            "text": "The children like to play outside in the park.",
+            "textLang": "en",
+            "translation": "A los niños les gusta jugar afuera en el parque.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and energetic, thinking of kids running around",
+            "note": null,
+            "matchedForm": "play",
+            "matchedTranslationForm": "jugar"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t0ra0x6c67k2spc",
+        "order": 1,
+        "definition": "Hacer música con un instrumento musical.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tocar"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎸",
+        "examples": [
+          {
+            "id": "5c89macdla8mkub",
+            "text": "She plays the guitar very well.",
+            "textLang": "en",
+            "translation": "Ella toca la guitarra muy bien.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "plays",
+            "matchedTranslationForm": "toca"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kv13pk0h5c28jc1",
+        "order": 2,
+        "definition": "Hacer que suene música o se vea un video en un aparato.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "poner",
+              "reproducir"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "▶️",
+        "examples": [
+          {
+            "id": "2um0x9ftcsmybi0",
+            "text": "Can you play that song again?",
+            "textLang": "en",
+            "translation": "¿Puedes poner esa canción otra vez?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager to hear a favorite song",
+            "note": null,
+            "matchedForm": "play",
+            "matchedTranslationForm": "poner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "play",
+    "lemma": "play",
+    "reading": null,
+    "ipa": "/pleɪ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚽",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "jugar; tocar un instrumento; reproducir",
     "primaryGloss": "jugar",
     "emotion": "lighthearted and eager, ready to join in the fun",
@@ -203,5 +353,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "siempre se usa 'play' seguido de 'the'",
+        "why": "In US English, 'the' before musical instruments is optional and often omitted."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note for Spanish speakers: no article with sports (play soccer)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "She learns to play the guitar every Tuesday.",
+        "why": "'Learns to play... every Tuesday' is unnatural in English."
+      }
+    ],
+    "growth": 0.905
   }
 }

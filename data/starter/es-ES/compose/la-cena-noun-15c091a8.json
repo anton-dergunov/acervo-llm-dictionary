@@ -74,6 +74,95 @@
     "primaryGloss": "dinner",
     "emotion": null,
     "notes": [
+      "In Spain, 'la cena' is lighter than lunch and is typically eaten late in the evening, often from 9:00 p.m. onwards."
+    ],
+    "senses": [
+      {
+        "id": "ifvxaqydmflbi54",
+        "order": 0,
+        "definition": "The main meal eaten in the evening, or a social gathering for this meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "supper"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "ybvi05nd0dzrkci",
+            "text": "Preparo la cena para toda la familia.",
+            "textLang": "es",
+            "translation": "I prepare dinner for the whole family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and cheerful, looking forward to sharing a meal",
+            "note": null,
+            "matchedForm": "cena",
+            "matchedTranslationForm": "dinner"
+          },
+          {
+            "id": "456fmmpzs71od6g",
+            "text": "Tenemos una cena de empresa el viernes.",
+            "textLang": "es",
+            "translation": "We have a company dinner on Friday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited about a social event with coworkers",
+            "note": null,
+            "matchedForm": "cena",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la cena",
+    "lemma": "cena",
+    "reading": null,
+    "ipa": "/ˈθena/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner; supper",
+    "primaryGloss": "dinner",
+    "emotion": null,
+    "notes": [
       "In Spain, 'la cena' is typically eaten quite late in the evening, often from 9:00 PM onwards."
     ],
     "senses": [
@@ -162,5 +251,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "A social gathering or party where a meal is eaten",
+        "why": "Having dinner with others is a shade of the same meaning, not a separate sense."
+      }
+    ],
+    "growth": 0.94
   }
 }

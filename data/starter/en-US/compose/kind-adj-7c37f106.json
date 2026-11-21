@@ -68,6 +68,76 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "amable; bondadoso",
+    "primaryGloss": "amable",
+    "emotion": "warm and gentle, smiling softly at someone's thoughtfulness",
+    "notes": [
+      "Para indicar con quién se es amable, se usa la preposición 'to' ('Be kind to animals').",
+      "No confundir con el sustantivo 'kind', que significa 'tipo' o 'clase' ('What kind of music?')."
+    ],
+    "senses": [
+      {
+        "id": "p9g6v56o850pox4",
+        "order": 0,
+        "definition": "Que muestra buena voluntad, afecto y consideración hacia los demás.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "amable",
+              "bondadoso",
+              "considerado"
+            ]
+          }
+        ],
+        "domain": "personalidad",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "aw5fp7rorx26dj7",
+            "text": "She was very kind to help me carry my bags.",
+            "textLang": "en",
+            "translation": "Fue muy amable al ayudarme a llevar mis maletas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and grateful, remembering a helpful gesture",
+            "note": null,
+            "matchedForm": "kind",
+            "matchedTranslationForm": "amable"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "kind",
+    "lemma": "kind",
+    "reading": null,
+    "ipa": "/kaɪnd/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💛",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "amable; tipo",
     "primaryGloss": "amable",
     "emotion": "warm and gentle, smiling softly at someone's thoughtfulness",
@@ -163,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Clase, categoría o tipo de persona o cosa.",
+        "why": "This is the noun 'kind', included in an entry whose POS is 'adj'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "amable; tipo",
+        "why": "'tipo' is the noun meaning, which does not belong in the adjective entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Como adjetivo, significa que alguien es bueno, considerado y atento",
+        "why": "merely repeats the definition."
+      }
+    ],
+    "growth": 0.803
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "to remember",
     "emotion": "thoughtful and reflective, searching one's memory",
     "notes": [
+      "Always takes a reflexive pronoun (ik herinner me, jij herinnert je). Do not confuse it with 'onthouden', which means to memorize or keep something in mind for the future."
+    ],
+    "senses": [
+      {
+        "id": "sq8ho28rdxbh33a",
+        "order": 0,
+        "definition": "To bring a past fact, person, or event back into your mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to remember",
+              "to recall"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "71yuj5rc8wdxi26",
+            "text": "Ik kan me haar naam niet meer herinneren.",
+            "textLang": "nl",
+            "translation": "I can no longer remember her name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and trying hard to think of something",
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zich herinneren",
+    "lemma": "zich herinneren",
+    "reading": null,
+    "ipa": "/zɪx hɛˈrɪnərə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to remember; to recall",
+    "primaryGloss": "to remember",
+    "emotion": "thoughtful and reflective, searching one's memory",
+    "notes": [
       "This is a reflexive verb in Dutch, so it always needs a reflexive pronoun like 'zich' (zich herinneren)."
     ],
     "senses": [
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To keep something in your mind over time.",
+        "why": "Keeping information in mind for the future is 'onthouden', not 'zich herinneren'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Het is belangrijk om deze regel goed te herinneren voor het examen.",
+        "why": "Ungrammatical (missing reflexive pronoun) and wrong verb ('onthouden' is required here)."
+      }
+    ],
+    "growth": 0.744
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "cough",
     "emotion": "harsh and raspy, clearing the throat with some irritation",
     "notes": [
+      "In everyday speech, Dutch often uses the verb 'hoesten' (to cough) or the diminutive 'een hoestje' where English uses the noun: 'Ik moet veel hoesten' (I have a bad cough)."
+    ],
+    "senses": [
+      {
+        "id": "mu9ml66mei5jcey",
+        "order": 0,
+        "definition": "An act or sound of forcing air out of the lungs through the throat, or an illness that causes this.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cough"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤧",
+        "examples": [
+          {
+            "id": "3714svsln9bb2mr",
+            "text": "Hij heeft al een week een nare hoest.",
+            "textLang": "nl",
+            "translation": "He has had a nasty cough for a week already.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hoest",
+            "matchedTranslationForm": "cough"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de hoest",
+    "lemma": "hoest",
+    "reading": null,
+    "ipa": "/ɦust/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤧",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "cough",
+    "primaryGloss": "cough",
+    "emotion": "harsh and raspy, clearing the throat with some irritation",
+    "notes": [
       "Use 'de hoest' for the condition or the act of coughing itself, often heard during a cold."
     ],
     "senses": [
@@ -118,5 +185,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Pushing air out of the throat with a noise.",
+        "why": "Defined as a verb phrase (gerund) rather than a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de hoest' for the condition or the act of coughing itself",
+        "why": "Restates the basic meaning without adding useful grammar or usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik heb veel last van de hoest.",
+        "why": "'Last van de hoest' is unnatural; Dutch uses 'last van hoest' or 'een nare hoest'."
+      }
+    ],
+    "growth": 1.732
   }
 }

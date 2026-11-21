@@ -68,6 +68,76 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "school; primary school",
+    "primaryGloss": "school",
+    "emotion": "busy and routine, typical of a weekday morning",
+    "notes": [
+      "False friend: 'colegio' means 'school' (for children), not 'college' or 'university' ('la universidad').",
+      "In Spain, 'el colegio' (informally 'el cole') usually refers to primary school or a private school; a public secondary school is 'el instituto'."
+    ],
+    "senses": [
+      {
+        "id": "p5nt1l1v60k35nh",
+        "order": 0,
+        "definition": "A place where children go to be educated, especially at primary level.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "school",
+              "primary school",
+              "elementary school"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "ri2jdo0t1i8vytm",
+            "text": "Los niños van al colegio por la mañana.",
+            "textLang": "es",
+            "translation": "The children go to school in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and ordinary, describing a daily routine",
+            "note": null,
+            "matchedForm": "colegio",
+            "matchedTranslationForm": "school"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el colegio",
+    "lemma": "colegio",
+    "reading": null,
+    "ipa": "/koˈlexjo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏫",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "school; secondary school",
     "primaryGloss": "school",
     "emotion": "busy and routine, typical of a weekday morning",
@@ -159,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A secondary school or high school.",
+        "why": "False in Spain (and contradicts note 0): public high school is 'instituto', not 'colegio'."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial false-friend warning that 'colegio' does not mean 'college' (university)."
+      }
+    ],
+    "growth": 0.877
   }
 }

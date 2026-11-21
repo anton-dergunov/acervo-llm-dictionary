@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to choose; to elect",
+    "primaryGloss": "choose",
+    "emotion": "thoughtful and hesitant, weighing options before making up one's mind",
+    "notes": [
+      "Strong verb: koos, kozen, heeft gekozen. Note the consonant change from z to s in the singular past tense ('ik koos').",
+      "Use 'kiezen' with 'voor' when choosing an option or course of action ('kiezen voor zekerheid' – to opt for certainty). For casting a ballot in an election ('to vote'), use 'stemmen' instead."
+    ],
+    "senses": [
+      {
+        "id": "zys65vofoy87m8g",
+        "order": 0,
+        "definition": "To decide which person or thing you want from two or more possibilities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "choose",
+              "select",
+              "pick"
+            ]
+          }
+        ],
+        "domain": "choice",
+        "emoji": "🔀",
+        "examples": [
+          {
+            "id": "rdcq72j0pf3ryqx",
+            "text": "Het is moeilijk om een kleur te kiezen.",
+            "textLang": "nl",
+            "translation": "It is difficult to choose a color.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "puzzled and indecisive, looking back and forth between two choices",
+            "note": null,
+            "matchedForm": "kiezen",
+            "matchedTranslationForm": "choose"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6vet78gxkkg05kh",
+        "order": 1,
+        "definition": "To choose someone for an official position by voting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "elect",
+              "choose"
+            ]
+          }
+        ],
+        "domain": "politics",
+        "emoji": "🗳️",
+        "examples": [
+          {
+            "id": "zrt1ssre8l321sr",
+            "text": "Volgende week kiezen we een nieuw parlement.",
+            "textLang": "nl",
+            "translation": "Next week we are electing a new parliament.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kiezen",
+            "matchedTranslationForm": "electing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "kiezen",
+    "lemma": "kiezen",
+    "reading": null,
+    "ipa": "/ˈkizə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to choose; to vote",
     "primaryGloss": "choose",
     "emotion": "thoughtful and hesitant, weighing options before making up one's mind",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Morgen mogen we een nieuwe burgemeester kiezen.",
+        "why": "In the Netherlands, mayors are appointed by the Crown, not elected by voters."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "vote, elect",
+        "why": "Transitive 'iemand kiezen' means 'to elect someone'; intransitive 'to vote' is 'stemmen'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'kozen', which is the past plural form.",
+        "why": "Unhelpful filler; should instead give the full strong principal parts (koos, gekozen)."
+      }
+    ],
+    "growth": 1.386
   }
 }

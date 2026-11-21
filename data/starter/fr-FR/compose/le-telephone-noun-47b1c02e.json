@@ -68,6 +68,95 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "phone, telephone",
+    "primaryGloss": "phone",
+    "emotion": "distracted and casual, checking messages while walking down the street",
+    "notes": [
+      "Notice common expressions: 'être au téléphone' (to be on the phone), 'un coup de téléphone' (a phone call), and 'un numéro de téléphone' (a phone number)."
+    ],
+    "senses": [
+      {
+        "id": "mkgxzqlq79dkwgp",
+        "order": 0,
+        "definition": "A device or system used for talking to people who are far away.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "phone",
+              "telephone"
+            ]
+          }
+        ],
+        "domain": "device",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "aa5cnjfmepa6nzz",
+            "text": "J'ai perdu mon téléphone dans le train.",
+            "textLang": "fr",
+            "translation": "I lost my phone on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "panicked and frustrated, realizing something valuable is missing",
+            "note": null,
+            "matchedForm": "téléphone",
+            "matchedTranslationForm": "phone"
+          },
+          {
+            "id": "r9ml2jyryhwpa8a",
+            "text": "Il est au téléphone avec sa mère.",
+            "textLang": "fr",
+            "translation": "He is on the phone with his mother.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and patient, waiting for someone to finish a conversation",
+            "note": null,
+            "matchedForm": "téléphone",
+            "matchedTranslationForm": "phone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le téléphone",
+    "lemma": "téléphone",
+    "reading": null,
+    "ipa": "/te.le.fɔn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📱",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "phone; telephone call",
     "primaryGloss": "phone",
     "emotion": "distracted and casual, checking messages while walking down the street",
@@ -160,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(call) A conversation held by using this device.",
+        "why": "'Téléphone' alone does not mean 'phone call' in standard French (that is 'coup de téléphone')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'téléphone' to mean both the physical device and the call itself",
+        "why": "It is 'coup de téléphone' that means a call, not 'téléphone' by itself."
+      }
+    ],
+    "growth": 0.955
   }
 }

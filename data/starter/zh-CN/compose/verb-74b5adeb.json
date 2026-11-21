@@ -59,6 +59,96 @@
     "language": "zh",
     "headword": "需要",
     "lemma": "需要",
+    "reading": "xūyào",
+    "ipa": "/ɕy˥ i̯au̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "b",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to require",
+    "primaryGloss": "need",
+    "emotion": "matter-of-fact and practical, stating a requirement clearly",
+    "notes": [
+      "Can be followed by a noun (需要水, 'need water') or a verb phrase (需要休息, 'need to rest'). Also used as a noun meaning 'need' or 'requirement'.",
+      "Unlike 要 (yào), which often means 'to want' or 'to be going to', 需要 specifically emphasizes necessity."
+    ],
+    "senses": [
+      {
+        "id": "1ruedgbd1v791x8",
+        "order": 0,
+        "definition": "To need something or have to do something because it is necessary.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "need",
+              "require"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "cz3emxtrc20k9z2",
+            "text": "我需要一杯热水。",
+            "textLang": "zh",
+            "translation": "I need a cup of hot water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly tired and gently asking for comfort",
+            "note": null,
+            "matchedForm": "需要",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "v9pb0uwyitq2z8y",
+            "text": "学习一门新语言需要很多时间。",
+            "textLang": "zh",
+            "translation": "Learning a new language requires a lot of time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and realistic, acknowledging the effort involved",
+            "note": null,
+            "matchedForm": "需要",
+            "matchedTranslationForm": "requires"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "需要",
+    "lemma": "需要",
     "reading": "xū yào",
     "ipa": "/ɕy˥ i̯au̯˥˩/",
     "pos": "verb",
@@ -163,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(possession) To have to have something; to be in a situation",
+        "why": "Senses 0 and 1 are the exact same meaning ('to need something')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to have to have something, must have",
+        "why": "'to have to have something' is a definition phrase, not a natural translation gloss."
+      }
+    ],
+    "growth": 0.811
   }
 }

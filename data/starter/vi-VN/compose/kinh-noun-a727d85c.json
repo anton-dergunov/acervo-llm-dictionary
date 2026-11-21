@@ -68,6 +68,117 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "glasses; pane glass",
+    "primaryGloss": "glasses",
+    "emotion": "matter-of-fact and helpful, providing clarity for someone",
+    "notes": [
+      "For eyeglasses, takes the classifier 'cái' or 'đôi', or is specified as 'kính mắt' (glasses) or 'kính râm' (sunglasses).",
+      "As a material, 'kính' refers only to flat panes or lenses (windows, tabletops); glass used for bottles or cups is 'thủy tinh'."
+    ],
+    "senses": [
+      {
+        "id": "i8bss47x56b9yzd",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame and worn over the eyes to aid vision or protect from the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "eyeglasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "rhobkvln5j2up44",
+            "text": "Tôi cần mua một cái kính mới.",
+            "textLang": "vi",
+            "translation": "I need to buy a new pair of glasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and purposeful, looking for a solution",
+            "note": null,
+            "matchedForm": "kính",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "74lwegqah4s0fcx",
+        "order": 1,
+        "definition": "Hard, transparent glass made in flat sheets or panes, such as for windows or doors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glass",
+              "pane glass"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "🪟",
+        "examples": [
+          {
+            "id": "rvifrv6o17yace4",
+            "text": "Cửa sổ này được làm bằng kính.",
+            "textLang": "vi",
+            "translation": "This window is made of glass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and objective, pointing out a feature",
+            "note": null,
+            "matchedForm": "kính",
+            "matchedTranslationForm": "glass"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "kính",
+    "lemma": "kính",
+    "reading": null,
+    "ipa": "/kïŋ˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "glasses; glass",
     "primaryGloss": "glasses",
     "emotion": "matter-of-fact and helpful, providing clarity for someone",
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A hard, transparent material used for windows, bottles, or mirrors.",
+        "why": "'Kính' is sheet or optical glass (windows, lenses); bottle glass is 'thủy tinh'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'kính' refers to spectacles, it also means the material 'glass'.",
+        "why": "Restates the two senses and misses the needed contrast with 'thủy tinh'."
+      }
+    ],
+    "growth": 0.984
   }
 }

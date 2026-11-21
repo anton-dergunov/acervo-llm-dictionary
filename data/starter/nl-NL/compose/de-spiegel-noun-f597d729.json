@@ -58,6 +58,73 @@
     "headword": "de spiegel",
     "lemma": "spiegel",
     "reading": null,
+    "ipa": "/ˈspi.ɣəl/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "mirror",
+    "primaryGloss": "mirror",
+    "emotion": "curious and self-aware, checking one's appearance before leaving",
+    "notes": [
+      "The plural is 'spiegels'. Note that 'ie' is pronounced like 'ee' in 'see' (/i/)."
+    ],
+    "senses": [
+      {
+        "id": "5s56pme8dj4vv5x",
+        "order": 0,
+        "definition": "A piece of glass that reflects an image of whatever is in front of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mirror"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🪞",
+        "examples": [
+          {
+            "id": "8l0mp0lccu82gtx",
+            "text": "Zij kijkt in de spiegel om haar haar te kammen.",
+            "textLang": "nl",
+            "translation": "She looks in the mirror to comb her hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and focused, getting ready for the day",
+            "note": null,
+            "matchedForm": "spiegel",
+            "matchedTranslationForm": "mirror"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de spiegel",
+    "lemma": "spiegel",
+    "reading": null,
     "ipa": "/ˈspɛi.ɣəl/",
     "pos": "noun",
     "gender": "common",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈspɛi.ɣəl/",
+        "why": "Wrong vowel: 'ie' in Dutch is pronounced /i/, not /ɛi/ ('ij'/'ei')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the definite article 'de' because it is a common gender noun",
+        "why": "Restates the headword and gender field."
+      }
+    ],
+    "growth": 0.799
   }
 }

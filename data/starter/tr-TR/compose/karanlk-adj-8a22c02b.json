@@ -72,6 +72,115 @@
     "primaryGloss": "dark",
     "emotion": "quiet and observant, noticing the fading light as evening settles in",
     "notes": [
+      "Also commonly used as a noun meaning 'darkness' or 'the dark' (e.g., 'karanlıkta' — in the dark). Its opposite is 'aydınlık' (bright / light)."
+    ],
+    "senses": [
+      {
+        "id": "4np1t0j78z9rdmx",
+        "order": 0,
+        "definition": "With little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "lyttvgm2eol33fo",
+            "text": "Sokaklar çok karanlık, lütfen dikkatli yürü.",
+            "textLang": "tr",
+            "translation": "The streets are very dark, please walk carefully.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "karanlık",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vtvl96vay6b47to",
+        "order": 1,
+        "definition": "Kept secret, mysterious, or suspicious.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "obscure",
+              "mysterious",
+              "shady"
+            ]
+          }
+        ],
+        "domain": "mystery",
+        "emoji": "🕵️",
+        "examples": [
+          {
+            "id": "096zfg7b1hth16m",
+            "text": "Bu olay hakkında hâlâ karanlık noktalar var.",
+            "textLang": "tr",
+            "translation": "There are still obscure points about this incident.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "karanlık",
+            "matchedTranslationForm": "obscure"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "karanlık",
+    "lemma": "karanlık",
+    "reading": null,
+    "ipa": "/kaɾanˈɫɯk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dark; obscure",
+    "primaryGloss": "dark",
+    "emotion": "quiet and observant, noticing the fading light as evening settles in",
+    "notes": [
       "Karanlık can describe both physical spaces lacking light and abstract concepts like a murky situation or future."
     ],
     "senses": [
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Sokaklar çok karanlık, lütfen dikkatli yürüsün.",
+        "why": "Grammatical mismatch: 'lütfen' addresses 'you', so imperative must be 2nd person ('yürü'/'yürüyün'), not 3rd ('yürüsün')."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "dark, darkness",
+        "why": "'Darkness' is a noun gloss, but the entry POS and definition are strictly adjective."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Karanlık can describe both physical spaces lacking light and abstract concepts",
+        "why": "Merely repeats the two senses instead of explaining that 'karanlık' also functions as a noun."
+      }
+    ],
+    "growth": 1.061
   }
 }

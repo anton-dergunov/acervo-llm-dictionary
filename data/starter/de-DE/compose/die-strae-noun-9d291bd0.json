@@ -74,6 +74,96 @@
     "primaryGloss": "street",
     "emotion": "everyday and functional, the backdrop of getting from one place to another",
     "notes": [
+      "Use 'in der Straße' when talking about living on a street ('Ich wohne in dieser Straße'), and 'auf der Straße' for being out on the road surface ('Die Kinder spielen auf der Straße').",
+      "On street signs and in addresses, 'Straße' is often abbreviated to 'Str.' (e.g., 'Hauptstr. 5')."
+    ],
+    "senses": [
+      {
+        "id": "s92rw26haovni94",
+        "order": 0,
+        "definition": "A paved public way for vehicles and people, either inside a town (with buildings alongside) or between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street",
+              "road"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "p6kghv277ubn1pk",
+            "text": "In dieser Straße stehen viele alte Häuser.",
+            "textLang": "de",
+            "translation": "There are many old houses on this street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and observant, pointing out local architecture",
+            "note": null,
+            "matchedForm": "Straße",
+            "matchedTranslationForm": "street"
+          },
+          {
+            "id": "ss0mqeubi51d2tx",
+            "text": "Die Straße ins nächste Dorf ist wegen Bauarbeiten gesperrt.",
+            "textLang": "de",
+            "translation": "The road to the next village is closed because of roadworks.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Straße",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Straße",
+    "lemma": "Straße",
+    "reading": null,
+    "ipa": "/ˈʃtʁaːsə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "street; road",
+    "primaryGloss": "street",
+    "emotion": "everyday and functional, the backdrop of getting from one place to another",
+    "notes": [
       "While 'Straße' covers both meanings, 'Gasse' specifically refers to a very narrow, often old-fashioned street, and 'Autobahn' is reserved for high-speed motorways between cities."
     ],
     "senses": [
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(road) A wide, paved way designed for vehicles",
+        "why": "Splits one German concept along the English distinction between 'street' and 'road'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention prepositions 'in der Straße' (address) vs. 'auf der Straße' (on the pavement)."
+      }
+    ],
+    "growth": 1.17
   }
 }

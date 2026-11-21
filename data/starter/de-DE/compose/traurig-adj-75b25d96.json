@@ -72,6 +72,95 @@
     "primaryGloss": "sad",
     "emotion": "a soft, heavy sigh, feeling the weight of a quiet disappointment",
     "notes": [
+      "Takes the preposition 'über' (+ accusative) for the cause of sadness: 'traurig über die Nachricht' (sad about the news)."
+    ],
+    "senses": [
+      {
+        "id": "qbud9f4cm6d5i5q",
+        "order": 0,
+        "definition": "Feeling, showing, or causing sorrow; unhappy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sad",
+              "unhappy"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "nluiwkoy1go271k",
+            "text": "Ich bin heute etwas traurig.",
+            "textLang": "de",
+            "translation": "I am a little sad today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and vulnerable, speaking quietly to a close friend",
+            "note": null,
+            "matchedForm": "traurig",
+            "matchedTranslationForm": "sad"
+          },
+          {
+            "id": "ipj3l8hksndbc9s",
+            "text": "Das ist eine traurige Nachricht.",
+            "textLang": "de",
+            "translation": "That is sad news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and empathetic, delivering news with a heavy heart",
+            "note": null,
+            "matchedForm": "traurige",
+            "matchedTranslationForm": "sad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "traurig",
+    "lemma": "traurig",
+    "reading": null,
+    "ipa": "/ˈtʁaʊ̯ʁɪç/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "sad; unhappy",
+    "primaryGloss": "sad",
+    "emotion": "a soft, heavy sigh, feeling the weight of a quiet disappointment",
+    "notes": [
       "Traurig describes a state of sadness or unhappiness. It is often used to express how one feels about a situation or event.",
       "Do not confuse this with 'enttäuscht', which specifically means disappointed. You can be traurig (sad) because you are enttäuscht (disappointed)."
     ],
@@ -162,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Traurig describes a state of sadness or unhappiness.",
+        "why": "Restates the glosses and definition; note should give grammatical construction (traurig über)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Feeling sad and causing sadness are standard shades of one basic adjective sense."
+      }
+    ],
+    "growth": 0.593
   }
 }

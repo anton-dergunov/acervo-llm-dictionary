@@ -71,6 +71,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to drink",
+    "primaryGloss": "drink",
+    "emotion": "refreshing and satisfying, like quenching a real thirst",
+    "notes": [
+      "In Brazil, 'tomar' is very commonly used instead of 'beber' when naming the beverage (e.g., 'tomar água', 'tomar café').",
+      "When used without an object, 'beber' usually means to drink alcohol."
+    ],
+    "senses": [
+      {
+        "id": "c7xbc3ho54csjwy",
+        "order": 0,
+        "definition": "To take liquid into the mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drink"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "doav9b7vwpny0x6",
+            "text": "Preciso beber um copo de água agora.",
+            "textLang": "pt",
+            "translation": "I need to drink a glass of water now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "urgent and thirsty, focused on relief",
+            "note": null,
+            "matchedForm": "beber",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f803gegal8zjz8b",
+        "order": 1,
+        "definition": "To consume alcoholic drinks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drink"
+            ]
+          }
+        ],
+        "domain": "alcohol",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "j90aah0f2n4od2s",
+            "text": "Eu não posso beber hoje porque estou dirigindo.",
+            "textLang": "pt",
+            "translation": "I can't drink today because I'm driving.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "beber",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "beber",
+    "lemma": "beber",
+    "reading": null,
+    "ipa": "/beˈbeʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to drink; to swallow liquid",
     "primaryGloss": "drink",
     "emotion": "refreshing and satisfying, like quenching a real thirst",
@@ -163,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(swallow) To swallow a liquid intentionally. | glosses en: swallow, ingest",
+        "why": "'Beber' does not mean 'to swallow' (engolir); this is an oversplit of sense 0."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "É importante beber o remédio com bastante líquido.",
+        "why": "In Portuguese, one uses 'tomar' (to take) for medicine, not 'beber'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday intransitive sense 'to drink alcohol' (mentioned in note 1)."
+      }
+    ],
+    "growth": 0.74
   }
 }

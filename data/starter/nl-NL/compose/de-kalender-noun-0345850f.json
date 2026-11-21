@@ -60,6 +60,73 @@
     "reading": null,
     "ipa": "/kaːˈlɛndər/",
     "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "calendar",
+    "primaryGloss": "calendar",
+    "emotion": "organized and looking ahead, planning the weeks to come",
+    "notes": [
+      "Do not confuse 'kalender' (a wall or digital chart of the year) with 'agenda' (a personal planner or diary for appointments)."
+    ],
+    "senses": [
+      {
+        "id": "rrjksxoqsm0gtkd",
+        "order": 0,
+        "definition": "A printed or digital chart showing the days, weeks, and months of a year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calendar"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📆",
+        "examples": [
+          {
+            "id": "8fw0ihz48ycn16d",
+            "text": "Ik hang de nieuwe kalender in de keuken op.",
+            "textLang": "nl",
+            "translation": "I am hanging the new calendar up in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and domestic, getting ready for a fresh year",
+            "note": null,
+            "matchedForm": "kalender",
+            "matchedTranslationForm": "calendar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de kalender",
+    "lemma": "kalender",
+    "reading": null,
+    "ipa": "/kaːˈlɛndər/",
+    "pos": "noun",
     "gender": null,
     "register": "neutral",
     "dialect": null,
@@ -159,5 +226,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.gender",
+        "path": "gender",
+        "quote": "",
+        "why": "Missing grammatical gender ('common' / de-word)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A single page showing the days, weeks, and months",
+        "why": "'Kalender' means calendar, not a single calendar page ('kalenderblaadje')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij scheurde de kalender van vandaag af.",
+        "why": "Unnatural Dutch; one tears a page off a calendar, not 'today's calendar'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de kalender' for both physical wall calendars and digital ones",
+        "why": "Restates the definition and matches English usage."
+      }
+    ],
+    "growth": 0.529
   }
 }

@@ -68,6 +68,96 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "fear; fright",
+    "primaryGloss": "fear",
+    "emotion": "a hollow, tightening sensation in the chest, quiet and cautious",
+    "notes": [
+      "Use the expression 'ter medo (de)' or 'estar com medo (de)' to say that you are afraid (of something), literally 'to have/be with fear'.",
+      "To describe a sudden fright or startle, use 'susto' instead."
+    ],
+    "senses": [
+      {
+        "id": "cmw111jtcz7o9hc",
+        "order": 0,
+        "definition": "The unpleasant feeling caused by the belief that someone or something is dangerous.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fear",
+              "fright"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "hw72fmsr7vio4j6",
+            "text": "Eu tenho medo de altura.",
+            "textLang": "pt",
+            "translation": "I am afraid of heights.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a hesitant admission, cautious and slightly vulnerable",
+            "note": null,
+            "matchedForm": "medo",
+            "matchedTranslationForm": null
+          },
+          {
+            "id": "yka15e1s4vtzljr",
+            "text": "Ele sente muito medo quando ouve trovões.",
+            "textLang": "pt",
+            "translation": "He feels a lot of fear when he hears thunder.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing someone else's genuine, instinctual reaction",
+            "note": null,
+            "matchedForm": "medo",
+            "matchedTranslationForm": "fear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o medo",
+    "lemma": "medo",
+    "reading": null,
+    "ipa": "/ˈme.du/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "fear; fright; phobia",
     "primaryGloss": "fear",
     "emotion": "a hollow, tightening sensation in the chest, quiet and cautious",
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fear; fright; phobia",
+        "why": "'phobia' is not in the sense glosses and is too clinical for 'medo'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I have a fear of heights.",
+        "why": "Calqued translation; 'ter medo de' naturally translates to 'to be afraid of'."
+      }
+    ],
+    "growth": 0.993
   }
 }

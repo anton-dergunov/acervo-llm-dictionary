@@ -73,6 +73,138 @@
     "primaryGloss": "light",
     "emotion": "warm and clear, illuminating a cozy room",
     "notes": [
+      "Irregular declension: genitive του φωτός, plural τα φώτα.",
+      "The plural τα φώτα often refers to room lights, car headlights, or traffic lights (also τα φανάρια)."
+    ],
+    "senses": [
+      {
+        "id": "8jbw7winmnclb28",
+        "order": 0,
+        "definition": "The brightness from the sun, a lamp, or fire that lets you see things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "brightness"
+            ]
+          }
+        ],
+        "domain": "illumination",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "ouir481tzi7m6a8",
+            "text": "Το δωμάτιο έχει πολύ φυσικό φως.",
+            "textLang": "el",
+            "translation": "The room has a lot of natural light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "φως",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "weyozjw8jffi4j2",
+        "order": 1,
+        "definition": "An electric lamp or switch that produces brightness in a room.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lamp"
+            ]
+          }
+        ],
+        "domain": "appliance",
+        "emoji": "🔌",
+        "examples": [
+          {
+            "id": "kxrhsi3f6ptqb1z",
+            "text": "Άνοιξε το φως γιατί δεν βλέπω τίποτα.",
+            "textLang": "el",
+            "translation": "Turn on the light because I can't see anything.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and practical, trying to brighten a dark room",
+            "note": null,
+            "matchedForm": "φως",
+            "matchedTranslationForm": "light"
+          },
+          {
+            "id": "wtjsa11zxegzsnc",
+            "text": "Σβήσε το φως πριν φύγεις από το δωμάτιο.",
+            "textLang": "el",
+            "translation": "Turn off the light before you leave the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reminding someone carefully as you head out the door",
+            "note": null,
+            "matchedForm": "φως",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το φως",
+    "lemma": "φως",
+    "reading": null,
+    "ipa": "/fos/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "light",
+    "primaryGloss": "light",
+    "emotion": "warm and clear, illuminating a cozy room",
+    "notes": [
       "Note that the plural 'τα φώτα' is frequently used to mean the lights of a room, a car headlights, or the holiday of Epiphany."
     ],
     "senses": [
@@ -161,5 +293,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Άνοιξε το φως γιατί δεν βλέπω τίποτα.",
+        "why": "'Turn on the light' belongs to sense 1 (electric light), not sense 0 (natural/general illumination)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the essential irregular declension: genitive του φωτός, plural τα φώτα."
+      }
+    ],
+    "growth": 1.149
   }
 }

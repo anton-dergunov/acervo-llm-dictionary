@@ -58,6 +58,117 @@
     "headword": "ο πόνος",
     "lemma": "πόνος",
     "reading": null,
+    "ipa": "/ˈpo.nos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pain; ache; sorrow",
+    "primaryGloss": "pain",
+    "emotion": "throbbing and weary, enduring a persistent ache",
+    "notes": [
+      "Often used with the verbs έχω (have) or νιώθω (feel)."
+    ],
+    "senses": [
+      {
+        "id": "t9ylye09m3ots1y",
+        "order": 0,
+        "definition": "The unpleasant physical feeling when a part of the body hurts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "ache"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "yt9sa99gyzh528o",
+            "text": "Έχω έναν δυνατό πόνο στο κεφάλι.",
+            "textLang": "el",
+            "translation": "I have a strong pain in my head.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πόνο",
+            "matchedTranslationForm": "pain"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xo26s837400916t",
+        "order": 1,
+        "definition": "Deep emotional suffering or sadness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "sorrow",
+              "grief",
+              "heartache"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "vknxk41jv1gb3gy",
+            "text": "Ο πόνος της απώλειας είναι μεγάλος.",
+            "textLang": "el",
+            "translation": "The pain of loss is great.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and quiet, speaking with a heavy heart",
+            "note": null,
+            "matchedForm": "πόνος",
+            "matchedTranslationForm": "pain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο πόνος",
+    "lemma": "πόνος",
+    "reading": null,
     "ipa": "/ˈponos/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +272,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Έχω έναν δυνατό πόνος στο κεφάλι.",
+        "why": "Ungrammatical: direct object must be in the accusative case (πόνο), not nominative (πόνος)."
+      }
+    ],
+    "growth": 0.813
   }
 }

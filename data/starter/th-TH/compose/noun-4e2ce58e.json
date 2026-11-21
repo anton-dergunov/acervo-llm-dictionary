@@ -68,6 +68,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "stone; rock",
+    "primaryGloss": "stone",
+    "emotion": "heavy and solid, grounded in the earth",
+    "notes": [
+      "An individual stone or pebble is often called ก้อนหิน (using the classifier ก้อน). In casual speech, หิน is also used as an adjective meaning 'tough' or 'very difficult' (e.g., ข้อสอบหิน 'a tough exam')."
+    ],
+    "senses": [
+      {
+        "id": "p8fh9898gopvjgw",
+        "order": 0,
+        "definition": "The hard solid mineral material of the earth's surface, or a piece of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stone",
+              "rock"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "4bvq1h69opqpbes",
+            "text": "เด็ก ๆ เก็บหินริมแม่น้ำ",
+            "textLang": "th",
+            "translation": "The children collected stones by the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and playful, searching the ground",
+            "note": null,
+            "matchedForm": "หิน",
+            "matchedTranslationForm": "stones"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "หิน",
+    "lemma": "หิน",
+    "reading": null,
+    "ipa": "/hǐn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "stone; rock; difficult",
     "primaryGloss": "stone",
     "emotion": "heavy and solid, grounded in the earth",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Hard and difficult, used to describe a tough task or test.",
+        "why": "Adjective sense does not belong in a noun entry; it is also colloquial slang."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "stone; rock; difficult",
+        "why": "Includes adjective gloss 'difficult' on a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A small hard piece of rock found on the ground.",
+        "why": "หิน means both the material (rock/stone of any size) and an individual stone (often ก้อนหิน)."
+      }
+    ],
+    "growth": 0.896
   }
 }

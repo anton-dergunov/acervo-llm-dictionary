@@ -71,6 +71,130 @@
     "shortGloss": "chocolate; hot chocolate",
     "primaryGloss": "chocolate",
     "emotion": "craving and satisfied, ready to take a bite",
+    "notes": [],
+    "senses": [
+      {
+        "id": "82ubjorarou7o6m",
+        "order": 0,
+        "definition": "A sweet food made from cacao and sugar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chocolate"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍫",
+        "examples": [
+          {
+            "id": "vjfgd9u7yqzv1q6",
+            "text": "Compré una barra de chocolate amargo.",
+            "textLang": "es",
+            "translation": "I bought a bar of dark chocolate.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "chocolate",
+            "matchedTranslationForm": "chocolate"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yht232sg8r3p3jl",
+        "order": 1,
+        "definition": "A hot or cold drink prepared with cacao and milk or water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot chocolate",
+              "cocoa"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "pwbfi2a7yayhrre",
+            "text": "Por la mañana me gusta tomar un chocolate caliente.",
+            "textLang": "es",
+            "translation": "In the morning I like to drink hot chocolate.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and comforted on a chilly morning",
+            "note": null,
+            "matchedForm": "chocolate",
+            "matchedTranslationForm": "chocolate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "82ubjorarou7o6m",
+      "from": "Alimento dulce hecho con cacao y azúcar.",
+      "to": "A sweet food made from cacao and sugar.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    },
+    {
+      "sense": "yht232sg8r3p3jl",
+      "from": "Bebida caliente o fría preparada con cacao y leche o agua.",
+      "to": "A hot or cold drink prepared with cacao and milk or water.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el chocolate",
+    "lemma": "chocolate",
+    "reading": null,
+    "ipa": "/tʃo.koˈla.te/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍫",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "chocolate; hot chocolate",
+    "primaryGloss": "chocolate",
+    "emotion": "craving and satisfied, ready to take a bite",
     "notes": [
       "In Mexico, 'chocolate' can refer both to the solid candy and to hot cocoa, often spiced with cinnamon."
     ],
@@ -160,22 +284,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "82ubjorarou7o6m",
-      "from": "Alimento dulce hecho con cacao y azúcar.",
-      "to": "A sweet food made from cacao and sugar.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    },
-    {
-      "sense": "yht232sg8r3p3jl",
-      "from": "Bebida caliente o fría preparada con cacao y leche o agua.",
-      "to": "A hot or cold drink prepared with cacao and milk or water.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Mexico, 'chocolate' can refer both to the solid candy and",
+        "why": "Restates the two senses already shown in the entry."
+      }
+    ],
+    "growth": 0.753
+  }
 }

@@ -57,6 +57,139 @@
     "language": "ja",
     "headword": "立つ",
     "lemma": "立つ",
+    "reading": "たつ",
+    "ipa": "/tatsɯ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand up; to stand; to depart",
+    "primaryGloss": "to stand",
+    "emotion": "matter-of-fact and present, simply shifting into a vertical position",
+    "notes": [
+      "An intransitive godan verb (立たない, 立ちます); its transitive pair is 立てる. Because 立つ means to move into a standing position, 'to be standing' is expressed with 立っている.",
+      "Do not confuse with homophones written with other kanji: 建つ (for a building to be built) and 経つ (for time to pass)."
+    ],
+    "senses": [
+      {
+        "id": "kb2nxiuwq3ww2jv",
+        "order": 0,
+        "definition": "To rise to one's feet, or (as 立っている) to be in an upright position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stand up",
+              "to stand",
+              "to rise"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🆙",
+        "examples": [
+          {
+            "id": "abaeq539yepgkg9",
+            "text": "席から立ってください。",
+            "textLang": "ja",
+            "translation": "Please stand up from your seat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but firm, giving a clear instruction",
+            "note": null,
+            "matchedForm": "立って",
+            "matchedTranslationForm": "stand up"
+          },
+          {
+            "id": "49uft9nf53oyuxm",
+            "text": "電車でずっと立っていました。",
+            "textLang": "ja",
+            "translation": "I was standing the whole time on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "立っていました",
+            "matchedTranslationForm": "standing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nxreiiht9fahi77",
+        "order": 1,
+        "definition": "To leave for a destination or start a journey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to depart",
+              "to leave",
+              "to set off"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "3x4ewztlivla3lk",
+            "text": "明日、日本へ立つ予定です。",
+            "textLang": "ja",
+            "translation": "I plan to depart for Japan tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anticipatory and focused, looking forward to a trip",
+            "note": null,
+            "matchedForm": "立つ",
+            "matchedTranslationForm": "depart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "立つ",
+    "lemma": "立つ",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -202,5 +335,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (たつ) for a headword containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0]",
+        "quote": "To be in an upright position supported by one's feet.",
+        "why": "Japanese 立つ is punctual ('to stand up'); 'to be standing' is just its ている form."
+      }
+    ],
+    "growth": 0.851
   }
 }

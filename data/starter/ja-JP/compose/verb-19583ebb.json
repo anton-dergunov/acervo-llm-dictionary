@@ -58,6 +58,75 @@
     "headword": "答える",
     "lemma": "答える",
     "reading": "こたえる",
+    "ipa": "kotaeɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to answer; to reply",
+    "primaryGloss": "to answer",
+    "emotion": "attentive and ready, waiting for someone to finish their sentence",
+    "notes": [
+      "Ichidan verb (答えない, 答えます, 答えて). The question or person answered takes the particle に (質問に答える).",
+      "Do not confuse with 応える (also read こたえる), which is used for living up to expectations or requests (期待に応える)."
+    ],
+    "senses": [
+      {
+        "id": "8vzt363fyz5o24r",
+        "order": 0,
+        "definition": "To give an answer or reply to a question or person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to answer",
+              "to reply"
+            ]
+          }
+        ],
+        "domain": "reply",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "9xfavsfv7falaed",
+            "text": "先生の質問に答えた。",
+            "textLang": "ja",
+            "translation": "I answered the teacher's question.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "答えた",
+            "matchedTranslationForm": "answered"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "答える",
+    "lemma": "答える",
+    "reading": "こたえる",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To act in accordance with an expectation or a request.",
+        "why": "This sense belongs to 応える, contradicting note[1], and its example does not contain 答える."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "期待に応える。",
+        "why": "Uses 応える instead of the headword 答える."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use '答える' (kotaeru) when giving an answer to a question",
+        "why": "Simply restates the definition without mentioning the particle に or verb class."
+      }
+    ],
+    "growth": 0.538
   }
 }

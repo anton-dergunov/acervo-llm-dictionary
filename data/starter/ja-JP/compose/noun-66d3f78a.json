@@ -68,6 +68,118 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "company; workplace",
+    "primaryGloss": "company",
+    "emotion": "professional and routine, the way you describe your daily workplace",
+    "notes": [
+      "Often used to mean 'work' or 'the office' in everyday phrases like 会社に行く ('go to work') or 会社を休む ('take a day off work').",
+      "In compounds specifying a type of company, かいしゃ changes to がいしゃ: 自動車会社 (じどうしゃがいしゃ, 'car company')."
+    ],
+    "senses": [
+      {
+        "id": "6w9wfvh66hi8wua",
+        "order": 0,
+        "definition": "A business organization that makes or sells goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "company",
+              "firm",
+              "corporation"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "glu7xrsn32dkfzm",
+            "text": "私は新しい会社で働いています。",
+            "textLang": "ja",
+            "translation": "I am working at a new company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and informative, sharing news about a job",
+            "note": null,
+            "matchedForm": "会社",
+            "matchedTranslationForm": "company"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5ido7a58vpgwk3o",
+        "order": 1,
+        "definition": "The company where one works, used to refer to one's workplace or job.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "work",
+              "the office",
+              "workplace"
+            ]
+          }
+        ],
+        "domain": "workplace",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tmqhqe4ngwy011w",
+            "text": "毎日電車で会社に行きます。",
+            "textLang": "ja",
+            "translation": "I go to work by train every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "会社",
+            "matchedTranslationForm": "work"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "会社",
+    "lemma": "会社",
+    "reading": "かいしゃ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "company; corporation",
     "primaryGloss": "company",
     "emotion": "professional and routine, the way you describe your daily workplace",
@@ -121,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "you often add the suffix '-sha' to a specific industry or brand",
+        "why": "自動車会社 attaches -gaisha (会社 with rendaku), not the suffix -sha (社)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Lacks the everyday sense of 'work, one's workplace/office' (e.g. 会社に行く 'go to work')."
+      }
+    ],
+    "growth": 1.098
   }
 }

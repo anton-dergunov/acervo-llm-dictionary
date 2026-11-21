@@ -58,6 +58,114 @@
     "headword": "مَطْبَخ",
     "lemma": "مَطْبَخ",
     "reading": null,
+    "ipa": "/ˈmatˤ.bax/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "kitchen; cuisine",
+    "primaryGloss": "kitchen",
+    "emotion": "warm and inviting, smelling of fresh food and home",
+    "notes": [
+      "The plural is مَطَابِخ (maṭābiḵ)."
+    ],
+    "senses": [
+      {
+        "id": "vpgww135d6pyw84",
+        "order": 0,
+        "definition": "The room in a home or restaurant where food is prepared and cooked.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "kitchen"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "pijg0l040pc1pui",
+            "text": "أُمِّي تُعِدُّ الْعَشَاءَ فِي الْمَطْبَخِ.",
+            "textLang": "ar",
+            "translation": "My mother is preparing dinner in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْمَطْبَخِ",
+            "matchedTranslationForm": "kitchen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6uhxhtln085qg20",
+        "order": 1,
+        "definition": "A style or tradition of cooking, especially of a particular country or region.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cuisine",
+              "cooking"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "57v4or0cj8humek",
+            "text": "أُحِبُّ الْمَطْبَخَ الشَّامِيَّ كَثِيرًا.",
+            "textLang": "ar",
+            "translation": "I love Levantine cuisine very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْمَطْبَخَ",
+            "matchedTranslationForm": "cuisine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "مَطْبَخ",
+    "lemma": "مَطْبَخ",
+    "reading": null,
     "ipa": "/matbax/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/matbax/",
+        "why": "Missing pharyngealization on /tˤ/ (ط is emphatic)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "الْطَّبْخُ يَحْدُثُ فِي الْمَطْبَخِ.",
+        "why": "Unnatural phrasing ('Cooking happens in the kitchen') and wrong sukūn on sun-letter article."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'cuisine, style of cooking'."
+      }
+    ],
+    "growth": 2.066
   }
 }

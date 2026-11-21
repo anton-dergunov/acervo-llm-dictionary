@@ -68,6 +68,114 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "soup; pasta or rice dish",
+    "primaryGloss": "soup",
+    "emotion": "comforting and warm, smelling a homemade meal on a cold day",
+    "notes": [
+      "In Mexico, 'sopa' refers both to broth-based soups ('sopa aguada') and to cooked pasta or rice dishes where the broth has been absorbed ('sopa seca', such as 'sopa de arroz' or 'sopa de coditos')."
+    ],
+    "senses": [
+      {
+        "id": "pona75pfnak83tz",
+        "order": 0,
+        "definition": "A hot liquid food made by boiling meat, vegetables, or pasta in broth or water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup"
+            ]
+          }
+        ],
+        "domain": "liquid dish",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "asbaednvbrk7o9r",
+            "text": "Mamá preparó una sopa de verduras para la comida.",
+            "textLang": "es",
+            "translation": "Mom made vegetable soup for lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sopa",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vag9mkyn8anx3q0",
+        "order": 1,
+        "definition": "(Mexico) A savory dish of pasta or rice cooked in broth or sauce until the liquid is absorbed, served before the main course.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pasta dish",
+              "rice dish"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": null,
+        "examples": [
+          {
+            "id": "o5d4razm0cwzha6",
+            "text": "De entrada hay sopa de arroz o sopa de coditos con crema.",
+            "textLang": "es",
+            "translation": "For a starter there is Mexican rice or elbow macaroni with cream.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sopa",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la sopa",
+    "lemma": "sopa",
+    "reading": null,
+    "ipa": "/ˈsopa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "soup; bread soaked in liquid",
     "primaryGloss": "soup",
     "emotion": "comforting and warm, smelling a homemade meal on a cold day",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Bread soaked in liquid, or a dish made with pieces of bread",
+        "why": "'bread soaked in liquid' is archaic; 'sopa de ajo' is just sense 0"
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "bread soup, sopas",
+        "why": "'sopas' is Spanish, not an English gloss"
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "in Mexico, 'sopa' very commonly refers to cooked pasta or rice dishes ('sopa seca')"
+      }
+    ],
+    "growth": 1.251
   }
 }

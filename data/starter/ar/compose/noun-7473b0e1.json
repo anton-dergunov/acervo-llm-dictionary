@@ -72,6 +72,74 @@
     "primaryGloss": "soup",
     "emotion": "warm and comforting, smelling a hot bowl on a cold evening",
     "notes": [
+      "The standard Arabic word for soup; in everyday spoken Arabic, شُورْبَة (šūrba) is much more common."
+    ],
+    "senses": [
+      {
+        "id": "8rdc9p6tc3irw7w",
+        "order": 0,
+        "definition": "A liquid dish typically made by boiling vegetables, meat, or grains in water or stock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup",
+              "broth"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "m2klvwk5s56plmb",
+            "text": "تَنَاوَلْتُ حَسَاءً دَافِئًا فِي الطَّقْسِ البَارِدِ.",
+            "textLang": "ar",
+            "translation": "I had warm soup in the cold weather.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حَسَاءً",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حَسَاء",
+    "lemma": "حَسَاء",
+    "reading": null,
+    "ipa": "/ħaˈsaːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "soup",
+    "primaryGloss": "soup",
+    "emotion": "warm and comforting, smelling a hot bowl on a cold evening",
+    "notes": [
       "Used for clear or light broths and soups, distinct from heavier stews."
     ],
     "senses": [
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for clear or light broths and soups, distinct from heavier stews.",
+        "why": "حَسَاء is the general MSA word for any soup, not restricted to clear broths."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I ate a warm soup in the cold weather.",
+        "why": "Unnatural English ('ate a warm soup'); 'had warm soup' is natural."
+      }
+    ],
+    "growth": 1.139
   }
 }

@@ -58,6 +58,73 @@
     "headword": "دَقِيقَة",
     "lemma": "دَقِيقَة",
     "reading": null,
+    "ipa": "/daˈqiː.qa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "minute",
+    "primaryGloss": "minute",
+    "emotion": "checking the watch impatiently while waiting for someone",
+    "notes": [
+      "Takes the broken plural دَقَائِق (daqāʾiq)."
+    ],
+    "senses": [
+      {
+        "id": "zuwvsxawys663p8",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "c9xhr020aha0nwr",
+            "text": "اِنْتَظِرْ دَقِيقَةً مِنْ فَضْلِكَ.",
+            "textLang": "ar",
+            "translation": "Wait a minute, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "دَقِيقَةً",
+            "matchedTranslationForm": "minute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "دَقِيقَة",
+    "lemma": "دَقِيقَة",
+    "reading": null,
     "ipa": "/daˈqiːqa/",
     "pos": "noun",
     "gender": "feminine",
@@ -157,5 +224,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(detail) Exact, detailed, or thorough. | glosses en: precise, detailed",
+        "why": "Conflates the feminine noun دَقِيقَة with the adjective دَقِيق (precise)."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "قَدَّمَ شَرْحًا دَقِيقًا للمسألة.",
+        "why": "Uses the masculine adjective دَقِيقًا, not the feminine noun lemma دَقِيقَة."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "minute; precise",
+        "why": "Includes 'precise', which belongs to the adjective lemma دَقِيق, not this noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on the common broken plural دَقَائِق (daqāʾiq)."
+      }
+    ],
+    "growth": 0.679
   }
 }

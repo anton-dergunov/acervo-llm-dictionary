@@ -68,6 +68,96 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "animal",
+    "primaryGloss": "animal",
+    "emotion": "matter-of-fact and informative, describing the natural world",
+    "notes": [
+      "Plural: die Tiere.",
+      "For a pet kept at home, use 'das Haustier'."
+    ],
+    "senses": [
+      {
+        "id": "tuswojgo2idhe74",
+        "order": 0,
+        "definition": "A living creature that can move and eats plants or other animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "animal",
+              "creature"
+            ]
+          }
+        ],
+        "domain": "animals",
+        "emoji": "🐾",
+        "examples": [
+          {
+            "id": "rhr511cgt6ep0ea",
+            "text": "Der Wolf ist ein wildes Tier.",
+            "textLang": "de",
+            "translation": "The wolf is a wild animal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and observant, pointing out a fact about nature",
+            "note": null,
+            "matchedForm": "Tier",
+            "matchedTranslationForm": "animal"
+          },
+          {
+            "id": "g4ad9fdoz2qglcc",
+            "text": "Im Zoo gibt es viele verschiedene Tiere.",
+            "textLang": "de",
+            "translation": "There are many different animals at the zoo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and enthusiastic, as if showing something interesting to a child",
+            "note": null,
+            "matchedForm": "Tiere",
+            "matchedTranslationForm": "animals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Tier",
+    "lemma": "Tier",
+    "reading": null,
+    "ipa": "/tiːɐ̯/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "animal; creature; beast",
     "primaryGloss": "animal",
     "emotion": "matter-of-fact and informative, describing the natural world",
@@ -182,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A harsh or derogatory way to describe a person",
+        "why": "Secondary figurative sense is not needed for an A2 beginner; 'wie ein Tier' is literal."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In German, 'Tier' is a very broad term.",
+        "why": "Restates what English 'animal' already covers instead of giving grammar like the plural."
+      }
+    ],
+    "growth": 0.474
   }
 }

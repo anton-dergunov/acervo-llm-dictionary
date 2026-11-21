@@ -58,6 +58,74 @@
     "headword": "텔레비전",
     "lemma": "텔레비전",
     "reading": null,
+    "ipa": "tʰe̞lle̞bid͡ʑʌ̹n",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "television",
+    "primaryGloss": "television",
+    "emotion": "comfortable and relaxed, sitting on the living room sofa in the evening",
+    "notes": [
+      "In everyday speech, it is very often shortened to 티비 or 테레비."
+    ],
+    "senses": [
+      {
+        "id": "sbwg7gwwj0q4848",
+        "order": 0,
+        "definition": "An electronic device with a screen for watching broadcast programmes, or the programmes shown on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "22fyk9j14qt5g8r",
+            "text": "거실에 앉아서 텔레비전을 보고 있어요.",
+            "textLang": "ko",
+            "translation": "I am sitting in the living room watching television.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and cozy, enjoying a quiet evening at home",
+            "note": null,
+            "matchedForm": "텔레비전",
+            "matchedTranslationForm": "television"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "텔레비전",
+    "lemma": "텔레비전",
+    "reading": null,
     "ipa": "/tʰe̞le̞biʑʌn/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A screen specifically used for watching broadcast programmes or video content.",
+        "why": "Invented duplicate sense; 'screen for watching programmes' is not a distinct meaning of 텔레비전."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "television; screen for watching programmes",
+        "why": "Includes the artificial second sense."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tʰe̞le̞biʑʌn/",
+        "why": "Geminate ㄹㄹ is [ll], not single [l], and ㅈ is [dʑ], not [ʑ]."
+      }
+    ],
+    "growth": 0.477
   }
 }

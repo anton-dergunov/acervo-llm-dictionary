@@ -68,6 +68,94 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "tooth",
+    "primaryGloss": "tooth",
+    "emotion": "a sharp, focused sensation, often involving a bit of pain or care",
+    "notes": [
+      "In the plural, the stress stays on the stem in the nominative and accusative (зу́бы), but shifts to the ending in the other cases (зубо́в, зуба́м, etc.)."
+    ],
+    "senses": [
+      {
+        "id": "jfr9nm7t5ghlemx",
+        "order": 0,
+        "definition": "One of the hard white parts in the mouth used for biting and chewing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tooth"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "a38qguc7buu1zgj",
+            "text": "У меня болит зуб.",
+            "textLang": "ru",
+            "translation": "I have a toothache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "unpleasant, wincing, and slightly complaining",
+            "note": null,
+            "matchedForm": "зуб",
+            "matchedTranslationForm": null
+          },
+          {
+            "id": "es8t6v0sk8cprlu",
+            "text": "Нужно чистить зубы каждый день.",
+            "textLang": "ru",
+            "translation": "You need to brush your teeth every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "instructive, calm, and matter-of-fact",
+            "note": null,
+            "matchedForm": "зубы",
+            "matchedTranslationForm": "teeth"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "зуб",
+    "lemma": "зуб",
+    "reading": null,
+    "ipa": "/zup/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "tooth; cog; prong",
     "primaryGloss": "tooth",
     "emotion": "a sharp, focused sensation, often involving a bit of pain or care",
@@ -181,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When talking about things that look like teeth... the same word is",
+        "why": "False: the plural for anatomical teeth is зу́бы, but for mechanical teeth/cogs it is зу́бья."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(mechanics) A projecting part on a wheel or tool",
+        "why": "Mechanical sense ('cog, prong') is technical and not needed at A2."
+      }
+    ],
+    "growth": 0.71
   }
 }

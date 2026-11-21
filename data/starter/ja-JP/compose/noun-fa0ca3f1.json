@@ -68,6 +68,74 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "train station",
+    "primaryGloss": "station",
+    "emotion": "a practical and bustling place, associated with beginning a journey or commuting",
+    "notes": [
+      "Refers to a train or subway station (and major highway roadside stations, 道の駅), not a regular bus stop (バス停). Placed after a station's name: 東京駅 (Tokyo Station)."
+    ],
+    "senses": [
+      {
+        "id": "ajs7qjfyidzdjss",
+        "order": 0,
+        "definition": "A building and platforms where trains or subway trains stop for passengers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "station",
+              "train station"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚉",
+        "examples": [
+          {
+            "id": "a0rlgvskvln1jk7",
+            "text": "駅で会いましょう。",
+            "textLang": "ja",
+            "translation": "Let's meet at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and expectant, arranging plans with a friend",
+            "note": null,
+            "matchedForm": "駅",
+            "matchedTranslationForm": "station"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "駅",
+    "lemma": "駅",
+    "reading": "えき",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "station",
     "primaryGloss": "station",
     "emotion": "a practical and bustling place, associated with beginning a journey or commuting",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A place where trains or buses stop",
+        "why": "駅 refers specifically to a train or subway station, not a regular bus stop (バス停)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Japan, stations are often the center of city life",
+        "why": "Cultural trivia rather than useful linguistic usage information."
+      }
+    ],
+    "growth": 1.427
   }
 }

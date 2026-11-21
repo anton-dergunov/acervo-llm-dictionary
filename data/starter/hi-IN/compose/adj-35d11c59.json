@@ -58,6 +58,116 @@
     "headword": "हरा",
     "lemma": "हरा",
     "reading": null,
+    "ipa": "/ɦə.ɾɑː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe, fresh",
+    "primaryGloss": "green",
+    "emotion": "bright and fresh, looking at the trees outside",
+    "notes": [
+      "Changes ending to match the noun: हरा (masculine singular), हरे (masculine plural/oblique), हरी (feminine)."
+    ],
+    "senses": [
+      {
+        "id": "axaocpqs2m7ia2t",
+        "order": 0,
+        "definition": "Of the colour of growing grass or leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "mwk5nxgh634kgtc",
+            "text": "उसका हरा कोट बहुत सुंदर है।",
+            "textLang": "hi",
+            "translation": "His green coat is very nice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and warm, noticing a nice piece of clothing",
+            "note": null,
+            "matchedForm": "हरा",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ctd21qa2par659r",
+        "order": 1,
+        "definition": "Of fruit, plants, or wood: not yet ripe or dry; fresh.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green",
+              "fresh",
+              "raw"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "🫛",
+        "examples": [
+          {
+            "id": "n5w48wa0jca1bdo",
+            "text": "पेड़ पर अभी हरे आम लगे हैं।",
+            "textLang": "hi",
+            "translation": "There are still unripe mangoes on the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "हरे",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "हरा",
+    "lemma": "हरा",
+    "reading": null,
     "ipa": "/ɦəˈɾɑː/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the literal colour of grass and leaves",
+        "why": "Restates the senses; should instead explain that it is a variable adjective (हरा/हरी/हरे)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "बाज़ार में ताज़ा हरी सब्जियाँ मिलती हैं।",
+        "why": "हरी सब्जियाँ means 'green vegetables', and ताज़ा already means 'fresh'; fails to show 'unripe/raw'."
+      }
+    ],
+    "growth": 1.022
   }
 }

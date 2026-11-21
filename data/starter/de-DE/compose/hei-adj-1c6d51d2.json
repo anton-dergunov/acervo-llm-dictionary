@@ -75,6 +75,96 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "hot",
+    "primaryGloss": "hot",
+    "emotion": null,
+    "notes": [
+      "To say that a person feels hot, use the dative: 'Mir ist heiß' (I am hot). Never say 'Ich bin heiß', which means 'I am sexually aroused' or 'attractive'.",
+      "For spicy food ('hot' in English), German uses 'scharf', not 'heiß'."
+    ],
+    "senses": [
+      {
+        "id": "8ipodvucsxopq3l",
+        "order": 0,
+        "definition": "Having a high temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "♨️",
+        "examples": [
+          {
+            "id": "49ufpvjlao939fp",
+            "text": "Vorsicht, die Suppe ist noch sehr heiß!",
+            "textLang": "de",
+            "translation": "Careful, the soup is still very hot!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "heiß",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "ckawsswamujhuyv",
+            "text": "Heute ist es wirklich heiß draußen.",
+            "textLang": "de",
+            "translation": "It is really hot outside today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and slightly overwhelmed by the summer sun",
+            "note": null,
+            "matchedForm": "heiß",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "heiß",
+    "lemma": "heiß",
+    "reading": null,
+    "ipa": "/haɪ̯s/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "hot; very warm",
     "primaryGloss": "hot",
     "emotion": null,
@@ -166,5 +256,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Hot objects and hot weather are the same literal temperature meaning."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the crucial A1/A2 grammar warning: 'Mir ist heiß' (not 'Ich bin heiß')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 'heiß' for high temperatures. For things that are only 'warm'",
+        "why": "Both notes are filler; learners already know hot vs. warm and won't confuse 'hitzig'."
+      }
+    ],
+    "growth": 0.826
   }
 }

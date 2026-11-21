@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "safe; certain, sure",
+    "primaryGloss": "safe",
+    "emotion": "reassured and calm, knowing that everything is under control",
+    "notes": [
+      "Usually takes 'ser' when it means 'safe' (Es un lugar seguro) and 'estar' when it means 'sure' (Estoy seguro/a de eso).",
+      "As a masculine noun ('el seguro'), it means 'insurance'."
+    ],
+    "senses": [
+      {
+        "id": "guwuma9nmbnlhst",
+        "order": 0,
+        "definition": "Protected from danger or free from risk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "safe",
+              "secure"
+            ]
+          }
+        ],
+        "domain": "safety",
+        "emoji": "🛡️",
+        "examples": [
+          {
+            "id": "6s90ywm9qaaohbp",
+            "text": "Es un lugar seguro para los niños.",
+            "textLang": "es",
+            "translation": "It is a safe place for children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and satisfied, ensuring everything is in order",
+            "note": null,
+            "matchedForm": "seguro",
+            "matchedTranslationForm": "safe"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p495ih5uloc3dij",
+        "order": 1,
+        "definition": "Free from doubt; convinced about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "certain",
+              "sure"
+            ]
+          }
+        ],
+        "domain": "certainty",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "si96x777mda0bu1",
+            "text": "Estoy seguro de que vendrán mañana.",
+            "textLang": "es",
+            "translation": "I am sure that they will come tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and steady, without any hesitation",
+            "note": null,
+            "matchedForm": "seguro",
+            "matchedTranslationForm": "sure"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "seguro",
+    "lemma": "seguro",
+    "reading": null,
+    "ipa": "/seˈɣu.ɾo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛡️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "safe; certain; insurance",
     "primaryGloss": "safe",
     "emotion": "reassured and calm, knowing that everything is under control",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "safe; certain; insurance",
+        "why": "Includes the noun meaning 'insurance', which does not belong in this adjective entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When seguro means 'certain', it describes how a person feels",
+        "why": "Merely restates the two definitions instead of explaining the ser vs. estar distinction."
+      }
+    ],
+    "growth": 0.793
   }
 }

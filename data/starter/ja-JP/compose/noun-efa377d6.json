@@ -60,6 +60,158 @@
     "headword": "手",
     "lemma": "手",
     "reading": "て",
+    "ipa": "te",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "hand; help; method",
+    "primaryGloss": "hand",
+    "emotion": null,
+    "notes": [
+      "Refers to the hand (and sometimes the forearm in idioms), whereas 腕 (ude) refers to the arm.",
+      "Very common in everyday expressions such as 手を貸す (te o kasu, to lend a hand) and 手が足りない (te ga tarinai, to be short-handed)."
+    ],
+    "senses": [
+      {
+        "id": "c7mpii5ucok3q62",
+        "order": 0,
+        "definition": "The body part at the end of the arm, including the palm and fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "n5x9l3f71tvcejo",
+            "text": "食事の前に手を洗ってください。",
+            "textLang": "ja",
+            "translation": "Please wash your hands before eating.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "手",
+            "matchedTranslationForm": "hands"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0quf91vnib7j3qw",
+        "order": 1,
+        "definition": "Effort, assistance, or a person available to do work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "help",
+              "hand",
+              "worker"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "t1tzft5k0u8qh9v",
+            "text": "忙しくて手が足りません。",
+            "textLang": "ja",
+            "translation": "We are busy and short-handed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "手",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "77gdhvsfqjomime",
+        "order": 2,
+        "definition": "A way, means, or trick to achieve something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "method",
+              "way",
+              "means"
+            ]
+          }
+        ],
+        "domain": "method",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "ciacbnlwd59duvn",
+            "text": "ほかにいい手はありませんか。",
+            "textLang": "ja",
+            "translation": "Is there no other good way?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "手",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "手",
+    "lemma": "手",
+    "reading": "て",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -138,5 +290,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hand; arm; worker; method",
+        "why": "Includes 'arm', which is not in the senses and contradicts note[1]."
+      },
+      {
+        "severity": 2,
+        "category": "new:example.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Polysemous word with three distinct senses lacks any example sentences to illustrate them."
+      }
+    ],
+    "growth": 1.371
   }
 }

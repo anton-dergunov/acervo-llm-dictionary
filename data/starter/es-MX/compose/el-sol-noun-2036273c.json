@@ -72,6 +72,115 @@
     "primaryGloss": "sun",
     "emotion": "warm and bright, looking up at a clear sky",
     "notes": [
+      "Common expressions: hace sol or hay sol (it's sunny), tomar el sol (to sunbathe)."
+    ],
+    "senses": [
+      {
+        "id": "orrq83e9zglfwpl",
+        "order": 0,
+        "definition": "The star that gives light and heat to Earth during the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sun"
+            ]
+          }
+        ],
+        "domain": "star",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "cxwuqz8b6dmhusx",
+            "text": "El sol calienta mucho hoy.",
+            "textLang": "es",
+            "translation": "The sun is very hot today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary from the heat, needing some shade",
+            "note": null,
+            "matchedForm": "sol",
+            "matchedTranslationForm": "sun"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e6kd5ownyoyfhmb",
+        "order": 1,
+        "definition": "The light or heat that comes from the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sunlight",
+              "sun",
+              "sunshine"
+            ]
+          }
+        ],
+        "domain": "sunlight",
+        "emoji": "😎",
+        "examples": [
+          {
+            "id": "u9gms9y6s5lj8z3",
+            "text": "Me gusta tomar el sol en la playa.",
+            "textLang": "es",
+            "translation": "I like to sunbathe on the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and peaceful, enjoying a warm afternoon",
+            "note": null,
+            "matchedForm": "sol",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el sol",
+    "lemma": "sol",
+    "reading": null,
+    "ipa": "/ˈsol/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "sun; sunlight",
+    "primaryGloss": "sun",
+    "emotion": "warm and bright, looking up at a clear sky",
+    "notes": [
       "Used as 'el sol' when referring to the celestial body, and simply 'sol' when talking about sunlight in a general sense, like 'hay mucho sol' (it's very sunny)."
     ],
     "senses": [
@@ -159,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "and simply 'sol' when talking about sunlight in a general sense",
+        "why": "Misleading: 'el sol' with the article is regularly used for sunlight too, as in example[1]."
+      }
+    ],
+    "growth": 0.686
   }
 }

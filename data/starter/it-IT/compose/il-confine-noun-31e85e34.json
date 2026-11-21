@@ -68,6 +68,135 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "border; boundary; limit",
+    "primaryGloss": "border",
+    "emotion": "excited and curious about crossing into a new place",
+    "notes": [
+      "Often used with the prepositions 'a' ('al confine', at the border) and 'tra' ('il confine tra... e...', the border between... and...)."
+    ],
+    "senses": [
+      {
+        "id": "hkys2tvo4kfalod",
+        "order": 0,
+        "definition": "A line that separates two countries, regions, or pieces of land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "border",
+              "boundary",
+              "frontier"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "1u7lripcg9f30pu",
+            "text": "Siamo arrivati al confine tra Italia e Francia.",
+            "textLang": "it",
+            "translation": "We have arrived at the border between Italy and France.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and observant while traveling",
+            "note": null,
+            "matchedForm": "confine",
+            "matchedTranslationForm": "border"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "onx3ciu49n30jyb",
+        "order": 1,
+        "definition": "The furthest limit or point of something abstract.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "limit",
+              "boundary",
+              "edge"
+            ]
+          }
+        ],
+        "domain": "limit",
+        "emoji": "🚧",
+        "examples": [
+          {
+            "id": "0w0ma258dsgqe6f",
+            "text": "La sua pazienza non ha confini.",
+            "textLang": "it",
+            "translation": "His patience knows no bounds.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "confini",
+            "matchedTranslationForm": "bounds"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "hkys2tvo4kfalod",
+      "from": "La linea che separa due Stati o territori.",
+      "to": "A line that marks the boundary between two countries or territories.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:18Z"
+    },
+    {
+      "sense": "onx3ciu49n30jyb",
+      "from": "Il limite massimo di qualcosa, anche figurato.",
+      "to": "The furthest point or edge of something, including abstract ideas.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il confine",
+    "lemma": "confine",
+    "reading": null,
+    "ipa": "/konˈfi.ne/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗺️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "border; boundary",
     "primaryGloss": "border",
     "emotion": "excited and curious about crossing into a new place",
@@ -162,22 +291,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "hkys2tvo4kfalod",
-      "from": "La linea che separa due Stati o territori.",
-      "to": "A line that marks the boundary between two countries or territories.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:18Z"
-    },
-    {
-      "sense": "onx3ciu49n30jyb",
-      "from": "Il limite massimo di qualcosa, anche figurato.",
-      "to": "The furthest point or edge of something, including abstract ideas.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or 'fuori fuori' when talking about national borders.",
+        "why": "'Fuori fuori' is nonsense here; the actual expression is 'fuori dai confini'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dobbiamo rispettare i confini della proprietà.",
+        "why": "Property boundaries are physical territorial lines (sense 0), not abstract limits (sense 1)."
+      }
+    ],
+    "growth": 0.987
+  }
 }

@@ -72,6 +72,96 @@
     "primaryGloss": "pillow",
     "emotion": "cozy and sleepy, sinking into bed after a long day",
     "notes": [
+      "The plural is also 'die Kissen'.",
+      "Covers both English 'pillow' (in bed, also 'das Kopfkissen') and 'cushion' (on a sofa or chair)."
+    ],
+    "senses": [
+      {
+        "id": "vvovnjdeih31wdx",
+        "order": 0,
+        "definition": "A soft filled bag used to rest your head on in bed or for comfort on a chair or sofa.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow",
+              "cushion"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "disa3vrp08bpfb6",
+            "text": "Ich lege meinen Kopf auf das weiche Kissen.",
+            "textLang": "de",
+            "translation": "I lay my head on the soft pillow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comforted by the soft bedding",
+            "note": null,
+            "matchedForm": "Kissen",
+            "matchedTranslationForm": "pillow"
+          },
+          {
+            "id": "5kxk8987vgj4cwk",
+            "text": "Auf dem Sofa liegen viele bunte Kissen.",
+            "textLang": "de",
+            "translation": "There are many colorful cushions on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and describing a cozy living room space",
+            "note": null,
+            "matchedForm": "Kissen",
+            "matchedTranslationForm": "cushions"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Kissen",
+    "lemma": "Kissen",
+    "reading": null,
+    "ipa": "/ˈkɪsn̩/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "pillow; cushion",
+    "primaryGloss": "pillow",
+    "emotion": "cozy and sleepy, sinking into bed after a long day",
+    "notes": [
       "Use 'Kissen' for both the pillows you sleep on and the decorative cushions on your sofa.",
       "Do not confuse this with 'Kiste', which means a box or crate."
     ],
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A small soft bag placed on a chair or sofa",
+        "why": "German 'Kissen' is one concept; 'pillow' vs. 'cushion' is an English distinction."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'Kissen' for both the pillows you sleep on and",
+        "why": "Merely restates the glosses and definitions; the unchanged plural 'die Kissen' is missing."
+      }
+    ],
+    "growth": 0.812
   }
 }

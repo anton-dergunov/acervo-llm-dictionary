@@ -70,6 +70,95 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": null,
+    "notes": [
+      "As an adverb, 'tarde' never changes form (e.g., 'acordei tarde' — I woke up late, 'é muito tarde' — it is very late).",
+      "Do not confuse with the feminine noun 'a tarde' (the afternoon), seen in 'boa tarde' (good afternoon) and 'à tarde' (in the afternoon)."
+    ],
+    "senses": [
+      {
+        "id": "8g5fbkf5vh9m0oc",
+        "order": 0,
+        "definition": "After the usual, expected, or planned time, or near the end of the day or night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "in6bt7uuf370ke6",
+            "text": "Desculpe, cheguei muito tarde hoje.",
+            "textLang": "pt",
+            "translation": "Sorry, I arrived very late today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and flustered, explaining a minor mishap",
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "3dh11mvzika770q",
+            "text": "Já está tarde, preciso ir embora.",
+            "textLang": "pt",
+            "translation": "It is already late, I need to leave.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "tarde",
+    "lemma": "tarde",
+    "reading": null,
+    "ipa": "/ˈtaʁ.dʒi/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "late; in the afternoon",
     "primaryGloss": "late",
     "emotion": null,
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(afternoon) During the part of the day between noon and evening.",
+        "why": "'Tarde' meaning afternoon is a feminine noun (used in 'à tarde'), not an adverb."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "late; in the afternoon",
+        "why": "Includes 'in the afternoon', which belongs to the noun 'tarde' inside a prepositional phrase."
+      }
+    ],
+    "growth": 0.898
   }
 }

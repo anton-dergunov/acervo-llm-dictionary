@@ -75,6 +75,74 @@
     "headword": "das Restaurant",
     "lemma": "Restaurant",
     "reading": null,
+    "ipa": "/ʁɛstoˈʁɑ̃ː/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "City",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "restaurant",
+    "primaryGloss": "restaurant",
+    "emotion": "a sociable and relaxed sense of anticipating a good meal out",
+    "notes": [
+      "Pronounced in the French way: 'au' sounds like 'o', and '-ant' is a nasal vowel (or '-ang' in northern and colloquial speech). Plural: 'die Restaurants'."
+    ],
+    "senses": [
+      {
+        "id": "4s4y48tp1ftv9to",
+        "order": 0,
+        "definition": "A place where you pay to sit and eat a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "g2o872jp9bgm89c",
+            "text": "Wir gehen heute Abend in ein italienisches Restaurant.",
+            "textLang": "de",
+            "translation": "We are going to an Italian restaurant this evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and looking forward to the evening ahead",
+            "note": null,
+            "matchedForm": "Restaurant",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Restaurant",
+    "lemma": "Restaurant",
+    "reading": null,
     "ipa": "/ʁɛstaʊ̯ˈʁɑ̃ː/",
     "pos": "noun",
     "gender": "neuter",
@@ -137,5 +205,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʁɛstaʊ̯ˈʁɑ̃ː/",
+        "why": "French loanword 'au' is /o/ (/ʁɛstoˈʁɑ̃ː/), not the German diphthong /aʊ̯/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is always used with the neuter article 'das'.",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "(the 'au' sound in the second syllable)",
+        "why": "Misleading: the key French feature is the nasal ending '-ant', while 'au' is pronounced 'o'."
+      }
+    ],
+    "growth": 0.915
   }
 }

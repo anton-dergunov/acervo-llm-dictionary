@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to walk; to ride; to be (lately)",
+    "primaryGloss": "walk",
+    "emotion": "steady and rhythmic, like a casual walk down the street",
+    "notes": [
+      "Followed by 'de' + means of transport to mean 'to ride' or 'to travel by': 'andar de bicicleta' (ride a bike), 'andar de ônibus' (ride the bus).",
+      "Do not confuse the verb 'andar' with the noun 'o andar' (floor/story of a building)."
+    ],
+    "senses": [
+      {
+        "id": "4ftiwcym4rpiifz",
+        "order": 0,
+        "definition": "To move on foot at a normal speed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to walk",
+              "to go on foot"
+            ]
+          }
+        ],
+        "domain": "walking",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "4wla0gf6hxu4who",
+            "text": "Eu gosto de andar pelo parque aos domingos.",
+            "textLang": "pt",
+            "translation": "I like to walk through the park on Sundays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and peaceful, enjoying a quiet day off",
+            "note": null,
+            "matchedForm": "andar",
+            "matchedTranslationForm": "walk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0n86se2qtoxk6i2",
+        "order": 1,
+        "definition": "To travel using a vehicle, bicycle, or animal (used with 'de').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ride",
+              "to travel by"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6x0l264l5llo8bu",
+            "text": "Você sabe andar de bicicleta?",
+            "textLang": "pt",
+            "translation": "Do you know how to ride a bike?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "andar",
+            "matchedTranslationForm": "ride"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zqtx7gbvv3itypq",
+        "order": 2,
+        "definition": "To be in a certain state or doing something repeatedly lately.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be (lately)"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "🗓️",
+        "examples": [
+          {
+            "id": "oc5uom4di25p1w4",
+            "text": "Ele anda muito cansado ultimamente.",
+            "textLang": "pt",
+            "translation": "He has been very tired lately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and observant, noticing someone's recent behavior",
+            "note": null,
+            "matchedForm": "anda",
+            "matchedTranslationForm": "has been"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "andar",
+    "lemma": "andar",
+    "reading": null,
+    "ipa": "/ɐ̃ˈdaʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to walk; to move; to be in a certain state",
     "primaryGloss": "walk",
     "emotion": "steady and rhythmic, like a casual walk down the street",
@@ -202,5 +352,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense 'andar de' (to ride / travel by a vehicle or transport)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "as in 'estou andando muito ocupado' (I have been very busy lately).",
+        "why": "Ungrammatical/unnatural Portuguese; the auxiliary is conjugated directly: 'ando muito ocupado'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(operate) To function or operate, especially regarding machines or systems.",
+        "why": "'Funcionar' is standard for machines operating; 'andar' is mostly just vehicles moving."
+      }
+    ],
+    "growth": 0.847
   }
 }

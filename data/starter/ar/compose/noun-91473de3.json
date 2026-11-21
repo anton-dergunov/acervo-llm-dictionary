@@ -68,6 +68,96 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "luck; fortune",
+    "primaryGloss": "luck",
+    "emotion": "hopeful and light, like waiting for something good to happen",
+    "notes": [
+      "Commonly used in حَظّ سَعِيد (ḥaẓẓ saʿīd, 'good luck') and حَظّ سَيِّئ (ḥaẓẓ sayyiʾ, 'bad luck'). Plural: حُظُوظ (ḥuẓūẓ).",
+      "Unlike نَصِيب (naṣīb, 'fate, lot'), which refers to what is destined, حَظّ refers to good or bad fortune."
+    ],
+    "senses": [
+      {
+        "id": "ch2vs8fxedkhv7k",
+        "order": 0,
+        "definition": "Success or failure apparently brought by chance rather than through one's own actions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "luck",
+              "fortune"
+            ]
+          }
+        ],
+        "domain": "luck",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "0pp5dpk9rzxxpal",
+            "text": "حَظِّي جَيِّدٌ اليَوْمَ.",
+            "textLang": "ar",
+            "translation": "My luck is good today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حَظِّي",
+            "matchedTranslationForm": "luck"
+          },
+          {
+            "id": "kbttzwe988kgvn8",
+            "text": "أَتَمَنَّى لَكَ حَظًّا سَعِيدًا.",
+            "textLang": "ar",
+            "translation": "I wish you good luck.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حَظًّا",
+            "matchedTranslationForm": "luck"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حَظّ",
+    "lemma": "حَظّ",
+    "reading": null,
+    "ipa": "/ħaðˤː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍀",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "luck; chance; fortune",
     "primaryGloss": "luck",
     "emotion": "hopeful and light, like waiting for something good to happen",
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Events that happen to a person by chance",
+        "why": "حظ means luck/fortune, not 'chance/happenstance' (which is صدفة); example even translates it as 'luck'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "لَقَد الْتَقَيْنَا صُدْفَةً بِحَظٍّ كَبِير.",
+        "why": "Awkward phrasing; uses صدفة for 'by chance' and tacks on بحظ كبير unnaturally."
+      }
+    ],
+    "growth": 0.827
   }
 }

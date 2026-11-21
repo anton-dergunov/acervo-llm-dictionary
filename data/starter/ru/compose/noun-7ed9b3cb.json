@@ -58,6 +58,116 @@
     "headword": "домашнее животное",
     "lemma": "домашнее животное",
     "reading": null,
+    "ipa": "/dɐˈmaʂnʲɪjə ʐɨˈvotnəjə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐕",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pet; domestic animal",
+    "primaryGloss": "pet",
+    "emotion": "fond and gentle, thinking of a beloved companion at home",
+    "notes": [
+      "Both words decline as neuter adjectives (genitive: домашнего животного, plural: домашние животные).",
+      "For a pet kept in the home, the shorter term 'питомец' (pet) is also very common."
+    ],
+    "senses": [
+      {
+        "id": "jw659v5o2ys3hjr",
+        "order": 0,
+        "definition": "An animal kept in the home as a companion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pet"
+            ]
+          }
+        ],
+        "domain": "pet",
+        "emoji": "🐈",
+        "examples": [
+          {
+            "id": "1cga7lyliqh6qtt",
+            "text": "У вас есть домашние животные?",
+            "textLang": "ru",
+            "translation": "Do you have any pets?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "домашние животные",
+            "matchedTranslationForm": "pets"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1ukroe794vlnc02",
+        "order": 1,
+        "definition": "A tamed animal raised on a farm for food, work, or other agricultural purposes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "domestic animal",
+              "farm animal",
+              "livestock"
+            ]
+          }
+        ],
+        "domain": "livestock",
+        "emoji": "🐄",
+        "examples": [
+          {
+            "id": "tdhs8gjhlolwdom",
+            "text": "Корова и лошадь — это полезные домашние животные.",
+            "textLang": "ru",
+            "translation": "Cows and horses are useful domestic animals.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "домашние животные",
+            "matchedTranslationForm": "domestic animals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "домашнее животное",
+    "lemma": "домашнее животное",
+    "reading": null,
     "ipa": "/dɐˈmɑʂnʲɪɪ ʐɨˈvotnəvə/",
     "pos": "noun",
     "gender": "neuter",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dɐˈmɑʂnʲɪɪ ʐɨˈvotnəvə/",
+        "why": "Transcribes the genitive form 'животного' (/ʐɨˈvotnəvə/) instead of the nominative lemma 'животное' (/ʐɨˈvotnəjə/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer specifically to pets kept in the house, as",
+        "why": "Merely repeats the two senses; misses the vital grammar point that 'животное' declines like an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "У меня дома живет любимое домашнее животное.",
+        "why": "Unnatural phrasing; nobody refers to their own pet at home as 'любимое домашнее животное'."
+      }
+    ],
+    "growth": 1.23
   }
 }

@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "wrong; mistaken; at fault",
+    "primaryGloss": "wrong",
+    "emotion": "matter-of-fact and direct, pointing out a mistake without being unkind",
+    "notes": [
+      "Also very common before a verb to mean 'do something by mistake' (e.g., 'salah beli' = buy the wrong thing, 'salah paham' = misunderstand), and in 'salah satu' ('one of')."
+    ],
+    "senses": [
+      {
+        "id": "4w2rpuy81cgr7z4",
+        "order": 0,
+        "definition": "Not correct or not true.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "0k59lxx0gdkp960",
+            "text": "Jawaban kamu salah.",
+            "textLang": "id",
+            "translation": "Your answer is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and clear, correcting someone in a classroom setting",
+            "note": null,
+            "matchedForm": "salah",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "26xkh04sbyr6si9",
+        "order": 1,
+        "definition": "Mistaken in judgment or responsible for an error or offense.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "mistaken",
+              "at fault",
+              "guilty"
+            ]
+          }
+        ],
+        "domain": "blame",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "dhxwxr7jqbqiy2h",
+            "text": "Maaf, saya salah karena tidak memberi tahu kamu lebih awal.",
+            "textLang": "id",
+            "translation": "Sorry, I was wrong not to tell you earlier.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "salah",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "salah",
+    "lemma": "salah",
+    "reading": null,
+    "ipa": "/ˈsa.lah/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "wrong; incorrect; at fault",
     "primaryGloss": "wrong",
     "emotion": "matter-of-fact and direct, pointing out a mistake without being unkind",
@@ -160,5 +271,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bukan salah saya.",
+        "why": "In 'Bukan salah saya', 'salah' is used as a noun ('my fault'), not an adjective."
+      }
+    ],
+    "growth": 0.994
   }
 }

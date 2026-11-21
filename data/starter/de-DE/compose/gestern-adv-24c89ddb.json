@@ -72,6 +72,73 @@
     "primaryGloss": "yesterday",
     "emotion": null,
     "notes": [
+      "Combines with parts of the day without an article: 'gestern Morgen' (yesterday morning), 'gestern Abend' (last night / yesterday evening)."
+    ],
+    "senses": [
+      {
+        "id": "0rj9jhjd9r8ha8o",
+        "order": 0,
+        "definition": "On the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🔙",
+        "examples": [
+          {
+            "id": "q8uvadmvnfgou4y",
+            "text": "Ich habe gestern einen Kuchen gebacken.",
+            "textLang": "de",
+            "translation": "I baked a cake yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented and satisfied with having finished a task",
+            "note": null,
+            "matchedForm": "gestern",
+            "matchedTranslationForm": "yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "gestern",
+    "lemma": "gestern",
+    "reading": null,
+    "ipa": "/ˈɡɛstɐn/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
       "Note that 'gestern' functions as an adverb and does not take an article. It is typically placed after the verb in a main clause, such as in 'Ich war gestern zu Hause'."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'gestern' functions as an adverb and does not take",
+        "why": "Restates POS; misses useful collocations like 'gestern Morgen' and contrast with 'heute Morgen'."
+      }
+    ],
+    "growth": 0.897
   }
 }

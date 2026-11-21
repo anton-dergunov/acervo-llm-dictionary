@@ -72,6 +72,73 @@
     "primaryGloss": "carrot",
     "emotion": "simple and healthy, thinking about preparing a crisp fresh vegetable",
     "notes": [
+      "Counted with the measure word 根 (gēn): 一根胡萝卜 (one carrot)."
+    ],
+    "senses": [
+      {
+        "id": "41u788sonrzi8of",
+        "order": 0,
+        "definition": "A long, crunchy, orange root vegetable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "carrot"
+            ]
+          }
+        ],
+        "domain": "vegetable",
+        "emoji": "🥕",
+        "examples": [
+          {
+            "id": "rrruz1o8yznw1s1",
+            "text": "胡萝卜对眼睛很好。",
+            "textLang": "zh",
+            "translation": "Carrots are good for your eyes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, offering a piece of common health advice",
+            "note": null,
+            "matchedForm": "胡萝卜",
+            "matchedTranslationForm": "Carrots"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "胡萝卜",
+    "lemma": "胡萝卜",
+    "reading": "hú luó bo",
+    "ipa": "/xu˧˥ lu̯o˧˥ pu̯o/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "carrot",
+    "primaryGloss": "carrot",
+    "emotion": "simple and healthy, thinking about preparing a crisp fresh vegetable",
+    "notes": [
       "The word is often pronounced as 'hú luó bo' in dictionaries, but in daily speech, it is very common to hear it as 'hú luó bǒ' or even just 'hú luó bu' with a neutral tone on the last character.",
       "It is a versatile vegetable used in everything from stir-fries to soups."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is very common to hear it as 'hú luó bǒ'",
+        "why": "卜 is never pronounced bǒ here; it takes a neutral tone (bo)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a versatile vegetable used in everything from stir-fries to soups.",
+        "why": "Encyclopedic trivia about cooking, not a usage note; common classifier needed instead."
+      }
+    ],
+    "growth": 0.419
   }
 }

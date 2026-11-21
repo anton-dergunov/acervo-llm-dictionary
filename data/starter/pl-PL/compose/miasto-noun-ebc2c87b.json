@@ -72,6 +72,75 @@
     "primaryGloss": "city",
     "emotion": "bustling and urban, watching the busy streets below",
     "notes": [
+      "Covers both 'city' and 'town' in English; a smaller town is often called 'miasteczko'.",
+      "Note the stem change in the locative singular: 'w mieście' (in the city/town)."
+    ],
+    "senses": [
+      {
+        "id": "j2uoklm0uz306jn",
+        "order": 0,
+        "definition": "A densely populated settlement larger than a village, with many buildings, businesses, and residents.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "292ce2u96i0cvu3",
+            "text": "Warszawa to duże miasto z wieloma zabytkami.",
+            "textLang": "pl",
+            "translation": "Warsaw is a large city with many historical monuments.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and informative, showing off the capital",
+            "note": null,
+            "matchedForm": "miasto",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "miasto",
+    "lemma": "miasto",
+    "reading": null,
+    "ipa": "/ˈmjas.tɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "bustling and urban, watching the busy streets below",
+    "notes": [
       "Miasto refers to any large or important settlement, covering both cities and large towns.",
       "Do not confuse with wieś (village)."
     ],
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The people living in such a settlement, or the administrative center.",
+        "why": "Regular metonymy oversplit into a separate sense, with 'town' artificially split from 'city'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Miasto refers to any large or important settlement",
+        "why": "Both notes merely restate the glosses while omitting the irregular locative 'w mieście'."
+      }
+    ],
+    "growth": 0.768
   }
 }

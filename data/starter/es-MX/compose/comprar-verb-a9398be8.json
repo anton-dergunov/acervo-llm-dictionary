@@ -70,6 +70,92 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "to buy",
+    "primaryGloss": "to buy",
+    "emotion": "busy and purposeful, focused on getting what is needed",
+    "notes": [
+      "When saying who you are buying something for or from, use an indirect object pronoun (like 'le') and the preposition 'a': 'Le compré flores a mi mamá' (I bought flowers for my mom)."
+    ],
+    "senses": [
+      {
+        "id": "fo23mjhv0tgi1qe",
+        "order": 0,
+        "definition": "To obtain something by paying money for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to purchase"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "w0mrm129kzpxj6b",
+            "text": "Voy al mercado a comprar fruta fresca para la semana.",
+            "textLang": "es",
+            "translation": "I am going to the market to buy fresh fruit for the week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and organized, planning the weekly meals",
+            "note": null,
+            "matchedForm": "comprar",
+            "matchedTranslationForm": "buy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "fo23mjhv0tgi1qe",
+      "from": "Adquirir algo a cambio de dinero.",
+      "to": "To obtain something by paying money for it.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    },
+    {
+      "sense": "5ra29721015tefs",
+      "from": "Creer o aceptar algo como verdad, especialmente una mentira o una excusa.",
+      "to": "To believe or accept something as true, especially a lie or an excuse.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "comprar",
+    "lemma": "comprar",
+    "reading": null,
+    "ipa": "/komˈpɾaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "to buy; to purchase",
     "primaryGloss": "to buy",
     "emotion": "busy and purposeful, focused on getting what is needed",
@@ -164,22 +250,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "fo23mjhv0tgi1qe",
-      "from": "Adquirir algo a cambio de dinero.",
-      "to": "To obtain something by paying money for it.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    },
-    {
-      "sense": "5ra29721015tefs",
-      "from": "Creer o aceptar algo como verdad, especialmente una mentira o una excusa.",
-      "to": "To believe or accept something as true, especially a lie or an excuse.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To believe or accept something as true, especially a lie",
+        "why": "Figurative calque of English 'to buy (an excuse)', marginal for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use comprar for any transaction where you exchange money for goods",
+        "why": "Restates the basic definition of 'to buy' without adding useful learner information."
+      }
+    ],
+    "growth": 0.644
+  }
 }

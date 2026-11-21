@@ -57,6 +57,117 @@
     "language": "ja",
     "headword": "醜い",
     "lemma": "醜い",
+    "reading": "みにくい",
+    "ipa": "minikɯi",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👹",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "ugly; unsightly; shameful",
+    "primaryGloss": "ugly",
+    "emotion": "repelled and blunt, turning one's face away from an eyesore",
+    "notes": [
+      "A strong, judgmental word; avoid using it directly about a person's appearance, as it sounds harsh and insulting.",
+      "Do not confuse with 見にくい (also read みにくい), which means 'hard to see'."
+    ],
+    "senses": [
+      {
+        "id": "ggc95ws1bnftzqs",
+        "order": 0,
+        "definition": "Unpleasant to look at; lacking beauty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ugly",
+              "unsightly"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👺",
+        "examples": [
+          {
+            "id": "7hclhgqvvnwi8dl",
+            "text": "醜い怪物が現れた。",
+            "textLang": "ja",
+            "translation": "An ugly monster appeared.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fearful and tense, describing a nightmare creature",
+            "note": null,
+            "matchedForm": "醜い",
+            "matchedTranslationForm": "ugly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "799vlxod1nlxvit",
+        "order": 1,
+        "definition": "Of behavior or feelings: morally offensive, shameful, or undignified.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ugly",
+              "shameful",
+              "vile"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "👎",
+        "examples": [
+          {
+            "id": "tf1jy8qw1g4l9xa",
+            "text": "彼らは遺産をめぐって醜い争いを始めた。",
+            "textLang": "ja",
+            "translation": "They started an ugly quarrel over the inheritance.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "醜い",
+            "matchedTranslationForm": "ugly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "醜い",
+    "lemma": "醜い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -162,5 +273,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a word with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "彼は醜い争いを始めた。",
+        "why": "'Ugly quarrel' belongs under sense 1 (shameful/offensive behavior), not physical appearance."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Morally offensive or shameful behavior that lacks grace or decency.",
+        "why": "Adjective defined as a noun ('...behavior that...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "For a more neutral or objective way to say something looks bad",
+        "why": "Vague advice in English without naming any Japanese words."
+      }
+    ],
+    "growth": 0.752
   }
 }

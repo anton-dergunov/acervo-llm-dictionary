@@ -68,6 +68,74 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "shoe, boot",
+    "primaryGloss": "shoe",
+    "emotion": "matter-of-fact and practical, talking about what you are putting on",
+    "notes": [
+      "Most often used in the plural ('buty') to refer to a pair of shoes or boots."
+    ],
+    "senses": [
+      {
+        "id": "ef8ykt55ru2ozg3",
+        "order": 0,
+        "definition": "An item of footwear with a firm sole, such as a shoe, sneaker, or boot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shoe",
+              "boot"
+            ]
+          }
+        ],
+        "domain": "footwear",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "kgdb513c3xu4ob3",
+            "text": "Muszę kupić nowe buty na zimę.",
+            "textLang": "pl",
+            "translation": "I have to buy new shoes for the winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "buty",
+            "matchedTranslationForm": "shoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "but",
+    "lemma": "but",
+    "reading": null,
+    "ipa": "/but/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👞",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "shoe",
     "primaryGloss": "shoe",
     "emotion": "matter-of-fact and practical, talking about what you are putting on",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę kupić nowy but, bo ten jest zniszczony.",
+        "why": "Unnatural: people do not buy a single shoe; 'but' is usually used in the plural ('buty')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common word for a shoe, covering everything",
+        "why": "Notes are mostly filler and miss that the word is predominantly used in the plural ('buty')."
+      }
+    ],
+    "growth": 0.629
   }
 }

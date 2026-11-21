@@ -68,6 +68,112 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "menu",
+    "primaryGloss": "menu",
+    "emotion": "helpful and ready, handing over choices at a table",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ikqvw7hkktiupff",
+        "order": 0,
+        "definition": "A list of dishes available in a restaurant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "5wcy9dlso5a6pea",
+            "text": "Boleh saya lihat menunya?",
+            "textLang": "id",
+            "translation": "May I see the menu, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "menunya",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7vciet3ke70a3fs",
+        "order": 1,
+        "definition": "A list of options or commands on a computer or phone screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu",
+              "options"
+            ]
+          }
+        ],
+        "domain": "technology",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "2a0pfcsz7ydrpf0",
+            "text": "Pilih pengaturan dari menu utama.",
+            "textLang": "id",
+            "translation": "Select settings from the main menu.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "clear and instructional, guiding someone through a screen",
+            "note": null,
+            "matchedForm": "menu",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "menu",
+    "lemma": "menu",
+    "reading": null,
+    "ipa": "/məˈnu/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📜",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "menu; set of options",
     "primaryGloss": "menu",
     "emotion": "helpful and ready, handing over choices at a table",
@@ -159,5 +265,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Boleh saya lihat menu, tolong?",
+        "why": "Appending ', tolong?' is a calque of English ', please?'; Indonesian uses 'menunya' without 'tolong'."
+      }
+    ],
+    "growth": 0.592
   }
 }

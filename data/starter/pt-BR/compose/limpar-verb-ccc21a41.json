@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to clean; to wipe",
+    "primaryGloss": "to clean",
+    "emotion": "a sense of relief and order, restoring peace to a messy space",
+    "notes": [
+      "Has both a regular past participle 'limpado' (used with 'ter'/'haver') and a short form 'limpo' (used with 'ser'/'estar'): 'Eu tinha limpado a sala', 'A sala está limpa'."
+    ],
+    "senses": [
+      {
+        "id": "v10w9cvukoga096",
+        "order": 0,
+        "definition": "To remove dirt, dust, or stains from a surface, object, or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to clean",
+              "to wipe",
+              "to clean up"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧹",
+        "examples": [
+          {
+            "id": "544k501hy49cp48",
+            "text": "Preciso limpar a cozinha depois do jantar.",
+            "textLang": "pt",
+            "translation": "I need to clean the kitchen after dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the necessary task at hand",
+            "note": null,
+            "matchedForm": "limpar",
+            "matchedTranslationForm": "clean"
+          },
+          {
+            "id": "pre4exifpbtssru",
+            "text": "Ele limpou os óculos com um pano.",
+            "textLang": "pt",
+            "translation": "He wiped his glasses with a cloth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "limpou",
+            "matchedTranslationForm": "wiped"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "limpar",
+    "lemma": "limpar",
+    "reading": null,
+    "ipa": "/lĩˈpaʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧹",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to clean; to wipe; to clear",
     "primaryGloss": "to clean",
     "emotion": "a sense of relief and order, restoring peace to a messy space",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Limpar is the general verb for making something clean.",
+        "why": "Pure filler restating the definition; misses the irregular short participle 'limpo'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Vamos limpar a mesa para colocar os jogos.",
+        "why": "Clearing items off a table is 'tirar a mesa' or 'desocupar'; 'limpar' means wiping dirt."
+      }
+    ],
+    "growth": 0.934
   }
 }

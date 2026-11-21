@@ -58,6 +58,159 @@
     "headword": "dar",
     "lemma": "dar",
     "reading": null,
+    "ipa": "/daʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to give; to yield; to be possible",
+    "primaryGloss": "give",
+    "emotion": "helpful and generous, focused on the act of passing something over",
+    "notes": [
+      "Highly irregular verb (present: 'dou, dá'; past: 'dei, deu').",
+      "In everyday Brazilian Portuguese, 'dar (para)' is constantly used impersonally to mean 'to be possible': 'Dá para ir a pé?' (Is it possible to walk?)."
+    ],
+    "senses": [
+      {
+        "id": "6ldpa6fyw6dyocp",
+        "order": 0,
+        "definition": "To pass, hand, or offer something to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "give",
+              "hand over"
+            ]
+          }
+        ],
+        "domain": "transfer",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "yo96sa6uqv3p7t7",
+            "text": "Você pode me dar o sal?",
+            "textLang": "pt",
+            "translation": "Can you give me the salt?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and requesting, waiting for the salt to be passed",
+            "note": null,
+            "matchedForm": "dar",
+            "matchedTranslationForm": "give"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "emffe7zprfcsij7",
+        "order": 1,
+        "definition": "To produce, yield, or result in something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yield",
+              "produce",
+              "result in"
+            ]
+          }
+        ],
+        "domain": "result",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "pnigu0dfz4kp9qe",
+            "text": "Esse trabalho vai dar muito dinheiro.",
+            "textLang": "pt",
+            "translation": "This job will bring in a lot of money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "optimistic and confident, anticipating a good outcome",
+            "note": null,
+            "matchedForm": "dar",
+            "matchedTranslationForm": "bring in"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cwvj4ea3pgjovfl",
+        "order": 2,
+        "definition": "Used impersonally to say that something is possible, enough, or works out.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be possible",
+              "work out",
+              "manage"
+            ]
+          }
+        ],
+        "domain": "possibility",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6wks9b5mh0ay8gn",
+            "text": "Hoje não dá para eu ir à festa.",
+            "textLang": "pt",
+            "translation": "I can't make it to the party today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dá",
+            "matchedTranslationForm": "make it"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "dar",
+    "lemma": "dar",
+    "reading": null,
     "ipa": "/daɾ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +315,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Lacks the very common everyday sense 'to be possible / to work out' (dar para)."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that 'dar' is highly irregular, which is essential for an A2 learner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Dar is one of the most common verbs in Portuguese.",
+        "why": "Pure filler that restates the gloss and gives no actionable grammar or usage help."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/daɾ/",
+        "why": "Final /r/ in standard Brazilian Portuguese is /ʁ/ (or /h/), not the tap /ɾ/."
+      }
+    ],
+    "growth": 1.275
   }
 }

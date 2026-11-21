@@ -68,6 +68,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new",
+    "primaryGloss": "new",
+    "emotion": "excited and pleased, showing off something freshly acquired",
+    "notes": [
+      "For fresh food or air, use 新鲜 (xīnxiān) rather than 新 alone."
+    ],
+    "senses": [
+      {
+        "id": "vbjv92g6dx1zrqh",
+        "order": 0,
+        "definition": "Recently made, bought, or started; not old or worn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand new"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "g6ukx442tw3ymhf",
+            "text": "我买了一辆新车。",
+            "textLang": "zh",
+            "translation": "I bought a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and excited, showing off a new purchase",
+            "note": null,
+            "matchedForm": "新",
+            "matchedTranslationForm": "new"
+          },
+          {
+            "id": "9thzb25ztjrxk2g",
+            "text": "这件衣服看起来很新。",
+            "textLang": "zh",
+            "translation": "This piece of clothing looks very new.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised at how well something has been kept",
+            "note": null,
+            "matchedForm": "新",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "新",
+    "lemma": "新",
+    "reading": "xīn",
+    "ipa": "/ɕin˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh; recently made or bought",
     "primaryGloss": "new",
     "emotion": "excited and pleased, showing off something freshly acquired",
@@ -163,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(condition) Not worn out or used before; in good condition.",
+        "why": "Senses 0 and 1 are shades of the single everyday meaning 'new'; merge them."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "新 (xīn) is used for things that are recently made, bought, or",
+        "why": "Restates the definition without giving extra grammatical or usage help."
+      }
+    ],
+    "growth": 0.428
   }
 }

@@ -68,6 +68,131 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "blanket; cover",
+    "primaryGloss": "blanket",
+    "emotion": "cozy and sleepy, wrapped up warm on a cold night",
+    "notes": [],
+    "senses": [
+      {
+        "id": "hmawzq8ztock38d",
+        "order": 0,
+        "definition": "A thick piece of fabric placed on a bed to keep warm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blanket",
+              "cover"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "0z66dlbos3t27ki",
+            "text": "Il fait froid, je rajoute une couverture sur le lit.",
+            "textLang": "fr",
+            "translation": "It's cold, I'm adding a blanket to the bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shivering slightly, reaching for extra warmth before sleep",
+            "note": null,
+            "matchedForm": "couverture",
+            "matchedTranslationForm": "blanket"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ytzdk2cbso9wpcu",
+        "order": 1,
+        "definition": "The outside part of a book or magazine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cover",
+              "front cover"
+            ]
+          }
+        ],
+        "domain": "publishing",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "9zahmhimf0ebicz",
+            "text": "La couverture de ce roman est magnifique.",
+            "textLang": "fr",
+            "translation": "The cover of this novel is magnificent.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring an attractive book design",
+            "note": null,
+            "matchedForm": "couverture",
+            "matchedTranslationForm": "cover"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "hmawzq8ztock38d",
+      "from": "Pièce de tissu épaisse que l'on met sur le lit pour se réchauffer.",
+      "to": "A thick piece of fabric placed on a bed to keep warm.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "ytzdk2cbso9wpcu",
+      "from": "Page extérieure d'un livre ou d'un magazine.",
+      "to": "The outside page of a book or magazine.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la couverture",
+    "lemma": "couverture",
+    "reading": null,
+    "ipa": "/ku.vɛʁ.tyʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "blanket; cover; roof",
     "primaryGloss": "blanket",
     "emotion": "cozy and sleepy, wrapped up warm on a cold night",
@@ -161,22 +286,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "hmawzq8ztock38d",
-      "from": "Pièce de tissu épaisse que l'on met sur le lit pour se réchauffer.",
-      "to": "A thick piece of fabric placed on a bed to keep warm.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "ytzdk2cbso9wpcu",
-      "from": "Page extérieure d'un livre ou d'un magazine.",
-      "to": "The outside page of a book or magazine.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "blanket; cover; roof",
+        "why": "Lists 'roof', which is not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La couverture refers primarily to a bed blanket, but it is",
+        "why": "Merely restates the glosses of the senses."
+      }
+    ],
+    "growth": 0.684
+  }
 }

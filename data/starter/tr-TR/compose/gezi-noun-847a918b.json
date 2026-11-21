@@ -58,6 +58,76 @@
     "headword": "gezi",
     "lemma": "gezi",
     "reading": null,
+    "ipa": "/ɟeˈzi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "trip; excursion; tour",
+    "primaryGloss": "trip",
+    "emotion": "excited and eager, planning a fun day out",
+    "notes": [
+      "Refers to a shorter outing, sightseeing tour, or excursion; for longer journeys or travel in general, use 'seyahat' or 'yolculuk'."
+    ],
+    "senses": [
+      {
+        "id": "t50mqjntkt81sy8",
+        "order": 0,
+        "definition": "A short journey or outing for pleasure, sightseeing, or education.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "excursion",
+              "tour",
+              "outing"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "2g9ljanweui3vti",
+            "text": "Yarın müzeye bir okul gezisi düzenleyeceğiz.",
+            "textLang": "tr",
+            "translation": "Tomorrow we will organize a school trip to the museum.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gezisi",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "gezi",
+    "lemma": "gezi",
+    "reading": null,
     "ipa": "/ɡeˈzi/",
     "pos": "noun",
     "gender": null,
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Gezi refers generally to a trip, excursion, or tour",
+        "why": "Simply repeats the definition and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yarın okul için müzeye bir gezi düzenleyeceğiz.",
+        "why": "'Okul için' (for the school) is unnatural for 'school trip'; 'okul gezisi' is natural."
+      }
+    ],
+    "growth": 0.862
   }
 }

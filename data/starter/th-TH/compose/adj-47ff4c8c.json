@@ -58,6 +58,97 @@
     "headword": "เย็น",
     "lemma": "เย็น",
     "reading": null,
+    "ipa": "/jen˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "cool; cold",
+    "primaryGloss": "cool",
+    "emotion": "refreshing and comfortable, like a light breeze on a warm day",
+    "notes": [
+      "Used for cool or cold objects, food, drinks, and pleasantly cool air. For cold weather or feeling cold, use หนาว (nǎao).",
+      "As a noun (มักใช้ว่า ตอนเย็น), it means 'evening' (around 4–6 p.m.)."
+    ],
+    "senses": [
+      {
+        "id": "p3i4odwjcaybnqi",
+        "order": 0,
+        "definition": "Having a low temperature; pleasantly cool or chilled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cool",
+              "cold",
+              "chilled"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "72g351tn1zgs430",
+            "text": "วันนี้ลมเย็นสบายมาก",
+            "textLang": "th",
+            "translation": "The breeze is very nice and cool today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เย็น",
+            "matchedTranslationForm": "cool"
+          },
+          {
+            "id": "buho568ey1kczh1",
+            "text": "ขอน้ำเย็นแก้วหนึ่งครับ",
+            "textLang": "th",
+            "translation": "May I have a glass of cold water, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เย็น",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เย็น",
+    "lemma": "เย็น",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -159,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "น้ำเย็นอร่อยมาก — The cool water is very delicious.",
+        "why": "Saying plain cold water is 'very delicious' is unnatural in both Thai and English."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "For things that are unpleasantly cold, Thai speakers use 'หนาว'.",
+        "why": "Misleading: หนาว is used for weather and feeling cold, whereas เย็น is used for cold objects/drinks."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The time of day between afternoon and night.",
+        "why": "Noun sense ('evening') included in an adjective entry."
+      }
+    ],
+    "growth": 1.005
   }
 }

@@ -68,6 +68,118 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "cake; cookie; traditional snack",
+    "primaryGloss": "cake",
+    "emotion": "warm and inviting, offering a sweet treat to a guest",
+    "notes": [
+      "Covers Western-style cakes ('kue ulang tahun'), dry cookies and biscuits ('kue kering'), and traditional bite-sized snacks ('kue basah' or 'kue pasar')."
+    ],
+    "senses": [
+      {
+        "id": "hlcv9ws7tp0pdzv",
+        "order": 0,
+        "definition": "A sweet baked food made from flour, sugar, and eggs, or a small dry biscuit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cake",
+              "cookie",
+              "pastry",
+              "biscuit"
+            ]
+          }
+        ],
+        "domain": "baked goods",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "xlufvfbtdzd46dc",
+            "text": "Ibu membuat kue cokelat untuk ulang tahun adik.",
+            "textLang": "id",
+            "translation": "Mother is making a chocolate cake for my little brother's birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and loving, preparing a treat for a celebration",
+            "note": null,
+            "matchedForm": "kue",
+            "matchedTranslationForm": "cake"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ws196mwvv98cxnh",
+        "order": 1,
+        "definition": "A traditional bite-sized snack, sweet or savory, often steamed or fried and made from rice flour, coconut, and palm sugar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traditional snack",
+              "kuih",
+              "sweet"
+            ]
+          }
+        ],
+        "domain": "snack",
+        "emoji": "🥟",
+        "examples": [
+          {
+            "id": "ilc5fzg52f9tb5r",
+            "text": "Di pasar pagi ada banyak penjual kue tradisional.",
+            "textLang": "id",
+            "translation": "At the morning market there are many sellers of traditional snacks.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and pointing out the delicious options at the market",
+            "note": null,
+            "matchedForm": "kue",
+            "matchedTranslationForm": "snacks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kue",
+    "lemma": "kue",
+    "reading": null,
+    "ipa": "/ˈku.e/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍰",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "cake; pastry; sweet snack",
     "primaryGloss": "cake",
     "emotion": "warm and inviting, offering a sweet treat to a guest",
@@ -161,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense of 'cookie / biscuit' (as in 'kue kering')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "for younger sibling's birthday.",
+        "why": "Calqued translation of 'adik'; in English one says 'my little brother's/sister's birthday'."
+      }
+    ],
+    "growth": 1.07
   }
 }

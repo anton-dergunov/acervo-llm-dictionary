@@ -58,6 +58,75 @@
     "headword": "अँधेरा",
     "lemma": "अँधेरा",
     "reading": null,
+    "ipa": "/ən.d̪ʱeː.ɾɑː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "dark",
+    "primaryGloss": "dark",
+    "emotion": "quiet and cautious, peering into a dim room",
+    "notes": [
+      "Declines for gender and number: अँधेरा (masculine singular), अँधेरे (masculine plural/oblique), अँधेरी (feminine).",
+      "Very commonly used as a masculine noun meaning 'darkness', as in कमरे में अँधेरा है (It is dark in the room)."
+    ],
+    "senses": [
+      {
+        "id": "1nsn6qvz3d6n7tf",
+        "order": 0,
+        "definition": "With little or no light; dark.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "fp8xsqyzs4upkd6",
+            "text": "हम एक अँधेरे कमरे में बैठे थे।",
+            "textLang": "hi",
+            "translation": "We were sitting in a dark room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "अँधेरे",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "अँधेरा",
+    "lemma": "अँधेरा",
+    "reading": null,
     "ipa": "/ən.dʱeː.ɾɑː/",
     "pos": "adj",
     "gender": null,
@@ -121,5 +190,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "dark, darkness",
+        "why": "Entry is an adjective; 'darkness' is a noun."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "कमरे में बहुत अँधेरा है।",
+        "why": "Uses अँधेरा as a noun ('there is much darkness'), not as an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with सवेरा (saverā), which means morning or dawn.",
+        "why": "Unlikely confusion; note should instead explain declension (-आ/-ई/-ए) and noun usage."
+      }
+    ],
+    "growth": 1.248
   }
 }

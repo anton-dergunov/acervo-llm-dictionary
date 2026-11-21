@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to push; to postpone",
+    "primaryGloss": "push",
+    "emotion": "assertive and active, like clearing a path forward with your hands",
+    "notes": [
+      "The opposite is 拉 (lā, 'to pull'); both are commonly seen on doors."
+    ],
+    "senses": [
+      {
+        "id": "19io0k2nivndwo0",
+        "order": 0,
+        "definition": "To use force to move something away from yourself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "push",
+              "shove"
+            ]
+          }
+        ],
+        "domain": "motion",
+        "emoji": "👐",
+        "examples": [
+          {
+            "id": "s6xoj23dt0mhg6i",
+            "text": "请推一下门。",
+            "textLang": "zh",
+            "translation": "Please push the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but direct, giving a simple instruction to a visitor",
+            "note": null,
+            "matchedForm": "推",
+            "matchedTranslationForm": "push"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iwher96ysm6lcjn",
+        "order": 1,
+        "definition": "To move an event or plan to a later time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "postpone",
+              "delay",
+              "put off"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "obj2tzgejfkmeqy",
+            "text": "我们可以把会议推到明天吗？",
+            "textLang": "zh",
+            "translation": "Can we postpone the meeting until tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and slightly apologetic, asking for a change of plans",
+            "note": null,
+            "matchedForm": "推",
+            "matchedTranslationForm": "postpone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "推",
+    "lemma": "推",
+    "reading": "tuī",
+    "ipa": "/tʰu̯ei̯˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👐",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to push; to postpone; to deduce",
     "primaryGloss": "push",
     "emotion": "assertive and active, like clearing a path forward with your hands",
@@ -203,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "我们无法推断出结果。",
+        "why": "Uses the compound word 推断 (tuīduàn) instead of the verb 推."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(deduce) To infer, deduce, or promote an idea or theory.",
+        "why": "Conflates two unrelated meanings ('deduce' and 'promote') which require compound words at A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Chinese, 'tuī' is very versatile. While it literally means 'to push'",
+        "why": "Pure filler restating the definitions."
+      }
+    ],
+    "growth": 0.536
   }
 }

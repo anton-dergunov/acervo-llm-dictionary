@@ -57,6 +57,75 @@
     "language": "zh",
     "headword": "国外",
     "lemma": "国外",
+    "reading": "guówài",
+    "ipa": "/ku̯o˧˥ u̯ai̯˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "abroad; foreign countries",
+    "primaryGloss": "abroad",
+    "emotion": "excited and wistful, dreaming of a trip across the sea",
+    "notes": [
+      "Unlike English 'abroad', 国外 is a place noun, so it needs a verb or preposition before it: 在国外 (be/live abroad), 去国外 (go abroad)."
+    ],
+    "senses": [
+      {
+        "id": "i3qftwj5kh2lcw0",
+        "order": 0,
+        "definition": "A country or countries outside one's own.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "abroad",
+              "foreign countries",
+              "overseas"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "02i2re2karqo0kw",
+            "text": "他很想去国外看看不同的风景。",
+            "textLang": "zh",
+            "translation": "He really wants to go abroad to see different scenery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and eager, looking forward to a grand journey",
+            "note": null,
+            "matchedForm": "国外",
+            "matchedTranslationForm": "abroad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "国外",
+    "lemma": "国外",
     "reading": "guó wài",
     "ipa": "/ku̯o˧˥ u̯ai̯˥˩/",
     "pos": "adv",
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "国外 is a place noun (nominal), not an adverb."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "after prepositions like 在 or 去, as in 在国外 (to live abroad) or 去国外",
+        "why": "去 is a verb, not a preposition, and 在 here acts as a verb/preposition."
+      }
+    ],
+    "growth": 1.216
   }
 }

@@ -68,6 +68,116 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person, people; body",
+    "primaryGloss": "person",
+    "emotion": "warm and welcoming, addressing a familiar face in the crowd",
+    "notes": [
+      "Also used as the main classifier for people (e.g., 'ba người bạn' = three friends) and as a prefix for nationalities or professions ('người Việt' = Vietnamese person).",
+      "Vietnamese nouns do not change form for singular or plural, so 'người' means both 'person' and 'people'."
+    ],
+    "senses": [
+      {
+        "id": "1h0e3lqmf3ul514",
+        "order": 0,
+        "definition": "A human being, or people in general.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "people",
+              "human"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "1vjfqay4gyu9zel",
+            "text": "Đó là một người tốt.",
+            "textLang": "vi",
+            "translation": "That is a good person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and appreciative, speaking with quiet respect",
+            "note": null,
+            "matchedForm": "người",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mc2qif0hmhtzj1g",
+        "order": 1,
+        "definition": "One's physical body, especially when talking about health or how one feels.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "body"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "bxolfk1kpwo45yd",
+            "text": "Hôm nay tôi thấy mệt trong người.",
+            "textLang": "vi",
+            "translation": "Today I feel tired in my body.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "người",
+            "matchedTranslationForm": "body"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "người",
+    "lemma": "người",
+    "reading": null,
+    "ipa": "/ŋɨəj˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; human; people",
     "primaryGloss": "person",
     "emotion": "warm and welcoming, addressing a familiar face in the crowd",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(people) Humanity or people in general.",
+        "why": "Vietnamese nouns do not inflect for number; 'person/people' is one sense, and example uses 'con người'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential everyday sense of physical body ('đau người', 'mệt người')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When referring to people in general, it translates to humans or people.",
+        "why": "Restates the glosses without explaining that Vietnamese nouns lack singular/plural inflection."
+      }
+    ],
+    "growth": 1.535
   }
 }

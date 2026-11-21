@@ -72,6 +72,136 @@
     "primaryGloss": "esquina",
     "emotion": "orienting and helpful, pointing out a location in a city",
     "notes": [
+      "Para la esquina de una calle se usa 'on the corner' o 'at the corner'; para el rincón de una habitación se usa 'in the corner'.",
+      "No confundir con 'edge', que es el borde lineal de algo."
+    ],
+    "senses": [
+      {
+        "id": "wqf1aayyg4v5hvj",
+        "order": 0,
+        "definition": "Punto donde se cruzan dos calles o donde se unen dos lados o bordes exteriores de algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "esquina"
+            ]
+          }
+        ],
+        "domain": "exterior",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "ej1b0zezrgy2x2p",
+            "text": "The bakery is on the corner.",
+            "textLang": "en",
+            "translation": "La panadería está en la esquina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, giving directions to someone",
+            "note": null,
+            "matchedForm": "corner",
+            "matchedTranslationForm": "esquina"
+          },
+          {
+            "id": "pfhu4icjz8n5l9a",
+            "text": "I hit my leg on the corner of the table.",
+            "textLang": "en",
+            "translation": "Me golpeé la pierna con la esquina de la mesa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "corner",
+            "matchedTranslationForm": "esquina"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o5xijzzc6b8xqjw",
+        "order": 1,
+        "definition": "Ángulo interior formado por el encuentro de dos paredes o superficies.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "rincón",
+              "esquina"
+            ]
+          }
+        ],
+        "domain": "interior",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "q0h2azvuifdekoa",
+            "text": "He sat in the corner of the room.",
+            "textLang": "en",
+            "translation": "Se sentó en un rincón de la habitación.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and observant, noting where someone is sitting",
+            "note": null,
+            "matchedForm": "corner",
+            "matchedTranslationForm": "rincón"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "corner",
+    "lemma": "corner",
+    "reading": null,
+    "ipa": "/ˈkɔrnər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "esquina; rincón",
+    "primaryGloss": "esquina",
+    "emotion": "orienting and helpful, pointing out a location in a city",
+    "notes": [
       "Se usa 'corner' para el punto de encuentro de dos calles. Si te refieres al ángulo interior de una habitación o de un objeto, se usa la palabra 'corner' también, pero se suele traducir como 'rincón'.",
       "No confundir con 'edge', que es el borde lineal de algo."
     ],
@@ -159,5 +289,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa 'corner' para el punto de encuentro de dos calles.",
+        "why": "Restates the senses and glosses instead of explaining preposition usage (on/in/at the corner)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Definitions are too narrow, missing the corner of an object (table, page) and preposition usage."
+      }
+    ],
+    "growth": 1.193
   }
 }

@@ -68,6 +68,92 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "hotel",
+    "primaryGloss": "hotel",
+    "emotion": "excited and ready for a trip, carrying bags into the lobby",
+    "notes": [
+      "The initial 'h' is mute, taking elision ('l'hôtel') and liaison ('des hôtels' /de.z‿o.tɛl/).",
+      "Also found in 'l'hôtel de ville' (town hall / city hall)."
+    ],
+    "senses": [
+      {
+        "id": "h1t4mdzthnti0yx",
+        "order": 0,
+        "definition": "A building where people pay to stay when they are traveling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hotel"
+            ]
+          }
+        ],
+        "domain": "accommodation",
+        "emoji": "🏨",
+        "examples": [
+          {
+            "id": "p0w0i98pbfhdky7",
+            "text": "Nous avons réservé une belle chambre dans cet hôtel près de la gare.",
+            "textLang": "fr",
+            "translation": "We booked a nice room in this hotel near the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and relieved after a long journey",
+            "note": null,
+            "matchedForm": "hôtel",
+            "matchedTranslationForm": "hotel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "h1t4mdzthnti0yx",
+      "from": "Établissement qui offre un service de logement payant aux voyageurs.",
+      "to": "A building where people pay to stay when they are traveling.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:32Z"
+    },
+    {
+      "sense": "x7uoh5ixby9lw10",
+      "from": "Grand bâtiment particulier, souvent luxueux et ancien.",
+      "to": "A large, old, and often luxurious private house.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:32Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'hôtel",
+    "lemma": "hôtel",
+    "reading": null,
+    "ipa": "/o.tɛl/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏨",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "hotel; large private townhouse",
     "primaryGloss": "hotel",
     "emotion": "excited and ready for a trip, carrying bags into the lobby",
@@ -160,22 +246,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "h1t4mdzthnti0yx",
-      "from": "Établissement qui offre un service de logement payant aux voyageurs.",
-      "to": "A building where people pay to stay when they are traveling.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:32Z"
-    },
-    {
-      "sense": "x7uoh5ixby9lw10",
-      "from": "Grand bâtiment particulier, souvent luxueux et ancien.",
-      "to": "A large, old, and often luxurious private house.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:32Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large, old, and often luxurious private house.",
+        "why": "Historical/architectural sense ('hôtel particulier'), not an everyday standalone A2 meaning; 'hôtel de ville' is more useful in a note."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that the initial 'h' is silent and aspirate in spelling origin",
+        "why": "Confusing and contradictory explanation about 'aspirate in spelling origin'."
+      }
+    ],
+    "growth": 0.613
+  }
 }

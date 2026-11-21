@@ -68,6 +68,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "airplane; plane",
+    "primaryGloss": "airplane",
+    "emotion": "excited and ready for a long-awaited trip",
+    "notes": [
+      "To say 'by plane', use με το αεροπλάνο or the adverb αεροπορικώς.",
+      "Do not confuse with το αεροδρόμιο (airport)."
+    ],
+    "senses": [
+      {
+        "id": "use1nzmkgyvayzc",
+        "order": 0,
+        "definition": "A vehicle with wings and engines that flies through the air.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "airplane",
+              "plane",
+              "aeroplane"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "ikig2zdt7dmoy4h",
+            "text": "Το αεροπλάνο πετάει ψηλά στον ουρανό.",
+            "textLang": "el",
+            "translation": "The airplane is flying high in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "amazed and pointing up at the sky",
+            "note": null,
+            "matchedForm": "αεροπλάνο",
+            "matchedTranslationForm": "airplane"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το αεροπλάνο",
+    "lemma": "αεροπλάνο",
+    "reading": null,
+    "ipa": "/a.e.ɾoˈpla.no/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "airplane",
     "primaryGloss": "airplane",
     "emotion": "excited and ready for a long-awaited trip",
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "The learner's preferred topic is City, but Travel is the",
+        "why": "Leaked internal prompt/system meta-commentary into a learner-facing note."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "and a weight greater than that of the air it displaces.",
+        "why": "Overly technical physics phrasing for an A2 learner's dictionary."
+      }
+    ],
+    "growth": 0.815
   }
 }

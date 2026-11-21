@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "悲しい",
     "lemma": "悲しい",
+    "reading": "かなしい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "sad; sorrowful",
+    "primaryGloss": "sad",
+    "emotion": "a soft, heavy weight in the chest, quiet and reflective",
+    "notes": [
+      "Describes both a person's feeling of sorrow and things that cause sadness (e.g. 悲しいニュース, 'sad news'). Differs from 寂しい (sabishii), which specifically means 'lonely'."
+    ],
+    "senses": [
+      {
+        "id": "tj6n27z5qtae4v0",
+        "order": 0,
+        "definition": "Feeling sorrow or unhappiness, or causing someone to feel that way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sad",
+              "sorrowful",
+              "unhappy"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "8q8233b1vzw8rhz",
+            "text": "その映画を見て悲しくなった。",
+            "textLang": "ja",
+            "translation": "Watching that movie made me sad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "悲しく",
+            "matchedTranslationForm": "sad"
+          },
+          {
+            "id": "riw6r91la3f467g",
+            "text": "昨日、とても悲しいニュースを聞きました。",
+            "textLang": "ja",
+            "translation": "I heard some very sad news yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "悲しい",
+            "matchedTranslationForm": "sad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "悲しい",
+    "lemma": "悲しい",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -118,5 +208,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading かなしい for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (emotion) Feeling or showing sorrow ... [1] (regret) Regrettable or disappointing",
+        "why": "Feeling sad and a situation being sad/sorrowful are two facets of one A2 sense."
+      }
+    ],
+    "growth": 1.089
   }
 }

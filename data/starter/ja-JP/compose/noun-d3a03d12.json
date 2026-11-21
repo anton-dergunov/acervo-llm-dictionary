@@ -57,6 +57,95 @@
     "language": "ja",
     "headword": "お金",
     "lemma": "お金",
+    "reading": "おかね",
+    "ipa": "okane",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "money",
+    "primaryGloss": "money",
+    "emotion": "a practical and common necessity, matter-of-fact and neutral",
+    "notes": [
+      "The prefix お is standard in everyday speech; 金 (かね) without お sounds rough or blunt.",
+      "For physical cash as opposed to card or digital payment, use 現金 (げんきん)."
+    ],
+    "senses": [
+      {
+        "id": "c48kh0ycrzjofsn",
+        "order": 0,
+        "definition": "Coins, banknotes, or funds used to buy things and pay for services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "💴",
+        "examples": [
+          {
+            "id": "ia6nqc6p1mtguwf",
+            "text": "お金が足りません。",
+            "textLang": "ja",
+            "translation": "I do not have enough money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly embarrassed, realizing a shortage while at the register",
+            "note": null,
+            "matchedForm": "お金",
+            "matchedTranslationForm": "money"
+          },
+          {
+            "id": "l8b5x3x66z0z9ur",
+            "text": "彼はお金をたくさん持っています。",
+            "textLang": "ja",
+            "translation": "He has a lot of money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a clear observation",
+            "note": null,
+            "matchedForm": "お金",
+            "matchedTranslationForm": "money"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "お金",
+    "lemma": "お金",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -182,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (おかね) for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(wealth) Wealth or personal fortune.",
+        "why": "'Money' as currency and 'having a lot of money' are a single sense."
+      }
+    ],
+    "growth": 0.718
   }
 }

@@ -72,6 +72,115 @@
     "primaryGloss": "traffic light",
     "emotion": "a patient, mundane pause in the flow of a busy day",
     "notes": [
+      "In everyday speech, 信号 almost always means a traffic light. Note that 'green light' is 青信号 (ao-shingō, literally 'blue signal') and 'red light' is 赤信号 (aka-shingō).",
+      "For a hand gesture or cue between people, use 合図 (aizu); for cell phone or Wi-Fi reception, use 電波 (denpa)."
+    ],
+    "senses": [
+      {
+        "id": "cnohm42xpdbibbz",
+        "order": 0,
+        "definition": "A set of coloured lights at a road junction or crossing that controls traffic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traffic light",
+              "traffic signal"
+            ]
+          }
+        ],
+        "domain": "traffic",
+        "emoji": "🚦",
+        "examples": [
+          {
+            "id": "63k3d4r6p9y1iff",
+            "text": "次の信号を左に曲がってください。",
+            "textLang": "ja",
+            "translation": "Please turn left at the next traffic light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, giving clear directions to a driver",
+            "note": null,
+            "matchedForm": "信号",
+            "matchedTranslationForm": "traffic light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "r9xzqjcc0ah32d9",
+        "order": 1,
+        "definition": "A physical or electronic sign used to convey a warning or instruction, such as a railway signal or SOS.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "signal"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "📡",
+        "examples": [
+          {
+            "id": "732kx5bizappa8m",
+            "text": "船がSOSの信号を送った。",
+            "textLang": "ja",
+            "translation": "The ship sent an SOS signal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "信号",
+            "matchedTranslationForm": "signal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "信号",
+    "lemma": "信号",
+    "reading": "しんごう",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "traffic light; signal",
+    "primaryGloss": "traffic light",
+    "emotion": "a patient, mundane pause in the flow of a busy day",
+    "notes": [
       "While 'shingō' can refer to signals in a general or technical sense (like a phone signal or a gesture), it is most commonly used by everyday speakers to mean the traffic lights at a street corner.",
       "Do not confuse this with 'kōtsū' (交通), which refers to the broader concept of traffic movement or transportation itself."
     ],
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "スマホの信号が弱いです。",
+        "why": "Cell phone reception is 電波 (denpa), not 信号; 信号 here is an English calque."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "like a phone signal or a gesture",
+        "why": "Phone reception is 電波 and a gesture is 合図; neither is called 信号 in everyday Japanese."
+      }
+    ],
+    "growth": 0.982
   }
 }

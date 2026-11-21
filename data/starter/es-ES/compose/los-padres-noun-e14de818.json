@@ -58,6 +58,113 @@
     "headword": "los padres",
     "lemma": "padre",
     "reading": null,
+    "ipa": "/ˈpaðɾes/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "parents; fathers",
+    "primaryGloss": "parents",
+    "emotion": "warm and grounding, reflecting on the people who raised you",
+    "notes": [
+      "The masculine plural 'los padres' refers to 'parents' (mother and father together) as well as to more than one father."
+    ],
+    "senses": [
+      {
+        "id": "z8kj70wkf0vlijr",
+        "order": 0,
+        "definition": "A person's mother and father considered together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parents"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "mu38gcrfxnd10ac",
+            "text": "Mis padres viven en el campo.",
+            "textLang": "es",
+            "translation": "My parents live in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and steady, describing where your family is based",
+            "note": null,
+            "matchedForm": "padres",
+            "matchedTranslationForm": "parents"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lydo0w46vuz4utc",
+        "order": 1,
+        "definition": "More than one father.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fathers"
+            ]
+          }
+        ],
+        "domain": "men",
+        "emoji": "👨‍👧‍👦",
+        "examples": [
+          {
+            "id": "errtybinovuiqw6",
+            "text": "Los dos padres esperaban a sus hijos a la salida del colegio.",
+            "textLang": "es",
+            "translation": "The two fathers were waiting for their children outside the school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "padres",
+            "matchedTranslationForm": "fathers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "los padres",
+    "lemma": "padre",
+    "reading": null,
     "ipa": "/los ˈpaðɾes/",
     "pos": "noun",
     "gender": "masculine",
@@ -159,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/los ˈpaðɾes/",
+        "why": "IPA should transcribe the word without the article."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hoy en el colegio celebran el día de los padres.",
+        "why": "Father's Day in Spain is 'el Día del Padre'; this example is unnatural."
+      }
+    ],
+    "growth": 0.731
   }
 }

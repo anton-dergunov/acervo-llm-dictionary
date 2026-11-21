@@ -68,6 +68,77 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "autobús",
+    "primaryGloss": "autobús",
+    "emotion": "waiting on a busy corner, watching the traffic approach",
+    "notes": [
+      "Su plural es 'buses' (o a veces 'busses').",
+      "Para decir 'en autobús' como medio de transporte se usa 'by bus' (sin artículo), pero para ubicarse dentro del vehículo se usa 'on the bus' ('I am on the bus')."
+    ],
+    "senses": [
+      {
+        "id": "puon6qpptffqv6g",
+        "order": 0,
+        "definition": "Vehículo grande de motor que transporta a muchos pasajeros por una ruta fija.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "autobús",
+              "bus",
+              "colectivo",
+              "camión"
+            ]
+          }
+        ],
+        "domain": "transporte",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "j7vjtane146xp0y",
+            "text": "The bus arrives at the station in five minutes.",
+            "textLang": "en",
+            "translation": "El autobús llega a la estación en cinco minutos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "checking the watch anxiously while waiting on the curb",
+            "note": null,
+            "matchedForm": "bus",
+            "matchedTranslationForm": "autobús"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "bus",
+    "lemma": "bus",
+    "reading": null,
+    "ipa": "/bʌs/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "autobús; bus de computación",
     "primaryGloss": "autobús",
     "emotion": "waiting on a busy corner, watching the traffic approach",
@@ -161,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(computación) Conjunto de conexiones físicas que permiten la transferencia de datos",
+        "why": "Technical computing sense is not needed for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "En la mayoría de los países hispanohablantes se prefiere 'autobús' o 'colectivo'",
+        "why": "Explains Spanish regionalisms instead of English usage."
+      }
+    ],
+    "growth": 0.709
   }
 }

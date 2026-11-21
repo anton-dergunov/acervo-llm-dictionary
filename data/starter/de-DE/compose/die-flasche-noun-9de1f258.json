@@ -74,6 +74,95 @@
     "primaryGloss": "bottle",
     "emotion": null,
     "notes": [
+      "Before a noun naming the contents, no preposition is used: 'eine Flasche Wasser' (a bottle of water).",
+      "In colloquial German, calling someone 'eine Flasche' is a mild insult meaning 'loser' or incompetent person."
+    ],
+    "senses": [
+      {
+        "id": "npizn01mjielnlv",
+        "order": 0,
+        "definition": "A container for liquids, typically made of glass or plastic, with a narrow neck.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "c0yhgfybur07xek",
+            "text": "Ich möchte eine Flasche Wasser kaufen.",
+            "textLang": "de",
+            "translation": "I would like to buy a bottle of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, making a request at a shop",
+            "note": null,
+            "matchedForm": "Flasche",
+            "matchedTranslationForm": "bottle"
+          },
+          {
+            "id": "m3tyrse9hm00di1",
+            "text": "Die Flasche ist leer.",
+            "textLang": "de",
+            "translation": "The bottle is empty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, observing a simple state",
+            "note": null,
+            "matchedForm": "Flasche",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Flasche",
+    "lemma": "Flasche",
+    "reading": null,
+    "ipa": "/ˈflaʃə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bottle",
+    "primaryGloss": "bottle",
+    "emotion": null,
+    "notes": [
       "In German, 'Flasche' refers specifically to the container. If you are talking about the contents, use 'der Inhalt'.",
       "In colloquial German, calling someone a 'Flasche' is an insult, meaning they are incompetent or a loser."
     ],
@@ -183,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In German, 'Flasche' refers specifically to the container.",
+        "why": "False: 'eine Flasche trinken' (to drink a bottle's contents) is completely standard in German."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "An incompetent person or someone who is failing at a task.",
+        "why": "Slang insult not needed as a main sense for A2; also duplicates note[1]."
+      }
+    ],
+    "growth": 0.633
   }
 }

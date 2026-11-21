@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to open; to turn on",
+    "primaryGloss": "open",
+    "emotion": "ready and helpful, reaching out to let someone in",
+    "notes": [
+      "Used both transitively (ανοίγω την πόρτα, 'I open the door') and intransitively (το μαγαζί ανοίγει στις οκτώ, 'the shop opens at eight').",
+      "Contrasts with κλείνω (to close, to turn off). The aorist is άνοιξα."
+    ],
+    "senses": [
+      {
+        "id": "hfyl3k00p7obk28",
+        "order": 0,
+        "definition": "To move something like a door, window, or container so it is no longer shut, or of a business, to begin operating for the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "open"
+            ]
+          }
+        ],
+        "domain": "open",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "43g1nexs4jgin53",
+            "text": "Ανοίγω το παράθυρο για να μπει φρέσκος αέρας.",
+            "textLang": "el",
+            "translation": "I open the window so fresh air can come in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fresh and breezy, glad to let the air in",
+            "note": null,
+            "matchedForm": "Ανοίγω",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "02ywj87117urlj8",
+        "order": 1,
+        "definition": "To start the flow of electricity or water in a light, tap, or appliance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "turn on",
+              "switch on"
+            ]
+          }
+        ],
+        "domain": "device",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "v0syfbpg6x9k0wn",
+            "text": "Ανοίγω το φως γιατί είναι σκοτεινά.",
+            "textLang": "el",
+            "translation": "I turn on the light because it is dark.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and immediate, reaching for the switch",
+            "note": null,
+            "matchedForm": "Ανοίγω",
+            "matchedTranslationForm": "turn on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ανοίγω",
+    "lemma": "ανοίγω",
+    "reading": null,
+    "ipa": "/aˈniɣo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to open; to turn on; to start",
     "primaryGloss": "open",
     "emotion": "ready and helpful, reaching out to let someone in",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to open; to turn on; to start",
+        "why": "'to start' is not in the senses (and is contrasted in note 1)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical objects like doors and windows, but also for",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.05
   }
 }

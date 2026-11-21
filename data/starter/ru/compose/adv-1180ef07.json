@@ -72,6 +72,95 @@
     "primaryGloss": "here",
     "emotion": null,
     "notes": [
+      "Describes static location (where: 'я здесь'). For movement toward this place (where to), use 'сюда' ('иди сюда').",
+      "Synonym 'тут' is slightly more informal in conversation."
+    ],
+    "senses": [
+      {
+        "id": "b11el52kptlwrat",
+        "order": 0,
+        "definition": "In, at, or to this place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "8933zsx8yh5izs8",
+            "text": "Мы здесь живём.",
+            "textLang": "ru",
+            "translation": "We live here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "здесь",
+            "matchedTranslationForm": "here"
+          },
+          {
+            "id": "epqz7mj8s84xvyh",
+            "text": "Здесь очень красиво.",
+            "textLang": "ru",
+            "translation": "It is very beautiful here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Здесь",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "здесь",
+    "lemma": "здесь",
+    "reading": null,
+    "ipa": "/zʲdʲesʲ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "here",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
       "Use здесь when pointing out a place where you are right now.",
       "Do not confuse с здесь with тут; they both mean 'here', but тут is often used in more colloquial speech while здесь is slightly more neutral."
     ],
@@ -140,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Do not confuse с здесь with тут;",
+        "why": "Contains stray Russian preposition 'с' inside an English sentence."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Положи книгу здесь.",
+        "why": "'Положить' usually takes directional 'сюда' ('Положи книгу сюда'), not locational 'здесь'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use здесь when pointing out a place where you are right now.",
+        "why": "Restates the meaning of 'here'; missing the crucial contrast with directional 'сюда'."
+      }
+    ],
+    "growth": 0.935
   }
 }

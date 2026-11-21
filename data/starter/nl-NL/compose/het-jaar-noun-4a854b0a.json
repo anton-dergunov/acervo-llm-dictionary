@@ -72,6 +72,94 @@
     "primaryGloss": "year",
     "emotion": "reflective, looking back over the passage of time",
     "notes": [
+      "The plural is 'jaren', but after a number or 'hoeveel' / 'een paar', the singular form 'jaar' is used: 'twee jaar' (two years), 'twintig jaar oud' (twenty years old)."
+    ],
+    "senses": [
+      {
+        "id": "a7aesghs8u9yp9s",
+        "order": 0,
+        "definition": "A period of twelve months, or the unit used to state age or duration.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "year"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "170bn1rckige6u9",
+            "text": "Dit jaar ga ik op vakantie naar Spanje.",
+            "textLang": "nl",
+            "translation": "This year I am going on holiday to Spain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and eagerly anticipating the upcoming trip",
+            "note": null,
+            "matchedForm": "jaar",
+            "matchedTranslationForm": "year"
+          },
+          {
+            "id": "rpcieh70f9bkowp",
+            "text": "Mijn broer is vijfentwintig jaar oud.",
+            "textLang": "nl",
+            "translation": "My brother is twenty-five years old.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and matter-of-fact when stating family details",
+            "note": null,
+            "matchedForm": "jaar",
+            "matchedTranslationForm": "years"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het jaar",
+    "lemma": "jaar",
+    "reading": null,
+    "ipa": "/jaːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "year",
+    "primaryGloss": "year",
+    "emotion": "reflective, looking back over the passage of time",
+    "notes": [
       "Takes the neuter article 'het' (het jaar), and the plural is 'jaren'.",
       "Notice that when counting after numbers like 'twee', 'drie', etc., Dutch uses the singular form 'jaar' instead of the plural 'jaren' (e.g., 'twee jaar' instead of 'twee jaren')."
     ],
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Using 'jaar' to state someone's age is the same meaning of 'year', not a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the neuter article 'het' (het jaar)",
+        "why": "Restates the article already shown in the headword."
+      }
+    ],
+    "growth": 0.763
   }
 }

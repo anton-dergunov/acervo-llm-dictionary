@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "水",
     "lemma": "水",
+    "reading": "みず",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": null,
+    "notes": [
+      "水 specifically refers to cold or room-temperature water; for warm or hot water, use お湯 (おゆ).",
+      "Often spoken with the polite prefix お as お水 (おみず), especially when ordering or offering drinking water."
+    ],
+    "senses": [
+      {
+        "id": "aht5e3pby46yoky",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills rivers and seas, and is used for drinking and washing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water",
+              "cold water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "h29z4tvhalrajkp",
+            "text": "お水をください。",
+            "textLang": "ja",
+            "translation": "Water, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "水",
+            "matchedTranslationForm": "Water"
+          },
+          {
+            "id": "8zg28mwvf7mrh2v",
+            "text": "川の水はとても冷たいです。",
+            "textLang": "ja",
+            "translation": "The river water is very cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly surprised by the temperature",
+            "note": null,
+            "matchedForm": "水",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "水",
+    "lemma": "水",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -159,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (みず) for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(beverage) The clear liquid ... (nature) The natural element",
+        "why": "Drinking water and river water are the same everyday meaning and should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the liquid you drink and as the general natural element.",
+        "why": "Restates the artificial sense split instead of noting that 水 implies cold or room-temperature water."
+      }
+    ],
+    "growth": 1.003
   }
 }

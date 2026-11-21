@@ -72,6 +72,74 @@
     "primaryGloss": "monkey",
     "emotion": "curious and amused, watching an animal climb and jump",
     "notes": [
+      "In everyday French, 'singe' covers both monkeys and apes (sometimes called 'grands singes')."
+    ],
+    "senses": [
+      {
+        "id": "dwze3msatw5eksx",
+        "order": 0,
+        "definition": "A furry primate that climbs trees and has hands and feet that can grasp things; a monkey or ape.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey",
+              "ape"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "ngzf9pyxzsrr8i5",
+            "text": "Le singe grimpe vite dans l'arbre.",
+            "textLang": "fr",
+            "translation": "The monkey climbs quickly up the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fascinated and eager, pointing out the movement",
+            "note": null,
+            "matchedForm": "singe",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le singe",
+    "lemma": "singe",
+    "reading": null,
+    "ipa": "/sɛ̃ʒ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "monkey; ape",
+    "primaryGloss": "monkey",
+    "emotion": "curious and amused, watching an animal climb and jump",
+    "notes": [
       "In everyday French, 'singe' covers both monkeys and apes, much like 'monkey' in casual English."
     ],
     "senses": [
@@ -118,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "monkey; ape",
+        "why": "'ape' is in shortGloss and notes, but missing from sense[0] glosses and excluded by definition."
+      }
+    ],
+    "growth": 1.085
   }
 }

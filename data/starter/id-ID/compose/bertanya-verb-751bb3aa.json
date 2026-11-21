@@ -72,6 +72,96 @@
     "primaryGloss": "to ask",
     "emotion": "curious and eager to know the answer",
     "notes": [
+      "'Bertanya' is intransitive (from root 'tanya'): use 'kepada' before the person asked, and 'tentang' before the topic. To take a direct object, use 'menanyakan'.",
+      "It only means 'to ask a question'. For 'to ask for / request' something, use 'meminta'."
+    ],
+    "senses": [
+      {
+        "id": "h4xvcaoce9lmftp",
+        "order": 0,
+        "definition": "To put a question to someone in order to get information or an answer.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ask",
+              "to inquire"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "tamfq3nut7eumpt",
+            "text": "Murid itu bertanya kepada guru tentang pelajaran baru.",
+            "textLang": "id",
+            "translation": "The student asked the teacher about the new lesson.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and attentive, wanting to understand the lesson better",
+            "note": null,
+            "matchedForm": "bertanya",
+            "matchedTranslationForm": "asked"
+          },
+          {
+            "id": "1g10beh87d6k8k6",
+            "text": "Jangan malu bertanya kalau kamu belum paham.",
+            "textLang": "id",
+            "translation": "Don't be shy to ask if you don't understand yet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bertanya",
+            "matchedTranslationForm": "ask"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "bertanya",
+    "lemma": "tanya",
+    "reading": null,
+    "ipa": "/bərˈta.ɲa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to ask; to inquire",
+    "primaryGloss": "to ask",
+    "emotion": "curious and eager to know the answer",
+    "notes": [
       "Bertanya is an intransitive verb formed with the prefix ber- and the root tanya. It means 'to ask a question'.",
       "To say who you are asking, use the preposition kepada before the person, or simply follow with the person's name in direct speech."
     ],
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(request) To ask for something, such as an item or a service.",
+        "why": "'Bertanya' only means to ask a question; 'to ask for' is 'meminta'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dia bertanya alamat toko buku itu kepada pelayan.",
+        "why": "'Bertanya' is intransitive and cannot take a direct object like 'alamat' without 'tentang'/'soal'."
+      }
+    ],
+    "growth": 0.881
   }
 }

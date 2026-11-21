@@ -72,6 +72,73 @@
     "primaryGloss": "coffee",
     "emotion": "warm and comforting, starting the morning gently",
     "notes": [
+      "Commonly ordered as 'kopi hitam' (black coffee) or 'kopi susu' (coffee with milk)."
+    ],
+    "senses": [
+      {
+        "id": "wpj5okpjnpwlqsx",
+        "order": 0,
+        "definition": "A dark drink made from roasted coffee beans, or the beans and powder used to make it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffee"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "83cd5wkgrnev5ik",
+            "text": "Saya suka minum kopi setiap pagi.",
+            "textLang": "id",
+            "translation": "I like to drink coffee every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a quiet morning routine",
+            "note": null,
+            "matchedForm": "kopi",
+            "matchedTranslationForm": "coffee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kopi",
+    "lemma": "kopi",
+    "reading": null,
+    "ipa": "/ˈkɔpi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "coffee",
+    "primaryGloss": "coffee",
+    "emotion": "warm and comforting, starting the morning gently",
+    "notes": [
       "In Indonesia, coffee is a massive part of daily social life, often enjoyed very sweet and strong at local stalls called warung kopi."
     ],
     "senses": [
@@ -158,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The roasted and ground beans used to make this drink.",
+        "why": "Unnecessary split; example uses 'biji kopi' (coffee beans), and roasted beans aren't harvested."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Indonesia, coffee is a massive part of daily social life",
+        "why": "Cultural trivia rather than a linguistic usage note."
+      }
+    ],
+    "growth": 0.61
   }
 }

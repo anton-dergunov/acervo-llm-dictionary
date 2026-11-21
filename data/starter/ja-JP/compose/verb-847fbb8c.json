@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to lose; to misplace; to get rid of",
+    "primaryGloss": "lose",
+    "emotion": "frustrated and slightly frantic, like patting down all your pockets",
+    "notes": [
+      "Godan (group 1) transitive verb (also written 無くす). Its intransitive pair is なくなる (to get lost; to disappear; to run out): 鍵をなくした (I lost my keys) vs. 鍵がなくなった (my keys are gone).",
+      "For people or animals going missing, use いなくなる rather than なくす."
+    ],
+    "senses": [
+      {
+        "id": "lemepv2yqy6ojt2",
+        "order": 0,
+        "definition": "To misplace something or no longer have it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lose",
+              "misplace"
+            ]
+          }
+        ],
+        "domain": "losing",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "rxc3uyp42hlp17y",
+            "text": "どこかで鍵をなくしてしまった。",
+            "textLang": "ja",
+            "translation": "I lost my keys somewhere.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "なくして",
+            "matchedTranslationForm": "lost"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gqnyb8oiwd9tspp",
+        "order": 1,
+        "definition": "To get rid of or remove something unwanted.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "get rid of",
+              "eliminate",
+              "remove"
+            ]
+          }
+        ],
+        "domain": "removal",
+        "emoji": "🗑️",
+        "examples": [
+          {
+            "id": "tofx37dkvvir3wa",
+            "text": "時間の無駄をなくしたい。",
+            "textLang": "ja",
+            "translation": "I want to eliminate wasted time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "なくしたい",
+            "matchedTranslationForm": "eliminate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "なくす",
+    "lemma": "なくす",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to lose; to misplace",
     "primaryGloss": "lose",
     "emotion": "frustrated and slightly frantic, like patting down all your pockets",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to lose; to misplace",
+        "why": "Omits sense 1 ('to get rid of; to eliminate')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It implies the item still exists somewhere, but you cannot find it.",
+        "why": "Overstated: なくす covers Sense 1 (eliminating) and losing abstract things like confidence."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that なくす is the transitive pair of なくなる (to disappear/be lost)."
+      }
+    ],
+    "growth": 1.1
   }
 }

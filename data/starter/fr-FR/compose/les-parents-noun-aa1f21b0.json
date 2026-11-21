@@ -58,6 +58,125 @@
     "headword": "les parents",
     "lemma": "parent",
     "reading": null,
+    "ipa": "/pa.ʁɑ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "parents; relatives",
+    "primaryGloss": "parents",
+    "emotion": "warm and familiar, speaking of one's own family with affection",
+    "notes": [
+      "In the singular, 'un parent' (or feminine 'une parente') can mean either a mother/father (e.g. 'un parent d'élève') or a relative; the final 't' is silent."
+    ],
+    "senses": [
+      {
+        "id": "qkbaahypsvood3n",
+        "order": 0,
+        "definition": "A person's father and mother.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parents",
+              "mother and father"
+            ]
+          }
+        ],
+        "domain": "parents",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "skzy11y9nv3qr8l",
+            "text": "Mes parents habitent à Lyon.",
+            "textLang": "fr",
+            "translation": "My parents live in Lyon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and proud, talking about where family lives",
+            "note": null,
+            "matchedForm": "parents",
+            "matchedTranslationForm": "parents"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f76knf9w14nhwiu",
+        "order": 1,
+        "definition": "Members of the same extended family.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "relatives",
+              "relations"
+            ]
+          }
+        ],
+        "domain": "relatives",
+        "emoji": "👨‍👩‍👧‍👦",
+        "examples": [
+          {
+            "id": "wpg3heu9ql7rzmz",
+            "text": "J'ai des parents dans le sud de la France.",
+            "textLang": "fr",
+            "translation": "I have relatives in the south of France.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "parents",
+            "matchedTranslationForm": "relatives"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "f76knf9w14nhwiu",
+      "from": "Membres d'une même famille, plus ou moins éloignés.",
+      "to": "Members of the same family, whether closely or distantly related.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:12Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "les parents",
+    "lemma": "parent",
+    "reading": null,
     "ipa": "/le pa.ʁɑ̃/",
     "pos": "noun",
     "gender": "masculine",
@@ -163,14 +282,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "f76knf9w14nhwiu",
-      "from": "Membres d'une même famille, plus ou moins éloignés.",
-      "to": "Members of the same family, whether closely or distantly related.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:12Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/le pa.ʁɑ̃/",
+        "why": "IPA must be a transcription of the lemma without the article."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "In French, 'les parents' is very commonly used specifically to mean",
+        "why": "Both notes merely restate the two senses and their glosses."
+      }
+    ],
+    "growth": 0.768
+  }
 }

@@ -58,6 +58,117 @@
     "headword": "dayı",
     "lemma": "dayı",
     "reading": null,
+    "ipa": "/daˈjɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "maternal uncle; uncle (address)",
+    "primaryGloss": "maternal uncle",
+    "emotion": "warm and familiar, speaking of a respected relative",
+    "notes": [
+      "Turkish distinguishes uncles by side of the family: 'dayı' is your mother's brother, while 'amca' is your father's brother.",
+      "Also used colloquially to address or refer to an older man, though 'amca' is generally more polite with strangers."
+    ],
+    "senses": [
+      {
+        "id": "8odc71po6d51b60",
+        "order": 0,
+        "definition": "The brother of one's mother.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "maternal uncle",
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "j5cwobwhfbg41fm",
+            "text": "Yarın dayım bizi ziyarete gelecek.",
+            "textLang": "tr",
+            "translation": "Tomorrow my uncle is coming to visit us.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and welcoming, anticipating a family visit",
+            "note": null,
+            "matchedForm": "dayım",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q95h61whopwuk6j",
+        "order": 1,
+        "definition": "An informal form of address or reference for an older man.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle",
+              "old man",
+              "fellow"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "wekidcdf3sjmrf3",
+            "text": "Yaşlı dayı bankta oturup gazetesini okuyordu.",
+            "textLang": "tr",
+            "translation": "The old fellow was sitting on the bench reading his newspaper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dayı",
+            "matchedTranslationForm": "fellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dayı",
+    "lemma": "dayı",
+    "reading": null,
     "ipa": "/daːˈjɯ/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/daːˈjɯ/",
+        "why": "The first vowel is short in standard Turkish: /daˈjɯ/."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Yaşlı dayı bankta oturup gazetemsi okuyordu.",
+        "why": "'gazetemsi' (newspaper-ish) is a corrupt typo for 'gazetesini' (his newspaper)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "maternal uncle; tough guy",
+        "why": "'tough guy' is not covered by the senses."
+      }
+    ],
+    "growth": 0.942
   }
 }

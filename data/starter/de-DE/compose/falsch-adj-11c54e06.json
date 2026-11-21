@@ -58,6 +58,138 @@
     "headword": "falsch",
     "lemma": "falsch",
     "reading": null,
+    "ipa": "/falʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "wrong; incorrect; fake",
+    "primaryGloss": "wrong",
+    "emotion": "sharp and corrective, pointing out a mistake plainly",
+    "notes": [
+      "Commonly used as an adverb with verbs like 'verstehen' ('to misunderstand') or 'abbiegen' ('to take a wrong turn')."
+    ],
+    "senses": [
+      {
+        "id": "lbsgqicf43kbbbh",
+        "order": 0,
+        "definition": "Not correct or true; containing an error or not the right one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect",
+              "false"
+            ]
+          }
+        ],
+        "domain": "incorrect",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "axuzdqiits9m4ix",
+            "text": "Das ist leider die falsche Antwort.",
+            "textLang": "de",
+            "translation": "Unfortunately, that is the wrong answer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "kindly breaking bad news to a student",
+            "note": null,
+            "matchedForm": "falsche",
+            "matchedTranslationForm": "wrong"
+          },
+          {
+            "id": "fes732zbjby6gic",
+            "text": "Wir sitzen im falschen Zug.",
+            "textLang": "de",
+            "translation": "We are on the wrong train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "falschen",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x6iveay5vzbifo9",
+        "order": 1,
+        "definition": "Not genuine; artificial or counterfeit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fake",
+              "false",
+              "counterfeit"
+            ]
+          }
+        ],
+        "domain": "fake",
+        "emoji": "🎭",
+        "examples": [
+          {
+            "id": "3n4n0kt6vr3z08h",
+            "text": "Er trägt einen falschen Bart für das Theaterstück.",
+            "textLang": "de",
+            "translation": "He is wearing a fake beard for the play.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation about a costume",
+            "note": null,
+            "matchedForm": "falschen",
+            "matchedTranslationForm": "fake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "falsch",
+    "lemma": "falsch",
+    "reading": null,
     "ipa": "/fals/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +293,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/fals/",
+        "why": "Wrong transcription: 'sch' is /ʃ/, so 'falsch' is /falʃ/, not /fals/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'falsch' for both factual errors (like a wrong answer) and objects",
+        "why": "Restates the two senses; 'falsche Perücke' is also unidiomatic (a wig is already artificial)."
+      }
+    ],
+    "growth": 1.04
   }
 }

@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "dog",
+    "primaryGloss": "dog",
+    "emotion": "warm and fond, thinking of a loyal pet",
+    "notes": [
+      "The most common measure words for 狗 are 只 (zhī) and 条 (tiáo)."
+    ],
+    "senses": [
+      {
+        "id": "hozac7u81damfah",
+        "order": 0,
+        "definition": "A common four-legged animal that barks and is often kept as a pet or used to guard things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐶",
+        "examples": [
+          {
+            "id": "tvo6oqe8e1mbj07",
+            "text": "我家有一只很可爱的狗。",
+            "textLang": "zh",
+            "translation": "My family has a very cute dog.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and proud, showing off a beloved pet",
+            "note": null,
+            "matchedForm": "狗",
+            "matchedTranslationForm": "dog"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "狗",
+    "lemma": "狗",
+    "reading": "gǒu",
+    "ipa": "/kou̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐶",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "dog; contemptible person",
     "primaryGloss": "dog",
     "emotion": "warm and fond, thinking of a loyal pet",
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(insult) A contemptible, despicable, or mean person.",
+        "why": "Derogatory slang/insult sense is unnecessary for an A2 beginner entry."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "dog; contemptible person",
+        "why": "Includes the marginal insult sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the common measure words 只 (zhī) and 条 (tiáo), while giving a filler note."
+      }
+    ],
+    "growth": 0.447
   }
 }

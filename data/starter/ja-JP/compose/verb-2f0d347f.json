@@ -68,6 +68,119 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to tell; to convey; to hand down",
+    "primaryGloss": "to convey",
+    "emotion": "earnest and focused, wanting to ensure the message is understood clearly",
+    "notes": [
+      "Takes を for the message or feeling and に for the person receiving it (e.g., 彼にメッセージを伝える).",
+      "Transitive ichidan verb; its intransitive counterpart is 伝わる (to be conveyed, to come across)."
+    ],
+    "senses": [
+      {
+        "id": "hafj28zl7r3usow",
+        "order": 0,
+        "definition": "To pass on information, a message, or feelings to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to tell",
+              "to convey",
+              "to pass on",
+              "to report"
+            ]
+          }
+        ],
+        "domain": "communicate",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "ulqmfe1dgzxdiqt",
+            "text": "先生に伝えます。",
+            "textLang": "ja",
+            "translation": "I'll let the teacher know.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and reliable, confirming that a task will be completed",
+            "note": null,
+            "matchedForm": "伝えます",
+            "matchedTranslationForm": "let"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tjyjs2ndpl7l6uz",
+        "order": 1,
+        "definition": "To pass down knowledge, traditions, or culture to the next generation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hand down",
+              "to pass on",
+              "to transmit"
+            ]
+          }
+        ],
+        "domain": "transmit",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "kq372wcbs38jnpq",
+            "text": "伝統を次の世代に伝えます。",
+            "textLang": "ja",
+            "translation": "We pass traditions down to the next generation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "伝えます",
+            "matchedTranslationForm": "pass"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "伝える",
+    "lemma": "伝える",
+    "reading": "つたえる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to tell; to convey; to transmit",
     "primaryGloss": "convey",
     "emotion": "earnest and focused, wanting to ensure the message is understood clearly",
@@ -163,5 +276,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 伝える when you want to pass on information",
+        "why": "Restates the definition instead of giving grammar, valency, or transitivity pair (伝わる)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I will convey it to the teacher.",
+        "why": "Unnatural translation; a sentence fragment in sense 1 also needs to be a complete sentence."
+      }
+    ],
+    "growth": 1.041
   }
 }

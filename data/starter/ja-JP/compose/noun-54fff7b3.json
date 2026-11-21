@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "道路",
     "lemma": "道路",
+    "reading": "どうろ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "road; street; highway",
+    "primaryGloss": "road",
+    "emotion": "matter-of-fact and orienting, identifying a place to walk or drive",
+    "notes": [
+      "道路 (dōro) refers specifically to paved roads designed for vehicle traffic. It is more formal than 道 (michi), which is the everyday word for any road, street, or walking path."
+    ],
+    "senses": [
+      {
+        "id": "ce2udyqf4srnutm",
+        "order": 0,
+        "definition": "A public way built for vehicles to travel between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "highway",
+              "thoroughfare"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "g3jtu26he6t4hes",
+            "text": "この道路は車が多いです。",
+            "textLang": "ja",
+            "translation": "There are many cars on this road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly cautious, noting the heavy traffic",
+            "note": null,
+            "matchedForm": "道路",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "道路",
+    "lemma": "道路",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (どうろ) for a word written with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "road; street; path",
+        "why": "'path' contradicts the note and sense, which specify roads for vehicles."
+      }
+    ],
+    "growth": 0.858
   }
 }

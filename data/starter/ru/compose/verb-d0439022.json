@@ -74,6 +74,136 @@
     "primaryGloss": "to love",
     "emotion": "warm and heartfelt, speaking with deep affection",
     "notes": [
+      "Expresses deep affection for people, or a general, habitual fondness for things and activities. For a specific, immediate impression ('I like this soup'), use нравиться instead."
+    ],
+    "senses": [
+      {
+        "id": "f7ilhdzyrin3z46",
+        "order": 0,
+        "definition": "To feel deep romantic or familial affection for someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to love"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "💖",
+        "examples": [
+          {
+            "id": "rxi00l36rj4sx4r",
+            "text": "Я очень люблю свою семью.",
+            "textLang": "ru",
+            "translation": "I love my family very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and sincere, feeling grateful for loved ones",
+            "note": null,
+            "matchedForm": "люблю",
+            "matchedTranslationForm": "love"
+          },
+          {
+            "id": "0lg4we3ogh9efsk",
+            "text": "Кажется, он её любит.",
+            "textLang": "ru",
+            "translation": "It seems he loves her.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confidential and slightly amused, sharing a secret",
+            "note": null,
+            "matchedForm": "любит",
+            "matchedTranslationForm": "loves"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8hqd8cpwfgrfhtw",
+        "order": 1,
+        "definition": "To enjoy something generally or have a strong fondness for a thing or activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to love",
+              "to enjoy"
+            ]
+          }
+        ],
+        "domain": "preference",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "x2jtirtz3jpdax3",
+            "text": "Мы любим пить кофе по утрам.",
+            "textLang": "ru",
+            "translation": "We like drinking coffee in the mornings.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and cozy, enjoying a peaceful morning routine",
+            "note": null,
+            "matchedForm": "любим",
+            "matchedTranslationForm": "like"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "любить",
+    "lemma": "любить",
+    "reading": null,
+    "ipa": "/lʲuˈbʲitʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to love; to like",
+    "primaryGloss": "to love",
+    "emotion": "warm and heartfelt, speaking with deep affection",
+    "notes": [
       "Used for both deep romantic or familial love and for strong preferences (like hobbies or food)."
     ],
     "senses": [
@@ -203,5 +333,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To like someone very much or have a crush on them.",
+        "why": "Artificial split; 'он её любит' simply means 'he loves her', not a separate infatuation sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both deep romantic or familial love and for strong preferences",
+        "why": "Restates the senses while omitting the crucial distinction from 'нравиться'."
+      }
+    ],
+    "growth": 0.989
   }
 }

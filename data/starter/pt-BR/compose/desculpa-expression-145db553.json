@@ -83,6 +83,116 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "sorry; excuse me",
+    "primaryGloss": "sorry",
+    "emotion": "sincere and apologetic, wanting to make things right",
+    "notes": [
+      "In Brazil, 'desculpa' and 'desculpe' are both widely used to say sorry; 'desculpe' sounds slightly more formal.",
+      "As a feminine noun ('a desculpa'), it means 'an excuse' or 'an apology' (e.g., 'pedir desculpas' — to apologize)."
+    ],
+    "senses": [
+      {
+        "id": "nnw391klj5frcpj",
+        "order": 0,
+        "definition": "Said to apologize when you have done something wrong.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sorry",
+              "apologies"
+            ]
+          }
+        ],
+        "domain": "apology",
+        "emoji": "🙇",
+        "examples": [
+          {
+            "id": "hbxvkpkn405obnv",
+            "text": "Desculpa, eu não queria fazer isso.",
+            "textLang": "pt",
+            "translation": "Sorry, I didn't mean to do that.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and soft, asking for forgiveness",
+            "note": null,
+            "matchedForm": "Desculpa",
+            "matchedTranslationForm": "Sorry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i0rm5u34wew9p4s",
+        "order": 1,
+        "definition": "Said politely to get someone's attention or interrupt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "excuse me",
+              "pardon"
+            ]
+          }
+        ],
+        "domain": "attention",
+        "emoji": "🙋",
+        "examples": [
+          {
+            "id": "gbos0cjiqhpngs6",
+            "text": "Desculpa, você sabe que horas são?",
+            "textLang": "pt",
+            "translation": "Excuse me, do you know what time it is?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and slightly hurried, asking a stranger for help",
+            "note": null,
+            "matchedForm": "Desculpa",
+            "matchedTranslationForm": "Excuse me"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "desculpa",
+    "lemma": "desculpa",
+    "reading": null,
+    "ipa": "/desˈkuw.pɐ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "🙇",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "sorry; excuse me; apology",
     "primaryGloss": "sorry",
     "emotion": "sincere and apologetic, wanting to make things right",
@@ -176,5 +286,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sorry; excuse me; apology",
+        "why": "Includes 'apology' (a noun), which is not covered by the expression senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used on its own as an exclamation to mean 'sorry' or 'excuse me'.",
+        "why": "Merely repeats the senses; a note comparing 'desculpa' and 'desculpe' is much more useful."
+      }
+    ],
+    "growth": 1.173
   }
 }

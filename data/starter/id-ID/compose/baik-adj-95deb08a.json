@@ -62,6 +62,160 @@
     "headword": "baik",
     "lemma": "baik",
     "reading": null,
+    "ipa": "/ˈba.ɪk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👍",
+    "topics": [
+      "Feelings",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "good; kind; fine, well",
+    "primaryGloss": "good",
+    "emotion": "a warm and approving nod, feeling positive and satisfied",
+    "notes": [
+      "Use 'baik' for moral character ('orang baik' = a kind person), health/condition ('kabar baik' = doing well), or abstract quality. For objects that look nice or perform well, 'bagus' is more common.",
+      "On its own in conversation, 'Baik' or 'Baiklah' is also commonly used to mean 'Okay' or 'Alright'."
+    ],
+    "senses": [
+      {
+        "id": "tzu82pf4owlo5zp",
+        "order": 0,
+        "definition": "Of a high standard, satisfactory, or favorable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "fine"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "owdklnjtx75qygb",
+            "text": "Restoran ini memberikan pelayanan yang baik.",
+            "textLang": "id",
+            "translation": "This restaurant provides good service.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and recommending, speaking with a slight smile",
+            "note": null,
+            "matchedForm": "baik",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yfn1ng2x8y6auyq",
+        "order": 1,
+        "definition": "Of a person: friendly, generous, and caring toward others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "kind",
+              "good",
+              "nice"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "pftj6wluuwdfzt9",
+            "text": "Dia sangat baik karena membantu saya.",
+            "textLang": "id",
+            "translation": "He is very kind because he helped me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grateful and sincere, appreciating the kindness",
+            "note": null,
+            "matchedForm": "baik",
+            "matchedTranslationForm": "kind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a53o1f362295toh",
+        "order": 2,
+        "definition": "In good health or a satisfactory condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fine",
+              "well",
+              "good"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "l1vkfre6ljvpezo",
+            "text": "Kabar saya baik, terima kasih.",
+            "textLang": "id",
+            "translation": "I am doing well, thank you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "baik",
+            "matchedTranslationForm": "well"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "baik",
+    "lemma": "baik",
+    "reading": null,
     "ipa": "/baˈɪk/",
     "pos": "adj",
     "gender": null,
@@ -209,5 +363,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baˈɪk/",
+        "why": "Wrong stress placement; standard Indonesian stresses the penultimate syllable: /ˈba.ɪk/."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[2].examples[0].text",
+        "quote": "Cuaca hari ini cukup baik untuk pergi keluar.",
+        "why": "Sense 2 is 'feelings/well', but the example is about good weather (Sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention 'bagus', which learners constantly confuse with 'baik' for 'good'."
+      }
+    ],
+    "growth": 0.999
   }
 }

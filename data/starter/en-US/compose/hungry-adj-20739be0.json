@@ -68,6 +68,117 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "hambriento, con hambre; deseoso",
+    "primaryGloss": "hambriento",
+    "emotion": "a genuine physical need for food, empty and ready to eat",
+    "notes": [
+      "En inglés se usa el verbo 'to be' ('I am hungry'), a diferencia del español que suele usar 'tener' ('tengo hambre').",
+      "En sentido figurado va seguido de la preposición 'for' ('hungry for success')."
+    ],
+    "senses": [
+      {
+        "id": "omh7j1j3lk6ca02",
+        "order": 0,
+        "definition": "Que siente la necesidad o el deseo de comer.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "hambriento",
+              "con hambre"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "1mu6kxkkfk02m78",
+            "text": "I am so hungry after the long walk.",
+            "textLang": "en",
+            "translation": "Tengo mucha hambre después de la larga caminata.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and ready for a big meal after exercising",
+            "note": null,
+            "matchedForm": "hungry",
+            "matchedTranslationForm": "hambre"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "91bq8veryua9hdg",
+        "order": 1,
+        "definition": "Que tiene un deseo fuerte por conseguir algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ávido",
+              "deseoso",
+              "ansioso"
+            ]
+          }
+        ],
+        "domain": "deseo",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "nrjgqc0b0h839lk",
+            "text": "She is hungry for success in her new job.",
+            "textLang": "en",
+            "translation": "Ella está ávida de éxito en su nuevo trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ambitious and determined to achieve a goal",
+            "note": null,
+            "matchedForm": "hungry",
+            "matchedTranslationForm": "ávida"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hungry",
+    "lemma": "hungry",
+    "reading": null,
+    "ipa": "/ˈhʌŋɡri/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "hambriento; sediento de algo",
     "primaryGloss": "hambriento",
     "emotion": "a genuine physical need for food, empty and ready to eat",
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Estoy muy hambriento después de la caminata larga.",
+        "why": "Calque: Spanish naturally says 'Tengo mucha hambre', as the entry's own note points out."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "shortGloss",
+        "quote": "sediento de algo",
+        "why": "'Sediento' literally means thirsty, which is confusing as a primary gloss for 'hungry'."
+      }
+    ],
+    "growth": 1.12
   }
 }

@@ -58,6 +58,116 @@
     "headword": "стоять",
     "lemma": "стоять",
     "reading": null,
+    "ipa": "/stɐˈjatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand; to be situated",
+    "primaryGloss": "stand",
+    "emotion": "steady and grounded, resting in one place",
+    "notes": [
+      "Used for people standing on their feet and for objects that stand upright or have a base (such as furniture, dishes, buildings, or parked cars).",
+      "Do not confuse with сто́ить (to cost), which has the same spelling in the 3rd person singular (сто́ит vs. стои́т) but different stress."
+    ],
+    "senses": [
+      {
+        "id": "f8puruttn06u7sx",
+        "order": 0,
+        "definition": "To be upright on your feet, not sitting or lying down.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stand"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "oawja8oyfzqasd7",
+            "text": "Я не могу долго стоять на одном месте.",
+            "textLang": "ru",
+            "translation": "I cannot stand in one place for long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "restless and tired, shifting weight from foot to foot",
+            "note": null,
+            "matchedForm": "стоять",
+            "matchedTranslationForm": "stand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4p574afj5tsaw79",
+        "order": 1,
+        "definition": "Of an upright object, vehicle, or building: to be located or placed somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stand",
+              "be located",
+              "be parked"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "fjd4xxgzbev8hwn",
+            "text": "Машина стоит около дома.",
+            "textLang": "ru",
+            "translation": "The car is parked near the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and matter of fact, pointing out the window",
+            "note": null,
+            "matchedForm": "стоит",
+            "matchedTranslationForm": "is parked"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "стоять",
+    "lemma": "стоять",
+    "reading": null,
     "ipa": "[stɐˈjatʲ]",
     "pos": "verb",
     "gender": null,
@@ -202,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(price) To have a specific price. | glosses en: cost",
+        "why": "Conflates сто́ить (to cost) with стоя́ть (to stand) because of the homographic form стоит."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is also used for how much something costs when asking for a price.",
+        "why": "False: 'to cost' is a different verb, сто́ить (stressed on the first syllable)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to stand; to be situated; to cost",
+        "why": "Includes 'to cost', which belongs to the verb стоить, not стоять."
+      }
+    ],
+    "growth": 1.135
   }
 }

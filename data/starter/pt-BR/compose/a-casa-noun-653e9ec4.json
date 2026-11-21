@@ -72,6 +72,95 @@
     "primaryGloss": "house",
     "emotion": "warm and welcoming, evoking a sense of belonging and comfort",
     "notes": [
+      "Without an article, 'casa' means 'one's own home': 'estou em casa' (I am at home), 'vou para casa' (I am going home). With an article ('na casa'), it refers to a specific house."
+    ],
+    "senses": [
+      {
+        "id": "v7uwiildfftjbld",
+        "order": 0,
+        "definition": "A building where people live, or the place where one lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "housing",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "l8p0cdpjdvrkwcr",
+            "text": "A casa deles é muito grande.",
+            "textLang": "pt",
+            "translation": "Their house is very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing a simple observation about a residence",
+            "note": null,
+            "matchedForm": "casa",
+            "matchedTranslationForm": "house"
+          },
+          {
+            "id": "72kjhmunpx3mk4b",
+            "text": "Eu me sinto bem quando chego em casa.",
+            "textLang": "pt",
+            "translation": "I feel good when I get home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and relieved, as if sighing after a long day",
+            "note": null,
+            "matchedForm": "casa",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a casa",
+    "lemma": "casa",
+    "reading": null,
+    "ipa": "/ˈka.zɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house; home",
+    "primaryGloss": "house",
+    "emotion": "warm and welcoming, evoking a sense of belonging and comfort",
+    "notes": [
       "In Portuguese, 'casa' can mean both the physical structure (house) and the place where you live (home).",
       "Use 'em casa' to mean 'at home'. You do not need to say 'na casa' unless you are referring to a specific house."
     ],
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Portuguese, 'casa' can mean both the physical structure (house) and...",
+        "why": "Restates the glosses and senses without adding new usage information."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(lifestyle) The place where someone feels they belong",
+        "why": "The English distinction between 'house' and 'home' is one concept in Portuguese 'casa'."
+      }
+    ],
+    "growth": 0.804
   }
 }

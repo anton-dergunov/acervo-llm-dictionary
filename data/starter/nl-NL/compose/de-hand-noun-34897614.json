@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand",
+    "primaryGloss": "hand",
+    "emotion": "reaching out to greet someone warmly",
+    "notes": [
+      "The final 'd' is pronounced as /t/ in the singular ('hand'), but as /d/ in the plural ('handen').",
+      "Very common in everyday expressions, such as 'een hand geven' (to shake hands) and 'een handje helpen' (to lend a hand)."
+    ],
+    "senses": [
+      {
+        "id": "na4ltxyp0rqcwte",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "7ymp592ek5bbnzt",
+            "text": "Geef me je hand als we oversteken.",
+            "textLang": "nl",
+            "translation": "Give me your hand when we cross the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "protective and caring, holding close to guide safely",
+            "note": null,
+            "matchedForm": "hand",
+            "matchedTranslationForm": "hand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de hand",
+    "lemma": "hand",
+    "reading": null,
+    "ipa": "/ɦɑnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; handwriting",
     "primaryGloss": "hand",
     "emotion": "reaching out to greet someone warmly",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person's style of handwriting.",
+        "why": "Archaic sense; modern Dutch uses 'handschrift' for handwriting."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik kan zijn hand niet lezen.",
+        "why": "Unnatural; 'de hand lezen' means palm reading, while handwriting is 'handschrift'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 'hand' primarily for the physical body part at the end of",
+        "why": "Restates the definitions without giving useful grammatical or usage advice."
+      }
+    ],
+    "growth": 0.974
   }
 }

@@ -69,6 +69,74 @@
     ],
     "status": "active",
     "shortGloss": "to read",
+    "primaryGloss": "to read",
+    "emotion": "quiet and focused, lost in the contents of a book",
+    "notes": [
+      "Strong (irregular) verb: the stem vowel changes in the present tense (du liest, er/sie/es liest) and in the past (las, hat gelesen).",
+      "Do not confuse with 'vorlesen', which means to read aloud to someone else."
+    ],
+    "senses": [
+      {
+        "id": "jr4iybj3rgfg577",
+        "order": 0,
+        "definition": "To look at written or printed words and understand their meaning.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to read"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "jxvltq7wclb3mov",
+            "text": "Am Abend lese ich gerne spannende Romane.",
+            "textLang": "de",
+            "translation": "In the evening, I enjoy reading exciting novels.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lese",
+            "matchedTranslationForm": "reading"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "lesen",
+    "lemma": "lesen",
+    "reading": null,
+    "ipa": "/ˈleːzn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to read",
     "primaryGloss": "read",
     "emotion": "quiet and focused, lost in the contents of a book",
     "notes": [
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ich lese gerne spannende Romane am Abend.",
+        "why": "Placing the time adverbial 'am Abend' after the direct object is unnatural word order."
+      }
+    ],
+    "growth": 0.952
   }
 }

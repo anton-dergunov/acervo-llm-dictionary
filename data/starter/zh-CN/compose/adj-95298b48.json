@@ -57,6 +57,137 @@
     "language": "zh",
     "headword": "干净",
     "lemma": "干净",
+    "reading": "gānjìng",
+    "ipa": "/kan˥ tɕiŋ˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "clean; neat",
+    "primaryGloss": "clean",
+    "emotion": "satisfied and pleased, noting a space that is neat and fresh",
+    "notes": [
+      "Often placed directly after a verb of washing or tidying to show the result: 洗干净 (wash clean), 擦干净 (wipe clean), 收拾干净 (tidy up completely)."
+    ],
+    "senses": [
+      {
+        "id": "sprscvp8uz3uoku",
+        "order": 0,
+        "definition": "Free from dirt, dust, or stains; not dirty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean",
+              "spotless"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "qomf6xa3o8uwx9m",
+            "text": "这件衣服洗得很干净。",
+            "textLang": "zh",
+            "translation": "This piece of clothing has been washed very clean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "干净",
+            "matchedTranslationForm": "clean"
+          },
+          {
+            "id": "6aq5qf3mxzey8uh",
+            "text": "请把房间收拾干净。",
+            "textLang": "zh",
+            "translation": "Please tidy up the room so it is clean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and encouraging, pointing to a space that needs tidying",
+            "note": null,
+            "matchedForm": "干净",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xvfpj08ere7fqpw",
+        "order": 1,
+        "definition": "Orderly, neat, and free of clutter or mess.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "neat",
+              "tidy",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "neatness",
+        "emoji": "📝",
+        "examples": [
+          {
+            "id": "64l6575mlalioy6",
+            "text": "他的字写得很干净。",
+            "textLang": "zh",
+            "translation": "His handwriting is very neat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and admiring of good handwriting",
+            "note": null,
+            "matchedForm": "干净",
+            "matchedTranslationForm": "neat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "干净",
+    "lemma": "干净",
     "reading": "gān jìng",
     "ipa": "/kan˥ tɕiŋ˥˩/",
     "pos": "adj",
@@ -201,5 +332,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 1 and 2 over-split and over-extend the word; Sense 2 uses adverb glosses for an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "这项工作他做得干干净净。",
+        "why": "Uses the reduplicated form 干干净净 instead of the lemma 干净."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "干净 is used both for physical cleanliness, like a clean room",
+        "why": "Restates the senses instead of explaining how 干净 is used after verbs as a result complement."
+      }
+    ],
+    "growth": 0.821
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "school",
     "emotion": "matter-of-fact and ordinary, describing a routine part of daily life",
     "notes": [
+      "Unlike English 'go to school' or 'at school', German uses the article: 'zur Schule gehen' ('zu der') and 'in der Schule sein'.",
+      "'die Schule' is for children and teenagers; a university is 'die Universität' ('die Uni') or 'die Hochschule'."
+    ],
+    "senses": [
+      {
+        "id": "2nrjm8hec0qhd7r",
+        "order": 0,
+        "definition": "A place where children and teenagers are taught, or the time spent having lessons there.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "school"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "itm3cznby8xlkh8",
+            "text": "Die Kinder gehen jeden Morgen zur Schule.",
+            "textLang": "de",
+            "translation": "The children go to school every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, routine statement about a daily schedule",
+            "note": null,
+            "matchedForm": "Schule",
+            "matchedTranslationForm": "school"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Schule",
+    "lemma": "Schule",
+    "reading": null,
+    "ipa": "/ˈʃuːlə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏫",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "school",
+    "primaryGloss": "school",
+    "emotion": "matter-of-fact and ordinary, describing a routine part of daily life",
+    "notes": [
       "Note that 'Schule' in German is often used without an article when referring to the institution itself (e.g., 'Ich gehe zur Schule').",
       "It is a feminine noun, so remember to use 'die' in the nominative case."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "often used without an article when referring to the institution itself (e.g., 'Ich gehe zur Schule')",
+        "why": "'zur' is a contraction of 'zu der' (with the definite article), unlike English 'to school'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a feminine noun, so remember to use 'die'",
+        "why": "Restates the gender field."
+      }
+    ],
+    "growth": 1.279
   }
 }

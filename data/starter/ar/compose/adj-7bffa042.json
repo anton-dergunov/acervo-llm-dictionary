@@ -66,6 +66,117 @@
     "headword": "حَارّ",
     "lemma": "حَارّ",
     "reading": null,
+    "ipa": "/ħaːrr/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "hot; spicy; warm",
+    "primaryGloss": "hot",
+    "emotion": "feeling the intense heat of a summer sun",
+    "notes": [
+      "Most common for hot weather and spicy food. For food, drinks, or water that are hot in temperature, سَاخِن (sākhin) is usually preferred.",
+      "Also used figuratively for 'warm' or heartfelt feelings, as in تَحِيَّاتِي الحَارَّة (my warm regards)."
+    ],
+    "senses": [
+      {
+        "id": "9y4teimzy3drm8w",
+        "order": 0,
+        "definition": "Having a high temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "b9ad46z3twpuxdh",
+            "text": "الْجَوُّ حَارٌّ فِي الصَّيْفِ.",
+            "textLang": "ar",
+            "translation": "The weather is hot in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حَارٌّ",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qvkf9aztf6gww1d",
+        "order": 1,
+        "definition": "Of food: having a burning, pungent taste from chillies or spices.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spicy",
+              "hot"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🌶️",
+        "examples": [
+          {
+            "id": "qp7me2alb9w00gj",
+            "text": "هَذَا الطَّعَامُ حَارٌّ جِدًّا.",
+            "textLang": "ar",
+            "translation": "This food is very spicy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حَارٌّ",
+            "matchedTranslationForm": "spicy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حَارّ",
+    "lemma": "حَارّ",
+    "reading": null,
     "ipa": "/ħaːr/",
     "pos": "adj",
     "gender": null,
@@ -211,5 +322,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "المِسْكَ حَارٌّ عَلَى اليَدِ.",
+        "why": "Corrupt and ungrammatical Arabic ('المِسْكَ' means musk in the accusative, not 'surface')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "High temperature of weather and of objects/surfaces are the same sense of 'hot'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for weather, temperature of objects, and spicy food.",
+        "why": "Merely lists the entry's senses."
+      }
+    ],
+    "growth": 0.83
   }
 }

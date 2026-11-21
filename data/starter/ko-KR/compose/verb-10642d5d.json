@@ -58,6 +58,75 @@
     "headword": "자다",
     "lemma": "자다",
     "reading": null,
+    "ipa": "tɕada",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep",
+    "primaryGloss": "to sleep",
+    "emotion": "relaxed and calm, signaling the end of a long day",
+    "notes": [
+      "Often appears in the set phrase '잠을 자다' (literally 'to sleep a sleep'). For polite elders, use the honorific verb '주무시다' instead."
+    ],
+    "senses": [
+      {
+        "id": "qbv692rcgdboua3",
+        "order": 0,
+        "definition": "To rest with one's eyes closed and mind unconscious, at night or for a nap.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep",
+              "to go to sleep",
+              "to go to bed"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "9nhvtptov1iwqmw",
+            "text": "오늘 밤에 일찍 자고 싶어요.",
+            "textLang": "ko",
+            "translation": "I want to go to sleep early tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little tired, looking forward to getting some rest",
+            "note": null,
+            "matchedForm": "자고",
+            "matchedTranslationForm": "go to sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "자다",
+    "lemma": "자다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sleep; to rest",
+        "why": "'to rest' is not one of the senses and is misleading (means '쉬다')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for the natural state of sleeping at night or taking...",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.887
   }
 }

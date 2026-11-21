@@ -68,6 +68,158 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to jump; to skip; to pop",
+    "primaryGloss": "to jump",
+    "emotion": "energetic and bouncy, full of sudden movement",
+    "notes": [
+      "When meaning 'to skip' or 'to break' (a meal, a stop, a rule, a red light), it is usually used reflexively as 'saltarse'."
+    ],
+    "senses": [
+      {
+        "id": "i8sj2tk32c7ap86",
+        "order": 0,
+        "definition": "To push yourself off the ground into the air using your legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to jump",
+              "to leap"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🦘",
+        "examples": [
+          {
+            "id": "mqezdpyc1yfnfoh",
+            "text": "A los niños les encanta saltar en la cama elástica.",
+            "textLang": "es",
+            "translation": "The children love jumping on the trampoline.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "saltar",
+            "matchedTranslationForm": "jumping"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rpeerbnlxyenxsn",
+        "order": 1,
+        "definition": "To omit, pass over, or break something such as a step, meal, or rule.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to skip",
+              "to miss",
+              "to break"
+            ]
+          }
+        ],
+        "domain": "omission",
+        "emoji": "⏭️",
+        "examples": [
+          {
+            "id": "ehndrqedkej1zbj",
+            "text": "No puedes saltarte las reglas del juego.",
+            "textLang": "es",
+            "translation": "You cannot break the rules of the game.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "saltarte",
+            "matchedTranslationForm": "break"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yf7il38or2uf5kp",
+        "order": 2,
+        "definition": "To burst out, pop, or trip suddenly, such as a cork, a spark, or a fuse.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pop",
+              "to blow",
+              "to come off"
+            ]
+          }
+        ],
+        "domain": "sudden release",
+        "emoji": "💥",
+        "examples": [
+          {
+            "id": "raypdw4lfks54i2",
+            "text": "Saltaron los plomos y nos quedamos sin luz.",
+            "textLang": "es",
+            "translation": "The fuse blew and we were left without power.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Saltaron",
+            "matchedTranslationForm": "blew"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "saltar",
+    "lemma": "saltar",
+    "reading": null,
+    "ipa": "/salˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦘",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to jump; to skip; to blow up",
     "primaryGloss": "jump",
     "emotion": "energetic and bouncy, full of sudden movement",
@@ -204,5 +356,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Los niños disfrutan de saltar en la cama elástica.",
+        "why": "'Disfrutar + infinitive' or 'disfrutar saltando' is natural; 'disfrutar de + infinitive' is awkward."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "No puedes saltar las reglas del juego.",
+        "why": "For skipping/breaking rules, rules, or turns, Spanish requires reflexive 'saltarse' (No puedes saltarte las reglas)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical jumping, but also commonly for things popping or exploding",
+        "why": "Restates the senses instead of explaining how to use 'saltarse' for skipping."
+      }
+    ],
+    "growth": 1.005
   }
 }

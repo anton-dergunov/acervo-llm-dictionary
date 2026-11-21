@@ -72,6 +72,77 @@
     "primaryGloss": "error",
     "emotion": "frustrated and regretful, realizing something went wrong",
     "notes": [
+      "Para decir «cometer un error», se usa el verbo 'make' ('make a mistake'), nunca 'do'.",
+      "También es muy común la expresión 'by mistake' (por error, sin querer).",
+      "Se diferencia de 'error' en que 'mistake' es la palabra habitual en la vida diaria, mientras que 'error' es más formal o técnico."
+    ],
+    "senses": [
+      {
+        "id": "2x566x3tltg53cx",
+        "order": 0,
+        "definition": "Acción, decisión o idea que no es correcta o acertada.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "error",
+              "equivocación",
+              "fallo"
+            ]
+          }
+        ],
+        "domain": "error",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "s3o87b087liiooh",
+            "text": "I made a big mistake in the report.",
+            "textLang": "en",
+            "translation": "Cometí un gran error en el informe.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and stressed about a professional failure",
+            "note": null,
+            "matchedForm": "mistake",
+            "matchedTranslationForm": "error"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "mistake",
+    "lemma": "mistake",
+    "reading": null,
+    "ipa": "/mɪˈsteɪk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "error; equivocación",
+    "primaryGloss": "error",
+    "emotion": "frustrated and regretful, realizing something went wrong",
+    "notes": [
       "Mistake es la palabra más común para cualquier tipo de error o equivocación en el trabajo o la vida diaria.",
       "Se diferencia de error en que mistake suele usarse más al hablar y es un poco más informal."
     ],
@@ -121,5 +192,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Mistake es la palabra más común para cualquier tipo de error",
+        "why": "Restates the gloss; misses the key collocation 'make a mistake' (not 'do a mistake')."
+      }
+    ],
+    "growth": 1.223
   }
 }

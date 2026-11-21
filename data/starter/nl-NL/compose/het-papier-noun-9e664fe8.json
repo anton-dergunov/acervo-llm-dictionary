@@ -68,6 +68,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "paper; documents",
+    "primaryGloss": "paper",
+    "emotion": "smooth and light, holding a fresh sheet ready to write on",
+    "notes": [
+      "For the material, 'papier' is uncountable (e.g., 'een vel papier' — a sheet of paper). For a single piece of paper, the diminutive 'een papiertje' is very common.",
+      "In the plural ('papieren'), it refers to official documents or ID papers."
+    ],
+    "senses": [
+      {
+        "id": "ryj4noqv5afv9u0",
+        "order": 0,
+        "definition": "The thin material that you write, draw, or print on, or a piece of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paper"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "i3vrrm8earwyagl",
+            "text": "Ik schrijf mijn gedicht op een schoon vel papier.",
+            "textLang": "nl",
+            "translation": "I am writing my poem on a clean sheet of paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and quiet, focused on writing",
+            "note": null,
+            "matchedForm": "papier",
+            "matchedTranslationForm": "paper"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9btsc2vvyqmk1nu",
+        "order": 1,
+        "definition": "Official documents, forms, or identity papers (usually plural).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "papers",
+              "documents",
+              "paperwork"
+            ]
+          }
+        ],
+        "domain": "document",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "nar4xmsxgxz14hu",
+            "text": "De agent vroeg om onze papieren.",
+            "textLang": "nl",
+            "translation": "The officer asked for our papers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "papieren",
+            "matchedTranslationForm": "papers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het papier",
+    "lemma": "papier",
+    "reading": null,
+    "ipa": "/paˈpiːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📄",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "paper; document",
     "primaryGloss": "paper",
     "emotion": "smooth and light, holding a fresh sheet ready to write on",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the neuter gender: it is *het papier*, not *de papier*.",
+        "why": "Restates the gender already given in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De immigratieofficier vroeg om al onze papieren.",
+        "why": "'Immigratieofficier' is a calque of 'immigration officer'; 'douanier' or 'agent' is natural."
+      }
+    ],
+    "growth": 1.125
   }
 }

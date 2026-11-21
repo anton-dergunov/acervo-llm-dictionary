@@ -72,6 +72,114 @@
     "primaryGloss": "green",
     "emotion": "a fresh, crisp, and calm sensation, like looking at spring foliage",
     "notes": [
+      "Has the same form for both masculine and feminine singular ('el coche verde', 'la casa verde'); plural 'verdes'."
+    ],
+    "senses": [
+      {
+        "id": "dwvvpo0r6y33n4o",
+        "order": 0,
+        "definition": "Of the color of fresh grass or leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "g3w799k1zle37z7",
+            "text": "Lleva una camisa verde.",
+            "textLang": "es",
+            "translation": "He is wearing a green shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "verde",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ojfnisl7agswd68",
+        "order": 1,
+        "definition": "Of fruit or vegetables: not yet ripe or ready to eat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green"
+            ]
+          }
+        ],
+        "domain": "ripeness",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "pk7t1mxtkme1t2b",
+            "text": "No comas ese plátano, todavía está verde.",
+            "textLang": "es",
+            "translation": "Don't eat that banana, it is still unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "verde",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "verde",
+    "lemma": "verde",
+    "reading": null,
+    "ipa": "/ˈbeɾ.ðe/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe",
+    "primaryGloss": "green",
+    "emotion": "a fresh, crisp, and calm sensation, like looking at spring foliage",
+    "notes": [
       "While verde describes the color of nature, it is also frequently used to describe fruit or vegetables that are not yet ripe."
     ],
     "senses": [
@@ -115,5 +223,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of fresh grass or leaves.",
+        "why": "Adjective defined as a noun ('The color...') instead of a quality ('Of the color...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While verde describes the color of nature, it is also frequently used",
+        "why": "Merely repeats the two senses; a note on invariable gender ('-e' ending) helps A2 learners."
+      }
+    ],
+    "growth": 1.284
   }
 }

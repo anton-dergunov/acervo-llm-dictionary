@@ -58,6 +58,137 @@
     "headword": "bersih",
     "lemma": "bersih",
     "reading": null,
+    "ipa": "/bərˈsih/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "clean; net",
+    "primaryGloss": "clean",
+    "emotion": "fresh and satisfied, looking at a tidy room",
+    "notes": [
+      "Do not confuse with 'rapi' (neat, tidy); a room can be 'bersih' (free of dirt) without being 'rapi', and vice versa.",
+      "Also used in financial contexts for 'net' (after deductions), as in 'gaji bersih' (net salary)."
+    ],
+    "senses": [
+      {
+        "id": "2v4eheajbfjf09p",
+        "order": 0,
+        "definition": "Free from dirt, marks, or impurities; not dirty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean",
+              "pure",
+              "clear"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "kkvia5449zch8ib",
+            "text": "Kamar tidur ini sangat bersih dan rapi.",
+            "textLang": "id",
+            "translation": "This bedroom is very clean and tidy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and proud of the tidy space",
+            "note": null,
+            "matchedForm": "bersih",
+            "matchedTranslationForm": "clean"
+          },
+          {
+            "id": "5rd8hhhd1uglkis",
+            "text": "Air di sungai itu masih sangat bersih.",
+            "textLang": "id",
+            "translation": "The water in that river is still very clean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bersih",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p9b3u3eb6swrnxg",
+        "order": 1,
+        "definition": "Remaining after all deductions or expenses have been subtracted.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "net"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tu70w0mqxn6in81",
+            "text": "Berapa gaji bersih yang kamu terima setiap bulan?",
+            "textLang": "id",
+            "translation": "How much is the net salary you receive every month?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bersih",
+            "matchedTranslationForm": "net"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "bersih",
+    "lemma": "bersih",
+    "reading": null,
     "ipa": "/bər.sɪh/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +292,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "clean; pure; neat",
+        "why": "'Neat' (rapi) is not one of the senses and is a different word."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(pure) Pure, clear, or free from blemish.",
+        "why": "Clean water is just sense 0; misses the common everyday sense 'net' (income/weight)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Bersih is primarily used for physical cleanliness, like a clean room",
+        "why": "Restates the basic definition without adding useful learner guidance."
+      }
+    ],
+    "growth": 1.27
   }
 }

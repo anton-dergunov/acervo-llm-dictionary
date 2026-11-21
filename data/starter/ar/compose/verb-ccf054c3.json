@@ -58,6 +58,96 @@
     "headword": "لَعِبَ",
     "lemma": "لَعِبَ",
     "reading": null,
+    "ipa": "/la.ʕi.ba/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚽",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to play",
+    "primaryGloss": "to play",
+    "emotion": "lighthearted and energetic, ready to have fun with others",
+    "notes": [
+      "Imperfect: يَلْعَبُ (yalʕabu).",
+      "Takes a direct object for sports and games (لَعِبَ كُرَةَ القَدَمِ 'played football'), and بِـ (bi-) for toys or objects (لَعِبَ بِالكُرَةِ 'played with the ball').",
+      "Not used for playing musical instruments; use عَزَفَ (ʕazafa) instead."
+    ],
+    "senses": [
+      {
+        "id": "3pq9lxjpnvsoq9y",
+        "order": 0,
+        "definition": "To take part in a game, sport, or recreational activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "games",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "olkdtjd0qogze8j",
+            "text": "لَعِبَ الأَطْفَالُ فِي الحَدِيقَةِ.",
+            "textLang": "ar",
+            "translation": "The children played in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "carefree and cheerful, watching children enjoy their afternoon",
+            "note": null,
+            "matchedForm": "لَعِبَ",
+            "matchedTranslationForm": "played"
+          },
+          {
+            "id": "63t7921xuuot487",
+            "text": "نَحْنُ نَلْعَبُ كُرَةَ القَدَمِ كُلَّ جُمُعَةٍ.",
+            "textLang": "ar",
+            "translation": "We play football every Friday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and regular, looking forward to the weekly match",
+            "note": null,
+            "matchedForm": "نَلْعَبُ",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "لَعِبَ",
+    "lemma": "لَعِبَ",
+    "reading": null,
     "ipa": "/laʕiba/",
     "pos": "verb",
     "gender": null,
@@ -180,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When talking about playing a specific sport, follow this verb with the preposition 'بـ'",
+        "why": "False: named sports take a direct object (as in example 1); بـ is for toys/objects."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To perform on a musical instrument.",
+        "why": "Playing an instrument in MSA is عَزَفَ (ʕazafa); لَعِبَ عَلَى is an unidiomatic calque."
+      }
+    ],
+    "growth": 0.836
   }
 }

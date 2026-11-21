@@ -58,6 +58,85 @@
     "headword": "растительное масло",
     "lemma": "растительное масло",
     "reading": null,
+    "ipa": "/rɐsˈtʲitʲɪlʲnəjə ˈmasɫə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌻",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "vegetable oil",
+    "primaryGloss": "vegetable oil",
+    "emotion": "practical and everyday, standing in the kitchen ready to cook",
+    "notes": [
+      "Usually uncountable. Distinguish from сливочное масло (butter); масло alone can mean either depending on context.",
+      "In Russia, default растительное масло is almost always sunflower oil (подсолнечное масло)."
+    ],
+    "senses": [
+      {
+        "id": "1ebu6c53va2k3re",
+        "order": 0,
+        "definition": "Liquid fat of plant origin used for cooking and dressing food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vegetable oil",
+              "cooking oil"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "y0km21kmu58npl9",
+            "text": "Налейте немного растительного масла на сковороду.",
+            "textLang": "ru",
+            "translation": "Pour a little vegetable oil into the frying pan.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "растительного масла",
+            "matchedTranslationForm": "vegetable oil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "1ebu6c53va2k3re",
+      "from": "Жидкий жир растительного происхождения, используемый для приготовления пищи.",
+      "to": "Liquid fat of plant origin used for cooking.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:07:03Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "растительное масло",
+    "lemma": "растительное масло",
+    "reading": null,
     "ipa": "/rɐsˈtʲitʲɪlʲnəɪ̯ə ˈmasɫə/",
     "pos": "noun",
     "gender": "neuter",
@@ -120,14 +199,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "1ebu6c53va2k3re",
-      "from": "Жидкий жир растительного происхождения, используемый для приготовления пищи.",
-      "to": "Liquid fat of plant origin used for cooking.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:07:03Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Добавьте немного растительное масло на сковороду.",
+        "why": "Ungrammatical: 'немного' requires the genitive case (растительного масла), not accusative."
+      }
+    ],
+    "growth": 1.304
+  }
 }

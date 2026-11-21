@@ -60,6 +60,76 @@
     "headword": "ภูเขา",
     "lemma": "ภูเขา",
     "reading": null,
+    "ipa": "/pʰuː˧.kʰaw˩˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "mountain; hill",
+    "primaryGloss": "mountain",
+    "emotion": "a sense of wonder at something grand, vast, and permanent",
+    "notes": [
+      "Counted with the classifier ลูก (lûuk). In everyday speech it is often shortened to เขา (khǎo).",
+      "Covers both mountains and large hills; for a small gentle hill, use เนินเขา (nəən-khǎo)."
+    ],
+    "senses": [
+      {
+        "id": "n25a8d1hlk53rc3",
+        "order": 0,
+        "definition": "A large natural elevation of the earth's surface, including both mountains and large hills.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "hill"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "82hv6ben1k140ts",
+            "text": "ภูเขาลูกนี้สูงมาก",
+            "textLang": "th",
+            "translation": "This mountain is very high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring the impressive size of the peak",
+            "note": null,
+            "matchedForm": "ภูเขา",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ภูเขา",
+    "lemma": "ภูเขา",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -162,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(hill) A landform that is lower than a mountain",
+        "why": "Thai makes no distinction here; 'hill' is just an English translation shade."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "เราเดินขึ้นไปบนภูเขาเตี้ยๆ หลังหมู่บ้าน — We walked up the very high hill",
+        "why": "เตี้ยๆ means 'low', directly contradicting the translation 'very high'."
+      }
+    ],
+    "growth": 0.635
   }
 }

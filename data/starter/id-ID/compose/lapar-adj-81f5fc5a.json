@@ -58,6 +58,73 @@
     "headword": "lapar",
     "lemma": "lapar",
     "reading": null,
+    "ipa": "/ˈla.par/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "hungry",
+    "primaryGloss": "hungry",
+    "emotion": "a simple, physiological need that makes one look forward to a meal",
+    "notes": [
+      "In Indonesian, 'lapar' is used directly after the subject without a verb like 'to be' (e.g., 'Saya lapar' = 'I am hungry'). The noun 'hunger' is 'kelaparan'."
+    ],
+    "senses": [
+      {
+        "id": "2n9oht72gpwf74v",
+        "order": 0,
+        "definition": "Wanting or needing to eat food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hungry"
+            ]
+          }
+        ],
+        "domain": "appetite",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "851pyiq438575md",
+            "text": "Saya merasa sangat lapar setelah bekerja.",
+            "textLang": "id",
+            "translation": "I feel very hungry after working.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit tired and ready to sit down for a meal",
+            "note": null,
+            "matchedForm": "lapar",
+            "matchedTranslationForm": "hungry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lapar",
+    "lemma": "lapar",
+    "reading": null,
     "ipa": "/ˈlapar/",
     "pos": "adj",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The physical feeling of wanting to eat.",
+        "why": "Adjective defined as a noun ('the feeling'); should be 'wanting or needing food'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe the physical sensation of needing food.",
+        "why": "Restates the definition without adding grammar or usage info."
+      }
+    ],
+    "growth": 1.186
   }
 }

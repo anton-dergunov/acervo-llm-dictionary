@@ -58,6 +58,118 @@
     "headword": "dạy",
     "lemma": "dạy",
     "reading": null,
+    "ipa": "zaj˧˨ʔ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩‍🏫",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to teach; to discipline",
+    "primaryGloss": "teach",
+    "emotion": "patient and encouraging, sharing knowledge with someone",
+    "notes": [
+      "Do not confuse with 'dậy' (to wake up / get up), which is pronounced identically in Northern Vietnamese.",
+      "Commonly forms compounds like 'dạy học' (to teach) and 'dạy bảo' (to upbringing/discipline)."
+    ],
+    "senses": [
+      {
+        "id": "buufy42ase8xh2i",
+        "order": 0,
+        "definition": "To give lessons or show someone how to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "teach",
+              "instruct",
+              "train"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "nobwqp3uhdcuy9s",
+            "text": "Cô giáo dạy chúng tôi tiếng Việt.",
+            "textLang": "vi",
+            "translation": "The teacher teaches us Vietnamese.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dạy",
+            "matchedTranslationForm": "teaches"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lgtpsg6q50asu4n",
+        "order": 1,
+        "definition": "To discipline or correct someone's behavior, especially a child's.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "discipline",
+              "teach a lesson",
+              "scold"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "5ai08ey0t1bmsca",
+            "text": "Mẹ phải dạy lại nó vì dạo này nó hư quá.",
+            "textLang": "vi",
+            "translation": "Mother has to discipline him because he has been so naughty lately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dạy",
+            "matchedTranslationForm": "discipline"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "dạy",
+    "lemma": "dạy",
+    "reading": null,
     "ipa": "/zajŋ͡m˨˩/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/zajŋ͡m˨˩/",
+        "why": "Wrong IPA; that represents 'dạnh'. Northern IPA for 'dạy' is /zaj˧˨ʔ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also mean to scold or discipline someone, especially children, to",
+        "why": "Merely restates the second sense without adding usage info."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The teacher teaches us to learn Vietnamese.",
+        "why": "Calqued translation; 'dạy học' or 'dạy ... tiếng Việt' means 'teaches us Vietnamese'."
+      }
+    ],
+    "growth": 0.959
   }
 }

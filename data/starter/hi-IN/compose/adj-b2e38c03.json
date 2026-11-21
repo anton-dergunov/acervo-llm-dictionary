@@ -81,6 +81,96 @@
     "primaryGloss": "hot",
     "emotion": null,
     "notes": [
+      "Invariable adjective. Equally common in the spelling गरम (garam, pronounced /ɡəɾəm/). Covers both 'hot' and 'warm'."
+    ],
+    "senses": [
+      {
+        "id": "9py5u5b9lz7qwaj",
+        "order": 0,
+        "definition": "Having a high or pleasantly warm temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "v9e5tjrg23ak3ea",
+            "text": "यह खाना बहुत गर्म है।",
+            "textLang": "hi",
+            "translation": "This food is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and cautious, blowing on food to cool it down",
+            "note": null,
+            "matchedForm": "गर्म",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "egqcmrs3rhiaov9",
+            "text": "आज बहुत गर्म दिन है।",
+            "textLang": "hi",
+            "translation": "Today is a very hot day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly uncomfortable, wiping sweat from the forehead",
+            "note": null,
+            "matchedForm": "गर्म",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "गर्म",
+    "lemma": "गर्म",
+    "reading": null,
+    "ipa": "/ɡəɾm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "hot; warm",
+    "primaryGloss": "hot",
+    "emotion": null,
+    "notes": [
       "While 'गर्म' (garm) covers hot and warm, it is used for everything from the sun to a cup of tea. If you want to say someone is 'feeling warm' because of a fever, use 'बुखार' (fever) instead.",
       "Be careful not to confuse this with 'गरम' (garam), which is just a different spelling for the exact same word."
     ],
@@ -211,5 +301,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Splits one meaning ('hot/warm' in temperature) into three artificial senses (weather, touch, comfort)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Very warm weather or high temperatures outdoors.",
+        "why": "Defines an adjective as a noun phrase ('weather or temperatures')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[2].definition",
+        "quote": "A pleasant or comfortable level of heat.",
+        "why": "Defines an adjective as a noun phrase ('a level of heat')."
+      }
+    ],
+    "growth": 0.443
   }
 }

@@ -68,6 +68,155 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "cuenta; cheque; revisión",
+    "primaryGloss": "cuenta",
+    "emotion": "ready to leave after a good meal, calling the server over",
+    "notes": [
+      "En Estados Unidos se pide 'the check' en un restaurante; en el Reino Unido se dice 'the bill', y el documento bancario se escribe 'cheque'."
+    ],
+    "senses": [
+      {
+        "id": "yo026dxisza8trg",
+        "order": 0,
+        "definition": "Papel que muestra el total que se debe pagar por una comida en un restaurante.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cuenta"
+            ]
+          }
+        ],
+        "domain": "restaurante",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "72musj32j5ik120",
+            "text": "Could we have the check, please?",
+            "textLang": "en",
+            "translation": "¿Nos trae la cuenta, por favor?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and ready to go",
+            "note": null,
+            "matchedForm": "check",
+            "matchedTranslationForm": "cuenta"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o0nc9ei5os810x6",
+        "order": 1,
+        "definition": "Documento impreso de un banco que permite pagar una cantidad de dinero desde una cuenta.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cheque"
+            ]
+          }
+        ],
+        "domain": "dinero",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "x0tmztoyzkvavsr",
+            "text": "He paid the rent with a check.",
+            "textLang": "en",
+            "translation": "Pagó el alquiler con un cheque.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact about paying bills",
+            "note": null,
+            "matchedForm": "check",
+            "matchedTranslationForm": "cheque"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g6h2c9mo1amwfqj",
+        "order": 2,
+        "definition": "Acción de mirar o examinar algo para asegurarse de que está bien o es correcto.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "revisión",
+              "control",
+              "comprobación"
+            ]
+          }
+        ],
+        "domain": "revisión",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "6x51is2lqcu00mp",
+            "text": "Let me do a quick check of the numbers.",
+            "textLang": "en",
+            "translation": "Déjame hacer una revisión rápida de los números.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and careful",
+            "note": null,
+            "matchedForm": "check",
+            "matchedTranslationForm": "revisión"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "check",
+    "lemma": "check",
+    "reading": null,
+    "ipa": "/tʃɛk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "cuenta; cheque; control",
     "primaryGloss": "cuenta",
     "emotion": "ready to leave after a good meal, calling the server over",
@@ -199,5 +348,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[2].glosses",
+        "quote": "control, revision",
+        "why": "Missing accent mark on Spanish word 'revisión'."
+      }
+    ],
+    "growth": 1.117
   }
 }

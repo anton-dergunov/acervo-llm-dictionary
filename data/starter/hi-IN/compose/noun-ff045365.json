@@ -72,6 +72,74 @@
     "primaryGloss": "flower",
     "emotion": "gentle and admiring, pausing to notice something beautiful",
     "notes": [
+      "Like other masculine nouns ending in a consonant, its direct singular and plural forms are the same: एक फूल (one flower), बहुत से फूल (many flowers)."
+    ],
+    "senses": [
+      {
+        "id": "i6qi4iitb1twnc2",
+        "order": 0,
+        "definition": "The coloured part of a plant that grows from a bud and is often fragrant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "blossom"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "23n6r2g3qcbconx",
+            "text": "बगीचे में बहुत सुंदर फूल खिले हैं।",
+            "textLang": "hi",
+            "translation": "Many beautiful flowers have blossomed in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and observant, pointing out a pleasant sight",
+            "note": null,
+            "matchedForm": "फूल",
+            "matchedTranslationForm": "flowers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "फूल",
+    "lemma": "फूल",
+    "reading": null,
+    "ipa": "/pʰuːl/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "flower; blossom",
+    "primaryGloss": "flower",
+    "emotion": "gentle and admiring, pausing to notice something beautiful",
+    "notes": [
       "In Hindi, 'phūl' is the standard word for any flower, whether it is growing on a plant or cut in a bouquet.",
       "This word is masculine. If you want to say 'the beautiful flower,' you should say 'sundar phūl' because the adjective endings for masculine nouns match the noun."
     ],
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Hindi, 'phūl' is the standard word for any flower",
+        "why": "Pure filler that just restates the gloss."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "because the adjective endings for masculine nouns match the noun.",
+        "why": "सुंदर (sundar) is an invariable adjective; it never changes endings for gender."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that being a consonant-ending masculine noun, its direct plural is identical (फूल)."
+      }
+    ],
+    "growth": 0.738
   }
 }

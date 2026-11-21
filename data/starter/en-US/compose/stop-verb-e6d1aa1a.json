@@ -68,6 +68,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "parar; detener; dejar de",
+    "primaryGloss": "parar",
+    "emotion": "firm and decisive, bringing an action to an immediate halt",
+    "notes": [
+      "Seguido de un verbo en '-ing' significa dejar de hacer esa acción ('stop talking' = dejar de hablar). Seguido de 'to' + infinitivo indica que te detienes para hacer otra cosa ('stop to talk' = detenerse para hablar).",
+      "Duplica la 'p' final en pasado y en la forma en '-ing': 'stopped', 'stopping'."
+    ],
+    "senses": [
+      {
+        "id": "epwfddahq0u3umo",
+        "order": 0,
+        "definition": "Dejar de moverse o avanzar, o hacer que algo o alguien deje de moverse.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "parar",
+              "detenerse",
+              "detener"
+            ]
+          }
+        ],
+        "domain": "movimiento",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "m3bmicuplfaebug",
+            "text": "The bus stopped at the corner.",
+            "textLang": "en",
+            "translation": "El autobús se detuvo en la esquina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "stopped",
+            "matchedTranslationForm": "detuvo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4hqmgyhs6z8vx3g",
+        "order": 1,
+        "definition": "Dejar de hacer una acción, o llegar a su fin un proceso o actividad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dejar de",
+              "parar",
+              "cesar"
+            ]
+          }
+        ],
+        "domain": "acción",
+        "emoji": "⏹️",
+        "examples": [
+          {
+            "id": "0okqly0bcs2pxb4",
+            "text": "Please stop running in the hallway.",
+            "textLang": "en",
+            "translation": "Por favor, deja de correr en el pasillo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and instructional, correcting someone's behavior in a hurry",
+            "note": null,
+            "matchedForm": "stop",
+            "matchedTranslationForm": "deja de"
+          },
+          {
+            "id": "bi9jzyxyq7d6md3",
+            "text": "The rain finally stopped after lunch.",
+            "textLang": "en",
+            "translation": "La lluvia por fin paró después del almuerzo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and calm, noticing a change in the weather",
+            "note": null,
+            "matchedForm": "stopped",
+            "matchedTranslationForm": "paró"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "stop",
+    "lemma": "stop",
+    "reading": null,
+    "ipa": "/stɑp/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "parar; dejar de hacer algo",
     "primaryGloss": "parar",
     "emotion": "firm and decisive, bringing an action to an immediate halt",
@@ -162,5 +295,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses",
+        "quote": "Dejar de moverse, avanzar o realizar una acción.",
+        "why": "Senses 0 and 1 mix stopping movement with stopping an action (+ -ing) and overlap."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing crucial A2 grammar note on 'stop doing' vs. 'stop to do'."
+      }
+    ],
+    "growth": 1.633
   }
 }

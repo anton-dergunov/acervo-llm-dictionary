@@ -68,6 +68,115 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "skirt; rock music",
+    "primaryGloss": "skirt",
+    "emotion": "matter-of-fact and helpful, describing what someone is wearing today",
+    "notes": [
+      "For the piece of clothing, the plural is 'die Röcke' (pronounced /ʁɔk/).",
+      "For the music genre, it is pronounced like the English word (/ɹɔk/) and has no plural."
+    ],
+    "senses": [
+      {
+        "id": "2erd21n9r2hzfmz",
+        "order": 0,
+        "definition": "A piece of clothing that hangs from the waist and does not have separate legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skirt"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "xl9y4vn1n4gtdq4",
+            "text": "Sie trägt heute einen blauen Rock.",
+            "textLang": "de",
+            "translation": "She is wearing a blue skirt today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Rock",
+            "matchedTranslationForm": "skirt"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8lah933uxioxgpp",
+        "order": 1,
+        "definition": "A loud, popular style of music played with electric guitars and drums.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rock",
+              "rock music"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hzxmi6kgeo3lzyq",
+            "text": "Er hört am liebsten Rock und Pop.",
+            "textLang": "de",
+            "translation": "He likes listening to rock and pop best.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Rock",
+            "matchedTranslationForm": "rock"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Rock",
+    "lemma": "Rock",
+    "reading": null,
+    "ipa": "/ʁɔk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "skirt; coat",
     "primaryGloss": "skirt",
     "emotion": "matter-of-fact and helpful, describing what someone is wearing today",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(coat) An outer garment with sleeves, covering the upper body",
+        "why": "Archaic sense ('coat') does not belong in an A2 learner entry; 'rock music' is everyday."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Der Gehrock war im neunzehnten Jahrhundert sehr modisch.",
+        "why": "Uses compound 'Gehrock' instead of the lemma 'Rock'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular umlaut plural 'die Röcke' (and uncountable usage for music)."
+      }
+    ],
+    "growth": 0.673
   }
 }

@@ -58,6 +58,73 @@
     "headword": "l'oiseau",
     "lemma": "oiseau",
     "reading": null,
+    "ipa": "/wa.zo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐦",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bird",
+    "primaryGloss": "bird",
+    "emotion": "light and cheerful, watching something flutter past in the garden",
+    "notes": [
+      "The plural is spelled 'oiseaux' (words ending in '-eau' take '-x'), and both singular and plural are pronounced the same (/wa.zo/)."
+    ],
+    "senses": [
+      {
+        "id": "w3v5b9359d8i0vh",
+        "order": 0,
+        "definition": "An animal with feathers and wings, usually able to fly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bird"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐦",
+        "examples": [
+          {
+            "id": "i01q392efysdvtc",
+            "text": "Un petit oiseau chante dans l'arbre.",
+            "textLang": "fr",
+            "translation": "A little bird is singing in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and quiet, listening to the morning sounds",
+            "note": null,
+            "matchedForm": "oiseau",
+            "matchedTranslationForm": "bird"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'oiseau",
+    "lemma": "oiseau",
+    "reading": null,
     "ipa": "/wʁa.zo/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/wʁa.zo/",
+        "why": "Wrong IPA transcription; 'oiseau' is pronounced /wa.zo/, with no /ʁ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note the misleading pronunciation of 'oi' as /wa/ and silent plural '-x'."
+      }
+    ],
+    "growth": 1.131
   }
 }

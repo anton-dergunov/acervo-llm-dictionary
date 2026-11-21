@@ -70,6 +70,112 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to love",
+    "primaryGloss": "love",
+    "emotion": "deeply sincere and warm, speaking straight from the heart with total devotion",
+    "notes": [
+      "In Spain, 'querer' is the normal everyday word for loving people ('Te quiero'), while 'amar' sounds poetic, literary, or deeply solemn. To say you love doing something, use 'encantar'."
+    ],
+    "senses": [
+      {
+        "id": "17tuixq0ahl3y1h",
+        "order": 0,
+        "definition": "To feel deep romantic love, devotion, or attachment toward someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "love"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💖",
+        "examples": [
+          {
+            "id": "cwm2t8k4i79ynrn",
+            "text": "Los padres siempre van a amar a sus hijos.",
+            "textLang": "es",
+            "translation": "Parents will always love their children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and reassuring, full of absolute devotion",
+            "note": null,
+            "matchedForm": "amar",
+            "matchedTranslationForm": "love"
+          },
+          {
+            "id": "y46o3awwxlvl24n",
+            "text": "Él ama la música clásica con toda su alma.",
+            "textLang": "es",
+            "translation": "He loves classical music with all his soul.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ama",
+            "matchedTranslationForm": "loves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "17tuixq0ahl3y1h",
+      "from": "Sentir un amor muy fuerte y profundo por alguien.",
+      "to": "To feel a very strong and deep love for someone.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    },
+    {
+      "sense": "btsjg5itride0qh",
+      "from": "Gustar o apreciar a alguien o algo muchísimo.",
+      "to": "To like someone or something very much.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "amar",
+    "lemma": "amar",
+    "reading": null,
+    "ipa": "/aˈmaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to love; to like very much",
     "primaryGloss": "love",
     "emotion": "deeply sincere and warm, speaking straight from the heart with total devotion",
@@ -163,22 +269,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "17tuixq0ahl3y1h",
-      "from": "Sentir un amor muy fuerte y profundo por alguien.",
-      "to": "To feel a very strong and deep love for someone.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    },
-    {
-      "sense": "btsjg5itride0qh",
-      "from": "Gustar o apreciar a alguien o algo muchísimo.",
-      "to": "To like someone or something very much.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ella dice que ama bailar los fines de semana.",
+        "why": "In Spain, 'amar + infinitive' for hobbies is unnatural; 'encantar' is used instead."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(affection) To like someone or something very much.",
+        "why": "In Peninsular Spanish, 'amar' does not mean 'to like very much'; merge into one sense."
+      }
+    ],
+    "growth": 0.855
+  }
 }

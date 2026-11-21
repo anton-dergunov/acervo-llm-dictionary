@@ -70,6 +70,73 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "ticket",
+    "primaryGloss": "ticket",
+    "emotion": null,
+    "notes": [
+      "Use the preposition на + accusative for the transport or event: билет на поезд (train ticket), билет на концерт (concert ticket), or в + accusative for a venue: билет в кино (cinema ticket)."
+    ],
+    "senses": [
+      {
+        "id": "63vgmuldgddpuvy",
+        "order": 0,
+        "definition": "A printed or digital document that gives you the right to travel on public transport or enter an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ticket"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "c37pdcyq2qtbu87",
+            "text": "Я купил билет на поезд заранее.",
+            "textLang": "ru",
+            "translation": "I bought a train ticket in advance.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and organized, glad the travel is sorted out",
+            "note": null,
+            "matchedForm": "билет",
+            "matchedTranslationForm": "ticket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "билет",
+    "lemma": "билет",
+    "reading": null,
+    "ipa": "/bʲiˈlʲet/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎫",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "ticket; pass",
     "primaryGloss": "ticket",
     "emotion": null,
@@ -163,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use билет for travel tickets, event entries, and lottery slips.",
+        "why": "Merely restates the glosses; fails to give the required preposition (билет на + accusative)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A card with questions used by students during an exam.",
+        "why": "Exam question card is a specific academic sense, not everyday A2."
+      }
+    ],
+    "growth": 0.696
   }
 }

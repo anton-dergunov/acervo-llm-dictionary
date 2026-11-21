@@ -68,6 +68,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "to work",
+    "primaryGloss": "to work",
+    "emotion": "focused and steady, settling into the rhythm of a task",
+    "notes": [
+      "Takes the auxiliary verb 'avere' in compound tenses ('ho lavorato').",
+      "Do not use 'lavorare' to say that a machine, device, or plan works; use 'funzionare' instead (e.g., 'il telefono non funziona')."
+    ],
+    "senses": [
+      {
+        "id": "hzp5v7myhk86u9w",
+        "order": 0,
+        "definition": "To do a job or perform tasks and activities, especially to earn a living.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to work"
+            ]
+          }
+        ],
+        "domain": "job",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "pzinjsqzha8sks3",
+            "text": "Mio fratello lavora in un grande ufficio in centro.",
+            "textLang": "it",
+            "translation": "My brother works in a large office downtown.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, describing a family member's routine",
+            "note": null,
+            "matchedForm": "lavora",
+            "matchedTranslationForm": "works"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "lavorare",
+    "lemma": "lavorare",
+    "reading": null,
+    "ipa": "/la.voˈra.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "to work; to function",
     "primaryGloss": "work",
     "emotion": "focused and steady, settling into the rhythm of a task",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Questo computer non lavora bene oggi.",
+        "why": "False friend with English 'work'; for machines functioning, Italian uses 'funzionare', not 'lavorare'."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must warn the learner not to use 'lavorare' for machines/devices working (use 'funzionare')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'lavorare' with 'fabbricare'",
+        "why": "Learners do not confuse 'lavorare' with 'fabbricare'."
+      }
+    ],
+    "growth": 0.553
   }
 }

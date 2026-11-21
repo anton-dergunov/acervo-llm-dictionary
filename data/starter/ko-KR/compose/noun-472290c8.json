@@ -58,6 +58,75 @@
     "headword": "계산서",
     "lemma": "계산서",
     "reading": null,
+    "ipa": "kje.san.sʌ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check; invoice",
+    "primaryGloss": "bill",
+    "emotion": "matter-of-fact and practical, preparing to pay for a meal",
+    "notes": [
+      "Refers to the statement of charges before payment; contrast with 영수증 (receipt), which is proof of payment given after paying."
+    ],
+    "senses": [
+      {
+        "id": "or207y4ecmdy40a",
+        "order": 0,
+        "definition": "A written statement showing the amount of money owed for goods, a meal, or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check",
+              "invoice"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "hznet0i1q6c3vke",
+            "text": "계산서 좀 주세요.",
+            "textLang": "ko",
+            "translation": "Please give me the bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, signaling the end of the meal to the server",
+            "note": null,
+            "matchedForm": "계산서",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "계산서",
+    "lemma": "계산서",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(invoice) A written statement of goods or services provided",
+        "why": "Restaurant bill and invoice are shades of one meaning ('statement of money owed')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In a restaurant setting, use '계산서' to ask for the bill.",
+        "why": "Merely repeats the senses instead of contrasting with 영수증 (receipt after paying)."
+      }
+    ],
+    "growth": 0.715
   }
 }

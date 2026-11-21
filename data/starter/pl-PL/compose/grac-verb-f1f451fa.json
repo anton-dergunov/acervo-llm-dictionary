@@ -70,6 +70,155 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to play (a game or music); to act",
+    "primaryGloss": "to play",
+    "emotion": "light and active, focused on the enjoyment of the activity",
+    "notes": [
+      "Imperfective (perfective 'zagrać'). Use 'grać w' + accusative for sports and games ('grać w piłkę', 'w karty'), and 'grać na' + locative for instruments ('grać na gitarze').",
+      "For children playing freely with toys (not a structured game), use 'bawić się' instead."
+    ],
+    "senses": [
+      {
+        "id": "7vouo9m7avnyng5",
+        "order": 0,
+        "definition": "To take part in a sport or a game.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "games",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "bvrkf4uxttxb63y",
+            "text": "Lubimy grać w piłkę nożną w parku.",
+            "textLang": "pl",
+            "translation": "We like to play football in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and energetic, anticipating the fun of the game",
+            "note": null,
+            "matchedForm": "grać",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pnev78c0dmvmr2c",
+        "order": 1,
+        "definition": "To perform music on a musical instrument.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎸",
+        "examples": [
+          {
+            "id": "a8kwmzfwjxp9ood",
+            "text": "Ona potrafi grać na pianinie.",
+            "textLang": "pl",
+            "translation": "She knows how to play the piano.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and slightly impressed by the skill",
+            "note": null,
+            "matchedForm": "grać",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "styrn1cngfsq4he",
+        "order": 2,
+        "definition": "To perform a role in a film, play, or show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play",
+              "to act"
+            ]
+          }
+        ],
+        "domain": "acting",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "h9lwkr5qqo9tft3",
+            "text": "Ten aktor zawsze gra w komediach.",
+            "textLang": "pl",
+            "translation": "This actor always acts in comedies.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gra",
+            "matchedTranslationForm": "acts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "grać",
+    "lemma": "grać",
+    "reading": null,
+    "ipa": "/ɡrat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎮",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to play (a game or music)",
     "primaryGloss": "play",
     "emotion": "light and active, focused on the enjoyment of the activity",
@@ -160,5 +309,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "requires the locative case when you play a sport or game (grać w piłkę), but the instrumental case when you play an instrument (grać na gitarze).",
+        "why": "Both cases are wrong: 'w piłkę' takes the accusative, and 'na gitarze' takes the locative."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to act / play a role' (in a film/play)."
+      }
+    ],
+    "growth": 1.34
   }
 }

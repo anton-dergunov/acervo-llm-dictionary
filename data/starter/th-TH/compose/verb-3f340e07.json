@@ -58,6 +58,75 @@
     "headword": "ไปเยี่ยม",
     "lemma": "ไปเยี่ยม",
     "reading": null,
+    "ipa": "/paj jîam/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏥",
+    "topics": [
+      "Actions",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "to go visit (someone)",
+    "primaryGloss": "visit",
+    "emotion": "warm and friendly, looking forward to seeing someone special",
+    "notes": [
+      "Combines ไป ('to go') and เยี่ยม ('to visit'). Used for visiting people (like friends, relatives, or patients), not tourist attractions (which takes ไปเที่ยว or ไปเยี่ยมชม)."
+    ],
+    "senses": [
+      {
+        "id": "uw503tpw0kzw88w",
+        "order": 0,
+        "definition": "To go to see and spend time with a person, such as a relative, friend, or someone in the hospital.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to visit",
+              "to go see"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "jiroiz1eglsgdb2",
+            "text": "พรุ่งนี้ฉันจะไปเยี่ยมคุณยายที่โรงพยาบาล",
+            "textLang": "th",
+            "translation": "Tomorrow I will go visit my grandmother at the hospital.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and concerned, speaking gently about a sick relative",
+            "note": null,
+            "matchedForm": "ไปเยี่ยม",
+            "matchedTranslationForm": "go visit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ไปเยี่ยม",
+    "lemma": "ไปเยี่ยม",
+    "reading": null,
     "ipa": "/paj mîam/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/paj mîam/",
+        "why": "Wrong initial consonant in second syllable; เยี่ยม is /jîam/, not /mîam/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(travel) To go to see a place, such as a tourist attraction",
+        "why": "ไปเยี่ยม is used for people; visiting places or museums takes ไปเที่ยว or ไปเยี่ยมชม."
+      }
+    ],
+    "growth": 0.553
   }
 }

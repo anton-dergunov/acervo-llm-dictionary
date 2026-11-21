@@ -68,6 +68,136 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "with; to have",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
+      "Followed by a noun in the genitive case (-i) or an attached pronoun suffix: مَعِي (maʿī, with me), مَعَكَ (maʿaka, with you)."
+    ],
+    "senses": [
+      {
+        "id": "7isdq8jmaylemq5",
+        "order": 0,
+        "definition": "In the company of or together with someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "together with"
+            ]
+          }
+        ],
+        "domain": "accompaniment",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "yskrtvedvwum8i2",
+            "text": "أَنَا أَذْهَبُ مَعَ صَدِيقِي.",
+            "textLang": "ar",
+            "translation": "I go with my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and friendly, happy to have company",
+            "note": null,
+            "matchedForm": "مَعَ",
+            "matchedTranslationForm": "with"
+          },
+          {
+            "id": "c6cq76tgisxxui3",
+            "text": "أَشْرَبُ الشَّايَ مَعَ الحَلِيبِ.",
+            "textLang": "ar",
+            "translation": "I drink tea with milk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "مَعَ",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tde4um1fo4hcced",
+        "order": 1,
+        "definition": "Used with a pronoun suffix to show that someone has something with them at the moment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "have",
+              "have on one"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "3n0kqwgm6oisugg",
+            "text": "هَلْ مَعَكَ قَلَمٌ؟",
+            "textLang": "ar",
+            "translation": "Do you have a pen with you?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "مَعَكَ",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "مَعَ",
+    "lemma": "مَعَ",
+    "reading": null,
+    "ipa": "/ma.ʕa/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "with; together with",
     "primaryGloss": "with",
     "emotion": null,
@@ -141,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense 'to have (on oneself)' when used with pronoun suffixes."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with the noun 'مَعِيَّة' (accompaniment).",
+        "why": "An A2 learner will not confuse a basic word with an advanced noun like مَعِيَّة."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "كُلْ طَعَامَكَ مَعَ الخُبْزِ.",
+        "why": "Slightly stiff sentence and calqued translation ('together with the bread')."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Should be classified as a preposition."
+      }
+    ],
+    "growth": 1.057
   }
 }

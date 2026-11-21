@@ -73,6 +73,99 @@
     "primaryGloss": "vacation",
     "emotion": "relaxed and happy, thinking about a long-awaited trip",
     "notes": [
+      "Refers to paid time off from a job (including maternity leave, декретный отпуск). For school or university holidays, use каникулы.",
+      "Do not confuse with выходной, which refers to a single day off or a weekend."
+    ],
+    "senses": [
+      {
+        "id": "uzarn945pwq5lel",
+        "order": 0,
+        "definition": "An official period of time away from work for rest, travel, or family reasons.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vacation",
+              "holiday",
+              "leave",
+              "time off"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "jks78sel38h3k3k",
+            "text": "Я хочу поехать на море в отпуск.",
+            "textLang": "ru",
+            "translation": "I want to go to the sea on vacation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and excited about going to the beach",
+            "note": null,
+            "matchedForm": "отпуск",
+            "matchedTranslationForm": "vacation"
+          },
+          {
+            "id": "3ym97h729kgwf4a",
+            "text": "Ему дали две недели отпуска в июле.",
+            "textLang": "ru",
+            "translation": "He was given two weeks of leave in July.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and relieved to have time approved",
+            "note": null,
+            "matchedForm": "отпуска",
+            "matchedTranslationForm": "leave"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "отпуск",
+    "lemma": "отпуск",
+    "reading": null,
+    "ipa": "/ˈotpʊsk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel",
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "vacation; leave",
+    "primaryGloss": "vacation",
+    "emotion": "relaxed and happy, thinking about a long-awaited trip",
+    "notes": [
       "Use отпуск when someone stops working for a period of time to rest, travel, or spend time with family.",
       "Do not confuse with выходной, which typically refers to a single day off or a weekend."
     ],
@@ -163,5 +256,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same everyday meaning (time off work/vacation)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use отпуск when someone stops working for a period of time",
+        "why": "Merely repeats the definition instead of contrasting with каникулы (school holidays)."
+      }
+    ],
+    "growth": 0.855
   }
 }

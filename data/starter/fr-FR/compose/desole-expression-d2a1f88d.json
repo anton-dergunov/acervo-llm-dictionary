@@ -59,6 +59,75 @@
     "lemma": "désolé",
     "reading": null,
     "ipa": "/de.zo.le/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙇",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "sorry",
+    "primaryGloss": "sorry",
+    "emotion": "sincere and apologetic, showing genuine regret for a mistake",
+    "notes": [
+      "In writing, it agrees in gender and number with the speaker (feminine: 'désolée', plural: 'désolés' / 'désolées'), though the pronunciation '/de.zo.le/' does not change.",
+      "Often used on its own ('Désolé !') as a quick way to say 'Sorry!'."
+    ],
+    "senses": [
+      {
+        "id": "a2kdtkjjo20skwi",
+        "order": 0,
+        "definition": "Feeling or expressing regret for something one has done or for an inconvenience.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sorry",
+              "apologetic"
+            ]
+          }
+        ],
+        "domain": "apology",
+        "emoji": "🙇",
+        "examples": [
+          {
+            "id": "39xsle699jhktte",
+            "text": "Je suis désolé pour ce retard.",
+            "textLang": "fr",
+            "translation": "I am sorry for this delay.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and polite, explaining a late arrival",
+            "note": null,
+            "matchedForm": "désolé",
+            "matchedTranslationForm": "sorry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "désolé",
+    "lemma": "désolé",
+    "reading": null,
+    "ipa": "/de.zo.le/",
     "pos": "expression",
     "gender": null,
     "register": "neutral",
@@ -162,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'Désolé' is an adjective (also used as an interjection), as note[1] itself states."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "A word said when you have done something wrong.",
+        "why": "Defined as a noun ('a word') instead of an adjective or interjection."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Feeling great sadness or grief.",
+        "why": "Literary/dated sense; for A2 learners, 'désolé' simply means sorry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a polite way to say sorry when you have made",
+        "why": "Restates the definition without adding usage or grammar information."
+      }
+    ],
+    "growth": 0.784
   }
 }

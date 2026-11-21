@@ -69,6 +69,96 @@
     ],
     "status": "active",
     "shortGloss": "to need; to require",
+    "primaryGloss": "to need",
+    "emotion": "earnest and direct, asking for help or stating a necessity plainly",
+    "notes": [
+      "Followed directly by a noun ('ho bisogno di aiuto') or an infinitive verb ('ho bisogno di dormire'). When followed by a definite article, 'di' contracts ('ho bisogno del medico').",
+      "Also compares with 'servire' ('mi serve un caffè'), which is very common in spoken Italian for needing things."
+    ],
+    "senses": [
+      {
+        "id": "4xg3hvpd5bg48wn",
+        "order": 0,
+        "definition": "To require something or someone, or to need to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "thk6nnehzbhoryt",
+            "text": "Ho bisogno di un caffè per svegliarmi.",
+            "textLang": "it",
+            "translation": "I need a coffee to wake up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "groggy and hopeful, looking forward to the morning boost",
+            "note": null,
+            "matchedForm": "Ho bisogno di",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "52hs9dhgz3fi3lg",
+            "text": "Hai bisogno di riposare un po'.",
+            "textLang": "it",
+            "translation": "You need to rest a bit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Hai bisogno di",
+            "matchedTranslationForm": "need"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "avere bisogno di",
+    "lemma": "avere bisogno di",
+    "reading": null,
+    "ipa": "/aˈve.re biˈzoɲ.ɲo di/",
+    "pos": "phrase",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to require",
     "primaryGloss": "need",
     "emotion": "earnest and direct, asking for help or stating a necessity plainly",
     "notes": [
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(dependency) To have to have something urgently in order to function",
+        "why": "Senses 0 and 1 are the exact same meaning ('to need')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or by 'di' plus an infinitive verb",
+        "why": "'di' is already in the headword; this implies repeating 'di'."
+      }
+    ],
+    "growth": 0.866
   }
 }

@@ -68,6 +68,139 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "full; crowded; occupied",
+    "primaryGloss": "full",
+    "emotion": "satisfied and content, looking at a cup filled to the brim",
+    "notes": [
+      "To say 'full of [something]', use the noun before 'dolu', either bare or with 'ile' / '-(y)le': 'su dolu' or 'suyla dolu' (full of water).",
+      "As a noun, 'dolu' also means 'hail' (e.g., 'Dolu yağıyor' — 'It is hailing')."
+    ],
+    "senses": [
+      {
+        "id": "lffs5617bwu86uk",
+        "order": 0,
+        "definition": "Holding or containing as much as possible; not empty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "full",
+              "filled"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": "🫗",
+        "examples": [
+          {
+            "id": "9pla1r294ugq8b7",
+            "text": "Bardak suyla dolu.",
+            "textLang": "tr",
+            "translation": "The glass is full of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolu",
+            "matchedTranslationForm": "full"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rv24zw7ibi8slhj",
+        "order": 1,
+        "definition": "Of a place, seat, or schedule: crowded with people, taken, or busy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "full",
+              "crowded",
+              "occupied",
+              "busy"
+            ]
+          }
+        ],
+        "domain": "availability",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "8lq6kd95vynilfn",
+            "text": "Otobüs çok dolu, bir sonrakini bekleyelim.",
+            "textLang": "tr",
+            "translation": "The bus is very crowded; let's wait for the next one.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolu",
+            "matchedTranslationForm": "crowded"
+          },
+          {
+            "id": "yhfq9lntmhtfe62",
+            "text": "Bu koltuk dolu mu?",
+            "textLang": "tr",
+            "translation": "Is this seat taken?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolu",
+            "matchedTranslationForm": "taken"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dolu",
+    "lemma": "dolu",
+    "reading": null,
+    "ipa": "/doˈlu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧊",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "full; crowded; filled with hail",
     "primaryGloss": "full",
     "emotion": "satisfied and content, looking at a cup filled to the brim",
@@ -160,5 +293,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Precipitation in the form of small balls or lumps of ice",
+        "why": "Entry POS is adjective, but 'hail' is a noun homonym."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "shortGloss",
+        "quote": "filled with hail",
+        "why": "'Dolu' never means 'filled with hail'; it is an adjective (full) or noun (hail)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense 'busy / occupied / crowded' (of a place, seat, or time)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse dolu (full) with boş (empty).",
+        "why": "Restates basic antonym; fails to explain the postposition/ablative usage 'ile/-le dolu'."
+      }
+    ],
+    "growth": 1.248
   }
 }

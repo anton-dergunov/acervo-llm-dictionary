@@ -83,6 +83,115 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "uncle; man, mister",
+    "primaryGloss": "uncle",
+    "emotion": "warm and familiar, speaking of a close family member with affection",
+    "notes": [
+      "Masculine in gender (takes masculine adjectives and verb forms), though it ends in '-я' and declines like a feminine noun."
+    ],
+    "senses": [
+      {
+        "id": "6lqdx1dwrlwjmlm",
+        "order": 0,
+        "definition": "The brother of one's parent, or the husband of one's aunt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "l7kdw6woju8m2vg",
+            "text": "Мой дядя живёт в деревне.",
+            "textLang": "ru",
+            "translation": "My uncle lives in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and reminiscent, talking about family living far away",
+            "note": null,
+            "matchedForm": "дядя",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n54ft1tajqaej9z",
+        "order": 1,
+        "definition": "An adult man, especially as spoken of or addressed by a child.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "man",
+              "mister",
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👨‍💼",
+        "examples": [
+          {
+            "id": "qdy2lct2eu8lj2t",
+            "text": "Мальчик спросил дорогу у незнакомого дяди.",
+            "textLang": "ru",
+            "translation": "The boy asked an unfamiliar man for directions.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "дяди",
+            "matchedTranslationForm": "man"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "дядя",
+    "lemma": "дядя",
+    "reading": null,
+    "ipa": "/ˈdʲadʲə/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍💼",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "uncle; mister",
     "primaryGloss": "uncle",
     "emotion": "warm and familiar, speaking of a close family member with affection",
@@ -175,5 +284,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Мальчик спросил проходящего дялю дорогу.",
+        "why": "Typo 'дялю' instead of 'дядю', and ungrammatical double accusative ('спросил у дяди дорогу')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer to the brother of one's father or mother",
+        "why": "Repeats the definition verbatim."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that although it ends in '-я', it is masculine and declines like feminine nouns."
+      }
+    ],
+    "growth": 0.968
   }
 }

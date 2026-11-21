@@ -60,6 +60,75 @@
     "headword": "شُرْطِيّ",
     "lemma": "شُرْطِيّ",
     "reading": null,
+    "ipa": "/ʃur.tˤijː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👮",
+    "topics": [
+      "Work",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "police officer",
+    "primaryGloss": "police officer",
+    "emotion": "alert and respectful, acknowledging authority on the street",
+    "notes": [
+      "Feminine: شُرْطِيَّة. Plural: شُرْطِيُّون, or collective شُرْطَة (the police)."
+    ],
+    "senses": [
+      {
+        "id": "t32t1ygwyztqklg",
+        "order": 0,
+        "definition": "A member of the police force.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "police officer",
+              "policeman"
+            ]
+          }
+        ],
+        "domain": "occupation",
+        "emoji": "👮",
+        "examples": [
+          {
+            "id": "07bbltgru0v9mh1",
+            "text": "سَأَلْتُ الشُّرْطِيَّ عَنِ الطَّرِيقِ.",
+            "textLang": "ar",
+            "translation": "I asked the police officer for directions.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الشُّرْطِيَّ",
+            "matchedTranslationForm": "police officer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "شُرْطِيّ",
+    "lemma": "شُرْطِيّ",
+    "reading": null,
     "ipa": "/ʃur.tˤij/",
     "pos": "noun",
     "gender": "masculine",
@@ -122,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "سَأَلَ الشُّرْطِيُّ عَنِ الطَّرِيقِ.",
+        "why": "Usually someone asks the police officer for directions, not the other way around."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the common collective/plural forms (شُرْطَة / شُرْطِيُّون)."
+      }
+    ],
+    "growth": 0.878
   }
 }

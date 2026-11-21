@@ -70,6 +70,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "warm; lukewarm; tepid",
+    "primaryGloss": "lukewarm",
+    "emotion": null,
+    "notes": [
+      "Note the vowel change in the stressed syllable: the masculine singular 'morno' has a closed 'o' (/o/), while the feminine 'morna' and plurals 'mornos/mornas' have an open 'o' (/ɔ/)."
+    ],
+    "senses": [
+      {
+        "id": "6ep9a77rgh441nq",
+        "order": 0,
+        "definition": "Moderately warm; neither hot nor cold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lukewarm",
+              "warm",
+              "tepid"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "0iqr3dsh7c2weny",
+            "text": "Tomei um banho morno para relaxar antes de dormir.",
+            "textLang": "pt",
+            "translation": "I took a warm shower to relax before going to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and satisfied, enjoying a peaceful moment of comfort",
+            "note": null,
+            "matchedForm": "morno",
+            "matchedTranslationForm": "warm"
+          },
+          {
+            "id": "7rrpxzwqr6l957p",
+            "text": "O café ficou morno depois de alguns minutos.",
+            "textLang": "pt",
+            "translation": "The coffee got lukewarm after a few minutes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly disappointed, looking at a drink that is no longer perfect",
+            "note": null,
+            "matchedForm": "morno",
+            "matchedTranslationForm": "lukewarm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iy5ywp6frirgfpk",
+        "order": 1,
+        "definition": "Lacking enthusiasm, energy, or intensity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lukewarm",
+              "half-hearted",
+              "tepid"
+            ]
+          }
+        ],
+        "domain": "attitude",
+        "emoji": "😐",
+        "examples": [
+          {
+            "id": "d64kamt47k09rgb",
+            "text": "A recepção ao novo projeto foi morna.",
+            "textLang": "pt",
+            "translation": "The reception to the new project was lukewarm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and analytical, describing a lack of excitement",
+            "note": null,
+            "matchedForm": "morna",
+            "matchedTranslationForm": "lukewarm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "morno",
+    "lemma": "morno",
+    "reading": null,
+    "ipa": "/ˈmoɾ.nu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌡️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "lukewarm; tepid",
     "primaryGloss": "lukewarm",
     "emotion": null,
@@ -185,5 +317,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "a temperature that is neither refreshing nor soothing.",
+        "why": "False claim; 'morno' can describe a pleasant, soothing temperature (as in Example 0: 'banho morno')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While it can be used metaphorically to describe a lack of enthusiasm",
+        "why": "Merely restates Sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I took a lukewarm shower to relax before sleeping.",
+        "why": "In English, a relaxing shower is 'warm', not 'lukewarm' (which sounds unpleasant)."
+      }
+    ],
+    "growth": 0.925
   }
 }

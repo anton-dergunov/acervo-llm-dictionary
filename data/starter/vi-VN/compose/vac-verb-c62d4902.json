@@ -58,6 +58,74 @@
     "headword": "vác",
     "lemma": "vác",
     "reading": null,
+    "ipa": "/vaːk̚˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏋️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to carry on the shoulder",
+    "primaryGloss": "carry on the shoulder",
+    "emotion": "strained and focused, using physical effort to move something heavy",
+    "notes": [
+      "Used specifically for heavy or bulky loads on the shoulder. Contrast with 'xách' (carry hanging from the hand) and 'bê' (carry in both hands)."
+    ],
+    "senses": [
+      {
+        "id": "1mbv71d4cu105aw",
+        "order": 0,
+        "definition": "To carry something heavy or bulky by resting it on the shoulder.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "carry on the shoulder",
+              "shoulder"
+            ]
+          }
+        ],
+        "domain": "carrying",
+        "emoji": "🏋️",
+        "examples": [
+          {
+            "id": "gwuyhh0n1cbchoy",
+            "text": "Anh ấy vác bao gạo nặng lên lầu.",
+            "textLang": "vi",
+            "translation": "He carried a heavy bag of rice upstairs on his shoulder.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and exerted, showing the difficulty of the task",
+            "note": null,
+            "matchedForm": "vác",
+            "matchedTranslationForm": "carried"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "vác",
+    "lemma": "vác",
+    "reading": null,
     "ipa": "/vɜːk/",
     "pos": "verb",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/vɜːk/",
+        "why": "English-style IPA without Vietnamese vowel quality or tone; Hanoi IPA is /vaːk̚˧˥/."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "He carried a heavy bag of rice up to the floor.",
+        "why": "'lên lầu' means 'upstairs', not 'up to the floor'."
+      }
+    ],
+    "growth": 0.798
   }
 }

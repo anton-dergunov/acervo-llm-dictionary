@@ -68,6 +68,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "fuerte; alto; ruidoso",
+    "primaryGloss": "fuerte",
+    "emotion": "energetic and speaking up to be heard over the noise",
+    "notes": [
+      "Para sonidos, voces o música equivale a 'fuerte' o 'alto' ('a loud voice' = una voz fuerte); para lugares, objetos o personas equivale a 'ruidoso' ('noisy').",
+      "También se usa como adverbio en expresiones cotidianas como 'speak loud' (hablar alto) o 'read out loud' (leer en voz alta)."
+    ],
+    "senses": [
+      {
+        "id": "qs32crwzpfwic68",
+        "order": 0,
+        "definition": "Que produce mucho ruido o tiene un volumen alto.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "fuerte",
+              "alto",
+              "ruidoso"
+            ]
+          }
+        ],
+        "domain": "sonido",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "1apatqxbt383fly",
+            "text": "The music was too loud to talk.",
+            "textLang": "en",
+            "translation": "La música estaba demasiado alta para hablar.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated by the noise while trying to have a conversation",
+            "note": null,
+            "matchedForm": "loud",
+            "matchedTranslationForm": "alta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "loud",
+    "lemma": "loud",
+    "reading": null,
+    "ipa": "/laʊd/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔊",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "ruidoso; llamativo",
     "primaryGloss": "ruidoso",
     "emotion": "energetic and speaking up to be heard over the noise",
@@ -160,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para sonidos de alto volumen como para colores",
+        "why": "Merely repeats the two senses instead of giving useful usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Dicho de un color o de la ropa, que es demasiado llamativo",
+        "why": "The 'gaudy/flashy' sense is C1/idiomatic, not needed at A2 and crowds out core usage."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "La música era demasiado ruidosa para hablar.",
+        "why": "Unnatural calque; in Spanish loud music is 'música muy alta/fuerte', not 'ruidosa'."
+      }
+    ],
+    "growth": 1.154
   }
 }

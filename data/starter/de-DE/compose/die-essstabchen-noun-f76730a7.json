@@ -58,6 +58,73 @@
     "headword": "die Essstäbchen",
     "lemma": "Essstäbchen",
     "reading": null,
+    "ipa": "/ˈɛsˌʃtɛːpçən/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥢",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "chopsticks",
+    "primaryGloss": "chopsticks",
+    "emotion": "matter-of-fact, setting the table for a meal",
+    "notes": [
+      "Spelled with three 's's ('Ess' + 'Stäbchen'). Usually used in the plural (singular: 'das Essstäbchen'). In everyday speech, people often just say 'Stäbchen'."
+    ],
+    "senses": [
+      {
+        "id": "m8h9dg3un3os56y",
+        "order": 0,
+        "definition": "A pair of thin sticks held in one hand and used as utensils for eating, especially in East Asian cuisine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chopsticks"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🥢",
+        "examples": [
+          {
+            "id": "cu67t4evwb49zts",
+            "text": "Kannst du mit Essstäbchen essen?",
+            "textLang": "de",
+            "translation": "Can you eat with chopsticks?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Essstäbchen",
+            "matchedTranslationForm": "chopsticks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Essstäbchen",
+    "lemma": "Essstäbchen",
+    "reading": null,
     "ipa": "/ˈɛsˌʃtɛpçən/",
     "pos": "noun",
     "gender": "neuter",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɛsˌʃtɛpçən/",
+        "why": "The vowel 'ä' in 'Stäbchen' is long (/ˈɛsˌʃtɛːpçən/), not short."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Always used in the plural in German, just as in",
+        "why": "False: the singular 'das Essstäbchen' exists, though plural is much more common."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Kannst du mit den Essstäbchen essen?",
+        "why": "Definite article 'den' is unnatural for general ability; 'mit Stäbchen / Essstäbchen' is used."
+      }
+    ],
+    "growth": 1.155
   }
 }

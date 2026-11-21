@@ -70,6 +70,75 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "sweater, pullover",
+    "primaryGloss": "sweater",
+    "emotion": null,
+    "notes": [
+      "Refers to a pullover without buttons or a zipper; a cardigan that opens in the front is 'hırka'."
+    ],
+    "senses": [
+      {
+        "id": "g16ohww70m0dwgu",
+        "order": 0,
+        "definition": "A knitted piece of clothing worn on the upper body, pulled on over the head.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sweater",
+              "jumper",
+              "pullover"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🧥",
+        "examples": [
+          {
+            "id": "zf1bqvrt29bf2sd",
+            "text": "Hava soğuk olduğu için kalın bir kazak giydim.",
+            "textLang": "tr",
+            "translation": "I put on a thick sweater because the weather was cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "comforted and snug against the chilly wind outside",
+            "note": null,
+            "matchedForm": "kazak",
+            "matchedTranslationForm": "sweater"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kazak",
+    "lemma": "kazak",
+    "reading": null,
+    "ipa": "/kaˈzak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧥",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "sweater; Cossack",
     "primaryGloss": "sweater",
     "emotion": null,
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A member of a Slavic people historically from the southern steppes",
+        "why": "Historical 'Cossack' sense (and capitalized Kazak) is marginal for an A2 common noun entry."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Kazaklar tarih boyunca cesur savaşçıları olarak bilinirler.",
+        "why": "Ungrammatical Turkish: 'cesur savaşçıları' has an erroneous possessive suffix; should be 'cesur savaşçılar'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kazak refers to a knitted sweater worn in cool weather.",
+        "why": "Restates the definition; contrast with 'hırka' (cardigan) is much more useful than 'mont'."
+      }
+    ],
+    "growth": 0.558
   }
 }

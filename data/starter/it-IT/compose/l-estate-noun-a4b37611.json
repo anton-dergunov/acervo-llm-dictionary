@@ -58,6 +58,73 @@
     "headword": "l'estate",
     "lemma": "estate",
     "reading": null,
+    "ipa": "/eˈsta.te/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "summer",
+    "primaryGloss": "summer",
+    "emotion": "warm, sunny, and relaxed, enjoying the bright weather",
+    "notes": [
+      "Use 'd'estate' or 'in estate' to say 'in (the) summer'."
+    ],
+    "senses": [
+      {
+        "id": "noivi3xc46cjinp",
+        "order": 0,
+        "definition": "The warmest season of the year, between spring and autumn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "summer"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "d2pb9wbu2g97nld",
+            "text": "Quest'estate andiamo al mare in Sicilia.",
+            "textLang": "it",
+            "translation": "This summer we are going to the seaside in Sicily.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and happy, looking forward to a sunny holiday",
+            "note": null,
+            "matchedForm": "estate",
+            "matchedTranslationForm": "summer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'estate",
+    "lemma": "estate",
+    "reading": null,
     "ipa": "/leˈstaːte/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/leˈstaːte/",
+        "why": "IPA must transcribe the lemma 'estate' without the article 'l''."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'estate' takes a feminine article: 'l'estate'",
+        "why": "Restates the gender field and basic A1 article elision rules."
+      }
+    ],
+    "growth": 0.569
   }
 }

@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "sick; ill",
+    "primaryGloss": "sick",
+    "emotion": "tired and a bit miserable, staying home in bed",
+    "notes": [
+      "Usually used with 'estar' (estar enfermo = to be sick/ill). Also used as a noun (el enfermo / la enferma) meaning 'patient' or 'sick person'."
+    ],
+    "senses": [
+      {
+        "id": "348ukgrq1bj0k97",
+        "order": 0,
+        "definition": "Not feeling well; suffering from an illness or disease.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "lh1e3mbg19k3qrl",
+            "text": "Me siento enfermo y no quiero salir de la cama.",
+            "textLang": "es",
+            "translation": "I feel sick and I don't want to get out of bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weak and groaning, wrapped in a blanket",
+            "note": null,
+            "matchedForm": "enfermo",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "enfermo",
+    "lemma": "enfermo",
+    "reading": null,
+    "ipa": "/enˈfeɾmo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "sick; ill; patient",
     "primaryGloss": "sick",
     "emotion": "tired and a bit miserable, staying home in bed",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A person who receives medical treatment in a hospital or clinic.",
+        "why": "Entry POS is adjective, but sense 1 is defined as a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs a note contrasting 'estar enfermo' (temporary illness) with 'ser enfermo'."
+      }
+    ],
+    "growth": 0.685
   }
 }

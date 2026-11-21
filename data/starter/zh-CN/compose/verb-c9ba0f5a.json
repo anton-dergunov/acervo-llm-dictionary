@@ -71,6 +71,76 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wear (accessories, hats, glasses)",
+    "primaryGloss": "wear",
+    "emotion": "matter-of-fact and routine, putting on glasses or a hat before heading out",
+    "notes": [
+      "Use 戴 (dài) for accessories worn on the head, face, neck, or hands—such as hats, glasses, masks, scarves, watches, and rings.",
+      "Do not confuse 戴 with 穿 (chuān), which is used for clothing and shoes that cover the body."
+    ],
+    "senses": [
+      {
+        "id": "er45y0yugzz5jix",
+        "order": 0,
+        "definition": "To put on or wear an accessory such as a hat, glasses, a watch, a scarf, or jewelry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wear",
+              "put on"
+            ]
+          }
+        ],
+        "domain": "accessories",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "phtrq35f4l3o0mr",
+            "text": "他出门前总是戴上一副墨镜。",
+            "textLang": "zh",
+            "translation": "He always puts on a pair of sunglasses before going out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and deliberate, getting ready to step into the bright sunlight",
+            "note": null,
+            "matchedForm": "戴",
+            "matchedTranslationForm": "puts on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "戴",
+    "lemma": "戴",
+    "reading": "dài",
+    "ipa": "/tai̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wear (accessories, hats, glasses); to support or respect",
     "primaryGloss": "wear",
     "emotion": "matter-of-fact and routine, putting on glasses or a hat before heading out",
@@ -164,5 +234,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to wear (accessories, hats, glasses); to support or respect",
+        "why": "Includes 'to support or respect', which is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To have or carry something on one's head or body",
+        "why": "Wearing a red scarf or badge is the same sense as wearing accessories."
+      }
+    ],
+    "growth": 0.678
   }
 }

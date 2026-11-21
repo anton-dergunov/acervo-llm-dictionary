@@ -58,6 +58,73 @@
     "headword": "pocket",
     "lemma": "pocket",
     "reading": null,
+    "ipa": "/ˈpɑkɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕳️",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "bolsillo",
+    "primaryGloss": "bolsillo",
+    "emotion": "casual and practical, like finding a forgotten treat or key",
+    "notes": [
+      "Se refiere solo al bolsillo cosido en la ropa o en un bolso, no a una bolsa suelta ('bag')."
+    ],
+    "senses": [
+      {
+        "id": "yrly01kx00pv0ol",
+        "order": 0,
+        "definition": "Bolsa pequeña cosida en una prenda de ropa o equipaje para llevar objetos pequeños.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "bolsillo"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "lnyfyj0bbvor1e4",
+            "text": "I found a coin in my pocket.",
+            "textLang": "en",
+            "translation": "Encontré una moneda en mi bolsillo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised to find extra money",
+            "note": null,
+            "matchedForm": "pocket",
+            "matchedTranslationForm": "bolsillo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "pocket",
+    "lemma": "pocket",
+    "reading": null,
     "ipa": "/ˈpɒkɪt/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈpɒkɪt/",
+        "why": "British IPA used instead of US English (/ˈpɑkɪt/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Un área pequeña o espacio aislado que contiene algo diferente",
+        "why": "'Pocket of air' is too advanced/marginal for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bolsillo; bolsa pequeña",
+        "why": "'Bolsa pequeña' is the definition of a pocket, not a valid Spanish translation."
+      }
+    ],
+    "growth": 0.404
   }
 }

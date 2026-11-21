@@ -58,6 +58,96 @@
     "headword": "cần",
     "lemma": "cần",
     "reading": null,
+    "ipa": "/kən˨˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to need to",
+    "primaryGloss": "need",
+    "emotion": "direct and practical, stating a basic requirement clearly",
+    "notes": [
+      "Followed directly by a noun ('cần tiền' – to need money) or another verb ('cần đi' – to need to go). Negated as 'không cần' (don't need to)."
+    ],
+    "senses": [
+      {
+        "id": "uylt3kwb6ovlrju",
+        "order": 0,
+        "definition": "To require something, or to have to do something, because it is necessary or important.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "need",
+              "require",
+              "need to"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "ce03jxo30jdl2c1",
+            "text": "Tôi cần một chút thời gian để suy nghĩ.",
+            "textLang": "vi",
+            "translation": "I need a little time to think.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cần",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "sfa26x8b3nrblth",
+            "text": "Bạn cần hoàn thành bài tập này trước ngày mai.",
+            "textLang": "vi",
+            "translation": "You need to finish this homework before tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and instructional, giving a clear reminder",
+            "note": null,
+            "matchedForm": "cần",
+            "matchedTranslationForm": "need to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cần",
+    "lemma": "cần",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'Need (a noun)' and 'need (to do)' are syntactic patterns of one meaning."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi cần mua một ít đồ ăn ở chợ.",
+        "why": "Uses 'cần + verb' in the sense meant for 'need (something)' as opposed to sense 1."
+      }
+    ],
+    "growth": 0.943
   }
 }

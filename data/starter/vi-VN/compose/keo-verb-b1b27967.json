@@ -58,6 +58,118 @@
     "headword": "kéo",
     "lemma": "kéo",
     "reading": null,
+    "ipa": "/kɛw˧˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪢",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pull; to drag; to stretch",
+    "primaryGloss": "pull",
+    "emotion": "focused and firm, putting physical effort into moving an object",
+    "notes": [
+      "The opposite of 'kéo' (to pull) is 'đẩy' (to push). It is also a homonym of the noun 'kéo' (scissors).",
+      "Often combines with 'dài' (long) to form 'kéo dài' (to last, to prolong, to extend in time)."
+    ],
+    "senses": [
+      {
+        "id": "ygj3qfavdjq8c18",
+        "order": 0,
+        "definition": "To apply force to something to move it towards you or along with you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pull",
+              "drag",
+              "draw"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🪢",
+        "examples": [
+          {
+            "id": "cu8po0unri03g7o",
+            "text": "Anh ấy kéo cái bàn lại gần.",
+            "textLang": "vi",
+            "translation": "He pulled the table closer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing a simple physical action",
+            "note": null,
+            "matchedForm": "kéo",
+            "matchedTranslationForm": "pulled"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1fqpxnjdd7c6md1",
+        "order": 1,
+        "definition": "To pull something out to its full length or make it taut.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stretch",
+              "draw out",
+              "extend"
+            ]
+          }
+        ],
+        "domain": "extension",
+        "emoji": "↔️",
+        "examples": [
+          {
+            "id": "api49g3w5b58xi7",
+            "text": "Họ đang kéo dây điện qua đường.",
+            "textLang": "vi",
+            "translation": "They are stretching an electric wire across the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kéo",
+            "matchedTranslationForm": "stretching"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "kéo",
+    "lemma": "kéo",
+    "reading": null,
     "ipa": "/kəːw/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kəːw/",
+        "why": "Wrong vowel and missing tone; Hanoi IPA for 'kéo' is /kɛw˧˦/."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Đừng kéo dài cuộc họp quá lâu.",
+        "why": "Uses the compound 'kéo dài' instead of the bare verb 'kéo'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In some contexts, 'kéo' can also mean to lengthen or stretch",
+        "why": "Restates sense 1 without adding grammar or usage information."
+      }
+    ],
+    "growth": 0.937
   }
 }

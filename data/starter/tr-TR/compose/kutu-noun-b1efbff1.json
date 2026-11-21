@@ -72,6 +72,116 @@
     "primaryGloss": "box",
     "emotion": "neat and organized, putting things away",
     "notes": [
+      "Takes the buffer consonant 's' in the third-person possessive (kutusu) and 'y' before vowel-initial case suffixes (kutuya, kutuyu).",
+      "Used as a counter after a number without a suffix: 'bir kutu süt' (a carton of milk), 'iki kutu kola' (two cans of cola)."
+    ],
+    "senses": [
+      {
+        "id": "0wao60832pn3v5s",
+        "order": 0,
+        "definition": "A rigid container with flat sides, made of cardboard, wood, or plastic, used for holding or storing things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "box",
+              "carton"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "20b15om8utvlcbm",
+            "text": "Eşyaları büyük bir kutuya koydu.",
+            "textLang": "tr",
+            "translation": "He put the things into a big box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kutuya",
+            "matchedTranslationForm": "box"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9z18j9kmfdtajux",
+        "order": 1,
+        "definition": "A small sealed metal container for drinks or food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "can",
+              "tin"
+            ]
+          }
+        ],
+        "domain": "packaging",
+        "emoji": "🥫",
+        "examples": [
+          {
+            "id": "u3b569u7jokpgo9",
+            "text": "Masada boş bir kola kutusu var.",
+            "textLang": "tr",
+            "translation": "There is an empty soda can on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kutusu",
+            "matchedTranslationForm": "can"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kutu",
+    "lemma": "kutu",
+    "reading": null,
+    "ipa": "/kuˈtu/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "box; carton; can",
+    "primaryGloss": "box",
+    "emotion": "neat and organized, putting things away",
+    "notes": [
       "Kutu is a general word for any box with flat sides, whether made of cardboard, wood, or plastic."
     ],
     "senses": [
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Eşyaları büyük bir kutu içine koydu.",
+        "why": "Unnatural indefinite compound with 'bir': a native speaker says 'büyük bir kutuya' or 'kutunun içine'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kutu is a general word for any box with flat",
+        "why": "Restates the definition without adding grammar or usage help."
+      }
+    ],
+    "growth": 1.378
   }
 }

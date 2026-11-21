@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "投げる",
     "lemma": "投げる",
+    "reading": "なげる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚾",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to throw; to toss; to pitch",
+    "primaryGloss": "throw",
+    "emotion": "energetic and purposeful, releasing a ball or object into the air",
+    "notes": [
+      "An ichidan (Group 2) transitive verb taking を for the object thrown and に or へ for the target or direction."
+    ],
+    "senses": [
+      {
+        "id": "wbbnxzbvt35st7f",
+        "order": 0,
+        "definition": "To propel an object through the air using your hand or arm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "throw",
+              "toss",
+              "pitch"
+            ]
+          }
+        ],
+        "domain": "throwing",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "nwh9u2f1uedhrff",
+            "text": "ボールを遠くに投げる。",
+            "textLang": "ja",
+            "translation": "I throw the ball far away.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and strong, putting effort into the physical movement",
+            "note": null,
+            "matchedForm": "投げる",
+            "matchedTranslationForm": "throw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "投げる",
+    "lemma": "投げる",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "such as in 諦めを投げる (to give up)",
+        "why": "諦めを投げる is not a real Japanese collocation; さじを投げる is the idiom."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(abandon) To give up on something or abandon a situation.",
+        "why": "Marginal figurative sense for A2; throwing away is unnecessary, and throwing is the core sense."
+      }
+    ],
+    "growth": 0.494
   }
 }

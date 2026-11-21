@@ -73,6 +73,97 @@
     "primaryGloss": "cook",
     "emotion": "focused and busy, standing near hot pans in a warm kitchen",
     "notes": [
+      "The feminine is 'la cuisinière' (/kɥi.zi.njɛʁ/), which also means a kitchen stove (cooker).",
+      "'Un chef' (or 'chef cuisinier') is the head of a restaurant kitchen; 'un cuisinier' is anyone who cooks professionally or well."
+    ],
+    "senses": [
+      {
+        "id": "zw6qoyrpv1m548l",
+        "order": 0,
+        "definition": "A person who prepares and cooks food, especially as a job.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cook",
+              "chef"
+            ]
+          }
+        ],
+        "domain": "occupation",
+        "emoji": "👨‍🍳",
+        "examples": [
+          {
+            "id": "4xym9ay5qwu96pk",
+            "text": "Le cuisinier prépare les plats pour les clients.",
+            "textLang": "fr",
+            "translation": "The cook prepares the dishes for the customers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud of the meal being prepared",
+            "note": null,
+            "matchedForm": "cuisinier",
+            "matchedTranslationForm": "cook"
+          },
+          {
+            "id": "h6fg7kaoyjg4zdt",
+            "text": "Mon père est un très bon cuisinier.",
+            "textLang": "fr",
+            "translation": "My father is a very good cook.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cuisinier",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le cuisinier",
+    "lemma": "cuisinier",
+    "reading": null,
+    "ipa": "/kɥi.zi.nje/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍🍳",
+    "topics": [
+      "Work",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cook; chef",
+    "primaryGloss": "cook",
+    "emotion": "focused and busy, standing near hot pans in a warm kitchen",
+    "notes": [
       "Use cuisinier for someone who cooks professionally, and cuisinière when referring to a female cook or chef.",
       "Do not confuse cuisinier with chef; while un chef heads the kitchen, un cuisinier is any professional cook on the brigade."
     ],
@@ -162,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A person who enjoys cooking meals at home for family or friends.",
+        "why": "Professional vs. amateur cook is one meaning ('un bon cuisinier'); no need for two senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Mon père est un bon cuisinier le dimanche.",
+        "why": "'Être un bon cuisinier le dimanche' is unnatural; being a good cook isn't limited to Sundays."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "and cuisinière when referring to a female cook or chef.",
+        "why": "Should warn that 'une cuisinière' also commonly means a kitchen stove/cooker."
+      }
+    ],
+    "growth": 0.804
   }
 }

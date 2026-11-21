@@ -58,6 +58,73 @@
     "headword": "pieniądze",
     "lemma": "pieniądz",
     "reading": null,
+    "ipa": "/ˈpʲɛ.ɲɔnt͡s/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💵",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "money",
+    "primaryGloss": "money",
+    "emotion": "counting out coins on a counter, focused and practical",
+    "notes": [
+      "Used almost exclusively in the plural form 'pieniądze' (genitive 'pieniędzy') for money in general; the singular 'pieniądz' usually means a single coin."
+    ],
+    "senses": [
+      {
+        "id": "1uowwizy2jurjxq",
+        "order": 0,
+        "definition": "Coins, banknotes, or digital funds used to buy things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money"
+            ]
+          }
+        ],
+        "domain": "currency",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "r8xe3p32j9n110o",
+            "text": "Nie mam przy sobie żadnych pieniędzy.",
+            "textLang": "pl",
+            "translation": "I don't have any money on me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pieniędzy",
+            "matchedTranslationForm": "money"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pieniądze",
+    "lemma": "pieniądz",
+    "reading": null,
     "ipa": "/pjeˈɲɔn.d͡zɛ/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Nie mam wystarczająco dużo pieniądze.",
+        "why": "Ungrammatical: 'dużo' and negated 'mieć' require the genitive plural 'pieniędzy', not nominative 'pieniądze'."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pjeˈɲɔn.d͡zɛ/",
+        "why": "IPA should transcribe the singular lemma 'pieniądz' (/ˈpʲɛ.ɲɔnt͡s/), or correctly palatalize /pʲɛ-/."
+      }
+    ],
+    "growth": 1.446
   }
 }

@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to come; to fall (of rain or snow)",
+    "primaryGloss": "come",
+    "emotion": "straightforward and direct, announcing someone's arrival or approach",
+    "notes": [
+      "Unlike English 'come', 오다 is only used for movement toward the speaker's own current or future location. When moving toward the listener ('I'm coming to your place'), Korean uses 가다 (to go)."
+    ],
+    "senses": [
+      {
+        "id": "phebu7zkl7t3gf1",
+        "order": 0,
+        "definition": "To move toward the place where the speaker is or will be.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "come",
+              "arrive"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "ks44s26bcv8la6s",
+            "text": "친구들이 집에 와요.",
+            "textLang": "ko",
+            "translation": "My friends are coming to my house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and anticipating the arrival of friends",
+            "note": null,
+            "matchedForm": "와요",
+            "matchedTranslationForm": "coming"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "73rao0e920mwk1d",
+        "order": 1,
+        "definition": "Of rain or snow: to fall from the sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fall",
+              "rain",
+              "snow"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌦️",
+        "examples": [
+          {
+            "id": "3cdu2x1wvtaw4oy",
+            "text": "밖에 비가 와요.",
+            "textLang": "ko",
+            "translation": "It is raining outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "와요",
+            "matchedTranslationForm": "raining"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "19egn8ybshcvp1s",
+        "order": 2,
+        "definition": "Of a season, time, or communication: to arrive or come about.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "come",
+              "arrive"
+            ]
+          }
+        ],
+        "domain": "arrival",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "f40v79w1t73xsf6",
+            "text": "드디어 봄이 왔어요.",
+            "textLang": "ko",
+            "translation": "Spring has finally come.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "왔어요",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오다",
+    "lemma": "오다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to come",
     "primaryGloss": "come",
     "emotion": "straightforward and direct, announcing someone's arrival or approach",
@@ -160,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To happen, arrive, or occur, such as a season, a feeling, or",
+        "why": "Conflates precipitation falling (비가 오다) with time/events arriving (봄이 오다); glosses lack 'fall'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "when the destination is where the speaker currently is or will be",
+        "why": "Unlike English, Korean 오다 is strictly deictic to the speaker's location, not the listener's."
+      }
+    ],
+    "growth": 1.059
   }
 }

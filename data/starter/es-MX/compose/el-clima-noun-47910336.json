@@ -72,6 +72,114 @@
     "primaryGloss": "weather",
     "emotion": "matter-of-fact, looking out the window to decide what to wear today",
     "notes": [
+      "Masculine despite ending in '-a' (el clima agradable).",
+      "In Mexico, 'el clima' is the most common everyday word for daily weather (e.g., '¿Cómo está el clima hoy?'), alongside 'el tiempo'. In northern and coastal Mexico, it also commonly refers to air conditioning."
+    ],
+    "senses": [
+      {
+        "id": "lu28szgyu3pulwy",
+        "order": 0,
+        "definition": "The state of the atmosphere at a particular place and time, such as sun, rain, wind, or temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "wv6d5hek459udzx",
+            "text": "El clima está muy agradable hoy.",
+            "textLang": "es",
+            "translation": "The weather is very pleasant today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and appreciative of the nice day, speaking to a neighbor",
+            "note": null,
+            "matchedForm": "clima",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5ay9gynfwov0omp",
+        "order": 1,
+        "definition": "The typical weather conditions of a large area over a long period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "climate"
+            ]
+          }
+        ],
+        "domain": "climate",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "3d0o2z37763vt99",
+            "text": "México tiene un clima variado dependiendo de la región.",
+            "textLang": "es",
+            "translation": "Mexico has a varied climate depending on the region.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and neutral, like someone describing a country's geography",
+            "note": null,
+            "matchedForm": "clima",
+            "matchedTranslationForm": "climate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el clima",
+    "lemma": "clima",
+    "reading": null,
+    "ipa": "/ˈklima/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "weather; climate",
+    "primaryGloss": "weather",
+    "emotion": "matter-of-fact, looking out the window to decide what to wear today",
+    "notes": [
       "While 'clima' can refer to the long-term climate of a region, in everyday conversation, it is most often used to talk about the 'weather' (el tiempo).",
       "Use 'el tiempo' when you mean what is happening outside right now (e.g., '¿Cómo está el tiempo hoy?'). Use 'el clima' when discussing trends or seasons over a longer period."
     ],
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use 'el tiempo' when you mean what is happening outside right now",
+        "why": "Contradicts note 0, sense 0, and actual Mexican usage where 'el clima' means daily weather."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that nouns in '-ma' like 'el clima' are masculine despite ending in '-a'."
+      }
+    ],
+    "growth": 0.913
   }
 }

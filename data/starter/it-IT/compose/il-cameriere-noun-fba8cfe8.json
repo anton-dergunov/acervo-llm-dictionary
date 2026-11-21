@@ -62,6 +62,75 @@
     "headword": "il cameriere",
     "lemma": "cameriere",
     "reading": null,
+    "ipa": "/ka.meˈrjɛ.re/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "w",
+    "topics": [
+      "Work",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "waiter, server",
+    "primaryGloss": "waiter",
+    "emotion": "busy and polite, taking an order with a notepad ready",
+    "notes": [
+      "The feminine form is 'la cameriera' (waitress). In hotels, 'la cameriera' (or 'cameriera ai piani') also means 'housekeeper / room attendant'."
+    ],
+    "senses": [
+      {
+        "id": "kbjxggnf9fx46er",
+        "order": 0,
+        "definition": "A person whose job is to serve food and drinks to customers at their tables in a restaurant or café.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "waiter",
+              "server"
+            ]
+          }
+        ],
+        "domain": "occupation",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "aa1p5fvzbtucccb",
+            "text": "Il cameriere porta il menu al tavolo.",
+            "textLang": "it",
+            "translation": "The waiter brings the menu to the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and attentive, setting things down gently",
+            "note": null,
+            "matchedForm": "cameriere",
+            "matchedTranslationForm": "waiter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il cameriere",
+    "lemma": "cameriere",
+    "reading": null,
     "ipa": "/kameˈrjɛre/",
     "pos": "noun",
     "gender": "masculine",
@@ -167,5 +236,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use la cameriere or la cameriera for a female waiter",
+        "why": "'La cameriere' is ungrammatical; the feminine form is strictly 'la cameriera'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with capo cameriere, which means headwaiter",
+        "why": "Unhelpful note; learners will not confuse a basic noun with its transparent compound."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person who works as a domestic servant in a private household.",
+        "why": "Dated/marginal sense for A2; hotel room attendant ('cameriera ai piani') is much more relevant."
+      }
+    ],
+    "growth": 0.736
   }
 }

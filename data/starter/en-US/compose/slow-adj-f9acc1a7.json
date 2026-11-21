@@ -68,6 +68,113 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "lento; atrasado",
+    "primaryGloss": "lento",
+    "emotion": "patient and unhurried, taking your time to watch the world go by",
+    "notes": [
+      "Como adverbio («despacio», «lentamente») se suele usar 'slowly', aunque 'slow' también se usa en el habla informal ('drive slow')."
+    ],
+    "senses": [
+      {
+        "id": "yq2sjb7eit7byk6",
+        "order": 0,
+        "definition": "Que se mueve, actúa o sucede a poca velocidad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "lento"
+            ]
+          }
+        ],
+        "domain": "velocidad",
+        "emoji": "🐢",
+        "examples": [
+          {
+            "id": "u91xiih1dg0nlrj",
+            "text": "The traffic is very slow today.",
+            "textLang": "en",
+            "translation": "El tráfico está muy lento hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and resigned while waiting in a line of cars",
+            "note": null,
+            "matchedForm": "slow",
+            "matchedTranslationForm": "lento"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yva9pks742esbmv",
+        "order": 1,
+        "definition": "Dicho de un reloj: que marca una hora anterior a la real.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "atrasado"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "s0tpic5prs73snz",
+            "text": "My watch is five minutes slow.",
+            "textLang": "en",
+            "translation": "Mi reloj está cinco minutos atrasado.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "slow",
+            "matchedTranslationForm": "atrasado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "slow",
+    "lemma": "slow",
+    "reading": null,
+    "ipa": "/sloʊ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "lento; despacio",
     "primaryGloss": "lento",
     "emotion": "patient and unhurried, taking your time to watch the world go by",
@@ -119,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "lento, despacio",
+        "why": "'Despacio' is an adverb in Spanish, but this entry is for the adjective 'slow'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "lento; despacio",
+        "why": "'Despacio' is an adverb, not an adjective gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para personas y animales como para objetos",
+        "why": "Pure filler; Spanish 'lento' works the exact same way."
+      }
+    ],
+    "growth": 1.684
   }
 }

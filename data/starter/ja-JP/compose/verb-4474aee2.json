@@ -57,6 +57,118 @@
     "language": "ja",
     "headword": "行く",
     "lemma": "行く",
+    "reading": "いく",
+    "ipa": "ikɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go; to proceed",
+    "primaryGloss": "to go",
+    "emotion": "purposeful and forward-moving, ready to get to the destination",
+    "notes": [
+      "Has an irregular te-form (行って, itte) and past form (行った, itta). Also read ゆく (yuku) in more formal or literary contexts.",
+      "Takes に or へ for the destination. Contrast with 来る (kuru), which means to come toward the speaker's location."
+    ],
+    "senses": [
+      {
+        "id": "kjpukzyku5nxwy7",
+        "order": 0,
+        "definition": "To move from one's current location to another place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go",
+              "to head to",
+              "to travel"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "4h1rfepynzhxb5m",
+            "text": "明日、学校へ行く。",
+            "textLang": "ja",
+            "translation": "I will go to school tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and steady, stating a planned activity",
+            "note": null,
+            "matchedForm": "行く",
+            "matchedTranslationForm": "go"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "01vx2hyhku0b7qz",
+        "order": 1,
+        "definition": "To proceed or turn out in a particular way (often written in hiragana).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go",
+              "to proceed",
+              "to turn out"
+            ]
+          }
+        ],
+        "domain": "progress",
+        "emoji": "⏩",
+        "examples": [
+          {
+            "id": "cd61279smshdwet",
+            "text": "すべてうまく行った。",
+            "textLang": "ja",
+            "translation": "Everything went well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "行った",
+            "matchedTranslationForm": "went"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "行く",
+    "lemma": "行く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a word with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "計画は順調に行く。",
+        "why": "Unnatural aspect; 順調にいっている or 順調にいくでしょう is natural, and this sense is usually written in kana."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular te/ta-form (行って/行った) and secondary reading ゆく."
+      }
+    ],
+    "growth": 1.267
   }
 }

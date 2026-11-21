@@ -72,6 +72,96 @@
     "primaryGloss": "vacío",
     "emotion": "looking inside a box or a room and finding nothing at all",
     "notes": [
+      "También se usa como verbo ('to empty') con el significado de 'vaciar'."
+    ],
+    "senses": [
+      {
+        "id": "94g8k6zpl2xbts9",
+        "order": 0,
+        "definition": "Que no tiene nada ni a nadie dentro.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "vacío",
+              "desocupado",
+              "desierto"
+            ]
+          }
+        ],
+        "domain": "estado",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "sti4c67juc6azwv",
+            "text": "The box is completely empty.",
+            "textLang": "en",
+            "translation": "La caja está completamente vacía.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised to see that there is nothing left inside",
+            "note": null,
+            "matchedForm": "empty",
+            "matchedTranslationForm": "vacía"
+          },
+          {
+            "id": "x3nxw5al6vamb8x",
+            "text": "The streets were empty at night.",
+            "textLang": "en",
+            "translation": "Las calles estaban vacías por la noche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing a quiet and lonely midnight walk",
+            "note": null,
+            "matchedForm": "empty",
+            "matchedTranslationForm": "vacías"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "empty",
+    "lemma": "empty",
+    "reading": null,
+    "ipa": "/ˈɛmpti/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📭",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "vacío; desocupado",
+    "primaryGloss": "vacío",
+    "emotion": "looking inside a box or a room and finding nothing at all",
+    "notes": [
       "Se usa para objetos, espacios y también para situaciones abstractas como una promesa vacía."
     ],
     "senses": [
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Sense 0 explicitly includes 'ni nadie' (nobody), making Sense 1 (without people) redundant."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para objetos, espacios y también para situaciones abstractas",
+        "why": "Generic filler note; mentions an abstract sense not covered in the entry."
+      }
+    ],
+    "growth": 0.818
   }
 }

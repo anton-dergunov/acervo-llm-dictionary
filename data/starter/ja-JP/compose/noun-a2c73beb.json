@@ -59,6 +59,73 @@
     "language": "ja",
     "headword": "枕",
     "lemma": "枕",
+    "reading": "まくら",
+    "ipa": "makɯɾa",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "pillow",
+    "primaryGloss": "pillow",
+    "emotion": null,
+    "notes": [
+      "For a decorative cushion on a sofa or chair, use クッション (kusshon); for a floor cushion to sit on, use 座布団 (zabuton)."
+    ],
+    "senses": [
+      {
+        "id": "3c59ylbeva5ip5e",
+        "order": 0,
+        "definition": "A soft cushion used to support the head while sleeping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "k86yaf69duiqgyl",
+            "text": "この枕は柔らかくて気持ちいい。",
+            "textLang": "ja",
+            "translation": "This pillow is soft and comfortable.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "枕",
+            "matchedTranslationForm": "pillow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "枕",
+    "lemma": "枕",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -121,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (まくら) for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "枕を高くして寝る。",
+        "why": "An idiom is unhelpful as the sole example of a basic noun for beginners."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used specifically for the soft cushion you place your head on",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.539
   }
 }

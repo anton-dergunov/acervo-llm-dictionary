@@ -58,6 +58,74 @@
     "headword": "ห้อง",
     "lemma": "ห้อง",
     "reading": null,
+    "ipa": "/hɔ̂ŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "room",
+    "primaryGloss": "room",
+    "emotion": "matter-of-fact and practical, naming a space in a building",
+    "notes": [
+      "Used as its own classifier (e.g., ห้องสามห้อง, 'three rooms').",
+      "Combines with other words to name specific rooms, such as ห้องนอน (bedroom), ห้องน้ำ (bathroom), and ห้องครัว (kitchen)."
+    ],
+    "senses": [
+      {
+        "id": "okud9bhuuxvso2v",
+        "order": 0,
+        "definition": "A separate space inside a building enclosed by walls, or an apartment unit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "vtwxeykgcw7irea",
+            "text": "ห้องนี้กว้างมาก",
+            "textLang": "th",
+            "translation": "This room is very spacious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and impressed by the size of the space",
+            "note": null,
+            "matchedForm": "ห้อง",
+            "matchedTranslationForm": "room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ห้อง",
+    "lemma": "ห้อง",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -139,5 +207,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A single space or area inside a building / A generic term for",
+        "why": "Sense 1 has no example and is not a distinct everyday meaning for A2 learners."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used as a noun, it almost always refers to a room",
+        "why": "Restates the definition; only the compound-building pattern is useful."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "This room is very wide.",
+        "why": "กว้าง for a room translates naturally as 'spacious' or 'large', not 'wide'."
+      }
+    ],
+    "growth": 0.646
   }
 }

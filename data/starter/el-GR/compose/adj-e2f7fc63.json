@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "black; gloomy, miserable",
+    "primaryGloss": "black",
+    "emotion": "flat and heavy, noting the absence of light",
+    "notes": [
+      "Declines for gender: μαύρος (masculine), μαύρη (feminine), μαύρο (neuter).",
+      "Often used figuratively in everyday expressions to mean gloomy, bad, or miserable (e.g., μαύρη μέρα, 'a terrible day')."
+    ],
+    "senses": [
+      {
+        "id": "01w6wjgv2ox2eld",
+        "order": 0,
+        "definition": "Having the darkest colour, like coal or the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "⬛",
+        "examples": [
+          {
+            "id": "ifsosabzlmyyejv",
+            "text": "Φόρεσε ένα μαύρο παλτό για το κρύο.",
+            "textLang": "el",
+            "translation": "He wore a black coat for the cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and matter-of-fact, getting ready to go out",
+            "note": null,
+            "matchedForm": "μαύρο",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hbx4xe0hu53nxwa",
+        "order": 1,
+        "definition": "Full of sadness, difficulty, or bad luck.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gloomy",
+              "bleak",
+              "miserable"
+            ]
+          }
+        ],
+        "domain": "mood",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "qjkx5dv5gdk2eem",
+            "text": "Πέρασα μια μαύρη μέρα στη δουλειά.",
+            "textLang": "el",
+            "translation": "I had a terrible day at work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μαύρη",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "μαύρος",
+    "lemma": "μαύρος",
+    "reading": null,
+    "ipa": "/ˈmavɾos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⬛",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "black; dark",
     "primaryGloss": "black",
     "emotion": "flat and heavy, noting the absence of light",
@@ -159,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Μαύρος is the standard word for black.",
+        "why": "Restates the gloss; better to note its common figurative use for 'gloomy/wretched'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Very dark, with little or no light.",
+        "why": "Forced literal sense; the everyday secondary sense of μαύρος is figurative (gloomy, miserable)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Η νύχτα ήταν σκοτεινή και μαύρη.",
+        "why": "Tautological and unnatural phrasing for an A2 learner."
+      }
+    ],
+    "growth": 1.234
   }
 }

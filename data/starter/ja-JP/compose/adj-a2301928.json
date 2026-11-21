@@ -72,6 +72,137 @@
     "primaryGloss": "new",
     "emotion": "feeling bright and expectant, like the start of something fresh",
     "notes": [
+      "An i-adjective (past: 新しかった, negative: 新しくない). Can also be read あらたしい in older expressions, though あたらしい is standard."
+    ],
+    "senses": [
+      {
+        "id": "aglvrqerbynl6bd",
+        "order": 0,
+        "definition": "Recently made, bought, created, or started; not old or used before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand-new",
+              "recent",
+              "latest"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "kkebthyfadgqiyd",
+            "text": "新しい靴を買いました。",
+            "textLang": "ja",
+            "translation": "I bought new shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleased with a recent purchase",
+            "note": null,
+            "matchedForm": "新しい",
+            "matchedTranslationForm": "new"
+          },
+          {
+            "id": "58b4iiwmz299ad6",
+            "text": "新しい計画を立てています。",
+            "textLang": "ja",
+            "translation": "We are making a new plan.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and determined, looking toward the future",
+            "note": null,
+            "matchedForm": "新しい",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w887q83nj6bsy5w",
+        "order": 1,
+        "definition": "Of food, air, or water: not stale or spoiled; just picked or prepared.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fresh"
+            ]
+          }
+        ],
+        "domain": "freshness",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "rbfret1o4n2filg",
+            "text": "新しい野菜はとても美味しいです。",
+            "textLang": "ja",
+            "translation": "Fresh vegetables are very delicious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and appreciative of good food",
+            "note": null,
+            "matchedForm": "新しい",
+            "matchedTranslationForm": "Fresh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "新しい",
+    "lemma": "新しい",
+    "reading": "あたらしい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "new; fresh; recent",
+    "primaryGloss": "new",
+    "emotion": "feeling bright and expectant, like the start of something fresh",
+    "notes": [
       "Use 'atarashii' to describe things that are brand new or just bought. It is also used to talk about things that are 'fresh' in terms of food or ideas.",
       "Do not confuse this with 'shinki' (新奇), which usually refers to something being novel or strange."
     ],
@@ -201,5 +332,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (condition) Having been made or bought recently ... [1] (time) Recently created",
+        "why": "Senses 0 and 1 are both the basic meaning 'new' and should be merged."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'atarashii' to describe things that are brand new or just bought.",
+        "why": "Restates the definitions and glosses without adding usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'shinki' (新奇)",
+        "why": "A2 learners will not confuse an everyday i-adjective with an uncommon literary noun."
+      }
+    ],
+    "growth": 0.783
   }
 }

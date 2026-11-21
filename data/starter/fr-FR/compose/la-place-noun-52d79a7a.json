@@ -72,6 +72,160 @@
     "primaryGloss": "square",
     "emotion": "bustling and open, standing in the middle of a lively town square",
     "notes": [
+      "Partial false friend: to say 'a nice place' or 'a place to visit' in general, French uses 'un endroit' or 'un lieu', not 'une place'.",
+      "Also used for a ticket or admission to a cinema, theatre, or concert (e.g. 'acheter deux places de cinéma')."
+    ],
+    "senses": [
+      {
+        "id": "qigqa1u2rrs97uu",
+        "order": 0,
+        "definition": "An open public area in a town or city, often surrounded by buildings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "square",
+              "plaza",
+              "town square"
+            ]
+          }
+        ],
+        "domain": "town square",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "478tf2ritiiuias",
+            "text": "La fontaine est au milieu de la place.",
+            "textLang": "fr",
+            "translation": "The fountain is in the middle of the square.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observing a peaceful morning in the city center",
+            "note": null,
+            "matchedForm": "place",
+            "matchedTranslationForm": "square"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lcwz5dxhb9j2ym1",
+        "order": 1,
+        "definition": "A seat, spot, or admission space for one person, as on transport, in a car park, or at a show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "seat",
+              "spot",
+              "place",
+              "ticket"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "💺",
+        "examples": [
+          {
+            "id": "n71xaq0fn2azqvw",
+            "text": "J'ai réservé une place près de la fenêtre dans le train.",
+            "textLang": "fr",
+            "translation": "I booked a window seat on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and prepared for a journey",
+            "note": null,
+            "matchedForm": "place",
+            "matchedTranslationForm": "seat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fre54l9z0kxnp7n",
+        "order": 2,
+        "definition": "Room or physical space available for someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room",
+              "space"
+            ]
+          }
+        ],
+        "domain": "available space",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "gpfl5dgfiy84zyx",
+            "text": "Il n'y a plus de place dans la valise.",
+            "textLang": "fr",
+            "translation": "There is no room left in the suitcase.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated while trying to pack too much luggage",
+            "note": null,
+            "matchedForm": "place",
+            "matchedTranslationForm": "room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la place",
+    "lemma": "place",
+    "reading": null,
+    "ipa": "/plas/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "square; seat; space; room",
+    "primaryGloss": "square",
+    "emotion": "bustling and open, standing in the middle of a lively town square",
+    "notes": [
       "While 'la place' often means a public square, it is also commonly used for a seat on a train, bus, or at a table ('avoir une place').",
       "Do not confuse it with 'l'espace', which refers to outer space or a broader expanse."
     ],
@@ -204,5 +358,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'la place' often means a public square, it is also commonly",
+        "why": "Restates senses 0 and 1; a false-friend note vs English 'place' is needed."
+      }
+    ],
+    "growth": 1.068
   }
 }

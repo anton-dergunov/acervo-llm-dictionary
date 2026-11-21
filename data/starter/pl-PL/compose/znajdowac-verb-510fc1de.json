@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to find; (with się) to be located",
+    "primaryGloss": "to find",
+    "emotion": "hopeful and searching, carefully looking for something lost",
+    "notes": [
+      "Imperfective verb (used for repeated actions or ongoing processes); its perfective counterpart is 'znaleźć' (for a single completed action).",
+      "With the reflexive pronoun 'się' ('znajdować się'), it means 'to be located' or 'to find oneself' somewhere."
+    ],
+    "senses": [
+      {
+        "id": "nixuuo48lavau2l",
+        "order": 0,
+        "definition": "To discover where something or someone is after searching or by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to find",
+              "to discover",
+              "to come across"
+            ]
+          }
+        ],
+        "domain": "discovery",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "q2d2ib3k7e6zyt8",
+            "text": "Często znajduję ciekawe książki w tym sklepie.",
+            "textLang": "pl",
+            "translation": "I often find interesting books in this shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "znajduję",
+            "matchedTranslationForm": "find"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iloaie8oqh647ea",
+        "order": 1,
+        "definition": "(reflexive, znajdować się) To be located in a specific place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be located",
+              "to be situated",
+              "to be found"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "d2z5zo5tydriuqd",
+            "text": "Szpital znajduje się blisko stacji.",
+            "textLang": "pl",
+            "translation": "The hospital is located near the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "znajduje się",
+            "matchedTranslationForm": "is located"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "znajdować",
+    "lemma": "znajdować",
+    "reading": null,
+    "ipa": "/znajˈdɔ.vatɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to find; to locate",
     "primaryGloss": "to find",
     "emotion": "hopeful and searching, carefully looking for something lost",
@@ -163,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Staram się znajdować moje klucze w pokoju.",
+        "why": "Wrong aspect: a single attempt to find keys requires perfective 'znaleźć', not imperfective 'znajdować'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to find; to locate",
+        "why": "Omits the very common reflexive sense 'to be located' present in sense 1."
+      }
+    ],
+    "growth": 1.105
   }
 }

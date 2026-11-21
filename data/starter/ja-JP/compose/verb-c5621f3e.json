@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "待つ",
     "lemma": "待つ",
+    "reading": "まつ",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wait; to await",
+    "primaryGloss": "wait",
+    "emotion": "patient and grounded, focus directed toward the arrival of something expected",
+    "notes": [
+      "Godan verb (待たない, 待ちます, 待って). Takes を for the person or thing waited for (バスを待つ, 'to wait for the bus').",
+      "The te-form 待って is very common in requests: ちょっと待ってください ('Please wait a moment')."
+    ],
+    "senses": [
+      {
+        "id": "f0zat45lpx3gby3",
+        "order": 0,
+        "definition": "To stay in a place or delay acting until someone arrives or something happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wait",
+              "await"
+            ]
+          }
+        ],
+        "domain": "waiting",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "z6k1bvn4s1greig",
+            "text": "駅で友達を待つ。",
+            "textLang": "ja",
+            "translation": "I wait for my friend at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and prepared, passing the time while looking for someone",
+            "note": null,
+            "matchedForm": "待つ",
+            "matchedTranslationForm": "wait"
+          },
+          {
+            "id": "mornxu2n83c2uep",
+            "text": "少し待ってください。",
+            "textLang": "ja",
+            "translation": "Please wait a moment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "待って",
+            "matchedTranslationForm": "wait"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "待つ",
+    "lemma": "待つ",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Hiragana reading まつ is missing for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(anticipation) To anticipate or look forward to something with expectation.",
+        "why": "待つ simply means 'to wait for / await'; 'look forward to' is 楽しみにする."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Often confused with 'to hang on' (matte), but 'matsu' is the general verb",
+        "why": "待って is just the te-form of 待つ; both notes are unhelpful filler."
+      }
+    ],
+    "growth": 0.696
   }
 }

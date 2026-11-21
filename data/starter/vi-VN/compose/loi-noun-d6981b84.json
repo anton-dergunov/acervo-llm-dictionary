@@ -58,6 +58,117 @@
     "headword": "lỗi",
     "lemma": "lỗi",
     "reading": null,
+    "ipa": "/loj˦ˀ˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "mistake; fault; bug",
+    "primaryGloss": "mistake",
+    "emotion": "apologetic and cautious, realizing something went wrong",
+    "notes": [
+      "Commonly heard in 'xin lỗi' (sorry / excuse me, literally 'ask pardon for a fault') and 'lỗi của + person' (someone's fault)."
+    ],
+    "senses": [
+      {
+        "id": "x2bg9ysvumev8gd",
+        "order": 0,
+        "definition": "Something done wrong, or responsibility for something that went wrong.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mistake",
+              "fault",
+              "error"
+            ]
+          }
+        ],
+        "domain": "mistake",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "7ldi4n9kl7umcih",
+            "text": "Đây là lỗi của tôi.",
+            "textLang": "vi",
+            "translation": "This is my fault.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and honest, taking responsibility",
+            "note": null,
+            "matchedForm": "lỗi",
+            "matchedTranslationForm": "fault"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ih2eol8g9otdakx",
+        "order": 1,
+        "definition": "A flaw or defect in a machine, system, or computer program.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bug",
+              "error",
+              "glitch"
+            ]
+          }
+        ],
+        "domain": "technology",
+        "emoji": "🐛",
+        "examples": [
+          {
+            "id": "k33f9hovthksb0i",
+            "text": "Chương trình này có nhiều lỗi quá.",
+            "textLang": "vi",
+            "translation": "This program has too many bugs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated while looking at a computer screen",
+            "note": null,
+            "matchedForm": "lỗi",
+            "matchedTranslationForm": "bugs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "lỗi",
+    "lemma": "lỗi",
+    "reading": null,
     "ipa": "/lɔj˦ˀ˥/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/lɔj˦ˀ˥/",
+        "why": "'lỗi' has vowel /o/ (ô), not /ɔ/ (o): should be /loj˦ˀ˥/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used broadly to mean a mistake, a technical bug in software, or",
+        "why": "Merely restates the glosses instead of giving useful collocations ('xin lỗi', 'lỗi của ai')."
+      }
+    ],
+    "growth": 1.25
   }
 }

@@ -58,6 +58,93 @@
     "headword": "il fiore",
     "lemma": "fiore",
     "reading": null,
+    "ipa": "/ˈfjo.re/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "flower; blossom",
+    "primaryGloss": "flower",
+    "emotion": "gentle and admiring, smelling something sweet in the sun",
+    "notes": [
+      "The phrase 'in fiore' means 'in bloom' (e.g., 'gli alberi sono in fiore', the trees are in bloom)."
+    ],
+    "senses": [
+      {
+        "id": "1gmf36ysdghzvkm",
+        "order": 0,
+        "definition": "The colored part of a plant that produces seeds or fruit, or a stem cut with it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "blossom",
+              "bloom"
+            ]
+          }
+        ],
+        "domain": "botany",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "8h3elsqsaeq0bca",
+            "text": "Ho visto un bel fiore rosso in giardino.",
+            "textLang": "it",
+            "translation": "I saw a nice red flower in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fiore",
+            "matchedTranslationForm": "flower"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "1gmf36ysdghzvkm",
+      "from": "La parte colorata di una pianta da cui nascono i frutti.",
+      "to": "The colored part of a plant from which fruits develop.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:11Z"
+    },
+    {
+      "sense": "vxcnsb0rxsqas6g",
+      "from": "La parte migliore o più scelta di qualcosa.",
+      "to": "The best or most chosen part of something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il fiore",
+    "lemma": "fiore",
+    "reading": null,
     "ipa": "/ˈfjɔː.re/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,22 +248,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "1gmf36ysdghzvkm",
-      "from": "La parte colorata di una pianta da cui nascono i frutti.",
-      "to": "The colored part of a plant from which fruits develop.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:11Z"
-    },
-    {
-      "sense": "vxcnsb0rxsqas6g",
-      "from": "La parte migliore o più scelta di qualcosa.",
-      "to": "The best or most chosen part of something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The best or most chosen part of something.",
+        "why": "Literary/idiomatic sense ('il fiore della gioventù') not appropriate as a core sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the living blossom on a plant and, when cut",
+        "why": "Pure filler; works exactly like English 'flower'."
+      }
+    ],
+    "growth": 0.767
+  }
 }

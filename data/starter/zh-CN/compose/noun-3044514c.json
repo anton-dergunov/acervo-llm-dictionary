@@ -74,6 +74,95 @@
     "primaryGloss": "leg",
     "emotion": null,
     "notes": [
+      "Takes the classifier 条 (tiáo), e.g., 两条腿 (two legs).",
+      "Also used for the legs of furniture, such as 桌子腿 (table leg)."
+    ],
+    "senses": [
+      {
+        "id": "vhr01whabepr2fu",
+        "order": 0,
+        "definition": "The limb of a person or animal used for standing and walking; also the leg of an animal eaten as food, or a support on a piece of furniture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "64xropmi3wfwm6p",
+            "text": "我的腿很酸。",
+            "textLang": "zh",
+            "translation": "My legs are very sore.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and slightly pained, feeling the ache after exercise",
+            "note": null,
+            "matchedForm": "腿",
+            "matchedTranslationForm": "legs"
+          },
+          {
+            "id": "y4iu0hnla46ms01",
+            "text": "我想吃鸡腿。",
+            "textLang": "zh",
+            "translation": "I want to eat a chicken leg.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a meal",
+            "note": null,
+            "matchedForm": "腿",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "腿",
+    "lemma": "腿",
+    "reading": "tuǐ",
+    "ipa": "/tʰu̯ei̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg",
+    "primaryGloss": "leg",
+    "emotion": null,
+    "notes": [
       "In Chinese, 腿 is used for the entire leg from the hip to the ankle. When referring specifically to the foot, use 脚 (jiǎo)."
     ],
     "senses": [
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(food) The part of an animal, such as a chicken or pig",
+        "why": "Animal leg/meat is the same core meaning; furniture leg (桌子腿) is a better extension."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the common classifier 条 (tiáo) instead of stating leg vs. foot."
+      }
+    ],
+    "growth": 0.955
   }
 }

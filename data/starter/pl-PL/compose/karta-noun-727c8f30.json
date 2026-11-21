@@ -68,6 +68,158 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "card; playing card; menu",
+    "primaryGloss": "card",
+    "emotion": "matter-of-fact and focused on the transaction at hand",
+    "notes": [
+      "Do not confuse with 'kartka' (a sheet of paper, note, or postcard)."
+    ],
+    "senses": [
+      {
+        "id": "3t2tbur6jo1zsmf",
+        "order": 0,
+        "definition": "A small plastic card used for paying, withdrawing money, or proving identity or membership.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "card",
+              "bank card",
+              "credit card"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "d7aadhp5l8qbbjb",
+            "text": "Czy mogę zapłacić kartą?",
+            "textLang": "pl",
+            "translation": "Can I pay by card?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and routine, a standard question at a checkout",
+            "note": null,
+            "matchedForm": "kartą",
+            "matchedTranslationForm": "card"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "01rvh68r5mlayns",
+        "order": 1,
+        "definition": "One of a set of stiff paper pieces used for playing games.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "playing card",
+              "card"
+            ]
+          }
+        ],
+        "domain": "games",
+        "emoji": "🃏",
+        "examples": [
+          {
+            "id": "turjqi2r5kpm2ln",
+            "text": "Gramy w karty.",
+            "textLang": "pl",
+            "translation": "We are playing cards.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and leisurely, enjoying a hobby with friends",
+            "note": null,
+            "matchedForm": "karty",
+            "matchedTranslationForm": "cards"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4293hdc0flindm5",
+        "order": 2,
+        "definition": "A printed list of food and drinks in a restaurant (often in 'karta dań'), or an official record sheet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu",
+              "card",
+              "chart"
+            ]
+          }
+        ],
+        "domain": "document",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "p9l1lmpymo6dysn",
+            "text": "Czy mogę prosić o kartę dań?",
+            "textLang": "pl",
+            "translation": "May I have the menu?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and expectant, ordering food at a table",
+            "note": null,
+            "matchedForm": "kartę",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "karta",
+    "lemma": "karta",
+    "reading": null,
+    "ipa": "/ˈkar.ta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "card; playing card; page",
     "primaryGloss": "card",
     "emotion": "matter-of-fact and focused on the transaction at hand",
@@ -203,5 +355,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "card; playing card; page",
+        "why": "'page' is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for many types of flat objects, including credit cards and",
+        "why": "Merely restates the senses already listed."
+      }
+    ],
+    "growth": 0.839
   }
 }

@@ -68,6 +68,94 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "coffee",
+    "primaryGloss": "coffee",
+    "emotion": "relaxed and social, anticipating a pleasant break or conversation",
+    "notes": [
+      "Has an irregular plural: οι καφέδες. The phrase πάμε για (έναν) καφέ ('let's go for a coffee') is a very common way to suggest meeting up. Do not confuse masculine ο καφές (the drink) with neuter indeclinable το καφέ (the café) or το καφενείο (traditional coffee house)."
+    ],
+    "senses": [
+      {
+        "id": "r507ijpdyptutq6",
+        "order": 0,
+        "definition": "A hot or cold drink made from roasted coffee beans, or a cup of this drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffee"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "2vcpxhfe3mud4pt",
+            "text": "Θέλω έναν καφέ, παρακαλώ.",
+            "textLang": "el",
+            "translation": "I would like a coffee, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and appreciative, looking forward to a warm drink",
+            "note": null,
+            "matchedForm": "καφέ",
+            "matchedTranslationForm": "coffee"
+          },
+          {
+            "id": "3ez4ak28mxp1f2a",
+            "text": "Πάμε για έναν καφέ στο κέντρο;",
+            "textLang": "el",
+            "translation": "Shall we go for a coffee downtown?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and inviting, suggesting a casual outing",
+            "note": null,
+            "matchedForm": "καφέ",
+            "matchedTranslationForm": "coffee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο καφές",
+    "lemma": "καφές",
+    "reading": null,
+    "ipa": "/kaˈfes/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "coffee; coffee house",
     "primaryGloss": "coffee",
     "emotion": "relaxed and social, anticipating a pleasant break or conversation",
@@ -159,5 +247,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A place of business where coffee and light refreshments are served.",
+        "why": "Masculine 'ο καφές' means the drink, not a café (which is neuter indeclinable 'το καφέ')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "people often just use 'καφέ' to refer to a café",
+        "why": "Confuses masculine 'ο καφές' (acc. 'καφέ') with the separate neuter noun 'το καφέ' (café)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "coffee; coffee house",
+        "why": "'ο καφές' does not mean 'coffee house'."
+      }
+    ],
+    "growth": 0.744
   }
 }

@@ -58,6 +58,117 @@
     "headword": "het licht",
     "lemma": "licht",
     "reading": null,
+    "ipa": "/lɪxt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "light; traffic light",
+    "primaryGloss": "light",
+    "emotion": "warm and glowing, like a lamp turning on in a dark room",
+    "notes": [
+      "Common expressions: 'het licht aandoen' (to turn on the light) and 'het licht uitdoen' (to turn off the light).",
+      "In traffic, 'het licht' (or 'het stoplicht') often refers to a traffic light: 'voor het rode licht wachten' (to wait at the red light)."
+    ],
+    "senses": [
+      {
+        "id": "nu6987v6s7zofps",
+        "order": 0,
+        "definition": "The brightness from the sun, fire, or a lamp that lets you see things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "daylight"
+            ]
+          }
+        ],
+        "domain": "brightness",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "8dv6egtmo25ngdf",
+            "text": "Er komt veel licht door het grote raam.",
+            "textLang": "nl",
+            "translation": "A lot of light comes through the big window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "licht",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d6c253q786f1q6k",
+        "order": 1,
+        "definition": "An electric lamp or light source, including a traffic light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lamp",
+              "traffic light"
+            ]
+          }
+        ],
+        "domain": "lamp",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "81fli54bd55wtn7",
+            "text": "Doe het licht aan in de woonkamer.",
+            "textLang": "nl",
+            "translation": "Turn on the light in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and routine, reaching for the wall switch as the room grows dark",
+            "note": null,
+            "matchedForm": "licht",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het licht",
+    "lemma": "licht",
+    "reading": null,
     "ipa": "/vəlɪxt/",
     "pos": "noun",
     "gender": "neuter",
@@ -159,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/vəlɪxt/",
+        "why": "IPA is for 'wellicht' or 'verlicht', not 'licht' (/lɪxt/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Doe het licht aan in de woonkamer.",
+        "why": "Turning on the light refers to electric lighting (sense 1), not natural brightness (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'licht' both for the physical brightness",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.351
   }
 }

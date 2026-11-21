@@ -72,6 +72,74 @@
     "primaryGloss": "television",
     "emotion": "relaxed and cozy, sitting in the living room in the evening",
     "notes": [
+      "The plural is تِلْفَازَات (tilfāzāt). In everyday speech and media, the loanword تِلِفِزْيُون (tilifizyūn) is also very common."
+    ],
+    "senses": [
+      {
+        "id": "1cdf769k1f33ex7",
+        "order": 0,
+        "definition": "An electronic device with a screen used for watching broadcast programmes and shows.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "pi33jng52gnwpv1",
+            "text": "اشْتَرَى أَبِي تِلْفَازًا جَدِيدًا لِلْغُرْفَةِ.",
+            "textLang": "ar",
+            "translation": "My father bought a new television for the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and happy about a new purchase for the house",
+            "note": null,
+            "matchedForm": "تِلْفَازًا",
+            "matchedTranslationForm": "television"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "تِلْفَاز",
+    "lemma": "تلفاز",
+    "reading": null,
+    "ipa": "/tilˈfaːz/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "television",
+    "primaryGloss": "television",
+    "emotion": "relaxed and cozy, sitting in the living room in the evening",
+    "notes": [
       "تلفاز is the standard Modern Standard Arabic word for television, often shortened to تلفيزيون in everyday spoken dialects."
     ],
     "senses": [
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "تلفاز is the standard Modern Standard Arabic word for television, often shortened to تلفيزيون",
+        "why": "تلفيزيون (tilifizyūn) is longer than تلفاز (tilfāz), not a shortened form of it."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "television, tv, screen",
+        "why": "'Screen' is شَاشَة (shāsha), not تِلْفَاز."
+      }
+    ],
+    "growth": 1.012
   }
 }

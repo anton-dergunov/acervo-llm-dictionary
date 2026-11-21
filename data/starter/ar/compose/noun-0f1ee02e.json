@@ -72,6 +72,74 @@
     "primaryGloss": "wall",
     "emotion": "solid and structural, framing the room",
     "notes": [
+      "Plural: جُدْرَان (judrān).",
+      "Often interchangeable with حَائِط (ḥāʾiṭ), whereas سُور (sūr) refers to a surrounding outdoor wall or fence."
+    ],
+    "senses": [
+      {
+        "id": "h1955015juc59zl",
+        "order": 0,
+        "definition": "A vertical structure that divides or encloses a room or building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wall"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🧱",
+        "examples": [
+          {
+            "id": "i5g5pb7np6s7jsm",
+            "text": "اللَّوْحَةُ مُعَلَّقَةٌ عَلَى الجِدَارِ.",
+            "textLang": "ar",
+            "translation": "The painting is hanging on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الجِدَارِ",
+            "matchedTranslationForm": "wall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جِدَار",
+    "lemma": "جِدَار",
+    "reading": null,
+    "ipa": "/d͡ʒiˈdaːr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧱",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "wall",
+    "primaryGloss": "wall",
+    "emotion": "solid and structural, framing the room",
+    "notes": [
       "Used mainly for the walls of a room, house, or building.",
       "Differs from حائط (ḥā'iṭ), which often refers specifically to an outdoor wall or a partition, though they are frequently interchangeable."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "اللوحة تعلَق على الجِدَار.",
+        "why": "Wrong vocalization and verb form for 'hangs' (state); should be مُعَلَّقَة."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used mainly for the walls of a room, house, or building.",
+        "why": "Restates the definition; should give the broken plural جُدْرَان instead."
+      }
+    ],
+    "growth": 0.876
   }
 }

@@ -57,6 +57,76 @@
     "language": "zh",
     "headword": "年轻",
     "lemma": "年轻",
+    "reading": "niánqīng",
+    "ipa": "/ni̯ɛn˧˥ tɕʰiŋ˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Describing",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "young",
+    "primaryGloss": "young",
+    "emotion": "warm and bright, smiling at someone's vitality",
+    "notes": [
+      "Used mainly for people (typically teenagers to adults in their twenties or thirties), not for small children (where 小 is used) or objects.",
+      "To say 'young people', add 人: 年轻人 (niánqīngrén)."
+    ],
+    "senses": [
+      {
+        "id": "kmgb805y5i5ec6r",
+        "order": 0,
+        "definition": "Of a person: not old; having lived for a relatively short time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "young",
+              "youthful"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "j369gsafvktlfnl",
+            "text": "他们虽然很年轻，但是工作经验很丰富。",
+            "textLang": "zh",
+            "translation": "Although they are very young, they have a lot of work experience.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "年轻",
+            "matchedTranslationForm": "young"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "年轻",
+    "lemma": "年轻",
     "reading": "nián qīng",
     "ipa": "/ni̯ɛn˧˥ tɕʰiŋ˥/",
     "pos": "adj",
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[0].text",
+        "quote": "他们虽然很年轻，但是工作 experience 很丰富。",
+        "why": "English word 'experience' left untranslated inside the Chinese example sentence."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe people who have not lived many years",
+        "why": "Restates the definition without adding useful learner information."
+      }
+    ],
+    "growth": 0.776
   }
 }

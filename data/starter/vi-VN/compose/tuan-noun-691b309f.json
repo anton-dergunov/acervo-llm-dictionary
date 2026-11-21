@@ -68,6 +68,73 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": "steady and regular, counting the days of the routine",
+    "notes": [
+      "Used directly with demonstratives and numbers without a classifier: 'tuần này' (this week), 'tuần trước' (last week), 'tuần sau' or 'tuần tới' (next week), 'hai tuần' (two weeks)."
+    ],
+    "senses": [
+      {
+        "id": "ajw9feaoc4vxhcj",
+        "order": 0,
+        "definition": "A period of seven days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📆",
+        "examples": [
+          {
+            "id": "kt2sedzftphuhop",
+            "text": "Tôi sẽ đi du lịch vào tuần tới.",
+            "textLang": "vi",
+            "translation": "I will go traveling next week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and looking forward to the upcoming holiday",
+            "note": null,
+            "matchedForm": "tuần",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tuần",
+    "lemma": "tuần",
+    "reading": null,
+    "ipa": "/twən˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "week; patrol",
     "primaryGloss": "week",
     "emotion": "steady and regular, counting the days of the routine",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(security) An act of guarding or walking around an area",
+        "why": "'Patrol' is a bound root in 'đi tuần' (verb), not a standalone A2 noun sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "week; patrol",
+        "why": "Includes 'patrol', which is not a standalone noun sense."
+      }
+    ],
+    "growth": 0.524
   }
 }

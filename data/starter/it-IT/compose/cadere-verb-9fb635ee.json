@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to fall",
+    "primaryGloss": "to fall",
+    "emotion": "surprised and unsteady, reacting to a sudden slip",
+    "notes": [
+      "Intransitive verb taking 'essere' in compound tenses ('è caduto'). Irregular past ('caddi') and future ('cadrò').",
+      "To express transitive 'to drop (something)', use 'far cadere' (e.g., 'Ho fatto cadere le chiavi')."
+    ],
+    "senses": [
+      {
+        "id": "3h2tehy9kned0n1",
+        "order": 0,
+        "definition": "To move downward and hit the ground accidentally, or of an object, to come down from a higher position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to fall down",
+              "to drop"
+            ]
+          }
+        ],
+        "domain": "motion",
+        "emoji": "🤸",
+        "examples": [
+          {
+            "id": "qysizvdodpykrjr",
+            "text": "Attento a non cadere sul ghiaccio.",
+            "textLang": "it",
+            "translation": "Careful not to fall on the ice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warning urgently and pointing at the danger",
+            "note": null,
+            "matchedForm": "cadere",
+            "matchedTranslationForm": "fall"
+          },
+          {
+            "id": "l1jiu9649nq6i1d",
+            "text": "Le foglie cominciano a cadere dagli alberi.",
+            "textLang": "it",
+            "translation": "The leaves are starting to fall from the trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cadere",
+            "matchedTranslationForm": "fall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "3h2tehy9kned0n1",
+      "from": "Perdere l'equilibrio e finire per terra.",
+      "to": "To lose one's balance and hit the ground.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    },
+    {
+      "sense": "o4s4y3gliy7htye",
+      "from": "Lasciare andare o scivolare qualcosa fino a terra.",
+      "to": "To let go of something so it falls to the ground.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "cadere",
+    "lemma": "cadere",
+    "reading": null,
+    "ipa": "/kaˈde.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to fall; to drop",
     "primaryGloss": "to fall",
     "emotion": "surprised and unsteady, reacting to a sudden slip",
@@ -162,22 +271,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "3h2tehy9kned0n1",
-      "from": "Perdere l'equilibrio e finire per terra.",
-      "to": "To lose one's balance and hit the ground.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    },
-    {
-      "sense": "o4s4y3gliy7htye",
-      "from": "Lasciare andare o scivolare qualcosa fino a terra.",
-      "to": "To let go of something so it falls to the ground.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To let go of something so it falls to the ground.",
+        "why": "Cadere is intransitive; transitive 'to drop' requires 'far cadere' (as in the example)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular forms (passato remoto caddi, future cadrò) and how to express transitive 'drop'."
+      }
+    ],
+    "growth": 1.165
+  }
 }

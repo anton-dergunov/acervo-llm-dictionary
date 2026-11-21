@@ -58,6 +58,113 @@
     "headword": "पालतू जानवर",
     "lemma": "पालतू जानवर",
     "reading": null,
+    "ipa": "/paːlt̪uː dʒaːnvəɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐶",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pet; domestic animal",
+    "primaryGloss": "pet",
+    "emotion": "warm and affectionate, thinking of a beloved companion at home",
+    "notes": [
+      "Compound of पालतू (pāltū, 'tame, domesticated') and जानवर (jānvar, 'animal')."
+    ],
+    "senses": [
+      {
+        "id": "1zgak0f8w4sv5qe",
+        "order": 0,
+        "definition": "An animal kept at home for companionship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pet"
+            ]
+          }
+        ],
+        "domain": "companionship",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "3hlu9rttfp6pp6x",
+            "text": "मेरे घर में एक पालतू जानवर है।",
+            "textLang": "hi",
+            "translation": "I have a pet at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and happy, sharing a detail about one's home life",
+            "note": null,
+            "matchedForm": "पालतू जानवर",
+            "matchedTranslationForm": "pet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sa3xg64ojqywyr5",
+        "order": 1,
+        "definition": "An animal tamed and kept by humans for work, food, or farming.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "domestic animal"
+            ]
+          }
+        ],
+        "domain": "farming",
+        "emoji": "🐄",
+        "examples": [
+          {
+            "id": "zgqv9heg3g0jy03",
+            "text": "गाय एक उपयोगी पालतू जानवर है।",
+            "textLang": "hi",
+            "translation": "The cow is a useful domestic animal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पालतू जानवर",
+            "matchedTranslationForm": "domestic animal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पालतू जानवर",
+    "lemma": "पालतू जानवर",
+    "reading": null,
     "ipa": "/ˈpaːl.t̪uː ˌdʒaːn.vəɾ/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "गायें एक उपयोगी पालतू जानवर हैं।",
+        "why": "Number mismatch between plural subject 'गायें' (cows) and singular 'एक ... जानवर'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While it literally means 'domesticated animal', it is the standard way",
+        "why": "Restates the senses and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "Do not confuse this with 'āwārā jānvar', which refers to a",
+        "why": "An antonym is not a word learners will confuse this with."
+      }
+    ],
+    "growth": 0.601
   }
 }

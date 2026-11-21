@@ -58,6 +58,138 @@
     "headword": "sudah",
     "lemma": "sudah",
     "reading": null,
+    "ipa": "/ˈsu.dah/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "already; enough",
+    "primaryGloss": "already",
+    "emotion": null,
+    "notes": [
+      "To negate 'sudah' ('have not yet'), use 'belum', not 'tidak'. Asking 'Sudah makan?' ('Have you eaten?') belongs to everyday small talk and is answered with 'Sudah' or 'Belum'.",
+      "Do not confuse 'sudah' with 'telah'. Both mean 'already', but 'telah' is formal and mainly used in writing."
+    ],
+    "senses": [
+      {
+        "id": "0ly3o50bahi9z3e",
+        "order": 0,
+        "definition": "Used before a verb or adjective to show that an action is completed or a state has been reached.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already",
+              "done"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "r3lszggmzrnbh0b",
+            "text": "Saya sudah makan.",
+            "textLang": "id",
+            "translation": "I have already eaten.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and content, signalling the end of a meal",
+            "note": null,
+            "matchedForm": "sudah",
+            "matchedTranslationForm": "already"
+          },
+          {
+            "id": "375v2ntr05iqv4n",
+            "text": "Hari sudah malam.",
+            "textLang": "id",
+            "translation": "It is already night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and a little weary, acknowledging the passing of the day",
+            "note": null,
+            "matchedForm": "sudah",
+            "matchedTranslationForm": "already"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6fz1j15k6xpnn69",
+        "order": 1,
+        "definition": "Used to tell someone to stop doing something or to show that a situation is over.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "enough",
+              "that's enough",
+              "stop"
+            ]
+          }
+        ],
+        "domain": "exclamation",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "xoj4k23azso29qk",
+            "text": "Sudah, jangan menangis lagi.",
+            "textLang": "id",
+            "translation": "Enough, don't cry anymore.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and firm, trying to comfort someone",
+            "note": null,
+            "matchedForm": "Sudah",
+            "matchedTranslationForm": "Enough"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "sudah",
+    "lemma": "sudah",
+    "reading": null,
     "ipa": "/ˈsudah/",
     "pos": "adv",
     "gender": null,
@@ -201,5 +333,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To have completed an action before the present time.",
+        "why": "Adverb/aspect marker is defined as an infinitive verb phrase ('To have...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To signify that a state or condition has been reached.",
+        "why": "Completed action and reached state are the same aspectual meaning of 'already'; merge them."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Sudah is used to indicate that an action is completed.",
+        "why": "Repeats the definition and gloss; instead, note 'belum' (not yet) as its negative."
+      }
+    ],
+    "growth": 0.898
   }
 }

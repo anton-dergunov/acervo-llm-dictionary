@@ -72,6 +72,115 @@
     "primaryGloss": "sister",
     "emotion": "warm and informal, reflecting a close family bond",
     "notes": [
+      "The ligature 'œu' is pronounced /œ/ (like in 'peur' or 'cœur').",
+      "For an older or younger sister, everyday French most often uses 'grande sœur' and 'petite sœur' ('sœur aînée' and 'sœur cadette' are more formal)."
+    ],
+    "senses": [
+      {
+        "id": "h7pdr613ka7qkjn",
+        "order": 0,
+        "definition": "A girl or woman who has the same parents as another person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sister"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👭",
+        "examples": [
+          {
+            "id": "1s89yza7zteq0d0",
+            "text": "C'est ma grande sœur.",
+            "textLang": "fr",
+            "translation": "She is my older sister.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sœur",
+            "matchedTranslationForm": "sister"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kipujowh9g9owi3",
+        "order": 1,
+        "definition": "A female member of a Christian religious community, also used as her title.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nun",
+              "sister"
+            ]
+          }
+        ],
+        "domain": "religion",
+        "emoji": "⛪",
+        "examples": [
+          {
+            "id": "48ylwbjb6lkml5o",
+            "text": "La sœur travaille à l'hôpital de la ville.",
+            "textLang": "fr",
+            "translation": "The nun works at the city hospital.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "respectful and matter-of-fact",
+            "note": null,
+            "matchedForm": "sœur",
+            "matchedTranslationForm": "nun"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la sœur",
+    "lemma": "sœur",
+    "reading": null,
+    "ipa": "/sœʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👭",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "sister; nun",
+    "primaryGloss": "sister",
+    "emotion": "warm and informal, reflecting a close family bond",
+    "notes": [
       "While 'sœur' is used for a female sibling, it is also the term for a nun in a religious order.",
       "Do not confuse 'sœur' (sister) with 'sueur' (sweat); they sound different to a native speaker."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'sœur' is used for a female sibling, it is also the",
+        "why": "merely restates the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Elle est ma sœur aînée.",
+        "why": "With a possessive determiner + noun, natural French uses 'C'est ma sœur', not 'Elle est'."
+      }
+    ],
+    "growth": 1.111
   }
 }

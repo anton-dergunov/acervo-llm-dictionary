@@ -60,6 +60,75 @@
     "headword": "il negozio",
     "lemma": "negozio",
     "reading": null,
+    "ipa": "/neˈɡɔt.tsjo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "shop; store",
+    "primaryGloss": "shop",
+    "emotion": "bustling and purposeful, walking down a busy street to run errands",
+    "notes": [
+      "The plural is 'i negozi' (with a single '-i').",
+      "Do not confuse with the false friend 'magazzino', which means 'warehouse' (though 'grande magazzino' means 'department store')."
+    ],
+    "senses": [
+      {
+        "id": "x7u26j6ly3xfor2",
+        "order": 0,
+        "definition": "A place where goods are sold to the public.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "store"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "o04lcccdd7t56eh",
+            "text": "Ho comprato questa giacca in un piccolo negozio in centro.",
+            "textLang": "it",
+            "translation": "I bought this jacket in a small shop downtown.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased with a recent purchase, showing something off",
+            "note": null,
+            "matchedForm": "negozio",
+            "matchedTranslationForm": "shop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il negozio",
+    "lemma": "negozio",
+    "reading": null,
     "ipa": "/neˈɡɔtsjo/",
     "pos": "noun",
     "gender": "masculine",
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(business) Commercial activity or business dealings.",
+        "why": "Archaic or strictly legal sense in modern Italian; not used for everyday business."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "È partito per Roma per affari di negozio.",
+        "why": "Nobody says 'affari di negozio' in modern Italian; it is completely unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'negozio' for a standard retail shop or store.",
+        "why": "Restates the definition and gloss without adding useful information."
+      }
+    ],
+    "growth": 0.773
   }
 }

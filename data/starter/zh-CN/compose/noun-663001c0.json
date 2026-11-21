@@ -57,6 +57,74 @@
     "language": "zh",
     "headword": "城市",
     "lemma": "城市",
+    "reading": "chéngshì",
+    "ipa": "/ʈʂʰəŋ˧˥ ʂɻ̩˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "wide-eyed and observant, looking at the tall buildings and busy streets",
+    "notes": [
+      "Takes the measure word 座 (zuò) or 个 (gè)."
+    ],
+    "senses": [
+      {
+        "id": "ridpvrnf32yh9jm",
+        "order": 0,
+        "definition": "A large and densely populated area where many people live and work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "kpakcben0rty973",
+            "text": "北京是一座美丽的城市。",
+            "textLang": "zh",
+            "translation": "Beijing is a beautiful city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "城市",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "城市",
+    "lemma": "城市",
     "reading": "chéng shì",
     "ipa": "/ʈʂʰəŋ˧˥ ʂɻ̩˥˩/",
     "pos": "noun",
@@ -116,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(town) A large town, specifically one that serves as an administrative",
+        "why": "'City' and 'large town' are one single concept in Chinese (城市)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse this with '城', which usually refers to",
+        "why": "Unhelpful note; 城commonly means city/downtown (e.g. 进城), and the classifier 座 is missing."
+      }
+    ],
+    "growth": 0.427
   }
 }

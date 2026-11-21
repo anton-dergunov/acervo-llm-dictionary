@@ -75,6 +75,97 @@
     "primaryGloss": "police officer",
     "emotion": "a sense of public order and reliability, professional and steady",
     "notes": [
+      "Use the feminine form 'die Polizistin' for a female police officer.",
+      "As a weak masculine noun (n-declension), it takes the ending '-en' in the plural and in all singular cases except the nominative ('den/dem/des Polizisten')."
+    ],
+    "senses": [
+      {
+        "id": "5hy91teg7d2sm1x",
+        "order": 0,
+        "definition": "A male member of the police force.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "police officer",
+              "policeman"
+            ]
+          }
+        ],
+        "domain": "law enforcement",
+        "emoji": "👮",
+        "examples": [
+          {
+            "id": "zgylpeuw069832y",
+            "text": "Der Polizist regelt den Verkehr an der Kreuzung.",
+            "textLang": "de",
+            "translation": "The police officer is directing traffic at the intersection.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and observant, describing a common scene",
+            "note": null,
+            "matchedForm": "Polizist",
+            "matchedTranslationForm": "police officer"
+          },
+          {
+            "id": "tsmvqktgy60viz9",
+            "text": "Ich habe den Polizisten nach dem Weg zum Bahnhof gefragt.",
+            "textLang": "de",
+            "translation": "I asked the police officer for directions to the train station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Polizisten",
+            "matchedTranslationForm": "police officer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Polizist",
+    "lemma": "Polizist",
+    "reading": null,
+    "ipa": "/poliˈt͡sɪst/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👮",
+    "topics": [
+      "Work",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "police officer",
+    "primaryGloss": "police officer",
+    "emotion": "a sense of public order and reliability, professional and steady",
+    "notes": [
       "Use the feminine form 'die Polizistin' when referring to a female police officer.",
       "This word is used for any member of the police force, regardless of their specific rank or duty."
     ],
@@ -144,5 +235,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Ich habe den Polizist nach dem Weg zum Bahnhof gefragt.",
+        "why": "Ungrammatical weak noun declension; must be 'den Polizisten' in the accusative case."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "This word is used for any member of the police force,",
+        "why": "Filler note; should instead explain weak masculine noun declension (-en in non-nominative cases)."
+      }
+    ],
+    "growth": 0.821
   }
 }

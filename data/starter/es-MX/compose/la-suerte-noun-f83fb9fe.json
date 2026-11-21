@@ -68,6 +68,96 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "luck",
+    "primaryGloss": "luck",
+    "emotion": "hopeful and reflective, believing in the possibility of a good outcome",
+    "notes": [
+      "Commonly used in 'tener suerte' (to be lucky), 'por suerte' (luckily), and '¡Buena suerte!' or simply '¡Suerte!' (Good luck!).",
+      "Without an adjective, 'tener suerte' means to have good luck."
+    ],
+    "senses": [
+      {
+        "id": "c2rz82plrc6atz2",
+        "order": 0,
+        "definition": "Chance as a force that brings good or bad things; specifically, good fortune.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "luck",
+              "fortune"
+            ]
+          }
+        ],
+        "domain": "chance",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "aft2ho4r52t9gpb",
+            "text": "Tuve mucha suerte en el examen.",
+            "textLang": "es",
+            "translation": "I was very lucky on the exam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and slightly surprised by the positive result",
+            "note": null,
+            "matchedForm": "suerte",
+            "matchedTranslationForm": "lucky"
+          },
+          {
+            "id": "58i3u1ccljcty1o",
+            "text": "¡Te deseo mucha suerte en tu nuevo trabajo!",
+            "textLang": "es",
+            "translation": "I wish you the best of luck in your new job!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "suerte",
+            "matchedTranslationForm": "luck"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la suerte",
+    "lemma": "suerte",
+    "reading": null,
+    "ipa": "/ˈsweɾte/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍀",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "luck; fate; fortune",
     "primaryGloss": "luck",
     "emotion": "hopeful and reflective, believing in the possibility of a good outcome",
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Es cuestión de suerte si el tren llega a tiempo.",
+        "why": "'cuestión de suerte' means 'a matter of luck' (sense 0), not 'a matter of fate'"
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The way in which things happen, seemingly outside of a person's control.",
+        "why": "for A2, 'suerte' is simply 'luck' (good or bad); 'destino' is standard for 'fate'"
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both the random nature of events",
+        "why": "restates the definition instead of teaching useful collocations like 'tener suerte' or '¡buena suerte!'"
+      }
+    ],
+    "growth": 0.77
   }
 }

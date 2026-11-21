@@ -72,6 +72,96 @@
     "primaryGloss": "to say",
     "emotion": "a simple, everyday exchange of information between two people, open and direct",
     "notes": [
+      "Highly irregular: present 'digo, dices, dice...', preterite 'dije, dijiste...', and past participle 'dicho'.",
+      "Use 'decir' to state or communicate something, and 'contar' to tell a story, joke, or secret."
+    ],
+    "senses": [
+      {
+        "id": "l2xbmsrol64m2d0",
+        "order": 0,
+        "definition": "To express something in words, or to communicate information to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to say",
+              "to tell"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "wloo0zdh7ufl4gm",
+            "text": "Ella me dice que tiene hambre.",
+            "textLang": "es",
+            "translation": "She tells me that she is hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple need to a friend",
+            "note": null,
+            "matchedForm": "dice",
+            "matchedTranslationForm": "tells"
+          },
+          {
+            "id": "d1x2yjzzz4qqjqh",
+            "text": "¿Cómo se dice «perro» en inglés?",
+            "textLang": "es",
+            "translation": "How do you say 'dog' in English?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dice",
+            "matchedTranslationForm": "say"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "decir",
+    "lemma": "decir",
+    "reading": null,
+    "ipa": "/deˈθiɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to say; to tell",
+    "primaryGloss": "to say",
+    "emotion": "a simple, everyday exchange of information between two people, open and direct",
+    "notes": [
       "Remember that 'decir' changes to 'dices', 'dice', 'decimos' in the present tense.",
       "Use 'decir' when sharing information, but use 'contar' if you are telling a longer story, a joke, or a secret."
     ],
@@ -182,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "Remember that 'decir' changes to 'dices', 'dice', 'decimos' in the present",
+        "why": "Omits the highly irregular 1st-person singular 'digo' and irregular preterite 'dije'/participle 'dicho'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(naming) To mention a specific name or word.",
+        "why": "'¿Cómo se dice...?' is simply the normal 'to say' sense used impersonally."
+      }
+    ],
+    "growth": 0.871
   }
 }

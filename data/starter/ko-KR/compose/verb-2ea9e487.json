@@ -58,6 +58,96 @@
     "headword": "틀리다",
     "lemma": "틀리다",
     "reading": null,
+    "ipa": "/tʰɯʎʎida/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "to be wrong, to be incorrect",
+    "primaryGloss": "to be wrong",
+    "emotion": "a sharp, slight disappointment when realizing a mistake, like stopping mid-thought",
+    "notes": [
+      "Usually used in the past tense (틀렸다) to mean something is wrong or incorrect: 답이 틀렸어요 (The answer is wrong).",
+      "Do not confuse with 다르다 (to be different). Although native speakers casually say 틀리다 to mean 'different', this is considered non-standard."
+    ],
+    "senses": [
+      {
+        "id": "9rcmpn9ebswmulb",
+        "order": 0,
+        "definition": "To be incorrect, mistaken, or not right.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be wrong",
+              "to be incorrect"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "cod698xn6r7rpei",
+            "text": "제 답이 틀렸어요.",
+            "textLang": "ko",
+            "translation": "My answer is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and slightly embarrassed while admitting an error",
+            "note": null,
+            "matchedForm": "틀렸어요",
+            "matchedTranslationForm": "is wrong"
+          },
+          {
+            "id": "y8qgqya8d13mf47",
+            "text": "전화번호가 틀린 것 같아요.",
+            "textLang": "ko",
+            "translation": "I think the phone number is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "틀린",
+            "matchedTranslationForm": "is wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "틀리다",
+    "lemma": "틀리다",
+    "reading": null,
     "ipa": "/tɯʎʎida/",
     "pos": "verb",
     "gender": null,
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tɯʎʎida/",
+        "why": "Wrong initial consonant: ㅌ is aspirated /tʰ/, not plain /t/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "To be not the same as another; to differ.",
+        "why": "Colloquial misuse for 다르다; teaches a non-standard sense that contradicts note[0]."
+      }
+    ],
+    "growth": 0.829
   }
 }

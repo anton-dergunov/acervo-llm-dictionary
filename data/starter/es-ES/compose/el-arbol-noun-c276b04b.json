@@ -72,6 +72,83 @@
     "primaryGloss": "tree",
     "emotion": "peaceful and grounded, standing in the shade of a green park",
     "notes": [
+      "The plural is 'los árboles', keeping the written accent so the stress stays on the first syllable."
+    ],
+    "senses": [
+      {
+        "id": "8ashv5x06hgyyx7",
+        "order": 0,
+        "definition": "A tall plant with a wooden trunk and branches.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "7ochohkdbmy0aoa",
+            "text": "El pájaro canta en la rama del árbol.",
+            "textLang": "es",
+            "translation": "The bird is singing on the branch of the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching a quiet morning in the garden",
+            "note": null,
+            "matchedForm": "árbol",
+            "matchedTranslationForm": "tree"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "8ashv5x06hgyyx7",
+      "from": "Planta grande con un tronco de madera y ramas que forman una copa.",
+      "to": "A large plant with a wooden trunk and branches that form a top.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el árbol",
+    "lemma": "árbol",
+    "reading": null,
+    "ipa": "/ˈaɾβol/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "tree",
+    "primaryGloss": "tree",
+    "emotion": "peaceful and grounded, standing in the shade of a green park",
+    "notes": [
       "Remember that the plural is 'árboles', moving the stress back to the first syllable."
     ],
     "senses": [
@@ -119,14 +196,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "8ashv5x06hgyyx7",
-      "from": "Planta grande con un tronco de madera y ramas que forman una copa.",
-      "to": "A large plant with a wooden trunk and branches that form a top.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "moving the stress back to the first syllable.",
+        "why": "The stress stays on the first syllable ('ár-') in both singular and plural."
+      }
+    ],
+    "growth": 1.009
+  }
 }

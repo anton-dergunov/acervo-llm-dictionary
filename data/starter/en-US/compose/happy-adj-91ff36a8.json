@@ -68,6 +68,139 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "feliz, contento; encantado",
+    "primaryGloss": "feliz",
+    "emotion": "warm and bright, like sharing good news with a friend",
+    "notes": [
+      "Se usa muy a menudo en saludos y felicitaciones como 'Happy Birthday' (Feliz cumpleaños) o 'Happy New Year' (Feliz Año Nuevo).",
+      "Se diferencia de 'lucky' (afortunado), que se refiere a tener buena suerte y no a un estado de ánimo."
+    ],
+    "senses": [
+      {
+        "id": "f18ts5tx64xypxn",
+        "order": 0,
+        "definition": "Que siente o muestra alegría, placer o satisfacción.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "feliz",
+              "contento",
+              "alegre"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "ppr7yafqv25ez29",
+            "text": "I am very happy to see you today.",
+            "textLang": "en",
+            "translation": "Estoy muy contento de verte hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, expressing genuine pleasure at a reunion",
+            "note": null,
+            "matchedForm": "happy",
+            "matchedTranslationForm": "contento"
+          },
+          {
+            "id": "567g8vupeh87dsw",
+            "text": "They had a happy ending to their trip.",
+            "textLang": "en",
+            "translation": "Su viaje tuvo un final feliz.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, reflecting on a positive experience",
+            "note": null,
+            "matchedForm": "happy",
+            "matchedTranslationForm": "feliz"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ua7o7yigtzx2xdr",
+        "order": 1,
+        "definition": "Dispuesto a hacer algo con gusto y sin inconveniente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "encantado",
+              "con gusto",
+              "contento"
+            ]
+          }
+        ],
+        "domain": "disposición",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "itr5o3ddfnpwh6o",
+            "text": "I am happy to help you with your homework.",
+            "textLang": "en",
+            "translation": "Estoy encantado de ayudarte con tu tarea.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "happy",
+            "matchedTranslationForm": "encantado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "happy",
+    "lemma": "happy",
+    "reading": null,
+    "ipa": "/ˈhæpi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "feliz; contento",
     "primaryGloss": "feliz",
     "emotion": "warm and bright, like sharing good news with a friend",
@@ -162,5 +295,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Sentirse complacido, satisfecho o alegre.",
+        "why": "Adjective defined as a verb in the infinitive ('Sentirse...'); should be defined as a quality."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Algo que causa satisfacción o que sale bien.",
+        "why": "Adjective defined as a noun ('Algo que...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday greeting/wish usage ('Happy birthday', 'Happy New Year') and 'willing/glad to' ('happy to help')."
+      }
+    ],
+    "growth": 1.2
   }
 }

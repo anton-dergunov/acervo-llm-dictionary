@@ -72,6 +72,74 @@
     "primaryGloss": "evening",
     "emotion": "calm and relaxed, winding down at the end of the day",
     "notes": [
+      "Use ''s avonds' for 'in the evening(s)' and 'vanavond' for 'this evening' or 'tonight'.",
+      "Do not confuse 'avond' (evening) with 'nacht' (night), which refers to the late hours when people sleep."
+    ],
+    "senses": [
+      {
+        "id": "da4u606bhzdlc2a",
+        "order": 0,
+        "definition": "The part of the day between the end of the afternoon and the time you go to bed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "evening"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌇",
+        "examples": [
+          {
+            "id": "cc9d55oukst7f8x",
+            "text": "Wij eten meestal om zes uur 's avonds.",
+            "textLang": "nl",
+            "translation": "We usually eat at six o'clock in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "avonds",
+            "matchedTranslationForm": "evening"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de avond",
+    "lemma": "avond",
+    "reading": null,
+    "ipa": "/ˈaːvɔnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌆",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "evening",
+    "primaryGloss": "evening",
+    "emotion": "calm and relaxed, winding down at the end of the day",
+    "notes": [
       "Use 'vanavond' when you mean 'tonight' or 'this evening'.",
       "Do not confuse 'avond' (evening) with 'nacht' (night), which starts later when it is fully dark and people are generally sleeping."
     ],
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "In de avond lees ik graag een boek.",
+        "why": "Native Dutch strongly prefers ''s avonds' over 'in de avond' for habitual actions."
+      }
+    ],
+    "growth": 1.203
   }
 }

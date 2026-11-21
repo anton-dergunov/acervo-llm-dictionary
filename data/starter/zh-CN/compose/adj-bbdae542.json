@@ -70,6 +70,118 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "tired; exhausting; tiring",
+    "primaryGloss": "tired",
+    "emotion": null,
+    "notes": [
+      "Can describe both a person feeling tired (我很累, I'm very tired) and an activity that makes you tired (这工作很累, This job is very tiring).",
+      "Also read lěi ('to accumulate', as in 积累) and léi ('cumbersome')."
+    ],
+    "senses": [
+      {
+        "id": "2yoaih0m1yf1e4p",
+        "order": 0,
+        "definition": "Needing rest or sleep; feeling physical or mental fatigue.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tired",
+              "exhausted",
+              "fatigued"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "4kpki0ctbh63jmq",
+            "text": "今天工作很忙，我真的很累。",
+            "textLang": "zh",
+            "translation": "Work was very busy today, and I am really tired.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and drained, speaking with a heavy sigh after a long shift",
+            "note": null,
+            "matchedForm": "累",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4jteicpz4lk7cyz",
+        "order": 1,
+        "definition": "Causing fatigue; hard and demanding.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tiring",
+              "exhausting",
+              "tiresome"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🏋️",
+        "examples": [
+          {
+            "id": "s4tjjju5wkk5qu9",
+            "text": "搬家是一件很累的事情。",
+            "textLang": "zh",
+            "translation": "Moving house is a very tiring thing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreading the physical effort, groaning at the thought of heavy lifting",
+            "note": null,
+            "matchedForm": "累",
+            "matchedTranslationForm": "tiring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "累",
+    "lemma": "累",
+    "reading": "lèi",
+    "ipa": "/lei̯˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "tired; exhausted; to tire",
     "primaryGloss": "tired",
     "emotion": null,
@@ -165,5 +277,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].glosses",
+        "quote": "tiresome, trixing, hard",
+        "why": "'trixing' is a typo for 'tiring'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tired; exhausted; to tire",
+        "why": "Entry is an adjective with no verb sense, so 'to tire' mismatches; misses 'tiring'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse with 生气 (shēngqì), which means angry; 累 is purely",
+        "why": "Note 0 restates the definition, and Note 1 warns against an unlikely confusion."
+      }
+    ],
+    "growth": 1.111
   }
 }

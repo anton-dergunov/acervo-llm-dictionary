@@ -72,6 +72,96 @@
     "primaryGloss": "face",
     "emotion": "a calm and focused observation, noting someone's features or expression",
     "notes": [
+      "Plural: 'die Gesichter'.",
+      "Commonly used in expressions like 'ein freundliches/trauriges Gesicht machen' (to put on a friendly/sad face)."
+    ],
+    "senses": [
+      {
+        "id": "r29g8f9pco2jwql",
+        "order": 0,
+        "definition": "The front part of a person's head, where the eyes, nose, and mouth are, or the expression shown on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "face",
+              "facial expression"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🙂",
+        "examples": [
+          {
+            "id": "ivdl1nmprok48l0",
+            "text": "Sie wäscht sich das Gesicht mit kaltem Wasser.",
+            "textLang": "de",
+            "translation": "She washes her face with cold water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Gesicht",
+            "matchedTranslationForm": "face"
+          },
+          {
+            "id": "kb7owj85eyaijen",
+            "text": "Er machte ein trauriges Gesicht, als er die Nachricht hörte.",
+            "textLang": "de",
+            "translation": "He made a sad face when he heard the news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sympathetic and observant, noticing someone's change in mood",
+            "note": null,
+            "matchedForm": "Gesicht",
+            "matchedTranslationForm": "face"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Gesicht",
+    "lemma": "Gesicht",
+    "reading": null,
+    "ipa": "/ɡəˈzɪçt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "face",
+    "primaryGloss": "face",
+    "emotion": "a calm and focused observation, noting someone's features or expression",
+    "notes": [
       "While 'Gesicht' refers to the physical face, it is also frequently used to talk about 'facial expressions' (e.g., 'ein freundliches Gesicht machen').",
       "It is a neuter noun, so always use 'das' with it."
     ],
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a neuter noun, so always use 'das' with it.",
+        "why": "Restates the gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'Gesicht' refers to the physical face, it is also frequently used",
+        "why": "Merely repeats the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(expression) The way someone looks or feels, often shown by their eyes",
+        "why": "'Ein trauriges Gesicht machen' ('make a sad face') is the same basic sense."
+      }
+    ],
+    "growth": 0.83
   }
 }

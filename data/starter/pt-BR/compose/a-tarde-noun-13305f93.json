@@ -70,6 +70,74 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "afternoon",
+    "primaryGloss": "afternoon",
+    "emotion": "relaxed and steady, the feeling of the day winding down",
+    "notes": [
+      "To say 'in the afternoon', use 'à tarde' (e.g., 'Trabalho à tarde') or 'de tarde'.",
+      "Without an article, 'tarde' is also an adverb meaning 'late' (e.g., 'Cheguei tarde' — 'I arrived late')."
+    ],
+    "senses": [
+      {
+        "id": "udwumk6dv0m554h",
+        "order": 0,
+        "definition": "The part of the day from noon until evening.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "im49ectmy6881i6",
+            "text": "Eu estudo toda a tarde.",
+            "textLang": "pt",
+            "translation": "I study all afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "studious and calm, focused on the task at hand",
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "afternoon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a tarde",
+    "lemma": "tarde",
+    "reading": null,
+    "ipa": "/ˈtaʁ.dʒi/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "afternoon; late",
     "primaryGloss": "afternoon",
     "emotion": "relaxed and steady, the feeling of the day winding down",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Used as an adverb to indicate that something happens after",
+        "why": "Includes an adverb sense in a noun entry ('a tarde')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "afternoon; late",
+        "why": "'late' is the adverb 'tarde', not the noun 'a tarde'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Portuguese, 'a tarde' refers specifically to the time between",
+        "why": "Restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.657
   }
 }

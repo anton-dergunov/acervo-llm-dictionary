@@ -72,6 +72,114 @@
     "primaryGloss": "cheese",
     "emotion": "relaxed and appreciative, like picking out something tasty for lunch",
     "notes": [
+      "Usually uncountable. Colloquially, 'Käse' is also used to mean 'nonsense' or 'rubbish' (e.g., 'Das ist doch Käse!')."
+    ],
+    "senses": [
+      {
+        "id": "8tnll4nq193r2cu",
+        "order": 0,
+        "definition": "A food made from the pressed curds of milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheese"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧀",
+        "examples": [
+          {
+            "id": "jjgy7tlaernzbv4",
+            "text": "Ich esse gerne Käse auf meinem Brot.",
+            "textLang": "de",
+            "translation": "I like to eat cheese on my bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Käse",
+            "matchedTranslationForm": "cheese"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "msr72jyt9mdplhm",
+        "order": 1,
+        "definition": "Colloquially, something that is silly, untrue, or worthless.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nonsense",
+              "rubbish"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🙄",
+        "examples": [
+          {
+            "id": "o65x5v1tjbtvv28",
+            "text": "Red nicht so einen Käse!",
+            "textLang": "de",
+            "translation": "Don't talk such nonsense!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and dismissive, tired of hearing someone talk foolishly",
+            "note": null,
+            "matchedForm": "Käse",
+            "matchedTranslationForm": "nonsense"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Käse",
+    "lemma": "Käse",
+    "reading": null,
+    "ipa": "/ˈkɛːzə/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧀",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cheese; nonsense",
+    "primaryGloss": "cheese",
+    "emotion": "relaxed and appreciative, like picking out something tasty for lunch",
+    "notes": [
       "Used figuratively, 'Käse' is a common, slightly old-fashioned way to say 'nonsense' or 'rubbish' (e.g., 'Das ist doch Käse!')."
     ],
     "senses": [
@@ -159,5 +267,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ich esse gerne Käse auf mein Brot.",
+        "why": "Wrong case after 'auf': static location requires the dative 'auf meinem Brot'."
+      }
+    ],
+    "growth": 0.882
   }
 }

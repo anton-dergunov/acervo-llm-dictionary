@@ -94,6 +94,75 @@
         "emoji": "🚖",
         "examples": [
           {
+            "id": "x8lh1j1f8woqj8z",
+            "text": "Πήρε ένα ταξί για να πάει στον σταθμό.",
+            "textLang": "el",
+            "translation": "He took a taxi to go to the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ταξί",
+            "matchedTranslationForm": "taxi"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το ταξί",
+    "lemma": "ταξί",
+    "reading": null,
+    "ipa": "/taˈksi/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚖",
+    "topics": [
+      "City",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "taxi; cab",
+    "primaryGloss": "taxi",
+    "emotion": "hurried and relieved to finally spot a ride in the rain",
+    "notes": [
+      "As an indeclinable neuter noun, το ταξί does not change its form in the plural (τα ταξί)."
+    ],
+    "senses": [
+      {
+        "id": "yed5o5iyj6jtwwa",
+        "order": 0,
+        "definition": "A car with a driver that you pay to take you somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "taxi",
+              "cab"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚖",
+        "examples": [
+          {
             "id": "dd6zvgo2v1b5sou",
             "text": "Πήρέ ένα ταξί για να πάει στο σταθμό.",
             "textLang": "el",
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Πήρέ ένα ταξί για να πάει στο σταθμό.",
+        "why": "'Πήρέ' has two accent marks; the correct spelling is 'Πήρε'."
+      }
+    ],
+    "growth": 1.004
   }
 }

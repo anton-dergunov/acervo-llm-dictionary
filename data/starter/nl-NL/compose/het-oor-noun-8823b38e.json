@@ -68,6 +68,113 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "ear; handle (of a cup)",
+    "primaryGloss": "ear",
+    "emotion": "attentive and curious, leaning in to catch a whisper",
+    "notes": [
+      "The plural is 'oren' (written with a single 'o')."
+    ],
+    "senses": [
+      {
+        "id": "6hpzy6lisdv7c12",
+        "order": 0,
+        "definition": "The organ on the side of the head that you use to hear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "ha2f5f8kt79lxtm",
+            "text": "Ik heb een oorontsteking en mijn linkeroor doet pijn.",
+            "textLang": "nl",
+            "translation": "I have an ear infection and my left ear hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "linkeroor",
+            "matchedTranslationForm": "ear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6i674cvo2ie505z",
+        "order": 1,
+        "definition": "The curved handle of a cup, mug, or jug.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "handle"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "rmtb5nlw66lv4ah",
+            "text": "Pak de mok vast bij het oor.",
+            "textLang": "nl",
+            "translation": "Hold the mug by the handle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and instructional, showing how to do something safely",
+            "note": null,
+            "matchedForm": "oor",
+            "matchedTranslationForm": "handle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het oor",
+    "lemma": "oor",
+    "reading": null,
+    "ipa": "/oːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "ear; handle",
     "primaryGloss": "ear",
     "emotion": "attentive and curious, leaning in to catch a whisper",
@@ -160,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'het' for this noun (het oor).",
+        "why": "Restates the gender and article already shown in the headword."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik heb een oorontsteking en mijn linker oor doet pijn.",
+        "why": "Spelling error: 'linkeroor' is written as one word in Dutch."
+      }
+    ],
+    "growth": 0.892
   }
 }

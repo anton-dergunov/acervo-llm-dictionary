@@ -72,6 +72,95 @@
     "primaryGloss": "late",
     "emotion": "rushed and apologetic, looking at a watch and hurrying",
     "notes": [
+      "'Muộn' is the standard word in northern Vietnam; in the south, 'trễ' is more common.",
+      "Do not confuse with 'muốn' (to want), which has a rising tone."
+    ],
+    "senses": [
+      {
+        "id": "1xadaidu6tqyw8p",
+        "order": 0,
+        "definition": "After the expected or usual time, or towards the end of the day or night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "sp8dxymynyg94g9",
+            "text": "Tôi đến muộn vì tắc đường.",
+            "textLang": "vi",
+            "translation": "I arrived late because of a traffic jam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and flustered, explaining a delay to a boss",
+            "note": null,
+            "matchedForm": "muộn",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "4ovbr8lu20qje1d",
+            "text": "Đã muộn rồi, chúng ta về nhà thôi.",
+            "textLang": "vi",
+            "translation": "It's already late, let's go home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "muộn",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "muộn",
+    "lemma": "muộn",
+    "reading": null,
+    "ipa": "/muən˧ˀ˨ʔ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "rushed and apologetic, looking at a watch and hurrying",
+    "notes": [
       "In northern Vietnam, you may also hear 'trễ' for 'late', but 'muộn' is widely understood and used across all regions, especially in the south for time.",
       "Do not confuse 'muộn' (late) with 'buồn' (sad), which sounds similar to learners."
     ],
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In northern Vietnam, you may also hear 'trễ' for 'late', but 'muộn' is",
+        "why": "Backwards: 'muộn' is the standard northern word, while 'trễ' is primarily southern."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "At a late hour in the night or day.",
+        "why": "Both senses mean 'late' in time and should be merged for a beginner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'muộn' (late) with 'buồn' (sad)",
+        "why": "'Muộn' and 'buồn' have different initials and tones; learners rather confuse 'muộn' with 'muốn'."
+      }
+    ],
+    "growth": 0.717
   }
 }

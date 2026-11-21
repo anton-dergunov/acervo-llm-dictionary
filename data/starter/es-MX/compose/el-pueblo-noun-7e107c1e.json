@@ -68,6 +68,115 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "town, village; people",
+    "primaryGloss": "town",
+    "emotion": "warm and nostalgic, thinking of home and family",
+    "notes": [
+      "When referring to people, 'el pueblo' means a whole nation or community, whereas 'la gente' means people in general."
+    ],
+    "senses": [
+      {
+        "id": "g2s3drp2m5o2uyd",
+        "order": 0,
+        "definition": "A small population center in the countryside, smaller than a city.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "town",
+              "village"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "dx5ulymu67ffnof",
+            "text": "Mis abuelos viven en un pueblo pequeño en las montañas.",
+            "textLang": "es",
+            "translation": "My grandparents live in a small town in the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and proud of family roots",
+            "note": null,
+            "matchedForm": "pueblo",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i9kgm9j3q7h13vn",
+        "order": 1,
+        "definition": "All the persons who belong to a nation, community, or ethnic group.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "people",
+              "nation"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "y8gxnezshlp8dlf",
+            "text": "Es un pueblo que lucha por sus derechos.",
+            "textLang": "es",
+            "translation": "It is a people that fights for its rights.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and passionate, speaking with solidarity",
+            "note": null,
+            "matchedForm": "pueblo",
+            "matchedTranslationForm": "people"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el pueblo",
+    "lemma": "pueblo",
+    "reading": null,
+    "ipa": "/ˈpweβlo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏘️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "town; village; people",
     "primaryGloss": "town",
     "emotion": "warm and nostalgic, thinking of home and family",
@@ -202,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(village) A very small town in the country, often quiet and rural.",
+        "why": "Spanish 'pueblo' does not split English 'town' and 'village' into two separate senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'pueblo' can mean a city or town in general",
+        "why": "Inaccurate ('pueblo' does not mean city) and merely repeats the definition."
+      }
+    ],
+    "growth": 0.582
   }
 }

@@ -69,6 +69,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "duck",
+    "primaryGloss": "duck",
+    "emotion": "a walk through a quiet park, watching birds on a pond",
+    "notes": [
+      "Refers to both the bird and its meat (e.g., 'magret de canard'). The final 'd' is silent."
+    ],
+    "senses": [
+      {
+        "id": "p5iacqnkrsr9fl7",
+        "order": 0,
+        "definition": "A water bird with a flat beak and webbed feet, or its meat eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "duck"
+            ]
+          }
+        ],
+        "domain": "animal, food",
+        "emoji": "🦆",
+        "examples": [
+          {
+            "id": "s1avn9m5rcp6jsa",
+            "text": "Les enfants donnent du pain aux canards sur le lac.",
+            "textLang": "fr",
+            "translation": "The children are feeding bread to the ducks on the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "canards",
+            "matchedTranslationForm": "ducks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le canard",
+    "lemma": "canard",
+    "reading": null,
+    "ipa": "/ka.naʁ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦆",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "duck; scoop (news); sugar cube in coffee",
     "primaryGloss": "duck",
     "emotion": "a walk through a quiet park, watching birds on a pond",
@@ -136,5 +204,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "scoop (news)",
+        "why": "Glosses as 'scoop', which contradicts the 'false news / hoax' sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A false report or a piece of journalistic fabrication.",
+        "why": "Dated journalistic sense not needed at A2 level."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "A sugar cube dipped into a drink like coffee or brandy.",
+        "why": "Marginal sense not needed at A2 level."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While primarily used for the animal, in journalism, a 'canard'",
+        "why": "Merely restates marginal senses."
+      }
+    ],
+    "growth": 0.693
   }
 }

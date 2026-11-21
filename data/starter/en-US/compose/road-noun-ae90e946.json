@@ -70,6 +70,74 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "carretera; camino",
+    "primaryGloss": "carretera",
+    "emotion": null,
+    "notes": [
+      "Se usa sobre todo para vías que conectan pueblos o ciudades. Para una vía urbana con edificios a los lados es más común decir 'street' (calle)."
+    ],
+    "senses": [
+      {
+        "id": "ch9n4j9m9a1oj0z",
+        "order": 0,
+        "definition": "Vía pública hecha para que circulen vehículos entre dos lugares.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "carretera",
+              "camino"
+            ]
+          }
+        ],
+        "domain": "transporte",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "644fdqgrhzpw6ex",
+            "text": "The road to the city is very long.",
+            "textLang": "en",
+            "translation": "La carretera a la ciudad es muy larga.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "un tono descriptivo y tranquilo, como alguien señalando una dirección",
+            "note": null,
+            "matchedForm": "road",
+            "matchedTranslationForm": "carretera"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "road",
+    "lemma": "road",
+    "reading": null,
+    "ipa": "/roʊd/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "camino; carretera; calle",
     "primaryGloss": "carretera",
     "emotion": null,
@@ -121,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "camino; carretera; calle",
+        "why": "Includes 'calle', which is absent from the sense glosses and contradicts the note."
+      }
+    ],
+    "growth": 0.838
   }
 }

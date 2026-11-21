@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "cold; common cold",
+    "primaryGloss": "cold",
+    "emotion": "sniffling and tired, speaking with a heavy head and a stuffed-up nose",
+    "notes": [
+      "In everyday speech, the shorter noun 'το κρύωμα' or the verb 'κρυώνω' (e.g. 'κρύωσα' — I caught a cold) is often used instead."
+    ],
+    "senses": [
+      {
+        "id": "ami3g3zw07evk76",
+        "order": 0,
+        "definition": "A common viral illness that causes a runny nose, sneezing, and a sore throat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "common cold"
+            ]
+          }
+        ],
+        "domain": "illness",
+        "emoji": "🤧",
+        "examples": [
+          {
+            "id": "b696ztm4ucbw48c",
+            "text": "Έχω ένα ελαφρύ κρυολόγημα και μένω σπίτι.",
+            "textLang": "el",
+            "translation": "I have a slight cold and I am staying home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and complaining, wrapped in a blanket",
+            "note": null,
+            "matchedForm": "κρυολόγημα",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το κρυολόγημα",
+    "lemma": "κρυολόγημα",
+    "reading": null,
+    "ipa": "/kɾioˈloʝima/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤧",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "common cold; a common illness with a runny nose",
     "primaryGloss": "common cold",
     "emotion": "sniffling and tired, speaking with a heavy head and a stuffed-up nose",
@@ -117,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "common cold; a common illness with a runny nose",
+        "why": "Includes a full definition phrase in shortGloss instead of concise gloss terms."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I have a mild common cold and I am staying home.",
+        "why": "Unnatural English ('a mild common cold' instead of 'a mild cold' or 'a slight cold')."
+      }
+    ],
+    "growth": 1.399
   }
 }

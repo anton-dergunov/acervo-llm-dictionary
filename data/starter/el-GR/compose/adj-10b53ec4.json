@@ -77,6 +77,97 @@
     "primaryGloss": "cold",
     "emotion": "shivering slightly from a sudden draft, bracing against the chill",
     "notes": [
+      "The neuter form is also used as a noun, το κρύο (the cold), especially in Κάνει κρύο (It is cold)."
+    ],
+    "senses": [
+      {
+        "id": "9pr75wxmw0ywcwr",
+        "order": 0,
+        "definition": "Having a low temperature; not warm or hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "chilly",
+              "cool"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌨️",
+        "examples": [
+          {
+            "id": "8g86kd6xfe8fhog",
+            "text": "Το νερό στο ποτήρι είναι κρύο.",
+            "textLang": "el",
+            "translation": "The water in the glass is cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshing and pleasant on a hot summer afternoon",
+            "note": null,
+            "matchedForm": "κρύο",
+            "matchedTranslationForm": "cold"
+          },
+          {
+            "id": "bv25r4iwlnsdzyc",
+            "text": "Σήμερα ο καιρός είναι πολύ κρύος.",
+            "textLang": "el",
+            "translation": "Today the weather is very cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "huddling into a heavy coat against a freezing wind",
+            "note": null,
+            "matchedForm": "κρύος",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "κρύος",
+    "lemma": "κρύος",
+    "reading": null,
+    "ipa": "/ˈkɾi.os/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥶",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "cold; chilly",
+    "primaryGloss": "cold",
+    "emotion": "shivering slightly from a sudden draft, bracing against the chill",
+    "notes": [
       "Note that 'κρύος' is masculine. The feminine form is 'κρύα' and the neuter is 'κρύο'.",
       "Do not confuse with the noun 'το κρύο' (the cold), which is used for weather or physical sensations."
     ],
@@ -165,5 +256,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Splitting literal low temperature into 'weather' and 'object' is artificial oversplitting."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'κρύος' is masculine. The feminine form is 'κρύα'",
+        "why": "Explaining regular -ος, -α, -ο adjective endings is unnecessary filler."
+      }
+    ],
+    "growth": 0.614
   }
 }

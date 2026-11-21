@@ -75,6 +75,136 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "hot; feverish",
+    "primaryGloss": "hot",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'hangat' (warm) or 'pedas' (spicy hot, as in chili)."
+    ],
+    "senses": [
+      {
+        "id": "7y2c8zvlx452lm2",
+        "order": 0,
+        "definition": "Having a high temperature; producing or feeling a lot of heat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "jo0viknoqd4dl65",
+            "text": "Cuaca hari ini sangat panas.",
+            "textLang": "id",
+            "translation": "The weather is very hot today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little frustrated while fanning oneself in the heat",
+            "note": null,
+            "matchedForm": "panas",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "f9uaevkyxz0geth",
+            "text": "Hati-hati, kopinya masih panas.",
+            "textLang": "id",
+            "translation": "Be careful, the coffee is still hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and helpful, warning someone of a danger",
+            "note": null,
+            "matchedForm": "panas",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cficc7jixrcu51m",
+        "order": 1,
+        "definition": "Of a person or body: having a fever.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "feverish",
+              "having a fever"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "7jp2xfxc8ym3ofm",
+            "text": "Badan anak itu panas sejak semalam.",
+            "textLang": "id",
+            "translation": "That child has had a fever since last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "panas",
+            "matchedTranslationForm": "had a fever"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "panas",
+    "lemma": "panas",
+    "reading": null,
+    "ipa": "/ˈpanas/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "hot; warm",
     "primaryGloss": "hot",
     "emotion": null,
@@ -166,5 +296,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Weather temperature and touch temperature are shades of one meaning ('hot')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "hot, warm",
+        "why": "'Warm' is 'hangat' in Indonesian, not 'panas'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense of having a fever."
+      }
+    ],
+    "growth": 1.048
   }
 }

@@ -72,6 +72,117 @@
     "primaryGloss": "work",
     "emotion": "earnest and responsible, focused on the task at hand",
     "notes": [
+      "Mark the place or company where someone works with the particle で (e.g., 銀行で働く, to work at a bank).",
+      "For machines (like a watch or computer) working or running, 動く (ugoku) is much more common in everyday speech; for medicine working, use 効く (kiku)."
+    ],
+    "senses": [
+      {
+        "id": "9n9tkzljyol1yqf",
+        "order": 0,
+        "definition": "To do a job or perform labor, especially to earn money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "work",
+              "labor"
+            ]
+          }
+        ],
+        "domain": "employment",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "4jcba04f51h7934",
+            "text": "父は毎日遅くまで働きます。",
+            "textLang": "ja",
+            "translation": "My father works until late every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "respectful and slightly weary, describing a hardworking parent",
+            "note": null,
+            "matchedForm": "働きます",
+            "matchedTranslationForm": "works"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b2xkgvifggzq2mt",
+        "order": 1,
+        "definition": "Of the mind, a sense, or a mechanism: to function or operate properly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "function",
+              "work",
+              "operate"
+            ]
+          }
+        ],
+        "domain": "function",
+        "emoji": "⚙️",
+        "examples": [
+          {
+            "id": "5fegk3da3yqjcp9",
+            "text": "朝は頭がよく働く。",
+            "textLang": "ja",
+            "translation": "My brain works well in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "働く",
+            "matchedTranslationForm": "works"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "働く",
+    "lemma": "働く",
+    "reading": "はたらく",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "to work; to function",
+    "primaryGloss": "work",
+    "emotion": "earnest and responsible, focused on the task at hand",
+    "notes": [
       "Use 働く to talk about earning a living or performing a job. It implies physical or mental effort.",
       "Do not confuse this with 勉強する (benkyou suru), which is specifically for studying academic subjects.",
       "When referring to machines or parts of a system that are running, 働く implies they are performing their intended function."
@@ -163,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "この薬はすぐに働きます。",
+        "why": "Unnatural calque from English 'medicine works'; Japanese uses 効く (kiku) for medicine."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 働く to talk about earning a living or performing a job.",
+        "why": "Notes restate the definitions instead of giving useful grammar or usage contrast."
+      }
+    ],
+    "growth": 0.941
   }
 }

@@ -74,6 +74,156 @@
     "primaryGloss": "see",
     "emotion": "attentive and open, noticing what is happening around you",
     "notes": [
+      "Irregular aorist (simple past): 'είδα' (I saw). The perfective stem used after 'θα' and 'να' for single actions is 'δ-': 'θα δω' (I will see), 'να δεις' (to see)."
+    ],
+    "senses": [
+      {
+        "id": "jakt9ypdtxdzzyg",
+        "order": 0,
+        "definition": "To perceive or notice someone or something with your eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "see",
+              "notice"
+            ]
+          }
+        ],
+        "domain": "sight",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "jybktl9ahxwh0wc",
+            "text": "Δεν σε βλέπω καλά χωρίς τα γυαλιά μου.",
+            "textLang": "el",
+            "translation": "I can't see you well without my glasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "βλέπω",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "abyvttldnxxrbsi",
+        "order": 1,
+        "definition": "To look at something for a period of time, such as a film, television program, or match.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "watch",
+              "see"
+            ]
+          }
+        ],
+        "domain": "watching",
+        "emoji": "🎬",
+        "examples": [
+          {
+            "id": "yij80sup7fcied8",
+            "text": "Κάθε βράδυ βλέπουμε μια ταινία.",
+            "textLang": "el",
+            "translation": "Every evening we watch a movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "βλέπουμε",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "81hlj0m9vsrxo2h",
+        "order": 2,
+        "definition": "To meet or visit someone by arrangement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "see",
+              "meet"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "2ed3sh54lcmepft",
+            "text": "Θα δω τον φίλο μου αύριο.",
+            "textLang": "el",
+            "translation": "I will see my friend tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "δω",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "βλέπω",
+    "lemma": "βλέπω",
+    "reading": null,
+    "ipa": "/ˈvle.po/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to see; to watch; to meet",
+    "primaryGloss": "see",
+    "emotion": "attentive and open, noticing what is happening around you",
+    "notes": [
       "βλέπω is the standard verb for both physical sight and watching a screen or show. When you mean watching a film, Greeks use βλέπω just as English speakers use 'to see' or 'to watch'."
     ],
     "senses": [
@@ -203,5 +353,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Το βράδυ θα βλέπω μια ταινία.",
+        "why": "Wrong aspect: a single future event ('watch a movie tonight') requires the perfective 'θα δω', not imperfective 'θα βλέπω'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Θα βλέπω τον φίλο μου αύριο.",
+        "why": "Wrong aspect: a single meeting tomorrow requires the perfective 'θα δω', not imperfective 'θα βλέπω'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to give the suppletive aorist 'είδα' and perfective stem 'δ-' ('να δω'), essential for an A2 learner."
+      }
+    ],
+    "growth": 1.024
   }
 }

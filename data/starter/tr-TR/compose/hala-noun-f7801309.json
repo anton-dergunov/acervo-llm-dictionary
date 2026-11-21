@@ -58,6 +58,75 @@
     "headword": "hala",
     "lemma": "hala",
     "reading": null,
+    "ipa": "/haˈla/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "paternal aunt",
+    "primaryGloss": "paternal aunt",
+    "emotion": "warm and familial, speaking with affection about a relative",
+    "notes": [
+      "Specifically refers to your father's sister; your mother's sister is 'teyze'.",
+      "Do not confuse with the adverb 'hâlâ' ('still, yet'), which is pronounced with two long vowels (/haːˈlaː/) and often written without circumflexes in casual text."
+    ],
+    "senses": [
+      {
+        "id": "jmsvckvhx5xfkta",
+        "order": 0,
+        "definition": "The sister of one's father.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paternal aunt",
+              "aunt"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "r6y60q90pgdts45",
+            "text": "Yarın halama gideceğiz.",
+            "textLang": "tr",
+            "translation": "We are going to my aunt's tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheerful about visiting family",
+            "note": null,
+            "matchedForm": "halama",
+            "matchedTranslationForm": "aunt's"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hala",
+    "lemma": "hala",
+    "reading": null,
     "ipa": "/haːˈla/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/haːˈla/",
+        "why": "The noun 'hala' (aunt) has two short vowels: /haˈla/. Long /haːˈlaː/ is the adverb 'hâlâ'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "with the adverb hâla (still, yet), which has a circumflex over the first 'a'",
+        "why": "The adverb is spelled 'hâlâ' with two circumflexes in current standard Turkish, not just one."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(time) Up to this time or continuing until now.",
+        "why": "Conflates distinct adverb 'hâlâ' into the noun entry 'hala', contradicting its own note."
+      }
+    ],
+    "growth": 0.779
   }
 }

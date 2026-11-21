@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "probar; saber (a)",
+    "primaryGloss": "probar",
+    "emotion": "focused and curious, pausing to appreciate a flavor",
+    "notes": [
+      "Para describir cómo sabe algo se usa seguido de un adjetivo ('it tastes good' = sabe bien) o de 'like' más un sustantivo ('it tastes like chicken' = sabe a pollo).",
+      "No se debe confundir con 'try', que es más general (intentar algo o probar algo por primera vez); 'taste' se refiere solo a percibir el sabor."
+    ],
+    "senses": [
+      {
+        "id": "45gws61m4kma94b",
+        "order": 0,
+        "definition": "Tomar un poco de comida o bebida para comprobar su sabor.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "probar"
+            ]
+          }
+        ],
+        "domain": "probar",
+        "emoji": "👅",
+        "examples": [
+          {
+            "id": "7nb2t2ohrog7tv0",
+            "text": "Taste this soup to see if it needs more salt.",
+            "textLang": "en",
+            "translation": "Prueba esta sopa para ver si necesita más sal.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and encouraging, wanting to know if it is good",
+            "note": null,
+            "matchedForm": "Taste",
+            "matchedTranslationForm": "Prueba"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nzclv7zuwnc978z",
+        "order": 1,
+        "definition": "De un alimento o una bebida: tener un sabor determinado.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "saber",
+              "saber a"
+            ]
+          }
+        ],
+        "domain": "sabor",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "3kedzrkwdbsbyq4",
+            "text": "The cake tastes like lemon.",
+            "textLang": "en",
+            "translation": "El pastel sabe a limón.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and descriptive, sharing an observation about food",
+            "note": null,
+            "matchedForm": "tastes",
+            "matchedTranslationForm": "sabe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "taste",
+    "lemma": "taste",
+    "reading": null,
+    "ipa": "/teɪst/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "probar el sabor; tener un sabor",
     "primaryGloss": "probar",
     "emotion": "focused and curious, pausing to appreciate a flavor",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para la acción voluntaria de probar algo como para",
+        "why": "Repeats the two senses without explaining the grammar ('taste good' vs 'taste like')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "saber a, tener un sabor de",
+        "why": "'Tener un sabor de' is unidiomatic in Spanish; 'saber (bien/mal, etc.)' and 'saber a' are needed."
+      }
+    ],
+    "growth": 1.181
   }
 }

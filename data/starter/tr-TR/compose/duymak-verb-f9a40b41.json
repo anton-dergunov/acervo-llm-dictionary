@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to hear; to feel",
+    "primaryGloss": "hear",
+    "emotion": "attentive and quiet, catching a sudden sound in the room",
+    "notes": [
+      "Do not confuse with 'dinlemek' (to listen). 'Duymak' is passive (hearing a sound), while 'dinlemek' is active (listening to something).",
+      "In the sense of 'to feel', it is typically used with abstract nouns like 'üzüntü' (sadness), 'saygı' (respect), or 'acı' (pain)."
+    ],
+    "senses": [
+      {
+        "id": "rbu91ej9gylreem",
+        "order": 0,
+        "definition": "To perceive a sound with the ears, or to be told news.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear",
+              "learn of"
+            ]
+          }
+        ],
+        "domain": "hearing",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "gihc2appsx32t20",
+            "text": "Odadan bir ses duyuyorum.",
+            "textLang": "tr",
+            "translation": "I hear a sound from the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and alert, pausing to listen closer",
+            "note": null,
+            "matchedForm": "duyuyorum",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5b925orlbo5kabn",
+        "order": 1,
+        "definition": "To experience an emotion or physical sensation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "feel",
+              "experience"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "4z08j9x3of96cke",
+            "text": "Derin bir üzüntü duydu.",
+            "textLang": "tr",
+            "translation": "He felt a deep sadness.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and reflective, sharing a heavy moment",
+            "note": null,
+            "matchedForm": "duydu",
+            "matchedTranslationForm": "felt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "duymak",
+    "lemma": "duymak",
+    "reading": null,
+    "ipa": "/dujˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to hear; to feel; to smell",
     "primaryGloss": "hear",
     "emotion": "attentive and quiet, catching a sudden sound in the room",
@@ -201,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "hear, listen",
+        "why": "'duymak' means 'to hear'; 'to listen' is 'dinlemek'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(smell) To perceive a scent through the nose.",
+        "why": "Only used in the collocation 'koku duymak' (sense 1); standalone verb is 'koklamak'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "duymak covers both hearing a sound and feeling an emotion",
+        "why": "Restates the senses; should instead contrast 'duymak' (hear) with 'dinlemek' (listen)."
+      }
+    ],
+    "growth": 1.102
   }
 }

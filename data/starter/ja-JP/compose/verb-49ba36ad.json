@@ -57,6 +57,117 @@
     "language": "ja",
     "headword": "落ち着く",
     "lemma": "落ち着く",
+    "reading": "おちつく",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😌",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to calm down; to settle down",
+    "primaryGloss": "to calm down",
+    "emotion": "a gentle, relieved exhale after a moment of tension, quiet and steady",
+    "notes": [
+      "An intransitive godan verb (落ち着きます, 落ち着いて). Often used in the ている form (落ち着いている) to describe a calm person or a quiet, relaxing place.",
+      "Do not confuse with 安心する (あんしんする), which means to feel relieved."
+    ],
+    "senses": [
+      {
+        "id": "eclxahct0b2f1wv",
+        "order": 0,
+        "definition": "To become quiet and composed after being nervous, angry, or excited.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to calm down",
+              "to compose oneself",
+              "to relax"
+            ]
+          }
+        ],
+        "domain": "emotions",
+        "emoji": "😌",
+        "examples": [
+          {
+            "id": "lbnaf1ydst1uc1p",
+            "text": "深呼吸をして、落ち着いてください。",
+            "textLang": "ja",
+            "translation": "Please take a deep breath and calm down.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "落ち着いて",
+            "matchedTranslationForm": "calm down"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "06f7ptzpysuubfj",
+        "order": 1,
+        "definition": "To become stable or settled in a place, job, or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to settle down",
+              "to stabilize"
+            ]
+          }
+        ],
+        "domain": "situation",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "dfhazb19dmv0tbk",
+            "text": "新しい生活もようやく落ち着きました。",
+            "textLang": "ja",
+            "translation": "My new life has finally settled down.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "落ち着きました",
+            "matchedTranslationForm": "settled down"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "落ち着く",
+    "lemma": "落ち着く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (おちつく) for a word containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "深呼吸をして、落ち着く。",
+        "why": "Dictionary form does not match the imperative translation; 명령/request or past tense is natural."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "新しい生活にようやく落ち着きました。",
+        "why": "Unnatural particle; 新しい生活もようやく落ち着きました or 新しい場所に落ち着きました is natural."
+      }
+    ],
+    "growth": 1.011
   }
 }

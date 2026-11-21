@@ -72,6 +72,114 @@
     "primaryGloss": "green",
     "emotion": "calm and refreshing like a walk in the woods",
     "notes": [
+      "Has the same form for masculine and feminine nouns (e.g., 'o carro verde', 'a camisa verde')."
+    ],
+    "senses": [
+      {
+        "id": "k4tqh2pneztx0dj",
+        "order": 0,
+        "definition": "Of the color of fresh grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "nvk5cw9ut6asmav",
+            "text": "A grama do jardim está bem verde hoje.",
+            "textLang": "pt",
+            "translation": "The garden grass is very green today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational, simple, and pleased with the vibrant sight",
+            "note": null,
+            "matchedForm": "verde",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o6p2o6m6vu7gt4s",
+        "order": 1,
+        "definition": "Of fruit or vegetables: not yet ripe or ready to eat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍏",
+        "examples": [
+          {
+            "id": "e3qqr293n0jwu2s",
+            "text": "Não coma essa banana, ela ainda está verde.",
+            "textLang": "pt",
+            "translation": "Don't eat that banana, it is still unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and helpful, warning someone to wait",
+            "note": null,
+            "matchedForm": "verde",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "verde",
+    "lemma": "verde",
+    "reading": null,
+    "ipa": "/ˈveʁ.dʒi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe",
+    "primaryGloss": "green",
+    "emotion": "calm and refreshing like a walk in the woods",
+    "notes": [
       "In Portuguese, 'verde' is used not only for the colour but also to describe fruit that is not yet ripe (unripe).",
       "It is a versatile adjective that remains the same for both masculine and feminine nouns."
     ],
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of grass and leaves.",
+        "why": "Adjective defined as a noun instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Portuguese, 'verde' is used not only for the colour but also",
+        "why": "Merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.824
   }
 }

@@ -58,6 +58,76 @@
     "headword": "के साथ",
     "lemma": "के साथ",
     "reading": null,
+    "ipa": "/keː sɑːt̪ʰ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "with; along with",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
+      "Preceded by a noun in the oblique case (लड़के के साथ, 'with the boy'). With first- and second-person pronouns, के is replaced by -रे or -म्हारे: मेरे साथ ('with me'), तुम्हारे साथ ('with you').",
+      "Do not use के साथ for tools or instruments ('with a pen'); use से (se) instead."
+    ],
+    "senses": [
+      {
+        "id": "xsj8zzjdfitggtl",
+        "order": 0,
+        "definition": "In the company of someone, or together with something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "along with",
+              "together with"
+            ]
+          }
+        ],
+        "domain": "accompaniment",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "rkzh5pbbpaw6exb",
+            "text": "मैं अपने दोस्त के साथ बाज़ार जा रहा हूँ।",
+            "textLang": "hi",
+            "translation": "I am going to the market with my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "के साथ",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "के साथ",
+    "lemma": "के साथ",
+    "reading": null,
     "ipa": null,
     "pos": "expression",
     "gender": null,
@@ -159,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(instrument) Using an instrument, tool, or means to do something.",
+        "why": "False in Hindi (English calque); instruments take 'से', not 'के साथ'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "उसने कलम के साथ पत्र लिखा।",
+        "why": "Ungrammatical calque of English 'with a pen'; Hindi requires 'कलम से'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs to explain oblique case requirement and pronoun contraction (मेरे साथ, etc.)."
+      }
+    ],
+    "growth": 1.21
   }
 }

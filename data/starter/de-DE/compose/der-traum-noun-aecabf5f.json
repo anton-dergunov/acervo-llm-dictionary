@@ -68,6 +68,114 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "dream",
+    "primaryGloss": "dream",
+    "emotion": "a wistful, far-away feeling, imagining something wonderful",
+    "notes": [
+      "Plural: 'die Träume' (with an umlaut)."
+    ],
+    "senses": [
+      {
+        "id": "u12pb951oq2oti3",
+        "order": 0,
+        "definition": "Pictures and stories that happen in your mind while you are asleep.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "2xqutms3wa9gcuj",
+            "text": "Ich hatte letzte Nacht einen komischen Traum.",
+            "textLang": "de",
+            "translation": "I had a strange dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confused and slightly amused, telling a story about the night",
+            "note": null,
+            "matchedForm": "Traum",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "eft95lvrtzaqagu",
+        "order": 1,
+        "definition": "A strong wish or a goal that someone hopes to achieve in life.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream",
+              "ambition"
+            ]
+          }
+        ],
+        "domain": "ambition",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "f7bxbfgnv3x68l5",
+            "text": "Es ist mein größter Traum, einmal die Welt zu sehen.",
+            "textLang": "de",
+            "translation": "It is my biggest dream to see the world one day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and inspired, looking towards the future",
+            "note": null,
+            "matchedForm": "Traum",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Traum",
+    "lemma": "Traum",
+    "reading": null,
+    "ipa": "/tʁaʊ̯m/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "dream; desire",
     "primaryGloss": "dream",
     "emotion": "a wistful, far-away feeling, imagining something wonderful",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'Traum' can mean both the images in your sleep",
+        "why": "Restates the two senses; should instead note the umlaut plural 'die Träume'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "It is my biggest dream to see the world once.",
+        "why": "'Einmal' here means 'one day' or 'someday', not 'once'."
+      }
+    ],
+    "growth": 0.704
   }
 }

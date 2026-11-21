@@ -58,6 +58,95 @@
     "headword": "ชื่อ",
     "lemma": "ชื่อ",
     "reading": null,
+    "ipa": "/tɕʰɯː˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📛",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "name",
+    "primaryGloss": "name",
+    "emotion": "matter-of-fact and helpful, as when introducing someone",
+    "notes": [
+      "Also used directly as a verb meaning 'to be named', as in คุณชื่ออะไร (What is your name?).",
+      "In daily life, Thai people usually go by their ชื่อเล่น (nickname) rather than their formal given name (ชื่อจริง)."
+    ],
+    "senses": [
+      {
+        "id": "1lo0ylp8s3k1qda",
+        "order": 0,
+        "definition": "A word or set of words by which a person, place, or thing is known.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "name"
+            ]
+          }
+        ],
+        "domain": "language",
+        "emoji": "📛",
+        "examples": [
+          {
+            "id": "t41gi0dxjh1lev2",
+            "text": "ผมจำชื่อเขาไม่ได้",
+            "textLang": "th",
+            "translation": "I cannot remember his name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly embarrassed and apologetic",
+            "note": null,
+            "matchedForm": "ชื่อ",
+            "matchedTranslationForm": "name"
+          },
+          {
+            "id": "jis7jdhlnncp9il",
+            "text": "คุณชื่ออะไรครับ",
+            "textLang": "th",
+            "translation": "What is your name?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ชื่อ",
+            "matchedTranslationForm": "name"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ชื่อ",
+    "lemma": "ชื่อ",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to identify people, objects, or places. In Thai, it is common",
+        "why": "Restates the definition and example using ad-hoc romanization instead of Thai script."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "คุณชื่ออะไร",
+        "why": "Uses ชื่อ as a verb ('to be named') inside a noun-only entry without explanation."
+      }
+    ],
+    "growth": 0.79
   }
 }

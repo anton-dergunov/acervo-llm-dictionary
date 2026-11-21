@@ -68,6 +68,133 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "skirt; foothills",
+    "primaryGloss": "skirt",
+    "emotion": "casual and practical, getting dressed for a day out",
+    "notes": [
+      "In the plural ('en faldas de'), it can also mean 'in the lap of', though 'el regazo' is the standard word for 'lap'."
+    ],
+    "senses": [
+      {
+        "id": "tq52wwg1omfczdw",
+        "order": 0,
+        "definition": "A garment that hangs from the waist downwards.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skirt"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "jjx32u72zjogegl",
+            "text": "Lleva una falda azul muy bonita.",
+            "textLang": "es",
+            "translation": "She is wearing a very pretty blue skirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and admiring a nice outfit",
+            "note": null,
+            "matchedForm": "falda",
+            "matchedTranslationForm": "skirt"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b0zlphdc21uiul4",
+        "order": 1,
+        "definition": "The lower slope or base of a mountain or hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foothills",
+              "lower slope",
+              "base"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "ihxngp54hyoi5dn",
+            "text": "Pusieron las tiendas en la falda de la montaña.",
+            "textLang": "es",
+            "translation": "They pitched their tents at the base of the mountain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, setting the scene of a trip",
+            "note": null,
+            "matchedForm": "falda",
+            "matchedTranslationForm": "base"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "tq52wwg1omfczdw",
+      "from": "Prenda de vestir que cuelga de la cintura hacia abajo.",
+      "to": "A garment that hangs from the waist downwards.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    },
+    {
+      "sense": "b0zlphdc21uiul4",
+      "from": "Parte inferior de un monte o montaña.",
+      "to": "The lower part or base of a mountain or hill.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la falda",
+    "lemma": "falda",
+    "reading": null,
+    "ipa": "/ˈfalda/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "skirt; lap; foothills",
     "primaryGloss": "skirt",
     "emotion": "casual and practical, getting dressed for a day out",
@@ -160,22 +287,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "tq52wwg1omfczdw",
-      "from": "Prenda de vestir que cuelga de la cintura hacia abajo.",
-      "to": "A garment that hangs from the waist downwards.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    },
-    {
-      "sense": "b0zlphdc21uiul4",
-      "from": "Parte inferior de un monte o montaña.",
-      "to": "The lower part or base of a mountain or hill.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "skirt; lap; foothills",
+        "why": "Includes 'lap', which is not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'falda' most commonly refers to the garment, it is also",
+        "why": "Merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.926
+  }
 }

@@ -58,6 +58,117 @@
     "headword": "dünya",
     "lemma": "dünya",
     "reading": null,
+    "ipa": "/dynˈjaː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "world; Earth",
+    "primaryGloss": "world",
+    "emotion": "wide and awe-struck, looking out over a vast horizon",
+    "notes": [
+      "Capitalized as 'Dünya' when referring to planet Earth as an astronomical body, and takes an apostrophe before suffixes (e.g., Dünya'nın).",
+      "Because it ends in a vowel, it takes the buffer consonant 'y' before vowel-initial suffixes (e.g., dünyayı, dünyaya)."
+    ],
+    "senses": [
+      {
+        "id": "nlikev3sqrfb20i",
+        "order": 0,
+        "definition": "The earth together with all its countries, peoples, and human society.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "world"
+            ]
+          }
+        ],
+        "domain": "society",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "2un9dsnojkjrhyd",
+            "text": "Dünyayı gezip görmek istiyorum.",
+            "textLang": "tr",
+            "translation": "I want to travel and see the world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and eager, imagining far-off adventures",
+            "note": null,
+            "matchedForm": "Dünyayı",
+            "matchedTranslationForm": "world"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "029rlc7ozgauigc",
+        "order": 1,
+        "definition": "The planet on which we live; the third planet from the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "Earth",
+              "earth",
+              "globe"
+            ]
+          }
+        ],
+        "domain": "planet",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "yrlvdlvvfeojn8v",
+            "text": "Dünya, Güneş'in etrafında döner.",
+            "textLang": "tr",
+            "translation": "The Earth revolves around the Sun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Dünya",
+            "matchedTranslationForm": "Earth"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dünya",
+    "lemma": "dünya",
+    "reading": null,
     "ipa": "/dynˈja/",
     "pos": "noun",
     "gender": null,
@@ -163,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dynˈja/",
+        "why": "In this Arabic loanword, the final 'a' is long: /dynˈjaː/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(planet) The earth and all its countries, peoples... / (society) Human society",
+        "why": "Senses 0 and 1 both define 'world' as human society/people, and their examples do not distinguish planet Earth from society."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the planet as a physical body and for the human world",
+        "why": "Merely restates the senses."
+      }
+    ],
+    "growth": 1.194
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "arm",
     "emotion": "matter-of-fact and neutral, simply identifying a part of the body",
     "notes": [
+      "The second syllable is pronounced with a neutral tone (gēbo). It is the everyday spoken word for 'arm'; 手臂 (shǒubì) is slightly more formal. Takes the measure word 只 (zhī) or 条 (tiáo)."
+    ],
+    "senses": [
+      {
+        "id": "bbkdte3epubah5d",
+        "order": 0,
+        "definition": "The part of the body between the shoulder and the hand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "3eanvmjryp52k8b",
+            "text": "他的胳膊受伤了。",
+            "textLang": "zh",
+            "translation": "His arm was injured.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "胳膊",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "胳膊",
+    "lemma": "胳膊",
+    "reading": "gē bo",
+    "ipa": "/kɤ˥ pu̯o/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "arm",
+    "primaryGloss": "arm",
+    "emotion": "matter-of-fact and neutral, simply identifying a part of the body",
+    "notes": [
       "While '胳膊' refers to the entire limb from shoulder to hand, '手' specifically refers to the hand. In formal medical contexts, you might hear '上肢' (upper limb)."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "他受伤了胳膊。",
+        "why": "Ungrammatical: 受伤 is an intransitive verb and cannot take a direct object like 胳膊."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '胳膊' refers to the entire limb from shoulder to hand",
+        "why": "Restates the definition; misses that 胳膊 is colloquial compared to 手臂 (shǒubì)."
+      }
+    ],
+    "growth": 1.114
   }
 }

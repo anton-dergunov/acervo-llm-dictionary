@@ -69,6 +69,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "busy; occupied; employed",
+    "primaryGloss": "busy",
+    "emotion": "hurried and focused, with little time to spare for others",
+    "notes": [
+      "Followed by 'mit' (+ dative) to say what someone is busy with: 'beschäftigt mit der Arbeit' (busy with work).",
+      "In the sense 'employed', it is usually used with 'bei' (+ dative) for the employer: 'bei einer Bank beschäftigt sein'."
+    ],
+    "senses": [
+      {
+        "id": "zgm5e8xaevybpld",
+        "order": 0,
+        "definition": "Having a lot to do, or currently engaged in an activity; not free.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "occupied"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "r27dga6otlzz07h",
+            "text": "Ich kann jetzt nicht sprechen, ich bin sehr beschäftigt.",
+            "textLang": "de",
+            "translation": "I cannot speak now, I am very busy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little stressed and apologetic for not having time",
+            "note": null,
+            "matchedForm": "beschäftigt",
+            "matchedTranslationForm": "busy"
+          },
+          {
+            "id": "ig422swvopmf0pe",
+            "text": "Das Kind ist mit seinem neuen Spielzeug beschäftigt.",
+            "textLang": "de",
+            "translation": "The child is occupied with its new toy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, describing someone focused on a task",
+            "note": null,
+            "matchedForm": "beschäftigt",
+            "matchedTranslationForm": "occupied"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jidcjza3ps6txa3",
+        "order": 1,
+        "definition": "Having a paid job with a company or organization.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "employed",
+              "working"
+            ]
+          }
+        ],
+        "domain": "employment",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "69klmckf2hln8bw",
+            "text": "Sie ist seit drei Jahren bei dieser Firma beschäftigt.",
+            "textLang": "de",
+            "translation": "She has been employed at this company for three years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "beschäftigt",
+            "matchedTranslationForm": "employed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "beschäftigt",
+    "lemma": "beschäftigen",
+    "reading": null,
+    "ipa": "/bəˈʃɛftɪçt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Work",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "busy; occupied",
     "primaryGloss": "busy",
     "emotion": "hurried and focused, with little time to spare for others",
@@ -162,5 +294,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (busy) Having a lot of work... [1] (engaged) Engaged in",
+        "why": "Shades of the same meaning ('busy/occupied'); should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'employed' (e.g., bei einer Firma beschäftigt sein)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'berufstätig', which specifically means that someone has a job",
+        "why": "Misleading because 'beschäftigt' also commonly means 'employed' (working for an employer)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'beschäftigt' when someone has a lot to do or is currently working",
+        "why": "Merely restates the definition; should instead mention the preposition 'mit' (+ dative)."
+      }
+    ],
+    "growth": 1.16
   }
 }

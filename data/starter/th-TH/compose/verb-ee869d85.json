@@ -58,6 +58,115 @@
     "headword": "เดิน",
     "lemma": "เดิน",
     "reading": null,
+    "ipa": "/dɤːn/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to walk; to run (of a clock)",
+    "primaryGloss": "walk",
+    "emotion": "steady and purposeful, taking a relaxed stroll",
+    "notes": [
+      "Appears in many everyday compounds, such as เดินทาง (to travel) and เดินเล่น (to take a stroll)."
+    ],
+    "senses": [
+      {
+        "id": "565c3bb55h23kkr",
+        "order": 0,
+        "definition": "To move forward on foot at a normal speed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "walk"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "y7qjp4qy81belew",
+            "text": "ฉันชอบเดินไปทำงานทุกเช้า",
+            "textLang": "th",
+            "translation": "I like to walk to work every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and cheerful, enjoying the morning air",
+            "note": null,
+            "matchedForm": "เดิน",
+            "matchedTranslationForm": "walk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jaa4fnnz4do98ta",
+        "order": 1,
+        "definition": "Of a clock, watch, or engine: to run or function.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "run",
+              "work",
+              "operate"
+            ]
+          }
+        ],
+        "domain": "operation",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "ntjp11c9cdwaz1i",
+            "text": "นาฬิกาเรือนนี้ยังเดินอยู่ไหม",
+            "textLang": "th",
+            "translation": "Is this clock still running?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เดิน",
+            "matchedTranslationForm": "running"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เดิน",
+    "lemma": "เดิน",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "เดิน is the standard verb for walking on foot, but it is",
+        "why": "Restates the definitions without giving specific useful compounds or usage guidance."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "นาฬิกานี้ยังเดินอยู่ไหม",
+        "why": "Missing the classifier เรือน before นาฬิกานี้ (should be นาฬิกาเรือนนี้)."
+      }
+    ],
+    "growth": 0.803
   }
 }

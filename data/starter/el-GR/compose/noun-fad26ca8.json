@@ -70,6 +70,71 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "lake",
+    "primaryGloss": "lake",
+    "emotion": "peaceful and quiet, taking in the calm water on a still morning",
+    "notes": [],
+    "senses": [
+      {
+        "id": "nnqs36hvl5u4hdu",
+        "order": 0,
+        "definition": "A large area of water surrounded by land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lake"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🏞️",
+        "examples": [
+          {
+            "id": "4v8b1k2ovh223wl",
+            "text": "Τα δέντρα καθρεφτίζονται στα ήσυχα νερά της λίμνης.",
+            "textLang": "el",
+            "translation": "The trees are reflected in the calm waters of the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "λίμνης",
+            "matchedTranslationForm": "lake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η λίμνη",
+    "lemma": "λίμνη",
+    "reading": null,
+    "ipa": "/ˈlim.ni/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏞️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "lake; pool",
     "primaryGloss": "lake",
     "emotion": "peaceful and quiet, taking in the calm water on a still morning",
@@ -159,5 +224,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Τα δέντρα καθρεφτίζονται στα ήσυχη νερά στη λίμνη.",
+        "why": "ungrammatical gender/number agreement: 'στα ήσυχη νερά' instead of 'στα ήσυχα νερά της λίμνης'"
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A small pool of water, often left after rain.",
+        "why": "a rain puddle in everyday Greek is 'λακκούβα'; 'λίμνη' for puddle is marginal"
+      }
+    ],
+    "growth": 0.492
   }
 }

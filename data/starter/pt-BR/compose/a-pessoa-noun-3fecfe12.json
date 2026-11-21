@@ -68,6 +68,74 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person",
+    "primaryGloss": "person",
+    "emotion": "friendly and observant, noticing someone nearby",
+    "notes": [
+      "Always grammatically feminine (so adjectives must be feminine too), even when referring to a man: 'João é uma boa pessoa'."
+    ],
+    "senses": [
+      {
+        "id": "4wmru3i00mxiw0t",
+        "order": 0,
+        "definition": "A human being, considered as an individual.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "human being"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "l7l6z27auhfvaxp",
+            "text": "Ela é uma pessoa muito gentil.",
+            "textLang": "pt",
+            "translation": "She is a very kind person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, praising a friend",
+            "note": null,
+            "matchedForm": "pessoa",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a pessoa",
+    "lemma": "pessoa",
+    "reading": null,
+    "ipa": "/peˈso.ɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; someone",
     "primaryGloss": "person",
     "emotion": "friendly and observant, noticing someone nearby",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(indefinite) An indefinite individual; someone.",
+        "why": "'Uma pessoa' meaning 'someone' is just the indefinite article with sense 0, not a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "To speak of a man specifically, use 'o homem', not 'a pessoa masculina'.",
+        "why": "Awkward filler; the note should simply explain grammatical agreement remain feminine regardless of sex."
+      }
+    ],
+    "growth": 0.565
   }
 }

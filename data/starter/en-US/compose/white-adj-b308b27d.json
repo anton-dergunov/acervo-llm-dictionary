@@ -74,6 +74,114 @@
     "primaryGloss": "blanco",
     "emotion": null,
     "notes": [
+      "La 'h' es muda: se pronuncia /waɪt/.",
+      "También se usa como sustantivo para referirse al color en sí: 'White is my favorite color' (El blanco es mi color favorito)."
+    ],
+    "senses": [
+      {
+        "id": "acf0ol44vuwhe0u",
+        "order": 0,
+        "definition": "Del color de la nieve o de la leche, el más claro.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "blanco"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "toom769vhtgtk1a",
+            "text": "She is wearing a white shirt today.",
+            "textLang": "en",
+            "translation": "Ella lleva puesta una camisa blanca hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "white",
+            "matchedTranslationForm": "blanca"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t65o0flbqtqmx8y",
+        "order": 1,
+        "definition": "Dicho de una persona: de piel clara, generalmente de origen europeo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "blanco"
+            ]
+          }
+        ],
+        "domain": "personas",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fbyczofb87kjcgo",
+            "text": "Most people in that small town are white.",
+            "textLang": "en",
+            "translation": "La mayoría de las personas de ese pueblito son blancas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "white",
+            "matchedTranslationForm": "blancas"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "white",
+    "lemma": "white",
+    "reading": null,
+    "ipa": "/waɪt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blanco",
+    "primaryGloss": "blanco",
+    "emotion": null,
+    "notes": [
       "White es el color básico. A diferencia de otros adjetivos en inglés, no cambia según el género o el número del sustantivo al que describe.",
       "A menudo se usa como sustantivo para referirse al color en sí: 'White is my favorite color' (El blanco es mi color favorito)."
     ],
@@ -121,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "A diferencia de otros adjetivos en inglés, no cambia según el género",
+        "why": "False claim: NO adjectives in English change for gender or number, not just 'white'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "El color de la nieve o de la leche.",
+        "why": "Adjective defined as a noun ('El color...'); should be defined as a quality ('Del color...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense: of people, having light-colored skin / of European descent."
+      }
+    ],
+    "growth": 1.162
   }
 }

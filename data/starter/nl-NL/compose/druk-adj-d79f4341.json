@@ -73,6 +73,161 @@
     "primaryGloss": "busy",
     "emotion": "rushed and slightly breathless, with a packed schedule",
     "notes": [
+      "Doubles the 'k' when inflected: drukke (drukker, drukst).",
+      "To say a person is busy, use 'het druk hebben (met iets)' rather than 'druk zijn' (which usually means energetic or rowdy)."
+    ],
+    "senses": [
+      {
+        "id": "2mc82uiisjb6x22",
+        "order": 0,
+        "definition": "Having a lot of things to do; occupied with work or tasks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "occupied"
+            ]
+          }
+        ],
+        "domain": "schedule",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "9rza8c5hi8ycf1i",
+            "text": "Ik heb het vandaag erg druk op mijn werk.",
+            "textLang": "nl",
+            "translation": "I am very busy at work today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stressed about time, rushing to finish tasks",
+            "note": null,
+            "matchedForm": "druk",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "auyo8lzu786klu9",
+        "order": 1,
+        "definition": "Of a place or time: full of people, traffic, or activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "crowded",
+              "bustling"
+            ]
+          }
+        ],
+        "domain": "crowdedness",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "quzinyprcenubbw",
+            "text": "Het is erg druk in de stad op zaterdag.",
+            "textLang": "nl",
+            "translation": "It is very busy in the city on Saturday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "navigating through a sea of people with slight annoyance",
+            "note": null,
+            "matchedForm": "druk",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7k7cqex6avs01w6",
+        "order": 2,
+        "definition": "Of a person, especially a child: noisy, restless, or full of energy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "energetic",
+              "rowdy",
+              "hyper",
+              "restless"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "⚡",
+        "examples": [
+          {
+            "id": "84w9l5vpmpy8y01",
+            "text": "De kinderen zijn vandaag erg druk.",
+            "textLang": "nl",
+            "translation": "The children are very rowdy today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exhausted by children running around the room",
+            "note": null,
+            "matchedForm": "druk",
+            "matchedTranslationForm": "rowdy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "druk",
+    "lemma": "druk",
+    "reading": null,
+    "ipa": "/drʏk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏃",
+    "topics": [
+      "Describing",
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "busy; crowded; energetic",
+    "primaryGloss": "busy",
+    "emotion": "rushed and slightly breathless, with a packed schedule",
+    "notes": [
       "Druk is used both for people who have a lot to do and for places that are full of activity or people.",
       "Do not confuse druk (busy) with dronk (drank) or droog (dry)."
     ],
@@ -205,5 +360,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Druk is used both for people who have a lot to do",
+        "why": "Restates the senses and warns of random words, while omitting the key construction 'het druk hebben'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].translation",
+        "quote": "The children are very hyperactive today.",
+        "why": "'Hyperactive' sounds clinical in English; 'rowdy', 'boisterous', or 'energetic' is the natural translation."
+      }
+    ],
+    "growth": 1.08
   }
 }

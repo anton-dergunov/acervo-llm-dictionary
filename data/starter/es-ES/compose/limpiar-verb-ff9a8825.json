@@ -68,6 +68,113 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to clean; to wipe",
+    "primaryGloss": "to clean",
+    "emotion": "energetic and purposeful, rolling up sleeves to get things done",
+    "notes": [
+      "Compare with 'lavar' (to wash with water and soap, like dishes, clothes, or hands); 'limpiar' is more general for removing dirt or wiping surfaces."
+    ],
+    "senses": [
+      {
+        "id": "2kaqjmla2sqtwf1",
+        "order": 0,
+        "definition": "To remove dirt, dust, or mess from something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to clean",
+              "to wipe"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧽",
+        "examples": [
+          {
+            "id": "frxvh77240e3snq",
+            "text": "Voy a limpiar la cocina esta tarde.",
+            "textLang": "es",
+            "translation": "I am going to clean the kitchen this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and ready to tackle a big chore",
+            "note": null,
+            "matchedForm": "limpiar",
+            "matchedTranslationForm": "clean"
+          },
+          {
+            "id": "00w1jdaxa84u6k5",
+            "text": "Tienes que limpiar la mesa con un trapo.",
+            "textLang": "es",
+            "translation": "You have to wipe the table with a cloth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "limpiar",
+            "matchedTranslationForm": "wipe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2kaqjmla2sqtwf1",
+      "from": "Quitar la suciedad de algo.",
+      "to": "To remove the dirt from something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    },
+    {
+      "sense": "x8tkbs014nl9519",
+      "from": "Quitar algo que molesta o sobra de una superficie.",
+      "to": "To remove something that bothers or is left over from a surface.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "limpiar",
+    "lemma": "limpiar",
+    "reading": null,
+    "ipa": "/limˈpjaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧹",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to clean; to wipe; to clear",
     "primaryGloss": "clean",
     "emotion": "energetic and purposeful, rolling up sleeves to get things done",
@@ -163,22 +270,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2kaqjmla2sqtwf1",
-      "from": "Quitar la suciedad de algo.",
-      "to": "To remove the dirt from something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    },
-    {
-      "sense": "x8tkbs014nl9519",
-      "from": "Quitar algo que molesta o sobra de una superficie.",
-      "to": "To remove something that bothers or is left over from a surface.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Tienes que limpiar la mesa antes de comer. — You have to clear",
+        "why": "'Limpiar la mesa' means to wipe/clean the table; 'clear the table' is 'recoger la mesa'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'llover' (to rain), which sounds somewhat similar.",
+        "why": "'Limpiar' and 'llover' do not sound similar at all; useless filler note."
+      }
+    ],
+    "growth": 0.845
+  }
 }

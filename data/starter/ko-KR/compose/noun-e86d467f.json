@@ -68,6 +68,155 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "ticket; table; vote",
+    "primaryGloss": "ticket",
+    "emotion": null,
+    "notes": [
+      "For tickets, the English loanword 티켓 is also very common in everyday speech (e.g., 비행기 표 or 비행기 티켓)."
+    ],
+    "senses": [
+      {
+        "id": "p9xmajlz486tp98",
+        "order": 0,
+        "definition": "A printed or digital piece of paper that gives you the right to travel on public transport or enter an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ticket"
+            ]
+          }
+        ],
+        "domain": "ticket",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "hytp5fbu6b7y7sk",
+            "text": "지하철 표를 샀어요.",
+            "textLang": "ko",
+            "translation": "I bought a subway ticket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple task completed",
+            "note": null,
+            "matchedForm": "표",
+            "matchedTranslationForm": "ticket"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xwtp50nilqg5sow",
+        "order": 1,
+        "definition": "A set of facts or numbers arranged in rows and columns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "table",
+              "chart"
+            ]
+          }
+        ],
+        "domain": "table",
+        "emoji": "📊",
+        "examples": [
+          {
+            "id": "8mr9j31ioogf3rx",
+            "text": "표를 보면 이해하기 쉬워요.",
+            "textLang": "ko",
+            "translation": "It is easy to understand if you look at the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and encouraging, pointing out an easy solution",
+            "note": null,
+            "matchedForm": "표",
+            "matchedTranslationForm": "table"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "glbo16pmrgfrqwv",
+        "order": 2,
+        "definition": "A formal choice made by a person in an election or ballot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vote",
+              "ballot"
+            ]
+          }
+        ],
+        "domain": "vote",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "9068bbbeusrt0n0",
+            "text": "그 후보가 가장 많은 표를 얻었어요.",
+            "textLang": "ko",
+            "translation": "That candidate got the most votes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "표",
+            "matchedTranslationForm": "votes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "표",
+    "lemma": "표",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎫",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "ticket; sign; table",
     "primaryGloss": "ticket",
     "emotion": null,
@@ -203,5 +352,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "비상구 표가 어디에 있어요?",
+        "why": "Unnatural; 'sign' as a physical board is 표지판 or 표시, not standalone 표."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'vote, ballot' (e.g., 표를 얻다)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '표' is used for tickets, note that for official identification",
+        "why": "English speakers do not confuse 'ticket' with 'ID card'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with '표지판' (signpost/traffic sign)",
+        "why": "Contradicts sense 2 and its example, which used 표 to mean signpost."
+      }
+    ],
+    "growth": 0.83
   }
 }

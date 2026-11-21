@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "お勘定",
     "lemma": "お勘定",
+    "reading": "おかんじょう",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": null,
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check",
+    "primaryGloss": "bill",
+    "emotion": "matter-of-fact and slightly hurried, finishing up a meal at a restaurant",
+    "notes": [
+      "Used when asking for the bill at a restaurant or bar. お会計 (okaikei) is an equally common, slightly more modern synonym."
+    ],
+    "senses": [
+      {
+        "id": "l5ebo32qug4neus",
+        "order": 0,
+        "definition": "The amount of money owed for food and drinks at a restaurant or bar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check",
+              "tab"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "mf5foi0grulb75l",
+            "text": "すみません、お勘定をお願いします。",
+            "textLang": "ja",
+            "translation": "Excuse me, could I have the bill, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and appreciative, signaling the end of a nice meal",
+            "note": null,
+            "matchedForm": "お勘定",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "お勘定",
+    "lemma": "お勘定",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -140,5 +209,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji headword is missing its hiragana reading (おかんじょう)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(calculation) The act of counting money or calculating a total.",
+        "why": "With the prefix お-, this word means 'bill/check'; 'calculation' is 勘定 without お-."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bill; check",
+        "why": "shortGloss omitted sense 1 (which is being removed anyway, fixing the mismatch)."
+      }
+    ],
+    "growth": 0.554
   }
 }

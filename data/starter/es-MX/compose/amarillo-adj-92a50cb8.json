@@ -72,6 +72,73 @@
     "primaryGloss": "yellow",
     "emotion": "bright, sunny, and cheerful, like a warm afternoon",
     "notes": [
+      "It changes its ending to match the gender and number of the noun (amarillo, amarilla, amarillos, amarillas)."
+    ],
+    "senses": [
+      {
+        "id": "2pe1if5ng2wueti",
+        "order": 0,
+        "definition": "Having the color of a ripe lemon or the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "xijd692yjiim8it",
+            "text": "El limón es amarillo.",
+            "textLang": "es",
+            "translation": "The lemon is yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and matter-of-fact",
+            "note": null,
+            "matchedForm": "amarillo",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "amarillo",
+    "lemma": "amarillo",
+    "reading": null,
+    "ipa": "/a.maˈɾi.ʝo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow",
+    "primaryGloss": "yellow",
+    "emotion": "bright, sunny, and cheerful, like a warm afternoon",
+    "notes": [
       "As an adjective, remember to change the ending to match the gender of the noun (amarilla for feminine).",
       "In some Spanish-speaking countries, this word can also describe something that is pale, sickly, or jaundiced."
     ],
@@ -161,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of a lemon, or the colour of the sun.",
+        "why": "Adjective defined as a noun ('The colour...') instead of a quality ('Of the colour...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Describing someone who looks pale or sickly, often associated with illness.",
+        "why": "Marginal figurative use not needed as a separate sense for an A2 beginner."
+      }
+    ],
+    "growth": 0.432
   }
 }

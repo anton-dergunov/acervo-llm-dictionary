@@ -68,6 +68,75 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "queue; line",
+    "primaryGloss": "line",
+    "emotion": "patient and slightly resigned, standing in a slow-moving line at the store",
+    "notes": [
+      "In Brazil, 'fila' is the standard word for a line of people waiting (e.g., 'ficar na fila' = to stand in line, 'furar a fila' = to cut in line). In Portugal, 'bicha' is also used, which is a derogatory slang term in Brazil.",
+      "For a row of seats in a theater or classroom, Brazilians usually say 'fileira' rather than 'fila'."
+    ],
+    "senses": [
+      {
+        "id": "sq4j2gmhgxi4nwu",
+        "order": 0,
+        "definition": "A line of people or vehicles waiting for their turn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "line",
+              "queue"
+            ]
+          }
+        ],
+        "domain": "everyday",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "qcwygecirya86ma",
+            "text": "A fila para o caixa está muito grande.",
+            "textLang": "pt",
+            "translation": "The line for the register is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit annoyed and impatient while waiting for service",
+            "note": null,
+            "matchedForm": "fila",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a fila",
+    "lemma": "fila",
+    "reading": null,
+    "ipa": "/ˈfi.lɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "queue; line; row",
     "primaryGloss": "queue",
     "emotion": "patient and slightly resigned, standing in a slow-moving line at the store",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use 'fila' for any orderly sequence of people or objects, such as",
+        "why": "Restates the definitions without adding useful grammar or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Sentamos na primeira fila do teatro.",
+        "why": "In Brazilian Portuguese, 'fileira' is the standard word for a row of seats, not 'fila'."
+      }
+    ],
+    "growth": 0.819
   }
 }

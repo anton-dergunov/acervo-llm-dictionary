@@ -58,6 +58,95 @@
     "headword": "luid",
     "lemma": "luid",
     "reading": null,
+    "ipa": "/lœyt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔊",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "loud; loudly",
+    "primaryGloss": "loud",
+    "emotion": "assertive and direct, projecting voice or sound with clear strength",
+    "notes": [
+      "In everyday spoken Dutch, 'hard' is much more common than 'luid' for loud sounds or voices (De muziek staat te hard; Praat niet zo hard). 'Luid' is somewhat more formal or used in fixed phrases like 'luid en duidelijk' (loud and clear)."
+    ],
+    "senses": [
+      {
+        "id": "0u14zgnh8xt9f1q",
+        "order": 0,
+        "definition": "Producing a lot of sound; not quiet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "loud",
+              "loudly"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "dfef8esmj5uqc62",
+            "text": "We hoorden een luide knal op straat.",
+            "textLang": "nl",
+            "translation": "We heard a loud bang in the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "luide",
+            "matchedTranslationForm": "loud"
+          },
+          {
+            "id": "8hrd5l3xrnndb7a",
+            "text": "Hij was luid aan het telefoneren in de trein.",
+            "textLang": "nl",
+            "translation": "He was talking loudly on the phone on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "luid",
+            "matchedTranslationForm": "loudly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "luid",
+    "lemma": "luid",
+    "reading": null,
     "ipa": "/lœy̯t/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Clearly audible or spoken with force.",
+        "why": "'Luid' means loud, not clear; 'clear' comes from 'duidelijk' in the idiom 'luid en duidelijk'."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "clear, audible, loud",
+        "why": "'Luid' does not mean 'clear'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij sprak in een luid en duidelijk stemgeluid.",
+        "why": "'In een ... stemgeluid' is unnatural Dutch; 'luid en duidelijk' is used adverbially."
+      }
+    ],
+    "growth": 0.952
   }
 }

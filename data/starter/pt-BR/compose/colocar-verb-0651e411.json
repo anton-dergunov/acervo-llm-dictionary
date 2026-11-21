@@ -58,6 +58,116 @@
     "headword": "colocar",
     "lemma": "colocar",
     "reading": null,
+    "ipa": "/ko.lo.ˈkaʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to put; to place; to put on",
+    "primaryGloss": "to put",
+    "emotion": "matter-of-fact, focused on the task at hand",
+    "notes": [
+      "In Brazil, 'colocar' and 'botar' (more informal) are often preferred in speech over 'pôr' because they have regular conjugations.",
+      "In the 1st person singular preterite, 'c' changes to 'qu' before '-ei': eu coloquei."
+    ],
+    "senses": [
+      {
+        "id": "oa2pk00yym1ubrh",
+        "order": 0,
+        "definition": "To move something into a particular place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to place",
+              "to set"
+            ]
+          }
+        ],
+        "domain": "position",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "ny9yfimm9un63ok",
+            "text": "Preciso colocar os livros na prateleira.",
+            "textLang": "pt",
+            "translation": "I need to put the books on the shelf.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "diligent and orderly, tidying up the room",
+            "note": null,
+            "matchedForm": "colocar",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "620r1ojj169z1ps",
+        "order": 1,
+        "definition": "To dress oneself in a piece of clothing or an accessory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put on"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "j6z1vdyay18vjwu",
+            "text": "Vou colocar meu casaco porque está frio.",
+            "textLang": "pt",
+            "translation": "I am going to put on my coat because it is cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sensible and preparing for the weather",
+            "note": null,
+            "matchedForm": "colocar",
+            "matchedTranslationForm": "put on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "colocar",
+    "lemma": "colocar",
+    "reading": null,
     "ipa": "/ko.lo.ˈkaɾ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Colocar is slightly more formal than pôr.",
+        "why": "In Brazilian Portuguese, 'colocar' is extremely common in everyday speech and is completely neutral."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "put on, wear",
+        "why": "'Colocar' denotes the action of putting clothes on, not the state of wearing them."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use colocar when you are physically placing an object in a specific",
+        "why": "Restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.859
   }
 }

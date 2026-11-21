@@ -72,6 +72,115 @@
     "primaryGloss": "tooth",
     "emotion": "a sharp, pulsing throb that makes you wince and press your cheek",
     "notes": [
+      "The vowel 'ą' changes to 'ę' in all other grammatical cases and in the plural, e.g., 'zęby' (teeth), 'bez zęba' (without a tooth).",
+      "The final 'b' is devoiced to a 'p' sound at the end of the word, but pronounced 'b' before endings ('zęby')."
+    ],
+    "senses": [
+      {
+        "id": "zdt96dnf8cvf0yb",
+        "order": 0,
+        "definition": "One of the hard white structures in the mouth used for biting and chewing food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tooth"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "r9gxrb75ebsv2kf",
+            "text": "Boli mnie ząb.",
+            "textLang": "pl",
+            "translation": "My tooth hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "painful and weary, needing to see a dentist soon",
+            "note": null,
+            "matchedForm": "ząb",
+            "matchedTranslationForm": "tooth"
+          },
+          {
+            "id": "e5zlxmzgifo4613",
+            "text": "Myję zęby dwa razy dziennie.",
+            "textLang": "pl",
+            "translation": "I brush my teeth twice a day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "zęby",
+            "matchedTranslationForm": "teeth"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5i05h11y9fkmq47",
+        "order": 1,
+        "definition": "One of a row of pointed parts on an object such as a comb, saw, zipper, or gear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tooth",
+              "cog",
+              "prong"
+            ]
+          }
+        ],
+        "domain": "object part",
+        "emoji": "⚙️",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ząb",
+    "lemma": "ząb",
+    "reading": null,
+    "ipa": "/zɔmp/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "tooth; cog; prong",
+    "primaryGloss": "tooth",
+    "emotion": "a sharp, pulsing throb that makes you wince and press your cheek",
+    "notes": [
       "Note that the final 'b' is devoiced to a 'p' sound when spoken alone or at the end of a word.",
       "When talking about the 'teeth' of a saw or gear, Polish uses this same word, ząb, just like we use 'tooth' in English."
     ],
@@ -139,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When talking about the 'teeth' of a saw or gear, Polish uses",
+        "why": "Filler note repeating sense 1, while the irregular vowel alternation (ząb -> zęby) is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs a note on the stem vowel alternation 'ą' to 'ę' in declined forms (zęby)."
+      }
+    ],
+    "growth": 1.26
   }
 }

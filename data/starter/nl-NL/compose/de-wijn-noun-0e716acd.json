@@ -58,6 +58,73 @@
     "headword": "de wijn",
     "lemma": "wijn",
     "reading": null,
+    "ipa": "/ʋɛin/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍷",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "wine",
+    "primaryGloss": "wine",
+    "emotion": "warm and convivial, enjoying a quiet evening with a meal",
+    "notes": [
+      "Uncountable for the drink in general, or countable ('een wijn', plural 'wijnen') when referring to a glass or a type of wine."
+    ],
+    "senses": [
+      {
+        "id": "zi4s6a8jv4zi2zb",
+        "order": 0,
+        "definition": "An alcoholic drink made from fermented grape juice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wine"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "qhw2q71qkhllsrg",
+            "text": "We drinken een glas rode wijn bij het avondeten.",
+            "textLang": "nl",
+            "translation": "We are drinking a glass of red wine with dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and pleasant, enjoying the company and the meal",
+            "note": null,
+            "matchedForm": "wijn",
+            "matchedTranslationForm": "wine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de wijn",
+    "lemma": "wijn",
+    "reading": null,
     "ipa": "/wɛin/",
     "pos": "noun",
     "gender": "common",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/wɛin/",
+        "why": "Dutch 'w' is /ʋ/, not /w/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'de' is the definite article for common gender words",
+        "why": "Restates the article and gender already given in the headword."
+      }
+    ],
+    "growth": 1.157
   }
 }

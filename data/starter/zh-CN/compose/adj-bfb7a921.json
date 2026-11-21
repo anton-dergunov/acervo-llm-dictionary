@@ -57,6 +57,115 @@
     "language": "zh",
     "headword": "无聊",
     "lemma": "无聊",
+    "reading": "wúliáo",
+    "ipa": "/u˧˥ li̯au̯˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥱",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "bored; boring",
+    "primaryGloss": "bored",
+    "emotion": "dragging and sighing, completely tired of having nothing to do",
+    "notes": [
+      "Describes both a person feeling bored (我很无聊, I'm bored) and a thing that is boring (电影很无聊, the movie is boring). Be careful: saying 你很无聊 means 'You are boring/silly', not 'You are bored'."
+    ],
+    "senses": [
+      {
+        "id": "0sczu8tdhunfbe7",
+        "order": 0,
+        "definition": "Feeling restless and uninterested because you have nothing to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bored"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🥱",
+        "examples": [
+          {
+            "id": "iwp0mgku0ocmxmz",
+            "text": "今天下雨，我待在家里觉得很无聊。",
+            "textLang": "zh",
+            "translation": "It is raining today, and I feel very bored staying at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "无聊",
+            "matchedTranslationForm": "bored"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "voks0140wk85mjj",
+        "order": 1,
+        "definition": "Dull and uninteresting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boring",
+              "dull",
+              "tedious"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "💤",
+        "examples": [
+          {
+            "id": "55ud917303nbeu3",
+            "text": "这部电影太无聊了，我中途就睡着了。",
+            "textLang": "zh",
+            "translation": "This movie was so boring that I fell asleep halfway through.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sleepy and dismissive about a terrible film",
+            "note": null,
+            "matchedForm": "无聊",
+            "matchedTranslationForm": "boring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "无聊",
+    "lemma": "无聊",
     "reading": "wú liáo",
     "ipa": "/u˧˥ li̯au̯˧˥/",
     "pos": "adj",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "wú liáo",
+        "why": "Pinyin for a single word should not have spaces between syllables (wúliáo)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that is dull, uninteresting, or a waste of time.",
+        "why": "Defines an adjective as a noun ('Something that is...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 讨厌 (tǎoyàn), which means annoying or hateful.",
+        "why": "Unrelated word that learners have no special reason to confuse with 无聊."
+      }
+    ],
+    "growth": 0.937
   }
 }

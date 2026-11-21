@@ -60,6 +60,74 @@
     "headword": "банк",
     "lemma": "банк",
     "reading": null,
+    "ipa": "/bank/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "bank",
+    "primaryGloss": "bank",
+    "emotion": "matter-of-fact and straightforward, stating a location",
+    "notes": [
+      "Do not confuse with банка (feminine), which means 'jar' or 'can'."
+    ],
+    "senses": [
+      {
+        "id": "kqppwsv8xt01jze",
+        "order": 0,
+        "definition": "A financial institution where people can keep and borrow money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "ikrrx89kaljv7yq",
+            "text": "Мне нужно зайти в банк, чтобы снять деньги.",
+            "textLang": "ru",
+            "translation": "I need to go to the bank to withdraw money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and purposeful, running a necessary errand",
+            "note": null,
+            "matchedForm": "банк",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "банк",
+    "lemma": "банк",
+    "reading": null,
     "ipa": "/baŋk/",
     "pos": "noun",
     "gender": "masculine",
@@ -162,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baŋk/",
+        "why": "Russian does not have the velar nasal /ŋ/ before /k/; it is /bank/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A pool of money or stakes in certain card games.",
+        "why": "Card-game sense is marginal for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bank; card game",
+        "why": "Says 'card game' when the sense actually meant the pot/stakes, and sense is marginal."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both the financial institution and a traditional card game.",
+        "why": "Restates the senses and falsely claims it means a card game rather than the pot."
+      }
+    ],
+    "growth": 0.622
   }
 }

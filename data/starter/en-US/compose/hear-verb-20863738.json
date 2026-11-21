@@ -58,6 +58,116 @@
     "headword": "hear",
     "lemma": "hear",
     "reading": null,
+    "ipa": "/hɪr/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "oír; enterarse",
+    "primaryGloss": "oír",
+    "emotion": "attentive and natural, focusing on the sounds arriving at the ears",
+    "notes": [
+      "Es un verbo irregular: su pasado y participio pasado son 'heard' (/hɜrd/).",
+      "No lo confundas con 'listen' (escuchar). 'Hear' es percibir un sonido sin intentarlo; 'listen' es prestar atención voluntariamente."
+    ],
+    "senses": [
+      {
+        "id": "js53ddxd4caufzv",
+        "order": 0,
+        "definition": "Percibir un sonido a través de los oídos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "oír",
+              "escuchar"
+            ]
+          }
+        ],
+        "domain": "sonido",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "fxsui8w76ednfqx",
+            "text": "I can hear someone knocking at the door.",
+            "textLang": "en",
+            "translation": "Puedo oír a alguien llamando a la puerta.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit surprised, noticing a sudden sound",
+            "note": null,
+            "matchedForm": "hear",
+            "matchedTranslationForm": "oír"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "exhcespl7rlotqm",
+        "order": 1,
+        "definition": "Recibir información o noticias sobre algo o alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "enterarse",
+              "oír hablar"
+            ]
+          }
+        ],
+        "domain": "noticias",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "gltro7by4bvfdsr",
+            "text": "Did you hear the news?",
+            "textLang": "en",
+            "translation": "¿Te enteraste de las noticias?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager to share, checking if the other person knows",
+            "note": null,
+            "matchedForm": "hear",
+            "matchedTranslationForm": "enteraste"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hear",
+    "lemma": "hear",
+    "reading": null,
     "ipa": "/hɪər/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/hɪər/",
+        "why": "Uses British IPA (/hɪər/) instead of US English (/hɪr/)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "oír; escuchar",
+        "why": "Does not cover sense 1 (enterarse), and 'escuchar' contradicts the note comparing it with 'listen'."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[1].glosses",
+        "quote": "oir hablar",
+        "why": "Missing accent mark on 'oír'."
+      }
+    ],
+    "growth": 1.042
   }
 }

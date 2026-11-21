@@ -58,6 +58,95 @@
     "headword": "insegnare",
     "lemma": "insegnare",
     "reading": null,
+    "ipa": "/in.seɲˈɲa.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to teach",
+    "primaryGloss": "to teach",
+    "emotion": "patient and purposeful, sharing knowledge with someone who is listening",
+    "notes": [
+      "Takes an indirect object for the person taught ('insegnare qualcosa a qualcuno') and 'a' before an infinitive ('Mi insegni a nuotare?')."
+    ],
+    "senses": [
+      {
+        "id": "lmwb2n820h1og18",
+        "order": 0,
+        "definition": "To help someone learn a subject or how to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to teach",
+              "to show"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "8oqqt3nxybfo917",
+            "text": "Il professore insegna matematica al liceo.",
+            "textLang": "it",
+            "translation": "The teacher teaches mathematics at the high school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "insegna",
+            "matchedTranslationForm": "teaches"
+          },
+          {
+            "id": "1ly8wzg5zkhz9q5",
+            "text": "Puoi insegnarmi a preparare questa ricetta?",
+            "textLang": "it",
+            "translation": "Can you teach me how to make this recipe?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "insegnarmi",
+            "matchedTranslationForm": "teach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "insegnare",
+    "lemma": "insegnare",
+    "reading": null,
     "ipa": "/in.seɲ.ˈɲa.re/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(demonstration) To demonstrate how to perform an action or give someone",
+        "why": "Teaching a subject and teaching how to do something are one sense of 'insegnare'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Italian, 'insegnare' is used for formal instruction, like a teacher",
+        "why": "False claim: 'insegnare' is used for informal teaching as well, as sense 1 shows."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Il professore insegna la matematica ai suoi studenti.",
+        "why": "With 'insegnare', school subjects normally omit the definite article ('insegna matematica')."
+      }
+    ],
+    "growth": 0.654
   }
 }

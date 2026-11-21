@@ -58,6 +58,116 @@
     "headword": "yürümek",
     "lemma": "yürümek",
     "reading": null,
+    "ipa": "/jyɾyˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to walk; to proceed; to go well",
+    "primaryGloss": "walk",
+    "emotion": "steady and purposeful, moving forward step by step",
+    "notes": [
+      "In the present continuous, the vowel changes before '-yor': 'yürüyor' (walking). To say 'walk to a place' as a mode of transport, Turkish usually uses 'yürüyerek gitmek' (to go by walking)."
+    ],
+    "senses": [
+      {
+        "id": "e0hm54rhjbqi64a",
+        "order": 0,
+        "definition": "To move forward on foot at a normal speed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "walk",
+              "go on foot"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "e6esqli0cy42u8d",
+            "text": "Her akşam parkta yarım saat yürüyorum.",
+            "textLang": "tr",
+            "translation": "I walk in the park for half an hour every evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yürüyorum",
+            "matchedTranslationForm": "walk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i18k7pa9vfjmoxy",
+        "order": 1,
+        "definition": "Of a plan, business, or relationship: to proceed or go well without problems.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "proceed",
+              "go well",
+              "work out"
+            ]
+          }
+        ],
+        "domain": "progress",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "678ebnz45d4ebke",
+            "text": "Projelerimiz planladığımız gibi yürümeye başladı.",
+            "textLang": "tr",
+            "translation": "Our projects started to proceed as we planned.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and satisfied, seeing things fall into place",
+            "note": null,
+            "matchedForm": "yürümeye",
+            "matchedTranslationForm": "proceed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yürümek",
+    "lemma": "yürümek",
+    "reading": null,
     "ipa": "/yːryˈmec/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/yːryˈmec/",
+        "why": "Missing initial /j/ for Turkish 'y' and has a false long vowel /yː/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Her gün işe yürümek sağlıklı bir alışkanlıktır.",
+        "why": "'İşe yürümek' is a calque from English; Turkish naturally says 'işe yürüyerek gitmek'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Yürümek is the standard verb for walking on foot, but it is",
+        "why": "Merely restates the two senses already defined in the entry."
+      }
+    ],
+    "growth": 1.12
   }
 }

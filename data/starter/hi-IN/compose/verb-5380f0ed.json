@@ -72,6 +72,157 @@
     "primaryGloss": "to open",
     "emotion": "helpful and welcoming, reaching out to let someone in",
     "notes": [
+      "Transitive verb (takes ने in the perfective). Do not confuse with its intransitive pair खुलना ('to open' on its own: दुकान खुल गई, 'the shop opened')."
+    ],
+    "senses": [
+      {
+        "id": "e25u7a0la7jucbu",
+        "order": 0,
+        "definition": "To move something such as a door, window, book, or container so that it is no longer shut.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open"
+            ]
+          }
+        ],
+        "domain": "opening",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "c5a8997fot4cxev",
+            "text": "कृपया दरवाज़ा खोलिए।",
+            "textLang": "hi",
+            "translation": "Please open the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "खोलिए",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2euafzth2s8qkkz",
+        "order": 1,
+        "definition": "To undo a knot, tie, button, or fastened thing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to untie",
+              "to undo",
+              "to unfasten"
+            ]
+          }
+        ],
+        "domain": "unfastening",
+        "emoji": "🪢",
+        "examples": [
+          {
+            "id": "hqu81fcld83z9vx",
+            "text": "उसने अपने जूते के फ़ीते खोल दिए।",
+            "textLang": "hi",
+            "translation": "He untied his shoelaces.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "खोल",
+            "matchedTranslationForm": "untied"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ab52fisvpv4qhue",
+        "order": 2,
+        "definition": "To start or set up a shop, business, or bank account.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open",
+              "to start",
+              "to set up"
+            ]
+          }
+        ],
+        "domain": "starting",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "nw30q30q0lwgt91",
+            "text": "उन्होंने बैंक में नया खाता खोला।",
+            "textLang": "hi",
+            "translation": "They opened a new account at the bank.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "खोला",
+            "matchedTranslationForm": "opened"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "खोलना",
+    "lemma": "खोलना",
+    "reading": null,
+    "ipa": "/kʰoːl.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to open; to untie; to start",
+    "primaryGloss": "to open",
+    "emotion": "helpful and welcoming, reaching out to let someone in",
+    "notes": [
       "Used broadly for opening doors, windows, containers, and books, as well as starting businesses or untying knots."
     ],
     "senses": [
@@ -201,5 +352,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "कृपया दरवाज़ा खोलना।",
+        "why": "With कृपया (please), the polite imperative खोलिए or खोल दीजिए is natural, not the infinitive खोलना."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used broadly for opening doors, windows, containers, and books, as well as",
+        "why": "Purely repeats the definitions instead of contrasting with the intransitive खुलना."
+      }
+    ],
+    "growth": 1.111
   }
 }

@@ -77,6 +77,115 @@
     "primaryGloss": "pez",
     "emotion": "matter-of-fact and neutral",
     "notes": [
+      "En inglés, 'fish' se usa tanto para el animal vivo ('pez') como para el alimento ('pescado').",
+      "Como animal es contable, pero su plural suele ser invariable ('one fish', 'two fish'). Como alimento es incontable."
+    ],
+    "senses": [
+      {
+        "id": "g430sfoihl49gz3",
+        "order": 0,
+        "definition": "Animal vertebrado que vive en el agua, respira por branquias y tiene aletas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pez"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "plelc7gqynsakz1",
+            "text": "The small fish swims quickly in the lake.",
+            "textLang": "en",
+            "translation": "El pequeño pez nada rápidamente en el lago.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm",
+            "note": null,
+            "matchedForm": "fish",
+            "matchedTranslationForm": "pez"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pbbuz9cpbat9g53",
+        "order": 1,
+        "definition": "Carne de este animal usada como alimento.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pescado"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "crhqs8dp6twfdlq",
+            "text": "I like to eat grilled fish for dinner.",
+            "textLang": "en",
+            "translation": "Me gusta comer pescado a la parrilla para la cena.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and hungry, looking forward to a healthy meal",
+            "note": null,
+            "matchedForm": "fish",
+            "matchedTranslationForm": "pescado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "fish",
+    "lemma": "fish",
+    "reading": null,
+    "ipa": "/fɪʃ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Food and drink",
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pez; pescado",
+    "primaryGloss": "pez",
+    "emotion": "matter-of-fact and neutral",
+    "notes": [
       "En inglés, la palabra 'fish' se usa tanto para el animal vivo como para el alimento. En español, usamos dos palabras distintas: 'pez' para el que está vivo en el agua y 'pescado' para el que se cocina o se come."
     ],
     "senses": [
@@ -163,5 +272,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial grammatical fact that the plural of 'fish' is usually 'fish' (and 'fish' as food is uncountable)."
+      }
+    ],
+    "growth": 0.994
   }
 }

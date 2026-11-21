@@ -70,6 +70,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to fly; to throw, to throw away",
+    "primaryGloss": "fly",
+    "emotion": "light and breezy, watching something soar away into the open sky",
+    "notes": [
+      "Also very commonly used in the form πετάω in everyday speech. Simple past (aorist): πέταξα.",
+      "Do not confuse with πηδώ / πηδάω ('to jump')."
+    ],
+    "senses": [
+      {
+        "id": "7lug12vdpqfk6yx",
+        "order": 0,
+        "definition": "To move or travel through the air (of a bird, aircraft, or passenger).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fly"
+            ]
+          }
+        ],
+        "domain": "flight",
+        "emoji": "🕊️",
+        "examples": [
+          {
+            "id": "3hdjbne141iltwf",
+            "text": "Τα πουλιά πετούν ψηλά στον ουρανό.",
+            "textLang": "el",
+            "translation": "The birds fly high in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching birds in the open air",
+            "note": null,
+            "matchedForm": "πετούν",
+            "matchedTranslationForm": "fly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dev1wqnvl7k1wbs",
+        "order": 1,
+        "definition": "To send something through the air with your hand, or to get rid of something as rubbish.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "throw",
+              "throw away",
+              "toss"
+            ]
+          }
+        ],
+        "domain": "throwing",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "5rpdc0avuo4x5nt",
+            "text": "Πέταξε την μπάλα στον φίλο του.",
+            "textLang": "el",
+            "translation": "He threw the ball to his friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "active and playful, passing a ball outdoors",
+            "note": null,
+            "matchedForm": "Πέταξε",
+            "matchedTranslationForm": "threw"
+          },
+          {
+            "id": "gcpllo8ceiergy8",
+            "text": "Μην πετάς τα σκουπίδια κάτω.",
+            "textLang": "el",
+            "translation": "Don't throw rubbish on the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πετάς",
+            "matchedTranslationForm": "throw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "πετώ",
+    "lemma": "πετώ",
+    "reading": null,
+    "ipa": "/peˈto/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦅",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to fly; to throw",
     "primaryGloss": "fly",
     "emotion": "light and breezy, watching something soar away into the open sky",
@@ -162,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "πετώ has two very common meanings: moving through the air",
+        "why": "Restates the two sense definitions without adding usage or grammar information."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To move through the air using wings.",
+        "why": "Too narrow; also used for airplanes and people traveling by plane."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To send something through the air quickly using your hand.",
+        "why": "Misses the very common meaning 'to throw away' (rubbish)."
+      }
+    ],
+    "growth": 1.285
   }
 }

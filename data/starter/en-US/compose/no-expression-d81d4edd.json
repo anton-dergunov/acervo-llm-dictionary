@@ -68,6 +68,73 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "no",
+    "primaryGloss": "no",
+    "emotion": null,
+    "notes": [
+      "A diferencia del español, 'no' se usa para responder preguntas o antes de un sustantivo ('no money'), pero para negar un verbo se usa 'not' ('I do not know')."
+    ],
+    "senses": [
+      {
+        "id": "j81qotygrozjj64",
+        "order": 0,
+        "definition": "Se usa para dar una respuesta negativa o expresar rechazo o desacuerdo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "no"
+            ]
+          }
+        ],
+        "domain": "negación",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "mouq4cuxzttck0f",
+            "text": "No, I don't want any coffee, thank you.",
+            "textLang": "en",
+            "translation": "No, no quiero café, gracias.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "No",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "no",
+    "lemma": "no",
+    "reading": null,
+    "ipa": "/noʊ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "no; not",
     "primaryGloss": "no",
     "emotion": null,
@@ -114,5 +181,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "shortGloss",
+        "quote": "no; not",
+        "why": "Contains the English word 'not' in a Spanish gloss field."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Palabra que se usa para negar un verbo o una frase.",
+        "why": "False for English: 'not' negates verbs/clauses, whereas 'no' is an interjection or determiner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para negar una afirmación como para responder de forma",
+        "why": "Restates the basic meaning instead of contrasting 'no' with 'not'."
+      }
+    ],
+    "growth": 1.376
   }
 }

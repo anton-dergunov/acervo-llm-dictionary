@@ -58,6 +58,73 @@
     "headword": "เนื้อสัตว์",
     "lemma": "เนื้อสัตว์",
     "reading": null,
+    "ipa": "/nɯ́a.sàt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat",
+    "primaryGloss": "meat",
+    "emotion": "appetizing and practical, planning what to cook for dinner",
+    "notes": [
+      "Composed of เนื้อ (meat, flesh) + สัตว์ (animal). Used for meat in general, whereas เนื้อ alone in food contexts usually means beef."
+    ],
+    "senses": [
+      {
+        "id": "v3nxs53ra56kmwx",
+        "order": 0,
+        "definition": "The flesh of an animal eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "zpnird289pj23qw",
+            "text": "ฉันชอบกินเนื้อสัตว์ทุกชนิด ยกเว้นเนื้อแพะ",
+            "textLang": "th",
+            "translation": "I like eating all kinds of meat except goat meat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เนื้อสัตว์",
+            "matchedTranslationForm": "meat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เนื้อสัตว์",
+    "lemma": "เนื้อสัตว์",
+    "reading": null,
     "ipa": "/nɯ́asàt/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "ยกเว้นเนื้อแพ",
+        "why": "typo 'แพ' (raft) instead of 'แพะ' (goat)"
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used generally for any kind of meat eaten as food",
+        "why": "restates the definition instead of contrasting with เนื้อ alone (beef)"
+      }
+    ],
+    "growth": 0.974
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "moon",
     "emotion": "wondering and calm, looking up at the night sky",
     "notes": [
+      "Commonly used with 'cheia' (full), 'nova' (new), 'crescente' (waxing), or 'minguante' (waning) to describe its phase."
+    ],
+    "senses": [
+      {
+        "id": "x08co10t3j2k851",
+        "order": 0,
+        "definition": "The natural satellite that orbits Earth and shines in the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "moon"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "1v37wylk4uqch3h",
+            "text": "A lua está muito brilhante hoje à noite.",
+            "textLang": "pt",
+            "translation": "The moon is very bright tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the night view",
+            "note": null,
+            "matchedForm": "lua",
+            "matchedTranslationForm": "moon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a lua",
+    "lemma": "lua",
+    "reading": null,
+    "ipa": "/ˈlu.ɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "moon",
+    "primaryGloss": "moon",
+    "emotion": "wondering and calm, looking up at the night sky",
+    "notes": [
       "In Portuguese, 'lua' is always feminine because of the definite article 'a'.",
       "It is often used with 'cheia' (full), 'nova' (new), or 'crescente' (waxing) to describe its phase."
     ],
@@ -119,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Portuguese, 'lua' is always feminine because of the definite article 'a'.",
+        "why": "Restates gender and gets causality backwards (the article is 'a' because 'lua' is feminine)."
+      }
+    ],
+    "growth": 0.823
   }
 }

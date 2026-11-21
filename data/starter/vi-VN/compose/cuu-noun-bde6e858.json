@@ -72,6 +72,74 @@
     "primaryGloss": "sheep",
     "emotion": "gentle and pastoral, picturing a flock grazing in a quiet green field",
     "notes": [
+      "Takes the classifier 'con' for individual animals (con cừu) and 'đàn' for a flock (đàn cừu).",
+      "Common in compounds such as thịt cừu (lamb/mutton) and lông cừu (sheep's wool)."
+    ],
+    "senses": [
+      {
+        "id": "rcek34rhsc7j63k",
+        "order": 0,
+        "definition": "A farm animal with thick wool, raised for its meat and wool.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "lzalvvfm399rjsd",
+            "text": "Đàn cừu đang ăn cỏ trên đồi.",
+            "textLang": "vi",
+            "translation": "The flock of sheep is grazing on the hill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching animals peacefully in nature",
+            "note": null,
+            "matchedForm": "cừu",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cừu",
+    "lemma": "cừu",
+    "reading": null,
+    "ipa": "/kɨw˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "sheep",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and pastoral, picturing a flock grazing in a quiet green field",
+    "notes": [
       "Used to refer to both the individual animal and sheep in general.",
       "Often combined with other words to specify parts or products, such as thịt cừu (mutton/lamb) and len cừu (wool)."
     ],
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer to both the individual animal and sheep in general.",
+        "why": "All Vietnamese nouns work this way; misses the needed classifier 'con'."
+      }
+    ],
+    "growth": 0.981
   }
 }

@@ -68,6 +68,92 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "orange (fruit)",
+    "primaryGloss": "orange",
+    "emotion": "refreshing and bright, anticipating the sweet and zesty taste",
+    "notes": [
+      "Plural: die Orangen. In northern and central Germany, the fruit is also called 'die Apfelsine'.",
+      "As a color noun, it is neuter ('das Orange')."
+    ],
+    "senses": [
+      {
+        "id": "1s8cbpp486mcz91",
+        "order": 0,
+        "definition": "A round, sweet citrus fruit with a thick reddish-yellow skin.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "orange"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍊",
+        "examples": [
+          {
+            "id": "umlhb47imefb808",
+            "text": "Ich esse jeden Morgen eine frische Orange.",
+            "textLang": "de",
+            "translation": "I eat a fresh orange every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented and healthy, enjoying a simple breakfast routine",
+            "note": null,
+            "matchedForm": "Orange",
+            "matchedTranslationForm": "orange"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "1s8cbpp486mcz91",
+      "from": "Eine runde, orangefarbene Zitrusfrucht.",
+      "to": "A round, orange-colored citrus fruit.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:11:15Z"
+    },
+    {
+      "sense": "3zj5lynvyb86mie",
+      "from": "Eine leuchtende Farbe zwischen Rot und Gelb.",
+      "to": "A bright color between red and yellow.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:11:15Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Orange",
+    "lemma": "Orange",
+    "reading": null,
+    "ipa": "/oˈʁɑ̃ːʒə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍊",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "orange (fruit); orange (color)",
     "primaryGloss": "orange",
     "emotion": "refreshing and bright, anticipating the sweet and zesty taste",
@@ -160,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "1s8cbpp486mcz91",
-      "from": "Eine runde, orangefarbene Zitrusfrucht.",
-      "to": "A round, orange-colored citrus fruit.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:11:15Z"
-    },
-    {
-      "sense": "3zj5lynvyb86mie",
-      "from": "Eine leuchtende Farbe zwischen Rot und Gelb.",
-      "to": "A bright color between red and yellow.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:11:15Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "particularly in the south and in Austria, this fruit is commonly called 'Apfelsine'",
+        "why": "'Apfelsine' is Northern German; the South and Austria exclusively use 'Orange'."
+      },
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "senses[1]",
+        "quote": "(color) A bright color between red and yellow.",
+        "why": "Color noun 'das Orange' is neuter, not feminine like 'die Orange' (fruit)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'Orange' with 'Orangensaft', which is orange juice.",
+        "why": "Pointless filler note; learners do not confuse a basic noun with its transparent compound."
+      }
+    ],
+    "growth": 0.641
+  }
 }

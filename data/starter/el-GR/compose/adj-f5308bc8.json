@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old; worn out; former",
+    "primaryGloss": "old",
+    "emotion": "a slightly nostalgic, matter-of-fact tone used when describing items with history",
+    "notes": [
+      "Used for things that are not new, or for long-standing relationships (παλιός φίλος, 'old friend'). For a person who is old in age, use ηλικιωμένος or γέρος, not παλιός.",
+      "Unlike αρχαίος ('ancient'), which is for historical things like ruins, παλιός is for everyday things that are not new."
+    ],
+    "senses": [
+      {
+        "id": "f7ghfl95al61e9f",
+        "order": 0,
+        "definition": "Of a thing: made or existing for a long time; not new, or worn from use.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "worn out"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "2ber9uw17b023pi",
+            "text": "Αγόρασε ένα παλιό αυτοκίνητο.",
+            "textLang": "el",
+            "translation": "He bought an old car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and factual, describing a purchase",
+            "note": null,
+            "matchedForm": "παλιό",
+            "matchedTranslationForm": "old"
+          },
+          {
+            "id": "6cbxoja9uvhmb8h",
+            "text": "Πέταξε τα παλιά του ρούχα.",
+            "textLang": "el",
+            "translation": "He threw away his old clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "decisive and efficient, cleaning up clutter",
+            "note": null,
+            "matchedForm": "παλιά",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c8hg0uzd7am9smk",
+        "order": 1,
+        "definition": "Dating from the past, or known for a long time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "former",
+              "long-standing"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "9js0zkdstug33ar",
+            "text": "Συνάντησα έναν παλιό μου φίλο.",
+            "textLang": "el",
+            "translation": "I met an old friend of mine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "παλιό",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "παλιός",
+    "lemma": "παλιός",
+    "reading": null,
+    "ipa": "/paˈʎos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕰️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "old; worn out",
     "primaryGloss": "old",
     "emotion": "a slightly nostalgic, matter-of-fact tone used when describing items with history",
@@ -159,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that has been used for a long time and is now",
+        "why": "Adjective is defined as a noun ('Something that...')."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'former / long-standing' (e.g., παλιός φίλος, παλιός συμμαθητής)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should contrast with ηλικιωμένος / γέρος for old people in age, a classic A2 trap."
+      }
+    ],
+    "growth": 1.337
   }
 }

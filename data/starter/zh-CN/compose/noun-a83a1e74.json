@@ -68,6 +68,74 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "blanket; rug",
+    "primaryGloss": "blanket",
+    "emotion": "cosy and warm, settling into bed on a cold night",
+    "notes": [
+      "The common measure word is 条 (tiáo), or 张 (zhāng). For a thick quilt or duvet, use 被子 (bèizi)."
+    ],
+    "senses": [
+      {
+        "id": "5ixm5hliw3cwxrv",
+        "order": 0,
+        "definition": "A woven cover used for warmth on a bed or sofa, or as a mat on the floor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blanket",
+              "rug"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "m0u9kpo03d2skm9",
+            "text": "天气冷了，多盖一条毯子吧。",
+            "textLang": "zh",
+            "translation": "It's getting cold, put on another blanket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "毯子",
+            "matchedTranslationForm": "blanket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "毯子",
+    "lemma": "毯子",
+    "reading": "tǎn zi",
+    "ipa": "/tʰan˨˩˦ tsɹ̩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "blanket",
     "primaryGloss": "blanket",
     "emotion": "cosy and warm, settling into bed on a cold night",
@@ -118,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "毯子 refers to blankets in general, including wool blankets and heavy bed",
+        "why": "Restates the gloss and falsely implies it includes heavy quilts (被子); lacks measure word."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "天气冷了，多 盖 一 条 毯子 吧。",
+        "why": "Chinese text contains unnatural spaces between words."
+      }
+    ],
+    "growth": 1.298
   }
 }

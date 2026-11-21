@@ -58,6 +58,73 @@
     "headword": "오렌지",
     "lemma": "오렌지",
     "reading": null,
+    "ipa": "oɾendʑi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍊",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "orange",
+    "primaryGloss": "orange",
+    "emotion": "refreshing and light, holding a juicy piece of fruit",
+    "notes": [
+      "Refers to the fruit. For the color orange, use 주황색 or 오렌지색."
+    ],
+    "senses": [
+      {
+        "id": "tz5im0ihrwebvoj",
+        "order": 0,
+        "definition": "A round citrus fruit with a thick, bright orange skin and juicy segments inside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "orange"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍊",
+        "examples": [
+          {
+            "id": "uc1hre1yjud11bn",
+            "text": "오렌지를 먹고 싶어요.",
+            "textLang": "ko",
+            "translation": "I want to eat an orange.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and hungry, feeling like a healthy snack",
+            "note": null,
+            "matchedForm": "오렌지를",
+            "matchedTranslationForm": "orange"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오렌지",
+    "lemma": "오렌지",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "you can also use the native Korean word '주황색'",
+        "why": "주황색 (橘黃色) is a Sino-Korean word, not native Korean."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "그 셔츠는 오렌지색이에요.",
+        "why": "Uses the compound word 오렌지색 instead of the headword 오렌지."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(color) The color between red and yellow",
+        "why": "The color is normally 주황색 or 오렌지색; bare 오렌지 is mainly the fruit."
+      }
+    ],
+    "growth": 0.326
   }
 }

@@ -68,6 +68,73 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "ear",
+    "primaryGloss": "ear",
+    "emotion": "matter-of-fact and focused on the physical part of the body",
+    "notes": [
+      "Takes the classifier 'cái' for a single ear or 'đôi' for a pair of ears. Not to be confused with 'tay' (hand/arm)."
+    ],
+    "senses": [
+      {
+        "id": "yjg7sk1st8h5qwh",
+        "order": 0,
+        "definition": "The organ on the side of the head of humans and animals, used for hearing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "wc90h0wifdn2wmm",
+            "text": "Con thỏ có đôi tai rất dài.",
+            "textLang": "vi",
+            "translation": "The rabbit has very long ears.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tai",
+            "matchedTranslationForm": "ears"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tai",
+    "lemma": "tai",
+    "reading": null,
+    "ipa": "/taːj˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "ear; trouble/disaster",
     "primaryGloss": "ear",
     "emotion": "matter-of-fact and focused on the physical part of the body",
@@ -116,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A word used to refer to a negative event, trouble, or a",
+        "why": "Sino-Vietnamese bound morpheme (災), not a standalone noun meaning 'disaster' or 'accident'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ear; trouble/disaster",
+        "why": "Includes the bound Sino-Vietnamese root meaning as if it were a standalone word."
+      }
+    ],
+    "growth": 0.65
   }
 }

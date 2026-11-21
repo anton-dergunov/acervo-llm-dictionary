@@ -72,6 +72,74 @@
     "primaryGloss": "cousin",
     "emotion": "warm and casual, mentioning someone you know well",
     "notes": [
+      "Use 'o primo' for a male cousin and 'a prima' for a female cousin. The plural 'os primos' can refer to male cousins or a mixed group."
+    ],
+    "senses": [
+      {
+        "id": "ow7ua6fra8e49cj",
+        "order": 0,
+        "definition": "The son of your aunt or uncle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cousin",
+              "male cousin"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "rcq3gygl58jw5mb",
+            "text": "O meu primo vai nos visitar no domingo.",
+            "textLang": "pt",
+            "translation": "My cousin is going to visit us on Sunday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "primo",
+            "matchedTranslationForm": "cousin"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o primo",
+    "lemma": "primo",
+    "reading": null,
+    "ipa": "/ˈpɾĩ.mu/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "cousin",
+    "primaryGloss": "cousin",
+    "emotion": "warm and casual, mentioning someone you know well",
+    "notes": [
       "In Portuguese, you must use the masculine 'o primo' for a male cousin and 'a prima' for a female cousin.",
       "This word refers strictly to the child of an aunt or uncle, never to more distant relatives like a second cousin."
     ],
@@ -119,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "This word refers strictly to the child of an aunt or uncle,",
+        "why": "False: 'primo' is widely used for more distant cousins too (e.g. 'primo de segundo grau')."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "The child of an uncle or aunt.",
+        "why": "'O primo' specifically means a male cousin (the son, not any child)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "O meu primo vai visitar-nos no domingo.",
+        "why": "Enclitic 'visitar-nos' is European Portuguese; Brazilian Portuguese uses 'nos visitar'."
+      }
+    ],
+    "growth": 0.782
   }
 }

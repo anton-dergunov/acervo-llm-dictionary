@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to break; to fracture",
+    "primaryGloss": "to break",
+    "emotion": "frustrated and tense, realizing something is ruined",
+    "notes": [
+      "Imperfective; the perfective partner is сломать (used for single completed accidents, such as breaking an arm).",
+      "Use ломать for solid objects (sticks, furniture, toys, bones) or machines. For shattering glass or dishes, use разбивать."
+    ],
+    "senses": [
+      {
+        "id": "p8f17y54h7oxq4b",
+        "order": 0,
+        "definition": "To damage a solid object or machine so that it splits into pieces or stops working.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to break"
+            ]
+          }
+        ],
+        "domain": "objects",
+        "emoji": "🔨",
+        "examples": [
+          {
+            "id": "ianiy93pc8f4czk",
+            "text": "Не надо ломать игрушки!",
+            "textLang": "ru",
+            "translation": "Don't break the toys!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ломать",
+            "matchedTranslationForm": "break"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3g41ywbwu1nz8wk",
+        "order": 1,
+        "definition": "To fracture a bone in the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to break",
+              "to fracture"
+            ]
+          }
+        ],
+        "domain": "injury",
+        "emoji": "🦴",
+        "examples": [
+          {
+            "id": "8tcy9qrjd5zlzp5",
+            "text": "Он уже два раза ломал руку.",
+            "textLang": "ru",
+            "translation": "He has already broken his arm twice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ломал",
+            "matchedTranslationForm": "broken"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "ломать",
+    "lemma": "ломать",
+    "reading": null,
+    "ipa": "/ɫɐˈmatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔨",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to break; to fracture; to demolish",
     "primaryGloss": "break",
     "emotion": "frustrated and tense, realizing something is ruined",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Зимой легко упасть и ломать руку.",
+        "why": "Wrong aspect: 'упасть' (pf) coordinated with 'ломать' (impf) is ungrammatical here; needs 'сломать'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ребёнок случайно стал ломать игрушку.",
+        "why": "'Случайно стал ломать' (accidentally started breaking) is contradictory and unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to break; to fracture; to demolish",
+        "why": "'To demolish' is not covered by the senses."
+      }
+    ],
+    "growth": 1.068
   }
 }

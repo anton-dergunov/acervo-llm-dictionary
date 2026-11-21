@@ -68,6 +68,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "nurse (male)",
+    "primaryGloss": "nurse",
+    "emotion": "kind and reassuring, speaking calmly in a quiet hospital room",
+    "notes": [
+      "The feminine form, for a female nurse, is 'l'infirmière' (/ɛ̃.fiʁ.mjɛʁ/)."
+    ],
+    "senses": [
+      {
+        "id": "iarj3z40e40xk87",
+        "order": 0,
+        "definition": "A man trained to care for sick or injured people, especially in a hospital.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nurse",
+              "male nurse"
+            ]
+          }
+        ],
+        "domain": "healthcare",
+        "emoji": "👨‍⚕️",
+        "examples": [
+          {
+            "id": "bxghwjt96oamxpe",
+            "text": "L'infirmier prend ma tension tous les matins.",
+            "textLang": "fr",
+            "translation": "The nurse takes my blood pressure every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and professional, reassuring a patient during a routine check",
+            "note": null,
+            "matchedForm": "L'infirmier",
+            "matchedTranslationForm": "nurse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'infirmier",
+    "lemma": "infirmier",
+    "reading": null,
+    "ipa": "/ɛ̃.fiʁ.mje/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍⚕️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "male nurse",
     "primaryGloss": "male nurse",
     "emotion": "kind and reassuring, speaking calmly in a quiet hospital room",
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'le docteur', which means doctor.",
+        "why": "Unhelpful filler; learners do not confuse 'infirmier' with 'docteur'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The male nurse takes my blood pressure every morning.",
+        "why": "Unnatural translation; English simply uses 'nurse' unless gender is specifically contrasted."
+      }
+    ],
+    "growth": 0.944
   }
 }

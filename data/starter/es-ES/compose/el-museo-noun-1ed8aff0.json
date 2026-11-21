@@ -74,6 +74,72 @@
     "shortGloss": "museum",
     "primaryGloss": "museum",
     "emotion": "curious and observant, ready to learn something new",
+    "notes": [],
+    "senses": [
+      {
+        "id": "0m028wi6cy0mqij",
+        "order": 0,
+        "definition": "A building where historical, artistic, or scientific objects are kept and shown to the public.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "museum"
+            ]
+          }
+        ],
+        "domain": "culture",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "5qpuanx0xl7kg96",
+            "text": "Pasamos la tarde visitando el museo.",
+            "textLang": "es",
+            "translation": "We spent the afternoon visiting the museum.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a quiet cultural afternoon",
+            "note": null,
+            "matchedForm": "museo",
+            "matchedTranslationForm": "museum"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el museo",
+    "lemma": "museo",
+    "reading": null,
+    "ipa": "/muˈseo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏛️",
+    "topics": [
+      "City",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "museum",
+    "primaryGloss": "museum",
+    "emotion": "curious and observant, ready to learn something new",
     "notes": [
       "Note that 'museo' is masculine, so use 'el' or 'un'.",
       "In Spain, you might hear people use the plural 'museos' if they are visiting a city with many of them, like 'Madrid tiene muchos museos'."
@@ -122,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'museo' is masculine, so use 'el' or 'un'.",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In Spain, you might hear people use the plural 'museos'",
+        "why": "Trivial filler explaining that a regular countable noun has a plural form."
+      }
+    ],
+    "growth": 0.508
   }
 }

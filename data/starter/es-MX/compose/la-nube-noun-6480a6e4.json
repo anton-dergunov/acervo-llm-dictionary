@@ -68,6 +68,114 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "cloud",
+    "primaryGloss": "cloud",
+    "emotion": "wondering and peaceful, looking up at a bright, expansive sky",
+    "notes": [
+      "Do not confuse 'nube' (a cloud in the sky) with 'niebla' or 'neblina' (fog or mist near the ground)."
+    ],
+    "senses": [
+      {
+        "id": "2qw3zwzw9m971vx",
+        "order": 0,
+        "definition": "A white or grey mass in the sky made of tiny water droplets.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cloud"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "061nhofnryvr08g",
+            "text": "Hoy el cielo está cubierto de nubes blancas.",
+            "textLang": "es",
+            "translation": "Today the sky is covered with white clouds.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, describing the state of the day",
+            "note": null,
+            "matchedForm": "nubes",
+            "matchedTranslationForm": "clouds"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xpg6c1dxh64d73y",
+        "order": 1,
+        "definition": "Online storage and services accessed over the internet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "the cloud",
+              "cloud"
+            ]
+          }
+        ],
+        "domain": "technology",
+        "emoji": "💾",
+        "examples": [
+          {
+            "id": "lz5i47k1wy8ha1e",
+            "text": "Guardé mis fotos en la nube para tener espacio en mi teléfono.",
+            "textLang": "es",
+            "translation": "I saved my photos in the cloud to have space on my phone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "la nube",
+            "matchedTranslationForm": "the cloud"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la nube",
+    "lemma": "nube",
+    "reading": null,
+    "ipa": "/ˈnu.βe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "cloud; online storage",
     "primaryGloss": "cloud",
     "emotion": "wondering and peaceful, looking up at a bright, expansive sky",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Guarde mis fotos en la nube para tener espacio en mi teléfono.",
+        "why": "Missing accent mark: 'Guarde' is subjunctive/imperative; past 'I saved' must be 'Guardé'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In the context of technology, 'la nube' refers to cloud computing",
+        "why": "Merely repeats sense 1."
+      }
+    ],
+    "growth": 0.686
   }
 }

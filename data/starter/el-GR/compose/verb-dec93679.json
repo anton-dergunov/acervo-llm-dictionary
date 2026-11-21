@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to clean; to peel",
+    "primaryGloss": "clean",
+    "emotion": "thorough and satisfying, putting things back in their proper place",
+    "notes": [
+      "For food, it covers peeling fruits and vegetables, shelling nuts or eggs, and scaling or gutting fish.",
+      "Aorist (simple past): καθάρισα."
+    ],
+    "senses": [
+      {
+        "id": "fxdoq336mlw3mit",
+        "order": 0,
+        "definition": "To remove dirt, stains, or mess from a place or object.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean",
+              "clean up"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧹",
+        "examples": [
+          {
+            "id": "byi763erofj34bl",
+            "text": "Καθαρίζω το δωμάτιό μου κάθε Σάββατο.",
+            "textLang": "el",
+            "translation": "I clean my room every Saturday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dutiful and organized, approaching a weekend chore with purpose",
+            "note": null,
+            "matchedForm": "Καθαρίζω",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iga0fygst705cl8",
+        "order": 1,
+        "definition": "To remove the skin, shell, or inedible parts from food before eating or cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "peel",
+              "shell",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥔",
+        "examples": [
+          {
+            "id": "tg5488lhpa22g2n",
+            "text": "Πρέπει να καθαρίσω τις πατάτες για το φαγητό.",
+            "textLang": "el",
+            "translation": "I need to peel the potatoes for the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and steady, preparing ingredients for a meal",
+            "note": null,
+            "matchedForm": "καθαρίσω",
+            "matchedTranslationForm": "peel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "καθαρίζω",
+    "lemma": "καθαρίζω",
+    "reading": null,
+    "ipa": "/ka.θaˈɾi.zo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧹",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to clean; to clear",
     "primaryGloss": "clean",
     "emotion": "thorough and satisfying, putting things back in their proper place",
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to clean; to clear",
+        "why": "Names 'to clear', which is not in the senses, and omits 'to peel'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While this verb is used for cleaning physical spaces (like a room)",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.849
   }
 }

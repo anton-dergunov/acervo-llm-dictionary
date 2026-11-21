@@ -74,6 +74,115 @@
     ],
     "status": "active",
     "shortGloss": "to cook; to boil",
+    "primaryGloss": "to cook",
+    "emotion": null,
+    "notes": [
+      "Distinguish between 'kochen' (cooking on the stove or boiling) and 'backen' (baking in the oven).",
+      "Can be used without an object ('Das Wasser kocht' — The water is boiling) or with a direct object ('Ich koche Wasser / Nudeln')."
+    ],
+    "senses": [
+      {
+        "id": "sqhb5xaru5or88t",
+        "order": 0,
+        "definition": "To prepare hot food using heat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "zqy3bmdmx5sq5q3",
+            "text": "Ich koche heute Abend ein leckeres Abendessen.",
+            "textLang": "de",
+            "translation": "I am cooking a delicious dinner tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented and enthusiastic about the meal ahead",
+            "note": null,
+            "matchedForm": "koche",
+            "matchedTranslationForm": "cooking"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0l7240fvggmafc9",
+        "order": 1,
+        "definition": "Of a liquid: to bubble with heat; or to heat water or food in water until it bubbles.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to boil"
+            ]
+          }
+        ],
+        "domain": "boiling",
+        "emoji": "🫧",
+        "examples": [
+          {
+            "id": "k5a68qd6t8d1jpa",
+            "text": "Das Wasser kocht schon.",
+            "textLang": "de",
+            "translation": "The water is already boiling.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and observant, noticing the change in the pot",
+            "note": null,
+            "matchedForm": "kocht",
+            "matchedTranslationForm": "boiling"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "kochen",
+    "lemma": "kochen",
+    "reading": null,
+    "ipa": "/ˈkɔxn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cook; to boil",
     "primaryGloss": "cook",
     "emotion": null,
     "notes": [
@@ -165,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "If the liquid itself is bubbling, you say 'das Wasser kocht'",
+        "why": "Repeats sense 1 and its example without adding grammatical or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To reach the temperature at which a liquid turns to vapor.",
+        "why": "Only covers intransitive boiling, missing transitive use (boiling water or eggs)."
+      }
+    ],
+    "growth": 0.937
   }
 }

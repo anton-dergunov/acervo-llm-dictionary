@@ -60,6 +60,95 @@
     "headword": "akşam yemeği",
     "lemma": "akşam yemeği",
     "reading": null,
+    "ipa": "/akˈʃam je.me.i/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner; supper",
+    "primaryGloss": "dinner",
+    "emotion": null,
+    "notes": [
+      "Literally 'evening meal' (from 'akşam' + 'yemek'). Case suffixes attach after a buffer 'n': akşam yemeğine (to dinner), akşam yemeğinde (at dinner)."
+    ],
+    "senses": [
+      {
+        "id": "zga8uxqtntps96c",
+        "order": 0,
+        "definition": "The main meal of the day, eaten in the evening.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "supper"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "m5f4yrt9u11biij",
+            "text": "Akşam yemeği için ne pişiriyorsun?",
+            "textLang": "tr",
+            "translation": "What are you cooking for dinner?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and hungry, smelling what is cooking in the kitchen",
+            "note": null,
+            "matchedForm": "Akşam yemeği",
+            "matchedTranslationForm": "dinner"
+          },
+          {
+            "id": "1whydjitpztf2wl",
+            "text": "Bütün aile akşam yemeğinde bir araya geldi.",
+            "textLang": "tr",
+            "translation": "The whole family got together at dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "akşam yemeğinde",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "akşam yemeği",
+    "lemma": "akşam yemeği",
+    "reading": null,
     "ipa": "/akˈʃam je.meː.i/",
     "pos": "noun",
     "gender": null,
@@ -143,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Bütün aile akşam yemeği etrafında toplandı.",
+        "why": "One gathers around the table ('sofra/masa etrafında') or at dinner ('akşam yemeğinde'), not 'around dinner'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is usually eaten quite late in Türkiye, often after eight in",
+        "why": "Overgeneralized cultural claim; a grammar note on how the compound takes case suffixes is needed."
+      }
+    ],
+    "growth": 1.022
   }
 }

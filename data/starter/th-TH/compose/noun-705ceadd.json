@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "fever",
+    "primaryGloss": "fever",
+    "emotion": "tired and heavy, feeling weak and sick in bed",
+    "notes": [
+      "To say 'have a fever', use เป็นไข้ or มีไข้. Also appears in คนไข้ ('patient', literally 'fever person') and in names of illnesses such as ไข้หวัด ('common cold')."
+    ],
+    "senses": [
+      {
+        "id": "r3t7odgo74w20vl",
+        "order": 0,
+        "definition": "A body temperature that is higher than normal because of illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever",
+              "temperature"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "3uxisso1re07a6k",
+            "text": "ฉันมีไข้สูงและปวดหัวมาก",
+            "textLang": "th",
+            "translation": "I have a high fever and a bad headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "aching all over and speaking in a weak, tired voice",
+            "note": null,
+            "matchedForm": "ไข้",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ไข้",
+    "lemma": "ไข้",
+    "reading": null,
+    "ipa": "/kʰâj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "fever; illness with fever",
     "primaryGloss": "fever",
     "emotion": "tired and heavy, feeling weak and sick in bed",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fever; illness with fever",
+        "why": "Names a second meaning ('illness with fever') not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when someone has an elevated body temperature due to illness, or",
+        "why": "Restates the definition; misses key collocations like เป็นไข้ and คนไข้."
+      }
+    ],
+    "growth": 0.92
   }
 }

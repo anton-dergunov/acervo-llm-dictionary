@@ -58,6 +58,95 @@
     "headword": "ihtiyacı olmak",
     "lemma": "ihtiyacı olmak",
     "reading": null,
+    "ipa": "/ihtijaːˈdʒɯ olˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need",
+    "primaryGloss": "need",
+    "emotion": "earnest and a bit vulnerable, asking for help",
+    "notes": [
+      "'İhtiyaç' takes a possessive suffix for the person who needs, and the thing needed takes the dative case (-e/-a). In the present tense, 'olmak' is usually replaced by 'var' (or 'yok' in the negative): 'Suya ihtiyacım var' (I need water)."
+    ],
+    "senses": [
+      {
+        "id": "vt78q48cwaaax70",
+        "order": 0,
+        "definition": "To require something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "need",
+              "require"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "bv85altuup9cjt4",
+            "text": "Yardıma ihtiyacın olursa bana haber ver.",
+            "textLang": "tr",
+            "translation": "Let me know if you need help.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ihtiyacın olursa",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "mz9dmfvg7lzjntu",
+            "text": "Bu işi bitirmek için zamana ihtiyacımız olacak.",
+            "textLang": "tr",
+            "translation": "We will need time to finish this job.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ihtiyacımız olacak",
+            "matchedTranslationForm": "will need"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ihtiyacı olmak",
+    "lemma": "ihtiyacı olmak",
+    "reading": null,
     "ipa": "/içtiyɑʤɯ olmɑk/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +249,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The person who is in need takes the dative case (-e/-a) while",
+        "why": "Completely backwards: the thing needed takes the dative (-e/-a), and the person takes possessive/genitive."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yeni bir arabaya ihtiyacım var.",
+        "why": "Uses 'ihtiyacı var' instead of the headword verb 'ihtiyacı olmak' in both examples."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are identical in meaning; sense 1 is artificial filler."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/içtiyɑʤɯ olmɑk/",
+        "why": "Uses non-IPA symbol 'y' instead of /j/."
+      }
+    ],
+    "growth": 0.816
   }
 }

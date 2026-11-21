@@ -58,6 +58,116 @@
     "headword": "yaprak",
     "lemma": "yaprak",
     "reading": null,
+    "ipa": "/japˈɾak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "leaf; sheet",
+    "primaryGloss": "leaf",
+    "emotion": "peaceful and observant, noticing the small details of the forest",
+    "notes": [
+      "The final -k softens to -ğ- before a vowel suffix: yaprağı (the leaf).",
+      "In food names, it can mean a thin slice or layer, as in 'yaprak döner' (thinly sliced döner) or 'yaprak sarma' (stuffed vine leaves)."
+    ],
+    "senses": [
+      {
+        "id": "sxdg4cu5gz383p1",
+        "order": 0,
+        "definition": "The flat, usually green part of a plant or tree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "jfvij8ksa6tkip8",
+            "text": "Sonbaharda ağaçların yaprakları sararır.",
+            "textLang": "tr",
+            "translation": "In autumn, the leaves of the trees turn yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yaprakları",
+            "matchedTranslationForm": "leaves"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9a2a6upni641cu9",
+        "order": 1,
+        "definition": "A single sheet of paper, especially in a book, notebook, or calendar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheet",
+              "leaf",
+              "page"
+            ]
+          }
+        ],
+        "domain": "paper",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "3z4t1frx43smrrd",
+            "text": "Defterden temiz bir yaprak kopardı.",
+            "textLang": "tr",
+            "translation": "He tore a clean sheet from the notebook.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yaprak",
+            "matchedTranslationForm": "sheet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yaprak",
+    "lemma": "yaprak",
+    "reading": null,
     "ipa": "/japɾak/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "leaf; petal",
+        "why": "'Petal' is not in the senses (and in Turkish is 'taç yaprak')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Etleri yaprak gibi ince kestim.",
+        "why": "Uses 'yaprak' literally in a simile ('like a leaf'), not as 'sheet/page'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on final k → ğ consonant softening before vowels (yaprağı)."
+      }
+    ],
+    "growth": 1.241
   }
 }

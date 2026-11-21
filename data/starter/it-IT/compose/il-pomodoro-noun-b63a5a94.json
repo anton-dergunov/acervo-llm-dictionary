@@ -58,6 +58,71 @@
     "headword": "il pomodoro",
     "lemma": "pomodoro",
     "reading": null,
+    "ipa": "/pomoˈdɔro/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "tomato",
+    "primaryGloss": "tomato",
+    "emotion": "fresh and bright, holding up a ripe fruit in the kitchen",
+    "notes": [],
+    "senses": [
+      {
+        "id": "0gkp3xw2pmp3eru",
+        "order": 0,
+        "definition": "A soft red fruit eaten raw in salads or cooked in sauces.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tomato"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍅",
+        "examples": [
+          {
+            "id": "tltvnzfvj9jgft7",
+            "text": "Taglio un pomodoro fresco per l'insalata.",
+            "textLang": "it",
+            "translation": "I'm cutting a fresh tomato for the salad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pomodoro",
+            "matchedTranslationForm": "tomato"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il pomodoro",
+    "lemma": "pomodoro",
+    "reading": null,
     "ipa": "/pomoˈdoːro/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Plural is 'i pomodori'.",
+        "why": "The plural is completely regular and does not need a note."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tagliare un pomodoro fresco per l'insalata.",
+        "why": "Bare infinitive fragment is unnatural as a dictionary example; use a full sentence."
+      }
+    ],
+    "growth": 0.921
   }
 }

@@ -70,6 +70,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "foot; leg (of furniture), base",
+    "primaryGloss": "foot",
+    "emotion": "matter-of-fact and grounded, as when mentioning a basic physical necessity",
+    "notes": [
+      "Before a suffix starting with a vowel, the final 'k' softens to 'ğ': 'ayağım' (my foot), 'ayağa' (to the foot).",
+      "Do not confuse with 'bacak', which means 'leg' (of a person or animal)."
+    ],
+    "senses": [
+      {
+        "id": "77kgfs4wsfvmf5n",
+        "order": 0,
+        "definition": "The lowest part of the leg, on which a person or animal stands and walks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foot"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦶",
+        "examples": [
+          {
+            "id": "gwy15mhgmhmjh2v",
+            "text": "Ayağım çok acıyor.",
+            "textLang": "tr",
+            "translation": "My foot hurts a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit pained and complaining, seeking sympathy",
+            "note": null,
+            "matchedForm": "Ayağım",
+            "matchedTranslationForm": "foot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nc7rjpwgs7j1xhg",
+        "order": 1,
+        "definition": "One of the vertical parts that support a piece of furniture, or the base of an object.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg",
+              "base",
+              "foot"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "zwnauchoe8ws80s",
+            "text": "Masanın ayağı kırık.",
+            "textLang": "tr",
+            "translation": "The table leg is broken.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed at the inconvenience of a broken household item",
+            "note": null,
+            "matchedForm": "ayağı",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ayak",
+    "lemma": "ayak",
+    "reading": null,
+    "ipa": "/aˈjak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦶",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "foot; leg; base",
     "primaryGloss": "foot",
     "emotion": "matter-of-fact and grounded, as when mentioning a basic physical necessity",
@@ -202,5 +312,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The entire limb used for movement, from the hip to the toes.",
+        "why": "In standard Turkish, 'ayak' is 'foot'; 'leg' is 'bacak'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Uzun ayakları var. — She has long legs.",
+        "why": "'Uzun ayakları var' means 'She has long feet'; 'long legs' is 'uzun bacakları'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Turkish, 'ayak' can refer to the entire leg from the hip",
+        "why": "False for standard Istanbul Turkish, where 'ayak' is 'foot' and 'bacak' is 'leg'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note consonant softening of final 'k' to 'ğ' before a vowel ('ayağım')."
+      }
+    ],
+    "growth": 0.779
   }
 }

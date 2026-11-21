@@ -57,6 +57,139 @@
     "language": "ja",
     "headword": "古い",
     "lemma": "古い",
+    "reading": "ふるい",
+    "ipa": "/ɸɯɾɯi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕰️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "old; outdated",
+    "primaryGloss": "old",
+    "emotion": "a sense of long-standing history, often accompanied by a quiet nostalgia",
+    "notes": [
+      "Used for things, places, and abstract concepts, not for a person's age (use 年上, 年寄り, etc.). With people, such as 古い友達 (furui tomodachi), it means 'long-standing' rather than 'elderly'.",
+      "Contrasts with 新しい (atarashii, new)."
+    ],
+    "senses": [
+      {
+        "id": "k05qeb3yxnmn1w9",
+        "order": 0,
+        "definition": "Having existed or been used for a long time; not new.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "aged",
+              "long-standing"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "1h3x5m2yc1bbzsr",
+            "text": "これはとても古い木です。",
+            "textLang": "ja",
+            "translation": "This is a very old tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and respectful of something that has stood for a long time",
+            "note": null,
+            "matchedForm": "古い",
+            "matchedTranslationForm": "old"
+          },
+          {
+            "id": "cd1fmsjczdv00w7",
+            "text": "彼は私の古い友達です。",
+            "textLang": "ja",
+            "translation": "He is an old friend of mine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "古い",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gfia7iq481i1l7u",
+        "order": 1,
+        "definition": "No longer modern, current, or fashionable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "outdated",
+              "old-fashioned",
+              "old"
+            ]
+          }
+        ],
+        "domain": "modernity",
+        "emoji": "🏚️",
+        "examples": [
+          {
+            "id": "z55iazjbq54tv75",
+            "text": "その考え方はもう古いよ。",
+            "textLang": "ja",
+            "translation": "That way of thinking is outdated now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "古い",
+            "matchedTranslationForm": "outdated"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "古い",
+    "lemma": "古い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -163,5 +296,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (ふるい) for a word with kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for non-human things.",
+        "why": "Used for people too when referring to longstanding relationships (e.g., 古い友達, old friend)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "Can also mean something is outdated or no longer fashionable.",
+        "why": "Merely restates the second sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "古い本を読みました。",
+        "why": "'An old book' illustrates physical age (sense 0), not being outdated or old-fashioned."
+      }
+    ],
+    "growth": 1.225
   }
 }

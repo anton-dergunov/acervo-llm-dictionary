@@ -58,6 +58,95 @@
     "headword": "vacío",
     "lemma": "vacío",
     "reading": null,
+    "ipa": "/baˈsio/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕳️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "empty; vacant",
+    "primaryGloss": "empty",
+    "emotion": "a hollow and slightly lonely feeling, echoing the lack of anything inside",
+    "notes": [
+      "Normally used with 'estar' ('El vaso está vacío'). Keep the written accent on the 'í' in all forms (vacío, vacía, vacíos, vacías)."
+    ],
+    "senses": [
+      {
+        "id": "3en19neg8c8aqzy",
+        "order": 0,
+        "definition": "Having nothing or nobody inside; not occupied.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "vacant"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🕳️",
+        "examples": [
+          {
+            "id": "nqhh81x1g5gmhw4",
+            "text": "La caja está vacía porque ya saqué todo.",
+            "textLang": "es",
+            "translation": "The box is empty because I already took everything out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a practical and matter-of-fact observation while cleaning up",
+            "note": null,
+            "matchedForm": "vacía",
+            "matchedTranslationForm": "empty"
+          },
+          {
+            "id": "blb3hnpjcwybu8a",
+            "text": "No me gusta caminar por esa calle cuando está vacía.",
+            "textLang": "es",
+            "translation": "I don't like walking down that street when it is empty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vacía",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "vacío",
+    "lemma": "vacío",
+    "reading": null,
     "ipa": "/baˈθio/",
     "pos": "adj",
     "gender": null,
@@ -183,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baˈθio/",
+        "why": "Uses Peninsular Spanish /θ/ instead of Mexican Spanish /s/ (/baˈsio/)."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Siento un vacío enorme después de terminar el libro.",
+        "why": "'Un vacío' here is a masculine noun ('a void'), not the adjective."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "I don't like walking through that alley when it is vacant.",
+        "why": "English speakers say an alley is 'empty' or 'deserted', not 'vacant'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 'vacío' to describe containers, spaces, or even abstract feelings",
+        "why": "Both notes are filler (restating senses and regular -o/-a agreement); misses 'estar vacío'."
+      }
+    ],
+    "growth": 0.623
   }
 }

@@ -68,6 +68,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to cut; to chop; to cut off",
+    "primaryGloss": "to cut",
+    "emotion": "a sharp and purposeful movement, focused entirely on the task at hand",
+    "notes": [
+      "For getting a haircut, Spanish uses the reflexive structure 'cortarse el pelo' ('Me voy a cortar el pelo').",
+      "Do not confuse with 'recortar', which implies trimming or cutting out shapes (such as paper or hair ends)."
+    ],
+    "senses": [
+      {
+        "id": "j8jnn2t03c6nepk",
+        "order": 0,
+        "definition": "To divide, slice, or shorten something with a sharp tool such as a knife or scissors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut",
+              "to slice",
+              "to chop"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "mxfi1wqa47nwaiw",
+            "text": "Voy a cortar el pan con este cuchillo.",
+            "textLang": "es",
+            "translation": "I am going to cut the bread with this knife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and ready to begin preparing a meal",
+            "note": null,
+            "matchedForm": "cortar",
+            "matchedTranslationForm": "cut"
+          },
+          {
+            "id": "e9fpftfu9oa2jzm",
+            "text": "Ella corta las verduras para la ensalada.",
+            "textLang": "es",
+            "translation": "She chops the vegetables for the salad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "steady and rhythmic, working quickly in the kitchen",
+            "note": null,
+            "matchedForm": "corta",
+            "matchedTranslationForm": "chops"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "65g8pdjjbejlr5f",
+        "order": 1,
+        "definition": "To stop a supply, a phone call, a road, or a conversation before it is finished.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut off",
+              "to disconnect",
+              "to interrupt"
+            ]
+          }
+        ],
+        "domain": "interruption",
+        "emoji": "✂️",
+        "examples": [
+          {
+            "id": "9xzdrw98bn74br3",
+            "text": "Se cortó la llamada cuando entré en el túnel.",
+            "textLang": "es",
+            "translation": "The call got cut off when I entered the tunnel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cortó",
+            "matchedTranslationForm": "cut off"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "cortar",
+    "lemma": "cortar",
+    "reading": null,
+    "ipa": "/koɾˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to cut; to chop; to slice",
     "primaryGloss": "to cut",
     "emotion": "a sharp and purposeful movement, focused entirely on the task at hand",
@@ -184,5 +317,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to cut; to chop; to slice",
+        "why": "Omits the interruption/disconnection sense (sense 1)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'cortar' for any action involving a blade or edge.",
+        "why": "Restates sense 0 and contradicts sense 1 (cutting off a phone call)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Me cortaron la llamada cuando entré en el túnel.",
+        "why": "Entering a tunnel causes a call to drop ('se cortó'), not someone cutting it."
+      }
+    ],
+    "growth": 0.915
   }
 }

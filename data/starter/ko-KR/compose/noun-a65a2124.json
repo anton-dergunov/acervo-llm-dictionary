@@ -72,6 +72,157 @@
     "primaryGloss": "wind",
     "emotion": "a refreshing, cooling sensation on the skin on a warm day",
     "notes": [
+      "For 'wind', use the verb 불다 (바람이 불다, 'the wind blows'). For 'affair', it is almost always used in 바람(을) 피우다 or 바람(이) 나다. In the 'wish' sense, derived from 바라다 ('to hope'), it is often misspelled as 바램."
+    ],
+    "senses": [
+      {
+        "id": "d8qfkbwoy71zrpy",
+        "order": 0,
+        "definition": "Air that moves naturally outdoors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wind",
+              "breeze"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌬️",
+        "examples": [
+          {
+            "id": "3yjjv7mrc8acs5x",
+            "text": "바람이 아주 시원하게 부네요.",
+            "textLang": "ko",
+            "translation": "There is a nice cool breeze blowing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised and relaxed by the nice weather",
+            "note": null,
+            "matchedForm": "바람",
+            "matchedTranslationForm": "breeze"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "26vfl0pubibh3pk",
+        "order": 1,
+        "definition": "A desire or hope for something to happen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wish",
+              "hope",
+              "desire"
+            ]
+          }
+        ],
+        "domain": "wish",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "4l6rdwl78w7p9h1",
+            "text": "모두가 행복하기를 바라는 것이 저의 바람입니다.",
+            "textLang": "ko",
+            "translation": "It is my wish that everyone be happy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and gentle, speaking with a warm heart",
+            "note": null,
+            "matchedForm": "바람",
+            "matchedTranslationForm": "wish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bgulu34u9gqi1bm",
+        "order": 2,
+        "definition": "A romantic relationship outside of one's marriage or main partnership.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "affair",
+              "cheating"
+            ]
+          }
+        ],
+        "domain": "relationships",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "f19s2ts8gje56q8",
+            "text": "그는 아내 몰래 바람을 피우고 있었어요.",
+            "textLang": "ko",
+            "translation": "He was having an affair behind his wife's back.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and grave, sharing a piece of upsetting news",
+            "note": null,
+            "matchedForm": "바람",
+            "matchedTranslationForm": "affair"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "바람",
+    "lemma": "바람",
+    "reading": null,
+    "ipa": "/pa.ɾam/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌬️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "wind; wish; affair",
+    "primaryGloss": "wind",
+    "emotion": "a refreshing, cooling sensation on the skin on a warm day",
+    "notes": [
       "The word '바람' has several common meanings. Be careful to distinguish between the natural 'wind' (바람), a 'wish or hope' (바람), and the slang 'to have an affair' (바람을 피우다). Context usually makes the intended meaning clear."
     ],
     "senses": [
@@ -201,5 +352,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word '바람' has several common meanings. Be careful to distinguish between",
+        "why": "Restates the three senses; should explain key collocations and the common spelling mistake *바램."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The wind is blowing very coolly.",
+        "why": "Unnatural English calque; a native speaker would say 'There is a nice cool breeze'."
+      }
+    ],
+    "growth": 0.921
   }
 }

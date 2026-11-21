@@ -58,6 +58,74 @@
     "headword": "hôn",
     "lemma": "hôn",
     "reading": null,
+    "ipa": "/hon˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to kiss",
+    "primaryGloss": "to kiss",
+    "emotion": "tender and affectionate, expressing warm love",
+    "notes": [
+      "In southern dialects, the common word for 'to kiss' is 'hun'."
+    ],
+    "senses": [
+      {
+        "id": "byp0vzws0l1diir",
+        "order": 0,
+        "definition": "To touch someone or something with your lips as a sign of love, affection, or greeting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to kiss",
+              "kiss"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "💋",
+        "examples": [
+          {
+            "id": "2yebngbtb0hpbf9",
+            "text": "Cô ấy hôn má con trai trước khi đi ngủ.",
+            "textLang": "vi",
+            "translation": "She kisses her son's cheek before going to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and loving, speaking softly to a child",
+            "note": null,
+            "matchedForm": "hôn",
+            "matchedTranslationForm": "kisses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "hôn",
+    "lemma": "hôn",
+    "reading": null,
     "ipa": "/hon/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(darkness) Dark, dim, or lacking light.",
+        "why": "Sino-Vietnamese bound root (昏), not a standalone verb/adjective in Vietnamese."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Trời tối hôn, không nhìn rõ đường.",
+        "why": "'Tối hôn' is not a valid Vietnamese phrase (confused with 'hoàng hôn' or 'tối om')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to kiss; to be dark or murky",
+        "why": "Includes the invalid 'dark or murky' sense."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "in certain regional or old-fashioned contexts, it can also relate to darkness",
+        "why": "False claim; it is a Sino-Vietnamese morpheme in compounds like 'hoàng hôn', not standalone."
+      }
+    ],
+    "growth": 0.509
   }
 }

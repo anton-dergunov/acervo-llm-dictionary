@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "heavy and solid, grounded and slow moving, like a large creature",
+    "notes": [
+      "A teddy bear is 'urso de pelúcia' or the diminutive 'ursinho'."
+    ],
+    "senses": [
+      {
+        "id": "jv9lmabqcgpkwat",
+        "order": 0,
+        "definition": "A large, heavy wild mammal with thick fur.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "m7w24lp0kcsg8g6",
+            "text": "O urso vive na floresta e hiberna durante o inverno.",
+            "textLang": "pt",
+            "translation": "The bear lives in the forest and hibernates during the winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "urso",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o urso",
+    "lemma": "urso",
+    "reading": null,
+    "ipa": "/ˈuɾ.su/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "bear; teddy bear",
     "primaryGloss": "bear",
     "emotion": "heavy and solid, grounded and slow moving, like a large creature",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A stuffed toy shaped like a bear, often given to children.",
+        "why": "Not a distinct sense of 'urso' alone; the example uses the compound 'urso de pelúcia'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used literally for the wild animal and informally for a stuffed toy",
+        "why": "Repeats the senses; 'urso de pelúcia' is a normal compound, not informal."
+      }
+    ],
+    "growth": 0.422
   }
 }

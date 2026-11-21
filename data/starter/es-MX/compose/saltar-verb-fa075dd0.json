@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to jump; to skip",
+    "primaryGloss": "to jump",
+    "emotion": "energetic and lively, full of sudden physical movement",
+    "notes": [
+      "In Mexico, 'brincar' is very commonly used in everyday speech to mean 'to jump'.",
+      "In the sense 'to skip', it is often used reflexively: 'saltarse' ('Me salté el desayuno')."
+    ],
+    "senses": [
+      {
+        "id": "pxiuxj252idg135",
+        "order": 0,
+        "definition": "To push yourself off the ground into the air with your legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to jump",
+              "to leap"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🤸",
+        "examples": [
+          {
+            "id": "t0l3s5non7gorz4",
+            "text": "A los niños les gusta saltar en el parque.",
+            "textLang": "es",
+            "translation": "The kids like to jump in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "saltar",
+            "matchedTranslationForm": "to jump"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wizhwgm1ibtsuke",
+        "order": 1,
+        "definition": "To pass over or leave out a part of something, such as a meal, step, or page (often reflexive: saltarse).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to skip",
+              "to miss"
+            ]
+          }
+        ],
+        "domain": "omission",
+        "emoji": "⏭️",
+        "examples": [
+          {
+            "id": "k80xohvsnji0hxn",
+            "text": "No te puedes saltar esa parte de la historia.",
+            "textLang": "es",
+            "translation": "You cannot skip that part of the story.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "saltar",
+            "matchedTranslationForm": "skip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "saltar",
+    "lemma": "saltar",
+    "reading": null,
+    "ipa": "/salˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "跳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to jump; to skip; to pop",
     "primaryGloss": "to jump",
     "emotion": "energetic and lively, full of sudden physical movement",
@@ -202,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Los niños les gusta saltar en el parque.",
+        "why": "Ungrammatical: 'gustar' requires the preposition 'a' before the indirect object ('A los niños')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "La alarma va a saltar si abres la puerta.",
+        "why": "'Saltar la alarma' is Peninsular Spanish; in Mexico 'sonar' or 'activarse' is used."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also mean to skip something, like a line in a text",
+        "why": "Restates sense 1 without adding grammar or usage information."
+      }
+    ],
+    "growth": 0.747
   }
 }

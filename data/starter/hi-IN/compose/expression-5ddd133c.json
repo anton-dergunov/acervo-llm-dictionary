@@ -72,6 +72,73 @@
     "primaryGloss": "without",
     "emotion": null,
     "notes": [
+      "Usually used as के बिना after a noun (चीनी के बिना) or placed before the noun as बिना ... के (बिना चीनी के). With pronouns, use the possessive form + बिना (मेरे बिना, 'without me')."
+    ],
+    "senses": [
+      {
+        "id": "mp67hkckk8mf8lq",
+        "order": 0,
+        "definition": "Not having or not accompanied by something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "lack",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "321ff8d60o51jxv",
+            "text": "मैं चीनी के बिना चाय पीता हूँ।",
+            "textLang": "hi",
+            "translation": "I drink tea without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बिना",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बिना",
+    "lemma": "बिना",
+    "reading": null,
+    "ipa": "/bɪnaː/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
       "Used as a postposition, it usually follows the oblique case of the noun or pronoun it governs.",
       "Often used in conjunction with the particle 'ke' (ke bina) for emphasis, though 'bina' alone is grammatically correct."
     ],
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "बिना is a postposition, not an expression."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Often used in conjunction with the particle 'ke' (ke bina) for emphasis",
+        "why": "के बिना is the normal compound postposition construction, not for emphasis."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "मैं चीनी बिना चाय पीता हूँ।",
+        "why": "Following a noun directly without के sounds awkward; चीनी के बिना or बिना चीनी के is natural."
+      }
+    ],
+    "growth": 0.916
   }
 }

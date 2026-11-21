@@ -68,6 +68,117 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "happy; glad; to like",
+    "primaryGloss": "happy",
+    "emotion": "warm, peaceful, and quietly content with the present moment",
+    "notes": [
+      "Describes a person's feeling ('Saya senang' — I am happy). To say a thing or activity is pleasant or fun, use 'menyenangkan' ('Film itu menyenangkan' — That movie was fun)."
+    ],
+    "senses": [
+      {
+        "id": "1dmwju6tn05fe26",
+        "order": 0,
+        "definition": "Feeling pleased, glad, or satisfied about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happy",
+              "glad",
+              "pleased"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "j0mpxferpbr26aa",
+            "text": "Saya senang bisa bertemu denganmu hari ini.",
+            "textLang": "id",
+            "translation": "I am glad to be able to meet you today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, smiling while greeting a friend",
+            "note": null,
+            "matchedForm": "senang",
+            "matchedTranslationForm": "glad"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2jb24citymn3rio",
+        "order": 1,
+        "definition": "Finding pleasure in an activity or thing; fond of.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to enjoy",
+              "fond of"
+            ]
+          }
+        ],
+        "domain": "preference",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "rdo8xz3x4j7pr7d",
+            "text": "Adik saya senang membaca buku cerita.",
+            "textLang": "id",
+            "translation": "My younger sibling likes reading storybooks.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "senang",
+            "matchedTranslationForm": "likes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "senang",
+    "lemma": "senang",
+    "reading": null,
+    "ipa": "/səˈnaŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "happy; glad; comfortable",
     "primaryGloss": "happy",
     "emotion": "warm, peaceful, and quietly content with the present moment",
@@ -163,5 +274,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Feeling comfortable, at ease, and free from worry or physical discomfort.",
+        "why": "'Senang' does not mean physically comfortable or cozy in standard Indonesian (that is 'nyaman')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Duduk di taman ini sangat senang dan tenang.",
+        "why": "Ungrammatical; 'senang' describes a person's feeling, not an activity like sitting ('nyaman' or 'menyenangkan')."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense 'to like; to enjoy doing something'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Senang is the most common word for feeling happy, pleased, or glad",
+        "why": "Restates the glosses without adding useful information."
+      }
+    ],
+    "growth": 0.848
   }
 }

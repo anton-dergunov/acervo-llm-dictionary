@@ -58,6 +58,76 @@
     "headword": "لَكِنْ",
     "lemma": "لَكِنْ",
     "reading": null,
+    "ipa": "/ˈlaːkin/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚖️",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; however",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
+      "Pronounced with a long 'ā' (lākin) even though the alif is not written in standard spelling.",
+      "In formal Arabic, لَكِنْ (lākin) is followed by a verb, whereas لَكِنَّ (lākinna) is followed by a noun or pronoun suffix (e.g., لَكِنَّهُ lākinnahu, 'but he')."
+    ],
+    "senses": [
+      {
+        "id": "7a66gwfj7vmaq9n",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "however",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "ovnzk9d9tyq0ou0",
+            "text": "أَرَدْتُ الذَّهَابَ، لَكِنْ لَمْ أَسْتَطِعْ.",
+            "textLang": "ar",
+            "translation": "I wanted to go, but I could not.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "لَكِنْ",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "لَكِنْ",
+    "lemma": "لَكِنْ",
+    "reading": null,
     "ipa": "/laˈkin/",
     "pos": "expression",
     "gender": null,
@@ -141,5 +211,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/laˈkin/",
+        "why": "Wrong vowel length and stress: pronounced /ˈlaːkin/ with a long 'ā' (dagger alif)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "الطقس بارد، لَكِنْ الجو جميل.",
+        "why": "Ungrammatical in MSA: لَكِنْ (with sukūn) cannot precede a nominal clause; requires لَكِنَّ or a verb."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "It is a conjunction, as the sense definition itself says."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use this to connect two ideas that contrast or contradict each other.",
+        "why": "Both notes merely restate the definition; missing notes on unvoweled long 'ā' and لَكِنْ vs لَكِنَّ."
+      }
+    ],
+    "growth": 0.995
   }
 }

@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "good; nice, kind",
+    "primaryGloss": "good",
+    "emotion": "approving and warm, acknowledging the positive value of something",
+    "notes": [
+      "Has an irregular comparative form 'лучше' (better) and superlative 'лучший' (best)."
+    ],
+    "senses": [
+      {
+        "id": "qpxfit7h9wqpkse",
+        "order": 0,
+        "definition": "Of high quality, pleasant, or satisfactory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "nice",
+              "fine"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "1vl5jpy7lp12gf1",
+            "text": "Это очень хороший фильм.",
+            "textLang": "ru",
+            "translation": "This is a very good movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic, recommending something you enjoyed",
+            "note": null,
+            "matchedForm": "хороший",
+            "matchedTranslationForm": "good"
+          },
+          {
+            "id": "3jsawz0t37r99f8",
+            "text": "Сегодня хорошая погода.",
+            "textLang": "ru",
+            "translation": "The weather is nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and relaxed, noting a bright day",
+            "note": null,
+            "matchedForm": "хорошая",
+            "matchedTranslationForm": "nice"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y124xevfgqevzjl",
+        "order": 1,
+        "definition": "Of a person: kind, friendly, or admirable in character.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "kind",
+              "nice"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "guw59cqxjz5f4gr",
+            "text": "Он очень хороший человек.",
+            "textLang": "ru",
+            "translation": "He is a very good person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and sincere, expressing genuine respect",
+            "note": null,
+            "matchedForm": "хороший",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "хороший",
+    "lemma": "хороший",
+    "reading": null,
+    "ipa": "/xɐˈroʂɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👍",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "good; nice; high quality",
     "primaryGloss": "good",
     "emotion": "approving and warm, acknowledging the positive value of something",
@@ -184,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common way to say 'good' in Russian.",
+        "why": "Restates the gloss; notes[1] is also generic regular grammar, while irregular comparative 'лучше' is missing."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "Today is nice weather.",
+        "why": "Calqued and unidiomatic English; should be 'The weather is nice today.'"
+      }
+    ],
+    "growth": 0.758
   }
 }

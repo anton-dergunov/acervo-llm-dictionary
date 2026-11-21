@@ -58,6 +58,114 @@
     "headword": "ขอโทษ",
     "lemma": "ขอโทษ",
     "reading": null,
+    "ipa": "kʰɔ̌ː˩˩˦.tʰoːt˥˩",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙇",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "sorry; excuse me",
+    "primaryGloss": "sorry",
+    "emotion": "sincere and slightly apologetic, taking responsibility for a minor mistake",
+    "notes": [
+      "In spoken Thai, normally followed by the polite particle ครับ (khráp, male speaker) or ค่ะ (khâ, female speaker): ขอโทษครับ / ขอโทษค่ะ."
+    ],
+    "senses": [
+      {
+        "id": "bkx5zj53caqtsy7",
+        "order": 0,
+        "definition": "Used to apologize for a mistake or inconvenience.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sorry",
+              "I apologize"
+            ]
+          }
+        ],
+        "domain": "apology",
+        "emoji": "🙇",
+        "examples": [
+          {
+            "id": "v89uuki2npd48nj",
+            "text": "ขอโทษที่มาสาย",
+            "textLang": "th",
+            "translation": "Sorry for being late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "remorseful and humble, acknowledging you have kept someone waiting",
+            "note": null,
+            "matchedForm": "ขอโทษ",
+            "matchedTranslationForm": "Sorry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p91858h8m4jojm6",
+        "order": 1,
+        "definition": "Used to politely get someone's attention or ask to get past.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "excuse me"
+            ]
+          }
+        ],
+        "domain": "politeness",
+        "emoji": "🙏",
+        "examples": [
+          {
+            "id": "35aqeeg6h8xjmrs",
+            "text": "ขอโทษครับ ห้องน้ำอยู่ที่ไหนครับ",
+            "textLang": "th",
+            "translation": "Excuse me, where is the restroom?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ขอโทษ",
+            "matchedTranslationForm": "Excuse me"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ขอโทษ",
+    "lemma": "ขอโทษ",
+    "reading": null,
     "ipa": null,
     "pos": "expression",
     "gender": null,
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use this for both apologizing for a mistake and for getting someone's",
+        "why": "Restates the two senses directly without adding new usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "If you want to be very formal, you can add 'khrap'",
+        "why": "Adding ครับ/ค่ะ is standard everyday politeness, not 'very formal'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "ขอโทษครับ จะผ่านไปทางนี้ได้ไหม",
+        "why": "Unnatural phrasing for asking to pass; ขอทางหน่อยครับ is what native speakers say."
+      }
+    ],
+    "growth": 0.786
   }
 }

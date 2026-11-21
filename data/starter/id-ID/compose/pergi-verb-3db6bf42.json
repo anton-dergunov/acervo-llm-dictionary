@@ -72,6 +72,115 @@
     "primaryGloss": "go",
     "emotion": "ready to step out the door, upbeat and purposeful",
     "notes": [
+      "Usually followed by 'ke' (to) for a destination or 'dari' (from) for a starting point. Do not confuse with 'berangkat', which specifically means to depart or set off on a trip."
+    ],
+    "senses": [
+      {
+        "id": "ujliia9qsxz433o",
+        "order": 0,
+        "definition": "To move or travel from one place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "go"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "jjl8hka9ij942ts",
+            "text": "Saya mau pergi ke pasar sekarang.",
+            "textLang": "id",
+            "translation": "I want to go to the market now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and ready to tackle the errands",
+            "note": null,
+            "matchedForm": "pergi",
+            "matchedTranslationForm": "go"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tjm7pokxxflzse6",
+        "order": 1,
+        "definition": "To go away from a place; to leave.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leave",
+              "go away",
+              "depart"
+            ]
+          }
+        ],
+        "domain": "departure",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "fwmhr7bdz0tuks0",
+            "text": "Dia sudah pergi dari rumah sejak pagi.",
+            "textLang": "id",
+            "translation": "He has been gone from the house since morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and straightforward, stating a simple fact",
+            "note": null,
+            "matchedForm": "pergi",
+            "matchedTranslationForm": "gone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "pergi",
+    "lemma": "pergi",
+    "reading": null,
+    "ipa": "/pər.ɡi/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go; to leave",
+    "primaryGloss": "go",
+    "emotion": "ready to step out the door, upbeat and purposeful",
+    "notes": [
       "Pergi is the standard word for 'to go' or 'to leave'. Use it when moving from one place to another.",
       "Do not confuse pergi with berangkat. Pergi focuses on the act of going or leaving a location, while berangkat specifically means to depart or set off on a journey."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Pergi is the standard word for 'to go' or 'to leave'.",
+        "why": "Restates the glosses and definition without adding usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "He already left the house since morning.",
+        "why": "Ungrammatical English calque of 'sudah ... sejak pagi'; should be 'has been gone since morning'."
+      }
+    ],
+    "growth": 0.811
   }
 }

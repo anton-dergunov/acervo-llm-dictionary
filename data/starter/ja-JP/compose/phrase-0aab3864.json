@@ -59,6 +59,97 @@
     "language": "ja",
     "headword": "お腹がすく",
     "lemma": "お腹がすく",
+    "reading": "おなかがすく",
+    "ipa": "onaka ɡa sɯkɯ",
+    "pos": "phrase",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to get hungry",
+    "primaryGloss": "to get hungry",
+    "emotion": null,
+    "notes": [
+      "Literally 'one's stomach becomes empty'. To say 'I am hungry' right now, use the past tense お腹がすいた (casual) or お腹がすきました (polite).",
+      "Also written お腹が空く; here 空く is read すく, not あく."
+    ],
+    "senses": [
+      {
+        "id": "dp82py7n2o6z7mb",
+        "order": 0,
+        "definition": "To come to feel a need for food; to become hungry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get hungry",
+              "to become hungry",
+              "to be hungry"
+            ]
+          }
+        ],
+        "domain": "hunger",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "n1kh7kwz8or1bpp",
+            "text": "たくさん運動したので、お腹がすきました。",
+            "textLang": "ja",
+            "translation": "I exercised a lot, so I'm hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired but satisfied after a good workout",
+            "note": null,
+            "matchedForm": "お腹がすきました",
+            "matchedTranslationForm": "hungry"
+          },
+          {
+            "id": "mxx5310ka2sae69",
+            "text": "お昼の時間を過ぎると、すぐにお腹がすく。",
+            "textLang": "ja",
+            "translation": "I get hungry right after lunchtime passes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and slightly annoyed by one's own metabolism",
+            "note": null,
+            "matchedForm": "お腹がすく",
+            "matchedTranslationForm": "get hungry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "お腹がすく",
+    "lemma": "お腹がすく",
     "reading": null,
     "ipa": null,
     "pos": "phrase",
@@ -144,5 +235,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing required hiragana reading (おなかがすく) for a headword containing kanji."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "I get hungry as soon as past lunchtime.",
+        "why": "Ungrammatical English translation."
+      }
+    ],
+    "growth": 0.79
   }
 }

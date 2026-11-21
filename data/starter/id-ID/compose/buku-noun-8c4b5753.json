@@ -71,6 +71,75 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "book",
+    "primaryGloss": "book",
+    "emotion": "studious and focused, ready to open and read",
+    "notes": [
+      "Counted using the classifier buah (e.g., sebuah buku, 'a book')."
+    ],
+    "senses": [
+      {
+        "id": "lbg1gp2sbk62xwb",
+        "order": 0,
+        "definition": "A set of written, printed, or blank pages fastened together inside a cover.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "book",
+              "volume"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "8d0nyv1ygvnkp20",
+            "text": "Dia membaca buku di perpustakaan.",
+            "textLang": "id",
+            "translation": "She is reading a book in the library.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and quiet, deeply engrossed in reading",
+            "note": null,
+            "matchedForm": "buku",
+            "matchedTranslationForm": "book"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "buku",
+    "lemma": "buku",
+    "reading": null,
+    "ipa": "/ˈbuku/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Work",
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "book; joint",
     "primaryGloss": "book",
     "emotion": "studious and focused, ready to open and read",
@@ -164,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A joint or node on the body, such as a knuckle",
+        "why": "The homonym meaning 'joint/node' is anatomical/botanical and not an everyday A2 sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'buku' has two completely unrelated meanings depending on context",
+        "why": "Note merely restates the glosses of the two senses."
+      }
+    ],
+    "growth": 0.471
   }
 }

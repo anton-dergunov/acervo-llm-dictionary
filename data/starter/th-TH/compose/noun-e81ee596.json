@@ -58,6 +58,76 @@
     "headword": "เจ้านาย",
     "lemma": "เจ้านาย",
     "reading": null,
+    "ipa": "/t͡ɕâːw˥˩.naːj˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👔",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "boss; master",
+    "primaryGloss": "boss",
+    "emotion": "professional and respectful, acknowledging someone with authority",
+    "notes": [
+      "Literally 'lord-master' (เจ้า + นาย). Commonly used for one's workplace boss, and also for a pet's owner."
+    ],
+    "senses": [
+      {
+        "id": "dfteeu4qex0l1pm",
+        "order": 0,
+        "definition": "A person who is in charge of an employee at work, or the owner of a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boss",
+              "manager",
+              "employer",
+              "master"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "v8387j6441ncl8k",
+            "text": "ฉันต้องไปคุยงานกับเจ้านาย",
+            "textLang": "th",
+            "translation": "I have to go talk about work with my boss.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and slightly formal, getting ready for a meeting",
+            "note": null,
+            "matchedForm": "เจ้านาย",
+            "matchedTranslationForm": "boss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เจ้านาย",
+    "lemma": "เจ้านาย",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -141,5 +211,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "literally translates to 'lord/ruler of the group'",
+        "why": "นาย means master or lord, not 'of the group'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person of high social status or royalty, typically used in historical",
+        "why": "Historical/royal sense is not needed at A2; keep only the everyday 'boss/master' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used commonly in professional settings to refer to your supervisor or manager.",
+        "why": "Restates the definition without adding usage information."
+      }
+    ],
+    "growth": 0.505
   }
 }

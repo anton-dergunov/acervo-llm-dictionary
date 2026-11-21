@@ -72,6 +72,137 @@
     "primaryGloss": "cup",
     "emotion": "a simple, everyday comfort, reaching for a drink to start the morning",
     "notes": [
+      "Covers both cups/mugs and drinking glasses (e.g., 물컵, 유리컵), whereas 잔 is used for smaller cups (tea, coffee) or alcohol glasses."
+    ],
+    "senses": [
+      {
+        "id": "ewl0q214m7gcxsf",
+        "order": 0,
+        "definition": "A small container used for drinking liquids, with or without a handle, including drinking glasses and mugs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "glass",
+              "mug"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "febkm2jyyy9h412",
+            "text": "뜨거운 커피를 컵에 담았어요.",
+            "textLang": "ko",
+            "translation": "I poured hot coffee into the cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and practical, focused on the task at hand",
+            "note": null,
+            "matchedForm": "컵",
+            "matchedTranslationForm": "cup"
+          },
+          {
+            "id": "bnrezbvbkruju29",
+            "text": "종이컵을 사용하세요.",
+            "textLang": "ko",
+            "translation": "Please use a paper cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "컵",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3y2qukctvfwklv8",
+        "order": 1,
+        "definition": "A unit of amount equal to what one cup holds, used as a counter after a number.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "cupful"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ua5kg33wqkw78la",
+            "text": "물 한 컵만 주세요.",
+            "textLang": "ko",
+            "translation": "Please give me just a cup of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "컵",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "컵",
+    "lemma": "컵",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cup; glass; mug",
+    "primaryGloss": "cup",
+    "emotion": "a simple, everyday comfort, reaching for a drink to start the morning",
+    "notes": [
       "In Korean, '컵' generally refers to a container with a handle for hot drinks. For a standard drinking glass without a handle, you will often hear '유리잔' (yurijan)."
     ],
     "senses": [
@@ -160,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Korean, '컵' generally refers to a container with a handle",
+        "why": "False: 컵 is the general word for any cup or drinking glass, with or without handle."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(container) A portable container used for drinking, often made of plastic",
+        "why": "Disposable/paper cups are the same drinking-vessel sense, not a distinct meaning."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common counter/measure sense ('a cup of water/flour')."
+      }
+    ],
+    "growth": 1.074
   }
 }

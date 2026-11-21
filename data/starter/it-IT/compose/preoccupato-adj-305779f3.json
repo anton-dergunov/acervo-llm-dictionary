@@ -74,6 +74,74 @@
     "primaryGloss": "worried",
     "emotion": null,
     "notes": [
+      "Usually followed by 'per' + noun ('preoccupato per l'esame' = worried about the exam) or 'di' + infinitive."
+    ],
+    "senses": [
+      {
+        "id": "8j9upmrguy1nxui",
+        "order": 0,
+        "definition": "Feeling uneasy or anxious because you are thinking about a problem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "worried",
+              "concerned"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😟",
+        "examples": [
+          {
+            "id": "v8hqosz9gnm1e3q",
+            "text": "Sono preoccupato per l'esame di domani.",
+            "textLang": "it",
+            "translation": "I am worried about tomorrow's exam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tense and focused on a looming challenge, seeking reassurance",
+            "note": null,
+            "matchedForm": "preoccupato",
+            "matchedTranslationForm": "worried"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "preoccupato",
+    "lemma": "preoccupato",
+    "reading": null,
+    "ipa": "/pre.ok.kuˈpa.to/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😟",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "worried; concerned",
+    "primaryGloss": "worried",
+    "emotion": null,
+    "notes": [
       "Used to describe someone who is actively thinking about potential problems.",
       "Do not confuse this with 'ansioso', which often implies a more general, long-term state of anxiety or nervousness."
     ],
@@ -122,5 +190,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe someone who is actively thinking about potential problems.",
+        "why": "Repeats the definition while omitting the preposition it takes ('per' or 'di')."
+      }
+    ],
+    "growth": 0.829
   }
 }

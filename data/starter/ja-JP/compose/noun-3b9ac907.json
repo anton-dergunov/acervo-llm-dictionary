@@ -70,6 +70,96 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sea; beach",
+    "primaryGloss": "sea",
+    "emotion": "wide and calm, feeling the cool breeze on your face",
+    "notes": [
+      "In everyday expressions like 海に行く (go to the sea), 海 often translates naturally as 'the beach' or 'the seaside'."
+    ],
+    "senses": [
+      {
+        "id": "luxywkg97lypogk",
+        "order": 0,
+        "definition": "The large body of salt water that covers most of the earth, or the shore beside it as a place to visit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea",
+              "ocean",
+              "beach"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "omjkexyer23t0oz",
+            "text": "夏休みに海へ行きます。",
+            "textLang": "ja",
+            "translation": "I am going to the beach during summer vacation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and anticipating a fun trip",
+            "note": null,
+            "matchedForm": "海",
+            "matchedTranslationForm": "beach"
+          },
+          {
+            "id": "up4tmizoel0o29g",
+            "text": "このあたりの海はとても深いです。",
+            "textLang": "ja",
+            "translation": "The sea around here is very deep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "海",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "海",
+    "lemma": "海",
+    "reading": "うみ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sea; ocean",
     "primaryGloss": "sea",
     "emotion": "wide and calm, feeling the cool breeze on your face",
@@ -143,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I will go to the sea during summer vacation.",
+        "why": "海へ行く idiomatically means 'go to the beach/seaside' in English."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is also used figuratively to describe something that is vast",
+        "why": "Vague note about a figurative use without examples or common A2 relevance."
+      }
+    ],
+    "growth": 0.948
   }
 }

@@ -68,6 +68,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "lesson; class",
+    "primaryGloss": "lesson",
+    "emotion": "focused and steady, preparing for learning or reflecting on something new",
+    "notes": [
+      "Broken plural: دُرُوس (durūs).",
+      "Do not confuse with دِرَاسَة (dirāsa), which means 'study' or 'studies' in general."
+    ],
+    "senses": [
+      {
+        "id": "wcd1twjzkt7v34c",
+        "order": 0,
+        "definition": "A period of time in which students are taught, or a unit of teaching in a course or book.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lesson",
+              "class"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "9wny49j84od5ixd",
+            "text": "سَأَحْضُرُ دَرْسَ اللُّغَةِ العَرَبِيَّةِ غَدًا.",
+            "textLang": "ar",
+            "translation": "I will attend the Arabic language lesson tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "committed and positive, looking forward to the task ahead",
+            "note": null,
+            "matchedForm": "دَرْسَ",
+            "matchedTranslationForm": "lesson"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "onvieb7otvrqu0d",
+        "order": 1,
+        "definition": "Something learned from an experience, especially a difficult one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lesson",
+              "moral"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "96nrkdyfxplfioo",
+            "text": "تَعَلَّمْتُ دَرْسًا قَاسِيًا مِن هَذِهِ التَّجْرِبَةِ.",
+            "textLang": "ar",
+            "translation": "I learned a hard lesson from this experience.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and serious, acknowledging a valuable realization",
+            "note": null,
+            "matchedForm": "دَرْسًا",
+            "matchedTranslationForm": "lesson"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "دَرْس",
+    "lemma": "دَرْس",
+    "reading": null,
+    "ipa": "/dars/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "lesson; class; study",
     "primaryGloss": "lesson",
     "emotion": "focused and steady, preparing for learning or reflecting on something new",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "lesson; class; study",
+        "why": "Includes 'study', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In an academic context, 'dars' is the standard word for a lesson",
+        "why": "Restates the gloss; broken plural دُرُوس (durūs) is needed instead."
+      }
+    ],
+    "growth": 0.897
   }
 }

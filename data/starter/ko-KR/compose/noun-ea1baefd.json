@@ -72,6 +72,156 @@
     "primaryGloss": "tea",
     "emotion": "comforting and warm, like a quiet break in the afternoon",
     "notes": [
+      "Count cups of tea with 잔 (e.g., 차 한 잔, a cup of tea) and cars with 대 (e.g., 차 한 대, one car).",
+      "In the sense of 'difference', 차이 is much more common as a standalone noun, while 차 is often used after another noun (e.g., 시간차, time difference; 기온 차, temperature gap)."
+    ],
+    "senses": [
+      {
+        "id": "7xgnh5pw7q81r0o",
+        "order": 0,
+        "definition": "A drink made by pouring hot water over dried leaves, herbs, or fruit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tea"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍵",
+        "examples": [
+          {
+            "id": "ukdhyha89yee5ss",
+            "text": "따뜻한 차 한 잔 마실래요?",
+            "textLang": "ko",
+            "translation": "Would you like to drink a cup of warm tea?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inviting, offering a friendly gesture",
+            "note": null,
+            "matchedForm": "차",
+            "matchedTranslationForm": "tea"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "anpeljff2094mei",
+        "order": 1,
+        "definition": "A road vehicle with four wheels, or vehicles in general.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "car",
+              "vehicle"
+            ]
+          }
+        ],
+        "domain": "vehicle",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "l075jbi7b48dy6s",
+            "text": "차를 타고 학교에 가요.",
+            "textLang": "ko",
+            "translation": "I go to school by car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and factual, describing a daily commute",
+            "note": null,
+            "matchedForm": "차",
+            "matchedTranslationForm": "car"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wxohy6ysat76y34",
+        "order": 2,
+        "definition": "The amount or way in which two things are not the same.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "difference",
+              "gap"
+            ]
+          }
+        ],
+        "domain": "difference",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "syrw73bfip0z7c8",
+            "text": "두 선수 사이에 실력 차가 커요.",
+            "textLang": "ko",
+            "translation": "There is a big gap in skill between the two players.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "차",
+            "matchedTranslationForm": "gap"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "차",
+    "lemma": "차",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍵",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "tea; car; difference",
+    "primaryGloss": "tea",
+    "emotion": "comforting and warm, like a quiet break in the afternoon",
+    "notes": [
       "The word '차' is a homonym. Its meaning depends entirely on the context of the sentence.",
       "Do not confuse '차' (tea/car) with '차이' (difference), even though they share the same starting syllable."
     ],
@@ -201,5 +351,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse '차' (tea/car) with '차이' (difference)",
+        "why": "Directly contradicts sense 2, where 차 itself means 'difference'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word '차' is a homonym. Its meaning depends entirely on",
+        "why": "Obvious from the entry having multiple distinct senses."
+      }
+    ],
+    "growth": 1.151
   }
 }

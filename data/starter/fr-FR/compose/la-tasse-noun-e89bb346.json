@@ -74,6 +74,74 @@
     "primaryGloss": "cup",
     "emotion": null,
     "notes": [
+      "Used for hot drinks with a handle; for cold drinks without a handle, use 'le verre' (glass, cup). Takes 'de' for contents: 'une tasse de café' (a cup of coffee), 'une tasse à café' (a coffee cup)."
+    ],
+    "senses": [
+      {
+        "id": "z2qk6ujvpnejh84",
+        "order": 0,
+        "definition": "A small container with a handle, used for drinking hot liquids such as coffee or tea, or the amount it holds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "mug"
+            ]
+          }
+        ],
+        "domain": "drinkware",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "al0kd2p06ypj9nu",
+            "text": "Elle boit une tasse de thé chaud tous les matins.",
+            "textLang": "fr",
+            "translation": "She drinks a cup of hot tea every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and cozy, enjoying a quiet morning routine",
+            "note": null,
+            "matchedForm": "tasse",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la tasse",
+    "lemma": "tasse",
+    "reading": null,
+    "ipa": "/tas/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cup",
+    "primaryGloss": "cup",
+    "emotion": null,
+    "notes": [
       "Use 'tasse' for a cup with a handle used for hot drinks like coffee or tea.",
       "Do not confuse it with 'bol', which is a bowl used for cereal or soup without a handle."
     ],
@@ -122,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'tasse' for a cup with a handle used for hot drinks",
+        "why": "Merely repeats the definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'bol', which is a bowl",
+        "why": "Learners do not confuse 'tasse' with 'bol'; contrast with 'verre' (cold drinks) instead."
+      }
+    ],
+    "growth": 1.167
   }
 }

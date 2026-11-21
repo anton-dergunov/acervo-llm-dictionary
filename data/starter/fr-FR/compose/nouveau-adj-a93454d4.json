@@ -68,6 +68,118 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new; another; recent",
+    "primaryGloss": "new",
+    "emotion": "excited and proud to show off something fresh and modern",
+    "notes": [
+      "Usually placed before the noun (une nouvelle voiture). Before a masculine singular noun starting with a vowel or silent h, it becomes nouvel (un nouvel ami); the feminine is nouvelle and the masculine plural is nouveaux.",
+      "Do not confuse with neuf (neuve), which means 'brand-new' (never used before): une nouvelle voiture (new to me) vs. une voiture neuve (factory-new)."
+    ],
+    "senses": [
+      {
+        "id": "7yhxfa9zou63v5e",
+        "order": 0,
+        "definition": "Different from what existed or was owned before; additional or other.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "another",
+              "fresh"
+            ]
+          }
+        ],
+        "domain": "change",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "65natc9mx4ixy1b",
+            "text": "Il a acheté une nouvelle voiture.",
+            "textLang": "fr",
+            "translation": "He bought a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nouvelle",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nwrny6ur49kqiqe",
+        "order": 1,
+        "definition": "Recently made, created, or discovered; novel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "recent",
+              "novel"
+            ]
+          }
+        ],
+        "domain": "recent",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "uyyugk7wdrh3c0r",
+            "text": "C'est une nouvelle méthode pour apprendre.",
+            "textLang": "fr",
+            "translation": "It is a new method for learning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "interested and optimistic about a better way of doing things",
+            "note": null,
+            "matchedForm": "nouvelle",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "nouveau",
+    "lemma": "nouveau",
+    "reading": null,
+    "ipa": "/nu.vo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh; recent",
     "primaryGloss": "new",
     "emotion": "excited and proud to show off something fresh and modern",
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Il a acheté une voiture nouvelle.",
+        "why": "Unnatural adjective placement; 'nouveau' usually precedes the noun, and 'neuf' means brand-new."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on pre-nominal placement and distinction from 'neuf' (brand-new)."
+      }
+    ],
+    "growth": 1.687
   }
 }

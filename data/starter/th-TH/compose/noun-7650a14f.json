@@ -58,6 +58,75 @@
     "headword": "ไอ",
     "lemma": "ไอ",
     "reading": null,
+    "ipa": "/ʔaj˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "steam; vapor",
+    "primaryGloss": "steam",
+    "emotion": "brief and dry, slightly uncomfortable as if the throat is itchy",
+    "notes": [
+      "Often combined with other nouns, as in ไอน้ำ (water vapor, steam) or ไอแดด (heat haze from the sun).",
+      "Do not confuse with the homophone verb ไอ ('to cough'). To say 'a cough' as a noun, Thai uses อาการไอ (symptom of coughing)."
+    ],
+    "senses": [
+      {
+        "id": "ds6axgrbrzmm6ta",
+        "order": 0,
+        "definition": "Vapor, steam, or fumes rising from a liquid or surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "steam",
+              "vapor"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "vn04wrjyy9hvszs",
+            "text": "มีไอขึ้นมาจากถ้วยกาแฟ",
+            "textLang": "th",
+            "translation": "There is steam rising from the coffee cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, observing the warmth of the drink",
+            "note": null,
+            "matchedForm": "ไอ",
+            "matchedTranslationForm": "steam"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ไอ",
+    "lemma": "ไอ",
+    "reading": null,
     "ipa": "/ʔaj˩/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʔaj˩/",
+        "why": "Wrong tone; ไอ has a mid tone (/ʔaj˧/), not a low tone."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[0]",
+        "quote": "(symptom) The act of pushing air out of the throat",
+        "why": "As a noun, ไอ means 'vapor/steam'. 'Cough' is a verb (or อาการไอ as noun)."
+      }
+    ],
+    "growth": 0.762
   }
 }

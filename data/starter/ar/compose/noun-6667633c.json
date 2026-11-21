@@ -58,6 +58,75 @@
     "headword": "غَرِيب",
     "lemma": "غَرِيب",
     "reading": null,
+    "ipa": "/ɣaˈriːb/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "stranger; foreigner",
+    "primaryGloss": "stranger",
+    "emotion": "wary and slightly distant, noting that someone is not from here",
+    "notes": [
+      "Plural: غُرَبَاء (ḡurabāʔ). Also very commonly used as an adjective meaning 'strange' or 'unusual' (e.g., هَذَا الصَّوْتُ غَرِيبٌ — This sound is strange)."
+    ],
+    "senses": [
+      {
+        "id": "ideiio415as6oe1",
+        "order": 0,
+        "definition": "A person one does not know, or someone from another place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stranger",
+              "foreigner",
+              "outsider"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "b9gj208biqlazvw",
+            "text": "لَا تَثِقْ بِالْغَرِيبِ فِي الْمَكَانِ الْعَامِّ.",
+            "textLang": "ar",
+            "translation": "Do not trust a stranger in a public place.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "بِالْغَرِيبِ",
+            "matchedTranslationForm": "stranger"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غَرِيب",
+    "lemma": "غَرِيب",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": "masculine",
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(strange) Something that is unusual, unfamiliar, or hard to understand.",
+        "why": "Entry POS is noun, but sense 1 is an adjective defined as a thing."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "stranger; strange; odd",
+        "why": "Includes adjective glosses in a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When used as a noun, it refers to someone you do not",
+        "why": "Restates the definition and gloss."
+      }
+    ],
+    "growth": 0.627
   }
 }

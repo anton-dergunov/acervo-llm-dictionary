@@ -58,6 +58,95 @@
     "headword": "開ける",
     "lemma": "開ける",
     "reading": "あける",
+    "ipa": "akeɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to open (something)",
+    "primaryGloss": "to open",
+    "emotion": "matter-of-fact and helpful, as when you prepare a space for someone",
+    "notes": [
+      "Ichidan (ru) verb. Transitive: takes を (o) for the thing being opened (e.g., ドアを開ける, 'to open a door').",
+      "Contrast with the intransitive verb 開く (aku), where something opens on its own (e.g., ドアが開く, 'the door opens')."
+    ],
+    "senses": [
+      {
+        "id": "snludmod89m1dvl",
+        "order": 0,
+        "definition": "To move something such as a door, window, lid, or container so that it is no longer closed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "tmqb0xrcg25mri7",
+            "text": "窓を開けてください。",
+            "textLang": "ja",
+            "translation": "Please open the window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and slightly expectant, asking for fresh air",
+            "note": null,
+            "matchedForm": "開けて",
+            "matchedTranslationForm": "open"
+          },
+          {
+            "id": "9k06mtvvuoqyswu",
+            "text": "プレゼントの箱を開ける。",
+            "textLang": "ja",
+            "translation": "I open the gift box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and curious, anticipating what is inside",
+            "note": null,
+            "matchedForm": "開ける",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "開ける",
+    "lemma": "開ける",
+    "reading": "あける",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -182,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To unwrap or uncover something to reveal its contents.",
+        "why": "Opening a box is the exact same sense as [0]; 'to unwrap' is inaccurate."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "to open, to unlock",
+        "why": "開ける means to open, not specifically to unlock (鍵を開ける)."
+      }
+    ],
+    "growth": 0.732
   }
 }

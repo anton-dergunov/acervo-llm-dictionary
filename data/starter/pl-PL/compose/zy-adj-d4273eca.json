@@ -73,6 +73,158 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "bad; wrong; angry",
+    "primaryGloss": "bad",
+    "emotion": "sharp and impatient, the feeling of losing one's temper",
+    "notes": [
+      "In the sense 'bad', it has an irregular comparative 'gorszy' (worse) and superlative 'najgorszy' (worst).",
+      "When meaning 'angry at someone/something', it takes the preposition 'na' + accusative (e.g., 'Jestem zły na ciebie' — I am angry at you)."
+    ],
+    "senses": [
+      {
+        "id": "ulu9rqakkc6y8zo",
+        "order": 0,
+        "definition": "Unpleasant, harmful, or of low quality; not good.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bad",
+              "poor"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "👎",
+        "examples": [
+          {
+            "id": "ou0fmquf6hhe371",
+            "text": "To był bardzo zły pomysł.",
+            "textLang": "pl",
+            "translation": "That was a very bad idea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and firm, acknowledging a mistake was made",
+            "note": null,
+            "matchedForm": "zły",
+            "matchedTranslationForm": "bad"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k5v2a0isoune1kj",
+        "order": 1,
+        "definition": "Not correct or not suitable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "xsehl8mh69qbc97",
+            "text": "Wsiadłem do złego autobusu.",
+            "textLang": "pl",
+            "translation": "I got on the wrong bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "złego",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tb9621snppczggi",
+        "order": 2,
+        "definition": "Feeling or showing strong displeasure or annoyance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "angry",
+              "mad"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "senrpoji1fbth9u",
+            "text": "Jestem zły na mojego brata.",
+            "textLang": "pl",
+            "translation": "I am angry at my brother.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and direct, clearly stating a personal grievance",
+            "note": null,
+            "matchedForm": "zły",
+            "matchedTranslationForm": "angry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "zły",
+    "lemma": "zły",
+    "reading": null,
+    "ipa": "/zwɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "angry; bad",
     "primaryGloss": "angry",
     "emotion": "sharp and impatient, the feeling of losing one's temper",
@@ -166,5 +318,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Core meaning 'bad' should come first; 'wrong/incorrect' is distinct enough to clarify."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When zły means 'bad' or 'poor quality', it is a general adjective",
+        "why": "Restates the definition without giving useful grammar info (like irregular comparative 'gorszy')."
+      }
+    ],
+    "growth": 1.169
   }
 }

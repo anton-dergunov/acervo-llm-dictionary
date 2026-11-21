@@ -72,6 +72,114 @@
     "primaryGloss": "green",
     "emotion": "refreshing and natural, like the first warm day of spring",
     "notes": [
+      "Also used for environmentally friendly things or the Green party ('die Grünen')."
+    ],
+    "senses": [
+      {
+        "id": "bngb3qvgcskru6l",
+        "order": 0,
+        "definition": "Of the colour of fresh grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "9l6rmhy9zm5n5na",
+            "text": "Das Gras im Park ist nach dem Regen besonders grün.",
+            "textLang": "de",
+            "translation": "The grass in the park is especially green after the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and appreciative, noticing the freshness of nature",
+            "note": null,
+            "matchedForm": "grün",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bjwpk7nu5ltxjhk",
+        "order": 1,
+        "definition": "Of fruit or vegetables: not yet ripe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍏",
+        "examples": [
+          {
+            "id": "xzrxtbbnrvcy7ak",
+            "text": "Iss den Apfel noch nicht, er ist noch ganz grün.",
+            "textLang": "de",
+            "translation": "Don't eat the apple yet, it is still completely unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and protective, warning someone against eating something sour",
+            "note": null,
+            "matchedForm": "grün",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "grün",
+    "lemma": "grün",
+    "reading": null,
+    "ipa": "/ɡʁyːn/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe",
+    "primaryGloss": "green",
+    "emotion": "refreshing and natural, like the first warm day of spring",
+    "notes": [
       "When talking about fruit, 'grün' means it is unripe and not yet ready to eat. This is different from the colour of the peel, which might be green even when the fruit is ripe (like a lime)."
     ],
     "senses": [
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of grass and leaves.",
+        "why": "Adjective defined as a noun instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When talking about fruit, 'grün' means it is unripe and not yet",
+        "why": "Merely restates sense 1 and adds obvious trivia."
+      }
+    ],
+    "growth": 0.792
   }
 }

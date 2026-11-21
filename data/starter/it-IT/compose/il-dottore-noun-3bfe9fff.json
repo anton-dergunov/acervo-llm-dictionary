@@ -70,6 +70,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "doctor; university graduate",
+    "primaryGloss": "doctor",
+    "emotion": "reassuring and calm, speaking to someone who needs help",
+    "notes": [
+      "The feminine form is 'la dottoressa'. Before a name or surname, the masculine singular drops the final '-e': 'il dottor Rossi' (Dr. Rossi).",
+      "In Italy, 'dottore' and 'dottoressa' are used as respectful titles for anyone with a university degree, not only medical doctors."
+    ],
+    "senses": [
+      {
+        "id": "f1kc7r1fvycmt3n",
+        "order": 0,
+        "definition": "A person qualified to practice medicine and treat sick people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "doctor",
+              "physician"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "🩺",
+        "examples": [
+          {
+            "id": "63corxjgi25jk1a",
+            "text": "Devo andare dal dottore perché ho la febbre.",
+            "textLang": "it",
+            "translation": "I have to go to the doctor because I have a fever.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit miserable and tired, complaining about feeling sick",
+            "note": null,
+            "matchedForm": "dottore",
+            "matchedTranslationForm": "doctor"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xeckj00chc8ytvy",
+        "order": 1,
+        "definition": "A person who holds a university degree, often used as a polite title of address.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "doctor",
+              "graduate"
+            ]
+          }
+        ],
+        "domain": "title",
+        "emoji": "🎓",
+        "examples": [
+          {
+            "id": "her5n1nwy3oy1yr",
+            "text": "Buongiorno, dottor Rossi, s'accomodi.",
+            "textLang": "it",
+            "translation": "Good morning, Dr. Rossi, please come in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dottor",
+            "matchedTranslationForm": "Dr."
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il dottore",
+    "lemma": "dottore",
+    "reading": null,
+    "ipa": "/dotˈto.re/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍⚕️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "doctor; physician",
     "primaryGloss": "doctor",
     "emotion": "reassuring and calm, speaking to someone who needs help",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il dottore Rossi ha appena terminato l'università.",
+        "why": "Before a surname or first name, 'dottore' must drop the final '-e': 'il dottor Rossi'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Graduate Rossi has just finished university.",
+        "why": "'Graduate Rossi' is not English; the title corresponds to 'Dr.' or 'Mr.'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the feminine form 'la dottoressa' and the apocopated title form 'dottor' before names."
+      }
+    ],
+    "growth": 1.173
   }
 }

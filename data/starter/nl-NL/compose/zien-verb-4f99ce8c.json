@@ -58,6 +58,138 @@
     "headword": "zien",
     "lemma": "zien",
     "reading": null,
+    "ipa": "/zin/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to see; to realize",
+    "primaryGloss": "to see",
+    "emotion": "attentive and open, noticing the world unfolding around you",
+    "notes": [
+      "Strong verb: past 'zag' / 'zagen', past participle 'gezien'.",
+      "'Zien' is passive perception with the eyes (to see), whereas 'kijken' is intentional looking or watching."
+    ],
+    "senses": [
+      {
+        "id": "3a02dycrkni8s6p",
+        "order": 0,
+        "definition": "To perceive or notice something with your eyes, or to have watched a film or show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to notice"
+            ]
+          }
+        ],
+        "domain": "sight",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "f100gn52916bkus",
+            "text": "Ik zie een mooie vogel in de boom.",
+            "textLang": "nl",
+            "translation": "I see a beautiful bird in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and pointing something out to a companion",
+            "note": null,
+            "matchedForm": "zie",
+            "matchedTranslationForm": "see"
+          },
+          {
+            "id": "b55hdxabrwfdtmb",
+            "text": "Heb je die nieuwe film al gezien?",
+            "textLang": "nl",
+            "translation": "Have you seen that new movie yet?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gezien",
+            "matchedTranslationForm": "seen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fxcoiufrg2vx6mx",
+        "order": 1,
+        "definition": "To understand or realize a fact or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to realize",
+              "to understand"
+            ]
+          }
+        ],
+        "domain": "mind",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "lrcysjd1hmkm3tu",
+            "text": "Nu zie ik wat je bedoelt.",
+            "textLang": "nl",
+            "translation": "Now I see what you mean.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "suddenly enlightened, agreeing after a moment of confusion",
+            "note": null,
+            "matchedForm": "zie",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zien",
+    "lemma": "zien",
+    "reading": null,
     "ipa": "/ziːn/",
     "pos": "verb",
     "gender": null,
@@ -202,5 +334,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Wij gaan vanavond een film zien.",
+        "why": "In Netherlandic Dutch, 'een film kijken' is normal; 'zien' is mainly used in the perfect."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention irregular principal parts (zag, gezien)."
+      }
+    ],
+    "growth": 1.039
   }
 }

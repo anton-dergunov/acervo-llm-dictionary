@@ -58,6 +58,74 @@
     "headword": "สลัด",
     "lemma": "สลัด",
     "reading": null,
+    "ipa": "/sà.làt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salad",
+    "primaryGloss": "salad",
+    "emotion": "crisp and fresh, ready to eat a healthy meal",
+    "notes": [
+      "Borrowed from English 'salad'. Salad dressing is called น้ำสลัด (nám-sà-làt).",
+      "A homograph สลัด with the same pronunciation is a native Thai verb meaning 'to shake off' (and appears in โจรสลัด 'pirate')."
+    ],
+    "senses": [
+      {
+        "id": "sbiuykxupjn61x6",
+        "order": 0,
+        "definition": "A dish of raw or cooked vegetables, often served cold with a dressing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salad"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "7r96v9d3vwjo3ps",
+            "text": "ฉันชอบกินสลัดผักกับน้ำสลัดงา",
+            "textLang": "th",
+            "translation": "I like to eat vegetable salad with sesame dressing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "สลัด",
+            "matchedTranslationForm": "salad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สลัด",
+    "lemma": "สลัด",
+    "reading": null,
     "ipa": "/sa-lat/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "To shake off, flick away, or discard.",
+        "why": "Entry POS is noun, but sense 1 is a verb ('to shake off'), an unrelated homograph."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/sa-lat/",
+        "why": "Missing tone marks in IPA (/sà.làt/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "เขาพยายามสลัดน้ำที่เปียกออกจากเสื้อผ้า",
+        "why": "'น้ำที่เปียก' ('wet water') is tautological and unnatural."
+      }
+    ],
+    "growth": 0.677
   }
 }

@@ -58,6 +58,73 @@
     "headword": "il leone",
     "lemma": "leone",
     "reading": null,
+    "ipa": "/leˈone/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "lion",
+    "primaryGloss": "lion",
+    "emotion": "awed and cautious, watching the great animal pace across the grass",
+    "notes": [
+      "The feminine form is 'la leonessa' (lioness)."
+    ],
+    "senses": [
+      {
+        "id": "fa4mk5auvnpnit5",
+        "order": 0,
+        "definition": "A large wild cat native to Africa and India, known for the male's thick mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "z1h2lzpkntx9nmk",
+            "text": "Il leone ruggisce nella savana.",
+            "textLang": "it",
+            "translation": "The lion roars in the savanna.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "leone",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il leone",
+    "lemma": "leone",
+    "reading": null,
     "ipa": "/leˈo.ne/",
     "pos": "noun",
     "gender": "masculine",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Il leone rugbisce nella savana.",
+        "why": "Misspelled verb: 'rugbisce' is not a word; it must be 'ruggisce'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person who shows great courage, strength, or fierceness.",
+        "why": "Transparent simile ('come un leone'), not a separate everyday sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for the large wild cat with a mane, but",
+        "why": "Merely repeats the definitions of the senses."
+      }
+    ],
+    "growth": 0.486
   }
 }

@@ -58,6 +58,74 @@
     "headword": "el tazón",
     "lemma": "tazón",
     "reading": null,
+    "ipa": "/taˈson/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bowl",
+    "primaryGloss": "bowl",
+    "emotion": "a warm, hearty feeling of sitting down to a large meal",
+    "notes": [
+      "Plural: 'los tazones'. Do not confuse with 'la taza' (cup or mug with a handle)."
+    ],
+    "senses": [
+      {
+        "id": "49wi20hrtbph7ms",
+        "order": 0,
+        "definition": "A round, deep dish used for serving food like soup, cereal, or fruit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bowl",
+              "large bowl"
+            ]
+          }
+        ],
+        "domain": "dishware",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "corh84no0h088gn",
+            "text": "Ella sirvió la sopa caliente en un tazón.",
+            "textLang": "es",
+            "translation": "She served the hot soup in a bowl.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tazón",
+            "matchedTranslationForm": "bowl"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el tazón",
+    "lemma": "tazón",
+    "reading": null,
     "ipa": "/taˈθon/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/taˈθon/",
+        "why": "Uses Peninsular /θ/ instead of Mexican seseo /s/ (/taˈson/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large cup, often without a handle or with a sturdy one",
+        "why": "In Mexico, a mug with a handle is 'una taza', not 'un tazón'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Be careful not to confuse 'tazón' with 'taza'.",
+        "why": "Notes [0] and [1] repeat the exact same comparison between 'tazón' and 'taza'."
+      }
+    ],
+    "growth": 0.327
   }
 }

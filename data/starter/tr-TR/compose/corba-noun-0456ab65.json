@@ -74,6 +74,115 @@
     "primaryGloss": "soup",
     "emotion": null,
     "notes": [
+      "In Turkish, you 'drink' soup (çorba içmek) rather than 'eat' it."
+    ],
+    "senses": [
+      {
+        "id": "cfkvm17hrq8y5u3",
+        "order": 0,
+        "definition": "A liquid dish, typically served hot, made by boiling meat, vegetables, or grains in stock or water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "lf6lle5jkjo3oyr",
+            "text": "Akşam yemekten önce sıcak bir mercimek çorbası içtik.",
+            "textLang": "tr",
+            "translation": "We had a hot lentil soup before dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and satisfied, enjoying a hot bowl of soup",
+            "note": null,
+            "matchedForm": "çorbası",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tik6i0q3r1b1mae",
+        "order": 1,
+        "definition": "An informal word for a disordered, confused state or a messy mixture of things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mess",
+              "muddle",
+              "jumble"
+            ]
+          }
+        ],
+        "domain": "mess",
+        "emoji": "🌪️",
+        "examples": [
+          {
+            "id": "5sx9ds6uec9t50k",
+            "text": "Projeyi o kadar kötü yönetti ki ortalık tamamen çorba oldu.",
+            "textLang": "tr",
+            "translation": "He managed the project so poorly that everything became a complete mess.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and overwhelmed by a chaotic situation",
+            "note": null,
+            "matchedForm": "çorba",
+            "matchedTranslationForm": "mess"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "çorba",
+    "lemma": "çorba",
+    "reading": null,
+    "ipa": "/tʃoɾˈba/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "soup; mess",
+    "primaryGloss": "soup",
+    "emotion": null,
+    "notes": [
       "Used figuratively, 'çorba' can mean a messy, tangled situation or a poorly organized mix of things."
     ],
     "senses": [
@@ -162,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used figuratively, 'çorba' can mean a messy, tangled situation",
+        "why": "Merely restates the second sense; misses the useful collocation 'çorba içmek'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "We drank a hot lentil soup before dinner in the evening.",
+        "why": "Calqued 'drank soup' and redundant 'before dinner in the evening'."
+      }
+    ],
+    "growth": 0.976
   }
 }

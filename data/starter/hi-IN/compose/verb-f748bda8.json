@@ -58,6 +58,157 @@
     "headword": "चुनना",
     "lemma": "चुनना",
     "reading": null,
+    "ipa": "/t͡ʃʊn.naː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👆",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to choose; to elect; to pick",
+    "primaryGloss": "to choose",
+    "emotion": "thoughtful and deliberate, weighing options carefully before making a decision",
+    "notes": [
+      "Takes ने in the perfective aspect (जैसे: उसने एक किताब चुनी — she chose a book)."
+    ],
+    "senses": [
+      {
+        "id": "gzlfzk2q7wdimvg",
+        "order": 0,
+        "definition": "To decide which person or thing you want out of several options.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to choose",
+              "to select",
+              "to pick"
+            ]
+          }
+        ],
+        "domain": "choice",
+        "emoji": "👆",
+        "examples": [
+          {
+            "id": "6dpi4c5kh83fo2w",
+            "text": "आपको इनमें से कौन सी किताब चुननी है?",
+            "textLang": "hi",
+            "translation": "Which of these books do you want to choose?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "चुननी",
+            "matchedTranslationForm": "choose"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yd8p99ont0mfw4r",
+        "order": 1,
+        "definition": "To choose someone for an official position by voting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to elect"
+            ]
+          }
+        ],
+        "domain": "politics",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "3hj4sgcsz1fxmzo",
+            "text": "लोगों ने अपना नया नेता चुना।",
+            "textLang": "hi",
+            "translation": "The people elected their new leader.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "चुना",
+            "matchedTranslationForm": "elected"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n84owl39l8r7v8l",
+        "order": 2,
+        "definition": "To pluck or gather small items, such as flowers or grains, one by one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pick",
+              "to pluck",
+              "to gather"
+            ]
+          }
+        ],
+        "domain": "gathering",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "4xapck9riw8qikw",
+            "text": "वह बगीचे से फूल चुन रही है।",
+            "textLang": "hi",
+            "translation": "She is picking flowers from the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and focused, enjoying a quiet task in the garden",
+            "note": null,
+            "matchedForm": "चुन",
+            "matchedTranslationForm": "picking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "चुनना",
+    "lemma": "चुनना",
+    "reading": null,
     "ipa": "/t͡ʃʊn.nɑː/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "आपको इनमें से कौन सी किताब चुनना है?",
+        "why": "Agreement error: with feminine किताब, the infinitive must be चुननी, not चुनना."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to elect' (a leader or representative)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "चुनना is used for making a choice from several options",
+        "why": "Merely repeats the definition and gloss."
+      }
+    ],
+    "growth": 1.314
   }
 }

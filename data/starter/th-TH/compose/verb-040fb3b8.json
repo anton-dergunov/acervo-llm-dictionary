@@ -58,6 +58,115 @@
     "headword": "ฟัง",
     "lemma": "ฟัง",
     "reading": null,
+    "ipa": "faŋ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to listen; to obey",
+    "primaryGloss": "listen",
+    "emotion": "attentive and still, leaning in slightly to catch the sound",
+    "notes": [
+      "Do not confuse with ได้ยิน (dâi-yin, 'to hear'), which is perceiving sound rather than actively listening."
+    ],
+    "senses": [
+      {
+        "id": "qb0gbv6q5b1h0zs",
+        "order": 0,
+        "definition": "To give attention to a sound or to what someone is saying.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "listen"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "04zgw04ej16563b",
+            "text": "ฉันชอบฟังเพลงเวลาทำงาน",
+            "textLang": "th",
+            "translation": "I like to listen to music while working.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and pleased, enjoying a favourite tune",
+            "note": null,
+            "matchedForm": "ฟัง",
+            "matchedTranslationForm": "listen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x8se6bw3jqsd8xg",
+        "order": 1,
+        "definition": "To heed or follow someone's advice or orders.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "listen",
+              "obey",
+              "heed"
+            ]
+          }
+        ],
+        "domain": "obedience",
+        "emoji": "🎯",
+        "examples": [
+          {
+            "id": "6vu2jyreannpky0",
+            "text": "เด็กคนนี้ไม่ยอมฟังพ่อแม่เลย",
+            "textLang": "th",
+            "translation": "This child refuses to listen to his parents at all.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ฟัง",
+            "matchedTranslationForm": "listen"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ฟัง",
+    "lemma": "ฟัง",
+    "reading": null,
     "ipa": "/faŋ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "ฟัง is used for both intentional listening and the physical act",
+        "why": "False and contradicts note[1]; ฟัง is intentional listening, while ได้ยิน is physical hearing."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "listen, hear",
+        "why": "'Hear' translates ได้ยิน, not ฟัง."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To pay attention to a sound or what someone is saying.",
+        "why": "Repeats sense 0 instead of giving the distinct sense 'to obey / heed advice'."
+      }
+    ],
+    "growth": 0.74
   }
 }

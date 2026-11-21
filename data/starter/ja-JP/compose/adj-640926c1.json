@@ -68,6 +68,156 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "big, large; loud; major",
+    "primaryGloss": "big",
+    "emotion": "a neutral observation of size, objective and matter-of-fact",
+    "notes": [
+      "An i-adjective. Unlike 大きな (which can only come directly before a noun, as in 大きな家), 大きい can also be used at the end of a sentence (家が大きい)."
+    ],
+    "senses": [
+      {
+        "id": "lp2uj784ats2yrd",
+        "order": 0,
+        "definition": "Of great physical size, extent, or amount.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "big",
+              "large"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "fh9uxd5yta4i20f",
+            "text": "その犬はとても大きいです。",
+            "textLang": "ja",
+            "translation": "That dog is very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the sheer scale of the dog",
+            "note": null,
+            "matchedForm": "大きい",
+            "matchedTranslationForm": "big"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pnrd45sgjwr3r0o",
+        "order": 1,
+        "definition": "Of a sound or voice: high in volume.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "loud"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🔊",
+        "examples": [
+          {
+            "id": "yxl1qx487vf15un",
+            "text": "テレビの音が大きいです。",
+            "textLang": "ja",
+            "translation": "The TV is loud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "大きい",
+            "matchedTranslationForm": "loud"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ht8ud76ty4xaq9d",
+        "order": 2,
+        "definition": "Significant in scale, degree, or importance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "big",
+              "major",
+              "great"
+            ]
+          }
+        ],
+        "domain": "importance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "p0zf4cuutb1r98k",
+            "text": "それは大きい問題ですね。",
+            "textLang": "ja",
+            "translation": "That is a major problem.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "大きい",
+            "matchedTranslationForm": "major"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "大きい",
+    "lemma": "大きい",
+    "reading": "おおきい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "large; big",
     "primaryGloss": "large",
     "emotion": "a neutral observation of size, objective and matter-of-fact",
@@ -160,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "large; big",
+        "why": "Misses the 'loud' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use 'ookii' when you want to say something is large, loud, or",
+        "why": "Merely restates the glosses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense of 'major / important / great' (e.g. a big problem)."
+      }
+    ],
+    "growth": 0.993
   }
 }

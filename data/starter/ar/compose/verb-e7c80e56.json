@@ -72,6 +72,95 @@
     "primaryGloss": "to need",
     "emotion": "a practical sense of lacking something essential, matter-of-fact and focused",
     "notes": [
+      "Usually followed by the preposition إِلَى (ʾilā), though it can also take a direct object: أَحْتَاجُ إِلَى مُسَاعَدَةٍ (I need help)."
+    ],
+    "senses": [
+      {
+        "id": "rvn6au0cyfcbqhc",
+        "order": 0,
+        "definition": "To require something or someone because they are necessary or important.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "need",
+        "emoji": "🆘",
+        "examples": [
+          {
+            "id": "y6u5uk3pnxbdf2n",
+            "text": "أَحْتَاجُ إِلَى كُوبٍ مِنَ القَهْوَةِ.",
+            "textLang": "ar",
+            "translation": "I need a cup of coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَحْتَاجُ",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "0manqah7qoyyqaq",
+            "text": "هَذَا المَشْرُوعُ يَحْتَاجُ إِلَى مَزِيدٍ مِنَ الوَقْتِ.",
+            "textLang": "ar",
+            "translation": "This project needs more time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "يَحْتَاجُ",
+            "matchedTranslationForm": "needs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "احْتَاجَ",
+    "lemma": "احْتَاجَ",
+    "reading": null,
+    "ipa": "/iħˈtaːdʒa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to require",
+    "primaryGloss": "to need",
+    "emotion": "a practical sense of lacking something essential, matter-of-fact and focused",
+    "notes": [
       "This verb is almost always followed by the preposition 'إلى' (ila) when indicating what is needed: 'أحتاج إلى مساعدة' (I need help).",
       "It is a very common verb used for both physical items ('I need water') and abstract concepts ('I need time')."
     ],
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To have to have something; to be in a situation",
+        "why": "Senses 0 and 1 are the exact same meaning ('to need / require')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "This project has to have more time.",
+        "why": "Awkward phrasing written only to match the artificial gloss 'to have to have'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a very common verb used for both physical items",
+        "why": "Filler note; works just like English 'need'."
+      }
+    ],
+    "growth": 0.684
   }
 }

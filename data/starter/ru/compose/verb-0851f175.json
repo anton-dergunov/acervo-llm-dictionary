@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to take; to borrow; to rent",
+    "primaryGloss": "to take",
+    "emotion": "steady and purposeful, reaching out to pick something up",
+    "notes": [
+      "Imperfective; pairs with the perfective взять. It has an irregular present tense stem бер-: я беру́, ты берёшь, они беру́т (past: брал, брала́, бра́ли)."
+    ],
+    "senses": [
+      {
+        "id": "80r8khxs3pqmlpz",
+        "order": 0,
+        "definition": "To get hold of something with your hands, or to take something with you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to take",
+              "to pick up",
+              "to grab"
+            ]
+          }
+        ],
+        "domain": "take",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "7c9d8htzp3294lp",
+            "text": "Я всегда беру с собой зонт.",
+            "textLang": "ru",
+            "translation": "I always take an umbrella with me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "беру",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nxaykukli10xv6v",
+        "order": 1,
+        "definition": "To borrow, hire, or rent something for temporary use.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to borrow",
+              "to rent",
+              "to hire",
+              "to take"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "lb1wvmyyatc6ciy",
+            "text": "В отпуске мы обычно берём машину напрокат.",
+            "textLang": "ru",
+            "translation": "On vacation we usually rent a car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "берём",
+            "matchedTranslationForm": "rent"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "брать",
+    "lemma": "брать",
+    "reading": null,
+    "ipa": "/bratʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to take; to catch; to rent",
     "primaryGloss": "take",
     "emotion": "steady and purposeful, reaching out to pick something up",
@@ -162,5 +274,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он взял книгу со стола.",
+        "why": "Uses the perfective partner взять instead of the headword брать."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Мы решили взять машину напрокат на выходные.",
+        "why": "Uses the perfective partner взять instead of the headword брать."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to take; to catch; to rent",
+        "why": "Includes 'to catch', which is not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Does not mention the irregular present tense stem бер- (беру, берёшь)."
+      }
+    ],
+    "growth": 1.025
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "to sleep",
     "emotion": "tired and quiet, drifting off at the end of a long day",
     "notes": [
+      "Imperfective (perfective поспать for sleeping for a while; уснуть or заснуть for falling asleep). Irregular present tense: я сплю, ты спишь, они спят."
+    ],
+    "senses": [
+      {
+        "id": "6xg67e8zswp0vtp",
+        "order": 0,
+        "definition": "To rest with your eyes closed and your mind and body inactive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "7d1iid4ufbmtfyj",
+            "text": "По выходным я люблю долго спать.",
+            "textLang": "ru",
+            "translation": "On weekends I like to sleep late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "спать",
+            "matchedTranslationForm": "sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "спать",
+    "lemma": "спать",
+    "reading": null,
+    "ipa": "/spatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep",
+    "primaryGloss": "to sleep",
+    "emotion": "tired and quiet, drifting off at the end of a long day",
+    "notes": [
       "Use спать when talking about the state of sleeping, and уснуть when focusing on the moment of falling asleep."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Мне нужно хорошо спать перед экзаменом.",
+        "why": "Single occasion before an exam requires perfective поспать or выспаться, not imperfective спать."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular stem change in conjugation (сплю, спишь) and basic aspect pair (поспать)."
+      }
+    ],
+    "growth": 1.114
   }
 }

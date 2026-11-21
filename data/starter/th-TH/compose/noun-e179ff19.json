@@ -68,6 +68,76 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "company; firm",
+    "primaryGloss": "company",
+    "emotion": "professional and routine, speaking about a workplace",
+    "notes": [
+      "Counted with the classifier แห่ง (hɛ̀ŋ) or, less formally, ที่ (thîi).",
+      "Refers to a business organization or office; do not confuse with ร้าน (ráan), which is a shop or store."
+    ],
+    "senses": [
+      {
+        "id": "7z7k0qnop8j8e8t",
+        "order": 0,
+        "definition": "A business organization that produces or sells goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "company",
+              "firm",
+              "corporation"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "p7rjexvxlrucqrp",
+            "text": "ฉันทำงานอยู่ที่บริษัทนี้มาห้าปีแล้ว",
+            "textLang": "th",
+            "translation": "I have been working at this company for five years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "บริษัท",
+            "matchedTranslationForm": "company"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "บริษัท",
+    "lemma": "บริษัท",
+    "reading": null,
+    "ipa": "/bɔː˧.ri˨˩.sat̚˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "company; corporation",
     "primaryGloss": "company",
     "emotion": "professional and routine, speaking about a workplace",
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[0].text",
+        "quote": "ฉันทำงานอยู่ที่บริษัทนี้มาห้า years แล้ว",
+        "why": "Contains the English word 'years' instead of Thai ปี."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "บริษัท is the standard term for a corporate company",
+        "why": "Restates the definition and gloss without adding usage information."
+      }
+    ],
+    "growth": 0.884
   }
 }

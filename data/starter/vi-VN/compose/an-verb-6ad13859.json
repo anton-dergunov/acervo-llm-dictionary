@@ -60,6 +60,158 @@
     "headword": "ăn",
     "lemma": "ăn",
     "reading": null,
+    "ipa": "/an˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to eat; to celebrate; to win",
+    "primaryGloss": "eat",
+    "emotion": "casual and hungry, ready to sit down for a meal",
+    "notes": [
+      "Often paired with 'cơm' (cooked rice) as 'ăn cơm' to mean having a meal in general, even if rice is not the main dish."
+    ],
+    "senses": [
+      {
+        "id": "m0001opovfa1i3d",
+        "order": 0,
+        "definition": "To put food in your mouth and swallow it, or to have a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eat",
+              "have a meal"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "of1pectds1zetij",
+            "text": "Chúng tôi đang ăn cơm tối.",
+            "textLang": "vi",
+            "translation": "We are eating dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and conversational, sharing a quiet evening meal",
+            "note": null,
+            "matchedForm": "ăn",
+            "matchedTranslationForm": "eating"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y25n67abq1syxm7",
+        "order": 1,
+        "definition": "To celebrate a holiday or attend a celebratory feast, such as a wedding.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "celebrate",
+              "attend a feast"
+            ]
+          }
+        ],
+        "domain": "celebration",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "uu3s2spyeaeiy0i",
+            "text": "Năm nay gia đình tôi về quê ăn Tết.",
+            "textLang": "vi",
+            "translation": "This year my family is going back to our hometown to celebrate Tet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ăn",
+            "matchedTranslationForm": "celebrate"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c5i4i3iubz6lgts",
+        "order": 2,
+        "definition": "To win a prize or money, capture a piece in a game, or take a share of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "win",
+              "take",
+              "earn"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "p6mdahaki68xi1s",
+            "text": "Anh ấy vừa ăn được một khoản lớn ở sòng bạc.",
+            "textLang": "vi",
+            "translation": "He just won a large amount at the casino.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and slightly breathless, talking about a lucky break",
+            "note": null,
+            "matchedForm": "ăn",
+            "matchedTranslationForm": "won"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ăn",
+    "lemma": "ăn",
+    "reading": null,
     "ipa": "/an/",
     "pos": "verb",
     "gender": null,
@@ -207,5 +359,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to eat; to corrode; to cost",
+        "why": "'to cost' is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(damage) To erode or eat away at a material",
+        "why": "'To corrode' is too technical for A2; celebrating (ăn Tết/ăn cưới) is much more everyday."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse with 'uống', which is specifically used for drinking",
+        "why": "Beginners do not confuse 'eat' and 'drink'; note[0] just restates the senses."
+      }
+    ],
+    "growth": 0.988
   }
 }

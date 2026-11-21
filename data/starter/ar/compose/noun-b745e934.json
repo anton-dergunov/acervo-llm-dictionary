@@ -72,6 +72,74 @@
     "primaryGloss": "ice",
     "emotion": "cold and crisp, feeling the chill of winter air",
     "notes": [
+      "Refers to natural ice in the environment (on roads, lakes, or windows). For ice cubes in a drink or snow, ثَلْج (ṯalj) is commonly used."
+    ],
+    "senses": [
+      {
+        "id": "7wetqncgnkkwxoe",
+        "order": 0,
+        "definition": "Frozen water forming a solid layer on the ground, water surfaces, or windows in cold weather.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ice",
+              "frost"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "ozhrsnblz0cnoy9",
+            "text": "تَكَوَّنَ الجَلِيدُ عَلَى النَّافِذَةِ فِي الصَّبَاحِ.",
+            "textLang": "ar",
+            "translation": "Ice formed on the window in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الجَلِيدُ",
+            "matchedTranslationForm": "Ice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَلِيد",
+    "lemma": "جَلِيد",
+    "reading": null,
+    "ipa": "/dʒaˈliːd/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "ice; frost",
+    "primaryGloss": "ice",
+    "emotion": "cold and crisp, feeling the chill of winter air",
+    "notes": [
       "Used for both ice and frost on surfaces during cold weather."
     ],
     "senses": [
@@ -158,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both ice and frost on surfaces during cold weather.",
+        "why": "Restates the glosses and fails to distinguish جَلِيد (natural ice) from ثَلْج (snow/drink ice)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Ice and frost on cold surfaces are shades of one meaning in Arabic; صَقِيع is specifically frost."
+      }
+    ],
+    "growth": 1.144
   }
 }

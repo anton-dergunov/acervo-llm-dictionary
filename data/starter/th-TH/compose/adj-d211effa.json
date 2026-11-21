@@ -62,6 +62,117 @@
     "headword": "ถูก",
     "lemma": "ถูก",
     "reading": null,
+    "ipa": "tʰùːk",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "cheap; correct; right",
+    "primaryGloss": "cheap",
+    "emotion": "pleasantly surprised at a bargain",
+    "notes": [
+      "The opposite of ถูก is แพง (expensive) when talking about price, and ผิด (wrong) when talking about accuracy.",
+      "Also used before a verb as a passive marker to show that the subject undergoes an action (e.g., ถูกตี 'to be hit')."
+    ],
+    "senses": [
+      {
+        "id": "i5mmb5g2x3j0d2c",
+        "order": 0,
+        "definition": "Low in price; not costing much money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "inexpensive"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "lc28omxuawscorb",
+            "text": "เสื้อตัวนี้ราคาถูกมาก",
+            "textLang": "th",
+            "translation": "This shirt is very cheap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted with a good find",
+            "note": null,
+            "matchedForm": "ถูก",
+            "matchedTranslationForm": "cheap"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nqdikdj1371jzue",
+        "order": 1,
+        "definition": "Free from error; right or proper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "right"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "✔️",
+        "examples": [
+          {
+            "id": "zm6zv9igpleciu1",
+            "text": "คุณตอบถูกทุกข้อเลย",
+            "textLang": "th",
+            "translation": "You answered every question right.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ถูก",
+            "matchedTranslationForm": "right"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ถูก",
+    "lemma": "ถูก",
+    "reading": null,
     "ipa": "/tʰuːk/",
     "pos": "adj",
     "gender": null,
@@ -207,5 +318,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "เรื่องนี้เป็นเรื่องถูก — This matter is true.",
+        "why": "ถูก does not mean 'true/real' (that is จริง); เรื่องนี้เป็นเรื่องถูก is unidiomatic."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tʰuːk/",
+        "why": "Missing the low tone mark; ถูก is pronounced /tʰùːk/."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "คำตอบของคุณถูกต้อง",
+        "why": "Uses the compound ถูกต้อง rather than showing standalone ถูก."
+      }
+    ],
+    "growth": 0.837
   }
 }

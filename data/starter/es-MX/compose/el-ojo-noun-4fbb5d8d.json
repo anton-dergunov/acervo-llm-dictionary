@@ -58,6 +58,73 @@
     "headword": "el ojo",
     "lemma": "ojo",
     "reading": null,
+    "ipa": "/ˈo.xo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "eye",
+    "primaryGloss": "eye",
+    "emotion": "matter-of-fact and direct, describing a part of oneself",
+    "notes": [
+      "Saying '¡Ojo!' on its own is a very common way to say 'Watch out!' or 'Pay attention!'; 'tener buen ojo' means 'to have a good eye' (for something)."
+    ],
+    "senses": [
+      {
+        "id": "m8xmqyuqp887x0r",
+        "order": 0,
+        "definition": "One of the two organs on the face used for seeing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eye"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "odp7zoycot6n1r8",
+            "text": "Me entró polvo en el ojo.",
+            "textLang": "es",
+            "translation": "I got dust in my eye.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ojo",
+            "matchedTranslationForm": "eye"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el ojo",
+    "lemma": "ojo",
+    "reading": null,
     "ipa": "/ˈoxo/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'ojo' is masculine, so use 'el' or 'un'.",
+        "why": "Restates the grammatical gender already shown in the headword and field."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "sight, vision",
+        "why": "'Ojo' does not translate as 'sight' or 'vision' (which is 'vista'); 'tener buen ojo' is an idiom."
+      }
+    ],
+    "growth": 0.622
   }
 }

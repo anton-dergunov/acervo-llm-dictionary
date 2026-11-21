@@ -72,6 +72,74 @@
     "primaryGloss": "ice",
     "emotion": "crisp and cold, feeling the chill of a winter day",
     "notes": [
+      "Has a fleeting vowel in declined forms, replaced by a soft sign: льда (genitive), на льду (locative, 'on the ice').",
+      "The letter 'ё' is often written as 'е' (лед), but is always pronounced /o/."
+    ],
+    "senses": [
+      {
+        "id": "wbw0wx2mt71tqea",
+        "order": 0,
+        "definition": "Water that has frozen solid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ice"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "yu0sp041i2eckio",
+            "text": "Зимой на озере появляется толстый слой льда.",
+            "textLang": "ru",
+            "translation": "In winter, a thick layer of ice appears on the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and calm, observing the quiet winter landscape",
+            "note": null,
+            "matchedForm": "льда",
+            "matchedTranslationForm": "ice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "лёд",
+    "lemma": "лёд",
+    "reading": null,
+    "ipa": "/lʲot/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "ice",
+    "primaryGloss": "ice",
+    "emotion": "crisp and cold, feeling the chill of a winter day",
+    "notes": [
       "Note the change in the last letter when you decline the word: lëd (nominative) becomes l'da (genitive). The 'ë' is often written as 'e' in informal texts, but it is pronounced 'o'.",
       "Do not confuse this with 'led' (a common mis-transliteration of the verb 'to lead'). This word is strictly about frozen water."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note the change in the last letter when you decline",
+        "why": "The vowel 'ё' drops (becomes 'ь'), not the last letter; uses Latin transliteration."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'led' (a common mis-transliteration",
+        "why": "Nonsensical warning about an English verb in Latin script."
+      }
+    ],
+    "growth": 0.721
   }
 }

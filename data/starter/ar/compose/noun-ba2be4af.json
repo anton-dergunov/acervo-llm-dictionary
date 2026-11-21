@@ -68,6 +68,117 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip; journey; flight",
+    "primaryGloss": "trip",
+    "emotion": "excited and anticipating a new adventure away from home",
+    "notes": [
+      "Plural: رِحْلَات (riḥlāt).",
+      "Do not confuse with سَفَر (safar, travel in general); رِحْلَة refers to a specific trip, outing, or scheduled flight."
+    ],
+    "senses": [
+      {
+        "id": "jb0kcgrpjioy61q",
+        "order": 0,
+        "definition": "An act of traveling from one place to another, or an outing for pleasure or education.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey",
+              "excursion",
+              "tour"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "pz85xge0bx8ol60",
+            "text": "ذَهَبْنَا فِي رِحْلَةٍ مَدْرَسِيَّةٍ إِلَى الْمُتْحَفِ.",
+            "textLang": "ar",
+            "translation": "We went on a school trip to the museum.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and recalling a fun day out with friends",
+            "note": null,
+            "matchedForm": "رِحْلَةٍ",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "49dw2oam2yu37ht",
+        "order": 1,
+        "definition": "A scheduled journey on an airplane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flight"
+            ]
+          }
+        ],
+        "domain": "aviation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "dik8h2kf3q8ip71",
+            "text": "تَأَخَّرَتِ الرِّحْلَةُ بِسَبَبِ الطَّقْسِ.",
+            "textLang": "ar",
+            "translation": "The flight was delayed because of the weather.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الرِّحْلَةُ",
+            "matchedTranslationForm": "flight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رِحْلَة",
+    "lemma": "رِحْلَة",
+    "reading": null,
+    "ipa": "/ˈriħ.la/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; journey; tour",
     "primaryGloss": "trip",
     "emotion": "excited and anticipating a new adventure away from home",
@@ -163,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "General trip and organized excursion/school trip are shades of one meaning in Arabic."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday travel sense 'flight' (e.g., رِحْلَة طَيَرَان or airport flight number)."
+      }
+    ],
+    "growth": 0.998
   }
 }

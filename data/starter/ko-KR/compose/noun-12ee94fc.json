@@ -74,6 +74,114 @@
     "primaryGloss": "market",
     "emotion": null,
     "notes": [
+      "These two meanings come from different Sino-Korean words: 市場 ('market', pronounced with a short vowel) and 市長 ('mayor', historically with a long first vowel)."
+    ],
+    "senses": [
+      {
+        "id": "xhqjqqb8phmn5vs",
+        "order": 0,
+        "definition": "A place where people gather to buy and sell food, clothes, and other goods, or an economic market.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "market",
+              "marketplace"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "ju9cbc6xbgvgsx6",
+            "text": "주말에 엄마와 함께 시장에 갔어요.",
+            "textLang": "ko",
+            "translation": "I went to the market with my mom on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and warm, remembering a pleasant weekend outing",
+            "note": null,
+            "matchedForm": "시장에",
+            "matchedTranslationForm": "market"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fdrp4bot0gm3i4j",
+        "order": 1,
+        "definition": "The elected head of a city government.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mayor"
+            ]
+          }
+        ],
+        "domain": "politics",
+        "emoji": "👔",
+        "examples": [
+          {
+            "id": "blduasmjnuoidcb",
+            "text": "이번 선거에서 새로운 시장이 뽑혔습니다.",
+            "textLang": "ko",
+            "translation": "A new mayor was elected in this election.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "시장이",
+            "matchedTranslationForm": "mayor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "시장",
+    "lemma": "시장",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "market; mayor",
+    "primaryGloss": "market",
+    "emotion": null,
+    "notes": [
       "시장 is a homonym in Korean. It can mean either a marketplace where goods are sold or the mayor of a city depending on the context."
     ],
     "senses": [
@@ -161,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "시장 is a homonym in Korean. It can mean either a marketplace",
+        "why": "Merely restates the two senses given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "새로운 시장이 우리 도시를 방문했습니다.",
+        "why": "A city's own mayor would not 'visit our city'; sounds like a translation."
+      }
+    ],
+    "growth": 1.122
   }
 }

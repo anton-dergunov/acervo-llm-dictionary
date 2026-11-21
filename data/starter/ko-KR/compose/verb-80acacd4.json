@@ -58,6 +58,155 @@
     "headword": "듣다",
     "lemma": "듣다",
     "reading": null,
+    "ipa": "/tɯt̚.t͈a/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to listen to; to hear; to take (a class)",
+    "primaryGloss": "listen",
+    "emotion": "focused and quiet, leaning in to catch a sound",
+    "notes": [
+      "ㄷ-irregular verb: the final ㄷ changes to ㄹ before a vowel (듣다 → 들어요, 들었어요).",
+      "Covers both intentional 'listening' and passive 'hearing'. For 'to be audible / can be heard', Korean often uses the passive verb 들리다."
+    ],
+    "senses": [
+      {
+        "id": "o9bhgr1gc7cj92j",
+        "order": 0,
+        "definition": "To pay attention to a sound or to what someone is saying.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "listen to"
+            ]
+          }
+        ],
+        "domain": "listening",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "d3pgbqe1jhl3l2b",
+            "text": "저는 매일 아침 음악을 들어요.",
+            "textLang": "ko",
+            "translation": "I listen to music every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "들어요",
+            "matchedTranslationForm": "listen to"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "afnnpa2azvrjnmq",
+        "order": 1,
+        "definition": "To perceive a sound or learn news with your ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear"
+            ]
+          }
+        ],
+        "domain": "hearing",
+        "emoji": "🔊",
+        "examples": [
+          {
+            "id": "szkv0cze219k8qc",
+            "text": "그 소식을 듣고 깜짝 놀랐어요.",
+            "textLang": "ko",
+            "translation": "I was very surprised to hear that news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "듣고",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8wgxhu66emfpoh6",
+        "order": 2,
+        "definition": "To attend or take a class, course, or lecture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "take (a class)",
+              "attend"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fczacn93sha63hg",
+            "text": "이번 학기에 한국어 수업을 들어요.",
+            "textLang": "ko",
+            "translation": "I am taking a Korean class this semester.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "들어요",
+            "matchedTranslationForm": "taking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "듣다",
+    "lemma": "듣다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -160,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "작게 말해서 안 들려요.",
+        "why": "Uses the passive lemma 들리다 instead of the headword 듣다."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common A1/A2 sense 'to take (a class/course)' (수업을 듣다)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular conjugation note: 듣다 is a ㄷ-irregular verb (들어, 들어요)."
+      }
+    ],
+    "growth": 0.768
   }
 }

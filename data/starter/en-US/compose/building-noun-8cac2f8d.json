@@ -58,6 +58,114 @@
     "headword": "building",
     "lemma": "building",
     "reading": null,
+    "ipa": "/ˈbɪldɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "edificio; construcción",
+    "primaryGloss": "edificio",
+    "emotion": "matter-of-fact and observant, pointing something out in the street",
+    "notes": [
+      "La letra 'u' es muda (/ˈbɪldɪŋ/).",
+      "Como 'edificio' es contable (many buildings); como 'construcción' es incontable."
+    ],
+    "senses": [
+      {
+        "id": "3bazvqvymqe6n82",
+        "order": 0,
+        "definition": "Estructura con paredes y techo, como una casa, escuela u oficina.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "edificio"
+            ]
+          }
+        ],
+        "domain": "arquitectura",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "q7bkpn0lckjtsjs",
+            "text": "She works in a tall office building downtown.",
+            "textLang": "en",
+            "translation": "Ella trabaja en un edificio de oficinas alto en el centro.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "building",
+            "matchedTranslationForm": "edificio"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7yo4xapz5cwqgro",
+        "order": 1,
+        "definition": "Proceso o actividad de construir estructuras.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "construcción"
+            ]
+          }
+        ],
+        "domain": "construcción",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "ty3c1ysix0dc75k",
+            "text": "The building of the new bridge will take two years.",
+            "textLang": "en",
+            "translation": "La construcción del nuevo puente llevará dos años.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and realistic, discussing a long-term project",
+            "note": null,
+            "matchedForm": "building",
+            "matchedTranslationForm": "construcción"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "building",
+    "lemma": "building",
+    "reading": null,
     "ipa": "/ˈbɪl.dɪŋ/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "The Empire State is a very tall building.",
+        "why": "In English it is always called 'The Empire State Building', never 'The Empire State'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "se usa casi siempre como un sustantivo para referirse a la estructura misma, no al proceso",
+        "why": "Contradicts sense 1 directly instead of explaining countability."
+      }
+    ],
+    "growth": 0.9
   }
 }

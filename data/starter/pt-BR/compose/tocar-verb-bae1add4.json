@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to touch; to play (music); to ring",
+    "primaryGloss": "touch",
+    "emotion": "focused and deliberate, reaching out to make contact with something",
+    "notes": [
+      "For physical contact, 'tocar' often takes the preposition 'em' ('tocar em algo'), though it can also be used directly ('tocar algo').",
+      "Do not confuse with 'pegar' (to grab, hold, or take): 'tocar' is just making contact."
+    ],
+    "senses": [
+      {
+        "id": "5hiwg2v5f5jzzvn",
+        "order": 0,
+        "definition": "To put your hand or another part of your body on something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to touch",
+              "to feel"
+            ]
+          }
+        ],
+        "domain": "contact",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "c9c2169r5iy03af",
+            "text": "Não toque nos quadros da galeria.",
+            "textLang": "pt",
+            "translation": "Do not touch the paintings in the gallery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "authoritative and warning, protecting something valuable",
+            "note": null,
+            "matchedForm": "toque",
+            "matchedTranslationForm": "touch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8mai9mtyry8prv7",
+        "order": 1,
+        "definition": "To make music on an instrument, or for a song or band to play.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎸",
+        "examples": [
+          {
+            "id": "giodpm7fb58xyfy",
+            "text": "Ela toca piano muito bem.",
+            "textLang": "pt",
+            "translation": "She plays the piano very well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and impressed by someone's skill",
+            "note": null,
+            "matchedForm": "toca",
+            "matchedTranslationForm": "plays"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dnwo9mlgfz39hs4",
+        "order": 2,
+        "definition": "Of a phone, doorbell, or alarm: to make a sound.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ring",
+              "to go off"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "jbdru28ofumu45a",
+            "text": "O meu celular tocou durante a reunião.",
+            "textLang": "pt",
+            "translation": "My cell phone rang during the meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tocou",
+            "matchedTranslationForm": "rang"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "tocar",
+    "lemma": "tocar",
+    "reading": null,
+    "ipa": "/toˈkaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎵",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to touch; to play an instrument; to be one's turn",
     "primaryGloss": "touch",
     "emotion": "focused and deliberate, reaching out to make contact with something",
@@ -200,5 +350,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'to ring / go off' (phone, alarm, doorbell)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[2].examples[0].text",
+        "quote": "Agora toca a mim escolher o filme.",
+        "why": "'Toca a mim' for 'it's my turn' is a Spanish calque/Lusitanism, unnatural in Brazil."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When used for 'to be one's turn', the structure is 'toca",
+        "why": "Teaches 'toca a mim', which is not used in Brazilian Portuguese ('é a minha vez')."
+      }
+    ],
+    "growth": 0.955
   }
 }

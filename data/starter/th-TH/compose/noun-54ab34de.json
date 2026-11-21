@@ -58,6 +58,74 @@
     "headword": "มื้ออาหาร",
     "lemma": "มื้ออาหาร",
     "reading": null,
+    "ipa": "/mɯ́ː ʔaː.hǎːn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meal",
+    "primaryGloss": "meal",
+    "emotion": "satisfied and anticipating a pleasant time eating",
+    "notes": [
+      "Formed from มื้อ ('mealtime', also the classifier for meals) and อาหาร ('food'). In everyday speech, มื้อ alone often means 'meal', as in มื้อเช้า ('breakfast') or สามมื้อ ('three meals')."
+    ],
+    "senses": [
+      {
+        "id": "gmncjpe05wjxwoe",
+        "order": 0,
+        "definition": "An occasion when food is eaten, such as breakfast, lunch, or dinner.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meal",
+              "mealtime"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "vkq6boo5lnzx3pd",
+            "text": "การกินมื้ออาหารตรงเวลาดีต่อสุขภาพ",
+            "textLang": "th",
+            "translation": "Eating meals on time is good for your health.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "มื้ออาหาร",
+            "matchedTranslationForm": "meals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "มื้ออาหาร",
+    "lemma": "มื้ออาหาร",
+    "reading": null,
     "ipa": "/mɯ́ː ʔaː.hàːn/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mɯ́ː ʔaː.hàːn/",
+        "why": "Wrong tone on อาหาร: ห + live syllable gives rising tone /hǎːn/, not low /hàːn/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "เราควรกินอาหารที่มีประโยชน์ในทุกมื้ออาหาร",
+        "why": "Repeating อาหาร at the end is redundant; natives say ในทุกมื้อ, or use another sentence."
+      }
+    ],
+    "growth": 1.08
   }
 }

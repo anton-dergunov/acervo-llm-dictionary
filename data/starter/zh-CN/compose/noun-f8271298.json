@@ -68,6 +68,117 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person; people; others",
+    "primaryGloss": "person",
+    "emotion": null,
+    "notes": [
+      "Counted with 个 (gè). Often placed after a country, city, or group name to mean a person from there (e.g. 中国人 'Chinese person')."
+    ],
+    "senses": [
+      {
+        "id": "mphbidgrx96waky",
+        "order": 0,
+        "definition": "A human being; men, women, or children.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "people",
+              "human being"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "bzckgerc8atf0f3",
+            "text": "路上有很多人。",
+            "textLang": "zh",
+            "translation": "There are many people on the road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing a busy street scene",
+            "note": null,
+            "matchedForm": "人",
+            "matchedTranslationForm": "people"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m85t5s0faff16nb",
+        "order": 1,
+        "definition": "People in general, or someone other than oneself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "other people",
+              "others",
+              "everybody"
+            ]
+          }
+        ],
+        "domain": "society",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "f9m3prd87r54tef",
+            "text": "她总是喜欢帮助人。",
+            "textLang": "zh",
+            "translation": "She always likes helping others.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "人",
+            "matchedTranslationForm": "others"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "人",
+    "lemma": "人",
+    "reading": "rén",
+    "ipa": "/ʐən˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; human being; people",
     "primaryGloss": "person",
     "emotion": null,
@@ -160,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "人 is a fundamental counter and noun. It is often used as",
+        "why": "False: 人 is a noun (taking the classifier 个), not a counter; rambling example about 老师."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "路上有很多人。 — There are many people on the road.",
+        "why": "Chinese does not inflect for plural; 'person' and 'people' in this example are the exact same sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'other people; others; everybody' (e.g. 别人, 人人)."
+      }
+    ],
+    "growth": 1.017
   }
 }

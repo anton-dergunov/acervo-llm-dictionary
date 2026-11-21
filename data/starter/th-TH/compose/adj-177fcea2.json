@@ -58,6 +58,117 @@
     "headword": "ผิด",
     "lemma": "ผิด",
     "reading": null,
+    "ipa": "/pʰìt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "wrong; incorrect; at fault",
+    "primaryGloss": "wrong",
+    "emotion": "matter-of-fact and direct, pointing out a discrepancy",
+    "notes": [
+      "Opposite of ถูก (right, correct).",
+      "Often placed directly after a noun to mean 'the wrong...' (e.g., ผิดคน 'the wrong person', ผิดทาง 'the wrong way'), or after a verb as an adverb meaning 'wrongly' (e.g., ทำผิด 'to do wrong')."
+    ],
+    "senses": [
+      {
+        "id": "4th5d8ncftsktqr",
+        "order": 0,
+        "definition": "Not correct; not matching the truth or a standard.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "lko3otxcjefviqf",
+            "text": "คำตอบนี้ผิด",
+            "textLang": "th",
+            "translation": "This answer is incorrect.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and corrective, as if marking a test",
+            "note": null,
+            "matchedForm": "ผิด",
+            "matchedTranslationForm": "incorrect"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c7g283th3xgqu5l",
+        "order": 1,
+        "definition": "Having made a mistake or broken a rule, law, or moral standard.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "at fault",
+              "guilty"
+            ]
+          }
+        ],
+        "domain": "fault",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "je741vv1rp1xl2o",
+            "text": "เรื่องนี้ฉันผิดเอง",
+            "textLang": "th",
+            "translation": "I am at fault in this matter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ผิด",
+            "matchedTranslationForm": "at fault"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ผิด",
+    "lemma": "ผิด",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "incorrect; wrong; to make a mistake",
+        "why": "Includes verbal gloss 'to make a mistake' for an adjective entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To act in a way that violates a rule",
+        "why": "Adjective sense is defined as a verb ('To act...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used as an adjective, 'ผิด' means incorrect or wrong.",
+        "why": "Notes merely restate the glosses instead of explaining grammar and usage."
+      }
+    ],
+    "growth": 0.937
   }
 }

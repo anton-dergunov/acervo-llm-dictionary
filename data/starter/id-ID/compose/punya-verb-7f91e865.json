@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to have; to own",
+    "primaryGloss": "to have",
+    "emotion": "matter-of-fact and direct, simply stating a reality without fuss",
+    "notes": [
+      "Shortened from the formal verb 'mempunyai'. In formal writing, 'mempunyai' or 'memiliki' is preferred, while 'punya' is standard in everyday speech.",
+      "Do not use 'punya' for illnesses or physical sensations: 'I have a headache' is 'saya sakit kepala', not *'saya punya sakit kepala'*."
+    ],
+    "senses": [
+      {
+        "id": "3h7ivgws2kjyu1t",
+        "order": 0,
+        "definition": "To own, possess, or have something (objects, relationships, time, or plans).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to own",
+              "to possess"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "0gm67bqs1v6mhfg",
+            "text": "Saya punya mobil baru.",
+            "textLang": "id",
+            "translation": "I have a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and mildly proud, sharing personal news",
+            "note": null,
+            "matchedForm": "punya",
+            "matchedTranslationForm": "have"
+          },
+          {
+            "id": "whl61n3sqf0ynpl",
+            "text": "Dia punya banyak teman di Jakarta.",
+            "textLang": "id",
+            "translation": "She has many friends in Jakarta.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, describing someone's social life",
+            "note": null,
+            "matchedForm": "punya",
+            "matchedTranslationForm": "has"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "punya",
+    "lemma": "punya",
+    "reading": null,
+    "ipa": "/ˈpuɲa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to have; to own; to possess",
     "primaryGloss": "to have",
     "emotion": "matter-of-fact and direct, simply stating a reality without fuss",
@@ -180,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "having a headache",
+        "why": "Physical sensations like headaches do not use 'punya' in Indonesian (they use 'sakit')."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To experience or feel a particular thing, such as a",
+        "why": "'Punya' is not used to feel physical sensations; merge with general possession/having."
+      }
+    ],
+    "growth": 0.816
   }
 }

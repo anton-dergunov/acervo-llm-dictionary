@@ -58,6 +58,95 @@
     "headword": "sbagliato",
     "lemma": "sbagliato",
     "reading": null,
+    "ipa": "/zbaʎˈʎa.to/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "wrong; incorrect",
+    "primaryGloss": "wrong",
+    "emotion": "apologetic and slightly embarrassed about making a mistake",
+    "notes": [
+      "Describes things (an answer, a number, a choice, a time), not a person who has made a mistake: to say 'I am wrong / mistaken', use 'mi sbaglio' or 'ho torto', never 'sono sbagliato'."
+    ],
+    "senses": [
+      {
+        "id": "ml3ydv6160izmuj",
+        "order": 0,
+        "definition": "Not correct; containing an error or not the right one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "trjm5zf1v70wi0s",
+            "text": "Questa risposta è sbagliata.",
+            "textLang": "it",
+            "translation": "This answer is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "realizing a mistake and pointing it out honestly",
+            "note": null,
+            "matchedForm": "sbagliata",
+            "matchedTranslationForm": "wrong"
+          },
+          {
+            "id": "s6fsxodtbbzts6o",
+            "text": "Scusa, ho preso l'autobus sbagliato.",
+            "textLang": "it",
+            "translation": "Sorry, I took the wrong bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sbagliato",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "sbagliato",
+    "lemma": "sbagliato",
+    "reading": null,
     "ipa": "/zbaʎˈʎaːto/",
     "pos": "adj",
     "gender": null,
@@ -120,5 +209,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or a person who has made a mistake.",
+        "why": "False friend trap: in Italian, a mistaken person says 'mi sbaglio', never 'sono sbagliato'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe something that is incorrect, an answer that is not",
+        "why": "Restates the definition and gloss instead of giving useful grammar or usage warnings."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "wrong, incorrect, mistaken",
+        "why": "'Mistaken' misleads English learners into applying 'sbagliato' to people ('I am mistaken')."
+      }
+    ],
+    "growth": 1.51
   }
 }

@@ -58,6 +58,73 @@
     "headword": "قَائِمَة طَعَام",
     "lemma": "قَائِمَة طَعَام",
     "reading": null,
+    "ipa": "/qaː.ʔi.mat tˤa.ʕaːm/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📜",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "menu",
+    "primaryGloss": "menu",
+    "emotion": "hungry and eager, deciding what to order from the choices",
+    "notes": [
+      "A construct phrase (iḍāfa) literally meaning 'list of food'. To make it definite ('the menu'), add الـ only to the second word: قَائِمَة الطَّعَام."
+    ],
+    "senses": [
+      {
+        "id": "jmnbkkxmh9kri44",
+        "order": 0,
+        "definition": "A list of food and drinks available in a restaurant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "nywkjafvj76v7eq",
+            "text": "هَلْ يُمْكِنُنِي رُؤْيَةُ قَائِمَةِ الطَّعَامِ مِنْ فَضْلِكَ؟",
+            "textLang": "ar",
+            "translation": "Could I see the menu, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "قَائِمَةِ الطَّعَامِ",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "قَائِمَة طَعَام",
+    "lemma": "قَائِمَة طَعَام",
+    "reading": null,
     "ipa": "/qaː.i.ma.t͡sˤ tˤa.ʕaːm/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/qaː.i.ma.t͡sˤ tˤa.ʕaːm/",
+        "why": "Corrupt IPA (/t͡sˤ/ does not exist in Arabic and glottal stop /ʔ/ is missing)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "مُمكِن قَائِمَة طَعَام مِن فَضْلِك؟",
+        "why": "Colloquial phrasing without full MSA vocalization, and missing the definite article on الطَّعَام."
+      }
+    ],
+    "growth": 1.449
   }
 }

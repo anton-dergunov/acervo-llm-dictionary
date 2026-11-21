@@ -58,6 +58,76 @@
     "headword": "ใช่",
     "lemma": "ใช่",
     "reading": null,
+    "ipa": "tɕʰaj˥˩",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "yes; that's right",
+    "primaryGloss": "yes",
+    "emotion": "convinced and agreeable, confirming what has just been said",
+    "notes": [
+      "Confirms that a fact is true ('that's right'), unlike ครับ (khráp) and ค่ะ (khâ), which are polite particles that can also serve as a general 'yes'.",
+      "Often used at the end of a sentence in ใช่ไหม (châi mái, 'right?') to form a yes/no question, and negated as ไม่ใช่ (mâi châi, 'no / that's not right')."
+    ],
+    "senses": [
+      {
+        "id": "2sh8tk1by2wc20w",
+        "order": 0,
+        "definition": "Used to confirm that a statement is true or correct.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yes",
+              "that's right",
+              "correct"
+            ]
+          }
+        ],
+        "domain": "agreement",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "slix0aum2m4mnfw",
+            "text": "ใช่ ฉันเข้าใจแล้ว",
+            "textLang": "th",
+            "translation": "Yes, I understand now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ใช่",
+            "matchedTranslationForm": "Yes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ใช่",
+    "lemma": "ใช่",
+    "reading": null,
     "ipa": null,
     "pos": "expression",
     "gender": null,
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to confirm that something is true or correct.",
+        "why": "Merely repeats the definition and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ใช่, ฉันเข้าใจแล้ว",
+        "why": "Thai does not use English-style commas after interjections; use a space instead."
+      }
+    ],
+    "growth": 0.935
   }
 }

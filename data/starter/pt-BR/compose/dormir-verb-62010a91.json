@@ -73,6 +73,114 @@
     "headword": "dormir",
     "lemma": "dormir",
     "reading": null,
+    "ipa": "/doʁˈmiχ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep; to stay the night",
+    "primaryGloss": "sleep",
+    "emotion": "relaxed and peaceful, reflecting a quiet moment of rest",
+    "notes": [
+      "In the present tense, the 'o' changes to 'u' in the first-person singular: 'eu durmo'."
+    ],
+    "senses": [
+      {
+        "id": "3ckxdzr685j124b",
+        "order": 0,
+        "definition": "To rest with your eyes closed and your body inactive, usually at night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleep"
+            ]
+          }
+        ],
+        "domain": "rest",
+        "emoji": "💤",
+        "examples": [
+          {
+            "id": "g7j7zc349hvgrsj",
+            "text": "Eu preciso dormir cedo hoje.",
+            "textLang": "pt",
+            "translation": "I need to go to sleep early today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and slightly weary, planning a needed early night",
+            "note": null,
+            "matchedForm": "dormir",
+            "matchedTranslationForm": "sleep"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kxdoyzvz4b31kue",
+        "order": 1,
+        "definition": "To spend the night somewhere away from home.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stay the night",
+              "sleep over"
+            ]
+          }
+        ],
+        "domain": "stay",
+        "emoji": "🏨",
+        "examples": [
+          {
+            "id": "hvwfiqldph1i63p",
+            "text": "Vamos dormir na casa de uns amigos neste fim de semana.",
+            "textLang": "pt",
+            "translation": "We are going to stay the night at some friends' house this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dormir",
+            "matchedTranslationForm": "stay the night"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "dormir",
+    "lemma": "dormir",
+    "reading": null,
     "ipa": "/doʁˈmiɾ/",
     "pos": "verb",
     "gender": null,
@@ -174,5 +282,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sleep; to rest",
+        "why": "'to rest' is not in the glosses; sense 1 is 'to stay the night'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "at friends' house",
+        "why": "Unnatural English phrasing; should be 'at a friend's house' or 'at some friends' house'."
+      }
+    ],
+    "growth": 0.993
   }
 }

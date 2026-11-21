@@ -68,6 +68,118 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "unattractive, ugly; unseemly",
+    "primaryGloss": "unattractive",
+    "emotion": "matter-of-fact and direct, describing something lacking aesthetic appeal",
+    "notes": [
+      "Literally 'not beautiful' (не- + красивый), this is the everyday, polite word for 'ugly'. It is much milder than уродливый ('hideous, grotesque').",
+      "In the second sense, the adverb/predicative form некрасиво is very common: Это некрасиво с твоей стороны ('That's not nice of you')."
+    ],
+    "senses": [
+      {
+        "id": "exmkn08tp6olo1o",
+        "order": 0,
+        "definition": "Not pleasant to look at; lacking beauty or attractiveness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unattractive",
+              "ugly",
+              "plain"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "k8xuatwtzorugiz",
+            "text": "Это здание кажется мне некрасивым.",
+            "textLang": "ru",
+            "translation": "This building seems unattractive to me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "некрасивым",
+            "matchedTranslationForm": "unattractive"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "li6213cy6lmptz6",
+        "order": 1,
+        "definition": "Of an action or remark: morally wrong, unkind, or improper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unseemly",
+              "not nice",
+              "shameful"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "👎",
+        "examples": [
+          {
+            "id": "mh4dxo7cugi7wov",
+            "text": "Это был очень некрасивый поступок.",
+            "textLang": "ru",
+            "translation": "That was a very shameful thing to do.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "некрасивый",
+            "matchedTranslationForm": "shameful"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "некрасивый",
+    "lemma": "некрасивый",
+    "reading": null,
+    "ipa": "/nʲɪkrɐˈsʲivɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "ugly; unattractive",
     "primaryGloss": "unattractive",
     "emotion": "matter-of-fact and direct, describing something lacking aesthetic appeal",
@@ -161,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Behavior that is morally wrong, unkind, or embarrassing.",
+        "why": "Defines an adjective as a noun ('Behavior that is...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Поступать так было некрасиво с его стороны.",
+        "why": "Uses the adverb/predicative 'некрасиво' instead of the adjective 'некрасивый'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ugly; unattractive",
+        "why": "Omits the second sense (unseemly, wrong)."
+      }
+    ],
+    "growth": 1.127
   }
 }

@@ -68,6 +68,73 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "parque",
+    "primaryGloss": "parque",
+    "emotion": "peaceful and relaxed, enjoying a sunny afternoon outdoors",
+    "notes": [
+      "Como sustantivo significa 'parque'. También existe el verbo 'to park' (estacionar / aparcar), pero el lugar para dejar el auto se llama 'parking lot'."
+    ],
+    "senses": [
+      {
+        "id": "obr7r56e5cpj53b",
+        "order": 0,
+        "definition": "Área pública con árboles y césped para pasear, jugar o descansar, o gran reserva natural protegida.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "parque"
+            ]
+          }
+        ],
+        "domain": "lugar",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "aoqbbma3keimilj",
+            "text": "Let's go for a walk in the park this afternoon.",
+            "textLang": "en",
+            "translation": "Vamos a dar un paseo por el parque esta tarde.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and eager to spend time outside",
+            "note": null,
+            "matchedForm": "park",
+            "matchedTranslationForm": "parque"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "park",
+    "lemma": "park",
+    "reading": null,
+    "ipa": "/pɑɹk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "parque; estacionamiento",
     "primaryGloss": "parque",
     "emotion": "peaceful and relaxed, enjoying a sunny afternoon outdoors",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Lugar destinado para dejar automóviles.",
+        "why": "As a noun in US English, 'park' alone does not mean parking lot."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "The car is parked in the back.",
+        "why": "Uses the verb 'parked' in a noun entry."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "se refiere tanto a un espacio verde público como a la acción o lugar para estacionar",
+        "why": "Conflates the noun with the verb and with 'parking lot'."
+      }
+    ],
+    "growth": 0.785
   }
 }

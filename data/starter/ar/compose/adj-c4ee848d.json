@@ -68,6 +68,159 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "healthy; safe; sound",
+    "primaryGloss": "healthy",
+    "emotion": "reassured and calm, feeling that all is well",
+    "notes": [
+      "Takes the preposition مِنْ (min) when meaning 'free from' a flaw or illness."
+    ],
+    "senses": [
+      {
+        "id": "12utp53w34fp2ln",
+        "order": 0,
+        "definition": "In good physical or mental health, free from illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "sound",
+              "fit"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "2eivzxsk6qkb7ke",
+            "text": "العَقْلُ السَّلِيمُ فِي الجِسْمِ السَّلِيمِ.",
+            "textLang": "ar",
+            "translation": "A sound mind is in a healthy body.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "السَّلِيمِ",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ifyb4lvr2gwws48",
+        "order": 1,
+        "definition": "Unharmed, undamaged, or out of danger.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "safe",
+              "unharmed",
+              "intact"
+            ]
+          }
+        ],
+        "domain": "safety",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "v0qgcsxfeq1jowg",
+            "text": "خَرَجَ السَّائِقُ مِنَ الحَادِثِ سَلِيمًا.",
+            "textLang": "ar",
+            "translation": "The driver came out of the accident unharmed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "سَلِيمًا",
+            "matchedTranslationForm": "unharmed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "viggcr8muwbayqj",
+        "order": 2,
+        "definition": "Correct, well-founded, and free from errors or flaws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sound",
+              "correct",
+              "valid"
+            ]
+          }
+        ],
+        "domain": "judgment",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "ee5a1isrt9bkmq0",
+            "text": "هٰذَا قَرَارٌ سَلِيمٌ.",
+            "textLang": "ar",
+            "translation": "This is a sound decision.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "سَلِيمٌ",
+            "matchedTranslationForm": "sound"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سَلِيم",
+    "lemma": "سليم",
+    "reading": null,
+    "ipa": "/saˈliːm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "healthy; sound; safe",
     "primaryGloss": "healthy",
     "emotion": "reassured and calm, feeling that all is well",
@@ -163,5 +316,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'safe, unharmed, intact' (already listed in shortGloss)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "الجسم السليم في العقل السليم.",
+        "why": "Inverts the famous Arabic proverb 'العقل السليم في الجسم السليم'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe a body or mind that is free from illness",
+        "why": "Restates the definitions without adding grammatical or usage value."
+      }
+    ],
+    "growth": 1.364
   }
 }

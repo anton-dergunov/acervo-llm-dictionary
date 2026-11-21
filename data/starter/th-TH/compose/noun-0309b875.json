@@ -58,6 +58,73 @@
     "headword": "เลือด",
     "lemma": "เลือด",
     "reading": null,
+    "ipa": "/lɯ̂at/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩸",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "blood",
+    "primaryGloss": "blood",
+    "emotion": "a serious and matter-of-fact tone used when discussing health or biology",
+    "notes": [
+      "To say someone is bleeding, pair เลือด with ออก ('come out') or ไหล ('flow'): เลือดออก ('to bleed') or เลือดไหล ('blood is flowing')."
+    ],
+    "senses": [
+      {
+        "id": "hva79p43znm7qg6",
+        "order": 0,
+        "definition": "The red liquid that flows through the bodies of people and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blood"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩸",
+        "examples": [
+          {
+            "id": "ooxsc1xocfoyjyo",
+            "text": "เขามีเลือดไหลที่แขน",
+            "textLang": "th",
+            "translation": "His arm is bleeding.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and urgent, describing a medical situation",
+            "note": null,
+            "matchedForm": "เลือด",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เลือด",
+    "lemma": "เลือด",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "He has blood flowing from his arm.",
+        "why": "Calqued translation; natural English for เลือดไหล is 'His arm is bleeding'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Thai uses 'blood' (เลือด) figuratively to talk about lineage or someone's true",
+        "why": "Vague filler note for A2; better to explain common expressions for bleeding."
+      }
+    ],
+    "growth": 0.761
   }
 }

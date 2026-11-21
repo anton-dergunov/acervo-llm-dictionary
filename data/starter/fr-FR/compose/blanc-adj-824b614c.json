@@ -72,6 +72,113 @@
     "primaryGloss": "white",
     "emotion": "crisp and clean, naming the colour of fresh snow",
     "notes": [
+      "The feminine form is blanche (e.g., une chemise blanche); the c in blanc is silent."
+    ],
+    "senses": [
+      {
+        "id": "irmn16ib1fru0vr",
+        "order": 0,
+        "definition": "Having the color of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "0ebfqcanbgegrol",
+            "text": "Les montagnes sont couvertes de neige blanche en hiver.",
+            "textLang": "fr",
+            "translation": "The mountains are covered with white snow in winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, picturing a quiet winter scene",
+            "note": null,
+            "matchedForm": "blanche",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f15y11jqtsn2q9m",
+        "order": 1,
+        "definition": "Having no writing, marks, or printing; empty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blank"
+            ]
+          }
+        ],
+        "domain": "page",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "3xfs0cn28pp0iv4",
+            "text": "Veuillez signer sur la page blanche à la fin du document.",
+            "textLang": "fr",
+            "translation": "Please sign on the blank page at the end of the document.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "formal and instructional, pointing out where to sign",
+            "note": null,
+            "matchedForm": "blanche",
+            "matchedTranslationForm": "blank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "blanc",
+    "lemma": "blanc",
+    "reading": null,
+    "ipa": "/blɑ̃/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⬜",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white; blank",
+    "primaryGloss": "white",
+    "emotion": "crisp and clean, naming the colour of fresh snow",
+    "notes": [
       "The feminine form changes to 'blanche' before feminine nouns (e.g., une chemise blanche)."
     ],
     "senses": [
@@ -158,5 +265,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The feminine form changes to 'blanche' before feminine nouns (e.g., une chemise blanche).",
+        "why": "Color adjectives in French normally follow the noun, as the note's own example shows."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow or milk.",
+        "why": "An adjective must be defined as a quality, not as a noun."
+      }
+    ],
+    "growth": 1.0
   }
 }

@@ -68,6 +68,116 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "street; outside, outdoors",
+    "primaryGloss": "street",
+    "emotion": "a sense of movement and public space, bustling and lived-in",
+    "notes": [
+      "Use 'calle' for streets in a town or city; use 'carretera' for a highway and 'camino' for a country road.",
+      "In phrases like 'en la calle' or 'salir a la calle', it often simply means 'outside' (away from home or indoors)."
+    ],
+    "senses": [
+      {
+        "id": "4mu6urpp545fi55",
+        "order": 0,
+        "definition": "A public road in a city or town, usually with buildings on one or both sides.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "y5ks8cmo8e9z4b0",
+            "text": "La calle principal tiene muchas tiendas.",
+            "textLang": "es",
+            "translation": "The main street has many shops.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, pointing out a busy area",
+            "note": null,
+            "matchedForm": "calle",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4fmg0v6gvjjy36s",
+        "order": 1,
+        "definition": "The area outside a house or building, in public view.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "outside",
+              "outdoors",
+              "the street"
+            ]
+          }
+        ],
+        "domain": "outdoors",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "m95dahmrgedt9nq",
+            "text": "Hace mucho frío en la calle hoy.",
+            "textLang": "es",
+            "translation": "It is very cold outside today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "chilly and slightly reluctant to go out",
+            "note": null,
+            "matchedForm": "calle",
+            "matchedTranslationForm": "outside"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la calle",
+    "lemma": "calle",
+    "reading": null,
+    "ipa": "/ˈkaʝe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "street; road",
     "primaryGloss": "street",
     "emotion": "a sense of movement and public space, bustling and lived-in",
@@ -160,5 +270,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "street; road",
+        "why": "Lacks sense 1 ('outdoors') and includes 'road', which is not in the glosses."
+      }
+    ],
+    "growth": 1.017
   }
 }

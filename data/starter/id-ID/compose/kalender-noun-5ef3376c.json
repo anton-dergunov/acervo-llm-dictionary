@@ -72,6 +72,73 @@
     "primaryGloss": "calendar",
     "emotion": "matter-of-fact and organized, a sense of keeping track of things",
     "notes": [
+      "Do not confuse with 'jadwal' (schedule/timetable). A 'kalender' shows the dates of the year; a 'jadwal' shows planned events or times."
+    ],
+    "senses": [
+      {
+        "id": "7so5v6r5h26wo1r",
+        "order": 0,
+        "definition": "A chart, app, or system that shows the days, weeks, and months of a year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calendar"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "j2vnjth7vxjxaow",
+            "text": "Dia menandai tanggal penting di kalender.",
+            "textLang": "id",
+            "translation": "She marked an important date on the calendar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kalender",
+            "matchedTranslationForm": "calendar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kalender",
+    "lemma": "kalender",
+    "reading": null,
+    "ipa": "/kaˈlɛn.dər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "calendar",
+    "primaryGloss": "calendar",
+    "emotion": "matter-of-fact and organized, a sense of keeping track of things",
+    "notes": [
       "Used both for the physical object (like a wall hanging) and the abstract system of months and days.",
       "Do not confuse with 'jadwal' (schedule). A kalender shows the dates; a jadwal shows your appointments."
     ],
@@ -138,5 +205,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Splitting calendar into abstract system and physical chart is unnecessary for A2; chart is primary."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "calendar page",
+        "why": "'Kalender' means the whole calendar, not specifically a 'calendar page'."
+      }
+    ],
+    "growth": 0.611
   }
 }

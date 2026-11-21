@@ -58,6 +58,115 @@
     "headword": "olmadan",
     "lemma": "olmak",
     "reading": null,
+    "ipa": "/ˈolmadan/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without; before",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Literally 'without being', formed from olmak (to be/happen) with the negative converb suffix -madan.",
+      "Placed after a noun or pronoun to mean 'without' (e.g., sen olmadan — without you). Often followed by önce to mean 'before something happens'."
+    ],
+    "senses": [
+      {
+        "id": "byocwu9pt49jvlo",
+        "order": 0,
+        "definition": "In the absence of someone or something; without.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "pfj73oo4kac66u0",
+            "text": "Sen olmadan gitmek istemiyorum.",
+            "textLang": "tr",
+            "translation": "I don't want to go without you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "olmadan",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ju2hohkcyy3co2b",
+        "order": 1,
+        "definition": "Before an event or state happens or comes to pass.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "before",
+              "without happening"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "ccjdv4x38qw909n",
+            "text": "Geç olmadan eve dönelim.",
+            "textLang": "tr",
+            "translation": "Let's return home before it gets late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "olmadan",
+            "matchedTranslationForm": "before it gets"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "olmadan",
+    "lemma": "olmak",
+    "reading": null,
     "ipa": "/olmaˈdan/",
     "pos": "expression",
     "gender": null,
@@ -160,5 +269,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/olmaˈdan/",
+        "why": "The suffix -madan is pre-stressed; stress is on the first syllable /ˈolmadan/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When followed by a noun or pronoun, it translates as 'without'.",
+        "why": "Turkish is postpositional: 'olmadan' follows the noun/pronoun, and is not attached to verb roots."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Kahvesini şekersiz ve sütsüz olmadan içemez.",
+        "why": "Double negative ('without being sugarless'); nobody says this."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Haber vermeden, yani kimseye söylemeden gitti.",
+        "why": "Does not contain the headword 'olmadan' (confuses it with the suffix -madan/-meden)."
+      }
+    ],
+    "growth": 0.774
   }
 }

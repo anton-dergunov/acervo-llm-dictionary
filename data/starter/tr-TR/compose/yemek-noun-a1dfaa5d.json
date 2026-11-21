@@ -68,6 +68,119 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "food, dish; meal",
+    "primaryGloss": "food",
+    "emotion": "hungry and looking forward to a good plate",
+    "notes": [
+      "Refers mainly to cooked or prepared food; for raw food items or groceries in general, yiyecek is used.",
+      "Before a vowel suffix, the final -k softens to -ğ- (for example, akşam yemeği, 'dinner').",
+      "Identical in form to the infinitive verb yemek ('to eat')."
+    ],
+    "senses": [
+      {
+        "id": "2ycqeg43g3yk3dt",
+        "order": 0,
+        "definition": "Prepared or cooked food, or a particular type of dish.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "food",
+              "dish",
+              "cooking"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "qq60a67e8zvp59c",
+            "text": "Bu yemek çok lezzetli.",
+            "textLang": "tr",
+            "translation": "This dish is very delicious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and eager to take another bite",
+            "note": null,
+            "matchedForm": "yemek",
+            "matchedTranslationForm": "dish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8e7j1perjf1q4fg",
+        "order": 1,
+        "definition": "An occasion when food is eaten, such as lunch or dinner.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meal",
+              "dinner",
+              "lunch"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "zrtvoymdcjhdw1x",
+            "text": "Akşam yemeği hazır.",
+            "textLang": "tr",
+            "translation": "Dinner is ready.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "welcoming and warm, calling everyone to the table",
+            "note": null,
+            "matchedForm": "yemeği",
+            "matchedTranslationForm": "Dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yemek",
+    "lemma": "yemek",
+    "reading": null,
+    "ipa": "/jeˈmec/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "food; meal",
     "primaryGloss": "food",
     "emotion": "hungry and looking forward to a good plate",
@@ -162,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Any nutritious substance that people eat or drink",
+        "why": "'Yemek' refers to prepared/cooked food or dishes, not drinks or raw ingredients (which is 'yiyecek')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Yemek is both the general word for food and the specific",
+        "why": "Restates the two senses; better to contrast with 'yiyecek' and note consonant softening 'yemeği'."
+      }
+    ],
+    "growth": 0.988
   }
 }

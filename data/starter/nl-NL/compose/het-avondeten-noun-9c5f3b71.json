@@ -60,6 +60,75 @@
     "headword": "het avondeten",
     "lemma": "avondeten",
     "reading": null,
+    "ipa": "/ˈaːvɔntˌeːtə(n)/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner; evening meal",
+    "primaryGloss": "dinner",
+    "emotion": null,
+    "notes": [
+      "Uncountable noun (no plural). In the Netherlands, the evening meal is traditionally eaten quite early, around 6:00 p.m."
+    ],
+    "senses": [
+      {
+        "id": "b7k0utl6z5gy580",
+        "order": 0,
+        "definition": "The main meal of the day, eaten in the evening.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "evening meal",
+              "supper"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "x8l46tvnyu2zjcb",
+            "text": "Wat maken we vandaag voor het avondeten?",
+            "textLang": "nl",
+            "translation": "What are we making for dinner today?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "avondeten",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het avondeten",
+    "lemma": "avondeten",
+    "reading": null,
     "ipa": "/ˈaːvəntˌeːtə(n)/",
     "pos": "noun",
     "gender": "neuter",
@@ -123,5 +192,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈaːvəntˌeːtə(n)/",
+        "why": "The second vowel of 'avond' is /ɔ/, not /ə/: /ˈaːvɔntˌeːtə(n)/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse avondeten with lunch, which is the midday meal",
+        "why": "No learner confuses 'avondeten' (evening food) with 'lunch'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "We eten om zes uur avondeten.",
+        "why": "'Eten ... avondeten' is repetitive; Dutch speakers say 'We eten om zes uur' or 'Het avondeten staat klaar'."
+      }
+    ],
+    "growth": 0.773
   }
 }

@@ -60,6 +60,98 @@
     "headword": "đeo",
     "lemma": "đeo",
     "reading": null,
+    "ipa": "/ɗɛw˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wear (accessories); to carry (a bag)",
+    "primaryGloss": "wear",
+    "emotion": "casual and everyday, getting dressed before heading out",
+    "notes": [
+      "Used for items worn or hung on the body, such as glasses, jewelry, watches, masks, and backpacks.",
+      "For clothes, use 'mặc'; for hats, use 'đội'; for shoes, use 'đi' or 'mang'."
+    ],
+    "senses": [
+      {
+        "id": "sbie5yfvahtywtd",
+        "order": 0,
+        "definition": "To wear or carry something attached to or hanging on the body, such as jewelry, glasses, or a bag.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wear",
+              "put on",
+              "carry"
+            ]
+          }
+        ],
+        "domain": "wearing",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "98ko4vaqgk5m4mu",
+            "text": "Tôi luôn đeo kính râm khi đi ra ngoài trời nắng.",
+            "textLang": "vi",
+            "translation": "I always wear sunglasses when going out in the sun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and prepared for a bright sunny day",
+            "note": null,
+            "matchedForm": "đeo",
+            "matchedTranslationForm": "wear"
+          },
+          {
+            "id": "1ma9icy4phjyuu2",
+            "text": "Học sinh đeo ba lô trên vai đến trường.",
+            "textLang": "vi",
+            "translation": "Students carry backpacks on their shoulders to school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đeo",
+            "matchedTranslationForm": "carry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đeo",
+    "lemma": "đeo",
+    "reading": null,
     "ipa": "/dɛw/",
     "pos": "verb",
     "gender": null,
@@ -185,5 +277,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dɛw/",
+        "why": "Vietnamese 'đ' is implosive /ɗ/, not /d/, and mid-level tone mark is missing."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To have an accessory, piece of jewellery, glasses, or a bag",
+        "why": "Sense 0 already includes bags; wearing accessories and carrying a bag are one sense."
+      }
+    ],
+    "growth": 0.794
   }
 }

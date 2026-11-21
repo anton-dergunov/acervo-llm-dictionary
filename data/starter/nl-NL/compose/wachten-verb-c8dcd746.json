@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wait",
+    "primaryGloss": "to wait",
+    "emotion": "patient and still, watching the clock tick slowly",
+    "notes": [
+      "Use 'wachten op' when waiting for someone or something.",
+      "Do not confuse 'wachten' (to wait) with 'verwachten' (to expect)."
+    ],
+    "senses": [
+      {
+        "id": "kpkyf5pw6391nj3",
+        "order": 0,
+        "definition": "To stay in a place or delay acting until someone arrives or something happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wait"
+            ]
+          }
+        ],
+        "domain": "wait",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "c1wnk13mmlaqwx8",
+            "text": "Ik moet op de bus wachten.",
+            "textLang": "nl",
+            "translation": "I have to wait for the bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little impatient in the cold wind",
+            "note": null,
+            "matchedForm": "wachten",
+            "matchedTranslationForm": "wait"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "wachten",
+    "lemma": "wachten",
+    "reading": null,
+    "ipa": "/ˈʋɑxtə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wait; to expect",
     "primaryGloss": "to wait",
     "emotion": "patient and still, watching the clock tick slowly",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(expect) To anticipate something that is going to happen.",
+        "why": "'Wachten' does not mean 'to expect' (which is 'verwachten', as note 1 rightly says)."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to wait; to expect",
+        "why": "Includes false gloss 'to expect'."
+      }
+    ],
+    "growth": 0.671
   }
 }

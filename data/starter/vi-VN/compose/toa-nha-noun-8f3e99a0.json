@@ -72,6 +72,73 @@
     "primaryGloss": "building",
     "emotion": "looking up at a tall glass tower with quiet awe",
     "notes": [
+      "Used for large or multi-story buildings such as office blocks or apartment complexes, not for a small house, which is simply 'nhà' or 'ngôi nhà'."
+    ],
+    "senses": [
+      {
+        "id": "0ikrvisq0k15jlj",
+        "order": 0,
+        "definition": "A large or multi-story structure, such as an office block or apartment building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "building"
+            ]
+          }
+        ],
+        "domain": "architecture",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "npmxg4y5zn57zp0",
+            "text": "Tòa nhà này có mười tầng.",
+            "textLang": "vi",
+            "translation": "This building has ten floors.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing out a large landmark with pride",
+            "note": null,
+            "matchedForm": "Tòa nhà",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tòa nhà",
+    "lemma": "tòa nhà",
+    "reading": null,
+    "ipa": "/twaː˨˩ ɲaː˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "building",
+    "primaryGloss": "building",
+    "emotion": "looking up at a tall glass tower with quiet awe",
+    "notes": [
       "Use 'tòa nhà' for substantial structures like offices, apartments, or civic buildings.",
       "Do not use it for a small residential house, which is simply 'nhà'."
     ],
@@ -120,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A structure with walls and a roof, such as a house or",
+        "why": "Contradicts the note and Vietnamese usage: 'tòa nhà' is a large/multi-story building, not a house."
+      }
+    ],
+    "growth": 1.003
   }
 }

@@ -86,6 +86,138 @@
     ],
     "status": "active",
     "shortGloss": "to send; to dispatch",
+    "primaryGloss": "to send",
+    "emotion": null,
+    "notes": [
+      "Imperfective; the perfective pair is отправить.",
+      "Takes the dative case for the recipient (отправлять другу) or в/на + accusative for a destination (отправлять в Москву). Close in meaning to посылать."
+    ],
+    "senses": [
+      {
+        "id": "8wg8nrbarfvhtdz",
+        "order": 0,
+        "definition": "To cause mail, a parcel, or a message to go to a destination.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to send",
+              "to dispatch"
+            ]
+          }
+        ],
+        "domain": "mail",
+        "emoji": "📤",
+        "examples": [
+          {
+            "id": "ms21sjcji1eeid7",
+            "text": "Я отправляю письмо другу.",
+            "textLang": "ru",
+            "translation": "I am sending a letter to a friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and focused on the connection",
+            "note": null,
+            "matchedForm": "отправляю",
+            "matchedTranslationForm": "sending"
+          },
+          {
+            "id": "k2jt98zyfojzx5p",
+            "text": "Он отправляет посылку за границу.",
+            "textLang": "ru",
+            "translation": "He is sending a parcel abroad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing a routine activity",
+            "note": null,
+            "matchedForm": "отправляет",
+            "matchedTranslationForm": "sending"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a8h9x4s6qm2q8o4",
+        "order": 1,
+        "definition": "To direct or arrange for a person to go somewhere for a purpose.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to send",
+              "to send off",
+              "to dispatch"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "yu958nqiaw3c374",
+            "text": "Начальник отправляет сотрудников в командировку.",
+            "textLang": "ru",
+            "translation": "The boss is sending employees on a business trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "official and professional, managing work logistics",
+            "note": null,
+            "matchedForm": "отправляет",
+            "matchedTranslationForm": "sending"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "отправлять",
+    "lemma": "отправлять",
+    "reading": null,
+    "ipa": "/ɐtprɐˈvlʲætʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to send; to dispatch",
     "primaryGloss": "send",
     "emotion": null,
     "notes": [
@@ -199,5 +331,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'отправлять' when you send physical objects (mail, parcels) or digital items",
+        "why": "Contradicts sense 1, where 'отправлять' is used for sending people (employees on a trip)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the essential perfective aspect partner 'отправить'."
+      }
+    ],
+    "growth": 0.951
   }
 }

@@ -58,6 +58,73 @@
     "headword": "xanh dương",
     "lemma": "xanh dương",
     "reading": null,
+    "ipa": "/sajŋ˧˧ zɨəŋ˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": "calm and clear, looking up at a bright open sky",
+    "notes": [
+      "In Vietnamese, 'xanh' alone covers both blue and green. 'Xanh dương' (or 'xanh nước biển', sea blue) specifies blue, while 'xanh lá cây' specifies green. It is often preceded by 'màu' (color)."
+    ],
+    "senses": [
+      {
+        "id": "vhhvxi5zccvute3",
+        "order": 0,
+        "definition": "Of the color of a clear sky or the deep sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔵",
+        "examples": [
+          {
+            "id": "xw3trbgbn7i3sct",
+            "text": "Cô ấy đang mặc một chiếc áo màu xanh dương.",
+            "textLang": "vi",
+            "translation": "She is wearing a blue shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "xanh dương",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "xanh dương",
+    "lemma": "xanh dương",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bầu trời hôm nay rất xanh dương.",
+        "why": "Unnatural; 'xanh dương' is not modified by 'rất' or used for the sky ('xanh da trời')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of a clear sky or the deep sea.",
+        "why": "Defined as a noun ('the color of...') rather than an adjective ('of the color...')."
+      }
+    ],
+    "growth": 1.01
   }
 }

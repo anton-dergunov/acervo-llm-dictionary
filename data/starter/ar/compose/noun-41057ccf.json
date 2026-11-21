@@ -75,6 +75,76 @@
     "primaryGloss": "market",
     "emotion": "bustling and lively, smelling of spices and warm bread",
     "notes": [
+      "Usually feminine in standard Arabic, though often treated as masculine in modern usage. The plural is أَسْوَاق (ʾaswāq)."
+    ],
+    "senses": [
+      {
+        "id": "w1yqrb1twtuws4l",
+        "order": 0,
+        "definition": "A public place, street, or area of stalls and shops where goods are bought and sold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "market",
+              "bazaar",
+              "souk"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "⛺",
+        "examples": [
+          {
+            "id": "80el1g005lfo18x",
+            "text": "اشْتَرَيْتُ الخُضَارَ مِنَ السُّوقِ القَرِيبَةِ.",
+            "textLang": "ar",
+            "translation": "I bought the vegetables from the nearby market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "السُّوقِ",
+            "matchedTranslationForm": "market"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سُوق",
+    "lemma": "سُوق",
+    "reading": null,
+    "ipa": "/suːq/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "market; bazaar",
+    "primaryGloss": "market",
+    "emotion": "bustling and lively, smelling of spices and warm bread",
+    "notes": [
       "While traditionally referring to an open-air bazaar or market street, 'سوق' is also used for modern supermarkets and metaphorical markets like the job market."
     ],
     "senses": [
@@ -164,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "اشْتَرَيْتُ الخُضْرَارَ مِنَ السُّوقِ المَحَلِّيِّ.",
+        "why": "Contains non-word typo الخُضْرَارَ (for الخُضَارَ) and masculine agreement whereas gender field says feminine."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large shop selling food and household goods; a supermarket.",
+        "why": "Alone, سُوق means market; 'supermarket' requires a compound like سُوق مَرْكَزِيّ."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that سُوق can be feminine or masculine, and its broken plural أَسْوَاق."
+      }
+    ],
+    "growth": 0.615
   }
 }

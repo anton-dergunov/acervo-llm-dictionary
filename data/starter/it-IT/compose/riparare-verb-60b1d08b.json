@@ -58,6 +58,117 @@
     "headword": "riparare",
     "lemma": "riparare",
     "reading": null,
+    "ipa": "/ri.paˈra.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔧",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to repair; to protect",
+    "primaryGloss": "repair",
+    "emotion": "focused and capable, hands at work on something broken",
+    "notes": [
+      "In the sense of 'to take shelter', it is used reflexively: 'ripararsi' (e.g., 'ripararsi dalla pioggia')."
+    ],
+    "senses": [
+      {
+        "id": "kz4bjbx4lq0i91p",
+        "order": 0,
+        "definition": "To fix something that is broken or damaged so that it works again.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "repair",
+              "fix",
+              "mend"
+            ]
+          }
+        ],
+        "domain": "repair",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "yvl1e4qkehszk12",
+            "text": "Devo riparare la bicicletta prima di partire.",
+            "textLang": "it",
+            "translation": "I need to repair the bicycle before leaving.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and slightly hurried, checking the tools",
+            "note": null,
+            "matchedForm": "riparare",
+            "matchedTranslationForm": "repair"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qi2pbv1gpdmc4te",
+        "order": 1,
+        "definition": "To protect someone or something from harm or bad weather.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "protect",
+              "shelter",
+              "shield"
+            ]
+          }
+        ],
+        "domain": "protection",
+        "emoji": "☂️",
+        "examples": [
+          {
+            "id": "hmnolh9lgmh1l5f",
+            "text": "Questo cappotto ripara dal freddo.",
+            "textLang": "it",
+            "translation": "This coat protects against the cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "comfortably warm and satisfied against the wind",
+            "note": null,
+            "matchedForm": "ripara",
+            "matchedTranslationForm": "protects"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "riparare",
+    "lemma": "riparare",
+    "reading": null,
     "ipa": "/ripaˈrare/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Can mean both fixing a physical object and taking shelter from the weather.",
+        "why": "Merely restates the glosses without explaining that 'to take shelter' requires the reflexive 'ripararsi'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to repair; to protect; to take shelter",
+        "why": "'to take shelter' is not covered by the senses (and is normally reflexive 'ripararsi')."
+      }
+    ],
+    "growth": 1.108
   }
 }

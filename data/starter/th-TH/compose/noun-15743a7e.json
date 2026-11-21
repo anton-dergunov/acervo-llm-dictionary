@@ -58,6 +58,115 @@
     "headword": "ชั่วโมง",
     "lemma": "ชั่วโมง",
     "reading": null,
+    "ipa": "/tɕʰûa.moːŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "hour; class period",
+    "primaryGloss": "hour",
+    "emotion": "checking the time, watchful and waiting for the moment",
+    "notes": [
+      "As a time unit, it is placed directly after a number without a separate classifier (e.g., สองชั่วโมง, 'two hours'). Commonly abbreviated in writing as ชม."
+    ],
+    "senses": [
+      {
+        "id": "z0qfgzgzibul5y3",
+        "order": 0,
+        "definition": "A period of time lasting sixty minutes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hour"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "tf0t5xhwbqpx73a",
+            "text": "ฉันรอเขามาหนึ่งชั่วโมงแล้ว",
+            "textLang": "th",
+            "translation": "I have been waiting for him for an hour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and a little annoyed at the long wait",
+            "note": null,
+            "matchedForm": "ชั่วโมง",
+            "matchedTranslationForm": "hour"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3hhelcngq2tau2u",
+        "order": 1,
+        "definition": "A scheduled class period or lesson at school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "class",
+              "lesson",
+              "period"
+            ]
+          }
+        ],
+        "domain": "school",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "fa4fo8exem8vm8u",
+            "text": "เรามีชั่วโมงภาษาไทยตอนบ่าย",
+            "textLang": "th",
+            "translation": "We have a Thai class in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and calm, planning the school day",
+            "note": null,
+            "matchedForm": "ชั่วโมง",
+            "matchedTranslationForm": "class"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ชั่วโมง",
+    "lemma": "ชั่วโมง",
+    "reading": null,
     "ipa": "/châw.mɔːŋ/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/châw.mɔːŋ/",
+        "why": "Wrong consonant symbol /ch/, wrong vowel /âw/, and wrong vowel /ɔː/; should be /tɕʰûa.moːŋ/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hour",
+        "why": "Does not include the second sense (class period/lesson)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for a clock hour of sixty minutes and for",
+        "why": "Merely restates the two senses; misses the useful abbreviation ชม. and classifier note."
+      }
+    ],
+    "growth": 1.16
   }
 }

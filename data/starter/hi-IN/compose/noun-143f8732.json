@@ -72,6 +72,74 @@
     "primaryGloss": "letter",
     "emotion": "nostalgic and warm, recalling a thoughtful message from a friend",
     "notes": [
+      "'चिट्ठी' is the everyday conversational word, whereas 'पत्र' (patra) is used in formal contexts. Plural: 'चिट्ठियाँ'."
+    ],
+    "senses": [
+      {
+        "id": "j9czpmcckei378n",
+        "order": 0,
+        "definition": "A written message sent by post or left for someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter",
+              "note"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "b761aml6b2ni1fz",
+            "text": "मुझे कल एक चिट्ठी मिली।",
+            "textLang": "hi",
+            "translation": "I received a letter yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant surprise, as if sharing a bit of interesting news",
+            "note": null,
+            "matchedForm": "चिट्ठी",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "चिट्ठी",
+    "lemma": "चिट्ठी",
+    "reading": null,
+    "ipa": "/tʃɪʈ.ʈʰiː/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "letter; note",
+    "primaryGloss": "letter",
+    "emotion": "nostalgic and warm, recalling a thoughtful message from a friend",
+    "notes": [
       "While 'पत्र' (patra) is a more formal term for a letter, 'चिट्ठी' (chiṭṭhī) is the everyday, conversational word used by most speakers.",
       "The word is feminine, so use it with feminine verbs and adjectives (e.g., 'एक लंबी चिट्ठी')."
     ],
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "The word is feminine, so use it with feminine verbs and adjectives",
+        "why": "Restates the gender field and basic Hindi agreement rules."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "A letter by post and a short written note are the same everyday sense."
+      }
+    ],
+    "growth": 0.514
   }
 }

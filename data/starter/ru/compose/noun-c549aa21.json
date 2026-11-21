@@ -58,6 +58,73 @@
     "headword": "кровь",
     "lemma": "кровь",
     "reading": null,
+    "ipa": "/krofʲ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩸",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "blood",
+    "primaryGloss": "blood",
+    "emotion": "a serious, visceral word, felt deep in the body",
+    "notes": [
+      "Has the locative form в крови́ (in the blood) after в, though о кро́ви after о."
+    ],
+    "senses": [
+      {
+        "id": "yubk80q4qq9tkpq",
+        "order": 0,
+        "definition": "The red liquid that flows through the bodies of people and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blood"
+            ]
+          }
+        ],
+        "domain": "biology",
+        "emoji": "🩸",
+        "examples": [
+          {
+            "id": "ccpidqcz6vc6k4a",
+            "text": "У него из пальца идёт кровь.",
+            "textLang": "ru",
+            "translation": "His finger is bleeding.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "кровь",
+            "matchedTranslationForm": "bleeding"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "кровь",
+    "lemma": "кровь",
+    "reading": null,
     "ipa": "/krovʲ/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/krovʲ/",
+        "why": "Word-final devoicing makes it /krofʲ/, not /krovʲ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Refers to heritage, family, or ancestors.",
+        "why": "Literary figurative sense not needed at A2; definition also starts with 'Refers to'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "Blood is flowing from his finger.",
+        "why": "Calqued translation; natural English is 'His finger is bleeding'."
+      }
+    ],
+    "growth": 0.504
   }
 }

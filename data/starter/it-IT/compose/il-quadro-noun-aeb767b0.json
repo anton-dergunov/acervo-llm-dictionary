@@ -60,6 +60,158 @@
     "headword": "il quadro",
     "lemma": "quadro",
     "reading": null,
+    "ipa": "/ˈkwadro/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖼️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "painting; picture; overview; panel",
+    "primaryGloss": "painting",
+    "emotion": null,
+    "notes": [
+      "Use 'quadro' for a painting or framed picture on a wall; a classroom blackboard or whiteboard is 'la lavagna', and a picture frame is 'la cornice'."
+    ],
+    "senses": [
+      {
+        "id": "ah9um0j3higfs6o",
+        "order": 0,
+        "definition": "A picture made with paint on canvas, or a framed picture hung on a wall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "painting",
+              "picture"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "🖼️",
+        "examples": [
+          {
+            "id": "uqq30vgii28dm0d",
+            "text": "Ho comprato un quadro bellissimo per il soggiorno.",
+            "textLang": "it",
+            "translation": "I bought a very nice painting for the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and enthusiastic about decorating the home",
+            "note": null,
+            "matchedForm": "quadro",
+            "matchedTranslationForm": "painting"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ipayht70jfpqu91",
+        "order": 1,
+        "definition": "A general description or view of a situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "picture",
+              "overview",
+              "situation"
+            ]
+          }
+        ],
+        "domain": "situation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "dmr2g8nzsksj8g8",
+            "text": "Il medico mi ha fatto un quadro chiaro della situazione.",
+            "textLang": "it",
+            "translation": "The doctor gave me a clear picture of the situation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "quadro",
+            "matchedTranslationForm": "picture"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mxbo4unblct026g",
+        "order": 2,
+        "definition": "A panel containing switches, dials, or controls, such as an electrical panel or dashboard.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "panel",
+              "board",
+              "dashboard"
+            ]
+          }
+        ],
+        "domain": "devices",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "cbr096rts6fygzz",
+            "text": "C'è un guasto al quadro elettrico.",
+            "textLang": "it",
+            "translation": "There is a fault in the electrical panel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "quadro",
+            "matchedTranslationForm": "panel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il quadro",
+    "lemma": "quadro",
+    "reading": null,
     "ipa": "/ˈkwad.ro/",
     "pos": "noun",
     "gender": "masculine",
@@ -163,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il professore ha scritto la regola sul quadro.",
+        "why": "False friend with French/Portuguese: a classroom board in Italian is 'la lavagna', never 'il quadro'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "painting; picture; frame; board",
+        "why": "'Frame' (cornice) is not a meaning of 'quadro' and is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Lacks the common everyday sense 'overall situation, overview, or description' (e.g. quadro della situazione)."
+      }
+    ],
+    "growth": 1.494
   }
 }

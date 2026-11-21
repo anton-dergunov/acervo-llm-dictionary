@@ -72,6 +72,96 @@
     "primaryGloss": "but",
     "emotion": null,
     "notes": [
+      "Do not confuse 'pero' (but, single 'r') with 'perro' (dog, rolled 'rr').",
+      "After a negative statement, use 'sino' (not 'pero') when correcting or replacing it directly ('No es café, sino té' — It's not coffee, but tea)."
+    ],
+    "senses": [
+      {
+        "id": "05yo5df3n8d6490",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with or limits what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "however"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "z5whsrb0ibaom65",
+            "text": "Quiero ir a la fiesta, pero tengo mucho trabajo.",
+            "textLang": "es",
+            "translation": "I want to go to the party, but I have a lot of work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit regretful and slightly disappointed about missing out",
+            "note": null,
+            "matchedForm": "pero",
+            "matchedTranslationForm": "but"
+          },
+          {
+            "id": "s0d4i57jcfyj27u",
+            "text": "Es muy tarde, pero todavía podemos ir.",
+            "textLang": "es",
+            "translation": "It is very late, but we can still go.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and optimistic about making plans work",
+            "note": null,
+            "matchedForm": "pero",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pero",
+    "lemma": "pero",
+    "reading": null,
+    "ipa": "/ˈpeɾo/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚖️",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; however",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
       "Do not confuse 'pero' (but) with 'perro' (dog). 'Pero' has a single 'r', while 'perro' has a double 'r' which is trilled.",
       "Use 'pero' to introduce a contrast or a reservation after a positive statement."
     ],
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'Pero' is a coordinating conjunction ('conj'), as its own definition states."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "after a positive statement.",
+        "why": "'Pero' follows negative statements just as often; for contrast after negatives removing the first clause, distinguish from 'sino'."
+      }
+    ],
+    "growth": 1.07
   }
 }

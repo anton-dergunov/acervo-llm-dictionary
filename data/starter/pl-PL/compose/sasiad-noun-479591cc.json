@@ -74,6 +74,95 @@
     "primaryGloss": "neighbor",
     "emotion": null,
     "notes": [
+      "For a female neighbor, use 'sąsiadka' (plural 'sąsiadki').",
+      "The plural 'sąsiedzi' is used for male or mixed-gender groups (note the vowel and consonant shift: -ąd → -edzi)."
+    ],
+    "senses": [
+      {
+        "id": "ryelw7329c3hoqm",
+        "order": 0,
+        "definition": "A person who lives next to or near you, or a person or country next to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "neighbor"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "3lbxxcl880olvpm",
+            "text": "Mój sąsiad zawsze pomaga mi z zakupami.",
+            "textLang": "pl",
+            "translation": "My neighbor always helps me with the shopping.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and warm, feeling gratitude for a kind act",
+            "note": null,
+            "matchedForm": "sąsiad",
+            "matchedTranslationForm": "neighbor"
+          },
+          {
+            "id": "w99vcj0cu1nfcjv",
+            "text": "Niemcy są naszym zachodnim sąsiadem.",
+            "textLang": "pl",
+            "translation": "Germany is our western neighbor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and matter-of-fact, stating a geographical relationship",
+            "note": null,
+            "matchedForm": "sąsiadem",
+            "matchedTranslationForm": "neighbor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sąsiad",
+    "lemma": "sąsiad",
+    "reading": null,
+    "ipa": "/ˈsɔ̃.ɕat/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "neighbor",
+    "primaryGloss": "neighbor",
+    "emotion": null,
+    "notes": [
       "This noun is masculine. If you are talking about a female neighbor, use the feminine form 'sąsiadka'.",
       "The plural form is 'sąsiedzi' when referring to a group of neighbors, regardless of their gender."
     ],
@@ -162,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "The plural form is 'sąsiedzi' when referring to a group of neighbors, regardless of their gender.",
+        "why": "False: an all-female group of neighbors is 'sąsiadki', not 'sąsiedzi'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(proximity) A person or thing that is located near or next to another.",
+        "why": "Shades of the same meaning (person/country next door) should be one sense."
+      }
+    ],
+    "growth": 0.816
   }
 }

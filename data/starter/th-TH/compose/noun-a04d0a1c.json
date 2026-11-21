@@ -58,6 +58,75 @@
     "headword": "บิล",
     "lemma": "บิล",
     "reading": null,
+    "ipa": "/bin˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check",
+    "primaryGloss": "bill",
+    "emotion": "matter-of-fact and professional, signalling the end of a transaction",
+    "notes": [
+      "In restaurants, people usually ask for the bill using the phrase เช็คบิล (literally 'check bill') or เก็บตังค์ ('collect money').",
+      "Do not confuse with ใบเสร็จ (receipt), which is the proof of payment given after you pay."
+    ],
+    "senses": [
+      {
+        "id": "eyband6a1vrlm5x",
+        "order": 0,
+        "definition": "A statement of money owed for goods or services, such as a restaurant meal or utilities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "y3ybbpk9721s6xo",
+            "text": "ขอเช็คบิลหน่อยครับ",
+            "textLang": "th",
+            "translation": "Could I have the bill, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and decisive, ready to leave the restaurant",
+            "note": null,
+            "matchedForm": "บิล",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "บิล",
+    "lemma": "บิล",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "used more frequently in casual daily interactions than the formal Thai term 'ใบเสร็จ'",
+        "why": "Confuses บิล (bill requesting payment) with ใบเสร็จ (receipt after payment); not register variants."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "owed for food or drinks served at a restaurant.",
+        "why": "Too narrow; บิล is also used for utility bills like electricity and water."
+      }
+    ],
+    "growth": 1.033
   }
 }

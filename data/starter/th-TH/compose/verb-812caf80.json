@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to forget; to leave behind",
+    "primaryGloss": "forget",
+    "emotion": "a bit scattered and apologetic, realizing you left something behind",
+    "notes": [
+      "Can be followed by a noun (forget a thing or fact) or directly by a verb (forget to do something).",
+      "To say you left something behind somewhere, use ลืม...ไว้ (e.g., ลืมกุญแจไว้ที่บ้าน 'left my keys at home').",
+      "Also appears in the common expression ลืมตา ('to open one's eyes')."
+    ],
+    "senses": [
+      {
+        "id": "pvzoasgl8sa03f3",
+        "order": 0,
+        "definition": "To fail to remember a fact or to do something, or to accidentally leave something behind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "forget",
+              "leave behind"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "negto7t5yy3pfwh",
+            "text": "ฉันลืมชื่อของเขาไปแล้ว",
+            "textLang": "th",
+            "translation": "I have forgotten his name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casually admitting a lapse in memory, slightly embarrassed but relaxed",
+            "note": null,
+            "matchedForm": "ลืม",
+            "matchedTranslationForm": "forgotten"
+          },
+          {
+            "id": "5f4smk57ou5gycd",
+            "text": "อย่าลืมปิดไฟก่อนออกจากบ้าน",
+            "textLang": "th",
+            "translation": "Don't forget to turn off the lights before leaving the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reminding someone with a helpful, slightly firm tone",
+            "note": null,
+            "matchedForm": "ลืม",
+            "matchedTranslationForm": "forget"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ลืม",
+    "lemma": "ลืม",
+    "reading": null,
+    "ipa": "/lɯːm/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to forget; to be oblivious to",
     "primaryGloss": "forget",
     "emotion": "a bit scattered and apologetic, realizing you left something behind",
@@ -159,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Forgetting a fact, an action, or an object are one sense in Thai."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to forget; to be oblivious to",
+        "why": "'To be oblivious to' is not in the senses and not an A2 gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both forgetting a memory or fact (e.g., forgetting a name)",
+        "why": "Just repeats the two senses below."
+      }
+    ],
+    "growth": 0.994
   }
 }

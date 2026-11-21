@@ -58,6 +58,117 @@
     "headword": "спокойный",
     "lemma": "спокойный",
     "reading": null,
+    "ipa": "/spɐˈkojnɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😌",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "calm; quiet; peaceful",
+    "primaryGloss": "calm",
+    "emotion": "serene and unhurried, resting easily in the moment",
+    "notes": [
+      "The fixed phrase «Спокойной ночи!» (literally 'of a quiet night') is the standard way to say 'Good night!'."
+    ],
+    "senses": [
+      {
+        "id": "1rz09dh9zi1hb77",
+        "order": 0,
+        "definition": "Of a person or their manner: not worried, angry, or excited; feeling at ease.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calm",
+              "peaceful",
+              "composed"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😌",
+        "examples": [
+          {
+            "id": "fhzultbyr3tqoul",
+            "text": "Он оставался спокойным даже перед экзаменом.",
+            "textLang": "ru",
+            "translation": "He remained calm even before the exam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "спокойным",
+            "matchedTranslationForm": "calm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xfyqp7utlh6ibsk",
+        "order": 1,
+        "definition": "Of a place, time, or situation: without noise, trouble, or disturbance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "peaceful",
+              "tranquil"
+            ]
+          }
+        ],
+        "domain": "atmosphere",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "1yfbfjponpvhmbh",
+            "text": "Мы провели вечер в спокойной обстановке.",
+            "textLang": "ru",
+            "translation": "We spent the evening in a quiet atmosphere.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "спокойной",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "спокойный",
+    "lemma": "спокойный",
+    "reading": null,
     "ipa": "/spɐˈkojnyj/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "в спокойный обстановке",
+        "why": "Wrong case/gender agreement: feminine prepositional requires 'спокойной'."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/spɐˈkojnyj/",
+        "why": "Russian unstressed 'ы' is transcribed /ɨ/, not /y/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both a person's state of mind",
+        "why": "Merely restates the two senses; better to note common phrase 'спокойной ночи'."
+      }
+    ],
+    "growth": 1.108
   }
 }

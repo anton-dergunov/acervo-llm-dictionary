@@ -71,6 +71,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to love; to adore",
+    "primaryGloss": "love",
+    "emotion": "warm and sincere, holding someone close in your heart",
+    "notes": [
+      "In everyday Brazilian Portuguese, 'amar' is used both for deep emotional love and enthusiastically for things one enjoys (alongside 'adorar' and 'gostar muito de')."
+    ],
+    "senses": [
+      {
+        "id": "6boo7fro6zzt718",
+        "order": 0,
+        "definition": "To feel deep affection, devotion, or romantic attachment for someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "love"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "97h46tphj6nv5kl",
+            "text": "Eu amo muito a minha família.",
+            "textLang": "pt",
+            "translation": "I love my family very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and grateful, feeling the warmth of family",
+            "note": null,
+            "matchedForm": "amo",
+            "matchedTranslationForm": "love"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d7egieees3zlujn",
+        "order": 1,
+        "definition": "To like or enjoy something very much.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "love",
+              "adore"
+            ]
+          }
+        ],
+        "domain": "enthusiasm",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "ly2cky0yw4z8dyr",
+            "text": "Eu amo viajar e conhecer lugares novos.",
+            "textLang": "pt",
+            "translation": "I love traveling and seeing new places.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "amo",
+            "matchedTranslationForm": "love"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "amar",
+    "lemma": "amar",
+    "reading": null,
+    "ipa": "/aˈmaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to love; to like very much",
     "primaryGloss": "love",
     "emotion": "warm and sincere, holding someone close in your heart",
@@ -162,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'amar' for people and profound emotional connections.",
+        "why": "Contradicts sense 1 and everyday Brazilian usage, where 'eu amo' is very common for things/food."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ele ama os amigos dele. — He really likes his friends.",
+        "why": "Uses people for the 'like very much' sense and mistranslates 'ama' as 'really likes'."
+      }
+    ],
+    "growth": 0.81
   }
 }

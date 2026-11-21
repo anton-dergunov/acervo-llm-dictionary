@@ -58,6 +58,74 @@
     "headword": "gấu",
     "lemma": "gấu",
     "reading": null,
+    "ipa": "/ɣəw˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "heavy and solid, standing firm like a massive creature in the woods",
+    "notes": [
+      "Takes the classifier 'con' (con gấu).",
+      "A teddy bear is called 'gấu bông' (literally 'cotton bear'). In youth slang, 'gấu' is also used playfully to mean 'boyfriend' or 'girlfriend'."
+    ],
+    "senses": [
+      {
+        "id": "p998pknggcwlvpi",
+        "order": 0,
+        "definition": "A large, heavy, furry wild mammal with sharp claws and a short tail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "c37d0xubrcgzwui",
+            "text": "Con gấu lớn đang tìm kiếm thức ăn trong rừng.",
+            "textLang": "vi",
+            "translation": "The large bear is searching for food in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and cautious, pointing out a wild creature from a safe distance",
+            "note": null,
+            "matchedForm": "gấu",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "gấu",
+    "lemma": "gấu",
+    "reading": null,
     "ipa": "/ɡəw˧˥/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡəw˧˥/",
+        "why": "Initial 'g' in Vietnamese is the fricative /ɣ/, not stop /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A stuffed toy shaped like a bear",
+        "why": "Teddy bear is normally the compound 'gấu bông' (used in the example), not a separate sense."
+      }
+    ],
+    "growth": 0.678
   }
 }

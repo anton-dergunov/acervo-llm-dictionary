@@ -74,6 +74,76 @@
     "primaryGloss": "waiter",
     "emotion": "attentive and polite, ready to take an order in a busy restaurant",
     "notes": [
+      "'Garson' is gender-neutral and refers to both waiters and waitresses.",
+      "Avoid calling out 'Garson!' to get a server's attention, as it sounds rude; say 'Bakar mısınız?' (Could you look?) or 'Pardon' instead."
+    ],
+    "senses": [
+      {
+        "id": "uiwxskkvq7ykntj",
+        "order": 0,
+        "definition": "A person who serves food and drinks at tables in a restaurant or café.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "waiter",
+              "waitress",
+              "server"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "jrg78nprev4dm42",
+            "text": "Garson bize menüyü getirdi.",
+            "textLang": "tr",
+            "translation": "The waiter brought us the menu.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Garson",
+            "matchedTranslationForm": "waiter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "garson",
+    "lemma": "garson",
+    "reading": null,
+    "ipa": "/ɡaɾˈson/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "waiter; server",
+    "primaryGloss": "waiter",
+    "emotion": "attentive and polite, ready to take an order in a busy restaurant",
+    "notes": [
       "While 'garson' originally comes from French, in modern Turkish it is the standard and most common word for a waiter or waitress.",
       "Unlike in English where 'waiter' specifies gender, 'garson' in Turkish is gender-neutral and used for anyone serving in a restaurant."
     ],
@@ -123,5 +193,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Garson, menüyü lütfen getirebilir misiniz?",
+        "why": "Addressing a server directly as 'Garson!' is considered rude in modern Turkey."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'garson' originally comes from French, in modern Turkish it is the",
+        "why": "Etymology filler; misses the vital cultural note not to call out 'Garson!' to servers."
+      }
+    ],
+    "growth": 0.785
   }
 }

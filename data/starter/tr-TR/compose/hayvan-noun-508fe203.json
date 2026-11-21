@@ -68,6 +68,116 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "animal; brute",
+    "primaryGloss": "animal",
+    "emotion": "curious and observant, watching a creature move across the path",
+    "notes": [
+      "For a pet, Turkish uses 'evcil hayvan' (domestic animal). Calling a person 'hayvan' is a strong insult."
+    ],
+    "senses": [
+      {
+        "id": "lz74rq1wj9oni6n",
+        "order": 0,
+        "definition": "A living creature other than a human or plant, able to move and feel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "animal",
+              "creature"
+            ]
+          }
+        ],
+        "domain": "biology",
+        "emoji": "🐾",
+        "examples": [
+          {
+            "id": "jsu5wrhmcohoth6",
+            "text": "Ormanda pek çok vahşi hayvan yaşıyor.",
+            "textLang": "tr",
+            "translation": "Many wild animals live in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "intrigued and cautious, speaking of the wilderness",
+            "note": null,
+            "matchedForm": "hayvan",
+            "matchedTranslationForm": "animals"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ms14023or3iqqq6",
+        "order": 1,
+        "definition": "A rude, insensitive, or brutish person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "brute",
+              "beast",
+              "jerk"
+            ]
+          }
+        ],
+        "domain": "insult",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "33efbka5phis7pu",
+            "text": "Kimseye haber vermeden çekip gitti, ne kaba bir hayvan!",
+            "textLang": "tr",
+            "translation": "He just walked off without telling anyone, what a rude brute!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hayvan",
+            "matchedTranslationForm": "brute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hayvan",
+    "lemma": "hayvan",
+    "reading": null,
+    "ipa": "/hajˈvan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "animal; beast",
     "primaryGloss": "animal",
     "emotion": "curious and observant, watching a creature move across the path",
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Hayvan can refer broadly to any living creature that is not a plant",
+        "why": "Both notes merely repeat the two sense definitions without adding grammar or usage info."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Yolda kimseye haber vermeden gitti, gerçekten bir hayvan.",
+        "why": "Awkward phrasing in Turkish and mistranslated ('on the road') in English; plural 'jerks' in gloss."
+      }
+    ],
+    "growth": 0.757
   }
 }

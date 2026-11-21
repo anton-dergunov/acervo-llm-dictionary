@@ -72,6 +72,73 @@
     "primaryGloss": "helado",
     "emotion": "un verano caluroso, fresco y con ganas de disfrutar un postre dulce",
     "notes": [
+      "Es incontable cuando se refiere al alimento en general ('some ice cream'), pero contable cuando se refiere a una porción o cono ('an ice cream')."
+    ],
+    "senses": [
+      {
+        "id": "g1n6crys6g2gto0",
+        "order": 0,
+        "definition": "Postre dulce y congelado que se prepara con leche o crema.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "helado"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🍦",
+        "examples": [
+          {
+            "id": "qqb9g93s3znzr1t",
+            "text": "I love eating chocolate ice cream on a hot day.",
+            "textLang": "en",
+            "translation": "Me encanta comer helado de chocolate en un día caluroso.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "entusiasta y relajado, disfrutando de un momento de placer",
+            "note": null,
+            "matchedForm": "ice cream",
+            "matchedTranslationForm": "helado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "ice cream",
+    "lemma": "ice cream",
+    "reading": null,
+    "ipa": "/ˈaɪs ˌkrim/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍦",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "helado",
+    "primaryGloss": "helado",
+    "emotion": "un verano caluroso, fresco y con ganas de disfrutar un postre dulce",
+    "notes": [
       "Es un sustantivo incontable en inglés, por lo que no se usa con 'a' o 'an' a menos que especifiques un recipiente o unidad, como 'a scoop of ice cream'.",
       "No confundir con 'iced coffee' o 'iced tea', que se refieren a bebidas frías con hielo, mientras que 'ice cream' siempre es el postre cremoso."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "no se usa con 'a' o 'an' a menos que especifiques",
+        "why": "Partially false: 'an ice cream' is very common in everyday English for a cone or individual serving."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "No confundir con 'iced coffee' o 'iced tea'",
+        "why": "Unnecessary filler note; learners do not confuse 'ice cream' with 'iced tea'."
+      }
+    ],
+    "growth": 0.657
   }
 }

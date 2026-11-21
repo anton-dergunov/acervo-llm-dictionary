@@ -68,6 +68,117 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "oficina; consultorio; cargo",
+    "primaryGloss": "oficina",
+    "emotion": "focused and steady, starting the workday",
+    "notes": [
+      "En el sentido de 'cargo público', suele usarse sin artículo en expresiones como 'in office' (en el cargo) o 'take office' (asumir el cargo).",
+      "También se usa para la consulta de un médico o abogado: 'doctor's office' (consultorio médico)."
+    ],
+    "senses": [
+      {
+        "id": "dniaevmevjxsd5l",
+        "order": 0,
+        "definition": "Habitación, conjunto de habitaciones o edificio donde se realiza trabajo administrativo o profesional.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "oficina",
+              "despacho",
+              "consultorio"
+            ]
+          }
+        ],
+        "domain": "trabajo",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "hlud6u8i9nbvb69",
+            "text": "She arrives at the office very early every morning.",
+            "textLang": "en",
+            "translation": "Ella llega a la oficina muy temprano todas las mañanas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and purposeful, rushing slightly with coffee in hand",
+            "note": null,
+            "matchedForm": "office",
+            "matchedTranslationForm": "oficina"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sgukgaiy3exzry7",
+        "order": 1,
+        "definition": "Posición de autoridad o empleo importante, especialmente en el gobierno.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cargo",
+              "puesto"
+            ]
+          }
+        ],
+        "domain": "gobierno",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "uzh7upiae5h1rd5",
+            "text": "He took office as the new mayor last month.",
+            "textLang": "en",
+            "translation": "Él asumió el cargo de nuevo alcalde el mes pasado.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "formal and respectful, acknowledging a significant milestone",
+            "note": null,
+            "matchedForm": "office",
+            "matchedTranslationForm": "cargo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "office",
+    "lemma": "office",
+    "reading": null,
+    "ipa": "/ˈɔfɪs/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "oficina; despacho; cargo",
     "primaryGloss": "oficina",
     "emotion": "focused and steady, starting the workday",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Se usa principalmente para referirse al lugar físico donde se trabaja",
+        "why": "Both notes merely repeat the two sense definitions without adding grammar or usage help."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "cargo, puesto, oficina",
+        "why": "In Spanish, 'oficina' does not mean political office or position of authority."
+      }
+    ],
+    "growth": 1.167
   }
 }

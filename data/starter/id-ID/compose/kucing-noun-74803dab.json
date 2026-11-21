@@ -58,6 +58,74 @@
     "headword": "kucing",
     "lemma": "kucing",
     "reading": null,
+    "ipa": "/ˈku.t͡ʃɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐱",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "cat",
+    "primaryGloss": "cat",
+    "emotion": "warm and friendly, smiling slightly at a common, cute animal",
+    "notes": [
+      "Takes the animal classifier 'ekor' when counted (e.g., 'seekor kucing' = a cat)."
+    ],
+    "senses": [
+      {
+        "id": "c1l1f0aq1j31twc",
+        "order": 0,
+        "definition": "A small furry mammal often kept as a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cat",
+              "kitty"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐱",
+        "examples": [
+          {
+            "id": "ntqv5zywojcmkmp",
+            "text": "Kucing itu sedang tidur di atas sofa.",
+            "textLang": "id",
+            "translation": "The cat is sleeping on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and quiet, observing something peaceful",
+            "note": null,
+            "matchedForm": "Kucing",
+            "matchedTranslationForm": "cat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kucing",
+    "lemma": "kucing",
+    "reading": null,
     "ipa": "/ku.t͡ʃɪŋ/",
     "pos": "noun",
     "gender": null,
@@ -138,5 +206,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The biological family of feline animals including wild species.",
+        "why": "Unnecessary biological sense for A2; 'kucing' simply means 'cat'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kucing is the general term for any feline",
+        "why": "Restates the gloss; lacks useful grammar such as its classifier 'ekor'."
+      }
+    ],
+    "growth": 0.609
   }
 }

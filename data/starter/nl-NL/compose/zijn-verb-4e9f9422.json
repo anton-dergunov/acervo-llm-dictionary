@@ -70,6 +70,136 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be; to have (auxiliary)",
+    "primaryGloss": "to be",
+    "emotion": "steady and foundational, anchoring the basic state of things",
+    "notes": [
+      "Highly irregular: present 'ben, bent, is, zijn'; past 'was, waren'; past participle 'geweest'.",
+      "For the location of objects, Dutch often prefers 'liggen', 'staan', or 'zitten' over 'zijn'."
+    ],
+    "senses": [
+      {
+        "id": "qlax3nbvr0th875",
+        "order": 0,
+        "definition": "To have a certain identity, quality, or state, or to be in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "2spfkyfj06taju1",
+            "text": "Ik ben student en ik ben vandaag erg moe.",
+            "textLang": "nl",
+            "translation": "I am a student and I am very tired today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ben",
+            "matchedTranslationForm": "am"
+          },
+          {
+            "id": "nm1ixwu2t1d7zz5",
+            "text": "Wij zijn al thuis.",
+            "textLang": "nl",
+            "translation": "We are already home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "zijn",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ydg0vc712s6enob",
+        "order": 1,
+        "definition": "Used with a past participle to form the perfect tense of verbs of movement or change of state, and to form the passive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to be"
+            ]
+          }
+        ],
+        "domain": "grammar",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fgwk0h0cz910ir6",
+            "text": "Zij is gisteren naar Amsterdam gegaan.",
+            "textLang": "nl",
+            "translation": "She went to Amsterdam yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "is",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zijn",
+    "lemma": "zijn",
+    "reading": null,
+    "ipa": "/zɛin/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be; to exist",
     "primaryGloss": "to be",
     "emotion": "steady and foundational, anchoring the basic state of things",
@@ -160,5 +290,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Identity, temporary state and location are all the copula 'to be'; conversely, auxiliary use is missing."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De sleutels zijn op tafel.",
+        "why": "Dutch uses positional verbs ('De sleutels liggen op tafel'), not 'zijn', for objects on surfaces."
+      }
+    ],
+    "growth": 1.397
   }
 }

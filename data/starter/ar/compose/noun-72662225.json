@@ -72,6 +72,114 @@
     "primaryGloss": "name",
     "emotion": null,
     "notes": [
+      "The plural is أَسْمَاء (asmāʾ).",
+      "Starts with a connecting hamzah (هَمْزَة وَصْل): the initial 'i' vowel is dropped when preceded by another word, as in مَا اسْمُكَ؟ (masmuka?)."
+    ],
+    "senses": [
+      {
+        "id": "37jurhyvzvbt069",
+        "order": 0,
+        "definition": "What a person, place, or thing is called.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "name"
+            ]
+          }
+        ],
+        "domain": "name",
+        "emoji": "📛",
+        "examples": [
+          {
+            "id": "nj75oh0i4qm7228",
+            "text": "مَا اسْمُكَ؟",
+            "textLang": "ar",
+            "translation": "What is your name?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "اسْمُكَ",
+            "matchedTranslationForm": "name"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rx4p9g42npw0cg2",
+        "order": 1,
+        "definition": "In grammar, a word that refers to a person, place, thing, or quality.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "noun"
+            ]
+          }
+        ],
+        "domain": "grammar",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "cfaesrqxl2ykzi1",
+            "text": "هٰذِهِ الكَلِمَةُ اسْمٌ وَلَيْسَتْ فِعْلًا.",
+            "textLang": "ar",
+            "translation": "This word is a noun, not a verb.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "اسْمٌ",
+            "matchedTranslationForm": "noun"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "اسْم",
+    "lemma": "اسْم",
+    "reading": null,
+    "ipa": "/ism/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "name; noun",
+    "primaryGloss": "name",
+    "emotion": null,
+    "notes": [
       "In Arabic grammar, 'ism' also refers to a noun, distinguishing it from verbs (fi'l) and particles (harf)."
     ],
     "senses": [
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "هذا الكَلِمَة اسْمٌ.",
+        "why": "Gender agreement error: الكَلِمَة is feminine and requires هٰذِهِ, not هذا."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Arabic grammar, 'ism' also refers to a noun",
+        "why": "Simply repeats sense 1 instead of giving a useful note like plural or hamzat waṣl."
+      }
+    ],
+    "growth": 1.304
   }
 }

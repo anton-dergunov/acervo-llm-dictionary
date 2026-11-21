@@ -60,6 +60,114 @@
     "headword": "pić",
     "lemma": "pić",
     "reading": null,
+    "ipa": "/pʲit͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to drink; to drink alcohol",
+    "primaryGloss": "drink",
+    "emotion": "thirsty and eager to quench the thirst with a cool beverage",
+    "notes": [
+      "Imperfective verb (perfective: 'wypić').",
+      "Has an irregular present-tense stem 'pij-': ja piję, ty pijesz, on/ona pije, oni piją."
+    ],
+    "senses": [
+      {
+        "id": "0qeno8wkxen5wgy",
+        "order": 0,
+        "definition": "To take liquid into the mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "5lbcdadxsx3qt4i",
+            "text": "Muszę pić dużo wody w upalne dni.",
+            "textLang": "pl",
+            "translation": "I need to drink a lot of water on hot days.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hot and exhausted, needing hydration immediately",
+            "note": null,
+            "matchedForm": "pić",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g0tqcys6asx87g4",
+        "order": 1,
+        "definition": "To consume alcoholic beverages, especially regularly or to excess (used without an object).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink"
+            ]
+          }
+        ],
+        "domain": "alcohol",
+        "emoji": "🍻",
+        "examples": [
+          {
+            "id": "zvnfu7yt6j7o91d",
+            "text": "Nie piję, bo prowadzę samochód.",
+            "textLang": "pl",
+            "translation": "I'm not drinking because I'm driving.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "piję",
+            "matchedTranslationForm": "drinking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pić",
+    "lemma": "pić",
+    "reading": null,
     "ipa": "/piɲt͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/piɲt͡ɕ/",
+        "why": "Wrong transcription ('pińć'); standard Polish for 'pić' is /pʲit͡ɕ/."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "On już nie chce pić alkoholu na imprezach.",
+        "why": "With explicit object 'alkoholu', 'pić' has its general sense 0; sense 1 is intransitive."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing its irregular present tense stem 'pij-' (piję, pijesz), essential for A2."
+      }
+    ],
+    "growth": 0.867
   }
 }

@@ -74,6 +74,131 @@
     "primaryGloss": "desk",
     "emotion": "focused and steady, settling in to work",
     "notes": [
+      "The plural is formed by adding '-x': 'des bureaux' (pronounced the same as the singular)."
+    ],
+    "senses": [
+      {
+        "id": "r98hzeuvdlk0hv4",
+        "order": 0,
+        "definition": "A piece of furniture with a flat surface used for writing, reading, or working.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "desk"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "qrs8pdgjknjbung",
+            "text": "Mon ordinateur portable est posé sur mon bureau.",
+            "textLang": "fr",
+            "translation": "My laptop is on my desk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tidy and organized, pointing out a workspace",
+            "note": null,
+            "matchedForm": "bureau",
+            "matchedTranslationForm": "desk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i1z51t8vidapf6l",
+        "order": 1,
+        "definition": "A room or building where business or professional work is done.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "office"
+            ]
+          }
+        ],
+        "domain": "workplace",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "t2yjzdz71zaycv6",
+            "text": "Je commence à travailler au bureau à neuf heures.",
+            "textLang": "fr",
+            "translation": "I start working at the office at nine o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and hurried, heading off to start the workday",
+            "note": null,
+            "matchedForm": "bureau",
+            "matchedTranslationForm": "office"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "r98hzeuvdlk0hv4",
+      "from": "Meuble avec une surface plate pour travailler, écrire ou étudier.",
+      "to": "A piece of furniture with a flat surface used for writing, reading, or working.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:04Z"
+    },
+    {
+      "sense": "i1z51t8vidapf6l",
+      "from": "Pièce ou local où l'on travaille.",
+      "to": "A room or building where business or professional work is done.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le bureau",
+    "lemma": "bureau",
+    "reading": null,
+    "ipa": "/byʁo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💻",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "desk; office",
+    "primaryGloss": "desk",
+    "emotion": "focused and steady, settling in to work",
+    "notes": [
       "In French, 'bureau' means both the piece of furniture (desk) and the room or place where you work (office).",
       "Do not confuse it with 'magasin' or 'boutique', which are shops where things are sold."
     ],
@@ -162,22 +287,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "r98hzeuvdlk0hv4",
-      "from": "Meuble avec une surface plate pour travailler, écrire ou étudier.",
-      "to": "A piece of furniture with a flat surface used for writing, reading, or working.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:04Z"
-    },
-    {
-      "sense": "i1z51t8vidapf6l",
-      "from": "Pièce ou local où l'on travaille.",
-      "to": "A room or building where business or professional work is done.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In French, 'bureau' means both the piece of furniture (desk)",
+        "why": "Restates the senses and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'magasin' or 'boutique'",
+        "why": "Learners do not confuse 'bureau' with shops; misses the irregular plural 'bureaux'."
+      }
+    ],
+    "growth": 0.791
+  }
 }

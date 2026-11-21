@@ -68,6 +68,153 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "green; eco-friendly; inexperienced",
+    "primaryGloss": "green",
+    "emotion": "a calm, natural and refreshing state, looking at trees or fields",
+    "notes": [],
+    "senses": [
+      {
+        "id": "g1li4a9azgu6btn",
+        "order": 0,
+        "definition": "Having the color of grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "39mlofttey7ymzb",
+            "text": "Het gras is in de lente heel groen.",
+            "textLang": "nl",
+            "translation": "The grass is very green in the spring.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational, noting the change of seasons with a sense of relief",
+            "note": null,
+            "matchedForm": "groen",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2xs9bfkxje0ezsf",
+        "order": 1,
+        "definition": "Relating to the protection of the environment; ecologically friendly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green",
+              "eco-friendly"
+            ]
+          }
+        ],
+        "domain": "environment",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ja0l1vuqd1hc48x",
+            "text": "Wij gebruiken thuis alleen groene stroom.",
+            "textLang": "nl",
+            "translation": "We only use green energy at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "groene",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ssh295hl72jh2dk",
+        "order": 2,
+        "definition": "Not having much experience in a job or activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green",
+              "inexperienced"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "9wqb1jekcz58kup",
+            "text": "Hij is nog erg groen in dit werk.",
+            "textLang": "nl",
+            "translation": "He is still very green at this job.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit indulgent, acknowledging someone is still learning the ropes",
+            "note": null,
+            "matchedForm": "groen",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "groen",
+    "lemma": "groen",
+    "reading": null,
+    "ipa": "/ɣrun/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "green; inexperienced",
     "primaryGloss": "green",
     "emotion": "a calm, natural and refreshing state, looking at trees or fields",
@@ -159,5 +306,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of grass and leaves.",
+        "why": "Defines an adjective as a noun ('The colour...') instead of a quality ('Having the colour...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'environmentally friendly, ecological', which is much more frequent than 'inexperienced'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'groen' is used both for the color and as",
+        "why": "Purely repeats the definitions of the senses."
+      }
+    ],
+    "growth": 1.086
   }
 }

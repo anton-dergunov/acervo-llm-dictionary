@@ -72,6 +72,73 @@
     "primaryGloss": "early",
     "emotion": "quiet and peaceful, waking up as the sun comes through the window",
     "notes": [
+      "Opposite of tarde (late). Also used as an adjective (temprano/a) agreeing with the noun: a una hora temprana (at an early hour)."
+    ],
+    "senses": [
+      {
+        "id": "kb8a2c95cvttuoa",
+        "order": 0,
+        "definition": "Before the usual or expected time, or near the beginning of the day or a period.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "early"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "pshel5expwcn2yt",
+            "text": "Mañana me levantaré muy temprano para correr.",
+            "textLang": "es",
+            "translation": "Tomorrow I will get up very early to go for a run.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and energetic, looking forward to the morning workout",
+            "note": null,
+            "matchedForm": "temprano",
+            "matchedTranslationForm": "early"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "temprano",
+    "lemma": "temprano",
+    "reading": null,
+    "ipa": "/temˈpɾano/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "early",
+    "primaryGloss": "early",
+    "emotion": "quiet and peaceful, waking up as the sun comes through the window",
+    "notes": [
       "Used as an adverb meaning 'early', it stays invariable.",
       "Can also function as an adjective meaning 'early' or 'premature', in which case it agrees in gender and number with the noun (e.g., 'una hora temprana')."
     ],
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "In the early part of the day, morning, or period.",
+        "why": "Shades of the same meaning 'early'; does not specifically mean 'at dawn'."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "early in the morning, at dawn",
+        "why": "'Temprano' means 'early', not specifically 'at dawn' (al amanecer / de madrugada)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as an adverb meaning 'early', it stays invariable.",
+        "why": "Restates the gloss and basic grammar of all adverbs."
+      }
+    ],
+    "growth": 0.602
   }
 }

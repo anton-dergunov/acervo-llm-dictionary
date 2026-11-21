@@ -68,6 +68,76 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "pig",
+    "primaryGloss": "pig",
+    "emotion": "matter-of-fact and neutral, simply identifying a creature",
+    "notes": [
+      "For the meat (pork), use 돼지고기.",
+      "Also used informally to call someone who eats a lot or is greedy a 'pig'."
+    ],
+    "senses": [
+      {
+        "id": "lm0edlfn4ypyepm",
+        "order": 0,
+        "definition": "A pink or bristly farm animal with a flat snout, kept for its meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "swine",
+              "hog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐷",
+        "examples": [
+          {
+            "id": "k6edrit9jf0xrbv",
+            "text": "농장에 귀여운 돼지가 있어요.",
+            "textLang": "ko",
+            "translation": "There is a cute pig on the farm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and pointing out something charming to a friend",
+            "note": null,
+            "matchedForm": "돼지가",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "돼지",
+    "lemma": "돼지",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐷",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "pig; pork",
     "primaryGloss": "pig",
     "emotion": "matter-of-fact and neutral, simply identifying a creature",
@@ -160,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The meat of a pig, used as food.",
+        "why": "돼지 alone does not mean 'pork'; pork is the compound 돼지고기."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "오늘 저녁은 돼지 고기를 먹을 거예요.",
+        "why": "Uses the compound 돼지고기 (misspelled with a space) rather than 돼지."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pig; pork",
+        "why": "돼지 does not mean 'pork'."
+      }
+    ],
+    "growth": 0.584
   }
 }

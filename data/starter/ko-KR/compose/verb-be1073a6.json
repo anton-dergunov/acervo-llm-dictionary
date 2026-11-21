@@ -58,6 +58,118 @@
     "headword": "오르다",
     "lemma": "오르다",
     "reading": null,
+    "ipa": "oɾɯda",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go up; to climb; to rise",
+    "primaryGloss": "go up",
+    "emotion": "persistent and focused, exerting energy to reach a higher point",
+    "notes": [
+      "Irregular 르 verb: drops ㅡ and adds ㄹ before -아/어 (오르다 → 올라요, 올랐어요).",
+      "Intransitive (takes 에). Do not confuse with 올리다 (to raise or lift something)."
+    ],
+    "senses": [
+      {
+        "id": "j1oj665fl56su19",
+        "order": 0,
+        "definition": "To go up, climb, or ascend to a higher place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "go up",
+              "climb",
+              "ascend"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "⬆️",
+        "examples": [
+          {
+            "id": "9c0u814cen9eap9",
+            "text": "주말에 친구들과 산에 올랐어요.",
+            "textLang": "ko",
+            "translation": "I climbed a mountain with my friends on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "올랐어요",
+            "matchedTranslationForm": "climbed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "95ixscvu853786x",
+        "order": 1,
+        "definition": "To increase in price, temperature, or level.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rise",
+              "increase",
+              "go up"
+            ]
+          }
+        ],
+        "domain": "increase",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "977flbf5k4p3qkn",
+            "text": "요즘 물가가 많이 올랐어요.",
+            "textLang": "ko",
+            "translation": "Prices have risen a lot lately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "올랐어요",
+            "matchedTranslationForm": "risen"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오르다",
+    "lemma": "오르다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -202,5 +314,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[1] (climbing) To climb or scramble using both hands and feet.",
+        "why": "Senses 0 and 1 are shades of the same physical meaning (going up/climbing)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "산에 오르다.",
+        "why": "Examples use unconjugated dictionary forms instead of natural conversational Korean."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on 르-irregular conjugation (오르다 -> 올라요, 올랐어요)."
+      }
+    ],
+    "growth": 0.76
   }
 }

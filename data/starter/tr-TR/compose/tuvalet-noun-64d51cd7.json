@@ -68,6 +68,97 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "toilet; restroom",
+    "primaryGloss": "toilet",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'banyo' (bathroom), which specifically refers to the room with a bathtub or shower."
+    ],
+    "senses": [
+      {
+        "id": "4a2kflrymkiwuqf",
+        "order": 0,
+        "definition": "A room containing a toilet, or the bowl-shaped fixture itself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "toilet",
+              "restroom",
+              "bathroom",
+              "lavatory"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "gl54hwdhsuvrm0m",
+            "text": "Affedersiniz, tuvalet nerede?",
+            "textLang": "tr",
+            "translation": "Excuse me, where is the restroom?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tuvalet",
+            "matchedTranslationForm": "restroom"
+          },
+          {
+            "id": "685z7ttpt89aw3u",
+            "text": "Evde iki tuvalet var.",
+            "textLang": "tr",
+            "translation": "There are two toilets in the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative",
+            "note": null,
+            "matchedForm": "tuvalet",
+            "matchedTranslationForm": "toilets"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tuvalet",
+    "lemma": "tuvalet",
+    "reading": null,
+    "ipa": "/tu.vaˈlet/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚽",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "toilet; restroom; dressing",
     "primaryGloss": "toilet",
     "emotion": null,
@@ -181,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 (fixture and room) are standardly combined for beginner learners."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "The process of washing, dressing, and grooming oneself.",
+        "why": "Copied French 'toilette' sense; in Turkish 'tuvalet' additionally means an evening gown, not grooming."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tuvalet nerede?",
+        "why": "Asking where the toilet is asks for the room (sense 1), not the bowl."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Tuvalet refers both to the physical fixture used for bodily waste",
+        "why": "Merely restates the definitions."
+      }
+    ],
+    "growth": 0.655
   }
 }

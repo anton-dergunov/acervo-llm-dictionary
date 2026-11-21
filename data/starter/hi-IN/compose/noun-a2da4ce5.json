@@ -68,6 +68,114 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "bus; control",
+    "primaryGloss": "bus",
+    "emotion": "matter-of-fact and functional, a common way to get across town",
+    "notes": [
+      "Not to be confused with the very common homonym 'बस' used as an adverb or interjection meaning 'enough', 'just', or 'only' (e.g., 'बस करो' — 'stop it')."
+    ],
+    "senses": [
+      {
+        "id": "6uveqpgidr1auk9",
+        "order": 0,
+        "definition": "A large road vehicle that carries many passengers along a fixed route.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bus"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "7wi4l9nur43h03g",
+            "text": "मैं बस से दफ़्तर जाता हूँ।",
+            "textLang": "hi",
+            "translation": "I go to the office by bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and calm, describing a typical daily habit",
+            "note": null,
+            "matchedForm": "बस",
+            "matchedTranslationForm": "bus"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "homb2h2gobmfzhi",
+        "order": 1,
+        "definition": "Power or ability to control something, used mainly in set phrases.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "control",
+              "power"
+            ]
+          }
+        ],
+        "domain": "control",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "cqooo3a0l6b4p4p",
+            "text": "यह मेरे बस की बात नहीं है।",
+            "textLang": "hi",
+            "translation": "This is beyond my control.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बस",
+            "matchedTranslationForm": "control"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बस",
+    "lemma": "बस",
+    "reading": null,
+    "ipa": "/bəs/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "bus; enough; stop",
     "primaryGloss": "bus",
     "emotion": "matter-of-fact and functional, a common way to get across town",
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "An expression used to indicate that something is finished",
+        "why": "This is a noun entry; sense 1 is an adverb/interjection of a different etymology."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bus; enough; stop",
+        "why": "Includes non-noun meanings ('enough; stop') in a noun entry."
+      }
+    ],
+    "growth": 0.86
   }
 }

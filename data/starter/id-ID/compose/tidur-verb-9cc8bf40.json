@@ -68,6 +68,98 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sleep; to be asleep",
+    "primaryGloss": "sleep",
+    "emotion": "heavy and relaxed, drifting off at the end of a long day",
+    "notes": [
+      "Can mean both 'to be asleep' and 'to go to sleep' depending on context.",
+      "Do not confuse with 'istirahat', which means to rest or take a break without sleeping."
+    ],
+    "senses": [
+      {
+        "id": "65oag5enzsxk3ji",
+        "order": 0,
+        "definition": "To rest your body and mind with your eyes closed in a natural state of unconsciousness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleep",
+              "be asleep",
+              "go to sleep",
+              "nap"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "r0mzdtoaua4yn6z",
+            "text": "Anak itu sudah tidur di kamarnya.",
+            "textLang": "id",
+            "translation": "That child is already asleep in their room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and gentle, whispering so as not to wake the child",
+            "note": null,
+            "matchedForm": "tidur",
+            "matchedTranslationForm": "asleep"
+          },
+          {
+            "id": "wjxb7ni0k6b8arx",
+            "text": "Dia duduk di kursi dan tidur sebentar.",
+            "textLang": "id",
+            "translation": "She sat in the chair and slept for a moment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and unhurried, taking a peaceful moment to recover strength",
+            "note": null,
+            "matchedForm": "tidur",
+            "matchedTranslationForm": "slept"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tidur",
+    "lemma": "tidur",
+    "reading": null,
+    "ipa": "/ˈtidur/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sleep; to rest with eyes closed",
     "primaryGloss": "sleep",
     "emotion": "heavy and relaxed, drifting off at the end of a long day",
@@ -161,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(rest) To rest with your eyes closed without necessarily falling into deep sleep.",
+        "why": "Artificial split; 'tidur sebentar' simply means to take a short nap, which is still sleeping."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'tidur' for ordinary nighttime sleep as well as resting with your eyes closed.",
+        "why": "merely repeats the definitions."
+      }
+    ],
+    "growth": 0.775
   }
 }

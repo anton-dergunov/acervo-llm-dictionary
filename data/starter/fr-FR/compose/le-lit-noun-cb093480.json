@@ -68,6 +68,91 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "bed",
+    "primaryGloss": "bed",
+    "emotion": "somewhere you sink into after a long day, settled and comfortable",
+    "notes": [
+      "The final -t is silent (/li/). Do not confuse it with 'le lait' /lɛ/ (milk)."
+    ],
+    "senses": [
+      {
+        "id": "dlit0beyedy6zqm",
+        "order": 0,
+        "definition": "A piece of furniture on which one lies down to sleep or rest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bed"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "iayn0dne1wu0dw5",
+            "text": "Je vais faire mon lit avant de partir.",
+            "textLang": "fr",
+            "translation": "I am going to make my bed before leaving.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tidy and purposeful, getting chores done in the morning",
+            "note": null,
+            "matchedForm": "lit",
+            "matchedTranslationForm": "bed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "dlit0beyedy6zqm",
+      "from": "Meuble sur lequel on s'allonge pour dormir ou se reposer.",
+      "to": "A piece of furniture on which one lies down to sleep or rest.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "gu9el86nkvze29p",
+      "from": "Canal creusé par un cours d'eau.",
+      "to": "A channel carved out by a stream or river.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le lit",
+    "lemma": "lit",
+    "reading": null,
+    "ipa": "/li/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "bed; riverbed",
     "primaryGloss": "bed",
     "emotion": "somewhere you sink into after a long day, settled and comfortable",
@@ -160,22 +245,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "dlit0beyedy6zqm",
-      "from": "Meuble sur lequel on s'allonge pour dormir ou se reposer.",
-      "to": "A piece of furniture on which one lies down to sleep or rest.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "gu9el86nkvze29p",
-      "from": "Canal creusé par un cours d'eau.",
-      "to": "A channel carved out by a stream or river.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Do not confuse 'lit' (bed) with 'lait' (milk) or 'la 'laie' (wild",
+        "why": "False phonetic claim: 'lit' /li/ does not sound like 'lait' or 'laie' /lɛ/."
+      }
+    ],
+    "growth": 0.556
+  }
 }

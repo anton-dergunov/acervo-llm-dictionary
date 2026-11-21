@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sit; to sit down",
+    "primaryGloss": "sit",
+    "emotion": "relaxed and grounded, resting after being on your feet",
+    "notes": [
+      "Covers both the action 'to sit down' and the state 'to be sitting'. Notice the related verbs 'menduduki' (to occupy/sit on) and 'mendudukkan' (to seat someone)."
+    ],
+    "senses": [
+      {
+        "id": "hw422mm8ibz21tk",
+        "order": 0,
+        "definition": "To rest the body on a chair or the floor with the weight supported by the buttocks, or to move into this position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sit",
+              "sit down",
+              "be seated"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "7qlmgqxtj96km84",
+            "text": "Silakan duduk di kursi itu.",
+            "textLang": "id",
+            "translation": "Please sit in that chair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inviting, offering hospitality to a guest",
+            "note": null,
+            "matchedForm": "duduk",
+            "matchedTranslationForm": "sit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "duduk",
+    "lemma": "duduk",
+    "reading": null,
+    "ipa": "/ˈdu.dʊk/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sit; to reside",
     "primaryGloss": "sit",
     "emotion": "relaxed and grounded, resting after being on your feet",
@@ -161,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To live or reside in a specific place or house.",
+        "why": "Archaic/obsolete in modern Indonesian; teaching 'Saya duduk di Jakarta' is misleading."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In formal Indonesian, it can also be used to mean 'to live'",
+        "why": "False for modern Indonesian; 'duduk' for 'reside' is obsolete and unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'tidur', which means 'to sleep'.",
+        "why": "'Duduk' and 'tidur' do not look or sound alike."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sit; to reside",
+        "why": "Includes the obsolete 'reside' sense."
+      }
+    ],
+    "growth": 0.578
   }
 }

@@ -58,6 +58,157 @@
     "headword": "묻다",
     "lemma": "묻다",
     "reading": null,
+    "ipa": "mut̚t͈a",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to ask; to bury; to get on (stain)",
+    "primaryGloss": "to ask",
+    "emotion": "inquisitive and polite, reaching out for information from someone else",
+    "notes": [
+      "When meaning 'to ask', it is a ㄷ-irregular verb: ㄷ changes to ㄹ before a vowel (물어요, 물었어요). In everyday speech, 물어보다 is often used instead.",
+      "When meaning 'to bury' or 'to stick/stain', it conjugates regularly (묻어요, 묻었어요)."
+    ],
+    "senses": [
+      {
+        "id": "6xlaxzfb85nvphf",
+        "order": 0,
+        "definition": "To ask a question to get information from someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ask",
+              "to inquire"
+            ]
+          }
+        ],
+        "domain": "inquiry",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "j1guad2s0bmqbzu",
+            "text": "모르는 것이 있으면 저에게 물으세요.",
+            "textLang": "ko",
+            "translation": "If there is something you do not know, please ask me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "물으세요",
+            "matchedTranslationForm": "ask"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fox2pj7sunr2mrj",
+        "order": 1,
+        "definition": "To put something into the ground and cover it with earth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to bury"
+            ]
+          }
+        ],
+        "domain": "burial",
+        "emoji": "🪦",
+        "examples": [
+          {
+            "id": "4451jjrh3r0qwh3",
+            "text": "강아지가 뼈를 땅에 묻었어요.",
+            "textLang": "ko",
+            "translation": "The puppy buried the bone in the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly amused, watching a cute pet's natural habit",
+            "note": null,
+            "matchedForm": "묻었어요",
+            "matchedTranslationForm": "buried"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "axoe10du83dhcbz",
+        "order": 2,
+        "definition": "For a liquid, powder, or stain to stick to or get onto a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get on",
+              "to stain",
+              "to stick to"
+            ]
+          }
+        ],
+        "domain": "staining",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "qq7glujd1mdh0oz",
+            "text": "흰 셔츠에 커피가 묻었어요.",
+            "textLang": "ko",
+            "translation": "Coffee got on my white shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "묻었어요",
+            "matchedTranslationForm": "got on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "묻다",
+    "lemma": "묻다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +312,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "the base form 묻다 changes to 물어봐요 (polite)",
+        "why": "묻다 conjugates to 물어요 (ㄷ-irregular). 물어봐요 is a different verb, 물어보다."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "선생님께 모르는 것을 물어봤어요.",
+        "why": "Uses 물어봤어요 (from 물어보다) instead of a conjugated form of 묻다."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to get on / stain (clothing)' (옷에 김치가 묻다)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb is a homonym. You must use context to know",
+        "why": "Filler note; should instead explain the ㄷ-irregular vs regular conjugation difference."
+      }
+    ],
+    "growth": 1.139
   }
 }

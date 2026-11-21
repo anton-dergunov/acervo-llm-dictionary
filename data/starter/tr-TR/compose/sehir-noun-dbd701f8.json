@@ -72,6 +72,96 @@
     "primaryGloss": "city",
     "emotion": "bustling and metropolitan, full of energy and movement",
     "notes": [
+      "The 'i' drops before a vowel suffix: 'şehre' (to the city), 'şehrim' (my city).",
+      "'Kent' is a common synonym. For a smaller town, 'kasaba' or 'ilçe' is used."
+    ],
+    "senses": [
+      {
+        "id": "b1oj6fc7zgyotar",
+        "order": 0,
+        "definition": "A large and permanent human settlement; a city or large town.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "upg0jd5m4na7mxn",
+            "text": "İstanbul büyük ve kalabalık bir şehirdir.",
+            "textLang": "tr",
+            "translation": "Istanbul is a big and crowded city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the scale and energy of the place",
+            "note": null,
+            "matchedForm": "şehirdir",
+            "matchedTranslationForm": "city"
+          },
+          {
+            "id": "tvlq4oln8da61mi",
+            "text": "Yaz aylarında bu sakin şehre çok turist geliyor.",
+            "textLang": "tr",
+            "translation": "Many tourists come to this quiet city during the summer months.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and appreciative of the local charm",
+            "note": null,
+            "matchedForm": "şehre",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "şehir",
+    "lemma": "şehir",
+    "reading": null,
+    "ipa": "/ʃeˈhiɾ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "bustling and metropolitan, full of energy and movement",
+    "notes": [
       "Note that the final 'i' drops when adding certain suffixes, as in 'şehre' (to the city) or 'şehrim' (my city).",
       "While 'şehir' can mean both a large city and a town, 'kasaba' is more specific for a smaller town."
     ],
@@ -161,5 +251,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(town) A large town.",
+        "why": "In Turkish, 'şehir' does not have a separate sense for 'town'; merge into one sense."
+      }
+    ],
+    "growth": 0.842
   }
 }

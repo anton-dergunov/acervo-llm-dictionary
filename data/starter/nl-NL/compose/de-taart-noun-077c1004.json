@@ -68,6 +68,97 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "cake; pie; tart",
+    "primaryGloss": "cake",
+    "emotion": "warm and celebratory, looking forward to a sweet treat",
+    "notes": [
+      "'Taart' covers both layered celebration cakes and sweet baked pies or tarts (such as 'appeltaart'). For a loaf cake such as pound cake, Dutch uses 'cake'; for a biscuit or cookie, 'koek' or 'koekje'."
+    ],
+    "senses": [
+      {
+        "id": "gyds91jj2zvxl3x",
+        "order": 0,
+        "definition": "A large sweet baked food, often with cream, fruit, or icing, cut into slices and eaten at celebrations or with coffee.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cake",
+              "pie",
+              "tart",
+              "gateau"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "llcxucgaqwefd3b",
+            "text": "We eten morgen taart omdat opa jarig is.",
+            "textLang": "nl",
+            "translation": "We're having cake tomorrow because it's grandpa's birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheerful, anticipating a party",
+            "note": null,
+            "matchedForm": "taart",
+            "matchedTranslationForm": "cake"
+          },
+          {
+            "id": "38yex8ynl5whaue",
+            "text": "De bakker bakt een heerlijke taart met appels en kaneel.",
+            "textLang": "nl",
+            "translation": "The baker is baking a delicious pie with apples and cinnamon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "taart",
+            "matchedTranslationForm": "pie"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de taart",
+    "lemma": "taart",
+    "reading": null,
+    "ipa": "/taːrt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "cake; tart",
     "primaryGloss": "cake",
     "emotion": "warm and celebratory, looking forward to a sweet treat",
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Dutch 'taart' is one concept covering large cakes, pies, and tarts; splitting mirrors English."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "De bakker maakt heerlijke appeltaart met kaneel.",
+        "why": "Uses the compound 'appeltaart' rather than the word 'taart' itself."
+      }
+    ],
+    "growth": 1.005
   }
 }

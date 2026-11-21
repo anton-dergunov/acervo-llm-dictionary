@@ -58,6 +58,117 @@
     "headword": "밥",
     "lemma": "밥",
     "reading": null,
+    "ipa": "pap̚",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cooked rice; meal",
+    "primaryGloss": "cooked rice",
+    "emotion": "comforting and warm, like the smell of a freshly opened rice cooker",
+    "notes": [
+      "Refers to cooked rice; uncooked rice is '쌀'. When speaking to elders, use the honorific word '진지' instead of '밥'.",
+      "'밥 먹었어?' (Did you eat?) is a common everyday greeting in Korea, similar to asking how someone is doing."
+    ],
+    "senses": [
+      {
+        "id": "r1glrggm1hn4w7b",
+        "order": 0,
+        "definition": "Rice that has been boiled or steamed, eaten as a staple food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cooked rice",
+              "steamed rice",
+              "rice"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "p8eliw3xay5e1k0",
+            "text": "빵보다 밥이 더 좋아요.",
+            "textLang": "ko",
+            "translation": "I like rice better than bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "밥",
+            "matchedTranslationForm": "rice"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w25ndj40k47gowz",
+        "order": 1,
+        "definition": "An occasion when food is eaten, or the food eaten at that time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meal",
+              "food"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "330ryz4x5050tbq",
+            "text": "밥 먹었어?",
+            "textLang": "ko",
+            "translation": "Have you eaten?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and friendly, checking in with a close friend",
+            "note": null,
+            "matchedForm": "밥",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "밥",
+    "lemma": "밥",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must contrast '밥' (cooked rice) with '쌀' (uncooked rice) and mention honorific '진지'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "오늘 점심은 밥을 먹었어요.",
+        "why": "Ambiguous in Korean; natively understood as 'had lunch/a meal' rather than specifically 'cooked rice'."
+      }
+    ],
+    "growth": 0.94
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "sofa",
     "emotion": "relaxed and comfortable, settling down to rest after a long day",
     "notes": [
+      "The plural is los sofás. In Mexico, sillón (armchair) is often used informally to refer to a sofa as well."
+    ],
+    "senses": [
+      {
+        "id": "sn8h4hqj550lgb6",
+        "order": 0,
+        "definition": "A long, soft seat with a back and arms for several people to sit on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sofa",
+              "couch"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "rgq5n88z16r86fi",
+            "text": "Me gusta leer un libro en el sofá.",
+            "textLang": "es",
+            "translation": "I like to read a book on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and peaceful, enjoying a quiet moment",
+            "note": null,
+            "matchedForm": "sofá",
+            "matchedTranslationForm": "sofa"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el sofá",
+    "lemma": "sofá",
+    "reading": null,
+    "ipa": "/soˈfa/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "sofa; couch",
+    "primaryGloss": "sofa",
+    "emotion": "relaxed and comfortable, settling down to rest after a long day",
+    "notes": [
       "In Mexico and many other Spanish-speaking regions, 'sofá' and 'sillón' or 'cuch' are commonly used, though 'sofá' specifically refers to the long upholstered seat for multiple people."
     ],
     "senses": [
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Mexico and many other Spanish-speaking regions, 'sofá' and 'sillón' or 'cuch'",
+        "why": "'Cuch' is not a Spanish word; it is a hallucinated calque of 'couch'."
+      }
+    ],
+    "growth": 0.775
   }
 }

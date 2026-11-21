@@ -58,6 +58,116 @@
     "headword": "ลม",
     "lemma": "ลม",
     "reading": null,
+    "ipa": "/lom˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "wind; breeze; gas",
+    "primaryGloss": "wind",
+    "emotion": "refreshed and cool, feeling a pleasant breeze on a warm afternoon",
+    "notes": [
+      "Also appears in the very common expression เป็นลม, which literally means 'to become wind' but idiomatic for 'to faint' or 'to feel dizzy'."
+    ],
+    "senses": [
+      {
+        "id": "zeahd37zzr2r21b",
+        "order": 0,
+        "definition": "Moving air outside, such as a wind or breeze.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wind",
+              "breeze",
+              "air"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "xu6z8e3xq1momcf",
+            "text": "วันนี้ลมพัดแรงมาก",
+            "textLang": "th",
+            "translation": "The wind is blowing very hard today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ลม",
+            "matchedTranslationForm": "wind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jebztzrw4wmqgow",
+        "order": 1,
+        "definition": "Gas in the stomach or intestines.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gas",
+              "flatulence"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🫧",
+        "examples": [
+          {
+            "id": "xmuinn6u8j5pzrw",
+            "text": "ฉันรู้สึกว่ามีลมในท้อง",
+            "textLang": "th",
+            "translation": "I feel like I have gas in my stomach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ลม",
+            "matchedTranslationForm": "gas"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ลม",
+    "lemma": "ลม",
+    "reading": null,
     "ipa": "/lom/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[1].examples[0].text",
+        "quote": "ฉันรู้สึกมีลม in ท้อง",
+        "why": "Contains the English word 'in' instead of Thai 'ใน'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Thai, 'ลม' is used not only for weather like wind",
+        "why": "Merely restates the two senses; misses important expressions like เป็นลม (to faint)."
+      }
+    ],
+    "growth": 1.094
   }
 }

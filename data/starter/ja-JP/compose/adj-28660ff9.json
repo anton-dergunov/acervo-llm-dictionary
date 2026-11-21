@@ -57,6 +57,118 @@
     "language": "ja",
     "headword": "辛い",
     "lemma": "辛い",
+    "reading": "からい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌶️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "spicy; hot; salty; tough",
+    "primaryGloss": "spicy",
+    "emotion": "a sharp, burning sensation that makes you want to reach for water",
+    "notes": [
+      "The spelling 辛い represents two common words: からい (karai, 'spicy; salty') and つらい (tsurai, 'painful; tough to bear'). Because of this, つらい is often written in hiragana."
+    ],
+    "senses": [
+      {
+        "id": "s6fmiaipk94lmzm",
+        "order": 0,
+        "definition": "(read からい) having a hot, burning taste from spices such as chili or wasabi, or having too much salt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spicy",
+              "hot",
+              "salty"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "🌶️",
+        "examples": [
+          {
+            "id": "x0g7brk97686003",
+            "text": "このカレーはとても辛いです。",
+            "textLang": "ja",
+            "translation": "This curry is very spicy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised by the intensity, mouth puckering slightly",
+            "note": null,
+            "matchedForm": "辛い",
+            "matchedTranslationForm": "spicy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "28xjaae9yeu7ajh",
+        "order": 1,
+        "definition": "(read つらい) causing emotional or physical pain; hard to bear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "painful",
+              "tough",
+              "hard",
+              "heartbreaking"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "😫",
+        "examples": [
+          {
+            "id": "50qbsk5143yrq9a",
+            "text": "毎日残業するのは辛いです。",
+            "textLang": "ja",
+            "translation": "Working overtime every day is tough.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "辛い",
+            "matchedTranslationForm": "tough"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "辛い",
+    "lemma": "辛い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -163,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[2]",
+        "quote": "use the kanji 辛い with the okurigana 辛い, but 'karai' is often",
+        "why": "Nonsensical, repetitive statement about kanji and okurigana."
+      },
+      {
+        "severity": 2,
+        "category": "new:homograph-conflation",
+        "path": "senses",
+        "quote": "",
+        "why": "Conflates two distinct Japanese words (からい 'spicy/salty' and つらい 'painful') that share kanji."
+      }
+    ],
+    "growth": 0.815
   }
 }

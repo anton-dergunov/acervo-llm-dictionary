@@ -57,6 +57,118 @@
     "language": "ja",
     "headword": "味わう",
     "lemma": "味わう",
+    "reading": "あじわう",
+    "ipa": "adʑiwaɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to savor; to experience",
+    "primaryGloss": "savor",
+    "emotion": "contented and focused, lingering over a pleasant sensation",
+    "notes": [
+      "Godan verb (味わわない, 味わいます, 味わって). Transitive, taking を.",
+      "In Sense 2, it can be used for both positive and negative feelings (e.g. 苦労を味わう, to experience hardship)."
+    ],
+    "senses": [
+      {
+        "id": "264doa029vge4jo",
+        "order": 0,
+        "definition": "To eat or drink slowly to appreciate the flavor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "savor",
+              "taste",
+              "enjoy"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "tfw8lgegbisrcz9",
+            "text": "ゆっくりとスープを味わう。",
+            "textLang": "ja",
+            "translation": "I slowly savor the soup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and appreciative, focusing entirely on the meal",
+            "note": null,
+            "matchedForm": "味わう",
+            "matchedTranslationForm": "savor"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "veechzyrgt2w3lu",
+        "order": 1,
+        "definition": "To deeply experience or feel an emotion or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "experience",
+              "savor",
+              "feel"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "1agw5vplmherwue",
+            "text": "勝利の喜びを味わった。",
+            "textLang": "ja",
+            "translation": "We savored the joy of victory.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "味わった",
+            "matchedTranslationForm": "savored"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "味わう",
+    "lemma": "味わう",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing required hiragana reading (あじわう) for a word with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To fully experience or enjoy an event or feeling.",
+        "why": "Also commonly used for negative feelings like defeat, pain, or hardship, not just enjoying."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I enjoy the joy of victory.",
+        "why": "Awkward repetitive English phrasing ('enjoy the joy')."
+      }
+    ],
+    "growth": 1.0
   }
 }

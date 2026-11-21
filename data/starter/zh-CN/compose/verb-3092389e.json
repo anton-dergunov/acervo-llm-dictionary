@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wait; when (in the future)",
+    "primaryGloss": "to wait",
+    "emotion": "patient and quiet, standing still while time passes",
+    "notes": [
+      "Often reduplicated as 等等 (děngdeng) or 等一下 (děng yīxià) to mean 'wait a moment'.",
+      "As a particle after a list of nouns, 等 means 'and so on' or 'etc.'."
+    ],
+    "senses": [
+      {
+        "id": "olwsekxlzzq2p63",
+        "order": 0,
+        "definition": "To stay in a place or delay acting until someone arrives or something happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wait",
+              "to wait for"
+            ]
+          }
+        ],
+        "domain": "waiting",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "0ifdupioepplcj4",
+            "text": "我在车站等朋友。",
+            "textLang": "zh",
+            "translation": "I am waiting for a friend at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking around patiently for someone to arrive",
+            "note": null,
+            "matchedForm": "等",
+            "matchedTranslationForm": "waiting for"
+          },
+          {
+            "id": "s9urom7t8e35ojb",
+            "text": "你先吃吧，不用等我回来。",
+            "textLang": "zh",
+            "translation": "Go ahead and eat, you don't need to wait for me to come back.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and considerate, telling someone not to delay their meal",
+            "note": null,
+            "matchedForm": "等",
+            "matchedTranslationForm": "wait for"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lxrtag481o6xjzk",
+        "order": 1,
+        "definition": "Used before a clause to indicate the time when a future condition is met, often followed by 再 (zài).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "when",
+              "once",
+              "after"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "opl8osxygrasclc",
+            "text": "等雨停了我们再走吧。",
+            "textLang": "zh",
+            "translation": "Let's leave once the rain stops.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "等",
+            "matchedTranslationForm": "once"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "等",
+    "lemma": "等",
+    "reading": "děng",
+    "ipa": "/təŋ˨˩˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wait; to wait until",
     "primaryGloss": "wait",
     "emotion": "patient and quiet, standing still while time passes",
@@ -160,5 +292,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To stay until something happens.",
+        "why": "Sense 1's example is just Sense 0 ('wait for') with a clausal object."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to mean waiting for a person, a time, or waiting until",
+        "why": "Restates the definitions without explaining useful grammar or the particle 等 (etc.)."
+      }
+    ],
+    "growth": 1.573
   }
 }

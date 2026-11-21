@@ -72,6 +72,117 @@
     "primaryGloss": "busy",
     "emotion": "hurried and focused, with too much to finish before the day ends",
     "notes": [
+      "Often used with the verb 'etmek' ('meşgul etmek' = to keep someone busy or take up their time) and 'olmak' ('meşgul olmak' = to be busy with, taking 'ile' / '-(y)le').",
+      "Takes front-vowel suffixes despite ending in the back vowel 'u' (e.g., 'meşgulüm' = I am busy)."
+    ],
+    "senses": [
+      {
+        "id": "1rtyzp9ec2kms3t",
+        "order": 0,
+        "definition": "Of a person: having a lot to do; occupied with work or an activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "occupied"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🏃",
+        "examples": [
+          {
+            "id": "0sb9j1hdz7h45c3",
+            "text": "Bugün çok meşgulüm, akşam görüşelim.",
+            "textLang": "tr",
+            "translation": "I am very busy today, let's meet in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and rushed, explaining why there is no time right now",
+            "note": null,
+            "matchedForm": "meşgulüm",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "urrjjjfk2l5pbho",
+        "order": 1,
+        "definition": "Of a telephone line or place: currently in use by someone else.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "engaged",
+              "occupied"
+            ]
+          }
+        ],
+        "domain": "availability",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "3efri40y76lc1zu",
+            "text": "Seni aradım ama telefonun sürekli meşgul çalıyor.",
+            "textLang": "tr",
+            "translation": "I called you, but your phone keeps ringing busy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "meşgul",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "meşgul",
+    "lemma": "meşgul",
+    "reading": null,
+    "ipa": "/meʃˈɡul/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "busy; occupied",
+    "primaryGloss": "busy",
+    "emotion": "hurried and focused, with too much to finish before the day ends",
+    "notes": [
       "Meşgul is commonly used to describe someone who has a lot of work or tasks to handle at the moment.",
       "It can also mean that a phone line or a physical space is currently occupied or in use."
     ],
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Meşgul is commonly used to describe someone who has a lot of",
+        "why": "Both notes merely restate the definitions of the two senses instead of giving grammar help."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Telefonu aradım ama sürekli meşgul çalıyor.",
+        "why": "'Telefonu aradım' is unnatural in Turkish; one calls a person or says the line rings busy."
+      }
+    ],
+    "growth": 1.177
   }
 }

@@ -68,6 +68,96 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry",
+    "primaryGloss": "dry",
+    "emotion": "crisp and dusty, feeling the lack of moisture in the air",
+    "notes": [
+      "Also used of wine that is not sweet: сухое вино (dry wine).",
+      "To say 'it is dry' about the weather or a place, use the impersonal form сухо: На улице сухо (It is dry outside)."
+    ],
+    "senses": [
+      {
+        "id": "61ad1sp5m8sjd5o",
+        "order": 0,
+        "definition": "Free from moisture, liquid, or rain; not wet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "arid"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "🏜️",
+        "examples": [
+          {
+            "id": "59pkzczrzj26sun",
+            "text": "Возьми сухое полотенце.",
+            "textLang": "ru",
+            "translation": "Take a dry towel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "сухое",
+            "matchedTranslationForm": "dry"
+          },
+          {
+            "id": "frleqst3c548lsb",
+            "text": "Этим летом была очень сухая погода.",
+            "textLang": "ru",
+            "translation": "This summer the weather was very dry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "complaining about the heat and lack of rain",
+            "note": null,
+            "matchedForm": "сухая",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "сухой",
+    "lemma": "сухой",
+    "reading": null,
+    "ipa": "/sʊˈxoj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; arid; thin",
     "primaryGloss": "dry",
     "emotion": "crisp and dusty, feeling the lack of moisture in the air",
@@ -201,5 +291,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(weather) Having little or no rain; arid.",
+        "why": "Dry weather and dry objects are one basic meaning for beginners."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(person) Lean and thin in build.",
+        "why": "Literary/dated sense; 'сухощавый' or 'худой' is standard at A2."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "После дождя асфальт быстро стал сухой.",
+        "why": "After 'стал', the instrumental 'сухим' (or the verb 'высох') is standard, not nominative."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe things that have no water or moisture",
+        "why": "Restates the definition; better to note the short form 'сух/суха/сухо' or 'сухое вино'."
+      }
+    ],
+    "growth": 0.745
   }
 }

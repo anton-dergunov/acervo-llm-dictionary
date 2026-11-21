@@ -58,6 +58,95 @@
     "headword": "رُبَّمَا",
     "lemma": "رُبَّمَا",
     "reading": null,
+    "ipa": "/ˈrub.ba.maː/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤔",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "perhaps; maybe",
+    "primaryGloss": "perhaps",
+    "emotion": null,
+    "notes": [
+      "Can be followed directly by a verb (present for future/present possibility, past for past possibility) or by a noun/pronoun."
+    ],
+    "senses": [
+      {
+        "id": "1wjaghvp9uliee9",
+        "order": 0,
+        "definition": "Used to say that something may happen or may be true.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "perhaps",
+              "maybe"
+            ]
+          }
+        ],
+        "domain": "possibility",
+        "emoji": "🤔",
+        "examples": [
+          {
+            "id": "cgnyis97kn66mtf",
+            "text": "رُبَّمَا نُسَافِرُ غَدًا.",
+            "textLang": "ar",
+            "translation": "Perhaps we will travel tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "رُبَّمَا",
+            "matchedTranslationForm": "Perhaps"
+          },
+          {
+            "id": "vmrcidcivbzx9xq",
+            "text": "رُبَّمَا كَانَ عَلَى حَقٍّ.",
+            "textLang": "ar",
+            "translation": "Perhaps he was right.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective, considering a different perspective on the past",
+            "note": null,
+            "matchedForm": "رُبَّمَا",
+            "matchedTranslationForm": "Perhaps"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رُبَّمَا",
+    "lemma": "رُبَّمَا",
+    "reading": null,
     "ipa": "/ˈrubbama/",
     "pos": "adv",
     "gender": null,
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "رُبَّمَا نَسَافِرُ غَدًا.",
+        "why": "Incorrect vowelization on the verb: Form III يُسَافِرُ takes a ḍammah (نُسَافِرُ), not نَسَافِرُ."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is often followed by a verb in the past tense, even when referring to the future",
+        "why": "In MSA, رُبَّمَا + past tense refers to past or present, whereas future takes the imperfect (مُضَارِع)."
+      }
+    ],
+    "growth": 0.657
   }
 }

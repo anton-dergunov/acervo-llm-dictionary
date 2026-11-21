@@ -60,6 +60,137 @@
     "reading": null,
     "ipa": "/svʲet/",
     "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "light, electricity; world",
+    "primaryGloss": "light",
+    "emotion": "bright and welcoming, flicking a switch as you walk into a room",
+    "notes": [
+      "Singular only. Takes the ending -у in the prepositional case after в and на in the literal sense: стоять на свету (to stand in the light).",
+      "In everyday speech, свет also means home electricity: включить/выключить свет (to turn the light on/off), отключили свет (the power went out)."
+    ],
+    "senses": [
+      {
+        "id": "i7h7mry1yms9xz9",
+        "order": 0,
+        "definition": "Brightness from the sun, a lamp, or fire that lets you see things; electric lighting or power in a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lighting",
+              "electricity"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "nrkbh7xeekvtc2d",
+            "text": "В комнате мало света.",
+            "textLang": "ru",
+            "translation": "There is little light in the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gloomy and squinting in a dim room",
+            "note": null,
+            "matchedForm": "света",
+            "matchedTranslationForm": "light"
+          },
+          {
+            "id": "0gwi8cn6txnxmee",
+            "text": "У нас вчера вечером отключили свет.",
+            "textLang": "ru",
+            "translation": "Our power was cut off last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "свет",
+            "matchedTranslationForm": "power"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8v0qauw8s5fwbgq",
+        "order": 1,
+        "definition": "The Earth and everyone living on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "world"
+            ]
+          }
+        ],
+        "domain": "world",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "kn3h36jv4rfzrdx",
+            "text": "Он объездил весь свет.",
+            "textLang": "ru",
+            "translation": "He traveled all over the world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "amazed and telling stories of distant lands",
+            "note": null,
+            "matchedForm": "свет",
+            "matchedTranslationForm": "world"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "свет",
+    "lemma": "свет",
+    "reading": null,
+    "ipa": "/svʲet/",
+    "pos": "noun",
     "gender": "neuter",
     "register": "neutral",
     "dialect": null,
@@ -160,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "gender",
+        "quote": "neuter",
+        "why": "свет is a masculine noun, not neuter."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Свет means both physical light (like sunshine or a lamp) and the",
+        "why": "Restates the definitions; missing note on uncountable grammar and locative -у (на свету)."
+      }
+    ],
+    "growth": 1.524
   }
 }

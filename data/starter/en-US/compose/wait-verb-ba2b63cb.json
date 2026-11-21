@@ -72,6 +72,96 @@
     "primaryGloss": "esperar",
     "emotion": "tranquilo y paciente, dispuesto a pasar el tiempo hasta que ocurra algo",
     "notes": [
+      "Cuando esperas a alguien o algo, siempre debes usar la preposición 'for': 'wait for me' (espérame), 'wait for the bus' (esperar el autobús).",
+      "En español 'esperar' tiene varios significados, pero 'wait' solo es permanecer en un lugar hasta que pase algo. Para 'tener la esperanza', usa 'hope', y para 'creer que algo pasará', usa 'expect'."
+    ],
+    "senses": [
+      {
+        "id": "6h4g6i4jb212csr",
+        "order": 0,
+        "definition": "Permanecer en un sitio o no hacer nada hasta que llegue alguien o ocurra algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "esperar",
+              "aguardar"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "enhxd93kajuw48i",
+            "text": "I will wait here until the bus arrives.",
+            "textLang": "en",
+            "translation": "Esperaré aquí hasta que llegue el autobús.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calmado y seguro, sin prisa por lo que vendrá después",
+            "note": null,
+            "matchedForm": "wait",
+            "matchedTranslationForm": "Esperaré"
+          },
+          {
+            "id": "yqcqaitiy0f5vye",
+            "text": "Can you wait for me for five minutes?",
+            "textLang": "en",
+            "translation": "¿Puedes esperarme cinco minutos?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "un poco impaciente pero amable, pidiendo un favor rápido",
+            "note": null,
+            "matchedForm": "wait",
+            "matchedTranslationForm": "esperarme"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "wait",
+    "lemma": "wait",
+    "reading": null,
+    "ipa": "/weɪt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "esperar; aguardar",
+    "primaryGloss": "esperar",
+    "emotion": "tranquilo y paciente, dispuesto a pasar el tiempo hasta que ocurra algo",
+    "notes": [
       "Se confunde a menudo con 'await', pero 'await' es mucho más formal y se usa casi exclusivamente en contextos literarios o escritos. 'Wait' es la palabra cotidiana que se usa en cualquier situación."
     ],
     "senses": [
@@ -140,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se confunde a menudo con 'await'",
+        "why": "A2 learners rarely confuse it with 'await'; they confuse it with 'hope'/'expect' (Spanish 'esperar') and omit 'for'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain 'wait for' (someone/something) and contrast with 'hope'/'expect' for Spanish speakers."
+      }
+    ],
+    "growth": 1.313
   }
 }

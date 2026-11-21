@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "diente, muela",
+    "primaryGloss": "diente",
+    "emotion": "matter-of-fact and direct, pointing something out naturally",
+    "notes": [
+      "El plural es irregular: «teeth» (nunca «toothes»)."
+    ],
+    "senses": [
+      {
+        "id": "m87faaapi3s7ohq",
+        "order": 0,
+        "definition": "Cada una de las piezas duras y blancas que tenemos en la boca para masticar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "diente",
+              "muela"
+            ]
+          }
+        ],
+        "domain": "anatomía",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "kiriwg11jimbvkr",
+            "text": "He lost a tooth while eating an apple.",
+            "textLang": "en",
+            "translation": "Perdió un diente mientras comía una manzana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly surprised and amused, telling a small personal story",
+            "note": null,
+            "matchedForm": "tooth",
+            "matchedTranslationForm": "diente"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "tooth",
+    "lemma": "tooth",
+    "reading": null,
+    "ipa": "/tuːθ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "diente; pieza de un engranaje",
     "primaryGloss": "diente",
     "emotion": "matter-of-fact and direct, pointing something out naturally",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Perdí un diente mientras comía una manzana.",
+        "why": "Translates third-person 'He lost' as first-person 'Perdí'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Parte saliente y en forma de diente en una rueda dentada",
+        "why": "Mechanical gear sense is too technical and marginal for A2; burdens shortGloss."
+      }
+    ],
+    "growth": 0.505
   }
 }

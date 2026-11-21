@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "monkey",
+    "primaryGloss": "monkey",
+    "emotion": "playful and lively, like pointing out something energetic at the zoo",
+    "notes": [
+      "In everyday Mexican Spanish, 'chango' is also very commonly used to mean 'monkey'."
+    ],
+    "senses": [
+      {
+        "id": "cfsxb37x777eu7l",
+        "order": 0,
+        "definition": "An animal with a long tail that lives in warm countries and climbs trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "8v7hi1imua5nys7",
+            "text": "El mono salta de rama en rama en la selva.",
+            "textLang": "es",
+            "translation": "The monkey jumps from branch to branch in the jungle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and curious, watching a quick movement",
+            "note": null,
+            "matchedForm": "mono",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el mono",
+    "lemma": "mono",
+    "reading": null,
+    "ipa": "/ˈmono/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "monkey; jumpsuit; cute",
     "primaryGloss": "monkey",
     "emotion": "playful and lively, like pointing out something energetic at the zoo",
@@ -201,5 +268,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "Used as an adjective to describe someone or something that is attractive,",
+        "why": "Adjective sense does not belong in a noun entry ('el mono')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A single piece of clothing that covers the body, including the legs",
+        "why": "Peninsular Spanish usage; in Mexico a jumpsuit/overalls is 'overol', not 'mono'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "monkey; jumpsuit; cute",
+        "why": "Includes non-Mexican sense ('jumpsuit') and adjective sense ('cute')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In Mexico, 'tener mono' is not commonly used for the animal; stick",
+        "why": "Bizarre and unhelpful note about a Peninsular slang idiom ('tener mono')."
+      }
+    ],
+    "growth": 0.299
   }
 }

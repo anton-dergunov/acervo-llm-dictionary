@@ -72,6 +72,137 @@
     "primaryGloss": "corner",
     "emotion": "standing on a street corner, waiting for someone and looking around",
     "notes": [
+      "Notice the prepositions: 'au coin de la rue' (on/at the corner of the street), but 'dans le coin' (in the corner of a room, or informal for 'around here')."
+    ],
+    "senses": [
+      {
+        "id": "97vp6oec1ja0wck",
+        "order": 0,
+        "definition": "The place or angle where two streets, walls, or edges meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner",
+              "nook"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📐",
+        "examples": [
+          {
+            "id": "rtcms02po3v8th5",
+            "text": "Il m'attend au coin de la rue.",
+            "textLang": "fr",
+            "translation": "He is waiting for me at the corner of the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking down the street to spot a friend",
+            "note": null,
+            "matchedForm": "coin",
+            "matchedTranslationForm": "corner"
+          },
+          {
+            "id": "jmhwxpjm21l81ct",
+            "text": "Le fauteuil est dans le coin du salon.",
+            "textLang": "fr",
+            "translation": "The armchair is in the corner of the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing the layout of a cozy room",
+            "note": null,
+            "matchedForm": "coin",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "450o43wu4ni0fr2",
+        "order": 1,
+        "definition": "An informal word for a local area, neighborhood, or spot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "area",
+              "neighborhood",
+              "spot"
+            ]
+          }
+        ],
+        "domain": "area",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "1lh2qt5d8iamfbk",
+            "text": "C'est un joli coin pour se promener.",
+            "textLang": "fr",
+            "translation": "It's a nice area to go for a walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciating a peaceful local spot",
+            "note": null,
+            "matchedForm": "coin",
+            "matchedTranslationForm": "area"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le coin",
+    "lemma": "coin",
+    "reading": null,
+    "ipa": "/kwɛ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📐",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "corner; area, neighborhood",
+    "primaryGloss": "corner",
+    "emotion": "standing on a street corner, waiting for someone and looking around",
+    "notes": [
       "« Coin » can mean both a geometric corner, a street corner, and an informal neighborhood or area (« le coin »)."
     ],
     "senses": [
@@ -201,5 +332,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (street) ... [1] (home)",
+        "why": "Street corner and room corner are both translated as 'corner' and should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "« Coin » can mean both a geometric corner, a street corner, and an informal neighborhood",
+        "why": "Merely restates the senses without adding usage information."
+      }
+    ],
+    "growth": 1.011
   }
 }

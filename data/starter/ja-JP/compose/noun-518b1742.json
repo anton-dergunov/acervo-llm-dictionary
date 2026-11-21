@@ -62,6 +62,73 @@
     "headword": "ポケット",
     "lemma": "ポケット",
     "reading": null,
+    "ipa": "poketto",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "ポ",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pocket",
+    "primaryGloss": "pocket",
+    "emotion": null,
+    "notes": [
+      "In casual conversation, it is sometimes shortened to ポケ (especially in compounds) or ポッケ (informal/childish)."
+    ],
+    "senses": [
+      {
+        "id": "hrd6mz9xw4ft7tx",
+        "order": 0,
+        "definition": "A small pouch sewn into or onto clothing or a bag for carrying small items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pocket"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🪡",
+        "examples": [
+          {
+            "id": "uykvn5dsgxw8w94",
+            "text": "スマホをポケットに入れる。",
+            "textLang": "ja",
+            "translation": "I put my smartphone in my pocket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the simple action of storing an item",
+            "note": null,
+            "matchedForm": "ポケット",
+            "matchedTranslationForm": "pocket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "ポケット",
+    "lemma": "ポケット",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -163,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A small, isolated area or group that is different from its surroundings.",
+        "why": "English semantic calque; ポケット is not used this way in Japanese."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is also used metaphorically in Japan to describe small, isolated areas",
+        "why": "False claim based on English 'pocket of...', not Japanese usage."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pocket; small space",
+        "why": "Includes the false 'small space' sense."
+      }
+    ],
+    "growth": 0.422
   }
 }

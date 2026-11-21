@@ -73,6 +73,74 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "mountain",
+    "primaryGloss": "mountain",
+    "emotion": null,
+    "notes": [
+      "In Mexico, 'cerro' is very commonly used for hills and even fairly tall mountains, while 'montaña' refers to large mountains or mountain ranges."
+    ],
+    "senses": [
+      {
+        "id": "j020cbpdrpaf996",
+        "order": 0,
+        "definition": "A very high, large natural elevation of the earth's surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "2zefks4suvjvbnd",
+            "text": "Desde aquí se ven las montañas cubiertas de nieve.",
+            "textLang": "es",
+            "translation": "From here you can see the snow-covered mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "montañas",
+            "matchedTranslationForm": "mountains"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la montaña",
+    "lemma": "montaña",
+    "reading": null,
+    "ipa": "/monˈtaɲa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "mountain; large hill",
     "primaryGloss": "mountain",
     "emotion": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(hill) A very high hill.",
+        "why": "Artificial split; in Mexico a hill is 'cerro' or 'colina', not a separate sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can be used for very high hills. If you want to",
+        "why": "Misleading; in Mexico 'cerro' is the everyday word for hills and many mountains."
+      }
+    ],
+    "growth": 1.053
   }
 }

@@ -68,6 +68,76 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "car; vehicle",
+    "primaryGloss": "car",
+    "emotion": "everyday and practical, the feeling of getting from one place to another",
+    "notes": [
+      "The everyday word for 'car'. 自動車 (じどうしゃ, jidōsha, 'automobile') is more formal or official.",
+      "Take the particle に (ni) when getting in (車に乗る, 'get in a car') and を (o) or から (kara) when getting out (車を降りる, 'get out of a car')."
+    ],
+    "senses": [
+      {
+        "id": "uacco0xx94ofsdo",
+        "order": 0,
+        "definition": "A road vehicle with an engine and four wheels that carries a small number of people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "car",
+              "automobile",
+              "vehicle"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "68o7ophqqjnox21",
+            "text": "車で駅まで行きます。",
+            "textLang": "ja",
+            "translation": "I will go to the station by car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the transit plan",
+            "note": null,
+            "matchedForm": "車",
+            "matchedTranslationForm": "car"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "車",
+    "lemma": "車",
+    "reading": "くるま",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "car; vehicle; wheel",
     "primaryGloss": "car",
     "emotion": "everyday and practical, the feeling of getting from one place to another",
@@ -162,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A wheel or a generic wheeled machine.",
+        "why": "Standalone 車 rarely means 'wheel' or 'cart' in modern everyday Japanese; marginal for A2."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "車の輪を修理する。",
+        "why": "Unnatural and archaic phrasing; 'wheel' is 車輪 (sharin), not 車の輪."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'kuruma' most commonly refers to a car, it can also refer",
+        "why": "Restates the glosses without giving useful usage information."
+      }
+    ],
+    "growth": 0.738
   }
 }

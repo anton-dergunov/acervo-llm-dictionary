@@ -68,6 +68,114 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "arm; armrest",
+    "primaryGloss": "arm",
+    "emotion": "warm and friendly, gesturing toward someone",
+    "notes": [
+      "For the whole limb (arm and hand together), anatomy and formal contexts use 'miembro superior', while everyday speech distinguishes 'brazo' (shoulder to wrist) from 'mano' (hand)."
+    ],
+    "senses": [
+      {
+        "id": "ng97lfid9pmwjsc",
+        "order": 0,
+        "definition": "The limb of the human body that extends from the shoulder to the hand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "6iv4fast6s32pcu",
+            "text": "Levantó el brazo para saludar a sus amigos.",
+            "textLang": "es",
+            "translation": "He raised his arm to greet his friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and energetic, calling out from a distance",
+            "note": null,
+            "matchedForm": "brazo",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s27fuzya17mdj88",
+        "order": 1,
+        "definition": "The side part of a chair or sofa on which you rest your arm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm",
+              "armrest"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "qjnjyv8gzcjbc8u",
+            "text": "Se sentó en el brazo del sillón.",
+            "textLang": "es",
+            "translation": "He sat on the arm of the armchair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "brazo",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el brazo",
+    "lemma": "brazo",
+    "reading": null,
+    "ipa": "/ˈbɾa.so/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "arm; sleeve",
     "primaryGloss": "arm",
     "emotion": "warm and friendly, gesturing toward someone",
@@ -158,5 +266,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(clothing) The part of a piece of clothing that covers the arm.",
+        "why": "'Brazo' does not mean 'sleeve' (which is 'manga', as the example itself shows)."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Se manchó la manga de la camisa en el brazo.",
+        "why": "Uses 'manga' for sleeve and 'brazo' for the body part."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers specifically to the upper limb from the shoulder to the hand.",
+        "why": "Merely restates the definition of sense 0."
+      }
+    ],
+    "growth": 1.262
   }
 }

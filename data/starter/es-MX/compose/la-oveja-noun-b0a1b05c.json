@@ -72,6 +72,75 @@
     "primaryGloss": "sheep",
     "emotion": "gentle and pastoral, observing a peaceful grazing field",
     "notes": [
+      "In Mexico, 'el borrego' is very commonly used in everyday speech for a sheep, though 'la oveja' is understood everywhere.",
+      "Do not confuse with 'la abeja' (bee)."
+    ],
+    "senses": [
+      {
+        "id": "pi9ucg786ye7lty",
+        "order": 0,
+        "definition": "A farm animal with thick wool raised for its fleece, meat, or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep",
+              "ewe"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "eyxiiz6til2t70i",
+            "text": "La oveja pasta tranquilamente en el campo.",
+            "textLang": "es",
+            "translation": "The sheep grazes peacefully in the field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching a slow moment in the countryside",
+            "note": null,
+            "matchedForm": "oveja",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la oveja",
+    "lemma": "oveja",
+    "reading": null,
+    "ipa": "/oˈβexa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "sheep",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and pastoral, observing a peaceful grazing field",
+    "notes": [
       "While 'la oveja' refers to the animal, remember that 'la lana' is the word for the wool it produces.",
       "Do not confuse this with 'el ovejo' or 'el borrego', which are sometimes used in specific regions or for younger sheep; 'oveja' is the most standard term for the animal."
     ],
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'el ovejo' or 'el borrego', which are",
+        "why": "In Mexico, 'el borrego' is actually the most common everyday word for sheep."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'la oveja' refers to the animal, remember that 'la lana' is",
+        "why": "Unnecessary vocabulary tangent; better to note the spelling/sound contrast with 'abeja'."
+      }
+    ],
+    "growth": 0.735
   }
 }

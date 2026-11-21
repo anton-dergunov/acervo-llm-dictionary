@@ -58,6 +58,74 @@
     "headword": "omdat",
     "lemma": "omdat",
     "reading": null,
+    "ipa": "/ɔmˈdɑt/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "'Omdat' introduces a subordinate clause, so the verb goes to the end of that clause. Compare 'want' (also 'because'), which keeps normal main-clause word order."
+    ],
+    "senses": [
+      {
+        "id": "lf9dhux2ls8n3tt",
+        "order": 0,
+        "definition": "For the reason that; used to introduce a clause explaining why something happens or is the case.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "🔗",
+        "examples": [
+          {
+            "id": "qen15ddefzyyn8n",
+            "text": "Ik blijf thuis omdat ik moe ben.",
+            "textLang": "nl",
+            "translation": "I am staying home because I am tired.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact, explaining a simple choice simply",
+            "note": null,
+            "matchedForm": "omdat",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "omdat",
+    "lemma": "omdat",
+    "reading": null,
     "ipa": "/ˈɔmdɑt/",
     "pos": "expression",
     "gender": null,
@@ -119,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'omdat' is a single-word subordinating conjunction, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɔmdɑt/",
+        "why": "Primary stress in 'omdat' is on the second syllable: /ɔmˈdɑt/."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should contrast 'omdat' (subordinating, verb at end) with 'want' (coordinating, normal word order)."
+      }
+    ],
+    "growth": 0.935
   }
 }

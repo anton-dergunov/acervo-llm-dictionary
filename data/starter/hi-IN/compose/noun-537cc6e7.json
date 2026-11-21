@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "moon",
+    "primaryGloss": "moon",
+    "emotion": "wistful and calm, admiring the beauty of the night sky",
+    "notes": [
+      "'चाँद' is the everyday word for the moon; 'चंद्रमा' (candramā) is its formal and scientific synonym."
+    ],
+    "senses": [
+      {
+        "id": "jxaftoxlnhokmfo",
+        "order": 0,
+        "definition": "The natural satellite of the Earth that shines in the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "moon"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "oyhutndq8hrdxxj",
+            "text": "आज रात चाँद बहुत सुंदर दिख रहा है।",
+            "textLang": "hi",
+            "translation": "The moon looks very beautiful tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and appreciative, gazing up at a clear night sky",
+            "note": null,
+            "matchedForm": "चाँद",
+            "matchedTranslationForm": "moon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "चाँद",
+    "lemma": "चाँद",
+    "reading": null,
+    "ipa": "/t͡ʃɑ̃ːd̪/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "moon; lunar month",
     "primaryGloss": "moon",
     "emotion": "wistful and calm, admiring the beauty of the night sky",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "moon; lunar month",
+        "why": "Includes 'lunar month', which is not in the senses (and is an Urdu sense)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A term of endearment, often used for a loved one",
+        "why": "Forced sense with an unnatural example ('मेरा चाँद' is normally 'मेरे चाँद का टुकड़ा')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "The word is also used to refer to the 'lunar month'",
+        "why": "In Hindi, चाँद does not mean 'month'; that is a poetic or Urdu usage."
+      }
+    ],
+    "growth": 0.386
   }
 }

@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "soup",
+    "primaryGloss": "soup",
+    "emotion": "warm and comforting, smelling something delicious in the kitchen",
+    "notes": [
+      "Dutch speakers generally say 'soep eten' (to eat soup) rather than 'drinken' (to drink).",
+      "In the idiom 'in de soep lopen', it means to go wrong or fall through (e.g., 'Onze plannen zijn in de soep gelopen')."
+    ],
+    "senses": [
+      {
+        "id": "6gfku66zs395vu3",
+        "order": 0,
+        "definition": "A liquid dish, typically served warm, made by cooking vegetables, meat, or fish in water or stock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "xm8ylb2raldl1si",
+            "text": "Ik eet vanavond een kom verse tomatensoep.",
+            "textLang": "nl",
+            "translation": "I am eating a bowl of fresh tomato soup tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tomatensoep",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de soep",
+    "lemma": "soep",
+    "reading": null,
+    "ipa": "/sup/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "soup; mess",
     "primaryGloss": "soup",
     "emotion": "warm and comforting, smelling something delicious in the kitchen",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A chaotic, unorganized, or messy situation.",
+        "why": "Primarily Belgian Dutch or fixed in idioms ('in de soep lopen'); marginal as standalone noun."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "soup; mess",
+        "why": "'mess' should be dropped along with the marginal second sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike in some languages, 'soep' is not used to describe physical liquids",
+        "why": "Bizarre and unhelpful comparison that no learner needs."
+      }
+    ],
+    "growth": 0.71
   }
 }

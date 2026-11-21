@@ -72,6 +72,157 @@
     "primaryGloss": "light",
     "emotion": "a sense of ease and lack of burden, clear and airy",
     "notes": [
+      "For light colors (e.g., light blue), use 'claro' ('azul claro'), not 'ligero'."
+    ],
+    "senses": [
+      {
+        "id": "flknhbwkseuwlbv",
+        "order": 0,
+        "definition": "Not heavy; weighing very little, or easy to digest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "m3j79vofr3psd1t",
+            "text": "Esta maleta es muy ligera.",
+            "textLang": "es",
+            "translation": "This suitcase is very light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised that it is not heavy",
+            "note": null,
+            "matchedForm": "ligera",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iaj8jpklscpj2wn",
+        "order": 1,
+        "definition": "Small in amount, degree, or intensity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slight",
+              "mild",
+              "light"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": "🌬️",
+        "examples": [
+          {
+            "id": "pjtrw3dfv8mf92z",
+            "text": "Sentí una ligera brisa en la cara.",
+            "textLang": "es",
+            "translation": "I felt a slight breeze on my face.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and appreciative of the weather",
+            "note": null,
+            "matchedForm": "ligera",
+            "matchedTranslationForm": "slight"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ymf4i7tan24lex8",
+        "order": 2,
+        "definition": "Moving or acting with speed and agility.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quick",
+              "nimble",
+              "agile"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "👟",
+        "examples": [
+          {
+            "id": "g24gueu4qtmk91u",
+            "text": "El atleta tiene pasos ligeros.",
+            "textLang": "es",
+            "translation": "The athlete has quick steps.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and impressed by the speed",
+            "note": null,
+            "matchedForm": "ligeros",
+            "matchedTranslationForm": "quick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ligero",
+    "lemma": "ligero",
+    "reading": null,
+    "ipa": "/liˈxeɾo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "light; slight; quick",
+    "primaryGloss": "light",
+    "emotion": "a sense of ease and lack of burden, clear and airy",
+    "notes": [
       "Use 'ligero' for weight, but also for things like a light snack ('una cena ligera') or a quick, agile movement ('pasos ligeros').",
       "Do not confuse this with 'fácil' (easy), even though in English we sometimes use 'light' to mean 'not difficult'."
     ],
@@ -203,5 +354,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'ligero' for weight, but also for things like a light snack",
+        "why": "Merely restates the senses without adding grammatical or usage insight."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing distinction between 'ligero' (light in weight) and 'claro' / 'luz' for English 'light'."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "light, weightless",
+        "why": "'Weightless' means having no weight at all ('ingrávido'), which is too extreme for 'ligero'."
+      }
+    ],
+    "growth": 0.769
   }
 }

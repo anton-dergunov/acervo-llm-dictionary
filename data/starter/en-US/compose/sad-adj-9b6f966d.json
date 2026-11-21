@@ -72,6 +72,96 @@
     "primaryGloss": "triste",
     "emotion": "heavy and quiet, the way you feel when you are missing someone",
     "notes": [
+      "Al formar el comparativo y el superlativo se duplica la «d»: «sadder», «saddest»."
+    ],
+    "senses": [
+      {
+        "id": "6wklt8tpqjq8oyj",
+        "order": 0,
+        "definition": "Que siente o expresa tristeza o pena, o que la causa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "triste",
+              "apenado",
+              "lamentable"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "nqw1ocq5kngpzrj",
+            "text": "I felt very sad when my friend moved away.",
+            "textLang": "en",
+            "translation": "Me sentí muy triste cuando mi amigo se mudó lejos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and reflective, sharing a difficult personal moment",
+            "note": null,
+            "matchedForm": "sad",
+            "matchedTranslationForm": "triste"
+          },
+          {
+            "id": "t36gjhxwjxfkoq5",
+            "text": "It is a sad story.",
+            "textLang": "en",
+            "translation": "Es una historia triste.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and slightly sympathetic, reflecting on an unfortunate event",
+            "note": null,
+            "matchedForm": "sad",
+            "matchedTranslationForm": "triste"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sad",
+    "lemma": "sad",
+    "reading": null,
+    "ipa": "/sæd/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "triste; apenado",
+    "primaryGloss": "triste",
+    "emotion": "heavy and quiet, the way you feel when you are missing someone",
+    "notes": [
       "Se usa para describir un sentimiento de infelicidad o pena. Es diferente de 'angry' (enojado), que implica molestia o frustración, y de 'upset' (disgustado), que suele ser una reacción más inmediata ante un problema."
     ],
     "senses": [
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Sentir infelicidad o pena.",
+        "why": "Adjective defined as a verb in sense 0 and as a noun ('Algo...') in sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para describir un sentimiento de infelicidad o pena.",
+        "why": "Restates the definition and makes an unneeded contrast with 'angry'."
+      }
+    ],
+    "growth": 0.642
   }
 }

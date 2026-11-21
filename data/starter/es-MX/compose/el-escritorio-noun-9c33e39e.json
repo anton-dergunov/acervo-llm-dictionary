@@ -68,6 +68,113 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "desk; desktop",
+    "primaryGloss": "desk",
+    "emotion": "focused and industrious, preparing to start a day of work",
+    "notes": [
+      "False friend for speakers of Romance languages like Portuguese or Italian: in Spanish, 'escritorio' is the piece of furniture (desk), while the room is 'la oficina' (office) or 'el estudio' (study)."
+    ],
+    "senses": [
+      {
+        "id": "anvsggi6vagbvvv",
+        "order": 0,
+        "definition": "A piece of furniture with a flat surface used for writing, studying, or working at a computer.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "desk"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "kdqcvm2mzdm3juc",
+            "text": "Limpié todo el escritorio antes de empezar a trabajar.",
+            "textLang": "es",
+            "translation": "I cleaned the entire desk before starting to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and organized, ready to get things done",
+            "note": null,
+            "matchedForm": "escritorio",
+            "matchedTranslationForm": "desk"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ogtfrm2kzmg4qtr",
+        "order": 1,
+        "definition": "The main screen area on a computer where icons and windows appear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "desktop"
+            ]
+          }
+        ],
+        "domain": "computing",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "dlz1g4fobey7mgq",
+            "text": "Guardé el archivo en el escritorio de la computadora.",
+            "textLang": "es",
+            "translation": "I saved the file on the computer's desktop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "escritorio",
+            "matchedTranslationForm": "desktop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el escritorio",
+    "lemma": "escritorio",
+    "reading": null,
+    "ipa": "/es.kɾiˈto.ɾjo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "desk; office",
     "primaryGloss": "desk",
     "emotion": "focused and industrious, preparing to start a day of work",
@@ -160,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A room or office where someone performs their professional tasks.",
+        "why": "In Mexican Spanish, 'escritorio' means desk or computer desktop, not a room or office."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is also commonly used to refer to the office or workspace",
+        "why": "False claim; in Mexico an office is 'la oficina' or 'el despacho', not 'el escritorio'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday computing sense 'desktop' (screen background or desktop computer)."
+      }
+    ],
+    "growth": 0.891
   }
 }

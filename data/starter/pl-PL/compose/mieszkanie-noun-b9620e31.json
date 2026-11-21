@@ -58,6 +58,115 @@
     "headword": "mieszkanie",
     "lemma": "mieszkanie",
     "reading": null,
+    "ipa": "/mʲɛʂˈka.ɲɛ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "apartment; flat; living",
+    "primaryGloss": "apartment",
+    "emotion": "contented and settled, feeling safe and private in one's own space",
+    "notes": [
+      "In Poland, 'mieszkanie' specifically refers to an apartment (a unit within a larger residential building). Use 'dom' for a standalone house."
+    ],
+    "senses": [
+      {
+        "id": "d1tr8gfgg3s59f7",
+        "order": 0,
+        "definition": "A set of rooms for living in, usually on one floor of a larger building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "apartment",
+              "flat"
+            ]
+          }
+        ],
+        "domain": "housing",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "18eldpgtopmc9kj",
+            "text": "Szukam nowego mieszkania w centrum miasta.",
+            "textLang": "pl",
+            "translation": "I am looking for a new apartment in the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and focused, thinking about the future",
+            "note": null,
+            "matchedForm": "mieszkania",
+            "matchedTranslationForm": "apartment"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "crioi5d1ci9vice",
+        "order": 1,
+        "definition": "The act of living or residing in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "living",
+              "residing"
+            ]
+          }
+        ],
+        "domain": "residing",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "pcj5fckn0litt33",
+            "text": "Mieszkanie w dużym mieście jest bardzo drogie.",
+            "textLang": "pl",
+            "translation": "Living in a big city is very expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Mieszkanie",
+            "matchedTranslationForm": "Living"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "mieszkanie",
+    "lemma": "mieszkanie",
+    "reading": null,
     "ipa": "/mʲɛʂˈkaɲɛ/",
     "pos": "noun",
     "gender": "neuter",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "apartment; flat; housing",
+        "why": "'housing' is not in the sense glosses, and sense 1 ('living') is missing."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "To mieszkanie w dużym mieście jest bardzo drogie.",
+        "why": "Starting with 'To' makes 'mieszkanie' sound like 'This apartment' rather than the verbal noun 'living'."
+      }
+    ],
+    "growth": 0.872
   }
 }

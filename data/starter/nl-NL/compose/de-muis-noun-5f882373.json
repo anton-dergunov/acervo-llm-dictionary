@@ -68,6 +68,114 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "mouse",
+    "primaryGloss": "mouse",
+    "emotion": "nervous and startled, spotting a small creature darting across the floor",
+    "notes": [
+      "Plural: 'muizen' (the 's' changes to 'z')."
+    ],
+    "senses": [
+      {
+        "id": "5q5u1oldo114un3",
+        "order": 0,
+        "definition": "A small furry rodent with a pointed nose and a long tail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐭",
+        "examples": [
+          {
+            "id": "7nd1ioarnzz27oz",
+            "text": "De kat vangt een kleine muis in de tuin.",
+            "textLang": "nl",
+            "translation": "The cat catches a small mouse in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "muis",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ncb9ow9uis9o82k",
+        "order": 1,
+        "definition": "A small handheld device used to move the cursor on a computer screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse",
+              "computer mouse"
+            ]
+          }
+        ],
+        "domain": "computer",
+        "emoji": "🖱️",
+        "examples": [
+          {
+            "id": "9yn84kgkmclhkz6",
+            "text": "Klik met de muis op het pictogram om het bestand te openen.",
+            "textLang": "nl",
+            "translation": "Click the icon with the mouse to open the file.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "muis",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de muis",
+    "lemma": "muis",
+    "reading": null,
+    "ipa": "/mœys/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐭",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "mouse; computer mouse",
     "primaryGloss": "mouse",
     "emotion": "nervous and startled, spotting a small creature darting across the floor",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, just like in English, 'muis' is used for both",
+        "why": "Restates the two senses without adding grammar or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Klik met de muis op het scherm om te openen.",
+        "why": "Missing an object for 'openen' and 'op het scherm' sounds unnatural with a mouse."
+      }
+    ],
+    "growth": 0.836
   }
 }

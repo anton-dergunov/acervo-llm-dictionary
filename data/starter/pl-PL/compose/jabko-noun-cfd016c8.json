@@ -58,6 +58,52 @@
     "headword": "jabłko",
     "lemma": "jabłko",
     "reading": null,
+    "ipa": "/ˈjap.kɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "apple",
+    "primaryGloss": "apple",
+    "emotion": "crisp and refreshing, like the crunch of a fresh piece of fruit",
+    "notes": [
+      "In everyday speech the 'ł' is nearly silent and 'b' is devoiced, so it sounds like 'japko'.",
+      "The genitive plural is 'jabłek' (e.g., 'kilogram jabłek')."
+    ],
+    "senses": [
+      {
+        "id": "zn53sj0dxvzg18k",
+        "order": 0,
+        "definition": "A round fruit with red, green, or yellow skin and crisp flesh.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "apple"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍎",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "jabłko",
+    "lemma": "jabłko",
+    "reading": null,
     "ipa": "/ˈjab.wko/",
     "pos": "noun",
     "gender": "neuter",
@@ -97,5 +143,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈjab.wko/",
+        "why": "The cluster 'błk' undergoes voice assimilation and often /w/ deletion: /ˈjap.kɔ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a neuter noun, so remember to use neuter endings",
+        "why": "Restates the gender field and general grammar instead of noting the silent 'ł'."
+      }
+    ],
+    "growth": 0.932
   }
 }

@@ -58,6 +58,97 @@
     "headword": "przestawać",
     "lemma": "przestawać",
     "reading": null,
+    "ipa": "/pʂɛsˈta.vat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stop; to cease",
+    "primaryGloss": "to stop",
+    "emotion": "firm and decisive, making a clean break with the past",
+    "notes": [
+      "Imperfective verb; its perfective partner is 'przestać' (which is much more common in the infinitive).",
+      "Always followed by an imperfective infinitive (e.g., 'przestawać palić'). For stopping physical movement, use 'zatrzymywać się'."
+    ],
+    "senses": [
+      {
+        "id": "eqrlk9n6ysuv5q7",
+        "order": 0,
+        "definition": "To cease an ongoing action, activity, or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stop",
+              "to cease",
+              "to quit"
+            ]
+          }
+        ],
+        "domain": "stop",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "fg445v13p15g5wi",
+            "text": "Deszcz powoli przestaje padać.",
+            "textLang": "pl",
+            "translation": "The rain is slowly stopping.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "przestaje",
+            "matchedTranslationForm": "stopping"
+          },
+          {
+            "id": "hsoycu9vxwbcww3",
+            "text": "On nigdy nie przestaje mówić.",
+            "textLang": "pl",
+            "translation": "He never stops talking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "przestaje",
+            "matchedTranslationForm": "stops"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "przestawać",
+    "lemma": "przestawać",
+    "reading": null,
     "ipa": "/pʂɛsˈta.vatʲ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +253,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʂɛsˈta.vatʲ/",
+        "why": "Word-final 'ć' in Polish is /t͡ɕ/, not palatalized /tʲ/."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To no longer move or do something",
+        "why": "Does not mean to stop moving physically (which is 'zatrzymywać się')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę przestawać palić papierosy.",
+        "why": "Ungrammatical aspect choice; 'muszę' requires the perfective 'przestać palić'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To stop spending time with someone or visiting them regularly.",
+        "why": "False meaning: 'przestawać z kimś' means to associate/hang out with someone, not to stop."
+      }
+    ],
+    "growth": 0.626
   }
 }

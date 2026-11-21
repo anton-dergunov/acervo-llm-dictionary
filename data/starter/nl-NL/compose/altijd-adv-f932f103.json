@@ -68,6 +68,95 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "always",
+    "primaryGloss": "always",
+    "emotion": null,
+    "notes": [
+      "In a main clause, 'altijd' comes after the conjugated verb (e.g., 'Hij is altijd te laat' — He is always late)."
+    ],
+    "senses": [
+      {
+        "id": "bbzuxl5h904n6ib",
+        "order": 0,
+        "definition": "At all times; on every occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "always",
+              "at all times"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "dpkg6isj4p2lvdu",
+            "text": "De zon schijnt hier niet altijd.",
+            "textLang": "nl",
+            "translation": "The sun does not always shine here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective, stating a simple fact about the weather",
+            "note": null,
+            "matchedForm": "altijd",
+            "matchedTranslationForm": "always"
+          },
+          {
+            "id": "xll2q5gb4lhog77",
+            "text": "Je bent altijd welkom bij ons.",
+            "textLang": "nl",
+            "translation": "You are always welcome at our place.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "altijd",
+            "matchedTranslationForm": "always"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "altijd",
+    "lemma": "altijd",
+    "reading": null,
+    "ipa": "/ˈɑltɛi̯t/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "always; every time",
     "primaryGloss": "always",
     "emotion": null,
@@ -162,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Anyway; in any case, used to offer a positive alternative",
+        "why": "'We can always try' is just a normal nuance of 'always', not a separate sense meaning 'anyway'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Als het regent, kunnen we het altijd thuis proberen.",
+        "why": "'kunnen we altijd nog...' is the natural Dutch phrasing for this usage."
+      }
+    ],
+    "growth": 0.512
   }
 }

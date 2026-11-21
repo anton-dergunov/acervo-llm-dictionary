@@ -73,6 +73,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "chicken, hen",
+    "primaryGloss": "chicken",
+    "emotion": "casual and everyday, like talking about dinner plans or visiting a farmyard",
+    "notes": [
+      "Specifically refers to the female bird (hen) as well as the species in general; a rooster is 'horoz'."
+    ],
+    "senses": [
+      {
+        "id": "llriwa1yhiclet1",
+        "order": 0,
+        "definition": "A common farm bird kept for its eggs and meat, especially the female.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chicken",
+              "hen"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐔",
+        "examples": [
+          {
+            "id": "jnzt3r3s88ddshx",
+            "text": "Bahçede birkaç tavuk geziniyor.",
+            "textLang": "tr",
+            "translation": "A few chickens are wandering around in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, pointing out something in the yard",
+            "note": null,
+            "matchedForm": "tavuk",
+            "matchedTranslationForm": "chickens"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "52j1py8ehr5gih9",
+        "order": 1,
+        "definition": "The meat of this bird used as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chicken"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍗",
+        "examples": [
+          {
+            "id": "8p11gqi6m5cy5c9",
+            "text": "Akşam yemeğinde tavuk yedik.",
+            "textLang": "tr",
+            "translation": "We ate chicken for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tavuk",
+            "matchedTranslationForm": "chicken"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tavuk",
+    "lemma": "tavuk",
+    "reading": null,
+    "ipa": "/taˈvuk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐔",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "chicken; chicken meat",
     "primaryGloss": "chicken",
     "emotion": "casual and everyday, like talking about dinner plans or visiting a farmyard",
@@ -164,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Tavuk is used both for the live farm bird and for the",
+        "why": "Merely restates the two senses; a contrast with 'horoz' (rooster) and 'piliç' is more useful."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Akşam yemekte tavuk yedik.",
+        "why": "'Akşam yemeğinde' is the natural phrasing for 'for dinner', and 'in the evening' is redundant."
+      }
+    ],
+    "growth": 0.963
   }
 }

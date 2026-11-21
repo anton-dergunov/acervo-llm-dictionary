@@ -58,6 +58,71 @@
     "headword": "το εισιτήριο",
     "lemma": "εισιτήριο",
     "reading": null,
+    "ipa": "/i.siˈti.ɾi.o/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎟️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "ticket",
+    "primaryGloss": "ticket",
+    "emotion": "excited and ready for a journey, holding the ticket up",
+    "notes": [],
+    "senses": [
+      {
+        "id": "l5kl1tcr5evyw3f",
+        "order": 0,
+        "definition": "A printed or digital document that lets you travel on public transport or enter a place or event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ticket"
+            ]
+          }
+        ],
+        "domain": "everyday",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "stemz6suwbydmu3",
+            "text": "Αγόρασα ένα εισιτήριο για το τρένο.",
+            "textLang": "el",
+            "translation": "I bought a ticket for the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and prepared, checking the pocket for the ticket",
+            "note": null,
+            "matchedForm": "εισιτήριο",
+            "matchedTranslationForm": "ticket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το εισιτήριο",
+    "lemma": "εισιτήριο",
+    "reading": null,
     "ipa": "/e.siˈti.ɾi.o/",
     "pos": "noun",
     "gender": "neuter",
@@ -118,5 +183,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/e.siˈti.ɾi.o/",
+        "why": "Digraph 'ει' is pronounced /i/, not /e/: /i.siˈti.ɾi.o/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ticket; fare",
+        "why": "'fare' is not in the sense glosses (and fare in Greek is κόμιστρο/ναύλος)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for all kinds of transport like buses, trains, and planes",
+        "why": "Simply repeats what the definition already says."
+      }
+    ],
+    "growth": 0.603
   }
 }

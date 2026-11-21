@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to bring; to take",
+    "primaryGloss": "bring",
+    "emotion": "helpful and attentive, offering to deliver something to someone",
+    "notes": [
+      "Irregular verb: bracht, gebracht.",
+      "Covers both English 'bring' (towards the speaker) and 'take' (to another place or person). Contrast with 'halen' (to go and get/fetch)."
+    ],
+    "senses": [
+      {
+        "id": "2iv81igd8rnyvky",
+        "order": 0,
+        "definition": "To take or carry someone or something to a place or person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bring",
+              "take",
+              "deliver"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "8pko2mcdhapgb7c",
+            "text": "Ik zal je naar het station brengen.",
+            "textLang": "nl",
+            "translation": "I will take you to the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "kind and reassuring, offering a helpful ride",
+            "note": null,
+            "matchedForm": "brengen",
+            "matchedTranslationForm": "take"
+          },
+          {
+            "id": "fswej21cb17ubed",
+            "text": "Kun je die doos even hierheen brengen?",
+            "textLang": "nl",
+            "translation": "Can you bring that box over here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "brengen",
+            "matchedTranslationForm": "bring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "brengen",
+    "lemma": "brengen",
+    "reading": null,
+    "ipa": "/ˈbrɛŋə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to bring; to take; to spend",
     "primaryGloss": "bring",
     "emotion": "helpful and attentive, offering to deliver something to someone",
@@ -200,5 +291,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "To spend a period of time somewhere or doing something.",
+        "why": "'Brengen' does not mean 'to spend time'; that is the separable verb 'doorbrengen'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "We gaan onze vakantie in Spanje brengen.",
+        "why": "Ungrammatical in Dutch; must be 'doorbrengen'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same Dutch meaning split by English 'bring' vs 'take'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Kun je die doos even naar hier brengen?",
+        "why": "In Netherlandic Dutch, 'hierheen brengen' is natural, not 'naar hier brengen'."
+      }
+    ],
+    "growth": 0.739
   }
 }

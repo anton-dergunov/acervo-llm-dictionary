@@ -70,6 +70,116 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "pharmacy; first-aid kit",
+    "primaryGloss": "pharmacy",
+    "emotion": "reassuring and helpful, directing someone in need",
+    "notes": [
+      "Refers only to the shop or a first-aid kit; the science or profession of pharmacy is 'η φαρμακευτική'."
+    ],
+    "senses": [
+      {
+        "id": "d2gy55wjkr6dq7a",
+        "order": 0,
+        "definition": "A shop where medicines and healthcare products are prepared and sold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pharmacy",
+              "drugstore",
+              "chemist's"
+            ]
+          }
+        ],
+        "domain": "shop",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "d81fnz1opjtqkgj",
+            "text": "Το φαρμακείο είναι ανοιχτό μέχρι τις οκτώ.",
+            "textLang": "el",
+            "translation": "The pharmacy is open until eight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, sharing useful information",
+            "note": null,
+            "matchedForm": "φαρμακείο",
+            "matchedTranslationForm": "pharmacy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kh55sl93rxav5d3",
+        "order": 1,
+        "definition": "A small box or cabinet containing first-aid supplies and basic medicines.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "first-aid kit",
+              "medicine cabinet"
+            ]
+          }
+        ],
+        "domain": "medical",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "40bwwiapy2jh6xk",
+            "text": "Έχουμε πάντα ένα φαρμακείο στο σπίτι και στο αυτοκίνητο.",
+            "textLang": "el",
+            "translation": "We always have a first-aid kit at home and in the car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "φαρμακείο",
+            "matchedTranslationForm": "first-aid kit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το φαρμακείο",
+    "lemma": "φαρμακείο",
+    "reading": null,
+    "ipa": "/faɾmaˈci.o/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "pharmacy; drugstore",
     "primaryGloss": "pharmacy",
     "emotion": "reassuring and helpful, directing someone in need",
@@ -164,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "and the professional practice of pharmacy.",
+        "why": "False: the science or profession of pharmacy is 'η φαρμακευτική', not 'το φαρμακείο'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pharmacy; drugstore",
+        "why": "Omits sense 1 (first-aid kit / medicine cabinet)."
+      }
+    ],
+    "growth": 0.977
   }
 }

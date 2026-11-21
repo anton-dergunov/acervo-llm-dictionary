@@ -72,6 +72,95 @@
     "primaryGloss": "white",
     "emotion": "clean, bright, and simple, like a fresh page or light",
     "notes": [
+      "The masculine personal plural form is 'biali' (with 'l' instead of 'ł'), e.g., 'biali ludzie' (white people).",
+      "Pronunciation: 'ł' sounds like English 'w' (/w/), while 'l' in 'biali' sounds like English 'l'."
+    ],
+    "senses": [
+      {
+        "id": "892crpwcpndlek4",
+        "order": 0,
+        "definition": "Of the colour of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "2c5gj5rpots5vih",
+            "text": "W zimie wszystko jest białe.",
+            "textLang": "pl",
+            "translation": "In winter everything is white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the winter scenery",
+            "note": null,
+            "matchedForm": "białe",
+            "matchedTranslationForm": "white"
+          },
+          {
+            "id": "89f740gxqlarfqt",
+            "text": "Mam białą koszulę na spotkanie.",
+            "textLang": "pl",
+            "translation": "I have a white shirt for the meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "prepared and professional, feeling ready for the day",
+            "note": null,
+            "matchedForm": "białą",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "biały",
+    "lemma": "biały",
+    "reading": null,
+    "ipa": "/ˈbja.wɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white",
+    "primaryGloss": "white",
+    "emotion": "clean, bright, and simple, like a fresh page or light",
+    "notes": [
       "This is the basic adjective for the colour white in Polish. Like all adjectives, it must agree in gender and case with the noun it describes (e.g., biała ściana for a white wall).",
       "It is a versatile word, used for everything from physical colours to the abstract idea of purity or light."
     ],
@@ -159,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are identical in meaning; 'white shirt' is just the colour white."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow or milk.",
+        "why": "Adjective defined as a noun rather than a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "This is the basic adjective for the colour white in Polish.",
+        "why": "Both notes are generic filler that restate the gloss and general grammar rules."
+      }
+    ],
+    "growth": 0.736
   }
 }

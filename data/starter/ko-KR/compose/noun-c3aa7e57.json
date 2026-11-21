@@ -72,6 +72,73 @@
     "primaryGloss": "pasta",
     "emotion": "craving something comforting and savoury after a long day",
     "notes": [
+      "In Korea, pasta restaurants are grouped under 양식 (Western food)."
+    ],
+    "senses": [
+      {
+        "id": "rcphewpniurch04",
+        "order": 0,
+        "definition": "An Italian dish made from flour-and-water dough shaped into strings, tubes, or other forms and boiled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pasta"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍝",
+        "examples": [
+          {
+            "id": "jbltjfgpiz4zi0a",
+            "text": "오늘 저녁은 간단하게 파스타를 만들어 먹었어요.",
+            "textLang": "ko",
+            "translation": "I made a quick pasta for dinner tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and satisfied after cooking a quick home meal",
+            "note": null,
+            "matchedForm": "파스타",
+            "matchedTranslationForm": "pasta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "파스타",
+    "lemma": "파스타",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "pasta",
+    "primaryGloss": "pasta",
+    "emotion": "craving something comforting and savoury after a long day",
+    "notes": [
       "While '파스타' refers to the dish itself, you might also hear people refer to specific shapes like '스파게티' (spaghetti) or '펜네' (penne) when ordering in a restaurant.",
       "In Korea, pasta is often categorised as 'Western food' or 'yangsik' (양식)."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '파스타' refers to the dish itself, you might also hear",
+        "why": "World knowledge filler; does not teach Korean usage."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I made and ate pasta simply for dinner tonight.",
+        "why": "Awkward calque of 간단하게 만들어 먹었어요."
+      }
+    ],
+    "growth": 0.528
   }
 }

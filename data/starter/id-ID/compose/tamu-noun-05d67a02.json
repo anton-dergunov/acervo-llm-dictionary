@@ -72,6 +72,95 @@
     "primaryGloss": "guest",
     "emotion": "welcoming and attentive, thinking of hospitality and preparing the house",
     "notes": [
+      "Used for a visitor to a home, an invited guest at an event, or a hotel guest. A visitor to a public place (like a museum or park) is 'pengunjung'."
+    ],
+    "senses": [
+      {
+        "id": "eysmkvts72lqghp",
+        "order": 0,
+        "definition": "A person visiting someone's home or attending an event, or a paying customer at a hotel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest",
+              "visitor"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "ezh1asi38t57c3v",
+            "text": "Kami sedang menyiapkan makanan untuk tamu yang akan datang nanti malam.",
+            "textLang": "id",
+            "translation": "We are preparing food for the guests who are coming tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and focused, preparing for a pleasant social gathering",
+            "note": null,
+            "matchedForm": "tamu",
+            "matchedTranslationForm": "guests"
+          },
+          {
+            "id": "jkort6epzlpzhco",
+            "text": "Tamu hotel itu bisa menggunakan kolam renang secara gratis.",
+            "textLang": "id",
+            "translation": "The hotel guests can use the swimming pool for free.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, explaining a standard hotel policy",
+            "note": null,
+            "matchedForm": "Tamu",
+            "matchedTranslationForm": "guests"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tamu",
+    "lemma": "tamu",
+    "reading": null,
+    "ipa": "/ˈta.mu/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "guest; visitor",
+    "primaryGloss": "guest",
+    "emotion": "welcoming and attentive, thinking of hospitality and preparing the house",
+    "notes": [
       "Tamu is a broad term for anyone visiting you. In a home, it implies someone you are hosting, whereas a 'pengunjung' is more likely a customer or someone visiting a public place like a museum or website.",
       "Using the word 'tamu' can also imply a sense of social obligation; a good host is expected to treat a tamu well, offering them a drink or a seat."
     ],
@@ -160,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A person invited to your home or event. ... Someone who is staying",
+        "why": "Home visitor and hotel guest are shades of one meaning ('guest/visitor') in Indonesian."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Using the word 'tamu' can also imply a sense of social obligation",
+        "why": "Generic cultural commentary about hospitality rather than useful linguistic guidance."
+      }
+    ],
+    "growth": 0.716
   }
 }

@@ -58,6 +58,73 @@
     "headword": "salata",
     "lemma": "salata",
     "reading": null,
+    "ipa": "/saˈlata/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salad",
+    "primaryGloss": "salad",
+    "emotion": "crisp and fresh, ready to eat a healthy meal",
+    "notes": [
+      "Do not confuse with 'salatalık' (cucumber), though in some regions 'salata' is used colloquially for cucumber."
+    ],
+    "senses": [
+      {
+        "id": "1hawv7weafgce5m",
+        "order": 0,
+        "definition": "A cold dish of raw or cooked vegetables, usually seasoned with oil, lemon juice, or vinegar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salad"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "vvmil6vwo6iwjrr",
+            "text": "Yemeğin yanında taze bir salata sipariş ettik.",
+            "textLang": "tr",
+            "translation": "We ordered a fresh salad with the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a tasty meal",
+            "note": null,
+            "matchedForm": "salata",
+            "matchedTranslationForm": "salad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "salata",
+    "lemma": "salata",
+    "reading": null,
     "ipa": "/saːlaˈta/",
     "pos": "noun",
     "gender": null,
@@ -158,5 +225,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/saːlaˈta/",
+        "why": "Wrong stress and false vowel length; stressed on the second syllable (/saˈlata/)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(plant) A leafy green vegetable used to make salads, such as lettuce.",
+        "why": "'Salata' alone does not mean lettuce in standard Turkish ('göbek salata' or 'marul' does)."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Manuptan iki baş salata aldım.",
+        "why": "'Manuptan' is a non-existent word, likely a garbled typo for 'manavdan' (from the greengrocer)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'salata' can mean both the prepared dish (salad) and the plant itself (lettuce)",
+        "why": "Confuses Turkish with other languages; bare 'salata' is not used for lettuce."
+      }
+    ],
+    "growth": 0.593
   }
 }

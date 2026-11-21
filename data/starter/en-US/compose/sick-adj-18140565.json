@@ -68,6 +68,157 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "enfermo; con náuseas; harto",
+    "primaryGloss": "enfermo",
+    "emotion": "tired and low, like someone who just wants to stay in bed",
+    "notes": [
+      "En EE. UU., 'sick' significa 'enfermo' en general. En el Reino Unido, 'be sick' o 'feel sick' suele referirse a vomitar o tener náuseas (para 'enfermo' usan más 'ill').",
+      "La expresión 'be sick of' seguida de un sustantivo o verbo en '-ing' significa 'estar harto de'."
+    ],
+    "senses": [
+      {
+        "id": "0y1eyj3djbojkfc",
+        "order": 0,
+        "definition": "Que no tiene buena salud o se siente mal físicamente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "enfermo",
+              "malo"
+            ]
+          }
+        ],
+        "domain": "enfermedad",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "y4b622pa4anzh22",
+            "text": "I stayed home because I felt sick.",
+            "textLang": "en",
+            "translation": "Me quedé en casa porque me sentía enfermo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and needing rest, speaking softly",
+            "note": null,
+            "matchedForm": "sick",
+            "matchedTranslationForm": "enfermo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "og26njuok3fzc6j",
+        "order": 1,
+        "definition": "Que siente ganas de vomitar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con náuseas",
+              "mareado"
+            ]
+          }
+        ],
+        "domain": "náuseas",
+        "emoji": "🤢",
+        "examples": [
+          {
+            "id": "l79ckwahfqhsano",
+            "text": "The roller coaster ride made me feel sick.",
+            "textLang": "en",
+            "translation": "El paseo en la montaña rusa me dio náuseas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncomfortable and slightly dizzy, recalling a bad experience",
+            "note": null,
+            "matchedForm": "sick",
+            "matchedTranslationForm": "náuseas"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "htbfptx1lr5rwim",
+        "order": 2,
+        "definition": "Cansado o molesto por algo que se repite mucho (seguido de 'of').",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "harto",
+              "cansado"
+            ]
+          }
+        ],
+        "domain": "hartazgo",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "nmbxl55asxqxgti",
+            "text": "I am sick of eating the same food every day.",
+            "textLang": "en",
+            "translation": "Estoy harto de comer la misma comida todos los días.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sick",
+            "matchedTranslationForm": "harto"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sick",
+    "lemma": "sick",
+    "reading": null,
+    "ipa": "/sɪk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "enfermo; con náuseas",
     "primaryGloss": "enfermo",
     "emotion": "tired and low, like someone who just wants to stay in bed",
@@ -160,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Sentir ganas de vomitar o tener náuseas.",
+        "why": "Adjective defined with infinitive verbs instead of an adjectival phrase."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense 'sick of' (fed up with / harto de)."
+      }
+    ],
+    "growth": 1.225
   }
 }

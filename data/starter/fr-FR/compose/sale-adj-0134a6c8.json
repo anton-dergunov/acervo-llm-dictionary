@@ -72,6 +72,117 @@
     "primaryGloss": "dirty",
     "emotion": "repulsed and pulling back slightly from something unclean",
     "notes": [
+      "Position changes the meaning: after a noun, it means physically dirty (une chambre sale); before a noun, it is informal and means nasty or awful (un sale temps, un sale type).",
+      "Do not confuse it with 'salé' (salty)."
+    ],
+    "senses": [
+      {
+        "id": "j18ocxm6sp1kp0b",
+        "order": 0,
+        "definition": "Covered in dirt; not clean.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dirty",
+              "filthy"
+            ]
+          }
+        ],
+        "domain": "dirt",
+        "emoji": "🪵",
+        "examples": [
+          {
+            "id": "tfgj0e7ynnviv25",
+            "text": "Ses chaussures sont sales après la promenade dans le jardin.",
+            "textLang": "fr",
+            "translation": "His shoes are dirty after the walk in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking down at muddy shoes with dismay",
+            "note": null,
+            "matchedForm": "sales",
+            "matchedTranslationForm": "dirty"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qyijrxm6ti5onrd",
+        "order": 1,
+        "definition": "Very unpleasant, nasty, or unfair (placed before the noun).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nasty",
+              "foul",
+              "bad"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "🦝",
+        "examples": [
+          {
+            "id": "827jsjg5bki909p",
+            "text": "Il a fait un sale coup à son collègue.",
+            "textLang": "fr",
+            "translation": "He played a nasty trick on his colleague.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "indignant and disapproving about someone's unfair behavior",
+            "note": null,
+            "matchedForm": "sale",
+            "matchedTranslationForm": "nasty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "sale",
+    "lemma": "sale",
+    "reading": null,
+    "ipa": "/sal/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧹",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dirty; nasty, foul",
+    "primaryGloss": "dirty",
+    "emotion": "repulsed and pulling back slightly from something unclean",
+    "notes": [
       "While 'sale' primarily describes physical dirt, it is also frequently used metaphorically to mean nasty, foul, or unfair (e.g., 'un sale caractère').",
       "Do not confuse it with 'salé', which means salty."
     ],
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'sale' primarily describes physical dirt, it is also frequently used metaphorically",
+        "why": "Restates the two senses without explaining the crucial change in adjective placement before/after the noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain that 'sale' goes after the noun for 'dirty' and before for 'nasty/bad'."
+      }
+    ],
+    "growth": 1.082
   }
 }

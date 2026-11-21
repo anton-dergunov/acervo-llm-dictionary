@@ -68,6 +68,94 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "grass",
+    "primaryGloss": "grass",
+    "emotion": "relaxed and peaceful, looking at a beautiful sunny park",
+    "notes": [
+      "Usually uncountable in everyday use. Do not confuse with 'trawnik', which refers specifically to a lawn (an area of mown grass)."
+    ],
+    "senses": [
+      {
+        "id": "neh2tg32lpti23u",
+        "order": 0,
+        "definition": "A common wild or garden plant with thin green leaves that covers the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grass"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "bvamhaxgjtgwaqk",
+            "text": "Siedzieliśmy na zielonej trawie.",
+            "textLang": "pl",
+            "translation": "We were sitting on the green grass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and comfortable, enjoying a warm afternoon outdoors",
+            "note": null,
+            "matchedForm": "trawie",
+            "matchedTranslationForm": "grass"
+          },
+          {
+            "id": "kc8dr0pj7iofpdz",
+            "text": "Muszę skosić trawę w ogrodzie.",
+            "textLang": "pl",
+            "translation": "I have to mow the grass in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly burdened by a chore, stating a necessary task",
+            "note": null,
+            "matchedForm": "trawę",
+            "matchedTranslationForm": "grass"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "trawa",
+    "lemma": "trawa",
+    "reading": null,
+    "ipa": "/ˈtra.va/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "grass; lawn",
     "primaryGloss": "grass",
     "emotion": "relaxed and peaceful, looking at a beautiful sunny park",
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean the plant 'grass'; 'skosić trawę' is literally 'mow the grass', not a separate 'lawn' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as both a mass noun for the plant itself",
+        "why": "Restates the definitions instead of adding useful usage info."
+      }
+    ],
+    "growth": 0.764
   }
 }

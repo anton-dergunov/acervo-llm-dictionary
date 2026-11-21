@@ -58,6 +58,73 @@
     "headword": "غُرْفَة نَوْم",
     "lemma": "غُرْفَة نَوْم",
     "reading": null,
+    "ipa": "/ˈɣur.fat nawm/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "bedroom",
+    "primaryGloss": "bedroom",
+    "emotion": "calm and quiet, winding down for the night",
+    "notes": [
+      "Genitive construct (iḍāfa) of غُرْفَة ('room') + نَوْم ('sleep'). Definite: غُرْفَةُ النَّوْمِ; plural: غُرَف نَوْم."
+    ],
+    "senses": [
+      {
+        "id": "rtf4yfvzwmtqx86",
+        "order": 0,
+        "definition": "A room used for sleeping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bedroom"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "jxngz9qxbypj4yy",
+            "text": "غُرْفَةُ النَّوْمِ نَظِيفَةٌ وَمُرَتَّبَةٌ.",
+            "textLang": "ar",
+            "translation": "The bedroom is clean and tidy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "غُرْفَةُ النَّوْمِ",
+            "matchedTranslationForm": "bedroom"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غُرْفَة نَوْم",
+    "lemma": "غُرْفَة نَوْم",
+    "reading": null,
     "ipa": "/ˈɣur.fa naum/",
     "pos": "noun",
     "gender": "feminine",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "غُرْفَةُ النَّوْمِ نَظِيفَةٌ وَمُرْتَبِئَةٌ.",
+        "why": "مُرْتَبِئَةٌ is a non-existent corrupted word; 'tidy' is مُرَتَّبَةٌ."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Literally translates as 'room of sleep'.",
+        "why": "Both notes say the same thing and miss how to make the phrase definite."
+      }
+    ],
+    "growth": 0.996
   }
 }

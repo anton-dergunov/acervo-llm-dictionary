@@ -58,6 +58,96 @@
     "headword": "tahu",
     "lemma": "tahu",
     "reading": null,
+    "ipa": "/ˈtahu/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to know; to be aware of",
+    "primaryGloss": "know",
+    "emotion": "matter-of-fact and helpful, providing information you are sure about",
+    "notes": [
+      "Do not confuse with 'kenal', which means to know or be acquainted with a person or place.",
+      "In everyday speech, the 'h' is often dropped, making it sound just like the homograph 'tahu' (tofu)."
+    ],
+    "senses": [
+      {
+        "id": "bzdndaml02xda5m",
+        "order": 0,
+        "definition": "To have information or facts in your mind, or to be aware of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know",
+              "be aware of"
+            ]
+          }
+        ],
+        "domain": "knowledge",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "o9x8icqe6yhcx6n",
+            "text": "Saya tahu di mana dia tinggal.",
+            "textLang": "id",
+            "translation": "I know where he lives.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calmly providing a simple fact to an acquaintance",
+            "note": null,
+            "matchedForm": "tahu",
+            "matchedTranslationForm": "know"
+          },
+          {
+            "id": "qn3w1i3llqph7xr",
+            "text": "Dia tahu cara memasak nasi goreng.",
+            "textLang": "id",
+            "translation": "He knows how to cook fried rice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and admiring someone's specific ability",
+            "note": null,
+            "matchedForm": "tahu",
+            "matchedTranslationForm": "knows"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tahu",
+    "lemma": "tahu",
+    "reading": null,
     "ipa": "/ta.hu/",
     "pos": "verb",
     "gender": null,
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(skill) To understand how to do something or to have a skill.",
+        "why": "In the example 'tahu cara', 'cara' means 'how to'; 'tahu' itself still just means 'to know'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'tahu' when you have information or facts in your mind...",
+        "why": "Repeats sense 0's definition word for word."
+      }
+    ],
+    "growth": 0.849
   }
 }

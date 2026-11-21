@@ -68,6 +68,94 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "rushed and looking at a watch, knowing time is running out",
+    "notes": [
+      "Often used after a verb with 得 (de), as in 来得晚 (arrive late), or before a verb in casual speech, as in 晚到了 (arrived late)."
+    ],
+    "senses": [
+      {
+        "id": "dxsxizxawvrdkek",
+        "order": 0,
+        "definition": "Happening, arriving, or done after the usual or expected time; late in the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "zsi7e92p1tgel59",
+            "text": "我们今天走得太晚了。",
+            "textLang": "zh",
+            "translation": "We left too late today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and hurrying to catch up",
+            "note": null,
+            "matchedForm": "晚",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "ixb654kpvkm9ghg",
+            "text": "天已经很晚了，快睡吧。",
+            "textLang": "zh",
+            "translation": "It is already very late; go to sleep soon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "晚",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "晚",
+    "lemma": "晚",
+    "reading": "wǎn",
+    "ipa": "/u̯an˨˩˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "late; evening",
     "primaryGloss": "late",
     "emotion": "rushed and looking at a watch, knowing time is running out",
@@ -160,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "The latter part of the day, near nightfall.",
+        "why": "Defines an adjective entry as a noun, and the example uses a different word (晚上)."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "他喜欢在晚上下棋。",
+        "why": "Uses the compound noun 晚上 (wǎnshang) rather than the adjective 晚."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as an adjective to describe time or events happening later",
+        "why": "Restates the definition and POS; learners shouldn't confuse an antonym like 早."
+      }
+    ],
+    "growth": 0.894
   }
 }

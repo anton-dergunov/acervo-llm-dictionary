@@ -68,6 +68,115 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "calendario; agenda",
+    "primaryGloss": "calendario",
+    "emotion": "organized and focused, planning the days ahead with purpose",
+    "notes": [
+      "En inglés de EE. UU., 'calendar' también se usa para la agenda o aplicación donde se anotan citas y eventos."
+    ],
+    "senses": [
+      {
+        "id": "d71ublm1i95mto1",
+        "order": 0,
+        "definition": "Tabla, impresa o digital, que muestra los días, semanas y meses de un año, o el sistema con que se organizan.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "calendario",
+              "almanaque"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "pk9znjlki7c862e",
+            "text": "I tore the old page off the wall calendar.",
+            "textLang": "en",
+            "translation": "Arranqué la hoja vieja del calendario de pared.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and domestic, completing a small daily chore",
+            "note": null,
+            "matchedForm": "calendar",
+            "matchedTranslationForm": "calendario"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n5y1cd9vp6gvxe0",
+        "order": 1,
+        "definition": "Agenda o registro donde se anotan las citas y eventos planeados.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "calendario",
+              "agenda"
+            ]
+          }
+        ],
+        "domain": "organización",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "nhv7cah9p0hry9m",
+            "text": "Mark the date on your calendar.",
+            "textLang": "en",
+            "translation": "Marca la fecha en tu calendario.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "direct and helpful, guiding someone to stay organized",
+            "note": null,
+            "matchedForm": "calendar",
+            "matchedTranslationForm": "calendario"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "calendar",
+    "lemma": "calendar",
+    "reading": null,
+    "ipa": "/ˈkæl.ən.dɚ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "calendario; almanaque",
     "primaryGloss": "calendario",
     "emotion": "organized and focused, planning the days ahead with purpose",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "System vs physical/digital chart of dates are shades of one everyday meaning; sense 0's example actually shows sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Mark the date on your calendar.",
+        "why": "Marking a date on your calendar refers to the physical/digital chart or schedule, not the abstract calendar system."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "mientras que una 'diary' es un libro donde escribes tus citas personales",
+        "why": "In US English, 'diary' is a personal journal of feelings/events, not an appointment book ('planner')."
+      }
+    ],
+    "growth": 0.851
   }
 }

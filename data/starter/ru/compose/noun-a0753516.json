@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "head; mind",
+    "primaryGloss": "head",
+    "emotion": "a grounding, essential feeling, as natural as breathing",
+    "notes": [
+      "The stress shifts to the first syllable in the accusative singular ('го́лову') and nominative/accusative plural ('го́ловы').",
+      "For the 'head' (leader) of a company, city, or state, Russian uses 'глава', not 'голова'."
+    ],
+    "senses": [
+      {
+        "id": "7hw4hagrgtd0gi3",
+        "order": 0,
+        "definition": "The top part of the human or animal body, containing the face and brain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "spzvijvdlwmodkn",
+            "text": "У меня болит голова.",
+            "textLang": "ru",
+            "translation": "I have a headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "голова",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wnpnlvkcac3qkap",
+        "order": 1,
+        "definition": "A person's mind, intelligence, or ability to think and remember.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mind",
+              "brain",
+              "head"
+            ]
+          }
+        ],
+        "domain": "mind",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "ikrh5kaw38etwki",
+            "text": "У меня совсем вылетело из головы, что сегодня вторник.",
+            "textLang": "ru",
+            "translation": "It completely slipped my mind that today is Tuesday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "головы",
+            "matchedTranslationForm": "mind"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "голова",
+    "lemma": "голова",
+    "reading": null,
+    "ipa": "/ɡɐɫɐˈva/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "head; person; mind",
     "primaryGloss": "head",
     "emotion": "a grounding, essential feeling, as natural as breathing",
@@ -136,5 +246,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "head; person; mind",
+        "why": "'Person' is not a general gloss for any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'голова' refers to the anatomical head, it is also used metaphorically",
+        "why": "Merely repeats senses 0 and 1 without adding grammar or usage help."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Note that 'голова' has a plural form, 'головы', which is used in",
+        "why": "Confusing and misleading; 'голова' is not used to count people in Russian, and misses stress shift."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "The person or individual acting as a leader, chief, or head of",
+        "why": "In modern Russian 'глава' is standard for leader/head of an organization; 'голова' is dated or colloquial."
+      },
+      {
+        "severity": 2,
+        "category": "new:example.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "A polysemous word with multiple senses needs examples to show how each sense is used."
+      }
+    ],
+    "growth": 0.846
   }
 }

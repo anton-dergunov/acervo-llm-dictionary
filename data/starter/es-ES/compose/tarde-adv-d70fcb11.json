@@ -58,6 +58,83 @@
     "headword": "tarde",
     "lemma": "tarde",
     "reading": null,
+    "ipa": "/ˈtaɾde/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "rushed and apologetic, realizing the time slipped away",
+    "notes": [
+      "Do not confuse with the feminine noun la tarde (afternoon, evening), as in por la tarde (in the afternoon)."
+    ],
+    "senses": [
+      {
+        "id": "e3c1kb3mqpw2v4c",
+        "order": 0,
+        "definition": "After the expected, usual, or arranged time, or near the end of the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "ydlmb0zlrtstmet",
+            "text": "El tren llegó tarde a la estación.",
+            "textLang": "es",
+            "translation": "The train arrived late at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and impatient, waiting on the platform",
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "e3c1kb3mqpw2v4c",
+      "from": "Después del tiempo esperado o de la hora fijada.",
+      "to": "After the expected time or the set hour.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "tarde",
+    "lemma": "tarde",
+    "reading": null,
     "ipa": "/ˈtaɾ.de/",
     "pos": "adv",
     "gender": null,
@@ -119,14 +196,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "e3c1kb3mqpw2v4c",
-      "from": "Después del tiempo esperado o de la hora fijada.",
-      "to": "After the expected time or the set hour.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "late; in the afternoon",
+        "why": "'In the afternoon' belongs to the noun 'la tarde', not the adverb, and is not in senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as an adverb meaning 'late', as in 'Llego tarde'",
+        "why": "Restates the POS and gloss instead of distinguishing from the noun 'la tarde'."
+      }
+    ],
+    "growth": 1.216
+  }
 }

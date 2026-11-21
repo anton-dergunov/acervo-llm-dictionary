@@ -58,6 +58,73 @@
     "headword": "harita",
     "lemma": "harita",
     "reading": null,
+    "ipa": "/haˈɾita/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗺️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "map",
+    "primaryGloss": "map",
+    "emotion": "helpful and guiding, pointing the way forward",
+    "notes": [
+      "Pronounced with stress on the middle syllable (/haˈɾita/), not at the end."
+    ],
+    "senses": [
+      {
+        "id": "webyumwi90cxazl",
+        "order": 0,
+        "definition": "A drawing of an area that shows where roads, cities, rivers, etc. are.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "map"
+            ]
+          }
+        ],
+        "domain": "navigation",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "kxroszz6igua42q",
+            "text": "Şehirde kaybolmamak için haritaya bakıyorum.",
+            "textLang": "tr",
+            "translation": "I am looking at the map so as not to get lost in the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and careful, trying to find the right direction",
+            "note": null,
+            "matchedForm": "haritaya",
+            "matchedTranslationForm": "map"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "harita",
+    "lemma": "harita",
+    "reading": null,
     "ipa": "/haɾiˈta/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/haɾiˈta/",
+        "why": "Place and map words like 'harita' have penultimate stress in Turkish: /haˈɾita/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Harita takes the dative case (e.g., haritaya bakmak) when looking at a map.",
+        "why": "The dative case is governed by the verb 'bakmak', not by the noun 'harita'."
+      }
+    ],
+    "growth": 1.13
   }
 }

@@ -70,6 +70,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "heavy; annoying, tedious",
+    "primaryGloss": "heavy",
+    "emotion": null,
+    "notes": [
+      "In the sense 'annoying', use 'ser' for someone's personality (es muy pesado) and 'estar' for how they are acting right now (estás muy pesado)."
+    ],
+    "senses": [
+      {
+        "id": "jhs52quuw1edm0j",
+        "order": 0,
+        "definition": "Having great physical weight.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heavy"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "2osdh5j155qxoxs",
+            "text": "Las maletas son muy pesadas.",
+            "textLang": "es",
+            "translation": "The suitcases are very heavy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a tired sigh while looking at too much luggage",
+            "note": null,
+            "matchedForm": "pesadas",
+            "matchedTranslationForm": "heavy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hipi8of5vpxqsuk",
+        "order": 1,
+        "definition": "Of a person or thing: annoying, boring, or insistent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "annoying",
+              "tedious",
+              "boring",
+              "tiresome"
+            ]
+          }
+        ],
+        "domain": "behaviour",
+        "emoji": "🙄",
+        "examples": [
+          {
+            "id": "ws9l44mbw75l51e",
+            "text": "Deja de preguntar, ¡qué pesado eres!",
+            "textLang": "es",
+            "translation": "Stop asking, you are so annoying!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and sharp, finally losing patience with someone",
+            "note": null,
+            "matchedForm": "pesado",
+            "matchedTranslationForm": "annoying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pesado",
+    "lemma": "pesado",
+    "reading": null,
+    "ipa": "/peˈsaðo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚖️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "heavy; annoying",
     "primaryGloss": "heavy",
     "emotion": null,
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A person who is annoying, boring, or insists too much on something.",
+        "why": "Adjective defined as a noun ('A person who...'); also 'a pest' in glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'pesado' for physical weight, but also for people who are",
+        "why": "Restates the two senses; better to note ser vs. estar usage."
+      }
+    ],
+    "growth": 0.925
   }
 }

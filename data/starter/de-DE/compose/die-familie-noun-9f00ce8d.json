@@ -68,6 +68,94 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "family",
+    "primaryGloss": "family",
+    "emotion": "warm and grounding, thinking of the people closest to you",
+    "notes": [
+      "The stress is on the second syllable (fa-MI-li-e), and the ending '-ie' is pronounced as two syllables."
+    ],
+    "senses": [
+      {
+        "id": "w0kofx3t8b5xave",
+        "order": 0,
+        "definition": "A group of parents and children, or broader relatives, sharing close ties.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "family"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "fesumtz7z6m8njg",
+            "text": "Meine Familie kommt am Wochenende zu Besuch.",
+            "textLang": "de",
+            "translation": "My family is coming to visit this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "welcoming and excited, anticipating a pleasant get-together",
+            "note": null,
+            "matchedForm": "Familie",
+            "matchedTranslationForm": "family"
+          },
+          {
+            "id": "0y10y50uheep9nj",
+            "text": "Er verbringt viel Zeit mit seiner Familie.",
+            "textLang": "de",
+            "translation": "He spends a lot of time with his family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing someone's regular habit",
+            "note": null,
+            "matchedForm": "Familie",
+            "matchedTranslationForm": "family"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Familie",
+    "lemma": "Familie",
+    "reading": null,
+    "ipa": "/faˈmiːli̯ə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "family; relatives",
     "primaryGloss": "family",
     "emotion": "warm and grounding, thinking of the people closest to you",
@@ -141,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "In German, it is common to use 'meine Familie' (my family) even",
+        "why": "Both notes state obvious facts that apply equally to English; replaced with pronunciation info."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "family, relatives",
+        "why": "'Relatives' is 'Verwandte'; 'Familie' means family."
+      }
+    ],
+    "growth": 0.662
   }
 }

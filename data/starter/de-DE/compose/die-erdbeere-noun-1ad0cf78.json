@@ -72,6 +72,73 @@
     "primaryGloss": "strawberry",
     "emotion": "sunny and sweet, imagining the taste of a fresh summer treat",
     "notes": [
+      "Usually used in the plural when talking about food: 'die Erdbeeren'."
+    ],
+    "senses": [
+      {
+        "id": "vnicwta3cg8e9m6",
+        "order": 0,
+        "definition": "A small, soft, red fruit with tiny seeds on its surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strawberry"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍓",
+        "examples": [
+          {
+            "id": "8npi3425jemhv2z",
+            "text": "Ich esse gerne Erdbeeren zum Frühstück.",
+            "textLang": "de",
+            "translation": "I like eating strawberries for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Erdbeeren",
+            "matchedTranslationForm": "strawberries"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Erdbeere",
+    "lemma": "Erdbeere",
+    "reading": null,
+    "ipa": "/ˈeːɐ̯tˌbeːʁə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍓",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "strawberry",
+    "primaryGloss": "strawberry",
+    "emotion": "sunny and sweet, imagining the taste of a fresh summer treat",
+    "notes": [
       "Note that 'Erdbeere' literally means 'earth-berry' in German, referring to how they grow low to the ground."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ich esse gerne eine Erdbeere zum Frühstück.",
+        "why": "Unnatural to eat a single strawberry for breakfast; plural 'Erdbeeren' is natural."
+      }
+    ],
+    "growth": 0.836
   }
 }

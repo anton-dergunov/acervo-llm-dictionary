@@ -68,6 +68,75 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "yes",
+    "primaryGloss": "yes",
+    "emotion": "straightforward and confirming, a clear nod of agreement",
+    "notes": [
+      "False friend: although it sounds like English 'nay' or 'no', it means 'yes'.",
+      "On the phone, Greeks often answer with 'Ναι;' meaning 'Hello?'."
+    ],
+    "senses": [
+      {
+        "id": "8iitj0nge4kyzke",
+        "order": 0,
+        "definition": "Used to give an affirmative answer or express agreement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yes",
+              "yeah"
+            ]
+          }
+        ],
+        "domain": "affirmation",
+        "emoji": "👍",
+        "examples": [
+          {
+            "id": "q5p6cvyj25o828a",
+            "text": "— Θέλεις καφέ; — Ναι, ευχαριστώ.",
+            "textLang": "el",
+            "translation": "— Do you want coffee? — Yes, thank you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Ναι",
+            "matchedTranslationForm": "Yes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ναι",
+    "lemma": "ναι",
+    "reading": null,
+    "ipa": "/ne/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "yes; indeed; right",
     "primaryGloss": "yes",
     "emotion": "straightforward and confirming, a clear nod of agreement",
@@ -140,5 +209,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Είναι ωραία μέρα σήμερα, ναι;",
+        "why": "Unnatural calque of English 'right?'; Greek uses 'έτσι δεν είναι;' or 'ε;' here."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Used as a question tag or to solicit agreement from the listener.",
+        "why": "'Ναι' is not a general question tag in Greek; merge into one sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "yes; indeed; right",
+        "why": "Includes 'indeed' which is missing from senses, and false tag 'right'."
+      }
+    ],
+    "growth": 0.622
   }
 }

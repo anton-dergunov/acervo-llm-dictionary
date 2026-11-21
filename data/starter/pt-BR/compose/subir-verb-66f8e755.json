@@ -60,6 +60,139 @@
     "headword": "subir",
     "lemma": "subir",
     "reading": null,
+    "ipa": "/suˈbi(ʁ)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⬆️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to go up; to climb; to rise",
+    "primaryGloss": "go up",
+    "emotion": null,
+    "notes": [
+      "The stem vowel 'u' changes to open 'o' (/ɔ/) in the singular and third-person plural of the present tense: 'eu subo', but 'você sobe', 'eles sobem'.",
+      "Use 'subir em' for getting onto or climbing something ('subir na árvore', 'subir no ônibus'), and 'subir' directly for stairs or streets ('subir a escada')."
+    ],
+    "senses": [
+      {
+        "id": "7m2fup2v6d61l5q",
+        "order": 0,
+        "definition": "To move from a lower place to a higher one, or to get onto something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go up",
+              "to climb",
+              "to get on"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🪜",
+        "examples": [
+          {
+            "id": "5c9vigtlj5mf0vw",
+            "text": "Eu preciso subir as escadas para chegar ao escritório.",
+            "textLang": "pt",
+            "translation": "I need to go up the stairs to get to the office.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the task at hand",
+            "note": null,
+            "matchedForm": "subir",
+            "matchedTranslationForm": "go up"
+          },
+          {
+            "id": "0q485uq5u0y8ndy",
+            "text": "O menino gosta de subir na árvore do quintal.",
+            "textLang": "pt",
+            "translation": "The boy likes to climb the tree in the backyard.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and adventurous, recalling a childhood activity",
+            "note": null,
+            "matchedForm": "subir",
+            "matchedTranslationForm": "climb"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nsfeckam7800ums",
+        "order": 1,
+        "definition": "To become higher in level, amount, or price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to rise",
+              "to go up",
+              "to increase"
+            ]
+          }
+        ],
+        "domain": "increase",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "etsinxm6s3h86qr",
+            "text": "O preço da gasolina vai subir amanhã.",
+            "textLang": "pt",
+            "translation": "The price of gasoline will go up tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly concerned or resigned to bad news",
+            "note": null,
+            "matchedForm": "subir",
+            "matchedTranslationForm": "go up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "subir",
+    "lemma": "subir",
+    "reading": null,
     "ipa": "/suˈbiɾ/",
     "pos": "verb",
     "gender": null,
@@ -202,5 +335,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/suˈbiɾ/",
+        "why": "Word-final 'r' in standard Brazilian Portuguese is not a tap /ɾ/, but /ʁ/ (often dropped)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To move upward using both hands and feet to grip or hold on.",
+        "why": "'Subir em' means to go up on/into (a tree, bus, chair), not specifically climbing with hands."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Subir is a very flexible verb.",
+        "why": "Pure filler restating the senses; misses the vowel alternation (sobe) and prepositions (subir em)."
+      }
+    ],
+    "growth": 1.211
   }
 }

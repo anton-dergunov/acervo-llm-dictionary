@@ -72,6 +72,51 @@
     "primaryGloss": "cat",
     "emotion": "affectionate and gentle, perhaps softening the voice for something small and cute",
     "notes": [
+      "Counted using the animal counter 마리 (e.g., 고양이 한 마리, 'one cat')."
+    ],
+    "senses": [
+      {
+        "id": "f5tyhnr295unpe0",
+        "order": 0,
+        "definition": "A small furry animal with four legs and a tail, often kept as a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐱",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "고양이",
+    "lemma": "고양이",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐱",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "cat",
+    "primaryGloss": "cat",
+    "emotion": "affectionate and gentle, perhaps softening the voice for something small and cute",
+    "notes": [
       "Used for the small domesticated feline that is a popular household pet in Korea.",
       "Do not confuse with '야옹' (ya-ong), which is the onomatopoeia for the sound a cat makes (meow) rather than the name of the animal itself."
     ],
@@ -97,5 +142,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for the small domesticated feline that is a popular household pet",
+        "why": "Restates the definition; fails to mention the common counter 마리."
+      }
+    ],
+    "growth": 0.419
   }
 }

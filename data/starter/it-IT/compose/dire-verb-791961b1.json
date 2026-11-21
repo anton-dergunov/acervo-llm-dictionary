@@ -72,6 +72,97 @@
     "primaryGloss": "to say",
     "emotion": "matter-of-fact and direct, just conveying information to someone",
     "notes": [
+      "Irregular present tense: dico, dici, dice, diciamo, dite, dicono; past participle: detto.",
+      "Do not confuse with 'parlare' (to speak/talk): use 'dire' to report words or information, and 'parlare' for the activity of talking or speaking a language.",
+      "The phrase 'voler dire' means 'to mean' (e.g., 'Cosa vuol dire?' — 'What does it mean?')."
+    ],
+    "senses": [
+      {
+        "id": "x0glz60g404nt4k",
+        "order": 0,
+        "definition": "To express something in words, or to give information to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to say",
+              "to tell"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "1ifmkybzedi6lss",
+            "text": "Cosa hai detto a Maria?",
+            "textLang": "it",
+            "translation": "What did you say to Maria?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "detto",
+            "matchedTranslationForm": "say"
+          },
+          {
+            "id": "kcibw5k7pw0wt0u",
+            "text": "Mi ha detto che domani non viene.",
+            "textLang": "it",
+            "translation": "He told me that he is not coming tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and neutral, relaying news",
+            "note": null,
+            "matchedForm": "detto",
+            "matchedTranslationForm": "told"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "dire",
+    "lemma": "dire",
+    "reading": null,
+    "ipa": "/ˈdi.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to say; to tell",
+    "primaryGloss": "to say",
+    "emotion": "matter-of-fact and direct, just conveying information to someone",
+    "notes": [
       "Dire is the most common way to say 'to say' or 'to tell' in Italian. It is an irregular verb.",
       "Be careful not to confuse 'dire' with 'parlare' (to speak). Use 'dire' when you want to report specific words or information, and 'parlare' when you want to describe the act of talking or communicating in a language."
     ],
@@ -141,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "What do you want to say with this sentence?",
+        "why": "'Voler dire' is an idiom meaning 'to mean'; 'What do you want to say' is a calque."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Dire is the most common way to say 'to say' or 'to tell'",
+        "why": "Restates the glosses and says it is irregular without giving the irregular forms."
+      }
+    ],
+    "growth": 0.996
   }
 }

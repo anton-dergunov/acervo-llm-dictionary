@@ -68,6 +68,74 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "letter; mail",
+    "primaryGloss": "letter",
+    "emotion": "anticipatory and slightly focused, like checking a mailbox with mild curiosity",
+    "notes": [
+      "Takes the classifier 封 (fēng); 'to send a letter' is 寄信 (jì xìn) and 'to write a letter' is 写信 (xiě xìn). Do not confuse with 信息 (xìnxī, information or text message). 信 is also a common verb meaning 'to believe'."
+    ],
+    "senses": [
+      {
+        "id": "773zdc14mrw0pod",
+        "order": 0,
+        "definition": "A written or printed message sent to someone, usually in an envelope by post.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter",
+              "mail"
+            ]
+          }
+        ],
+        "domain": "mail",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "fgq8wmvvvehgem9",
+            "text": "我在书桌上放了一封信。",
+            "textLang": "zh",
+            "translation": "I put a letter on the desk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and matter-of-fact, describing a simple household task",
+            "note": null,
+            "matchedForm": "信",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "信",
+    "lemma": "信",
+    "reading": "xìn",
+    "ipa": "/ɕin˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "letter; mail; trust",
     "primaryGloss": "letter",
     "emotion": "anticipatory and slightly focused, like checking a mailbox with mild curiosity",
@@ -139,5 +207,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The act of believing or having faith in someone or something.",
+        "why": "As a standalone modern noun, 信 means 'letter'; 'trust' is bound in compounds (信用, 信任) or is the verb 'to believe'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'信' refers to the physical item or the act of sending written",
+        "why": "信 as a noun refers to the letter itself, not the act of sending it (which is 寄信)."
+      }
+    ],
+    "growth": 0.926
   }
 }

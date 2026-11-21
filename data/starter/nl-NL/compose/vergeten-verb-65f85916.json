@@ -72,6 +72,115 @@
     "primaryGloss": "forget",
     "emotion": "a light, breezy annoyance at a small mental slip, matter-of-fact",
     "notes": [
+      "Irregular verb: vergeten – vergat, vergaten – vergeten.",
+      "In the perfect tense, both 'zijn' and 'hebben' occur: use 'zijn' when you lost a memory (Ik ben zijn naam vergeten), and either 'hebben' or 'zijn' when you failed to do or bring something (Ik heb/ben mijn tas vergeten)."
+    ],
+    "senses": [
+      {
+        "id": "5cn6brtomoojkl4",
+        "order": 0,
+        "definition": "To fail to remember information or to neglect to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "forget"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "xxwaq45j9fjlfog",
+            "text": "Ik ben zijn naam even vergeten.",
+            "textLang": "nl",
+            "translation": "I have forgotten his name for a moment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit embarrassed and apologetic, seeking help",
+            "note": null,
+            "matchedForm": "vergeten",
+            "matchedTranslationForm": "forgotten"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h1t167pkp3qncvq",
+        "order": 1,
+        "definition": "To accidentally leave something behind in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leave behind",
+              "forget"
+            ]
+          }
+        ],
+        "domain": "belongings",
+        "emoji": "🎒",
+        "examples": [
+          {
+            "id": "79atq9ftidq0s28",
+            "text": "Ze is haar paraplu vergeten in de trein.",
+            "textLang": "nl",
+            "translation": "She left her umbrella behind on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated with oneself, slightly exasperated at the loss",
+            "note": null,
+            "matchedForm": "vergeten",
+            "matchedTranslationForm": "left"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "vergeten",
+    "lemma": "vergeten",
+    "reading": null,
+    "ipa": "/vərˈɣeːtə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to forget; to leave behind",
+    "primaryGloss": "forget",
+    "emotion": "a light, breezy annoyance at a small mental slip, matter-of-fact",
+    "notes": [
       "Use 'vergeten' when you do not remember something. It is also common to use this verb when you leave an item behind somewhere by accident (e.g., 'Ik ben mijn tas vergeten').",
       "In the perfect tense, Dutch speakers use the auxiliary 'zijn' (e.g., 'Ik ben het vergeten'), unlike English, which uses 'have'."
     ],
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'vergeten' when you do not remember something.",
+        "why": "Merely restates the definitions and glosses."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "In the perfect tense, Dutch speakers use the auxiliary 'zijn'",
+        "why": "Incomplete/misleading: 'hebben' is also used (specifically when failing to do an action)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular principal parts (vergat, vergeten)."
+      }
+    ],
+    "growth": 0.958
   }
 }

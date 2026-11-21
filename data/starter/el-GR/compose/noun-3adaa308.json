@@ -74,6 +74,113 @@
     "primaryGloss": "leg",
     "emotion": "matter-of-fact, describing a part of oneself while moving or resting",
     "notes": [
+      "Used for both 'leg' and 'foot'. Notice the common phrase με τα πόδια (on foot)."
+    ],
+    "senses": [
+      {
+        "id": "0kmjxg0k5jwepom",
+        "order": 0,
+        "definition": "The limb of a person or animal used for standing and walking, or the similar supporting part of a piece of furniture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg"
+            ]
+          }
+        ],
+        "domain": "leg",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "4qpr6o0x6jco2ph",
+            "text": "Με πονάει το πόδι μου μετά το τρέξιμο.",
+            "textLang": "el",
+            "translation": "My leg hurts after running.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and slightly complaining after physical exertion",
+            "note": null,
+            "matchedForm": "πόδι",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e9fjexgz2bqdhfh",
+        "order": 1,
+        "definition": "The lower part of the leg below the ankle, on which a person or animal stands.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foot"
+            ]
+          }
+        ],
+        "domain": "foot",
+        "emoji": "🦶",
+        "examples": [
+          {
+            "id": "6egb51dqokt6ah9",
+            "text": "Αυτά τα παπούτσια είναι στενά και με χτυπάνε στα πόδια.",
+            "textLang": "el",
+            "translation": "These shoes are tight and hurt my feet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πόδια",
+            "matchedTranslationForm": "feet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το πόδι",
+    "lemma": "πόδι",
+    "reading": null,
+    "ipa": "/ˈpo.ði/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg; foot",
+    "primaryGloss": "leg",
+    "emotion": "matter-of-fact, describing a part of oneself while moving or resting",
+    "notes": [
       "In Greek, the word 'πόδι' is used for both the leg and the foot. Context usually makes it clear which part is intended, though 'πέλμα' (sole) or 'πατούσα' (foot/sole) can be used for precision when referring strictly to the bottom of the foot."
     ],
     "senses": [
@@ -160,5 +267,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Πρέπει να αγοράσω καινούργια παπούτσια για το πόδι μου.",
+        "why": "Unnatural in Greek and English to buy shoes (plural) for 'my foot' (singular)."
+      }
+    ],
+    "growth": 0.808
   }
 }

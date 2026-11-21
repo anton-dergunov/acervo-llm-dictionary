@@ -70,6 +70,74 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "quiet; silent",
+    "primaryGloss": "quiet",
+    "emotion": null,
+    "notes": [
+      "The stressed 'o' is pronounced closed (/o/) in the masculine singular ('silencioso'), but open (/ɔ/) in the feminine ('silenciosa') and plurals."
+    ],
+    "senses": [
+      {
+        "id": "v54y5e3yfo2h6s9",
+        "order": 0,
+        "definition": "Making little or no noise; having no sound.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "silent"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "cz0xz55i53gucep",
+            "text": "O carro elétrico é muito silencioso.",
+            "textLang": "pt",
+            "translation": "The electric car is very quiet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, observing a modern feature of the vehicle",
+            "note": null,
+            "matchedForm": "silencioso",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "silencioso",
+    "lemma": "silencioso",
+    "reading": null,
+    "ipa": "/si.lẽ.si.ˈo.zu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "silent; quiet",
     "primaryGloss": "silent",
     "emotion": null,
@@ -121,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "That which makes little or no noise.",
+        "why": "Adjective defined as a noun phrase ('That which...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The electric car is very silent.",
+        "why": "Unnatural English collocation; in English a car is 'very quiet', not 'very silent'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for things or people that do not produce sound.",
+        "why": "Restates the definition without adding grammar or pronunciation help (such as metaphony in plural/feminine)."
+      }
+    ],
+    "growth": 1.078
   }
 }

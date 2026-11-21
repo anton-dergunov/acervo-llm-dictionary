@@ -58,6 +58,76 @@
     "headword": "gözlük",
     "lemma": "gözlük",
     "reading": null,
+    "ipa": "/ɟœzˈlyc/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; spectacles",
+    "primaryGloss": "glasses",
+    "emotion": "focused and clear, adjusting them on the nose",
+    "notes": [
+      "Unlike English 'glasses', gözlük is used in the singular for a single pair: gözlüğüm (my glasses).",
+      "Takes the verb takmak (to put on / to wear) and undergoes consonant softening before a vowel suffix (gözlük -> gözlüğü)."
+    ],
+    "senses": [
+      {
+        "id": "59f7qvwvba5nz24",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame worn on the face to correct vision or protect the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "eyeglasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "6y2a107k6cj5h9a",
+            "text": "Okumak için gözlüğümü takmam gerekiyor.",
+            "textLang": "tr",
+            "translation": "I need to put on my glasses to read.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gözlüğümü",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "gözlük",
+    "lemma": "gözlük",
+    "reading": null,
     "ipa": "/ɟøzˈlyk/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Okumak için gözlüklerimi takmam gerekiyor.",
+        "why": "A single pair of glasses is singular in Turkish (gözlüğümü, not plural gözlüklerimi)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must warn English speakers that a single pair of glasses is singular in Turkish."
+      }
+    ],
+    "growth": 1.439
   }
 }

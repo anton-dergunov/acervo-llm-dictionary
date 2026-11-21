@@ -57,6 +57,74 @@
     "language": "zh",
     "headword": "星期",
     "lemma": "星期",
+    "reading": "xīngqī",
+    "ipa": "/ɕiŋ˥ tɕʰi˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": "matter-of-fact and steady, planning the upcoming days",
+    "notes": [
+      "Takes the classifier 个 (gè), e.g., 一个星期 (one week).",
+      "Followed by numbers 1 to 6 to name Monday through Saturday (星期一 to 星期六), and by 天 or 日 for Sunday (星期天, 星期日)."
+    ],
+    "senses": [
+      {
+        "id": "9kgh8p8t4if1hb7",
+        "order": 0,
+        "definition": "A period of seven days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📆",
+        "examples": [
+          {
+            "id": "ccyopr9bvjbb7ru",
+            "text": "我上个星期去了北京。",
+            "textLang": "zh",
+            "translation": "I went to Beijing last week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and reminiscent, recalling a past trip",
+            "note": null,
+            "matchedForm": "星期",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "星期",
+    "lemma": "星期",
     "reading": "xīng qī",
     "ipa": "/ɕiŋ˥ tɕʰi˥/",
     "pos": "noun",
@@ -159,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(sunday) Sunday, the seventh day of the week.",
+        "why": "星期 alone rarely means Sunday; the example actually uses the compound 星期天."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "week; Sunday",
+        "why": "Sunday is not a standard everyday meaning of 星期 by itself."
+      }
+    ],
+    "growth": 0.549
   }
 }

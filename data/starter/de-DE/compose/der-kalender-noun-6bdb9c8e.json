@@ -68,6 +68,75 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "calendar; planner",
+    "primaryGloss": "calendar",
+    "emotion": "organized and expectant, marking down a future date",
+    "notes": [
+      "The plural form is the same as the singular: 'die Kalender'."
+    ],
+    "senses": [
+      {
+        "id": "toh2a4rrsurfly2",
+        "order": 0,
+        "definition": "A chart, book, or app showing the days, weeks, and months of a year, or used to record appointments.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calendar",
+              "planner",
+              "diary"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🗓️",
+        "examples": [
+          {
+            "id": "ocdm4ox40401myg",
+            "text": "Ich muss den Termin in meinen Kalender eintragen.",
+            "textLang": "de",
+            "translation": "I have to enter the appointment into my calendar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and practical, making sure a commitment is remembered",
+            "note": null,
+            "matchedForm": "Kalender",
+            "matchedTranslationForm": "calendar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Kalender",
+    "lemma": "Kalender",
+    "reading": null,
+    "ipa": "/kaˈlɛndɐ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "calendar",
     "primaryGloss": "calendar",
     "emotion": "organized and expectant, marking down a future date",
@@ -159,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A single sheet or page displaying the days, weeks and months",
+        "why": "'Kalender' means the whole calendar or planner, not a single page ('Kalenderblatt')."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Das Kalenderblatt für den neuen Monat ist sehr bunt.",
+        "why": "Uses the compound 'Kalenderblatt' instead of the headword 'Kalender'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'Kalender' can refer to a physical book or wall sheet",
+        "why": "Obvious filler; English 'calendar' is also used for both physical and digital calendars."
+      }
+    ],
+    "growth": 0.506
   }
 }

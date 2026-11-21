@@ -58,6 +58,74 @@
     "headword": "잎",
     "lemma": "잎",
     "reading": null,
+    "ipa": "/ip̚/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "leaf",
+    "primaryGloss": "leaf",
+    "emotion": "a peaceful feeling of walking through a quiet, shaded forest",
+    "notes": [
+      "At the end of a syllable or before a consonant, final ㅍ is pronounced as an unreleased [p̚] (잎 [입]), but before a vowel particle it links as [pʰ] (잎이 [이피])."
+    ],
+    "senses": [
+      {
+        "id": "hnfssija5w7qvkz",
+        "order": 0,
+        "definition": "A flat, usually green part of a plant or tree that grows from a stem or branch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf",
+              "foliage"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "t7nwtty0g9gx4f9",
+            "text": "가을이 되어 나무의 잎이 노랗게 변했습니다.",
+            "textLang": "ko",
+            "translation": "Autumn came and the leaves on the trees turned yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "잎이",
+            "matchedTranslationForm": "leaves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "잎",
+    "lemma": "잎",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -118,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "잎 ends with a double consonant that sounds like 'p' when it",
+        "why": "ㅍ is an aspirated consonant, not a double (tense) consonant."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "나무 잎이 가을이 되어 노랗게 변했습니다.",
+        "why": "'tree leaf' is natively the compound 나뭇잎 (with 사이시옷), not spaced 나무 잎."
+      }
+    ],
+    "growth": 0.896
   }
 }

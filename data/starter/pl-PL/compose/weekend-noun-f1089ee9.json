@@ -58,6 +58,73 @@
     "headword": "weekend",
     "lemma": "weekend",
     "reading": null,
+    "ipa": "/ˈwi.kɛnt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "weekend",
+    "primaryGloss": "weekend",
+    "emotion": "relaxed and anticipating rest, sounding bright and looking forward to time off",
+    "notes": [
+      "Pronounced like the English word (with an initial /w/ sound, not the Polish /v/), though it takes regular Polish masculine endings (e.g., 'w weekendzie', 'w weekendy'). For 'at/on the weekend', say 'w weekend'."
+    ],
+    "senses": [
+      {
+        "id": "7l1g47e9utsetzt",
+        "order": 0,
+        "definition": "Saturday and Sunday, often including Friday evening, as a period of rest from work or school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weekend"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "x7g8opus3mwxtbp",
+            "text": "Co robisz w ten weekend?",
+            "textLang": "pl",
+            "translation": "What are you doing this weekend?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "weekend",
+            "matchedTranslationForm": "weekend"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "weekend",
+    "lemma": "weekend",
+    "reading": null,
     "ipa": "/ˈwiːk.ɛnt/",
     "pos": "noun",
     "gender": "masculine",
@@ -136,5 +203,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈwiːk.ɛnt/",
+        "why": "Uses English long vowel /iː/; Polish phonemic transcription is /ˈwi.kɛnt/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Splitting 'Friday evening to Sunday' from 'Saturday and Sunday' is artificial."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Polish, this word is a loanword from English. It is masculine",
+        "why": "Filler note; should instead explain how 'weekend' is pronounced and used with prepositions."
+      }
+    ],
+    "growth": 0.71
   }
 }

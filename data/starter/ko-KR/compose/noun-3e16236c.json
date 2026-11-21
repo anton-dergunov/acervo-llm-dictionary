@@ -58,6 +58,74 @@
     "headword": "가을",
     "lemma": "가을",
     "reading": null,
+    "ipa": "/ka̠ɯɭ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "autumn; fall",
+    "primaryGloss": "autumn",
+    "emotion": "crisp and cool, breathing in the fresh air of a clear day",
+    "notes": [
+      "Takes the particle 에 to mean 'in autumn' (가을에)."
+    ],
+    "senses": [
+      {
+        "id": "lrak0rjvbkttfl6",
+        "order": 0,
+        "definition": "The season between summer and winter, when the weather turns cool and leaves fall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "autumn",
+              "fall"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "🍂",
+        "examples": [
+          {
+            "id": "ph3tclnppm7uwem",
+            "text": "가을에는 날씨가 선선하고 하늘이 맑습니다.",
+            "textLang": "ko",
+            "translation": "In autumn, the weather is cool and the sky is clear.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative of the nice weather, calm and content",
+            "note": null,
+            "matchedForm": "가을",
+            "matchedTranslationForm": "autumn"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "가을",
+    "lemma": "가을",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The season when leaves fall from the trees and change color.",
+        "why": "Sense 1 is the exact same meaning as sense 0 (the season autumn)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or 만에 (after a long time).",
+        "why": "만에 attaches to time-duration expressions, not to season nouns like 가을 by itself."
+      }
+    ],
+    "growth": 0.541
   }
 }

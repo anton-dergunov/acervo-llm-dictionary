@@ -72,6 +72,113 @@
     "primaryGloss": "late",
     "emotion": "rushing and glancing at the watch, breathless and worried about the hour",
     "notes": [
+      "Do not confuse with 'en retard' (delayed, past a scheduled time): 'Il est tard' (It is late at night) vs. 'Il est en retard' (He is late for his appointment).",
+      "The final 'd' is silent."
+    ],
+    "senses": [
+      {
+        "id": "slagxtoxg24d6o0",
+        "order": 0,
+        "definition": "Near the end of the day, or after the usual or expected time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "s2jjvpjhlaz7k62",
+            "text": "Il est trop tard pour aller au cinéma.",
+            "textLang": "fr",
+            "translation": "It is too late to go to the cinema.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and resigned, looking at the closed doors",
+            "note": null,
+            "matchedForm": "tard",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "viga4h7p2ovh984",
+            "text": "Je rentre souvent tard le soir.",
+            "textLang": "fr",
+            "translation": "I often come home late in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and weary, unlocking the front door after a long day",
+            "note": null,
+            "matchedForm": "tard",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "slagxtoxg24d6o0",
+      "from": "À une heure avancée, après le moment prévu ou habituel.",
+      "to": "At a time after the expected or usual hour.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    },
+    {
+      "sense": "8d7ir6estvm15sj",
+      "from": "À la fin d'une période, d'une saison ou de la vie.",
+      "to": "At a later point in a period, season, or life.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "tard",
+    "lemma": "tard",
+    "reading": null,
+    "ipa": "/taʁ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "rushing and glancing at the watch, breathless and worried about the hour",
+    "notes": [
       "Use 'tard' when an action happens after the expected or usual time.",
       "Do not confuse it with 'en retard', which describes a person or thing that has been delayed."
     ],
@@ -182,22 +289,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "slagxtoxg24d6o0",
-      "from": "À une heure avancée, après le moment prévu ou habituel.",
-      "to": "At a time after the expected or usual hour.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    },
-    {
-      "sense": "8d7ir6estvm15sj",
-      "from": "À la fin d'une période, d'une saison ou de la vie.",
-      "to": "At a later point in a period, season, or life.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il fait froid, c'est l'automne tard.",
+        "why": "Ungrammatical in French; an adverb cannot modify a noun like this ('la fin de l'automne')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(period) At a later point in a period, season, or life.",
+        "why": "Same basic temporal meaning as sense 0; no need for a separate sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'tard' when an action happens after the expected or usual time.",
+        "why": "Restates the definition without adding usage information."
+      }
+    ],
+    "growth": 0.826
+  }
 }

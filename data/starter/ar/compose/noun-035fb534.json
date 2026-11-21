@@ -73,6 +73,119 @@
     "primaryGloss": "road",
     "emotion": "focused and purposeful, looking ahead down the open road",
     "notes": [
+      "Plural: طُرُق (ṭuruq). The word طَرِيق itself can take either masculine or feminine agreement, though masculine is more common.",
+      "Do not confuse with طَرِيقَة (ṭarīqa, 'method, manner'), or with شَارِع (šāriʕ, 'city street')."
+    ],
+    "senses": [
+      {
+        "id": "mjemxwcvi984wwj",
+        "order": 0,
+        "definition": "A path or route built for vehicles and people to travel between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "way",
+              "route",
+              "path"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "ieq2j9jocu6ibqw",
+            "text": "هَذَا الطَّرِيقُ يُؤَدِّي إِلَى المَدِينَةِ.",
+            "textLang": "ar",
+            "translation": "This road leads to the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing ahead with certainty, showing the way forward",
+            "note": null,
+            "matchedForm": "الطَّرِيقُ",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fvu4cjj83o6a3f4",
+        "order": 1,
+        "definition": "A course of action or means of reaching a goal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "path"
+            ]
+          }
+        ],
+        "domain": "direction",
+        "emoji": "🧭",
+        "examples": [
+          {
+            "id": "efjd49qugnqiq7z",
+            "text": "هَذَا هُوَ الطَّرِيقُ الوَحِيدُ إِلَى النَّجَاحِ.",
+            "textLang": "ar",
+            "translation": "This is the only way to success.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الطَّرِيقُ",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "طَرِيق",
+    "lemma": "طَرِيق",
+    "reading": null,
+    "ipa": "/tˤaˈriːq/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "road; way",
+    "primaryGloss": "road",
+    "emotion": "focused and purposeful, looking ahead down the open road",
+    "notes": [
       "Can be masculine or feminine (طَرِيق or طَرِيقَة), though masculine is very common for physical roads.",
       "Do not confuse with شارِع (street), which usually refers to a road within a city with buildings on the sides."
     ],
@@ -164,5 +277,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Can be masculine or feminine (طَرِيق or طَرِيقَة)",
+        "why": "طَرِيق itself can take masculine or feminine agreement without adding ة; طَرِيقَة is a separate noun."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "بَحَثْتُ عَنْ طَرِيقَةٍ لِحَلِّ المُشْكِلَةِ.",
+        "why": "Uses the separate lemma طَرِيقَة (ṭarīqa) instead of the headword طَرِيق (ṭarīq)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the common broken plural طُرُق (ṭuruq)."
+      }
+    ],
+    "growth": 1.027
   }
 }

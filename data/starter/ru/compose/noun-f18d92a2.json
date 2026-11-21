@@ -70,6 +70,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "shop, store",
+    "primaryGloss": "shop",
+    "emotion": "routine and everyday, thinking about what to buy",
+    "notes": [
+      "False friend: «магазин» means a shop or store, not a printed magazine (which is «журнал»).Takes «в» + accusative for going to a shop («в магазин») and «в» + prepositional for being at a shop («в магазине»)."
+    ],
+    "senses": [
+      {
+        "id": "1m9jke2vykz5kyy",
+        "order": 0,
+        "definition": "A place where goods are sold to the public.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "store"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "ki893g08quxrs18",
+            "text": "Я иду в магазин за хлебом.",
+            "textLang": "ru",
+            "translation": "I am going to the shop for bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and purposeful, heading out the door",
+            "note": null,
+            "matchedForm": "магазин",
+            "matchedTranslationForm": "shop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "магазин",
+    "lemma": "магазин",
+    "reading": null,
+    "ipa": "/məɡɐˈzʲin/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "shop; magazine",
     "primaryGloss": "shop",
     "emotion": "routine and everyday, thinking about what to buy",
@@ -159,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(media) A periodical publication containing articles and stories.",
+        "why": "False friend: магазин never means a periodical; that is журнал, as the example's note admits."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Он купил новый музыкальный журнал.",
+        "why": "Example uses журнал instead of the headword магазин."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "shop; magazine",
+        "why": "Includes false friend 'magazine' (gun magazine is technical, print magazine is wrong)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should warn learners about the false friend 'magazine' (which is журнал in Russian)."
+      }
+    ],
+    "growth": 0.919
   }
 }

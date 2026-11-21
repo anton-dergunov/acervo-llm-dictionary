@@ -72,6 +72,74 @@
     "primaryGloss": "cook",
     "emotion": "busy in a hot kitchen, focused and moving fast",
     "notes": [
+      "Feminine: طَبَّاخَة (ṭabbāḵa). Plural: طَبَّاخُون (ṭabbāḵūn)."
+    ],
+    "senses": [
+      {
+        "id": "6jd1n5j4oy0308x",
+        "order": 0,
+        "definition": "A person whose job is to prepare and cook food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cook",
+              "chef"
+            ]
+          }
+        ],
+        "domain": "job",
+        "emoji": "👨‍🍳",
+        "examples": [
+          {
+            "id": "l741whywp7d5d01",
+            "text": "يَعْمَلُ الطَّبَّاخُ فِي مَطْعَمٍ كَبِيرٍ.",
+            "textLang": "ar",
+            "translation": "The cook works in a large restaurant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الطَّبَّاخُ",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "طَبَّاخ",
+    "lemma": "طَبَّاخ",
+    "reading": null,
+    "ipa": "/tˤab.baːχ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍🍳",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "cook; chef",
+    "primaryGloss": "cook",
+    "emotion": "busy in a hot kitchen, focused and moving fast",
+    "notes": [
       "طَبَّاخ usually refers to a cook or a chef who prepares food professionally, especially in a restaurant."
     ],
     "senses": [
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "يَعْمَلُ الطَّبَّاخُ فِي مِطْعَمٍ كَبِيرٍ.",
+        "why": "Wrong vowel in مِطْعَمٍ; the word for 'restaurant' is مَطْعَم (maṭʿam)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "طَبَّاخ usually refers to a cook or a chef who prepares food",
+        "why": "Merely restates the definition and gloss; feminine and plural forms are more useful."
+      }
+    ],
+    "growth": 0.807
   }
 }

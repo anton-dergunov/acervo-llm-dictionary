@@ -60,6 +60,114 @@
     "headword": "trắng",
     "lemma": "trắng",
     "reading": null,
+    "ipa": "/tɕaŋ˧˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white; blank",
+    "primaryGloss": "white",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'trong' (clear, transparent) or 'trống' (empty, vacant)."
+    ],
+    "senses": [
+      {
+        "id": "sqe8epo97hlfj67",
+        "order": 0,
+        "definition": "Having the colour of milk or fresh snow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "m5bzsoavb5re83d",
+            "text": "Cô ấy mặc một chiếc áo sơ mi trắng.",
+            "textLang": "vi",
+            "translation": "She is wearing a white shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "trắng",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tcq1q7d8me9m76h",
+        "order": 1,
+        "definition": "Of paper or a surface: having nothing written or printed on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blank",
+              "empty"
+            ]
+          }
+        ],
+        "domain": "paper",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "29sld21h1vd8xyq",
+            "text": "Trang giấy trắng chưa có chữ nào.",
+            "textLang": "vi",
+            "translation": "The blank page does not have any words yet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and hesitant, looking at an empty notebook before writing",
+            "note": null,
+            "matchedForm": "trắng",
+            "matchedTranslationForm": "blank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "trắng",
+    "lemma": "trắng",
+    "reading": null,
     "ipa": "/trakŋ͡m̚/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/trakŋ͡m̚/",
+        "why": "Wrong initial consonant and missing tone mark; Hanoi IPA is /tɕaŋ˧˦/."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow or milk.",
+        "why": "Adjective defined as a noun ('The colour...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "white; blank; empty; light",
+        "why": "Includes 'light', which is not covered by any sense in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Trắng is the standard word for the colour white, but",
+        "why": "Merely restates the glosses without adding useful learner guidance."
+      }
+    ],
+    "growth": 0.757
   }
 }

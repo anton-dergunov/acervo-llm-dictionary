@@ -58,6 +58,96 @@
     "headword": "捕る",
     "lemma": "捕る",
     "reading": "とる",
+    "ipa": "to̞ɾɯ̟ᵝ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👐",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to catch; to capture",
+    "primaryGloss": "to catch",
+    "emotion": "focused and alert, anticipating the movement of something about to be grabbed",
+    "notes": [
+      "Godan (u-verb) transitive verb taking を.",
+      "Pronounced the same as 取る (とる, to take or pick up), 捕る is specifically used for catching moving things such as fish, insects, animals, or a ball."
+    ],
+    "senses": [
+      {
+        "id": "m39twtjsls4l8in",
+        "order": 0,
+        "definition": "To catch or capture a moving animal, fish, insect, or ball with one's hands or a tool.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to catch",
+              "to capture"
+            ]
+          }
+        ],
+        "domain": "catching",
+        "emoji": "👐",
+        "examples": [
+          {
+            "id": "c4bbnshsn0kvvb8",
+            "text": "川で魚を捕った。",
+            "textLang": "ja",
+            "translation": "I caught fish in the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "捕った",
+            "matchedTranslationForm": "caught"
+          },
+          {
+            "id": "13qwyli6pazye9d",
+            "text": "彼が飛んできたボールを捕った。",
+            "textLang": "ja",
+            "translation": "He caught the ball that came flying.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "捕った",
+            "matchedTranslationForm": "caught"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "捕る",
+    "lemma": "捕る",
+    "reading": "とる",
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -142,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to catch; to take",
+        "why": "'to take' is not in the sense glosses and blurs the contrast with 取る."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples",
+        "quote": "ボールを捕る。 — To catch a ball.",
+        "why": "Bare infinitive fragments rather than natural sentences."
+      }
+    ],
+    "growth": 0.876
   }
 }

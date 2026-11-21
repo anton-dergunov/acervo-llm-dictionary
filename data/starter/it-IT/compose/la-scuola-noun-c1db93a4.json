@@ -72,6 +72,112 @@
     "primaryGloss": "school",
     "emotion": "busy and purposeful, heading in through the heavy wooden doors",
     "notes": [
+      "No article is used in common expressions like 'andare a scuola' (to go to school), 'essere a scuola' (to be at school), and 'finire la scuola' (to finish school)."
+    ],
+    "senses": [
+      {
+        "id": "q0cbk59zxhkgmz7",
+        "order": 0,
+        "definition": "A place or institution where children and young people go to learn, or the time spent there.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "school"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "tab5vg22yri45yn",
+            "text": "I bambini vanno a scuola ogni mattina.",
+            "textLang": "it",
+            "translation": "The children go to school every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and routine, walking with a backpack",
+            "note": null,
+            "matchedForm": "scuola",
+            "matchedTranslationForm": "school"
+          },
+          {
+            "id": "dtf2yfu0prsjo26",
+            "text": "Ho conosciuto il mio migliore amico a scuola.",
+            "textLang": "it",
+            "translation": "I met my best friend at school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and warm, remembering old times",
+            "note": null,
+            "matchedForm": "scuola",
+            "matchedTranslationForm": "school"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "q0cbk59zxhkgmz7",
+      "from": "Istituto dove si insegnano e si apprendono le materie di studio.",
+      "to": "An institution where subjects are taught and learned.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:07Z"
+    },
+    {
+      "sense": "evh8f6h7rkrew2j",
+      "from": "Periodo della vita in cui si frequenta l'istituto scolastico.",
+      "to": "The time in a person's life when they attend an educational institution.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:07Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la scuola",
+    "lemma": "scuola",
+    "reading": null,
+    "ipa": "/ˈskwɔ.la/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏫",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "school",
+    "primaryGloss": "school",
+    "emotion": "busy and purposeful, heading in through the heavy wooden doors",
+    "notes": [
       "Used both for the physical building and the institution itself, just like in English."
     ],
     "senses": [
@@ -160,22 +266,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "q0cbk59zxhkgmz7",
-      "from": "Istituto dove si insegnano e si apprendono le materie di studio.",
-      "to": "An institution where subjects are taught and learned.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:07Z"
-    },
-    {
-      "sense": "evh8f6h7rkrew2j",
-      "from": "Periodo della vita in cui si frequenta l'istituto scolastico.",
-      "to": "The time in a person's life when they attend an educational institution.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:07Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(period) The time in a person's life when they attend an educational",
+        "why": "Shades of the same basic meaning of 'school' that do not need separation at A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the physical building and the institution itself, just like",
+        "why": "Explains a usage identical to English instead of helpful Italian collocations without the article."
+      }
+    ],
+    "growth": 1.055
+  }
 }

@@ -74,6 +74,137 @@
     "primaryGloss": "remember",
     "emotion": null,
     "notes": [
+      "Stem-changing verb (o → ue) in the present tense: recuerdo, recuerdas, recuerda...",
+      "For 'to remember', 'acordarse de' is a very common alternative in spoken Spanish (e.g., 'No me acuerdo de su nombre').",
+      "When it means 'to remind', the person is the indirect object ('Recuérdame comprar pan') or it takes 'a' for resemblance ('Me recuerdas a tu padre')."
+    ],
+    "senses": [
+      {
+        "id": "cgubr5ogippqwz5",
+        "order": 0,
+        "definition": "To keep something in your mind or bring a past fact or event back to mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remember",
+              "recall"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "m3hk8o4bc3kv57k",
+            "text": "No recuerdo dónde puse las llaves.",
+            "textLang": "es",
+            "translation": "I don't remember where I put the keys.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit annoyed and frustrated with oneself",
+            "note": null,
+            "matchedForm": "recuerdo",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9g5cxxp9ej2s87p",
+        "order": 1,
+        "definition": "To cause someone to remember something they must do, or to make someone think of a person or thing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remind"
+            ]
+          }
+        ],
+        "domain": "reminder",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "qte7z6rixiag348",
+            "text": "Recuérdame que llame al médico mañana.",
+            "textLang": "es",
+            "translation": "Remind me to call the doctor tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Recuérdame",
+            "matchedTranslationForm": "Remind"
+          },
+          {
+            "id": "4cm0xq3jqelkdm3",
+            "text": "Esta canción me recuerda a mi infancia.",
+            "textLang": "es",
+            "translation": "This song reminds me of my childhood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and soft, feeling a warm connection to the past",
+            "note": null,
+            "matchedForm": "recuerda",
+            "matchedTranslationForm": "reminds"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "recordar",
+    "lemma": "recordar",
+    "reading": null,
+    "ipa": "/rekorˈðaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to remember; to remind",
+    "primaryGloss": "remember",
+    "emotion": null,
+    "notes": [
       "Use 'acordarse de' as an alternative to 'recordar' when you mean 'to remember'. They are interchangeable, but 'acordarse de' is very common in speech.",
       "Do not confuse this with 'recordar' meaning 'to remind' (someone else). In that case, you use a direct object (e.g., 'Me recuerdas a tu padre' - You remind me of your father)."
     ],
@@ -163,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "In that case, you use a direct object (e.g., 'Me recuerdas",
+        "why": "In 'recordar algo a alguien', the person reminded is an indirect object, not direct."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Sense 1 only covers resemblance ('remind of'), missing the common sense 'remind someone to do something'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the o -> ue stem change in the present tense (recuerdo, recuerdas)."
+      }
+    ],
+    "growth": 1.169
   }
 }

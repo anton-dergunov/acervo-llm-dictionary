@@ -58,6 +58,75 @@
     "headword": "đói",
     "lemma": "đói",
     "reading": null,
+    "ipa": "/ɗɔj˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "hungry; starving",
+    "primaryGloss": "hungry",
+    "emotion": "craving food with a hollow feeling in the stomach",
+    "notes": [
+      "Often used in 'đói bụng' (literally 'hungry stomach'). The opposite is 'no' ('full').",
+      "Use 'đói' when you need food, whereas 'thèm' means craving a specific food or drink."
+    ],
+    "senses": [
+      {
+        "id": "vt2ck4nfuzukxbw",
+        "order": 0,
+        "definition": "Feeling a need for food; suffering from a lack of food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hungry",
+              "starving"
+            ]
+          }
+        ],
+        "domain": "hunger",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "1g7y09zs08yec0z",
+            "text": "Tôi đói quá, chúng ta đi ăn thôi.",
+            "textLang": "vi",
+            "translation": "I am so hungry, let's go eat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and impatient, rubbing the stomach while thinking about food",
+            "note": null,
+            "matchedForm": "đói",
+            "matchedTranslationForm": "hungry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đói",
+    "lemma": "đói",
+    "reading": null,
     "ipa": "/dɔiŋ˧˥/",
     "pos": "adj",
     "gender": null,
@@ -159,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dɔiŋ˧˥/",
+        "why": "Corrupt IPA: 'đói' is /ɗɔj˧˥/; it has initial /ɗ/ and no final /ŋ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(scarcity) Suffering from a severe lack of food or experiencing famine.",
+        "why": "Shades of one meaning; the example actually uses the compound 'đói kém', not 'đói' alone."
+      }
+    ],
+    "growth": 0.754
   }
 }

@@ -72,6 +72,75 @@
     "primaryGloss": "there",
     "emotion": null,
     "notes": [
+      "Refers to a place near the listener, or a place just mentioned in conversation.",
+      "Part of the ko-so-a-do set: ここ (here, near me), そこ (there, near you), あそこ (over there, away from both), どこ (where)."
+    ],
+    "senses": [
+      {
+        "id": "r45jfow4ppq9cfo",
+        "order": 0,
+        "definition": "A place near the person being spoken to, or a place already mentioned in the conversation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there",
+              "that place"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "wx73asff5h06xr2",
+            "text": "そこには何がありますか。",
+            "textLang": "ja",
+            "translation": "What is there?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "そこ",
+            "matchedTranslationForm": "there"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "そこ",
+    "lemma": "そこ",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "there; that place",
+    "primaryGloss": "there",
+    "emotion": null,
+    "notes": [
       "Use 'soko' for a place that is near the person you are talking to, or a place you were both just discussing.",
       "Contrast this with 'koko' (here, where I am) and 'asoko' (over there, far from both of us)."
     ],
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "そこ is a pronoun (demonstrative place noun), not an adverb; it requires particles."
+      }
+    ],
+    "growth": 0.953
   }
 }

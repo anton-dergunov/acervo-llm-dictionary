@@ -58,6 +58,116 @@
     "headword": "ο πυρετός",
     "lemma": "πυρετός",
     "reading": null,
+    "ipa": "/pi.ɾeˈtos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "fever; frenzy",
+    "primaryGloss": "fever",
+    "emotion": "sluggish and achy, feeling heavy and unwell",
+    "notes": [
+      "To say you have a fever, use the verb έχω without an article: Έχω πυρετό."
+    ],
+    "senses": [
+      {
+        "id": "npz2x0w4zig0ue2",
+        "order": 0,
+        "definition": "A body temperature that is higher than normal because of illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever",
+              "temperature"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "ic38rrwyktryz43",
+            "text": "Έχω πυρετό και πονάει το κεφάλι μου.",
+            "textLang": "el",
+            "translation": "I have a fever and my head hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and uncomfortable, complaining of being sick",
+            "note": null,
+            "matchedForm": "πυρετό",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4hszwfpim5zdl4a",
+        "order": 1,
+        "definition": "A state of intense excitement or hurried activity before an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever",
+              "frenzy",
+              "excitement"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "70y12v54nx47d0k",
+            "text": "Η πόλη ζει στον πυρετό των προετοιμασιών.",
+            "textLang": "el",
+            "translation": "The city is in a fever of preparations.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and buzzing with frantic energy",
+            "note": null,
+            "matchedForm": "πυρετό",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο πυρετός",
+    "lemma": "πυρετός",
+    "reading": null,
     "ipa": "/pireˈtos/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fever; enthusiasm",
+        "why": "Sense 1 glosses do not include 'enthusiasm'; use 'frenzy' or 'excitement'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While πυρετός literally means fever, it is also commonly used metaphorically",
+        "why": "Restates the senses without adding grammatical or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The city lives in the fever of preparations.",
+        "why": "Literal calque; 'is in a fever of preparations' is natural English."
+      }
+    ],
+    "growth": 0.857
   }
 }

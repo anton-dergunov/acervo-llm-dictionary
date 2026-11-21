@@ -75,6 +75,140 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "cold; distant",
+    "primaryGloss": "cold",
+    "emotion": null,
+    "notes": [
+      "For weather ('it is cold') and bodily sensations ('I am cold'), Italian uses 'freddo' as a noun with 'fare' and 'avere': 'fa freddo', 'ho freddo'.",
+      "Do not confuse with 'il raffreddore', which is the illness ('a cold')."
+    ],
+    "senses": [
+      {
+        "id": "grd5lnroj5qk4cg",
+        "order": 0,
+        "definition": "Having a low temperature; not warm or hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "chilly",
+              "chilled"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "8ply6fowtfxvj5w",
+            "text": "Bevo sempre il tè freddo in estate.",
+            "textLang": "it",
+            "translation": "I always drink cold tea in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and refreshed, enjoying a cool drink on a hot day",
+            "note": null,
+            "matchedForm": "freddo",
+            "matchedTranslationForm": "cold"
+          },
+          {
+            "id": "m5bkueux6sb1oor",
+            "text": "Oggi è una giornata molto fredda.",
+            "textLang": "it",
+            "translation": "Today is a very cold day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fredda",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p104atjmy2nuyf9",
+        "order": 1,
+        "definition": "Of a person or their behavior: unfriendly or lacking emotion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "distant",
+              "unfriendly"
+            ]
+          }
+        ],
+        "domain": "personality",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "g7kbpk1yak0j21t",
+            "text": "È stato molto freddo con me.",
+            "textLang": "it",
+            "translation": "He was very cold to me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "freddo",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "freddo",
+    "lemma": "freddo",
+    "reading": null,
+    "ipa": "/ˈfred.do/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "cold",
     "primaryGloss": "cold",
     "emotion": null,
@@ -168,5 +302,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Cold weather and cold objects/food are the same basic temperature meaning."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Oggi fa molto freddo.",
+        "why": "In 'fa freddo', 'freddo' is a noun, whereas this entry is for the adjective."
+      }
+    ],
+    "growth": 1.068
   }
 }

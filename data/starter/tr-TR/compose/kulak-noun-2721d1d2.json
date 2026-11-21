@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "ear; attention",
+    "primaryGloss": "ear",
+    "emotion": "attentive and quiet, straining to hear a distant sound",
+    "notes": [
+      "The final 'k' softens to 'ğ' before a suffix starting with a vowel (e.g. kulağım 'my ear', kulağa 'to the ear').",
+      "Common in idioms like 'kulak vermek' (to lend an ear / listen closely, taking the dative) and 'kulak asmamak' (to ignore)."
+    ],
+    "senses": [
+      {
+        "id": "kc27mbhxs0621ek",
+        "order": 0,
+        "definition": "The organ on the side of the head that humans and animals use to hear sounds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "r7th470yt6bgk85",
+            "text": "Soğuktan kulaklarım kızardı.",
+            "textLang": "tr",
+            "translation": "My ears turned red from the cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kulaklarım",
+            "matchedTranslationForm": "ears"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lubf37brhbtjukq",
+        "order": 1,
+        "definition": "Attention or a willingness to listen (especially in idioms).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ear",
+              "attention"
+            ]
+          }
+        ],
+        "domain": "attention",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "s1w9khfmjdv1h89",
+            "text": "Lütfen bana kulak ver.",
+            "textLang": "tr",
+            "translation": "Please listen to me closely.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kulak",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kulak",
+    "lemma": "kulak",
+    "reading": null,
+    "ipa": "/kuˈɫak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "ear; handle; listener",
     "primaryGloss": "ear",
     "emotion": "attentive and quiet, straining to hear a distant sound",
@@ -201,5 +310,56 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Müzik dinlemek için kulaklık kullanıyorum.",
+        "why": "Uses the derived noun 'kulaklık' (headphones) instead of 'kulak' (ear)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Lütfen beni dikkatle kulak ver.",
+        "why": "Ungrammatical case: 'kulak vermek' takes the dative ('bana'), not the accusative ('beni')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ear; handle; listener",
+        "why": "'listener' is not a meaning of 'kulak' or in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A projecting part of an object used as a handle",
+        "why": "Cup/mug handles are 'kulp' ('bardağın kulpu'); 'kulak' as lug is technical/marginal for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In addition to the physical ear, \"kulak\" is commonly used",
+        "why": "Restates a marginal sense and falsely claims it is used for mugs (which use 'kulp')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential A2 grammar note: final 'k' softens to 'ğ' before a vowel ('kulağım')."
+      }
+    ],
+    "growth": 0.816
   }
 }

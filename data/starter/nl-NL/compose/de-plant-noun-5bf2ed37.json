@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "plant",
+    "primaryGloss": "plant",
+    "emotion": "warm and fond, caring for something growing on the windowsill",
+    "notes": [
+      "Unlike English 'plant', Dutch 'plant' only refers to the living organism, not to a factory ('de fabriek')."
+    ],
+    "senses": [
+      {
+        "id": "ui0tv1gbahx1kyb",
+        "order": 0,
+        "definition": "A living thing that grows in soil or water, typically with stems, leaves, and roots.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "plant"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "btx5v5rf133w4qh",
+            "text": "Ik geef de plant elke week water.",
+            "textLang": "nl",
+            "translation": "I water the plant every week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and nurturing, taking care of a favorite houseplant",
+            "note": null,
+            "matchedForm": "plant",
+            "matchedTranslationForm": "plant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de plant",
+    "lemma": "plant",
+    "reading": null,
+    "ipa": "/plɑnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "plant; factory",
     "primaryGloss": "plant",
     "emotion": "warm and fond, caring for something growing on the windowsill",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(industry) A large industrial building where goods are manufactured or power is",
+        "why": "English false friend: Dutch 'plant' does not mean 'factory' (which is 'fabriek')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'plant' can mean both a living green organism and a",
+        "why": "Falsely claims Dutch 'plant' is used like English for an industrial factory."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "plant; factory",
+        "why": "Includes 'factory', which is a false sense."
+      }
+    ],
+    "growth": 0.593
   }
 }

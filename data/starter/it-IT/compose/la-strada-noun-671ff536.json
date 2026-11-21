@@ -60,6 +60,115 @@
     "headword": "la strada",
     "lemma": "strada",
     "reading": null,
+    "ipa": "/ˈstra.da/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "road, street; way",
+    "primaryGloss": "road",
+    "emotion": "steady and purposeful, looking ahead while going somewhere",
+    "notes": [
+      "Covers both English 'road' (between towns) and 'street' (in a town). Compare with 'la via', which is used in street names and addresses (e.g. 'Via Roma')."
+    ],
+    "senses": [
+      {
+        "id": "scdq4it2cjz1c5h",
+        "order": 0,
+        "definition": "A paved way for vehicles and people, either in a town or between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "street"
+            ]
+          }
+        ],
+        "domain": "places",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "w0gg99nkoevry47",
+            "text": "Questa strada è piena di negozi.",
+            "textLang": "it",
+            "translation": "This street is full of shops.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lively and observant, looking around at the shops",
+            "note": null,
+            "matchedForm": "strada",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m18am685afrj68u",
+        "order": 1,
+        "definition": "The route or direction taken to get somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "route"
+            ]
+          }
+        ],
+        "domain": "direction",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "0mqzzh7lg1lo08j",
+            "text": "Scusi, mi può indicare la strada per la stazione?",
+            "textLang": "it",
+            "translation": "Excuse me, can you tell me the way to the station?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "strada",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la strada",
+    "lemma": "strada",
+    "reading": null,
     "ipa": "/ˈstraːda/",
     "pos": "noun",
     "gender": "feminine",
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Italian 'strada' covers both 'road' and 'street' as a single everyday concept."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense of 'way, route, direction' (e.g. 'sbagliare strada')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "La strada è lunga per arrivare al mare.",
+        "why": "Awkward word order in Italian and calqued English translation."
+      }
+    ],
+    "growth": 0.888
   }
 }

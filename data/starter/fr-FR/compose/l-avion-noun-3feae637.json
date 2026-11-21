@@ -60,6 +60,75 @@
     "headword": "l'avion",
     "lemma": "avion",
     "reading": null,
+    "ipa": "/a.vjɔ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "plane; airplane",
+    "primaryGloss": "plane",
+    "emotion": null,
+    "notes": [
+      "Use 'en avion' for 'by plane' (voyager en avion) and 'prendre l'avion' for catching or flying on a plane."
+    ],
+    "senses": [
+      {
+        "id": "nwci3xg1w4zxfy7",
+        "order": 0,
+        "definition": "A vehicle with wings and engines that flies through the air.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "plane",
+              "airplane",
+              "aircraft"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "3wa4v805jfjo7ns",
+            "text": "L'avion décolle à dix heures.",
+            "textLang": "fr",
+            "translation": "The plane takes off at ten o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and ready for a long-awaited trip",
+            "note": null,
+            "matchedForm": "avion",
+            "matchedTranslationForm": "plane"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'avion",
+    "lemma": "avion",
+    "reading": null,
     "ipa": "/la.vjɔ̃/",
     "pos": "noun",
     "gender": "masculine",
@@ -123,5 +192,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/la.vjɔ̃/",
+        "why": "IPA includes the definite article 'l''; should be the lemma 'avion' (/a.vjɔ̃/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with \"la voilure\" or other general terms",
+        "why": "No beginner confuses 'avion' with 'voilure'; note should cover 'en avion' (by plane)."
+      }
+    ],
+    "growth": 0.69
   }
 }

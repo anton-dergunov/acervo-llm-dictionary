@@ -58,6 +58,74 @@
     "headword": "educado",
     "lemma": "educado",
     "reading": null,
+    "ipa": "/e.duˈka.du/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "polite; well-mannered",
+    "primaryGloss": "polite",
+    "emotion": "warm and appreciative, acknowledging someone's kindness or good character",
+    "notes": [
+      "False friend: 'educado' means 'polite' or 'well-mannered' (opposite: 'mal-educado'). To say someone has a good formal education, use 'instruído' or 'estudado'."
+    ],
+    "senses": [
+      {
+        "id": "kj0pib9ve4s4ev5",
+        "order": 0,
+        "definition": "Having or showing good manners and respect towards others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "polite",
+              "well-mannered"
+            ]
+          }
+        ],
+        "domain": "manners",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "mepsahi3ukwzcdb",
+            "text": "O rapaz foi muito educado comigo no restaurante.",
+            "textLang": "pt",
+            "translation": "The young man was very polite to me at the restaurant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and sincere, recalling a pleasant social interaction",
+            "note": null,
+            "matchedForm": "educado",
+            "matchedTranslationForm": "polite"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "educado",
+    "lemma": "educado",
+    "reading": null,
     "ipa": "/eduˈkadu/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ela é uma mulher muito instruída e educada.",
+        "why": "Uses 'educada' to mean 'polite' inside the example meant to illustrate 'educated'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Possessing a good level of formal schooling or knowledge.",
+        "why": "As the note says, this is a false friend; listing it as a sense misleads beginners."
+      }
+    ],
+    "growth": 0.488
   }
 }

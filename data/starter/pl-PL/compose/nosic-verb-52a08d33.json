@@ -77,6 +77,115 @@
     "primaryGloss": "wear",
     "emotion": "matter-of-fact and steady, describing a state or an action",
     "notes": [
+      "'nosić' is an indeterminate imperfective verb describing habitual, repeated, or general actions. For carrying something in one direction right now, use 'nieść' (perfective: 'zanieść' or 'przynieść').",
+      "For clothes, 'nosić' usually means to wear habitually (e.g. 'Noszę okulary' – I wear glasses). To say what someone has on right now, 'mieć na sobie' is more common."
+    ],
+    "senses": [
+      {
+        "id": "ob6u8nxjsj6avbi",
+        "order": 0,
+        "definition": "To have clothes, accessories, or glasses on your body, especially habitually.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wear"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "jter39qiqrhkz0g",
+            "text": "Ona często nosi czerwoną sukienkę.",
+            "textLang": "pl",
+            "translation": "She often wears a red dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nosi",
+            "matchedTranslationForm": "wears"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w9rddi57l9njbga",
+        "order": 1,
+        "definition": "To hold and take something with you, especially regularly or in various directions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to carry"
+            ]
+          }
+        ],
+        "domain": "carrying",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "y7z2z0ouomgufzd",
+            "text": "Zawsze noszę przy sobie klucze.",
+            "textLang": "pl",
+            "translation": "I always carry my keys with me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "noszę",
+            "matchedTranslationForm": "carry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "nosić",
+    "lemma": "nosić",
+    "reading": null,
+    "ipa": "/ˈnɔɕit͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wear; to carry",
+    "primaryGloss": "wear",
+    "emotion": "matter-of-fact and steady, describing a state or an action",
+    "notes": [
       "Use 'nosić' for clothes that you habitually wear or have on right now. It can also mean 'to carry' an object while moving it from one place to another.",
       "Unlike 'ubrać' (to put on clothes), 'nosić' describes the ongoing state of wearing something."
     ],
@@ -164,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'nosić' for clothes that you habitually wear or have on right now.",
+        "why": "'nosić' is indeterminate (habitual/repeated); wearing something right now is usually 'mieć na sobie'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on indeterminate vs. determinate ('nieść') verb of motion distinction."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0]",
+        "quote": "Ona nosi czerwoną sukienkę. — She is wearing a red dress.",
+        "why": "'nosi' means wears habitually; 'mieć na sobie' is used for wearing right now."
+      }
+    ],
+    "growth": 1.303
   }
 }

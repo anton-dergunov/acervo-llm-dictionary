@@ -70,6 +70,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to know; to know how to; to find out",
+    "primaryGloss": "know",
+    "emotion": null,
+    "notes": [
+      "Irregular in several tenses, especially the present 'eu sei' (I know) and the past 'eu soube' (I found out / knew).",
+      "Used for facts, information, and skills (followed directly by a verb: 'sei nadar'). Do not confuse with 'conhecer', which means being familiar with people or places."
+    ],
+    "senses": [
+      {
+        "id": "078ni7ipvievp49",
+        "order": 0,
+        "definition": "To have information or facts in your mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know"
+            ]
+          }
+        ],
+        "domain": "information",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "uih7vsa3247st4x",
+            "text": "Você sabe onde é o museu?",
+            "textLang": "pt",
+            "translation": "Do you know where the museum is?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inquisitive, seeking information from a stranger",
+            "note": null,
+            "matchedForm": "sabe",
+            "matchedTranslationForm": "know"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4rtuee8chbqbbos",
+        "order": 1,
+        "definition": "To have the skill or ability to do something (followed by an infinitive verb).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know how to",
+              "can"
+            ]
+          }
+        ],
+        "domain": "skill",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "i7rcd2bgeirj82l",
+            "text": "Eu sei falar português.",
+            "textLang": "pt",
+            "translation": "I know how to speak Portuguese.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and steady, stating a fact about one's own ability",
+            "note": null,
+            "matchedForm": "sei",
+            "matchedTranslationForm": "know how to"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l1t9m54k2q210hk",
+        "order": 2,
+        "definition": "To hear about or learn a piece of news or information (often with 'de' or in the past tense).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "find out",
+              "hear about"
+            ]
+          }
+        ],
+        "domain": "discovery",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "n0tzlabu5n7s5ph",
+            "text": "Você soube da novidade?",
+            "textLang": "pt",
+            "translation": "Did you hear about the news?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "soube",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "saber",
+    "lemma": "saber",
+    "reading": null,
+    "ipa": "/saˈbe(ʁ)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to know; to have knowledge; to taste like",
     "primaryGloss": "to know",
     "emotion": null,
@@ -181,5 +331,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(taste) To have a specific flavor.",
+        "why": "'Saber a' meaning 'to taste like' is European Portuguese; in Brazil 'ter gosto de' is used."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0]",
+        "quote": "To have information in your mind or to have the skill",
+        "why": "Knowing facts and knowing how to do something (+ infinitive) should be distinct senses for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on high-frequency irregular forms ('eu sei', 'eu soube')."
+      }
+    ],
+    "growth": 1.46
   }
 }

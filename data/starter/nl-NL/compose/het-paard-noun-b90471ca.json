@@ -68,6 +68,113 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "horse; knight (chess)",
+    "primaryGloss": "horse",
+    "emotion": "calm and affectionate, gently stroking a warm muzzle",
+    "notes": [
+      "To say 'on horseback' or 'to ride a horse', Dutch uses 'te paard' or the verb 'paardrijden'."
+    ],
+    "senses": [
+      {
+        "id": "i5b7xjo8wkyfa76",
+        "order": 0,
+        "definition": "A large four-legged animal that people ride or use for pulling loads.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "horse"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐎",
+        "examples": [
+          {
+            "id": "97sx3gw18uabhvw",
+            "text": "Het paard staat in de wei gras te eten.",
+            "textLang": "nl",
+            "translation": "The horse is standing in the meadow eating grass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching the animals in the field",
+            "note": null,
+            "matchedForm": "paard",
+            "matchedTranslationForm": "horse"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8rfuxp7ry1piwd8",
+        "order": 1,
+        "definition": "A chess piece shaped like a horse's head that can jump over other pieces.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "knight"
+            ]
+          }
+        ],
+        "domain": "chess",
+        "emoji": "♞",
+        "examples": [
+          {
+            "id": "jgffu6018vhk9n2",
+            "text": "Ik zet mijn paard op een ander veld.",
+            "textLang": "nl",
+            "translation": "I am moving my knight to another square.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "paard",
+            "matchedTranslationForm": "knight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het paard",
+    "lemma": "paard",
+    "reading": null,
+    "ipa": "/paːrt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐴",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "horse; knight",
     "primaryGloss": "horse",
     "emotion": "calm and affectionate, gently stroking a warm muzzle",
@@ -158,5 +265,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In chess, the piece known as a 'knight' in English is called",
+        "why": "Repeats Sense 1 without adding new usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik zet mijn paard op een andere positie.",
+        "why": "Unidiomatic Dutch for chess; 'veld' (square) is used, not 'positie'."
+      }
+    ],
+    "growth": 1.005
   }
 }

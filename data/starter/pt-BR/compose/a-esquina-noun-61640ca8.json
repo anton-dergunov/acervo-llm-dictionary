@@ -73,6 +73,75 @@
     "headword": "a esquina",
     "lemma": "esquina",
     "reading": null,
+    "ipa": "/isˈki.nɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "street corner",
+    "primaryGloss": "street corner",
+    "emotion": null,
+    "notes": [
+      "Use 'esquina' for the corner where two streets meet. Use 'canto' for the inside corner of a room, and 'quina' for the sharp corner or edge of furniture.",
+      "People often say 'aqui na esquina' (right around the corner) to mean a place is very close by."
+    ],
+    "senses": [
+      {
+        "id": "jutb0zviqtzzeb1",
+        "order": 0,
+        "definition": "The place where two streets meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street corner",
+              "corner"
+            ]
+          }
+        ],
+        "domain": "street",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "4kpm4ro63ck1b27",
+            "text": "A padaria fica na esquina.",
+            "textLang": "pt",
+            "translation": "The bakery is on the corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, pointing the way to a neighbor",
+            "note": null,
+            "matchedForm": "esquina",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a esquina",
+    "lemma": "esquina",
+    "reading": null,
     "ipa": "/esˈki.nɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -176,5 +245,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ele bateu o pé na esquina da mesa.",
+        "why": "Spanish interference; in Brazilian Portuguese the corner of a table is 'quina', not 'esquina'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "The point where two lines, surfaces, or sides meet at an angle.",
+        "why": "In everyday Brazilian Portuguese, 'esquina' is strictly for streets; object corners are 'quina' or 'canto'."
+      }
+    ],
+    "growth": 0.601
   }
 }

@@ -84,6 +84,118 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "tarde; atrasado; tardío",
+    "primaryGloss": "tarde",
+    "emotion": "apresurado y un poco ansioso, mirando el reloj mientras caminas rápido",
+    "notes": [
+      "Para decir que alguien llega tarde a algo, se usa 'be late for' (I'm late for work).",
+      "No confundir con 'later' (más tarde / después)."
+    ],
+    "senses": [
+      {
+        "id": "fjern2xkuypbumb",
+        "order": 0,
+        "definition": "Que llega u ocurre después del tiempo esperado o fijado.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tarde",
+              "atrasado",
+              "retrasado"
+            ]
+          }
+        ],
+        "domain": "retraso",
+        "emoji": "🏃",
+        "examples": [
+          {
+            "id": "t31shzo6q68klet",
+            "text": "I am late for my meeting.",
+            "textLang": "en",
+            "translation": "Llego tarde a mi reunión.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disculpándose con sinceridad mientras intenta recuperar el tiempo perdido",
+            "note": null,
+            "matchedForm": "late",
+            "matchedTranslationForm": "tarde"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1a2zl7xnsc32r0r",
+        "order": 1,
+        "definition": "Que sucede cerca del final del día o de un periodo de tiempo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tardío",
+              "avanzado",
+              "tarde"
+            ]
+          }
+        ],
+        "domain": "momento",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "qsbcr6emux561zs",
+            "text": "They had a late dinner.",
+            "textLang": "en",
+            "translation": "Tuvieron una cena tardía.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relajado y tranquilo, disfrutando de una noche sosegada",
+            "note": null,
+            "matchedForm": "late",
+            "matchedTranslationForm": "tardía"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "late",
+    "lemma": "late",
+    "reading": null,
+    "ipa": "/leɪt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "tarde; atrasado",
     "primaryGloss": "tarde",
     "emotion": "apresurado y un poco ansioso, mirando el reloj mientras caminas rápido",
@@ -176,5 +288,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "avanzado, a última hora",
+        "why": "'A última hora' means at the last minute, not late in the day."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cenaron a última hora.",
+        "why": "Mistranslation; 'a late dinner' is 'una cena tardía' or 'cenaron tarde'."
+      }
+    ],
+    "growth": 1.07
   }
 }

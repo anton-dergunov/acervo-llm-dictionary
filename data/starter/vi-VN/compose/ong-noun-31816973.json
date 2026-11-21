@@ -58,6 +58,120 @@
     "headword": "ông",
     "lemma": "ông",
     "reading": null,
+    "ipa": "/əwŋ͡m˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "grandfather; old man; Mr., sir, you, he, I (older man)",
+    "primaryGloss": "grandfather",
+    "emotion": "warm and respectful, speaking to or about an elder",
+    "notes": [
+      "Like other Vietnamese kinship terms, ông is also used as a title ('Mr. Nam' = ông Nam) and as a pronoun ('you', 'he', or 'I' when a grandfather or older man speaks to someone younger).",
+      "Its female counterpart is bà (grandmother; Mrs., ma'am)."
+    ],
+    "senses": [
+      {
+        "id": "67g1wq4qsgx3vt2",
+        "order": 0,
+        "definition": "The father of your father or mother; also an older man.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grandfather",
+              "old man",
+              "gentleman"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "bilwxrn9lznhdpp",
+            "text": "Ông tôi thích uống trà buổi sáng.",
+            "textLang": "vi",
+            "translation": "My grandfather likes to drink tea in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and respectful, remembering an elder",
+            "note": null,
+            "matchedForm": "Ông",
+            "matchedTranslationForm": "grandfather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6cibywt878venh4",
+        "order": 1,
+        "definition": "A polite title or pronoun used to address or refer to a man from middle age onward, or by an older man to refer to himself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sir",
+              "Mr.",
+              "you",
+              "he",
+              "I"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "flmgami44c0vboq",
+            "text": "Ông có cần giúp gì không ạ?",
+            "textLang": "vi",
+            "translation": "Do you need any help, sir?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, offering assistance to an elder",
+            "note": null,
+            "matchedForm": "Ông",
+            "matchedTranslationForm": "sir"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ông",
+    "lemma": "ông",
+    "reading": null,
     "ipa": "/1wŋm/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/1wŋm/",
+        "why": "Corrupt and invalid IPA transcription; Hanoi pronunciation of 'ông' is /əwŋ͡m˧˧/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ông is used both as a noun meaning grandfather and as",
+        "why": "Restates the senses and misses the first-person use ('I') by older men."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses[1]",
+        "quote": "A polite pronoun used to address or refer to an older",
+        "why": "Misses the everyday title use ('Mr.') and first-person use ('I') by grandfathers/older men."
+      }
+    ],
+    "growth": 1.401
   }
 }

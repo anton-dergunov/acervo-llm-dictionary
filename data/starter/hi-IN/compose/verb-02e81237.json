@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to go to see someone; to visit someone",
+    "primaryGloss": "to go to see",
+    "emotion": "purposeful and warm, looking forward to an encounter with someone",
+    "notes": [
+      "The person being visited is marked with the postposition से (se), e.g., दोस्त से मिलने जाना (to go to see a friend)."
+    ],
+    "senses": [
+      {
+        "id": "xxi61obl5etlz5t",
+        "order": 0,
+        "definition": "To go to a place in order to meet or visit someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go to see",
+              "to visit"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "uscytq6st8j6j9q",
+            "text": "मैं आज अपने दोस्त से मिलने जा रहा हूँ।",
+            "textLang": "hi",
+            "translation": "I am going to see my friend today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and friendly, sharing plans for the day",
+            "note": null,
+            "matchedForm": "मिलने जा रहा हूँ",
+            "matchedTranslationForm": "going to see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "मिलने जाना",
+    "lemma": "मिलने जाना",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to go to see someone; to visit a place",
     "primaryGloss": "to go to see",
     "emotion": "purposeful and warm, looking forward to an encounter with someone",
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(place) To travel to a place to see it",
+        "why": "मिलने जाना is used for people, never for visiting places."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "हम कल उस नए पार्क को मिलने जा रहे हैं।",
+        "why": "Ungrammatical and unnatural; one cannot 'meet' a park in Hindi."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "can also be used for visiting a specific location or place.",
+        "why": "False claim; it is only used for visiting people, not places."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that the person being visited takes the postposition से (se)."
+      }
+    ],
+    "growth": 0.527
   }
 }

@@ -60,6 +60,136 @@
     "headword": "yêu",
     "lemma": "yêu",
     "reading": null,
+    "ipa": "iəw˧˧",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to love; to be very fond of",
+    "primaryGloss": "love",
+    "emotion": "tender and warm, speaking from the heart",
+    "notes": [
+      "Stronger than 'thích' (to like). For family or close friends, 'thương' is also very common; for food and everyday things, use 'thích' rather than 'yêu'."
+    ],
+    "senses": [
+      {
+        "id": "vwxji37vp92v4px",
+        "order": 0,
+        "definition": "To feel deep romantic or emotional affection for someone, or to be in a romantic relationship with them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "love",
+              "be in love with"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "💕",
+        "examples": [
+          {
+            "id": "rdttbinytcj416n",
+            "text": "Anh ấy rất yêu vợ con.",
+            "textLang": "vi",
+            "translation": "He loves his wife and children very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yêu",
+            "matchedTranslationForm": "loves"
+          },
+          {
+            "id": "id54irkrlyyf3tg",
+            "text": "Hai người yêu nhau được ba năm rồi.",
+            "textLang": "vi",
+            "translation": "The two of them have been in love for three years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yêu",
+            "matchedTranslationForm": "in love"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3hps600qdfyqrpt",
+        "order": 1,
+        "definition": "To feel great fondness or devotion toward something such as a pet, an art, or one's country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "love",
+              "be very fond of"
+            ]
+          }
+        ],
+        "domain": "fondness",
+        "emoji": "🥰",
+        "examples": [
+          {
+            "id": "b6zfascrqv2dbfk",
+            "text": "Cô ấy rất yêu chú mèo nhỏ này.",
+            "textLang": "vi",
+            "translation": "She loves this little kitten very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and delighted, looking at something adorable",
+            "note": null,
+            "matchedForm": "yêu",
+            "matchedTranslationForm": "loves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "yêu",
+    "lemma": "yêu",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi yêu gia đình của tôi.",
+        "why": "Sounds like a textbook calque; also mismatches the 'romance' domain label."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "similar to 'to love' in English when applied to food",
+        "why": "For food or casual likes, Vietnamese normally uses 'thích', not 'yêu'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'yêu' primarily means to love romantically or deeply",
+        "why": "Merely restates the two senses instead of contrasting 'yêu' with 'thích' and 'thương'."
+      }
+    ],
+    "growth": 1.286
   }
 }

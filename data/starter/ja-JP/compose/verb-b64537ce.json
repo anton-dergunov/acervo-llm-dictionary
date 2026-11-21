@@ -57,6 +57,156 @@
     "language": "ja",
     "headword": "押す",
     "lemma": "押す",
+    "reading": "おす",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔘",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to push; to press; to stamp",
+    "primaryGloss": "push",
+    "emotion": "matter-of-fact and focused on the physical interaction",
+    "notes": [
+      "Godan verb (押さない, 押します, 押して). Its opposite on doors and signs is 引く (hiku, 'to pull')."
+    ],
+    "senses": [
+      {
+        "id": "xqx5qmyn5743v6o",
+        "order": 0,
+        "definition": "To use physical force to move something away from yourself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "push",
+              "shove"
+            ]
+          }
+        ],
+        "domain": "physical force",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "7ju1vc6z5mqdzln",
+            "text": "重いドアを一生懸命押した。",
+            "textLang": "ja",
+            "translation": "I pushed the heavy door with all my might.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and slightly out of breath from the effort",
+            "note": null,
+            "matchedForm": "押した",
+            "matchedTranslationForm": "pushed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fwdf5298eehhkxz",
+        "order": 1,
+        "definition": "To press a button, key, or switch to operate something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "press",
+              "push"
+            ]
+          }
+        ],
+        "domain": "buttons",
+        "emoji": "🔘",
+        "examples": [
+          {
+            "id": "5e76hla1w54zdd7",
+            "text": "エレベーターのボタンを押してください。",
+            "textLang": "ja",
+            "translation": "Please press the elevator button.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, giving clear instructions to someone",
+            "note": null,
+            "matchedForm": "押して",
+            "matchedTranslationForm": "press"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vl5wodvthwsajrd",
+        "order": 2,
+        "definition": "To stamp a seal or mark onto paper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stamp",
+              "seal"
+            ]
+          }
+        ],
+        "domain": "stamping",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tt639a7tukfm3uz",
+            "text": "ここにハンコを押してください。",
+            "textLang": "ja",
+            "translation": "Please stamp your seal here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "押して",
+            "matchedTranslationForm": "stamp"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "押す",
+    "lemma": "押す",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -161,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Hiragana reading おす is missing for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "圧す (also read osu), which is a more formal or kanji-specific way of saying to press or stamp/seal.",
+        "why": "Stamping a seal is 捺す, not 圧す; 押す itself is standard for stamping."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to stamp (a seal)' (ハンコを押す)."
+      }
+    ],
+    "growth": 0.861
   }
 }

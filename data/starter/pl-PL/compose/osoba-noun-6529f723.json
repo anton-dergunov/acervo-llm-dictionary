@@ -72,6 +72,96 @@
     "primaryGloss": "person",
     "emotion": "a neutral, objective tone used to describe someone in a factual way",
     "notes": [
+      "Grammatically feminine regardless of the person's actual gender, so adjectives and verbs agreeing with it take feminine forms (e.g., 'ta młoda osoba przyszła').",
+      "Notice the vowel change in the genitive plural: 'osób' (e.g., 'pięć osób' — five people)."
+    ],
+    "senses": [
+      {
+        "id": "33kjbkleml7eh2u",
+        "order": 0,
+        "definition": "A man, woman, or child; an individual human being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "individual"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "lcf232b37x0u790",
+            "text": "W pokoju jest tylko jedna osoba.",
+            "textLang": "pl",
+            "translation": "There is only one person in the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative, noting a simple observation about the surroundings",
+            "note": null,
+            "matchedForm": "osoba",
+            "matchedTranslationForm": "person"
+          },
+          {
+            "id": "1nf6txh72uy7qfj",
+            "text": "To bardzo miła osoba.",
+            "textLang": "pl",
+            "translation": "They are a very nice person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm, sincere, and appreciative while describing someone's character",
+            "note": null,
+            "matchedForm": "osoba",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "osoba",
+    "lemma": "osoba",
+    "reading": null,
+    "ipa": "/ɔˈsɔ.ba/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "person; individual",
+    "primaryGloss": "person",
+    "emotion": "a neutral, objective tone used to describe someone in a factual way",
+    "notes": [
       "Even though 'osoba' is grammatically feminine, it is used for people of any gender. When you want to refer to a specific person who is a man, use 'mężczyzna'; for a woman, use 'kobieta'.",
       "In plural, the word changes to 'osoby'."
     ],
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the exact same everyday meaning ('person')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In plural, the word changes to 'osoby'.",
+        "why": "States regular nominative plural; the irregular genitive plural 'osób' is what needs noting."
+      }
+    ],
+    "growth": 0.895
   }
 }

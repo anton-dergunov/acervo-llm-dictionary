@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "eye; round spot",
+    "primaryGloss": "eye",
+    "emotion": "wide open and attentive, catching every detail around you",
+    "notes": [
+      "For the body part, the plural is irregular: 'oczy' (genitive 'oczu' or 'oczów'). For round spots or mesh openings, the regular plural 'oka' is used."
+    ],
+    "senses": [
+      {
+        "id": "v3mt71nksmxbho2",
+        "order": 0,
+        "definition": "The organ in the body that you use to see.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eye"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "5uudaxaqmlicbbz",
+            "text": "Zamknij oczy i policz do dziesięciu.",
+            "textLang": "pl",
+            "translation": "Close your eyes and count to ten.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and patient, guiding someone through a game",
+            "note": null,
+            "matchedForm": "oczy",
+            "matchedTranslationForm": "eyes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "145kl5mwi6sgq2v",
+        "order": 1,
+        "definition": "A round spot or opening, such as a drop of fat floating on soup or an opening in a net.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eye",
+              "spot",
+              "mesh"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": "🕳️",
+        "examples": [
+          {
+            "id": "cumrefuvefafy5a",
+            "text": "W rosole pływają żółte oka tłuszczu.",
+            "textLang": "pl",
+            "translation": "Yellow drops of fat are floating in the broth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "oka",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "oko",
+    "lemma": "oko",
+    "reading": null,
+    "ipa": "/ˈɔ.kɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "eye; center",
     "primaryGloss": "eye",
     "emotion": "wide open and attentive, catching every detail around you",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "eye; center",
+        "why": "'center' is not covered by the senses."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Nawlecz nitkę na igłę, ale celuj w małe oko.",
+        "why": "Unnatural Polish; the eye of a needle is almost always 'ucho' (or diminutive 'oczko')."
+      }
+    ],
+    "growth": 1.053
   }
 }

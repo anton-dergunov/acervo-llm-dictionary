@@ -58,6 +58,95 @@
     "headword": "geç",
     "lemma": "geç",
     "reading": null,
+    "ipa": "/ɟetʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "hurried and apologetic, rushing out the door",
+    "notes": [
+      "Used both as an adjective ('geç bir saat' — a late hour) and as an adverb ('geç gelmek' — to come late).",
+      "Often used in the phrase 'geç kalmak' (to be late). Its opposite is 'erken' (early)."
+    ],
+    "senses": [
+      {
+        "id": "0dcwqbhs5y5ag9z",
+        "order": 0,
+        "definition": "Happening or arriving after the expected, usual, or proper time; late in the day or night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "5z76xj2n7cksqyp",
+            "text": "Bugün eve çok geç döndüm.",
+            "textLang": "tr",
+            "translation": "I came home very late today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exhausted and regretful after a long day",
+            "note": null,
+            "matchedForm": "geç",
+            "matchedTranslationForm": "late"
+          },
+          {
+            "id": "b304skcfck15258",
+            "text": "Artık çok geç bir saat, yatmalıyız.",
+            "textLang": "tr",
+            "translation": "It is a very late hour now; we should go to bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "geç",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "geç",
+    "lemma": "geç",
+    "reading": null,
     "ipa": "/getʃ/",
     "pos": "adj",
     "gender": null,
@@ -159,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(clock) Later than a specific hour or time point. | glosses en: past",
+        "why": "'geçe' in clock times is a converb of the verb 'geçmek' (to pass), not 'geç'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used both as an adjective meaning late and as a preposition meaning",
+        "why": "'geç' is never a preposition meaning 'past'; that is 'geçe' from the verb 'geçmek'."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/getʃ/",
+        "why": "Before front vowel /e/, Turkish 'g' is palatalized to /ɟ/: /ɟetʃ/."
+      }
+    ],
+    "growth": 1.263
   }
 }

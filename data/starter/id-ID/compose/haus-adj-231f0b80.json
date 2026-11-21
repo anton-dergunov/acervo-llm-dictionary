@@ -58,6 +58,73 @@
     "headword": "haus",
     "lemma": "haus",
     "reading": null,
+    "ipa": "/ˈha.us/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "thirsty",
+    "primaryGloss": "thirsty",
+    "emotion": "a physical need for relief, slightly parched and longing for water",
+    "notes": [
+      "The related noun meaning 'thirst' is 'kehausan'."
+    ],
+    "senses": [
+      {
+        "id": "ae7ge4p4eplqagw",
+        "order": 0,
+        "definition": "Feeling a need to drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thirsty"
+            ]
+          }
+        ],
+        "domain": "thirst",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "rklpdl19272lih6",
+            "text": "Saya merasa haus setelah berolahraga.",
+            "textLang": "id",
+            "translation": "I feel thirsty after exercising.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "breathy and tired after activity, looking forward to a cold drink",
+            "note": null,
+            "matchedForm": "haus",
+            "matchedTranslationForm": "thirsty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "haus",
+    "lemma": "haus",
+    "reading": null,
     "ipa": "/haus/",
     "pos": "adj",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "A physical feeling of needing to drink something.",
+        "why": "Adjective defined as a noun ('a feeling') instead of a state/quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Haus is the state of needing a drink. It is a physical",
+        "why": "Restates the definition; contrast with the noun 'kehausan' (thirst) instead."
+      }
+    ],
+    "growth": 0.54
   }
 }

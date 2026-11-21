@@ -68,6 +68,114 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "ticket; vote",
+    "primaryGloss": "ticket",
+    "emotion": "matter-of-fact and focused on the practical task of boarding or entering",
+    "notes": [
+      "Takes the classifier 张 (zhāng). Often combined with the vehicle or event: 火车票 (train ticket), 电影票 (movie ticket), 机票 (plane ticket)."
+    ],
+    "senses": [
+      {
+        "id": "ixr1d7ww01o4clv",
+        "order": 0,
+        "definition": "A printed piece of paper or electronic record that gives you the right to travel or enter an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ticket"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "snuctm9ydyptrg8",
+            "text": "我要买一张去上海的票。",
+            "textLang": "zh",
+            "translation": "I want to buy a ticket to Shanghai.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and clear about one's travel plans",
+            "note": null,
+            "matchedForm": "票",
+            "matchedTranslationForm": "ticket"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bnx7ytat7aqg2dz",
+        "order": 1,
+        "definition": "A ballot or vote in an election or poll.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vote",
+              "ballot"
+            ]
+          }
+        ],
+        "domain": "voting",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "yznfogy1avsxoyy",
+            "text": "他得到了很多票。",
+            "textLang": "zh",
+            "translation": "He got a lot of votes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "票",
+            "matchedTranslationForm": "votes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "票",
+    "lemma": "票",
+    "reading": "piào",
+    "ipa": "/pʰi̯au̯˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎫",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "ticket; ballot; banknote",
     "primaryGloss": "ticket",
     "emotion": "matter-of-fact and focused on the practical task of boarding or entering",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Paper money, specifically used in older or formal contexts; also refers to",
+        "why": "Conflates two unrelated meanings (banknote and ballot/vote) into one sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].glosses",
+        "quote": "banknote",
+        "why": "Alone, 票 rarely means banknote in modern everyday speech (钞票 or 票子 is used)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Chinese, '票' is a versatile word used for any small piece",
+        "why": "Restates the definition while omitting the essential classifier 张 (zhāng)."
+      }
+    ],
+    "growth": 0.645
   }
 }

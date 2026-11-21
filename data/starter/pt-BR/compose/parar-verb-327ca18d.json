@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to stop; to cease",
+    "primaryGloss": "stop",
+    "emotion": "firm and decisive, like putting a hand up to halt someone",
+    "notes": [
+      "To say 'stop doing something', use 'parar de' followed by the infinitive (e.g., 'parar de falar', 'parar de fumar').",
+      "The expression 'ir parar em' is very common and means 'to end up in' a place (e.g., 'Como você foi parar lá?')."
+    ],
+    "senses": [
+      {
+        "id": "9srhr38trs0vh6e",
+        "order": 0,
+        "definition": "To cease moving, or to cause a person or vehicle to cease moving.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "come to a halt",
+              "pull over"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "w7knprkpqqczmpk",
+            "text": "O ônibus vai parar ali na frente.",
+            "textLang": "pt",
+            "translation": "The bus is going to stop right up ahead.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, giving clear directions",
+            "note": null,
+            "matchedForm": "parar",
+            "matchedTranslationForm": "stop"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ggyhmwmml4yruzq",
+        "order": 1,
+        "definition": "To cease doing an activity or for an event or process to come to an end.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "cease",
+              "quit"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "ogpiyl49p272b7a",
+            "text": "Temos que parar de falar agora.",
+            "textLang": "pt",
+            "translation": "We have to stop talking now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and urgent, signaling an end to a conversation",
+            "note": null,
+            "matchedForm": "parar",
+            "matchedTranslationForm": "stop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "parar",
+    "lemma": "parar",
+    "reading": null,
+    "ipa": "/paˈɾaʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to stop; to cease; to pause",
     "primaryGloss": "stop",
     "emotion": "firm and decisive, like putting a hand up to halt someone",
@@ -182,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Parar is the most common way to say stop.",
+        "why": "Restates the gloss instead of explaining the grammar ('parar de' + infinitive)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The bus will stop there in front.",
+        "why": "Calqued translation of 'ali na frente'; natural English is 'up ahead' or 'just ahead'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To stay in a place for a period of time",
+        "why": "Staying at a hotel is marginal/regional for A2 compared to 'stop moving' vs 'stop doing'."
+      }
+    ],
+    "growth": 1.026
   }
 }

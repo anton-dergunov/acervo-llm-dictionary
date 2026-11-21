@@ -58,6 +58,71 @@
     "headword": "la cebolla",
     "lemma": "cebolla",
     "reading": null,
+    "ipa": "/θeˈboʎa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "onion",
+    "primaryGloss": "onion",
+    "emotion": "pungent and watery-eyed, chopping vegetables on a wooden board",
+    "notes": [],
+    "senses": [
+      {
+        "id": "lnyzez6ycwcxauz",
+        "order": 0,
+        "definition": "A round vegetable with many layers and a strong smell and taste.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "onion"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧅",
+        "examples": [
+          {
+            "id": "y6kc4pqhi76hcuj",
+            "text": "Cortar la cebolla siempre me hace llorar.",
+            "textLang": "es",
+            "translation": "Cutting onions always makes me cry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stinging eyes and blinking away tears while cooking",
+            "note": null,
+            "matchedForm": "cebolla",
+            "matchedTranslationForm": "onions"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la cebolla",
+    "lemma": "cebolla",
+    "reading": null,
     "ipa": "/seˈβoʎa/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +224,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/seˈβoʎa/",
+        "why": "Gives seseo /s/ instead of Castilian /θ/ for initial 'ce-'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "onion; head (slang)",
+        "why": "Names a slang meaning that is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "A bulbous plant grown for its edible bulb.",
+        "why": "Oversplits the vegetable and the plant into two separate senses for beginners."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "La cebolla is the everyday bulb vegetable",
+        "why": "Note [0] restates the definition; note [1] teaches obscure slang not needed at A2."
+      }
+    ],
+    "growth": 0.269
   }
 }

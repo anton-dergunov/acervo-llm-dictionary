@@ -71,6 +71,71 @@
     "shortGloss": "bee",
     "primaryGloss": "bee",
     "emotion": "a gentle, sunny day in a garden with flowers buzzing nearby",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ztfwyremkt4q8p1",
+        "order": 0,
+        "definition": "A small yellow-and-black flying insect that collects nectar and makes honey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bee"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🐝",
+        "examples": [
+          {
+            "id": "gh2u18afin8rsrj",
+            "text": "Im Sommer fliegen viele Bienen von Blume zu Blume.",
+            "textLang": "de",
+            "translation": "In summer, many bees fly from flower to flower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and peaceful, watching nature in motion",
+            "note": null,
+            "matchedForm": "Bienen",
+            "matchedTranslationForm": "bees"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Biene",
+    "lemma": "Biene",
+    "reading": null,
+    "ipa": "/ˈbiːnə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐝",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bee",
+    "primaryGloss": "bee",
+    "emotion": "a gentle, sunny day in a garden with flowers buzzing nearby",
     "notes": [
       "Note that 'Biene' is feminine (die Biene). When talking about a bee in a general sense, use the feminine article.",
       "Bees are often associated with spring and summer. In German, you might also hear the term 'Honigbiene' (honey bee) to be more specific."
@@ -119,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'Biene' is feminine (die Biene).",
+        "why": "Restates the grammatical gender already shown in the entry header."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Bees are often associated with spring and summer.",
+        "why": "Encyclopedic trivia that offers no useful linguistic help to an A2 learner."
+      }
+    ],
+    "growth": 0.425
   }
 }

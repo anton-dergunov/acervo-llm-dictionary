@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "abeja",
+    "primaryGloss": "abeja",
+    "emotion": "busy and buzzing, darting from flower to flower",
+    "notes": [
+      "Se pronuncia exactamente igual que el verbo 'be' (ser o estar)."
+    ],
+    "senses": [
+      {
+        "id": "gfy41pdrlkhv6ij",
+        "order": 0,
+        "definition": "Insecto volador amarillo y negro que produce miel y cera.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "abeja"
+            ]
+          }
+        ],
+        "domain": "insecto",
+        "emoji": "🐝",
+        "examples": [
+          {
+            "id": "0j1taktngd4fwgf",
+            "text": "A bee landed on the yellow flower.",
+            "textLang": "en",
+            "translation": "Una abeja se posó en la flor amarilla.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching nature closely",
+            "note": null,
+            "matchedForm": "bee",
+            "matchedTranslationForm": "abeja"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "bee",
+    "lemma": "bee",
+    "reading": null,
+    "ipa": "/biː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐝",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "abeja; abeja obrera",
     "primaryGloss": "abeja",
     "emotion": "busy and buzzing, darting from flower to flower",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "No confundir con 'beet' (remolacha), que se pronuncia igual",
+        "why": "'Bee' /biː/ and 'beet' /biːt/ are not homophones; 'be' is the homophone."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "abeja; abeja obrera",
+        "why": "'Abeja obrera' (worker bee) is overly specific and not in the sense glosses."
+      }
+    ],
+    "growth": 0.754
   }
 }

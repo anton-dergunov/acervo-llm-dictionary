@@ -72,6 +72,97 @@
     "primaryGloss": "wrong",
     "emotion": "matter-of-fact and direct, pointing out a discrepancy",
     "notes": [
+      "Very often placed directly after a verb to show an action was done wrongly: 写错 (xiěcuò, write wrongly), 走错 (zǒucuò, go the wrong way), 买错 (mǎicuò, buy the wrong thing).",
+      "Also used as a noun meaning 'mistake' or 'fault', as in 犯错 (fàncuò, make a mistake) or 是我的错 (shì wǒ de cuò, it's my fault)."
+    ],
+    "senses": [
+      {
+        "id": "yhd392wez2bf06k",
+        "order": 0,
+        "definition": "Not correct or true; mistaken.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrong",
+              "incorrect",
+              "mistaken"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "crpmuabmshfjqz1",
+            "text": "这个答案是错的。",
+            "textLang": "zh",
+            "translation": "This answer is wrong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "objective and clear, correcting someone's error",
+            "note": null,
+            "matchedForm": "错",
+            "matchedTranslationForm": "wrong"
+          },
+          {
+            "id": "vm7sbxifa87arei",
+            "text": "对不起，我打错电话了。",
+            "textLang": "zh",
+            "translation": "Sorry, I dialed the wrong number.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "错",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "错",
+    "lemma": "错",
+    "reading": "cuò",
+    "ipa": "/tsʰu̯o˥˩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "wrong; incorrect; mistaken",
+    "primaryGloss": "wrong",
+    "emotion": "matter-of-fact and direct, pointing out a discrepancy",
+    "notes": [
       "Used as an adjective to describe something that is not right or factually incorrect.",
       "Can also function as a noun when used after the verb '犯' (fàn - to commit) to mean 'a mistake' (犯错 fàncuò).",
       "Do not confuse with '不对' (bú duì), which is often used in speech to express that something doesn't feel right or that a situation is suspicious."
@@ -121,5 +212,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Misses the essential A1/A2 usage of 错 as a result complement after a verb (e.g. 写错, 说错)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as an adjective to describe something that is not right",
+        "why": "Restates the part of speech and definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[2]",
+        "quote": "Do not confuse with '不对' (bú duì), which is often used",
+        "why": "Misleading; 不对 is the standard everyday way to say 'wrong/incorrect', often interchangeable with 错."
+      }
+    ],
+    "growth": 0.978
   }
 }

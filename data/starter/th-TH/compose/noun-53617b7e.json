@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand; player, specialist",
+    "primaryGloss": "hand",
+    "emotion": "helpful and ready, reaching out to offer assistance",
+    "notes": [
+      "The classifier for hands is ข้าง (for one hand) or คู่ (for a pair).",
+      "In compounds, มือ often begins words for a player, specialist, or role (e.g. มือใหม่ 'beginner', มืออาชีพ 'professional', มือกลอง 'drummer')."
+    ],
+    "senses": [
+      {
+        "id": "97d4mcg3oc59t8k",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the palm and fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "xqrxn5qbhr3tayw",
+            "text": "เขาล้างมือ",
+            "textLang": "th",
+            "translation": "He washes his hands.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "clean and refreshing, completing a routine task",
+            "note": null,
+            "matchedForm": "มือ",
+            "matchedTranslationForm": "hands"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n3b22gljzoqm1c8",
+        "order": 1,
+        "definition": "A person with a particular skill, level of experience, or role, especially in a sport, band, or profession (used in compounds).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "player",
+              "specialist",
+              "hand"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👨‍🔧",
+        "examples": [
+          {
+            "id": "t2n4d3pb12f47cd",
+            "text": "เขาเป็นมืออาชีพ",
+            "textLang": "th",
+            "translation": "He is a professional.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "มือ",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "มือ",
+    "lemma": "มือ",
+    "reading": null,
+    "ipa": "/mɯː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; side, direction; expert",
     "primaryGloss": "hand",
     "emotion": "helpful and ready, reaching out to offer assistance",
@@ -201,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A side, direction, or party in a contest or negotiation.",
+        "why": "มือ does not mean direction or party; left/right hand is ขวามือ/ซ้ายมือ, not มือขวา."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "รถวิ่งมาทางมือขวา",
+        "why": "Unnatural; 'on the right-hand side' in Thai is ทางขวามือ (or ด้านขวา), whereas มือขวา means right hand."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used figuratively to mean someone skilled or expert in a certain area",
+        "why": "Restates sense 2 instead of giving useful learner information such as the classifier ข้าง."
+      }
+    ],
+    "growth": 1.174
   }
 }

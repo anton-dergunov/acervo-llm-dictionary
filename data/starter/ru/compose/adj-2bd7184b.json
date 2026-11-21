@@ -73,6 +73,115 @@
     "primaryGloss": "green",
     "emotion": "a fresh and vibrant outdoor scene, clear and bright like spring grass",
     "notes": [
+      "The stress is always on the syllable with ё (pronounced 'yo'), which is often written as е in everyday texts (зеленый)."
+    ],
+    "senses": [
+      {
+        "id": "dn9xsi6a0f1b7kg",
+        "order": 0,
+        "definition": "Having the color of grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "cf1tmyl2wiggq6g",
+            "text": "Летом трава зелёная.",
+            "textLang": "ru",
+            "translation": "In the summer, the grass is green.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented and peaceful, observing the beauty of a summer day",
+            "note": null,
+            "matchedForm": "зелёная",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1yz81937aq6glp3",
+        "order": 1,
+        "definition": "Of fruit: not yet ripe; of a person: young and inexperienced.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green"
+            ]
+          }
+        ],
+        "domain": "maturity",
+        "emoji": "🍏",
+        "examples": [
+          {
+            "id": "8d4n7z5lgmhjvr1",
+            "text": "Это яблоко ещё зелёное.",
+            "textLang": "ru",
+            "translation": "This apple is still unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "зелёное",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "зелёный",
+    "lemma": "зелёный",
+    "reading": null,
+    "ipa": "/zʲɪˈlʲɵnɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Describing",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe",
+    "primaryGloss": "green",
+    "emotion": "a fresh and vibrant outdoor scene, clear and bright like spring grass",
+    "notes": [
       "Used to describe both the color and, metaphorically, something that is immature or unripe (like a 'green' fruit or a young, inexperienced person).",
       "Unlike some other colors, the endings change based on the gender and case of the noun being described, so ensure the ending matches your subject."
     ],
@@ -161,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Этот яблоко ещё зелёное.",
+        "why": "Grammatical error: 'яблоко' is neuter, so it takes 'это', not masculine 'этот'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of grass and leaves.",
+        "why": "Defined as a noun rather than an adjective ('Of the color of...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both the color and, metaphorically, something that is immature",
+        "why": "Merely restates the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike some other colors, the endings change based on the gender",
+        "why": "Almost all Russian adjectives decline; this is generic grammar filler."
+      }
+    ],
+    "growth": 0.711
   }
 }

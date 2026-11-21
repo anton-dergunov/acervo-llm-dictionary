@@ -68,6 +68,115 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "nombre; reputación",
+    "primaryGloss": "nombre",
+    "emotion": "friendly and helpful, introducing oneself to a new friend",
+    "notes": [
+      "En una persona, 'first name' es el nombre de pila, 'last name' el apellido y 'full name' el nombre completo."
+    ],
+    "senses": [
+      {
+        "id": "qlbp3oz0oo0nvi2",
+        "order": 0,
+        "definition": "Palabra o conjunto de palabras con que se designa e identifica a una persona, lugar o cosa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "nombre"
+            ]
+          }
+        ],
+        "domain": "identidad",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "eg9nvjitb7fdygr",
+            "text": "My name is John.",
+            "textLang": "en",
+            "translation": "Me llamo John.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and clear, introducing oneself",
+            "note": null,
+            "matchedForm": "name",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ibvkyuqs0kosm9f",
+        "order": 1,
+        "definition": "Reputación o fama que tiene alguien o algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "reputación",
+              "fama",
+              "nombre"
+            ]
+          }
+        ],
+        "domain": "reputación",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "r2ewoyzhovgbg20",
+            "text": "The company has a good name for quality.",
+            "textLang": "en",
+            "translation": "La empresa tiene buena reputación por su calidad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and certain, praising a business",
+            "note": null,
+            "matchedForm": "name",
+            "matchedTranslationForm": "reputación"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "name",
+    "lemma": "name",
+    "reading": null,
+    "ipa": "/neɪm/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📛",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "nombre; apellido",
     "primaryGloss": "nombre",
     "emotion": "friendly and helpful, introducing oneself to a new friend",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Palabra o conjunto de palabras con que se designa a una persona.",
+        "why": "Too narrow: 'name' designates places, animals, and things as well as people."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "nombre; apellido",
+        "why": "'apellido' is not in the sense glosses, while sense 1 ('reputación') is omitted from shortGloss."
+      }
+    ],
+    "growth": 1.057
   }
 }

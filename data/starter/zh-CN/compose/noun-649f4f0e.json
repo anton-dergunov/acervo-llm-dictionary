@@ -57,6 +57,116 @@
     "language": "zh",
     "headword": "头痛",
     "lemma": "头痛",
+    "reading": "tóutòng",
+    "ipa": "/tʰou̯˧˥ tʰʊŋ˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "to have a headache; headache",
+    "primaryGloss": "to have a headache",
+    "emotion": "throbbing and weary, pressing your temples with heavy, tired eyes",
+    "notes": [
+      "Used directly as a predicate (我今天头痛, 'I have a headache today') without needing a verb like 有 (yǒu).",
+      "In spoken Mandarin, 头疼 (tóuténg) is equally common."
+    ],
+    "senses": [
+      {
+        "id": "n5yhiojh4tl4fe0",
+        "order": 0,
+        "definition": "To feel a continuous pain in the head; a pain in the head.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have a headache",
+              "headache"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "6vjdc51hdcggfny",
+            "text": "我今天头痛得厉害。",
+            "textLang": "zh",
+            "translation": "I have a terrible headache today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weak, wincing, and wanting to rest in a dark room",
+            "note": null,
+            "matchedForm": "头痛",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u61ldgqadffqr3i",
+        "order": 1,
+        "definition": "To feel troubled or annoyed by a difficult problem (often in 让人头痛, 'to give someone a headache').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be a headache",
+              "to feel troubled"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "😫",
+        "examples": [
+          {
+            "id": "dcwp9oghjrakegh",
+            "text": "这个问题真让人头痛。",
+            "textLang": "zh",
+            "translation": "This problem is a real headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exasperated, sighs while staring at an unfinished pile of work",
+            "note": null,
+            "matchedForm": "头痛",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "头痛",
+    "lemma": "头痛",
     "reading": "tóu tòng",
     "ipa": "/tʰou̯˧˥ tʰʊŋ˥˩/",
     "pos": "noun",
@@ -160,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "noun",
+        "why": "头痛 is primarily a verb/adjective ('to have a headache'), as shown in both examples."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "A continuous pain in the head.",
+        "why": "Defined as a noun, but used as a predicate in the example and in Chinese."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A frustrating situation or task that is difficult to handle.",
+        "why": "Defined as a noun; in Chinese, 让人头痛 means 'to make someone feel troubled'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '头痛' literally means 'head pain', it is very commonly used",
+        "why": "Merely restates the two senses; misses the colloquial variant 头疼 (tóuténg)."
+      }
+    ],
+    "growth": 0.944
   }
 }

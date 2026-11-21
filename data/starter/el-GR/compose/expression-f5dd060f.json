@@ -72,6 +72,94 @@
     "primaryGloss": "without",
     "emotion": null,
     "notes": [
+      "Followed by a noun or pronoun in the accusative case (χωρίς ζάχαρη, χωρίς εσένα), or by να + verb to mean 'without doing something'."
+    ],
+    "senses": [
+      {
+        "id": "h841l7gl5qyvyi9",
+        "order": 0,
+        "definition": "In the absence of something or someone; not having or doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "➖",
+        "examples": [
+          {
+            "id": "t6shwyl6jyyhy1w",
+            "text": "Πίνω τον καφέ μου χωρίς ζάχαρη.",
+            "textLang": "el",
+            "translation": "I drink my coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple preference",
+            "note": null,
+            "matchedForm": "χωρίς",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "qwfrcc4p3enircq",
+            "text": "Έφυγε χωρίς να μου πει τίποτα.",
+            "textLang": "el",
+            "translation": "He left without saying anything to me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly annoyed or surprised, stating an event",
+            "note": null,
+            "matchedForm": "χωρίς",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "χωρίς",
+    "lemma": "χωρίς",
+    "reading": null,
+    "ipa": "/xoˈɾis/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
       "Χωρίς is a preposition that functions like 'without' in English. It is almost always followed by the accusative case.",
       "Do not confuse this with 'με' (with). If you are describing the lack of something, use 'χωρίς' + the thing you lack."
     ],
@@ -181,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'Χωρίς' is a preposition, as Note 0 itself states."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Apart from or excluding something.",
+        "why": "Not a distinct sense; the example still just means 'without'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'με' (with). If you are describing",
+        "why": "Pure filler; simply restates the basic meaning of 'without'."
+      }
+    ],
+    "growth": 0.67
   }
 }

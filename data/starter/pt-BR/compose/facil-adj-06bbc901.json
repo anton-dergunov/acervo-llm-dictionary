@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "easy; simple; easygoing",
+    "primaryGloss": "easy",
+    "emotion": "relaxed and confident, like solving a simple problem without thinking",
+    "notes": [
+      "Has the same form for masculine and feminine, and the irregular plural 'fáceis' (perguntas fáceis).",
+      "Followed by 'de' before an infinitive: fácil de fazer (easy to do)."
+    ],
+    "senses": [
+      {
+        "id": "td08g8xl9enq9zw",
+        "order": 0,
+        "definition": "Not difficult; able to be done or understood with little effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "easy",
+              "simple"
+            ]
+          }
+        ],
+        "domain": "ease",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "i6pzx26kbcyf4ml",
+            "text": "A prova de matemática estava fácil.",
+            "textLang": "pt",
+            "translation": "The math test was easy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and satisfied, having finished something without trouble",
+            "note": null,
+            "matchedForm": "fácil",
+            "matchedTranslationForm": "easy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "trgfu6l53oblzv1",
+        "order": 1,
+        "definition": "Of a person: pleasant and not difficult to get along with.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "easygoing",
+              "easy"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "fie0km0frlx2rj5",
+            "text": "Ele é uma pessoa fácil de lidar.",
+            "textLang": "pt",
+            "translation": "He is an easy person to deal with.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "approving and calm, describing someone pleasant and uncomplicated",
+            "note": null,
+            "matchedForm": "fácil",
+            "matchedTranslationForm": "easy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "fácil",
+    "lemma": "fácil",
+    "reading": null,
+    "ipa": "/ˈfa.siw/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎈",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "easy; simple",
     "primaryGloss": "easy",
     "emotion": "relaxed and confident, like solving a simple problem without thinking",
@@ -162,5 +272,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Fácil is a very versatile adjective used for anything",
+        "why": "Restates the definition without adding usage or grammar help."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 'fácil' is invariable for gender and forms the plural 'fáceis'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "something that can be done with little effort.",
+        "why": "Defines an adjective as a noun ('something that...')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something or someone that is simple to deal with or influence.",
+        "why": "Defines an adjective as a noun ('Something or someone...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "He is an easygoing person to deal with.",
+        "why": "Unnatural English ('easygoing to deal with' blends two idioms)."
+      }
+    ],
+    "growth": 0.935
   }
 }

@@ -68,6 +68,74 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "slow",
+    "primaryGloss": "slow",
+    "emotion": "a calm and steady observation of something taking its time",
+    "notes": [
+      "Used when slowness is unwanted or below normal speed (e.g. traffic, internet, a slow clock). For doing something gently, carefully, or quietly, use 'pelan' or 'pelan-pelan'.",
+      "To say that someone or something is late (behind schedule), use the derived form 'terlambat'."
+    ],
+    "senses": [
+      {
+        "id": "gwjxbx5mo4yaed1",
+        "order": 0,
+        "definition": "Not moving, working, or happening fast.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slow"
+            ]
+          }
+        ],
+        "domain": "speed",
+        "emoji": "🐢",
+        "examples": [
+          {
+            "id": "edon9uplx2r4qic",
+            "text": "Koneksi internet ini sangat lambat.",
+            "textLang": "id",
+            "translation": "This internet connection is very slow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly annoyed and frustrated at the lack of progress",
+            "note": null,
+            "matchedForm": "lambat",
+            "matchedTranslationForm": "slow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lambat",
+    "lemma": "lambat",
+    "reading": null,
+    "ipa": "/ˈlam.bat/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "slow; late",
     "primaryGloss": "slow",
     "emotion": "a calm and steady observation of something taking its time",
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "consider using 'lama'.",
+        "why": "'Lama' means taking a long time (duration), not annoying or inefficient slowness ('lelet'/'lamban')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing distinction between 'lambat' (unwanted/lagging slowness) and 'pelan' (gentle/careful slowness or low volume)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(time) Occurring or arriving after the expected time.",
+        "why": "Standard Indonesian uses 'terlambat' for arriving late; 'lambat' is mainly for slow watches or Malay."
+      }
+    ],
+    "growth": 0.747
   }
 }

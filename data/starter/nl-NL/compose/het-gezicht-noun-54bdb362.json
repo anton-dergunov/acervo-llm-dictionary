@@ -58,6 +58,73 @@
     "headword": "het gezicht",
     "lemma": "gezicht",
     "reading": null,
+    "ipa": "/ɣəˈzɪxt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "face",
+    "primaryGloss": "face",
+    "emotion": "friendly and direct, looking someone in the eyes",
+    "notes": [
+      "Plural: 'gezichten'. Also used in the expression 'dat is geen gezicht' (that looks ridiculous)."
+    ],
+    "senses": [
+      {
+        "id": "yns7yu40l03t6lt",
+        "order": 0,
+        "definition": "The front part of the head, where the eyes, nose, and mouth are.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "face"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "jbm50vtezjepsv0",
+            "text": "Ze waste haar gezicht met koud water.",
+            "textLang": "nl",
+            "translation": "She washed her face with cold water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshed and awake in the morning",
+            "note": null,
+            "matchedForm": "gezicht",
+            "matchedTranslationForm": "face"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het gezicht",
+    "lemma": "gezicht",
+    "reading": null,
     "ipa": "/ɡəˈzɪxt/",
     "pos": "noun",
     "gender": "neuter",
@@ -161,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡəˈzɪxt/",
+        "why": "Dutch 'g' is /ɣ/ or /x/, not /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The ability to see; eyesight.",
+        "why": "Using 'gezicht' alone for eyesight is dated; modern Dutch uses 'zicht' or 'gezichtsvermogen'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Door de dichte mist was zijn gezicht op de weg erg slecht.",
+        "why": "In this context Dutch requires 'zicht' (visibility), never 'gezicht'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'gezicht' primarily for the front part of the head, but it",
+        "why": "merely restates the glosses."
+      }
+    ],
+    "growth": 0.488
   }
 }

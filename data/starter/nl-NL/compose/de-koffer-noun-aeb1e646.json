@@ -68,6 +68,71 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "suitcase",
+    "primaryGloss": "suitcase",
+    "emotion": "excited and hurried, zipping it shut just before leaving for the trip",
+    "notes": [],
+    "senses": [
+      {
+        "id": "evaa15vtg3we5bs",
+        "order": 0,
+        "definition": "A large, rectangular container with a handle, used for carrying clothes and other belongings when travelling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "suitcase"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🧳",
+        "examples": [
+          {
+            "id": "t9p0wvdzs6h8exo",
+            "text": "Ik pak mijn koffer voor de vakantie.",
+            "textLang": "nl",
+            "translation": "I am packing my suitcase for the holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and purposeful, gathering everything needed for the trip",
+            "note": null,
+            "matchedForm": "koffer",
+            "matchedTranslationForm": "suitcase"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de koffer",
+    "lemma": "koffer",
+    "reading": null,
+    "ipa": "/ˈkɔfər/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧳",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "suitcase; trunk",
     "primaryGloss": "suitcase",
     "emotion": "excited and hurried, zipping it shut just before leaving for the trip",
@@ -160,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The enclosed space at the back of a car used for storing luggage.",
+        "why": "Using 'koffer' alone for car boot is chiefly Belgian; Netherlands Dutch uses 'kofferbak'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'koffer' for a suitcase you take on a trip, but remember",
+        "why": "merely restates the two senses and teaches Belgian usage as standard nl-NL."
+      }
+    ],
+    "growth": 0.433
   }
 }

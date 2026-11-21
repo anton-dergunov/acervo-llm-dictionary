@@ -73,6 +73,136 @@
     "headword": "a hora",
     "lemma": "hora",
     "reading": null,
+    "ipa": "/ˈɔ.ɾɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "hour; time",
+    "primaryGloss": "hour",
+    "emotion": null,
+    "notes": [
+      "To ask or tell the time of day, use the plural 'horas' (except for one o'clock): 'Que horas são?' (What time is it?), 'São três horas' (It's three o'clock).",
+      "Do not confuse with 'o tempo', which means time in general or weather ('Não tenho tempo' = I don't have time)."
+    ],
+    "senses": [
+      {
+        "id": "jbms6wursc56jyx",
+        "order": 0,
+        "definition": "A period of sixty minutes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hour"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "4hz9rtdwzmes34i",
+            "text": "A reunião vai durar uma hora.",
+            "textLang": "pt",
+            "translation": "The meeting will last an hour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and straightforward, stating the length of a planned event",
+            "note": null,
+            "matchedForm": "hora",
+            "matchedTranslationForm": "hour"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1r2d45yw54317ss",
+        "order": 1,
+        "definition": "The time of day as shown on a clock, or a particular moment for something to happen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "time",
+              "o'clock"
+            ]
+          }
+        ],
+        "domain": "clock time",
+        "emoji": "🕒",
+        "examples": [
+          {
+            "id": "wrmlzxlnlb8xg7r",
+            "text": "Você sabe que horas são?",
+            "textLang": "pt",
+            "translation": "Do you know what time it is?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and slightly hurried, asking for information to check your own watch",
+            "note": null,
+            "matchedForm": "horas",
+            "matchedTranslationForm": "time"
+          },
+          {
+            "id": "wkqs08mfghh13gb",
+            "text": "Está na hora de ir embora.",
+            "textLang": "pt",
+            "translation": "It is time to leave.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hora",
+            "matchedTranslationForm": "time"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a hora",
+    "lemma": "hora",
+    "reading": null,
     "ipa": "/ˈo.ɾɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -174,5 +304,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈo.ɾɐ/",
+        "why": "Wrong vowel quality: 'hora' has an open-mid /ɔ/ (/ˈɔ.ɾɐ/), not close-mid /o/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Portuguese, 'a hora' can mean both the specific time on the",
+        "why": "Restates the two senses; meanwhile a note on plural 'Que horas são?' is missing."
+      }
+    ],
+    "growth": 1.039
   }
 }

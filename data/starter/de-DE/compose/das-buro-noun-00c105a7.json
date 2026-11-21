@@ -68,6 +68,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "office; agency",
+    "primaryGloss": "office",
+    "emotion": "focused and steady, a brief moment of professional concentration",
+    "notes": [
+      "The plural takes -s: die Büros.",
+      "Use im Büro for 'at the office' and ins Büro for 'to the office'."
+    ],
+    "senses": [
+      {
+        "id": "9c1mjwlw0ls7891",
+        "order": 0,
+        "definition": "A room or set of rooms in which people work at desks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "office"
+            ]
+          }
+        ],
+        "domain": "workplace",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "xjn35d8dymn25b1",
+            "text": "Ich gehe heute ins Büro.",
+            "textLang": "de",
+            "translation": "I am going to the office today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a standard daily routine",
+            "note": null,
+            "matchedForm": "Büro",
+            "matchedTranslationForm": "office"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b1p5ek3c1iuqdze",
+        "order": 1,
+        "definition": "A department, agency, or business that provides an administrative service.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "office",
+              "agency",
+              "bureau"
+            ]
+          }
+        ],
+        "domain": "administration",
+        "emoji": "📁",
+        "examples": [
+          {
+            "id": "q1b45beommdnje3",
+            "text": "Das Büro hat den Vertrag geprüft.",
+            "textLang": "de",
+            "translation": "The office has reviewed the contract.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and official, as if discussing business matters",
+            "note": null,
+            "matchedForm": "Büro",
+            "matchedTranslationForm": "office"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Büro",
+    "lemma": "Büro",
+    "reading": null,
+    "ipa": "/byˈʁoː/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "office; study",
     "primaryGloss": "office",
     "emotion": "focused and steady, a brief moment of professional concentration",
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "office; study",
+        "why": "'Study' is not in the senses (and a home study is usually 'Arbeitszimmer')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In German, 'Büro' can refer to the room where you work",
+        "why": "Restates the definitions instead of giving useful grammar (plural 'die Büros', 'im/ins Büro')."
+      }
+    ],
+    "growth": 0.887
   }
 }

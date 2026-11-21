@@ -68,6 +68,155 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "key; wrench",
+    "primaryGloss": "key",
+    "emotion": "a practical and grounding sensation, the metallic weight of entry and access",
+    "notes": [
+      "Commonly used in compound names for tools, such as 'chave de fenda' (screwdriver) and 'chave inglesa' (adjustable wrench)."
+    ],
+    "senses": [
+      {
+        "id": "f3ue592p0pw8dwr",
+        "order": 0,
+        "definition": "A small shaped piece of metal used to open or lock a door, car, or padlock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key"
+            ]
+          }
+        ],
+        "domain": "lock",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "bk1hxz2fq9pq8ae",
+            "text": "Eu perdi a chave de casa hoje de manhã.",
+            "textLang": "pt",
+            "translation": "I lost the house key this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and slightly anxious about being locked out",
+            "note": null,
+            "matchedForm": "chave",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pp15iy9p8qcoc82",
+        "order": 1,
+        "definition": "The most important factor in achieving something or solving a problem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key",
+              "secret"
+            ]
+          }
+        ],
+        "domain": "solution",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "3adkwkvvaode144",
+            "text": "A paciência é a chave para o sucesso.",
+            "textLang": "pt",
+            "translation": "Patience is the key to success.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and wise, sharing a meaningful life lesson",
+            "note": null,
+            "matchedForm": "chave",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xpgvt3lqgeck2ea",
+        "order": 2,
+        "definition": "A metal hand tool used for turning nuts, bolts, or screws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrench",
+              "spanner"
+            ]
+          }
+        ],
+        "domain": "tool",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "7y4rotyhte9t4p1",
+            "text": "Você tem uma chave de fenda para me emprestar?",
+            "textLang": "pt",
+            "translation": "Do you have a screwdriver to lend me?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "chave",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a chave",
+    "lemma": "chave",
+    "reading": null,
+    "ipa": "/ˈʃa.vi/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "key; switch; solution",
     "primaryGloss": "key",
     "emotion": "a practical and grounding sensation, the metallic weight of entry and access",
@@ -201,5 +350,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'chave' is used for both a physical door key and for light switches",
+        "why": "False for standard Brazilian Portuguese: a light switch is 'interruptor', while 'chave' is a breaker/main switch."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Pode ligar a chave da luz, por favor?",
+        "why": "Unnatural; Brazilians say 'acender a luz' or 'apertar o interruptor', or 'ligar a chave geral' for the breaker."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday tool sense 'wrench / spanner' (e.g., chave de fenda, chave inglesa)."
+      }
+    ],
+    "growth": 0.938
   }
 }

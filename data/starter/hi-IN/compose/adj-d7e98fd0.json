@@ -68,6 +68,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "soft; tender",
+    "primaryGloss": "soft",
+    "emotion": "gentle and appreciative, touching something pleasant",
+    "notes": [
+      "Invariable adjective: does not change for gender or number.",
+      "Used for physical texture (fabric, skin, food), whereas कोमल (komal) often implies delicate or tender."
+    ],
+    "senses": [
+      {
+        "id": "98bl3kcwb33sfqb",
+        "order": 0,
+        "definition": "Easy to press, bend, or chew; smooth and pleasant to touch, not hard or rough.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soft",
+              "tender",
+              "supple"
+            ]
+          }
+        ],
+        "domain": "texture",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "8zcks9hel72ai8y",
+            "text": "उसका तकिया बहुत मुलायम है।",
+            "textLang": "hi",
+            "translation": "His pillow is very soft.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, commenting on a pleasant object",
+            "note": null,
+            "matchedForm": "मुलायम",
+            "matchedTranslationForm": "soft"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "मुलायम",
+    "lemma": "मुलायम",
+    "reading": null,
+    "ipa": "/mʊˈlɑːjəm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "soft; smooth",
     "primaryGloss": "soft",
     "emotion": "gentle and appreciative, touching something pleasant",
@@ -139,5 +209,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "soft; smooth",
+        "why": "shortGloss includes 'smooth', which is absent from the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "यह कपड़े का टुकड़ा बहुत मुलायम महसूस होता है।",
+        "why": "Reads like an English calque ('feels very soft'); one natural example is enough."
+      }
+    ],
+    "growth": 0.659
   }
 }

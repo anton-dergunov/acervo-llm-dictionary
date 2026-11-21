@@ -70,6 +70,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sea",
+    "primaryGloss": "sea",
+    "emotion": "vast and peaceful, listening to the sound of rolling waves",
+    "notes": [
+      "Usually masculine ('el mar'), though the feminine ('la mar') appears in weather forecasts, among sailors, and in the everyday idiom 'la mar de' (meaning 'lots of' or 'very', e.g. 'la mar de bien')."
+    ],
+    "senses": [
+      {
+        "id": "jn6j0avtr6p8pov",
+        "order": 0,
+        "definition": "The large area of salt water that covers most of the Earth's surface, or a particular part of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea",
+              "ocean"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "a7h9lh7plz3rgf5",
+            "text": "Me encanta caminar por la orilla del mar.",
+            "textLang": "es",
+            "translation": "I love walking along the edge of the sea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, enjoying a warm afternoon stroll",
+            "note": null,
+            "matchedForm": "mar",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el mar",
+    "lemma": "mar",
+    "reading": null,
+    "ipa": "/ˈmaɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sea; large area of salt water",
     "primaryGloss": "sea",
     "emotion": "vast and peaceful, listening to the sound of rolling waves",
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sea; large area of salt water",
+        "why": "Includes a definition rather than just translation terms."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "while the feminine form is often used in poetic contexts",
+        "why": "Misses the very common everyday Spanish idiom 'la mar de' (lots of / super)."
+      }
+    ],
+    "growth": 1.003
   }
 }

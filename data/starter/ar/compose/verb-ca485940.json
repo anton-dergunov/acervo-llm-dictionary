@@ -58,6 +58,76 @@
     "headword": "اشْتَاقَ إِلَى",
     "lemma": "اشْتَاقَ إِلَى",
     "reading": null,
+    "ipa": "/iʃ.ˈtaː.qa ʔi.laː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥺",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to miss; to long for",
+    "primaryGloss": "miss",
+    "emotion": "wistful and tender, thinking of someone you care about",
+    "notes": [
+      "Form VIII hollow verb (imperfect يَشْتَاقُ yaštāqu). Takes إِلَى (ʾilā) or لِـ (li-) before the person or thing missed.",
+      "Only means feeling longing for someone or something, never failing to hit or failing to catch transport."
+    ],
+    "senses": [
+      {
+        "id": "qiuk2ibbvgoua45",
+        "order": 0,
+        "definition": "To feel longing for someone or something that is absent or far away.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "miss",
+              "long for",
+              "yearn for"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "h03ac1eq25lxuh2",
+            "text": "أَشْتَاقُ إِلَى عَائِلَتِي كَثِيرًا.",
+            "textLang": "ar",
+            "translation": "I miss my family very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle, vulnerable, and deeply affectionate",
+            "note": null,
+            "matchedForm": "أَشْتَاقُ إِلَى",
+            "matchedTranslationForm": "miss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "اشْتَاقَ إِلَى",
+    "lemma": "اشْتَاقَ إِلَى",
+    "reading": null,
     "ipa": "/iʃˈtɑːqa ʔiˈlaj/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/iʃˈtɑːqa ʔiˈlaj/",
+        "why": "إِلَى in isolation is /ʔi.laː/, not /ʔiˈlaj/ (which only occurs before pronoun suffixes)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To feel sad because a person is absent or far away.",
+        "why": "Senses 0 and 1 are the exact same meaning ('to miss someone')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "This verb always requires the preposition 'إِلَى'",
+        "why": "It very commonly takes لِـ (li-) instead of إِلَى."
+      }
+    ],
+    "growth": 0.639
   }
 }

@@ -58,6 +58,75 @@
     "headword": "ネズミ",
     "lemma": "ネズミ",
     "reading": null,
+    "ipa": "nezɯmi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐭",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "mouse; rat",
+    "primaryGloss": "mouse",
+    "emotion": "matter-of-fact and neutral when spotting a quick movement",
+    "notes": [
+      "Covers both 'mouse' and 'rat'. To specify, use ハツカネズミ for a small mouse or ドブネズミ for a large rat.",
+      "Often written in katakana (ネズミ) or hiragana (ねずみ); the kanji is 鼠."
+    ],
+    "senses": [
+      {
+        "id": "98cp45gmk7ezw97",
+        "order": 0,
+        "definition": "A small rodent with a pointed snout, round ears, and a long thin tail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse",
+              "rat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐭",
+        "examples": [
+          {
+            "id": "os5unji8rj2lkdv",
+            "text": "家の中にネズミがいる。",
+            "textLang": "ja",
+            "translation": "There is a mouse in the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit startled or concerned about the unwanted visitor",
+            "note": null,
+            "matchedForm": "ネズミ",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "ネズミ",
+    "lemma": "ネズミ",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A person who is shy, cowardly, or likes to hide away; or a common computing input device.",
+        "why": "Hallucinated English senses; computer mouse is マウス, and ネズミ does not mean coward."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "パソコンのネズミを動かす。",
+        "why": "Completely unnatural; a computer mouse is always called マウス in Japanese."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "in biology or formal contexts, it is written with the kanji 鼠",
+        "why": "In biology, animal names are standardly written in katakana (ネズミ), not kanji."
+      }
+    ],
+    "growth": 0.52
   }
 }

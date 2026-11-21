@@ -72,6 +72,115 @@
     "primaryGloss": "water",
     "emotion": "refreshing and essential, the simple relief of a cool drink",
     "notes": [
+      "Takes the irregular buffer consonant 'y' instead of 's' or 'n' before vowel-initial suffixes: suyu (its water / the water), suyun (of the water), suyunu.",
+      "Combined with fruit or vegetable names in possessive compounds to mean 'juice', e.g., elma suyu (apple juice)."
+    ],
+    "senses": [
+      {
+        "id": "mtc23bijv6ag4b7",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain and is used for drinking and washing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "ybfn9yszok3e1pg",
+            "text": "Bir bardak soğuk su lütfen.",
+            "textLang": "tr",
+            "translation": "A glass of cold water, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and appreciative, making a simple request at a table",
+            "note": null,
+            "matchedForm": "su",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q4j3f7i5gkpw71j",
+        "order": 1,
+        "definition": "The liquid obtained from a fruit, vegetable, or cooked dish.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "juice",
+              "broth"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧃",
+        "examples": [
+          {
+            "id": "fvhwb4heyxyuavj",
+            "text": "Taze portakal suyu içiyorum.",
+            "textLang": "tr",
+            "translation": "I am drinking fresh orange juice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying a healthy start to the morning",
+            "note": null,
+            "matchedForm": "suyu",
+            "matchedTranslationForm": "juice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "su",
+    "lemma": "su",
+    "reading": null,
+    "ipa": "/su/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water; juice",
+    "primaryGloss": "water",
+    "emotion": "refreshing and essential, the simple relief of a cool drink",
+    "notes": [
       "In Turkish, 'su' is used both for the clear liquid we drink and as a suffix/noun for other liquids like fruit juices (e.g., 'elma suyu' for apple juice).",
       "It is a fundamental word; you will use it every day when ordering drinks or talking about staying hydrated."
     ],
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is a fundamental word; you will use it every day",
+        "why": "Pure filler; fails to mention the crucial irregular buffer consonant 'y' in inflection."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "'su' takes an irregular buffer 'y' (not 'n' or 's') in genitive and possessive forms."
+      }
+    ],
+    "growth": 1.009
   }
 }

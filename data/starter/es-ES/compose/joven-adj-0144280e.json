@@ -58,6 +58,84 @@
     "headword": "joven",
     "lemma": "joven",
     "reading": null,
+    "ipa": "/ˈxoβen/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "young",
+    "primaryGloss": "young",
+    "emotion": "warm and smiling, thinking of someone full of life and energy",
+    "notes": [
+      "Same form for masculine and feminine ('un chico joven', 'una chica joven'). The plural takes an accent mark: 'jóvenes'.",
+      "Also used as a noun ('un joven', 'una joven') meaning 'a young person'."
+    ],
+    "senses": [
+      {
+        "id": "8c2a6jabrxkryf4",
+        "order": 0,
+        "definition": "Having lived or existed for only a short time; not old.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "young"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "84v3hoai907xlmn",
+            "text": "Mi profesora de español es muy joven.",
+            "textLang": "es",
+            "translation": "My Spanish teacher is very young.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "joven",
+            "matchedTranslationForm": "young"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "8c2a6jabrxkryf4",
+      "from": "Que tiene pocos años.",
+      "to": "Having lived for only a few years.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "joven",
+    "lemma": "joven",
+    "reading": null,
     "ipa": "/xoˈβen/",
     "pos": "adj",
     "gender": null,
@@ -120,14 +198,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "8c2a6jabrxkryf4",
-      "from": "Que tiene pocos años.",
-      "to": "Having lived for only a few years.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/xoˈβen/",
+        "why": "Wrong stress: 'joven' is stressed on the first syllable (/ˈxoβen/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It applies to people who have been alive for only a short time.",
+        "why": "Purely repeats the definition; should note the plural spelling 'jóvenes' and 'ser vs. estar'."
+      }
+    ],
+    "growth": 1.337
+  }
 }

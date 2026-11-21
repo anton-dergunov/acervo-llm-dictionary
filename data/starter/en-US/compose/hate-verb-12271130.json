@@ -70,6 +70,97 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "odiar, detestar",
+    "primaryGloss": "odiar",
+    "emotion": "sharp and intense, expressing a strong aversion with a frown",
+    "notes": [
+      "A diferencia de 'dislike' (no gustar), 'hate' expresa un rechazo mucho más fuerte, aunque en el habla cotidiana se usa a menudo para exagerar cosas que simplemente molestan.",
+      "Cuando va seguido de otro verbo, este puede ir terminado en '-ing' o con 'to' (ej. 'I hate waiting' o 'I hate to wait')."
+    ],
+    "senses": [
+      {
+        "id": "30u1z2r5mbl5ihr",
+        "order": 0,
+        "definition": "Sentir una aversión muy fuerte hacia alguien o algo, o no soportar hacer algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "odiar",
+              "detestar",
+              "no soportar"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "💥",
+        "examples": [
+          {
+            "id": "wo19rrw3gp3d5hm",
+            "text": "I hate waking up early on cold mornings.",
+            "textLang": "en",
+            "translation": "Odio despertarme temprano en las mañanas frías.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grumpy and tired, complaining about the early hour",
+            "note": null,
+            "matchedForm": "hate",
+            "matchedTranslationForm": "Odio"
+          },
+          {
+            "id": "2643nmijlj4cje0",
+            "text": "She hates waiting in long lines.",
+            "textLang": "en",
+            "translation": "Ella detesta hacer filas largas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impatient and frustrated while standing around",
+            "note": null,
+            "matchedForm": "hates",
+            "matchedTranslationForm": "detesta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hate",
+    "lemma": "hate",
+    "reading": null,
+    "ipa": "/heɪt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "odiar; detestar",
     "primaryGloss": "odiar",
     "emotion": "sharp and intense, expressing a strong aversion with a frown",
@@ -162,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Sentir una aversión muy fuerte / No gustar algo en absoluto",
+        "why": "Both senses and examples show the exact same everyday meaning and grammar ('hate + -ing')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 'hate' can be followed by either an -ing form or 'to + infinitive'."
+      }
+    ],
+    "growth": 1.375
   }
 }

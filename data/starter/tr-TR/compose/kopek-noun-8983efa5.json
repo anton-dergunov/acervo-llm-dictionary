@@ -72,6 +72,95 @@
     "primaryGloss": "dog",
     "emotion": "warm and friendly, thinking of a loyal companion",
     "notes": [
+      "Before a suffix starting with a vowel, the final 'k' softens to 'ğ': 'köpeği' (his/her dog, or the dog [acc.]), 'köpeğe' (to the dog).",
+      "A puppy is called 'yavru köpek' or 'köpek yavrusu'."
+    ],
+    "senses": [
+      {
+        "id": "yr0g6ndbaddwvir",
+        "order": 0,
+        "definition": "A common four-legged animal kept as a pet or to guard buildings, known for barking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "kgc0k3acsd1iz78",
+            "text": "Sokakta çok tatlı bir köpek gördüm.",
+            "textLang": "tr",
+            "translation": "I saw a very cute dog on the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and excited, sharing a small happy moment",
+            "note": null,
+            "matchedForm": "köpek",
+            "matchedTranslationForm": "dog"
+          },
+          {
+            "id": "ie46wew1o1ru18c",
+            "text": "Komşumuzun köpeği sürekli havlıyor.",
+            "textLang": "tr",
+            "translation": "Our neighbor's dog is barking constantly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly annoyed and tired, complaining about a nuisance",
+            "note": null,
+            "matchedForm": "köpeği",
+            "matchedTranslationForm": "dog"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "köpek",
+    "lemma": "köpek",
+    "reading": null,
+    "ipa": "/cøˈpec/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐕",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "dog",
+    "primaryGloss": "dog",
+    "emotion": "warm and friendly, thinking of a loyal companion",
+    "notes": [
       "In Turkish culture, köpek is the standard word for dog. While it is sometimes used metaphorically in insults, in everyday conversation it is simply the animal.",
       "Do not confuse this with 'kedi' (cat).",
       "When referring to a puppy, you can use the word 'yavru köpek'."
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'kedi' (cat).",
+        "why": "Useless filler; learners do not confuse unrelated spellings 'köpek' and 'kedi'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on final consonant voicing (köpek -> köpeği) before vowel suffixes."
+      }
+    ],
+    "growth": 0.839
   }
 }

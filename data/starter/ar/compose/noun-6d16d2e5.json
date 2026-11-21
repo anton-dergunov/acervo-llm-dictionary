@@ -68,6 +68,75 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "father",
+    "primaryGloss": "father",
+    "emotion": "warm and respectful, speaking of a beloved family member",
+    "notes": [
+      "Plural: آبَاء (ʔābāʔ). The dual أَبَوَان (ʔabawān) means 'parents'.",
+      "One of the 'five nouns' (الأَسْمَاء الخَمْسَة): takes long-vowel case endings before a noun or suffix (أَبُو / أَبَا / أَبِي), except with 'my': أَبِي (ʔabī, 'my father')."
+    ],
+    "senses": [
+      {
+        "id": "65hkoq1s64plm1j",
+        "order": 0,
+        "definition": "A male parent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "father",
+              "dad"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨‍👧",
+        "examples": [
+          {
+            "id": "tzolo0yo93bcu5e",
+            "text": "هَذَا أَبِي.",
+            "textLang": "ar",
+            "translation": "This is my father.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and affectionate, introducing a family member",
+            "note": null,
+            "matchedForm": "أَبِي",
+            "matchedTranslationForm": "father"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَب",
+    "lemma": "أَب",
+    "reading": null,
+    "ipa": "/ʔab/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "father; parent",
     "primaryGloss": "father",
     "emotion": "warm and respectful, speaking of a beloved family member",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the irregular long-vowel inflection in construct/pronoun forms (أبو / أبا / أبي) and the broken plural (آباء)."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "father, dad, parent",
+        "why": "Singular أَب means 'father', not gender-neutral 'parent' (though dual أَبَوَان means 'parents')."
+      }
+    ],
+    "growth": 1.623
   }
 }

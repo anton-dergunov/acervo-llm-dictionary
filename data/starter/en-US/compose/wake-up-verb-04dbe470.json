@@ -70,6 +70,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "despertarse; despertar",
+    "primaryGloss": "despertarse",
+    "emotion": null,
+    "notes": [
+      "Es un verbo irregular: el pasado es 'woke up' y el participio es 'woken up'.",
+      "Cuando despiertas a otra persona, es separable; si usas un pronombre, debe ir en medio: 'wake him up' (despiértalo).",
+      "No lo confundas con 'get up', que significa levantarse de la cama."
+    ],
+    "senses": [
+      {
+        "id": "p13k0qgvetm9isx",
+        "order": 0,
+        "definition": "Dejar de estar dormido.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "despertarse"
+            ]
+          }
+        ],
+        "domain": "sueño",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "5tfendpfyz9di3y",
+            "text": "I wake up at seven every morning.",
+            "textLang": "en",
+            "translation": "Me despierto a las siete cada mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rutinario y constante, como alguien que cuenta su hábito diario con total naturalidad",
+            "note": null,
+            "matchedForm": "wake up",
+            "matchedTranslationForm": "Me despierto"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h0z1hqbu5b8wg4t",
+        "order": 1,
+        "definition": "Hacer que alguien deje de dormir.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "despertar"
+            ]
+          }
+        ],
+        "domain": "causativo",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "zipezt7w683c1s2",
+            "text": "Please wake me up at eight o'clock.",
+            "textLang": "en",
+            "translation": "Por favor, despiértame a las ocho.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "despiértame"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "wake up",
+    "lemma": "wake up",
+    "reading": null,
+    "ipa": "/ˈweɪk ʌp/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "despertarse; animarse",
     "primaryGloss": "despertarse",
     "emotion": null,
@@ -162,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday transitive sense 'to wake someone up' (despertar a alguien), which is even mentioned in note 0."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(animarse) Empezar a estar más atento o activo",
+        "why": "Figurative sense is marginal for A2; the example 'The party started to wake up' is unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "The party started to wake up after the music changed.",
+        "why": "Parties do not 'wake up' in natural English ('liven up' is used)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention irregular past forms 'woke up' / 'woken up'."
+      }
+    ],
+    "growth": 0.793
   }
 }

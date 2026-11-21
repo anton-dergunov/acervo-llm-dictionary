@@ -58,6 +58,75 @@
     "headword": "싸다",
     "lemma": "싸다",
     "reading": null,
+    "ipa": "s͈ada",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cheap; inexpensive",
+    "primaryGloss": "cheap",
+    "emotion": "satisfied and pleased, noting a good deal while shopping",
+    "notes": [
+      "Before a noun, conjugate as 싼 (e.g., 싼 값 'a cheap price').",
+      "Do not confuse with the verb 싸다 ('to wrap; to pack'), which conjugates differently in the present tense (싸다 'is cheap' vs. 싼다 'wraps')."
+    ],
+    "senses": [
+      {
+        "id": "yd6ft71kffsv1ph",
+        "order": 0,
+        "definition": "Costing little money; low in price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "inexpensive"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "42teox1wqy2z7dz",
+            "text": "이 사과는 정말 싸요.",
+            "textLang": "ko",
+            "translation": "This apple is really cheap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, noting a pleasant surprise at the store",
+            "note": null,
+            "matchedForm": "싸요",
+            "matchedTranslationForm": "cheap"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "싸다",
+    "lemma": "싸다",
+    "reading": null,
     "ipa": "/s͈a.da/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To wrap an object in paper or cloth.",
+        "why": "Includes a homograph transitive verb inside an adjective entry, contradicting note[1] and shortGloss."
+      },
+      {
+        "severity": 3,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To cost little money.",
+        "why": "Adjective defined as an infinitive verb instead of a quality."
+      }
+    ],
+    "growth": 0.784
   }
 }

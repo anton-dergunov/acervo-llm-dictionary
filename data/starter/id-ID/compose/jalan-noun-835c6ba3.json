@@ -68,6 +68,139 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "road; street; way",
+    "primaryGloss": "road",
+    "emotion": "straightforward and practical, pointing the way forward",
+    "notes": [
+      "In informal Indonesian, 'jalan' is also used as a verb meaning 'to walk' or 'to work/run' (compare standard 'berjalan'), while 'jalan-jalan' means to go for a stroll or trip."
+    ],
+    "senses": [
+      {
+        "id": "sdgagiyoazu5yp0",
+        "order": 0,
+        "definition": "A path, road, or street prepared for people or vehicles to travel along.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "street",
+              "path",
+              "way"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "b38fu6jki1jt3y5",
+            "text": "Mobil itu melaju kencang di jalan.",
+            "textLang": "id",
+            "translation": "The car was speeding down the road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and cautious, watching the traffic pass",
+            "note": null,
+            "matchedForm": "jalan",
+            "matchedTranslationForm": "road"
+          },
+          {
+            "id": "lnu0vxky8a0vdb5",
+            "text": "Rumah saya terletak di jalan ini.",
+            "textLang": "id",
+            "translation": "My house is located on this street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "welcoming and helpful, giving directions to a neighbor",
+            "note": null,
+            "matchedForm": "jalan",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dh1fppywjg93qcp",
+        "order": 1,
+        "definition": "A method, course of action, or means of achieving something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "method",
+              "means"
+            ]
+          }
+        ],
+        "domain": "method",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "893jqhfqr0hgp8t",
+            "text": "Pasti ada jalan keluar dari masalah ini.",
+            "textLang": "id",
+            "translation": "There must be a way out of this problem.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reassuring and determined, looking for a solution",
+            "note": null,
+            "matchedForm": "jalan",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "jalan",
+    "lemma": "jalan",
+    "reading": null,
+    "ipa": "/ˈdʒalan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "road; street; way; method",
     "primaryGloss": "road",
     "emotion": "straightforward and practical, pointing the way forward",
@@ -204,5 +337,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A road in a town or city with buildings alongside it.",
+        "why": "Indonesian 'jalan' does not distinguish road and street; this reflects English, not Indonesian."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Jalan is used both for physical paths and streets, and for abstract",
+        "why": "Merely restates the senses already listed."
+      }
+    ],
+    "growth": 0.855
   }
 }

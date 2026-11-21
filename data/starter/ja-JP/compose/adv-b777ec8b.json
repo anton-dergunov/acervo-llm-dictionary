@@ -68,6 +68,138 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "often; well, thoroughly",
+    "primaryGloss": "often",
+    "emotion": null,
+    "notes": [
+      "The adverbial form of いい / よい (good). Usually written in hiragana.",
+      "For skill at an activity (e.g., speaking a language well), use 上手に (じょうずに) rather than よく."
+    ],
+    "senses": [
+      {
+        "id": "y71i95694hgvwlt",
+        "order": 0,
+        "definition": "Many times; on many occasions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "uq5awarjdkfz5xj",
+            "text": "よく映画を見に行きます。",
+            "textLang": "ja",
+            "translation": "I often go to watch movies.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing a personal habit",
+            "note": null,
+            "matchedForm": "よく",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e6htfx3bhm0lq11",
+        "order": 1,
+        "definition": "In a good, thorough, or careful way; to a high degree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "well",
+              "thoroughly",
+              "closely"
+            ]
+          }
+        ],
+        "domain": "manner",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "3q50mzrlp8fdg1a",
+            "text": "昨夜はよく寝ました。",
+            "textLang": "ja",
+            "translation": "I slept well last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "よく",
+            "matchedTranslationForm": "well"
+          },
+          {
+            "id": "afs58shfuz09sry",
+            "text": "よく見てください。",
+            "textLang": "ja",
+            "translation": "Please look closely.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "よく",
+            "matchedTranslationForm": "closely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "よく",
+    "lemma": "よく",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔁",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "often; well",
     "primaryGloss": "often",
     "emotion": null,
@@ -161,5 +293,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To do something many times; frequently.",
+        "why": "Adverb defined as a verb phrase ('To do something...')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To do something in a good way; skillfully.",
+        "why": "Adverb defined as a verb phrase ('To do something...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "彼は日本語をよく話します。",
+        "why": "Unnatural; means 'he speaks Japanese often', whereas 'well' is じょうずに (jōzu ni)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Distinguish between frequency (often) and quality (well).",
+        "why": "Restates the senses without giving actionable grammar or usage advice."
+      }
+    ],
+    "growth": 1.211
   }
 }

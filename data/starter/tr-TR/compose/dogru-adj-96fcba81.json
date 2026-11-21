@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "correct; true; straight",
+    "primaryGloss": "correct",
+    "emotion": "confident and reassuring, certain of the facts",
+    "notes": [
+      "Also used as an adverb meaning 'straight' (Doğru git — Go straight) and, after the dative case (-e/-a), as a postposition meaning 'towards' in space or time (eve doğru — towards home; akşama doğru — towards evening)."
+    ],
+    "senses": [
+      {
+        "id": "8ib5lobrpmjqw8u",
+        "order": 0,
+        "definition": "Free from error; matching the facts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "true",
+              "right"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "90q6tnj6xez40lr",
+            "text": "Bu bilgi tamamen doğru.",
+            "textLang": "tr",
+            "translation": "This information is completely correct.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nodding in agreement, pleased that things are accurate",
+            "note": null,
+            "matchedForm": "doğru",
+            "matchedTranslationForm": "correct"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ud2snb7axi1nvy6",
+        "order": 1,
+        "definition": "Going in one direction without bending or curving.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "straight",
+              "direct"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "izlrwis6g4ehr8k",
+            "text": "Kağıda doğru bir çizgi çizdi.",
+            "textLang": "tr",
+            "translation": "She drew a straight line on the paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "doğru",
+            "matchedTranslationForm": "straight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "doğru",
+    "lemma": "doğru",
+    "reading": null,
+    "ipa": "/doːˈɾu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "correct; straight; towards",
     "primaryGloss": "correct",
     "emotion": "confident and reassuring, certain of the facts",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "correct; straight; towards",
+        "why": "Includes 'towards' (a postposition), which is not covered in the adjective senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bu yolu takip et, sonra doğru git.",
+        "why": "'doğru git' uses 'doğru' as an adverb ('go straight'), not an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with sol (left) or yanlış (wrong).",
+        "why": "Unhelpful filler; 'sol' means left and 'yanlış' is simply the antonym."
+      }
+    ],
+    "growth": 0.9
   }
 }

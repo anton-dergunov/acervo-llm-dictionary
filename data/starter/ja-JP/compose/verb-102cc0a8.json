@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "弾く",
     "lemma": "弾く",
+    "reading": "ひく",
+    "ipa": "çi̥kɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎹",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to play (a string or keyboard instrument)",
+    "primaryGloss": "to play",
+    "emotion": "focused and absorbed in the melody, finding a quiet rhythm",
+    "notes": [
+      "Godan verb (弾かない, 弾きます, 弾いて). Used for stringed and keyboard instruments (ギター, ピアノ, バイオリン); wind instruments take 吹く (ふく) and drums take たたく.",
+      "The same kanji 弾く is also read はじく, a different verb meaning 'to flick; to repel'."
+    ],
+    "senses": [
+      {
+        "id": "uu1v3e4o0yypwvw",
+        "order": 0,
+        "definition": "To play a stringed or keyboard musical instrument.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play",
+              "to strum"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎹",
+        "examples": [
+          {
+            "id": "taen5yfmn6g720f",
+            "text": "ピアノを弾くのが好きです。",
+            "textLang": "ja",
+            "translation": "I like playing the piano.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a personal hobby",
+            "note": null,
+            "matchedForm": "弾く",
+            "matchedTranslationForm": "playing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "弾く",
+    "lemma": "弾く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To hit or snap something with your finger, or to repel",
+        "why": "Conflates ひく (play) with a different verb はじく (flick, repel) written with the same kanji."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "指でデコピンを弾く。",
+        "why": "Ungrammatical collocation (one says デコピンをする) and uses the wrong verb (はじく)."
+      }
+    ],
+    "growth": 0.59
   }
 }

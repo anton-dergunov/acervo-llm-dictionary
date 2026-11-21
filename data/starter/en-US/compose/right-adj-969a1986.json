@@ -68,6 +68,156 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "correcto; derecho; adecuado",
+    "primaryGloss": "correcto",
+    "emotion": "confident and certain, as if confirming a fact without hesitation",
+    "notes": [
+      "La letra 'gh' es muda; se pronuncia exactamente igual que el verbo 'write' (/raɪt/)."
+    ],
+    "senses": [
+      {
+        "id": "x646tfyfrc0ht9j",
+        "order": 0,
+        "definition": "Que es verdadero, exacto o no tiene errores.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "correcto",
+              "cierto"
+            ]
+          }
+        ],
+        "domain": "exactitud",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "r4c9qklk25wt3h0",
+            "text": "Your answer is right.",
+            "textLang": "en",
+            "translation": "Tu respuesta es correcta.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and positive, like a teacher confirming a good result",
+            "note": null,
+            "matchedForm": "right",
+            "matchedTranslationForm": "correcta"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3rfvjuqo2g112un",
+        "order": 1,
+        "definition": "Situado en el lado opuesto al izquierdo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "derecho"
+            ]
+          }
+        ],
+        "domain": "dirección",
+        "emoji": "➡️",
+        "examples": [
+          {
+            "id": "xzju43v2t0txlrb",
+            "text": "Hold the pen in your right hand.",
+            "textLang": "en",
+            "translation": "Sostén el bolígrafo con la mano derecha.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "right",
+            "matchedTranslationForm": "derecha"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "453b3g4sfh78f4m",
+        "order": 2,
+        "definition": "Que es el más apropiado o conveniente para una persona o situación.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "adecuado",
+              "indicado",
+              "correcto"
+            ]
+          }
+        ],
+        "domain": "idoneidad",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "cb3w2n9roxvjoxc",
+            "text": "She is the right person for the job.",
+            "textLang": "en",
+            "translation": "Ella es la persona adecuada para el trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "right",
+            "matchedTranslationForm": "adecuada"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "right",
+    "lemma": "right",
+    "reading": null,
+    "ipa": "/raɪt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "correcto; a la derecha",
     "primaryGloss": "correcto",
     "emotion": "confident and certain, as if confirming a fact without hesitation",
@@ -159,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Turn right at the corner.",
+        "why": "In 'Turn right', 'right' is an adverb, not an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "correcto; a la derecha",
+        "why": "'A la derecha' translates the adverb, whereas the entry is for the adjective ('derecho')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "En inglés, 'right' es una palabra muy común con varios significados.",
+        "why": "Restates the senses without adding grammatical or usage information."
+      }
+    ],
+    "growth": 1.15
   }
 }

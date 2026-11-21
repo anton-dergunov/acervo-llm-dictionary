@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to catch",
+    "primaryGloss": "to catch",
+    "emotion": "focused and alert, reaching out to grab a moving object in time",
+    "notes": [
+      "Imperfective; the perfective pair is 'поймать'. Note the 'л' inserted in the 'я' form: 'я ловлю' (but 'ты ловишь').",
+      "Used in common phrases like 'ловить рыбу' (to fish / catch fish) and 'ловить такси' (to hail a cab)."
+    ],
+    "senses": [
+      {
+        "id": "uwbndli98ebbyx6",
+        "order": 0,
+        "definition": "To capture or try to capture a moving object, person, or animal, or to hail a vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to catch",
+              "to trap"
+            ]
+          }
+        ],
+        "domain": "capture",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "qfb5mksd2iksz05",
+            "text": "Собака любит ловить мяч на лету.",
+            "textLang": "ru",
+            "translation": "The dog loves catching the ball in mid-air.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ловить",
+            "matchedTranslationForm": "catching"
+          },
+          {
+            "id": "ho5zkv2fpovb2u3",
+            "text": "Мы любим ловить рыбу на озере летом.",
+            "textLang": "ru",
+            "translation": "We love catching fish at the lake in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and patient, sitting by the quiet water",
+            "note": null,
+            "matchedForm": "ловить",
+            "matchedTranslationForm": "catching"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "ловить",
+    "lemma": "ловить",
+    "reading": null,
+    "ipa": "/ɫɐˈvʲitʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎣",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to catch; to grab",
     "primaryGloss": "catch",
     "emotion": "focused and alert, reaching out to grab a moving object in time",
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(fishing) To try to catch fish or animals",
+        "why": "'Ловить рыбу' literally means 'to catch fish'; 'ловить' alone does not mean 'to fish'."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "fish, hunt",
+        "why": "'Ловить' alone does not mean 'to fish' or 'to hunt'; it requires an object."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он пытался ловить мяч на лету.",
+        "why": "After 'пытался' for a single ball, perfective 'поймать' is natural, not 'ловить'."
+      }
+    ],
+    "growth": 0.976
   }
 }

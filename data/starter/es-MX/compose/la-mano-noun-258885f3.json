@@ -68,6 +68,132 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand; coat of paint",
+    "primaryGloss": "hand",
+    "emotion": "warm and friendly, reaching out to greet someone",
+    "notes": [
+      "Although it ends in '-o', 'mano' is feminine ('la mano', 'las manos', 'la mano derecha')."
+    ],
+    "senses": [
+      {
+        "id": "ktxjfut4lp5acob",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm that includes the fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "glhw5at1ow198y3",
+            "text": "Levantó la mano para hacer una pregunta.",
+            "textLang": "es",
+            "translation": "He raised his hand to ask a question.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and attentive, wanting to speak in class",
+            "note": null,
+            "matchedForm": "mano",
+            "matchedTranslationForm": "hand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ct3rv07p4utks7t",
+        "order": 1,
+        "definition": "A layer of paint or varnish applied to a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coat",
+              "layer"
+            ]
+          }
+        ],
+        "domain": "painting",
+        "emoji": "🖌️",
+        "examples": [
+          {
+            "id": "mqamzfym1tdfrf3",
+            "text": "La pared necesita otra mano de pintura.",
+            "textLang": "es",
+            "translation": "The wall needs another coat of paint.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and critical, inspecting the unfinished work",
+            "note": null,
+            "matchedForm": "mano",
+            "matchedTranslationForm": "coat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "ktxjfut4lp5acob",
+      "from": "Parte del cuerpo en el extremo del brazo que incluye los dedos.",
+      "to": "The part of the body at the end of the arm that includes the fingers.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:09Z"
+    },
+    {
+      "sense": "ct3rv07p4utks7t",
+      "from": "Capa de pintura que se da a una superficie.",
+      "to": "A layer of paint applied to a surface.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:09Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la mano",
+    "lemma": "mano",
+    "reading": null,
+    "ipa": "/ˈmano/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; coat of paint; handle",
     "primaryGloss": "hand",
     "emotion": "warm and friendly, reaching out to greet someone",
@@ -160,22 +286,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "ktxjfut4lp5acob",
-      "from": "Parte del cuerpo en el extremo del brazo que incluye los dedos.",
-      "to": "The part of the body at the end of the arm that includes the fingers.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:09Z"
-    },
-    {
-      "sense": "ct3rv07p4utks7t",
-      "from": "Capa de pintura que se da a una superficie.",
-      "to": "A layer of paint applied to a surface.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:09Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "Aunque termina en -o, 'mano' es un sustantivo femenino",
+        "why": "Note is written in Spanish instead of English."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hand; coat of paint; handle",
+        "why": "'handle' is not in the senses and is not a standard meaning of 'mano'."
+      }
+    ],
+    "growth": 0.873
+  }
 }

@@ -70,6 +70,95 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "river",
+    "primaryGloss": "river",
+    "emotion": "wide and steady, a calm flow through the landscape",
+    "notes": [
+      "Takes the measure word 条 (tiáo), e.g., 一条河 (a river).",
+      "河 is the general everyday word for a river, while 江 (jiāng) is typically used in the names of very large rivers, such as 长江 (the Yangtze River)."
+    ],
+    "senses": [
+      {
+        "id": "es121imi24bfqp4",
+        "order": 0,
+        "definition": "A large natural flow of water moving across land toward the sea, a lake, or another river.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "river"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "河",
+        "examples": [
+          {
+            "id": "q4slv7wxvbiw0gj",
+            "text": "这条河很长。",
+            "textLang": "zh",
+            "translation": "This river is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, pointing out something obvious about the landscape",
+            "note": null,
+            "matchedForm": "河",
+            "matchedTranslationForm": "river"
+          },
+          {
+            "id": "lmo8dadto4anoyy",
+            "text": "我们去河边散步。",
+            "textLang": "zh",
+            "translation": "We are going to take a walk by the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and pleasant, looking forward to a peaceful afternoon",
+            "note": null,
+            "matchedForm": "河",
+            "matchedTranslationForm": "river"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "河",
+    "lemma": "河",
+    "reading": "hé",
+    "ipa": "/xɤ˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "河",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "river; stream",
     "primaryGloss": "river",
     "emotion": "wide and steady, a calm flow through the landscape",
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "river; stream",
+        "why": "Includes 'stream', which is absent from the sense glosses and contradicted by the note."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'hé' (河) is the standard word for a river that flows into",
+        "why": "Many rivers called 河 are inland tributaries and do not flow directly into the sea."
+      }
+    ],
+    "growth": 0.902
   }
 }

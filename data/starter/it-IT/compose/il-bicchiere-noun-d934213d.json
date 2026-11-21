@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "glass, glassful",
+    "primaryGloss": "glass",
+    "emotion": "thirsty and reaching for a drink at the table",
+    "notes": [
+      "Refers to a drinking vessel. Do not confuse with 'il vetro', which is the material (glass) or a windowpane."
+    ],
+    "senses": [
+      {
+        "id": "xrsvo75ljju0n9r",
+        "order": 0,
+        "definition": "A small container, usually made of glass or plastic, used for drinking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glass",
+              "drinking glass"
+            ]
+          }
+        ],
+        "domain": "tableware",
+        "emoji": "🥛",
+        "examples": [
+          {
+            "id": "rotacfaezwiuf9m",
+            "text": "Attento, è caduto un bicchiere e si è rotto.",
+            "textLang": "it",
+            "translation": "Careful, a glass fell and broke.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bicchiere",
+            "matchedTranslationForm": "glass"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wba87tjmgg7k0xf",
+        "order": 1,
+        "definition": "The amount of liquid that a drinking glass holds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glass",
+              "glassful"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "kket3hmt361i8sz",
+            "text": "Prendo un bicchiere d'acqua fresca, grazie.",
+            "textLang": "it",
+            "translation": "I'll have a glass of cool water, thank you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bicchiere",
+            "matchedTranslationForm": "glass"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il bicchiere",
+    "lemma": "bicchiere",
+    "reading": null,
+    "ipa": "/bikˈkjɛ.re/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥛",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "glass; drink",
     "primaryGloss": "glass",
     "emotion": "thirsty and reaching for a drink at the table",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Prendo un bicchiere d'acqua fresca.",
+        "why": "'Un bicchiere d'acqua' illustrates the quantity sense, not the physical vessel."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "glass; drink",
+        "why": "'Drink' is not in the glosses; both senses translate as 'glass'."
+      }
+    ],
+    "growth": 1.093
   }
 }

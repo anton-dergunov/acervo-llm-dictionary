@@ -58,6 +58,74 @@
     "headword": "trứng",
     "lemma": "trứng",
     "reading": null,
+    "ipa": "/tɕɨŋ˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "egg",
+    "primaryGloss": "egg",
+    "emotion": "simple and everyday, like opening the carton for breakfast",
+    "notes": [
+      "Counted with the classifier quả (in the North) or trái (in the South): một quả trứng (one egg).",
+      "Followed by the name of the animal to specify the type, such as trứng gà (chicken egg) or trứng vịt (duck egg)."
+    ],
+    "senses": [
+      {
+        "id": "9m6xuu0j9vw9cts",
+        "order": 0,
+        "definition": "The oval object laid by a female bird, reptile, or fish, especially a hen's egg eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "egg"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥚",
+        "examples": [
+          {
+            "id": "ltn67vhyqyiaais",
+            "text": "Tôi ăn hai quả trứng vào buổi sáng.",
+            "textLang": "vi",
+            "translation": "I eat two eggs in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a warm breakfast",
+            "note": null,
+            "matchedForm": "trứng",
+            "matchedTranslationForm": "eggs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "trứng",
+    "lemma": "trứng",
+    "reading": null,
     "ipa": "/trɨŋ˧˥/",
     "pos": "noun",
     "gender": null,
@@ -138,5 +206,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/trɨŋ˧˥/",
+        "why": "Hanoi 'tr' is pronounced /tɕ/, not /tr/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The oval cell from which a female animal or human develops",
+        "why": "Technical biological sense ('ovum') is unnecessary for an A2 entry; one sense covers 'egg'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the common classifiers 'quả' (Northern) and 'trái' (Southern)."
+      }
+    ],
+    "growth": 0.935
   }
 }

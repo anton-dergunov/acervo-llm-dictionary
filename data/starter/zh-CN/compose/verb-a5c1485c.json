@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to hug; to hold in one's arms",
+    "primaryGloss": "hug",
+    "emotion": "warm and welcoming, reaching out with affection",
+    "notes": [
+      "Do not confuse with 拿 (ná), which means holding or carrying something in one's hand rather than cradled in the arms."
+    ],
+    "senses": [
+      {
+        "id": "udkr1qshfplvog6",
+        "order": 0,
+        "definition": "To put your arms around someone to show love, affection, or comfort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hug",
+              "embrace",
+              "hold close"
+            ]
+          }
+        ],
+        "domain": "hug",
+        "emoji": "🫂",
+        "examples": [
+          {
+            "id": "rvxynj0eulsy2le",
+            "text": "妈妈抱了我一下。",
+            "textLang": "zh",
+            "translation": "Mom gave me a hug.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and safe, feeling entirely loved and cared for",
+            "note": null,
+            "matchedForm": "抱",
+            "matchedTranslationForm": "hug"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "drdfvfecq4dv362",
+        "order": 1,
+        "definition": "To carry or hold someone or something in your arms against your chest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hold in arms",
+              "carry",
+              "cradle"
+            ]
+          }
+        ],
+        "domain": "carry",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "vi3mjcl1x6oqufk",
+            "text": "他怀里抱着一大堆书。",
+            "textLang": "zh",
+            "translation": "He is holding a big pile of books in his arms.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "抱",
+            "matchedTranslationForm": "holding"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "抱",
+    "lemma": "抱",
+    "reading": "bào",
+    "ipa": "/pau̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to hold; to hug; to carry in arms",
     "primaryGloss": "hug",
     "emotion": "warm and welcoming, reaching out with affection",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "他手里抱著一大堆书。",
+        "why": "Uses traditional character 著 instead of simplified 着, and 手里 ('in hand') contradicts 抱 ('in arms')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for wrapping one's arms around another person in a hug",
+        "why": "Merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 1.01
   }
 }

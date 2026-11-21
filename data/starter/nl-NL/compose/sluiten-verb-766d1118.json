@@ -72,6 +72,138 @@
     "primaryGloss": "close",
     "emotion": "focused and practical, getting things done around the house",
     "notes": [
+      "Irregular (strong) verb: sloot, hebben/zijn gesloten.",
+      "In everyday speech, 'dichtdoen' is often preferred for physically closing doors or windows, while 'sluiten' sounds slightly more formal or is used for opening hours ('De winkel sluit om zes uur')."
+    ],
+    "senses": [
+      {
+        "id": "wfqdv35nso1b9gi",
+        "order": 0,
+        "definition": "To move so that an opening is covered, or to stop being open for business.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "close",
+              "shut"
+            ]
+          }
+        ],
+        "domain": "closing",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "qru3zkzoaauqzgq",
+            "text": "Kun je alsjeblieft de deur sluiten?",
+            "textLang": "nl",
+            "translation": "Can you please close the door?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, asking for a simple favor",
+            "note": null,
+            "matchedForm": "sluiten",
+            "matchedTranslationForm": "close"
+          },
+          {
+            "id": "ecsjx83tap8h1s4",
+            "text": "De supermarkt sluit om acht uur.",
+            "textLang": "nl",
+            "translation": "The supermarket closes at eight o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sluit",
+            "matchedTranslationForm": "closes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5ocjpi85iq92p8r",
+        "order": 1,
+        "definition": "To reach or make an official agreement, deal, or peace.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "conclude",
+              "enter into",
+              "make"
+            ]
+          }
+        ],
+        "domain": "agreement",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "78m125rbwwguyzf",
+            "text": "De bedrijven gaan een nieuw contract sluiten.",
+            "textLang": "nl",
+            "translation": "The companies are going to conclude a new contract.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "businesslike and professional",
+            "note": null,
+            "matchedForm": "sluiten",
+            "matchedTranslationForm": "conclude"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "sluiten",
+    "lemma": "sluiten",
+    "reading": null,
+    "ipa": "/ˈslœy.tə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to close; to shut; to conclude",
+    "primaryGloss": "close",
+    "emotion": "focused and practical, getting things done around the house",
+    "notes": [
       "Use 'sluiten' for doors, windows, and shops. It is also used in formal contexts like signing a deal ('een contract sluiten').",
       "Do not confuse with 'dichtmaken', which usually means to seal or fasten something physically."
     ],
@@ -161,5 +293,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'sluiten' for doors, windows, and shops. It is also used",
+        "why": "restates the senses while omitting the strong past forms ('sloot', 'gesloten') and everyday synonym 'dichtdoen'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To move something so that an opening, door, or window is",
+        "why": "only covers the transitive use; 'sluiten' is also very commonly intransitive ('De winkel sluit')."
+      }
+    ],
+    "growth": 1.231
   }
 }

@@ -72,6 +72,114 @@
     "primaryGloss": "skin",
     "emotion": "warm and tactile, touching one's own arm",
     "notes": [
+      "The broken plural is جُلُود (julūd)."
+    ],
+    "senses": [
+      {
+        "id": "1mmdrybvdst9ld6",
+        "order": 0,
+        "definition": "The outer covering of the human or animal body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skin",
+              "hide"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "rir3k79jzg58kcb",
+            "text": "الْجِلْدُ يَحْمِي الْجِسْمَ مِنَ الْحَرَارَةِ وَالْبَرْدِ.",
+            "textLang": "ar",
+            "translation": "The skin protects the body from heat and cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "educational and calm, explaining a basic fact",
+            "note": null,
+            "matchedForm": "الْجِلْدُ",
+            "matchedTranslationForm": "skin"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dj773ps5hx6mom7",
+        "order": 1,
+        "definition": "The treated hide of an animal used to make clothes, shoes, or bags.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leather"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "l23w2g483flat6o",
+            "text": "اشْتَرَيْتُ حِذَاءً مِنَ الْجِلْدِ.",
+            "textLang": "ar",
+            "translation": "I bought leather shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْجِلْدِ",
+            "matchedTranslationForm": "leather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جِلْد",
+    "lemma": "جِلْد",
+    "reading": null,
+    "ipa": "/d͡ʒild/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "skin; leather",
+    "primaryGloss": "skin",
+    "emotion": "warm and tactile, touching one's own arm",
+    "notes": [
       "Used for both human skin and animal hide or leather."
     ],
     "senses": [
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both human skin and animal hide or leather.",
+        "why": "Merely restates the two senses and glosses; better to note the broken plural."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "اشْتَرَيْتُ حِذَاءً مِنْ جِلْدِ.",
+        "why": "Wrong case vowel on 'جِلْدِ'; indefinite genitive requires tanwin (جِلْدٍ)."
+      }
+    ],
+    "growth": 0.942
   }
 }

@@ -68,6 +68,116 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "already; for (a period of time)",
+    "primaryGloss": "already",
+    "emotion": "surprised and pleased that something happened sooner than expected",
+    "notes": [
+      "With a present-tense verb and a time period, 'al' expresses how long something has been going on (English uses 'have been ... for').",
+      "As a determiner before a word like 'de', 'het', or 'mijn', 'al' means 'all' (e.g., 'al het water' — all the water)."
+    ],
+    "senses": [
+      {
+        "id": "ra8kof11g2cjq40",
+        "order": 0,
+        "definition": "Before now, or earlier than expected.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "earlier",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "6xj6c6n6h28l5ed",
+            "text": "Ben je al klaar?",
+            "textLang": "nl",
+            "translation": "Are you ready already?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and impatient, waiting for someone to finish",
+            "note": null,
+            "matchedForm": "al",
+            "matchedTranslationForm": "already"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b8ccc1f662o8gt2",
+        "order": 1,
+        "definition": "Used with a time period to show how long a situation has lasted up to now.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "for",
+              "already for"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "g5haq4qcvh1wh8h",
+            "text": "Ik woon al drie jaar in Utrecht.",
+            "textLang": "nl",
+            "translation": "I have been living in Utrecht for three years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "al",
+            "matchedTranslationForm": "for"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "al",
+    "lemma": "al",
+    "reading": null,
+    "ipa": "/ɑl/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "already; even; all",
     "primaryGloss": "already",
     "emotion": "surprised and pleased that something happened sooner than expected",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Al regen ik het, we gaan toch.",
+        "why": "Completely ungrammatical gibberish in Dutch ('Even if I rain it')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Used for emphasis to mean even or each.",
+        "why": "Confuses conjunction 'al' (even though) with determiner 'al' (all); adverb 'al' also means 'for [duration]'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'al' when an action or event happens earlier than",
+        "why": "merely restates the definition and gloss of sense 0."
+      }
+    ],
+    "growth": 1.388
   }
 }

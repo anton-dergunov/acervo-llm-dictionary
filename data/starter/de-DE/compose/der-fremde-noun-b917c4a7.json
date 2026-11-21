@@ -68,6 +68,96 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "stranger, outsider",
+    "primaryGloss": "stranger",
+    "emotion": "guarded and observant, noting the presence of someone unknown",
+    "notes": [
+      "Declines like an adjective: 'der Fremde', but 'ein Fremder' (masculine) and 'eine Fremde' (feminine).",
+      "For someone from another country (a foreigner), use 'der Ausländer'."
+    ],
+    "senses": [
+      {
+        "id": "8ttfw2gwguit0vz",
+        "order": 0,
+        "definition": "A person you do not know, or who is not from the place where they are.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stranger",
+              "outsider"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "hotqn0dnjtnymab",
+            "text": "Ich spreche nie mit Fremden auf der Straße.",
+            "textLang": "de",
+            "translation": "I never talk to strangers on the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Fremden",
+            "matchedTranslationForm": "strangers"
+          },
+          {
+            "id": "97hg6p6fs74t2qr",
+            "text": "Er fühlt sich hier noch wie ein Fremder.",
+            "textLang": "de",
+            "translation": "He still feels like an outsider here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Fremder",
+            "matchedTranslationForm": "outsider"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Fremde",
+    "lemma": "Fremde",
+    "reading": null,
+    "ipa": "/ˈfʁɛmdə/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "stranger; foreigner",
     "primaryGloss": "stranger",
     "emotion": "guarded and observant, noting the presence of someone unknown",
@@ -159,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing crucial grammar note: adjectival noun ('ein Fremder' without definite article)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the difference between 'der Fremde' (a stranger or foreigner) and 'fremd'",
+        "why": "Explains basic noun vs. adjective difference instead of adjectival noun declension."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A person who comes from another country.",
+        "why": "Means someone unfamiliar/not from here ('outsider'); 'Ausländer' is used for foreign nationality."
+      }
+    ],
+    "growth": 0.856
   }
 }

@@ -74,6 +74,156 @@
     "primaryGloss": "light",
     "emotion": null,
     "notes": [
+      "The opposite of 'leicht' is 'schwer' in both main senses: 'heavy' (weight) and 'difficult' (effort).",
+      "As an adverb, 'leicht' can also mean 'easily' or 'slightly' (e.g. 'Er ist leicht verletzt' – He is slightly injured)."
+    ],
+    "senses": [
+      {
+        "id": "udej8rw4n0qwsd0",
+        "order": 0,
+        "definition": "Having little physical weight; not heavy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "c5b3j99k1dpfdg1",
+            "text": "Der Koffer ist sehr leicht.",
+            "textLang": "de",
+            "translation": "The suitcase is very light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and relieved that the luggage isn't heavy",
+            "note": null,
+            "matchedForm": "leicht",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "r3a3tckrpijfwo0",
+        "order": 1,
+        "definition": "Not difficult to do or understand; requiring little effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "easy"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "duivszk1damgj5n",
+            "text": "Die Aufgabe ist ziemlich leicht.",
+            "textLang": "de",
+            "translation": "The task is quite easy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and unbothered, as if explaining something obvious",
+            "note": null,
+            "matchedForm": "leicht",
+            "matchedTranslationForm": "easy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s3xp665sy1gxh78",
+        "order": 2,
+        "definition": "Small in degree or intensity; mild or not heavy (of food, rain, illness, etc.).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slight",
+              "mild",
+              "light"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ib4bu1un7io25k2",
+            "text": "Ich habe leichte Kopfschmerzen.",
+            "textLang": "de",
+            "translation": "I have a slight headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "leichte",
+            "matchedTranslationForm": "slight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "leicht",
+    "lemma": "leicht",
+    "reading": null,
+    "ipa": "/laɪ̯çt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "light; easy; slight",
+    "primaryGloss": "light",
+    "emotion": null,
+    "notes": [
       "Use 'leicht' for both weight (a light box) and difficulty (an easy task).",
       "Don't confuse 'leicht' (easy) with 'einfach' (simple). 'Einfach' usually suggests something is not complex, while 'leicht' specifically means it doesn't take much effort or strength."
     ],
@@ -161,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "light; easy; slight",
+        "why": "'slight' is in shortGloss, and 'leicht' (slight/mild) is a common A2 sense missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'leicht' for both weight (a light box) and difficulty",
+        "why": "Restates the two main senses without adding usage information."
+      }
+    ],
+    "growth": 1.325
   }
 }

@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "bread",
+    "primaryGloss": "bread",
+    "emotion": "warm and comforting, smelling fresh from the oven",
+    "notes": [
+      "When a suffix starting with a vowel is added, the final 'k' softens to 'ğ': 'ekmeği' (the bread).",
+      "Not to be confused with the identical-looking verb 'ekmek' (to sow, to plant)."
+    ],
+    "senses": [
+      {
+        "id": "b6fzuslyfg6gxm9",
+        "order": 0,
+        "definition": "A basic food made from flour, water, and yeast mixed together and baked.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bread",
+              "loaf"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍞",
+        "examples": [
+          {
+            "id": "anlimjmqhopmpak",
+            "text": "Sabah taze ekmek almak için fırına gittim.",
+            "textLang": "tr",
+            "translation": "I went to the bakery in the morning to buy fresh bread.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a warm breakfast",
+            "note": null,
+            "matchedForm": "ekmek",
+            "matchedTranslationForm": "bread"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ekmek",
+    "lemma": "ekmek",
+    "reading": null,
+    "ipa": "/ecˈmec/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍞",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "bread; to sow",
     "primaryGloss": "bread",
     "emotion": "warm and comforting, smelling fresh from the oven",
@@ -159,5 +228,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "(agriculture) To plant seeds in the ground.",
+        "why": "Entry POS is noun, but sense 1 is the homonymous verb 'ekmek' (to sow)."
+      }
+    ],
+    "growth": 0.819
   }
 }

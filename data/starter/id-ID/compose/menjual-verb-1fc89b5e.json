@@ -60,6 +60,74 @@
     "headword": "menjual",
     "lemma": "jual",
     "reading": null,
+    "ipa": "/mənˈdʒu.al/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "sell",
+    "emotion": "energetic and persuasive, pitching an item to a customer",
+    "notes": [
+      "From the root 'jual', which is often used without the prefix in casual speech and on signs (e.g., Jual pulsa — 'Phone credit for sale'). The passive form 'dijual' means 'for sale'."
+    ],
+    "senses": [
+      {
+        "id": "ut7wbl9u6tq7gex",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "2xcww73sxw87ezv",
+            "text": "Dia menjual mobil lamanya untuk membeli sepeda.",
+            "textLang": "id",
+            "translation": "He sold his old car to buy a bicycle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and matter-of-fact, explaining a simple financial choice",
+            "note": null,
+            "matchedForm": "menjual",
+            "matchedTranslationForm": "sold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "menjual",
+    "lemma": "jual",
+    "reading": null,
     "ipa": "/mənˈjual/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mənˈjual/",
+        "why": "Indonesian 'j' is /dʒ/, not /j/ (which represents 'y'); should be /mənˈdʒu.al/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To be disloyal or betray someone for personal gain.",
+        "why": "Figurative idiom ('menjual teman') is marginal for A2; keep only the core commercial sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Derived from the root word 'jual'.",
+        "why": "Trivial notes; better to mention the passive/spoken root 'jual' and intransitive 'berjualan'."
+      }
+    ],
+    "growth": 0.776
   }
 }

@@ -70,6 +70,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to send; to see off; to spend (time)",
+    "primaryGloss": "to send",
+    "emotion": null,
+    "notes": [
+      "A godan verb (送ります, 送って). Takes を for the thing sent or person escorted, and に or へ for the recipient or destination.",
+      "Often written 贈る (same reading おくる) when sending or giving a gift."
+    ],
+    "senses": [
+      {
+        "id": "vsgicy6gfzwodyg",
+        "order": 0,
+        "definition": "To cause a letter, package, or message to go to a person or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to send",
+              "to mail",
+              "to ship"
+            ]
+          }
+        ],
+        "domain": "sending",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "yzuzewbzbf6nmyx",
+            "text": "友だちに手紙を送りました。",
+            "textLang": "ja",
+            "translation": "I sent a letter to my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and thoughtful, reflecting on a small kindness completed",
+            "note": null,
+            "matchedForm": "送りました",
+            "matchedTranslationForm": "sent"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7o2jwc49df8gwp6",
+        "order": 1,
+        "definition": "To go with someone to a station, airport, or their home to see them off or take them there safely.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see off",
+              "to escort",
+              "to walk (someone) home"
+            ]
+          }
+        ],
+        "domain": "escorting",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "4g59p2wvydwdpsm",
+            "text": "駅まで彼を送った。",
+            "textLang": "ja",
+            "translation": "I saw him off at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and considerate, mindful of the departure",
+            "note": null,
+            "matchedForm": "送った",
+            "matchedTranslationForm": "saw"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "87wwjr2rzl5q85w",
+        "order": 2,
+        "definition": "To pass or spend a period of time living in a certain way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to spend (time)",
+              "to lead (a life)"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "mjmcsj4fsiu1gy2",
+            "text": "楽しい毎日を送っています。",
+            "textLang": "ja",
+            "translation": "I am spending my days happily.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and reflective, enjoying one's current lifestyle",
+            "note": null,
+            "matchedForm": "送っています",
+            "matchedTranslationForm": "spending"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "送る",
+    "lemma": "送る",
+    "reading": "おくる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to send; to escort; to pass (time)",
     "primaryGloss": "send",
     "emotion": null,
@@ -205,5 +358,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "sending a message or signal (発信する)",
+        "why": "送る is the standard everyday word for sending messages and emails; 発信する is technical/formal."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When using it for 'escort', it often implies walking or driving",
+        "why": "Merely restates the definition of sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the homophone 贈る (to give a gift) and godan conjugation."
+      }
+    ],
+    "growth": 0.968
   }
 }

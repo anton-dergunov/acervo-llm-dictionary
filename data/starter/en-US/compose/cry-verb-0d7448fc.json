@@ -75,6 +75,116 @@
     "primaryGloss": "llorar",
     "emotion": "sad and vulnerable, letting the grief out with tears",
     "notes": [
+      "En tercera persona del singular cambia la '-y' por '-ies' ('cries'), y en pasado y participio por '-ied' ('cried').",
+      "Con el sentido de gritar, hoy se usa sobre todo en la expresión 'cry out' o 'cry for help' (gritar pidiendo ayuda); para 'gritar' en general es más común 'shout' o 'yell'."
+    ],
+    "senses": [
+      {
+        "id": "6ffukg0o6fhvqix",
+        "order": 0,
+        "definition": "Derramar lágrimas por tristeza, dolor o emoción.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llorar"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "cdcvfjikehts0f9",
+            "text": "She began to cry when she heard the bad news.",
+            "textLang": "en",
+            "translation": "Ella empezó a llorar cuando escuchó las malas noticias.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "upset and overwhelmed, breaking down in tears",
+            "note": null,
+            "matchedForm": "cry",
+            "matchedTranslationForm": "llorar"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a54iv5z31nul4sn",
+        "order": 1,
+        "definition": "Decir algo en voz muy alta o emitir un grito por dolor, miedo o para pedir ayuda.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "gritar",
+              "exclamar"
+            ]
+          }
+        ],
+        "domain": "voice",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "j8242vpsghn98nt",
+            "text": "Someone was crying for help from the water.",
+            "textLang": "en",
+            "translation": "Alguien estaba gritando pidiendo ayuda desde el agua.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "crying",
+            "matchedTranslationForm": "gritando"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "cry",
+    "lemma": "cry",
+    "reading": null,
+    "ipa": "/kraɪ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "llorar; gritar",
+    "primaryGloss": "llorar",
+    "emotion": "sad and vulnerable, letting the grief out with tears",
+    "notes": [
       "Significa tanto derramar lágrimas como gritar en voz alta. Para el llanto, suele ir seguido de por algo ('to cry over something').",
       "No confundir con 'shout' o 'scream', que se refieren específicamente a gritar con fuerza, mientras que 'cry' como grito suele ser un llanto o un grito de dolor o sorpresa."
     ],
@@ -163,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "The baby started to cry in the middle of the night.",
+        "why": "Example and its translation ('llorar') illustrate sense 0 (weeping), not sense 1 (shouting/calling out)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Significa tanto derramar lágrimas como gritar en voz alta.",
+        "why": "Restates the definitions; better to note the irregular forms 'cries' and 'cried'."
+      }
+    ],
+    "growth": 0.953
   }
 }

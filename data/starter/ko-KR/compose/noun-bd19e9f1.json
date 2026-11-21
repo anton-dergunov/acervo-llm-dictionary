@@ -58,6 +58,74 @@
     "headword": "남자",
     "lemma": "남자",
     "reading": null,
+    "ipa": "namdʑa",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "man; male",
+    "primaryGloss": "man",
+    "emotion": "a simple and direct identification, like pointing someone out in a crowd",
+    "notes": [
+      "Often placed directly before another noun to mean 'male': 남자 친구 (boyfriend), 남자 화장실 (men's restroom), 남자아이 (boy)."
+    ],
+    "senses": [
+      {
+        "id": "10mtjm1c7ognc5a",
+        "order": 0,
+        "definition": "An adult male person, or a person of the male sex.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "man",
+              "male"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "4ay8wruzmclt7tt",
+            "text": "저 남자는 누구예요?",
+            "textLang": "ko",
+            "translation": "Who is that man?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "남자",
+            "matchedTranslationForm": "man"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "남자",
+    "lemma": "남자",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -117,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean a male person; 'masculine' is an adjective gloss for a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "남자는 refers specifically to an adult male.",
+        "why": "Unattached topic particle 는 in English text, and 남자 is also used broadly for 'male'."
+      }
+    ],
+    "growth": 0.814
   }
 }

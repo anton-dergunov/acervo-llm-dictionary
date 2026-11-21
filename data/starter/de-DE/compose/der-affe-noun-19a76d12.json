@@ -72,6 +72,117 @@
     "primaryGloss": "monkey",
     "emotion": "wide-eyed and curious, pointing at an animal in the zoo",
     "notes": [
+      "Weak masculine noun (n-declension): takes '-n' in all cases except the nominative singular (den Affen, plural: die Affen).",
+      "'Affe' covers both monkeys and apes; when a distinction is needed, apes are called 'Menschenaffen'."
+    ],
+    "senses": [
+      {
+        "id": "8a8qvlglbcvtod6",
+        "order": 0,
+        "definition": "An intelligent primate that climbs trees, including both tailed monkeys and larger tailless apes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey",
+              "ape"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "yuemhmb2esq1e1i",
+            "text": "Im Zoo beobachte ich den Affen, wie er auf den Baum klettert.",
+            "textLang": "de",
+            "translation": "At the zoo, I watch the monkey as it climbs the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fascinated and observant, watching a playful animal",
+            "note": null,
+            "matchedForm": "Affen",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6d0a5cy47evrr8p",
+        "order": 1,
+        "definition": "(colloquial) A foolish, annoying, or arrogant person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fool",
+              "jerk",
+              "idiot"
+            ]
+          }
+        ],
+        "domain": "insult",
+        "emoji": "🤡",
+        "examples": [
+          {
+            "id": "ik0xgrezx1gkeaf",
+            "text": "Dieser Typ ist echt ein eingebildeter Affe!",
+            "textLang": "de",
+            "translation": "That guy is really a conceited jerk!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Affe",
+            "matchedTranslationForm": "jerk"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Affe",
+    "lemma": "Affe",
+    "reading": null,
+    "ipa": "/ˈafə/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "monkey; ape",
+    "primaryGloss": "monkey",
+    "emotion": "wide-eyed and curious, pointing at an animal in the zoo",
+    "notes": [
       "While 'Affe' can refer to both monkeys and apes in German, it is most often used for smaller primates with tails.",
       "In colloquial language, calling someone an 'Affe' can be an insult, implying they are acting foolish or silly."
     ],
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "A primate with a long tail that lives in trees",
+        "why": "'Affe' covers both tailed monkeys and tailless apes; the definition and glosses exclude apes."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hör auf, dich wie ein Affe zu benehmen!",
+        "why": "The simile 'wie ein Affe' uses the literal animal sense, not the direct insult."
+      }
+    ],
+    "growth": 1.042
   }
 }

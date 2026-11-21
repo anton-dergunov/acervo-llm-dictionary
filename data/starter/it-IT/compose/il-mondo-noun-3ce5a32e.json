@@ -68,6 +68,134 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "world; sphere",
+    "primaryGloss": "world",
+    "emotion": "wide-eyed and expansive, looking out across a vast horizon",
+    "notes": [
+      "Do not confuse with 'la terra' (the Earth as a planet, or the ground/soil).",
+      "Unlike French 'tout le monde', 'tutto il mondo' means 'the whole world', not 'everybody' (which is 'tutti')."
+    ],
+    "senses": [
+      {
+        "id": "kkto7zsa9eb926y",
+        "order": 0,
+        "definition": "The Earth and all the countries and people on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "world",
+              "earth"
+            ]
+          }
+        ],
+        "domain": "planet",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "qg2fs681myfj8xd",
+            "text": "Vorrei viaggiare in tutto il mondo.",
+            "textLang": "it",
+            "translation": "I would like to travel all over the world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and adventurous, longing for distant horizons",
+            "note": null,
+            "matchedForm": "mondo",
+            "matchedTranslationForm": "world"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rhmsh2bi755wmob",
+        "order": 1,
+        "definition": "A particular area of activity or group of people and their way of life.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "world",
+              "sphere"
+            ]
+          }
+        ],
+        "domain": "sphere",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "e0a7c2fvljab38f",
+            "text": "Lavora nel mondo della moda.",
+            "textLang": "it",
+            "translation": "She works in the fashion world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mondo",
+            "matchedTranslationForm": "world"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "kkto7zsa9eb926y",
+      "from": "La terra e tutti i paesi che la compongono.",
+      "to": "The Earth and all the countries and people on it.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:18Z"
+    },
+    {
+      "sense": "rhmsh2bi755wmob",
+      "from": "L'insieme delle persone o la società.",
+      "to": "All the people in the world or human society in general.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il mondo",
+    "lemma": "mondo",
+    "reading": null,
+    "ipa": "/ˈmon.do/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "world; people; realm",
     "primaryGloss": "world",
     "emotion": "wide-eyed and expansive, looking out across a vast horizon",
@@ -163,22 +291,41 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "kkto7zsa9eb926y",
-      "from": "La terra e tutti i paesi che la compongono.",
-      "to": "The Earth and all the countries and people on it.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:18Z"
-    },
-    {
-      "sense": "rhmsh2bi755wmob",
-      "from": "L'insieme delle persone o la società.",
-      "to": "All the people in the world or human society in general.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tutto il mondo era presente alla festa.",
+        "why": "Calque of French 'tout le monde'; Italian uses 'tutti' for 'everybody at the party'."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "world, everybody, society",
+        "why": "'Il mondo' does not translate to 'everybody' in standard Italian."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "world; people; realm",
+        "why": "'Realm' is not covered in the senses; 'people' is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Il mondo is used both for the physical planet and for society",
+        "why": "Merely restates the definitions of the senses."
+      }
+    ],
+    "growth": 0.975
+  }
 }

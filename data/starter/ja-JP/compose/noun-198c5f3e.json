@@ -74,6 +74,53 @@
     ],
     "status": "active",
     "shortGloss": "sandy beach",
+    "primaryGloss": "sandy beach",
+    "emotion": null,
+    "notes": [
+      "Specifically refers to a beach covered in sand (砂). For the coast or shore in general, whether sandy or rocky, use 海岸 (かいがん)."
+    ],
+    "senses": [
+      {
+        "id": "4afwxci10fg3qs1",
+        "order": 0,
+        "definition": "A stretch of land along the edge of the sea or a lake covered with sand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sandy beach",
+              "beach"
+            ]
+          }
+        ],
+        "domain": "shoreline",
+        "emoji": "🏖️",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "砂浜",
+    "lemma": "砂浜",
+    "reading": "すなはま",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "sandy beach",
     "primaryGloss": "beach",
     "emotion": null,
     "notes": [
@@ -103,5 +150,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "covered with sand or small pebbles.",
+        "why": "Contradicts the word (砂 means sand) and note[0]; 砂浜 is specifically sandy, not pebbled."
+      }
+    ],
+    "growth": 0.734
   }
 }

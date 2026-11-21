@@ -60,6 +60,115 @@
     "headword": "είμαι",
     "lemma": "είμαι",
     "reading": null,
+    "ipa": "/ˈime/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be",
+    "primaryGloss": "to be",
+    "emotion": "matter-of-fact and steady, stating a basic fact",
+    "notes": [
+      "Highly irregular verb with passive-style endings: είμαι, είσαι, είναι, είμαστε, είστε, είναι (past: ήμουν, ήσουν, ήταν...).",
+      "Greek usually omits subject pronouns (εγώ, εσύ, etc.) unless they are emphasized."
+    ],
+    "senses": [
+      {
+        "id": "r9xyl0zarh2sgua",
+        "order": 0,
+        "definition": "To have a particular identity, quality, or condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "identity",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "054xohkzcfuw1x3",
+            "text": "Είμαι δάσκαλος.",
+            "textLang": "el",
+            "translation": "I am a teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Είμαι",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e32glrunnscdi7v",
+        "order": 1,
+        "definition": "To be in a particular place, or to exist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be",
+              "there is"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "8qiko7i0qbbf5gj",
+            "text": "Είμαι στο σπίτι τώρα.",
+            "textLang": "el",
+            "translation": "I am at home now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and settled, describing one's current whereabouts",
+            "note": null,
+            "matchedForm": "Είμαι",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "είμαι",
+    "lemma": "είμαι",
+    "reading": null,
     "ipa": "/ˈimɛ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Εγώ είμαι δάσκαιος.",
+        "why": "Corrupt spelling 'δάσκαιος' instead of 'δάσκαλος' (teacher)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to be; to exist; to be located",
+        "why": "Includes 'to exist' and 'to be located' which are not in sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common verb in Greek, used for identity",
+        "why": "Filler restating the senses, while irregular conjugation and passive morphology are omitted."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Greek uses different verbs for temporary location (βρίσκομαι) and permanent identity (είμαι)",
+        "why": "Misleading contrast with Spanish ser/estar; είμαι is the standard verb for location too."
+      }
+    ],
+    "growth": 0.767
   }
 }

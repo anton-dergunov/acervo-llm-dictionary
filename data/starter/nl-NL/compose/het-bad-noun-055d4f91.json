@@ -72,6 +72,115 @@
     "primaryGloss": "bath",
     "emotion": "relaxed and warm, unwinding at the end of a long day",
     "notes": [
+      "To say 'take a bath', Dutch usually uses 'in bad gaan' (to go in the bath) or 'een bad nemen'.",
+      "The plural 'baden' has a long 'a' sound (/ˈbaːdə(n)/)."
+    ],
+    "senses": [
+      {
+        "id": "leg4llp9mkqf3cn",
+        "order": 0,
+        "definition": "A large, long container that you fill with water and sit in to wash your body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bathtub",
+              "bath"
+            ]
+          }
+        ],
+        "domain": "bathroom",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "ro5ybmzods8vfg0",
+            "text": "De badkamer heeft een douche en een groot bad.",
+            "textLang": "nl",
+            "translation": "The bathroom has a shower and a large bathtub.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bad",
+            "matchedTranslationForm": "bathtub"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qph0n6x255w4xgb",
+        "order": 1,
+        "definition": "An act of washing your body in a bathtub.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bath"
+            ]
+          }
+        ],
+        "domain": "washing",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "p02v4wttzf3f81r",
+            "text": "Ik neem vanavond een lekker warm bad.",
+            "textLang": "nl",
+            "translation": "I am taking a nice warm bath tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bad",
+            "matchedTranslationForm": "bath"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het bad",
+    "lemma": "bad",
+    "reading": null,
+    "ipa": "/bɑt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛁",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "bath; bathtub",
+    "primaryGloss": "bath",
+    "emotion": "relaxed and warm, unwinding at the end of a long day",
+    "notes": [
       "Use 'in bad gaan' when talking about taking a bath.",
       "Do not confuse 'bad' (the bath) with 'bed' (the bed), despite the similar spelling."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik neem vandaag een lekker warm bad.",
+        "why": "'Een bad nemen' means the act of bathing (sense 1), not the physical container (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'bad' (the bath) with 'bed' (the bed)",
+        "why": "Trivial spelling note; the irregular plural 'baden' (with a long 'a') is what learners actually need."
+      }
+    ],
+    "growth": 1.243
   }
 }

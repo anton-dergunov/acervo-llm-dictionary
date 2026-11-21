@@ -57,6 +57,73 @@
     "language": "ja",
     "headword": "島",
     "lemma": "島",
+    "reading": "しま",
+    "ipa": "ɕima",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": "wondering and calm, looking out at the horizon",
+    "notes": [
+      "In island names, 島 is read -shima, -jima, or -tō (e.g., 広島 Hiroshima, 沖縄本島 Okinawa-hontō)."
+    ],
+    "senses": [
+      {
+        "id": "coksd7d67pjz6mr",
+        "order": 0,
+        "definition": "A piece of land completely surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "bcz18e37blk0ktp",
+            "text": "南の島に行きたいです。",
+            "textLang": "ja",
+            "translation": "I want to go to a southern island.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and longing, imagining a relaxing vacation",
+            "note": null,
+            "matchedForm": "島",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "島",
+    "lemma": "島",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji headword is missing its hiragana reading (しま)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "like Hokkaidō or Sado-ga-shima",
+        "why": "北海道 (Hokkaidō) ends in 道, not 島 (-tō), and Sado-ga-shima illustrates -shima, not -tō."
+      }
+    ],
+    "growth": 0.822
   }
 }

@@ -71,6 +71,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "book",
+    "primaryGloss": "book",
+    "emotion": "quiet and absorbed, turning a page in a quiet room",
+    "notes": [
+      "Do not confuse masculine 'le livre' (book) with feminine 'la livre' (pound, a unit of weight of 500 grams or currency)."
+    ],
+    "senses": [
+      {
+        "id": "ogb30ty5pxlrij0",
+        "order": 0,
+        "definition": "A set of printed pages bound together inside a cover to be read.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "book"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "axiiaykq0q8d1wk",
+            "text": "Je lis un livre intéressant ce soir.",
+            "textLang": "fr",
+            "translation": "I am reading an interesting book tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and cozy, enjoying a quiet evening with a story",
+            "note": null,
+            "matchedForm": "livre",
+            "matchedTranslationForm": "book"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le livre",
+    "lemma": "livre",
+    "reading": null,
+    "ipa": "/livʁ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Home",
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "book; pound",
     "primaryGloss": "book",
     "emotion": "quiet and absorbed, turning a page in a quiet room",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A unit of weight equal to approximately 500 grams, used in markets.",
+        "why": "'Pound' is the feminine noun 'la livre', not masculine 'le livre', contradicting the note."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Je voudrais un livre de cerises, s'il vous plaît.",
+        "why": "Ungrammatical gender: 'livre' (pound) is feminine and requires 'une livre', not 'un livre'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "book; pound",
+        "why": "Includes 'pound', which belongs to the feminine noun 'la livre'."
+      }
+    ],
+    "growth": 0.629
   }
 }

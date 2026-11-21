@@ -61,6 +61,117 @@
     "language": "ja",
     "headword": "払う",
     "lemma": "払う",
+    "reading": "はらう",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pay; to brush off",
+    "primaryGloss": "to pay",
+    "emotion": null,
+    "notes": [
+      "Godan verb (払う → 払います, 払わない, 払った). Notice the negative is 払わない (harawanai), with わ, not あ.",
+      "支払う (shiharau) is a slightly more formal synonym used only for paying money."
+    ],
+    "senses": [
+      {
+        "id": "ush10xjzqxi2sju",
+        "order": 0,
+        "definition": "To give money in exchange for goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pay"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "90igsjwbfxiys4q",
+            "text": "カードで払ってもいいですか。",
+            "textLang": "ja",
+            "translation": "Can I pay by card?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "払って",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0eigd233nyrq5fo",
+        "order": 1,
+        "definition": "To brush or sweep away dust, dirt, or snow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to brush off",
+              "to wipe away",
+              "to sweep away"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧹",
+        "examples": [
+          {
+            "id": "iybbls72fmtbhqk",
+            "text": "服のほこりを払う。",
+            "textLang": "ja",
+            "translation": "I brush the dust off my clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and meticulous, wanting to look clean and neat",
+            "note": null,
+            "matchedForm": "払う",
+            "matchedTranslationForm": "brush"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "払う",
+    "lemma": "払う",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -166,5 +277,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a Japanese word with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 払う is commonly used for paying money (shopping), it literally means",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.737
   }
 }

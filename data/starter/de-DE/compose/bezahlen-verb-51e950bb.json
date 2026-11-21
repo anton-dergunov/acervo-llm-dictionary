@@ -75,6 +75,97 @@
     "primaryGloss": "to pay",
     "emotion": "matter-of-fact and focused, like finishing a transaction at a counter",
     "notes": [
+      "Takes a direct object without a preposition for both the bill and the item bought: 'die Rechnung bezahlen' (to pay the bill), 'den Kaffee bezahlen' (to pay for the coffee).",
+      "'Bezahlen' and 'zahlen' are often interchangeable, though 'zahlen' is more common when asking for the bill in a restaurant: 'Zahlen, bitte!'"
+    ],
+    "senses": [
+      {
+        "id": "kmb9dik18q8ndm5",
+        "order": 0,
+        "definition": "To give money in exchange for goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pay",
+              "to pay for"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "u61n90h2bqm15a7",
+            "text": "Ich muss die Rechnung bezahlen.",
+            "textLang": "de",
+            "translation": "I have to pay the bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly annoyed, acknowledging a responsibility that must be met",
+            "note": null,
+            "matchedForm": "bezahlen",
+            "matchedTranslationForm": "pay"
+          },
+          {
+            "id": "2m5p4pfcnwv8wcu",
+            "text": "Kann ich mit Karte bezahlen?",
+            "textLang": "de",
+            "translation": "Can I pay by card?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inquiring, checking the accepted payment method",
+            "note": null,
+            "matchedForm": "bezahlen",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "bezahlen",
+    "lemma": "bezahlen",
+    "reading": null,
+    "ipa": "/bəˈt͡saːlən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pay; to pay for",
+    "primaryGloss": "to pay",
+    "emotion": "matter-of-fact and focused, like finishing a transaction at a counter",
+    "notes": [
       "Use 'bezahlen' when you want to settle the cost of something. It is often used with a direct object—you 'bezahlen' the bill or the goods—whereas 'zahlen' is more commonly used without an object, as in 'Ich möchte zahlen' (I would like to pay/pay the bill)."
     ],
     "senses": [
@@ -142,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Money given in exchange for goods or services.",
+        "why": "A verb is defined as a noun ('Money given') instead of an action."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "to pay for",
+        "why": "Missing the primary translation 'to pay' (used when paying a bill or intransitively)."
+      }
+    ],
+    "growth": 1.149
   }
 }

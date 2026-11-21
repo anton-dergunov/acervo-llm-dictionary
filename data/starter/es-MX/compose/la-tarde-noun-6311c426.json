@@ -70,6 +70,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "afternoon; evening",
+    "primaryGloss": "afternoon",
+    "emotion": "relaxed and unhurried, reflecting on the stretch of time after work",
+    "notes": [
+      "'La tarde' covers both English 'afternoon' and early 'evening', from noon until it gets dark (when 'la noche' begins).",
+      "In Mexico, 'en la tarde' is more common than 'por la tarde' for 'in the afternoon'; 'buenas tardes' means 'good afternoon/evening'."
+    ],
+    "senses": [
+      {
+        "id": "513syz30zkrug3u",
+        "order": 0,
+        "definition": "The part of the day between noon and nightfall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon",
+              "evening"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "0um84mlm110kc4i",
+            "text": "Tengo una reunión en la tarde.",
+            "textLang": "es",
+            "translation": "I have a meeting in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "afternoon"
+          },
+          {
+            "id": "xa3e22efs58tnbd",
+            "text": "Nos vemos a las siete de la tarde.",
+            "textLang": "es",
+            "translation": "See you at seven in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tarde",
+            "matchedTranslationForm": "evening"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la tarde",
+    "lemma": "tarde",
+    "reading": null,
+    "ipa": "/ˈtaɾðe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "afternoon; late part of the day",
     "primaryGloss": "afternoon",
     "emotion": "relaxed and unhurried, reflecting on the stretch of time after work",
@@ -162,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The final part of the day, just before nightfall.",
+        "why": "'Tarde' covers both English 'afternoon' and early 'evening' as one continuous period, not distinct senses."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "usually starts when people have finished their work or daily activities, regardless",
+        "why": "False claim: 'la noche' starts when it gets dark, not regardless of clock time."
+      }
+    ],
+    "growth": 0.746
   }
 }

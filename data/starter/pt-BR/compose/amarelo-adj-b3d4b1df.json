@@ -58,6 +58,73 @@
     "headword": "amarelo",
     "lemma": "amarelo",
     "reading": null,
+    "ipa": "/a.maˈɾɛ.lu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💛",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow",
+    "primaryGloss": "yellow",
+    "emotion": "bright, sunlit and cheerful, like a warm summer afternoon",
+    "notes": [
+      "Agrees in gender and number with the noun it describes (amarelo, amarela, amarelos, amarelas)."
+    ],
+    "senses": [
+      {
+        "id": "ams48jphlmar008",
+        "order": 0,
+        "definition": "Having the color of a ripe lemon, gold, or a sunflower.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "8vcap8zq53v7ly5",
+            "text": "A banana fica amarela quando está madura.",
+            "textLang": "pt",
+            "translation": "A banana turns yellow when it is ripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "amarela",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "amarelo",
+    "lemma": "amarelo",
+    "reading": null,
     "ipa": "/a.ma.ˈɾɛ.lu/",
     "pos": "adj",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of a lemon or a sunflower.",
+        "why": "Adjective defined as a noun; should be 'Having the color of...'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(health) Having a pale or unhealthy complexion.",
+        "why": "'Sallow/pale' is marginal for A2; simple color sense is what learners need."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In addition to the color, 'amarelo' can describe someone who looks pale",
+        "why": "merely restates the second sense."
+      }
+    ],
+    "growth": 0.609
   }
 }

@@ -60,6 +60,118 @@
     "headword": "ból",
     "lemma": "ból",
     "reading": null,
+    "ipa": "/bul/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pain; ache; grief",
+    "primaryGloss": "pain",
+    "emotion": null,
+    "notes": [
+      "The vowel 'ó' is pronounced the same as 'u' (/u/). In other forms of the word, it stays 'ó' (e.g., genitive 'bólu', plural 'bóle').",
+      "Followed by the genitive case to name the hurting body part, e.g., 'ból głowy' (headache), 'ból zęba' (toothache)."
+    ],
+    "senses": [
+      {
+        "id": "62l9gddyood7pc3",
+        "order": 0,
+        "definition": "An unpleasant physical sensation caused by injury or illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "ache",
+              "soreness"
+            ]
+          }
+        ],
+        "domain": "physical",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "scu0ybzwd2w17od",
+            "text": "Czuję silny ból w plecach.",
+            "textLang": "pl",
+            "translation": "I feel a strong pain in my back.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wincing slightly while describing a real discomfort",
+            "note": null,
+            "matchedForm": "ból",
+            "matchedTranslationForm": "pain"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nlaitbdbj91f7hs",
+        "order": 1,
+        "definition": "A deep feeling of sadness or emotional suffering.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "grief",
+              "sorrow"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "xgwfqygd8bmcbbx",
+            "text": "Jego serce wypełniał wielki ból po stracie przyjaciela.",
+            "textLang": "pl",
+            "translation": "His heart was filled with great grief after the loss of his friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber, reflective, and heavy with quiet sadness",
+            "note": null,
+            "matchedForm": "ból",
+            "matchedTranslationForm": "grief"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ból",
+    "lemma": "ból",
+    "reading": null,
     "ipa": "/buw/",
     "pos": "noun",
     "gender": "masculine",
@@ -166,5 +278,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/buw/",
+        "why": "Wrong consonant in IPA: Polish 'l' is /l/, whereas /w/ represents 'ł'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pain; ache; soreness",
+        "why": "Omits the emotional sense (grief/sorrow) present in sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both physical pain and emotional suffering (like 'grief').",
+        "why": "Restates the senses without adding grammatical or usage information."
+      }
+    ],
+    "growth": 0.964
   }
 }

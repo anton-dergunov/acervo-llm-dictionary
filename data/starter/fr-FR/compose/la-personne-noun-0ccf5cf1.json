@@ -68,6 +68,75 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person",
+    "primaryGloss": "person",
+    "emotion": "matter-of-fact and straightforward, introducing someone simply",
+    "notes": [
+      "Always grammatically feminine, even when referring to a man.",
+      "Without an article and paired with 'ne' ('ne... personne'), 'personne' is a pronoun meaning 'nobody' or 'no one'."
+    ],
+    "senses": [
+      {
+        "id": "ntc84zzptb4coe3",
+        "order": 0,
+        "definition": "A human being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "individual"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "ib5g7j57qcx4vl2",
+            "text": "Il y a une personne à la porte.",
+            "textLang": "fr",
+            "translation": "There is a person at the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and attentive, noticing a visitor",
+            "note": null,
+            "matchedForm": "personne",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la personne",
+    "lemma": "personne",
+    "reading": null,
+    "ipa": "/pɛʁ.sɔn/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; nobody",
     "primaryGloss": "person",
     "emotion": "matter-of-fact and straightforward, introducing someone simply",
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "(pronoun) Used in negative sentences to mean no one or nobody.",
+        "why": "Entry headword is feminine noun 'la personne'; pronoun 'personne' should only be in notes."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 'la personne' is always grammatically feminine, even when referring to a man."
+      }
+    ],
+    "growth": 0.852
   }
 }

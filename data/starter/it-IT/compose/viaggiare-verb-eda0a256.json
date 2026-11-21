@@ -60,6 +60,94 @@
     "headword": "viaggiare",
     "lemma": "viaggiare",
     "reading": null,
+    "ipa": "/vjadˈdʒa.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to travel",
+    "primaryGloss": "to travel",
+    "emotion": "excited and open, dreaming of new places and distant horizons",
+    "notes": [
+      "Although it is a verb of movement, it takes 'avere' in compound tenses: 'Ho viaggiato molto' (I have traveled a lot).",
+      "Drops the 'i' before endings starting with 'i' or 'e': 'tu viaggi', 'noi viaggiamo'."
+    ],
+    "senses": [
+      {
+        "id": "k9l953g6uavkvj8",
+        "order": 0,
+        "definition": "To go from one place to another, especially over a long distance or for a trip.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to travel",
+              "to go on a trip"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "5xna24cgvjr9qpu",
+            "text": "Mi piace viaggiare in treno perché posso guardare il paesaggio.",
+            "textLang": "it",
+            "translation": "I like to travel by train because I can look at the scenery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a slow and scenic journey",
+            "note": null,
+            "matchedForm": "viaggiare",
+            "matchedTranslationForm": "to travel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "k9l953g6uavkvj8",
+      "from": "Spostarsi da un luogo a un altro, spesso per piacere o per lavoro.",
+      "to": "To move from one location to another, usually for pleasure or work.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "h3irg48q9gyupjb",
+      "from": "Muoversi o spostarsi da un posto all'altro.",
+      "to": "To go or move from one place to another.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "viaggiare",
+    "lemma": "viaggiare",
+    "reading": null,
     "ipa": "/viadˈdʒaːre/",
     "pos": "verb",
     "gender": null,
@@ -164,22 +252,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "k9l953g6uavkvj8",
-      "from": "Spostarsi da un luogo a un altro, spesso per piacere o per lavoro.",
-      "to": "To move from one location to another, usually for pleasure or work.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "h3irg48q9gyupjb",
-      "from": "Muoversi o spostarsi da un posto all'altro.",
-      "to": "To go or move from one place to another.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Uses 'essere' as the auxiliary verb in compound tenses (e.g., 'sono viaggiato'",
+        "why": "'Viaggiare' takes 'avere' ('ho viaggiato'); 'sono viaggiato' is ungrammatical."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To go or move from one place to another.",
+        "why": "Sense 1 is the same everyday meaning as sense 0."
+      }
+    ],
+    "growth": 0.599
+  }
 }

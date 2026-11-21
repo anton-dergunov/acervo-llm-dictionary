@@ -60,6 +60,75 @@
     "headword": "महँगा",
     "lemma": "महँगा",
     "reading": null,
+    "ipa": "/mə.ɦə̃.ɡɑː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "expensive; costly",
+    "primaryGloss": "expensive",
+    "emotion": null,
+    "notes": [
+      "Inflects for gender and number: महँगा (masculine singular), महँगे (masculine plural or oblique), महँगी (feminine). Also commonly spelled महंगा.",
+      "The opposite is सस्ता (sastā, 'cheap')."
+    ],
+    "senses": [
+      {
+        "id": "dx2evnjdgpt4gqn",
+        "order": 0,
+        "definition": "Costing a lot of money; having a high price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "rgvkot2tv1l52cn",
+            "text": "यह कार बहुत महँगी है।",
+            "textLang": "hi",
+            "translation": "This car is very expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a factual observation, slightly regretful about the high cost",
+            "note": null,
+            "matchedForm": "महँगी",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "महँगा",
+    "lemma": "महँगा",
+    "reading": null,
     "ipa": "/mɛ̃ŋɡɑː/",
     "pos": "adj",
     "gender": null,
@@ -122,5 +191,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mɛ̃ŋɡɑː/",
+        "why": "Wrong transcription; महँगा is pronounced /mə.ɦə̃.ɡɑː/ or /mɛ.ɦɛ̃.ɡɑː/, not with velar nasal /ŋ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe items that have a high price.",
+        "why": "First sentence restates the definition; second misses the masculine plural/oblique form महँगे."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is often confused with ज़्यादा (zyādā)",
+        "why": "Artificial confusion; replace with antonym सस्ता (cheap), which is much more useful."
+      }
+    ],
+    "growth": 0.829
   }
 }

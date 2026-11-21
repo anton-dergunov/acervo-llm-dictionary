@@ -71,6 +71,117 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "market; bargaining",
+    "primaryGloss": "market",
+    "emotion": "busy and active, smelling of fresh fruit and crowded with people",
+    "notes": [
+      "Takes the preposition 'na': 'na targu' (at the market), 'iść na targ' (to go to the market). A larger marketplace is also called 'targowisko'.",
+      "In the plural, 'targi' usually means a trade fair or exhibition (e.g. 'targi książki' – book fair)."
+    ],
+    "senses": [
+      {
+        "id": "q1n7vamnmhw6t42",
+        "order": 0,
+        "definition": "An open place, often outdoors, with stalls where people sell food, clothes, and other goods.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "market",
+              "marketplace"
+            ]
+          }
+        ],
+        "domain": "marketplace",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "v8j96zb3lr6dret",
+            "text": "W sobotę rano chodzę na targ po świeże warzywa.",
+            "textLang": "pl",
+            "translation": "On Saturday mornings I go to the market for fresh vegetables.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying the morning routine",
+            "note": null,
+            "matchedForm": "targ",
+            "matchedTranslationForm": "market"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "n26f09yexkclc6j",
+        "order": 1,
+        "definition": "Negotiation over the price of something being bought or sold, especially in the plural ('targi').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bargaining",
+              "haggling"
+            ]
+          }
+        ],
+        "domain": "bargaining",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "nxqjcwnwogq7z2g",
+            "text": "Po długich targach w końcu kupiłem ten stary obraz.",
+            "textLang": "pl",
+            "translation": "After long bargaining, I finally bought that old painting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "targach",
+            "matchedTranslationForm": "bargaining"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "targ",
+    "lemma": "targ",
+    "reading": null,
+    "ipa": "/tark/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "market; trade",
     "primaryGloss": "market",
     "emotion": "busy and active, smelling of fresh fruit and crowded with people",
@@ -164,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "trade, bargaining",
+        "why": "Singular 'targ' means haggling/bargaining, not general trade ('handel'); plural 'targi' means trade fair."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'sklep', which is a shop or store",
+        "why": "Explaining the difference between a market and a shop is unnecessary filler."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the common plural 'targi' (trade fair) and the preposition 'na' (na targu)."
+      }
+    ],
+    "growth": 0.899
   }
 }

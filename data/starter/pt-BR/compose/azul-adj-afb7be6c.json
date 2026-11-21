@@ -72,6 +72,94 @@
     "primaryGloss": "blue",
     "emotion": "calm and expansive, looking at a beautiful bright horizon",
     "notes": [
+      "Does not change form for masculine and feminine ('o carro azul', 'a camisa azul'). The plural is 'azuis'."
+    ],
+    "senses": [
+      {
+        "id": "mp6l6dm1onugnvn",
+        "order": 0,
+        "definition": "Of the color of a clear sky or the deep sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "oe89xgrcym3b0ej",
+            "text": "O céu está muito azul hoje.",
+            "textLang": "pt",
+            "translation": "The sky is very blue today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and cheerful, noticing the nice weather",
+            "note": null,
+            "matchedForm": "azul",
+            "matchedTranslationForm": "blue"
+          },
+          {
+            "id": "80wa21zhrmn9osj",
+            "text": "Ele comprou uma camisa azul.",
+            "textLang": "pt",
+            "translation": "He bought a blue shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter-of-fact",
+            "note": null,
+            "matchedForm": "azul",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "azul",
+    "lemma": "azul",
+    "reading": null,
+    "ipa": "/aˈzuw/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": "calm and expansive, looking at a beautiful bright horizon",
+    "notes": [
       "Unlike many other Portuguese adjectives, 'azul' does not change its ending based on gender; it is always 'azul'. The plural form is 'azuis'."
     ],
     "senses": [
@@ -158,5 +246,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(color) The colour of a clear sky... / (appearance) A common color...",
+        "why": "Both senses mean the exact same color 'blue'; should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of a clear sky or the ocean.",
+        "why": "Defined as a noun ('The colour...') instead of an adjective ('Having the color...')."
+      }
+    ],
+    "growth": 0.74
   }
 }

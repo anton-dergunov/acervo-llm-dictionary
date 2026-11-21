@@ -72,6 +72,138 @@
     "primaryGloss": "ugly",
     "emotion": "disapproving and blunt, turning away from something unpleasant",
     "notes": [
+      "Do not confuse with 'cattivo', which means bad in a moral sense (mean) or poor in taste/skill, whereas 'brutto' means ugly or unpleasant (like bad weather or bad news).",
+      "In common expressions like 'brutto tempo' (bad weather) or 'brutto sogno' (bad dream), it usually comes before the noun."
+    ],
+    "senses": [
+      {
+        "id": "un9xbczyt5ae6ph",
+        "order": 0,
+        "definition": "Unpleasant to look at; not attractive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ugly",
+              "unattractive"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👹",
+        "examples": [
+          {
+            "id": "0tthd34pln48rwr",
+            "text": "Quel palazzo grigio è davvero brutto.",
+            "textLang": "it",
+            "translation": "That gray building is really ugly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "brutto",
+            "matchedTranslationForm": "ugly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pma7or106a3b6h9",
+        "order": 1,
+        "definition": "Unpleasant, undesirable, or nasty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bad",
+              "nasty",
+              "awful"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "🌧️",
+        "examples": [
+          {
+            "id": "o6gqquvlt05l624",
+            "text": "Oggi fa brutto tempo.",
+            "textLang": "it",
+            "translation": "Today the weather is bad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "brutto",
+            "matchedTranslationForm": "bad"
+          },
+          {
+            "id": "l4kuiusphr03g3v",
+            "text": "Ho fatto un brutto sogno stanotte.",
+            "textLang": "it",
+            "translation": "I had a bad dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "brutto",
+            "matchedTranslationForm": "bad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "brutto",
+    "lemma": "brutto",
+    "reading": null,
+    "ipa": "/ˈbrut.to/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌧️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "ugly; bad; nasty",
+    "primaryGloss": "ugly",
+    "emotion": "disapproving and blunt, turning away from something unpleasant",
+    "notes": [
       "Used for both physical appearance and general unpleasantness (like weather or experiences).",
       "Do not confuse with cattivo, which means bad in a moral sense (wicked or mean), whereas brutto simply means unpleasant, ugly, or bad in quality."
     ],
@@ -162,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ha fatto un sogno brutto questa notte.",
+        "why": "'Un brutto sogno' (a bad dream) belongs to sense 1, not physical appearance."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Oggi c'è un tempo brutto.",
+        "why": "With 'tempo' (weather), 'brutto' precedes the noun: 'c'è brutto tempo' or 'il tempo è brutto'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both physical appearance and general unpleasantness",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.234
   }
 }

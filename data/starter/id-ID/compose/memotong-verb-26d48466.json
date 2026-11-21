@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to cut; to take a shortcut; to interrupt",
+    "primaryGloss": "to cut",
+    "emotion": "focused and deliberate, getting the job done efficiently",
+    "notes": [
+      "Formed from 'meN-' + 'potong' (the initial 'p' drops). Also commonly used for deducting money or wages (e.g. 'memotong gaji' = to dock pay)."
+    ],
+    "senses": [
+      {
+        "id": "b9tr6wqhbjd01s4",
+        "order": 0,
+        "definition": "To divide, separate, or shorten something using a sharp tool like a knife or scissors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut",
+              "to chop",
+              "to slice"
+            ]
+          }
+        ],
+        "domain": "cut",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "hfmhe2qyrjoqyqi",
+            "text": "Ibu memotong sayuran di dapur.",
+            "textLang": "id",
+            "translation": "Mother is cutting vegetables in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and routine, preparing a meal at home",
+            "note": null,
+            "matchedForm": "memotong",
+            "matchedTranslationForm": "cutting"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gcgtxipq7915ehf",
+        "order": 1,
+        "definition": "To take a shorter route across an area to get somewhere faster.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut across",
+              "to take a shortcut"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🛤️",
+        "examples": [
+          {
+            "id": "b1i0rcgzw0ewvi6",
+            "text": "Kita bisa memotong jalan lewat lapangan itu.",
+            "textLang": "id",
+            "translation": "We can take a shortcut through that field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurried and practical, looking for the fastest route",
+            "note": null,
+            "matchedForm": "memotong",
+            "matchedTranslationForm": "take a shortcut"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4q1u32irlu8ipbg",
+        "order": 2,
+        "definition": "To interrupt someone while they are speaking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to interrupt",
+              "to cut off"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "nxmarhjnwbdhpqm",
+            "text": "Jangan memotong pembicaraan orang lain.",
+            "textLang": "id",
+            "translation": "Do not interrupt other people's conversation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stern and corrective, teaching good manners",
+            "note": null,
+            "matchedForm": "memotong",
+            "matchedTranslationForm": "interrupt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "memotong",
+    "lemma": "potong",
+    "reading": null,
+    "ipa": "/məˈmo.toŋ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✂️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to cut; to chop; to intersect",
     "primaryGloss": "to cut",
     "emotion": "focused and deliberate, getting the job done efficiently",
@@ -203,5 +354,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to cut; to chop; to intersect",
+        "why": "Names 'to intersect', which is not covered by the senses, while omitting 'to interrupt'."
+      }
+    ],
+    "growth": 0.905
   }
 }

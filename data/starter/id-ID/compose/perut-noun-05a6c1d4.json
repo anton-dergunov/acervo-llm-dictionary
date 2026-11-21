@@ -58,6 +58,115 @@
     "headword": "perut",
     "lemma": "perut",
     "reading": null,
+    "ipa": "/ˈpə.rut/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤰",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "stomach; belly; abdomen",
+    "primaryGloss": "stomach",
+    "emotion": "matter-of-fact and slightly clinical, as if describing a physical sensation or location",
+    "notes": [
+      "Used for both the internal digestive organ and the outer front part of the body. 'Stomachache' is sakit perut."
+    ],
+    "senses": [
+      {
+        "id": "ntqn6czs9uc3bfj",
+        "order": 0,
+        "definition": "The organ inside the body where food goes and is digested.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stomach"
+            ]
+          }
+        ],
+        "domain": "organ",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "9kf77hcmgtcayme",
+            "text": "Perut saya sakit setelah makan makanan yang terlalu pedas.",
+            "textLang": "id",
+            "translation": "My stomach hurts after eating food that was too spicy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Perut",
+            "matchedTranslationForm": "stomach"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0hqnjnfzfjcbhi8",
+        "order": 1,
+        "definition": "The front part of the body between the chest and the legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "belly",
+              "abdomen",
+              "tummy"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🤰",
+        "examples": [
+          {
+            "id": "poa5wv7mlv7zut2",
+            "text": "Dia mengelus perutnya yang mulai membesar.",
+            "textLang": "id",
+            "translation": "She stroked her belly, which was starting to grow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and protective, focused on the physical change",
+            "note": null,
+            "matchedForm": "perutnya",
+            "matchedTranslationForm": "belly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "perut",
+    "lemma": "perut",
+    "reading": null,
     "ipa": "/ˈpərut/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "stomach, abdomen",
+        "why": "'Abdomen' belongs to the outer body part sense, not the internal digestive organ."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Saya merasa tidak enak di bagian perut setelah makan pedas.",
+        "why": "Wordy and unnatural; 'Perut saya terasa tidak enak...' or 'Saya sakit perut...' is natural."
+      }
+    ],
+    "growth": 0.84
   }
 }

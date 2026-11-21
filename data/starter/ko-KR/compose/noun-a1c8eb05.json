@@ -71,6 +71,75 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "doctor",
+    "primaryGloss": "doctor",
+    "emotion": "professional and calm, providing reassurance or diagnostic clarity",
+    "notes": [
+      "When addressing or referring to a doctor politely, attach 선생님: 의사 선생님."
+    ],
+    "senses": [
+      {
+        "id": "6036ztgsi1wj37e",
+        "order": 0,
+        "definition": "A person who is trained and licensed to treat sick or injured people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "doctor",
+              "physician"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "👨‍⚕️",
+        "examples": [
+          {
+            "id": "d4etyocafo4gwow",
+            "text": "몸이 아파서 의사를 만나러 병원에 갔습니다.",
+            "textLang": "ko",
+            "translation": "I went to the hospital to see a doctor because I was sick.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly weary and uncomfortable, focusing on getting relief",
+            "note": null,
+            "matchedForm": "의사",
+            "matchedTranslationForm": "doctor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "의사",
+    "lemma": "의사",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍⚕️",
+    "topics": [
+      "Work",
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "doctor; intention",
     "primaryGloss": "doctor",
     "emotion": "professional and calm, providing reassurance or diagnostic clarity",
@@ -164,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 의사 is a homonym. As a professional title, it means",
+        "why": "merely restates the definitions and glosses of the two senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The state of wanting or intending to do something.",
+        "why": "'의사' meaning 'intention' is a formal/advanced homonym, not an everyday A2 sense."
+      }
+    ],
+    "growth": 0.457
   }
 }

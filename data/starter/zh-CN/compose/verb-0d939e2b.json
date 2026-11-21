@@ -74,6 +74,96 @@
     "primaryGloss": "to like",
     "emotion": "warm and friendly, smiling while thinking of something or someone nice",
     "notes": [
+      "喜欢 can be followed directly by a noun (喜欢茶, 'like tea') or a verb without needing a special particle (喜欢游泳, 'like swimming')."
+    ],
+    "senses": [
+      {
+        "id": "dbu47hcpoig3j9p",
+        "order": 0,
+        "definition": "To find someone or something pleasant or enjoyable, or to feel fondness for them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to be fond of",
+              "to enjoy"
+            ]
+          }
+        ],
+        "domain": "preference",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "cj7y2dybtc9cjq1",
+            "text": "我喜欢听这首轻松的音乐。",
+            "textLang": "zh",
+            "translation": "I like listening to this relaxing music.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and peaceful, enjoying a calm moment",
+            "note": null,
+            "matchedForm": "喜欢",
+            "matchedTranslationForm": "like"
+          },
+          {
+            "id": "1i5bbl22dn3k2t1",
+            "text": "大家都喜欢这个善良的老师。",
+            "textLang": "zh",
+            "translation": "Everyone likes this kind teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, speaking with genuine fondness",
+            "note": null,
+            "matchedForm": "喜欢",
+            "matchedTranslationForm": "likes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "喜欢",
+    "lemma": "喜欢",
+    "reading": "xǐ huan",
+    "ipa": "/ɕi˨˩˦ xu̯an/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💖",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to like; to be fond of",
+    "primaryGloss": "to like",
+    "emotion": "warm and friendly, smiling while thinking of something or someone nice",
+    "notes": [
       "喜欢 is the most common way to say you like someone or something in Mandarin. It can take both noun objects (like food or books) and verb phrases (like swimming or reading).",
       "Unlike English 'like', 喜欢 cannot be followed directly by another verb without an object or without turning the action into a nominalized phrase, though it often precedes another verb when expressing a preference to do something (e.g., 喜欢吃)."
     ],
@@ -164,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "喜欢 cannot be followed directly by another verb without an object",
+        "why": "False and self-contradictory; 喜欢 is routinely followed directly by bare verbs (e.g., 喜欢游泳, 喜欢吃)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Liking things/activities and liking people are the same everyday sense of 喜欢."
+      }
+    ],
+    "growth": 0.496
   }
 }

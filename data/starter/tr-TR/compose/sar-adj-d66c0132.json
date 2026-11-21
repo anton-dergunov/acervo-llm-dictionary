@@ -68,6 +68,139 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "yellow; blond (of hair); pale (of skin)",
+    "primaryGloss": "yellow",
+    "emotion": null,
+    "notes": [
+      "Used of hair ('sarı saç'), it means blond; to describe a blond person, use 'sarışın' instead.",
+      "The final 'ı' is an unrounded vowel (/ɯ/), not pronounced like English 'ee'."
+    ],
+    "senses": [
+      {
+        "id": "tzla2kwfo6eyr07",
+        "order": 0,
+        "definition": "Of the colour of a lemon or ripe wheat; (of hair) blond or fair.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow",
+              "blond",
+              "fair"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "5tyc1xwrrlarf5t",
+            "text": "Ablam sarı bir elbise giydi.",
+            "textLang": "tr",
+            "translation": "My older sister wore a yellow dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sarı",
+            "matchedTranslationForm": "yellow"
+          },
+          {
+            "id": "s7whaf0mqgw5ydd",
+            "text": "Onun uzun sarı saçları var.",
+            "textLang": "tr",
+            "translation": "She has long blond hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sarı",
+            "matchedTranslationForm": "blond"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hin3sptg1243k21",
+        "order": 1,
+        "definition": "Of a person's face or complexion: pale and unhealthy-looking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pale",
+              "wan",
+              "sallow"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "f63dsyma7h2y2yz",
+            "text": "Hasta mısın? Yüzün çok sarı görünüyor.",
+            "textLang": "tr",
+            "translation": "Are you ill? Your face looks very pale.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sarı",
+            "matchedTranslationForm": "pale"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sarı",
+    "lemma": "sarı",
+    "reading": null,
+    "ipa": "/saˈɾɯ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "yellow; blonde",
     "primaryGloss": "yellow",
     "emotion": null,
@@ -160,5 +293,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When used for people's hair, 'sarı' means blonde.",
+        "why": "Merely repeats sense 1."
+      },
+      {
+        "severity": 3,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'siyah' (black) or 'beyaz' (white).",
+        "why": "Absurd filler; these words neither sound nor look alike."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The bright colour of a lemon or the sun.",
+        "why": "Adjective defined as a noun instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Güneş sarı bir renge sahip.",
+        "why": "Awkward translationese; 'renge sahip' is unnatural in everyday Turkish."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Having light-coloured or blonde hair.",
+        "why": "'Sarı' does not mean blonde-haired of a person (that is 'sarışın'); it modifies 'saç'."
+      }
+    ],
+    "growth": 1.778
   }
 }

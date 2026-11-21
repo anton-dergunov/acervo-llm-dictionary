@@ -57,6 +57,74 @@
     "language": "zh",
     "headword": "手表",
     "lemma": "手表",
+    "reading": "shǒubiǎo",
+    "ipa": "/ʂou̯˨˩˦ pi̯au̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "wristwatch; watch",
+    "primaryGloss": "wristwatch",
+    "emotion": "a practical and glance-ready accessory, reliable and slightly formal",
+    "notes": [
+      "Use the verb 戴 (dài) for wearing a watch (not 穿 chuān). Takes the measure word 块 (kuài) or 只 (zhī). Often shortened to 表 (biǎo)."
+    ],
+    "senses": [
+      {
+        "id": "3da52f4oh5bkv1f",
+        "order": 0,
+        "definition": "A small clock worn on a strap on the wrist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wristwatch",
+              "watch"
+            ]
+          }
+        ],
+        "domain": "timepiece",
+        "emoji": "⌚",
+        "examples": [
+          {
+            "id": "ae7xgo5l3a8gx77",
+            "text": "我的手表慢了五分钟。",
+            "textLang": "zh",
+            "translation": "My watch is five minutes slow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit bothered by the inaccuracy, wanting to be on time",
+            "note": null,
+            "matchedForm": "手表",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "手表",
+    "lemma": "手表",
     "reading": "shǒu biǎo",
     "ipa": "/ʂou̯˨˩˦ pi̯au̯˨˩˦/",
     "pos": "noun",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʂou̯˨˩˦ pi̯au̯˨˩˦/",
+        "why": "Missing tone sandhi: two third tones become rising + dipping (/ʂou̯˧˥ pi̯au̯˨˩˦/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While technically worn on the wrist, it is distinct from 'clothes'",
+        "why": "Bizarre filler; should explain the verb 'to wear' (戴 dài, not 穿 chuān) and measure word."
+      }
+    ],
+    "growth": 0.996
   }
 }

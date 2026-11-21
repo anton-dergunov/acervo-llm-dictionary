@@ -68,6 +68,112 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "nose; tip, point",
+    "primaryGloss": "nose",
+    "emotion": "matter-of-fact, as if pointing to or touching one's own face",
+    "notes": [],
+    "senses": [
+      {
+        "id": "7b3n3xi0z530t6o",
+        "order": 0,
+        "definition": "The part of the face above the mouth, used for breathing and smelling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nose"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "7xeghkwucvh2o5j",
+            "text": "Έχω συνάχι και η μύτη μου είναι βουλωμένη.",
+            "textLang": "el",
+            "translation": "I have a cold and my nose is stuffed up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and stuffy, trying to breathe through a blockage",
+            "note": null,
+            "matchedForm": "μύτη",
+            "matchedTranslationForm": "nose"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m7k935kbz31x6cl",
+        "order": 1,
+        "definition": "The sharp or narrow end of an object, such as a pencil, knife, or shoe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tip",
+              "point"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": "🫖",
+        "examples": [
+          {
+            "id": "j356bz9qa8pba4i",
+            "text": "Έσπασε η μύτη από το μολύβι μου.",
+            "textLang": "el",
+            "translation": "The tip of my pencil broke.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μύτη",
+            "matchedTranslationForm": "tip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η μύτη",
+    "lemma": "μύτη",
+    "reading": null,
+    "ipa": "/ˈmi.ti/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "nose; spout",
     "primaryGloss": "nose",
     "emotion": "matter-of-fact, as if pointing to or touching one's own face",
@@ -159,5 +265,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense 'tip, point' (e.g., of a pencil, knife, shoe)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The narrow projecting part of a container, such as a teapot",
+        "why": "'Spout' is much less common than 'point/tip'; better covered within the pointed end sense."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is rarely used to describe the front of a ship or an airplane",
+        "why": "Restates the senses and makes a false claim (μύτη is common for an airplane's nose)."
+      }
+    ],
+    "growth": 0.566
   }
 }

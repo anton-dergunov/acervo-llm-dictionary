@@ -58,6 +58,75 @@
     "headword": "بَطْن",
     "lemma": "بَطْن",
     "reading": null,
+    "ipa": "/batˤn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤰",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "belly; stomach",
+    "primaryGloss": "belly",
+    "emotion": "relaxed and comfortable after a good meal, warm and satisfied",
+    "notes": [
+      "Plural: بُطُون. Covers both the outer abdomen and the stomach area when talking about pain or fullness (the internal organ specifically is مَعِدَة)."
+    ],
+    "senses": [
+      {
+        "id": "kv95ed0a15h8a1r",
+        "order": 0,
+        "definition": "The front part of the body between the chest and the legs, or the stomach area inside it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "belly",
+              "stomach",
+              "abdomen"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🤰",
+        "examples": [
+          {
+            "id": "zhusznybisbu6co",
+            "text": "يُؤْلِمُهُ بَطْنُهُ بَعْدَ تَنَاوُلِ الكَثِيرِ مِنَ الطَّعَامِ.",
+            "textLang": "ar",
+            "translation": "His stomach hurts after eating a lot of food.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "بَطْنُهُ",
+            "matchedTranslationForm": "stomach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَطْن",
+    "lemma": "بَطْن",
+    "reading": null,
     "ipa": "/ba.tˤn/",
     "pos": "noun",
     "gender": "masculine",
@@ -121,5 +190,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ba.tˤn/",
+        "why": "بَطْن is one syllable /batˤn/, not two."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "بَطْن generally refers to the belly or stomach area",
+        "why": "Restates the definition and gloss; notes[1] is also pointless antonym filler."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "His belly hurts him after eating a lot of food.",
+        "why": "Calqued translation; in English we say 'His stomach hurts after eating a lot'."
+      }
+    ],
+    "growth": 1.0
   }
 }

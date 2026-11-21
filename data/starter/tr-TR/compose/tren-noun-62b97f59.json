@@ -68,6 +68,71 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "train",
+    "primaryGloss": "train",
+    "emotion": "excited and rhythmic, watching the station platform slide away",
+    "notes": [],
+    "senses": [
+      {
+        "id": "4b2eu45uqbdwbzh",
+        "order": 0,
+        "definition": "A railway vehicle consisting of connected carriages moved by an engine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "train"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "rp6q1bopy34ycer",
+            "text": "Tren saat onda kalkacak.",
+            "textLang": "tr",
+            "translation": "The train will leave at ten o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurried and focused, checking the time on a ticket",
+            "note": null,
+            "matchedForm": "Tren",
+            "matchedTranslationForm": "train"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tren",
+    "lemma": "tren",
+    "reading": null,
+    "ipa": "/tɾen/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚆",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "train; line of carriages",
     "primaryGloss": "train",
     "emotion": "excited and rhythmic, watching the station platform slide away",
@@ -158,5 +223,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A line of carriages or vehicles moving together on rails.",
+        "why": "Duplicate of sense 0 with an unnatural gloss 'line of carriages'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "and metaphorically for a line of people or objects.",
+        "why": "'Tren' does not mean a queue or line of people/objects in Turkish ('kuyruk' or 'sıra' is used)."
+      }
+    ],
+    "growth": 0.337
   }
 }

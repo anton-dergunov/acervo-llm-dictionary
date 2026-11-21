@@ -58,6 +58,118 @@
     "headword": "痛む",
     "lemma": "痛む",
     "reading": "いたむ",
+    "ipa": "/itamɯ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "to hurt; to ache",
+    "primaryGloss": "to hurt",
+    "emotion": "wincing slightly, holding a sore spot on the body with gentle concern",
+    "notes": [
+      "An intransitive godan verb (痛まない, 痛みます); the body part that hurts takes が. Its transitive pair is 痛める (to hurt/injure a body part).",
+      "The homophone 傷む (also いたむ) means for food to spoil or things to get damaged."
+    ],
+    "senses": [
+      {
+        "id": "jqx31tbpnswypam",
+        "order": 0,
+        "definition": "For a part of the body to ache or feel physical pain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache",
+              "to be sore"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "yhsabasvz3b9jx4",
+            "text": "昨日の運動で足の筋肉が痛む。",
+            "textLang": "ja",
+            "translation": "My leg muscles hurt from yesterday's exercise.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rubbing sore legs with a grimace after a hard workout",
+            "note": null,
+            "matchedForm": "痛む",
+            "matchedTranslationForm": "hurt"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e7kieu7gefm0acx",
+        "order": 1,
+        "definition": "For one's heart to ache with grief, distress, or sympathy (often as 心が痛む or 胸が痛む).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ache",
+              "to feel distressed",
+              "to grieve"
+            ]
+          }
+        ],
+        "domain": "emotions",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "tie4piptoerl5ay",
+            "text": "ニュースでその悲惨な事故を見て心が痛む。",
+            "textLang": "ja",
+            "translation": "My heart aches seeing that tragic accident on the news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "subdued and heavy-hearted, watching something distressing on television",
+            "note": null,
+            "matchedForm": "痛む",
+            "matchedTranslationForm": "aches"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "痛む",
+    "lemma": "痛む",
+    "reading": "いたむ",
     "ipa": "/itamu/",
     "pos": "verb",
     "gender": null,
@@ -205,5 +317,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(food) For food to go bad or spoil.",
+        "why": "Food spoiling or objects being damaged is written 傷む, not 痛む."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 傷める (itameru), which is the transitive counterpart",
+        "why": "For physical/emotional pain, the transitive counterpart is 痛める, not 傷める."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "痛む (itamu) is an intransitive verb meaning to ache or hurt physically",
+        "why": "Restates the definitions and glosses."
+      }
+    ],
+    "growth": 0.751
   }
 }

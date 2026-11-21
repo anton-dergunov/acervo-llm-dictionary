@@ -58,6 +58,74 @@
     "headword": "de woonkamer",
     "lemma": "woonkamer",
     "reading": null,
+    "ipa": "/ˈʋoːnˌkaː.mər/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "living room",
+    "primaryGloss": "living room",
+    "emotion": "warm and welcoming, feeling completely at home",
+    "notes": [
+      "A very common everyday synonym is 'de huiskamer' (literally 'house room')."
+    ],
+    "senses": [
+      {
+        "id": "b6xrs83asy1m5qn",
+        "order": 0,
+        "definition": "The main room in a house where people sit together and relax.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "living room",
+              "sitting room"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "r5edcbs3zk3d84x",
+            "text": "We zitten samen in de woonkamer.",
+            "textLang": "nl",
+            "translation": "We are sitting together in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and relaxed, enjoying a quiet evening together",
+            "note": null,
+            "matchedForm": "woonkamer",
+            "matchedTranslationForm": "living room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de woonkamer",
+    "lemma": "woonkamer",
+    "reading": null,
     "ipa": "/ˈwoːnˌkaː.mər/",
     "pos": "noun",
     "gender": "common",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈwoːnˌkaː.mər/",
+        "why": "Dutch 'w' is /ʋ/, not /w/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Dutch speakers also often use the short form 'de woon'",
+        "why": "'de woon' does not exist in Dutch as a short form for 'woonkamer'."
+      }
+    ],
+    "growth": 0.816
   }
 }

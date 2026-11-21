@@ -57,6 +57,116 @@
     "language": "ja",
     "headword": "分",
     "lemma": "分",
+    "reading": "ふん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "minute; share, portion",
+    "primaryGloss": "minute",
+    "emotion": "matter-of-fact and precise, calculating the time needed for a task",
+    "notes": [
+      "For minutes, read ふん after 2, 5, 7, 9 (ごふん) and ぷん after 1, 3, 4, 6, 8, 10 (いっぷん, さんぷん, ろっぷん, じゅっぷん).",
+      "For 'share' or 'amount worth', it is read ぶん."
+    ],
+    "senses": [
+      {
+        "id": "75sbrz0u0msf9oo",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "bwo2qvotoqdnzjg",
+            "text": "あと五分で着きます。",
+            "textLang": "ja",
+            "translation": "I will arrive in five minutes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reassuring and calm, keeping someone updated on progress",
+            "note": null,
+            "matchedForm": "分",
+            "matchedTranslationForm": "minutes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jw6lt54tn10zd3v",
+        "order": 1,
+        "definition": "An allotted share, portion, or amount corresponding to someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "share",
+              "portion",
+              "worth"
+            ]
+          }
+        ],
+        "domain": "portion",
+        "emoji": "🍰",
+        "examples": [
+          {
+            "id": "0r2yq5kbfe3tbp3",
+            "text": "これは私の分です。",
+            "textLang": "ja",
+            "translation": "This is my share.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "分",
+            "matchedTranslationForm": "share"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "分",
+    "lemma": "分",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "use 'fun' for 1, 6, and 8 minutes (ippun, roppun, happun)",
+        "why": "States 'fun' is used for 1, 6, 8, then gives examples with 'pun'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "ケーキを半分に分けました。",
+        "why": "Uses the compound word 半分 ('half') rather than 分 meaning 'share/portion'."
+      }
+    ],
+    "growth": 1.028
   }
 }

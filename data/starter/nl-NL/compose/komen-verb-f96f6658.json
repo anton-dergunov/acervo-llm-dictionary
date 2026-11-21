@@ -58,6 +58,117 @@
     "headword": "komen",
     "lemma": "komen",
     "reading": null,
+    "ipa": "/ˈkoːmə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to come; to happen",
+    "primaryGloss": "to come",
+    "emotion": "expectant and natural, inviting someone to move closer or arrive",
+    "notes": [
+      "Irregular verb: hij komt, kwam/kwamen, is gekomen (always takes 'zijn' in the perfect tense).",
+      "Used for movement towards the speaker or the place being talked about, or for accompanying the speaker (Kom je mee?)."
+    ],
+    "senses": [
+      {
+        "id": "q3xxswffd71836k",
+        "order": 0,
+        "definition": "To move towards or reach the speaker or a specified place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to come",
+              "to get to"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "pl1nkfdte4fc9ue",
+            "text": "Kom je morgen naar mijn feestje?",
+            "textLang": "nl",
+            "translation": "Are you coming to my party tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, looking forward to seeing someone",
+            "note": null,
+            "matchedForm": "Kom",
+            "matchedTranslationForm": "coming"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6n7t5lan76242nv",
+        "order": 1,
+        "definition": "To happen, arise, or be caused by something (especially with 'door').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to happen",
+              "to come about",
+              "to be due to"
+            ]
+          }
+        ],
+        "domain": "cause",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "3yegxx25xnazlia",
+            "text": "Hoe komt het dat je zo laat bent?",
+            "textLang": "nl",
+            "translation": "How come you are so late?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "komt",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "komen",
+    "lemma": "komen",
+    "reading": null,
     "ipa": "/ˈkoːmən/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Note that 'komen' is also used as an auxiliary verb in phrases like 'ik kom eraan'",
+        "why": "'Komen' is a main verb here (from 'eraankomen'), not an auxiliary verb."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "De trein komt om vijf uur aan op het station.",
+        "why": "Uses the separable verb 'aankomen' ('komt ... aan'), not 'komen'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are both 'to come/get somewhere'; misses the common sense 'to happen/be caused by'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular conjugation (komt, kwam/kwamen, is gekomen)."
+      }
+    ],
+    "growth": 1.004
   }
 }

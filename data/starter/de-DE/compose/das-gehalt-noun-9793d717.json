@@ -68,6 +68,76 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "salary",
+    "primaryGloss": "salary",
+    "emotion": "professional and matter-of-fact, focusing on the value of the work done",
+    "notes": [
+      "Plural: 'die Gehälter'.",
+      "Distinguish between 'das Gehalt' (fixed monthly salary) and 'der Lohn' (wages, often paid hourly).",
+      "Do not confuse neuter 'das Gehalt' (salary) with masculine 'der Gehalt' (content/level, as in 'der Zuckergehalt', plural 'die Gehalte')."
+    ],
+    "senses": [
+      {
+        "id": "8no79ph217347op",
+        "order": 0,
+        "definition": "The fixed amount of money an employee receives regularly, usually monthly, for their work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salary",
+              "pay"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💶",
+        "examples": [
+          {
+            "id": "na9aedbuyblsqao",
+            "text": "Sie ist mit ihrem Gehalt sehr zufrieden.",
+            "textLang": "de",
+            "translation": "She is very satisfied with her salary.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and secure, showing contentment with a situation",
+            "note": null,
+            "matchedForm": "Gehalt",
+            "matchedTranslationForm": "salary"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Gehalt",
+    "lemma": "Gehalt",
+    "reading": null,
+    "ipa": "/ɡəˈhalt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "salary; content",
     "primaryGloss": "salary",
     "emotion": "professional and matter-of-fact, focusing on the value of the work done",
@@ -161,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'das Gehalt' (salary) with the feminine 'die Gehalt'",
+        "why": "'Die Gehalt' does not exist; the contrast is masculine 'der Gehalt' (content) vs neuter 'das Gehalt' (salary)."
+      },
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "senses[1]",
+        "quote": "(content) The amount or concentration of a specific substance contained within something.",
+        "why": "In the 'content' sense, 'Gehalt' is masculine ('der Gehalt'), not neuter ('das Gehalt')."
+      }
+    ],
+    "growth": 0.564
   }
 }

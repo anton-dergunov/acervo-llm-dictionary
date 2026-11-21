@@ -58,6 +58,74 @@
     "headword": "thư",
     "lemma": "thư",
     "reading": null,
+    "ipa": "/tʰɨ˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "letter; mail",
+    "primaryGloss": "letter",
+    "emotion": "excited and curious, opening a hand-delivered message from a friend",
+    "notes": [
+      "Counted with the classifiers 'bức' or 'lá' (e.g., một bức thư). In Southern dialects, it is often pronounced and spelled 'thơ'."
+    ],
+    "senses": [
+      {
+        "id": "t8023pbf06zkypc",
+        "order": 0,
+        "definition": "A written or printed message sent to someone, usually by post or email.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "letter",
+              "mail"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "7brgykoqib62z46",
+            "text": "Tôi nhận được một bức thư từ gia đình.",
+            "textLang": "vi",
+            "translation": "I received a letter from my family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and nostalgic, holding a message from loved ones far away",
+            "note": null,
+            "matchedForm": "thư",
+            "matchedTranslationForm": "letter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "thư",
+    "lemma": "thư",
+    "reading": null,
     "ipa": "/tʰɨ̄/",
     "pos": "noun",
     "gender": null,
@@ -138,5 +206,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it also appears in compound words ... such as 'sách báo'",
+        "why": "'sách báo' does not contain 'thư' at all."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A bound collection of pages forming a book",
+        "why": "Only a bound Sino-Vietnamese root for 'book', not a standalone noun for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing common classifiers ('bức', 'lá') needed by A2 learners."
+      }
+    ],
+    "growth": 0.645
   }
 }

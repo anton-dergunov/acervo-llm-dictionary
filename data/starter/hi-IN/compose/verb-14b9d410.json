@@ -69,6 +69,74 @@
     ],
     "status": "active",
     "shortGloss": "to study; to do schoolwork",
+    "primaryGloss": "to study",
+    "emotion": "diligent and focused, settling down with books",
+    "notes": [
+      "Formed from the feminine noun पढ़ाई (studies) and करना (to do). In constructions requiring object agreement (like with ने or चाहिए), करना agrees with feminine पढ़ाई: मैंने पढ़ाई की, मुझे पढ़ाई करनी चाहिए."
+    ],
+    "senses": [
+      {
+        "id": "eif79wquao6z7dr",
+        "order": 0,
+        "definition": "To spend time learning or reading about a subject, especially for school or exams.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to study",
+              "to do schoolwork"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "5muqzd1bpv892di",
+            "text": "कल मेरी परीक्षा है, इसलिए मुझे पढ़ाई करनी चाहिए।",
+            "textLang": "hi",
+            "translation": "I have an exam tomorrow, so I should study.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पढ़ाई करनी",
+            "matchedTranslationForm": "study"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पढ़ाई करना",
+    "lemma": "पढ़ाई करना",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "to study; to do schoolwork",
     "primaryGloss": "study",
     "emotion": "diligent and focused, settling down with books",
     "notes": [
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "कल मेरी परीक्षा है, इसलिए मुझे पढ़ाई करना चाहिए।",
+        "why": "Grammatical gender error: पढ़ाई is feminine, so करना चाहिए must be करनी चाहिए."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is commonly used to describe studying for school",
+        "why": "Restates the definition; should instead explain agreement with feminine पढ़ाई."
+      }
+    ],
+    "growth": 1.012
   }
 }

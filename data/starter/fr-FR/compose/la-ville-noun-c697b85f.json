@@ -68,6 +68,97 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "busy and bustling, heading out to the busy streets",
+    "notes": [
+      "Covers both 'town' and 'city' in English.",
+      "The /l/ is pronounced normally (/vil/), unlike in 'fille' (/fij/).",
+      "Notice the expression 'en ville' (in town / downtown) without an article."
+    ],
+    "senses": [
+      {
+        "id": "c8615wa9qhrkwzv",
+        "order": 0,
+        "definition": "A large urban area where many people live and work, larger than a village.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "hu8b9elzqi4bbbt",
+            "text": "Paris est une grande ville avec beaucoup de monuments.",
+            "textLang": "fr",
+            "translation": "Paris is a big city with many monuments.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and impressed by the sights",
+            "note": null,
+            "matchedForm": "ville",
+            "matchedTranslationForm": "city"
+          },
+          {
+            "id": "9gposmeggm50gis",
+            "text": "J'habite en ville pendant la semaine et à la campagne le week-end.",
+            "textLang": "fr",
+            "translation": "I live in town during the week and in the countryside on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and matter-of-fact about the weekly routine",
+            "note": null,
+            "matchedForm": "ville",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la ville",
+    "lemma": "ville",
+    "reading": null,
+    "ipa": "/vil/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "town; city",
     "primaryGloss": "city",
     "emotion": "busy and bustling, heading out to the busy streets",
@@ -161,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "French 'ville' is a single concept covering both town and city; splitting follows English distinctions."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with \"le village\"",
+        "why": "Learners do not confuse 'ville' and 'village', since 'village' is an exact English cognate."
+      }
+    ],
+    "growth": 0.799
   }
 }

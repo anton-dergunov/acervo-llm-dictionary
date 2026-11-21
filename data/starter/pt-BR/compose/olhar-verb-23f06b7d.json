@@ -68,6 +68,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to look at; to check; to look after",
+    "primaryGloss": "look",
+    "emotion": "focused and alert, shifting attention toward something that caught the eye",
+    "notes": [
+      "Can be used directly ('olhar algo') or with the preposition 'para' ('olhar para algo').",
+      "Use 'olhar' for directing your eyes intentionally, and 'ver' for seeing in general or watching TV/movies. For 'to look for', use 'procurar'."
+    ],
+    "senses": [
+      {
+        "id": "ddb287tu6pq4qd9",
+        "order": 0,
+        "definition": "To turn your eyes towards something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look",
+              "look at"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "443fe0upfb5yl9r",
+            "text": "Ele gosta de olhar as estrelas à noite.",
+            "textLang": "pt",
+            "translation": "He likes to look at the stars at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and reflective, admiring the quiet beauty of the sky",
+            "note": null,
+            "matchedForm": "olhar",
+            "matchedTranslationForm": "look at"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g7y6jv6cfdl85ev",
+        "order": 1,
+        "definition": "To examine or check something with attention.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "check",
+              "examine",
+              "look at"
+            ]
+          }
+        ],
+        "domain": "examination",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "u6wd65l0lza0cgh",
+            "text": "O mecânico vai olhar o carro amanhã.",
+            "textLang": "pt",
+            "translation": "The mechanic is going to check the car tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "olhar",
+            "matchedTranslationForm": "check"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0694czmv3bdl3ma",
+        "order": 2,
+        "definition": "To take care of someone or something for a period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look after",
+              "watch",
+              "take care of"
+            ]
+          }
+        ],
+        "domain": "care",
+        "emoji": "👶",
+        "examples": [
+          {
+            "id": "5vsimq7xm1h8sa4",
+            "text": "Você pode olhar o bebê por um minuto?",
+            "textLang": "pt",
+            "translation": "Can you look after the baby for a minute?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly rushed and polite, making a quick request to someone",
+            "note": null,
+            "matchedForm": "olhar",
+            "matchedTranslationForm": "look after"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "olhar",
+    "lemma": "olhar",
+    "reading": null,
+    "ipa": "/o.ˈʎaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to look at; to watch; to gaze",
     "primaryGloss": "look",
     "emotion": "focused and alert, shifting attention toward something that caught the eye",
@@ -202,5 +355,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to look at; to watch; to gaze",
+        "why": "Includes 'to gaze' (not in senses) and omits sense 2 ('to look after')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Nós vamos olhar o jogo de futebol agora.",
+        "why": "In standard Brazilian Portuguese, 'assistir' or 'ver' is used for watching a match, not 'olhar'."
+      }
+    ],
+    "growth": 1.0
   }
 }

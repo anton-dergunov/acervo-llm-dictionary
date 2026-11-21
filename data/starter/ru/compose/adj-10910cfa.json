@@ -58,6 +58,137 @@
     "headword": "счастливый",
     "lemma": "счастливый",
     "reading": null,
+    "ipa": "/ɕːɪsˈlʲivɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "happy; lucky, fortunate",
+    "primaryGloss": "happy",
+    "emotion": "warm and glowing, as if reflecting on a truly wonderful moment",
+    "notes": [
+      "The combination 'сч' is pronounced as a single long soft 'щ' sound (/ɕː/), and the 'т' is silent.",
+      "Describes deep, lasting happiness, whereas 'рад' (glad, used only as a short predicate: 'я рад') expresses a reaction to something specific."
+    ],
+    "senses": [
+      {
+        "id": "guna4v2q8lyzita",
+        "order": 0,
+        "definition": "Feeling or showing great joy, pleasure, and satisfaction with life.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happy",
+              "content"
+            ]
+          }
+        ],
+        "domain": "joy",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "i3yk81tryek5ng7",
+            "text": "Они очень счастливые люди.",
+            "textLang": "ru",
+            "translation": "They are very happy people.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "smiling and genuine, observing a lovely couple",
+            "note": null,
+            "matchedForm": "счастливые",
+            "matchedTranslationForm": "happy"
+          },
+          {
+            "id": "2eqh73tziu0dtmb",
+            "text": "Это был самый счастливый день в моей жизни.",
+            "textLang": "ru",
+            "translation": "That was the happiest day of my life.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and heartfelt, recalling a special memory",
+            "note": null,
+            "matchedForm": "счастливый",
+            "matchedTranslationForm": "happiest"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8ida6xkx84zpdjf",
+        "order": 1,
+        "definition": "Bringing or having good luck; marked by favorable circumstances.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lucky",
+              "fortunate"
+            ]
+          }
+        ],
+        "domain": "luck",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "76fedrcfwg74fj7",
+            "text": "У меня счастливый билет!",
+            "textLang": "ru",
+            "translation": "I have a lucky ticket!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "счастливый",
+            "matchedTranslationForm": "lucky"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "счастливый",
+    "lemma": "счастливый",
+    "reading": null,
     "ipa": "/ˈɕːaslʲɪvɨj/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +292,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɕːaslʲɪvɨj/",
+        "why": "Wrong stress: 'счастли́вый' is stressed on the second syllable (/ɕːɪsˈlʲivɨj/)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'радый'",
+        "why": "'Радый' is non-standard/dialectal in modern Russian; the standard lemma is 'рад'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'счастливый' usually describes a person's inner state of joy,",
+        "why": "Merely restates the two senses; a note on silent 'т' in 'сч' is needed instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Это был самый счастливый день в моей жизни.",
+        "why": "'Счастливый день' means 'happiest day' (sense 0), not 'luckiest day'."
+      }
+    ],
+    "growth": 1.049
   }
 }

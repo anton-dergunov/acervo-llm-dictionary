@@ -58,6 +58,118 @@
     "headword": "lemah",
     "lemma": "lemah",
     "reading": null,
+    "ipa": "/ləˈmah/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔋",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "weak; feeble; poor",
+    "primaryGloss": "weak",
+    "emotion": "tired and drooping after a long day",
+    "notes": [
+      "Often appears in the compound 'lemah lembut' (gentle, mild-mannered).",
+      "Do not confuse with 'lembek' (physically soft or mushy) or 'lembut' (soft to the touch, gentle)."
+    ],
+    "senses": [
+      {
+        "id": "nj8re7nx0dv3vty",
+        "order": 0,
+        "definition": "Not physically strong; having little energy or physical power.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weak",
+              "feeble",
+              "faint"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🔋",
+        "examples": [
+          {
+            "id": "3v77yk7tdwth729",
+            "text": "Badannya terasa lemah setelah sakit demam.",
+            "textLang": "id",
+            "translation": "Her body felt weak after having a fever.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exhausted and recovering in bed",
+            "note": null,
+            "matchedForm": "lemah",
+            "matchedTranslationForm": "weak"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2wrlt5hvcrggtsm",
+        "order": 1,
+        "definition": "Lacking in force, ability, effectiveness, or resolve.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weak",
+              "poor",
+              "low"
+            ]
+          }
+        ],
+        "domain": "ability",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "va866a690yyvvji",
+            "text": "Sinyal internet di daerah ini sangat lemah.",
+            "textLang": "id",
+            "translation": "The internet signal in this area is very weak.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lemah",
+            "matchedTranslationForm": "weak"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lemah",
+    "lemma": "lemah",
+    "reading": null,
     "ipa": "/lemah/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +274,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/lemah/",
+        "why": "The first vowel in 'lemah' is a schwa /ə/, not /e/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(texture) Soft, easily bent, or not firm.",
+        "why": "'Lemah' does not mean physically soft like soil ('lembek'/'gembur'); it means weak in ability/force."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tanah di kebun itu sangat lemah dan basah.",
+        "why": "Soil is not described as 'lemah' in standard Indonesian; 'gembur' or 'lembek' is used."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or something soft and fragile like soil",
+        "why": "Repeats the false claim that 'lemah' describes soft soil and restates the gloss."
+      }
+    ],
+    "growth": 1.004
   }
 }

@@ -75,6 +75,75 @@
     "primaryGloss": "cry",
     "emotion": "sad and distressed, letting the heavy feelings out",
     "notes": [
+      "哭 usually implies crying with sound, whereas 流泪 (liúlèi) specifically means shedding tears quietly."
+    ],
+    "senses": [
+      {
+        "id": "6ws75bwys69xpbl",
+        "order": 0,
+        "definition": "To shed tears and often make sounds because of sadness, pain, or strong emotion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cry",
+              "weep"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😭",
+        "examples": [
+          {
+            "id": "e6kohd76lrhoq14",
+            "text": "玩具坏了，小女孩哭了起来。",
+            "textLang": "zh",
+            "translation": "The toy broke, and the little girl started crying.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "哭",
+            "matchedTranslationForm": "crying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "哭",
+    "lemma": "哭",
+    "reading": "kū",
+    "ipa": "/kʰu˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cry; to weep",
+    "primaryGloss": "cry",
+    "emotion": "sad and distressed, letting the heavy feelings out",
+    "notes": [
       "哭 refers to crying with sound, whereas 流泪 specifically means shedding tears without necessarily making noise.",
       "Do not confuse 哭 (to cry) with 笑 (to laugh/smile)."
     ],
@@ -164,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To have tears coming out of your eyes",
+        "why": "哭 does not mean eyes watering; in the example it is just hyperbole for crying."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "小女孩因为玩具坏了而哭。",
+        "why": "因为…而哭 is stiff and literary; everyday speech uses 哭了."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 哭 (to cry) with 笑 (to laugh/smile).",
+        "why": "Listing an unrelated antonym as a confusion warning is filler."
+      }
+    ],
+    "growth": 0.565
   }
 }

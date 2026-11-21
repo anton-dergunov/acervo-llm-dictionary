@@ -68,6 +68,73 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "falda",
+    "primaryGloss": "falda",
+    "emotion": "neat and well-groomed, getting ready to go out",
+    "notes": [
+      "No confundas 'skirt' (falda) con 'shirt' (camisa), que se escriben y suenan de forma parecida."
+    ],
+    "senses": [
+      {
+        "id": "4l4s90dneckwlt5",
+        "order": 0,
+        "definition": "Prenda de vestir que cuelga de la cintura y cubre las piernas total o parcialmente, sin dividirse para cada una.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "falda"
+            ]
+          }
+        ],
+        "domain": "ropa",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "dflleplxxnewngu",
+            "text": "She wore a blue skirt to the party.",
+            "textLang": "en",
+            "translation": "Ella llevó una falda azul a la fiesta.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased with how the outfit looks today",
+            "note": null,
+            "matchedForm": "skirt",
+            "matchedTranslationForm": "falda"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "skirt",
+    "lemma": "skirt",
+    "reading": null,
+    "ipa": "/skɜrt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "faldón; falda",
     "primaryGloss": "falda",
     "emotion": "neat and well-groomed, getting ready to go out",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "faldón; falda",
+        "why": "'faldón' is not in the sense glosses and shouldn't lead shortGloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa principalmente para referirse a la prenda de vestir femenina que",
+        "why": "Just repeats the definition of the only sense."
+      }
+    ],
+    "growth": 1.199
   }
 }

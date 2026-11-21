@@ -72,6 +72,95 @@
     "primaryGloss": "family",
     "emotion": "warm and affectionate, thinking of the people closest to home",
     "notes": [
+      "Takes a singular verb even when referring to all its members (e.g., 'la mia famiglia è grande')."
+    ],
+    "senses": [
+      {
+        "id": "6rm95yv9wsogvno",
+        "order": 0,
+        "definition": "A group of parents, children, and relatives, especially those living together as a household.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "family",
+              "household"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨‍👩‍👧‍👦",
+        "examples": [
+          {
+            "id": "gcd8w8afpy8p6o7",
+            "text": "Ho una grande famiglia.",
+            "textLang": "it",
+            "translation": "I have a big family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and smiling, speaking about loved ones",
+            "note": null,
+            "matchedForm": "famiglia",
+            "matchedTranslationForm": "family"
+          },
+          {
+            "id": "9ou6h45814gf39x",
+            "text": "Tutta la famiglia è andata in vacanza.",
+            "textLang": "it",
+            "translation": "The whole family went on vacation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, recounting a shared trip",
+            "note": null,
+            "matchedForm": "famiglia",
+            "matchedTranslationForm": "family"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la famiglia",
+    "lemma": "famiglia",
+    "reading": null,
+    "ipa": "/faˈmiʎ.ʎa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍👩‍👧‍👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "family; household",
+    "primaryGloss": "family",
+    "emotion": "warm and affectionate, thinking of the people closest to home",
+    "notes": [
       "While 'famiglia' primarily refers to relatives, it is also commonly used to mean 'household' or the people living under the same roof."
     ],
     "senses": [
@@ -160,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Shades of one meaning ('family' and 'household') split into two senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'famiglia' primarily refers to relatives, it is also commonly used",
+        "why": "Merely restates the glosses; misses useful grammar (takes singular verbs)."
+      }
+    ],
+    "growth": 0.906
   }
 }

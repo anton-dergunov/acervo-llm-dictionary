@@ -58,6 +58,74 @@
     "headword": "menggambar",
     "lemma": "gambar",
     "reading": null,
+    "ipa": "/məŋˈɡam.bar/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✏️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to draw",
+    "primaryGloss": "to draw",
+    "emotion": "focused and quiet, expressing an idea on paper with a steady hand",
+    "notes": [
+      "Formed from the noun 'gambar' (picture, drawing) with the active prefix meN-.",
+      "For figurative 'to depict' or 'to describe', use 'menggambarkan' instead."
+    ],
+    "senses": [
+      {
+        "id": "dibn58rza8unt1j",
+        "order": 0,
+        "definition": "To make a picture with a pencil, pen, crayon, or similar tool.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to draw"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "yda2noswrncwlkz",
+            "text": "Dia suka menggambar pemandangan di buku catatannya.",
+            "textLang": "id",
+            "translation": "She likes to draw landscapes in her notebook.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a creative hobby during free time",
+            "note": null,
+            "matchedForm": "menggambar",
+            "matchedTranslationForm": "draw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "menggambar",
+    "lemma": "gambar",
+    "reading": null,
     "ipa": "/məŋˈɡambar/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "(describe) To describe or represent something in a clear, detailed",
+        "why": "Confuses 'menggambar' (to draw physically) with 'menggambarkan' (to depict or describe)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Penulis itu menggambar karakter utamanya dengan sangat detail.",
+        "why": "Ungrammatical for 'depict in writing'; requires 'menggambarkan', not 'menggambar'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'menggambar' when you create an image using tools like",
+        "why": "Merely restates the definition."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to draw; to depict",
+        "why": "'To depict' is 'menggambarkan', not 'menggambar'."
+      }
+    ],
+    "growth": 0.618
   }
 }

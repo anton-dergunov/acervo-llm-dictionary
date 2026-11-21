@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sleep",
+    "primaryGloss": "sleep",
+    "emotion": "relaxed and calm, letting go of the day, peaceful and quiet",
+    "notes": [
+      "Irregular present tense conjugation: ja śpię, ty śpisz, on/ona śpi, my śpimy, wy śpicie, oni/one śpią.",
+      "Imperfective verb describing the state of being asleep. Compare with 'zasypiać' / 'zasnąć' (to fall asleep) and 'iść spać' (to go to bed)."
+    ],
+    "senses": [
+      {
+        "id": "v4waa8picj5coqa",
+        "order": 0,
+        "definition": "To rest with your eyes closed and your body inactive, usually at night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep",
+              "sleep"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "84wlh2s8odihakh",
+            "text": "Muszę dzisiaj wcześnie iść spać.",
+            "textLang": "pl",
+            "translation": "I have to go to sleep early tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "spać",
+            "matchedTranslationForm": "sleep"
+          },
+          {
+            "id": "olss5hl1ctvwybj",
+            "text": "Dzieci często lubią spać w dzień.",
+            "textLang": "pl",
+            "translation": "Children often like to sleep during the day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and thoughtful, noting a simple truth about children",
+            "note": null,
+            "matchedForm": "spać",
+            "matchedTranslationForm": "sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "spać",
+    "lemma": "spać",
+    "reading": null,
+    "ipa": "/spat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sleep; to rest",
     "primaryGloss": "sleep",
     "emotion": "relaxed and calm, letting go of the day, peaceful and quiet",
@@ -140,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę dzisiaj wcześnie spać.",
+        "why": "Unnatural Polish; native speakers say 'Muszę dzisiaj wcześnie iść spać' (go to sleep)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular present tense conjugation ('śpię, śpisz'), which is essential for A1/A2."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sleep; to rest",
+        "why": "Includes 'to rest', which is not in the glosses ('odpoczywać' is 'to rest')."
+      }
+    ],
+    "growth": 0.971
   }
 }

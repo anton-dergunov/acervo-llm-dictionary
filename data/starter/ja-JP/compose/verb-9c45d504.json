@@ -70,6 +70,76 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "to become dry; to dry out",
+    "primaryGloss": "dry",
+    "emotion": null,
+    "notes": [
+      "乾く is an intransitive verb (something dries by itself: 髪が乾く, hair dries). To say you dry something, use the transitive verb 乾かす (kawakasu: 髪を乾かす, to dry one's hair).",
+      "In the set phrase のどがかわく ('throat becomes dry', i.e. to get thirsty), it is usually written 渇く rather than 乾く."
+    ],
+    "senses": [
+      {
+        "id": "2f814q3kz6j7pwj",
+        "order": 0,
+        "definition": "To lose moisture and become dry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "become dry",
+              "dry out"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "4ylpzyieu04nh07",
+            "text": "天気がいいので、洗濯物がよく乾く。",
+            "textLang": "ja",
+            "translation": "Because the weather is nice, the laundry dries well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a light and pleasant feeling of satisfaction on a sunny day",
+            "note": null,
+            "matchedForm": "乾く",
+            "matchedTranslationForm": "dries"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "乾く",
+    "lemma": "乾く",
+    "reading": "かわく",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "to become dry; to feel thirsty",
     "primaryGloss": "to dry",
     "emotion": null,
@@ -163,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes",
+        "quote": "Do not confuse with 渇く (also pronounced kawaku), which is used specifically",
+        "why": "Contradicts itself and sense 1: 渇く is the standard kanji for thirst (のどが渇く)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "運動してのどが乾いた。",
+        "why": "'To feel thirsty' is only the idiom のどが渇く (usually written with 渇), not 乾く alone."
+      }
+    ],
+    "growth": 0.845
   }
 }

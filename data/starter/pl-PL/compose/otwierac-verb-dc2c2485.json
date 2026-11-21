@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to open",
+    "primaryGloss": "to open",
+    "emotion": "helpful and welcoming, reaching out to let someone in",
+    "notes": [
+      "Imperfective verb; its perfective pair is 'otworzyć'.",
+      "It is transitive (takes an object in the accusative case). When something opens by itself or a shop opens for the day, use the reflexive 'otwierać się'."
+    ],
+    "senses": [
+      {
+        "id": "uckb3curcd52899",
+        "order": 0,
+        "definition": "To move something so that it is no longer shut, or to unfasten a container.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open"
+            ]
+          }
+        ],
+        "domain": "general",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "2kkie69ft6cnl1o",
+            "text": "Zawsze otwieram okno rano, żeby wpuścić świeże powietrze.",
+            "textLang": "pl",
+            "translation": "I always open the window in the morning to let in fresh air.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshed and calm, breathing in the morning breeze",
+            "note": null,
+            "matchedForm": "otwieram",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4srqap7wloaiytb",
+        "order": 1,
+        "definition": "To start a business, shop, bank account, or computer file.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open",
+              "to start"
+            ]
+          }
+        ],
+        "domain": "starting",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "p3926urouzw7huv",
+            "text": "W przyszłym miesiącu otwierają tu nową restaurację.",
+            "textLang": "pl",
+            "translation": "Next month they are opening a new restaurant here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "otwierają",
+            "matchedTranslationForm": "opening"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "otwierać",
+    "lemma": "otwierać",
+    "reading": null,
+    "ipa": "/ɔtˈfjɛ.rat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to open; to turn on",
     "primaryGloss": "to open",
     "emotion": "helpful and welcoming, reaching out to let someone in",
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to open; to turn on",
+        "why": "'To turn on' is absent from the senses and is not a standard meaning."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Sklep otwiera o ósmej rano.",
+        "why": "Intransitive 'opens' requires the reflexive 'otwiera się' in Polish; 'otwiera' is transitive."
+      }
+    ],
+    "growth": 1.145
   }
 }

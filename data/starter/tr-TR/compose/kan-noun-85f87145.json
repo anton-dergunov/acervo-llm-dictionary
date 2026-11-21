@@ -72,6 +72,73 @@
     "primaryGloss": "blood",
     "emotion": "serious and cautious, looking at a sudden injury",
     "notes": [
+      "Often used in medical expressions like 'kan vermek' (to give/donate blood) and 'kan tahlili' (blood test)."
+    ],
+    "senses": [
+      {
+        "id": "nrqetfkq6fwl6vk",
+        "order": 0,
+        "definition": "The red liquid that flows inside the body through veins and arteries.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blood"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩸",
+        "examples": [
+          {
+            "id": "1zd99n05jczqcvb",
+            "text": "Elimden kan akıyor.",
+            "textLang": "tr",
+            "translation": "My hand is bleeding. (lit. Blood is flowing from my hand.)",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and surprised, noticing a cut on the hand",
+            "note": null,
+            "matchedForm": "kan",
+            "matchedTranslationForm": "Blood"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kan",
+    "lemma": "kan",
+    "reading": null,
+    "ipa": "/kan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩸",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "blood",
+    "primaryGloss": "blood",
+    "emotion": "serious and cautious, looking at a sudden injury",
+    "notes": [
       "Kan is a fundamental body-related noun, essential for talking about health, medical checkups, and injuries."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kan is a fundamental body-related noun, essential for talking about health",
+        "why": "Pure filler stating the obvious instead of useful usage information."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Blood is flowing from my hand.",
+        "why": "Calqued translation; in English one naturally says 'My hand is bleeding'."
+      }
+    ],
+    "growth": 1.115
   }
 }

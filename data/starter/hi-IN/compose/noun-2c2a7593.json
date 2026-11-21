@@ -60,6 +60,94 @@
     "headword": "कोना",
     "lemma": "कोना",
     "reading": null,
+    "ipa": "/koː.naː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📐",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "corner",
+    "primaryGloss": "corner",
+    "emotion": null,
+    "notes": [
+      "As a regular masculine noun ending in -आ (-ā), it changes to कोने (kone) in the oblique singular (e.g., कमरे के कोने में — in the corner of the room) and in the direct plural."
+    ],
+    "senses": [
+      {
+        "id": "grz15octmtju6yv",
+        "order": 0,
+        "definition": "The place, point, or area where two edges, walls, or streets meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "📐",
+        "examples": [
+          {
+            "id": "7frn38cqgrpmsa3",
+            "text": "मेज़ का कोना नुकीला है।",
+            "textLang": "hi",
+            "translation": "The corner of the table is sharp.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "कोना",
+            "matchedTranslationForm": "corner"
+          },
+          {
+            "id": "ktsqhbl1823mwra",
+            "text": "वह सड़क के कोने पर खड़ा है।",
+            "textLang": "hi",
+            "translation": "He is standing on the street corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful, giving clear directions to someone",
+            "note": null,
+            "matchedForm": "कोने",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "कोना",
+    "lemma": "कोना",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Physical corner and street corner are shades of one meaning; 'geometry' domain is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "corner, angle",
+        "why": "Geometric 'angle' in Hindi is कोण (koṇ), not कोना (konā)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'कोना' for the interior angle of a room or a box.",
+        "why": "False restriction: कोना is used equally for exterior corners (as in example[0] 'table corner')."
+      }
+    ],
+    "growth": 0.847
   }
 }

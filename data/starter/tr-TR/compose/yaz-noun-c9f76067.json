@@ -68,6 +68,73 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "summer",
+    "primaryGloss": "summer",
+    "emotion": "a warm, relaxed feeling, thinking of sunshine and long days",
+    "notes": [
+      "To say 'in the summer', use the adverbial form yazın. Do not confuse the noun yaz with yazı ('writing, article') or the imperative of yazmak ('write!')."
+    ],
+    "senses": [
+      {
+        "id": "wk79ih5smfu6zjm",
+        "order": 0,
+        "definition": "The warmest season of the year, between spring and autumn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "summer"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "qjqxxq8kytxz5ym",
+            "text": "Yaz tatilinde deniz kenarına gideceğiz.",
+            "textLang": "tr",
+            "translation": "We will go to the seaside during the summer vacation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and looking forward to a pleasant holiday",
+            "note": null,
+            "matchedForm": "Yaz",
+            "matchedTranslationForm": "summer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yaz",
+    "lemma": "yaz",
+    "reading": null,
+    "ipa": "/jaz/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "summer; writing",
     "primaryGloss": "summer",
     "emotion": "a warm, relaxed feeling, thinking of sunshine and long days",
@@ -158,5 +225,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The act of recording words, symbols, or characters on a surface.",
+        "why": "'Yaz' does not mean 'writing' (that is 'yazı'); 'yaz' is only the verb imperative 'write!'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bu yaz çok güzel olmuş.",
+        "why": "Means 'This summer has turned out very nice', not 'This piece of writing' ('Bu yazı')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It can mean the season 'summer' or the act of 'writing'",
+        "why": "Confuses the imperative verb form 'yaz' ('write!') with the noun 'yazı' ('writing')."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "summer; writing",
+        "why": "Includes false meaning 'writing'."
+      }
+    ],
+    "growth": 0.632
   }
 }

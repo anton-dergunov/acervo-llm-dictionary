@@ -57,6 +57,160 @@
     "language": "ja",
     "headword": "通り",
     "lemma": "通り",
+    "reading": "とおり",
+    "ipa": "toːɾi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "street, avenue; as, in the same way; traffic",
+    "primaryGloss": "street",
+    "emotion": "matter-of-fact and orienting, identifying a path or a location in a city",
+    "notes": [
+      "通り refers to a city street lined with buildings or shops, whereas 道 (みち) is the general word for any road, street, or path.",
+      "When attached directly to a noun or name (like 人通り 'foot traffic' or 説明書通り 'as in the manual'), it is often voiced as どおり."
+    ],
+    "senses": [
+      {
+        "id": "kgydkwtiilby0mg",
+        "order": 0,
+        "definition": "A public road in a town or city, typically lined with buildings or shops.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street",
+              "avenue",
+              "road"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "zi2ekvn8ejp1sc9",
+            "text": "この通りには店がたくさんあります。",
+            "textLang": "ja",
+            "translation": "There are many shops on this street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, pointing out a busy location",
+            "note": null,
+            "matchedForm": "通り",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4czkw8o4nqxim7d",
+        "order": 1,
+        "definition": "In the same way as, or in accordance with something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "as",
+              "in accordance with",
+              "way"
+            ]
+          }
+        ],
+        "domain": "manner",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "g5vpkxvniz7855c",
+            "text": "あなたの言う通りです。",
+            "textLang": "ja",
+            "translation": "It is just as you say.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "通り",
+            "matchedTranslationForm": "as"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "twjf2fi4x82j6op",
+        "order": 2,
+        "definition": "The movement or flow of people, vehicles, or air along a route.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traffic",
+              "flow",
+              "passage"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "53sxfavqmkrrh9q",
+            "text": "この道は車の通りが多いです。",
+            "textLang": "ja",
+            "translation": "There is a lot of car traffic on this road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "通り",
+            "matchedTranslationForm": "traffic"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "通り",
+    "lemma": "通り",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -162,5 +316,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A2 sense 'as, in accordance with' (e.g., その通り)."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "人通りが多い場所を歩きます。",
+        "why": "Uses compound noun 人通り (ひとどおり) instead of standalone 通り."
+      }
+    ],
+    "growth": 1.205
   }
 }

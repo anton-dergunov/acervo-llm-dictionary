@@ -68,6 +68,93 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new",
+    "primaryGloss": "new",
+    "emotion": "excited and pleased, showing off something fresh",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ow7ztegqcdl1gp1",
+        "order": 0,
+        "definition": "Recently made, bought, or started, or different from the previous one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand new"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "2g3dj35os3sf9dn",
+            "text": "Kupiłem nowy samochód.",
+            "textLang": "pl",
+            "translation": "I bought a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and excited about a fresh purchase",
+            "note": null,
+            "matchedForm": "nowy",
+            "matchedTranslationForm": "new"
+          },
+          {
+            "id": "dro2dezjlhwcpie",
+            "text": "To jest nowy przepis na ciasto.",
+            "textLang": "pl",
+            "translation": "This is a new cake recipe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager to share something untried",
+            "note": null,
+            "matchedForm": "nowy",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "nowy",
+    "lemma": "nowy",
+    "reading": null,
+    "ipa": "/ˈnɔ.vɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh, modern",
     "primaryGloss": "new",
     "emotion": "excited and pleased, showing off something fresh",
@@ -161,5 +248,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "nowy samochod (masculine), nowa ksiazka (feminine)",
+        "why": "Missing Polish diacritics in 'samochód' and 'książka'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Nowy modifies to match the gender, number, and case",
+        "why": "Generic grammar rule applicable to every Polish adjective."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Shades of the single meaning 'new' split artificially; 'modern' is 'nowoczesny'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "new; fresh, modern",
+        "why": "'fresh' and 'modern' are not accurate translations of 'nowy'."
+      }
+    ],
+    "growth": 0.431
   }
 }

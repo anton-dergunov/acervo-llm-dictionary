@@ -73,6 +73,136 @@
     "headword": "без",
     "lemma": "без",
     "reading": null,
+    "ipa": "/bʲes/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without; to (in telling time)",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Always takes the genitive case.",
+      "Pronounced unstressed and attached to the following word (/bʲɪz/ before voiced consonants and vowels, /bʲɪs/ before voiceless consonants)."
+    ],
+    "senses": [
+      {
+        "id": "qa5g592cywrqcc0",
+        "order": 0,
+        "definition": "Not having or lacking something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "m10vdwni4tp36vr",
+            "text": "Я пью чай без сахара.",
+            "textLang": "ru",
+            "translation": "I drink tea without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact and simple",
+            "note": null,
+            "matchedForm": "без",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "xotmpznk9nm5ag0",
+            "text": "Он пришёл без документов.",
+            "textLang": "ru",
+            "translation": "He arrived without documents.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "без",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "69zfgjyferci8v7",
+        "order": 1,
+        "definition": "Used with minutes to tell the time before the coming hour.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to",
+              "before"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "x3r8cums4z35ele",
+            "text": "Сейчас без десяти пять.",
+            "textLang": "ru",
+            "translation": "It is ten to five now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "checking the time quickly",
+            "note": null,
+            "matchedForm": "без",
+            "matchedTranslationForm": "to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "без",
+    "lemma": "без",
+    "reading": null,
     "ipa": "/bʲez/",
     "pos": "expression",
     "gender": null,
@@ -196,5 +326,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'без' is a preposition, not a multi-word expression."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/bʲez/",
+        "why": "Word-final 'з' devoiced in citation form (/bʲes/); before nouns it is unstressed (/bʲɪz/, /bʲɪs/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'бес', which sounds identical",
+        "why": "A2 learners will not confuse a basic preposition with the noun 'demon'."
+      }
+    ],
+    "growth": 1.173
   }
 }

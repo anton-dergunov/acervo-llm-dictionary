@@ -60,6 +60,73 @@
     "headword": "vịt",
     "lemma": "vịt",
     "reading": null,
+    "ipa": "/vit˧˨ˀ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦆",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "duck",
+    "primaryGloss": "duck",
+    "emotion": "matter-of-fact, describing a familiar animal in a simple, direct way",
+    "notes": [
+      "Takes the classifier 'con' for the live bird (con vịt) and 'thịt' for its meat (thịt vịt)."
+    ],
+    "senses": [
+      {
+        "id": "nduyhw0b0ehaa4a",
+        "order": 0,
+        "definition": "A common water bird with a flat beak and webbed feet, often raised for meat or eggs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "duck"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦆",
+        "examples": [
+          {
+            "id": "549hyvah6jkblzy",
+            "text": "Đàn vịt đang bơi trên hồ.",
+            "textLang": "vi",
+            "translation": "The flock of ducks is swimming on the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vịt",
+            "matchedTranslationForm": "ducks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "vịt",
+    "lemma": "vịt",
+    "reading": null,
     "ipa": "/vɨt˧/",
     "pos": "noun",
     "gender": null,
@@ -203,5 +270,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To avoid or move quickly out of the way of something.",
+        "why": "Hallucinated sense translating English verb 'duck' into Vietnamese."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "Something that is of low quality, counterfeit, or untrustworthy.",
+        "why": "Hallucinated sense; only 'tin vịt' (false rumor) exists, not 'hàng vịt' or 'đồ vịt'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "often as 'đồ vịt'",
+        "why": "False claim; 'đồ vịt' is not a Vietnamese expression for fake goods."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "the verb form 'vịt' can mean to dodge or evade",
+        "why": "False claim; 'vịt' does not mean to dodge in Vietnamese."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/vɨt˧/",
+        "why": "Wrong vowel and tone; 'vịt' is /vit˧˨ˀ/."
+      }
+    ],
+    "growth": 0.362
   }
 }

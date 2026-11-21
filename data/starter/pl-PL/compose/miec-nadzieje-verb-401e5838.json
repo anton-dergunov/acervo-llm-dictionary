@@ -58,6 +58,75 @@
     "headword": "mieć nadzieję",
     "lemma": "mieć nadzieję",
     "reading": null,
+    "ipa": "/mʲɛt͡ɕ naˈd͡ʑɛ.jɛ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤞",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to hope",
+    "primaryGloss": "to hope",
+    "emotion": "optimistic and looking forward to the future with quiet confidence",
+    "notes": [
+      "Followed by a comma and the conjunction że ('that') when introducing a clause: Mam nadzieję, że... ('I hope that...').",
+      "Can also be used on its own as a response: Mam nadzieję! ('I hope so!')."
+    ],
+    "senses": [
+      {
+        "id": "b3m4313dwcwtqvr",
+        "order": 0,
+        "definition": "To want something to happen and think that it is possible.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hope",
+              "to have hope"
+            ]
+          }
+        ],
+        "domain": "hope",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "ecolusu7awe0s8a",
+            "text": "Mam nadzieję, że pogoda jutro będzie ładna.",
+            "textLang": "pl",
+            "translation": "I hope that the weather will be nice tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and eager for a sunny day",
+            "note": null,
+            "matchedForm": "Mam nadzieję",
+            "matchedTranslationForm": "hope"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "mieć nadzieję",
+    "lemma": "mieć nadzieję",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To strongly want something to happen in the future.",
+        "why": "Artificial split; 'mieć nadzieję' only means 'to hope', not 'to want'."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to want something to happen, to wish for",
+        "why": "Translating 'mieć nadzieję' as 'to want' confuses learners with 'chcieć' (contradicting note 1)."
+      }
+    ],
+    "growth": 0.616
   }
 }

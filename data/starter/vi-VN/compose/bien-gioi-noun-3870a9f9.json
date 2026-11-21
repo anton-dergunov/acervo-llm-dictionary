@@ -70,6 +70,75 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "border; frontier",
+    "primaryGloss": "border",
+    "emotion": null,
+    "notes": [
+      "Refers specifically to the political and physical border between countries.",
+      "Use 'ranh giới' for a general boundary, limit between two things, or property line."
+    ],
+    "senses": [
+      {
+        "id": "98ba4iuyhydokon",
+        "order": 0,
+        "definition": "The official line or area that separates two countries.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "border",
+              "frontier"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🛂",
+        "examples": [
+          {
+            "id": "4fkw3ge69y4r5g2",
+            "text": "Chúng tôi đã đi qua biên giới bằng tàu hỏa.",
+            "textLang": "vi",
+            "translation": "We crossed the border by train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "biên giới",
+            "matchedTranslationForm": "border"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "biên giới",
+    "lemma": "biên giới",
+    "reading": null,
+    "ipa": "/ɓiən˧˧ zəːj˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "border; boundary",
     "primaryGloss": "border",
     "emotion": null,
@@ -164,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "(limit) The limit or edge of an area, interest, or field of",
+        "why": "English calque of 'frontiers of science'; 'biên giới' contradicts Note 0 and means national border."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Chúng tôi đã đi qua biên giới bằng xe lửa.",
+        "why": "In Northern Vietnamese, 'tàu hỏa' is standard and natural for 'train', not 'xe lửa'."
+      }
+    ],
+    "growth": 0.535
   }
 }

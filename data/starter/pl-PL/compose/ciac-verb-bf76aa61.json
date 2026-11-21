@@ -58,6 +58,116 @@
     "headword": "ciąć",
     "lemma": "ciąć",
     "reading": null,
+    "ipa": "/t͡ɕɔɲt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✂️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cut; to slash",
+    "primaryGloss": "to cut",
+    "emotion": "focused and steady, making a clean split",
+    "notes": [
+      "Imperfective (perfective: 'pociąć'). Irregular present tense: 'tnę', 'tniesz', 'tnie'.",
+      "Used for cutting paper, fabric, wood, or wire. For slicing food, use 'kroić'; for cutting hair, use 'strzyc' or 'obcinać'."
+    ],
+    "senses": [
+      {
+        "id": "ei4kboi1zvhnoo4",
+        "order": 0,
+        "definition": "To divide or make an opening in something using a sharp tool such as scissors, a knife, or a saw.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut",
+              "to slit"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "y32xfvumj7h772h",
+            "text": "Dzieci uczą się ciąć papier nożyczkami.",
+            "textLang": "pl",
+            "translation": "The children are learning to cut paper with scissors.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ciąć",
+            "matchedTranslationForm": "to cut"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9b2bxt2cjtxnz8i",
+        "order": 1,
+        "definition": "To reduce costs, spending, or content sharply.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut",
+              "to slash"
+            ]
+          }
+        ],
+        "domain": "reduction",
+        "emoji": "💇",
+        "examples": [
+          {
+            "id": "wjgpm6n0hamwbe5",
+            "text": "Firma musi ciąć koszty w tym roku.",
+            "textLang": "pl",
+            "translation": "The company has to cut costs this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ciąć",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ciąć",
+    "lemma": "ciąć",
+    "reading": null,
     "ipa": "/t͡ɕɔnt͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Musisz ciąć chleb ostrym nożem.",
+        "why": "For slicing bread or food, Polish uses 'kroić', not 'ciąć'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Chcę ciąć włosy u fryzjera.",
+        "why": "Unnatural; 'obciąć' or 'podciąć' (or 'strzyc') is used for getting a haircut."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use it for cutting paper, cloth, hair, or food.",
+        "why": "False: cutting food is 'kroić', cutting hair is usually 'strzyc' or 'obcinać'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same physical action of cutting with a sharp tool."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs the real perfective pair ('pociąć') and irregular present stem ('tnę, tniesz')."
+      }
+    ],
+    "growth": 1.033
   }
 }

@@ -58,6 +58,73 @@
     "headword": "l'œuf",
     "lemma": "œuf",
     "reading": null,
+    "ipa": "/œf/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "egg",
+    "primaryGloss": "egg",
+    "emotion": "hungry and anticipating a warm breakfast, simple and satisfied",
+    "notes": [
+      "The pronunciation changes in the plural: the 'f' is pronounced in the singular ('un œuf' /œ̃.n‿œf/), but silent in the plural ('des œufs' /de.z‿ø/)."
+    ],
+    "senses": [
+      {
+        "id": "w1xuw3rbxqrxu02",
+        "order": 0,
+        "definition": "The oval object with a shell laid by female birds, especially hens, used as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "egg"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥚",
+        "examples": [
+          {
+            "id": "c6bc6bqxleyijvi",
+            "text": "Je mange un œuf à la coque ce matin.",
+            "textLang": "fr",
+            "translation": "I am eating a soft-boiled egg this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and content, enjoying a quiet morning at home",
+            "note": null,
+            "matchedForm": "œuf",
+            "matchedTranslationForm": "egg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'œuf",
+    "lemma": "œuf",
+    "reading": null,
     "ipa": "/l‿œf/",
     "pos": "noun",
     "gender": "masculine",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/l‿œf/",
+        "why": "IPA must be of the lemma without the article: /œf/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The 'f' at the end of 'œuf' is silent when you talk",
+        "why": "States the exact opposite of the truth: 'f' is pronounced in singular, silent in plural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'veuf' (widower), which sounds similar.",
+        "why": "Beginners are unlikely to confuse 'egg' with 'widower'."
+      }
+    ],
+    "growth": 0.858
   }
 }

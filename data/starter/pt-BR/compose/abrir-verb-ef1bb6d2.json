@@ -70,6 +70,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to open; to start up",
+    "primaryGloss": "to open",
+    "emotion": null,
+    "notes": [
+      "Has an irregular past participle: 'aberto' (opened / open).",
+      "Can be used both with an object ('abrir a porta' — to open the door) and without one ('a loja abre às oito' — the store opens at eight)."
+    ],
+    "senses": [
+      {
+        "id": "3sfotv5tliqysjb",
+        "order": 0,
+        "definition": "To move something so that it is no longer closed, or to become not closed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open",
+              "to unwrap",
+              "to unfold"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "8jzr36fxkmb3car",
+            "text": "Preciso abrir a porta para o gato entrar.",
+            "textLang": "pt",
+            "translation": "I need to open the door for the cat to come in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, everyday task done for a pet, calm and routine",
+            "note": null,
+            "matchedForm": "abrir",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lqz1fw1n6gexmmb",
+        "order": 1,
+        "definition": "To start a business, account, or institution and make it available for use.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to open",
+              "to start up",
+              "to set up"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "aq99cxg3bpnuyhl",
+            "text": "Eles vão abrir uma loja nova na cidade.",
+            "textLang": "pt",
+            "translation": "They are going to open a new store in town.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excitement about a new beginning, bright and expectant",
+            "note": null,
+            "matchedForm": "abrir",
+            "matchedTranslationForm": "open"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "abrir",
+    "lemma": "abrir",
+    "reading": null,
+    "ipa": "/aˈbɾiʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to open; to unlock; to switch on",
     "primaryGloss": "open",
     "emotion": null,
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to open; to unlock; to switch on",
+        "why": "'To switch on' is false (contradicts note 1), and 'to unlock' is 'destrancar', not 'abrir'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the irregular past participle 'aberto', which every A2 learner needs to know."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Abrir is the standard verb for 'to open'",
+        "why": "Restates the gloss instead of giving useful grammatical information."
+      }
+    ],
+    "growth": 0.904
   }
 }

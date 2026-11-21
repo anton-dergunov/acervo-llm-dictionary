@@ -89,6 +89,74 @@
     "primaryGloss": "computer",
     "emotion": "focused and steady, ready to start typing at a desk",
     "notes": [
+      "The plural form is identical to the singular: 'die Computer'.",
+      "In everyday speech, 'der Rechner' is also very commonly used for a computer."
+    ],
+    "senses": [
+      {
+        "id": "23u06odynigj452",
+        "order": 0,
+        "definition": "An electronic machine used for storing and processing data, working, and using the internet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "computer"
+            ]
+          }
+        ],
+        "domain": "technology",
+        "emoji": "💻",
+        "examples": [
+          {
+            "id": "jme33ubvqayww5g",
+            "text": "Ich arbeite den ganzen Tag am Computer.",
+            "textLang": "de",
+            "translation": "I work at the computer all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and slightly tired from a long day at the desk",
+            "note": null,
+            "matchedForm": "Computer",
+            "matchedTranslationForm": "computer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Computer",
+    "lemma": "Computer",
+    "reading": null,
+    "ipa": "/kɔmˈpjuːtɐ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💻",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "computer",
+    "primaryGloss": "computer",
+    "emotion": "focused and steady, ready to start typing at a desk",
+    "notes": [
       "In German, compound nouns with Computer are very common, such as Computerbildsschirm (computer screen) or Computertastatur (computer keyboard).",
       "Note the gender: der Computer is masculine, and the plural form remains der Computer (with a slight vowel length difference in speech or context, though often identical)."
     ],
@@ -136,5 +204,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "and the plural form remains der Computer (with a slight vowel length",
+        "why": "Plural article is 'die' ('die Computer'), not 'der', and there is no vowel length difference."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "such as Computerbildsschirm (computer screen)",
+        "why": "Misspelled German word ('Computerbildsschirm' with double 's' instead of 'Computerbildschirm') in a filler note."
+      }
+    ],
+    "growth": 0.705
   }
 }

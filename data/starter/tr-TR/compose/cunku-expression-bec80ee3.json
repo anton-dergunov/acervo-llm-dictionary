@@ -58,6 +58,75 @@
     "headword": "çünkü",
     "lemma": "çünkü",
     "reading": null,
+    "ipa": "/ˈtʃyn.cy/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "Unlike 'diye' or 'için', which go at the end of a clause, 'çünkü' comes at the beginning of the clause giving the reason."
+    ],
+    "senses": [
+      {
+        "id": "fci1chni8tecdy7",
+        "order": 0,
+        "definition": "For the reason that; used to introduce an explanation or cause for something just stated.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since",
+              "as"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "🔗",
+        "examples": [
+          {
+            "id": "x21u8wjo89bqzqz",
+            "text": "Bugün dışarı çıkmıyorum, çünkü hava çok soğuk.",
+            "textLang": "tr",
+            "translation": "I am not going out today, because the weather is very cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "çünkü",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "çünkü",
+    "lemma": "çünkü",
+    "reading": null,
     "ipa": "/tʃyn.cy/",
     "pos": "expression",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tʃyn.cy/",
+        "why": "Missing primary stress mark on the first syllable (/ˈtʃyn.cy/)."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'çünkü' is a single-word conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "çünkü connects a statement to the reason or explanation that follows it.",
+        "why": "Merely restates the definition of the word."
+      }
+    ],
+    "growth": 0.868
   }
 }

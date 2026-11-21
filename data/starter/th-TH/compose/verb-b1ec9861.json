@@ -58,6 +58,159 @@
     "headword": "หยุด",
     "lemma": "หยุด",
     "reading": null,
+    "ipa": "/jùt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stop; to take a day off",
+    "primaryGloss": "stop",
+    "emotion": "firm and decisive, like telling someone to quit what they are doing",
+    "notes": [
+      "Do not confuse with 'เลิก' (lɤ̂ɤk), which is used for quitting a habit, ending a relationship, or finishing work/school for the day."
+    ],
+    "senses": [
+      {
+        "id": "lac7d1jj4tgv5zn",
+        "order": 0,
+        "definition": "To cease moving or doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "halt",
+              "cease"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "e79xo5m40e9kvt8",
+            "text": "รถหยุดแล้ว",
+            "textLang": "th",
+            "translation": "The car has stopped.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, noting a change in movement",
+            "note": null,
+            "matchedForm": "หยุด",
+            "matchedTranslationForm": "stopped"
+          },
+          {
+            "id": "z2mb3vb2tdde4v7",
+            "text": "หยุดพูดเดี๋ยวนี้",
+            "textLang": "th",
+            "translation": "Stop talking right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stern, sharp and impatient",
+            "note": null,
+            "matchedForm": "หยุด",
+            "matchedTranslationForm": "Stop"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0u2ahwd687zpm4g",
+        "order": 1,
+        "definition": "To take time off from work or school, or (of a business) to be closed for the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be off",
+              "take a day off",
+              "be closed"
+            ]
+          }
+        ],
+        "domain": "rest",
+        "emoji": "⏸️",
+        "examples": [
+          {
+            "id": "cmbe0evoafkk2f5",
+            "text": "พรุ่งนี้ร้านหยุด",
+            "textLang": "th",
+            "translation": "Tomorrow the shop is closed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "หยุด",
+            "matchedTranslationForm": "is closed"
+          },
+          {
+            "id": "963gfmt9h57qhd3",
+            "text": "วันนี้ฉันหยุดงาน",
+            "textLang": "th",
+            "translation": "Today I am off work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "หยุด",
+            "matchedTranslationForm": "am off"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "หยุด",
+    "lemma": "หยุด",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -182,5 +335,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses[1].definition",
+        "quote": "To take a break or pause for a period of time.",
+        "why": "Misses the core everyday meaning 'to be off work/school' or 'to be closed (of a shop)'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "เรามาหยุดพักกันก่อน",
+        "why": "'Rest/break' here comes from พัก; หยุด alone means 'stop' (sense 0) or 'take a day off'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical movement, time, or ongoing actions.",
+        "why": "Generic filler restating what 'to stop' means."
+      }
+    ],
+    "growth": 1.204
   }
 }

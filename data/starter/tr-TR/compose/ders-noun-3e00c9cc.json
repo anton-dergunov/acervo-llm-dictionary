@@ -68,6 +68,116 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "lesson; class; subject",
+    "primaryGloss": "lesson",
+    "emotion": "focused and academic, ready to listen or prepare for school",
+    "notes": [
+      "To say 'to study' or 'to do homework', use the collocation 'ders çalışmak' (e.g., Bu akşam ders çalışmam lazım — I need to study tonight)."
+    ],
+    "senses": [
+      {
+        "id": "320y7la2zshv001",
+        "order": 0,
+        "definition": "A period of time in which a teacher instructs students.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lesson",
+              "class",
+              "lecture"
+            ]
+          }
+        ],
+        "domain": "class period",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "q630spwotevao1d",
+            "text": "Ders saat on birde başlıyor.",
+            "textLang": "tr",
+            "translation": "The class starts at eleven o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, stating a schedule",
+            "note": null,
+            "matchedForm": "Ders",
+            "matchedTranslationForm": "class"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "36t6k0syzocq4tv",
+        "order": 1,
+        "definition": "An area of knowledge studied in school or university.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "subject",
+              "course"
+            ]
+          }
+        ],
+        "domain": "subject",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5e8fpjge99aie1y",
+            "text": "En sevdiğim ders matematik.",
+            "textLang": "tr",
+            "translation": "My favorite subject is math.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ders",
+            "matchedTranslationForm": "subject"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ders",
+    "lemma": "ders",
+    "reading": null,
+    "ipa": "/ˈdæɾs/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "lesson; class; study",
     "primaryGloss": "lesson",
     "emotion": "focused and academic, ready to listen or prepare for school",
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(study) The act of studying a subject to gain knowledge.",
+        "why": "'ders' means lesson/subject; 'studying' is the idiom 'ders çalışmak', not 'ders' alone."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'school subject / course' (e.g., Matematik dersi)."
+      }
+    ],
+    "growth": 0.946
   }
 }

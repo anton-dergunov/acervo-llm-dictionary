@@ -74,6 +74,74 @@
     "primaryGloss": "arrive",
     "emotion": null,
     "notes": [
+      "Takes the location particle -에 for the destination (e.g., 역에 도착하다), never the object particle -을/-를."
+    ],
+    "senses": [
+      {
+        "id": "dts5i19y3jvve7i",
+        "order": 0,
+        "definition": "To reach a place at the end of a journey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arrive",
+              "reach"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "11081gx1076u260",
+            "text": "기차가 역에 도착했습니다.",
+            "textLang": "ko",
+            "translation": "The train arrived at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, like an announcement",
+            "note": null,
+            "matchedForm": "도착했습니다",
+            "matchedTranslationForm": "arrived"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "도착하다",
+    "lemma": "도착하다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to arrive; to reach",
+    "primaryGloss": "arrive",
+    "emotion": null,
+    "notes": [
       "Use 도착하다 when focusing on the end point of a journey.",
       "Unlike words for 'visiting' or 'stopping by,' 도착하다 emphasizes the specific moment of crossing the threshold or completing the travel."
     ],
@@ -122,5 +190,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 도착하다 when focusing on the end point of a journey.",
+        "why": "Restates the definition while omitting the required particle -에 (not -을/를)."
+      }
+    ],
+    "growth": 0.665
   }
 }

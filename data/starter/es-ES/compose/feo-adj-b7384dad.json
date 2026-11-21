@@ -68,6 +68,132 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "ugly; nasty",
+    "primaryGloss": "ugly",
+    "emotion": "blunt and direct, pointing something out without sugarcoating it",
+    "notes": [],
+    "senses": [
+      {
+        "id": "rdftzu748fqfj6h",
+        "order": 0,
+        "definition": "Unpleasant to look at; lacking physical beauty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ugly",
+              "unattractive"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👹",
+        "examples": [
+          {
+            "id": "x90sm1gcly17fax",
+            "text": "Ese edificio es muy feo.",
+            "textLang": "es",
+            "translation": "That building is very ugly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disapproving, pointing out something unappealing in the city",
+            "note": null,
+            "matchedForm": "feo",
+            "matchedTranslationForm": "ugly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6w49omr1nv2n14b",
+        "order": 1,
+        "definition": "Of an action, remark, or situation: unpleasant, rude, or unkind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nasty",
+              "unpleasant",
+              "mean"
+            ]
+          }
+        ],
+        "domain": "behaviour",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "z4izty8woh0lehf",
+            "text": "Me hizo un gesto muy feo.",
+            "textLang": "es",
+            "translation": "He made a very nasty gesture at me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "offended and upset by bad behavior",
+            "note": null,
+            "matchedForm": "feo",
+            "matchedTranslationForm": "nasty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "rdftzu748fqfj6h",
+      "from": "Que tiene falta de belleza o atractivo físico.",
+      "to": "Lacking physical beauty or attractiveness.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:18Z"
+    },
+    {
+      "sense": "6w49omr1nv2n14b",
+      "from": "Que resulta desagradable a la vista o de mal gusto.",
+      "to": "Unpleasant to look at or in bad taste.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "feo",
+    "lemma": "feo",
+    "reading": null,
+    "ipa": "/ˈfe.o/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👹",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "ugly; unpleasant",
     "primaryGloss": "ugly",
     "emotion": "blunt and direct, pointing something out without sugarcoating it",
@@ -162,22 +288,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "rdftzu748fqfj6h",
-      "from": "Que tiene falta de belleza o atractivo físico.",
-      "to": "Lacking physical beauty or attractiveness.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:18Z"
-    },
-    {
-      "sense": "6w49omr1nv2n14b",
-      "from": "Que resulta desagradable a la vista o de mal gusto.",
-      "to": "Unpleasant to look at or in bad taste.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both physical appearance and behavior, much like 'ugly' in",
+        "why": "merely restates the two senses without adding grammatical or usage help."
+      }
+    ],
+    "growth": 0.825
+  }
 }

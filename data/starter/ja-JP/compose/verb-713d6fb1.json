@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to dance",
+    "primaryGloss": "dance",
+    "emotion": "energetic and spirited, carried away by the rhythm of the music",
+    "notes": [
+      "Godan (group 1) intransitive verb; also takes a direct object with を for the dance performed (e.g., ダンスを踊る).",
+      "Unlike ダンスする, 踊る is the native Japanese verb used in most contexts, including both modern and traditional dances."
+    ],
+    "senses": [
+      {
+        "id": "firji818amcvg0k",
+        "order": 0,
+        "definition": "To move one's body rhythmically to music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dance"
+            ]
+          }
+        ],
+        "domain": "dance",
+        "emoji": "💃",
+        "examples": [
+          {
+            "id": "uofggq7px2jbv7a",
+            "text": "パーティーでみんなが楽しく踊っていた。",
+            "textLang": "ja",
+            "translation": "Everyone was dancing happily at the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "踊って",
+            "matchedTranslationForm": "dancing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "踊る",
+    "lemma": "踊る",
+    "reading": "おどる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💃",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to dance; to flutter; to be excited",
     "primaryGloss": "dance",
     "emotion": "energetic and spirited, carried away by the rhythm of the music",
@@ -200,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(movement) To flutter or move about in the air, like leaves or",
+        "why": "Poetic/figurative sense not needed at A2; confuses with 舞う."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(feeling) To be caught up in excitement or swayed by emotions or",
+        "why": "Conflates idioms (胸が躍る, 踊らされる) that are beyond A2."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "senses[2].examples[0]",
+        "quote": "Uses the passive potential form to mean 'being controlled' or 'swayed'.",
+        "why": "踊らされる is the causative-passive of 踊る (or passive of 踊らす), not passive potential."
+      }
+    ],
+    "growth": 0.491
   }
 }

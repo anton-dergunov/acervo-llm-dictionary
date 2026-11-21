@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "menu; dish",
+    "primaryGloss": "menu",
+    "emotion": "expectant and hungry, scanning the list for something good to eat",
+    "notes": [
+      "The physical menu card or board is also called 메뉴판.",
+      "Commonly refers to a specific dish on the menu (e.g., 오늘의 메뉴 'today's special'), not just the list itself."
+    ],
+    "senses": [
+      {
+        "id": "pyyfaug8maot0o1",
+        "order": 0,
+        "definition": "A list of dishes that can be ordered in a restaurant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "w1wumqd5gawdam8",
+            "text": "메뉴를 주세요.",
+            "textLang": "ko",
+            "translation": "Please give me the menu.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, signaling the waiter to assist",
+            "note": null,
+            "matchedForm": "메뉴",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m1h4opvjsotwjzn",
+        "order": 1,
+        "definition": "A specific food item or dish offered on a list.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dish",
+              "item"
+            ]
+          }
+        ],
+        "domain": "dish",
+        "emoji": "🥘",
+        "examples": [
+          {
+            "id": "kaohw75ji1gczu1",
+            "text": "이 식당의 인기 메뉴는 비빔밥입니다.",
+            "textLang": "ko",
+            "translation": "A popular dish at this restaurant is bibimbap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, recommending a favorite",
+            "note": null,
+            "matchedForm": "메뉴",
+            "matchedTranslationForm": "dish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "메뉴",
+    "lemma": "메뉴",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📜",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "menu",
     "primaryGloss": "menu",
     "emotion": "expectant and hungry, scanning the list for something good to eat",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used identically to the English word 'menu' in a restaurant context.",
+        "why": "Restates the gloss and contradicts note 1; physical menu is also 메뉴판."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "menu",
+        "why": "Does not cover the second sense ('dish')."
+      }
+    ],
+    "growth": 0.908
   }
 }

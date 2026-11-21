@@ -71,6 +71,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "bank",
+    "primaryGloss": "bank",
+    "emotion": "matter-of-fact and steady, conducting everyday business",
+    "notes": [
+      "Do not confuse with το τραπέζι (table). In Modern Greek, τράπεζα means 'table' only in church or formal set phrases (such as Αγία Τράπεζα, 'holy altar')."
+    ],
+    "senses": [
+      {
+        "id": "5vd1ya8kul7knh8",
+        "order": 0,
+        "definition": "An organization where people and businesses keep, borrow, or exchange money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "qb6bun64twb4i3w",
+            "text": "Πρέπει να πάω στην τράπεζα για να πληρώσω τον λογαριασμό.",
+            "textLang": "el",
+            "translation": "I need to go to the bank to pay the bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit burdened by chores, stating what needs to be done",
+            "note": null,
+            "matchedForm": "τράπεζα",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η τράπεζα",
+    "lemma": "τράπεζα",
+    "reading": null,
+    "ipa": "/ˈtɾapeza/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "bank; table",
     "primaryGloss": "bank",
     "emotion": "matter-of-fact and steady, conducting everyday business",
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A piece of furniture with a flat top supported on legs",
+        "why": "False for Modern Greek: ordinary table is 'τραπέζι'; 'τράπεζα' as table is archaic/liturgical only."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Τράπεζα has two very common meanings: a financial institution (bank) and",
+        "why": "False claim that 'table' is a common everyday meaning of 'τράπεζα'; learners must use 'τραπέζι'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Βάλτε το φαγητό πάνω στην τράπεζα.",
+        "why": "Unnatural in Modern Greek; native speakers say 'στο τραπέζι', never 'στην τράπεζα'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bank; table",
+        "why": "Includes 'table', which is not a valid everyday sense of this word."
+      }
+    ],
+    "growth": 0.671
   }
 }

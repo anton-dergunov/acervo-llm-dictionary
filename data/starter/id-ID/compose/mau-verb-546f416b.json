@@ -58,6 +58,138 @@
     "headword": "mau",
     "lemma": "mau",
     "reading": null,
+    "ipa": "/ˈma.u/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "want; going to, will",
+    "primaryGloss": "want",
+    "emotion": "eager and straightforward, clearly stating a personal desire",
+    "notes": [
+      "Everyday and conversational; in formal speech or writing, use 'ingin' for 'want' and 'akan' for 'will'."
+    ],
+    "senses": [
+      {
+        "id": "3720xtnhrli1t0x",
+        "order": 0,
+        "definition": "To wish or be willing to have or do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "want",
+              "be willing",
+              "would like"
+            ]
+          }
+        ],
+        "domain": "desire",
+        "emoji": "🙋",
+        "examples": [
+          {
+            "id": "kmwru8snfwpwd0c",
+            "text": "Saya mau makan nasi goreng.",
+            "textLang": "id",
+            "translation": "I want to eat fried rice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a favorite meal",
+            "note": null,
+            "matchedForm": "mau",
+            "matchedTranslationForm": "want"
+          },
+          {
+            "id": "gwkyynwg2gh0n52",
+            "text": "Apakah kamu mau membantu saya?",
+            "textLang": "id",
+            "translation": "Are you willing to help me?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and hopeful, asking for a favor",
+            "note": null,
+            "matchedForm": "mau",
+            "matchedTranslationForm": "willing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "107fcd1q8kb7r0s",
+        "order": 1,
+        "definition": "Used before a verb to show that something will happen soon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "going to",
+              "will",
+              "about to"
+            ]
+          }
+        ],
+        "domain": "future",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "ngq5y45mzuf3wru",
+            "text": "Dia mau pergi ke pasar.",
+            "textLang": "id",
+            "translation": "He is going to go to the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and informative, stating simple plans for the day",
+            "note": null,
+            "matchedForm": "mau",
+            "matchedTranslationForm": "going to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "mau",
+    "lemma": "mau",
+    "reading": null,
     "ipa": "/maw/",
     "pos": "verb",
     "gender": null,
@@ -204,5 +336,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[2]",
+        "quote": "To be willing or agreeable to do something.",
+        "why": "In Indonesian 'mau' covers both wanting and being willing; splitting them forces an English distinction."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Mau is the most common and versatile way to express 'to want'",
+        "why": "Restates the senses; better to contrast with the more formal 'ingin' and 'akan'."
+      }
+    ],
+    "growth": 0.717
   }
 }

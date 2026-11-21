@@ -58,6 +58,74 @@
     "headword": "đèn giao thông",
     "lemma": "đèn giao thông",
     "reading": null,
+    "ipa": "/ɗɛn˨˩ zaːw˧˧ tʰəwŋ͡m˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "traffic light",
+    "primaryGloss": "traffic light",
+    "emotion": "patient and observant, waiting for the signal to change",
+    "notes": [
+      "Composed of 'đèn' (light, lamp) and 'giao thông' (traffic). In everyday speech, people also say 'đèn xanh đèn đỏ' (literally 'green light red light')."
+    ],
+    "senses": [
+      {
+        "id": "vnj5v5v2gf999ic",
+        "order": 0,
+        "definition": "A set of red, yellow, and green lights that control traffic at road junctions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "traffic light",
+              "traffic signal"
+            ]
+          }
+        ],
+        "domain": "traffic",
+        "emoji": "🚦",
+        "examples": [
+          {
+            "id": "jtaiykhg1ybrr9v",
+            "text": "Bạn phải dừng lại khi đèn giao thông chuyển sang màu đỏ.",
+            "textLang": "vi",
+            "translation": "You must stop when the traffic light turns red.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "đèn giao thông",
+            "matchedTranslationForm": "traffic light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đèn giao thông",
+    "lemma": "đèn giao thông",
+    "reading": null,
     "ipa": "/ɗɛn zao tʰɔŋ mɔt/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɗɛn zao tʰɔŋ mɔt/",
+        "why": "Has a hallucinated extra fourth syllable 'mɔt' and lacks tone marks."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Chúng tôi dừng lại ở đèn giao thông màu đỏ.",
+        "why": "Unnatural phrasing; Vietnamese says 'dừng đèn đỏ' or 'dừng lại ở đèn giao thông'."
+      }
+    ],
+    "growth": 1.212
   }
 }

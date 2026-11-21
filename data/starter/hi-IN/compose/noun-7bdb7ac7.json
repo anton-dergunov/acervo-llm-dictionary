@@ -68,6 +68,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "day; daytime",
+    "primaryGloss": "day",
+    "emotion": null,
+    "notes": [
+      "Unmarked masculine noun: the direct plural is also दिन (e.g., दो दिन, 'two days'), while the oblique plural is दिनों (dinõ).",
+      "In the sense of 'during the day', it takes में: दिन में (din mẽ)."
+    ],
+    "senses": [
+      {
+        "id": "jhghc6m1a970wke",
+        "order": 0,
+        "definition": "A period of twenty-four hours, or the light part of it between sunrise and sunset.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "daytime"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "dzehfajeljflfij",
+            "text": "मैं हर दिन काम पर जाता हूँ।",
+            "textLang": "hi",
+            "translation": "I go to work every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a daily habit",
+            "note": null,
+            "matchedForm": "दिन",
+            "matchedTranslationForm": "day"
+          },
+          {
+            "id": "6x5ypsu1urkgsoe",
+            "text": "आज दिन में बहुत गर्मी है।",
+            "textLang": "hi",
+            "translation": "It is very hot during the day today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "दिन",
+            "matchedTranslationForm": "day"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "दिन",
+    "lemma": "दिन",
+    "reading": null,
+    "ipa": "/d̪ɪn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "day",
     "primaryGloss": "day",
     "emotion": null,
@@ -140,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "be careful not to confuse it with 'duniya' (world) which sounds vaguely",
+        "why": "Unhelpful filler; दिन and दुनिया do not sound alike to learners."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "the word is 'aaj', not 'aaj ka din'.",
+        "why": "'आज का दिन' (today's day / today) is completely natural and very common in Hindi."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "दिन बहुत गर्म है।",
+        "why": "Sounds like a calque of 'The day is very hot' without 'आज' (today)."
+      }
+    ],
+    "growth": 1.036
   }
 }

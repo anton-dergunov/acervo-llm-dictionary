@@ -68,6 +68,93 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "person",
+    "primaryGloss": "person",
+    "emotion": null,
+    "notes": [
+      "Always grammatically feminine, so adjectives must be feminine even when referring to a man (e.g., 'Juan es una buena persona')."
+    ],
+    "senses": [
+      {
+        "id": "ky1ykyodepd2crr",
+        "order": 0,
+        "definition": "A human being; an individual.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person",
+              "human being",
+              "individual"
+            ]
+          }
+        ],
+        "domain": "human",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "x62pi94abtts4zo",
+            "text": "Es una persona muy amable.",
+            "textLang": "es",
+            "translation": "She is a very kind person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, speaking genuinely about a friend",
+            "note": null,
+            "matchedForm": "persona",
+            "matchedTranslationForm": "person"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "ky1ykyodepd2crr",
+      "from": "Individuo de la especie humana.",
+      "to": "An individual of the human species.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    },
+    {
+      "sense": "ozurhw20g96u69y",
+      "from": "Cada uno de los papeles en una obra de teatro o película.",
+      "to": "A role played in a play or movie.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la persona",
+    "lemma": "persona",
+    "reading": null,
+    "ipa": "/peɾˈsona/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "person; individual",
     "primaryGloss": "person",
     "emotion": null,
@@ -161,22 +248,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "ky1ykyodepd2crr",
-      "from": "Individuo de la especie humana.",
-      "to": "An individual of the human species.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    },
-    {
-      "sense": "ozurhw20g96u69y",
-      "from": "Cada uno de los papeles en una obra de teatro o película.",
-      "to": "A role played in a play or movie.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A role played in a play or movie.",
+        "why": "Archaic/false in modern Spanish; theatrical character is 'personaje', not 'persona'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "El actor interpreta a varias personas en la misma obra.",
+        "why": "Wrong word choice; a native speaker says 'interpreta a varios personajes'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "because it uses a fixed article.",
+        "why": "Clumsy explanation; the key learner point is feminine adjective agreement even for men."
+      }
+    ],
+    "growth": 0.55
+  }
 }

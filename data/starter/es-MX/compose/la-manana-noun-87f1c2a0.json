@@ -68,6 +68,74 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "morning",
+    "primaryGloss": "morning",
+    "emotion": "a fresh, hopeful beginning to the day, full of quiet potential",
+    "notes": [
+      "With an article ('la mañana'), it is a noun meaning 'the morning'. Without an article ('mañana'), it is an adverb meaning 'tomorrow'.",
+      "To say 'in the morning', Mexican Spanish commonly uses 'en la mañana' as well as 'por la mañana'."
+    ],
+    "senses": [
+      {
+        "id": "bvmpbh897btnkr5",
+        "order": 0,
+        "definition": "The early part of the day, from sunrise until noon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "morning"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "whyfs7ienmpjbvv",
+            "text": "Me gusta tomar café por la mañana.",
+            "textLang": "es",
+            "translation": "I like to drink coffee in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a simple daily ritual",
+            "note": null,
+            "matchedForm": "mañana",
+            "matchedTranslationForm": "morning"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la mañana",
+    "lemma": "mañana",
+    "reading": null,
+    "ipa": "/maˈɲana/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "morning; tomorrow",
     "primaryGloss": "morning",
     "emotion": "a fresh, hopeful beginning to the day, full of quiet potential",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "morning; tomorrow",
+        "why": "'tomorrow' is the adverb 'mañana', not the feminine noun 'la mañana', and is not in senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "A period of time or an entire day considered in relation",
+        "why": "'Morning as a duration' is the exact same meaning as sense 0."
+      }
+    ],
+    "growth": 0.595
   }
 }

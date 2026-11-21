@@ -58,6 +58,95 @@
     "headword": "phút",
     "lemma": "phút",
     "reading": null,
+    "ipa": "/fut̚˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏱️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "minute",
+    "primaryGloss": "minute",
+    "emotion": "hurried and impatient, watching the clock tick down",
+    "notes": [
+      "Used directly after numbers without a classifier (e.g., năm phút — five minutes)."
+    ],
+    "senses": [
+      {
+        "id": "sfm4i2vb0ukdd3h",
+        "order": 0,
+        "definition": "A unit of time equal to sixty seconds, or a very short period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "minute",
+              "moment"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "1wf8ony643sb7k3",
+            "text": "Xin vui lòng đợi một phút.",
+            "textLang": "vi",
+            "translation": "Please wait a minute.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and reassuring, asking for a brief pause",
+            "note": null,
+            "matchedForm": "phút",
+            "matchedTranslationForm": "minute"
+          },
+          {
+            "id": "lot3tv9mydb4dlo",
+            "text": "Tôi sẽ xong trong vài phút nữa.",
+            "textLang": "vi",
+            "translation": "I will be done in a few minutes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "phút",
+            "matchedTranslationForm": "minutes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "phút",
+    "lemma": "phút",
+    "reading": null,
     "ipa": "/fuk̚˧˥/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/fuk̚˧˥/",
+        "why": "That is Southern pronunciation; Northern (Hanoi) IPA for 'phút' has final /-t̚/: /fut̚˧˦/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(time) A unit of time ... (moment) A very short duration",
+        "why": "Oversplit; Sense 1's example even translates 'vài phút' literally as 'a few minutes'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to measure both sixty seconds of time and as a brief",
+        "why": "Restates the senses instead of giving a grammatical note (e.g., no classifier needed)."
+      }
+    ],
+    "growth": 1.026
   }
 }

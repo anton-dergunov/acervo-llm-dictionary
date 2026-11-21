@@ -72,6 +72,74 @@
     "primaryGloss": "calendar",
     "emotion": "organized and expectant, looking forward to upcoming plans",
     "notes": [
+      "Takes the classifier 本 (běn) for a calendar pad or book, or 张 (zhāng) and 页 (yè) for a single sheet.",
+      "Also used for the calendar app on a phone or computer."
+    ],
+    "senses": [
+      {
+        "id": "d36gb7iq0qirjkl",
+        "order": 0,
+        "definition": "A chart, set of pages, or app showing the days, weeks, and months of a year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calendar"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "t0w6hkxfkgx6xwp",
+            "text": "我在日历上记下了看医生的日子。",
+            "textLang": "zh",
+            "translation": "I marked the day of the doctor's visit on the calendar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "日历",
+            "matchedTranslationForm": "calendar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "日历",
+    "lemma": "日历",
+    "reading": "rì lì",
+    "ipa": "/ʐɻ̩˥˩ li˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "calendar",
+    "primaryGloss": "calendar",
+    "emotion": "organized and expectant, looking forward to upcoming plans",
+    "notes": [
       "While '日历' can refer to a physical book or wall calendar, it is also the standard term for the calendar app on a smartphone.",
       "Use '年历' if you are referring specifically to a yearly calendar that shows all months on one page."
     ],
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(page) A single page or sheet showing a specific month",
+        "why": "Senses 0 and 1 are the same noun; 'page' comes from the classifier 页."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the standard classifiers 本 (book/pad) and 张 (sheet)."
+      }
+    ],
+    "growth": 0.582
   }
 }

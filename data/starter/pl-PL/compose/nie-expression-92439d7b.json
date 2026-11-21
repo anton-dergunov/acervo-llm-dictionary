@@ -72,6 +72,114 @@
     "primaryGloss": "no",
     "emotion": null,
     "notes": [
+      "When 'nie' negates a transitive verb, the direct object usually changes from the accusative to the genitive case.",
+      "Written separately before verbs (e.g., 'nie wiem'), but attached as a prefix to adjectives and nouns (e.g., 'niedobry')."
+    ],
+    "senses": [
+      {
+        "id": "x03o6005n3w85ne",
+        "order": 0,
+        "definition": "Used to give a negative answer, to refuse, or to disagree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no"
+            ]
+          }
+        ],
+        "domain": "refusal",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "6ykxo6chc7ngq96",
+            "text": "Nie, dzisiaj nie mam czasu.",
+            "textLang": "pl",
+            "translation": "No, I don't have time today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and polite, declining an offer",
+            "note": null,
+            "matchedForm": "Nie",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3ezro4cdxnd2z05",
+        "order": 1,
+        "definition": "Used before a verb or other word to make it negative.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "not"
+            ]
+          }
+        ],
+        "domain": "negation",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "b6hc5abhfdmv3kq",
+            "text": "Nie rozumiem tego słowa.",
+            "textLang": "pl",
+            "translation": "I do not understand this word.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Nie",
+            "matchedTranslationForm": "not"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "nie",
+    "lemma": "nie",
+    "reading": null,
+    "ipa": "/ɲɛ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "no; not",
+    "primaryGloss": "no",
+    "emotion": null,
+    "notes": [
       "Used as a standalone response meaning 'no', and placed before verbs to make them negative."
     ],
     "senses": [
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ja nie rozumieję tego słowa.",
+        "why": "'rozumieję' is not a valid Polish form; the 1st person singular of 'rozumieć' is 'rozumiem'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a standalone response meaning 'no', and placed before verbs",
+        "why": "Restates the two senses instead of giving useful grammar notes (e.g. genitive of negation, spelling)."
+      }
+    ],
+    "growth": 1.505
   }
 }

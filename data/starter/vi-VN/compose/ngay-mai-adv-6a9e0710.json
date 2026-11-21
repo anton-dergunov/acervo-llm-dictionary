@@ -58,6 +58,73 @@
     "headword": "ngày mai",
     "lemma": "ngày mai",
     "reading": null,
+    "ipa": "/ŋaj˨˩ maːj˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "tomorrow",
+    "primaryGloss": "tomorrow",
+    "emotion": "forward-looking and expectant, anticipating what comes next",
+    "notes": [
+      "Often shortened to 'mai' in everyday speech (e.g. 'Mai gặp nhé!' — 'See you tomorrow!')."
+    ],
+    "senses": [
+      {
+        "id": "4zn2xhgzfy5g5fp",
+        "order": 0,
+        "definition": "On or during the day after today; the day after today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tomorrow"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "88r4api42b3hnio",
+            "text": "Ngày mai tôi sẽ đi du lịch.",
+            "textLang": "vi",
+            "translation": "Tomorrow I'm going on a trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and ready for a trip",
+            "note": null,
+            "matchedForm": "Ngày mai",
+            "matchedTranslationForm": "Tomorrow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ngày mai",
+    "lemma": "ngày mai",
+    "reading": null,
     "ipa": "/ŋàj 1 maːj 1/",
     "pos": "adv",
     "gender": null,
@@ -119,5 +186,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋàj 1 maːj 1/",
+        "why": "Corrupt IPA containing raw digits '1' and wrong vowel length for 'ngày'."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "Time expressions like 'ngày mai' are nouns in Vietnamese, though used adverbially."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use ngày mai when talking about the day immediately following today.",
+        "why": "Restates the definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with hôm qua, which means yesterday.",
+        "why": "Unmotivated filler; 'ngày mai' and 'hôm qua' do not look or sound alike."
+      }
+    ],
+    "growth": 1.0
   }
 }

@@ -71,6 +71,93 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to laugh",
+    "primaryGloss": "laugh",
+    "emotion": "light and cheerful, amused by something funny",
+    "notes": [
+      "Do not confuse 'ridere' (to laugh) with 'sorridere' (to smile).",
+      "Has an irregular past participle: 'riso' (takes the auxiliary 'avere': 'ho riso'). Followed by 'di' for 'to laugh at/about'."
+    ],
+    "senses": [
+      {
+        "id": "427glnj4azaus9d",
+        "order": 0,
+        "definition": "To make sounds with your voice and smile because you find something funny.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "laugh"
+            ]
+          }
+        ],
+        "domain": "laughter",
+        "emoji": "😂",
+        "examples": [
+          {
+            "id": "q0vpexkcg849i1k",
+            "text": "Tutti hanno iniziato a ridere quando lui è caduto.",
+            "textLang": "it",
+            "translation": "Everyone started to laugh when he fell.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and amused, sharing a funny moment",
+            "note": null,
+            "matchedForm": "ridere",
+            "matchedTranslationForm": "laugh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "427glnj4azaus9d",
+      "from": "Emettere suoni con la voce e muovere il viso perché qualcosa fa divertire.",
+      "to": "To make sounds with the voice and move the face because something is amusing.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "ok7ghjcnn05dh98",
+      "from": "Essere favorevole o fortunato verso qualcuno.",
+      "to": "To be favorable or fortunate towards someone.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "ridere",
+    "lemma": "ridere",
+    "reading": null,
+    "ipa": "/ˈri.de.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to laugh; to smile",
     "primaryGloss": "to laugh",
     "emotion": "light and cheerful, amused by something funny",
@@ -164,22 +251,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "427glnj4azaus9d",
-      "from": "Emettere suoni con la voce e muovere il viso perché qualcosa fa divertire.",
-      "to": "To make sounds with the voice and move the face because something is amusing.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "ok7ghjcnn05dh98",
-      "from": "Essere favorevole o fortunato verso qualcuno.",
-      "to": "To be favorable or fortunate towards someone.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(fortune) To be favorable or fortunate towards someone.",
+        "why": "Literary figurative sense, not needed for A2 learners; also misleads in shortGloss as 'to smile'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to laugh; to smile",
+        "why": "Misleads learner into thinking 'ridere' means 'to smile' (which Note 0 explicitly warns against)."
+      }
+    ],
+    "growth": 0.801
+  }
 }

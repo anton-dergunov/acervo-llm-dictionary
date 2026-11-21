@@ -68,6 +68,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to speak; to talk; to say",
+    "primaryGloss": "to speak",
+    "emotion": "a natural, everyday flow, like sharing a thought with a friend",
+    "notes": [
+      "Imperfective. In the sense 'to speak / talk', the perfective is поговорить ('to have a talk'). In the sense 'to say / tell', the perfective is сказать.",
+      "With languages, use the adverb with по-: говорить по-русски ('to speak Russian')."
+    ],
+    "senses": [
+      {
+        "id": "51l22d9gdz9jbru",
+        "order": 0,
+        "definition": "To use one's voice to produce words, converse, or use a language.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to speak",
+              "to talk"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "73qtfudlnoyjk5y",
+            "text": "Дети начинают говорить в раннем возрасте.",
+            "textLang": "ru",
+            "translation": "Children start to speak at an early age.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter-of-fact, observing a common life stage",
+            "note": null,
+            "matchedForm": "говорить",
+            "matchedTranslationForm": "to speak"
+          },
+          {
+            "id": "3bsj7aefcmsk0l2",
+            "text": "Я хочу говорить по-русски.",
+            "textLang": "ru",
+            "translation": "I want to speak Russian.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and determined, expressing a clear personal goal",
+            "note": null,
+            "matchedForm": "говорить",
+            "matchedTranslationForm": "to speak"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2p47ts8v046u3a7",
+        "order": 1,
+        "definition": "To express something in words; to state or tell.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to say",
+              "to tell"
+            ]
+          }
+        ],
+        "domain": "utterance",
+        "emoji": "💬",
+        "examples": [
+          {
+            "id": "s9op9onv0cd7ftr",
+            "text": "Он всегда говорит правду.",
+            "textLang": "ru",
+            "translation": "He always tells the truth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "говорит",
+            "matchedTranslationForm": "tells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "говорить",
+    "lemma": "говорить",
+    "reading": null,
+    "ipa": "/ɡəvɐˈrʲitʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to speak; to say; to talk",
     "primaryGloss": "to speak",
     "emotion": "a natural, everyday flow, like sharing a thought with a friend",
@@ -201,5 +332,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Он громко говорить правду.",
+        "why": "Ungrammatical: infinitive 'говорить' is used instead of 3rd-person singular 'говорит'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Speaking a language is not a distinct sense in Russian; use 'по-' + adverb."
+      }
+    ],
+    "growth": 0.913
   }
 }

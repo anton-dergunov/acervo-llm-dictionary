@@ -68,6 +68,74 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bee",
+    "primaryGloss": "bee",
+    "emotion": "a warm, buzzing summer afternoon in a field of wildflowers",
+    "notes": [
+      "Related to 'το μέλι' (honey)."
+    ],
+    "senses": [
+      {
+        "id": "xe9liuwam0qxisi",
+        "order": 0,
+        "definition": "A winged insect that collects nectar from flowers and makes honey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bee",
+              "honeybee"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🐝",
+        "examples": [
+          {
+            "id": "1u3qexhk79trr2t",
+            "text": "Η μέλισσα πετάει από λουλούδι σε λουλούδι.",
+            "textLang": "el",
+            "translation": "The bee flies from flower to flower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and observant, watching nature closely",
+            "note": null,
+            "matchedForm": "μέλισσα",
+            "matchedTranslationForm": "bee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η μέλισσα",
+    "lemma": "μέλισσα",
+    "reading": null,
+    "ipa": "/ˈme.li.sa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐝",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "honeybee",
     "primaryGloss": "honeybee",
     "emotion": "a warm, buzzing summer afternoon in a field of wildflowers",
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'μέλισσα' with 'μέλισμα'",
+        "why": "'Μέλισμα' is a rare, literary word that an A2 learner will not encounter."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "honeybee, bee",
+        "why": "Most common everyday translation 'bee' should come first, also in shortGloss and primaryGloss."
+      }
+    ],
+    "growth": 0.574
   }
 }

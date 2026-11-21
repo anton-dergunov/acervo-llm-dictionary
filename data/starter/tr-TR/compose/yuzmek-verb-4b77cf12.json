@@ -58,6 +58,74 @@
     "headword": "yüzmek",
     "lemma": "yüzmek",
     "reading": null,
+    "ipa": "/jyzˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏊",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to swim; to float",
+    "primaryGloss": "swim",
+    "emotion": "refreshed and energetic, enjoying a warm summer day by the water",
+    "notes": [
+      "Takes the locative case ('-de'/'-da') for the water you swim in: 'denizde yüzmek' (to swim in the sea). Its root 'yüz-' looks identical to 'yüz' ('face' or 'hundred')."
+    ],
+    "senses": [
+      {
+        "id": "pj9kiuj9ndj12gs",
+        "order": 0,
+        "definition": "To move through water using your arms and legs, or to float on water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "swim",
+              "float"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🏊",
+        "examples": [
+          {
+            "id": "trimdkc5q9evjd2",
+            "text": "Yaz aylarında her gün denizde yüzmek istiyorum.",
+            "textLang": "tr",
+            "translation": "I want to swim in the sea every day during the summer months.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and longing for a relaxing summer holiday",
+            "note": null,
+            "matchedForm": "yüzmek",
+            "matchedTranslationForm": "swim"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yüzmek",
+    "lemma": "yüzmek",
+    "reading": null,
     "ipa": "/yðzˈmec/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +228,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/yðzˈmec/",
+        "why": "Contains non-Turkish /ð/ and misses initial /j/; should be /jyzˈmec/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to swim; to float; to skin an animal",
+        "why": "'to float' is not included in the senses' glosses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To remove the skin from an animal.",
+        "why": "'To skin/flay' is too marginal for an A2 beginner compared to 'to swim/float'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Kasap avladığı hayvanı yüzmek için bıçağını biledi.",
+        "why": "Butchers slaughter livestock rather than hunting animals; also belongs to a marginal sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Yüzmek has two completely different meanings depending on the context: moving through",
+        "why": "Just restates the senses."
+      }
+    ],
+    "growth": 0.597
   }
 }

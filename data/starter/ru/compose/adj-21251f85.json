@@ -69,6 +69,157 @@
     ],
     "status": "active",
     "shortGloss": "sharp; spicy; acute",
+    "primaryGloss": "sharp",
+    "emotion": "hungry and eager, reaching for a tasty plate",
+    "notes": [
+      "For food, 'острый' means spicy from chili or pepper, whereas 'горячий' means hot in temperature."
+    ],
+    "senses": [
+      {
+        "id": "nreus8cp7y2vx17",
+        "order": 0,
+        "definition": "Having a thin edge or fine point that can cut or pierce easily.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sharp",
+              "pointed"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "i7t1is26xe17mrk",
+            "text": "Осторожно, это очень острый нож.",
+            "textLang": "ru",
+            "translation": "Be careful, this is a very sharp knife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "острый",
+            "matchedTranslationForm": "sharp"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bzwlj938y43k8c0",
+        "order": 1,
+        "definition": "Having a strong, burning taste from spices such as chili or pepper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spicy",
+              "hot"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "🌶️",
+        "examples": [
+          {
+            "id": "w4abwtwhcnquya6",
+            "text": "Этот суп очень острый, мне нравится.",
+            "textLang": "ru",
+            "translation": "This soup is very spicy, I like it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and warm, enjoying the strong flavor",
+            "note": null,
+            "matchedForm": "острый",
+            "matchedTranslationForm": "spicy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8gpmwpyr5j173g2",
+        "order": 2,
+        "definition": "Sudden, severe, or intense, especially of pain or a problem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sharp",
+              "acute",
+              "severe"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": "⚡",
+        "examples": [
+          {
+            "id": "6iz5kkm60ve4a49",
+            "text": "Он почувствовал острую боль в животе.",
+            "textLang": "ru",
+            "translation": "He felt a sharp pain in his stomach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "острую",
+            "matchedTranslationForm": "sharp"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "острый",
+    "lemma": "острый",
+    "reading": null,
+    "ipa": "/ˈostrɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌶️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "sharp; spicy; acute",
     "primaryGloss": "spicy",
     "emotion": "hungry and eager, reaching for a tasty plate",
     "notes": [
@@ -200,5 +351,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Он почувствовал острая боль в животе.",
+        "why": "Grammatical error: direct object after 'почувствовал' must be accusative ('острую боль'), not nominative."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical edges that can cut, hot spicy food,",
+        "why": "Merely restates the three senses without adding usage information."
+      }
+    ],
+    "growth": 1.13
   }
 }

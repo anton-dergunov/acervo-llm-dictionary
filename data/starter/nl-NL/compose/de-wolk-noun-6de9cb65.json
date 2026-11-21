@@ -58,6 +58,71 @@
     "headword": "de wolk",
     "lemma": "wolk",
     "reading": null,
+    "ipa": "/ʋɔlk/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "cloud",
+    "primaryGloss": "cloud",
+    "emotion": "dreamy and relaxed, looking up at the sky",
+    "notes": [],
+    "senses": [
+      {
+        "id": "egtr79ot5isayvf",
+        "order": 0,
+        "definition": "A white or grey mass in the sky made of small drops of water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cloud"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "cp43mojxuyp6z0j",
+            "text": "Er hangt een donkere wolk boven de stad.",
+            "textLang": "nl",
+            "translation": "There is a dark cloud hanging above the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apprehensive and cautious, watching the weather turn",
+            "note": null,
+            "matchedForm": "wolk",
+            "matchedTranslationForm": "cloud"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de wolk",
+    "lemma": "wolk",
+    "reading": null,
     "ipa": "/wɔlk/",
     "pos": "noun",
     "gender": "common",
@@ -118,5 +183,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/wɔlk/",
+        "why": "Dutch 'w' is /ʋ/, not /w/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "note that it shares the same root as the English word.",
+        "why": "False etymology: 'wolk' is not cognate with English 'cloud' (save archaic 'welkin')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cloud; mass",
+        "why": "'mass' is not in the sense glosses and is not an everyday translation."
+      }
+    ],
+    "growth": 0.595
   }
 }

@@ -68,6 +68,155 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "mano; ayuda; manecilla",
+    "primaryGloss": "mano",
+    "emotion": "matter-of-fact and helpful, as when pointing something out to someone",
+    "notes": [
+      "Se usa muy a menudo en expresiones cotidianas como 'give someone a hand' (echar una mano / ayudar) o 'by hand' (a mano)."
+    ],
+    "senses": [
+      {
+        "id": "bksr7jjwv77cw1b",
+        "order": 0,
+        "definition": "Parte del cuerpo al final del brazo que incluye la palma y los dedos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mano"
+            ]
+          }
+        ],
+        "domain": "anatomía",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "86joltl1j6wrdow",
+            "text": "She held his hand while they walked.",
+            "textLang": "en",
+            "translation": "Ella le tomó la mano mientras caminaban.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and affectionate, describing a gentle, caring moment",
+            "note": null,
+            "matchedForm": "hand",
+            "matchedTranslationForm": "mano"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5qqrvetay5sid5m",
+        "order": 1,
+        "definition": "Ayuda o asistencia que se le da a alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mano",
+              "ayuda"
+            ]
+          }
+        ],
+        "domain": "ayuda",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "wt69j6kk8q2d6gl",
+            "text": "Can you give me a hand with these boxes?",
+            "textLang": "en",
+            "translation": "¿Me puedes echar una mano con estas cajas?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hand",
+            "matchedTranslationForm": "mano"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "73yh6ito0wk3g9r",
+        "order": 2,
+        "definition": "Aguja de un reloj que indica la hora, los minutos o los segundos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "manecilla",
+              "aguja"
+            ]
+          }
+        ],
+        "domain": "reloj",
+        "emoji": "⌚",
+        "examples": [
+          {
+            "id": "wxneev8a8sx8x2b",
+            "text": "The hour hand is pointing to three.",
+            "textLang": "en",
+            "translation": "La manecilla de la hora apunta a las tres.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, like someone explaining how to read a clock",
+            "note": null,
+            "matchedForm": "hand",
+            "matchedTranslationForm": "manecilla"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hand",
+    "lemma": "hand",
+    "reading": null,
+    "ipa": "/hænd/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "parte final del brazo; manecilla del reloj",
     "primaryGloss": "mano",
     "emotion": "matter-of-fact and helpful, as when pointing something out to someone",
@@ -159,5 +308,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "parte final del brazo; manecilla del reloj",
+        "why": "shortGloss must use translations (glosses), not definitions ('parte final del brazo')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "A diferencia del español, donde 'mano' a veces se usa de forma",
+        "why": "False claim: Spanish 'mano' is not used to mean 'arm', just like English 'hand'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common everyday sense of 'help/assistance' (e.g., 'give me a hand')."
+      }
+    ],
+    "growth": 1.049
   }
 }

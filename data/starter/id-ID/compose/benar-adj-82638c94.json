@@ -72,6 +72,118 @@
     "primaryGloss": "correct",
     "emotion": "assured and steady, confirming that something is exactly as it should be",
     "notes": [
+      "Often interchangeable with 'betul', though 'benar' is slightly more formal. Reduplicated as 'benar-benar', it means 'really' or 'truly' and goes before the word it modifies.",
+      "When used to mean 'very', a single 'benar' must be placed after the adjective (e.g., 'mahal benar')."
+    ],
+    "senses": [
+      {
+        "id": "rhmqkgif2ptkomh",
+        "order": 0,
+        "definition": "In accordance with fact or truth; not mistaken.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "true",
+              "right"
+            ]
+          }
+        ],
+        "domain": "truth",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "a34g89zjqddbtn3",
+            "text": "Jawaban kamu benar.",
+            "textLang": "id",
+            "translation": "Your answer is correct.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and supportive, confirming a job well done",
+            "note": null,
+            "matchedForm": "benar",
+            "matchedTranslationForm": "correct"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wsqz428ezl7y7mi",
+        "order": 1,
+        "definition": "Placed after an adjective to emphasize its degree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "very",
+              "so",
+              "really"
+            ]
+          }
+        ],
+        "domain": "emphasis",
+        "emoji": "💯",
+        "examples": [
+          {
+            "id": "dllqbgp07cjmkcn",
+            "text": "Cuaca hari ini panas benar.",
+            "textLang": "id",
+            "translation": "The weather today is so hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "benar",
+            "matchedTranslationForm": "so"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "benar",
+    "lemma": "benar",
+    "reading": null,
+    "ipa": "/bəˈnar/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "correct; true; very",
+    "primaryGloss": "correct",
+    "emotion": "assured and steady, confirming that something is exactly as it should be",
+    "notes": [
       "Benar is versatile and can mean 'correct' (a fact), 'true' (a statement), or act as an intensifier meaning 'very'.",
       "It is often confused with 'betul'. They are largely synonyms, though 'benar' can feel slightly more formal or emphatic in certain contexts."
     ],
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cuaca hari ini benar panas.",
+        "why": "As an intensifier ('very'), 'benar' must follow the adjective (e.g., 'panas benar'), never precede it."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Benar is versatile and can mean 'correct' (a fact), 'true'",
+        "why": "Merely restates the glosses without explaining grammar or usage."
+      }
+    ],
+    "growth": 1.022
   }
 }

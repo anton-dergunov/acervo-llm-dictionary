@@ -68,6 +68,114 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "clean; neat; clear",
+    "primaryGloss": "clean",
+    "emotion": "satisfied and refreshed, seeing something in perfect order",
+    "notes": [
+      "With 'estar', it means something is currently clean ('el vaso está limpio'). With 'ser', it describes someone who has clean, tidy habits ('Juan es muy limpio')."
+    ],
+    "senses": [
+      {
+        "id": "yidp36kods4pgqu",
+        "order": 0,
+        "definition": "Free from dirt, marks, or stains; having tidy habits.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean",
+              "neat"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "v9e9vtnsfsc7cqr",
+            "text": "No tengo ninguna camisa limpia para mañana.",
+            "textLang": "es",
+            "translation": "I don't have any clean shirts for tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "limpia",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ofrds9ryqbk0ruv",
+        "order": 1,
+        "definition": "Of the sky or a surface: clear and free of clouds or obstacles.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clear"
+            ]
+          }
+        ],
+        "domain": "clarity",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "kdimhmt22x2qziz",
+            "text": "El cielo está limpio hoy y se pueden ver las montañas.",
+            "textLang": "es",
+            "translation": "The sky is clear today and you can see the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serene and appreciative of a beautiful, crisp day",
+            "note": null,
+            "matchedForm": "limpio",
+            "matchedTranslationForm": "clear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "limpio",
+    "lemma": "limpio",
+    "reading": null,
+    "ipa": "/ˈlimpjo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "clean; clear; neat",
     "primaryGloss": "clean",
     "emotion": "satisfied and refreshed, seeing something in perfect order",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "La cocina está muy limpia después de limpiarla.",
+        "why": "Clumsy tautology ('is very clean after cleaning it')."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain 'ser limpio' (neat person) vs 'estar limpio' (currently clean) for A2 learners."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'puro', which refers more to purity",
+        "why": "Unlikely point of confusion replacing essential grammar note on 'ser' vs 'estar'."
+      }
+    ],
+    "growth": 0.87
   }
 }

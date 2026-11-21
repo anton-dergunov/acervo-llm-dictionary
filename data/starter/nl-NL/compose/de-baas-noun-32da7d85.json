@@ -68,6 +68,118 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "boss; person in charge; owner",
+    "primaryGloss": "boss",
+    "emotion": "respectful and slightly cautious when talking about who is in charge",
+    "notes": [
+      "Plural: 'bazen'.",
+      "Commonly used in expressions like 'de baas zijn' (to be in charge) and 'de baas spelen' (to boss people around). For a pet's owner, the diminutive 'het baasje' is normally used."
+    ],
+    "senses": [
+      {
+        "id": "z4zvn54y5sjyhen",
+        "order": 0,
+        "definition": "The person in charge at work, or the owner of a business.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boss",
+              "manager",
+              "supervisor"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "👔",
+        "examples": [
+          {
+            "id": "5y9pyb40bvcv3qf",
+            "text": "Ik moet vandaag iets vragen aan de baas.",
+            "textLang": "nl",
+            "translation": "I need to ask the boss something today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and a bit nervous about approaching management",
+            "note": null,
+            "matchedForm": "baas",
+            "matchedTranslationForm": "boss"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sz9azkjxvd67612",
+        "order": 1,
+        "definition": "Someone who has authority or control over a situation, or the owner of a pet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "person in charge",
+              "master",
+              "owner"
+            ]
+          }
+        ],
+        "domain": "authority",
+        "emoji": "👑",
+        "examples": [
+          {
+            "id": "ikbz02msttleond",
+            "text": "Wie is hier eigenlijk de baas?",
+            "textLang": "nl",
+            "translation": "Who is actually in charge here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "assertive and challenging, wanting to know who holds the authority",
+            "note": null,
+            "matchedForm": "baas",
+            "matchedTranslationForm": "in charge"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de baas",
+    "lemma": "baas",
+    "reading": null,
+    "ipa": "/baːs/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👔",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "boss; owner; master",
     "primaryGloss": "boss",
     "emotion": "respectful and slightly cautious when talking about who is in charge",
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de baas' to refer to your manager, supervisor, or the owner",
+        "why": "Restates the definitions and glosses; misses useful idioms and plural form."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "The owner of a business, or someone who is in control",
+        "why": "Conflates business ownership (sense 0) with general authority or pet ownership."
+      }
+    ],
+    "growth": 1.14
   }
 }

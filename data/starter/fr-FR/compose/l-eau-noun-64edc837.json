@@ -58,6 +58,73 @@
     "headword": "l'eau",
     "lemma": "eau",
     "reading": null,
+    "ipa": "/o/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and clear, quenching a thirst on a hot day",
+    "notes": [
+      "Pronounced simply /o/, like the letter 'o'. The plural 'eaux' has the exact same pronunciation."
+    ],
+    "senses": [
+      {
+        "id": "4gfxluj1hhs16ee",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills rivers and seas, and is drunk by living things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "efcqxd9bl18p4um",
+            "text": "Je voudrais un verre d'eau, s'il vous plaît.",
+            "textLang": "fr",
+            "translation": "I would like a glass of water, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and thirsty, asking a waiter for a drink",
+            "note": null,
+            "matchedForm": "eau",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'eau",
+    "lemma": "eau",
+    "reading": null,
     "ipa": "/lo/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/lo/",
+        "why": "IPA includes the definite article 'l''; should be the lemma 'eau' (/o/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the liaison after certain determiners or prepositions, such as 'des eaux'",
+        "why": "Generic liaison rule with rare 'en eau'; note should explain the 'eau' = /o/ spelling and plural 'eaux'."
+      }
+    ],
+    "growth": 0.945
   }
 }

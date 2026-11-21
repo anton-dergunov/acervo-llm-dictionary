@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "back",
+    "primaryGloss": "back",
+    "emotion": "aching after a long day of carrying heavy boxes, tired and relieved",
+    "notes": [
+      "Stress shifts to the first syllable in the accusative singular (спи́ну) and nominative/accusative plural (спи́ны), though after за and на the stress moves to the preposition (за́ спину, на́ спину).",
+      "Used for the back of a body or garment; the back of a chair or bed is спинка."
+    ],
+    "senses": [
+      {
+        "id": "0tc5l7tfvop847u",
+        "order": 0,
+        "definition": "The rear part of a person's or animal's body from the shoulders to the hips, or the part of a garment that covers it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "back"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🔙",
+        "examples": [
+          {
+            "id": "k4xxr7g1wagwp6p",
+            "text": "У меня болит спина после работы.",
+            "textLang": "ru",
+            "translation": "My back hurts after work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and complaining about physical pain to a friend",
+            "note": null,
+            "matchedForm": "спина",
+            "matchedTranslationForm": "back"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "спина",
+    "lemma": "спина",
+    "reading": null,
+    "ipa": "/spʲiˈna/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔙",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "back; rear",
     "primaryGloss": "back",
     "emotion": "aching after a long day of carrying heavy boxes, tired and relieved",
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The rear or back surface of an object, chair, or book.",
+        "why": "A chair's back is 'спинка' and a book's spine is 'корешок', not 'спина'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Повесь пальто на спинку стула.",
+        "why": "Uses the separate lemma 'спинка' instead of the headword 'спина'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used mainly for the anatomical back of a human or animal",
+        "why": "Restates the definition while omitting the irregular stress shifts and the 'спинка' distinction."
+      }
+    ],
+    "growth": 1.303
   }
 }

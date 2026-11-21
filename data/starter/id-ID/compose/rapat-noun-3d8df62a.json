@@ -68,6 +68,75 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "meeting",
+    "primaryGloss": "meeting",
+    "emotion": "formal and purposeful, ready to discuss business",
+    "notes": [
+      "Commonly takes the prefix 'ber-' to form the verb 'berapat' (to hold a meeting), though 'mengadakan rapat' is more frequent in everyday speech. Note that 'rapat' is also a common adjective meaning 'tight' or 'close together'."
+    ],
+    "senses": [
+      {
+        "id": "e7xyek6rpqu9kdq",
+        "order": 0,
+        "definition": "A gathering of people to discuss work, business, or organizational matters.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meeting",
+              "conference",
+              "assembly"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "8ysm7hhyguv7ee9",
+            "text": "Kami harus menghadiri rapat penting pagi ini.",
+            "textLang": "id",
+            "translation": "We must attend an important meeting this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and busy, focused on the schedule",
+            "note": null,
+            "matchedForm": "rapat",
+            "matchedTranslationForm": "meeting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "rapat",
+    "lemma": "rapat",
+    "reading": null,
+    "ipa": "/ˈra.pat/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👥",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "meeting; tight, close",
     "primaryGloss": "meeting",
     "emotion": "formal and purposeful, ready to discuss business",
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Fitted closely together with very little or no space in between.",
+        "why": "Entry POS is noun, so adjective sense should not be included here."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 'rapat' refers to a meeting or gathering",
+        "why": "Merely restates the definitions."
+      }
+    ],
+    "growth": 0.692
   }
 }

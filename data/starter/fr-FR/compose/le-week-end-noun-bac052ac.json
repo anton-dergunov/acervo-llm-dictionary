@@ -72,6 +72,74 @@
     "primaryGloss": "weekend",
     "emotion": "relaxed and happy, looking forward to resting",
     "notes": [
+      "Plural: 'les week-ends'. Can also be spelled 'le weekend' without a hyphen.",
+      "Standard in France; in Canada, 'la fin de semaine' is used instead."
+    ],
+    "senses": [
+      {
+        "id": "o8v4y6x87t08pj6",
+        "order": 0,
+        "definition": "Saturday and Sunday, especially as time off from work or school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weekend"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "hesrhr2o2tjhon6",
+            "text": "Qu'est-ce que tu fais ce week-end ?",
+            "textLang": "fr",
+            "translation": "What are you doing this weekend?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and friendly, interested in weekend plans",
+            "note": null,
+            "matchedForm": "week-end",
+            "matchedTranslationForm": "weekend"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le week-end",
+    "lemma": "week-end",
+    "reading": null,
+    "ipa": "/wi.kɛnd/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "weekend",
+    "primaryGloss": "weekend",
+    "emotion": "relaxed and happy, looking forward to resting",
+    "notes": [
       "In French, 'le week-end' is masculine, so you say 'le week-end' or 'un week-end'.",
       "While it comes from English, French speakers use it constantly, though some traditionalists prefer 'fin de semaine'."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In French, 'le week-end' is masculine, so you say 'le week-end'",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "though some traditionalists prefer 'fin de semaine'.",
+        "why": "Misleading: 'fin de semaine' is the standard regional term in Quebec, not just for traditionalists."
+      }
+    ],
+    "growth": 0.804
   }
 }

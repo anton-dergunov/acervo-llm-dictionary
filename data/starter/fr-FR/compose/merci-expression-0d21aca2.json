@@ -68,6 +68,116 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "thanks; thank you; no thank you",
+    "primaryGloss": "thank you",
+    "emotion": null,
+    "notes": [
+      "Followed by 'de' + infinitive or 'pour' + noun (e.g., 'Merci d'être venu', 'Merci pour ton aide').",
+      "Watch out: in response to an offer, 'Merci' on its own means 'No, thank you'. To accept, say 'Oui, merci' or 'Volontiers'."
+    ],
+    "senses": [
+      {
+        "id": "qkqi8fnlrlcv9o3",
+        "order": 0,
+        "definition": "Used to tell someone that you are grateful for something they have given or done.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thank you",
+              "thanks"
+            ]
+          }
+        ],
+        "domain": "gratitude",
+        "emoji": "🙏",
+        "examples": [
+          {
+            "id": "81ffiu4m21f2xdy",
+            "text": "Merci pour ton aide.",
+            "textLang": "fr",
+            "translation": "Thank you for your help.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, smiling at someone who just helped",
+            "note": null,
+            "matchedForm": "Merci",
+            "matchedTranslationForm": "Thank you"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uj8xzdk7amuuqhn",
+        "order": 1,
+        "definition": "Used to politely refuse something that is offered to you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no thank you",
+              "no thanks"
+            ]
+          }
+        ],
+        "domain": "refusal",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "yymu3jdszq0du4w",
+            "text": "Tu veux encore du café ? — Merci, ça ira.",
+            "textLang": "fr",
+            "translation": "Do you want more coffee? — No thanks, I'm fine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Merci",
+            "matchedTranslationForm": "No thanks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "merci",
+    "lemma": "merci",
+    "reading": null,
+    "ipa": "/mɛʁ.si/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙏",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "thanks; thank you",
     "primaryGloss": "thank you",
     "emotion": null,
@@ -158,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Crucial false friend: 'Merci' alone in response to an offer means 'No, thank you'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Non merci, je n'ai plus faim.",
+        "why": "In 'Non merci', 'non' does the refusing; example should show 'merci' refusing alone."
+      }
+    ],
+    "growth": 2.35
   }
 }

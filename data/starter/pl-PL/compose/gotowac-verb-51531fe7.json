@@ -75,6 +75,115 @@
     "primaryGloss": "to cook",
     "emotion": "warm and welcoming, standing by a steaming pot in the kitchen",
     "notes": [
+      "Imperfective. The perfective is 'ugotować' for cooking food or meals, and 'zagotować' for bringing water to a boil.",
+      "For baking or roasting in the oven, use 'piec', and for frying in a pan, use 'smażyć'."
+    ],
+    "senses": [
+      {
+        "id": "griksw544xajiyd",
+        "order": 0,
+        "definition": "To prepare food or a meal by heating it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "noi5p1gnfn780jr",
+            "text": "Lubię gotować obiad dla mojej rodziny.",
+            "textLang": "pl",
+            "translation": "I like to cook dinner for my family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and caring, looking forward to sharing a meal",
+            "note": null,
+            "matchedForm": "gotować",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "97fz4bswghvmwzf",
+        "order": 1,
+        "definition": "To heat water or food in liquid until it bubbles.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to boil"
+            ]
+          }
+        ],
+        "domain": "boiling",
+        "emoji": "♨️",
+        "examples": [
+          {
+            "id": "0n8nrxmvda4jqmv",
+            "text": "Musisz gotować ziemniaki przez dwadzieścia minut.",
+            "textLang": "pl",
+            "translation": "You have to boil the potatoes for twenty minutes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gotować",
+            "matchedTranslationForm": "boil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "gotować",
+    "lemma": "gotować",
+    "reading": null,
+    "ipa": "/ɡɔˈtɔ.vat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cook; to boil",
+    "primaryGloss": "to cook",
+    "emotion": "warm and welcoming, standing by a steaming pot in the kitchen",
+    "notes": [
       "Gotować covers both preparing meals in general and the specific physical process of heating a liquid until it bubbles.",
       "Do not confuse it with piec, which means to bake or roast."
     ],
@@ -163,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To prepare food by heating it, usually in water or another liquid",
+        "why": "Conflates general meal preparation (to cook) with boiling food (sense 1)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Musisz najpierw gotować wodę na herbatę.",
+        "why": "With 'najpierw' (first, as a completed step), native speakers use perfective 'zagotować', not 'gotować'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Gotować covers both preparing meals in general and the specific physical process",
+        "why": "Restates the senses while omitting the needed perfective aspect pairs (ugotować / zagotować)."
+      }
+    ],
+    "growth": 0.95
   }
 }

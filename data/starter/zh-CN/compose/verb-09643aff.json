@@ -68,6 +68,114 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wake up; to sober up",
+    "primaryGloss": "wake up",
+    "emotion": "groggy and blinking in the morning light, stretching slowly",
+    "notes": [
+      "Often follows another verb as a resultative complement (e.g., 叫醒 jiàoxǐng 'to wake someone up', 吵醒 chǎoxǐng 'to wake someone by making noise')."
+    ],
+    "senses": [
+      {
+        "id": "lb3ywd5mt9h6x6n",
+        "order": 0,
+        "definition": "To stop sleeping and become awake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wake up",
+              "awaken"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "nxd4lkqmuh73fro",
+            "text": "我每天早上七点醒。",
+            "textLang": "zh",
+            "translation": "I wake up at seven every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and rubbing the sleep from one's eyes",
+            "note": null,
+            "matchedForm": "醒",
+            "matchedTranslationForm": "wake up"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sfxvjxwrq6c32nq",
+        "order": 1,
+        "definition": "To become sober after drinking alcohol.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sober up"
+            ]
+          }
+        ],
+        "domain": "alcohol",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "tx3lc95z5i5mres",
+            "text": "喝杯茶醒醒酒。",
+            "textLang": "zh",
+            "translation": "Drink a cup of tea to sober up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "醒",
+            "matchedTranslationForm": "sober up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "醒",
+    "lemma": "醒",
+    "reading": "xǐng",
+    "ipa": "/ɕiŋ˨˩˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wake up; to become sober; to regain consciousness",
     "primaryGloss": "wake up",
     "emotion": "groggy and blinking in the morning light, stretching slowly",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to wake up; to become sober; to regain consciousness",
+        "why": "Includes 'to regain consciousness', which is not covered by the senses."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Often used as a resultative complement in the form 醒来 (xǐng lái)",
+        "why": "Grammatically false: in 醒来, 醒 is the main verb and 来 is a directional complement."
+      }
+    ],
+    "growth": 1.076
   }
 }

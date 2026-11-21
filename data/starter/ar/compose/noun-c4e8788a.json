@@ -58,6 +58,75 @@
     "headword": "غُرْفَة مَعِيشَة",
     "lemma": "غُرْفَة مَعِيشَة",
     "reading": null,
+    "ipa": "/ˈɣur.fat maˈʕiː.ʃa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "living room",
+    "primaryGloss": "living room",
+    "emotion": "warm and welcoming, settled in for a cozy evening at home",
+    "notes": [
+      "Made definite by adding الـ to the second word: غُرْفَة المَعِيشَة (the living room); plural غُرَف مَعِيشَة.",
+      "Often called صَالَة (ṣāla) in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "h01thwlgrq78hk5",
+        "order": 0,
+        "definition": "The main room in a home where people sit and relax together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "living room",
+              "sitting room"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "0r47ludsod04m0a",
+            "text": "نَجْلِسُ فِي غُرْفَةِ المَعِيشَةِ كُلَّ مَسَاءٍ.",
+            "textLang": "ar",
+            "translation": "We sit in the living room every evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "غُرْفَةِ المَعِيشَةِ",
+            "matchedTranslationForm": "living room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غُرْفَة مَعِيشَة",
+    "lemma": "غُرْفَة مَعِيشَة",
+    "reading": null,
     "ipa": "/ˈɣurfata maˈʕiː.ʃa/",
     "pos": "noun",
     "gender": "feminine",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɣurfata maˈʕiː.ʃa/",
+        "why": "First word has accusative case ending -ta instead of pause form /ˈɣur.fat/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "نجلس في غُرْفَة مَعِيشَة كل مساء.",
+        "why": "Uses indefinite 'a living room' where Arabic requires definite 'غرفة المعيشة'."
+      }
+    ],
+    "growth": 1.179
   }
 }

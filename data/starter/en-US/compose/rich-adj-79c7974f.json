@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "rico; pesado (comida)",
+    "primaryGloss": "rico",
+    "emotion": "assertive and direct, pointing out a status or a quality clearly",
+    "notes": [
+      "Cuidado con el falso amigo al hablar de comida: 'rich' no significa 'rico' (sabroso/delicioso), sino que lleva mucha grasa, crema o azúcar y llena mucho.",
+      "'Wealthy' significa lo mismo en el sentido de dinero, pero suena un poco más formal."
+    ],
+    "senses": [
+      {
+        "id": "xahwug114z5qbhe",
+        "order": 0,
+        "definition": "Que tiene mucho dinero o muchas posesiones.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "rico",
+              "adinerado"
+            ]
+          }
+        ],
+        "domain": "dinero",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "urbf2n7xz0kvguz",
+            "text": "She was born into a very rich family.",
+            "textLang": "en",
+            "translation": "Ella nació en una familia muy rica.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter-of-fact, describing someone's background",
+            "note": null,
+            "matchedForm": "rich",
+            "matchedTranslationForm": "rica"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8e4yso9peff6mii",
+        "order": 1,
+        "definition": "De un alimento: que contiene mucha grasa, mantequilla o azúcar y llena rápidamente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pesado",
+              "muy concentrado",
+              "empalagoso"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🍰",
+        "examples": [
+          {
+            "id": "hensb0ojoz6ub98",
+            "text": "This chocolate cake is too rich for me.",
+            "textLang": "en",
+            "translation": "Este pastel de chocolate es demasiado pesado para mí.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly overwhelmed by the intensity of the flavor",
+            "note": null,
+            "matchedForm": "rich",
+            "matchedTranslationForm": "pesado"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "rich",
+    "lemma": "rich",
+    "reading": null,
+    "ipa": "/rɪtʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "rico; abundante; delicioso",
     "primaryGloss": "rico",
     "emotion": "assertive and direct, pointing out a status or a quality clearly",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "rico, pesado, nutritivo",
+        "why": "In Spanish, 'rico' for food means 'tasty/delicious' (a false friend here), and 'rich' does not mean 'nutritivo'."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "rico; abundante; delicioso",
+        "why": "'Delicioso' is a false friend for 'rich' (food), and 'abundante' is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Aunque 'rich' significa principalmente tener mucho dinero, también se usa",
+        "why": "Merely restates the two senses; misses the crucial false friend warning with Spanish 'rico' (tasty)."
+      }
+    ],
+    "growth": 1.082
   }
 }

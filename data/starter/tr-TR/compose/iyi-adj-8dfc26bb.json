@@ -72,6 +72,160 @@
     "primaryGloss": "good",
     "emotion": "warm and approving, nodding with a slight smile",
     "notes": [
+      "Without any suffix, iyi is also used as an adverb ('well') and in everyday greetings like İyi günler (Good day) and İyi akşamlar (Good evening).",
+      "Do not confuse with güzel (beautiful/nice); iyi focuses more on quality, function, or well-being rather than appearance."
+    ],
+    "senses": [
+      {
+        "id": "ld31gq8ywf6cv6r",
+        "order": 0,
+        "definition": "Of high quality, pleasant, or satisfactory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "great",
+              "fine"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "hgqw9rh8k3as60v",
+            "text": "Bu film gerçekten çok iyi.",
+            "textLang": "tr",
+            "translation": "This movie is really very good.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and pleased, recommending something to a friend",
+            "note": null,
+            "matchedForm": "iyi",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ec0jg5idhqf8mle",
+        "order": 1,
+        "definition": "In good health, recovered, or feeling well.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "well",
+              "fine",
+              "good"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "u0pliy8d86naaq8",
+            "text": "Bugün kendimi çok iyi hissediyorum.",
+            "textLang": "tr",
+            "translation": "Today I feel very good.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and calm, resting comfortably",
+            "note": null,
+            "matchedForm": "iyi",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "seykdm8mst40oem",
+        "order": 2,
+        "definition": "Morally right, kind, or benevolent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "kind",
+              "nice"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "💛",
+        "examples": [
+          {
+            "id": "ead1nik4j2sfksz",
+            "text": "O çok iyi bir insan, herkese yardım eder.",
+            "textLang": "tr",
+            "translation": "He is a very kind person; he helps everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "iyi",
+            "matchedTranslationForm": "kind"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "iyi",
+    "lemma": "iyi",
+    "reading": null,
+    "ipa": "/iˈji/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👍",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "good; well; fine",
+    "primaryGloss": "good",
+    "emotion": "warm and approving, nodding with a slight smile",
+    "notes": [
       "İyi is one of the most versatile adjectives in Turkish, covering everything from moral goodness to high quality and physical health.",
       "Do not confuse it with güzel (beautiful/nice); iyi focuses more on quality, function, or well-being rather than pure appearance."
     ],
@@ -205,5 +359,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "İyi is one of the most versatile adjectives in Turkish",
+        "why": "Filler restating the senses; should explain adverbial and greeting usage instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[2].examples[0].text",
+        "quote": "O, herkes için iyi şeyler düşünüyor.",
+        "why": "Unnatural phrasing and 'iyi şeyler' shows sense 0, not a person's moral character."
+      }
+    ],
+    "growth": 1.026
   }
 }

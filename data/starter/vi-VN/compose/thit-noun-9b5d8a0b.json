@@ -58,6 +58,113 @@
     "headword": "thịt",
     "lemma": "thịt",
     "reading": null,
+    "ipa": "/tʰit̚˧˨ʔ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat; flesh",
+    "primaryGloss": "meat",
+    "emotion": "appetizing and savory, ready to be cooked for a warm family meal",
+    "notes": [
+      "Placed before the name of an animal to name its meat: 'thịt bò' (beef), 'thịt lợn' (pork), 'thịt gà' (chicken). Does not usually include fish ('cá') or seafood ('hải sản')."
+    ],
+    "senses": [
+      {
+        "id": "f3ce29tv99njadp",
+        "order": 0,
+        "definition": "The flesh of an animal eaten as food, especially of mammals and birds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "8uijdcnfcq75jaj",
+            "text": "Chúng tôi ăn thịt bò vào bữa tối.",
+            "textLang": "vi",
+            "translation": "We eat beef for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a hearty meal",
+            "note": null,
+            "matchedForm": "thịt",
+            "matchedTranslationForm": "beef"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "99gfm8i4svxpaz1",
+        "order": 1,
+        "definition": "The soft tissue of a human or animal body between the skin and the bones.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flesh"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "5z99m3j7iljbkbe",
+            "text": "Vết thương sâu làm rách cả da lẫn thịt.",
+            "textLang": "vi",
+            "translation": "The deep wound tore both skin and flesh.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pained and sympathetic toward the injury",
+            "note": null,
+            "matchedForm": "thịt",
+            "matchedTranslationForm": "flesh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "thịt",
+    "lemma": "thịt",
+    "reading": null,
     "ipa": "/tʰɪt̚˧ˀ˥/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "flesh, skin",
+        "why": "'thịt' means flesh, not skin ('da'), which the definition itself excludes."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "meat; flesh; body",
+        "why": "'body' is not a gloss of either sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When used generally, thịt refers to animal meat used as food.",
+        "why": "Merely restates the two senses without adding usage information."
+      }
+    ],
+    "growth": 1.152
   }
 }

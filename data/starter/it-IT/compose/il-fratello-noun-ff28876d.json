@@ -68,6 +68,92 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "brother",
+    "primaryGloss": "brother",
+    "emotion": "warm and familiar, thinking of a family member with affection",
+    "notes": [
+      "Like other singular family members, it takes no article with possessive adjectives (mio fratello, not il mio fratello), except in the plural (i miei fratelli) or with loro (il loro fratello).",
+      "The plural fratelli can also mean 'brothers and sisters' (siblings)."
+    ],
+    "senses": [
+      {
+        "id": "r9q146zsuxqt5as",
+        "order": 0,
+        "definition": "A male who has the same parents as another person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "brother"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "mhzw0cqucwwj5g0",
+            "text": "Mio fratello minore frequenta la scuola elementare.",
+            "textLang": "it",
+            "translation": "My younger brother goes to elementary school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and proud, talking about family",
+            "note": null,
+            "matchedForm": "fratello",
+            "matchedTranslationForm": "brother"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "r9q146zsuxqt5as",
+      "from": "Figlio dei stessi genitori rispetto a un altro figlio; maschio che ha gli stessi genitori.",
+      "to": "A male who shares the same parents as another person.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    },
+    {
+      "sense": "949vq67qmr7gi2z",
+      "from": "Membro di un ordine religioso maschile; frate.",
+      "to": "A member of a male religious order.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il fratello",
+    "lemma": "fratello",
+    "reading": null,
+    "ipa": "/fraˈtɛl.lo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "brother; friar",
     "primaryGloss": "brother",
     "emotion": "warm and familiar, thinking of a family member with affection",
@@ -160,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "r9q146zsuxqt5as",
-      "from": "Figlio dei stessi genitori rispetto a un altro figlio; maschio che ha gli stessi genitori.",
-      "to": "A male who shares the same parents as another person.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    },
-    {
-      "sense": "949vq67qmr7gi2z",
-      "from": "Membro di un ordine religioso maschile; frate.",
-      "to": "A member of a male religious order.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il frate aiuta i poveri nel convento.",
+        "why": "Uses the noun 'frate' instead of the headword 'fratello'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A member of a male religious order.",
+        "why": "Marginal religious sense for A2; the everyday word for friar is 'frate'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential A1/A2 grammar note: singular family members drop the article with possessives."
+      }
+    ],
+    "growth": 1.08
+  }
 }

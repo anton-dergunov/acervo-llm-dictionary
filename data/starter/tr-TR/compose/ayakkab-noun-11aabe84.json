@@ -58,6 +58,75 @@
     "headword": "ayakkabı",
     "lemma": "ayakkabı",
     "reading": null,
+    "ipa": "/ajakkaˈbɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👞",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "shoe",
+    "primaryGloss": "shoe",
+    "emotion": "hurrying to get out the door, tapping heels and getting ready",
+    "notes": [
+      "The singular form 'ayakkabı' commonly refers to a pair of shoes as well as a single shoe.",
+      "Use 'giymek' to put on shoes and 'çıkarmak' to take them off."
+    ],
+    "senses": [
+      {
+        "id": "3kxirqy7sii12bx",
+        "order": 0,
+        "definition": "An outer covering for the foot, usually worn in pairs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shoe",
+              "footwear"
+            ]
+          }
+        ],
+        "domain": "footwear",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "drzd0ypgvfmei1h",
+            "text": "Yeni bir ayakkabı aldım.",
+            "textLang": "tr",
+            "translation": "I bought a new pair of shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ayakkabı",
+            "matchedTranslationForm": "shoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ayakkabı",
+    "lemma": "ayakkabı",
+    "reading": null,
     "ipa": "/ajaɫkaˈbɯ/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ajaɫkaˈbɯ/",
+        "why": "First k was corrupted into velarized l (ɫ); should be /ajakkaˈbɯ/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Ayakkabı literally combines 'ayak' (foot) and 'kapı' (door/covering)",
+        "why": "False etymology: second element is 'kap' (container) + possessive '-ı', not 'kapı' (door)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I bought a new shoe.",
+        "why": "In Turkish, singular 'ayakkabı' naturally refers to a pair of shoes, not one shoe."
+      }
+    ],
+    "growth": 0.889
   }
 }

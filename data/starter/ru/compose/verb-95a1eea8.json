@@ -83,6 +83,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to stop; to stay (at a hotel)",
+    "primaryGloss": "stop",
+    "emotion": "a deliberate pause in motion, calm and intentional",
+    "notes": [
+      "Imperfective verb; its perfective partner is 'остановиться'.",
+      "Intransitive (coming to a stop on one's own). To stop someone or something else, use 'останавливать' / 'остановить'."
+    ],
+    "senses": [
+      {
+        "id": "1srher39awyf3pk",
+        "order": 0,
+        "definition": "To cease moving or to pause during an activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stop",
+              "to pull up",
+              "to pause"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "enbdhhvgfydzehu",
+            "text": "Автобус останавливается на каждой остановке.",
+            "textLang": "ru",
+            "translation": "The bus stops at every stop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a regular bus route",
+            "note": null,
+            "matchedForm": "останавливается",
+            "matchedTranslationForm": "stops"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nwkxvfmfcdxgog4",
+        "order": 1,
+        "definition": "To live temporarily in a place as a guest or traveler, taking 'в' or 'у' with the prepositional or genitive case.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stay",
+              "to lodge"
+            ]
+          }
+        ],
+        "domain": "lodging",
+        "emoji": "🏨",
+        "examples": [
+          {
+            "id": "955c54kxwaf0fxi",
+            "text": "В командировках мы обычно останавливаемся в небольшом отеле.",
+            "textLang": "ru",
+            "translation": "On business trips we usually stay in a small hotel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "останавливаемся",
+            "matchedTranslationForm": "stay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "останавливаться",
+    "lemma": "останавливаться",
+    "reading": null,
+    "ipa": "/ɐstɐˈnavlʲɪvətsə/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to stop; to stay",
     "primaryGloss": "stop",
     "emotion": "a deliberate pause in motion, calm and intentional",
@@ -176,5 +287,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Мы планируем останавливаться в небольшом отеле.",
+        "why": "Wrong aspect: a single planned stay requires perfective 'остановиться', not imperfective 'останавливаться'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'останавливаться' for both physical movement stopping and for staying",
+        "why": "Merely restates the two senses; should instead give the perfective pair 'остановиться'."
+      }
+    ],
+    "growth": 1.059
   }
 }

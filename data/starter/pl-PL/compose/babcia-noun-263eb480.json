@@ -72,6 +72,115 @@
     "primaryGloss": "grandmother",
     "emotion": "warm and affectionate, the way you speak about a beloved family member",
     "notes": [
+      "When addressing her directly, use the vocative form 'babciu'. The formal word 'babka' is rarely used for family today."
+    ],
+    "senses": [
+      {
+        "id": "qz3auhh70sp0c8t",
+        "order": 0,
+        "definition": "The mother of one's father or mother.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grandmother",
+              "grandma"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👵",
+        "examples": [
+          {
+            "id": "37zg1h3xm5m7k8e",
+            "text": "Moja babcia piecze najlepsze ciasto.",
+            "textLang": "pl",
+            "translation": "My grandmother bakes the best cake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and appreciative, thinking of a favorite treat",
+            "note": null,
+            "matchedForm": "babcia",
+            "matchedTranslationForm": "grandmother"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2cf9bsytc3yasd9",
+        "order": 1,
+        "definition": "(informal) An older woman.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old lady",
+              "granny"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👩‍🦳",
+        "examples": [
+          {
+            "id": "te95ya4qvt2azw9",
+            "text": "Ta miła babcia zawsze karmi ptaki w parku.",
+            "textLang": "pl",
+            "translation": "That nice old lady always feeds the birds in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle, observant, and kindly",
+            "note": null,
+            "matchedForm": "babcia",
+            "matchedTranslationForm": "old lady"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "babcia",
+    "lemma": "babcia",
+    "reading": null,
+    "ipa": "/ˈbap.t͡ɕa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👵",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "grandmother; grandma",
+    "primaryGloss": "grandmother",
+    "emotion": "warm and affectionate, the way you speak about a beloved family member",
+    "notes": [
       "Babcia is the standard term. You will often hear 'babcia' used affectionately for any elderly woman, similar to 'granny'.",
       "Use 'babcia' in formal or neutral contexts, and 'babciu' when speaking directly to her (the vocative case)."
     ],
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "You will often hear 'babcia' used affectionately for any elderly woman",
+        "why": "Restates sense 1 instead of giving extra grammar or usage guidance."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use 'babcia' in formal or neutral contexts",
+        "why": "'Babcia' corresponds to 'grandma'; the formal term is 'babka'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "An affectionate way to address or refer to an older woman.",
+        "why": "Meta-linguistic definition; define as the person ('an older woman'), not 'a way to refer'."
+      }
+    ],
+    "growth": 0.738
   }
 }

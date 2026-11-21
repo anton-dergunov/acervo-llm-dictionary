@@ -68,6 +68,74 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "skirt",
+    "primaryGloss": "skirt",
+    "emotion": "neat and ready for the day, pleased with the outfit",
+    "notes": [
+      "The plural is 'rokken' (doubled consonant to keep the vowel short).",
+      "Do not confuse 'rok' (skirt, short vowel) with 'rook' (smoke, long vowel)."
+    ],
+    "senses": [
+      {
+        "id": "w43exha9ik9qnde",
+        "order": 0,
+        "definition": "A piece of clothing that hangs from the waist down without separate legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skirt"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "4cxbneyoxm3u0d5",
+            "text": "Zij draagt vandaag een rode rok.",
+            "textLang": "nl",
+            "translation": "She is wearing a red skirt today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleased, showing off a new outfit to a friend",
+            "note": null,
+            "matchedForm": "rok",
+            "matchedTranslationForm": "skirt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de rok",
+    "lemma": "rok",
+    "reading": null,
+    "ipa": "/rɔk/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "skirt; smoke",
     "primaryGloss": "skirt",
     "emotion": "neat and ready for the day, pleased with the outfit",
@@ -159,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "skirt; smoke",
+        "why": "'smoke' is 'rook', not 'rok'; this teaches a false meaning."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(formalwear) A formal man's coat with tails",
+        "why": "Tailcoat/white tie is a rare, formal sense not needed at A2."
+      }
+    ],
+    "growth": 0.703
   }
 }

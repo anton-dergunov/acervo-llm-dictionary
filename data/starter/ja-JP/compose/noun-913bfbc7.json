@@ -57,6 +57,116 @@
     "language": "ja",
     "headword": "角",
     "lemma": "角",
+    "reading": "かど",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "corner; horn",
+    "primaryGloss": "corner",
+    "emotion": "a practical and common point of reference used to give directions",
+    "notes": [
+      "Read かど (kado), it refers to an outside corner (of a street, desk, or box), whereas 隅 (すみ, sumi) is an inside corner (of a room or box).",
+      "When read つの (tsuno), this kanji means 'horn' or 'antler'."
+    ],
+    "senses": [
+      {
+        "id": "8mv8pd6wibui4sa",
+        "order": 0,
+        "definition": "The place where two streets meet, or the sharp outer edge where two sides of an object meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner",
+              "street corner"
+            ]
+          }
+        ],
+        "domain": "place, object",
+        "emoji": "🔀",
+        "examples": [
+          {
+            "id": "yh633kah8bn8q9u",
+            "text": "角を左に曲がってください。",
+            "textLang": "ja",
+            "translation": "Please turn left at the corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, giving clear directions to someone",
+            "note": null,
+            "matchedForm": "角",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "29px4dhey7q75cu",
+        "order": 1,
+        "definition": "A hard, pointed part that grows on the head of some animals, such as cows or deer (read つの).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "horn",
+              "antler"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tx8f7ztbfioh8f1",
+            "text": "しかにはりっぱな角があります。",
+            "textLang": "ja",
+            "translation": "Deer have splendid antlers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "角",
+            "matchedTranslationForm": "antlers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "角",
+    "lemma": "角",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -119,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji word with multiple readings."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'kado' specifically refers to a corner where two streets meet",
+        "why": "False claim; かど also refers to outer corners of objects like desks or boxes."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'horn, antler' (read つの) and object corner."
+      }
+    ],
+    "growth": 1.957
   }
 }

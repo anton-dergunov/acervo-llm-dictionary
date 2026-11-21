@@ -57,6 +57,73 @@
     "language": "zh",
     "headword": "镜子",
     "lemma": "镜子",
+    "reading": "jìngzi",
+    "ipa": "/tɕiŋ˥˩ tsɹ̩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "mirror",
+    "primaryGloss": "mirror",
+    "emotion": "casually checking your appearance, thoughtful and observant",
+    "notes": [
+      "Takes the classifier 面 (miàn). 'To look in the mirror' is 照镜子 (zhào jìngzi), not 看镜子."
+    ],
+    "senses": [
+      {
+        "id": "5ejg815e8km8eu1",
+        "order": 0,
+        "definition": "A piece of glass with a shiny backing that reflects images.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mirror"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🪞",
+        "examples": [
+          {
+            "id": "wboy29unm01ftdd",
+            "text": "她出门前总是要照一下镜子。",
+            "textLang": "zh",
+            "translation": "She always looks in the mirror before going out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "镜子",
+            "matchedTranslationForm": "mirror"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "镜子",
+    "lemma": "镜子",
     "reading": "jìng zi",
     "ipa": "/tɕiŋ˥˩ tsɹ̩/",
     "pos": "noun",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我在镜子里看我自己。",
+        "why": "Unnatural phrasing; in Mandarin, 'look in the mirror' is 照镜子."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the essential collocation 照镜子 (look in the mirror) and the classifier 面."
+      }
+    ],
+    "growth": 0.948
   }
 }

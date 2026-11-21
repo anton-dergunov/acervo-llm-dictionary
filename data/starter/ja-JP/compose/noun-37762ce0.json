@@ -68,6 +68,74 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "romantic couple",
+    "primaryGloss": "couple",
+    "emotion": "a warm and pleasant observation, noticing two people together in public",
+    "notes": [
+      "From English 'couple', but used in Japanese almost exclusively for two people in a romantic relationship (usually unmarried). Married couples are called 夫婦 (ふうふ, fūfu), and a general pair of people is 二人組 (ふたりぐみ, futarigumi)."
+    ],
+    "senses": [
+      {
+        "id": "adz192gys7xs0zm",
+        "order": 0,
+        "definition": "Two people who are in a romantic relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "couple",
+              "romantic partners"
+            ]
+          }
+        ],
+        "domain": "relationship",
+        "emoji": "💑",
+        "examples": [
+          {
+            "id": "j1sldik1i23vdte",
+            "text": "公園に幸せそうなカップルがいた。",
+            "textLang": "ja",
+            "translation": "There was a happy-looking couple in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and slightly charmed, noting the atmosphere of the scene",
+            "note": null,
+            "matchedForm": "カップル",
+            "matchedTranslationForm": "couple"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "カップル",
+    "lemma": "カップル",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "couple; pair",
     "primaryGloss": "couple",
     "emotion": "a warm and pleasant observation, noticing two people together in public",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A pair of two things or people.",
+        "why": "In Japanese カップル does not mean 'a pair of things'; notes[1] itself contradicts this sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "couple; pair",
+        "why": "Once the marginal 'pair' sense is removed, 'pair' in shortGloss is misleading."
+      }
+    ],
+    "growth": 0.629
   }
 }

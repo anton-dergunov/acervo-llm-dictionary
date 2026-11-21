@@ -72,6 +72,98 @@
     "primaryGloss": "avergonzado",
     "emotion": "self-conscious and uneasy, with a slight flush on the cheeks",
     "notes": [
+      "No confundas 'embarrassed' con 'embarazada' en español; este último significa 'pregnant' y no tiene nada que ver con la vergüenza.",
+      "Suele ir seguido de las preposiciones 'about' o 'by' (ej. 'embarrassed about his mistake')."
+    ],
+    "senses": [
+      {
+        "id": "y0mozh5h382yfhi",
+        "order": 0,
+        "definition": "Que siente vergüenza, timidez o incomodidad ante los demás por una situación torpe o por haber hecho el ridículo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "avergonzado",
+              "apenado",
+              "incómodo",
+              "cortado"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "😳",
+        "examples": [
+          {
+            "id": "gk8wrt2ty1rwn0b",
+            "text": "He felt embarrassed when everyone started singing happy birthday to him in the crowded restaurant.",
+            "textLang": "en",
+            "translation": "Se sintió avergonzado cuando todos empezaron a cantarle el cumpleaños feliz en el restaurante lleno.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "red-faced and wishing to disappear under the table",
+            "note": null,
+            "matchedForm": "embarrassed",
+            "matchedTranslationForm": "avergonzado"
+          },
+          {
+            "id": "l1tnmjwvwq8l96b",
+            "text": "She was embarrassed when her phone rang loudly during the quiet meeting.",
+            "textLang": "en",
+            "translation": "Se sintió avergonzada cuando su teléfono sonó fuerte durante la reunión silenciosa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and flustered, wanting to silence the noise quickly",
+            "note": null,
+            "matchedForm": "embarrassed",
+            "matchedTranslationForm": "avergonzada"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "embarrassed",
+    "lemma": "embarrassed",
+    "reading": null,
+    "ipa": "/ɪmˈbɛr.əst/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "avergonzado; apenado",
+    "primaryGloss": "avergonzado",
+    "emotion": "self-conscious and uneasy, with a slight flush on the cheeks",
+    "notes": [
       "No confundas 'embarrassed' con ' embarazada' en español; este último significa 'pregnant' y no tiene nada que ver con la vergüenza."
     ],
     "senses": [
@@ -161,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses describe the same core feeling of embarrassment/awkwardness and should be merged."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].definition",
+        "quote": "Sentirse tímido, inc cómodo o acomplejado",
+        "why": "Typo 'inc cómodo' instead of 'incómodo'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Sentirse tímido, inc cómodo o acomplejado",
+        "why": "Adjective defined as a verb phrase ('Sentirse...') and noun ('Incomodidad...') in sense 1."
+      }
+    ],
+    "growth": 1.065
   }
 }

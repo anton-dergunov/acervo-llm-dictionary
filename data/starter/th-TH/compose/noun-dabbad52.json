@@ -58,6 +58,74 @@
     "headword": "ชาวนา",
     "lemma": "ชาวนา",
     "reading": null,
+    "ipa": "/tɕʰaːw.naː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍🌾",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "rice farmer; farmer",
+    "primaryGloss": "rice farmer",
+    "emotion": "respectful and grounded, thinking of the hard work behind the food",
+    "notes": [
+      "'ชาวนา' literally means 'person of the rice field' (นา). For fruit/crop growers use 'ชาวสวน' or 'ชาวไร่', and for the formal general term 'farmer/agriculturalist' use 'เกษตรกร'."
+    ],
+    "senses": [
+      {
+        "id": "czv8haopbbn37zc",
+        "order": 0,
+        "definition": "A person who grows rice in paddy fields.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rice farmer",
+              "farmer"
+            ]
+          }
+        ],
+        "domain": "agriculture",
+        "emoji": "🌾",
+        "examples": [
+          {
+            "id": "lqwrq9ngww9ef5x",
+            "text": "ชาวนากำลังดำนาในทุ่งนา",
+            "textLang": "th",
+            "translation": "The rice farmer is planting rice in the field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ชาวนา",
+            "matchedTranslationForm": "rice farmer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ชาวนา",
+    "lemma": "ชาวนา",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A person who grows food or keeps animals, specifically one who works",
+        "why": "ชาวนา specifically grows rice; they do not keep animals (that is เกษตรกรผู้เลี้ยงสัตว์) or fruit orchards."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ชาวนา กำลังดำนาในทุ่งนา",
+        "why": "Unnecessary space after ชาวนา; standard Thai does not put spaces between subject and verb."
+      }
+    ],
+    "growth": 0.637
   }
 }

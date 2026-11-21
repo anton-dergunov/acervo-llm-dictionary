@@ -72,6 +72,75 @@
     "primaryGloss": "stairs",
     "emotion": "practical and everyday, navigating between floors of a building",
     "notes": [
+      "Refers to the staircase as a whole; a single step is 台阶 (táijiē), counted with 级 (jí).",
+      "Commonly used in phrases like 上楼梯 (go upstairs), 下楼梯 (go downstairs), and 走楼梯 (take the stairs)."
+    ],
+    "senses": [
+      {
+        "id": "hhkzto7ez2vtp92",
+        "order": 0,
+        "definition": "A set of steps for going from one level to another inside or outside a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stairs",
+              "staircase"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🪜",
+        "examples": [
+          {
+            "id": "ksn5s17gpz8torq",
+            "text": "电梯坏了，我们走楼梯吧。",
+            "textLang": "zh",
+            "translation": "The elevator is broken, let's take the stairs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "楼梯",
+            "matchedTranslationForm": "stairs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "楼梯",
+    "lemma": "楼梯",
+    "reading": "lóu tī",
+    "ipa": "/lou̯˧˥ tʰi˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪜",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "stairs; staircase",
+    "primaryGloss": "stairs",
+    "emotion": "practical and everyday, navigating between floors of a building",
+    "notes": [
       "Used for both a single step and a full flight of stairs.",
       "Use the measure word '条' (tiáo) for a flight of stairs or '级' (jí) for a single individual step."
     ],
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for both a single step and a full flight of stairs.",
+        "why": "楼梯 refers to the stairs/staircase as a whole; a single step is 台阶 (táijiē)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use the measure word '条' (tiáo) for a flight of stairs",
+        "why": "条 is unnatural for 楼梯; 段 (duàn) or 个 (gè) is used."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我在楼梯上走。",
+        "why": "Unnatural sentence; native speakers say 走楼梯 (take the stairs) or 上/下楼梯."
+      }
+    ],
+    "growth": 1.231
   }
 }

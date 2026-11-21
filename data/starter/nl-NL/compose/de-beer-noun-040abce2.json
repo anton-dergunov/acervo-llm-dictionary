@@ -58,6 +58,73 @@
     "headword": "de beer",
     "lemma": "beer",
     "reading": null,
+    "ipa": "/beːr/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "awed and cautious, watching a large animal in the woods",
+    "notes": [
+      "Do not confuse with English 'beer', which is 'het bier' (/biːr/) in Dutch."
+    ],
+    "senses": [
+      {
+        "id": "4b3xyrn5p0wr69s",
+        "order": 0,
+        "definition": "A large, heavy wild animal with thick fur and sharp claws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "l5mqyaquno37n22",
+            "text": "In het bos zagen we een grote beer lopen.",
+            "textLang": "nl",
+            "translation": "In the woods we saw a big bear walking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tense and whispering, pointing out something dangerous",
+            "note": null,
+            "matchedForm": "beer",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de beer",
+    "lemma": "beer",
+    "reading": null,
     "ipa": "/deːr/",
     "pos": "noun",
     "gender": "common",
@@ -137,5 +204,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/deːr/",
+        "why": "Wrong initial consonant; 'beer' is pronounced /beːr/, not /deːr/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "An adult uncastrated male pig.",
+        "why": "Agricultural term 'breeding boar' is not an everyday A2 meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'beer' primarily means the wild animal, but it can also",
+        "why": "Restates the senses and contains a nonsensical typo ('berm/boar')."
+      }
+    ],
+    "growth": 0.685
   }
 }

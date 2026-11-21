@@ -58,6 +58,116 @@
     "headword": "pekerjaan",
     "lemma": "pekerjaan",
     "reading": null,
+    "ipa": "/pə.kərˈdʒa.an/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "job; work; task",
+    "primaryGloss": "job",
+    "emotion": "professional and matter-of-fact, discussing daily responsibilities",
+    "notes": [
+      "Derived from 'kerja' (work). Do not confuse with the verb 'bekerja' (to work)."
+    ],
+    "senses": [
+      {
+        "id": "5xmyedbiwtupb83",
+        "order": 0,
+        "definition": "Regular work that a person does to earn money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "job",
+              "occupation",
+              "employment"
+            ]
+          }
+        ],
+        "domain": "employment",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "8qa2hnhmcrs310r",
+            "text": "Pekerjaan barunya sangat menyenangkan dan menantang.",
+            "textLang": "id",
+            "translation": "His new job is very enjoyable and challenging.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and enthusiastic about a new career",
+            "note": null,
+            "matchedForm": "Pekerjaan",
+            "matchedTranslationForm": "job"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u3p3jwuvzx7ecf0",
+        "order": 1,
+        "definition": "A piece of work or duty that needs to be done.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "work",
+              "task"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "📝",
+        "examples": [
+          {
+            "id": "0hpuvcwzgzrhami",
+            "text": "Saya masih punya banyak pekerjaan hari ini.",
+            "textLang": "id",
+            "translation": "I still have a lot of work today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pekerjaan",
+            "matchedTranslationForm": "work"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "pekerjaan",
+    "lemma": "pekerjaan",
+    "reading": null,
     "ipa": "/pəkərˈja.an/",
     "pos": "noun",
     "gender": null,
@@ -163,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pəkərˈja.an/",
+        "why": "Indonesian 'j' is pronounced /dʒ/, not /j/."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "meaning the act, place, or result of working.",
+        "why": "'Pekerjaan' does not mean a place of working."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dia menyelesaikan semua pekerjaan rumah sebelum pergi bermain.",
+        "why": "Uses the fixed compound 'pekerjaan rumah' (homework/chores) instead of 'pekerjaan' alone."
+      }
+    ],
+    "growth": 0.688
   }
 }

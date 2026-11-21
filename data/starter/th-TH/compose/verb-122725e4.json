@@ -60,6 +60,118 @@
     "headword": "เที่ยว",
     "lemma": "เที่ยว",
     "reading": null,
+    "ipa": "/tʰîaw/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to travel; to go out",
+    "primaryGloss": "travel",
+    "emotion": "relaxed and eager, planning a fun time away",
+    "notes": [
+      "Very commonly used after ไป as ไปเที่ยว ('to go on a trip' or 'to go out for fun').",
+      "Do not confuse with เดินทาง, which focuses on the journey from one place to another rather than leisure."
+    ],
+    "senses": [
+      {
+        "id": "mmbs3gravnjaklj",
+        "order": 0,
+        "definition": "To go on a trip or visit places for pleasure.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "travel",
+              "go on a trip",
+              "visit"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "03coq0dxztjhcwt",
+            "text": "ฉันอยากไปเที่ยวญี่ปุ่นช่วงฤดูหนาว",
+            "textLang": "th",
+            "translation": "I want to travel to Japan during the winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and excited, looking forward to a vacation",
+            "note": null,
+            "matchedForm": "เที่ยว",
+            "matchedTranslationForm": "travel"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7u6oju72wxqsgrk",
+        "order": 1,
+        "definition": "To go out socially to have fun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "go out",
+              "hang out"
+            ]
+          }
+        ],
+        "domain": "leisure",
+        "emoji": "💃",
+        "examples": [
+          {
+            "id": "f6gy0zqjxmv3t2m",
+            "text": "คืนนี้เราไปเที่ยวในเมืองกันไหม",
+            "textLang": "th",
+            "translation": "Shall we go out in the city tonight?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and energetic, inviting a friend for a night out",
+            "note": null,
+            "matchedForm": "เที่ยว",
+            "matchedTranslationForm": "go out"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เที่ยว",
+    "lemma": "เที่ยว",
+    "reading": null,
     "ipa": "/tʰiaːw˨˩/",
     "pos": "verb",
     "gender": null,
@@ -205,5 +317,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tʰiaːw˨˩/",
+        "why": "Wrong tone and vowel length: เที่ยว has a falling tone (/tʰîaw/ or /tʰiaw˥˩/), not low."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to travel; to go out; to visit",
+        "why": "'to visit' is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "To travel or move from place to place.",
+        "why": "Literary or auxiliary usage; overlaps with sense 0 and is not a core A2 sense."
+      }
+    ],
+    "growth": 0.639
   }
 }

@@ -72,6 +72,94 @@
     "primaryGloss": "yesterday",
     "emotion": null,
     "notes": [
+      "To say 'yesterday morning/afternoon/night', use 'ontem de manhã', 'ontem à tarde', and 'ontem à noite'."
+    ],
+    "senses": [
+      {
+        "id": "f455kul660z8oqr",
+        "order": 0,
+        "definition": "On the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "cn938pdextxqfdx",
+            "text": "Eu trabalhei muito ontem.",
+            "textLang": "pt",
+            "translation": "I worked a lot yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, reporting on a completed task",
+            "note": null,
+            "matchedForm": "ontem",
+            "matchedTranslationForm": "yesterday"
+          },
+          {
+            "id": "qow8ma4rlhncuh7",
+            "text": "O filme que vimos ontem era muito bom.",
+            "textLang": "pt",
+            "translation": "The movie we saw yesterday was very good.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and enthusiastic, sharing an opinion about a recent experience",
+            "note": null,
+            "matchedForm": "ontem",
+            "matchedTranslationForm": "yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "ontem",
+    "lemma": "ontem",
+    "reading": null,
+    "ipa": "/ˈõ.tẽj/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
       "Note that 'ontem' is an adverb and does not change form. Unlike some other languages, you do not use an article like 'o' before it.",
       "Do not confuse 'ontem' (the day before today) with 'antes de ontem' (the day before yesterday)."
     ],
@@ -140,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The day before today.",
+        "why": "Defines an adverb as a noun; needs 'On the day before today'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'ontem' is an adverb and does not change form.",
+        "why": "Unnecessary grammatical filler; English also does not use an article before 'yesterday'."
+      }
+    ],
+    "growth": 0.695
   }
 }

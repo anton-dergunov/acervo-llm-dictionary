@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "salt",
+    "primaryGloss": "salt",
+    "emotion": "crisp and clean, adding flavor to a savory meal",
+    "notes": [
+      "Can also be used as a verb meaning 'to pickle in salt' (e.g., muối dưa — to pickle greens). Do not confuse with 'muỗi' (mosquito), which has the ngã tone."
+    ],
+    "senses": [
+      {
+        "id": "ov78027gesu8bzz",
+        "order": 0,
+        "definition": "A white substance obtained from sea water or mines, used to season and preserve food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salt"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧂",
+        "examples": [
+          {
+            "id": "utxv56wzic1tcuj",
+            "text": "Cho thêm một ít muối vào canh nhé.",
+            "textLang": "vi",
+            "translation": "Add a little salt to the soup, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and warm, cooking a simple meal in the kitchen",
+            "note": null,
+            "matchedForm": "muối",
+            "matchedTranslationForm": "salt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "muối",
+    "lemma": "muối",
+    "reading": null,
+    "ipa": "/muəj˦ˀ˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "salt; to pickle; to preserve",
     "primaryGloss": "salt",
     "emotion": "crisp and clean, adding flavor to a savory meal",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "To preserve or pickle vegetables, fish, or fruit in salt or brine.",
+        "why": "Entry POS is noun, so a verb sense does not belong here."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, muối refers to the white crystalline substance",
+        "why": "Restates the definitions instead of giving useful usage or contrast."
+      }
+    ],
+    "growth": 0.621
   }
 }

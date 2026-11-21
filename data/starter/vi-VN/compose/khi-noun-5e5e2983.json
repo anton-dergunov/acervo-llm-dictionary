@@ -58,6 +58,74 @@
     "headword": "khỉ",
     "lemma": "khỉ",
     "reading": null,
+    "ipa": "/xi˧˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "monkey",
+    "primaryGloss": "monkey",
+    "emotion": "playful and energetic, watching something quick move through the branches",
+    "notes": [
+      "Takes the classifier 'con' (con khỉ).",
+      "Often used in the simile 'nghịch như khỉ' (as mischievous as a monkey) to describe restless children."
+    ],
+    "senses": [
+      {
+        "id": "1ax1vmlmppkg70i",
+        "order": 0,
+        "definition": "A small to medium-sized primate with a long tail that lives in trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "oz6dr22qdalelg4",
+            "text": "Con khỉ đang leo trèo trên cây.",
+            "textLang": "vi",
+            "translation": "The monkey is climbing in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "khỉ",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "khỉ",
+    "lemma": "khỉ",
+    "reading": null,
     "ipa": "/kʰi˧˩/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kʰi˧˩/",
+        "why": "Initial 'kh' in Vietnamese is /x/, not /kʰ/."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Thằng bé này nghịch như khỉ.",
+        "why": "Simile 'nghịch như khỉ' (mischievous as a monkey) uses the literal animal sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A playful or mischievous person, often used affectionately for children",
+        "why": "Mostly used in similes ('như khỉ') or scolding compounds ('con khỉ'); marginal as standalone A2 sense."
+      }
+    ],
+    "growth": 0.525
   }
 }

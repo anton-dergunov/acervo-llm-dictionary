@@ -68,6 +68,73 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "secret",
+    "primaryGloss": "secret",
+    "emotion": "hushed and conspiratorial, sharing something confidential with a close friend",
+    "notes": [
+      "'Sekret' usually refers to personal information kept from others. 'Tajemnica' is broader and also means 'mystery'."
+    ],
+    "senses": [
+      {
+        "id": "z0ygckmm83d4265",
+        "order": 0,
+        "definition": "Information that is kept hidden from other people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "secret"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "yp8syw7wmtoqrkz",
+            "text": "Muszę ci powiedzieć sekret.",
+            "textLang": "pl",
+            "translation": "I have to tell you a secret.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and whispering, leaning in close",
+            "note": null,
+            "matchedForm": "sekret",
+            "matchedTranslationForm": "secret"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sekret",
+    "lemma": "sekret",
+    "reading": null,
+    "ipa": "/ˈsɛ.krɛt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "secret; mystery",
     "primaryGloss": "secret",
     "emotion": "hushed and conspiratorial, sharing something confidential with a close friend",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(mystery) Something that is difficult to understand or explain.",
+        "why": "Not a distinct everyday sense of 'sekret'; 'mystery' is normally 'tajemnica' (as note[0] admits)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "To jest wielki sekret natury.",
+        "why": "Unnatural collocation; Polish says 'tajemnica natury', not 'sekret natury'."
+      }
+    ],
+    "growth": 0.426
   }
 }

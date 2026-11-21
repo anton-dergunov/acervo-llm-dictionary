@@ -68,6 +68,154 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "con",
+    "primaryGloss": "con",
+    "emotion": null,
+    "notes": [
+      "Seguido de pronombres personales de objeto ('with me', 'with you'), equivale a las formas especiales 'conmigo', 'contigo', etc."
+    ],
+    "senses": [
+      {
+        "id": "d0msq7u5d61e5o1",
+        "order": 0,
+        "definition": "En compañía o colaboración de otra persona o cosa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con",
+              "junto con"
+            ]
+          }
+        ],
+        "domain": "compañía",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "t28qp01w32b3jly",
+            "text": "I want to go to the park with you.",
+            "textLang": "en",
+            "translation": "Quiero ir al parque contigo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and inviting, looking forward to spending time together",
+            "note": null,
+            "matchedForm": "with",
+            "matchedTranslationForm": "contigo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "swqicag417s9wyw",
+        "order": 1,
+        "definition": "Usando un instrumento, medio o herramienta.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con"
+            ]
+          }
+        ],
+        "domain": "instrumento",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "6f23ceatc0wbfk1",
+            "text": "He writes his notes with a blue pen.",
+            "textLang": "en",
+            "translation": "Él escribe sus notas con un bolígrafo azul.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and matter of fact",
+            "note": null,
+            "matchedForm": "with",
+            "matchedTranslationForm": "con"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vkv285wmt0dnyau",
+        "order": 2,
+        "definition": "Que tiene o incluye algo como característica o parte.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con"
+            ]
+          }
+        ],
+        "domain": "característica",
+        "emoji": "🎒",
+        "examples": [
+          {
+            "id": "5ie3zdwgzr9nbq7",
+            "text": "I would like a house with a big garden.",
+            "textLang": "en",
+            "translation": "Me gustaría una casa con un jardín grande.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and hopeful, imagining a nice place to live",
+            "note": null,
+            "matchedForm": "with",
+            "matchedTranslationForm": "con"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "with",
+    "lemma": "with",
+    "reading": null,
+    "ipa": "/wɪð/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "con; junto a; con la ayuda de",
     "primaryGloss": "con",
     "emotion": null,
@@ -241,5 +389,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'with' is a preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(unión) En colaboración o asociación, equivalente a junto con.",
+        "why": "Working 'with' a team is a direct shade of sense 0 (company/togetherness)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa 'with' para indicar compañía, posesión o el instrumento",
+        "why": "Merely repeats the sense definitions; a note on 'with me/you' vs 'conmigo/contigo' is much more useful."
+      }
+    ],
+    "growth": 0.759
   }
 }

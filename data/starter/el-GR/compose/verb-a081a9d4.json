@@ -60,6 +60,75 @@
     "headword": "ταξιδεύω",
     "lemma": "ταξιδεύω",
     "reading": null,
+    "ipa": "/ta.ksiˈðe.vo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to travel",
+    "primaryGloss": "travel",
+    "emotion": "a sense of anticipation and movement, open to new experiences",
+    "notes": [
+      "Simple past (aorist): ταξίδεψα. Related noun: το ταξίδι (trip, journey)."
+    ],
+    "senses": [
+      {
+        "id": "8xvn8d42p3p2b4n",
+        "order": 0,
+        "definition": "To go from one place to another, especially over a long distance or to another country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "travel",
+              "journey"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "8fk27k7d7svn4pw",
+            "text": "Μου αρέσει να ταξιδεύω σε ξένες χώρες.",
+            "textLang": "el",
+            "translation": "I like to travel to foreign countries.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wistful and dreaming of future adventures",
+            "note": null,
+            "matchedForm": "ταξιδεύω",
+            "matchedTranslationForm": "travel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ταξιδεύω",
+    "lemma": "ταξιδεύω",
+    "reading": null,
     "ipa": "/taˈksi.ðe.vo/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/taˈksi.ðe.vo/",
+        "why": "Wrong stress placement; ταξιδεύω is stressed on -δεύ-: /ta.ksiˈðe.vo/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean 'to travel' from place to place."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Unlike the noun 'ταξίδι' (a trip), this is the action itself.",
+        "why": "Both notes are pure filler stating the definition and that a verb is an action."
+      }
+    ],
+    "growth": 0.49
   }
 }

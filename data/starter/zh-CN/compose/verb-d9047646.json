@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to bring; to take along; to look after",
+    "primaryGloss": "bring",
+    "emotion": "helpful and ready, getting things sorted for the trip",
+    "notes": [
+      "Do not confuse 带 (to bring or carry with you, e.g., 带伞 'bring an umbrella') with its homophone 戴 (dài, to wear accessories on the body, e.g., 戴眼镜 'wear glasses')."
+    ],
+    "senses": [
+      {
+        "id": "fkeggsgi7mggd4o",
+        "order": 0,
+        "definition": "To take or bring something or someone along with you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bring",
+              "take",
+              "carry"
+            ]
+          }
+        ],
+        "domain": "carrying",
+        "emoji": "🎒",
+        "examples": [
+          {
+            "id": "l9n7e6ek9y3xqgv",
+            "text": "出门的时候别忘了带伞。",
+            "textLang": "zh",
+            "translation": "Don't forget to bring an umbrella when you go out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and reminding a friend before they leave",
+            "note": null,
+            "matchedForm": "带",
+            "matchedTranslationForm": "bring"
+          },
+          {
+            "id": "85151thjgboorhm",
+            "text": "明天你可以把那本书带过来吗？",
+            "textLang": "zh",
+            "translation": "Can you bring that book here tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inquiring, asking for a favor",
+            "note": null,
+            "matchedForm": "带",
+            "matchedTranslationForm": "bring"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tye0rcv4m0m6bwt",
+        "order": 1,
+        "definition": "To look after, raise, or lead someone, especially children or a group.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look after",
+              "take care of",
+              "lead"
+            ]
+          }
+        ],
+        "domain": "caring",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6983cc82ac2ktac",
+            "text": "她周末在家带孩子。",
+            "textLang": "zh",
+            "translation": "She stays home looking after the children on weekends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "带",
+            "matchedTranslationForm": "looking after"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "带",
+    "lemma": "带",
+    "reading": "dài",
+    "ipa": "/tai̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to bring; to carry; to take",
     "primaryGloss": "bring",
     "emotion": "helpful and ready, getting things sorted for the trip",
@@ -182,5 +314,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To wear an accessory, such as a watch, glasses, or a hat.",
+        "why": "Confuses 带 (to bring/carry) with its homophone 戴 (to wear accessories)."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "他今天出门戴了一副新眼镜。",
+        "why": "Does not contain the headword 带; uses 戴 instead."
+      }
+    ],
+    "growth": 0.867
   }
 }

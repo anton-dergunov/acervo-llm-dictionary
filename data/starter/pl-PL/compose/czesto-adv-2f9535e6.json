@@ -58,6 +58,74 @@
     "headword": "często",
     "lemma": "często",
     "reading": null,
+    "ipa": "/ˈt͡ʂɛw̃.stɔ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "often; frequently",
+    "primaryGloss": "often",
+    "emotion": null,
+    "notes": [
+      "Comparative: częściej (more often). Opposite: rzadko (rarely)."
+    ],
+    "senses": [
+      {
+        "id": "wu9q5jc9ihr7k0o",
+        "order": 0,
+        "definition": "Many times or on many occasions; at short intervals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "gzhbdc26eedxoxe",
+            "text": "Ona często czyta książki wieczorem.",
+            "textLang": "pl",
+            "translation": "She often reads books in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and describing a comfortable daily routine",
+            "note": null,
+            "matchedForm": "często",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "często",
+    "lemma": "często",
+    "reading": null,
     "ipa": "/ˈt͡ʂɛs.tɔ/",
     "pos": "adv",
     "gender": null,
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈt͡ʂɛs.tɔ/",
+        "why": "Wrong transcription of 'ę' before a fricative; should be /ˈt͡ʂɛw̃.stɔ/ or /ˈt͡ʂɛn.stɔ/."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Happening many times or on many occasions.",
+        "why": "Defined as an adjective ('Happening...') instead of an adverb ('Many times...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use często when an action happens on a regular basis or",
+        "why": "Merely restates the definition and gloss; comparative form 'częściej' is much more useful."
+      }
+    ],
+    "growth": 0.645
   }
 }

@@ -71,6 +71,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "beach",
+    "primaryGloss": "beach",
+    "emotion": "relaxed and sunny, thinking of warm weather and the sound of waves",
+    "notes": [
+      "The plural drops the 'i': 'le spiagge'.",
+      "Often used with the preposition 'in' without an article ('andare in spiaggia' = to go to the beach)."
+    ],
+    "senses": [
+      {
+        "id": "dmt5pseoqgmu9o6",
+        "order": 0,
+        "definition": "An area of sand or pebbles beside the sea or a lake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beach",
+              "seashore"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "xrqe7nqaaerzfdr",
+            "text": "Domani andiamo in spiaggia a prendere il sole.",
+            "textLang": "it",
+            "translation": "Tomorrow we are going to the beach to sunbathe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and happy about a sunny day out",
+            "note": null,
+            "matchedForm": "spiaggia",
+            "matchedTranslationForm": "beach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la spiaggia",
+    "lemma": "spiaggia",
+    "reading": null,
+    "ipa": "/ˈspjad.dʒa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "beach; seashore",
     "primaryGloss": "beach",
     "emotion": "relaxed and sunny, thinking of warm weather and the sound of waves",
@@ -124,5 +194,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use spiaggia when talking about a sandy or pebbly shore",
+        "why": "Merely repeats the definition; a note on the plural 'le spiagge' is much more useful."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "beach, seashore, sand",
+        "why": "'Sand' is 'la sabbia', not 'la spiaggia'."
+      }
+    ],
+    "growth": 0.812
   }
 }

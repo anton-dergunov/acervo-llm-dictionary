@@ -68,6 +68,136 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "with; by; me",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
+      "As a preposition ('with', 'by'), it is followed by a noun or pronoun in the accusative case.",
+      "As a weak object pronoun ('me'), it comes immediately before the verb (e.g., με βλέπεις), or after an imperative."
+    ],
+    "senses": [
+      {
+        "id": "iqcxwxgy3r4t5j5",
+        "order": 0,
+        "definition": "In the company of someone, or using something as a tool or means of transport.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "by"
+            ]
+          }
+        ],
+        "domain": "preposition",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "xnbyog2oxnxe3ov",
+            "text": "Πάω σινεμά με έναν φίλο.",
+            "textLang": "el",
+            "translation": "I am going to the cinema with a friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and friendly, describing a plan",
+            "note": null,
+            "matchedForm": "με",
+            "matchedTranslationForm": "with"
+          },
+          {
+            "id": "8ddviouj91tgm6r",
+            "text": "Γράφω με στυλό.",
+            "textLang": "el",
+            "translation": "I am writing with a pen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "με",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0ns119zh94gnv8l",
+        "order": 1,
+        "definition": "Used as the direct object of a verb to refer to the speaker.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "me"
+            ]
+          }
+        ],
+        "domain": "pronoun",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "li1m4a065mnbw3v",
+            "text": "Με βλέπεις;",
+            "textLang": "el",
+            "translation": "Do you see me?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and waiting for an answer",
+            "note": null,
+            "matchedForm": "Με",
+            "matchedTranslationForm": "me"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "με",
+    "lemma": "με",
+    "reading": null,
+    "ipa": "/me/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "with; me",
     "primaryGloss": "with",
     "emotion": null,
@@ -180,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with the personal pronoun 'με' (me)",
+        "why": "Note contradicts the entry itself, which includes the pronoun 'με' (me) as sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "A single-word preposition/pronoun is not an 'expression'."
+      }
+    ],
+    "growth": 0.777
   }
 }

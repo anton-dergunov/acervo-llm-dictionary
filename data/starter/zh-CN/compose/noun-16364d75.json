@@ -72,6 +72,116 @@
     "primaryGloss": "head",
     "emotion": "matter-of-fact and literal, like pointing to a physical part",
     "notes": [
+      "Do not confuse with 头发 (tóufa), which specifically means hair on the head.",
+      "Also commonly used as a measure word for large animals like cows and pigs (e.g., 一头牛, yì tóu niú), and as a noun suffix (pronounced neutral tone, tou) in words like 石头 (shítou, stone)."
+    ],
+    "senses": [
+      {
+        "id": "rqjel3nlpwc0ifc",
+        "order": 0,
+        "definition": "The top part of the body that contains the brain, eyes, nose, and mouth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "29i998bgj4t4q1o",
+            "text": "我的头很疼。",
+            "textLang": "zh",
+            "translation": "My head hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dull, aching, and slightly uncomfortable",
+            "note": null,
+            "matchedForm": "头",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7g5t0q595a07zj3",
+        "order": 1,
+        "definition": "The top, tip, or end part of an object or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "end",
+              "top",
+              "tip"
+            ]
+          }
+        ],
+        "domain": "position",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "l9d2p1g645911ql",
+            "text": "他在路的那头等我。",
+            "textLang": "zh",
+            "translation": "He is waiting for me at the other end of the road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "头",
+            "matchedTranslationForm": "end"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "头",
+    "lemma": "头",
+    "reading": "tóu",
+    "ipa": "/tʰou̯˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "head; top; end",
+    "primaryGloss": "head",
+    "emotion": "matter-of-fact and literal, like pointing to a physical part",
+    "notes": [
       "While '头' is the standard word for the physical head, it is also frequently used as a counter for large animals or to describe the 'end' of an object or path. Be careful not to confuse it with '头发' (tóufa), which specifically refers to hair on the head."
     ],
     "senses": [
@@ -160,5 +270,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "He is waiting for me at the end of the street.",
+        "why": "街头 means street corner or on the streets; 尽头 or 那头 means the end."
+      }
+    ],
+    "growth": 0.974
   }
 }

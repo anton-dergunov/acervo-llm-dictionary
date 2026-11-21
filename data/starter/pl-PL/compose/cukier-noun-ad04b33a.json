@@ -72,6 +72,94 @@
     "primaryGloss": "sugar",
     "emotion": "a simple, domestic moment while preparing a hot drink in the morning",
     "notes": [
+      "Note the stem change in declined forms, where '-ie-' drops out: 'bez cukru' (without sugar), 'z cukrem' (with sugar)."
+    ],
+    "senses": [
+      {
+        "id": "s9gr4am2qv2ouom",
+        "order": 0,
+        "definition": "A sweet substance, usually in the form of white crystals, used to sweeten food and drinks or found in food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sugar"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧂",
+        "examples": [
+          {
+            "id": "04lxd2ui8h9hu23",
+            "text": "Pijesz kawę z cukrem czy bez?",
+            "textLang": "pl",
+            "translation": "Do you drink coffee with sugar or without?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cukrem",
+            "matchedTranslationForm": "sugar"
+          },
+          {
+            "id": "3uwi62eplre6dpk",
+            "text": "Ten jogurt ma dużo cukru.",
+            "textLang": "pl",
+            "translation": "This yogurt has a lot of sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and informative, looking at a product label",
+            "note": null,
+            "matchedForm": "cukru",
+            "matchedTranslationForm": "sugar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "cukier",
+    "lemma": "cukier",
+    "reading": null,
+    "ipa": "/ˈt͡su.kʲɛr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍬",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "sugar",
+    "primaryGloss": "sugar",
+    "emotion": "a simple, domestic moment while preparing a hot drink in the morning",
+    "notes": [
       "Cukier is a masculine noun. When talking about adding sugar to a drink, use the instrumental case: 'z cukrem' (with sugar).",
       "Do not confuse it with 'słodycze', which refers to the broader category of sweets or candy."
     ],
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Sugar in a coffee cup and sugar in yogurt are the same everyday sense."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "sugar, carbohydrates",
+        "why": "Singular 'cukier' means 'sugar'; 'carbohydrates' is 'węglowodany' (or plural 'cukry' in chemistry)."
+      }
+    ],
+    "growth": 0.658
   }
 }

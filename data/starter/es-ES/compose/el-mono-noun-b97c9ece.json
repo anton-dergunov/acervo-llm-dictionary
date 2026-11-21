@@ -68,6 +68,116 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "monkey; jumpsuit, overalls",
+    "primaryGloss": "monkey",
+    "emotion": "playful and curious, like looking at something lively and entertaining",
+    "notes": [
+      "As an adjective ('mono, -a'), it is very common in Spain with the meaning 'cute' or 'pretty' ('¡Qué niño más mono!').",
+      "In colloquial Peninsular Spanish, 'tener mono (de algo)' means to have withdrawal symptoms or a strong craving for something."
+    ],
+    "senses": [
+      {
+        "id": "teo7gk5kzrxt56k",
+        "order": 0,
+        "definition": "An animal with a long tail that lives in trees in warm countries and is related to apes and humans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "0f5niw9jm9iekpz",
+            "text": "El mono saltaba de rama en rama en el zoo.",
+            "textLang": "es",
+            "translation": "The monkey was jumping from branch to branch at the zoo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mono",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y0hkl5qjnhm7euh",
+        "order": 1,
+        "definition": "A one-piece garment that covers both the body and the legs, worn as fashionable clothing or as workwear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "jumpsuit",
+              "overalls",
+              "dungarees"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🦘",
+        "examples": [
+          {
+            "id": "am5v2ho2p2winso",
+            "text": "Se compró un mono azul para la fiesta.",
+            "textLang": "es",
+            "translation": "She bought a blue jumpsuit for the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mono",
+            "matchedTranslationForm": "jumpsuit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el mono",
+    "lemma": "mono",
+    "reading": null,
+    "ipa": "/ˈmono/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "monkey; jumpsuit; craving; cute",
     "primaryGloss": "monkey",
     "emotion": "playful and curious, like looking at something lively and entertaining",
@@ -201,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(appearance) To look very attractive, pretty, or cute. | glosses en: cute, pretty",
+        "why": "'Cute' is the adjective 'mono/mona', not the noun 'el mono'; defined as a verb."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "monkey; jumpsuit; craving; cute",
+        "why": "Includes 'craving' (missing from senses) and 'cute' (which is an adjective, not this noun)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'mono' is the standard word for the animal, it is also",
+        "why": "Merely restates the glosses of senses 0 and 1."
+      }
+    ],
+    "growth": 0.931
   }
 }

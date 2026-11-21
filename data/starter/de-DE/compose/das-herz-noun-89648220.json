@@ -72,6 +72,113 @@
     "primaryGloss": "heart",
     "emotion": "rhythmic, steady and life-giving, felt deep within the chest",
     "notes": [
+      "Irregular forms: dative singular 'dem Herzen', genitive singular 'des Herzens', plural 'die Herzen'."
+    ],
+    "senses": [
+      {
+        "id": "vlvxd3i4pq8ulon",
+        "order": 0,
+        "definition": "The organ in the chest that pumps blood through the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🫀",
+        "examples": [
+          {
+            "id": "8y84aiq9s1pdbph",
+            "text": "Das Herz pumpt Blut durch den ganzen Körper.",
+            "textLang": "de",
+            "translation": "The heart pumps blood through the whole body.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "factual, educational and calm, explaining a biological process",
+            "note": null,
+            "matchedForm": "Herz",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k531tilq2p0i8mu",
+        "order": 1,
+        "definition": "The center of a person's feelings, love, and kindness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heart"
+            ]
+          }
+        ],
+        "domain": "emotions",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "bte8mwl16ayebnl",
+            "text": "Er hat ein gutes Herz und hilft jedem.",
+            "textLang": "de",
+            "translation": "He has a kind heart and helps everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Herz",
+            "matchedTranslationForm": "heart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Herz",
+    "lemma": "Herz",
+    "reading": null,
+    "ipa": "/hɛʁt͡s/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "heart",
+    "primaryGloss": "heart",
+    "emotion": "rhythmic, steady and life-giving, felt deep within the chest",
+    "notes": [
       "Note the plural form is 'die Herzen'. The word changes slightly compared to simple nouns, so memorize the plural along with the singular.",
       "Just like in English, 'Herz' is used for both the biological organ and as the metaphorical seat of your emotions."
     ],
@@ -159,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Just like in English, 'Herz' is used for both the biological organ",
+        "why": "Restates the senses instead of noting the irregular singular forms 'des Herzens / dem Herzen'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "She has a heart in the right place.",
+        "why": "Unnatural English calque; the idiom is 'Her heart is in the right place.'"
+      }
+    ],
+    "growth": 0.706
   }
 }

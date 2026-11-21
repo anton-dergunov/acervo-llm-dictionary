@@ -58,6 +58,93 @@
     "headword": "perezoso",
     "lemma": "perezoso",
     "reading": null,
+    "ipa": "/peɾeˈθoso/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦥",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "lazy; idle",
+    "primaryGloss": "lazy",
+    "emotion": "lazy and drawn-out, reluctant to move an inch",
+    "notes": [
+      "Use with 'ser' for a lazy person ('es muy perezoso') and with 'estar' for feeling lazy or sluggish at a given moment ('hoy estoy perezoso')."
+    ],
+    "senses": [
+      {
+        "id": "omqz8fsxc4pkn05",
+        "order": 0,
+        "definition": "Of a person: unwilling to work or make an effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lazy",
+              "idle",
+              "sluggish"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "elq0qu1qpucmdo3",
+            "text": "Hoy estoy un poco perezoso y no quiero limpiar la casa.",
+            "textLang": "es",
+            "translation": "Today I am feeling a bit lazy and don't want to clean the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lazy and unmotivated, speaking slowly from the couch",
+            "note": null,
+            "matchedForm": "perezoso",
+            "matchedTranslationForm": "lazy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "omqz8fsxc4pkn05",
+      "from": "Que tiene poca disposición para hacer algo que requiere esfuerzo o trabajo.",
+      "to": "Unwilling to do anything that requires effort or work.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    },
+    {
+      "sense": "29lot9yp9vjfuqo",
+      "from": "Mamífero arborícola de movimientos muy lentos que vive en América.",
+      "to": "A very slow-moving tree-dwelling mammal that lives in America.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "perezoso",
+    "lemma": "perezoso",
+    "reading": null,
     "ipa": "/peɾeˈsoso/",
     "pos": "adj",
     "gender": null,
@@ -162,22 +249,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "omqz8fsxc4pkn05",
-      "from": "Que tiene poca disposición para hacer algo que requiere esfuerzo o trabajo.",
-      "to": "Unwilling to do anything that requires effort or work.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    },
-    {
-      "sense": "29lot9yp9vjfuqo",
-      "from": "Mamífero arborícola de movimientos muy lentos que vive en América.",
-      "to": "A very slow-moving tree-dwelling mammal that lives in America.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/peɾeˈsoso/",
+        "why": "In Castilian Spanish (es-ES), 'z' is pronounced /θ/: /peɾeˈθoso/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(animal) A very slow-moving tree-dwelling mammal that lives in America.",
+        "why": "This is a masculine noun, not an adjective, and marginal for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe someone who avoids work or physical effort",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.574
+  }
 }

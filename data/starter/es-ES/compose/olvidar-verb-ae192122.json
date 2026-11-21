@@ -58,6 +58,114 @@
     "headword": "olvidar",
     "lemma": "olvidar",
     "reading": null,
+    "ipa": "/ol.βiˈðaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to forget; to leave behind",
+    "primaryGloss": "to forget",
+    "emotion": "frustrated and blank, searching the mind for a missing thought",
+    "notes": [
+      "Can be used directly ('olvidé la cita'), as 'olvidarse de' ('me olvidé de la cita'), or with 'se' + indirect object pronoun where the thing forgotten agrees with the verb: 'se me olvidó la llave' / 'se me olvidaron las llaves'."
+    ],
+    "senses": [
+      {
+        "id": "5v9w0ijufkzft58",
+        "order": 0,
+        "definition": "To fail to remember something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to forget"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "g7bnjnu48owwvlg",
+            "text": "Siempre olvido las fechas de los cumpleaños.",
+            "textLang": "es",
+            "translation": "I always forget birthday dates.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "olvido",
+            "matchedTranslationForm": "forget"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "blwc8ku32cir18z",
+        "order": 1,
+        "definition": "To leave something behind somewhere by mistake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to leave behind",
+              "to forget"
+            ]
+          }
+        ],
+        "domain": "belongings",
+        "emoji": "🌂",
+        "examples": [
+          {
+            "id": "eq1hwn6m6t90117",
+            "text": "Voy a volver al restaurante porque creo que olvidé mi paraguas.",
+            "textLang": "es",
+            "translation": "I am going to go back to the restaurant because I think I left my umbrella behind.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and rushing back to retrace steps",
+            "note": null,
+            "matchedForm": "olvidé",
+            "matchedTranslationForm": "left"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "olvidar",
+    "lemma": "olvidar",
+    "reading": null,
     "ipa": "/olβiˈdaɾ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'Se me olvidó las llaves' (I forgot my keys).",
+        "why": "Ungrammatical Spanish in note: plural subject 'las llaves' requires plural verb 'Se me olvidaron'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "use 'olvidarse de' when you fail to remember or leave something behind on purpose",
+        "why": "'Olvidarse de' never means to leave something behind on purpose."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Siempre suelo olvidar las fechas de los cumpleaños.",
+        "why": "'Siempre suelo' is redundant and unnatural; say 'Suelo olvidar' or 'Siempre olvido'."
+      }
+    ],
+    "growth": 0.835
   }
 }

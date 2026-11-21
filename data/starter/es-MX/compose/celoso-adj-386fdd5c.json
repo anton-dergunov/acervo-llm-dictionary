@@ -60,6 +60,91 @@
     "headword": "celoso",
     "lemma": "celoso",
     "reading": null,
+    "ipa": "/seˈlo.so/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "j",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "jealous",
+    "primaryGloss": "jealous",
+    "emotion": "insecure and anxious, worried about losing someone's affection",
+    "notes": [
+      "Use 'celoso' for romantic or personal jealousy (fear of losing someone's affection). To mean wanting what someone else has, use 'envidioso' or 'tener envidia'."
+    ],
+    "senses": [
+      {
+        "id": "sqnazk6q703hm7j",
+        "order": 0,
+        "definition": "Unhappy or worried because you think someone you love might prefer someone else.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "jealous"
+            ]
+          }
+        ],
+        "domain": "relationships",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "xbf6bkcznofkjbi",
+            "text": "Se puso celoso cuando ella habló con su compañero.",
+            "textLang": "es",
+            "translation": "He got jealous when she talked to her classmate.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "suspicious and uneasy, watching someone closely",
+            "note": null,
+            "matchedForm": "celoso",
+            "matchedTranslationForm": "jealous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "sqnazk6q703hm7j",
+      "from": "Que siente temor de que la persona que ama prefiera a otra, o de perder su afecto.",
+      "to": "Feeling upset or worried that someone you love might prefer someone else, or that you might lose their affection.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:09Z"
+    },
+    {
+      "sense": "fh0de4ex9zttudp",
+      "from": "Que desea algo que otra persona tiene.",
+      "to": "Wanting something that another person has.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:09Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "celoso",
+    "lemma": "celoso",
+    "reading": null,
     "ipa": "/seˈloso/",
     "pos": "adj",
     "gender": null,
@@ -161,22 +246,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "sqnazk6q703hm7j",
-      "from": "Que siente temor de que la persona que ama prefiera a otra, o de perder su afecto.",
-      "to": "Feeling upset or worried that someone you love might prefer someone else, or that you might lose their affection.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:09Z"
-    },
-    {
-      "sense": "fh0de4ex9zttudp",
-      "from": "Que desea algo que otra persona tiene.",
-      "to": "Wanting something that another person has.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:09Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(envy) Wanting something that another person has.",
+        "why": "Directly contradicts note[0]; in Spanish, wanting another's possessions is 'envidioso', not 'celoso'."
+      }
+    ],
+    "growth": 0.686
+  }
 }

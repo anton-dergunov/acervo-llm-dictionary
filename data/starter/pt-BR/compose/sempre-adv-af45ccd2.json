@@ -68,6 +68,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "always",
+    "primaryGloss": "always",
+    "emotion": null,
+    "notes": [
+      "Usually placed before the main verb (e.g., 'Eu sempre acordo cedo'), or at the end of the sentence for emphasis.",
+      "Combine with 'que' ('sempre que') to mean 'whenever' or 'every time that'."
+    ],
+    "senses": [
+      {
+        "id": "sabms1mhjk0tptv",
+        "order": 0,
+        "definition": "At all times, or on every occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "always",
+              "all the time"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "♾️",
+        "examples": [
+          {
+            "id": "uwswzno2bw1jg0a",
+            "text": "Eu sempre acordo cedo.",
+            "textLang": "pt",
+            "translation": "I always wake up early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a regular habit",
+            "note": null,
+            "matchedForm": "sempre",
+            "matchedTranslationForm": "always"
+          },
+          {
+            "id": "et13s4lux3bpd9x",
+            "text": "Ela está sempre sorrindo.",
+            "textLang": "pt",
+            "translation": "She is always smiling.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sempre",
+            "matchedTranslationForm": "always"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "sempre",
+    "lemma": "sempre",
+    "reading": null,
+    "ipa": "/ˈsẽ.pɾi/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "♾️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "always; still; after all",
     "primaryGloss": "always",
     "emotion": null,
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Used to indicate that something continues or persists. | glosses en: still",
+        "why": "French calque ('toujours'); 'sempre' does not mean 'still' in Portuguese ('ainda' does)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can also mean 'still' (e.g., 'Você sempre mora lá?'",
+        "why": "False claim; 'sempre' means 'always' in that sentence, not 'still'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "always; still; after all",
+        "why": "Includes false meaning 'still' and European/advanced sense 'after all' missing from senses."
+      }
+    ],
+    "growth": 0.705
   }
 }

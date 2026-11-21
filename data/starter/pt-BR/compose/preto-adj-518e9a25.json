@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "black",
+    "primaryGloss": "black",
+    "emotion": "matter-of-fact and direct, describing the world as it is",
+    "notes": [
+      "In Brazil, both 'preto' and 'negro' are used to describe Black people. 'Preto' is an official census category and widely used with pride, while 'negro' is also common in social and cultural contexts.",
+      "For coffee without milk, Brazilians say 'café preto' or 'café puro'."
+    ],
+    "senses": [
+      {
+        "id": "maiwewaz4pca51j",
+        "order": 0,
+        "definition": "Of the darkest color, like coal or the night sky; opposite of white.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "2tuqg8b6wc7lv6a",
+            "text": "O gato é todo preto.",
+            "textLang": "pt",
+            "translation": "The cat is all black.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, pointing out something simple",
+            "note": null,
+            "matchedForm": "preto",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "femgjd9azycihrd",
+        "order": 1,
+        "definition": "Of a person: belonging to a race of people with dark skin, especially of African origin.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "Black",
+              "black"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "bmwhdq952yvhuy1",
+            "text": "Ela é uma mulher preta muito orgulhosa de suas raízes.",
+            "textLang": "pt",
+            "translation": "She is a Black woman who is very proud of her roots.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "preta",
+            "matchedTranslationForm": "Black"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "preto",
+    "lemma": "preto",
+    "reading": null,
+    "ipa": "/ˈpɾe.tu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "black; dark",
     "primaryGloss": "black",
     "emotion": "matter-of-fact and direct, describing the world as it is",
@@ -159,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The darkest color, the opposite of white.",
+        "why": "Defines the adjective as a noun ('The darkest color' instead of 'Of the darkest color')."
+      },
+      {
+        "severity": 3,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that is very dark, lacking light or brightness.",
+        "why": "Defines an adjective as a thing ('Something that is...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A noite estava preta de tão escura.",
+        "why": "'Preto' for a dark night is marginal/unnatural; everyday senses are color, race, and coffee."
+      }
+    ],
+    "growth": 1.323
   }
 }

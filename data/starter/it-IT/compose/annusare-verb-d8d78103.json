@@ -72,6 +72,95 @@
     "primaryGloss": "to smell",
     "emotion": "curious and attentive, leaning in to catch a scent",
     "notes": [
+      "Refers to intentionally sniffing something; for passively noticing a smell, use 'sentire' (e.g., 'sento un buon profumo')."
+    ],
+    "senses": [
+      {
+        "id": "et6j7kpb5h7mpvq",
+        "order": 0,
+        "definition": "To draw air through the nose to smell or test the scent of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to smell",
+              "to sniff"
+            ]
+          }
+        ],
+        "domain": "smell",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "anzkxfbrpi2e6nk",
+            "text": "Il cane si ferma ad annusare il cibo nella ciotola.",
+            "textLang": "it",
+            "translation": "The dog stops to sniff the food in the bowl.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and patient, watching an animal investigate its meal",
+            "note": null,
+            "matchedForm": "annusare",
+            "matchedTranslationForm": "sniff"
+          },
+          {
+            "id": "pg2ttzy99tske1o",
+            "text": "Ha voluto annusare il profumo prima di comprarlo.",
+            "textLang": "it",
+            "translation": "She wanted to smell the perfume before buying it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "annusare",
+            "matchedTranslationForm": "smell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "annusare",
+    "lemma": "annusare",
+    "reading": null,
+    "ipa": "/annuˈzare/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to smell; to sniff",
+    "primaryGloss": "to smell",
+    "emotion": "curious and attentive, leaning in to catch a scent",
+    "notes": [
       "Used both for testing food with your nose and for animals sniffing around."
     ],
     "senses": [
@@ -159,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(smell) To inhale air ... / (sniff) To sniff something",
+        "why": "Both senses describe the exact same physical action of smelling intentionally."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for testing food with your nose and for animals",
+        "why": "Restates the obvious meaning; fails to contrast with 'sentire' (passive smelling)."
+      }
+    ],
+    "growth": 0.915
   }
 }

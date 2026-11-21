@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "light; slight",
+    "primaryGloss": "light",
+    "emotion": "a sense of ease and lack of burden, feeling unencumbered and agile",
+    "notes": [
+      "Use 'ligero' for low weight or intensity, 'claro' for light colors, and 'la luz' for light that illuminates."
+    ],
+    "senses": [
+      {
+        "id": "7wppa8g3ep5hzyo",
+        "order": 0,
+        "definition": "Having very little weight; not heavy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lightweight"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "f4hl61hzscrzvab",
+            "text": "Esta maleta es muy ligera.",
+            "textLang": "es",
+            "translation": "This suitcase is very light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised by how easy it is to carry",
+            "note": null,
+            "matchedForm": "ligera",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ezbrbtz1l4kil59",
+        "order": 1,
+        "definition": "Not strong, heavy, or intense.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slight",
+              "light",
+              "mild"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "dq1gkc3e0z1b8xx",
+            "text": "Tuve una ligera molestia en la pierna.",
+            "textLang": "es",
+            "translation": "I had a slight discomfort in my leg.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calmly reporting a minor issue without alarm",
+            "note": null,
+            "matchedForm": "ligera",
+            "matchedTranslationForm": "slight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ligero",
+    "lemma": "ligero",
+    "reading": null,
+    "ipa": "/liˈxeɾo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "light; slight; fast; easy",
     "primaryGloss": "light",
     "emotion": "a sense of ease and lack of burden, feeling unencumbered and agile",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "light; slight; fast; easy",
+        "why": "'easy' is not covered by the senses and is a misleading translation."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "That which weighs very little.",
+        "why": "Adjectives must be defined as qualities, not as things ('that which')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something done quickly or with little intensity.",
+        "why": "Defined as a noun ('something') and mixes 'slight' with 'fast'."
+      }
+    ],
+    "growth": 0.816
   }
 }

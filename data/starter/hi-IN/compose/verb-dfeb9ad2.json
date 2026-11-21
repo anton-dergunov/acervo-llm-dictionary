@@ -72,6 +72,96 @@
     ],
     "status": "active",
     "shortGloss": "to wear; to put on",
+    "primaryGloss": "to wear",
+    "emotion": "a practical, everyday action of getting ready to start the day",
+    "notes": [
+      "पहनना describes the action of putting clothes on, as well as habitual wearing. To say someone 'is wearing' something right now, Hindi uses the perfective/stative form (जैसे: उसने लाल साड़ी पहनी है or वह लाल साड़ी पहने हुए है), whereas पहन रही है means 'is putting on'."
+    ],
+    "senses": [
+      {
+        "id": "9wgr8u1849km3gp",
+        "order": 0,
+        "definition": "To put clothes, shoes, or accessories on one's body, or to wear them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wear",
+              "to put on"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "6xvillcd7ap8lpo",
+            "text": "उसने लाल साड़ी पहनी है।",
+            "textLang": "hi",
+            "translation": "She is wearing a red sari.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पहनी",
+            "matchedTranslationForm": "wearing"
+          },
+          {
+            "id": "ktv6r342t2bkwo2",
+            "text": "बाहर जाने से पहले जूते पहन लो।",
+            "textLang": "hi",
+            "translation": "Put on your shoes before going outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a parent or friend giving a helpful, mild instruction",
+            "note": null,
+            "matchedForm": "पहन",
+            "matchedTranslationForm": "Put on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पहनना",
+    "lemma": "पहनना",
+    "reading": null,
+    "ipa": "/pəɦənnaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wear; to put on",
     "primaryGloss": "wear",
     "emotion": "a practical, everyday action of getting ready to start the day",
     "notes": [
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "वह लाल साड़ी पहन रही है। — She is wearing a red sari.",
+        "why": "पहन रही है means 'is putting on'; 'is wearing' requires पहने हुए है or पहनी है."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(wear) To have clothes... / (put on) To put an item...",
+        "why": "पहनना is a single action verb; English 'wear' vs 'put on' depends on Hindi aspect."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "This verb is transitive and usually requires the object (the clothes) to",
+        "why": "Confusing and unhelpful explanation of generic Hindi object marking."
+      }
+    ],
+    "growth": 0.709
   }
 }

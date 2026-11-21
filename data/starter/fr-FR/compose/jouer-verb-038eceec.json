@@ -70,6 +70,154 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to play; to act",
+    "primaryGloss": "to play",
+    "emotion": "active and engaged, focused on the enjoyment of the moment",
+    "notes": [
+      "Use 'jouer à' before names of games or sports (jouer au football), and 'jouer de' before musical instruments (jouer du piano)."
+    ],
+    "senses": [
+      {
+        "id": "o5ygtgq7iuw6pje",
+        "order": 0,
+        "definition": "To take part in a game or sport, or to have fun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "game",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "lpjivv4z8dalbcu",
+            "text": "Ils jouent au tennis chaque samedi.",
+            "textLang": "fr",
+            "translation": "They play tennis every Saturday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lighthearted and routine, describing a regular social activity",
+            "note": null,
+            "matchedForm": "jouent",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xjwbbb9m64q9g1e",
+        "order": 1,
+        "definition": "To perform music on a musical instrument.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎸",
+        "examples": [
+          {
+            "id": "1zq4y3p6ti3ttd7",
+            "text": "Elle joue très bien de la guitare.",
+            "textLang": "fr",
+            "translation": "She plays the guitar very well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "joue",
+            "matchedTranslationForm": "plays"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wz3esbea2llc2o6",
+        "order": 2,
+        "definition": "To perform a role or part in a film or play.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play",
+              "to act"
+            ]
+          }
+        ],
+        "domain": "acting",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "4ads3mcb7gtszp4",
+            "text": "Cet acteur joue le rôle principal dans le film.",
+            "textLang": "fr",
+            "translation": "This actor plays the main role in the film.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "joue",
+            "matchedTranslationForm": "plays"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "jouer",
+    "lemma": "jouer",
+    "reading": null,
+    "ipa": "/ʒu.e/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎮",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to play; to play music",
     "primaryGloss": "play",
     "emotion": "active and engaged, focused on the enjoyment of the moment",
@@ -161,5 +309,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense 'to act / play a role' (in a film, play, etc.)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Elle joue de la guitare très bien.",
+        "why": "In natural French, 'très bien' goes right after the verb: 'Elle joue très bien...'"
+      }
+    ],
+    "growth": 1.358
   }
 }

@@ -68,6 +68,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wash; to print (photos)",
+    "primaryGloss": "wash",
+    "emotion": "energetic and practical, getting things clean and ready",
+    "notes": [
+      "Do not confuse with 刷 (shuā), which means to brush or scrub with a brush (e.g., 刷牙, to brush teeth).",
+      "In the separable verb 洗澡 (xǐzǎo, to take a bath or shower), 澡 is the object, so elements can go in between: 洗个澡 (take a quick shower)."
+    ],
+    "senses": [
+      {
+        "id": "4b6hqzw0ehmi82q",
+        "order": 0,
+        "definition": "To clean something, or part of the body, with water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wash",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "hkefm1l3j96rnhp",
+            "text": "饭前要洗手。",
+            "textLang": "zh",
+            "translation": "You must wash your hands before eating.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reminding someone kindly and firmly of a good habit",
+            "note": null,
+            "matchedForm": "洗",
+            "matchedTranslationForm": "wash"
+          },
+          {
+            "id": "27xij3lbca8u1t6",
+            "text": "我累了，想先去洗个澡。",
+            "textLang": "zh",
+            "translation": "I am tired and want to take a shower first.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and ready to relax after a long day",
+            "note": null,
+            "matchedForm": "洗",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uore3c81u412lbq",
+        "order": 1,
+        "definition": "To develop film or make physical prints of photographs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "print",
+              "develop"
+            ]
+          }
+        ],
+        "domain": "photography",
+        "emoji": "📷",
+        "examples": [
+          {
+            "id": "v6dxebpw7zfk3n2",
+            "text": "我想把这些照片洗出来。",
+            "textLang": "zh",
+            "translation": "I want to get these photos printed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "洗",
+            "matchedTranslationForm": "printed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "洗",
+    "lemma": "洗",
+    "reading": "xǐ",
+    "ipa": "/ɕi˨˩˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wash; to clean; to develop a photo",
     "primaryGloss": "wash",
     "emotion": "energetic and practical, getting things clean and ready",
@@ -222,5 +353,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "洗 is the standard word for washing anything with water, from hands",
+        "why": "Restates the basic meaning without adding learner value."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To take a bath or shower to clean one's body.",
+        "why": "Bathing is expressed by the compound 洗澡; 洗 alone still just means wash."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[2].definition",
+        "quote": "To develop photographic film.",
+        "why": "Too narrow; in modern usage 洗照片 usually means printing digital photos."
+      }
+    ],
+    "growth": 0.9
   }
 }

@@ -68,6 +68,116 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "boy; guys",
+    "primaryGloss": "boy",
+    "emotion": "warm and familiar, speaking of a child running outside",
+    "notes": [
+      "Do not confuse with the inflected adjective 'jonge' ('young'), which has no final -n in spelling.",
+      "In the plural, 'jongens!' is very commonly used to address any group of people informally ('guys!'), regardless of gender."
+    ],
+    "senses": [
+      {
+        "id": "2mzr3rr0z4eaqzd",
+        "order": 0,
+        "definition": "A male child or youth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boy",
+              "lad"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "ptx61s0mdbphrbb",
+            "text": "De kleine jongen speelt in de tuin.",
+            "textLang": "nl",
+            "translation": "The little boy is playing in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and light, watching a child play",
+            "note": null,
+            "matchedForm": "jongen",
+            "matchedTranslationForm": "boy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "egtqbew0ggfszbo",
+        "order": 1,
+        "definition": "Used in the plural as an informal form of address for a group of friends or colleagues.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guys",
+              "folks"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "s7dn1hkx8a3793d",
+            "text": "Kom op jongens, we moeten gaan!",
+            "textLang": "nl",
+            "translation": "Come on guys, we have to go!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "jongens",
+            "matchedTranslationForm": "guys"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de jongen",
+    "lemma": "jongen",
+    "reading": null,
+    "ipa": "/ˈjɔŋə(n)/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "boy; boyfriend",
     "primaryGloss": "boy",
     "emotion": "warm and familiar, speaking of a child running outside",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A romantic male partner.",
+        "why": "In standard modern Dutch, 'vriend' or 'vriendje' means boyfriend, not 'jongen'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ze is erg verliefd op haar nieuwe jongen.",
+        "why": "'Haar nieuwe jongen' sounds like she gave birth; boyfriend is 'haar nieuwe vriend(je)'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "commonly used colloquially to mean a boyfriend ('mijn jongen')",
+        "why": "'Mijn jongen' is used for a son, not a boyfriend."
+      }
+    ],
+    "growth": 1.112
   }
 }

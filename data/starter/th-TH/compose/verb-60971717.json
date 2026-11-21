@@ -58,6 +58,117 @@
     "headword": "มี",
     "lemma": "มี",
     "reading": null,
+    "ipa": "/miː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to have; there is",
+    "primaryGloss": "have",
+    "emotion": "matter-of-fact and straightforward, stating a simple fact",
+    "notes": [
+      "With no subject before it (or after a place word), มี means 'there is / there are': ในห้องมีคน ('There are people in the room').",
+      "Negated with ไม่: ไม่มี (/mâj miː/) means 'do not have' or 'there is no'."
+    ],
+    "senses": [
+      {
+        "id": "w1v2w6q7hotnmhl",
+        "order": 0,
+        "definition": "To own, possess, or hold something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to own"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "a5tyh4qwq175kzb",
+            "text": "ฉันมีพี่สาวสองคน",
+            "textLang": "th",
+            "translation": "I have two older sisters.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "มี",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gxe5vr1cqkevdww",
+        "order": 1,
+        "definition": "To exist or be present in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there is",
+              "there are",
+              "to exist"
+            ]
+          }
+        ],
+        "domain": "existence",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "qbkam0vz9cb9zz1",
+            "text": "ในบ้านมีแมวสามตัว",
+            "textLang": "th",
+            "translation": "There are three cats in the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "มี",
+            "matchedTranslationForm": "There are"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "มี",
+    "lemma": "มี",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both to show possession (having something) and to indicate existence",
+        "why": "Merely restates the two senses; better to explain word order for the existential sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "มีแมวอยู่ 3 ตัวในบ้าน",
+        "why": "Word order and Arabic numeral are less natural; ในบ้านมีแมวสามตัว or มีแมวสามตัวอยู่ในบ้าน is standard."
+      }
+    ],
+    "growth": 1.042
   }
 }

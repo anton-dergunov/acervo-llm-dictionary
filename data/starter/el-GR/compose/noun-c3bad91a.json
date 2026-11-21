@@ -70,6 +70,136 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "road; street; way",
+    "primaryGloss": "road",
+    "emotion": "a sense of movement and direction, steady and purposeful",
+    "notes": [
+      "'Δρόμος' is the everyday word for both 'road' and 'street'. The feminine noun 'η οδός' is formal and used mainly with street names on signs and in addresses (e.g. 'οδός Ερμού')."
+    ],
+    "senses": [
+      {
+        "id": "p4gr1n3k6tr5l1b",
+        "order": 0,
+        "definition": "A built surface for vehicles and people to travel on, in a town or between places.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "street"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "6stckszcmivmxy2",
+            "text": "Αυτός ο δρόμος οδηγεί στην παραλία.",
+            "textLang": "el",
+            "translation": "This road leads to the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "δρόμος",
+            "matchedTranslationForm": "road"
+          },
+          {
+            "id": "6xtnreey8r2xp94",
+            "text": "Ο δρόμος μας έχει πολλά μαγαζιά.",
+            "textLang": "el",
+            "translation": "Our street has many shops.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "δρόμος",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7cfrk6qcdszz40u",
+        "order": 1,
+        "definition": "The route, direction, or distance taken to reach a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "route"
+            ]
+          }
+        ],
+        "domain": "route",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "eia50amofk05sxm",
+            "text": "Έχασα τον δρόμο μου.",
+            "textLang": "el",
+            "translation": "I lost my way.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "δρόμο",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο δρόμος",
+    "lemma": "δρόμος",
+    "reading": null,
+    "ipa": "/ˈðɾo.mos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "road; street; path; way",
     "primaryGloss": "road",
     "emotion": "a sense of movement and direction, steady and purposeful",
@@ -161,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A public path in a city or town",
+        "why": "Greek 'δρόμος' covers both 'road' and 'street' as a single everyday concept."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "road; street; path; way",
+        "why": "'path' is not in any sense's glosses."
+      }
+    ],
+    "growth": 0.942
   }
 }

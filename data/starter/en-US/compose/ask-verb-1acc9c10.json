@@ -68,6 +68,155 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "preguntar; pedir; invitar",
+    "primaryGloss": "preguntar",
+    "emotion": "inquisitive and clear, expecting an answer",
+    "notes": [
+      "Significa tanto «preguntar» como «pedir». Para pedir un objeto o favor se usa 'ask for': 'ask a question' (hacer una pregunta), pero 'ask for help' (pedir ayuda).",
+      "Seguido de la persona, no lleva 'to': se dice 'ask him' (pregúntale / pídele), nunca *ask to him*."
+    ],
+    "senses": [
+      {
+        "id": "8qk5npc8dkt6t3n",
+        "order": 0,
+        "definition": "Dirigir una pregunta a alguien para obtener información.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "preguntar"
+            ]
+          }
+        ],
+        "domain": "question",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "x2ts2xt3sxsojjp",
+            "text": "I will ask the teacher about the homework.",
+            "textLang": "en",
+            "translation": "Le preguntaré al profesor sobre la tarea.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and focused, seeking clarity",
+            "note": null,
+            "matchedForm": "ask",
+            "matchedTranslationForm": "preguntaré"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nnvx47ipbnl8hsb",
+        "order": 1,
+        "definition": "Solicitar a alguien que dé o haga algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pedir",
+              "solicitar"
+            ]
+          }
+        ],
+        "domain": "request",
+        "emoji": "🙏",
+        "examples": [
+          {
+            "id": "nihfxpcidflu34e",
+            "text": "Don't be afraid to ask for help.",
+            "textLang": "en",
+            "translation": "No tengas miedo de pedir ayuda.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and warm, offering support",
+            "note": null,
+            "matchedForm": "ask",
+            "matchedTranslationForm": "pedir"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "twdxzteuhqb9nvw",
+        "order": 2,
+        "definition": "Proponer a alguien que vaya a un lugar o a una cita.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "invitar"
+            ]
+          }
+        ],
+        "domain": "invitation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "f0obvfjf5y6brfw",
+            "text": "They asked us to dinner on Saturday.",
+            "textLang": "en",
+            "translation": "Nos invitaron a cenar el sábado.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "asked",
+            "matchedTranslationForm": "invitaron"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "ask",
+    "lemma": "ask",
+    "reading": null,
+    "ipa": "/æsk/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "preguntar; pedir",
     "primaryGloss": "preguntar",
     "emotion": "inquisitive and clear, expecting an answer",
@@ -161,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "preguntar, interrogar",
+        "why": "'Interrogar' means to interrogate, which is too forceful and formal for 'ask'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday A2 sense 'invitar' (e.g., ask someone out / to a party)."
+      }
+    ],
+    "growth": 1.266
   }
 }

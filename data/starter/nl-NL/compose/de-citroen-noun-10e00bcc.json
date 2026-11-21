@@ -68,6 +68,71 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "lemon",
+    "primaryGloss": "lemon",
+    "emotion": "mouth-puckering and sharp, smelling fresh and clean",
+    "notes": [],
+    "senses": [
+      {
+        "id": "j709a54hu8dfdlv",
+        "order": 0,
+        "definition": "A yellow citrus fruit with a sour taste, used in cooking and drinks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lemon"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "vyaxp3n7mp6s8ob",
+            "text": "Ik pers een citroen uit over de vis.",
+            "textLang": "nl",
+            "translation": "I squeeze a lemon over the fish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "citroen",
+            "matchedTranslationForm": "lemon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de citroen",
+    "lemma": "citroen",
+    "reading": null,
+    "ipa": "/siˈtrun/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "lemon; lemon color",
     "primaryGloss": "lemon",
     "emotion": "mouth-puckering and sharp, smelling fresh and clean",
@@ -159,5 +224,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ze draagt een jas in een frisse citroenkleur.",
+        "why": "Uses the compound 'citroenkleur' instead of the headword 'citroen'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(color) A bright yellow color resembling the skin of the fruit.",
+        "why": "'Citroen' alone is not used for the color in Dutch ('citroengeel' is used)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, the common gender means you use 'de citroen'",
+        "why": "Merely restates the grammatical gender already shown in the headword and gender field."
+      }
+    ],
+    "growth": 0.368
   }
 }

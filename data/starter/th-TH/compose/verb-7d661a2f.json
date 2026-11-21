@@ -60,6 +60,117 @@
     "headword": "จ่าย",
     "lemma": "จ่าย",
     "reading": null,
+    "ipa": "/tɕàːj/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pay; to shop for groceries",
+    "primaryGloss": "pay",
+    "emotion": "matter-of-fact and routine, focused on the transaction at hand",
+    "notes": [
+      "Used for paying money (e.g., จ่ายเงิน 'pay money', จ่ายค่าอาหาร 'pay for food'). For spending time, use ใช้.",
+      "Commonly used in จ่ายตลาด ('to do the grocery shopping at a market')."
+    ],
+    "senses": [
+      {
+        "id": "gsdq9yug6eu26k7",
+        "order": 0,
+        "definition": "To give money in exchange for goods, services, or bills.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay",
+              "spend"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "don71vua59t5ok0",
+            "text": "ฉันต้องจ่ายค่าอาหาร",
+            "textLang": "th",
+            "translation": "I have to pay for the food.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly burdened by the necessity of the payment",
+            "note": null,
+            "matchedForm": "จ่าย",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y5188p9ha3hsvam",
+        "order": 1,
+        "definition": "To buy food and household goods, especially at a market.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "buy groceries"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ergpd267vyhw934",
+            "text": "แม่ไปจ่ายตลาดทุกเช้า",
+            "textLang": "th",
+            "translation": "Mom goes grocery shopping at the market every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "จ่าย",
+            "matchedTranslationForm": "shopping"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "จ่าย",
+    "lemma": "จ่าย",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -163,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "ครูจ่ายเอกสารให้นักเรียน",
+        "why": "Handing out papers in class is แจก, not จ่าย; จ่าย is for disbursing money/supplies."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To distribute or hand out items to multiple people.",
+        "why": "Dispensing items (like medicine) is narrow; everyday shopping (จ่ายตลาด) is much more useful."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When you 'pay' a person or a company, 'จ่าย' is the standard",
+        "why": "Restates the basic gloss without new grammatical or usage information."
+      }
+    ],
+    "growth": 1.045
   }
 }

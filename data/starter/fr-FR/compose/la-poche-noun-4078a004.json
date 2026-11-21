@@ -72,6 +72,115 @@
     "primaryGloss": "pocket",
     "emotion": "casual and practical, patting down clothes to find keys",
     "notes": [
+      "The diminutive 'la pochette' means a small pouch, folder, or wallet; 'le livre de poche' is a paperback book."
+    ],
+    "senses": [
+      {
+        "id": "gv6u7ed3j3gwth4",
+        "order": 0,
+        "definition": "A small pouch sewn into or onto clothing for carrying small items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pocket"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "j34js6s5yvvr8jl",
+            "text": "J'ai mis mes clés dans ma poche.",
+            "textLang": "fr",
+            "translation": "I put my keys in my pocket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved after checking and finding the keys right where they should be",
+            "note": null,
+            "matchedForm": "poche",
+            "matchedTranslationForm": "pocket"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bhqeae6fqn3bdar",
+        "order": 1,
+        "definition": "A small bag or sealed sack, such as for liquids, ice, or a marsupial's young.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pouch",
+              "bag",
+              "pack"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "9wv4j81te1nvihz",
+            "text": "Elle a mis une poche de glace sur son genou.",
+            "textLang": "fr",
+            "translation": "She put an ice pack on her knee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "poche",
+            "matchedTranslationForm": "pack"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la poche",
+    "lemma": "poche",
+    "reading": null,
+    "ipa": "/pɔʃ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pocket; pouch",
+    "primaryGloss": "pocket",
+    "emotion": "casual and practical, patting down clothes to find keys",
+    "notes": [
       "Often used in clothing to store small items like keys, phones, or hands."
     ],
     "senses": [
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often used in clothing to store small items like keys, phones,",
+        "why": "Restates the definition instead of giving useful lexical or grammatical help."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il a sorti un bonbon de sa poche.",
+        "why": "In French, 'sa poche' means his clothing pocket, not a separate pouch."
+      }
+    ],
+    "growth": 1.271
   }
 }

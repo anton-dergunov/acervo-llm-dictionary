@@ -58,6 +58,116 @@
     "headword": "तूफ़ान",
     "lemma": "तूफ़ान",
     "reading": null,
+    "ipa": "/tuːfɑːn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌪️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "storm; upheaval",
+    "primaryGloss": "storm",
+    "emotion": "a sense of rising intensity and unease, watching the dark clouds gather",
+    "notes": [
+      "Often pronounced /tuːpʰɑːn/ in casual speech. To say a storm came, use the verb आना (तूफ़ान आना)."
+    ],
+    "senses": [
+      {
+        "id": "j3iw8z7vberkxg0",
+        "order": 0,
+        "definition": "A period of very bad weather with strong winds, often with rain or dust.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "storm",
+              "tempest"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌪️",
+        "examples": [
+          {
+            "id": "v86uxzwn0ogocnu",
+            "text": "कल रात बहुत तेज़ तूफ़ान आया था।",
+            "textLang": "hi",
+            "translation": "There was a very strong storm last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and descriptive, recounting the power of the weather",
+            "note": null,
+            "matchedForm": "तूफ़ान",
+            "matchedTranslationForm": "storm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ip5yykzhvm5vlk3",
+        "order": 1,
+        "definition": "A sudden, noisy disturbance or emotional outburst.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "upheaval",
+              "commotion",
+              "uproar"
+            ]
+          }
+        ],
+        "domain": "commotion",
+        "emoji": "💥",
+        "examples": [
+          {
+            "id": "2pd2aatfghkkfq4",
+            "text": "उनके घर में हर छोटी बात पर तूफ़ान खड़ा हो जाता है।",
+            "textLang": "hi",
+            "translation": "An uproar breaks out in their house over every little thing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "तूफ़ान",
+            "matchedTranslationForm": "uproar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "तूफ़ान",
+    "lemma": "तूफ़ान",
+    "reading": null,
     "ipa": "/tuːˈfɑːn/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While it literally means a storm, it is frequently used metaphorically",
+        "why": "Merely restates the two senses instead of giving usage or pronunciation advice."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "storm; tempest",
+        "why": "Does not cover the second sense (upheaval, commotion)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "A storm (upheaval) arises in their house",
+        "why": "Awkward parenthetical explanation in an unnatural literal translation."
+      }
+    ],
+    "growth": 0.758
   }
 }

@@ -71,6 +71,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "beach",
+    "primaryGloss": "beach",
+    "emotion": "relaxed and nostalgic, thinking of summer holidays by the sea",
+    "notes": [
+      "Plural: 'die Strände'. To say 'at/on the beach', use 'am Strand'; for 'to the beach', use 'an den Strand'.",
+      "While 'Strand' is a sandy or stony beach, use 'Küste' for the coast in general and 'Ufer' for the shore of a lake or bank of a river."
+    ],
+    "senses": [
+      {
+        "id": "ki09ostgwgcy3p8",
+        "order": 0,
+        "definition": "A strip of sand or stones along the edge of the sea or a lake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beach",
+              "seaside"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "0jnwghy4g0zczec",
+            "text": "Wir verbringen den ganzen Tag am Strand.",
+            "textLang": "de",
+            "translation": "We are spending the whole day at the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and eager, looking forward to the day ahead",
+            "note": null,
+            "matchedForm": "Strand",
+            "matchedTranslationForm": "beach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Strand",
+    "lemma": "Strand",
+    "reading": null,
+    "ipa": "/ʃtʁant/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "beach; shore",
     "primaryGloss": "beach",
     "emotion": "relaxed and nostalgic, thinking of summer holidays by the sea",
@@ -144,5 +214,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Remember that 'Strand' is masculine; always use 'der'",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "beach; shore",
+        "why": "Includes 'shore', which is absent from the sense glosses (and 'shore' is usually 'Ufer')."
+      }
+    ],
+    "growth": 0.782
   }
 }

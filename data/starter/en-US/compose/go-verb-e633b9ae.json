@@ -68,6 +68,160 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "ir; marcharse; volverse",
+    "primaryGloss": "ir",
+    "emotion": "ready to leave and moving forward, purposeful and direct",
+    "notes": [
+      "Es un verbo irregular: el pasado es 'went' y el participio es 'gone'.",
+      "Indica movimiento alejándose de donde está el hablante, a diferencia de 'come' (venir).",
+      "Se usa 'go to' antes de un lugar ('go to school'), pero sin 'to' antes de 'home', 'here' o 'there' ('go home')."
+    ],
+    "senses": [
+      {
+        "id": "44x3xszmd3mv2ne",
+        "order": 0,
+        "definition": "Moverse o viajar de un lugar a otro.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ir",
+              "viajar"
+            ]
+          }
+        ],
+        "domain": "movimiento",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "gt7i2uw7gcv4fzc",
+            "text": "I need to go home now.",
+            "textLang": "en",
+            "translation": "Necesito ir a casa ahora.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ready to leave and wanting to get home quickly",
+            "note": null,
+            "matchedForm": "go",
+            "matchedTranslationForm": "ir"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cfxxbmq3j01oul3",
+        "order": 1,
+        "definition": "Salir o marcharse de un lugar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "irse",
+              "marcharse",
+              "salir"
+            ]
+          }
+        ],
+        "domain": "partida",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "svcoyc0rkof8rb1",
+            "text": "It's late, we have to go.",
+            "textLang": "en",
+            "translation": "Es tarde, tenemos que irnos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "go",
+            "matchedTranslationForm": "irnos"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t7hx2jejqjdt2va",
+        "order": 2,
+        "definition": "Pasar a estar en un estado o condición, generalmente negativo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "volverse",
+              "ponerse",
+              "quedarse"
+            ]
+          }
+        ],
+        "domain": "cambio",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "gh0lqpodsr8bgjh",
+            "text": "Milk goes bad quickly in the heat.",
+            "textLang": "en",
+            "translation": "La leche se echa a perder rápido con el calor.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "goes",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "go",
+    "lemma": "go",
+    "reading": null,
+    "ipa": "/ɡoʊ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "ir; funcionar; marcharse",
     "primaryGloss": "ir",
     "emotion": "ready to leave and moving forward, purposeful and direct",
@@ -162,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing essential A1/A2 senses: 'leave/depart' and 'become/turn into a state' (go bad, go crazy)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Funcionar o marchar correctamente.",
+        "why": "'Go' meaning 'function' (especially with watches) is much less central than 'leave' or 'become'."
+      }
+    ],
+    "growth": 1.622
   }
 }

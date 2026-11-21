@@ -68,6 +68,117 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "trabajo; empleo; tarea",
+    "primaryGloss": "trabajo",
+    "emotion": "focused and steady, ready to take on a task",
+    "notes": [
+      "'Job' es un sustantivo contable ('a job', 'two jobs') que se refiere a un empleo o tarea concreta; 'work' es incontable y se refiere a la actividad laboral o al esfuerzo en general."
+    ],
+    "senses": [
+      {
+        "id": "y0pe92lu9qelgpn",
+        "order": 0,
+        "definition": "Actividad remunerada que una persona realiza regularmente para ganar dinero.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "trabajo",
+              "empleo",
+              "puesto"
+            ]
+          }
+        ],
+        "domain": "empleo",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "gowyxlmncrv474t",
+            "text": "She is looking for a new job.",
+            "textLang": "en",
+            "translation": "Ella está buscando un nuevo trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and hopeful, looking toward a better future",
+            "note": null,
+            "matchedForm": "job",
+            "matchedTranslationForm": "trabajo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2riqj6id19tvyal",
+        "order": 1,
+        "definition": "Tarea, encargo o labor específica que debe realizarse.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "trabajo",
+              "tarea",
+              "encargo"
+            ]
+          }
+        ],
+        "domain": "tarea",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "h5zyffm12fxafh1",
+            "text": "Painting the house was a big job.",
+            "textLang": "en",
+            "translation": "Pintar la casa fue un gran trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "job",
+            "matchedTranslationForm": "trabajo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "job",
+    "lemma": "job",
+    "reading": null,
+    "ipa": "/dʒɑb/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "trabajo; tarea",
     "primaryGloss": "trabajo",
     "emotion": "focused and steady, ready to take on a task",
@@ -162,5 +273,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "El mecánico terminó la tarea en mi coche.",
+        "why": "Unnatural Spanish translation; a mechanic's repair is 'el trabajo', not 'la tarea'."
+      }
+    ],
+    "growth": 0.913
   }
 }

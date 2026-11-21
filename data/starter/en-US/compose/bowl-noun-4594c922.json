@@ -72,6 +72,97 @@
     "primaryGloss": "tazón",
     "emotion": "warm and comforting, holding a hot soup on a cozy evening",
     "notes": [
+      "Se usa tanto para el recipiente en sí como para la cantidad de comida que cabe en él ('a bowl of soup')."
+    ],
+    "senses": [
+      {
+        "id": "96f4k9cup8reasg",
+        "order": 0,
+        "definition": "Recipiente hondo y redondo que se usa para preparar o servir alimentos como sopa, cereal o ensalada, o la cantidad que cabe en él.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tazón",
+              "bol",
+              "cuenco",
+              "plato hondo"
+            ]
+          }
+        ],
+        "domain": "vajilla",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "jix8zw5bpxw3pf5",
+            "text": "Put the flour and eggs in a large bowl.",
+            "textLang": "en",
+            "translation": "Pon la harina y los huevos en un bol grande.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bowl",
+            "matchedTranslationForm": "bol"
+          },
+          {
+            "id": "gk2l4y91rqyl1v0",
+            "text": "She had a warm bowl of soup for dinner.",
+            "textLang": "en",
+            "translation": "Se tomó un plato de sopa caliente para la cena.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bowl",
+            "matchedTranslationForm": "plato"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "bowl",
+    "lemma": "bowl",
+    "reading": null,
+    "ipa": "/boʊl/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "tazón; bol",
+    "primaryGloss": "tazón",
+    "emotion": "warm and comforting, holding a hot soup on a cozy evening",
+    "notes": [
       "Se usa tanto para referirse a la vajilla honda donde se come cereal o sopa como a la cantidad que cabe dentro de ella."
     ],
     "senses": [
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Cantidad de alimentos o líquido que cabe en un tazón.",
+        "why": "Container and its portion are the same basic concept; Furthermore, sense 0's example shows sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "She ate a warm bowl of soup.",
+        "why": "Eating a 'bowl of soup' illustrates the portion sense (sense 1), not the dish itself."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Ella comió un tazón tibio de sopa.",
+        "why": "Calqued translation; in Spanish one says 'un tazón de sopa caliente' or 'sopa tibia', not 'un tazón tibio'."
+      }
+    ],
+    "growth": 0.991
   }
 }

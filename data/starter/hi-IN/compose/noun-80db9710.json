@@ -58,6 +58,77 @@
     "headword": "सूअर",
     "lemma": "सूअर",
     "reading": null,
+    "ipa": "/suː.əɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐖",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pig",
+    "primaryGloss": "pig",
+    "emotion": null,
+    "notes": [
+      "Also written सुअर (suar) with a short vowel.",
+      "Can also be used as an insult for a person, similar to 'pig' in English."
+    ],
+    "senses": [
+      {
+        "id": "3s2wlrpfm2ejmkd",
+        "order": 0,
+        "definition": "A farm or wild animal with a flat snout and a stout body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "hog",
+              "boar",
+              "swine"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐖",
+        "examples": [
+          {
+            "id": "eb117lsdau5jc18",
+            "text": "खेत में एक बड़ा सूअर है।",
+            "textLang": "hi",
+            "translation": "There is a big pig in the field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and descriptive",
+            "note": null,
+            "matchedForm": "सूअर",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "सूअर",
+    "lemma": "सूअर",
+    "reading": null,
     "ipa": "/suːər/",
     "pos": "noun",
     "gender": "masculine",
@@ -120,5 +191,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "There is a big pig in the farm.",
+        "why": "'खेत' means 'field' (agricultural field), not 'farm', and 'in the farm' is unnatural English."
+      }
+    ],
+    "growth": 0.832
   }
 }

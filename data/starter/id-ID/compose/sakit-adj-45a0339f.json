@@ -60,6 +60,117 @@
     "headword": "sakit",
     "lemma": "sakit",
     "reading": null,
+    "ipa": "/ˈsakit/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "sick, ill; hurting, painful",
+    "primaryGloss": "sick",
+    "emotion": "run-down and feeling under the weather, subdued and tired",
+    "notes": [
+      "Placed after a body part to say that it aches or hurts: 'kepala saya sakit' (my head hurts), whereas 'sakit kepala' means 'a headache'."
+    ],
+    "senses": [
+      {
+        "id": "l0fpku93gmvom4b",
+        "order": 0,
+        "definition": "Of a person: in poor health or suffering from an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill",
+              "unwell"
+            ]
+          }
+        ],
+        "domain": "illness",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "61ujz9wneh4a6fm",
+            "text": "Dia tidak masuk kerja karena sakit hari ini.",
+            "textLang": "id",
+            "translation": "He didn't come to work because he is sick today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and apologetic, explaining an absence to a coworker",
+            "note": null,
+            "matchedForm": "sakit",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t5i7ov3cdp7wn3p",
+        "order": 1,
+        "definition": "Of a part of the body: feeling or causing physical pain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hurting",
+              "sore",
+              "painful"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "p3uty5apthwu0ub",
+            "text": "Kepala saya sakit sekali setelah membaca seharian.",
+            "textLang": "id",
+            "translation": "My head hurts a lot after reading all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grimacing and rubbing the temples, complaining about a headache",
+            "note": null,
+            "matchedForm": "sakit",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "sakit",
+    "lemma": "sakit",
+    "reading": null,
     "ipa": "/sakit/",
     "pos": "adj",
     "gender": null,
@@ -203,5 +314,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(illness) Suffering from a disease or serious medical condition.",
+        "why": "Shades of the exact same meaning ('sick / ill') split into two senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].translation",
+        "quote": "My head is very painful after reading all day.",
+        "why": "Unnatural calque in English; native speakers say 'My head really hurts'."
+      }
+    ],
+    "growth": 0.756
   }
 }

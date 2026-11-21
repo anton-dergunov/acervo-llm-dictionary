@@ -72,6 +72,115 @@
     "primaryGloss": "rice",
     "emotion": "warm and comforting, smelling of a hot meal",
     "notes": [
+      "For the 'rice' sense, the plural 'i risi' refers to varieties of rice. For 'laughter', the plural is irregular and feminine: 'le risa' (bursts of laughter).",
+      "In everyday speech, 'la risata' is much more common than 'il riso' for 'a laugh'."
+    ],
+    "senses": [
+      {
+        "id": "n4sxxmipwms5w78",
+        "order": 0,
+        "definition": "The small white or brown grains from a plant that are cooked and eaten.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rice"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "in8d0ltgsoitur3",
+            "text": "Oggi cucino il risotto con il riso avanzato.",
+            "textLang": "it",
+            "translation": "Today I am cooking risotto with the leftover rice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to dinner",
+            "note": null,
+            "matchedForm": "riso",
+            "matchedTranslationForm": "rice"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ywiptl4ii7ixm3i",
+        "order": 1,
+        "definition": "The action or sound of laughing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "laughter",
+              "laugh"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😆",
+        "examples": [
+          {
+            "id": "ap25mlugturgyb0",
+            "text": "Non riusciva a trattenere il riso durante la lezione.",
+            "textLang": "it",
+            "translation": "He couldn't hold back his laughter during the lesson.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "riso",
+            "matchedTranslationForm": "laughter"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il riso",
+    "lemma": "riso",
+    "reading": null,
+    "ipa": "/ˈri.zo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "rice; laughter",
+    "primaryGloss": "rice",
+    "emotion": "warm and comforting, smelling of a hot meal",
+    "notes": [
       "This word has two completely unrelated meanings that share the same spelling and masculine gender: food (rice) and expression (laughter).",
       "To avoid confusion, remember that il riso on your plate is a grain, while il riso on someone's face is a smile or chuckle."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "This word has two completely unrelated meanings that share the same spelling",
+        "why": "Both notes merely restate the two senses and gender while missing the irregular plural 'le risa'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "La sua battuta ha scatenato un grande riso tra i presenti.",
+        "why": "Unnatural collocation; 'riso' as laughter is usually used in the plural 'risa' or fixed phrases."
+      }
+    ],
+    "growth": 0.95
   }
 }

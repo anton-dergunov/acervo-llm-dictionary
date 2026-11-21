@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "roof",
+    "primaryGloss": "roof",
+    "emotion": "looking up at the house, solid and sheltering from the rain",
+    "notes": [
+      "Takes the preposition 'na' + locative ('na dachu') to mean 'on the roof'."
+    ],
+    "senses": [
+      {
+        "id": "orn0xpsd3q6coxp",
+        "order": 0,
+        "definition": "The top covering of a building or vehicle that protects the inside from rain, snow, and sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "roof"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "r09ybylxtagmf4u",
+            "text": "Kot siedzi na czerwonym dachu.",
+            "textLang": "pl",
+            "translation": "The cat is sitting on the red roof.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "charming and observant, pointing out something cozy",
+            "note": null,
+            "matchedForm": "dachu",
+            "matchedTranslationForm": "roof"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "dach",
+    "lemma": "dach",
+    "reading": null,
+    "ipa": "/dax/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "roof; top",
     "primaryGloss": "roof",
     "emotion": "looking up at the house, solid and sheltering from the rain",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "roof; top",
+        "why": "Names 'top', which is not covered by the senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is also used colloquially to mean the roof of a car",
+        "why": "'Dach' for a car's roof is standard neutral Polish, not colloquial."
+      }
+    ],
+    "growth": 0.875
   }
 }

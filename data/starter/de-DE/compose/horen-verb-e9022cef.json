@@ -72,6 +72,113 @@
     "primaryGloss": "hear",
     "emotion": "focused and alert, tuning into the sounds around you",
     "notes": [
+      "For listening to things like music, the radio, or a podcast, use 'hören' with a direct object (Musik hören). For listening attentively to a person speaking, use the separable verb 'zuhören' + dative (Hör mir zu! — Listen to me!)."
+    ],
+    "senses": [
+      {
+        "id": "j0fpgjazrpbolt9",
+        "order": 0,
+        "definition": "To perceive a sound with your ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hear"
+            ]
+          }
+        ],
+        "domain": "perception",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "d29uzwnt9fwdnf9",
+            "text": "Ich kann Musik in der Ferne hören.",
+            "textLang": "de",
+            "translation": "I can hear music in the distance.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, noticing the faint melody",
+            "note": null,
+            "matchedForm": "hören",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ie8n4lgns2kl4p7",
+        "order": 1,
+        "definition": "To pay attention to audio such as music, the radio, or a lecture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to listen to"
+            ]
+          }
+        ],
+        "domain": "listening",
+        "emoji": "🎧",
+        "examples": [
+          {
+            "id": "0aupzb51u24wwdd",
+            "text": "Wir hören jeden Morgen Radio.",
+            "textLang": "de",
+            "translation": "We listen to the radio every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and routine, starting the day with news or songs",
+            "note": null,
+            "matchedForm": "hören",
+            "matchedTranslationForm": "listen to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "hören",
+    "lemma": "hören",
+    "reading": null,
+    "ipa": "/ˈhøːʁən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hear; to listen to",
+    "primaryGloss": "hear",
+    "emotion": "focused and alert, tuning into the sounds around you",
+    "notes": [
       "Distinguish between 'hören' (to hear or listen) and 'zuhören' (to listen to someone attentively). 'Hören' is passive perception, while 'zuhören' is an active effort.",
       "Use 'hören' when you catch a sound, like hearing a bird or music in the background."
     ],
@@ -159,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'Hören' is passive perception, while 'zuhören' is an active effort.",
+        "why": "Contradicts sense 1: 'hören' is also active listening with direct objects (Musik/Radio hören)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use 'hören' when you catch a sound, like hearing a bird",
+        "why": "merely repeats sense 0."
+      }
+    ],
+    "growth": 0.98
   }
 }

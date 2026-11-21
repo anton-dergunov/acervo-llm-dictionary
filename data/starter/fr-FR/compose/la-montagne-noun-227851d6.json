@@ -70,6 +70,114 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "mountain; the mountains",
+    "primaryGloss": "mountain",
+    "emotion": "awed and peaceful, gazing out over a vast horizon",
+    "notes": [
+      "French uses the singular 'à la montagne' to mean 'in the mountains' as a holiday destination or region.",
+      "Do not confuse with 'la colline' (hill), which is smaller and rounder."
+    ],
+    "senses": [
+      {
+        "id": "dgqn39ghhdkcmyg",
+        "order": 0,
+        "definition": "A very high natural elevation of the earth's surface, or a mountainous region.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "the mountains"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "el3jqnk7ts7vfz3",
+            "text": "La montagne est couverte de neige en hiver.",
+            "textLang": "fr",
+            "translation": "The mountain is covered in snow in winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and admiring, picturing a snow-capped peak",
+            "note": null,
+            "matchedForm": "montagne",
+            "matchedTranslationForm": "mountain"
+          },
+          {
+            "id": "s1l0iduzrk9r2dd",
+            "text": "Nous aimons passer nos vacances à la montagne.",
+            "textLang": "fr",
+            "translation": "We like to spend our holidays in the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and relaxed, looking forward to a getaway",
+            "note": null,
+            "matchedForm": "montagne",
+            "matchedTranslationForm": "mountains"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "dgqn39ghhdkcmyg",
+      "from": "Une grande élévation naturelle de terre, plus haute qu'une colline.",
+      "to": "A large natural elevation of earth, higher than a hill.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    },
+    {
+      "sense": "h1ks3hl1zdk9l7z",
+      "from": "Une colline très haute.",
+      "to": "A very high hill.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:44Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la montagne",
+    "lemma": "montagne",
+    "reading": null,
+    "ipa": "/mɔ̃.taɲ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "mountain",
     "primaryGloss": "mountain",
     "emotion": "awed and peaceful, gazing out over a vast horizon",
@@ -184,22 +292,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "dgqn39ghhdkcmyg",
-      "from": "Une grande élévation naturelle de terre, plus haute qu'une colline.",
-      "to": "A large natural elevation of earth, higher than a hill.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    },
-    {
-      "sense": "h1ks3hl1zdk9l7z",
-      "from": "Une colline très haute.",
-      "to": "A very high hill.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:44Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Often used in the plural 'la montagne' or 'les montagnes'",
+        "why": "'la montagne' is singular, not plural; French uses singular 'à la montagne' where English uses plural."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(geography) A very high hill.",
+        "why": "Redundant duplicate of sense 0."
+      }
+    ],
+    "growth": 0.794
+  }
 }

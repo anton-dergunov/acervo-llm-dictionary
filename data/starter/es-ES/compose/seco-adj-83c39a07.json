@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry; blunt",
+    "primaryGloss": "dry",
+    "emotion": "a sharp, quick breath of air, like wind blowing over parched earth",
+    "notes": [
+      "With 'estar', it means something has dried or become dry ('la ropa ya está seca'); with 'ser', it describes an inherently dry thing, climate, or personality ('el clima es seco', 'él es muy seco')."
+    ],
+    "senses": [
+      {
+        "id": "62j12li84dkms0j",
+        "order": 0,
+        "definition": "Free from moisture, liquid, or rain; not wet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "lqkj8kf8o3f4w5g",
+            "text": "La ropa ya está seca porque ha salido el sol.",
+            "textLang": "es",
+            "translation": "The clothes are already dry because the sun came out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "seca",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c7rh4667lxzs1ho",
+        "order": 1,
+        "definition": "Of a person or their manner: unfriendly, abrupt, or lacking warmth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blunt",
+              "curt",
+              "cold"
+            ]
+          }
+        ],
+        "domain": "personality",
+        "emoji": "😐",
+        "examples": [
+          {
+            "id": "jkgqgscsbti3sys",
+            "text": "Es muy seco al hablar y casi nunca sonríe.",
+            "textLang": "es",
+            "translation": "He is very blunt when he speaks and almost never smiles.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "seco",
+            "matchedTranslationForm": "blunt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "seco",
+    "lemma": "seco",
+    "reading": null,
+    "ipa": "/ˈseko/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; arid; blunt",
     "primaryGloss": "dry",
     "emotion": "a sharp, quick breath of air, like wind blowing over parched earth",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'áridio', which is more specific to climate or soil.",
+        "why": "Misspells Spanish word 'árido' as 'áridio'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "dry; arid; blunt",
+        "why": "'arid' is not in the glosses of any sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for things that have no moisture or rain, but also used",
+        "why": "Simply restates the two senses defined below."
+      }
+    ],
+    "growth": 1.01
   }
 }

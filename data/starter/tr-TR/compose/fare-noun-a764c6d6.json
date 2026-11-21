@@ -72,6 +72,115 @@
     "primaryGloss": "mouse",
     "emotion": "startled and cautious, noticing a quick movement on the floor",
     "notes": [
+      "In everyday Turkish, 'fare' covers both mice and rats; a rat is more specifically called 'sıçan' or 'lağım faresi' (sewer rat)."
+    ],
+    "senses": [
+      {
+        "id": "53pqq9apmvrfp3c",
+        "order": 0,
+        "definition": "A small rodent with a pointed snout, small rounded ears, and a long tail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse",
+              "rat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐭",
+        "examples": [
+          {
+            "id": "31uok0ovd8cr05i",
+            "text": "Mutfakta bir fare gördüm.",
+            "textLang": "tr",
+            "translation": "I saw a mouse in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and a little disgusted, pointing at the corner",
+            "note": null,
+            "matchedForm": "fare",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k0vibmopfbx7bjy",
+        "order": 1,
+        "definition": "A hand-held device used to control the cursor on a computer screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse",
+              "computer mouse"
+            ]
+          }
+        ],
+        "domain": "technology",
+        "emoji": "🖱️",
+        "examples": [
+          {
+            "id": "0oz2c8d52vghptc",
+            "text": "Yeni bilgisayarım için kablosuz bir fare aldım.",
+            "textLang": "tr",
+            "translation": "I bought a wireless mouse for my new computer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and practical, showing off a new gadget",
+            "note": null,
+            "matchedForm": "fare",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "fare",
+    "lemma": "fare",
+    "reading": null,
+    "ipa": "/faːˈɾe/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐭",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "mouse; rat; computer mouse",
+    "primaryGloss": "mouse",
+    "emotion": "startled and cautious, noticing a quick movement on the floor",
+    "notes": [
       "Fare can refer to both mice and rats in everyday Turkish, though a larger rat is sometimes called a lağım faresiyse.",
       "It also means computer mouse, just like in English."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "sometimes called a lağım faresiyse.",
+        "why": "'lağım faresiyse' has the conditional suffix '-yse' attached by mistake; the lemma is 'lağım faresi'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It also means computer mouse, just like in English.",
+        "why": "Restates sense 1 without adding useful learner information."
+      }
+    ],
+    "growth": 0.921
   }
 }

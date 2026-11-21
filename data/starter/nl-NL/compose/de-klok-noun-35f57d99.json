@@ -75,6 +75,116 @@
     "primaryGloss": "clock",
     "emotion": "steady and reassuring, marking the passage of time in a quiet room",
     "notes": [
+      "Do not confuse 'de klok' (wall or table clock) with 'het horloge' (wristwatch)."
+    ],
+    "senses": [
+      {
+        "id": "r18ksqccnnwsbkb",
+        "order": 0,
+        "definition": "An instrument that shows the time, usually hanging on a wall or placed on a table.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clock",
+              "wall clock"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "jnxv4zktsaqtwdm",
+            "text": "De klok hangt boven de bank in de woonkamer.",
+            "textLang": "nl",
+            "translation": "The clock hangs above the sofa in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and domestic, pointing out a familiar object in the room",
+            "note": null,
+            "matchedForm": "klok",
+            "matchedTranslationForm": "clock"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jurrog26wdepj89",
+        "order": 1,
+        "definition": "A large metal bell, such as in a church tower, that rings to tell the time or call people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bell",
+              "church bell"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🔔",
+        "examples": [
+          {
+            "id": "98hsvmgsck9hnat",
+            "text": "De klokken van de kerk luiden elke zondagochtend.",
+            "textLang": "nl",
+            "translation": "The bells of the church ring every Sunday morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "klokken",
+            "matchedTranslationForm": "bells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de klok",
+    "lemma": "klok",
+    "reading": null,
+    "ipa": "/klɔk/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Home",
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "clock; bell",
+    "primaryGloss": "clock",
+    "emotion": "steady and reassuring, marking the passage of time in a quiet room",
+    "notes": [
       "Do not confuse 'klok' (clock or wall clock) with 'horloge' (wristwatch). In Dutch, a clock that hangs on the wall or stands on a mantelpiece is a 'klok', whereas what you wear on your wrist is always an 'horloge'."
     ],
     "senses": [
@@ -163,5 +273,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "De kerkklok luidt elke zondagochtend.",
+        "why": "Uses compound 'kerkklok' instead of the lemma 'klok'."
+      }
+    ],
+    "growth": 0.822
   }
 }

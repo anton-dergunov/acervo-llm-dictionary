@@ -72,6 +72,115 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "snake; queue; line",
+    "primaryGloss": "snake",
+    "emotion": "wary and alert, like someone pointing out a creature in the grass",
+    "notes": [
+      "Plural: 'die Schlangen'.",
+      "In sense 2, the fixed phrase 'Schlange stehen' (without an article) means 'to stand in line' or 'to queue'."
+    ],
+    "senses": [
+      {
+        "id": "b0vljs4l24097ld",
+        "order": 0,
+        "definition": "A long reptile with no legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [
+          {
+            "id": "jopgadw0aet0gnp",
+            "text": "Im Zoo habe ich eine giftige Schlange gesehen.",
+            "textLang": "de",
+            "translation": "At the zoo, I saw a venomous snake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and wide-eyed, recounting a highlight of a day out",
+            "note": null,
+            "matchedForm": "Schlange",
+            "matchedTranslationForm": "snake"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "00pfc9iekgo4et4",
+        "order": 1,
+        "definition": "A line of people or vehicles waiting their turn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "queue",
+              "line"
+            ]
+          }
+        ],
+        "domain": "waiting",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "6i4cwaugae03eiu",
+            "text": "Vor dem Kino gab es eine lange Schlange.",
+            "textLang": "de",
+            "translation": "There was a long line in front of the cinema.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Schlange",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Schlange",
+    "lemma": "Schlange",
+    "reading": null,
+    "ipa": "/ˈʃlaŋə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "snake; queue",
     "primaryGloss": "snake",
     "emotion": "wary and alert, like someone pointing out a creature in the grass",
@@ -164,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In German, this word has two very different meanings.",
+        "why": "Just restates the two senses shown right below."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'die Schlange stehen'",
+        "why": "The expression is 'Schlange stehen' without an article, and it uses this very noun."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Wir mussten eine lange Schlange vor dem Kino bilden.",
+        "why": "Unnatural phrasing; people wait or stand in a queue ('in einer langen Schlange stehen')."
+      }
+    ],
+    "growth": 0.717
   }
 }

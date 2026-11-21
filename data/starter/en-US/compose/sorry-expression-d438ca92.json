@@ -59,6 +59,119 @@
     "lemma": "sorry",
     "reading": null,
     "ipa": "/ˈsɔːri/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙏",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "lo siento; perdón; apenado",
+    "primaryGloss": "lo siento",
+    "emotion": "sincere and gentle, showing a touch of genuine regret",
+    "notes": [
+      "Se usa solo como expresión ('Sorry!') o con el verbo 'be' ('I'm sorry'). Va seguido de 'for' o 'about' ('sorry about the mess', 'sorry for being late').",
+      "Con entonación de pregunta ('Sorry?'), se usa de forma educada para pedir que te repitan algo que no oíste bien.",
+      "No lo confundas con 'apologize', que es el verbo ('disculparse')."
+    ],
+    "senses": [
+      {
+        "id": "ccasm32wseeiex1",
+        "order": 0,
+        "definition": "Que siente pesar o arrepentimiento por algo que hizo; se usa también solo como expresión para pedir disculpas o permiso.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "lo siento",
+              "perdón",
+              "disculpa",
+              "arrepentido"
+            ]
+          }
+        ],
+        "domain": "disculpa",
+        "emoji": "🙏",
+        "examples": [
+          {
+            "id": "24lsl9l9rokhxwr",
+            "text": "I am so sorry I broke your favorite mug.",
+            "textLang": "en",
+            "translation": "Siento mucho haber roto tu taza favorita.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and concerned, wanting to make things right",
+            "note": null,
+            "matchedForm": "sorry",
+            "matchedTranslationForm": "Siento"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xkialrw87yiwuy3",
+        "order": 1,
+        "definition": "Que siente tristeza, pena o compasión por la situación desafortunada de otra persona.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "apenado",
+              "lo siento"
+            ]
+          }
+        ],
+        "domain": "empatía",
+        "emoji": "😔",
+        "examples": [
+          {
+            "id": "7htibt7w3fd2uuj",
+            "text": "I am sorry to hear about your bad news.",
+            "textLang": "en",
+            "translation": "Siento mucho escuchar tus malas noticias.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "soft and sympathetic, showing care for the other person",
+            "note": null,
+            "matchedForm": "sorry",
+            "matchedTranslationForm": "Siento"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sorry",
+    "lemma": "sorry",
+    "reading": null,
+    "ipa": "/ˈsɔːri/",
     "pos": "expression",
     "gender": null,
     "register": "neutral",
@@ -162,5 +275,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Both examples use 'sorry' as a predicate adjective ('I am sorry'); 'Sorry!' is short for it."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "arrepentido, apenado",
+        "why": "'Arrepentido' means remorseful for one's own acts, not feeling sympathy for another's misfortune."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Sentir tristeza o lástima por una situación desafortunada de otra persona.",
+        "why": "Defined as an infinitive verb ('Sentir...') instead of an adjective or expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the essential prepositions learners need: 'sorry for / about' and 'sorry + to-infinitive'."
+      }
+    ],
+    "growth": 1.071
   }
 }

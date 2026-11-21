@@ -68,6 +68,74 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "box; carton",
+    "primaryGloss": "box",
+    "emotion": "neat and organized, putting things away neatly",
+    "notes": [
+      "Used for light boxes (cardboard, plastic, shoeboxes, candy boxes); for heavy wooden crates or drawers, use ящик. Genitive plural: коробок."
+    ],
+    "senses": [
+      {
+        "id": "kp0wgcm3v8zkjto",
+        "order": 0,
+        "definition": "A container with flat sides, usually made of cardboard or plastic, used for holding or storing things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "box",
+              "carton"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "30nf2kxctnad247",
+            "text": "Я положил книгу в коробку.",
+            "textLang": "ru",
+            "translation": "I put the book in the box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and deliberate, placing something inside",
+            "note": null,
+            "matchedForm": "коробку",
+            "matchedTranslationForm": "box"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "коробка",
+    "lemma": "коробка",
+    "reading": null,
+    "ipa": "/kɐˈropkə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "box; carton; case",
     "primaryGloss": "box",
     "emotion": "neat and organized, putting things away neatly",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "box; carton; case",
+        "why": "Includes 'case', which is not in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use коробка for cardboard or plastic boxes used for storage or gifts.",
+        "why": "Vague filler; better to contrast with ящик (wooden/heavy box, crate, or drawer) and plural genitive коробок."
+      }
+    ],
+    "growth": 1.339
   }
 }

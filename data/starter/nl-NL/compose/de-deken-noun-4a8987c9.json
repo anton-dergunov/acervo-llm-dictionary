@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "blanket",
+    "primaryGloss": "blanket",
+    "emotion": "cozy and comfortable, sinking into warmth on a cold evening",
+    "notes": [
+      "Refers to a woven or fleece blanket; a quilted duvet or comforter is 'het dekbed'."
+    ],
+    "senses": [
+      {
+        "id": "lp3oodc2nc0ekwa",
+        "order": 0,
+        "definition": "A large piece of thick cloth used on a bed or around the body for warmth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blanket"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "fo0brutzk1h1txs",
+            "text": "Het is koud buiten, dus ik pak nog een extra deken.",
+            "textLang": "nl",
+            "translation": "It is cold outside, so I am grabbing an extra blanket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "chilly but looking forward to the warmth of the bed",
+            "note": null,
+            "matchedForm": "deken",
+            "matchedTranslationForm": "blanket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de deken",
+    "lemma": "deken",
+    "reading": null,
+    "ipa": "/ˈdeːkə(n)/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "blanket; cover",
     "primaryGloss": "blanket",
     "emotion": "cozy and comfortable, sinking into warmth on a cold evening",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "comforter",
+        "why": "A comforter/duvet in Dutch is 'dekbed', not 'deken' (which is a woven/fleece blanket)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Don't confuse this with the word 'deken' meaning a dean",
+        "why": "Warns about a rare homonym instead of contrasting with the everyday word 'dekbed' (duvet/comforter)."
+      }
+    ],
+    "growth": 0.806
   }
 }

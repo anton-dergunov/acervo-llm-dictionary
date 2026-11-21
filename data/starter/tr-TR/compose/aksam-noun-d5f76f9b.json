@@ -68,6 +68,95 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "evening",
+    "primaryGloss": "evening",
+    "emotion": "relaxed and winding down, shifting from the busy day to rest",
+    "notes": [
+      "Often used without a suffix to mean 'in the evening' or 'tonight': 'Akşam gel' (Come in the evening).",
+      "Do not confuse with 'gece' (night), which starts later when it is late and time to sleep."
+    ],
+    "senses": [
+      {
+        "id": "i4pwj7e4i92g8sv",
+        "order": 0,
+        "definition": "The part of the day between the end of the afternoon and night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "evening"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌆",
+        "examples": [
+          {
+            "id": "bx6rm7ue3x5mc1e",
+            "text": "Bu akşam ne yapıyorsun?",
+            "textLang": "tr",
+            "translation": "What are you doing this evening?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "akşam",
+            "matchedTranslationForm": "evening"
+          },
+          {
+            "id": "4ag62gkq4hn77az",
+            "text": "Akşam oldu, hava kararıyor.",
+            "textLang": "tr",
+            "translation": "Evening has fallen; it's getting dark.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, noting the change in light",
+            "note": null,
+            "matchedForm": "Akşam",
+            "matchedTranslationForm": "Evening"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "akşam",
+    "lemma": "akşam",
+    "reading": null,
+    "ipa": "/akˈʃam/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌆",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "evening; dusk",
     "primaryGloss": "evening",
     "emotion": "relaxed and winding down, shifting from the busy day to rest",
@@ -161,5 +250,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Sense 1 is just the onset of evening; 'akşam oldu' means 'evening has fallen'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "We ate dinner together in the evening.",
+        "why": "'Akşam yemeği' is the compound for 'dinner'; 'in the evening' translates it twice."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "It is dusk, the air is getting dark.",
+        "why": "'Hava kararıyor' means 'it is getting dark', not literally 'the air is getting dark'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Akşam is the general term for the time between the end of",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.726
   }
 }

@@ -58,6 +58,91 @@
     "headword": "la sangre",
     "lemma": "sangre",
     "reading": null,
+    "ipa": "/ˈsaŋɡɾe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩸",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "blood",
+    "primaryGloss": "blood",
+    "emotion": "heavy and serious, feeling the quiet pulse of life",
+    "notes": [
+      "Often used in idioms like 'tener sangre fría' (to stay calm under pressure) and 'llevar algo en la sangre' (to have something in one's blood)."
+    ],
+    "senses": [
+      {
+        "id": "r0l9csz91smsv53",
+        "order": 0,
+        "definition": "The red liquid that flows through the veins and arteries of the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blood"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩸",
+        "examples": [
+          {
+            "id": "m5zq9aiozo8w9cc",
+            "text": "Se hizo una pequeña herida y le salió un poco de sangre.",
+            "textLang": "es",
+            "translation": "He got a small cut and a little blood came out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and careful, tending to a minor injury",
+            "note": null,
+            "matchedForm": "sangre",
+            "matchedTranslationForm": "blood"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "r0l9csz91smsv53",
+      "from": "El líquido rojo que circula por las venas y arterias del cuerpo.",
+      "to": "The red liquid that circulates through the veins and arteries of the body.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    },
+    {
+      "sense": "0rnb82k6ncqf0ez",
+      "from": "Conjunto de los parientes o descendientes de una misma familia.",
+      "to": "All the relatives or descendants of the same family.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la sangre",
+    "lemma": "sangre",
+    "reading": null,
     "ipa": "/ˈsaŋ.ɡɾe/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "r0l9csz91smsv53",
-      "from": "El líquido rojo que circula por las venas y arterias del cuerpo.",
-      "to": "The red liquid that circulates through the veins and arteries of the body.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    },
-    {
-      "sense": "0rnb82k6ncqf0ez",
-      "from": "Conjunto de los parientes o descendientes de una misma familia.",
-      "to": "All the relatives or descendants of the same family.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "blood; lineage; bloodshed",
+        "why": "Includes 'bloodshed', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Llevan la misma música en la sangre.",
+        "why": "'Llevar algo en la sangre' means an innate trait, not relatives or descendants."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "All the relatives or descendants of the same family.",
+        "why": "Literary or figurative sense; for A2 learners, 'sangre' has one core sense."
+      }
+    ],
+    "growth": 0.704
+  }
 }

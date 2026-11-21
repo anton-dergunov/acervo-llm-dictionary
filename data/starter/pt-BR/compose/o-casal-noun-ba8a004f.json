@@ -68,6 +68,132 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "couple; male-female pair",
+    "primaryGloss": "couple",
+    "emotion": "warm and affectionate, speaking of two people who belong together",
+    "notes": [
+      "Do not confuse with 'par' (a pair of objects, like shoes, or dance partners) or 'dupla' (a duo or working pair)."
+    ],
+    "senses": [
+      {
+        "id": "em3oglhwrizjtjb",
+        "order": 0,
+        "definition": "Two people who are married or in a romantic relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "couple"
+            ]
+          }
+        ],
+        "domain": "relationship",
+        "emoji": "💑",
+        "examples": [
+          {
+            "id": "2efdzi9wqabjsez",
+            "text": "O casal comprou uma casa nova no centro da cidade.",
+            "textLang": "pt",
+            "translation": "The couple bought a new house in the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and happy to share some good news about friends",
+            "note": null,
+            "matchedForm": "casal",
+            "matchedTranslationForm": "couple"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yd8h65n1cbmzacz",
+        "order": 1,
+        "definition": "A pair consisting of one male and one female, especially of animals or children.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pair",
+              "boy and girl"
+            ]
+          }
+        ],
+        "domain": "pair",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "ej7cgst9ihjqndo",
+            "text": "Eles têm um casal de filhos: um menino e uma menina.",
+            "textLang": "pt",
+            "translation": "They have two children, a boy and a girl.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "casal",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "em3oglhwrizjtjb",
+      "from": "Duas pessoas que mantêm uma relação amorosa ou que estão casadas.",
+      "to": "Two people who are in a romantic relationship or married.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:20Z"
+    },
+    {
+      "sense": "yd8h65n1cbmzacz",
+      "from": "Duas pessoas ou coisas consideradas em conjunto.",
+      "to": "Two people or things considered together.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o casal",
+    "lemma": "casal",
+    "reading": null,
+    "ipa": "/kaˈzaw/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "couple; pair",
     "primaryGloss": "couple",
     "emotion": "warm and affectionate, speaking of two people who belong together",
@@ -162,22 +288,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "em3oglhwrizjtjb",
-      "from": "Duas pessoas que mantêm uma relação amorosa ou que estão casadas.",
-      "to": "Two people who are in a romantic relationship or married.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:20Z"
-    },
-    {
-      "sense": "yd8h65n1cbmzacz",
-      "from": "Duas pessoas ou coisas consideradas em conjunto.",
-      "to": "Two people or things considered together.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Two people or things considered together.",
+        "why": "'Casal' cannot mean any two things or people; it means a male-female pair (animals, children)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Preciso de um casal de amigos para nos ajudar com o projeto.",
+        "why": "'Um casal de amigos' means a romantic couple who are friends, not just two friends."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'casal' to refer to two people in a romantic relationship",
+        "why": "Merely restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.914
+  }
 }

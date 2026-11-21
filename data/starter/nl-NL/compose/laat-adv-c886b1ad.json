@@ -72,6 +72,114 @@
     "primaryGloss": "late",
     "emotion": "tired and yawning, watching the clock tick past midnight",
     "notes": [
+      "Also used as an adjective ('een late trein').",
+      "Used in the common question 'Hoe laat is het?' (What time is it?, literally 'How late is it?')."
+    ],
+    "senses": [
+      {
+        "id": "4qnhwfs5leodhqe",
+        "order": 0,
+        "definition": "After the expected, arranged, or usual time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "delay",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "0aoevd0sf385axs",
+            "text": "De trein komt vandaag erg laat aan.",
+            "textLang": "nl",
+            "translation": "The train is arriving very late today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated, waiting on a cold station platform",
+            "note": null,
+            "matchedForm": "laat",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s25qzxr765af3pe",
+        "order": 1,
+        "definition": "Near the end of the day, evening, or night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "hour",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "dy0lwaqfj9dni80",
+            "text": "We hebben gisteren tot heel laat gepraat.",
+            "textLang": "nl",
+            "translation": "We talked until very late yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "laat",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "laat",
+    "lemma": "laat",
+    "reading": null,
+    "ipa": "/laːt/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "tired and yawning, watching the clock tick past midnight",
+    "notes": [
       "Used both as an adjective (een late trein) and an adverb (hij komt laat).",
       "Compare with 'ten minste' (at least) which sounds similar to English speakers but has a completely different meaning."
     ],
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Compare with 'ten minste' (at least) which sounds similar to English speakers",
+        "why": "'Ten minste' sounds nothing like 'laat'; nonsensical false-friend note."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "We hebben gisteren heel laat gepraat.",
+        "why": "Requires 'tot' ('tot heel laat') to mean 'until very late'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the essential A1 idiom 'Hoe laat is het?' (What time is it?)."
+      }
+    ],
+    "growth": 0.905
   }
 }

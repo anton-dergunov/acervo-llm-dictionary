@@ -58,6 +58,73 @@
     "headword": "o bolso",
     "lemma": "bolso",
     "reading": null,
+    "ipa": "/ˈbow.su/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pocket",
+    "primaryGloss": "pocket",
+    "emotion": "casually patting clothing to check for keys or a phone",
+    "notes": [
+      "Do not confuse with 'a bolsa', which means 'bag', 'handbag', or 'purse'."
+    ],
+    "senses": [
+      {
+        "id": "4ck7oq0nifqjrxc",
+        "order": 0,
+        "definition": "A small pouch sewn into or onto clothing for carrying small items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pocket"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "4jd94yg19bxc1oe",
+            "text": "Coloquei as chaves no bolso da calça.",
+            "textLang": "pt",
+            "translation": "I put the keys in my pants pocket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved after finding what was needed right away",
+            "note": null,
+            "matchedForm": "bolso",
+            "matchedTranslationForm": "pocket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o bolso",
+    "lemma": "bolso",
+    "reading": null,
     "ipa": "/ˈbow.zu/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈbow.zu/",
+        "why": "Wrong consonant in IPA; the 's' in 'bolso' is voiceless /s/, not /z/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A small bag or pouch, often with a strap, used for carrying",
+        "why": "False sense (Spanish interference); 'bolso' does not mean handbag in Portuguese, contradicting note[0]."
+      }
+    ],
+    "growth": 0.526
   }
 }

@@ -68,6 +68,136 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "tall; high",
+    "primaryGloss": "tall",
+    "emotion": "looking up towards a mountain peak, appreciative and impressed",
+    "notes": [
+      "Covers both English 'tall' (people, trees, buildings) and 'high' (mountains, walls, prices).",
+      "Comparative form is irregular: 'wyższy' (taller, higher)."
+    ],
+    "senses": [
+      {
+        "id": "w5riztfj2syywhe",
+        "order": 0,
+        "definition": "Of a person or thing: having a great or greater than average height from bottom to top.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "zyj7g8rn750yurt",
+            "text": "Mój brat jest bardzo wysoki.",
+            "textLang": "pl",
+            "translation": "My brother is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and smiling while pointing out a family member",
+            "note": null,
+            "matchedForm": "wysoki",
+            "matchedTranslationForm": "tall"
+          },
+          {
+            "id": "m9rs0pht38x03sn",
+            "text": "W centrum miasta stoi wysoki budynek.",
+            "textLang": "pl",
+            "translation": "There is a tall building in the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking up in awe at modern architecture",
+            "note": null,
+            "matchedForm": "wysoki",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rimf3u7yhm6t779",
+        "order": 1,
+        "definition": "Greater than normal in amount, level, or degree (such as prices, temperature, or quality).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "high"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "eggtfylpcw02fd4",
+            "text": "Ceny w tym sklepie są bardzo wysokie.",
+            "textLang": "pl",
+            "translation": "The prices in this shop are very high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wysokie",
+            "matchedTranslationForm": "high"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wysoki",
+    "lemma": "wysoki",
+    "reading": null,
+    "ipa": "/vɨˈsɔ.ki/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦒",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "tall; high; loud",
     "primaryGloss": "tall",
     "emotion": "looking up towards a mountain peak, appreciative and impressed",
@@ -160,5 +290,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tall; high; loud",
+        "why": "'wysoki' never means 'loud' (it means high-pitched for sound), and no sense covers it."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense of 'high' in amount, level, or degree (prices, temperature)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(person) Having a greater than average height.",
+        "why": "Polish does not split 'tall' (person) and 'high' (building) into separate senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "while for things like buildings or mountains, it means high.",
+        "why": "Misleading about English: 'tall' is the standard translation for buildings and trees too."
+      }
+    ],
+    "growth": 1.455
   }
 }

@@ -58,6 +58,76 @@
     "headword": "vegetable",
     "lemma": "vegetable",
     "reading": null,
+    "ipa": "/ˈvɛdʒtəbəl/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥦",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "verdura, hortaliza",
+    "primaryGloss": "verdura",
+    "emotion": "fresh and crisp, like picking healthy food at the market",
+    "notes": [
+      "En inglés tiene tres sílabas (/ˈvɛdʒtəbəl/), no cuatro: la segunda 'e' es muda.",
+      "En español cotidiano se traduce como «verdura» (o «vegetales» en algunas regiones, pero en España «vegetal» suele referirse a cualquier planta)."
+    ],
+    "senses": [
+      {
+        "id": "vp420ujwkp1654w",
+        "order": 0,
+        "definition": "Planta o parte de una planta cultivada para comerse, generalmente en platos salados.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "verdura",
+              "hortaliza",
+              "vegetal"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🥕",
+        "examples": [
+          {
+            "id": "ywd80f26ssvsb6c",
+            "text": "It is important to eat fresh vegetables every day.",
+            "textLang": "en",
+            "translation": "Es importante comer verduras frescas todos los días.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vegetables",
+            "matchedTranslationForm": "verduras"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "vegetable",
+    "lemma": "vegetable",
+    "reading": null,
     "ipa": "/ˈvɛdʒ.tə.bəl/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +231,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "shortGloss",
+        "quote": "vegetable; planta herbácea cultivada para alimento",
+        "why": "Contains the English word 'vegetable' and a long definition instead of Spanish glosses."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "primaryGloss",
+        "quote": "vegetal",
+        "why": "'Vegetal' is a false friend in everyday Spanish; the natural everyday translation is 'verdura'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Persona que se encuentra en un estado de vida vegetativo, sin actividad",
+        "why": "Offensive/derogatory slang sense, inappropriate and unnecessary for an A2 beginner entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "It is important to eat a fresh vegetable every day.",
+        "why": "Unnatural singular usage; English speakers say 'eat fresh vegetables' in the plural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia de 'fruit', que suele tener semillas y sabor dulce, un",
+        "why": "Botanical/culinary trivia that does not help with English usage."
+      }
+    ],
+    "growth": 0.647
   }
 }

@@ -58,6 +58,116 @@
     "headword": "надеяться",
     "lemma": "надеяться",
     "reading": null,
+    "ipa": "/nɐˈdʲejɪt͡sə/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤞",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to hope; to rely on",
+    "primaryGloss": "to hope",
+    "emotion": "warm and optimistic, looking forward to something good",
+    "notes": [
+      "Takes the preposition 'на' + accusative case for what you hope for or whom you rely on (надеяться на погоду, надеяться на друга), or a clause with 'что' (Я надеюсь, что...).",
+      "Imperfective; the perfective pair is понадеяться."
+    ],
+    "senses": [
+      {
+        "id": "ex8k05s8rkn112l",
+        "order": 0,
+        "definition": "To want something to happen and think that it might.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hope",
+              "to hope for"
+            ]
+          }
+        ],
+        "domain": "hope",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "rrhuzded4k1k34k",
+            "text": "Мы надеемся на хорошую погоду в выходные.",
+            "textLang": "ru",
+            "translation": "We are hoping for good weather on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and hopeful, thinking about the weekend",
+            "note": null,
+            "matchedForm": "надеемся",
+            "matchedTranslationForm": "are hoping"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0vvmludmtbrttnx",
+        "order": 1,
+        "definition": "To trust someone or something to help you or not let you down.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to rely on",
+              "to count on"
+            ]
+          }
+        ],
+        "domain": "reliance",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "wf51jmw5suilegy",
+            "text": "В трудную минуту всегда можно надеяться на верного друга.",
+            "textLang": "ru",
+            "translation": "In a difficult moment, you can always rely on a loyal friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grateful and secure, trusting someone close",
+            "note": null,
+            "matchedForm": "надеяться",
+            "matchedTranslationForm": "rely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "надеяться",
+    "lemma": "надеяться",
+    "reading": null,
     "ipa": "/nɐˈdʲejɪtsʲə/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/nɐˈdʲejɪtsʲə/",
+        "why": "Reflexive -ться is pronounced hard [t͡sə], not palatalized [t͡sʲə]."
+      },
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "(например: надеяться на друга)",
+        "why": "Meta-text 'например' is in Russian in an English note; also omits that 'на + acc.' applies to hoping too."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hope; to want something to happen",
+        "why": "Repeats sense 0 and omits sense 1 ('to rely on')."
+      }
+    ],
+    "growth": 0.919
   }
 }

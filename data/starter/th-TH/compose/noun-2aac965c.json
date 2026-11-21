@@ -58,6 +58,115 @@
     "headword": "ร่ม",
     "lemma": "ร่ม",
     "reading": null,
+    "ipa": "/rôm/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☂️",
+    "topics": [
+      "Clothes",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "umbrella; shade",
+    "primaryGloss": "umbrella",
+    "emotion": "prepared for the sudden tropical downpour, practical and dry",
+    "notes": [
+      "For an umbrella, the classifier is คัน, and the verb for opening/holding one up is กาง (กางร่ม). Also used as an adjective meaning 'shady' (often as ร่มรื่น)."
+    ],
+    "senses": [
+      {
+        "id": "cmtj8tevw4tq6mp",
+        "order": 0,
+        "definition": "A folding canopy on a stick used to protect a person from rain or sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "umbrella",
+              "parasol"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "☂️",
+        "examples": [
+          {
+            "id": "3heeeftho2g46xa",
+            "text": "อย่าลืมพกร่มไปด้วยเพราะฝนจะตก",
+            "textLang": "th",
+            "translation": "Don't forget to bring an umbrella because it is going to rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reminding someone urgently before heading out into the storm",
+            "note": null,
+            "matchedForm": "ร่ม",
+            "matchedTranslationForm": "umbrella"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8t2e4g37zcdeel8",
+        "order": 1,
+        "definition": "An area sheltered from direct sunlight.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shade"
+            ]
+          }
+        ],
+        "domain": "shade",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "t6ursnlforbpf10",
+            "text": "ไปนั่งพักในร่มกันเถอะ",
+            "textLang": "th",
+            "translation": "Let's go sit and rest in the shade.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ร่ม",
+            "matchedTranslationForm": "shade"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ร่ม",
+    "lemma": "ร่ม",
+    "reading": null,
     "ipa": "/rom˥/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/rom˥/",
+        "why": "Wrong tone in IPA: ร่ม has a falling tone (/rôm/ or /rom˥˩/), not high."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Shaded or protected from the direct heat of the sun.",
+        "why": "Adjective definition and glosses inside a noun entry; the noun sense is 'shade'."
+      }
+    ],
+    "growth": 1.02
   }
 }

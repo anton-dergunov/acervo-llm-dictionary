@@ -58,6 +58,75 @@
     "headword": "sonbahar",
     "lemma": "sonbahar",
     "reading": null,
+    "ipa": "/ˈsonbahaɾ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "autumn; fall",
+    "primaryGloss": "autumn",
+    "emotion": "crisp and reflective, watching the leaves drift down on a cool afternoon",
+    "notes": [
+      "Compound of 'son' (last, end) and 'bahar' (spring). Another common, slightly more literary word for autumn is 'güz'.",
+      "To say 'in autumn', add the locative suffix '-da': 'sonbaharda'."
+    ],
+    "senses": [
+      {
+        "id": "54waqugut90qkih",
+        "order": 0,
+        "definition": "The season of the year between summer and winter, when leaves fall from the trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "autumn",
+              "fall"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "🍂",
+        "examples": [
+          {
+            "id": "l5znkji1ucwq86d",
+            "text": "Sonbahar gelince yapraklar sararıyor ve dökülüyor.",
+            "textLang": "tr",
+            "translation": "When autumn arrives, the leaves turn yellow and fall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Sonbahar",
+            "matchedTranslationForm": "autumn"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sonbahar",
+    "lemma": "sonbahar",
+    "reading": null,
     "ipa": "/sonbaˈhaɾ/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "yapraklar sarariyor ve dökülüyor.",
+        "why": "Spelling error: 'sarariyor' should be 'sararıyor' (dotless ı)."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/sonbaˈhaɾ/",
+        "why": "Compounds with 'son' carry primary stress on the first syllable: /ˈsonbahaɾ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention 'sonbaharda' (in autumn) as a very common usage for A2 learners."
+      }
+    ],
+    "growth": 0.766
   }
 }

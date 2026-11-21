@@ -60,6 +60,136 @@
     "headword": "cây",
     "lemma": "cây",
     "reading": null,
+    "ipa": "/kə̆j˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "tree; plant; classifier for long objects",
+    "primaryGloss": "tree",
+    "emotion": "shaded and cool under leaves, peaceful and grounded",
+    "notes": [
+      "Covers both woody trees and smaller green plants; takes the classifier 'cái' rarely, instead functioning as its own classifier before plant names (e.g., 'cây táo' — apple tree)."
+    ],
+    "senses": [
+      {
+        "id": "yhr5cii13jm6unj",
+        "order": 0,
+        "definition": "A living plant growing in soil, from a small houseplant to a tall woody tree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree",
+              "plant"
+            ]
+          }
+        ],
+        "domain": "botany",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "4canb7sxmjp0em9",
+            "text": "Cô ấy thích trồng cây trong vườn.",
+            "textLang": "vi",
+            "translation": "She likes growing plants in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cây",
+            "matchedTranslationForm": "plants"
+          },
+          {
+            "id": "95qt59qtkphm2hp",
+            "text": "Cây xanh che bóng mát cho ngôi nhà.",
+            "textLang": "vi",
+            "translation": "The green tree provides shade for the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and appreciative of the cool shade on a warm day",
+            "note": null,
+            "matchedForm": "Cây",
+            "matchedTranslationForm": "tree"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bs7xt63pnx9oyo6",
+        "order": 1,
+        "definition": "Used as a classifier before nouns for plants or long, stick-like objects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "classifier for long objects",
+              "stick of"
+            ]
+          }
+        ],
+        "domain": "grammar",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "pny5onax9g2kvar",
+            "text": "Cho tôi mượn cây bút này nhé.",
+            "textLang": "vi",
+            "translation": "Let me borrow this pen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cây",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cây",
+    "lemma": "cây",
+    "reading": null,
     "ipa": "/kəj̄/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kəj̄/",
+        "why": "Non-standard tone diacritic; Hanoi IPA should be /kə̆j˧˧/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tree; plant; long object",
+        "why": "'long object' is in shortGloss and notes, but missing from senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Vietnamese 'cây' covers trees and plants as one concept; split is artificial."
+      }
+    ],
+    "growth": 1.179
   }
 }

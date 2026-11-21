@@ -72,6 +72,75 @@
     "primaryGloss": "medicine",
     "emotion": "concerned and hopeful, reaching for relief from a fever",
     "notes": [
+      "Countable in French ('un médicament', 'des médicaments'), unlike English 'medicine'.",
+      "Use 'prendre un médicament' for taking medicine. Do not confuse with 'la médecine' (the medical field or profession)."
+    ],
+    "senses": [
+      {
+        "id": "9qbao3mpf19d0mh",
+        "order": 0,
+        "definition": "A substance taken to treat an illness or relieve symptoms.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "medicine",
+              "medication"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "ns6kfr68l7i1r3q",
+            "text": "Le médecin m'a prescrit un médicament contre la toux.",
+            "textLang": "fr",
+            "translation": "The doctor prescribed me some cough medicine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "médicament",
+            "matchedTranslationForm": "medicine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le médicament",
+    "lemma": "médicament",
+    "reading": null,
+    "ipa": "/me.di.ka.mɑ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "medicine; medication",
+    "primaryGloss": "medicine",
+    "emotion": "concerned and hopeful, reaching for relief from a fever",
+    "notes": [
       "Use 'prendre un médicament' when talking about taking medicine.",
       "Do not confuse with 'la médecine', which refers to the medical profession or the field of study."
     ],
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The doctor prescribed me a medicine for the cough.",
+        "why": "Calqued translation; 'medicine' is uncountable in English and 'for my cough' is natural."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "medicine, medication, pill",
+        "why": "'Pill' is 'un comprimé' or 'une pilule'; 'médicament' includes syrups, drops, etc."
+      }
+    ],
+    "growth": 1.068
   }
 }

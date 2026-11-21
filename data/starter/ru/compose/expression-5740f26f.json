@@ -58,6 +58,117 @@
     "headword": "с",
     "lemma": "с",
     "reading": null,
+    "ipa": "/s/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "with; from, since",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
+      "Takes the instrumental case when it means 'with' (с другом), and the genitive case when it means 'from' or 'since' (с утра, с работы).",
+      "Spelled and pronounced 'со' before certain consonant clusters (со мной — with me).",
+      "Pronounced /z/ before voiced consonants (с другом)."
+    ],
+    "senses": [
+      {
+        "id": "nagjgqrbha5lmih",
+        "order": 0,
+        "definition": "Together with another person or thing, or having something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with"
+            ]
+          }
+        ],
+        "domain": "accompaniment",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "wl92570vvkr4tn1",
+            "text": "Я иду в парк с другом.",
+            "textLang": "ru",
+            "translation": "I am going to the park with a friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and conversational, sharing a simple plan",
+            "note": null,
+            "matchedForm": "с",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "on4ysyh3kipre9r",
+        "order": 1,
+        "definition": "Indicating the starting point in time or space, or movement off a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "from",
+              "since",
+              "off"
+            ]
+          }
+        ],
+        "domain": "origin",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "06f1gvvz9dptvad",
+            "text": "Магазин работает с восьми утра.",
+            "textLang": "ru",
+            "translation": "The shop is open from eight in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, providing necessary details",
+            "note": null,
+            "matchedForm": "с",
+            "matchedTranslationForm": "from"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "с",
+    "lemma": "с",
+    "reading": null,
     "ipa": "/s/ (before voiceless consonants) or /z/ (before voiced consonants)",
     "pos": "expression",
     "gender": null,
@@ -201,5 +312,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'с' is a preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/s/ (before voiceless consonants) or /z/ (before voiced consonants)",
+        "why": "IPA field must contain only the transcription, without explanatory prose."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is followed by the instrumental case",
+        "why": "Incomplete and misleading: 'с' takes the genitive in sense 1 ('from/since')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Он пришел с пять часов.",
+        "why": "Ungrammatical in Russian; 'с' + accusative denotes duration or size, not clock time."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "Used to indicate an approximate time or amount.",
+        "why": "Approximation with accusative is marginal/colloquial for A2 and easily misused."
+      }
+    ],
+    "growth": 0.88
   }
 }

@@ -71,6 +71,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat",
+    "primaryGloss": "eat",
+    "emotion": "content and satisfied, perhaps thinking of a favorite meal",
+    "notes": [
+      "Irregular strong verb: 'du isst', 'er/sie/es isst'; past tense 'aß'; past participle 'hat gegessen'.",
+      "'essen' is used for humans. For animals, use 'fressen' instead (using 'fressen' for people is rude)."
+    ],
+    "senses": [
+      {
+        "id": "nefnklw7fgruzt5",
+        "order": 0,
+        "definition": "to put food in your mouth, chew it, and swallow it, or to have a meal",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eat",
+              "have a meal"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍴",
+        "examples": [
+          {
+            "id": "aob6zwvovm6fqqe",
+            "text": "Ich esse jeden Tag einen Apfel.",
+            "textLang": "de",
+            "translation": "I eat an apple every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "esse",
+            "matchedTranslationForm": "eat"
+          },
+          {
+            "id": "py8cr2r78otrass",
+            "text": "Wir essen heute zusammen zu Mittag.",
+            "textLang": "de",
+            "translation": "We are having lunch together today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, looking forward to shared time",
+            "note": null,
+            "matchedForm": "essen",
+            "matchedTranslationForm": "having lunch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "essen",
+    "lemma": "essen",
+    "reading": null,
+    "ipa": "/ˈɛsn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to dine",
     "primaryGloss": "eat",
     "emotion": "content and satisfied, perhaps thinking of a favorite meal",
@@ -163,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (consumption) ... [1] (dining) ...",
+        "why": "Eating food and having a meal are the same core verb sense in German."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Redundant notes on 'fressen', while the essential irregular forms (isst, aß, gegessen) are missing."
+      }
+    ],
+    "growth": 0.865
   }
 }

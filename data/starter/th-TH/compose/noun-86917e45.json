@@ -70,6 +70,76 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "glasses; eyeglasses",
+    "primaryGloss": "glasses",
+    "emotion": null,
+    "notes": [
+      "Often shortened to แว่น in everyday conversation. For sunglasses, use แว่นกันแดด.",
+      "The classifier for a pair of glasses is อัน (an), not คู่ (pair)."
+    ],
+    "senses": [
+      {
+        "id": "ypl7d9ntv1x0573",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame worn on the face to help a person see better or to protect the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "eyeglasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "6ip19q9a5h1peqm",
+            "text": "ฉันต้องใส่แว่นตาเวลาอ่านหนังสือ",
+            "textLang": "th",
+            "translation": "I have to wear glasses when reading.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แว่นตา",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แว่นตา",
+    "lemma": "แว่นตา",
+    "reading": null,
+    "ipa": "/wɛ̂n.taː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "eyeglasses; glasses",
     "primaryGloss": "eyeglasses",
     "emotion": null,
@@ -163,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Classifiers for glasses in Thai are อัน (an) or คู่ (khu)",
+        "why": "Eyeglasses take the classifier อัน; คู่ is not used for a pair of glasses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A frame with tinted lenses worn to protect the eyes",
+        "why": "แว่นตา alone means glasses in general; sunglasses specifically are แว่นกันแดด."
+      }
+    ],
+    "growth": 0.67
   }
 }

@@ -69,6 +69,116 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "chicken",
+    "primaryGloss": "chicken",
+    "emotion": "matter-of-fact and literal, identifying a common farm animal",
+    "notes": [
+      "The final cluster 'ㄺ' is pronounced [k] on its own or before a consonant (닭 [닥]), but both sounds appear before a vowel particle (닭이 [달기]).",
+      "For chicken meat, both 닭 and 닭고기 ('chicken meat') are commonly used."
+    ],
+    "senses": [
+      {
+        "id": "5nil0pgj84ibd4n",
+        "order": 0,
+        "definition": "A common farm bird raised for its eggs and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chicken",
+              "hen"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐔",
+        "examples": [
+          {
+            "id": "jogq9790hjmsl9w",
+            "text": "시골 농장에서 닭을 키워요.",
+            "textLang": "ko",
+            "translation": "I raise chickens on a rural farm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and descriptive, sharing a simple fact about life",
+            "note": null,
+            "matchedForm": "닭",
+            "matchedTranslationForm": "chickens"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yg929jp7js4ql8w",
+        "order": 1,
+        "definition": "The meat of a chicken eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chicken"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍗",
+        "examples": [
+          {
+            "id": "p6tjrrgalafk7h5",
+            "text": "오늘 저녁으로 닭 요리를 먹었어요.",
+            "textLang": "ko",
+            "translation": "I ate a chicken dish for dinner today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and appreciative, talking about a good meal",
+            "note": null,
+            "matchedForm": "닭",
+            "matchedTranslationForm": "chicken"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "닭",
+    "lemma": "닭",
+    "reading": null,
+    "ipa": "/tak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐔",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "chicken; poultry",
     "primaryGloss": "chicken",
     "emotion": "matter-of-fact and literal, identifying a common farm animal",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 닭 refers to the live animal, it is also the standard",
+        "why": "Restates the two senses; better to note 닭고기 is common for chicken meat."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "chicken; poultry",
+        "why": "Poultry is not in the glosses and is less accurate than just 'chicken'."
+      }
+    ],
+    "growth": 0.816
   }
 }

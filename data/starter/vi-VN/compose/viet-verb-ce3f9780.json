@@ -72,6 +72,136 @@
     "primaryGloss": "write",
     "emotion": "focused and deliberate, like someone concentrating on a task",
     "notes": [
+      "For 'write down' (to record or take notes), use 'viết ra' or 'ghi lại', not the literal calque 'viết xuống'.",
+      "In southern Vietnam, 'viết' is also used as a noun meaning 'pen' (northern 'bút')."
+    ],
+    "senses": [
+      {
+        "id": "prjgizjp3kvj27g",
+        "order": 0,
+        "definition": "To form letters, words, or text on paper or a screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "write"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "0y218dc3vmme39a",
+            "text": "Tôi đang viết một bức thư.",
+            "textLang": "vi",
+            "translation": "I am writing a letter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and calm, focusing on the message",
+            "note": null,
+            "matchedForm": "viết",
+            "matchedTranslationForm": "writing"
+          },
+          {
+            "id": "q76uocfdu5bxq8s",
+            "text": "Anh ấy viết tin nhắn trên điện thoại.",
+            "textLang": "vi",
+            "translation": "He is writing a message on his phone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing someone else's action",
+            "note": null,
+            "matchedForm": "viết",
+            "matchedTranslationForm": "writing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jqv95yz98odl66l",
+        "order": 1,
+        "definition": "To be the author of a book, article, or piece of music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "write",
+              "author"
+            ]
+          }
+        ],
+        "domain": "authorship",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "4f9y4d558d38708",
+            "text": "Nhà văn này viết rất nhiều sách hay.",
+            "textLang": "vi",
+            "translation": "This author writes many good books.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and respectful of the creator",
+            "note": null,
+            "matchedForm": "viết",
+            "matchedTranslationForm": "writes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "viết",
+    "lemma": "viết",
+    "reading": null,
+    "ipa": "/viət˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✍️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to write",
+    "primaryGloss": "write",
+    "emotion": "focused and deliberate, like someone concentrating on a task",
+    "notes": [
       "Viết is a general verb for creating text. Use it whether you are using a pen on paper, typing on a computer, or using a phone.",
       "If you want to say 'write down' (like taking notes or recording something), you can add the word 'xuống' after it: 'viết xuống'."
     ],
@@ -181,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "you can add the word 'xuống' after it: 'viết xuống'",
+        "why": "'Viết xuống' is an English calque; natural Vietnamese uses 'viết ra' or 'ghi lại'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Viết is a general verb for creating text.",
+        "why": "Restates the definition without adding useful usage information."
+      }
+    ],
+    "growth": 0.848
   }
 }

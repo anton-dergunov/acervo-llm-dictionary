@@ -68,6 +68,71 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "park",
+    "primaryGloss": "park",
+    "emotion": "relaxed and peaceful, enjoying the fresh air and greenery",
+    "notes": [],
+    "senses": [
+      {
+        "id": "felmcwi4ae9r2wv",
+        "order": 0,
+        "definition": "A public area with grass, trees, and paths for walking and relaxing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "park"
+            ]
+          }
+        ],
+        "domain": "recreation",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "ndhboh7frblux5o",
+            "text": "Мы гуляем в парке каждый вечер.",
+            "textLang": "ru",
+            "translation": "We walk in the park every evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and rhythmic, describing a pleasant daily routine",
+            "note": null,
+            "matchedForm": "парке",
+            "matchedTranslationForm": "park"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "парк",
+    "lemma": "парк",
+    "reading": null,
+    "ipa": "/park/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "park; grounds",
     "primaryGloss": "park",
     "emotion": "relaxed and peaceful, enjoying the fresh air and greenery",
@@ -160,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not use it to refer to a private backyard or garden",
+        "why": "English speakers do not call a private backyard a 'park'; filler warning."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "grounds, depot, fleet",
+        "why": "'Grounds' does not match the vehicle depot/fleet sense."
+      }
+    ],
+    "growth": 0.241
   }
 }

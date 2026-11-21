@@ -71,6 +71,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "to sell",
+    "emotion": "businesslike and eager, offering something useful to a customer",
+    "notes": [
+      "Imperfective; the perfective pair is продать.",
+      "Present tense drops -ва-: я продаю, ты продаёшь, они продают. Opposite of покупать ('to buy')."
+    ],
+    "senses": [
+      {
+        "id": "uz7cjc2ahi9pdk3",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "nmoak868ar87uv0",
+            "text": "Они продают свежие овощи на рынке.",
+            "textLang": "ru",
+            "translation": "They sell fresh vegetables at the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud of the good produce, calling out to buyers",
+            "note": null,
+            "matchedForm": "продают",
+            "matchedTranslationForm": "sell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "продавать",
+    "lemma": "продавать",
+    "reading": null,
+    "ipa": "/prədɐˈvatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sell; to betray",
     "primaryGloss": "to sell",
     "emotion": "businesslike and eager, offering something useful to a customer",
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Он не мог продать своих друзей.",
+        "why": "Uses the perfective verb 'продать' instead of the headword 'продавать'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To be unfaithful to someone's trust for personal gain.",
+        "why": "'Betray' is colloquial/marginal for A2 and mostly used in the perfective 'продать'; drop it."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the perfective pair (продать) and irregular present tense conjugation (продаю, продаёшь)."
+      }
+    ],
+    "growth": 0.877
   }
 }

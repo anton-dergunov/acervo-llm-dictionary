@@ -58,6 +58,73 @@
     "headword": "botol",
     "lemma": "botol",
     "reading": null,
+    "ipa": "/ˈbɔ.tɔl/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bottle",
+    "primaryGloss": "bottle",
+    "emotion": "matter-of-fact and practical, thinking of holding a drink or water",
+    "notes": [
+      "Also used as a classifier for bottled liquids, often with the prefix 'se-' for 'one' (e.g., 'sebotol air', 'dua botol bir')."
+    ],
+    "senses": [
+      {
+        "id": "29lmqqgmjhcz6x2",
+        "order": 0,
+        "definition": "A glass or plastic container with a narrow neck, used for holding liquids.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "nybt69pwi1q2aza",
+            "text": "Dia minum air dari botol plastik.",
+            "textLang": "id",
+            "translation": "He is drinking water from a plastic bottle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "botol",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "botol",
+    "lemma": "botol",
+    "reading": null,
     "ipa": "/ˈbo.tɔl/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the standard term for a container used for liquids.",
+        "why": "Pure filler restating the definition; omits its common use as a measure word ('sebotol')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Dia minum air dari satu botol plastik.",
+        "why": "'Satu botol plastik' is a calque of English 'a plastic bottle'; omit 'satu'."
+      }
+    ],
+    "growth": 0.743
   }
 }

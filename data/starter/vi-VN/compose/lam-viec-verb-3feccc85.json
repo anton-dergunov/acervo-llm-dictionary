@@ -58,6 +58,74 @@
     "headword": "làm việc",
     "lemma": "làm việc",
     "reading": null,
+    "ipa": "/laːm˨˩ viək̚˧˨ʔ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💻",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "to work",
+    "primaryGloss": "to work",
+    "emotion": "focused and steady, concentrated on the task at hand",
+    "notes": [
+      "Combines 'làm' (to do) and 'việc' (work, matter).",
+      "Used for people doing their job or studying; for machines functioning properly, use 'hoạt động' or 'chạy' instead."
+    ],
+    "senses": [
+      {
+        "id": "5x4zdasfoyj0sr4",
+        "order": 0,
+        "definition": "To do a job or perform duties and tasks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to work"
+            ]
+          }
+        ],
+        "domain": "job",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "gpcrvngk1h5ctd3",
+            "text": "Tôi làm việc ở văn phòng từ thứ Hai đến thứ Sáu.",
+            "textLang": "vi",
+            "translation": "I work at the office from Monday to Friday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, stating a regular schedule",
+            "note": null,
+            "matchedForm": "làm việc",
+            "matchedTranslationForm": "work"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "làm việc",
+    "lemma": "làm việc",
+    "reading": null,
     "ipa": "/lɑːm˨˩ viək̚˧˥/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/lɑːm˨˩ viək̚˧˥/",
+        "why": "Wrong tone on 'việc': nặng tone with final stop is low (/viək̚˧˨ʔ/), not rising."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Máy tính này không làm việc nữa.",
+        "why": "Calque from English 'not working'; broken everyday machines 'không hoạt động' or 'bị hỏng'."
+      }
+    ],
+    "growth": 0.635
   }
 }

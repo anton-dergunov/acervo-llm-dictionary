@@ -68,6 +68,159 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "good; kind; tasty",
+    "primaryGloss": "good",
+    "emotion": "warm and appreciative, acknowledging something positive or well-made",
+    "notes": [
+      "Shortens to 'buen' before a masculine singular noun (e.g., un buen libro).",
+      "Used with 'ser' for general quality or moral character (es bueno = he is kind), and with 'estar' for taste, health, or physical attractiveness (está bueno = it is tasty)."
+    ],
+    "senses": [
+      {
+        "id": "7t7tvn53rkzl4cv",
+        "order": 0,
+        "definition": "Of high quality, pleasant, beneficial, or satisfactory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "great",
+              "fine"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "k6k7ddgszt2se4u",
+            "text": "Es un buen libro para aprender español.",
+            "textLang": "es",
+            "translation": "It is a good book for learning Spanish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and encouraging, giving a friendly recommendation",
+            "note": null,
+            "matchedForm": "buen",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8bb8hv94k82radw",
+        "order": 1,
+        "definition": "Having a kind, helpful, or morally positive nature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "kind"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "😇",
+        "examples": [
+          {
+            "id": "i4znos1gznwf7s8",
+            "text": "Ella es una persona muy buena.",
+            "textLang": "es",
+            "translation": "She is a very kind person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and warm, describing a friend you respect",
+            "note": null,
+            "matchedForm": "buena",
+            "matchedTranslationForm": "kind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lagh15t6ws8wkik",
+        "order": 2,
+        "definition": "Of food or drink: pleasant in flavour; delicious.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tasty",
+              "good",
+              "delicious"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "zhbbt7y5h2tz95q",
+            "text": "La paella está muy buena.",
+            "textLang": "es",
+            "translation": "The paella is very tasty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and delighted, enjoying a nice meal",
+            "note": null,
+            "matchedForm": "buena",
+            "matchedTranslationForm": "tasty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "bueno",
+    "lemma": "bueno",
+    "reading": null,
+    "ipa": "/ˈbweno/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👍",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "good; kind; tasty; okay",
     "primaryGloss": "good",
     "emotion": "warm and appreciative, acknowledging something positive or well-made",
@@ -203,5 +356,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "good; kind; tasty; okay",
+        "why": "'okay' is listed in shortGloss (an interjection) but is not among the adjective senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial ser vs. estar distinction with 'bueno' (kind/good vs. tasty/healthy/attractive)."
+      }
+    ],
+    "growth": 0.97
   }
 }

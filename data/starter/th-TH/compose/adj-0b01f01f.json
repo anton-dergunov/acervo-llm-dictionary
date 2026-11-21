@@ -58,6 +58,138 @@
     "headword": "ใหม่",
     "lemma": "ใหม่",
     "reading": null,
+    "ipa": "/màj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "new; again; anew",
+    "primaryGloss": "new",
+    "emotion": "positive and refreshed, looking at something crisp and unused",
+    "notes": [
+      "Placed after a verb, it functions as an adverb meaning 'again' or 'over again' (e.g., ทำใหม่ 'to redo', พูดใหม่ 'to say again').",
+      "For 'fresh' food (like vegetables, meat, or milk), use สด (sòt) instead."
+    ],
+    "senses": [
+      {
+        "id": "7a3xwfpg8ix4kfx",
+        "order": 0,
+        "definition": "Recently made, bought, or started; not old or previous.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "recent"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "0vgzxqwh39cke51",
+            "text": "ฉันซื้อโทรศัพท์ใหม่",
+            "textLang": "th",
+            "translation": "I bought a new phone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and pleased, showing off a recent purchase",
+            "note": null,
+            "matchedForm": "ใหม่",
+            "matchedTranslationForm": "new"
+          },
+          {
+            "id": "cp8b1kxbo4v9sgd",
+            "text": "เขาเป็นพนักงานใหม่ของบริษัท",
+            "textLang": "th",
+            "translation": "He is a new employee at the company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, introducing a colleague to others",
+            "note": null,
+            "matchedForm": "ใหม่",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ioq61a2oon08z2j",
+        "order": 1,
+        "definition": "One more time, from the beginning, or in a different way (used after a verb).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "again",
+              "anew",
+              "over again"
+            ]
+          }
+        ],
+        "domain": "repetition",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ngnmm7j2wfd8sdw",
+            "text": "ขอพูดใหม่อีกครั้งได้ไหม",
+            "textLang": "th",
+            "translation": "Could you say that again?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ใหม่",
+            "matchedTranslationForm": "again"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ใหม่",
+    "lemma": "ใหม่",
+    "reading": null,
     "ipa": "/maːj˨˩/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +292,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/maːj˨˩/",
+        "why": "Wrong vowel length: ใหม่ has a short vowel (/màj/), whereas /maːj˨˩/ is หม่าย."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the very common adverbial sense 'again; anew; over again' (e.g., ทำใหม่, เริ่มใหม่)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(time) Not long ago; recent in time.",
+        "why": "A 'new employee' is the same core sense of 'new'; oversplit."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "ใหม่ (mài) is used to describe objects that are brand new",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 1.211
   }
 }

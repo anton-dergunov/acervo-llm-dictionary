@@ -58,6 +58,95 @@
     "headword": "avergonzado",
     "lemma": "avergonzado",
     "reading": null,
+    "ipa": "/abeɾɡonˈθado/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "ashamed; embarrassed",
+    "primaryGloss": "embarrassed",
+    "emotion": "flustered and slightly defensive, avoiding eye contact",
+    "notes": [
+      "Used with 'estar' or 'sentirse' (e.g., 'Estoy avergonzado de mi comportamiento'). In everyday speech, the phrase 'tener vergüenza' or 'dar vergüenza' is often more common."
+    ],
+    "senses": [
+      {
+        "id": "0669pc6k8h7wl5x",
+        "order": 0,
+        "definition": "Feeling ashamed, guilty, or uncomfortable because of something one did or a socially awkward situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "embarrassed",
+              "ashamed"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😞",
+        "examples": [
+          {
+            "id": "rbhgqtjau2b1mno",
+            "text": "Se sentía muy avergonzado por haber mentido a sus amigos.",
+            "textLang": "es",
+            "translation": "He felt very ashamed for having lied to his friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and quiet, admitting a mistake",
+            "note": null,
+            "matchedForm": "avergonzado",
+            "matchedTranslationForm": "ashamed"
+          },
+          {
+            "id": "rct2gh5yvmp5ua9",
+            "text": "Estaba avergonzada después de caerse delante de todos.",
+            "textLang": "es",
+            "translation": "She was embarrassed after falling in front of everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "avergonzada",
+            "matchedTranslationForm": "embarrassed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "avergonzado",
+    "lemma": "avergonzado",
+    "reading": null,
     "ipa": "/a.βeɾ.ɣonˈsa.ðo/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +250,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/a.βeɾ.ɣonˈsa.ðo/",
+        "why": "Castilian Spanish (es-ES) uses /θ/ for 'z', not /s/, and broad transcription is needed."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Spanish 'avergonzado' covers both 'ashamed' and 'embarrassed' as one undivided concept."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Se puso avergonzado cuando todos empezaron a cantar.",
+        "why": "'Ponerse avergonzado' is unnatural; native speakers use 'estar/sentirse avergonzado' or 'dar vergüenza'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Avergonzado describes the feeling of shame or embarrassment, often caused by a",
+        "why": "Restates the definition and glosses without adding grammatical or usage advice."
+      }
+    ],
+    "growth": 0.925
   }
 }

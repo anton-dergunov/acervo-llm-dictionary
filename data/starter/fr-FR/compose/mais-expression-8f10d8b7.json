@@ -72,6 +72,116 @@
     "primaryGloss": "but",
     "emotion": null,
     "notes": [
+      "Often used before oui, non, or si (Mais oui ! Mais non !) to reinforce an answer or show impatience."
+    ],
+    "senses": [
+      {
+        "id": "a3dpkgujgxxv31x",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "🔀",
+        "examples": [
+          {
+            "id": "5i6ueqlgmcim6t7",
+            "text": "Il est petit, mais très fort.",
+            "textLang": "fr",
+            "translation": "He is small, but very strong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact, pointing out a surprising combination",
+            "note": null,
+            "matchedForm": "mais",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "to2x1963tjgr7tn",
+        "order": 1,
+        "definition": "Used at the beginning of a sentence or exclamation to express surprise, objection, or emphasis.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "why",
+              "oh",
+              "come on"
+            ]
+          }
+        ],
+        "domain": "emphasis",
+        "emoji": "❗",
+        "examples": [
+          {
+            "id": "obpg9gubusngtld",
+            "text": "Mais non, ce n'est pas possible !",
+            "textLang": "fr",
+            "translation": "Oh no, that's not possible!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disbelieving and slightly frustrated",
+            "note": null,
+            "matchedForm": "Mais",
+            "matchedTranslationForm": "Oh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "mais",
+    "lemma": "mais",
+    "reading": null,
+    "ipa": "/mɛ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; yet; why",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
       "Used to connect two contrasting clauses or ideas, much like 'but' in English."
     ],
     "senses": [
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'mais' is a coordinating conjunction, not an 'expression'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Used to express emphasis, objection, or surprise at the end of",
+        "why": "As an intensifier (Mais oui ! Mais non !), 'mais' comes at the beginning, not the end."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to connect two contrasting clauses or ideas, much like 'but'",
+        "why": "Restates sense 0 definition and gloss."
+      }
+    ],
+    "growth": 1.229
   }
 }

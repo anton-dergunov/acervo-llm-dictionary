@@ -58,6 +58,75 @@
     "headword": "سَائِح",
     "lemma": "سَائِح",
     "reading": null,
+    "ipa": "/ˈsaː.ʔiħ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧳",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "tourist",
+    "primaryGloss": "tourist",
+    "emotion": "curious and excited, looking around a new city with a camera",
+    "notes": [
+      "The common masculine plural is سُيَّاح (suyyāḥ); the feminine singular is سَائِحَة (sāʾiḥa).",
+      "Contrast with مُسَافِر (musāfir, 'traveler, passenger'), which is used for anyone traveling for any purpose."
+    ],
+    "senses": [
+      {
+        "id": "nb82tcv9481n5k9",
+        "order": 0,
+        "definition": "A person who visits a place for pleasure and sightseeing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tourist",
+              "sightseer"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "hzpwsa6gt9c3yds",
+            "text": "كَثِيرٌ مِنَ السُّيَّاحِ يَزُورُونَ الْمَتْحَفَ.",
+            "textLang": "ar",
+            "translation": "Many tourists visit the museum.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "interested and observant, pointing out interesting sights",
+            "note": null,
+            "matchedForm": "السُّيَّاحِ",
+            "matchedTranslationForm": "tourists"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سَائِح",
+    "lemma": "سَائِح",
+    "reading": null,
     "ipa": "/ˈsaː.ʔih/",
     "pos": "noun",
     "gender": "masculine",
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈsaː.ʔih/",
+        "why": "Final consonant is voiceless pharyngeal fricative /ħ/, not glottal /h/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers primarily to someone traveling for pleasure and sightseeing",
+        "why": "Restates the definition; fails to give the broken plural 'سُيَّاح' used in the example."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "tourist, sightseer, traveler",
+        "why": "'Traveler' in general is مُسَافِر; سَائِح in modern Arabic specifically means tourist."
+      }
+    ],
+    "growth": 1.264
   }
 }

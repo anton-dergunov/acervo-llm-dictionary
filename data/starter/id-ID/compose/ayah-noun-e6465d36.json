@@ -58,6 +58,74 @@
     "headword": "ayah",
     "lemma": "ayah",
     "reading": null,
+    "ipa": "/ˈajah/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍👧",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "father; dad",
+    "primaryGloss": "father",
+    "emotion": "warm and respectful, speaking of one's parent with quiet affection",
+    "notes": [
+      "Unlike 'bapak', which means 'father' but is also used as a polite title ('Mr.' or 'Sir') for adult men, 'ayah' is used only for one's own father (including in direct address)."
+    ],
+    "senses": [
+      {
+        "id": "t4nf4kr2cre45vq",
+        "order": 0,
+        "definition": "A male parent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "father",
+              "dad"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨‍👦",
+        "examples": [
+          {
+            "id": "xvo9vjkh9lj8gb0",
+            "text": "Ayah saya bekerja di kantor.",
+            "textLang": "id",
+            "translation": "My father works at an office.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and matter-of-fact, telling someone about a parent",
+            "note": null,
+            "matchedForm": "Ayah",
+            "matchedTranslationForm": "father"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "ayah",
+    "lemma": "ayah",
+    "reading": null,
     "ipa": "/ˈaja/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈaja/",
+        "why": "Missing the final glottal fricative /h/, which is pronounced in Indonesian (/ˈajah/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ayah is the standard, neutral word for father in Indonesian, used",
+        "why": "Restates the gloss and register field without adding new information."
+      }
+    ],
+    "growth": 0.767
   }
 }

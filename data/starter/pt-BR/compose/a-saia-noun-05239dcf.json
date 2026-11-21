@@ -68,6 +68,73 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "skirt",
+    "primaryGloss": "skirt",
+    "emotion": "light and feminine, moving with a slight swish as you walk",
+    "notes": [
+      "Notice that 'saia' is also a verb form of 'sair' (to leave), used in commands like 'Saia daqui!' (Get out of here!)."
+    ],
+    "senses": [
+      {
+        "id": "h0lkl1ukvk4yi3w",
+        "order": 0,
+        "definition": "A piece of clothing that hangs from the waist and does not have legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skirt"
+            ]
+          }
+        ],
+        "domain": "clothes",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "tlnoaaw6w80a3cx",
+            "text": "Ela comprou uma saia azul nova.",
+            "textLang": "pt",
+            "translation": "She bought a new blue skirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and pleased, sharing a bit of shopping news",
+            "note": null,
+            "matchedForm": "saia",
+            "matchedTranslationForm": "skirt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a saia",
+    "lemma": "saia",
+    "reading": null,
+    "ipa": "/ˈsa.jɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "skirt; hem",
     "primaryGloss": "skirt",
     "emotion": "light and feminine, moving with a slight swish as you walk",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The lower part or hem of a piece of clothing.",
+        "why": "'Saia' does not mean 'hem' (which is 'bainha' or 'barra'); it means the skirt portion."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can also refer to the 'hem' or lower edge",
+        "why": "False claim: 'hem' is 'bainha' or 'barra', not 'saia'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'camisa' (shirt)",
+        "why": "Unhelpful filler; learners do not confuse 'saia' with 'camisa'."
+      }
+    ],
+    "growth": 0.606
   }
 }

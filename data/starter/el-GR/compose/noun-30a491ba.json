@@ -68,6 +68,116 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "television; TV set",
+    "primaryGloss": "television",
+    "emotion": "relaxed and cozy, settling in on the couch for the evening",
+    "notes": [
+      "To say 'on television', Greek uses the preposition σε: στην τηλεόραση."
+    ],
+    "senses": [
+      {
+        "id": "uwvlvsks70vm2xp",
+        "order": 0,
+        "definition": "An electronic device with a screen used for watching broadcast programmes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV set",
+              "TV"
+            ]
+          }
+        ],
+        "domain": "appliance",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "0net34b857f806e",
+            "text": "Άνοιξα την τηλεόραση για να δω τις ειδήσεις.",
+            "textLang": "el",
+            "translation": "I turned on the television to watch the news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and routine, starting the evening unwind",
+            "note": null,
+            "matchedForm": "τηλεόραση",
+            "matchedTranslationForm": "television"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jqzmc4hf0o68ok4",
+        "order": 1,
+        "definition": "The system or medium of broadcasting programmes for public viewing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV"
+            ]
+          }
+        ],
+        "domain": "broadcast",
+        "emoji": "📡",
+        "examples": [
+          {
+            "id": "nw0ooi5kw6rjkwa",
+            "text": "Δεν βλέπω συχνά τηλεόραση.",
+            "textLang": "el",
+            "translation": "I don't watch television often.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and honest about daily habits",
+            "note": null,
+            "matchedForm": "τηλεόραση",
+            "matchedTranslationForm": "television"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η τηλεόραση",
+    "lemma": "τηλεόραση",
+    "reading": null,
+    "ipa": "/ti.leˈo.ɾa.si/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "television; TV set; television broadcast",
     "primaryGloss": "television",
     "emotion": "relaxed and cozy, settling in on the couch for the evening",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "or simply τηλεόραση when referring to the physical set.",
+        "why": "Saying a word is shortened to itself makes no sense."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "television, TV set, screen",
+        "why": "'Screen' is οθόνη in Greek, not τηλεόραση."
+      }
+    ],
+    "growth": 0.84
   }
 }

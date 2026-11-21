@@ -68,6 +68,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to cut; to stop; to buy (a ticket)",
+    "primaryGloss": "cut",
+    "emotion": "matter-of-fact and steady, focused on the task at hand",
+    "notes": [
+      "The aorist (simple past) is έκοψα, and the perfective stem is κόψ- (να κόψω)."
+    ],
+    "senses": [
+      {
+        "id": "aqr2yr2k7tbiwye",
+        "order": 0,
+        "definition": "To divide, slice, or trim something using a sharp tool such as a knife or scissors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cut",
+              "slice",
+              "chop"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "m0kvy6ncvkjvnvj",
+            "text": "Κόβω το ψωμί σε φέτες.",
+            "textLang": "el",
+            "translation": "I cut the bread into slices.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and deliberate, ensuring the slices are even",
+            "note": null,
+            "matchedForm": "Κόβω",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dh8g8a3ckm5xags",
+        "order": 1,
+        "definition": "To give up a habit, or to cut off a supply or connection.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "quit",
+              "cut off"
+            ]
+          }
+        ],
+        "domain": "stopping",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "28ntfogvizj4b3l",
+            "text": "Πρέπει να κόψω το κάπνισμα.",
+            "textLang": "el",
+            "translation": "I must quit smoking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and serious, making a firm resolution",
+            "note": null,
+            "matchedForm": "κόψω",
+            "matchedTranslationForm": "quit"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2cd929b14wwi31e",
+        "order": 2,
+        "definition": "To buy or issue a ticket, receipt, or fine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "buy",
+              "get",
+              "issue"
+            ]
+          }
+        ],
+        "domain": "tickets",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "sdnyt3dxbxkwgje",
+            "text": "Κόβω εισιτήριο για το τρένο.",
+            "textLang": "el",
+            "translation": "I am buying a train ticket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit hurried but efficient, like someone at a busy station",
+            "note": null,
+            "matchedForm": "Κόβω",
+            "matchedTranslationForm": "buying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "κόβω",
+    "lemma": "κόβω",
+    "reading": null,
+    "ipa": "/ˈko.vo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to cut; to stop; to slice",
     "primaryGloss": "cut",
     "emotion": "matter-of-fact and steady, focused on the task at hand",
@@ -203,5 +356,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used in many contexts, from physical cutting with a knife",
+        "why": "Merely restates the senses; should give the aorist stem (έκοψα / να κόψω)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[2].definition",
+        "quote": "To obtain a document or ticket.",
+        "why": "Too broad; used specifically for issuing/buying tickets, receipts, or invoices, not any document."
+      }
+    ],
+    "growth": 0.949
   }
 }

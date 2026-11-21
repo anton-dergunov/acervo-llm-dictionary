@@ -72,6 +72,98 @@
     "primaryGloss": "cut",
     "emotion": "matter-of-fact and focused on the task at hand",
     "notes": [
+      "Irregular verb: schneidet, schnitt, hat geschnitten.",
+      "Often used reflexively ('sich schneiden') when you accidentally cut yourself (e.g., 'Ich habe mich in den Finger geschnitten')."
+    ],
+    "senses": [
+      {
+        "id": "9w7zm4qdtew5g5k",
+        "order": 0,
+        "definition": "To divide, shorten, or slice something using a sharp tool like a knife or scissors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cut",
+              "slice",
+              "chop",
+              "trim"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "9z795nn9447d6y4",
+            "text": "Ich schneide das Brot für das Abendessen.",
+            "textLang": "de",
+            "translation": "I am cutting the bread for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and domestic, preparing a simple meal",
+            "note": null,
+            "matchedForm": "schneide",
+            "matchedTranslationForm": "cutting"
+          },
+          {
+            "id": "jwysjoul7f2mcfc",
+            "text": "Morgen muss ich mir die Haare schneiden lassen.",
+            "textLang": "de",
+            "translation": "Tomorrow I have to get my hair cut.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "resigned to a chore, sounding slightly annoyed",
+            "note": null,
+            "matchedForm": "schneiden",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "schneiden",
+    "lemma": "schneiden",
+    "reading": null,
+    "ipa": "/ˈʃnaɪ̯dn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cut; to slice",
+    "primaryGloss": "cut",
+    "emotion": "matter-of-fact and focused on the task at hand",
+    "notes": [
       "Schneiden is a strong verb (schnitt, geschnitten).",
       "It is used for everything from slicing bread to cutting hair or paper.",
       "Do not confuse it with 'schnitzen', which specifically refers to carving wood or stone."
@@ -163,5 +255,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(grooming) To shorten hair by using scissors.",
+        "why": "Cutting hair is the same literal meaning as cutting other things, not a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is used for everything from slicing bread to cutting hair or paper.",
+        "why": "Restates the examples and definition without adding grammar or usage value."
+      }
+    ],
+    "growth": 0.893
   }
 }

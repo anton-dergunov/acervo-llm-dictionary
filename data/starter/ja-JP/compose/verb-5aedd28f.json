@@ -57,6 +57,158 @@
     "language": "ja",
     "headword": "置く",
     "lemma": "置く",
+    "reading": "おく",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📥",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to put; to leave; to do in advance",
+    "primaryGloss": "to put",
+    "emotion": "matter-of-fact and organized, setting something down exactly where it belongs",
+    "notes": [
+      "Takes the particle に (ni) to mark the place where something is put.",
+      "After the te-form of a verb (～ておく), it is usually written in hiragana and often contracts to ～とく in casual speech (e.g. 買っとく)."
+    ],
+    "senses": [
+      {
+        "id": "obdhval0i5ealok",
+        "order": 0,
+        "definition": "To put or set something down in a specific place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to place",
+              "to set down"
+            ]
+          }
+        ],
+        "domain": "placement",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "wsqkrx7v3xrs71c",
+            "text": "かばんを机の上に置いた。",
+            "textLang": "ja",
+            "translation": "I put my bag on the desk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "置いた",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h2ddz9p9ll08dcp",
+        "order": 1,
+        "definition": "To leave something behind or keep it in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to leave",
+              "to keep"
+            ]
+          }
+        ],
+        "domain": "leaving",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "dyuo80qyefzqn7p",
+            "text": "自転車はここに置いてもいいですか。",
+            "textLang": "ja",
+            "translation": "May I leave my bicycle here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "置いて",
+            "matchedTranslationForm": "leave"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ay4vmz1qhu44vkt",
+        "order": 2,
+        "definition": "Used after the te-form of a verb to mean doing something in advance or leaving it in a resulting state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to do in advance",
+              "to leave (in a state)"
+            ]
+          }
+        ],
+        "domain": "preparation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "9gcpw0zdu43y4lc",
+            "text": "旅行の前にホテルを予約しておく。",
+            "textLang": "ja",
+            "translation": "I will book a hotel in advance before the trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "おく",
+            "matchedTranslationForm": "in advance"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "置く",
+    "lemma": "置く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +314,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (おく) for a headword containing kanji."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A2 grammar sense '～ておく' (to do something in advance)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "窓を開けたまま置く。",
+        "why": "Ungrammatical phrasing; Japanese says 開けたままにする or 開けておく, not 開けたまま置く."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike 'iru' (to exist for animate objects), 'oku' is strictly for inanimate",
+        "why": "Confusing comparison between an intransitive existence verb (いる) and a transitive placement verb (置く)."
+      }
+    ],
+    "growth": 1.523
   }
 }

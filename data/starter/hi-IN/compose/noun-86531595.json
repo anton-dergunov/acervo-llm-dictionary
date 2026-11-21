@@ -68,6 +68,136 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "country; homeland",
+    "primaryGloss": "country",
+    "emotion": "proud and rooted, a sense of belonging to a home land",
+    "notes": [
+      "In colloquial speech, many speakers also use 'देश' (or 'देस') to mean their native village or hometown when living away from it."
+    ],
+    "senses": [
+      {
+        "id": "cyt5v0u7k1cpd93",
+        "order": 0,
+        "definition": "A nation with its own government and territory.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "country",
+              "nation"
+            ]
+          }
+        ],
+        "domain": "politics",
+        "emoji": "🏳️",
+        "examples": [
+          {
+            "id": "ls5sh845al8gx5w",
+            "text": "भारत एक बड़ा देश है।",
+            "textLang": "hi",
+            "translation": "India is a big country.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stating a plain, objective fact with neutral interest",
+            "note": null,
+            "matchedForm": "देश",
+            "matchedTranslationForm": "country"
+          },
+          {
+            "id": "tqwrjvcq2gbj7cp",
+            "text": "उसने बहुत से देशों की यात्रा की।",
+            "textLang": "hi",
+            "translation": "He traveled to many countries.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and impressed by someone's wide experience",
+            "note": null,
+            "matchedForm": "देशों",
+            "matchedTranslationForm": "countries"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "msf09h974fjy3ks",
+        "order": 1,
+        "definition": "One's native land, home region, or ancestral village.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "homeland",
+              "native place"
+            ]
+          }
+        ],
+        "domain": "homeland",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "vb9uyqsn02faklg",
+            "text": "वह छुट्टियों में अपने देश जा रहा है।",
+            "textLang": "hi",
+            "translation": "He is going to his native place for the holidays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "देश",
+            "matchedTranslationForm": "native place"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "देश",
+    "lemma": "देश",
+    "reading": null,
+    "ipa": "/d̪eːʃ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "country; nation; region",
     "primaryGloss": "country",
     "emotion": "proud and rooted, a sense of belonging to a home land",
@@ -161,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "उसने बहुत से देशों की यात्रा की। — He traveled to many regions.",
+        "why": "Here देशों means 'countries', not 'regions'; mistranslated to fit a marginal sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(region) A geographical area or a region.",
+        "why": "Poetic or compound-only sense; 'हमार देश' (native village/homeland) is more everyday than 'region'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "For 'my country' (India), speakers often use 'भारत' (Bharat) for the name",
+        "why": "Trivial observation about proper nouns vs. common nouns."
+      }
+    ],
+    "growth": 0.969
   }
 }

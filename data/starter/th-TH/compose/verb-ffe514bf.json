@@ -58,6 +58,97 @@
     "headword": "รอ",
     "lemma": "รอ",
     "reading": null,
+    "ipa": "/rɔː˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wait; to await",
+    "primaryGloss": "wait",
+    "emotion": "patient and focused, prepared to pass the time until something starts",
+    "notes": [
+      "Takes a direct object without a preposition: รอฉัน (rɔɔ chǎn, 'wait for me').",
+      "Often paired or used interchangeably with คอย (khɔɔi, 'to wait'), including in the compound รอคอย (rɔɔ-khɔɔi, 'to await eagerly or for a long time')."
+    ],
+    "senses": [
+      {
+        "id": "s64o2jfvjdg5exn",
+        "order": 0,
+        "definition": "To stay in a place or delay doing something until someone arrives or something happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wait",
+              "wait for",
+              "await"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "73364mjajf35pnp",
+            "text": "ฉันรอคุณอยู่ที่ร้านอาหาร",
+            "textLang": "th",
+            "translation": "I am waiting for you at the restaurant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "รอ",
+            "matchedTranslationForm": "waiting"
+          },
+          {
+            "id": "qz76dj9jdnq84co",
+            "text": "เราต้องรอจนกว่าฝนจะหยุด",
+            "textLang": "th",
+            "translation": "We have to wait until the rain stops.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly impatient, looking out the window at the storm",
+            "note": null,
+            "matchedForm": "รอ",
+            "matchedTranslationForm": "wait"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "รอ",
+    "lemma": "รอ",
+    "reading": null,
     "ipa": "/rɔː/",
     "pos": "verb",
     "gender": null,
@@ -142,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Thai speakers often repeat this word to show an extended period",
+        "why": "Unhelpful and unidiomatic; 'รอๆ' is not standard usage for waiting a long time."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "distinguish this from 'khɔːi', which is often used in the context of 'to rely on'",
+        "why": "คอย (khɔɔi) means 'to wait for' or 'to keep doing something', not 'to rely on'."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "stay for",
+        "why": "'Stay for' is not a natural English gloss for รอ."
+      }
+    ],
+    "growth": 0.862
   }
 }

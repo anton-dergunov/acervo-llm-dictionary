@@ -72,6 +72,95 @@
     "primaryGloss": "garden",
     "emotion": "peaceful and quiet, enjoying the fresh air among the plants",
     "notes": [
+      "Often takes the classifier 'khu' (khu vườn) or 'mảnh' (mảnh vườn); 'cái' is also used in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "gi12umwe1iskyrj",
+        "order": 0,
+        "definition": "A piece of land, often near a house, used for growing flowers, vegetables, or fruit trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "garden",
+              "orchard"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "lyqtsweb71ztnof",
+            "text": "Ngôi nhà có một khu vườn rộng trồng nhiều hoa hồng.",
+            "textLang": "vi",
+            "translation": "The house has a large garden with many roses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vườn",
+            "matchedTranslationForm": "garden"
+          },
+          {
+            "id": "ocgaxbvjs83l1i1",
+            "text": "Nhà bác tôi có một vườn xoài lớn ở miền Tây.",
+            "textLang": "vi",
+            "translation": "My uncle's family has a large mango orchard in the Mekong Delta.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vườn",
+            "matchedTranslationForm": "orchard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "vườn",
+    "lemma": "vườn",
+    "reading": null,
+    "ipa": "/vɨə̀n/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "garden; orchard",
+    "primaryGloss": "garden",
+    "emotion": "peaceful and quiet, enjoying the fresh air among the plants",
+    "notes": [
       "Used to describe both a flower garden around a house and a larger area for growing fruit trees."
     ],
     "senses": [
@@ -159,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Flower garden, vegetable garden, and orchard are a single concept in Vietnamese."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe both a flower garden around a house and a",
+        "why": "merely restates the definitions and glosses; missing the main classifier 'khu'."
+      }
+    ],
+    "growth": 0.998
   }
 }

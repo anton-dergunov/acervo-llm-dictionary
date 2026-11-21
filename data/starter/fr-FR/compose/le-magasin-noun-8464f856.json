@@ -70,6 +70,75 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "shop; store",
+    "primaryGloss": "shop",
+    "emotion": "hurried and focused, running errands around town",
+    "notes": [
+      "False friend: do not confuse 'magasin' (shop) with the English 'magazine', which is 'un magazine' or 'une revue' in French.",
+      "'Un grand magasin' means 'a department store', not simply a big shop."
+    ],
+    "senses": [
+      {
+        "id": "3zprtmz1d8rzbcj",
+        "order": 0,
+        "definition": "A building or part of a building where goods are sold to customers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "store"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🏬",
+        "examples": [
+          {
+            "id": "02zluuli9r4xujj",
+            "text": "Le magasin est ouvert tous les jours sauf le dimanche.",
+            "textLang": "fr",
+            "translation": "The shop is open every day except Sunday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, giving local opening hours",
+            "note": null,
+            "matchedForm": "magasin",
+            "matchedTranslationForm": "shop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le magasin",
+    "lemma": "magasin",
+    "reading": null,
+    "ipa": "/ma.ɡa.zɛ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏬",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "shop; store; warehouse",
     "primaryGloss": "shop",
     "emotion": "hurried and focused, running errands around town",
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Les cartons sont rangés dans le grand magasin.",
+        "why": "'Grand magasin' is a set phrase meaning 'department store', not 'large warehouse'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large building where goods are stored",
+        "why": "French normally uses 'entrepôt' for warehouse; 'magasin' in this sense is specialized."
+      }
+    ],
+    "growth": 0.817
   }
 }

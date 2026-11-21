@@ -69,6 +69,96 @@
     ],
     "status": "active",
     "shortGloss": "to hope; to expect",
+    "primaryGloss": "to hope",
+    "emotion": "earnest and hopeful, looking forward to a positive outcome",
+    "notes": [
+      "Takes 'agar' or 'supaya' when hoping someone else will do something, and 'pada' or 'kepada' when placing hopes in someone."
+    ],
+    "senses": [
+      {
+        "id": "eufwvu3q8wthmxl",
+        "order": 0,
+        "definition": "To want something to happen or to place one's hopes in someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hope",
+              "to expect",
+              "to count on"
+            ]
+          }
+        ],
+        "domain": "hope",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "jbhj1bx6d1rexq3",
+            "text": "Saya berharap cuaca akan cerah besok.",
+            "textLang": "id",
+            "translation": "I hope the weather will be clear tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "optimistic and cheerful, looking forward to sunshine",
+            "note": null,
+            "matchedForm": "berharap",
+            "matchedTranslationForm": "hope"
+          },
+          {
+            "id": "fo5c82p9tiangqd",
+            "text": "Jangan terlalu berharap pada orang lain.",
+            "textLang": "id",
+            "translation": "Do not count too much on other people.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and pragmatic, giving advice from experience",
+            "note": null,
+            "matchedForm": "berharap",
+            "matchedTranslationForm": "count"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "berharap",
+    "lemma": "harap",
+    "reading": null,
+    "ipa": "/bərˈharap/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤞",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to hope; to expect",
     "primaryGloss": "hope",
     "emotion": "earnest and hopeful, looking forward to a positive outcome",
     "notes": [
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hope; to expect",
+        "why": "'to expect' is in shortGloss, while sense 1 is 'to rely, to depend'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To rely or depend on someone or something for help.",
+        "why": "'Berharap pada' is 'to place one's hopes in / expect from', a shade of hoping."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Derived from the root 'harap' (hope).",
+        "why": "Restates the lemma and gloss without adding usage help."
+      }
+    ],
+    "growth": 0.946
   }
 }

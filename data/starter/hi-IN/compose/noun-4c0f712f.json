@@ -58,6 +58,74 @@
     "headword": "बटुआ",
     "lemma": "बटुआ",
     "reading": null,
+    "ipa": "/bəʈʊɑː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👛",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "wallet; purse",
+    "primaryGloss": "wallet",
+    "emotion": "casual and practical, pulling it out to pay for something",
+    "notes": [
+      "Inflects as a regular masculine -आ noun: बटुए (oblique singular and direct plural). In everyday urban speech, the English loanword पर्स (pars) is also very common for both a man's wallet and a woman's handbag."
+    ],
+    "senses": [
+      {
+        "id": "ww1licnb12mzczp",
+        "order": 0,
+        "definition": "A small folding case or pouch used for carrying paper money, coins, and cards.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wallet",
+              "purse"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "👛",
+        "examples": [
+          {
+            "id": "dblhi9h4ukimzyp",
+            "text": "मैं अपना बटुआ दुकान पर भूल गया।",
+            "textLang": "hi",
+            "translation": "I forgot my wallet at the shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बटुआ",
+            "matchedTranslationForm": "wallet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बटुआ",
+    "lemma": "बटुआ",
+    "reading": null,
     "ipa": "/baʈuːɑː/",
     "pos": "noun",
     "gender": "masculine",
@@ -119,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "मैंने अपना बटुआ दुकान पर भूल दिया।",
+        "why": "Ungrammatical: भूलना is intransitive (takes में, not ने) and builds compounds with जाना, not देना."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baʈuːɑː/",
+        "why": "Incorrect vowels: first vowel is /ə/ and second is short /ʊ/ (/bəʈʊɑː/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "बटुआ (batua) usually refers to a small purse, pouch, or traditional wallet",
+        "why": "Merely repeats the definition and glosses."
+      }
+    ],
+    "growth": 1.413
   }
 }

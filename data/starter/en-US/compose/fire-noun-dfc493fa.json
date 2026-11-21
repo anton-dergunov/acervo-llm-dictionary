@@ -68,6 +68,117 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "fuego; incendio; fogata",
+    "primaryGloss": "fuego",
+    "emotion": "el calor reconfortante de una chimenea en una tarde fría",
+    "notes": [
+      "Como 'fuego' en general, es incontable ('Fire is dangerous'). Como 'incendio' o 'fogata', es contable y lleva artículo ('a forest fire', 'make a fire').",
+      "Para decir que algo se está quemando accidentalmente, se usa la expresión 'on fire' (por ejemplo, 'The car is on fire')."
+    ],
+    "senses": [
+      {
+        "id": "schpzzfdigqqcck",
+        "order": 0,
+        "definition": "Llamas, luz y calor producidos cuando algo se quema, o fuego encendido para dar calor o cocinar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "fuego",
+              "fogata",
+              "lumbre"
+            ]
+          }
+        ],
+        "domain": "combustión",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "3ij7zcwnv0anz94",
+            "text": "We sat around the fire to stay warm.",
+            "textLang": "en",
+            "translation": "Nos sentamos alrededor del fuego para mantenernos calientes.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fire",
+            "matchedTranslationForm": "fuego"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fdnwz0uq548p04e",
+        "order": 1,
+        "definition": "Fuego grande y descontrolado que destruye edificios, bosques u otras cosas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "incendio",
+              "fuego"
+            ]
+          }
+        ],
+        "domain": "desastre",
+        "emoji": "🚒",
+        "examples": [
+          {
+            "id": "gons88twa87o705",
+            "text": "The old factory was destroyed by a fire.",
+            "textLang": "en",
+            "translation": "La antigua fábrica fue destruida por un incendio.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fire",
+            "matchedTranslationForm": "incendio"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "fire",
+    "lemma": "fire",
+    "reading": null,
+    "ipa": "/ˈfaɪər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "fuego; incendio; disparo",
     "primaryGloss": "fuego",
     "emotion": "el calor reconfortante de una chimenea en una tarde fría",
@@ -117,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fuego; incendio; disparo",
+        "why": "'disparo' is in shortGloss, but there is no sense for gunfire/shooting."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "No confundas 'fire' con 'light' (luz), que se refiere a la iluminación.",
+        "why": "Notes 0 and 1 restate the senses; Note 2 warns against an unlikely confusion."
+      }
+    ],
+    "growth": 1.681
   }
 }

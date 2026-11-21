@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to come; to arrive; to come from",
+    "primaryGloss": "to come",
+    "emotion": "straightforward and direct, simply stating a movement or arrival",
+    "notes": [
+      "Irregular verb: 'kommen – kam – ist gekommen' (takes 'sein' in the perfect tense).",
+      "Use 'kommen' for movement toward the speaker or shared destination, and 'gehen' for movement away.",
+      "With 'aus', it states someone's country or city of origin ('Ich komme aus Berlin')."
+    ],
+    "senses": [
+      {
+        "id": "xlqnvtt3e508270",
+        "order": 0,
+        "definition": "To move toward the speaker or toward a shared place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to come"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "5is2n47uekpq23n",
+            "text": "Komm bitte hierher!",
+            "textLang": "de",
+            "translation": "Please come here!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Komm",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ylczlwaw18u9a9w",
+        "order": 1,
+        "definition": "To arrive at a place or at a scheduled time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to come",
+              "to arrive"
+            ]
+          }
+        ],
+        "domain": "arrival",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "s5yvq8gc87xtpfy",
+            "text": "Wann kommt der nächste Bus?",
+            "textLang": "de",
+            "translation": "When does the next bus come?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kommt",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0pulonb4nzqn1ud",
+        "order": 2,
+        "definition": "To originate from a place or background (with 'aus' or 'von').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to come from",
+              "to be from"
+            ]
+          }
+        ],
+        "domain": "origin",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "sp626t13e4f9xot",
+            "text": "Woher kommst du?",
+            "textLang": "de",
+            "translation": "Where do you come from?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kommst",
+            "matchedTranslationForm": "come"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "kommen",
+    "lemma": "kommen",
+    "reading": null,
+    "ipa": "/ˈkɔmən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to come; to arrive",
     "primaryGloss": "come",
     "emotion": "straightforward and direct, simply stating a movement or arrival",
@@ -160,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Wann kommt der Zug an?",
+        "why": "Uses the separable verb 'ankommen' instead of the lemma 'kommen'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 sense 'to come from' (origin: 'Woher kommst du?')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular forms ('kam', 'ist gekommen') and auxiliary 'sein'."
+      }
+    ],
+    "growth": 1.46
   }
 }

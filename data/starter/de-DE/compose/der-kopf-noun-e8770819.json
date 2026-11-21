@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "head; mind",
+    "primaryGloss": "head",
+    "emotion": "straightforward and physical, pointing to where you are thinking",
+    "notes": [
+      "Plural: die Köpfe.",
+      "To say your head hurts, say 'Mir tut der Kopf weh' or 'Ich habe Kopfschmerzen' (I have a headache)."
+    ],
+    "senses": [
+      {
+        "id": "ciza8rciu8dw77e",
+        "order": 0,
+        "definition": "The upper part of the human or animal body, containing the brain, eyes, nose, mouth, and ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "29mitubqphyhrpd",
+            "text": "Mir tut heute der Kopf weh.",
+            "textLang": "de",
+            "translation": "My head hurts today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Kopf",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6yozop0n40nqt3p",
+        "order": 1,
+        "definition": "A person's thoughts, memory, or imagination.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mind",
+              "head"
+            ]
+          }
+        ],
+        "domain": "mind",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "a5i0a3wwpyrjdwl",
+            "text": "Das Lied geht mir nicht mehr aus dem Kopf.",
+            "textLang": "de",
+            "translation": "I can't get that song out of my head.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Kopf",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Kopf",
+    "lemma": "Kopf",
+    "reading": null,
+    "ipa": "/kɔpf/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "head; mind; top",
     "primaryGloss": "head",
     "emotion": "straightforward and physical, pointing to where you are thinking",
@@ -178,5 +287,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ich habe Kopfschmerzen im Kopf.",
+        "why": "Redundant and unnatural in both German and English, and lacks the standalone word 'Kopf'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "If you are talking about the 'head' of an organization",
+        "why": "The head of an organization is usually 'Leiter' or 'Chef' in German, not 'Kopf'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "The top or upper part of something, such as a mountain",
+        "why": "Mountain top is 'Gipfel', not 'Kopf'; marginal/inaccurate sense for A2."
+      }
+    ],
+    "growth": 0.717
   }
 }

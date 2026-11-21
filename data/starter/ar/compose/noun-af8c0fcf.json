@@ -72,6 +72,73 @@
     "primaryGloss": "pocket",
     "emotion": "practical and casual, tapping a pocket to check for keys",
     "notes": [
+      "The plural is جُيُوب (juyūb)."
+    ],
+    "senses": [
+      {
+        "id": "ky2jdh49fz1cuqw",
+        "order": 0,
+        "definition": "A small pouch sewn into clothing for carrying small items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pocket"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "pbm78r3x434w448",
+            "text": "مِفْتَاحِي فِي جَيْبِي.",
+            "textLang": "ar",
+            "translation": "My key is in my pocket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved, having just found the missing key",
+            "note": null,
+            "matchedForm": "جَيْبِي",
+            "matchedTranslationForm": "pocket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَيْب",
+    "lemma": "جَيْب",
+    "reading": null,
+    "ipa": "/dʒajb/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pocket",
+    "primaryGloss": "pocket",
+    "emotion": "practical and casual, tapping a pocket to check for keys",
+    "notes": [
       "Used to store small items like keys, phone, or money.",
       "Commonly found in trousers, shirts, and coats."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to store small items like keys, phone, or money.",
+        "why": "Explains what a pocket is instead of giving linguistic information (like its broken plural)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Commonly found in trousers, shirts, and coats.",
+        "why": "World knowledge filler; does not help with Arabic usage."
+      }
+    ],
+    "growth": 0.681
   }
 }

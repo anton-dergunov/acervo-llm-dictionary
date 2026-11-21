@@ -72,6 +72,73 @@
     "primaryGloss": "beer",
     "emotion": "relaxed and social at the end of a long day",
     "notes": [
+      "'Bier' is usually uncountable for the drink in general. To order or talk about a glass or bottle of beer, use the diminutive 'het biertje' (plural 'biertjes')."
+    ],
+    "senses": [
+      {
+        "id": "um9yepmsnmw19as",
+        "order": 0,
+        "definition": "An alcoholic drink made from grain, water, hops, and yeast.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beer"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍺",
+        "examples": [
+          {
+            "id": "y1se35umhi7tvp0",
+            "text": "Drink je liever wijn of bier bij het eten?",
+            "textLang": "nl",
+            "translation": "Do you prefer to drink wine or beer with your meal?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bier",
+            "matchedTranslationForm": "beer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het bier",
+    "lemma": "bier",
+    "reading": null,
+    "ipa": "/biːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍺",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "beer",
+    "primaryGloss": "beer",
+    "emotion": "relaxed and social at the end of a long day",
+    "notes": [
       "Takes the neuter article 'het': het bier."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the neuter article 'het': het bier.",
+        "why": "Restates the gender and article already in the headword."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Hij bestelde een koud bier op het terras.",
+        "why": "To order a glass of beer, Dutch speakers normally use the diminutive 'een biertje'."
+      }
+    ],
+    "growth": 1.706
   }
 }

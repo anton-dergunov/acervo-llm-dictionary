@@ -58,6 +58,73 @@
     "headword": "งู",
     "lemma": "งู",
     "reading": null,
+    "ipa": "/ŋuː˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "snake",
+    "primaryGloss": "snake",
+    "emotion": "caution mixed with quiet alertness, watching the ground closely",
+    "notes": [
+      "The classifier for snakes is ตัว (e.g., งูสองตัว — two snakes)."
+    ],
+    "senses": [
+      {
+        "id": "syiwc0mpx4zwm0j",
+        "order": 0,
+        "definition": "A long, legless reptile with scaly skin and sometimes a venomous bite.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [
+          {
+            "id": "n7z5kmnuxx6jl9b",
+            "text": "ระวังงูตัวนั้นนะ มันอาจจะมีพิษ",
+            "textLang": "th",
+            "translation": "Watch out for that snake, it might be venomous.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "งู",
+            "matchedTranslationForm": "snake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "งู",
+    "lemma": "งู",
+    "reading": null,
     "ipa": "/ŋuː/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "ระวัง งู ตัว นั้น นะ มัน อาจ จะ มี พิษ",
+        "why": "Thai text is written with unnatural spaces between every word."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a general term for all snakes. In Thai culture, seeing",
+        "why": "Restates the gloss and adds cultural trivia instead of the classifier ตัว."
+      }
+    ],
+    "growth": 0.636
   }
 }

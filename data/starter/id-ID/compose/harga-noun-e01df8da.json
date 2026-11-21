@@ -72,6 +72,116 @@
     "primaryGloss": "price",
     "emotion": "matter-of-fact and practical, checking the cost of daily goods",
     "notes": [
+      "Use 'harga' mainly for monetary price (and in 'harga diri', self-respect); for abstract value, worth, or a grade/score, use 'nilai'."
+    ],
+    "senses": [
+      {
+        "id": "vty63vh584514vd",
+        "order": 0,
+        "definition": "The amount of money required or given in payment for something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "price",
+              "cost"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "icycx1dslm2yp7a",
+            "text": "Berapa harga baju ini?",
+            "textLang": "id",
+            "translation": "What is the price of this shirt?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and polite, asking a shopkeeper how much something costs",
+            "note": null,
+            "matchedForm": "harga",
+            "matchedTranslationForm": "price"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "52jr7im0dh79hab",
+        "order": 1,
+        "definition": "The importance, worth, or respect that something or someone has, especially in set phrases like 'harga diri' (self-respect).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "value",
+              "worth",
+              "honor"
+            ]
+          }
+        ],
+        "domain": "worth",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "72bl9n8htndu15g",
+            "text": "Kita harus menjaga harga diri kita.",
+            "textLang": "id",
+            "translation": "We must maintain our self-respect.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and firm, speaking about personal dignity",
+            "note": null,
+            "matchedForm": "harga",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "harga",
+    "lemma": "harga",
+    "reading": null,
+    "ipa": "/ˈhar.ɡa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "price; value",
+    "primaryGloss": "price",
+    "emotion": "matter-of-fact and practical, checking the cost of daily goods",
+    "notes": [
       "Harga is the standard word for the cost or price of an item when you are shopping.",
       "Do not confuse it with 'nilai', which refers more to abstract value or worth."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Harga is the standard word for the cost or price",
+        "why": "Simply restates the gloss and definition."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Kita harus menjaga harga diri kita.",
+        "why": "Uses the fixed compound 'harga diri' (self-esteem) instead of showing 'harga' meaning value/worth."
+      }
+    ],
+    "growth": 0.99
   }
 }

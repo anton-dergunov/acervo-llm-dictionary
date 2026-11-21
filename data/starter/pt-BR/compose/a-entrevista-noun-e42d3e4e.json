@@ -73,6 +73,94 @@
     "headword": "a entrevista",
     "lemma": "entrevista",
     "reading": null,
+    "ipa": "/ẽ.tɾeˈvis.tɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "interview",
+    "primaryGloss": "interview",
+    "emotion": "nervous and hopeful, preparing to make a good impression",
+    "notes": [
+      "Common expressions: *fazer uma entrevista* (to do/conduct an interview), *dar uma entrevista* (to give an interview to the media), *entrevista de emprego* (job interview)."
+    ],
+    "senses": [
+      {
+        "id": "qhjyzs0f84n6ncj",
+        "order": 0,
+        "definition": "A formal meeting or conversation in which someone is asked questions, such as for a job or for the media.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "interview"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "h1k9dgjmnd8g04r",
+            "text": "Eu tenho uma entrevista de emprego amanhã de manhã.",
+            "textLang": "pt",
+            "translation": "I have a job interview tomorrow morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anxious and eager, double-checking all the details",
+            "note": null,
+            "matchedForm": "entrevista",
+            "matchedTranslationForm": "interview"
+          },
+          {
+            "id": "8a01ymkfbo1ugvk",
+            "text": "A atriz deu uma entrevista interessante na televisão.",
+            "textLang": "pt",
+            "translation": "The actress gave an interesting interview on television.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "engaged and curious, watching the screen",
+            "note": null,
+            "matchedForm": "entrevista",
+            "matchedTranslationForm": "interview"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a entrevista",
+    "lemma": "entrevista",
+    "reading": null,
     "ipa": "/ẽtɾeˈvistɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -174,5 +262,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "interview; conversation",
+        "why": "Includes 'conversation', which is not in the sense glosses and is too broad."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Job and media interviews are the same core concept and translate identically."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both job interviews and journalistic interviews with a famous person.",
+        "why": "Restates the senses instead of giving useful collocations."
+      }
+    ],
+    "growth": 0.967
   }
 }

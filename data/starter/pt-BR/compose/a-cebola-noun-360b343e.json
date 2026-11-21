@@ -58,6 +58,83 @@
     "headword": "a cebola",
     "lemma": "cebola",
     "reading": null,
+    "ipa": "/seˈbo.lɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "onion",
+    "primaryGloss": "onion",
+    "emotion": "pungent and watery-eyed, chopping vegetables in the kitchen",
+    "notes": [
+      "Pronounced with a closed 'o' sound (/o/), like 'avô'."
+    ],
+    "senses": [
+      {
+        "id": "2wjkl5n3lmlqc79",
+        "order": 0,
+        "definition": "A round vegetable with a strong taste and smell and many layers that makes your eyes water when cut.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "onion"
+            ]
+          }
+        ],
+        "domain": "vegetable",
+        "emoji": "🧅",
+        "examples": [
+          {
+            "id": "qo5md59gzydt0j0",
+            "text": "Preciso cortar uma cebola para o refogado.",
+            "textLang": "pt",
+            "translation": "I need to chop an onion for the sautéed base.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and careful, working quickly with a kitchen knife",
+            "note": null,
+            "matchedForm": "cebola",
+            "matchedTranslationForm": "onion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2wjkl5n3lmlqc79",
+      "from": "Hortaliça de sabor forte e camadas concêntricas que faz chorar ao cortar.",
+      "to": "A strong-tasting vegetable with layers that makes your eyes water when you cut it.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:22Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a cebola",
+    "lemma": "cebola",
+    "reading": null,
     "ipa": "/seˈbɔ.lɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -119,14 +196,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2wjkl5n3lmlqc79",
-      "from": "Hortaliça de sabor forte e camadas concêntricas que faz chorar ao cortar.",
-      "to": "A strong-tasting vegetable with layers that makes your eyes water when you cut it.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:22Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/seˈbɔ.lɐ/",
+        "why": "Has closed /o/ (/seˈbo.lɐ/), not open /ɔ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used constantly as the aromatic base for Brazilian savory dishes",
+        "why": "Culinary trivia; note on closed /o/ pronunciation is actually needed."
+      }
+    ],
+    "growth": 0.88
+  }
 }

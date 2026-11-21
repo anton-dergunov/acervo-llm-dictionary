@@ -70,6 +70,136 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "ser; estar; tener",
+    "primaryGloss": "ser",
+    "emotion": "a fundamental, steady state of existence, calm and clear",
+    "notes": [
+      "Verbo muy irregular: presente «I am», «you/we/they are», «he/she/it is»; pasado «was» / «were»; participio «been».",
+      "Se usa con la edad y con estados como hambre, sed, frío o calor, donde en español se usa «tener» (p. ej., «I am twenty» = tengo veinte años; «I am hungry» = tengo hambre)."
+    ],
+    "senses": [
+      {
+        "id": "rq2sn89tdsyw6oq",
+        "order": 0,
+        "definition": "Tener una identidad, profesión, origen o cualidad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ser"
+            ]
+          }
+        ],
+        "domain": "identidad",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "f3blabgesakfb50",
+            "text": "I am a teacher.",
+            "textLang": "en",
+            "translation": "Soy profesor.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "straightforward and confident, introducing oneself",
+            "note": null,
+            "matchedForm": "am",
+            "matchedTranslationForm": "Soy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kxzla3vaj2xm14y",
+        "order": 1,
+        "definition": "Encontrarse en un lugar o en un estado o condición determinados.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "estar",
+              "tener"
+            ]
+          }
+        ],
+        "domain": "estado",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "ledom1m94owuc89",
+            "text": "She is in the kitchen.",
+            "textLang": "en",
+            "translation": "Está en la cocina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, pointing out a location",
+            "note": null,
+            "matchedForm": "is",
+            "matchedTranslationForm": "Está"
+          },
+          {
+            "id": "uh17b6r76dgozmc",
+            "text": "They are tired today.",
+            "textLang": "en",
+            "translation": "Están cansados hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary, describing a current feeling",
+            "note": null,
+            "matchedForm": "are",
+            "matchedTranslationForm": "Están"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "be",
+    "lemma": "be",
+    "reading": null,
+    "ipa": "/bi/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "ser; estar",
     "primaryGloss": "ser",
     "emotion": "a fundamental, steady state of existence, calm and clear",
@@ -182,5 +312,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past forms (was/were) and common uses where Spanish uses 'tener' (age, hunger)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Yo soy profesor.",
+        "why": "Unnatural subject pronoun in Spanish; 'Soy profesor' is natural."
+      }
+    ],
+    "growth": 1.072
   }
 }

@@ -72,6 +72,138 @@
     "primaryGloss": "fast",
     "emotion": "eager and energetic, moving without wasting any time",
     "notes": [
+      "Used as both an adjective ('fast, quick') and an adverb ('quickly, soon')."
+    ],
+    "senses": [
+      {
+        "id": "skausxm8r1p6yum",
+        "order": 0,
+        "definition": "Moving at high speed, or taking only a short time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fast",
+              "quick",
+              "rapid",
+              "quickly"
+            ]
+          }
+        ],
+        "domain": "speed",
+        "emoji": "🏎️",
+        "examples": [
+          {
+            "id": "sbdkfs7k1eotsye",
+            "text": "De trein is heel snel.",
+            "textLang": "nl",
+            "translation": "The train is very fast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the high speed of the journey",
+            "note": null,
+            "matchedForm": "snel",
+            "matchedTranslationForm": "fast"
+          },
+          {
+            "id": "69ccppecqkmi00q",
+            "text": "We nemen even een snel ontbijt.",
+            "textLang": "nl",
+            "translation": "We are having a quick breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurrying through the morning routine before leaving",
+            "note": null,
+            "matchedForm": "snel",
+            "matchedTranslationForm": "quick"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2x086ik8jd43da4",
+        "order": 1,
+        "definition": "Used as an adverb: happening after a short time from now.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soon",
+              "shortly"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🔜",
+        "examples": [
+          {
+            "id": "6gh6vjcgswpuqwd",
+            "text": "Ik zie je snel weer.",
+            "textLang": "nl",
+            "translation": "I will see you again soon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, saying goodbye with anticipation",
+            "note": null,
+            "matchedForm": "snel",
+            "matchedTranslationForm": "soon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "snel",
+    "lemma": "snel",
+    "reading": null,
+    "ipa": "/snɛl/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "fast; quick; soon",
+    "primaryGloss": "fast",
+    "emotion": "eager and energetic, moving without wasting any time",
+    "notes": [
       "Use 'snel' for both speed ('fast') and time ('soon'). When you want to say something will happen shortly, you can also use 'straks'."
     ],
     "senses": [
@@ -201,5 +333,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(time) Taking a short time to happen or be done.",
+        "why": "senses 0 and 1 are both 'fast/quick' and should be merged; sense 2 is adverbial."
+      }
+    ],
+    "growth": 0.863
   }
 }

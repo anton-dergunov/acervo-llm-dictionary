@@ -58,6 +58,73 @@
     "headword": "đảo",
     "lemma": "đảo",
     "reading": null,
+    "ipa": "/ɗaːw˧˩˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": null,
+    "notes": [
+      "Takes the classifier 'hòn' for individual islands (e.g., một hòn đảo). 'Quần đảo' means archipelago."
+    ],
+    "senses": [
+      {
+        "id": "7jdeh3ctuv7ykgw",
+        "order": 0,
+        "definition": "A piece of land surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "totp1uozxvzq8yu",
+            "text": "Chúng tôi đi tham quan hòn đảo xanh mát vào mùa hè.",
+            "textLang": "vi",
+            "translation": "We went to visit the lush green island in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and dreamy, picturing a sunny getaway",
+            "note": null,
+            "matchedForm": "đảo",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đảo",
+    "lemma": "đảo",
+    "reading": null,
     "ipa": "/ɗa᷉ːw/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To move food around in a pan or pot while cooking.",
+        "why": "Entry POS is noun; cannot include a verb sense (homonym) under a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "island; to turn upside down",
+        "why": "Includes a verb gloss in a noun entry, and mismatches sense 1's cooking gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 'đảo' means an island. As a verb, it means",
+        "why": "Explains the verb homonym and restates the gloss instead of giving noun usage."
+      }
+    ],
+    "growth": 0.517
   }
 }

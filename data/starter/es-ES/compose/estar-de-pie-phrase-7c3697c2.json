@@ -72,6 +72,74 @@
     "primaryGloss": "to be standing",
     "emotion": "alert and upright, ready to move at any second",
     "notes": [
+      "Describes the state of standing on your feet; do not confuse it with 'ponerse de pie' or 'levantarse', which mean the action of standing up."
+    ],
+    "senses": [
+      {
+        "id": "pphngti4ahrdw2b",
+        "order": 0,
+        "definition": "To be upright on your feet, not sitting or lying down.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be standing",
+              "to stand"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "ifon68suekajlt8",
+            "text": "Tengo que estar de pie todo el día en el trabajo.",
+            "textLang": "es",
+            "translation": "I have to be standing all day at work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "estar de pie",
+            "matchedTranslationForm": "be standing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "estar de pie",
+    "lemma": "estar de pie",
+    "reading": null,
+    "ipa": "/esˈtaɾ de ˈpje/",
+    "pos": "phrase",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be standing",
+    "primaryGloss": "to be standing",
+    "emotion": "alert and upright, ready to move at any second",
+    "notes": [
       "Use estar de pie to describe the physical posture of being on your feet.",
       "Do not confuse this with levantarse, which means the action of standing up."
     ],
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Llevo dos horas estar de pie esperando el autobús.",
+        "why": "Ungrammatical Spanish; 'llevar + time' cannot take the infinitive 'estar' ('Llevo dos horas de pie')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use estar de pie to describe the physical posture of being",
+        "why": "Purely repeats the definition of the phrase."
+      }
+    ],
+    "growth": 0.927
   }
 }

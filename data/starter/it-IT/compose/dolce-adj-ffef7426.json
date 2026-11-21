@@ -68,6 +68,135 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "sweet; gentle, mild",
+    "primaryGloss": "sweet",
+    "emotion": "craving something tasty, warm and appreciative",
+    "notes": [
+      "Has the same form for masculine and feminine singular (dolce), changing to 'dolci' in the plural.",
+      "As a masculine noun (il dolce, i dolci), it means 'dessert', 'cake', or 'sweets'."
+    ],
+    "senses": [
+      {
+        "id": "kmet9jd2exyu697",
+        "order": 0,
+        "definition": "Having a taste like sugar or honey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sweet"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "🍯",
+        "examples": [
+          {
+            "id": "5x4rtr26z6ab3hg",
+            "text": "Questo caffè è troppo dolce per i miei gusti.",
+            "textLang": "it",
+            "translation": "This coffee is too sweet for my taste.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolce",
+            "matchedTranslationForm": "sweet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a7ms2penhw49qrr",
+        "order": 1,
+        "definition": "Pleasant, soft, and not harsh or severe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gentle",
+              "sweet",
+              "mild",
+              "soft"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "gnl8r5k9os1duyi",
+            "text": "La nonna ha una voce molto dolce.",
+            "textLang": "it",
+            "translation": "Grandma has a very gentle voice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolce",
+            "matchedTranslationForm": "gentle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "kmet9jd2exyu697",
+      "from": "Che ha un sapore simile a quello dello zucchero.",
+      "to": "Having a taste similar to sugar.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "a7ms2penhw49qrr",
+      "from": "Gradevole ai sensi, morbido, non aspro o violento.",
+      "to": "Pleasant to the senses, soft, and not harsh.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "dolce",
+    "lemma": "dolce",
+    "reading": null,
+    "ipa": "/ˈdoltʃe/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍰",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "sweet; soft, gentle",
     "primaryGloss": "sweet",
     "emotion": "craving something tasty, warm and appreciative",
@@ -162,22 +291,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "kmet9jd2exyu697",
-      "from": "Che ha un sapore simile a quello dello zucchero.",
-      "to": "Having a taste similar to sugar.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "a7ms2penhw49qrr",
-      "from": "Gradevole ai sensi, morbido, non aspro o violento.",
-      "to": "Pleasant to the senses, soft, and not harsh.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Questo caffè è troppo dolce senza abbastanza amaro.",
+        "why": "'Senza abbastanza amaro' is unnatural and unidiomatic in Italian."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse with 'caro', which means dear",
+        "why": "Notes restate senses and warn against an unlikely confusion instead of explaining -e adjective agreement."
+      }
+    ],
+    "growth": 1.007
+  }
 }

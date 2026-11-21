@@ -74,6 +74,155 @@
     "primaryGloss": "be",
     "emotion": null,
     "notes": [
+      "Highly irregular in the present ('io sono, tu sei, lui/lei è, noi siamo, voi siete, loro sono') and uses 'stato' as its past participle ('sono stato').",
+      "Unlike Spanish, 'essere' is used for both permanent and temporary qualities and locations. Do not confuse it with 'stare', which is used in greetings ('Come stai? — Sto bene') and fixed expressions."
+    ],
+    "senses": [
+      {
+        "id": "q9jfa87bux42gvz",
+        "order": 0,
+        "definition": "To have a particular identity, origin, quality, or condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "o4emwozgwg7f13q",
+            "text": "Sono uno studente e sono molto stanco oggi.",
+            "textLang": "it",
+            "translation": "I am a student and I am very tired today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Sono",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "046l7kq1f2jydz6",
+        "order": 1,
+        "definition": "To be in a particular place, or to take place at a particular time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "tdc6szo1154t6ff",
+            "text": "Le chiavi sono sul tavolo.",
+            "textLang": "it",
+            "translation": "The keys are on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sono",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t1usaokcgvj86wa",
+        "order": 2,
+        "definition": "Used as an auxiliary verb with past participles to form compound tenses of many intransitive and reflexive verbs, and to form the passive voice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "have",
+              "be"
+            ]
+          }
+        ],
+        "domain": "auxiliary",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "gs2d4si43hw17ae",
+            "text": "Siamo arrivati ieri sera.",
+            "textLang": "it",
+            "translation": "We arrived last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Siamo",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "essere",
+    "lemma": "essere",
+    "reading": null,
+    "ipa": "/ˈɛs.se.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be",
+    "primaryGloss": "be",
+    "emotion": null,
+    "notes": [
       "Use 'essere' with adjectives and prepositional phrases for temporary states or locations, and with nouns for permanent or defining characteristics.",
       "Be careful not to confuse it with 'stare', which is used for specific conditions like health ('sto bene') or standing posture."
     ],
@@ -161,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'essere' with adjectives and prepositional phrases for temporary states",
+        "why": "Misleading rule (confuses Italian with Spanish): 'essere' is used with adjectives for permanent traits too."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that 'essere' is highly irregular and forms its past participle with 'stato'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing its essential everyday role as an auxiliary verb for compound tenses."
+      }
+    ],
+    "growth": 1.551
   }
 }

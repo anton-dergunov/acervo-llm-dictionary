@@ -59,6 +59,114 @@
     "language": "ja",
     "headword": "本",
     "lemma": "本",
+    "reading": "ほん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Home",
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "book; counter for long objects",
+    "primaryGloss": "book",
+    "emotion": null,
+    "notes": [
+      "As a counter, the reading changes depending on the number: ほん (2, 4, 5, 7, 9), ぽん (1, 6, 8, 10), and ぼん (3, and 何本 'how many')."
+    ],
+    "senses": [
+      {
+        "id": "6xof03vryiijg4b",
+        "order": 0,
+        "definition": "A set of printed pages fastened together inside a cover to be read.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "book"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "ql6iogfdr06rl6c",
+            "text": "図書館で本を借りました。",
+            "textLang": "ja",
+            "translation": "I borrowed a book from the library.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "本",
+            "matchedTranslationForm": "book"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zf0juxpqihg41ec",
+        "order": 1,
+        "definition": "Used after a number to count long, thin objects such as pens, bottles, umbrellas, or trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "counter for long objects"
+            ]
+          }
+        ],
+        "domain": "counter",
+        "emoji": "🖊️",
+        "examples": [
+          {
+            "id": "v14hlglv9md3k94",
+            "text": "ペンを三本買いました。",
+            "textLang": "ja",
+            "translation": "I bought three pens.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "本",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "本",
+    "lemma": "本",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -117,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "本 is a versatile word. As a noun, it means 'book'.",
+        "why": "Restates the senses without mentioning the crucial -hon/-pon/-bon sound changes."
+      }
+    ],
+    "growth": 1.437
   }
 }

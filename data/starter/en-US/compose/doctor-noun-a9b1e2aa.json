@@ -62,6 +62,116 @@
     "headword": "doctor",
     "lemma": "doctor",
     "reading": null,
+    "ipa": "/ˈdɑːktər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍⚕️",
+    "topics": [
+      "Work",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "médico; doctor",
+    "primaryGloss": "médico",
+    "emotion": "profesional y confiado, listo para ayudar",
+    "notes": [
+      "Como sustantivo común ('a doctor'), se usa casi exclusivamente para médicos. Para alguien con un doctorado académico (PhD), se usa como título ante el apellido ('Dr. Smith') o se dice 'She has a PhD/doctorate'.",
+      "La expresión 'go to the doctor's' (con apóstrofo) significa 'ir a la consulta del médico'."
+    ],
+    "senses": [
+      {
+        "id": "2t5ycj426c4yol4",
+        "order": 0,
+        "definition": "Persona con título profesional que cura o previene enfermedades.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "médico",
+              "doctor"
+            ]
+          }
+        ],
+        "domain": "medicina",
+        "emoji": "🏥",
+        "examples": [
+          {
+            "id": "acmomo1kgjg6gli",
+            "text": "The doctor says I need to rest for a week.",
+            "textLang": "en",
+            "translation": "El médico dice que necesito descansar una semana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serio y preocupado por la salud, siguiendo indicaciones",
+            "note": null,
+            "matchedForm": "doctor",
+            "matchedTranslationForm": "médico"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "po3zgywk21o682z",
+        "order": 1,
+        "definition": "Persona que ha obtenido el grado académico más alto en una universidad (usado principalmente como título: Dr.).",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "doctor"
+            ]
+          }
+        ],
+        "domain": "educación",
+        "emoji": "🎓",
+        "examples": [
+          {
+            "id": "akfs4mjsz5k6aeu",
+            "text": "Doctor Evans teaches modern history at the university.",
+            "textLang": "en",
+            "translation": "La doctora Evans enseña historia moderna en la universidad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Doctor",
+            "matchedTranslationForm": "doctora"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "doctor",
+    "lemma": "doctor",
+    "reading": null,
     "ipa": "/ˈdɒktər/",
     "pos": "noun",
     "gender": null,
@@ -165,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈdɒktər/",
+        "why": "Uses British vowel /ɒ/ instead of US English /ˈdɑːktər/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "She is a doctor of history.",
+        "why": "Directly contradicts note 0; natives say 'She has a doctorate/PhD in history' or 'Dr. Smith'."
+      }
+    ],
+    "growth": 1.226
   }
 }

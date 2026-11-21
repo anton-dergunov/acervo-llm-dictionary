@@ -58,6 +58,113 @@
     "headword": "cầu",
     "lemma": "cầu",
     "reading": null,
+    "ipa": "/kəw˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bridge; shuttlecock",
+    "primaryGloss": "bridge",
+    "emotion": null,
+    "notes": [
+      "Takes the classifier 'cây' or 'chiếc' when meaning 'bridge' (e.g. 'cây cầu'), and 'quả' or 'trái' when meaning 'shuttlecock' (e.g. 'quả cầu')."
+    ],
+    "senses": [
+      {
+        "id": "aam0eu53pgqxow3",
+        "order": 0,
+        "definition": "a structure built over a river, road, or railway so that people and vehicles can cross",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bridge"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🌉",
+        "examples": [
+          {
+            "id": "c5lftwqee065nhd",
+            "text": "Chúng tôi đi qua cầu để sang sông.",
+            "textLang": "vi",
+            "translation": "We crossed the bridge to get to the other side of the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and observant during a city walk",
+            "note": null,
+            "matchedForm": "cầu",
+            "matchedTranslationForm": "bridge"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ybr08s1deksj2m9",
+        "order": 1,
+        "definition": "a feathered shuttlecock kicked in the game of 'đá cầu' (jianzi), or part of sport names like 'cầu lông' (badminton)",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shuttlecock"
+            ]
+          }
+        ],
+        "domain": "sports",
+        "emoji": "🏸",
+        "examples": [
+          {
+            "id": "q1p2cguxpa1n2kq",
+            "text": "Các học sinh đang đá cầu ở sân trường.",
+            "textLang": "vi",
+            "translation": "The students are kicking a shuttlecock in the schoolyard.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cầu",
+            "matchedTranslationForm": "shuttlecock"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cầu",
+    "lemma": "cầu",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -202,5 +309,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[2]",
+        "quote": "To ask for something earnestly, or to pray for a wish",
+        "why": "Entry POS is noun, but sense 2 is a verb ('to pray')."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A round object used in games or sports, such as a shuttlecock or ball.",
+        "why": "Standalone 'cầu' refers to a shuttlecock (especially in 'đá cầu'), not a general ball ('bóng')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anh ấy đang đánh cầu lông trong công viên.",
+        "why": "Uses the compound word 'cầu lông' (badminton) rather than standalone noun 'cầu'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "This word has multiple unrelated meanings depending on context",
+        "why": "Both notes are pure filler restating the senses."
+      }
+    ],
+    "growth": 0.709
   }
 }

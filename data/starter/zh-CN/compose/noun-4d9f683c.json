@@ -72,6 +72,73 @@
     "primaryGloss": "breakfast",
     "emotion": "warm and comforting, starting the morning with a hot bowl of congee",
     "notes": [
+      "早饭 is the most common word in everyday speech; 早餐 (zǎocān) is slightly more formal and common on menus. The usual measure word is 顿 (dùn)."
+    ],
+    "senses": [
+      {
+        "id": "u7eejvravp30svb",
+        "order": 0,
+        "definition": "The first meal of the day, eaten in the morning.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "breakfast"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "hxf63hs87wzso8i",
+            "text": "你今天早饭吃了什么？",
+            "textLang": "zh",
+            "translation": "What did you eat for breakfast today?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "早饭",
+            "matchedTranslationForm": "breakfast"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "早饭",
+    "lemma": "早饭",
+    "reading": "zǎofàn",
+    "ipa": "/tsau̯˨˩˦ fan˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "breakfast",
+    "primaryGloss": "breakfast",
+    "emotion": "warm and comforting, starting the morning with a hot bowl of congee",
+    "notes": [
       "早饭 is the common term for breakfast in everyday speech. You will also hear 早餐 in more formal contexts or on menus."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "你今天早上吃什么早饭？",
+        "why": "Missing aspect particle 了 for a past question, and 早上 with 早饭 is redundant."
+      }
+    ],
+    "growth": 1.068
   }
 }

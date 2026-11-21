@@ -58,6 +58,137 @@
     "headword": "แม่",
     "lemma": "แม่",
     "reading": null,
+    "ipa": "/mɛ̂ː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩‍👧",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "mother; polite address for an older woman",
+    "primaryGloss": "mother",
+    "emotion": "warm and intimate, the voice soft with natural affection",
+    "notes": [
+      "Commonly used in place of a pronoun ('I' by a mother speaking to her child, or 'you' by a child speaking to their mother), often preceded by คุณ (คุณแม่).",
+      "Placed before an animal name to mean a mother or adult female animal (e.g. แม่ไก่ 'mother hen, hen'), and in many compounds for female roles (e.g. แม่บ้าน 'housewife', แม่ค้า 'female vendor')."
+    ],
+    "senses": [
+      {
+        "id": "xctk7mw54kss9e7",
+        "order": 0,
+        "definition": "A female parent of a person or animal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mother",
+              "mom"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👩‍👧",
+        "examples": [
+          {
+            "id": "zjn7zi86jvsovwp",
+            "text": "แม่ของฉันใจดีมาก",
+            "textLang": "th",
+            "translation": "My mother is very kind.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and appreciative, with a smile in the voice",
+            "note": null,
+            "matchedForm": "แม่",
+            "matchedTranslationForm": "mother"
+          },
+          {
+            "id": "vtywidor1xuo3yr",
+            "text": "แม่ไก่กำลังกกไข่",
+            "textLang": "th",
+            "translation": "The mother hen is sitting on her eggs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and calm, describing a natural scene",
+            "note": null,
+            "matchedForm": "แม่",
+            "matchedTranslationForm": "mother"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "53m1f4aa6gyeoii",
+        "order": 1,
+        "definition": "A familiar or respectful term of address for an older woman of one's mother's generation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ma'am",
+              "mother"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ulrey0hl4q7l8b4",
+            "text": "แม่ครับ ขอซื้อน้ำหน่อยครับ",
+            "textLang": "th",
+            "translation": "Ma'am, may I buy some water?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แม่",
+            "matchedTranslationForm": "Ma'am"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แม่",
+    "lemma": "แม่",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -203,5 +334,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "เธอเป็นแม่บทในการทำอาหารไทย — She is a master of Thai cooking.",
+        "why": "แม่บท means 'model/pattern/template', not a female expert; compounds like แม่ค้า are separate words."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(animals) The female parent of an animal.",
+        "why": "Just the word 'mother' applied to animals; also used for adult female animals generally."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a respectful address for one's own mother or as a",
+        "why": "Restates the basic meaning without adding how it functions as a pronoun or title."
+      }
+    ],
+    "growth": 0.939
   }
 }

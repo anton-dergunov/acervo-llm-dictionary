@@ -68,6 +68,73 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "bright and clear, pointing something out with steady confidence",
+    "notes": [
+      "In older Russian, красный meant 'beautiful', which is where the name Красная площадь (Red Square) comes from."
+    ],
+    "senses": [
+      {
+        "id": "p1xocjlq90hdgsw",
+        "order": 0,
+        "definition": "Having the colour of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "xnxeouzvaipmok3",
+            "text": "На столе лежало красное яблоко.",
+            "textLang": "ru",
+            "translation": "There was a red apple on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and descriptive, pointing out a nice piece of fruit",
+            "note": null,
+            "matchedForm": "красное",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "красный",
+    "lemma": "красный",
+    "reading": null,
+    "ipa": "/ˈkrasnɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "red; beautiful; main",
     "primaryGloss": "red",
     "emotion": "bright and clear, pointing something out with steady confidence",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Traditional, historical, or main (as in Red Square).",
+        "why": "Archaic meaning was 'beautiful', not 'historical'; only survives in set names like Red Square."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "red; beautiful; main",
+        "why": "Includes archaic meanings that should only be mentioned as an etymological note."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of blood or a ripe tomato.",
+        "why": "Defined as a noun ('the colour') instead of an adjective ('of the colour')."
+      }
+    ],
+    "growth": 0.509
   }
 }

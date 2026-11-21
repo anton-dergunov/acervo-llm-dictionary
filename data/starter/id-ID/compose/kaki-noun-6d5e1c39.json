@@ -74,6 +74,138 @@
     "primaryGloss": "leg",
     "emotion": "matter-of-fact and steady, standing firmly on the ground",
     "notes": [
+      "In Indonesian, 'kaki' covers both 'leg' and 'foot'. Context usually makes it clear, but you can specify 'paha' (thigh), 'betis' (calf), or 'telapak kaki' (sole of the foot) to be precise.",
+      "Commonly used in 'jalan kaki' (to walk / go on foot)."
+    ],
+    "senses": [
+      {
+        "id": "59wt5rbwgrnunyi",
+        "order": 0,
+        "definition": "The lower limb of a person or animal, including both the leg and the foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg",
+              "foot"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "4doj5v5m59b5hyl",
+            "text": "Kakinya sakit setelah berlari jauh.",
+            "textLang": "id",
+            "translation": "His leg hurts after running far.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and sore, rubbing a weary limb after exercise",
+            "note": null,
+            "matchedForm": "Kakinya",
+            "matchedTranslationForm": "leg"
+          },
+          {
+            "id": "z5y6juvmjwick14",
+            "text": "Ukuran sepatu kaki saya 40.",
+            "textLang": "id",
+            "translation": "My foot's shoe size is 40.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kaki",
+            "matchedTranslationForm": "foot's"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rbp2up36r61opwu",
+        "order": 1,
+        "definition": "The lower supporting part or base of an object, furniture, or mountain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg",
+              "foot",
+              "base"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "mc82qubknq9mk5n",
+            "text": "Kaki meja itu patah satu.",
+            "textLang": "id",
+            "translation": "One of the table legs is broken.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and inconvenienced by a wobbly piece of furniture",
+            "note": null,
+            "matchedForm": "Kaki",
+            "matchedTranslationForm": "legs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kaki",
+    "lemma": "kaki",
+    "reading": null,
+    "ipa": "/ˈkaki/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg; foot",
+    "primaryGloss": "leg",
+    "emotion": "matter-of-fact and steady, standing firmly on the ground",
+    "notes": [
       "In Indonesian, 'kaki' covers both what English calls the 'leg' and the 'foot'. Context usually makes it clear which one is meant, but you can specify 'paha' (thigh), 'betis' (calf), or 'telapak kaki' (sole of the foot) if you need to be precise."
     ],
     "senses": [
@@ -200,5 +332,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Indonesian does not distinguish 'leg' and 'foot' as separate senses; it is one anatomical concept."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dia mencopot sepatunya dari kaki.",
+        "why": "'Mencopot sepatu dari kaki' is redundant and unnatural; 'melepas sepatu' is normal."
+      }
+    ],
+    "growth": 0.878
   }
 }

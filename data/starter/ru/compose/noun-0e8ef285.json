@@ -60,6 +60,75 @@
     "reading": null,
     "ipa": "/ɐt͡ɕˈkʲi/",
     "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; spectacles",
+    "primaryGloss": "glasses",
+    "emotion": "a practical, everyday habit, reaching for them to focus on the world",
+    "notes": [
+      "A plural-only noun in Russian (genitive 'очков'). Use plural adjectives, pronouns, and verb forms even for one pair.",
+      "Do not confuse with 'очки' meaning 'points' in a game, which is the plural of 'очко' (point)."
+    ],
+    "senses": [
+      {
+        "id": "1gemsy8dokd1ayx",
+        "order": 0,
+        "definition": "A pair of lenses in a frame worn on the face to help you see or to protect the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "ok1z14wh2fm8ek6",
+            "text": "Я ничего не вижу без своих очков.",
+            "textLang": "ru",
+            "translation": "I cannot see anything without my glasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "очков",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "очки",
+    "lemma": "очки",
+    "reading": null,
+    "ipa": "/ɐt͡ɕˈkʲi/",
+    "pos": "noun",
     "gender": "masculine",
     "register": "neutral",
     "dialect": null,
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "gender",
+        "quote": "masculine",
+        "why": "Plural-only nouns (pluralia tantum) in Russian do not have grammatical gender."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The numerical score earned during a game or competition.",
+        "why": "In the 'points' sense, 'очки' is the regular plural of 'очко' (neuter), not this lemma."
+      }
+    ],
+    "growth": 0.715
   }
 }

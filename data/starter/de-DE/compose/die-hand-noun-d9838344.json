@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand",
+    "primaryGloss": "hand",
+    "emotion": "a practical and grounding touch, ready to work or hold",
+    "notes": [
+      "Plural: 'die Hände'.",
+      "Do not use 'Hand' for the hands of a clock ('der Zeiger') or in the phrase 'on the other hand' ('auf der anderen Seite' / 'andererseits')."
+    ],
+    "senses": [
+      {
+        "id": "jxz6qk9tx3yaang",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the palm and fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "w5iyiszrugvwwt4",
+            "text": "Sie legt ihre Hand auf den Tisch.",
+            "textLang": "de",
+            "translation": "She puts her hand on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Hand",
+            "matchedTranslationForm": "hand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Hand",
+    "lemma": "Hand",
+    "reading": null,
+    "ipa": "/hant/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; pointer; side",
     "primaryGloss": "hand",
     "emotion": "a practical and grounding touch, ready to work or hold",
@@ -200,5 +268,56 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Sie hält ihre Hand auf den Tisch.",
+        "why": "Ungrammatical case: 'halten' (static) requires dative 'auf dem Tisch', or 'legen' with 'auf den Tisch'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The pointer or indicator on a clock or watch.",
+        "why": "German 'Hand' does not mean clock hand ('Zeiger'); this lists an English sense."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Der kleine Zeiger der Uhr zeigt auf die drei.",
+        "why": "Example does not contain the headword 'Hand'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "A position, side, or direction, often used in comparisons.",
+        "why": "Modern German does not use 'Hand' for 'on the other hand'; this is an English sense."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "Auf der einen Seite ist es gut, auf der anderen Seite",
+        "why": "Example does not contain the headword 'Hand'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hand; pointer; side",
+        "why": "Includes false meanings ('pointer', 'side') that belong to English 'hand', not German 'Hand'."
+      }
+    ],
+    "growth": 0.358
   }
 }

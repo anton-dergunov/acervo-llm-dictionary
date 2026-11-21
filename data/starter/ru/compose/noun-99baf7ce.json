@@ -68,6 +68,114 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "street; outside",
+    "primaryGloss": "street",
+    "emotion": "busy and bustling, walking briskly through the heart of town",
+    "notes": [
+      "Takes the preposition 'на' for location and direction ('на улице' = in the street / outside; 'на улицу' = outside)."
+    ],
+    "senses": [
+      {
+        "id": "s6cbq4nbnkykv02",
+        "order": 0,
+        "definition": "A road in a town or city with buildings on one or both sides.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "street"
+            ]
+          }
+        ],
+        "domain": "street",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "yyprk1qglj3dp7a",
+            "text": "Мы живём на тихой улице.",
+            "textLang": "ru",
+            "translation": "We live on a quiet street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and content, pointing out the peaceful neighborhood",
+            "note": null,
+            "matchedForm": "улице",
+            "matchedTranslationForm": "street"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e50crcn0wo7g7bg",
+        "order": 1,
+        "definition": "The open space outside of a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "outside",
+              "outdoors"
+            ]
+          }
+        ],
+        "domain": "outdoors",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "mp95s1dafkbvozr",
+            "text": "На улице холодно.",
+            "textLang": "ru",
+            "translation": "It is cold outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shivering slightly and pulling a coat tighter",
+            "note": null,
+            "matchedForm": "улице",
+            "matchedTranslationForm": "outside"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "улица",
+    "lemma": "улица",
+    "reading": null,
+    "ipa": "/ˈulʲɪt͡sə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "street",
     "primaryGloss": "street",
     "emotion": "busy and bustling, walking briskly through the heart of town",
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "street",
+        "why": "Missing the common second sense 'outside, outdoors'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs a note that it takes the preposition 'на' ('на улице'), not 'в'."
+      }
+    ],
+    "growth": 0.879
   }
 }

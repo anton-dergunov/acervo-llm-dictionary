@@ -72,6 +72,74 @@
     "primaryGloss": "dinner",
     "emotion": "warm and welcoming, gathering around the table with family in the evening",
     "notes": [
+      "Do not confuse with عِشَاء (ʿishāʾ, with i), which refers to nightfall or the night prayer (صَلَاة العِشَاء), or with غَدَاء (ḡadāʾ, lunch)."
+    ],
+    "senses": [
+      {
+        "id": "tdou156lqbcvf5i",
+        "order": 0,
+        "definition": "The main meal eaten in the evening.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "supper"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "14h57wbyqb8xa2n",
+            "text": "تَنَاوَلْنَا العَشَاءَ مَعًا فِي المَسَاءِ.",
+            "textLang": "ar",
+            "translation": "We had dinner together in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "العَشَاءَ",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "عَشَاء",
+    "lemma": "عَشَاء",
+    "reading": null,
+    "ipa": "/ʕaˈʃaːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner; supper",
+    "primaryGloss": "dinner",
+    "emotion": "warm and welcoming, gathering around the table with family in the evening",
+    "notes": [
       "Used for both a light evening meal (supper) and the main evening meal (dinner).",
       "Not to be confused with غَدَاء (lunch), which is eaten in the middle of the day."
     ],
@@ -120,5 +188,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "تَبَاوَرْنَا العَشَاءَ سَوِيًّا فِي المَسَاءِ.",
+        "why": "تَبَاوَرْنَا is a non-existent, garbled word (corruption of تَنَاوَلْنَا 'we had/ate')."
+      }
+    ],
+    "growth": 0.925
   }
 }

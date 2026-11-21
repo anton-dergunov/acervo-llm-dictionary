@@ -68,6 +68,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "wet",
+    "primaryGloss": "wet",
+    "emotion": "matter-of-fact and direct, describing the immediate state of something",
+    "notes": [
+      "Do not confuse with 'wilgotny' (damp, humid), which means only slightly wet or having moisture in the air."
+    ],
+    "senses": [
+      {
+        "id": "qx4vp8wz7w0itw6",
+        "order": 0,
+        "definition": "Covered or soaked with water or another liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wet",
+              "soaked"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "1l7thxpf2gqovfi",
+            "text": "Po deszczu trawa jest mokra.",
+            "textLang": "pl",
+            "translation": "After the rain, the grass is wet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observational, noting the change in the garden",
+            "note": null,
+            "matchedForm": "mokra",
+            "matchedTranslationForm": "wet"
+          },
+          {
+            "id": "aee0ni7dcfocvvu",
+            "text": "Muszę zdjąć mokre ubrania.",
+            "textLang": "pl",
+            "translation": "I have to take off my wet clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncomfortable and slightly urgent, wanting to get warm again",
+            "note": null,
+            "matchedForm": "mokre",
+            "matchedTranslationForm": "wet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "mokry",
+    "lemma": "mokry",
+    "reading": null,
+    "ipa": "/ˈmɔkrɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "wet; damp",
     "primaryGloss": "wet",
     "emotion": "matter-of-fact and direct, describing the immediate state of something",
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "wet; damp",
+        "why": "Includes 'damp', which the sense lacks and the note explicitly contrasts with 'mokry'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for things covered in liquid or moisture.",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.822
   }
 }

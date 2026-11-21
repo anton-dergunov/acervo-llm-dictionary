@@ -60,6 +60,95 @@
     "headword": "il cuscino",
     "lemma": "cuscino",
     "reading": null,
+    "ipa": "/kuʃˈʃi.no/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "pillow; cushion",
+    "primaryGloss": "pillow",
+    "emotion": null,
+    "notes": [
+      "Covers both a bed 'pillow' and a decorative or seat 'cushion'."
+    ],
+    "senses": [
+      {
+        "id": "cajbovjvwj44924",
+        "order": 0,
+        "definition": "A soft bag filled with feathers, foam, or other soft material, used to rest your head in bed or to sit or lean on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow",
+              "cushion"
+            ]
+          }
+        ],
+        "domain": "furnishing",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "pax0edbakd2kyez",
+            "text": "Appoggio la testa sul cuscino.",
+            "textLang": "it",
+            "translation": "I rest my head on the pillow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and relieved, finally getting ready to sleep",
+            "note": null,
+            "matchedForm": "cuscino",
+            "matchedTranslationForm": "pillow"
+          },
+          {
+            "id": "9k07syk4jmhx83x",
+            "text": "Ci sono molti cuscini colorati sul divano.",
+            "textLang": "it",
+            "translation": "There are many colorful cushions on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased with how cozy and tidy the living room looks",
+            "note": null,
+            "matchedForm": "cuscini",
+            "matchedTranslationForm": "cushions"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il cuscino",
+    "lemma": "cuscino",
+    "reading": null,
     "ipa": "/kuˈʃiːno/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(bed) A soft bag for your head in bed.",
+        "why": "Italian 'cuscino' is a single concept covering both English 'pillow' and 'cushion'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Not to be confused with divano, which is a sofa.",
+        "why": "'Cuscino' and 'divano' neither look nor sound alike; unhelpful warning."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kuˈʃiːno/",
+        "why": "Intervocalic /ʃ/ is always geminate in standard Italian (/kuʃˈʃi.no/)."
+      }
+    ],
+    "growth": 1.144
   }
 }

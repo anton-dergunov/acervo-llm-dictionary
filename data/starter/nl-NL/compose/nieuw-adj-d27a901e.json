@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new; unfamiliar",
+    "primaryGloss": "new",
+    "emotion": "excited and proud, showing off a fresh purchase",
+    "notes": [
+      "Takes the '-e' ending ('nieuwe') before most nouns, except singular indefinite 'het'-words (een nieuw huis, het nieuwe huis)."
+    ],
+    "senses": [
+      {
+        "id": "1n9tzsx5gn30y1s",
+        "order": 0,
+        "definition": "Recently made, built, bought, or started, and not used before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand-new"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "q0ew4no5wkud85u",
+            "text": "Ik heb een nieuwe jas gekocht voor de winter.",
+            "textLang": "nl",
+            "translation": "I bought a new coat for the winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and eager to wear the latest purchase",
+            "note": null,
+            "matchedForm": "nieuwe",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3wzymt5uvr7a2hz",
+        "order": 1,
+        "definition": "Not known, seen, or experienced before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "unfamiliar",
+              "novel"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "0e0ou8ai1ovlzi1",
+            "text": "Dit is een heel nieuw idee voor ons team.",
+            "textLang": "nl",
+            "translation": "This is a completely new idea for our team.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nieuw",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "nieuw",
+    "lemma": "nieuw",
+    "reading": null,
+    "ipa": "/niu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh; recent",
     "primaryGloss": "new",
     "emotion": "excited and proud, showing off a fresh purchase",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dit is een heel nieuw idee voor onsteam.",
+        "why": "Typo: missing space in 'onsteam' ('ons team')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "new; fresh; recent",
+        "why": "'Fresh' is not in the senses and is normally 'vers' in Dutch."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'nieuw' for things that have just been made, bought, or",
+        "why": "Both notes merely restate the definition and basic antonym."
+      }
+    ],
+    "growth": 0.998
   }
 }

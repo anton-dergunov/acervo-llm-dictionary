@@ -73,6 +73,137 @@
     "headword": "sozinho",
     "lemma": "sozinho",
     "reading": null,
+    "ipa": "/soˈzĩɲu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "alone; by oneself; lonely",
+    "primaryGloss": "alone",
+    "emotion": null,
+    "notes": [
+      "'Sozinho' agrees in gender and number with the person it describes ('sozinho', 'sozinha', 'sozinhos', 'sozinhas'), even when translated as 'by oneself' or 'on one's own'.",
+      "Do not confuse with 'só', which can also mean 'alone' but most often means 'only' ('só um' = only one)."
+    ],
+    "senses": [
+      {
+        "id": "qfd3kbv5h8ke72j",
+        "order": 0,
+        "definition": "Without other people present, or without anyone's help.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "alone",
+              "by oneself",
+              "on one's own"
+            ]
+          }
+        ],
+        "domain": "solitude",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "wjjtmzi2b8d93vn",
+            "text": "Eu prefiro jantar sozinho às vezes.",
+            "textLang": "pt",
+            "translation": "I prefer to have dinner alone sometimes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and independent, describing a personal preference",
+            "note": null,
+            "matchedForm": "sozinho",
+            "matchedTranslationForm": "alone"
+          },
+          {
+            "id": "4crwfj2q164g0sk",
+            "text": "A menina fez o dever de casa sozinha.",
+            "textLang": "pt",
+            "translation": "The girl did her homework by herself.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sozinha",
+            "matchedTranslationForm": "by herself"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "akq23l04neym6f2",
+        "order": 1,
+        "definition": "Feeling sad because one has no company or friends.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lonely"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😔",
+        "examples": [
+          {
+            "id": "iz8o5i8oqgewnkt",
+            "text": "Ele se sente muito sozinho na cidade grande.",
+            "textLang": "pt",
+            "translation": "He feels very lonely in the big city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sozinho",
+            "matchedTranslationForm": "lonely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "sozinho",
+    "lemma": "sozinho",
+    "reading": null,
     "ipa": "/soˈziɲu/",
     "pos": "adj",
     "gender": null,
@@ -175,5 +306,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ele sente-se muito sozinho na cidade grande.",
+        "why": "Enclisis ('sente-se') after a subject pronoun is unnatural in Brazilian Portuguese; use proclisis ('se sente')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'sozinho' typically just means 'alone' (by oneself)",
+        "why": "Merely restates the two senses; better to note how 'sozinho' also means 'without help'."
+      }
+    ],
+    "growth": 1.108
   }
 }

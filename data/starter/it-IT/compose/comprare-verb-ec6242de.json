@@ -74,6 +74,74 @@
     "primaryGloss": "to buy",
     "emotion": "busy and purposeful, focused on getting what is needed",
     "notes": [
+      "'Acquistare' is a more formal synonym, often used in business, official notices, or formal writing."
+    ],
+    "senses": [
+      {
+        "id": "ya9gfx49ivbzjl5",
+        "order": 0,
+        "definition": "To get something by paying money for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to purchase"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "4jhwhxlqpxecb6f",
+            "text": "Voglio comprare una giacca nuova per l'inverno.",
+            "textLang": "it",
+            "translation": "I want to buy a new jacket for the winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and looking forward to the new purchase",
+            "note": null,
+            "matchedForm": "comprare",
+            "matchedTranslationForm": "buy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "comprare",
+    "lemma": "comprare",
+    "reading": null,
+    "ipa": "/komˈpra.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "to buy; to purchase",
+    "primaryGloss": "to buy",
+    "emotion": "busy and purposeful, focused on getting what is needed",
+    "notes": [
       "Comprare is the standard, everyday verb for buying anything from groceries to a car.",
       "Acquistare is a more formal synonym, often used in business or formal writing."
     ],
@@ -163,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Comprare is the standard, everyday verb for buying anything",
+        "why": "Restates the definition and gloss without adding grammar or usage info."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To obtain something abstract, such as favor, loyalty, or trouble",
+        "why": "Direct figurative extension of buying; example literally uses 'con i soldi'."
+      }
+    ],
+    "growth": 0.509
   }
 }

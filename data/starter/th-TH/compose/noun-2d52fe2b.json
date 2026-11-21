@@ -58,6 +58,96 @@
     "headword": "รถไฟ",
     "lemma": "รถไฟ",
     "reading": null,
+    "ipa": "/rót.faj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚂",
+    "topics": [
+      "City",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "train",
+    "primaryGloss": "train",
+    "emotion": "matter-of-fact and steady, thinking of a journey",
+    "notes": [
+      "Do not confuse รถไฟ (intercity train) with รถไฟฟ้า (electric urban transit, such as the BTS Skytrain or MRT subway).",
+      "The classifier for a whole train is ขบวน, and for an individual carriage is ตู้."
+    ],
+    "senses": [
+      {
+        "id": "csfiu1ls2g0kdum",
+        "order": 0,
+        "definition": "A series of connected carriages that travel on railway tracks to carry passengers or goods.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "train"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚂",
+        "examples": [
+          {
+            "id": "11f3lnfc8rxp8mn",
+            "text": "ฉันนั่งรถไฟไปเชียงใหม่",
+            "textLang": "th",
+            "translation": "I took the train to Chiang Mai.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and nostalgic, recalling a long-distance trip",
+            "note": null,
+            "matchedForm": "รถไฟ",
+            "matchedTranslationForm": "train"
+          },
+          {
+            "id": "obtwsqtey3ps20y",
+            "text": "สถานีรถไฟอยู่ไม่ไกลจากที่นี่",
+            "textLang": "th",
+            "translation": "The train station is not far from here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "รถไฟ",
+            "matchedTranslationForm": "train"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "รถไฟ",
+    "lemma": "รถไฟ",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The system of rails, engines, and cars used for transportation.",
+        "why": "Oversplit induced by English 'railway station' for สถานีรถไฟ (train station); रेलवे track is ทางรถไฟ."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'รถไฟ' is used both for the vehicle itself and",
+        "why": "Restates the oversplit sense instead of giving the classifier (ขบวน)."
+      }
+    ],
+    "growth": 0.802
   }
 }

@@ -58,6 +58,75 @@
     "headword": "de lamp",
     "lemma": "lamp",
     "reading": null,
+    "ipa": "/lɑmp/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "lamp; light",
+    "primaryGloss": "lamp",
+    "emotion": "warm and cozy, turning on the light as evening falls",
+    "notes": [
+      "Refers to any light fixture (including ceiling lights) or a light bulb, not just a table or floor lamp. Do not confuse with 'het licht' (light itself)."
+    ],
+    "senses": [
+      {
+        "id": "o0crt1rgj9zwdyc",
+        "order": 0,
+        "definition": "An electric device or bulb that produces light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lamp",
+              "light",
+              "light bulb"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "0mpoaeqolsl8pvd",
+            "text": "Ik doe de lamp aan in de woonkamer.",
+            "textLang": "nl",
+            "translation": "I turn on the light in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "comfortable and settling in for the evening",
+            "note": null,
+            "matchedForm": "lamp",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de lamp",
+    "lemma": "lamp",
+    "reading": null,
     "ipa": "/dəlɑmp/",
     "pos": "noun",
     "gender": "common",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dəlɑmp/",
+        "why": "IPA includes the article 'de'; it must transcribe only the lemma 'lamp' (/lɑmp/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de' because 'lamp' is a common gender noun in Dutch.",
+        "why": "Restates the article and gender already shown in the entry fields."
+      }
+    ],
+    "growth": 1.114
   }
 }

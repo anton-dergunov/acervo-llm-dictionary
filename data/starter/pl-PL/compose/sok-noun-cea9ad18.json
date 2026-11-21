@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "juice",
+    "primaryGloss": "juice",
+    "emotion": "refreshing and simple, a thirsty person getting a glass of juice",
+    "notes": [
+      "Type of juice is usually expressed with an adjective after the noun (e.g., 'sok pomarańczowy' – orange juice, 'sok jabłkowy' – apple juice) or with 'z' + genitive ('sok z cytryny' – lemon juice)."
+    ],
+    "senses": [
+      {
+        "id": "5i470v2n42fe1yw",
+        "order": 0,
+        "definition": "A drink made from the liquid of fruit or vegetables.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "juice"
+            ]
+          }
+        ],
+        "domain": "beverage",
+        "emoji": "🧃",
+        "examples": [
+          {
+            "id": "8xqjn1qv0xkooui",
+            "text": "Piję świeży sok pomarańczowy.",
+            "textLang": "pl",
+            "translation": "I am drinking fresh orange juice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a morning drink",
+            "note": null,
+            "matchedForm": "sok",
+            "matchedTranslationForm": "juice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sok",
+    "lemma": "sok",
+    "reading": null,
+    "ipa": "/sɔk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "juice; sap",
     "primaryGloss": "juice",
     "emotion": "refreshing and simple, a thirsty person getting a glass of juice",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The liquid substance that circulates within a plant.",
+        "why": "Botanical 'sap' is not an everyday A2 sense; takes up room unnecessarily."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Sok usually refers to fruit or vegetable juice. It is a masculine",
+        "why": "Restates the gloss and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'sokół', which means 'falcon'.",
+        "why": "Unlikely confusion; unhelpful filler note."
+      }
+    ],
+    "growth": 0.727
   }
 }

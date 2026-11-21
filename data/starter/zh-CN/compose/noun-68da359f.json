@@ -74,6 +74,53 @@
     "primaryGloss": "snake",
     "emotion": null,
     "notes": [
+      "Takes the measure word 条 (tiáo), used for long, flexible things: 一条蛇 (a snake).",
+      "One of the twelve animals of the Chinese zodiac."
+    ],
+    "senses": [
+      {
+        "id": "rjy4nsx8qgzawkv",
+        "order": 0,
+        "definition": "A long reptile with no legs that crawls on the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake",
+              "serpent"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "蛇",
+    "lemma": "蛇",
+    "reading": "shé",
+    "ipa": "/ʂɤ˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "snake",
+    "primaryGloss": "snake",
+    "emotion": null,
+    "notes": [
       "In Mandarin, note that this is a first-tone word (shé). While it is a common animal name, it is also one of the twelve animals of the Chinese zodiac."
     ],
     "senses": [
@@ -98,5 +145,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Mandarin, note that this is a first-tone word (shé).",
+        "why": "shé is second tone (rising), not first tone."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the standard measure word 条 (tiáo), which A2 learners need for long animals."
+      }
+    ],
+    "growth": 0.93
   }
 }

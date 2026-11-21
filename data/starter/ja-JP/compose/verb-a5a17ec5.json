@@ -59,6 +59,98 @@
     "language": "ja",
     "headword": "泣く",
     "lemma": "泣く",
+    "reading": "なく",
+    "ipa": "nakɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😭",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cry; to weep",
+    "primaryGloss": "to cry",
+    "emotion": "raw and vulnerable, the quiet release of long-held sadness",
+    "notes": [
+      "Godan intransitive verb (泣きます).",
+      "Do not confuse with the homophone 鳴く (なく), which is used for animals and birds making sounds (barking, meowing, chirping)."
+    ],
+    "senses": [
+      {
+        "id": "arymz6a9ss45hw4",
+        "order": 0,
+        "definition": "To shed tears or cry out from sadness, pain, fear, or joy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cry",
+              "to weep",
+              "to sob"
+            ]
+          }
+        ],
+        "domain": "crying",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "kopioes0ddjxjyx",
+            "text": "映画を見て泣いた。",
+            "textLang": "ja",
+            "translation": "I cried watching the movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "softly sentimental, moved by a touching story",
+            "note": null,
+            "matchedForm": "泣いた",
+            "matchedTranslationForm": "cried"
+          },
+          {
+            "id": "z5txhy68am9ztm9",
+            "text": "赤ちゃんが泣いている。",
+            "textLang": "ja",
+            "translation": "The baby is crying.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and attentive, noticing a child in need",
+            "note": null,
+            "matchedForm": "泣いている",
+            "matchedTranslationForm": "crying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "泣く",
+    "lemma": "泣く",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -164,5 +256,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing required hiragana reading for a Japanese word containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(sound) To make a sound expressing pain or distress",
+        "why": "A baby crying is the same everyday meaning as sense 0; oversplit."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Unlike '叫ぶ' (sakebu), which means to shout or yell",
+        "why": "Filler notes; missing the essential homophone note distinguishing 泣く from 鳴く (animal cries)."
+      }
+    ],
+    "growth": 0.696
   }
 }

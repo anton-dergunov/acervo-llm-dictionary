@@ -58,6 +58,116 @@
     "headword": "병",
     "lemma": "병",
     "reading": null,
+    "ipa": "/pjʌŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bottle; illness; sickness",
+    "primaryGloss": "bottle",
+    "emotion": "matter-of-fact and ordinary, the everyday feeling of holding a common object",
+    "notes": [
+      "As 'bottle' (瓶), 병 is also used as a counter after native Korean numbers: 물 한 병 (one bottle of water), 맥주 두 병 (two bottles of beer).",
+      "As 'illness' (病), it is commonly used in the phrase 병에 걸리다 (to get sick / catch a disease) and 병이 나다 (to fall ill)."
+    ],
+    "senses": [
+      {
+        "id": "1uilrkasxg4y6gv",
+        "order": 0,
+        "definition": "A glass or plastic container with a narrow neck for holding liquids, or a counter for such containers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "vcjfr9ibka5l373",
+            "text": "물 한 병을 주세요.",
+            "textLang": "ko",
+            "translation": "Please give me a bottle of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, making a simple request at a restaurant",
+            "note": null,
+            "matchedForm": "병",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fvasob2oq9ruaq5",
+        "order": 1,
+        "definition": "A condition of poor health in the body or mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "illness",
+              "sickness",
+              "disease"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "ew4mx94xtihkx3k",
+            "text": "그는 병에 걸려서 학교에 가지 못했다.",
+            "textLang": "ko",
+            "translation": "He got sick and could not go to school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sympathetic and concerned, discussing someone's health status",
+            "note": null,
+            "matchedForm": "병",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "병",
+    "lemma": "병",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "병 has two very different meanings. Context usually makes it clear",
+        "why": "Obvious filler; should instead explain counter usage (한 병) and the collocation 병에 걸리다."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "He could not go to school because he caught an illness.",
+        "why": "'Caught an illness' is a calque of 병에 걸리다; natural English is 'got sick'."
+      }
+    ],
+    "growth": 1.15
   }
 }

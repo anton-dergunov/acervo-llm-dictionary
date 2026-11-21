@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to throw; to cast",
+    "primaryGloss": "throw",
+    "emotion": "focused and energetic, putting strength into the movement",
+    "notes": [
+      "Strong verb with vowel change in the present tense: du wirfst, er wirft; past: warf, hat geworfen."
+    ],
+    "senses": [
+      {
+        "id": "m8t597ik7dlgl2l",
+        "order": 0,
+        "definition": "To send something through the air with a quick movement of the hand and arm, or to put something somewhere quickly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "throw",
+              "toss",
+              "fling"
+            ]
+          }
+        ],
+        "domain": "throw",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "fzd914qq4dmw2yv",
+            "text": "Er wirft den Ball über den Zaun.",
+            "textLang": "de",
+            "translation": "He throws the ball over the fence.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and energetic, watching the ball fly",
+            "note": null,
+            "matchedForm": "wirft",
+            "matchedTranslationForm": "throws"
+          },
+          {
+            "id": "e637xpj7lzv2bb5",
+            "text": "Sie wirft das Papier in den Mülleimer.",
+            "textLang": "de",
+            "translation": "She throws the paper into the trash can.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quick and practical, getting rid of rubbish",
+            "note": null,
+            "matchedForm": "wirft",
+            "matchedTranslationForm": "throws"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pu22s618mfi3qn0",
+        "order": 1,
+        "definition": "To direct a look at someone or something, or to project light or a shadow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cast",
+              "throw",
+              "take (a look)"
+            ]
+          }
+        ],
+        "domain": "cast",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "pa1a1ndk500apuv",
+            "text": "Kannst du bitte kurz einen Blick darauf werfen?",
+            "textLang": "de",
+            "translation": "Can you please take a quick look at this?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "werfen",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "werfen",
+    "lemma": "werfen",
+    "reading": null,
+    "ipa": "/ˈvɛʁfn̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚾",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to throw; to drop; to cast",
     "primaryGloss": "throw",
     "emotion": "focused and energetic, putting strength into the movement",
@@ -163,5 +295,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to throw; to drop; to cast",
+        "why": "'to cast' is not covered in the senses; 'to drop' is a misleading translation."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'werfen' meaning to cast or drop",
+        "why": "Tells learner not to confuse the word with itself; misses stem vowel change e -> i."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To let something fall or drop carelessly, or to discard something.",
+        "why": "'werfen' does not mean 'to let fall' (fallen lassen); throwing into a bin is sense 0."
+      }
+    ],
+    "growth": 1.087
   }
 }

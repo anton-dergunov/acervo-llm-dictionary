@@ -68,6 +68,157 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "living room; room; classroom",
+    "primaryGloss": "living room",
+    "emotion": "comfortable and relaxed, feeling at home in your own space",
+    "notes": [
+      "In a house, 'a sala' (or 'sala de estar') means the living room; a bedroom is 'o quarto' and a general room of a house is 'o cômodo'."
+    ],
+    "senses": [
+      {
+        "id": "qlivmz6ivhqwcms",
+        "order": 0,
+        "definition": "The main room in a home where people sit, relax, watch TV, or receive guests.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "living room",
+              "lounge"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛋️",
+        "examples": [
+          {
+            "id": "60dn939us0czf2v",
+            "text": "Nós estamos assistindo televisão na sala.",
+            "textLang": "pt",
+            "translation": "We are watching television in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a quiet evening at home",
+            "note": null,
+            "matchedForm": "sala",
+            "matchedTranslationForm": "living room"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4gx3dms2hba0nbw",
+        "order": 1,
+        "definition": "A room in a public or commercial building used for a specific purpose, such as an office, waiting room, or theater hall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room",
+              "hall",
+              "office"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "t3hg6flq303lifi",
+            "text": "O médico está esperando na sala três.",
+            "textLang": "pt",
+            "translation": "The doctor is waiting in room three.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sala",
+            "matchedTranslationForm": "room"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0kp9pqjmnv6p9rc",
+        "order": 2,
+        "definition": "A room in a school or university where lessons take place (often 'sala de aula').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "classroom",
+              "room"
+            ]
+          }
+        ],
+        "domain": "school",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "fczyp8jiqrk0n1x",
+            "text": "A professora entrou na sala de aula.",
+            "textLang": "pt",
+            "translation": "The teacher entered the classroom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and focused, preparing for a lesson to begin",
+            "note": null,
+            "matchedForm": "sala",
+            "matchedTranslationForm": "classroom"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a sala",
+    "lemma": "sala",
+    "reading": null,
+    "ipa": "/ˈsa.lɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛋️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "room; living room; classroom",
     "primaryGloss": "living room",
     "emotion": "comfortable and relaxed, feeling at home in your own space",
@@ -160,5 +311,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the general sense 'room' (in an office, clinic, cinema, etc.), which is in shortGloss."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "room; living room; classroom",
+        "why": "'room' is in shortGloss and notes[0], but missing from senses."
+      }
+    ],
+    "growth": 1.318
   }
 }

@@ -58,6 +58,74 @@
     "headword": "오후",
     "lemma": "오후",
     "reading": null,
+    "ipa": "oɦu",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "afternoon; p.m.",
+    "primaryGloss": "afternoon",
+    "emotion": null,
+    "notes": [
+      "Placed before the hour to mean 'p.m.' (e.g., 오후 3시 = 3:00 p.m.). Its opposite is '오전' (morning; a.m.)."
+    ],
+    "senses": [
+      {
+        "id": "8gyc0clfq6fdl2f",
+        "order": 0,
+        "definition": "The time of day from noon until evening, or from noon until midnight when telling time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon",
+              "p.m."
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "5t5boaf8dwbjq1r",
+            "text": "오후 세 시에 만나요.",
+            "textLang": "ko",
+            "translation": "Let's meet at 3 p.m.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "오후",
+            "matchedTranslationForm": "p.m."
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오후",
+    "lemma": "오후",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -97,5 +165,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0]",
+        "quote": "(afternoon) The time of day from noon until evening. | glosses en: afternoon, P.M.",
+        "why": "Conflates 'afternoon' (noon to evening) with 'p.m.' (noon to midnight), and note contradicts P.M. usage."
+      }
+    ],
+    "growth": 1.102
   }
 }

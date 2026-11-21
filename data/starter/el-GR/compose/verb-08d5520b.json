@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to catch; to grab; to take (a seat)",
+    "primaryGloss": "catch",
+    "emotion": "matter-of-fact and direct, describing the physical act of interacting with an object",
+    "notes": [
+      "Simple past (aorist): 'έπιασα'.",
+      "Distinct from 'κρατάω' (to hold): 'πιάνω' is the action of taking hold of something, whereas 'κρατάω' means keeping it in your hand."
+    ],
+    "senses": [
+      {
+        "id": "5890ektaraw5wux",
+        "order": 0,
+        "definition": "To take hold of something with the hands.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grab",
+              "take",
+              "grasp"
+            ]
+          }
+        ],
+        "domain": "grasping",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "jh03yfqdhgbcnf8",
+            "text": "Πιάσε το ποτήρι πριν πέσει.",
+            "textLang": "el",
+            "translation": "Grab the glass before it falls.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "urgent and quick, signaling immediate action",
+            "note": null,
+            "matchedForm": "Πιάσε",
+            "matchedTranslationForm": "Grab"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f6fvrwwhg8sdhe9",
+        "order": 1,
+        "definition": "To intercept and hold something moving, or to capture someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "catch"
+            ]
+          }
+        ],
+        "domain": "catching",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "22d63xdd854s94e",
+            "text": "Προσπάθησε να πιάσεις την μπάλα.",
+            "textLang": "el",
+            "translation": "Try to catch the ball.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and focused, coaching someone in a game",
+            "note": null,
+            "matchedForm": "πιάσεις",
+            "matchedTranslationForm": "catch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pj99xz1bcgkexzq",
+        "order": 2,
+        "definition": "To take up or occupy a seat, space, or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "take",
+              "occupy"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "jknmidlxnqz23qz",
+            "text": "Πιάσε μια θέση κοντά στο παράθυρο.",
+            "textLang": "el",
+            "translation": "Take a seat near the window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and inviting, suggesting where to sit",
+            "note": null,
+            "matchedForm": "Πιάσε",
+            "matchedTranslationForm": "Take"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "πιάνω",
+    "lemma": "πιάνω",
+    "reading": null,
+    "ipa": "/ˈpça.no/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to grab; to catch; to reach; to occupy",
     "primaryGloss": "grab",
     "emotion": "matter-of-fact and direct, describing the physical act of interacting with an object",
@@ -202,5 +353,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to grab; to catch; to reach; to occupy",
+        "why": "'to reach' is in shortGloss, but there is no sense for it."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used in many contexts. It can mean grabbing an object",
+        "why": "Restates the senses instead of giving the irregular aorist 'έπιασα'."
+      }
+    ],
+    "growth": 0.882
   }
 }

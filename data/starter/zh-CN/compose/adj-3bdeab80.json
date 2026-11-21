@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry; dried up; in vain",
+    "primaryGloss": "dry",
+    "emotion": "matter-of-fact, stating the dry state of things plainly",
+    "notes": [
+      "The opposite of 湿 (shī, wet). For dry weather, skin, or air, the two-syllable word 干燥 (gānzào) is often preferred.",
+      "Do not confuse with the fourth-tone verb 干 (gàn, 'to do; to work'), written with the same simplified character."
+    ],
+    "senses": [
+      {
+        "id": "pju2kn36fjdyreh",
+        "order": 0,
+        "definition": "Not wet; free from moisture or having lost all its water or liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "dried up"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "🏜️",
+        "examples": [
+          {
+            "id": "msx40o2gcnsz26s",
+            "text": "衣服晒在外面，现在已经干了。",
+            "textLang": "zh",
+            "translation": "The clothes were hung outside and are dry now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased that the chores are finished",
+            "note": null,
+            "matchedForm": "干",
+            "matchedTranslationForm": "dry"
+          },
+          {
+            "id": "j74nkclb5wizm58",
+            "text": "水井里的水全干了。",
+            "textLang": "zh",
+            "translation": "The water in the well has completely dried up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned about the lack of water",
+            "note": null,
+            "matchedForm": "干",
+            "matchedTranslationForm": "dried up"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ox0su60g1cqgwtl",
+        "order": 1,
+        "definition": "Before a verb: in vain; without result or practical outcome.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "in vain",
+              "for nothing",
+              "futile"
+            ]
+          }
+        ],
+        "domain": "futility",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "1y5ljbo4q35k8p5",
+            "text": "我们白跑了一趟，干等了半天。",
+            "textLang": "zh",
+            "translation": "We made the trip for nothing and waited in vain for half a day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated by wasted time",
+            "note": null,
+            "matchedForm": "干",
+            "matchedTranslationForm": "in vain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "干",
+    "lemma": "干",
+    "reading": "gān",
+    "ipa": "/kan˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏜️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; empty; in vain",
     "primaryGloss": "dry",
     "emotion": "matter-of-fact, stating the dry state of things plainly",
@@ -201,5 +333,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(empty) Empty of water or liquid; having no milk, tears, or juice",
+        "why": "A well drying up is a shade of sense 0 ('dry'), not 'empty'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Most commonly used to mean 'dry' (opposite of 湿 shī)",
+        "why": "Mostly restates the primary gloss; only the antonym 湿 (shī) is useful."
+      }
+    ],
+    "growth": 0.992
   }
 }

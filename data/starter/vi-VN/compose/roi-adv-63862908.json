@@ -58,6 +58,117 @@
     "headword": "rồi",
     "lemma": "rồi",
     "reading": null,
+    "ipa": "/zoj˨˩/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "already; then, after that",
+    "primaryGloss": "already",
+    "emotion": null,
+    "notes": [
+      "Placed at the end of a clause to show that an action is completed (often paired with 'đã' before the verb: 'đã ... rồi').",
+      "Placed between two clauses or actions, it means 'then' or 'after that'."
+    ],
+    "senses": [
+      {
+        "id": "pw9lsd6u4zgavbq",
+        "order": 0,
+        "definition": "Used at the end of a sentence to show that an action has been completed or a state has begun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already",
+              "now"
+            ]
+          }
+        ],
+        "domain": "completion",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "bwy54m3ej7af3nh",
+            "text": "Tôi ăn cơm rồi.",
+            "textLang": "vi",
+            "translation": "I have already eaten.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and full after a good meal",
+            "note": null,
+            "matchedForm": "rồi",
+            "matchedTranslationForm": "already"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5y1tq4yxp5fs6xc",
+        "order": 1,
+        "definition": "Next; after that; following a previous action.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "then",
+              "afterwards",
+              "after that"
+            ]
+          }
+        ],
+        "domain": "sequence",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "f6mjk4gyoitz8ph",
+            "text": "Tôi làm bài tập rồi đi ngủ.",
+            "textLang": "vi",
+            "translation": "I did my homework and then went to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rồi",
+            "matchedTranslationForm": "then"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "rồi",
+    "lemma": "rồi",
+    "reading": null,
     "ipa": "/zəːj˨˩/",
     "pos": "adv",
     "gender": null,
@@ -160,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/zəːj˨˩/",
+        "why": "In northern Vietnamese, 'ô' is rounded /o/, so 'rồi' is /zoj˨˩/, not /zəːj˨˩/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday connective sense 'then; after that' ('ăn cơm rồi đi học')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To indicate that an event is finished or has come to an end.",
+        "why": "Duplicates sense 0; in the example, 'xong' means 'finished', while 'rồi' means 'already'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "An action or event that has been completed before now.",
+        "why": "Defines an adverb as a noun phrase ('an action or event')."
+      }
+    ],
+    "growth": 0.992
   }
 }

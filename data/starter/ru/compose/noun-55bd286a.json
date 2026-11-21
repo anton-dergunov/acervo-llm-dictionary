@@ -72,6 +72,113 @@
     "primaryGloss": "grass",
     "emotion": "peaceful and grounded, breathing in the fresh scent of the earth",
     "notes": [
+      "Uncountable in the 'grass' sense; countable and usually plural ('тра́вы', with stress shifting to the stem) when referring to herbs."
+    ],
+    "senses": [
+      {
+        "id": "ufrcpubs2dlsra0",
+        "order": 0,
+        "definition": "The short green plants that cover the ground in a lawn, park, or field.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grass"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "81kagv2izfgr0i2",
+            "text": "Во дворе растёт зелёная трава.",
+            "textLang": "ru",
+            "translation": "Green grass grows in the yard.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "трава",
+            "matchedTranslationForm": "grass"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6dz4llhnkhyl0wi",
+        "order": 1,
+        "definition": "A wild or garden plant used in medicine, tea, or cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "herb"
+            ]
+          }
+        ],
+        "domain": "herb",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "agi5pr4qj8lak2s",
+            "text": "Бабушка собирает целебные травы.",
+            "textLang": "ru",
+            "translation": "Grandmother gathers medicinal herbs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and reminiscent of a quiet countryside",
+            "note": null,
+            "matchedForm": "травы",
+            "matchedTranslationForm": "herbs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "трава",
+    "lemma": "трава",
+    "reading": null,
+    "ipa": "/trɐˈva/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "grass; herb",
+    "primaryGloss": "grass",
+    "emotion": "peaceful and grounded, breathing in the fresh scent of the earth",
+    "notes": [
       "Used both for the green grass on a lawn and for wild herbs or weeds."
     ],
     "senses": [
@@ -159,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the green grass on a lawn and for wild",
+        "why": "Merely repeats the two senses; misses countability and the stress shift in the plural."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "herb, weed",
+        "why": "'Weed' does not match the definition of a plant used in medicine or cooking ('сорняк')."
+      }
+    ],
+    "growth": 1.304
   }
 }

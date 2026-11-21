@@ -72,6 +72,96 @@
     "primaryGloss": "never",
     "emotion": null,
     "notes": [
+      "Before the verb, 'nunca' is used alone ('Eu nunca fui'); after the verb, 'não' is required before the verb ('Eu não fui nunca', I never went).",
+      "Opposite of 'sempre' (always)."
+    ],
+    "senses": [
+      {
+        "id": "hf51tx3z59oiib4",
+        "order": 0,
+        "definition": "At no time; on no occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "never",
+              "at no time"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "8p11ea0amma9fbd",
+            "text": "Eu nunca comi sushi.",
+            "textLang": "pt",
+            "translation": "I have never eaten sushi.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple personal truth",
+            "note": null,
+            "matchedForm": "nunca",
+            "matchedTranslationForm": "never"
+          },
+          {
+            "id": "4lkvp3s02pwys2m",
+            "text": "Nós nunca chegamos atrasados.",
+            "textLang": "pt",
+            "translation": "We never arrive late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and slightly proud of being punctual",
+            "note": null,
+            "matchedForm": "nunca",
+            "matchedTranslationForm": "never"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "nunca",
+    "lemma": "nunca",
+    "reading": null,
+    "ipa": "/ˈnũ.kɐ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "never; at no time",
+    "primaryGloss": "never",
+    "emotion": null,
+    "notes": [
       "In Portuguese, it is common to use 'nunca' alongside another negative word (like 'não') for emphasis: 'Eu nunca não fui' (I have never not gone).",
       "It is the opposite of 'sempre' (always)."
     ],
@@ -141,5 +231,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'Eu nunca não fui' (I have never not gone).",
+        "why": "Misexplains Portuguese negative concord; 'não' is required only when 'nunca' follows the verb."
+      }
+    ],
+    "growth": 0.962
   }
 }

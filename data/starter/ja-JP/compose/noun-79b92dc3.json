@@ -77,6 +77,115 @@
     "primaryGloss": "moon",
     "emotion": "a sense of quiet awe while looking at the night sky",
     "notes": [
+      "Standalone 月 is read 'tsuki'. In month names it is read '-gatsu' (e.g., 一月 ichigatsu, January), and when counting months it uses '-kagetsu' (e.g., 二ヶ月 nikagetsu, two months).",
+      "The moon in the sky is often politely or affectionately called お月様 (otsuki-sama), especially with children."
+    ],
+    "senses": [
+      {
+        "id": "gd7n3y4wkjlzavm",
+        "order": 0,
+        "definition": "The large object that shines in the night sky and changes its shape.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "moon"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "krivbnc7cand3h9",
+            "text": "今夜は月がとてもきれいです。",
+            "textLang": "ja",
+            "translation": "The moon is very beautiful tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and appreciative of the peaceful scenery",
+            "note": null,
+            "matchedForm": "月",
+            "matchedTranslationForm": "moon"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1ngb988rts7tb07",
+        "order": 1,
+        "definition": "A period of about thirty days, or one of the twelve parts of a year.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "month"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "7c2442fisyxmaf0",
+            "text": "新しい月が始まりました。",
+            "textLang": "ja",
+            "translation": "A new month has started.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "月",
+            "matchedTranslationForm": "month"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "月",
+    "lemma": "月",
+    "reading": "つき",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Nature",
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "moon; month",
+    "primaryGloss": "moon",
+    "emotion": "a sense of quiet awe while looking at the night sky",
+    "notes": [
       "When referring to the moon in the sky, it is often called 'otsuki-sama' (お月様) to show politeness or endearment, especially when speaking to children.",
       "As a unit of time, this word is usually combined with numbers, like 'ichi-gatsu' for January or 'ni-kagetsu' for a duration of two months."
     ],
@@ -164,5 +273,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "一月はとても寒いです。",
+        "why": "Uses compound '一月' (ichigatsu, January) rather than standalone '月' (tsuki, month)."
+      }
+    ],
+    "growth": 0.853
   }
 }

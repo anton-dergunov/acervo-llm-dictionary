@@ -72,6 +72,74 @@
     "primaryGloss": "hair",
     "emotion": "gentle and reflective, brushing or touching one's hair",
     "notes": [
+      "For all the hair on someone's head, both singular 'het haar' and plural 'de haren' are used (e.g., 'je haar/haren kammen').",
+      "Do not confuse with the pronoun 'haar' (her)."
+    ],
+    "senses": [
+      {
+        "id": "bzd7f7eqncsphen",
+        "order": 0,
+        "definition": "The fine threads that grow on a person's head or body, or on an animal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hair"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "💇",
+        "examples": [
+          {
+            "id": "tnmec6n2rxk7goi",
+            "text": "Zij heeft lang blond haar.",
+            "textLang": "nl",
+            "translation": "She has long blonde hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and admiring, describing someone's appearance",
+            "note": null,
+            "matchedForm": "haar",
+            "matchedTranslationForm": "hair"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het haar",
+    "lemma": "haar",
+    "reading": null,
+    "ipa": "/ɦaːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💇",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "hair",
+    "primaryGloss": "hair",
+    "emotion": "gentle and reflective, brushing or touching one's hair",
+    "notes": [
       "Note that 'haar' is a neuter noun, so it takes 'het haar' in the singular.",
       "Be careful not to confuse the noun 'haar' with the possessive pronoun 'haar' (her)."
     ],
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'haar' is a neuter noun, so it takes 'het haar'",
+        "why": "Restates the gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The fine thread-like growth covering the skin of animals.",
+        "why": "Human and animal hair are the same basic sense of 'haar' (animal fur is usually 'vacht')."
+      }
+    ],
+    "growth": 0.782
   }
 }

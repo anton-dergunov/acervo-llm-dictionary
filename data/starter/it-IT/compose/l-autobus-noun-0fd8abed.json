@@ -74,6 +74,74 @@
     "primaryGloss": "bus",
     "emotion": null,
     "notes": [
+      "It does not change in the plural: 'un autobus', 'gli autobus'.",
+      "Used for city or local buses (often shortened to 'bus'); a long-distance coach is called a 'pullman' or 'corriera'."
+    ],
+    "senses": [
+      {
+        "id": "0qkdvuhkl32hrxu",
+        "order": 0,
+        "definition": "A large motor vehicle that carries passengers along a fixed route, especially in a city.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bus"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "ges8tfk3q9q0ww2",
+            "text": "Prendo l'autobus per andare in centro.",
+            "textLang": "it",
+            "translation": "I take the bus to go downtown.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a daily habit",
+            "note": null,
+            "matchedForm": "autobus",
+            "matchedTranslationForm": "bus"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'autobus",
+    "lemma": "autobus",
+    "reading": null,
+    "ipa": "/ˈawtobus/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bus",
+    "primaryGloss": "bus",
+    "emotion": null,
+    "notes": [
       "In everyday speech, Italians usually shorten 'autobus' to 'bus' or 'pullman'."
     ],
     "senses": [
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Italians usually shorten 'autobus' to 'bus' or 'pullman'.",
+        "why": "'Pullman' is not a shortening of 'autobus'; it refers specifically to a long-distance coach."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention that 'autobus' is invariable in the plural ('gli autobus')."
+      }
+    ],
+    "growth": 1.541
   }
 }

@@ -58,6 +58,116 @@
     "headword": "بَدَأَ",
     "lemma": "بَدَأَ",
     "reading": null,
+    "ipa": "/ba.da.ʔa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to begin; to start",
+    "primaryGloss": "begin",
+    "emotion": "a sense of anticipation and movement as a new task is undertaken",
+    "notes": [
+      "Present tense: يَبْدَأُ (yabdaʾu). When meaning 'to start doing something', it can take a direct object, the preposition بـِ (bi-) with a noun, or an imperfect verb directly (e.g., بَدَأَ يَكْتُبُ 'he began to write')."
+    ],
+    "senses": [
+      {
+        "id": "or57f5v57jqoobj",
+        "order": 0,
+        "definition": "To start doing an activity or action.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "begin",
+              "start"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "▶️",
+        "examples": [
+          {
+            "id": "7qy8rz09nrzgztd",
+            "text": "بَدَأَ الطَّالِبُ الدِّرَاسَةَ.",
+            "textLang": "ar",
+            "translation": "The student began studying.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and determined as a student settles into their work",
+            "note": null,
+            "matchedForm": "بَدَأَ",
+            "matchedTranslationForm": "began"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s677ydv31z4suir",
+        "order": 1,
+        "definition": "To happen or exist from a particular time onwards.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "begin",
+              "start",
+              "commence"
+            ]
+          }
+        ],
+        "domain": "event",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "pmbajyrmnjjns9r",
+            "text": "بَدَأَ الدَّرْسُ فِي السَّاعَةِ التَّاسِعَةِ.",
+            "textLang": "ar",
+            "translation": "The lesson started at nine o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "بَدَأَ",
+            "matchedTranslationForm": "started"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَدَأَ",
+    "lemma": "بَدَأَ",
+    "reading": null,
     "ipa": "/baˈdaʔa/",
     "pos": "verb",
     "gender": null,
@@ -119,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baˈdaʔa/",
+        "why": "Wrong stress placement; in /badaʔa/ stress falls on the first syllable."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0].definition",
+        "quote": "To start doing something or for something to commence.",
+        "why": "Transitive ('to start something') and intransitive ('for something to start') uses should be separate senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The student began the study.",
+        "why": "Unnatural calque; الدِّرَاسَةَ here means 'studying' or 'his studies'."
+      }
+    ],
+    "growth": 1.533
   }
 }

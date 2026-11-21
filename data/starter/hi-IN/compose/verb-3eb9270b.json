@@ -72,6 +72,139 @@
     "primaryGloss": "to fall",
     "emotion": "surprised and sudden, watching something drop down unexpectedly",
     "notes": [
+      "Intransitive (does not take ने in the past tense). Do not confuse it with its transitive counterpart गिराना (to drop or knock something down).",
+      "Often used in the compound verb गिर जाना to emphasize the completion of falling."
+    ],
+    "senses": [
+      {
+        "id": "4pab040zrn0p963",
+        "order": 0,
+        "definition": "To move downward and hit the ground by accident or gravity, of an object or person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to fall down",
+              "to drop"
+            ]
+          }
+        ],
+        "domain": "motion",
+        "emoji": "🍂",
+        "examples": [
+          {
+            "id": "141abs7o7f8wuyx",
+            "text": "पेड़ से सेब नीचे गिर गया।",
+            "textLang": "hi",
+            "translation": "The apple fell down from the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and focused on the moving fruit",
+            "note": null,
+            "matchedForm": "गिर",
+            "matchedTranslationForm": "fell down"
+          },
+          {
+            "id": "bvyqc0idfilnlp9",
+            "text": "वह बारिश में फिसल कर गिर गया।",
+            "textLang": "hi",
+            "translation": "He slipped and fell in the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and sympathetic seeing someone slip",
+            "note": null,
+            "matchedForm": "गिर",
+            "matchedTranslationForm": "fell"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cr8x8sxbjsiiobt",
+        "order": 1,
+        "definition": "To become lower in amount, level, or value.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to drop",
+              "to decrease"
+            ]
+          }
+        ],
+        "domain": "decrease",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vpcn1cnp8i65z7e",
+            "text": "रात में तापमान बहुत गिर गया।",
+            "textLang": "hi",
+            "translation": "The temperature dropped a lot at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "गिर",
+            "matchedTranslationForm": "dropped"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "गिरना",
+    "lemma": "गिरना",
+    "reading": null,
+    "ipa": "/ɡɪɾ.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to fall; to drop",
+    "primaryGloss": "to fall",
+    "emotion": "surprised and sudden, watching something drop down unexpectedly",
+    "notes": [
       "Use गिरना for things that fall down by themselves or drop from your hands.",
       "Do not confuse it with गिराना (girānā), which means to drop or knock something down intentionally."
     ],
@@ -161,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(slip) To lose footing and drop to the floor or ground.",
+        "why": "A person falling and an object falling are the same sense; 'slip' comes from फिसलना."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to fall down, to slip",
+        "why": "गिरना does not mean 'to slip' (which is फिसलना in the example)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to decrease / drop' (prices, temperature)."
+      }
+    ],
+    "growth": 1.381
   }
 }

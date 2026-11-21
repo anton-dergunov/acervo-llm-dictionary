@@ -58,6 +58,116 @@
     "headword": "เสมอ",
     "lemma": "เสมอ",
     "reading": null,
+    "ipa": "/sà.mɤ̌ː/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "always; evenly; tie",
+    "primaryGloss": "always",
+    "emotion": "matter-of-fact and reliable, describing a recurring habit",
+    "notes": [
+      "Placed at the end of a clause when meaning 'always'. Do not confuse with ตลอด ('all along / the whole time'), which stresses continuous duration rather than repeated occasions."
+    ],
+    "senses": [
+      {
+        "id": "0aznbhauuj6wnje",
+        "order": 0,
+        "definition": "At all times; on every occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "always",
+              "constantly"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "jtp7emvmdu9dkji",
+            "text": "เขาไปทำงานสายเสมอ",
+            "textLang": "th",
+            "translation": "He is always late for work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and resigned, noting a recurring annoyance",
+            "note": null,
+            "matchedForm": "เสมอ",
+            "matchedTranslationForm": "always"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "30d43lixm2091v4",
+        "order": 1,
+        "definition": "To the same level, height, or score; evenly or in a tie.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "evenly",
+              "level",
+              "tied"
+            ]
+          }
+        ],
+        "domain": "equality",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "rk3kbzxknjl6oag",
+            "text": "ตัดหญ้าให้เสมอ",
+            "textLang": "th",
+            "translation": "Cut the grass so it is level.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "precise and focused, giving instructions for a task",
+            "note": null,
+            "matchedForm": "เสมอ",
+            "matchedTranslationForm": "level"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เสมอ",
+    "lemma": "เสมอ",
+    "reading": null,
     "ipa": "/sa.mɤ̌ː/",
     "pos": "adv",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/sa.mɤ̌ː/",
+        "why": "First syllable has low tone (/sà.mɤ̌ː/), not mid tone."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is often used for positive habits.",
+        "why": "False claim, directly contradicted by the example 'always late'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To be of the same level, height, or value",
+        "why": "Defined as an infinitive verb while POS is adverb."
+      }
+    ],
+    "growth": 0.846
   }
 }

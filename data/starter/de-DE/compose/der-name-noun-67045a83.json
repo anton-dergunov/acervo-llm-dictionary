@@ -74,6 +74,94 @@
     "primaryGloss": "name",
     "emotion": null,
     "notes": [
+      "Declines like a weak masculine noun with '-n' in most forms ('den Namen', plural 'die Namen'), except the genitive singular which takes '-ns' ('des Namens')."
+    ],
+    "senses": [
+      {
+        "id": "098k7c0g7g42vxd",
+        "order": 0,
+        "definition": "The word or phrase by which a person, animal, place, or thing is known or addressed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "name"
+            ]
+          }
+        ],
+        "domain": "identity",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "9velzo6exbivqzu",
+            "text": "Wie ist dein Name?",
+            "textLang": "de",
+            "translation": "What is your name?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and curious, making an introduction",
+            "note": null,
+            "matchedForm": "Name",
+            "matchedTranslationForm": "name"
+          },
+          {
+            "id": "a5nn8cu2tbq125q",
+            "text": "Er hat den Namen seines Hundes vergessen.",
+            "textLang": "de",
+            "translation": "He has forgotten his dog's name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly embarrassed or apologetic while admitting a lapse in memory",
+            "note": null,
+            "matchedForm": "Namen",
+            "matchedTranslationForm": "name"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Name",
+    "lemma": "Name",
+    "reading": null,
+    "ipa": "/ˈnaːmə/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "name",
+    "primaryGloss": "name",
+    "emotion": null,
+    "notes": [
       "Note that 'Name' is a weak masculine noun in German. This means it adds an '-n' in all cases except the nominative singular. For example, you would say 'Ich kenne seinen Namen' (accusative)."
     ],
     "senses": [
@@ -141,5 +229,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "adds an '-n' in all cases except the nominative singular",
+        "why": "'Name' is an irregular n-noun taking '-ns' in the genitive singular ('des Namens'), not '-n'."
+      }
+    ],
+    "growth": 0.916
   }
 }

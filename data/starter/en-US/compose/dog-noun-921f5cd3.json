@@ -72,6 +72,74 @@
     "primaryGloss": "perro",
     "emotion": "friendly and cheerful, calling a friendly pet over",
     "notes": [
+      "Es el término general para la especie; para referirse específicamente a un cachorro de pocos meses se usa 'puppy'."
+    ],
+    "senses": [
+      {
+        "id": "0tckhclotu8ek1p",
+        "order": 0,
+        "definition": "Animal mamífero doméstico de cuatro patas, muy común como mascota o animal de compañía.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "perro",
+              "perra"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "x3zrpsycf5j1jcu",
+            "text": "The dog is barking in the yard.",
+            "textLang": "en",
+            "translation": "El perro está ladrando en el patio.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and annoyed by the noise outside",
+            "note": null,
+            "matchedForm": "dog",
+            "matchedTranslationForm": "perro"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "dog",
+    "lemma": "dog",
+    "reading": null,
+    "ipa": "/dɔɡ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐶",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "perro",
+    "primaryGloss": "perro",
+    "emotion": "friendly and cheerful, calling a friendly pet over",
+    "notes": [
       "A diferencia de 'puppy', que se refiere específicamente a un cachorro, 'dog' es el término general para cualquier perro adulto."
     ],
     "senses": [
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'dog' es el término general para cualquier perro adulto.",
+        "why": "'dog' refers to the species regardless of age, not exclusively adult dogs."
+      }
+    ],
+    "growth": 0.884
   }
 }

@@ -72,6 +72,75 @@
     "primaryGloss": "suerte",
     "emotion": "hopeful and optimistic, keeping fingers crossed for a good outcome",
     "notes": [
+      "Es un sustantivo incontable: nunca lleva 'a' ni se usa en plural.",
+      "Para decir que alguien 'tiene suerte', en inglés es mucho más común usar el adjetivo 'lucky' con el verbo 'to be' ('You are lucky' = Tienes suerte) que decir 'have luck'."
+    ],
+    "senses": [
+      {
+        "id": "0v28rwjtwfv53im",
+        "order": 0,
+        "definition": "Fuerza o casualidad que hace que ocurran cosas buenas o malas sin depender del esfuerzo propio; especialmente, buena suerte.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "suerte",
+              "fortuna"
+            ]
+          }
+        ],
+        "domain": "azar",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "tgpvfdd6jj6y20w",
+            "text": "It was pure luck that we found the keys on the street.",
+            "textLang": "en",
+            "translation": "Fue pura suerte que encontráramos las llaves en la calle.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and grateful, still amazed at the unexpected outcome",
+            "note": null,
+            "matchedForm": "luck",
+            "matchedTranslationForm": "suerte"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "luck",
+    "lemma": "luck",
+    "reading": null,
+    "ipa": "/lʌk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍀",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "suerte; fortuna",
+    "primaryGloss": "suerte",
+    "emotion": "hopeful and optimistic, keeping fingers crossed for a good outcome",
+    "notes": [
       "Se usa mucho en expresiones fijas como 'good luck' (buena suerte) o 'bad luck' (mala suerte).",
       "No se debe confundir con 'chance', que se refiere más a la probabilidad o a la oportunidad."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Circunstancias o eventos buenos que ocurren por azar",
+        "why": "'Luck' can be good or bad (as note 0 itself says), though unmodified it often means good luck."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing two crucial learner facts: 'luck' is uncountable, and 'to be lucky' vs 'tener suerte'."
+      }
+    ],
+    "growth": 1.215
   }
 }

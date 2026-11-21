@@ -68,6 +68,75 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "cat; female cat",
+    "primaryGloss": "cat",
+    "emotion": "fond and gentle, thinking of a soft pet at home",
+    "notes": [
+      "Ко́шка is both the general word for a cat of unknown sex and the word for a female cat; a male cat is кот.",
+      "The genitive and accusative plural form has a fleeting vowel: ко́шек."
+    ],
+    "senses": [
+      {
+        "id": "lzrpzf7ses6f9v6",
+        "order": 0,
+        "definition": "A small furry domestic animal often kept as a pet, or specifically a female one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cat",
+              "female cat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐈",
+        "examples": [
+          {
+            "id": "n1d4xgz0573t64w",
+            "text": "Маленькая кошка спит на диване.",
+            "textLang": "ru",
+            "translation": "The small cat is sleeping on the sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and cozy, watching a pet rest",
+            "note": null,
+            "matchedForm": "кошка",
+            "matchedTranslationForm": "cat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "кошка",
+    "lemma": "кошка",
+    "reading": null,
+    "ipa": "/ˈkoʂkə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐈",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "female cat",
     "primaryGloss": "female cat",
     "emotion": "fond and gentle, thinking of a soft pet at home",
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "female cat, cat",
+        "why": "'cat' is the primary translation in everyday use; 'female cat' as primary gloss is over-specific."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "Used specifically for a female cat, though often used generally",
+        "why": "Fails to name the male counterpart 'кот' or the fleeting vowel in genitive plural 'ко́шек'."
+      }
+    ],
+    "growth": 1.158
   }
 }

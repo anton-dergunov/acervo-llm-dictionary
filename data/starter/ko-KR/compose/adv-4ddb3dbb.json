@@ -68,6 +68,96 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "there; that place",
+    "primaryGloss": "there",
+    "emotion": null,
+    "notes": [
+      "Refers to a place close to the listener or already mentioned in conversation (contrast with 여기 'here' near the speaker, and 저기 'over there' far from both).",
+      "Often used without the location particle 에 in casual speech."
+    ],
+    "senses": [
+      {
+        "id": "urnth8ysy9upr7k",
+        "order": 0,
+        "definition": "That place, near the listener or already mentioned.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there",
+              "that place"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "pvkozzdlocku104",
+            "text": "거기에 무엇이 있습니까?",
+            "textLang": "ko",
+            "translation": "What is there?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "거기에",
+            "matchedTranslationForm": "there"
+          },
+          {
+            "id": "qro8gqv4ky7mtoc",
+            "text": "거기 잠깐만 기다려 주세요.",
+            "textLang": "ko",
+            "translation": "Please wait there for a moment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "거기",
+            "matchedTranslationForm": "there"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "거기",
+    "lemma": "거기",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "there",
     "primaryGloss": "there",
     "emotion": null,
@@ -118,5 +208,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "거기 is a pronoun referring to a place, not an adverb."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "In or to that place, near the person you are talking to.",
+        "why": "Defined as an adverbial phrase rather than a place pronoun."
+      }
+    ],
+    "growth": 1.649
   }
 }

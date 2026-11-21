@@ -74,6 +74,116 @@
     "primaryGloss": "pareja",
     "emotion": null,
     "notes": [
+      "No confundas 'couple' (dos cosas o personas juntas, o unas pocas) con 'pair' (dos cosas que van juntas, como zapatos o gafas).",
+      "En el sentido de 'un par' o 'unos pocos', se usa como 'a couple of' (aunque en inglés informal estadounidense a veces se omite 'of': 'a couple days')."
+    ],
+    "senses": [
+      {
+        "id": "kmt9q66vwdidw4s",
+        "order": 0,
+        "definition": "Dos personas que mantienen una relación sentimental o están casadas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pareja"
+            ]
+          }
+        ],
+        "domain": "relationships",
+        "emoji": "👩‍❤️‍👨",
+        "examples": [
+          {
+            "id": "cb393ivz0tu88pt",
+            "text": "The couple is planning their wedding for next summer.",
+            "textLang": "en",
+            "translation": "La pareja está planeando su boda para el próximo verano.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and excited, thinking about a happy future event",
+            "note": null,
+            "matchedForm": "couple",
+            "matchedTranslationForm": "pareja"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2m7do4gomez4v03",
+        "order": 1,
+        "definition": "Dos o un número pequeño de personas o cosas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "par",
+              "unos pocos",
+              "algunos"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": "👫",
+        "examples": [
+          {
+            "id": "w30l60m43odufxy",
+            "text": "There are a couple of students waiting in the hallway.",
+            "textLang": "en",
+            "translation": "Hay un par de estudiantes esperando en el pasillo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and observant, simply reporting what is seen",
+            "note": null,
+            "matchedForm": "couple",
+            "matchedTranslationForm": "par"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "couple",
+    "lemma": "couple",
+    "reading": null,
+    "ipa": "/ˈkʌpəl/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👫",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "pareja; par; unos pocos",
+    "primaryGloss": "pareja",
+    "emotion": null,
+    "notes": [
       "No confundas 'couple' (dos personas o cosas juntas) con 'pair' (dos cosas diseñadas para ir juntas, como zapatos).",
       "Aunque 'couple' técnicamente significa exactamente dos, en lenguaje coloquial a veces se usa vagamente para referirse a 'unos pocos' o 'algunos'."
     ],
@@ -162,5 +272,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "Dos personas o cosas que están juntas o relacionadas.",
+        "why": "Sense 1 should cover the everyday quantifier use ('a couple of' = dos o unos pocos)."
+      }
+    ],
+    "growth": 1.03
   }
 }

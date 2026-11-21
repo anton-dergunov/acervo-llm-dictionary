@@ -72,6 +72,117 @@
     "primaryGloss": "uncle",
     "emotion": "warm and respectful, greeting an older family member",
     "notes": [
+      "Used specifically for your father's brother; your mother's brother is 'dayı'.",
+      "Placed after a first name as a respectful title for an older man (e.g., Ahmet Amca), or used alone to address an older male stranger."
+    ],
+    "senses": [
+      {
+        "id": "jnqhyqnq6cm7qwx",
+        "order": 0,
+        "definition": "The brother of one's father.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle",
+              "paternal uncle"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "0vr7dm4qamwbsqx",
+            "text": "Yarın amcam bizi ziyarete gelecek.",
+            "textLang": "tr",
+            "translation": "Tomorrow my uncle is coming to visit us.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited about a pleasant family visit",
+            "note": null,
+            "matchedForm": "amcam",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "keuq8wi2apfxmbd",
+        "order": 1,
+        "definition": "A respectful or affectionate term used to refer to or address an older man who is not a relative.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle",
+              "older man",
+              "sir"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "avxuerfeer6vpuf",
+            "text": "Ahmet Amca, sana yardım edeyim mi?",
+            "textLang": "tr",
+            "translation": "Uncle Ahmet, shall I help you?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Amca",
+            "matchedTranslationForm": "Uncle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "amca",
+    "lemma": "amca",
+    "reading": null,
+    "ipa": "/amˈdʒa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "paternal uncle; older man",
+    "primaryGloss": "uncle",
+    "emotion": "warm and respectful, greeting an older family member",
+    "notes": [
       "Use amca specifically for your father's brother. Your mother's brother is a dayı.",
       "In Turkish culture, amca is also used as a respectful, affectionate title for an older man who is not a relative, similar to calling someone 'uncle' in English."
     ],
@@ -161,5 +272,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "İhtiyar amca karşıdan karşıya geçmek için yardım istedi.",
+        "why": "Sense 1 defines a term of address, so the example should show direct address."
+      }
+    ],
+    "growth": 0.929
   }
 }

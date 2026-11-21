@@ -58,6 +58,73 @@
     "headword": "de vloer",
     "lemma": "vloer",
     "reading": null,
+    "ipa": "/vluːr/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "floor",
+    "primaryGloss": "floor",
+    "emotion": "down-to-earth and stable, pointing to where you stand",
+    "notes": [
+      "Refers only to the surface you walk on (though 'op de grond' is also very common indoors for things dropped on the floor). For a storey or level of a building, use 'de verdieping'."
+    ],
+    "senses": [
+      {
+        "id": "gneiout29wcliqj",
+        "order": 0,
+        "definition": "The bottom surface of a room or building that you walk on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor"
+            ]
+          }
+        ],
+        "domain": "interior",
+        "emoji": "👣",
+        "examples": [
+          {
+            "id": "xust6kv4n4n4np6",
+            "text": "Dit huis heeft een mooie houten vloer.",
+            "textLang": "nl",
+            "translation": "This house has a nice wooden floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vloer",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de vloer",
+    "lemma": "vloer",
+    "reading": null,
     "ipa": "/ˈvluːr/",
     "pos": "noun",
     "gender": "common",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The bottom surface of a structure or a specific level of",
+        "why": "False friend with English 'floor': a building's storey/level in Dutch is 'verdieping', never 'vloer'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Dit huis heeft een vloer van hout.",
+        "why": "A wooden floor is the exact same sense as sense 0."
+      }
+    ],
+    "growth": 0.797
   }
 }

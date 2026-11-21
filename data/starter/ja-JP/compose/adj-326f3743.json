@@ -57,6 +57,99 @@
     "language": "ja",
     "headword": "暇",
     "lemma": "暇",
+    "reading": "ひま",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "free; not busy; idle",
+    "primaryGloss": "free",
+    "emotion": "a relaxed, unhurried moment, feeling no pressure or urgency at all",
+    "notes": [
+      "A na-adjective (暇な) that is also used as a noun meaning 'free time' (暇がある, 'to have free time').",
+      "Depending on context, it can be positive (free to meet) or slightly negative (idle with nothing to do).",
+      "Unlike 自由 (jiyū, 'free to act without restriction'), 暇 only means having no tasks or plans."
+    ],
+    "senses": [
+      {
+        "id": "lv2cng1xrtg8p8c",
+        "order": 0,
+        "definition": "Having free time and not being busy with work or plans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "free",
+              "not busy",
+              "available",
+              "idle"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "11844d3lqsrii0b",
+            "text": "来週末は暇ですか。",
+            "textLang": "ja",
+            "translation": "Are you free next weekend?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and curious, testing the waters for making plans",
+            "note": null,
+            "matchedForm": "暇",
+            "matchedTranslationForm": "free"
+          },
+          {
+            "id": "cyc4y0ter0mmfgf",
+            "text": "今日は仕事がなくて暇だ。",
+            "textLang": "ja",
+            "translation": "I have no work today, so I have nothing to do.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "暇",
+            "matchedTranslationForm": "have nothing to do"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "暇",
+    "lemma": "暇",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -143,5 +236,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading ひま for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "free time; spare time; not busy",
+        "why": "Lists noun glosses ('free time; spare time') not present in the adjective sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "I have no work, so I am bored/free.",
+        "why": "Slash translation 'bored/free' is unnatural."
+      }
+    ],
+    "growth": 0.927
   }
 }

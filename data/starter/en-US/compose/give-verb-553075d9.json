@@ -72,6 +72,138 @@
     "primaryGloss": "dar",
     "emotion": "generous and open, reaching out to share something with another person",
     "notes": [
+      "Verbo irregular: pasado 'gave' (/ɡeɪv/), participio 'given' (/ˈɡɪvən/).",
+      "Suele ir seguido de la persona y luego la cosa ('give me the book'), o de la cosa más 'to' y la persona ('give the book to me')."
+    ],
+    "senses": [
+      {
+        "id": "dshozqblrqzzis0",
+        "order": 0,
+        "definition": "Pasar, entregar o regalar algo a otra persona.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dar",
+              "entregar",
+              "regalar"
+            ]
+          }
+        ],
+        "domain": "entregar",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "qqhih08jwd1r4tc",
+            "text": "Please give me the book.",
+            "textLang": "en",
+            "translation": "Por favor, dame el libro.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but direct, expecting the object in a normal exchange",
+            "note": null,
+            "matchedForm": "give",
+            "matchedTranslationForm": "da"
+          },
+          {
+            "id": "cfr0ly8zaujb17g",
+            "text": "I want to give her a nice present.",
+            "textLang": "en",
+            "translation": "Quiero darle un bonito regalo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and thoughtful, thinking of the person receiving the gift",
+            "note": null,
+            "matchedForm": "give",
+            "matchedTranslationForm": "dar"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nu5veo5kd4qrtuz",
+        "order": 1,
+        "definition": "Proporcionar u ofrecer algo no físico, como información, tiempo o ayuda.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dar",
+              "ofrecer"
+            ]
+          }
+        ],
+        "domain": "proporcionar",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "okhdnkucpf5kt15",
+            "text": "Can you give me some information?",
+            "textLang": "en",
+            "translation": "¿Puedes darme algo de información?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "give",
+            "matchedTranslationForm": "dar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "give",
+    "lemma": "give",
+    "reading": null,
+    "ipa": "/ɡɪv/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "dar; entregar; regalar",
+    "primaryGloss": "dar",
+    "emotion": "generous and open, reaching out to share something with another person",
+    "notes": [
       "Es uno de los verbos más comunes en inglés. Se usa tanto para entregar objetos físicos como para ofrecer cosas abstractas como tiempo o información.",
       "A diferencia de 'donate', 'give' es informal y se puede usar en cualquier situación cotidiana."
     ],
@@ -162,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past forms (gave, given) and ditransitive syntax (give someone something)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Es uno de los verbos más comunes en inglés.",
+        "why": "Both notes are filler and miss essential grammar for an A2 learner."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (entregar) ... [1] (regalar) ...",
+        "why": "Giving an object and giving a gift are the same core sense; abstract giving is missing."
+      }
+    ],
+    "growth": 1.036
   }
 }

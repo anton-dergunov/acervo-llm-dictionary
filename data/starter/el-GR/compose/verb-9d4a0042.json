@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sit; to stay",
+    "primaryGloss": "sit",
+    "emotion": "relaxed and comfortable, settling down to rest",
+    "notes": [
+      "Deponent verb: passive in form (-ομαι) in the present and imperfect, but active in the simple past: κάθισα or (colloquial) έκατσα.",
+      "Also used with the particle να + verb to mean 'to take the time or bother to do something'."
+    ],
+    "senses": [
+      {
+        "id": "26voz941hmnzyhu",
+        "order": 0,
+        "definition": "To be in or move into a seated position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sit",
+              "sit down"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "eucun583ahdmpwi",
+            "text": "Κάθισε στην καρέκλα και ξεκουράσου.",
+            "textLang": "el",
+            "translation": "Sit on the chair and rest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, offering comfort after a long day",
+            "note": null,
+            "matchedForm": "Κάθισε",
+            "matchedTranslationForm": "Sit"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t3s9r79eedvtb09",
+        "order": 1,
+        "definition": "To remain in a place or spend time somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stay",
+              "remain"
+            ]
+          }
+        ],
+        "domain": "staying",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "fkda35lpmmfll0d",
+            "text": "Θα καθίσω εδώ μέχρι να γυρίσεις.",
+            "textLang": "el",
+            "translation": "I will stay here until you return.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "καθίσω",
+            "matchedTranslationForm": "stay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "κάθομαι",
+    "lemma": "κάθομαι",
+    "reading": null,
+    "ipa": "/ˈka.θo.me/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sit; to stay; to reside",
     "primaryGloss": "sit",
     "emotion": "relaxed and comfortable, settling down to rest",
@@ -202,5 +312,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Θα κάθωμαι εδώ μέχρι να γυρίσεις.",
+        "why": "'Θα κάθωμαι' is ungrammatical and misspelt; should be 'Θα κάτσω' or 'Θα καθίσω'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "Πού κάθεσαι τώρα; — Where do you live now?",
+        "why": "In standard Modern Greek, 'μένω' means 'to live/reside'; 'Πού κάθεσαι;' means 'Where are you sitting?'."
+      }
+    ],
+    "growth": 0.79
   }
 }

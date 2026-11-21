@@ -68,6 +68,94 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "sin",
+    "primaryGloss": "sin",
+    "emotion": null,
+    "notes": [
+      "Cuando va seguido de un verbo, este debe ir terminado en '-ing' ('without saying', 'sin decir')."
+    ],
+    "senses": [
+      {
+        "id": "ksswugu567bclmf",
+        "order": 0,
+        "definition": "En ausencia o a falta de algo o alguien; sin hacer una acción.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "sin"
+            ]
+          }
+        ],
+        "domain": "ausencia",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "cnyc6aifmu0z1o8",
+            "text": "I cannot drink coffee without sugar.",
+            "textLang": "en",
+            "translation": "No puedo tomar café sin azúcar.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact and firm about personal taste",
+            "note": null,
+            "matchedForm": "without",
+            "matchedTranslationForm": "sin"
+          },
+          {
+            "id": "liic7xxe6x1fldz",
+            "text": "She walked out of the room without saying goodbye.",
+            "textLang": "en",
+            "translation": "Ella salió de la habitación sin decir adiós.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cold and final, leaving abruptly",
+            "note": null,
+            "matchedForm": "without",
+            "matchedTranslationForm": "sin"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "without",
+    "lemma": "without",
+    "reading": null,
+    "ipa": "/wɪðˈaʊt/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "sin; sin que",
     "primaryGloss": "sin",
     "emotion": null,
@@ -159,5 +247,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'without' is a preposition, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(ausencia) No tener o carecer de algo.",
+        "why": "Senses 0 and 1 have overlapping definitions for lack/absence, and their examples are swapped."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "She walked out of the room without saying goodbye.",
+        "why": "Shows 'without + -ing' (not doing an action), not 'not having or lacking something'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Se usa para indicar ausencia o falta de algo o alguien.",
+        "why": "Both notes merely restate the definition; missing a crucial note that 'without' takes '-ing' verbs."
+      }
+    ],
+    "growth": 0.918
   }
 }

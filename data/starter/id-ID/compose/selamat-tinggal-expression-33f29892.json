@@ -58,6 +58,75 @@
     "headword": "selamat tinggal",
     "lemma": "selamat tinggal",
     "reading": null,
+    "ipa": "/səˈlamat ˈtiŋɡal/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👋",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "goodbye; farewell",
+    "primaryGloss": "goodbye",
+    "emotion": "final and slightly melancholic, watching someone walk away",
+    "notes": [
+      "Said by the person leaving to the person staying behind (literally 'safe staying'). The person staying replies 'selamat jalan' ('safe travels').",
+      "Quite formal or final; for casual everyday goodbyes, use 'sampai jumpa' ('see you') instead."
+    ],
+    "senses": [
+      {
+        "id": "k08elmckz70qc6b",
+        "order": 0,
+        "definition": "Said by someone who is leaving to those who are staying behind, especially when parting for a long time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "goodbye",
+              "farewell"
+            ]
+          }
+        ],
+        "domain": "farewell",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "3e6y3ud9lm4w1qf",
+            "text": "Dia melambaikan tangan dan mengucapkan selamat tinggal sebelum naik kereta.",
+            "textLang": "id",
+            "translation": "He waved his hand and said goodbye before boarding the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sad and nostalgic, watching a loved one leave",
+            "note": null,
+            "matchedForm": "selamat tinggal",
+            "matchedTranslationForm": "goodbye"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "selamat tinggal",
+    "lemma": "selamat tinggal",
+    "reading": null,
     "ipa": "/səˈlamat tiŋˈɡal/",
     "pos": "expression",
     "gender": null,
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use selamat tinggal only when you won't see the person for a",
+        "why": "Misses the crucial rule: only the person leaving says 'selamat tinggal' to those staying."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/səˈlamat tiŋˈɡal/",
+        "why": "In Indonesian, stress on 'tinggal' falls on the penultimate syllable: /ˈtiŋɡal/."
+      }
+    ],
+    "growth": 1.23
   }
 }

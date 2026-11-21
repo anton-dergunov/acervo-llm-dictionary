@@ -68,6 +68,74 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "awestruck and wary, respecting the size and power of the animal",
+    "notes": [
+      "'Der Bär' is a weak masculine noun (n-declension): it adds '-en' in the plural ('die Bären') and in all singular cases except the nominative ('den/dem/des Bären').",
+      "Do not confuse with 'die Beere' (berry), which is pronounced similarly."
+    ],
+    "senses": [
+      {
+        "id": "nqvk535cyimrtyg",
+        "order": 0,
+        "definition": "A large, strong wild animal with thick fur and sharp claws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "6ac3usxkuyt3kph",
+            "text": "Im Wald haben wir einen Bären gesehen.",
+            "textLang": "de",
+            "translation": "We saw a bear in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and slightly breathless from the surprise of the encounter",
+            "note": null,
+            "matchedForm": "Bären",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Bär",
+    "lemma": "Bär",
+    "reading": null,
+    "ipa": "/bɛːɐ̯/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "bear; teddy bear",
     "primaryGloss": "bear",
     "emotion": "awestruck and wary, respecting the size and power of the animal",
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Das Kind schläft mit seinem Teddybären.",
+        "why": "Uses 'Teddybären' instead of the headword 'Bär'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(toy) A soft toy shaped like a bear, usually given to children.",
+        "why": "A toy bear is just a figurative use of 'bear'; 'teddy bear' is 'Teddybär'."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "'der Bär' is a weak masculine noun (n-declension: den/dem/des Bären, plural die Bären)."
+      }
+    ],
+    "growth": 0.67
   }
 }

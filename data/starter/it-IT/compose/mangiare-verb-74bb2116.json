@@ -70,6 +70,92 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "to eat; to have a meal",
+    "primaryGloss": "to eat",
+    "emotion": "hungry and looking forward to a warm meal, simple and satisfied",
+    "notes": [
+      "Drops the 'i' from the stem before endings starting with '-i' or '-e' (e.g., 'tu mangi', 'noi mangeremo')."
+    ],
+    "senses": [
+      {
+        "id": "6gjas471yjjarlw",
+        "order": 0,
+        "definition": "To put food into the mouth, chew it, and swallow it, or to have a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to eat",
+              "to have"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "vvaa80iqo0a1bbk",
+            "text": "Mi piace mangiare la pasta fresca.",
+            "textLang": "it",
+            "translation": "I like to eat fresh pasta.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and anticipating something delicious",
+            "note": null,
+            "matchedForm": "mangiare",
+            "matchedTranslationForm": "to eat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "6gjas471yjjarlw",
+      "from": "Introdurre cibo nel corpo attraverso la bocca.",
+      "to": "To put food into the body through the mouth.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "c14jsblk1rhwho7",
+      "from": "Consumare o rovinare lentamente qualcosa, come la ruggine fa con il ferro.",
+      "to": "To slowly consume or damage something, like rust does to metal.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "mangiare",
+    "lemma": "mangiare",
+    "reading": null,
+    "ipa": "/manˈdʒa.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to corrode",
     "primaryGloss": "eat",
     "emotion": "hungry and looking forward to a warm meal, simple and satisfied",
@@ -164,22 +250,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "6gjas471yjjarlw",
-      "from": "Introdurre cibo nel corpo attraverso la bocca.",
-      "to": "To put food into the body through the mouth.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "c14jsblk1rhwho7",
-      "from": "Consumare o rovinare lentamente qualcosa, come la ruggine fa con il ferro.",
-      "to": "To slowly consume or damage something, like rust does to metal.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To slowly consume or damage something, like rust does to metal.",
+        "why": "Figurative sense ('corrode') is not needed at A2 level."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to eat; to corrode",
+        "why": "Includes marginal sense 'to corrode' for basic A1/A2 verb 'mangiare'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use mangiare when referring to consuming food in general.",
+        "why": "Filler note; misses spelling rule where 'i' drops before '-e' or '-i'."
+      }
+    ],
+    "growth": 0.545
+  }
 }

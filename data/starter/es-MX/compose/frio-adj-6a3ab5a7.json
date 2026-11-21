@@ -75,6 +75,139 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "cold;distant",
+    "primaryGloss": "cold",
+    "emotion": null,
+    "notes": [
+      "For weather and bodily sensations, Spanish usually uses the noun 'frío' with 'hacer' or 'tener': 'hace frío' (it is cold), 'tengo frío' (I am cold).",
+      "Do not confuse with 'resfriado', which means 'having a cold' (the illness): 'estoy resfriado'."
+    ],
+    "senses": [
+      {
+        "id": "fpagl4tcd6y56tm",
+        "order": 0,
+        "definition": "Having a low temperature; not warm or hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "chilly"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "z36dqy3frtgl563",
+            "text": "Prefiero tomar el refresco bien frío.",
+            "textLang": "es",
+            "translation": "I prefer to drink soda very cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "frío",
+            "matchedTranslationForm": "cold"
+          },
+          {
+            "id": "ajaaiseaiilw8lt",
+            "text": "Hoy es un día muy frío.",
+            "textLang": "es",
+            "translation": "Today is a very cold day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "frío",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "974tb7y4xdm1kme",
+        "order": 1,
+        "definition": "Of a person or their behavior: unfriendly or showing no emotion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "distant",
+              "unfriendly"
+            ]
+          }
+        ],
+        "domain": "personality",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "nax5nuflxcx9ym1",
+            "text": "Se mostró muy frío conmigo en la reunión.",
+            "textLang": "es",
+            "translation": "He was very cold toward me at the meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "frío",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "frío",
+    "lemma": "frío",
+    "reading": null,
+    "ipa": "/ˈfɾio/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "cold",
     "primaryGloss": "cold",
     "emotion": null,
@@ -167,5 +300,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Hace mucho frío hoy en la ciudad.",
+        "why": "'Hace frío' uses the noun 'frío', not the adjective."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Low temperature of weather and of objects are the same adjective sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common figurative sense 'unfriendly or unemotional'."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse this with 'refriado'",
+        "why": "Misspelled Spanish word: 'resfriado', not 'refriado'."
+      }
+    ],
+    "growth": 1.191
   }
 }

@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to fall; to drop; to lose",
+    "primaryGloss": "to fall",
+    "emotion": "matter-of-fact and direct, describing a sudden change in position",
+    "notes": [
+      "掉 is often used after another verb as a resultative complement to show that something is removed, gone, or disposed of, as in 扔掉 (rēngdiào, 'to throw away'), 吃掉 (chīdiào, 'to eat up'), or 忘掉 (wàngdiào, 'to forget completely')."
+    ],
+    "senses": [
+      {
+        "id": "4cgi3gc85jbzs3w",
+        "order": 0,
+        "definition": "To fall or drop down from a higher place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall",
+              "to drop",
+              "to fall down"
+            ]
+          }
+        ],
+        "domain": "falling",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "9jgqsw05r29xja9",
+            "text": "我的手机掉在地上了。",
+            "textLang": "zh",
+            "translation": "My phone fell on the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly annoyed and surprised by the accident",
+            "note": null,
+            "matchedForm": "掉",
+            "matchedTranslationForm": "fell"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nvg181tft8r8pk0",
+        "order": 1,
+        "definition": "To go missing, be lost, or come off.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to lose",
+              "to come off",
+              "to be missing"
+            ]
+          }
+        ],
+        "domain": "loss",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "7oumhu3zidxt1gh",
+            "text": "我的钥匙掉了。",
+            "textLang": "zh",
+            "translation": "I lost my keys.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "掉",
+            "matchedTranslationForm": "lost"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "掉",
+    "lemma": "掉",
+    "reading": "diào",
+    "ipa": "/ti̯au̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to drop; to fall; to lose",
     "primaryGloss": "drop",
     "emotion": "matter-of-fact and direct, describing a sudden change in position",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "used as a directional complement after other verbs to indicate completion or movement downward",
+        "why": "In 拿掉 and 忘掉, 掉 is a resultative complement indicating removal/disappearance, not downward movement."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "My phone dropped on the ground.",
+        "why": "Unnatural English; 'fell on the ground' or 'dropped to the ground' is natural."
+      }
+    ],
+    "growth": 1.115
   }
 }

@@ -74,6 +74,73 @@
     "primaryGloss": "bottle",
     "emotion": null,
     "notes": [
+      "Followed by the genitive case for contents (бутылка воды — a bottle of water); genitive plural is буты́лок."
+    ],
+    "senses": [
+      {
+        "id": "jc0llvg181kb639",
+        "order": 0,
+        "definition": "A glass or plastic container for liquids, typically with a narrow neck.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle"
+            ]
+          }
+        ],
+        "domain": "containers",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "bvyeemh400pz9ox",
+            "text": "На столе стоит бутылка воды.",
+            "textLang": "ru",
+            "translation": "There is a bottle of water on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, descriptive observation of something nearby",
+            "note": null,
+            "matchedForm": "бутылка",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "бутылка",
+    "lemma": "бутылка",
+    "reading": null,
+    "ipa": "/bʊˈtɨlkə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bottle",
+    "primaryGloss": "bottle",
+    "emotion": null,
+    "notes": [
       "Note that the stress is on the first syllable: BU-tyl-ka.",
       "While it means a container for liquid, it is rarely used to describe a jar (which is 'банка')."
     ],
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note that the stress is on the first syllable: BU-tyl-ka.",
+        "why": "False pronunciation claim: stress is on the second syllable (буты́лка), as shown in IPA."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While it means a container for liquid, it is rarely used",
+        "why": "Trivial filler stating that 'bottle' does not mean 'jar'."
+      }
+    ],
+    "growth": 0.83
   }
 }

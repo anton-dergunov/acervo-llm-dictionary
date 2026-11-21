@@ -68,6 +68,133 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "foot; base",
+    "primaryGloss": "foot",
+    "emotion": "tired and sore after walking all day, taking off heavy shoes",
+    "notes": [
+      "Used in common expressions like 'à pied' (on foot), e.g., 'aller à l'école à pied' (to walk to school)."
+    ],
+    "senses": [
+      {
+        "id": "z54l8so3hu1yay1",
+        "order": 0,
+        "definition": "The bottom part of the leg used for standing and walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foot"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🦶",
+        "examples": [
+          {
+            "id": "qh5ahev5vezy6i9",
+            "text": "J'ai mal au pied après cette longue promenade.",
+            "textLang": "fr",
+            "translation": "My foot hurts after this long walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "complaining gently to a companion, rubbing a sore ankle",
+            "note": null,
+            "matchedForm": "pied",
+            "matchedTranslationForm": "foot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a5zr2mswgecy7bu",
+        "order": 1,
+        "definition": "The lower part of an object, piece of furniture, or plant that supports it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "base",
+              "leg",
+              "stem"
+            ]
+          }
+        ],
+        "domain": "support",
+        "emoji": "🪵",
+        "examples": [
+          {
+            "id": "sgjjwpvtq2azi7g",
+            "text": "Le pied de la lampe est en bois.",
+            "textLang": "fr",
+            "translation": "The base of the lamp is made of wood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "inspecting furniture closely while decorating a room",
+            "note": null,
+            "matchedForm": "pied",
+            "matchedTranslationForm": "base"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "z54l8so3hu1yay1",
+      "from": "La partie inférieure de la jambe qui sert à marcher et à se tenir debout.",
+      "to": "The bottom part of the leg used for standing and walking.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:11Z"
+    },
+    {
+      "sense": "a5zr2mswgecy7bu",
+      "from": "La partie inférieure d'un objet sur laquelle il repose.",
+      "to": "The lower part of an object that provides support.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le pied",
+    "lemma": "pied",
+    "reading": null,
+    "ipa": "/pje/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦶",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "foot; base; stem",
     "primaryGloss": "foot",
     "emotion": "tired and sore after walking all day, taking off heavy shoes",
@@ -161,22 +288,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "z54l8so3hu1yay1",
-      "from": "La partie inférieure de la jambe qui sert à marcher et à se tenir debout.",
-      "to": "The bottom part of the leg used for standing and walking.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:11Z"
-    },
-    {
-      "sense": "a5zr2mswgecy7bu",
-      "from": "La partie inférieure d'un objet sur laquelle il repose.",
-      "to": "The lower part of an object that provides support.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "foot; base; stem",
+        "why": "Includes 'stem', which is not covered in the senses or glosses."
+      }
+    ],
+    "growth": 0.938
+  }
 }

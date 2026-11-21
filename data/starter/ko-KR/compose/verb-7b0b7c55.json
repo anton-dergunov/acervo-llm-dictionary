@@ -75,6 +75,97 @@
     "primaryGloss": "dislike",
     "emotion": "a furrowed brow and a slight pull back, firm and decisive",
     "notes": [
+      "Takes the object marker -을/를 (e.g., 매운 음식을 싫어해요). By contrast, the adjective 싫다 takes -이/가 (매운 음식이 싫어요) and is mainly used for the speaker's own feelings; for a third person ('He dislikes...'), use 싫어하다."
+    ],
+    "senses": [
+      {
+        "id": "c80s8gfefsxcjj1",
+        "order": 0,
+        "definition": "To not like someone or something, or to feel an aversion to them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dislike",
+              "not like",
+              "hate"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🙅",
+        "examples": [
+          {
+            "id": "1aq09k336w0bstd",
+            "text": "나는 매운 음식을 싫어해요.",
+            "textLang": "ko",
+            "translation": "I don't like spicy food.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and clear, stating a personal preference",
+            "note": null,
+            "matchedForm": "싫어해요",
+            "matchedTranslationForm": "don't like"
+          },
+          {
+            "id": "wp453azz56uyrd2",
+            "text": "그는 거짓말하는 사람을 아주 싫어합니다.",
+            "textLang": "ko",
+            "translation": "He really hates people who lie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm, serious, and emphatic about strong disapproval",
+            "note": null,
+            "matchedForm": "싫어합니다",
+            "matchedTranslationForm": "hates"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "싫어하다",
+    "lemma": "싫어하다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to dislike; to hate",
+    "primaryGloss": "dislike",
+    "emotion": "a furrowed brow and a slight pull back, firm and decisive",
+    "notes": [
       "싫어하다 describes a dislike for something or someone as an action or state of being.",
       "Be careful not to confuse this with 싫다, which is an adjective meaning 'to be unpleasant' or 'to not be good'. While 싫어하다 expresses the feeling of the subject, 싫다 is often used to say that a thing is not desired by the speaker (e.g., 'I don't like it' as 'It is unpleasant to me')."
     ],
@@ -165,5 +256,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'Dislike' and 'hate' are degrees of one Korean sense; merge them."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "싫어하다 describes a dislike for something or someone as an action",
+        "why": "Restates the definition without adding usage value; note[1] lacks the key case marker difference."
+      }
+    ],
+    "growth": 0.622
   }
 }

@@ -68,6 +68,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "stone, rock; brick",
+    "primaryGloss": "stone",
+    "emotion": "grounded and solid, feeling the heavy weight in hand",
+    "notes": [
+      "Plural: 'stenen'. As an uncountable material ('van steen'), it refers to either natural stone or brick."
+    ],
+    "senses": [
+      {
+        "id": "hxvviusuy4joc8f",
+        "order": 0,
+        "definition": "A hard piece of rock found on the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stone",
+              "rock",
+              "pebble"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "ggeo8boqt6o2euj",
+            "text": "Hij schopte tegen een steen op de weg.",
+            "textLang": "nl",
+            "translation": "He kicked a stone on the road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and absent-minded while walking",
+            "note": null,
+            "matchedForm": "steen",
+            "matchedTranslationForm": "stone"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ouf21nraih51slm",
+        "order": 1,
+        "definition": "A hard block of baked clay or natural rock, or this material in general, used for building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "brick",
+              "stone"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🧱",
+        "examples": [
+          {
+            "id": "8kv8vq1ku9nq14j",
+            "text": "Het huis is gebouwd van rode steen.",
+            "textLang": "nl",
+            "translation": "The house is built of red brick.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing something solid and enduring",
+            "note": null,
+            "matchedForm": "steen",
+            "matchedTranslationForm": "brick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de steen",
+    "lemma": "steen",
+    "reading": null,
+    "ipa": "/steːn/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "stone; rock",
     "primaryGloss": "stone",
     "emotion": "grounded and solid, feeling the heavy weight in hand",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "stone; rock",
+        "why": "Missing 'brick' (sense 1), whereas 'rock' is not in the glosses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "Hard solid non-metallic mineral matter of which rock is made, used for building.",
+        "why": "Overly technical definition; in Dutch 'steen' in construction also means a baked clay brick."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both small pebbles and larger rocks, as well as the building material.",
+        "why": "Restates the senses without adding grammatical or usage information."
+      }
+    ],
+    "growth": 1.107
   }
 }

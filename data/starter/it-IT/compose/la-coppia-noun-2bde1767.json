@@ -72,6 +72,132 @@
     "primaryGloss": "couple",
     "emotion": "warm and fond, thinking of two people who belong together",
     "notes": [
+      "For things that naturally come in twos as a single set (like shoes, socks, or glasses), use 'il paio' instead (un paio di scarpe)."
+    ],
+    "senses": [
+      {
+        "id": "sslhwudkb32jd2n",
+        "order": 0,
+        "definition": "Two people who have a romantic relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "couple"
+            ]
+          }
+        ],
+        "domain": "relationship",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "ttf62zdul8s9o32",
+            "text": "Quella coppia cammina mano nella mano.",
+            "textLang": "it",
+            "translation": "That couple is walking hand in hand.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tender and observant, watching two people walk by",
+            "note": null,
+            "matchedForm": "coppia",
+            "matchedTranslationForm": "couple"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ml0ggiayq398bo6",
+        "order": 1,
+        "definition": "Two people, animals, or things of the same kind considered together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pair",
+              "couple"
+            ]
+          }
+        ],
+        "domain": "pair",
+        "emoji": "👟",
+        "examples": [
+          {
+            "id": "ocgjt4ai1vmy2sx",
+            "text": "Ho comprato una coppia di biglietti per il concerto.",
+            "textLang": "it",
+            "translation": "I bought a pair of tickets for the concert.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "coppia",
+            "matchedTranslationForm": "pair"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "sslhwudkb32jd2n",
+      "from": "Due persone che hanno una relazione sentimentale.",
+      "to": "Two people who have a romantic relationship.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    },
+    {
+      "sense": "ml0ggiayq398bo6",
+      "from": "Insieme di due cose uguali o simili.",
+      "to": "A set of two things that are the same or similar.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la coppia",
+    "lemma": "coppia",
+    "reading": null,
+    "ipa": "/ˈkɔp.pja/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👫",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "couple; pair",
+    "primaryGloss": "couple",
+    "emotion": "warm and fond, thinking of two people who belong together",
+    "notes": [
       "Use 'coppia' both for objects that come in twos (like shoes or gloves) and for romantic partners."
     ],
     "senses": [
@@ -160,22 +286,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "sslhwudkb32jd2n",
-      "from": "Due persone che hanno una relazione sentimentale.",
-      "to": "Two people who have a romantic relationship.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    },
-    {
-      "sense": "ml0ggiayq398bo6",
-      "from": "Insieme di due cose uguali o simili.",
-      "to": "A set of two things that are the same or similar.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "objects that come in twos (like shoes or gloves)",
+        "why": "False: shoes and gloves take 'paio' (un paio di scarpe), not 'coppia'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ho comprato una nuova coppia di scarpe.",
+        "why": "Unidiomatic Italian: a pair of shoes is 'un paio di scarpe', never 'una coppia'."
+      }
+    ],
+    "growth": 1.226
+  }
 }

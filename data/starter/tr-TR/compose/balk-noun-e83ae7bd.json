@@ -73,6 +73,114 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "fish",
+    "primaryGloss": "fish",
+    "emotion": "hungry and looking forward to a nice meal",
+    "notes": [
+      "The final -k softens to -ğ before a vowel suffix: balık → balığı."
+    ],
+    "senses": [
+      {
+        "id": "uiezdfbdex4dol0",
+        "order": 0,
+        "definition": "A cold-blooded animal with gills and fins that lives in water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "dk5wyakiy2msdcu",
+            "text": "Denizde birçok renkli balık yüzüyor.",
+            "textLang": "tr",
+            "translation": "Many colorful fish are swimming in the sea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching nature",
+            "note": null,
+            "matchedForm": "balık",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ag3efh5ah4vu307",
+        "order": 1,
+        "definition": "The flesh of a fish eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "qq9677f20jgex0l",
+            "text": "Akşam yemeğinde balık yedik.",
+            "textLang": "tr",
+            "translation": "We ate fish for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and content after a good meal",
+            "note": null,
+            "matchedForm": "balık",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "balık",
+    "lemma": "balık",
+    "reading": null,
+    "ipa": "/baˈɫɯk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Animals",
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "fish; seafood (as food)",
     "primaryGloss": "fish",
     "emotion": "hungry and looking forward to a nice meal",
@@ -165,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "fish, seafood",
+        "why": "'balık' means fish, not seafood in general (which is 'deniz ürünleri')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Balık means both the live animal swimming in water and the fish",
+        "why": "Just repeats the two senses; should note consonant softening (balık -> balığı) instead."
+      }
+    ],
+    "growth": 0.741
   }
 }

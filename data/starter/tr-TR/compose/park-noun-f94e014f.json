@@ -72,6 +72,114 @@
     "primaryGloss": "park",
     "emotion": "relaxed and peaceful, taking a breath of fresh air outdoors",
     "notes": [
+      "For vehicles, it is most commonly used in the compound verb 'park etmek' (to park) or in combinations like 'park yeri' (parking space). A parking lot or car park is called 'otopark'.",
+      "Do not confuse it with 'bahçe', which generally means a private garden or yard."
+    ],
+    "senses": [
+      {
+        "id": "z1tqqnh2le09iwn",
+        "order": 0,
+        "definition": "A public area with grass, trees, and benches in a town, used for walking, playing, and relaxation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "park"
+            ]
+          }
+        ],
+        "domain": "places",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "jb74s7usnibb9vs",
+            "text": "Çocuklar hafta sonu parkta oynuyor.",
+            "textLang": "tr",
+            "translation": "The children are playing in the park on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and lively, watching children play outdoors",
+            "note": null,
+            "matchedForm": "parkta",
+            "matchedTranslationForm": "park"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "98u3jzquslgs07u",
+        "order": 1,
+        "definition": "The act of leaving a vehicle in a particular place, or a designated space for doing so.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parking"
+            ]
+          }
+        ],
+        "domain": "vehicles",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "prl8eh2l2p6x8sh",
+            "text": "Bu sokakta park yeri bulmak çok zor.",
+            "textLang": "tr",
+            "translation": "It is very hard to find a parking space on this street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "park",
+            "matchedTranslationForm": "parking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "park",
+    "lemma": "park",
+    "reading": null,
+    "ipa": "/paɾk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "park; parking",
+    "primaryGloss": "park",
+    "emotion": "relaxed and peaceful, taking a breath of fresh air outdoors",
+    "notes": [
       "The word 'park' has two very common meanings in Turkish: a public green space and a place to leave a car.",
       "Do not confuse it with 'bahçe', which generally means a private garden belonging to a house."
     ],
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Arabayı otelin arkasındaki parka bıraktık.",
+        "why": "A parking lot is 'otopark'; 'park' alone means the act/state of parking (as in 'park etmek')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'park' has two very common meanings in Turkish",
+        "why": "Restates the senses; should explain the common compound verb 'park etmek' instead."
+      }
+    ],
+    "growth": 1.189
   }
 }

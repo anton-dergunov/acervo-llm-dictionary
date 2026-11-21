@@ -70,6 +70,118 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "sick; painful, hurting",
+    "primaryGloss": "sick",
+    "emotion": "a tired and weary tone, expressing the discomfort of being unwell",
+    "notes": [
+      "When a specific body part hurts, use '[body part] + -이/가 아프다' (e.g., 머리가 아파요, 'My head hurts').",
+      "The vowel 'ㅡ' drops before '-아/어' (아파요, 아팠어요)."
+    ],
+    "senses": [
+      {
+        "id": "eqzbd6x54b5q8ql",
+        "order": 0,
+        "definition": "Unwell or in poor health.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill",
+              "unwell"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "l9vwjcl6ghe0uuz",
+            "text": "몸이 아파서 학교에 못 갔어요.",
+            "textLang": "ko",
+            "translation": "I could not go to school because I was sick.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a slightly drained and apologetic tone, explaining a missed commitment",
+            "note": null,
+            "matchedForm": "아파서",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hckun9r1vy6s5bq",
+        "order": 1,
+        "definition": "Feeling or causing physical pain in a part of the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "painful",
+              "sore",
+              "to hurt"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "r9rza8ik0fithcg",
+            "text": "배가 너무 아파요.",
+            "textLang": "ko",
+            "translation": "My stomach hurts so much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a sharp and focused tone, clearly communicating the source of physical discomfort",
+            "note": null,
+            "matchedForm": "아파요",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "아프다",
+    "lemma": "아프다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to be ill; to hurt",
     "primaryGloss": "hurt",
     "emotion": "a tired and weary tone, expressing the discomfort of being unwell",
@@ -163,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To feel unwell or sick; to be ill.",
+        "why": "Adjective defined as a verb infinitive rather than a quality or state."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with '슬프다', which means 'to be sad'",
+        "why": "Unlikely confusion; a note on the 'ㅡ' drop conjugation (아파요) is needed instead."
+      }
+    ],
+    "growth": 0.698
   }
 }

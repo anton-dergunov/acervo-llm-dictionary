@@ -72,6 +72,156 @@
     "primaryGloss": "house",
     "emotion": "warm and comfortable, settling in after a long day away",
     "notes": [
+      "To say 'at home' or 'home' (with verbs of motion), use 'à la maison' or 'chez' + pronoun (e.g. 'chez moi'): 'Je rentre à la maison' (I'm going home).",
+      "Placed directly after another noun without a preposition, 'maison' means 'homemade': 'un gâteau maison' (a homemade cake)."
+    ],
+    "senses": [
+      {
+        "id": "d1wmdky2jlg5wg4",
+        "order": 0,
+        "definition": "A building where people, especially a family, live.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "zrypblbeyfnkyej",
+            "text": "J'habite dans une grande maison avec un jardin.",
+            "textLang": "fr",
+            "translation": "I live in a big house with a garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and happy to show where you live",
+            "note": null,
+            "matchedForm": "maison",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q0zufogkngfoe6f",
+        "order": 1,
+        "definition": "The place where one lives, whether a house or an apartment, especially in 'à la maison'.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "home"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "w3jneao2b06rwp4",
+            "text": "Ce soir, je reste à la maison.",
+            "textLang": "fr",
+            "translation": "Tonight, I am staying at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "maison",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bqgtthsaz8ycorw",
+        "order": 2,
+        "definition": "A traditional commercial firm, such as a fashion label or publishing company.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "firm",
+              "company"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "xnordodtfsg1q0y",
+            "text": "Cette maison de couture est très célèbre à Paris.",
+            "textLang": "fr",
+            "translation": "This fashion house is very famous in Paris.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and appreciative of quality craftsmanship",
+            "note": null,
+            "matchedForm": "maison",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la maison",
+    "lemma": "maison",
+    "reading": null,
+    "ipa": "/mɛ.zɔ̃/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house; home; firm",
+    "primaryGloss": "house",
+    "emotion": "warm and comfortable, settling in after a long day away",
+    "notes": [
       "Use 'maison' for a physical house or building, but also when talking about your home in general.",
       "Do not confuse with 'chez moi' which specifically means 'at my place'."
     ],
@@ -162,5 +312,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'maison' for a physical house or building, but also when",
+        "why": "Merely restates the glosses without adding usage guidance."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0]",
+        "quote": "A building where a family lives.",
+        "why": "Conflates the physical building ('house') with one's place of residence ('home', as in 'à la maison')."
+      }
+    ],
+    "growth": 1.657
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "ice",
     "emotion": "refreshing and crisp, like a cold drink on a summer day",
     "notes": [
+      "Used for both natural ice and ice cubes in drinks. Do not confuse it with アイス, which in everyday Japanese means 'ice cream' or 'popsicle' (or 'iced' in drink names like アイスコーヒー)."
+    ],
+    "senses": [
+      {
+        "id": "u1fer063rricn9r",
+        "order": 0,
+        "definition": "Water that has frozen solid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ice"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "f0emcdkup5v8mbi",
+            "text": "コップに氷を入れてください。",
+            "textLang": "ja",
+            "translation": "Please put some ice in the glass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and helpful, attending to someone's refreshment",
+            "note": null,
+            "matchedForm": "氷",
+            "matchedTranslationForm": "ice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "氷",
+    "lemma": "氷",
+    "reading": "こおり",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "ice",
+    "primaryGloss": "ice",
+    "emotion": "refreshing and crisp, like a cold drink on a summer day",
+    "notes": [
       "In Japanese, when referring to ice cubes specifically, people often use the word アイス (aisu) or 氷 (koori).",
       "Use 氷 for natural ice or ice in general, while アイス is common for ice cream or ice cubes in drinks."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "when referring to ice cubes specifically, people often use the word アイス (aisu)",
+        "why": "False: in everyday Japanese, アイス means ice cream/popsicle or iced drinks, not ice cubes."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "while アイス is common for ice cream or ice cubes in drinks.",
+        "why": "False: ice cubes in drinks are called 氷 (こおり), never アイス."
+      }
+    ],
+    "growth": 0.855
   }
 }

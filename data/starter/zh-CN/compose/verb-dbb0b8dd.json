@@ -57,6 +57,114 @@
     "language": "zh",
     "headword": "学习",
     "lemma": "学习",
+    "reading": "xuéxí",
+    "ipa": "/ɕy̯e˧˥ ɕi˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to study; to learn",
+    "primaryGloss": "study",
+    "emotion": "focused and industrious, bent over a desk with a textbook",
+    "notes": [
+      "Focuses on the process of studying or learning. To say you have successfully learned or mastered something, use 学会 (xuéhuì).",
+      "Unlike 学 (xué), 学习 can easily be used without an object (e.g., 我在学习, 'I am studying') and is also used as a noun meaning 'studies'."
+    ],
+    "senses": [
+      {
+        "id": "uxbcdpa5ekhmm1n",
+        "order": 0,
+        "definition": "To gain knowledge or a skill by studying or practicing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "study",
+              "learn"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "ena8q1qp7evtk7b",
+            "text": "我在图书馆学习中文。",
+            "textLang": "zh",
+            "translation": "I am studying Chinese in the library.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and studious, deeply absorbed in a textbook",
+            "note": null,
+            "matchedForm": "学习",
+            "matchedTranslationForm": "studying"
+          },
+          {
+            "id": "m749s6cho1m8cc8",
+            "text": "他每天晚上都花两个小时学习。",
+            "textLang": "zh",
+            "translation": "He spends two hours studying every evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "diligent and determined, sticking to a strict daily routine",
+            "note": null,
+            "matchedForm": "学习",
+            "matchedTranslationForm": "studying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "uxbcdpa5ekhmm1n",
+      "from": "获得知识或技能。",
+      "to": "To gain knowledge or a skill.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:13:08Z"
+    },
+    {
+      "sense": "i424tgb5d6s40mi",
+      "from": "花时间学习和掌握新知识。",
+      "to": "To spend time studying and mastering new knowledge.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:13:08Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "学习",
+    "lemma": "学习",
     "reading": "xué xí",
     "ipa": "/ɕy̯e˧˥ ɕi˧˥/",
     "pos": "verb",
@@ -162,22 +270,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "uxbcdpa5ekhmm1n",
-      "from": "获得知识或技能。",
-      "to": "To gain knowledge or a skill.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:13:08Z"
-    },
-    {
-      "sense": "i424tgb5d6s40mi",
-      "from": "花时间学习和掌握新知识。",
-      "to": "To spend time studying and mastering new knowledge.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:13:08Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To spend time studying and mastering new knowledge.",
+        "why": "Transitive and intransitive uses of 'study' are the same core meaning; 'spending time' is from 花."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[1]",
+        "quote": "It is broader than 念书, which specifically refers to attending school",
+        "why": "Should contrast with 学 (xué) or 学会 (xuéhuì) for A2 learners rather than 念书."
+      }
+    ],
+    "growth": 1.055
+  }
 }

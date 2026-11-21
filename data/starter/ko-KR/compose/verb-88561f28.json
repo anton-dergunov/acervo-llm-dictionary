@@ -58,6 +58,115 @@
     "headword": "읽다",
     "lemma": "읽다",
     "reading": null,
+    "ipa": "ik̚t͈a",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to read; to figure out",
+    "primaryGloss": "to read",
+    "emotion": "focused and calm, concentrating on the words on the page",
+    "notes": [
+      "Pronunciation shifts depending on the following sound: before a consonant, the ㄹ is silent (읽다 [익따], 읽고 [일꼬]); before a vowel, the ㄱ moves to the next syllable (읽어요 [일거요])."
+    ],
+    "senses": [
+      {
+        "id": "tjk9wv2o9an22v0",
+        "order": 0,
+        "definition": "To look at written words or symbols and understand their meaning.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to read"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "rvgvxhixy7wsckx",
+            "text": "나는 매일 아침 신문을 읽어요.",
+            "textLang": "ko",
+            "translation": "I read the newspaper every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and consistent, part of a daily routine",
+            "note": null,
+            "matchedForm": "읽어요",
+            "matchedTranslationForm": "read"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4d0f1rtfdf93l56",
+        "order": 1,
+        "definition": "To understand or sense someone's thoughts, feelings, or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to read",
+              "to figure out",
+              "to interpret"
+            ]
+          }
+        ],
+        "domain": "understanding",
+        "emoji": "🧐",
+        "examples": [
+          {
+            "id": "s0vo5rnzyuzo4xb",
+            "text": "그는 사람의 마음을 잘 읽어요.",
+            "textLang": "ko",
+            "translation": "He reads people's minds well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "읽어요",
+            "matchedTranslationForm": "reads"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "읽다",
+    "lemma": "읽다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use this verb when you are looking at text and processing",
+        "why": "Restates the definitions without giving pronunciation or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential pronunciation note on the irregular double batchim ㄺ ([익따] vs [일거요])."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to read; to make out",
+        "why": "'to make out' is not in the glosses; 'figure out' is better."
+      }
+    ],
+    "growth": 0.973
   }
 }

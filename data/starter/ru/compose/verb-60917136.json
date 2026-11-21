@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to pull, to drag; to drag out, to delay",
+    "primaryGloss": "to pull",
+    "emotion": "a steady, focused effort, applying physical strength to shift something heavy",
+    "notes": [
+      "Imperfective; perfective: потянуть (to give a pull) or вытянуть (to pull out, stretch).",
+      "Differentiate from тащить, which emphasises hauling something heavy or with effort."
+    ],
+    "senses": [
+      {
+        "id": "mjq6h713steoqny",
+        "order": 0,
+        "definition": "To apply force to something to move it towards oneself or along a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pull",
+              "to drag",
+              "to tug"
+            ]
+          }
+        ],
+        "domain": "motion",
+        "emoji": "👐",
+        "examples": [
+          {
+            "id": "et6ulqrt7dz10f9",
+            "text": "Он тянет дверь на себя.",
+            "textLang": "ru",
+            "translation": "He is pulling the door towards himself.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and descriptive, explaining a physical action",
+            "note": null,
+            "matchedForm": "тянет",
+            "matchedTranslationForm": "pulling"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ym3gv22oeykjjj3",
+        "order": 1,
+        "definition": "To make something last longer than needed, or to delay doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drag out",
+              "to delay",
+              "to stall"
+            ]
+          }
+        ],
+        "domain": "delay",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "u9wa2qh890xoz81",
+            "text": "Не надо тянуть время, пора начинать.",
+            "textLang": "ru",
+            "translation": "There's no need to stall, it's time to start.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and impatient, wanting to move things forward",
+            "note": null,
+            "matchedForm": "тянуть",
+            "matchedTranslationForm": "stall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "тянуть",
+    "lemma": "тянуть",
+    "reading": null,
+    "ipa": "/tʲɪˈnutʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to pull; to drag; to stretch",
     "primaryGloss": "pull",
     "emotion": "a steady, focused effort, applying physical strength to shift something heavy",
@@ -203,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 (pull) and 1 (drag) are the same basic meaning of тянуть."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].translation",
+        "quote": "No need to delay time, it is time to start.",
+        "why": "'Delay time' is a calque of 'тянуть время'; natural English is 'stall' or 'waste time'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The verb тянуть usually implies a continuous action of pulling or dragging",
+        "why": "Restates the definition instead of giving the aspect pair or the impersonal construction."
+      }
+    ],
+    "growth": 0.767
   }
 }

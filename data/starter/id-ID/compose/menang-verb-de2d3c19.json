@@ -68,6 +68,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to win",
+    "primaryGloss": "win",
+    "emotion": "excited and triumphant, celebrating a great victory",
+    "notes": [
+      "'Menang' is intransitive ('to win'). To say you defeat someone, use 'mengalahkan', or 'menang melawan' (win against)."
+    ],
+    "senses": [
+      {
+        "id": "lg6oxy5qopkpja0",
+        "order": 0,
+        "definition": "To come first or succeed in a game, competition, election, or conflict.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "win",
+              "be victorious"
+            ]
+          }
+        ],
+        "domain": "competition",
+        "emoji": "🥇",
+        "examples": [
+          {
+            "id": "g7n3erczrwcpffd",
+            "text": "Tim kami bermain sangat baik dan berhasil menang dalam pertandingan itu.",
+            "textLang": "id",
+            "translation": "Our team played very well and managed to win the match.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and thrilled about the team's success",
+            "note": null,
+            "matchedForm": "menang",
+            "matchedTranslationForm": "win"
+          },
+          {
+            "id": "f38lu939gitftco",
+            "text": "Kandidat itu menang dalam pemilihan umum tahun ini.",
+            "textLang": "id",
+            "translation": "That candidate won in this year's general election.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and objective, stating a political result",
+            "note": null,
+            "matchedForm": "menang",
+            "matchedTranslationForm": "won"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "menang",
+    "lemma": "menang",
+    "reading": null,
+    "ipa": "/məˈnaŋ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏆",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to win; to defeat",
     "primaryGloss": "win",
     "emotion": "excited and triumphant, celebrating a great victory",
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To gain a victory over an opponent ... defeat, beat, conquer",
+        "why": "Menang is intransitive ('to win'); 'to defeat' is transitive 'mengalahkan'."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to win; to defeat",
+        "why": "Includes 'to defeat', which is false for intransitive 'menang'."
+      }
+    ],
+    "growth": 0.859
   }
 }

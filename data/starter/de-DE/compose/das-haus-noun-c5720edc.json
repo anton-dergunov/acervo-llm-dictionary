@@ -68,6 +68,156 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "house; building; home",
+    "primaryGloss": "house",
+    "emotion": "solid and familiar, like describing the place you feel safest",
+    "notes": [
+      "Plural: die Häuser.",
+      "Notice the difference between 'nach Hause' (going home, direction) and 'zu Hause' (at home, location)."
+    ],
+    "senses": [
+      {
+        "id": "i0822c7d6adzkqp",
+        "order": 0,
+        "definition": "A building where a person or family lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house"
+            ]
+          }
+        ],
+        "domain": "dwelling",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "uf9z4r1rw8pmuek",
+            "text": "Das Haus hat einen großen Garten.",
+            "textLang": "de",
+            "translation": "The house has a big garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and content, showing someone around",
+            "note": null,
+            "matchedForm": "Haus",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i5971f9bg4u3rv5",
+        "order": 1,
+        "definition": "The place where one lives, especially in fixed phrases like 'zu Hause' (at home) and 'nach Hause' (homeward).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "home"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6561btcn6dkigmr",
+            "text": "Ich gehe jetzt nach Hause.",
+            "textLang": "de",
+            "translation": "I am going home now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Hause",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mukdxtlh4rz0co9",
+        "order": 2,
+        "definition": "A building used for a specific public or commercial purpose.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "building",
+              "house",
+              "establishment"
+            ]
+          }
+        ],
+        "domain": "public building",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "vhccn6fyqxct4d7",
+            "text": "Dieses Haus wurde vor hundert Jahren gebaut.",
+            "textLang": "de",
+            "translation": "This building was built a hundred years ago.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Haus",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Haus",
+    "lemma": "Haus",
+    "reading": null,
+    "ipa": "/haʊ̯s/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "house; building",
     "primaryGloss": "house",
     "emotion": "solid and familiar, like describing the place you feel safest",
@@ -160,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Das Opernhaus ist sehr alt.",
+        "why": "Uses the compound 'Opernhaus' instead of the headword 'Haus'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 sense 'home' in 'zu Hause' and 'nach Hause'."
+      }
+    ],
+    "growth": 1.238
   }
 }

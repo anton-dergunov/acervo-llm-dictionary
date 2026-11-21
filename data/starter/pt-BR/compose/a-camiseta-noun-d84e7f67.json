@@ -58,6 +58,74 @@
     "headword": "a camiseta",
     "lemma": "camiseta",
     "reading": null,
+    "ipa": "/ka.mi.ˈze.tɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "T-shirt",
+    "primaryGloss": "T-shirt",
+    "emotion": "casual and comfortable, picking out something easy to wear for the day",
+    "notes": [
+      "Do not confuse with 'camisa', which typically refers to a button-down shirt with a collar. A sleeveless undershirt or tank top is usually called a 'regata'."
+    ],
+    "senses": [
+      {
+        "id": "n3zn8ndl0nskz9x",
+        "order": 0,
+        "definition": "A simple, lightweight garment for the upper body, usually made of cotton with short sleeves and no collar or buttons.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "T-shirt",
+              "tee"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "omwza5hex92pshe",
+            "text": "Ela comprou uma camiseta de algodão muito confortável.",
+            "textLang": "pt",
+            "translation": "She bought a very comfortable cotton T-shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and relaxed, pleased with a soft new purchase",
+            "note": null,
+            "matchedForm": "camiseta",
+            "matchedTranslationForm": "T-shirt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a camiseta",
+    "lemma": "camiseta",
+    "reading": null,
     "ipa": "/ka.mi.ˈse.tɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ka.mi.ˈse.tɐ/",
+        "why": "Intervocalic 's' in 'camiseta' is voiced /z/, not /s/: /ka.mi.ˈze.tɐ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(underwear) A light garment worn directly against the skin under a shirt.",
+        "why": "Wearing a T-shirt under a dress shirt is not a separate lexical sense in Brazil."
+      }
+    ],
+    "growth": 0.668
   }
 }

@@ -68,6 +68,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "midday; afternoon",
+    "primaryGloss": "afternoon",
+    "emotion": null,
+    "notes": [
+      "Covers both noon and the afternoon (roughly 12 p.m. to 4 p.m.). For 'in the afternoon', use 'दोपहर में' or 'दोपहर को'."
+    ],
+    "senses": [
+      {
+        "id": "w6d8lkcmi54e5be",
+        "order": 0,
+        "definition": "The middle part of the day, from around noon until late afternoon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon",
+              "midday",
+              "noon"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "w2473kn99lszo9t",
+            "text": "दोपहर में धूप बहुत तेज़ होती है।",
+            "textLang": "hi",
+            "translation": "The sun is very strong in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, observing the heat of the day",
+            "note": null,
+            "matchedForm": "दोपहर",
+            "matchedTranslationForm": "afternoon"
+          },
+          {
+            "id": "pq7puqlkbg1zr4n",
+            "text": "हम दोपहर का खाना दो बजे खाते हैं।",
+            "textLang": "hi",
+            "translation": "We eat lunch at two o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "दोपहर",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "दोपहर",
+    "lemma": "दोपहर",
+    "reading": null,
+    "ipa": "/d̪oːpəɦəɾ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "midday; early afternoon",
     "primaryGloss": "midday",
     "emotion": null,
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(midday) ... (afternoon)",
+        "why": "Hindi 'दोपहर' covers both midday and afternoon as one continuous time period."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'दोपहर' specifically refers to the time around noon, while the afternoon follows",
+        "why": "Contradicts sense 1 and everyday usage; 'दोपहर' normally means afternoon as well."
+      }
+    ],
+    "growth": 0.859
   }
 }

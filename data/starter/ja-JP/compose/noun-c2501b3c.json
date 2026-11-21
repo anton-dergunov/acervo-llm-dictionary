@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "猿",
     "lemma": "猿",
+    "reading": "さる",
+    "ipa": "saɾɯ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "monkey; ape",
+    "primaryGloss": "monkey",
+    "emotion": "playful and curious, looking at something funny in the trees",
+    "notes": [
+      "Can also be written in katakana as サル, especially in biological contexts.",
+      "Covers both monkeys and tail-less apes, though specific names like ゴリラ (gorilla) are usually preferred for apes."
+    ],
+    "senses": [
+      {
+        "id": "6czhjlblm7gc0ia",
+        "order": 0,
+        "definition": "A furry animal that climbs trees and is closely related to humans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey",
+              "ape"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "ikmftqcc70thsfc",
+            "text": "動物園で猿を見ました。",
+            "textLang": "ja",
+            "translation": "I saw monkeys at the zoo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "猿",
+            "matchedTranslationForm": "monkeys"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "猿",
+    "lemma": "猿",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -137,5 +206,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (さる) for a word written in kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A derogatory term used to describe someone who is foolish",
+        "why": "Slang/derogatory insult sense is not an everyday A2 meaning; example uses literal simile."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "monkey; ape",
+        "why": "Includes 'ape', which is absent from the sense glosses."
+      }
+    ],
+    "growth": 0.663
   }
 }

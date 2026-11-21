@@ -68,6 +68,129 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "cloud",
+    "primaryGloss": "cloud",
+    "emotion": "dreamy and relaxed, looking up at the sky on a calm day",
+    "notes": [],
+    "senses": [
+      {
+        "id": "8xon92r217l6ifo",
+        "order": 0,
+        "definition": "A white or grey mass in the sky formed by tiny drops of water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cloud"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "bvoy3lk8a0b9d2p",
+            "text": "El cielo está despejado y no hay ni una nube.",
+            "textLang": "es",
+            "translation": "The sky is clear and there is not a single cloud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and cheerful, enjoying a lovely sunny day",
+            "note": null,
+            "matchedForm": "nube",
+            "matchedTranslationForm": "cloud"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2j4q8k55mj7eaeu",
+        "order": 1,
+        "definition": "A network of internet servers used to store data and programs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cloud"
+            ]
+          }
+        ],
+        "domain": "computing",
+        "emoji": "💻",
+        "examples": [
+          {
+            "id": "68w85x30so8am27",
+            "text": "He guardado todas mis fotos en la nube.",
+            "textLang": "es",
+            "translation": "I have saved all my photos in the cloud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and relieved to have everything backed up securely",
+            "note": null,
+            "matchedForm": "nube",
+            "matchedTranslationForm": "cloud"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "8xon92r217l6ifo",
+      "from": "Masa blanca o gris en el cielo formada por vapor de agua.",
+      "to": "A white or grey mass in the sky formed by water vapor.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    },
+    {
+      "sense": "2j4q8k55mj7eaeu",
+      "from": "Red de servidores conectados a internet para almacenar datos y programas.",
+      "to": "A network of internet servers used to store data and programs.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la nube",
+    "lemma": "nube",
+    "reading": null,
+    "ipa": "/ˈnu.βe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "cloud; cloud storage",
     "primaryGloss": "cloud",
     "emotion": "dreamy and relaxed, looking up at the sky on a calm day",
@@ -159,22 +282,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "8xon92r217l6ifo",
-      "from": "Masa blanca o gris en el cielo formada por vapor de agua.",
-      "to": "A white or grey mass in the sky formed by water vapor.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    },
-    {
-      "sense": "2j4q8k55mj7eaeu",
-      "from": "Red de servidores conectados a internet para almacenar datos y programas.",
-      "to": "A network of internet servers used to store data and programs.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In computing, 'la nube' is used just like in English",
+        "why": "Merely repeats sense 1 without adding extra grammatical or usage value."
+      }
+    ],
+    "growth": 0.746
+  }
 }

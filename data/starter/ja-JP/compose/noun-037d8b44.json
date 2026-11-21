@@ -58,6 +58,73 @@
     "headword": "背中",
     "lemma": "背中",
     "reading": "せなか",
+    "ipa": "senaka",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔙",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "back (of the body)",
+    "primaryGloss": "back",
+    "emotion": "matter-of-fact and grounded, describing a part of oneself",
+    "notes": [
+      "背中 refers only to the back of a person's or animal's body. For the back of a chair or a person's height, use 背 (se); for the reverse side of a flat object like paper, use 裏 (ura)."
+    ],
+    "senses": [
+      {
+        "id": "yxtsuam4zoky88h",
+        "order": 0,
+        "definition": "The rear surface of the human or animal body, from the shoulders to the hips.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "back"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🔙",
+        "examples": [
+          {
+            "id": "b3evdqdl5n17axj",
+            "text": "背中がかゆい。",
+            "textLang": "ja",
+            "translation": "My back itches.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly irritated, needing someone else to scratch a hard-to-reach spot",
+            "note": null,
+            "matchedForm": "背中",
+            "matchedTranslationForm": "back"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "背中",
+    "lemma": "背中",
+    "reading": "せなか",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "The reverse side or the back part of an object.",
+        "why": "背中 only refers to the back of a person's or animal's body, not objects."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "紙の背中に名前を書いてください。",
+        "why": "Completely unnatural; the back of a sheet of paper is 裏 (ura), never 背中."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "back, rear",
+        "why": "'Rear' suggests buttocks or the back of a building, not the anatomical back."
+      }
+    ],
+    "growth": 0.671
   }
 }

@@ -68,6 +68,117 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "world; people",
+    "primaryGloss": "world",
+    "emotion": "wide-eyed and thoughtful, contemplating the vast scope of the planet",
+    "notes": [
+      "Used as an uncountable noun ('du monde', 'beaucoup de monde') to mean 'people' or 'a crowd'. The very common phrase 'tout le monde' means 'everyone' and takes a third-person singular verb."
+    ],
+    "senses": [
+      {
+        "id": "fprvu0580usudc4",
+        "order": 0,
+        "definition": "The earth, together with all of its countries and peoples.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "world",
+              "globe",
+              "earth"
+            ]
+          }
+        ],
+        "domain": "earth",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "h2vpzxo2hgg06jx",
+            "text": "Il rêve de voyager partout dans le monde.",
+            "textLang": "fr",
+            "translation": "He dreams of traveling all over the world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and inspired, imagining distant horizons",
+            "note": null,
+            "matchedForm": "monde",
+            "matchedTranslationForm": "world"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jccxbiztm27xm2n",
+        "order": 1,
+        "definition": "People in general, or a large number of people in one place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "people",
+              "crowd",
+              "everyone"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "jq82ajxwrj0um76",
+            "text": "Il y a beaucoup de monde dans le magasin aujourd'hui.",
+            "textLang": "fr",
+            "translation": "There are a lot of people in the store today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observing a bustling and crowded room",
+            "note": null,
+            "matchedForm": "monde",
+            "matchedTranslationForm": "people"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le monde",
+    "lemma": "monde",
+    "reading": null,
+    "ipa": "/mɔ̃d/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "world; people; society",
     "primaryGloss": "world",
     "emotion": "wide-eyed and thoughtful, contemplating the vast scope of the planet",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "world; people; society",
+        "why": "'Society' is not covered in the senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Do not confuse it with 'la terre', which is more specifically",
+        "why": "Misleading: 'la Terre' also means planet Earth; should highlight 'tout le monde' instead."
+      }
+    ],
+    "growth": 0.916
   }
 }

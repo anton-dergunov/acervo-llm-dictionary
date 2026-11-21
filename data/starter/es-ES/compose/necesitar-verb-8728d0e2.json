@@ -58,6 +58,96 @@
     "headword": "necesitar",
     "lemma": "necesitar",
     "reading": null,
+    "ipa": "/neθesiˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need",
+    "primaryGloss": "to need",
+    "emotion": "earnest and straightforward, expressing a real requirement",
+    "notes": [
+      "Followed directly by a noun ('Necesito ayuda') or an infinitive verb without a preposition ('Necesito descansar').",
+      "For obligations ('have to' / 'must'), 'tener que' + infinitive is much more common than 'necesitar'."
+    ],
+    "senses": [
+      {
+        "id": "q0fsy4nbw89q7nb",
+        "order": 0,
+        "definition": "To require something or someone because it is essential or very important.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "necessity",
+        "emoji": "📌",
+        "examples": [
+          {
+            "id": "i07hjrpvq1hgvb5",
+            "text": "Necesito un paraguas porque está lloviendo.",
+            "textLang": "es",
+            "translation": "I need an umbrella because it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned about the weather and looking for shelter",
+            "note": null,
+            "matchedForm": "Necesito",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "pyg45ksbnqst4wk",
+            "text": "Hoy necesito acostarme temprano.",
+            "textLang": "es",
+            "translation": "Today I need to go to bed early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "necesito",
+            "matchedTranslationForm": "need to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "necesitar",
+    "lemma": "necesitar",
+    "reading": null,
     "ipa": "/nese.siˈtaɾ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/nese.siˈtaɾ/",
+        "why": "Gives seseo pronunciation; Castilian Spanish (es-ES) uses /θ/ for 'c' before 'e': /neθesiˈtaɾ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are identical in meaning ('to need something')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to have to have something",
+        "why": "Clumsy, unnatural phrase used as a gloss instead of 'to need'."
+      }
+    ],
+    "growth": 0.86
   }
 }

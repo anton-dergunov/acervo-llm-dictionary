@@ -58,6 +58,114 @@
     "headword": "a estrela",
     "lemma": "estrela",
     "reading": null,
+    "ipa": "/isˈtɾe.lɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "star; celebrity",
+    "primaryGloss": "star",
+    "emotion": "wide-eyed and quiet, gazing up at the vast night sky",
+    "notes": [
+      "Also used for rating hotels and restaurants (e.g., 'um hotel cinco estrelas' — a five-star hotel)."
+    ],
+    "senses": [
+      {
+        "id": "42lz7k2uf8iggof",
+        "order": 0,
+        "definition": "A bright point of light seen in the night sky, or a shape with points representing it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "zhh1aizc74mt3cd",
+            "text": "As estrelas brilham muito no céu noturno.",
+            "textLang": "pt",
+            "translation": "The stars shine brightly in the night sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "estrelas",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d7wwim7glh9ss7k",
+        "order": 1,
+        "definition": "A very famous or successful person, especially in entertainment or sports.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star",
+              "celebrity"
+            ]
+          }
+        ],
+        "domain": "fame",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "8o8htxwbdyyodgc",
+            "text": "Ela é uma estrela do cinema brasileiro.",
+            "textLang": "pt",
+            "translation": "She is a star of Brazilian cinema.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and enthusiastic, talking about someone talented",
+            "note": null,
+            "matchedForm": "estrela",
+            "matchedTranslationForm": "star"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a estrela",
+    "lemma": "estrela",
+    "reading": null,
     "ipa": "/isˈtɾɛ.lɐ/",
     "pos": "noun",
     "gender": "feminine",
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/isˈtɾɛ.lɐ/",
+        "why": "Wrong vowel quality: 'estrela' has a close-mid /e/, not open-mid /ɛ/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "star; famous person; asterisk",
+        "why": "Includes 'asterisk', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Portuguese, as in English, this word refers both to the celestial",
+        "why": "Restates the two senses in the entry."
+      }
+    ],
+    "growth": 0.866
   }
 }

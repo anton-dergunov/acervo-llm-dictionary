@@ -68,6 +68,114 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "tomorrow; someday",
+    "primaryGloss": "tomorrow",
+    "emotion": "looking forward to tomorrow with light, eager anticipation",
+    "notes": [
+      "Do not confuse with 'lusa' (the day after tomorrow) or 'kemarin' (yesterday)."
+    ],
+    "senses": [
+      {
+        "id": "8was239fdnyriuq",
+        "order": 0,
+        "definition": "On the day after today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tomorrow"
+            ]
+          }
+        ],
+        "domain": "tomorrow",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "6n933gwp90up7wr",
+            "text": "Kita akan pergi ke pantai besok.",
+            "textLang": "id",
+            "translation": "We will go to the beach tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheerful about the upcoming trip",
+            "note": null,
+            "matchedForm": "besok",
+            "matchedTranslationForm": "tomorrow"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l5riuq1cb7sa4en",
+        "order": 1,
+        "definition": "At an unspecified time in the future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "someday",
+              "in the future"
+            ]
+          }
+        ],
+        "domain": "future",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "r5wlo3ldmotcgqw",
+            "text": "Besok kalau sudah besar, kamu mau jadi apa?",
+            "textLang": "id",
+            "translation": "Someday when you grow up, what do you want to be?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Besok",
+            "matchedTranslationForm": "Someday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "besok",
+    "lemma": "besok",
+    "reading": null,
+    "ipa": "/ˈbɛ.sɔk/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "tomorrow; someday in the future",
     "primaryGloss": "tomorrow",
     "emotion": "looking forward to tomorrow with light, eager anticipation",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Jangan tunda sampai besok apa yang bisa kamu kerjakan hari ini.",
+        "why": "Example translates as 'tomorrow' (sense 0) rather than clearly illustrating 'someday in the future'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The day after today.",
+        "why": "Defined as a noun, though the entry's POS is adverb."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "someday, future",
+        "why": "'future' is a noun/adjective, not an adverb gloss."
+      }
+    ],
+    "growth": 0.876
   }
 }

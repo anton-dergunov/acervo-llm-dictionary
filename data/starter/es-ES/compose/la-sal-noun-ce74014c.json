@@ -71,6 +71,71 @@
     "shortGloss": "salt",
     "primaryGloss": "salt",
     "emotion": "matter-of-fact and helpful, reaching for the seasoning during a meal",
+    "notes": [],
+    "senses": [
+      {
+        "id": "pfgemq4obg2da23",
+        "order": 0,
+        "definition": "A white substance in the form of tiny crystals, used to season or preserve food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salt"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧂",
+        "examples": [
+          {
+            "id": "zsqqfzxdy7r49y5",
+            "text": "La sopa necesita un poco más de sal.",
+            "textLang": "es",
+            "translation": "The soup needs a little more salt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and tasting, noticing what is missing from the dish",
+            "note": null,
+            "matchedForm": "sal",
+            "matchedTranslationForm": "salt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la sal",
+    "lemma": "sal",
+    "reading": null,
+    "ipa": "/sal/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salt",
+    "primaryGloss": "salt",
+    "emotion": "matter-of-fact and helpful, reaching for the seasoning during a meal",
     "notes": [
       "Remember that sal is feminine, so you say 'la sal' or 'poca sal'."
     ],
@@ -118,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Remember that sal is feminine, so you say 'la sal'",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "White powder used to season food",
+        "why": "Salt consists of crystals or grains, not powder."
+      }
+    ],
+    "growth": 0.79
   }
 }

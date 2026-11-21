@@ -72,6 +72,75 @@
     "primaryGloss": "tired",
     "emotion": "heavy and low energy, like the end of a long day",
     "notes": [
+      "Describes physical or mental fatigue. Do not confuse with ง่วง (ngûang), which means 'sleepy' (needing sleep)."
+    ],
+    "senses": [
+      {
+        "id": "3ch76y5msoura74",
+        "order": 0,
+        "definition": "Needing rest because of physical or mental effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tired",
+              "exhausted",
+              "fatigued"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "lw2t3dpp9hyzte3",
+            "text": "ฉันเหนื่อยมากหลังจากทำงานทั้งวัน",
+            "textLang": "th",
+            "translation": "I am very tired after working all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and ready to lie down",
+            "note": null,
+            "matchedForm": "เหนื่อย",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เหนื่อย",
+    "lemma": "เหนื่อย",
+    "reading": null,
+    "ipa": "/nɯ̀aj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "tired; exhausted",
+    "primaryGloss": "tired",
+    "emotion": "heavy and low energy, like the end of a long day",
+    "notes": [
       "เหนื่อย (nèuai) is the standard word for feeling physically or mentally tired.",
       "If you feel 'exhausted' or 'worn out,' you can add the word มาก (mâak - very) to make it stronger: เหนื่อยมาก."
     ],
@@ -121,5 +190,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "เหนื่อย (nèuai) is the standard word for feeling physically or mentally tired.",
+        "why": "Restates the definition without adding useful contrast."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "If you feel 'exhausted' or 'worn out,' you can add the word มาก",
+        "why": "Adding 'very' to an adjective is generic grammar, not word-specific."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should contrast with ง่วง (sleepy), which beginners frequently confuse with เหนื่อย."
+      }
+    ],
+    "growth": 0.759
   }
 }

@@ -60,6 +60,73 @@
     "headword": "sân bay",
     "lemma": "sân bay",
     "reading": null,
+    "ipa": "/sən˧˧ ɓaːj˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "airport",
+    "primaryGloss": "airport",
+    "emotion": "busy and bustling, excited to travel somewhere new",
+    "notes": [
+      "Composed of 'sân' (yard, field) and 'bay' (to fly). Takes the classifier 'cái' when counted, though often used without one."
+    ],
+    "senses": [
+      {
+        "id": "r95mdj193z00pms",
+        "order": 0,
+        "definition": "A large area with buildings and runways where planes take off and land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "airport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "drqa7lfcn1s3qcs",
+            "text": "Tôi đang ở sân bay để chờ chuyến bay đi Hà Nội.",
+            "textLang": "vi",
+            "translation": "I am at the airport waiting for the flight to Hanoi.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurried and focused, watching the departure board",
+            "note": null,
+            "matchedForm": "sân bay",
+            "matchedTranslationForm": "airport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "sân bay",
+    "lemma": "sân bay",
+    "reading": null,
     "ipa": "/səːn ɓaːj/",
     "pos": "noun",
     "gender": null,
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/səːn ɓaːj/",
+        "why": "Short 'â' is /ə/, not long /əː/; missing tone marks."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used for all kinds of commercial and private aviation facilities.",
+        "why": "Pure filler; adds nothing beyond the word 'airport'."
+      }
+    ],
+    "growth": 1.007
   }
 }

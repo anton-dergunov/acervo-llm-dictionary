@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "elephant",
+    "primaryGloss": "elephant",
+    "emotion": "awestruck and quiet, looking up at something massive and gentle",
+    "notes": [
+      "In everyday speech, elephants often take the general animal classifier ตัว (tua), though the formal classifier for domesticated elephants is เชือก (chûueak) and for wild elephants is โขลง (khlǒong, for a herd)."
+    ],
+    "senses": [
+      {
+        "id": "yfkplzhtnoj9i7t",
+        "order": 0,
+        "definition": "A very large grey mammal with a long trunk and tusks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "elephant"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "q2iiu313dn84uq9",
+            "text": "ฉันเห็นช้างในป่า",
+            "textLang": "th",
+            "translation": "I saw an elephant in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and hushed, pointing something out in the distance",
+            "note": null,
+            "matchedForm": "ช้าง",
+            "matchedTranslationForm": "elephant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ช้าง",
+    "lemma": "ช้าง",
+    "reading": null,
+    "ipa": "/tɕʰáːŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "elephant; Thai royal/major unit",
     "primaryGloss": "elephant",
     "emotion": "awestruck and quiet, looking up at something massive and gentle",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "elephant; Thai royal/major unit",
+        "why": "Includes 'Thai royal/major unit', which is absent from the senses and cryptic."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "As a classifier or prefix, it often denotes something of massive size.",
+        "why": "Used as a modifier after a noun (not a prefix or classifier) for large varieties."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "ช้าง is a fundamental animal in Thai culture",
+        "why": "Encyclopedic filler instead of explaining the classifierเชือก vs ตัว."
+      }
+    ],
+    "growth": 0.988
   }
 }

@@ -74,6 +74,75 @@
     "primaryGloss": "mountain",
     "emotion": "awe-struck and small, looking up at the high ridge against the sky",
     "notes": [
+      "The letter 'ğ' (yumuşak g) is not pronounced as a consonant; in 'dağ', it simply lengthens the 'a' sound (/daː/).",
+      "A smaller hill is called 'tepe'."
+    ],
+    "senses": [
+      {
+        "id": "vaa3wilz2oxj1ux",
+        "order": 0,
+        "definition": "A very high natural elevation of the earth's surface rising steeply above the surrounding land, larger than a hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "mount"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "1fkxppfdcw149ec",
+            "text": "Kışın bu dağlar hep karla kaplanır.",
+            "textLang": "tr",
+            "translation": "In winter these mountains are always covered with snow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cold and admiring, looking at the snowy peaks in the distance",
+            "note": null,
+            "matchedForm": "dağlar",
+            "matchedTranslationForm": "mountains"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dağ",
+    "lemma": "dağ",
+    "reading": null,
+    "ipa": "/daː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "mountain",
+    "primaryGloss": "mountain",
+    "emotion": "awe-struck and small, looking up at the high ridge against the sky",
+    "notes": [
       "Do not confuse 'dağ' (mountain) with 'bağ' (vineyard or garden).",
       "When adding suffixes, the soft 'ğ' remains silent and lengthens the preceding vowel."
     ],
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(hill) A very high hill that rises steeply above the surrounding land.",
+        "why": "Artificial split of 'mountain'; 'hill' in Turkish is 'tepe', not 'dağ'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When adding suffixes, the soft 'ğ' remains silent and lengthens the preceding",
+        "why": "Between vowels (e.g. dağa), 'ğ' does not simply lengthen the preceding vowel."
+      }
+    ],
+    "growth": 0.707
   }
 }

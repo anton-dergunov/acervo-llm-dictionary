@@ -72,6 +72,116 @@
     "primaryGloss": "lonely",
     "emotion": "somewhat melancholy, reflecting on a sense of quiet isolation",
     "notes": [
+      "While 'alleen' simply means being physically by yourself (alone), 'eenzaam' describes the negative feeling of being isolated or missing company.",
+      "Inflected form: 'eenzame' (with a single 'a')."
+    ],
+    "senses": [
+      {
+        "id": "ojb7fl062sa816a",
+        "order": 0,
+        "definition": "Feeling sad because you are alone or feel isolated from others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lonely"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😔",
+        "examples": [
+          {
+            "id": "y1vxo3kcms8hpke",
+            "text": "Hij voelt zich erg eenzaam sinds hij verhuisd is.",
+            "textLang": "nl",
+            "translation": "He has been feeling very lonely since he moved.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit wistful and sad, speaking about someone's struggle to adjust",
+            "note": null,
+            "matchedForm": "eenzaam",
+            "matchedTranslationForm": "lonely"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3kqr7mv8a1fbaps",
+        "order": 1,
+        "definition": "Of a place: far away from people and rarely visited.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "solitary",
+              "remote",
+              "lonely"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏚️",
+        "examples": [
+          {
+            "id": "guslertzbiryox2",
+            "text": "Ze maakten een lange wandeling door het eenzame bos.",
+            "textLang": "nl",
+            "translation": "They took a long walk through the lonely woods.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful but slightly eerie, describing a quiet, empty setting",
+            "note": null,
+            "matchedForm": "eenzame",
+            "matchedTranslationForm": "lonely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "eenzaam",
+    "lemma": "eenzaam",
+    "reading": null,
+    "ipa": "/ˈeːnzaːm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😔",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "lonely; solitary",
+    "primaryGloss": "lonely",
+    "emotion": "somewhat melancholy, reflecting on a sense of quiet isolation",
+    "notes": [
       "While 'alleen' simply means being physically by yourself (alone), 'eenzaam' implies a negative emotional state of feeling isolated or missing social connection.",
       "You can be 'alleen' without feeling 'eenzaam', but feeling 'eenzaam' usually implies that being alone is not what you want."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A place that is far away from other people or empty.",
+        "why": "Adjective is defined as a noun ('A place that...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "You can be 'alleen' without feeling 'eenzaam', but feeling 'eenzaam' usually implies",
+        "why": "Repeats the exact same contrast already explained in note 0."
+      }
+    ],
+    "growth": 0.869
   }
 }

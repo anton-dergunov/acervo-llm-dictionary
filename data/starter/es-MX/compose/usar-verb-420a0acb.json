@@ -75,6 +75,132 @@
     "primaryGloss": "use",
     "emotion": "practical and matter-of-fact, explaining how something works",
     "notes": [
+      "In Mexico and across Latin America, 'usar' is the everyday verb for wearing clothes, shoes, glasses, or hairstyles (e.g., '¿Usas lentes?')."
+    ],
+    "senses": [
+      {
+        "id": "2jv5ohforpcis5d",
+        "order": 0,
+        "definition": "To do something with a tool, machine, or object for a purpose.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "use"
+            ]
+          }
+        ],
+        "domain": "use",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "86qzu3rln3zso04",
+            "text": "Voy a usar la computadora para trabajar.",
+            "textLang": "es",
+            "translation": "I am going to use the computer to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and determined, getting ready to start a task",
+            "note": null,
+            "matchedForm": "usar",
+            "matchedTranslationForm": "use"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p3p8hfuokoh1xee",
+        "order": 1,
+        "definition": "To have clothes, shoes, glasses, or accessories on your body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wear"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "52rzzstb0x2r4dw",
+            "text": "Ella prefiere usar ropa cómoda cuando está en casa.",
+            "textLang": "es",
+            "translation": "She prefers to wear comfortable clothes when she is at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and casual, thinking about comfort",
+            "note": null,
+            "matchedForm": "usar",
+            "matchedTranslationForm": "wear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2jv5ohforpcis5d",
+      "from": "Hacer servir una cosa para algo.",
+      "to": "To make use of something for a purpose.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    },
+    {
+      "sense": "p3p8hfuokoh1xee",
+      "from": "Llevar ropa o accesorios puestos en el cuerpo.",
+      "to": "To have clothes or accessories on the body.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "usar",
+    "lemma": "usar",
+    "reading": null,
+    "ipa": "/uˈsaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to use; to wear",
+    "primaryGloss": "use",
+    "emotion": "practical and matter-of-fact, explaining how something works",
+    "notes": [
       "In Mexico and many other Spanish-speaking regions, 'usar' is very commonly used to mean wearing clothes, just like 'to wear' in English."
     ],
     "senses": [
@@ -164,22 +290,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2jv5ohforpcis5d",
-      "from": "Hacer servir una cosa para algo.",
-      "to": "To make use of something for a purpose.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    },
-    {
-      "sense": "p3p8hfuokoh1xee",
-      "from": "Llevar ropa o accesorios puestos en el cuerpo.",
-      "to": "To have clothes or accessories on the body.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "wear, use",
+        "why": "'Use' is not natural English for wearing clothes."
+      }
+    ],
+    "growth": 1.077
+  }
 }

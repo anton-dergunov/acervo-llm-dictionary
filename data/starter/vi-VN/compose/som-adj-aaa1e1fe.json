@@ -68,6 +68,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "early; soon",
+    "primaryGloss": "early",
+    "emotion": "bright and energetic, greeting the start of a busy day",
+    "notes": [
+      "Often placed after a verb as an adverb (e.g., 'dậy sớm' — to wake up early, 'đến sớm' — to arrive early) or after 'sáng' in 'sáng sớm' (early morning)."
+    ],
+    "senses": [
+      {
+        "id": "3t7lmi6wzc1vvyb",
+        "order": 0,
+        "definition": "Happening or done before the usual or expected time, or near the beginning of a period.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "early",
+              "ahead of time",
+              "soon"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "yw68cyvydh0pmme",
+            "text": "Anh ấy đến sớm hơn mọi người.",
+            "textLang": "vi",
+            "translation": "He arrived earlier than everyone else.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and pleased at someone's punctuality",
+            "note": null,
+            "matchedForm": "sớm",
+            "matchedTranslationForm": "earlier"
+          },
+          {
+            "id": "cbdyc98c21xwdbp",
+            "text": "Vào buổi sáng sớm, trời rất mát mẻ.",
+            "textLang": "vi",
+            "translation": "In the early morning, the weather is very cool.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sớm",
+            "matchedTranslationForm": "early"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "sớm",
+    "lemma": "sớm",
+    "reading": null,
+    "ipa": "/səːm˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "early; in the morning",
     "primaryGloss": "early",
     "emotion": "bright and energetic, greeting the start of a busy day",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Buổi sáng trời rất mát mẻ.",
+        "why": "The example does not contain the headword 'sớm' at all."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Happening in the early part of the day, such as morning.",
+        "why": "Oversplit; 'sáng sớm' (early morning) is just sense 0 applied to the morning, or a literary noun."
+      }
+    ],
+    "growth": 1.088
   }
 }

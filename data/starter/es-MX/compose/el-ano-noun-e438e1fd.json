@@ -72,6 +72,95 @@
     "primaryGloss": "year",
     "emotion": null,
     "notes": [
+      "Do not drop the tilde on 'ñ': 'ano' means 'anus'.",
+      "To say someone's age, Spanish uses 'tener' + number + 'años': 'Tengo veinte años' (I am twenty years old)."
+    ],
+    "senses": [
+      {
+        "id": "ju0g3hyyehqcq23",
+        "order": 0,
+        "definition": "A period of twelve months, either from January 1 to December 31 or as a unit of time and age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "year"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "v1xseg4b0gp5qc2",
+            "text": "Este año voy a viajar mucho.",
+            "textLang": "es",
+            "translation": "This year I am going to travel a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "optimistic and looking forward to the future",
+            "note": null,
+            "matchedForm": "año",
+            "matchedTranslationForm": "year"
+          },
+          {
+            "id": "zzcpanma21fwhnf",
+            "text": "Viví en México por un año entero.",
+            "textLang": "es",
+            "translation": "I lived in Mexico for a whole year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and slightly proud of the long experience",
+            "note": null,
+            "matchedForm": "año",
+            "matchedTranslationForm": "year"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el año",
+    "lemma": "año",
+    "reading": null,
+    "ipa": "/ˈaɲo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "year",
+    "primaryGloss": "year",
+    "emotion": null,
+    "notes": [
       "Note the tilde (ñ), which changes the sound of the word. Without it, 'ano' means 'anus'.",
       "When talking about how old someone is, Spanish uses 'tener' (to have) followed by the number of years: 'Tengo veinte años' (I am twenty years old)."
     ],
@@ -160,5 +249,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A duration of twelve consecutive months.",
+        "why": "Calendar year and a twelve-month period are shades of one meaning, both translated 'year'."
+      }
+    ],
+    "growth": 0.773
   }
 }

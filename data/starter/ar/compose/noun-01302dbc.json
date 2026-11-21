@@ -68,6 +68,74 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "man",
+    "primaryGloss": "man",
+    "emotion": "a clear and steady description of someone, neutral and observant",
+    "notes": [
+      "Irregular plural: رِجَال (rijāl).",
+      "Do not confuse with رِجْل (rijl, 'foot, leg'), which is spelled identically without vowel marks (رجل)."
+    ],
+    "senses": [
+      {
+        "id": "rmwxgicgi8b1lpq",
+        "order": 0,
+        "definition": "An adult male human being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "man"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "ozb1m6jj1bel35n",
+            "text": "هٰذَا الرَّجُلُ طَوِيلٌ.",
+            "textLang": "ar",
+            "translation": "This man is tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الرَّجُلُ",
+            "matchedTranslationForm": "man"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رَجُل",
+    "lemma": "رَجُل",
+    "reading": null,
+    "ipa": "/ˈra.d͡ʒul/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "man; guy",
     "primaryGloss": "man",
     "emotion": "a clear and steady description of someone, neutral and observant",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "man; guy",
+        "why": "'guy' is not in the glosses and does not match the neutral MSA register."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(character) A person who is considered to have qualities such as courage",
+        "why": "Figurative shade of 'adult male'; not a separate everyday lexical sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike 'boy' (وَلَد), this word is used exclusively for adult males.",
+        "why": "Restates the definition ('adult male human being')."
+      }
+    ],
+    "growth": 0.665
   }
 }

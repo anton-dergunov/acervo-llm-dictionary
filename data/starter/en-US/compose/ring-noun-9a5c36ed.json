@@ -68,6 +68,155 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "anillo; timbre; círculo",
+    "primaryGloss": "anillo",
+    "emotion": "admiring a small, shining object on one's hand",
+    "notes": [],
+    "senses": [
+      {
+        "id": "lzgy3o99hhde4b6",
+        "order": 0,
+        "definition": "Pequeña pieza circular de metal que se lleva en el dedo como joya.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "anillo",
+              "sortija"
+            ]
+          }
+        ],
+        "domain": "joya",
+        "emoji": "💍",
+        "examples": [
+          {
+            "id": "igk0u7kwv2lei1s",
+            "text": "She wears a gold ring on her finger.",
+            "textLang": "en",
+            "translation": "Ella lleva un anillo de oro en el dedo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and happy, showing someone a new piece of jewelry",
+            "note": null,
+            "matchedForm": "ring",
+            "matchedTranslationForm": "anillo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3sl2e6cnmmr8vnx",
+        "order": 1,
+        "definition": "Sonido que hace un timbre, un teléfono o una campana.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "timbre",
+              "toque",
+              "sonido"
+            ]
+          }
+        ],
+        "domain": "sonido",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "fk3gproypp551v1",
+            "text": "There was a loud ring at the front door.",
+            "textLang": "en",
+            "translation": "Sonó fuerte el timbre de la puerta principal.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ring",
+            "matchedTranslationForm": "timbre"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4i93et3f5vhfvgi",
+        "order": 2,
+        "definition": "Forma redonda o grupo de cosas o personas dispuestas en círculo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "círculo",
+              "aro"
+            ]
+          }
+        ],
+        "domain": "forma",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "kkr6fsbfld60ab9",
+            "text": "The children sat in a ring on the floor.",
+            "textLang": "en",
+            "translation": "Los niños se sentaron en círculo en el suelo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ring",
+            "matchedTranslationForm": "círculo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "ring",
+    "lemma": "ring",
+    "reading": null,
+    "ipa": "/rɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💍",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "anillo; sortija; llamada telefónica",
     "primaryGloss": "anillo",
     "emotion": "admiring a small, shining object on one's hand",
@@ -161,5 +310,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "I heard the phone ring.",
+        "why": "In 'heard the phone ring', 'ring' is a bare infinitive verb, not a noun."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "llamada, timbre, toque",
+        "why": "In US English, 'ring' as a noun means the sound (timbre/toque), not a phone call ('llamada', which is BrE informal)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "anillo; sortija; llamada telefónica",
+        "why": "'Llamada telefónica' is British informal ('give someone a ring'), not standard US English."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para la joya que se lleva en el dedo",
+        "why": "Simply repeats the definitions of the two senses."
+      }
+    ],
+    "growth": 1.145
   }
 }

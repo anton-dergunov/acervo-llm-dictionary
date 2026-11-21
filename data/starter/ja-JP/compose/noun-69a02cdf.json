@@ -58,6 +58,118 @@
     "headword": "町",
     "lemma": "町",
     "reading": "まち",
+    "ipa": "matɕi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏘️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "town; downtown",
+    "primaryGloss": "town",
+    "emotion": "a sense of familiarity and local belonging, peaceful and grounded",
+    "notes": [
+      "Often overlaps with 街 (also read 'machi'), which focuses more on busy city streets and commercial districts, while 町 refers to a residential town or municipality.",
+      "Also read 'chō' when used as a suffix in address names (e.g., 本町, Honchō)."
+    ],
+    "senses": [
+      {
+        "id": "7j9wkc389da4ou3",
+        "order": 0,
+        "definition": "A populated urban area, typically smaller than a major city, or a local neighborhood.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "town",
+              "city",
+              "neighborhood"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "y930vyo502bb1o1",
+            "text": "ここは静かでいい町ですね。",
+            "textLang": "ja",
+            "translation": "This is a quiet and nice town, isn't it?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "町",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1p0wwloznpirq3x",
+        "order": 1,
+        "definition": "The lively central part of a town or city where shops and restaurants are located.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "downtown",
+              "town center",
+              "shopping district"
+            ]
+          }
+        ],
+        "domain": "city center",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "7ugmf17kdxhbz33",
+            "text": "週末は町へ買い物に行きます。",
+            "textLang": "ja",
+            "translation": "On the weekend, I go downtown to shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "町",
+            "matchedTranslationForm": "downtown"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "町",
+    "lemma": "町",
+    "reading": "まち",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -137,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(town) A populated area ... / (large town) A large, densely populated",
+        "why": "Senses 0 and 1 are shades of the same meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use this word when referring to the town you live in",
+        "why": "Restates the definitions without adding useful grammar or usage info."
+      },
+      {
+        "severity": 2,
+        "category": "new:example.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "A common polysemous noun needs examples to illustrate its senses."
+      }
+    ],
+    "growth": 0.97
   }
 }

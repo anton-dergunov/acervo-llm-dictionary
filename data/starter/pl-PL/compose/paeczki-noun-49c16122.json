@@ -72,6 +72,114 @@
     "primaryGloss": "chopsticks",
     "emotion": "hungry and eager, ready to dig into a meal",
     "notes": [
+      "Plural of 'pałeczka' (a small stick or baton). In the senses 'chopsticks' and 'drumsticks', it is normally used in the plural.",
+      "To say 'with chopsticks', use the instrumental plural 'pałeczkami' without a preposition: 'jeść pałeczkami'."
+    ],
+    "senses": [
+      {
+        "id": "upkb1vx2kdsszk6",
+        "order": 0,
+        "definition": "A pair of thin sticks used for eating East Asian food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chopsticks"
+            ]
+          }
+        ],
+        "domain": "utensils",
+        "emoji": "🥢",
+        "examples": [
+          {
+            "id": "6gvz6u6do0e14jo",
+            "text": "W tej restauracji jemy sushi pałeczkami.",
+            "textLang": "pl",
+            "translation": "In this restaurant we eat sushi with chopsticks.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pałeczkami",
+            "matchedTranslationForm": "chopsticks"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w4f5zckk6uegsxy",
+        "order": 1,
+        "definition": "A pair of sticks used to play drums.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drumsticks"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🥁",
+        "examples": [
+          {
+            "id": "j2b02dact27nf93",
+            "text": "Perkusista zgubił pałeczki przed koncertem.",
+            "textLang": "pl",
+            "translation": "The drummer lost his drumsticks before the concert.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "panicked and hurried, looking everywhere before the show",
+            "note": null,
+            "matchedForm": "pałeczki",
+            "matchedTranslationForm": "drumsticks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pałeczki",
+    "lemma": "pałeczka",
+    "reading": null,
+    "ipa": "/paˈwɛt͡ʂ.ki/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥢",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "chopsticks; drumsticks",
+    "primaryGloss": "chopsticks",
+    "emotion": "hungry and eager, ready to dig into a meal",
+    "notes": [
       "This word is almost always used in the plural form \"pałeczki\".",
       "It has two very common meanings: eating utensils and drumsticks."
     ],
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "W tej restauracji jemy sushi pałeczki.",
+        "why": "Ungrammatical: means of eating requires the instrumental case 'pałeczkami', not accusative 'pałeczki'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It has two very common meanings: eating utensils and drumsticks.",
+        "why": "Restates the senses and glosses without adding useful usage information."
+      }
+    ],
+    "growth": 1.296
   }
 }

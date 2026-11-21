@@ -69,6 +69,116 @@
     ],
     "status": "active",
     "shortGloss": "to understand; to comprehend",
+    "primaryGloss": "to understand",
+    "emotion": "thoughtful and relieved, like a light bulb going on in your head",
+    "notes": [
+      "Do not confuse with 알다 ('to know'), which is used for knowing facts, word meanings, or people. To say 'I understand' in response to an instruction, Koreans usually say 알겠습니다."
+    ],
+    "senses": [
+      {
+        "id": "yxfeaekt2d1eohx",
+        "order": 0,
+        "definition": "To grasp the meaning, logic, or explanation of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to understand",
+              "to comprehend",
+              "to grasp"
+            ]
+          }
+        ],
+        "domain": "comprehension",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "jzsingxij07ux6n",
+            "text": "선생님의 설명을 잘 이해했어요.",
+            "textLang": "ko",
+            "translation": "I understood the teacher's explanation well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and clear, confirming you successfully followed the instructions",
+            "note": null,
+            "matchedForm": "이해했어요",
+            "matchedTranslationForm": "understood"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t2frqknihva9uy8",
+        "order": 1,
+        "definition": "To sympathize with or accept someone's feelings, actions, or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to understand",
+              "to sympathize with"
+            ]
+          }
+        ],
+        "domain": "empathy",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fo9py6bzgruzt8o",
+            "text": "그 친구의 마음을 충분히 이해해요.",
+            "textLang": "ko",
+            "translation": "I fully understand how that friend feels.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "이해해요",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "이해하다",
+    "lemma": "이해하다",
+    "reading": null,
+    "ipa": "/i.ɦɛ.ɦa.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to understand; to comprehend",
     "primaryGloss": "understand",
     "emotion": "thoughtful and relieved, like a light bulb going on in your head",
     "notes": [
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(comprehension) ... (meaning)",
+        "why": "Both senses describe grasping meaning; they are the same sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "이 단어가 무슨 뜻인지 이해해요.",
+        "why": "For knowing a word's meaning, Koreans say 무슨 뜻인지 알아요, not 이해해요."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common sympathetic sense: understanding someone's feelings or situation."
+      }
+    ],
+    "growth": 1.11
   }
 }

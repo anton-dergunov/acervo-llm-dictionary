@@ -70,6 +70,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "tall; high",
+    "primaryGloss": "tall",
+    "emotion": "matter-of-fact and observational, describing someone you see across the room",
+    "notes": [
+      "More common in everyday speech than its formal variant υψηλός.",
+      "Do not confuse with μεγάλος ('big' or 'old'); ψηλός refers specifically to vertical height."
+    ],
+    "senses": [
+      {
+        "id": "a0haobgff16qaky",
+        "order": 0,
+        "definition": "Of a person, building, or upright object: of great or more than average height.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "stature",
+        "emoji": "🦒",
+        "examples": [
+          {
+            "id": "3hss523l0k1clww",
+            "text": "Είναι πολύ ψηλός για την ηλικία του.",
+            "textLang": "el",
+            "translation": "He is very tall for his age.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and slightly impressed by someone's quick growth",
+            "note": null,
+            "matchedForm": "ψηλός",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "oiw9ob9pimatoal",
+        "order": 1,
+        "definition": "Reaching a great height, or at a high level, degree, or pitch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "high"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "vtrreb5s55tjg0w",
+            "text": "Το χωριό βρίσκεται σε ένα ψηλό βουνό.",
+            "textLang": "el",
+            "translation": "The village is on a high mountain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ψηλό",
+            "matchedTranslationForm": "high"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ψηλός",
+    "lemma": "ψηλός",
+    "reading": null,
+    "ipa": "/psiˈlos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦒",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "tall; high; loud",
     "primaryGloss": "tall",
     "emotion": "matter-of-fact and observational, describing someone you see across the room",
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tall; high; loud",
+        "why": "'Loud' is not covered in the senses and is inaccurate for ψηλός."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When describing a sound or voice, ψηλός means 'high-pitched' or 'loud'",
+        "why": "For a voice or sound, ψηλός means high-pitched, not loud (δυνατός)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Το σπίτι έχει ψηλά παράθυρα.",
+        "why": "Ψηλά παράθυρα means tall windows, not windows high off the ground."
+      }
+    ],
+    "growth": 0.82
   }
 }

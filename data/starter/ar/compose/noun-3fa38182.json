@@ -58,6 +58,75 @@
     "headword": "رِجْل",
     "lemma": "رِجْل",
     "reading": null,
+    "ipa": "/ridʒl/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg; foot",
+    "primaryGloss": "leg",
+    "emotion": "matter-of-fact and grounded, describing a natural part of the body",
+    "notes": [
+      "Feminine even without ة; its plural is أَرْجُل (ʾarjul). In everyday Arabic it covers both the leg and the foot (more specifically قَدَم, qadam).",
+      "Do not confuse with رَجُل (rajul, 'man'), which is written with the same letters without vowel marks."
+    ],
+    "senses": [
+      {
+        "id": "bt5tipzubcxpy2y",
+        "order": 0,
+        "definition": "The lower limb of the body, or its lower part, used for standing and walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg",
+              "foot"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "kgb9ubrb0ft26j6",
+            "text": "تَعِبَتْ رِجْلِي مِنَ المَشْيِ الطَّوِيلِ.",
+            "textLang": "ar",
+            "translation": "My leg got tired from the long walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and sore, rubbing the leg after a long journey",
+            "note": null,
+            "matchedForm": "رِجْلِي",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رِجْل",
+    "lemma": "رِجْل",
+    "reading": null,
     "ipa": "/riɡl/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/riɡl/",
+        "why": "Egyptian pronunciation; Modern Standard Arabic has /ridʒl/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "leg; foot",
+        "why": "Lists 'foot', which is missing from the sense glosses and definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar: broken plural أَرْجُل, feminine by convention, and lookalike رَجُل (man)."
+      }
+    ],
+    "growth": 1.61
   }
 }

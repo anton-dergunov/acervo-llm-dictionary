@@ -70,6 +70,114 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "white; pale",
+    "primaryGloss": "white",
+    "emotion": null,
+    "notes": [
+      "To say a page or screen is 'blank' (empty of writing), Spanish uses the phrase 'en blanco': 'una hoja en blanco' (a blank sheet of paper)."
+    ],
+    "senses": [
+      {
+        "id": "4kg4uu6kp59xnn4",
+        "order": 0,
+        "definition": "Having the color of snow or milk; of the lightest color.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "3dxqobua7yvs5kx",
+            "text": "Me compré una camisa blanca para la fiesta.",
+            "textLang": "es",
+            "translation": "I bought a white shirt for the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "blanca",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a64g5nvsx6hpgvq",
+        "order": 1,
+        "definition": "Of a person or their skin: having a light complexion, or pale from fear or illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white",
+              "pale"
+            ]
+          }
+        ],
+        "domain": "skin",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ccvnwe4bg28p32n",
+            "text": "Se puso blanco del susto.",
+            "textLang": "es",
+            "translation": "He turned pale from the fright.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "blanco",
+            "matchedTranslationForm": "pale"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "blanco",
+    "lemma": "blanco",
+    "reading": null,
+    "ipa": "/ˈblaŋko/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "white; blank; target",
     "primaryGloss": "white",
     "emotion": null,
@@ -161,5 +269,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "white; blank; target",
+        "why": "'Target' is a noun meaning and not in the senses of this adjective entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow or milk.",
+        "why": "Adjective defined as a noun instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that has no writing, print, or marks on it.",
+        "why": "Adjective defined as a noun ('Something that...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "El examen estaba en blanco porque no estudié.",
+        "why": "Uses the adverbial idiom 'en blanco' (where 'blanco' is a noun), not the adjective."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As an adjective, remember to match the gender: 'una camisa blanca'",
+        "why": "Standard regular gender agreement applies to almost all Spanish adjectives."
+      }
+    ],
+    "growth": 0.857
   }
 }

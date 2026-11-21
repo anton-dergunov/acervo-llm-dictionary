@@ -68,6 +68,77 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip; excursion; tour",
+    "primaryGloss": "trip",
+    "emotion": "excited and ready for adventure, anticipating a pleasant time away",
+    "notes": [
+      "Usually takes the preposition 'na': 'jechać/iść na wycieczkę' (to go on a trip).",
+      "Distinguish from 'podróż' (journey, travel), which is longer or more general."
+    ],
+    "senses": [
+      {
+        "id": "v4bnc9arsgpc35s",
+        "order": 0,
+        "definition": "A short journey or outing to a place and back, usually for pleasure, sightseeing, or education.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "excursion",
+              "tour",
+              "outing"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🎒",
+        "examples": [
+          {
+            "id": "qp24bhuz4v32u4e",
+            "text": "Jutro jedziemy na wycieczkę w góry.",
+            "textLang": "pl",
+            "translation": "Tomorrow we are going on a trip to the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and looking forward to the outdoor activity",
+            "note": null,
+            "matchedForm": "wycieczkę",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wycieczka",
+    "lemma": "wycieczka",
+    "reading": null,
+    "ipa": "/vɨˈt͡ɕɛt͡ʂ.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎒",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; excursion; hike",
     "primaryGloss": "trip",
     "emotion": "excited and ready for adventure, anticipating a pleasant time away",
@@ -162,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(hike) A walk or hike, often in nature, done for recreation.",
+        "why": "A recreational walk in nature is the same meaning as sense 0 ('wycieczka')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for a journey to a place and back again, typically",
+        "why": "Restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.713
   }
 }

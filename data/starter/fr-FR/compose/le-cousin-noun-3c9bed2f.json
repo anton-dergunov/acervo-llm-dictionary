@@ -68,6 +68,84 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "male cousin",
+    "primaryGloss": "male cousin",
+    "emotion": "warm and friendly, talking about family",
+    "notes": [
+      "Use 'le cousin' for a male cousin and 'la cousine' (/ku.zin/) for a female cousin; in the plural, 'les cousins' covers a mixed group."
+    ],
+    "senses": [
+      {
+        "id": "k8zkuuuc0ykxwq6",
+        "order": 0,
+        "definition": "The son of an uncle or an aunt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "male cousin",
+              "cousin"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "log6ry5iedyp1bn",
+            "text": "Je passe mes vacances avec mon cousin à la campagne.",
+            "textLang": "fr",
+            "translation": "I am spending my holidays with my cousin in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and relaxed, looking forward to a fun holiday",
+            "note": null,
+            "matchedForm": "cousin",
+            "matchedTranslationForm": "cousin"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "kqhix12haws2cwt",
+      "from": "Un petit insecte volant qui ressemble à un moustique et pique.",
+      "to": "A small flying insect that looks like a mosquito and bites.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:15:12Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le cousin",
+    "lemma": "cousin",
+    "reading": null,
+    "ipa": "/ku.zɛ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "male cousin; mosquito",
     "primaryGloss": "male cousin",
     "emotion": "warm and friendly, talking about family",
@@ -162,14 +240,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "kqhix12haws2cwt",
-      "from": "Un petit insecte volant qui ressemble à un moustique et pique.",
-      "to": "A small flying insect that looks like a mosquito and bites.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:15:12Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A small flying insect that looks like a mosquito and bites.",
+        "why": "In France, 'cousin' is a crane fly (tipule): a large, harmless insect that never bites."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A small flying insect that looks like a mosquito and bites.",
+        "why": "The insect sense is too minor for an A2 entry; keep only the family sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'le cousin' (family member) with 'un moustique'",
+        "why": "Why would a learner confuse 'cousin' with 'moustique'? Unhelpful note."
+      }
+    ],
+    "growth": 0.544
+  }
 }

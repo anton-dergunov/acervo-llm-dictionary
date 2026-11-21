@@ -57,6 +57,73 @@
     "language": "zh",
     "headword": "枕头",
     "lemma": "枕头",
+    "reading": "zhěntou",
+    "ipa": "/ʈʂən˨˩˦ tʰou̯/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "pillow",
+    "primaryGloss": "pillow",
+    "emotion": "soft and sleepy, ready for bed after a long day",
+    "notes": [
+      "Takes the measure word 个 (gè)."
+    ],
+    "senses": [
+      {
+        "id": "ew3thx6zubnelk2",
+        "order": 0,
+        "definition": "A soft cushion used to support the head in bed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow"
+            ]
+          }
+        ],
+        "domain": "household",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "g0h53up008m04yk",
+            "text": "这个枕头很软，睡起来很舒服。",
+            "textLang": "zh",
+            "translation": "This pillow is very soft and comfortable to sleep on.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "枕头",
+            "matchedTranslationForm": "pillow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "枕头",
+    "lemma": "枕头",
     "reading": "zhěn tou",
     "ipa": "/ʈʂən˨˩˦ tʰou̯/",
     "pos": "noun",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The second syllable 头 (tou) is neutral tone in everyday speech.",
+        "why": "Restates what is already shown in the pinyin reading."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我每天晚上都要抱一个枕头睡觉。",
+        "why": "Uses the noun suffix 头 (tou) as a verb complement after 抱 instead of 抱(着)枕头."
+      }
+    ],
+    "growth": 0.693
   }
 }

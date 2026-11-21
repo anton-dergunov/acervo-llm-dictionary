@@ -72,6 +72,96 @@
     "primaryGloss": "free",
     "emotion": "a cheerful, energetic feeling of finding a great deal",
     "notes": [
+      "'Grátis' is invariable: it keeps the same form whether singular or plural, masculine or feminine. It can also be used as an adverb ('entrar grátis').",
+      "Do not say 'de grátis'; the common synonym is 'de graça' (for free)."
+    ],
+    "senses": [
+      {
+        "id": "sm3oc712xhxknhh",
+        "order": 0,
+        "definition": "Costing no money; provided without charge.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "free",
+              "free of charge"
+            ]
+          }
+        ],
+        "domain": "cost",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "k72byogl4mn9t2f",
+            "text": "A amostra do perfume é grátis.",
+            "textLang": "pt",
+            "translation": "The perfume sample is free.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and slightly surprised to receive something extra",
+            "note": null,
+            "matchedForm": "grátis",
+            "matchedTranslationForm": "free"
+          },
+          {
+            "id": "8577ufl9j1q626b",
+            "text": "Temos entrada grátis para crianças hoje.",
+            "textLang": "pt",
+            "translation": "We have free admission for children today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and welcoming, like an employee speaking to a customer",
+            "note": null,
+            "matchedForm": "grátis",
+            "matchedTranslationForm": "free"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "grátis",
+    "lemma": "grátis",
+    "reading": null,
+    "ipa": "/ˈɡɾa.tʃis/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "🎁",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "free; without charge",
+    "primaryGloss": "free",
+    "emotion": "a cheerful, energetic feeling of finding a great deal",
+    "notes": [
       "Grátis is an invariable adjective, meaning it does not change form for gender or number. Whether you are talking about one item or many, you use 'grátis'.",
       "It is often used with 'de', as in 'de graça' (for free), which is also very common in daily conversation."
     ],
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is often used with 'de', as in 'de graça'",
+        "why": "'Grátis' is not used with 'de' (*de grátis is non-standard); 'de graça' uses 'graça'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Something that costs no money.",
+        "why": "Adjective defined as a noun ('Something that...')."
+      }
+    ],
+    "growth": 0.946
   }
 }

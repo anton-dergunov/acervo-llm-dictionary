@@ -70,6 +70,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to hear; to listen",
+    "primaryGloss": "hear",
+    "emotion": "attentive and present, catching a sudden sound in the room",
+    "notes": [
+      "Covers both perceiving a sound ('to hear') and paying attention to it ('to listen to'); takes a direct object without a preposition (ακούω μουσική — I listen to music).",
+      "Present forms are often contracted in speech: ακούω, ακούς, ακούει, ακούμε, ακούτε, ακούν(ε). Aorist: άκουσα."
+    ],
+    "senses": [
+      {
+        "id": "jo9dgg67hf7b9pv",
+        "order": 0,
+        "definition": "To perceive a sound with the ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear"
+            ]
+          }
+        ],
+        "domain": "hearing",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "sh7lqctxt4ugqf0",
+            "text": "Δεν ακούω τίποτα από εδώ.",
+            "textLang": "el",
+            "translation": "I can't hear anything from here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "straining to catch a distant sound, frustrated by the noise",
+            "note": null,
+            "matchedForm": "ακούω",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ap9njro5j3o5br4",
+        "order": 1,
+        "definition": "To pay attention to a sound or to someone speaking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "listen",
+              "listen to"
+            ]
+          }
+        ],
+        "domain": "listening",
+        "emoji": "🎧",
+        "examples": [
+          {
+            "id": "hpl8p3j79xuqqef",
+            "text": "Άκουσε με προσοχή τι σου λέω.",
+            "textLang": "el",
+            "translation": "Listen carefully to what I am telling you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and firm, wanting to make sure the other person understands",
+            "note": null,
+            "matchedForm": "Άκουσε",
+            "matchedTranslationForm": "Listen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "icgccqmwjlcq7fe",
+        "order": 2,
+        "definition": "To receive news or information about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear",
+              "learn about"
+            ]
+          }
+        ],
+        "domain": "information",
+        "emoji": "📰",
+        "examples": [
+          {
+            "id": "bj80rftf16w77uj",
+            "text": "Άκουσα τα νέα για το ταξίδι.",
+            "textLang": "el",
+            "translation": "I heard the news about the trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "interested and surprised, sharing fresh news with a friend",
+            "note": null,
+            "matchedForm": "Άκουσα",
+            "matchedTranslationForm": "heard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ακούω",
+    "lemma": "ακούω",
+    "reading": null,
+    "ipa": "/aˈku.o/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to hear; to listen; to understand",
     "primaryGloss": "hear",
     "emotion": "attentive and present, catching a sudden sound in the room",
@@ -204,5 +354,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hear; to listen; to understand",
+        "why": "'to understand' is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with βλέπω (to see).",
+        "why": "Pointless filler; learners do not confuse 'hear' with 'see'."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Listen to me carefully what I am telling you.",
+        "why": "Ungrammatical English; 'με προσοχή' means 'with attention' ('carefully'), not 'to me carefully'."
+      }
+    ],
+    "growth": 1.012
   }
 }

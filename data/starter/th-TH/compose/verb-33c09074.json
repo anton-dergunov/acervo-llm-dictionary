@@ -58,6 +58,94 @@
     "headword": "บิน",
     "lemma": "บิน",
     "reading": null,
+    "ipa": "/bin/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to fly",
+    "primaryGloss": "fly",
+    "emotion": "light and airy, feeling the freedom of movement",
+    "notes": [
+      "Used for birds, insects, aircraft, and passengers traveling by air. To pilot a plane is ขับเครื่องบิน, not บิน."
+    ],
+    "senses": [
+      {
+        "id": "fczvl2hblp32eop",
+        "order": 0,
+        "definition": "To move through the air using wings or in an aircraft.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fly"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "jyaqqz8ab2war75",
+            "text": "นกกำลังบินอยู่บนท้องฟ้า",
+            "textLang": "th",
+            "translation": "The bird is flying in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching nature",
+            "note": null,
+            "matchedForm": "บิน",
+            "matchedTranslationForm": "flying"
+          },
+          {
+            "id": "62mw4i1m6u9e18h",
+            "text": "พรุ่งนี้ฉันจะบินไปเชียงใหม่",
+            "textLang": "th",
+            "translation": "Tomorrow I am flying to Chiang Mai.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "บิน",
+            "matchedTranslationForm": "flying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "บิน",
+    "lemma": "บิน",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -139,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "just saying someone 'flies' with the subject often conveys they are",
+        "why": "False: saying a person บิน means they travel by plane; piloting is ขับเครื่องบิน."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "I will fly to travel abroad tomorrow.",
+        "why": "Awkward calque of บินไปเที่ยว."
+      }
+    ],
+    "growth": 0.584
   }
 }

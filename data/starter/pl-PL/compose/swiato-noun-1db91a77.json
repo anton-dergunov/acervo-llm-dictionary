@@ -58,6 +58,114 @@
     "headword": "światło",
     "lemma": "światło",
     "reading": null,
+    "ipa": "/ˈɕfjat.wɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "light",
+    "primaryGloss": "light",
+    "emotion": "warm and comforting, like turning on a lamp in a cozy room",
+    "notes": [
+      "Used in the singular for home lighting ('włączyć/zgasić światło' — to turn on/off the light). In the plural, 'światła' also means traffic lights or car headlights."
+    ],
+    "senses": [
+      {
+        "id": "z6xesmipq2izsu9",
+        "order": 0,
+        "definition": "Brightness from the sun, a lamp, or fire that allows you to see.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light"
+            ]
+          }
+        ],
+        "domain": "illumination",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "obi5kxtr0dbrrrt",
+            "text": "W pokoju jest za mało światła do czytania.",
+            "textLang": "pl",
+            "translation": "There is too little light in the room for reading.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "squinting slightly and leaning closer to the book",
+            "note": null,
+            "matchedForm": "światła",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "es4cpo9qi5wmypm",
+        "order": 1,
+        "definition": "A lamp or electric lighting in a room or building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "lights"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "435ooes9hv9al1t",
+            "text": "Muszę wyłączyć światło przed wyjściem z domu.",
+            "textLang": "pl",
+            "translation": "I need to turn off the light before leaving the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and mindful, checking the rooms before leaving",
+            "note": null,
+            "matchedForm": "światło",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "światło",
+    "lemma": "światło",
+    "reading": null,
     "ipa": "/ˈɕfiat.wɔ/",
     "pos": "noun",
     "gender": "neuter",
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɕfiat.wɔ/",
+        "why": "Uses /i/ instead of /j/; 'świa-' is pronounced /ɕfja/, not two syllables."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Electric power used for lamps and lighting in a building.",
+        "why": "'Wyłączyć światło' means turning off electric lighting, not electricity ('prąd')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Polish, 'światło' is used both for natural or artificial light",
+        "why": "Merely repeats the senses; better to note the plural 'światła' (traffic lights/headlights)."
+      }
+    ],
+    "growth": 0.98
   }
 }

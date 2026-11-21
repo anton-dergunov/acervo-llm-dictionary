@@ -58,6 +58,94 @@
     "headword": "tunai",
     "lemma": "tunai",
     "reading": null,
+    "ipa": "/ˈtu.naj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💵",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cash",
+    "primaryGloss": "cash",
+    "emotion": "matter-of-fact and practical, ready to pay the bill",
+    "notes": [
+      "Often used as a modifier after nouns or verbs, as in 'uang tunai' (physical cash) or 'bayar tunai' (to pay in cash / upfront, as opposed to 'kredit', on credit)."
+    ],
+    "senses": [
+      {
+        "id": "t0kxlecogyo2eq9",
+        "order": 0,
+        "definition": "Money in the form of coins and banknotes, or immediate payment rather than credit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cash"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "arffw56qry9o6cj",
+            "text": "Apakah toko ini menerima pembayaran tunai?",
+            "textLang": "id",
+            "translation": "Does this shop accept cash payments?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and polite, asking the cashier a question",
+            "note": null,
+            "matchedForm": "tunai",
+            "matchedTranslationForm": "cash"
+          },
+          {
+            "id": "kwkr3ve8z4mkhvm",
+            "text": "Dia membayar secara tunai.",
+            "textLang": "id",
+            "translation": "He paid in cash.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tunai",
+            "matchedTranslationForm": "in cash"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tunai",
+    "lemma": "tunai",
+    "reading": null,
     "ipa": "/tuˈnaj/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The complete and immediate fulfillment of a payment or an obligation.",
+        "why": "Oversplit: 'tunai' is one concept (cash / paid upfront rather than on credit)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dia membayar pembelian itu secara tunai. — He paid for that purchase",
+        "why": "'Secara tunai' means 'in cash' (or upfront, not on credit), whereas 'in full' is 'lunas'."
+      }
+    ],
+    "growth": 0.771
   }
 }

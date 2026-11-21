@@ -68,6 +68,75 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "mouse; rat",
+    "primaryGloss": "mouse",
+    "emotion": "matter-of-fact, noting a presence in the house or office",
+    "notes": [
+      "Used for both mice and rats. To refer specifically to a small mouse, 'o camundongo' is also used in Brazil, and 'a ratazana' for a large rat.",
+      "For a computer mouse, Brazilian Portuguese uses the English word 'o mouse' (unlike European Portuguese, which uses 'o rato')."
+    ],
+    "senses": [
+      {
+        "id": "onnjuqqk8ewjoig",
+        "order": 0,
+        "definition": "A small rodent with a long, thin tail, often found in houses, streets, or fields.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mouse",
+              "rat"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐭",
+        "examples": [
+          {
+            "id": "yxfncthhe172vjc",
+            "text": "O rato correu para trás do armário.",
+            "textLang": "pt",
+            "translation": "The mouse ran behind the cupboard.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and slightly startled at seeing the animal move",
+            "note": null,
+            "matchedForm": "rato",
+            "matchedTranslationForm": "mouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o rato",
+    "lemma": "rato",
+    "reading": null,
+    "ipa": "/ˈʁa.tu/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐭",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "mouse; rat; computer mouse",
     "primaryGloss": "mouse",
     "emotion": "matter-of-fact, noting a presence in the house or office",
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "This word is also used for the computer peripheral 'mouse' in Brazil.",
+        "why": "False for Brazil: Brazilians say 'o mouse', while 'o rato' is European Portuguese."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(technology) The hand-operated electronic device used to move a cursor",
+        "why": "In Brazilian Portuguese, a computer mouse is called 'mouse', not 'rato'."
+      }
+    ],
+    "growth": 0.788
   }
 }

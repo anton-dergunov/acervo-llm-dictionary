@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to send",
+    "primaryGloss": "to send",
+    "emotion": "focused and purposeful, like finishing a small task",
+    "notes": [
+      "Very similar to 'mandar', which is more common in everyday Mexican speech. 'Enviar' sounds slightly more formal and is common for emails, messages, and packages.",
+      "Notice the written accent in most present-tense forms: envío, envías, envía, envían."
+    ],
+    "senses": [
+      {
+        "id": "a5lliwxlqydal4i",
+        "order": 0,
+        "definition": "To make something go to someone or to a place, by mail or electronically.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to send",
+              "to dispatch"
+            ]
+          }
+        ],
+        "domain": "sending",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "x9w6b610g72t9ga",
+            "text": "Voy a enviar un correo electrónico a mi jefe.",
+            "textLang": "es",
+            "translation": "I am going to send an email to my boss.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and efficient, getting work done",
+            "note": null,
+            "matchedForm": "enviar",
+            "matchedTranslationForm": "send"
+          },
+          {
+            "id": "pyba2idgj0l0o8g",
+            "text": "Ellos enviaron el paquete por correo ayer.",
+            "textLang": "es",
+            "translation": "They sent the package by mail yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, describing a completed action",
+            "note": null,
+            "matchedForm": "enviaron",
+            "matchedTranslationForm": "sent"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "enviar",
+    "lemma": "enviar",
+    "reading": null,
+    "ipa": "/emˈbjaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to send; to dispatch",
     "primaryGloss": "send",
     "emotion": "focused and purposeful, like finishing a small task",
@@ -140,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "Enviarme is very similar to mandar.",
+        "why": "Uses inflected form 'Enviarme' instead of the lemma 'Enviar'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on irregular stem-with-accent present forms (envío, envías, etc.)."
+      }
+    ],
+    "growth": 1.037
   }
 }

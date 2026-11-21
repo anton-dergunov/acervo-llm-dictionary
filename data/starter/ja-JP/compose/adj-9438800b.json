@@ -83,6 +83,158 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "strong; good at; resistant to",
+    "primaryGloss": "strong",
+    "emotion": "confident and certain, standing firm in ability",
+    "notes": [
+      "Takes the particle に (ni) to show what someone is good at or resistant to: 数学に強い (strong in math), お酒に強い (able to hold one's liquor)."
+    ],
+    "senses": [
+      {
+        "id": "jvtsemve4b80f37",
+        "order": 0,
+        "definition": "Having great physical power, force, or intensity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strong",
+              "powerful"
+            ]
+          }
+        ],
+        "domain": "power",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "6axhunfho3gjdmd",
+            "text": "今日は強い風が吹いています。",
+            "textLang": "ja",
+            "translation": "A strong wind is blowing today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "強い",
+            "matchedTranslationForm": "strong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mxovo6lcwggsvji",
+        "order": 1,
+        "definition": "Good at a subject or activity, or likely to win in a competition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "strong",
+              "good at",
+              "skilled"
+            ]
+          }
+        ],
+        "domain": "skill",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ucos1nwd61cu57l",
+            "text": "あのチームはとても強いです。",
+            "textLang": "ja",
+            "translation": "That team is very strong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "強い",
+            "matchedTranslationForm": "strong"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i0bx12gfuf70mb3",
+        "order": 2,
+        "definition": "Able to withstand hardship, illness, alcohol, or wear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "resistant",
+              "tolerant",
+              "durable"
+            ]
+          }
+        ],
+        "domain": "resilience",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ihh1mp7ocet3j7y",
+            "text": "彼女はお酒に強いです。",
+            "textLang": "ja",
+            "translation": "She can hold her liquor well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "強い",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "強い",
+    "lemma": "強い",
+    "reading": "つよい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "strong; powerful",
     "primaryGloss": "strong",
     "emotion": "confident and certain, standing firm in ability",
@@ -134,5 +286,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday senses: 'good at/strong in' (e.g. a subject) and 'resistant to / able to hold (alcohol)'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "彼は強い力で箱を持ち上げた。",
+        "why": "'強い力で' (with strong force) is redundant and unnatural in Japanese; '強い風' or '力が強い' is natural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical strength, endurance, or resistance against force.",
+        "why": "Merely restates the meanings instead of giving grammatical or usage help (like taking に for resistance/skill)."
+      }
+    ],
+    "growth": 2.738
   }
 }

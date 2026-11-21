@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to have; to be (of age); to be supposed to",
+    "primaryGloss": "to have",
+    "emotion": "matter-of-fact, stating a situation clearly and simply",
+    "notes": [
+      "Irregular in the present tense: ja mam, ty masz, on/ona/ono ma, my mamy, wy macie, oni/one mają.",
+      "Takes the accusative case in affirmative sentences (Mam kota), but switches to the genitive case when negated (Nie mam kota)."
+    ],
+    "senses": [
+      {
+        "id": "qccmx5fnnxkub5x",
+        "order": 0,
+        "definition": "To own, hold, or possess something, or to be in a relationship or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to own"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "0ctj99hzh80ebet",
+            "text": "Mam nowy samochód i dwoje dzieci.",
+            "textLang": "pl",
+            "translation": "I have a new car and two children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Mam",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a9nibpolfhlr2cl",
+        "order": 1,
+        "definition": "Used with a number and 'lata' or 'lat' to state someone's age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be (years old)"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fkfqkvbz4n9flir",
+            "text": "Ile masz lat? — Mam dwadzieścia lat.",
+            "textLang": "pl",
+            "translation": "How old are you? — I am twenty years old.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "masz",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z8l1u450cn97wz4",
+        "order": 2,
+        "definition": "Followed by an infinitive: to be scheduled, expected, or told to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be supposed to",
+              "to have to"
+            ]
+          }
+        ],
+        "domain": "obligation",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "0ac5rcf5iszzepq",
+            "text": "O której godzinie mam jutro przyjść?",
+            "textLang": "pl",
+            "translation": "What time am I supposed to come tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mam",
+            "matchedTranslationForm": "supposed to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "mieć",
+    "lemma": "mieć",
+    "reading": null,
+    "ipa": "/mʲɛt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to have; to own; must",
     "primaryGloss": "to have",
     "emotion": "matter-of-fact, stating a situation clearly and simply",
@@ -160,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 sense of expressing age ('Mam 20 lat')."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dzisiaj muszę pracować, ale jutro nie mam nic do zrobienia.",
+        "why": "Uses 'muszę' for obligation; 'nie mam nic do zrobienia' shows possession/availability, not 'mieć + infinitive'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on irregular present conjugation (mam, masz, ma...) and negation with genitive ('nie ma')."
+      }
+    ],
+    "growth": 1.261
   }
 }

@@ -72,6 +72,114 @@
     "primaryGloss": "to write",
     "emotion": "focused and steady, concentrating on the words on the page",
     "notes": [
+      "Imperfective (perfective написать). Present tense has a consonant change and stress shift: я пишу́, ты пи́шешь, они пи́шут.",
+      "Mind the stress in the infinitive: писа́ть means 'to write', whereas пи́сать (colloquial) means 'to pee'."
+    ],
+    "senses": [
+      {
+        "id": "cvx5h27awik9235",
+        "order": 0,
+        "definition": "To put words, letters, or numbers on paper or a screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to write"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "uu1443x8lu6o3co",
+            "text": "Я люблю писать письма друзьям.",
+            "textLang": "ru",
+            "translation": "I like to write letters to friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and nostalgic, thinking of loved ones far away",
+            "note": null,
+            "matchedForm": "писать",
+            "matchedTranslationForm": "write"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "boyiro01p3mux9z",
+        "order": 1,
+        "definition": "To create a picture using paints, especially in oil or watercolors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to paint"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "mn3ge61h0tyn0j0",
+            "text": "Художник начал писать новый пейзаж.",
+            "textLang": "ru",
+            "translation": "The artist began to paint a new landscape.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "inspired and observant, watching the canvas come to life",
+            "note": null,
+            "matchedForm": "писать",
+            "matchedTranslationForm": "paint"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "писать",
+    "lemma": "писать",
+    "reading": null,
+    "ipa": "/pʲɪˈsatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✍️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to write; to paint",
+    "primaryGloss": "to write",
+    "emotion": "focused and steady, concentrating on the words on the page",
+    "notes": [
       "When used with a noun indicating an artistic work, писа́ть means to paint (e.g., писа́ть карт́ину to paint a picture)."
     ],
     "senses": [
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular consonant mutation (пишу, пишешь), aspect pair (написать), and stress warning vs пи́сать."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "писа́ть карт́ину",
+        "why": "Misplaced stress mark on consonant т instead of vowel и."
+      }
+    ],
+    "growth": 1.232
   }
 }

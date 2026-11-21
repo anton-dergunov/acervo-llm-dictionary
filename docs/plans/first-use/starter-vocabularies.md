@@ -143,7 +143,7 @@ whatever the default quota gives: about one picture a minute.
 | --- | ---: |
 | Shared concept pictures (497 of the 521 have one), at ~$0.034 | ~$17 |
 | A judge on Gemini Pro, if Claude is not used, at ~$0.01 a word | up to ~$100 |
-| Pictures for senses with no concept | decided once counted (step 4) |
+| Pictures for senses with no concept | none: ~4,500 senses, ~$150, many abstract or grammatical |
 | Ten shared stories, later | ~$2 |
 
 ## Order of work
@@ -161,8 +161,9 @@ whatever the default quota gives: about one picture a minute.
    First, every definition compose's check doubts for its language is written again in English
    (Spanish for English), seeing the word, its glosses and its other senses; the compose file keeps
    what it replaced. Then one match call per topic.
-   `build.py status` counts the senses with no concept and the concepts no sense covers. **The owner
-   then decides** whether to draw pictures for the unmatched senses.
+   `build.py status` counts the senses with no concept and the concepts no sense covers. Senses with
+   no concept get no picture: only the 497 shared pictures are drawn, which reach 95% of the words
+   (`experiments/compose-judge/README.md`, "Full run").
    When compose's checks change, `build.py revet` applies them to what is already composed: their
    coercions land in the drafts, and a word whose reply they now refuse is set aside with its topic's
    match file, to be composed and matched again by the next run. Run on 21 Nov 2026 after

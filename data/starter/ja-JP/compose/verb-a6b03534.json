@@ -59,6 +59,76 @@
     "language": "ja",
     "headword": "座る",
     "lemma": "座る",
+    "reading": "すわる",
+    "ipa": "sɯwaɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sit down; to sit",
+    "primaryGloss": "to sit down",
+    "emotion": null,
+    "notes": [
+      "Godan intransitive verb (座ります). Takes the particle に for the seat or surface (e.g. 椅子に座る).",
+      "座る describes the action of sitting down; to describe being in a seated state, use 座っている."
+    ],
+    "senses": [
+      {
+        "id": "7ici4vmzjgfld7f",
+        "order": 0,
+        "definition": "To lower oneself into a seated position on a chair, the floor, or another surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sit down",
+              "to sit",
+              "to take a seat"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "bsl8pczlzl8pfh3",
+            "text": "どうぞ椅子に座ってください。",
+            "textLang": "ja",
+            "translation": "Please sit down on the chair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "座って",
+            "matchedTranslationForm": "sit down"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "座る",
+    "lemma": "座る",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -122,5 +192,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing required hiragana reading for a Japanese word containing kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for any action of moving into a seated position or being in a seated state.",
+        "why": "座る is punctual (to sit down); the seated state requires the ている form (座っている)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the particle に used for the seat or spot."
+      }
+    ],
+    "growth": 1.09
   }
 }

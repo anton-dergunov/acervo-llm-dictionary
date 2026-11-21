@@ -73,6 +73,76 @@
     "primaryGloss": "young",
     "emotion": "warm and bright, looking at someone with affection",
     "notes": [
+      "Used for living beings; for objects that are not old, use 'yeni' (new).",
+      "Also frequently used as a noun meaning 'young person' or 'youth' (gençler = young people); final 'ç' softens to 'c' before a vowel (genci)."
+    ],
+    "senses": [
+      {
+        "id": "kg6u3bniexdl8ao",
+        "order": 0,
+        "definition": "Having lived for only a short time; not old.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "young",
+              "youthful"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "o9r2xk7q3z3xrst",
+            "text": "Genç adam parkta kitap okuyor.",
+            "textLang": "tr",
+            "translation": "The young man is reading a book in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, noticing someone quietly passing the afternoon",
+            "note": null,
+            "matchedForm": "Genç",
+            "matchedTranslationForm": "young"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "genç",
+    "lemma": "genç",
+    "reading": null,
+    "ipa": "/ɟentʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Describing",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "young; youthful",
+    "primaryGloss": "young",
+    "emotion": "warm and bright, looking at someone with affection",
+    "notes": [
       "Used for both people and things that are recently made or have a fresh quality.",
       "Do not confuse with 'yeni' (new), which refers to objects or situations rather than living age."
     ],
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for both people and things that are recently made",
+        "why": "'Genç' is not used for recently made objects; that contradicts note[1] and is false."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note consonant softening (genç -> genci) and common noun usage ('a youth')."
+      }
+    ],
+    "growth": 1.076
   }
 }

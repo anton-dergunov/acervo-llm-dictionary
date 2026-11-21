@@ -58,6 +58,75 @@
     "headword": "zawstydzony",
     "lemma": "zawstydzony",
     "reading": null,
+    "ipa": "/zaf.stɨˈd͡zɔ.nɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "embarrassed; ashamed",
+    "primaryGloss": "embarrassed",
+    "emotion": "a bit warm in the face, looking down, feeling exposed and vulnerable",
+    "notes": [
+      "Do not confuse with 'nieśmiały' (shy), which is a personality trait; 'zawstydzony' is a temporary feeling in a specific situation."
+    ],
+    "senses": [
+      {
+        "id": "vev6fkdqq96b80l",
+        "order": 0,
+        "definition": "Feeling embarrassed, ashamed, or self-conscious because of something you did or an awkward situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "embarrassed",
+              "ashamed",
+              "abashed"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😔",
+        "examples": [
+          {
+            "id": "sgjppbi9ylyz7vy",
+            "text": "Byłem bardzo zawstydzony, kiedy wszyscy zaczęli na mnie patrzeć.",
+            "textLang": "pl",
+            "translation": "I was very embarrassed when everyone started looking at me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "self-conscious and wanting to hide from the spotlight",
+            "note": null,
+            "matchedForm": "zawstydzony",
+            "matchedTranslationForm": "embarrassed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "zawstydzony",
+    "lemma": "zawstydzony",
+    "reading": null,
     "ipa": "/zaf.stɨˈdzo.nɨ/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/zaf.stɨˈdzo.nɨ/",
+        "why": "Uses non-IPAdigraph 'dz' instead of /d͡z/, and /o/ instead of Polish /ɔ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same meaning (embarrassed/abashed); sense 0's example matches sense 1."
+      }
+    ],
+    "growth": 0.45
   }
 }

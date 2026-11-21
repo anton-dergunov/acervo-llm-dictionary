@@ -72,6 +72,114 @@
     "primaryGloss": "pocket",
     "emotion": "casual and practical, reaching for something you know is there",
     "notes": [
+      "For a clothing pocket, '호주머니' is a common synonym."
+    ],
+    "senses": [
+      {
+        "id": "9knvtw32kj4km3v",
+        "order": 0,
+        "definition": "A small compartment sewn into a piece of clothing for carrying small items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pocket"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👝",
+        "examples": [
+          {
+            "id": "mklq62cvz3lz3j1",
+            "text": "주머니에 손을 넣고 걸었어요.",
+            "textLang": "ko",
+            "translation": "I walked with my hands in my pockets.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, keeping warm or keeping a low profile",
+            "note": null,
+            "matchedForm": "주머니",
+            "matchedTranslationForm": "pockets"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ph7urs79f5afdfr",
+        "order": 1,
+        "definition": "A small drawstring bag or sack used to hold coins or small objects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pouch",
+              "small bag"
+            ]
+          }
+        ],
+        "domain": "bag",
+        "emoji": "👛",
+        "examples": [
+          {
+            "id": "8xzu23479amtsu2",
+            "text": "작은 천 주머니에 동전을 모았어요.",
+            "textLang": "ko",
+            "translation": "I collected coins in a small cloth pouch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "주머니",
+            "matchedTranslationForm": "pouch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "주머니",
+    "lemma": "주머니",
+    "reading": null,
+    "ipa": "/tɕu.mʌ.ni/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👝",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pocket; pouch",
+    "primaryGloss": "pocket",
+    "emotion": "casual and practical, reaching for something you know is there",
+    "notes": [
       "While '주머니' is the general word for a small bag or pouch, it is most commonly used to refer to a pocket sewn into a garment.",
       "Do not confuse this with '가방', which refers to a larger bag, purse, or backpack carried separately."
     ],
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "동전을 주머니에 넣었어요. — I put the coins into the pouch.",
+        "why": "Ambiguous example: native speakers normally read this as putting coins in a pocket."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '주머니' is the general word for a small bag or pouch",
+        "why": "Restates the two senses; better to mention the common synonym 호주머니."
+      }
+    ],
+    "growth": 0.686
   }
 }

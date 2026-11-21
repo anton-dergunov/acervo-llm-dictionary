@@ -68,6 +68,132 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "key; solution",
+    "primaryGloss": "key",
+    "emotion": "fumbling in a bag on a dark doorstep, relieved to find it",
+    "notes": [
+      "Also spelled 'la clef', with the exact same pronunciation (/kle/)."
+    ],
+    "senses": [
+      {
+        "id": "55u1vbf54tjwfpl",
+        "order": 0,
+        "definition": "A small metal object used to open or close a lock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key"
+            ]
+          }
+        ],
+        "domain": "lock",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "ee0cquhanpe8gb4",
+            "text": "J'ai perdu la clé de la maison.",
+            "textLang": "fr",
+            "translation": "I lost the house key.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "panicked and frustrated, searching pockets and bags",
+            "note": null,
+            "matchedForm": "clé",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s58hombxpqkdo0o",
+        "order": 1,
+        "definition": "Something that helps to understand or solve a problem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key",
+              "solution"
+            ]
+          }
+        ],
+        "domain": "solution",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "3ncmcsoujg0804e",
+            "text": "C'est la clé du mystère.",
+            "textLang": "fr",
+            "translation": "This is the key to the mystery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enlightened and triumphant, finally connecting the pieces",
+            "note": null,
+            "matchedForm": "clé",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "55u1vbf54tjwfpl",
+      "from": "Petit objet métallique qui sert à ouvrir ou fermer une serrure.",
+      "to": "A small metal object used to open or close a lock.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "s58hombxpqkdo0o",
+      "from": "Ce qui permet de comprendre ou de résoudre un problème.",
+      "to": "Something that helps to understand or solve a problem.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la clé",
+    "lemma": "clé",
+    "reading": null,
+    "ipa": "/kle/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "key; solution; wrench",
     "primaryGloss": "key",
     "emotion": "fumbling in a bag on a dark doorstep, relieved to find it",
@@ -161,22 +287,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "55u1vbf54tjwfpl",
-      "from": "Petit objet métallique qui sert à ouvrir ou fermer une serrure.",
-      "to": "A small metal object used to open or close a lock.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "s58hombxpqkdo0o",
-      "from": "Ce qui permet de comprendre ou de résoudre un problème.",
-      "to": "Something that helps to understand or solve a problem.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Often spelled 'clé' or 'clique' in older texts",
+        "why": "'Clique' is a completely different word; the variant spelling is 'clef'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'la clef', which is an older variant",
+        "why": "'La clef' is the exact same word, so telling learners not to confuse them is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "key; solution; wrench",
+        "why": "Lists 'wrench', which is not covered in the senses."
+      }
+    ],
+    "growth": 0.677
+  }
 }

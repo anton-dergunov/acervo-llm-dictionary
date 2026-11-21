@@ -58,6 +58,115 @@
     "headword": "カップ",
     "lemma": "カップ",
     "reading": null,
+    "ipa": "kappɯ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cup; mug",
+    "primaryGloss": "cup",
+    "emotion": "relaxed and warm, holding a favorite drink while taking a quiet break",
+    "notes": [
+      "Typically refers to cups with handles (for coffee or tea) or paper/plastic cups. Contrast with コップ (koppu), which usually refers to a drinking glass or tumbler without a handle.",
+      "As a cooking measurement in Japan, 1 cup (１カップ) is 200 ml."
+    ],
+    "senses": [
+      {
+        "id": "s2cm825eue8j5qj",
+        "order": 0,
+        "definition": "A small container, usually with a handle for hot drinks, or made of paper or plastic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "mug"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "99v65ske0sucu1u",
+            "text": "コーヒーをカップに注いだ。",
+            "textLang": "ja",
+            "translation": "I poured the coffee into the cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "カップ",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xttmu20yjeucsfi",
+        "order": 1,
+        "definition": "A unit of volume used in cooking, equal to 200 milliliters in Japan.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup"
+            ]
+          }
+        ],
+        "domain": "measure",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "x7c0rqnizehi3ul",
+            "text": "小麦粉を1カップ加えます。",
+            "textLang": "ja",
+            "translation": "Add one cup of flour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "instructional and precise, like following a recipe",
+            "note": null,
+            "matchedForm": "カップ",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "カップ",
+    "lemma": "カップ",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is distinct from 'kōppu' (コップ), which typically refers to a glass",
+        "why": "コップ is pronounced 'koppu' with a short 'o' and geminate 'pp', not a long 'kōppu'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A disposable container or a measurement unit in cooking.",
+        "why": "Conflates two distinct meanings (disposable cup and cooking measurement) in one sense."
+      }
+    ],
+    "growth": 1.237
   }
 }

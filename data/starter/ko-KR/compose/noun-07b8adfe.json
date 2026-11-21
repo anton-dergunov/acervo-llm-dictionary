@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and essential, like the first cool sip on a thirsty day",
+    "notes": [
+      "Be careful not to confuse the spelling and pronunciation with '불' (fire)."
+    ],
+    "senses": [
+      {
+        "id": "jfxksq5juisq87n",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain and is used for drinking and washing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "2iq7c325r7f24ap",
+            "text": "물 한 잔 주세요.",
+            "textLang": "ko",
+            "translation": "Please give me a glass of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and appreciative, making a simple request at a cafe",
+            "note": null,
+            "matchedForm": "물",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "물",
+    "lemma": "물",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "water; liquid",
     "primaryGloss": "water",
     "emotion": "refreshing and essential, like the first cool sip on a thirsty day",
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(liquid) Any liquid or fluid substance, such as broth or juice",
+        "why": "False sense: in '국에 물을 넣다', '물' literally means water, not any liquid."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I added more liquid to the soup.",
+        "why": "Mistranslates '물' as 'liquid' to force the artificial second sense; it means 'water'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as both the drinkable substance and any liquid in general.",
+        "why": "Repeats the oversplit senses and is misleading ('액체' means liquid, '국물' means broth)."
+      }
+    ],
+    "growth": 0.45
   }
 }

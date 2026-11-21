@@ -72,6 +72,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "road, street; sugar",
+    "primaryGloss": "road",
+    "emotion": "sweet and everyday, stirring a morning drink",
+    "notes": [
+      "For the 'road' sense, it takes the classifier 'con' (con đường)."
+    ],
+    "senses": [
+      {
+        "id": "w9qjx0c5asgftwv",
+        "order": 0,
+        "definition": "A path or route for vehicles and people to travel from one place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "street",
+              "way"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "e2vhrhpuzcouqnd",
+            "text": "Con đường này dẫn ra trung tâm thành phố.",
+            "textLang": "vi",
+            "translation": "This road leads to the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative when giving directions",
+            "note": null,
+            "matchedForm": "đường",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tyxqi419fujplgg",
+        "order": 1,
+        "definition": "A sweet substance made from plants, used to flavor food and drinks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sugar"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍬",
+        "examples": [
+          {
+            "id": "ylxynvn7wgdp2ug",
+            "text": "Cho tôi thêm một ít đường vào cà phê.",
+            "textLang": "vi",
+            "translation": "Add a little more sugar to my coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and polite when ordering a drink at a cafe",
+            "note": null,
+            "matchedForm": "đường",
+            "matchedTranslationForm": "sugar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đường",
+    "lemma": "đường",
+    "reading": null,
+    "ipa": "/ɗɨəŋ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "sugar; road, street",
     "primaryGloss": "sugar",
     "emotion": "sweet and everyday, stirring a morning drink",
@@ -164,5 +273,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This word has two completely unrelated meanings",
+        "why": "Restates the senses; should give useful classifier info ('con' for road) instead."
+      }
+    ],
+    "growth": 0.776
   }
 }

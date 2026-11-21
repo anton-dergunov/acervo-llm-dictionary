@@ -72,6 +72,74 @@
     "primaryGloss": "snake",
     "emotion": "caution mixed with curiosity, alert and focused",
     "notes": [
+      "Takes the classifier 'ekor' when counting (e.g., 'seekor ular' — a snake)."
+    ],
+    "senses": [
+      {
+        "id": "iwdoeo9y099yo9b",
+        "order": 0,
+        "definition": "A long, legless reptile that slides along the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake",
+              "serpent"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [
+          {
+            "id": "5yr1d19v4t37qsp",
+            "text": "Dia melihat ular di taman.",
+            "textLang": "id",
+            "translation": "He saw a snake in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit surprised and wary, pointing something out",
+            "note": null,
+            "matchedForm": "ular",
+            "matchedTranslationForm": "snake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "ular",
+    "lemma": "ular",
+    "reading": null,
+    "ipa": "/ˈular/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "snake",
+    "primaryGloss": "snake",
+    "emotion": "caution mixed with curiosity, alert and focused",
+    "notes": [
       "Ular is a general term for any snake, regardless of whether it is venomous or not.",
       "It is often used in compound words, such as ular sawa for python."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ular is a general term for any snake, regardless of whether it",
+        "why": "States the obvious fact that the word for 'snake' means any snake."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is often used in compound words, such as ular sawa for",
+        "why": "'Ular sawa' is primarily Malaysian; standard Indonesian for python is 'ular sanca' or 'ular piton'."
+      }
+    ],
+    "growth": 0.675
   }
 }

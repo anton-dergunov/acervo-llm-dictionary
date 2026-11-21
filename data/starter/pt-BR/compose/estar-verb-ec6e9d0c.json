@@ -73,6 +73,154 @@
     "headword": "estar",
     "lemma": "estar",
     "reading": null,
+    "ipa": "/isˈta(ʁ)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be (state or location); to be doing",
+    "primaryGloss": "be",
+    "emotion": "casual and direct, pointing out a current state or where someone is",
+    "notes": [
+      "Used for changeable states, moods, and current locations (whereas 'ser' is used for permanent traits, identity, and fixed buildings/places).",
+      "In Brazilian Portuguese, 'estar' + gerund (-ndo) expresses an ongoing action ('estou falando'). In casual speech, forms are often shortened to 'tô', 'tá', 'tão'."
+    ],
+    "senses": [
+      {
+        "id": "pa29omafdkewi9r",
+        "order": 0,
+        "definition": "To be in a particular changeable condition, mood, or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "50czhjs3vpnsyr9",
+            "text": "Ela está cansada depois do trabalho.",
+            "textLang": "pt",
+            "translation": "She is tired after work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and quiet, feeling the exhaustion of a long day",
+            "note": null,
+            "matchedForm": "está",
+            "matchedTranslationForm": "is"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mia4yffwklcnusk",
+        "order": 1,
+        "definition": "To be located in a particular place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6hn14eaoyv9wzbm",
+            "text": "Eu estou em casa agora.",
+            "textLang": "pt",
+            "translation": "I am at home now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, talking about being home",
+            "note": null,
+            "matchedForm": "estou",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qdjy7shb0et8xl3",
+        "order": 2,
+        "definition": "Used with a gerund (-ndo) to show an action in progress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be (doing)"
+            ]
+          }
+        ],
+        "domain": "progressive",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "3ks1mx7xtt3a7rr",
+            "text": "Eles estão estudando português.",
+            "textLang": "pt",
+            "translation": "They are studying Portuguese.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and steady, describing an ongoing activity",
+            "note": null,
+            "matchedForm": "estão",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "estar",
+    "lemma": "estar",
+    "reading": null,
     "ipa": "/isˈtaʁ/",
     "pos": "verb",
     "gender": null,
@@ -195,5 +343,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Combined with 'a' and an infinitive in Brazilian Portuguese, 'estar a' indicates",
+        "why": "False for pt-BR: Brazilian Portuguese uses 'estar' + gerund (-ndo); 'estar a' + infinitive is European."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'estar' for temporary conditions, moods, and locations, unlike 'ser'",
+        "why": "Misleading: fixed/permanent locations of movable or small things also take 'estar' ('Onde está o banco?')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Combines temporary state/condition and spatial location into one sense styled only '(location)'."
+      }
+    ],
+    "growth": 1.094
   }
 }

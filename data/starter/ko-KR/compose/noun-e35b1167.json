@@ -72,6 +72,159 @@
     "primaryGloss": "road",
     "emotion": "a sense of direction and movement, feeling like you are headed somewhere",
     "notes": [
+      "길 is the everyday word for any road, street, or path; 도로 refers specifically to a paved road for motor traffic.",
+      "Often used after -는 to mean 'on the way to' (e.g., 집에 가는 길에 'on the way home')."
+    ],
+    "senses": [
+      {
+        "id": "8o39h1mtb95zx7h",
+        "order": 0,
+        "definition": "A road, street, or path that people or vehicles travel along.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "street",
+              "path"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "1ltmfz04mlxeu29",
+            "text": "길이 아주 막혀요.",
+            "textLang": "ko",
+            "translation": "The road is very congested.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and tired, stuck in heavy traffic during rush hour",
+            "note": null,
+            "matchedForm": "길",
+            "matchedTranslationForm": "road"
+          },
+          {
+            "id": "l90oci2txtz0x2q",
+            "text": "공원에 산책하기 좋은 길이 있어요.",
+            "textLang": "ko",
+            "translation": "There is a good path for walking in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and appreciative, enjoying a calm stroll on a nice day",
+            "note": null,
+            "matchedForm": "길",
+            "matchedTranslationForm": "path"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1riyzalxoviz70v",
+        "order": 1,
+        "definition": "The route or direction to a place, or the course of going somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "route"
+            ]
+          }
+        ],
+        "domain": "direction",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "micdfexvh8n4zzz",
+            "text": "집에 가는 길에 친구를 만났어요.",
+            "textLang": "ko",
+            "translation": "I met a friend on the way home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "길",
+            "matchedTranslationForm": "way"
+          },
+          {
+            "id": "46zm5jabohw3r1n",
+            "text": "제가 길을 잃었어요.",
+            "textLang": "ko",
+            "translation": "I lost my way.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "길",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "길",
+    "lemma": "길",
+    "reading": null,
+    "ipa": "/kil/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "road; street; path; way",
+    "primaryGloss": "road",
+    "emotion": "a sense of direction and movement, feeling like you are headed somewhere",
+    "notes": [
       "While '길' is a general term for any kind of path, '도로' is more specifically used for larger, paved roads designed for cars.",
       "Use '길' when talking about your commute or the way to a specific destination."
     ],
@@ -163,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(road) A route or passage for vehicles ... (path) A narrow path",
+        "why": "Korean 길 covers both road and path as a single general concept."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A2 sense 'way, route, or process of going somewhere' (가는 길, 길을 잃다)."
+      }
+    ],
+    "growth": 0.914
   }
 }

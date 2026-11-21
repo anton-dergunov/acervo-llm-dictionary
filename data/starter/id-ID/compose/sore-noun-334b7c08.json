@@ -58,6 +58,76 @@
     "headword": "sore",
     "lemma": "sore",
     "reading": null,
+    "ipa": "/ˈso.re/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌇",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late afternoon; early evening",
+    "primaryGloss": "afternoon",
+    "emotion": "a relaxed, calm feeling as the workday ends and the light softens",
+    "notes": [
+      "Refers to the cooler part of the afternoon from around 3:00 PM until sunset (around 6:00 PM). Used in the greeting 'Selamat sore' (Good afternoon / early evening).",
+      "Do not confuse with 'siang' (around 11:00 AM to 3:00 PM) or 'malam' (night/evening after sunset)."
+    ],
+    "senses": [
+      {
+        "id": "s78hpaml2nrwuep",
+        "order": 0,
+        "definition": "The late afternoon and early evening, from around 3:00 PM until sunset.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon",
+              "late afternoon",
+              "early evening"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌇",
+        "examples": [
+          {
+            "id": "23da3up1ytf555a",
+            "text": "Saya suka berjalan-jalan pada sore hari.",
+            "textLang": "id",
+            "translation": "I like to go for a walk in the late afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sore",
+            "matchedTranslationForm": "late afternoon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "sore",
+    "lemma": "sore",
+    "reading": null,
     "ipa": "/ˈso.rə/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈso.rə/",
+        "why": "Final 'e' in 'sore' is /e/ (or /ɛ/), never a schwa /ə/."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "The period of the day occurring after midday and before evening.",
+        "why": "Contradicts the note: 'after midday' includes 'siang' (early afternoon), whereas 'sore' starts around 3 PM."
+      }
+    ],
+    "growth": 1.015
   }
 }

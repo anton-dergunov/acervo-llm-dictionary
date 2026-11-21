@@ -71,6 +71,96 @@
     ],
     "status": "active",
     "shortGloss": "to climb",
+    "primaryGloss": "to climb",
+    "emotion": null,
+    "notes": [
+      "Forms the perfect tense with 'sein' (ist geklettert).",
+      "Used for climbing with hands and feet. For stairs or mountains walked on foot, use 'steigen' (e.g. 'auf einen Berg steigen', 'die Treppe hinaufsteigen')."
+    ],
+    "senses": [
+      {
+        "id": "0nra92w61z0je4z",
+        "order": 0,
+        "definition": "To go up or over something using hands and feet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to climb",
+              "to scramble"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🧗",
+        "examples": [
+          {
+            "id": "0sfrgxrymycocmq",
+            "text": "Die Kinder klettern gerne auf die Bäume im Park.",
+            "textLang": "de",
+            "translation": "The children like to climb the trees in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and energetic, enjoying the freedom of the outdoors",
+            "note": null,
+            "matchedForm": "klettern",
+            "matchedTranslationForm": "climb"
+          },
+          {
+            "id": "t9nvvl3x61pp7go",
+            "text": "Er klettert am Wochenende in einer Kletterhalle.",
+            "textLang": "de",
+            "translation": "He climbs in a climbing gym on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused, describing a regular hobby",
+            "note": null,
+            "matchedForm": "klettert",
+            "matchedTranslationForm": "climbs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "klettern",
+    "lemma": "klettern",
+    "reading": null,
+    "ipa": "/ˈklɛtɐn/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to climb",
     "primaryGloss": "climb",
     "emotion": null,
     "notes": [
@@ -143,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "for stairs, use 'treppensteigen'",
+        "why": "'treppensteigen' is not a standard verb and is wrongly capitalized (it is 'die Treppe hinaufsteigen/nehmen')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Klettern is specifically used for climbing with hands and feet",
+        "why": "Repeats the definition verbatim; fails to mention that 'klettern' takes 'sein' in the perfect."
+      }
+    ],
+    "growth": 0.864
   }
 }

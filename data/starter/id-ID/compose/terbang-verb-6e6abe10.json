@@ -68,6 +68,94 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to fly",
+    "primaryGloss": "fly",
+    "emotion": "wide-eyed and excited, like a child watching a plane take off",
+    "notes": [
+      "Combined with 'pesawat' as 'pesawat terbang' (airplane)."
+    ],
+    "senses": [
+      {
+        "id": "akga3kr1ol60b8w",
+        "order": 0,
+        "definition": "To move through the air using wings, or to travel in an aircraft.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fly"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "o2pcd6tcwxwjiff",
+            "text": "Burung itu terbang tinggi di atas pohon.",
+            "textLang": "id",
+            "translation": "That bird is flying high above the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring nature",
+            "note": null,
+            "matchedForm": "terbang",
+            "matchedTranslationForm": "flying"
+          },
+          {
+            "id": "75ddm19xnl9cl0b",
+            "text": "Besok saya akan terbang ke Jakarta.",
+            "textLang": "id",
+            "translation": "Tomorrow I will fly to Jakarta.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anticipatory and bright, looking forward to a trip",
+            "note": null,
+            "matchedForm": "terbang",
+            "matchedTranslationForm": "fly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "terbang",
+    "lemma": "terbang",
+    "reading": null,
+    "ipa": "/tər.baŋ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to fly; to leave or move quickly",
     "primaryGloss": "fly",
     "emotion": "wide-eyed and excited, like a child watching a plane take off",
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To depart or travel to a destination rapidly, usually by plane.",
+        "why": "Traveling by plane is part of 'to fly' and already covered in sense 0's definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for birds, planes, and anything moving through the air.",
+        "why": "Both notes merely restate the definitions of the senses."
+      }
+    ],
+    "growth": 0.582
   }
 }

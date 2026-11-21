@@ -70,6 +70,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "cantar",
+    "primaryGloss": "cantar",
+    "emotion": null,
+    "notes": [
+      "Es un verbo irregular: el pasado es 'sang' y el participio es 'sung' (sing – sang – sung)."
+    ],
+    "senses": [
+      {
+        "id": "6726de7z2bvq8z2",
+        "order": 0,
+        "definition": "Producir sonidos musicales o melódicos con la voz, como hacen las personas o los pájaros.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cantar",
+              "trinar"
+            ]
+          }
+        ],
+        "domain": "música",
+        "emoji": "🎤",
+        "examples": [
+          {
+            "id": "yyqkkd9nah0xao5",
+            "text": "She loves to sing in the shower.",
+            "textLang": "en",
+            "translation": "A ella le encanta cantar en la ducha.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relajado y despreocupado, disfrutando de un momento privado",
+            "note": null,
+            "matchedForm": "sing",
+            "matchedTranslationForm": "cantar"
+          },
+          {
+            "id": "rwu1nqb1f5qznhc",
+            "text": "The birds start to sing early in the morning.",
+            "textLang": "en",
+            "translation": "Los pájaros empiezan a cantar temprano por la mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tranquilo y observador, como alguien que disfruta de la paz de la mañana",
+            "note": null,
+            "matchedForm": "sing",
+            "matchedTranslationForm": "cantar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sing",
+    "lemma": "sing",
+    "reading": null,
+    "ipa": "/sɪŋ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "cantar; entonar",
     "primaryGloss": "cantar",
     "emotion": null,
@@ -162,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'sing' es exclusivamente para el uso de la voz humana.",
+        "why": "Contradicts sense 1 (birds sing), which makes the claim false."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cantar; entonar",
+        "why": "'entonar' is not in any sense's glosses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Human and bird singing both translate to 'cantar' and need not be split for A2."
+      }
+    ],
+    "growth": 0.683
   }
 }

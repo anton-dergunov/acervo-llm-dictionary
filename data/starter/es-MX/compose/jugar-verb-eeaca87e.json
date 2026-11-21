@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to play; to gamble",
+    "primaryGloss": "to play",
+    "emotion": "energetic and light, the anticipation of having fun with others",
+    "notes": [
+      "Stem-changing verb (u → ue) in the present tense: juego, juegas, juega, juegan.",
+      "In Mexico, sports are played with or without 'a' (jugar fútbol / jugar al fútbol). For musical instruments, use 'tocar', not 'jugar'."
+    ],
+    "senses": [
+      {
+        "id": "rw56irmie20sv6i",
+        "order": 0,
+        "definition": "To take part in a game or sport.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "sport",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "04y43ynhoh1mrr5",
+            "text": "Ellos juegan fútbol los sábados por la tarde.",
+            "textLang": "es",
+            "translation": "They play soccer on Saturday afternoons.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "juegan",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2bvcboz7260hkw6",
+        "order": 1,
+        "definition": "To spend time doing something for fun, especially with toys.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "recreation",
+        "emoji": "🧸",
+        "examples": [
+          {
+            "id": "fqtur6f4cettmi3",
+            "text": "Los niños juegan con bloques en el suelo.",
+            "textLang": "es",
+            "translation": "The children play with blocks on the floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and observant, watching kids focused on their play",
+            "note": null,
+            "matchedForm": "juegan",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8uuhupyujbzqzeo",
+        "order": 2,
+        "definition": "To bet money on a game of chance or a lottery.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to gamble",
+              "to bet",
+              "to play"
+            ]
+          }
+        ],
+        "domain": "gambling",
+        "emoji": "🎰",
+        "examples": [
+          {
+            "id": "y1kklma4kzflt9t",
+            "text": "Mucha gente juega a la lotería en diciembre.",
+            "textLang": "es",
+            "translation": "Many people play the lottery in December.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and slightly secretive, like sharing a common habit",
+            "note": null,
+            "matchedForm": "juega",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "jugar",
+    "lemma": "jugar",
+    "reading": null,
+    "ipa": "/xuˈɣaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚽",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to play (game/sport); to participate",
     "primaryGloss": "to play",
     "emotion": "energetic and light, the anticipation of having fun with others",
@@ -199,5 +349,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Do not use 'de' or just the direct object.",
+        "why": "False for Mexican Spanish, where 'jugar fútbol' (without 'a') is the most common form."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing two vital A1/A2 points: stem change (u > ue) and 'tocar' for musical instruments."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to play (game/sport); to participate",
+        "why": "Sense 2 is 'to gamble/bet', not 'to participate'."
+      }
+    ],
+    "growth": 1.02
   }
 }

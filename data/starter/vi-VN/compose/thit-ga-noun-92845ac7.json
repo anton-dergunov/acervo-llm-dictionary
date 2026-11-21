@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "chicken meat; chicken",
+    "primaryGloss": "chicken",
+    "emotion": "appetizing and warm, looking forward to a delicious meal",
+    "notes": [
+      "Combines 'thịt' (meat) and 'gà' (chicken). Refers only to the meat as food; the live bird is 'gà' (or 'con gà')."
+    ],
+    "senses": [
+      {
+        "id": "fakzhqbzhei0q1z",
+        "order": 0,
+        "definition": "The meat of a chicken used as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chicken",
+              "chicken meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍗",
+        "examples": [
+          {
+            "id": "cb9k0dp52u6urjj",
+            "text": "Tối nay nhà mình ăn thịt gà nhé.",
+            "textLang": "vi",
+            "translation": "Let's eat chicken for dinner tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "thịt gà",
+            "matchedTranslationForm": "chicken"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "thịt gà",
+    "lemma": "thịt gà",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "chicken meat; chicken (animal)",
     "primaryGloss": "chicken",
     "emotion": "appetizing and warm, looking forward to a delicious meal",
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The domestic bird raised for its meat and eggs.",
+        "why": "'thịt gà' means only chicken meat; the live bird is 'gà' or 'con gà'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It refers to both the live animal as food source",
+        "why": "False: 'thịt gà' never refers to the live animal."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Người nông dân nuôi nhiều thịt gà trong trang trại.",
+        "why": "Absurd in Vietnamese ('raises much chicken meat'); one raises 'gà', not 'thịt gà'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Chúng tôi ăn thịt gà cho bữa tối.",
+        "why": "'cho bữa tối' is a calque of 'for dinner'; natural Vietnamese is 'vào bữa tối'."
+      }
+    ],
+    "growth": 0.608
   }
 }

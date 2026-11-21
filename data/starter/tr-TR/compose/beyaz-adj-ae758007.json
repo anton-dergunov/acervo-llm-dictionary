@@ -72,6 +72,73 @@
     "primaryGloss": "white",
     "emotion": "clear and bright, describing a clean surface or a snowy landscape",
     "notes": [
+      "'Beyaz' is the everyday word for white. Its synonym 'ak' appears mostly in set phrases and names, such as 'Akdeniz' (the Mediterranean Sea) or 'saçı sakalı ak' (with white hair and beard)."
+    ],
+    "senses": [
+      {
+        "id": "rn5hxnt3c1sdx82",
+        "order": 0,
+        "definition": "Having the color of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "fvqjt4a3qqrih9m",
+            "text": "Üzerinde beyaz bir gömlek vardı.",
+            "textLang": "tr",
+            "translation": "He was wearing a white shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "beyaz",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "beyaz",
+    "lemma": "beyaz",
+    "reading": null,
+    "ipa": "/beˈjaz/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white",
+    "primaryGloss": "white",
+    "emotion": "clear and bright, describing a clean surface or a snowy landscape",
+    "notes": [
       "Beyaz is the standard word for the color white. It is used for objects, light, and abstract concepts.",
       "Unlike some other languages that have multiple words for different shades of white, Turkish primarily uses beyaz for the general color."
     ],
@@ -160,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Saçları tamamen beyazlamış.",
+        "why": "Uses the derived verb 'beyazlamak' (to turn white), not the adjective 'beyaz'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Turkish primarily uses beyaz for the general color.",
+        "why": "Turkish also has the common native synonym 'ak', used in many fixed expressions."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of snow or milk.",
+        "why": "Defines the adjective as a noun ('The color of...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Beyaz is the standard word for the color white.",
+        "why": "Filler note that merely restates the gloss."
+      }
+    ],
+    "growth": 0.576
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "dream",
     "emotion": "quiet and reflective, drifting between reality and imagination",
     "notes": [
+      "Plural: أَحْلَام (ʔaḥlām). Can also be pronounced حُلُم (ḥulum) in the singular.",
+      "Do not confuse with حِلْم (ḥilm, 'patience, forbearance'), which is spelled identically without vowel marks (حلم)."
+    ],
+    "senses": [
+      {
+        "id": "ljm0bujyboeei7g",
+        "order": 0,
+        "definition": "A series of images or events that happen in the mind while sleeping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "5u6s7dfsg45nikx",
+            "text": "رَأَيْتُ حُلْمًا جَمِيلًا اللَّيْلَةَ الْمَاضِيَةَ.",
+            "textLang": "ar",
+            "translation": "I had a beautiful dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and nostalgic, recalling a pleasant moment",
+            "note": null,
+            "matchedForm": "حُلْمًا",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a627r3kt3tmuikg",
+        "order": 1,
+        "definition": "A strong desire or goal for the future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream",
+              "ambition",
+              "aspiration"
+            ]
+          }
+        ],
+        "domain": "ambition",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "dftuo4utjj7gvo4",
+            "text": "حُلْمِي أَنْ أُصْبِحَ طَبِيبًا.",
+            "textLang": "ar",
+            "translation": "My dream is to become a doctor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حُلْمِي",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حُلْم",
+    "lemma": "حُلْم",
+    "reading": null,
+    "ipa": "/ħulm/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "dream; ambition",
+    "primaryGloss": "dream",
+    "emotion": "quiet and reflective, drifting between reality and imagination",
+    "notes": [
       "The plural of this word is أَحْلَام (aḥlām).",
       "It is used both for the literal experience of dreaming while asleep and for the figurative sense of having a grand ambition for the future."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "حُلْمِي أَنْ أَصْبَحَ طَبِيبًا.",
+        "why": "Ungrammatical vocalization: 1st person singular subjunctive of أَصْبَحَ is أُصْبِحَ (uṣbiḥa), not أَصْبَحَ."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is used both for the literal experience of dreaming while asleep",
+        "why": "Simply restates the two senses directly below it."
+      }
+    ],
+    "growth": 1.023
   }
 }

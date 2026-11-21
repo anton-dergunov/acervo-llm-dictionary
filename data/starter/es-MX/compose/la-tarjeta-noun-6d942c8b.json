@@ -70,6 +70,118 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "card; credit card; greeting card",
+    "primaryGloss": "card",
+    "emotion": null,
+    "notes": [
+      "When paying, 'con tarjeta' alone means 'by credit or debit card' ('tarjeta de crédito' / 'tarjeta de débito').",
+      "Do not confuse with 'carta', which is used for playing cards ('jugar a las cartas'), letters, and restaurant menus."
+    ],
+    "senses": [
+      {
+        "id": "2aqd5mgj3jj89bg",
+        "order": 0,
+        "definition": "A small plastic or paper card used for paying, identification, or access.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "card",
+              "credit card",
+              "debit card"
+            ]
+          }
+        ],
+        "domain": "everyday object",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "7xs8o4rhf4omp21",
+            "text": "Voy a pagar con tarjeta.",
+            "textLang": "es",
+            "translation": "I am going to pay by card.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and efficient, finishing a transaction",
+            "note": null,
+            "matchedForm": "tarjeta",
+            "matchedTranslationForm": "card"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vqsjoezcqjy1zb2",
+        "order": 1,
+        "definition": "A piece of stiff paper with a picture or message, sent for an occasion or from a trip.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "card",
+              "greeting card",
+              "postcard"
+            ]
+          }
+        ],
+        "domain": "correspondence",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "pkctk9619avgcim",
+            "text": "Le compré una tarjeta de cumpleaños.",
+            "textLang": "es",
+            "translation": "I bought her a birthday card.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tarjeta",
+            "matchedTranslationForm": "card"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la tarjeta",
+    "lemma": "tarjeta",
+    "reading": null,
+    "ipa": "/taɾˈxeta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "card; credit card; postcard",
     "primaryGloss": "card",
     "emotion": null,
@@ -164,5 +276,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Sense [0] restricts 'tarjeta' to payment cards, omitting everyday ID, transit, and business cards."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'carta', which is a letter you write",
+        "why": "Incomplete contrast: 'carta' is also used for playing cards ('jugar a las cartas')."
+      }
+    ],
+    "growth": 0.933
   }
 }

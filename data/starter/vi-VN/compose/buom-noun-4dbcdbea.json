@@ -58,6 +58,73 @@
     "headword": "bướm",
     "lemma": "bướm",
     "reading": null,
+    "ipa": "/ɓɨəm˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦋",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "butterfly",
+    "primaryGloss": "butterfly",
+    "emotion": "light and airy, watching something delicate flutter past",
+    "notes": [
+      "Takes the classifier 'con' (con bướm). In everyday speech, the reduplicated form 'bươm bướm' is also very common."
+    ],
+    "senses": [
+      {
+        "id": "yp2hfgn3gl6ttcr",
+        "order": 0,
+        "definition": "An insect with large, often brightly coloured wings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "butterfly"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🦋",
+        "examples": [
+          {
+            "id": "6s5dabvmzx0pzof",
+            "text": "Con bướm đậu trên bông hoa.",
+            "textLang": "vi",
+            "translation": "The butterfly landed on the flower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and observant, watching nature closely",
+            "note": null,
+            "matchedForm": "bướm",
+            "matchedTranslationForm": "butterfly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "bướm",
+    "lemma": "bướm",
+    "reading": null,
     "ipa": "/bɨ̌m/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/bɨ̌m/",
+        "why": "Wrong vowel and tone notation; Hanoi IPA for 'bướm' is /ɓɨəm˧˦/."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In compound words, 'con bướm' is the full word",
+        "why": "'Con' is the animate classifier used before the noun, not a compound-only form."
+      }
+    ],
+    "growth": 0.928
   }
 }

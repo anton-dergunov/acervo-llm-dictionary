@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sky",
+    "primaryGloss": "sky",
+    "emotion": "wide, calm, and looking upward with a sense of peace",
+    "notes": [
+      "Read そら, 空 means 'sky'. The same kanji is read から when meaning 'empty' (as in 空の箱, kara no hako, 'an empty box') and くう in compounds like 空港 (kūkō, 'airport')."
+    ],
+    "senses": [
+      {
+        "id": "ngcnfeu5vt2bztv",
+        "order": 0,
+        "definition": "The space above the earth where clouds, the sun, and the stars appear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sky"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "s7sani4m8uh2i0j",
+            "text": "今日は空がとても青いです。",
+            "textLang": "ja",
+            "translation": "The sky is very blue today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "空",
+            "matchedTranslationForm": "sky"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "空",
+    "lemma": "空",
+    "reading": "そら",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sky; empty space",
     "primaryGloss": "sky",
     "emotion": "wide, calm, and looking upward with a sense of peace",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(emptiness) The state of being empty or vacant.",
+        "why": "空の箱 is read から (kara), not そら (sora); wrong word for this reading."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sky; empty space",
+        "why": "'empty space' belongs to the reading から/くう, not そら."
+      }
+    ],
+    "growth": 0.608
   }
 }

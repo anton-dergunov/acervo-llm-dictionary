@@ -68,6 +68,117 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "funny; comedian",
+    "primaryGloss": "funny",
+    "emotion": "chuckling and amused, sharing a good laugh with a friend",
+    "notes": [
+      "Also used as a noun meaning 'comedian' or 'comedy' (e.g., มุกตลก, 'a joke').",
+      "Compare ขำ (khǎm), which emphasizes the immediate urge to laugh rather than general comedy."
+    ],
+    "senses": [
+      {
+        "id": "s2njrcs7mdutzcm",
+        "order": 0,
+        "definition": "Causing laughter or amusement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "funny",
+              "comical",
+              "humorous"
+            ]
+          }
+        ],
+        "domain": "humor",
+        "emoji": "😂",
+        "examples": [
+          {
+            "id": "9ikxou23ub67n8i",
+            "text": "หนังเรื่องนี้ตลกมากจนฉันหัวเราะไม่หยุด",
+            "textLang": "th",
+            "translation": "This movie is so funny that I couldn't stop laughing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ตลก",
+            "matchedTranslationForm": "funny"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cyzpz5nmlgjh1x3",
+        "order": 1,
+        "definition": "A person who performs comedy or tells jokes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "comedian",
+              "comic"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🤡",
+        "examples": [
+          {
+            "id": "qf2ssh8trq11oy8",
+            "text": "เขาอยากเป็นตลกที่มีชื่อเสียง",
+            "textLang": "th",
+            "translation": "He wants to be a famous comedian.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "supportive and cheerful, talking about someone's career dream",
+            "note": null,
+            "matchedForm": "ตลก",
+            "matchedTranslationForm": "comedian"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ตลก",
+    "lemma": "ตลก",
+    "reading": null,
+    "ipa": "ta˨˩.lok̚˨˩",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "funny; comical; joke",
     "primaryGloss": "funny",
     "emotion": "chuckling and amused, sharing a good laugh with a friend",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "หนังเรื่องนี้ตลกมากจนฉันหัว",
+        "why": "Truncated word at end: 'หัว' (head) instead of 'หัวเราะ' (laugh)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "funny; comical; joke",
+        "why": "'joke' is not in any sense, and 'comedian' from sense 1 is missing."
+      }
+    ],
+    "growth": 0.959
   }
 }

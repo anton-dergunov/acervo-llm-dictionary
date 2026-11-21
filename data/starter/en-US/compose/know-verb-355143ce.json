@@ -74,6 +74,115 @@
     "primaryGloss": "saber",
     "emotion": "certain and steady, sharing a clear fact",
     "notes": [
+      "Verbo irregular: pasado 'knew' (/nuː/), participio 'known' (/noʊn/). La 'k' inicial es muda.",
+      "Para decir 'saber hacer algo', se usa 'know how to' + infinitivo (p. ej., 'I know how to swim'), o el modal 'can'.",
+      "No suele usarse en tiempos continuos (se dice 'I know', no 'I am knowing')."
+    ],
+    "senses": [
+      {
+        "id": "rj397p8zcygoolp",
+        "order": 0,
+        "definition": "Tener información, certeza o conocimiento sobre algo en la mente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "saber"
+            ]
+          }
+        ],
+        "domain": "información",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "dr1rtk3eanrabrs",
+            "text": "I know the answer to the question.",
+            "textLang": "en",
+            "translation": "Sé la respuesta a la pregunta.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and sure of the answer",
+            "note": null,
+            "matchedForm": "know",
+            "matchedTranslationForm": "Sé"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jpb0c3z8s74gn9a",
+        "order": 1,
+        "definition": "Estar familiarizado con una persona, un lugar o una cosa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "conocer"
+            ]
+          }
+        ],
+        "domain": "familiaridad",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "4pzxuf3onb9ftwh",
+            "text": "I know this city very well.",
+            "textLang": "en",
+            "translation": "Conozco muy bien esta ciudad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, talking about a place you love",
+            "note": null,
+            "matchedForm": "know",
+            "matchedTranslationForm": "Conozco"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "know",
+    "lemma": "know",
+    "reading": null,
+    "ipa": "/noʊ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "saber; conocer",
+    "primaryGloss": "saber",
+    "emotion": "certain and steady, sharing a clear fact",
+    "notes": [
       "Usa 'know' para información o hechos (saber) y también para personas o lugares con los que estás familiarizado (conocer)."
     ],
     "senses": [
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "saber, conocer",
+        "why": "Sense 0 is 'saber' (information/facts); including 'conocer' blurs the distinction with sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular forms (knew, known), static verb warning, and 'know how to' structure."
+      }
+    ],
+    "growth": 1.517
   }
 }

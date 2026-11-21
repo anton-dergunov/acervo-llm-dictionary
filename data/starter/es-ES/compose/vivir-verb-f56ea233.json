@@ -72,6 +72,115 @@
     "primaryGloss": "to live",
     "emotion": "a warm and steady feeling, describing the simple state of being alive",
     "notes": [
+      "Followed by 'en' to say where someone lives (e.g., 'vivo en Madrid'), and by 'con' to say with whom."
+    ],
+    "senses": [
+      {
+        "id": "anbbg307bcgm605",
+        "order": 0,
+        "definition": "To have your home in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to live",
+              "to reside"
+            ]
+          }
+        ],
+        "domain": "residence",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "bay964hiurriapz",
+            "text": "Vivo en Madrid con mi familia.",
+            "textLang": "es",
+            "translation": "I live in Madrid with my family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Vivo",
+            "matchedTranslationForm": "live"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ixt4j06sr4qz1qq",
+        "order": 1,
+        "definition": "To be alive or remain alive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to live",
+              "to be alive"
+            ]
+          }
+        ],
+        "domain": "existence",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "effiwn7jw7lwsee",
+            "text": "Mi bisabuela vivió casi cien años.",
+            "textLang": "es",
+            "translation": "My great-grandmother lived for almost a hundred years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vivió",
+            "matchedTranslationForm": "lived"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "vivir",
+    "lemma": "vivir",
+    "reading": null,
+    "ipa": "/biˈβiɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to live; to reside",
+    "primaryGloss": "to live",
+    "emotion": "a warm and steady feeling, describing the simple state of being alive",
+    "notes": [
       "While 'vivir' is used for both 'being alive' and 'residing', native speakers often use 'vivir en' when specifically discussing where they call home.",
       "Do not confuse this with 'convivir', which means to live together with others (cohabitate)."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Todos los seres vivos necesitan agua.",
+        "why": "Uses the noun/adjective 'vivos', not the verb 'vivir'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'convivir'",
+        "why": "Beginners do not confuse 'vivir' with 'convivir'; filler note."
+      }
+    ],
+    "growth": 0.794
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "dangerous",
     "emotion": "a sharp, cautionary tone, warning someone to stay away",
     "notes": [
+      "For 'serious' in the sense of 'not joking' or 'earnest', use جَادّ (jādd) or جِدِّيّ (jiddī), not خَطِير."
+    ],
+    "senses": [
+      {
+        "id": "9mfqilxjm6scc1y",
+        "order": 0,
+        "definition": "Able to hurt people or cause serious damage.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "risky"
+            ]
+          }
+        ],
+        "domain": "danger",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "1maze08xzdnnqzx",
+            "text": "هَذَا الطَّرِيقُ خَطِيرٌ جِدًّا.",
+            "textLang": "ar",
+            "translation": "This road is very dangerous.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and worried, urging someone to be careful",
+            "note": null,
+            "matchedForm": "خَطِيرٌ",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6udleognm5g76am",
+        "order": 1,
+        "definition": "Of a situation, illness, or problem: very bad and requiring urgent attention.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "serious",
+              "critical",
+              "grave"
+            ]
+          }
+        ],
+        "domain": "gravity",
+        "emoji": "🚨",
+        "examples": [
+          {
+            "id": "9dwo3p71c74uyha",
+            "text": "الوَضْعُ خَطِيرٌ فِي المَدِينَةِ.",
+            "textLang": "ar",
+            "translation": "The situation in the city is critical.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tense and informative, relaying urgent news",
+            "note": null,
+            "matchedForm": "خَطِيرٌ",
+            "matchedTranslationForm": "critical"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "خَطِير",
+    "lemma": "خَطِير",
+    "reading": null,
+    "ipa": "/xaˈtˤiːr/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dangerous; serious; critical",
+    "primaryGloss": "dangerous",
+    "emotion": "a sharp, cautionary tone, warning someone to stay away",
+    "notes": [
       "Use 'khatir' when something poses a real risk of harm or damage.",
       "Do not confuse this with 'jiddin' (serious/solemn), which refers to someone's mood or personality rather than a threat."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'jiddin' (serious/solemn)",
+        "why": "Wrong Arabic word and transliteration: 'jiddan' means 'very'; 'serious/solemn' is جَادّ (jādd) or جِدِّيّ (jiddī)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'khatir' when something poses a real risk of harm or damage.",
+        "why": "Merely repeats the definition of the first sense."
+      }
+    ],
+    "growth": 0.871
   }
 }

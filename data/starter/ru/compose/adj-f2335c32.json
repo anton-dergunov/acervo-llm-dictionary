@@ -62,6 +62,115 @@
     "headword": "лёгкий",
     "lemma": "лёгкий",
     "reading": null,
+    "ipa": "/ˈlʲɵxʲkʲɪj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "light; easy",
+    "primaryGloss": "light",
+    "emotion": null,
+    "notes": [
+      "Pronunciation: the letters гк in лёгкий (and легко) are pronounced like Russian хк (/ˈlʲɵxʲkʲɪj/), not with a 'g' sound.",
+      "The adverb and impersonal form is легко ('easily'; 'it is easy to...')."
+    ],
+    "senses": [
+      {
+        "id": "g76gyqskehmt9uf",
+        "order": 0,
+        "definition": "Having little weight; not heavy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light"
+            ]
+          }
+        ],
+        "domain": "weight",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "w2ged8n1fm25z8b",
+            "text": "Эта сумка очень лёгкая.",
+            "textLang": "ru",
+            "translation": "This bag is very light.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasantly surprised by how little effort it takes to carry it",
+            "note": null,
+            "matchedForm": "лёгкая",
+            "matchedTranslationForm": "light"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p60lbo9ou22qmf4",
+        "order": 1,
+        "definition": "Not difficult; requiring little effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "easy",
+              "simple"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "gnyztq8bcdnun5q",
+            "text": "Это было лёгкое задание.",
+            "textLang": "ru",
+            "translation": "This was an easy task.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and relaxed, acknowledging the task was straightforward",
+            "note": null,
+            "matchedForm": "лёгкое",
+            "matchedTranslationForm": "easy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "лёгкий",
+    "lemma": "лёгкий",
+    "reading": null,
     "ipa": "/ˈlʲɵkʲɪj/",
     "pos": "adj",
     "gender": null,
@@ -164,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈlʲɵkʲɪj/",
+        "why": "Wrong IPA transcription: 'г' before 'к' in 'лёгкий' is pronounced [x] (/ˈlʲɵxʲkʲɪj/), not dropped."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain the irregular pronunciation of 'гк' as [хк], where spelling misleads."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'лёгкий' both for objects that don't weigh much",
+        "why": "Purely repeats the two sense definitions."
+      }
+    ],
+    "growth": 0.787
   }
 }

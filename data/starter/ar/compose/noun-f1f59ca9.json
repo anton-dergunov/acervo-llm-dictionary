@@ -72,6 +72,75 @@
     "primaryGloss": "floor",
     "emotion": "matter-of-fact and direct, pointing upwards to an upper level",
     "notes": [
+      "Broken plural: طَوَابِق (ṭawābiq). Also vocalized طَابَق (ṭābaq).",
+      "Distinct from أَرْضِيَّة (arḍiyya), which means the floor surface you walk on."
+    ],
+    "senses": [
+      {
+        "id": "wz07uhv0b8quwei",
+        "order": 0,
+        "definition": "One level or storey of a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor",
+              "storey"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "ysrt9ut06ucod7r",
+            "text": "أَسْكُنُ فِي الطَّابِقِ الثَّالِثِ.",
+            "textLang": "ar",
+            "translation": "I live on the third floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and settled, describing where home is",
+            "note": null,
+            "matchedForm": "الطَّابِقِ",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "طَابِق",
+    "lemma": "طَابِق",
+    "reading": null,
+    "ipa": "/tˤaːbiq/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "floor; storey",
+    "primaryGloss": "floor",
+    "emotion": "matter-of-fact and direct, pointing upwards to an upper level",
+    "notes": [
       "Used to describe the levels or floors of a building.",
       "Do not confuse with 'دُور' which can also mean a turn or a role."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe the levels or floors of a building.",
+        "why": "Restates the definition without adding grammar or usage info."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'دُور' which can also mean a turn",
+        "why": "Wrong vowel: 'floor/turn/role' is دَوْر (dawr), whereas دُور (dūr) is plural of دَار."
+      }
+    ],
+    "growth": 1.115
   }
 }

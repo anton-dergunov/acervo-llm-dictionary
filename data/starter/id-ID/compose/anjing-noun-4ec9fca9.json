@@ -68,6 +68,115 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "dog; bastard (vulgar)",
+    "primaryGloss": "dog",
+    "emotion": "affectionate and familiar, calling out to a pet",
+    "notes": [
+      "When directed at a person or shouted in anger, 'anjing' (often softened in slang to 'anjir' or 'anjay') is a strong vulgarity."
+    ],
+    "senses": [
+      {
+        "id": "93klhe6prbwe96j",
+        "order": 0,
+        "definition": "A four-legged animal that barks, commonly kept as a pet or guard animal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "a1vldco4pagcmx2",
+            "text": "Anjing itu menggonggong pada orang asing di depan rumah.",
+            "textLang": "id",
+            "translation": "That dog is barking at the stranger in front of the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and watchful, pointing out a noise outside",
+            "note": null,
+            "matchedForm": "Anjing",
+            "matchedTranslationForm": "dog"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l0fy4afli4jnwq2",
+        "order": 1,
+        "definition": "(vulgar) A contemptible or hated person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bastard",
+              "asshole",
+              "son of a bitch"
+            ]
+          }
+        ],
+        "domain": "insult",
+        "emoji": "🤬",
+        "examples": [
+          {
+            "id": "fbdrtthxmh8b9sx",
+            "text": "Jangan panggil aku anjing!",
+            "textLang": "id",
+            "translation": "Don't call me a bastard!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "angry and defensive, shouting back at an insult",
+            "note": null,
+            "matchedForm": "anjing",
+            "matchedTranslationForm": "bastard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "anjing",
+    "lemma": "anjing",
+    "reading": null,
+    "ipa": "/ˈandʒɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐕",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "dog; scoundrel",
     "primaryGloss": "dog",
     "emotion": "affectionate and familiar, calling out to a pet",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "An offensive insult or curse word used to express",
+        "why": "Defines the word metalinguistically as 'an insult' instead of defining a person."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "bastard, asshole, damn",
+        "why": "'Damn' is an interjection, not a noun gloss."
+      }
+    ],
+    "growth": 0.821
   }
 }

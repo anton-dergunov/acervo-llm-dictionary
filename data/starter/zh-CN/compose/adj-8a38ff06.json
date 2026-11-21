@@ -74,6 +74,113 @@
     "primaryGloss": "black",
     "emotion": "matter-of-fact and direct, describing the world as it is",
     "notes": [
+      "Before a noun, use 黑色 (hēisè) rather than 黑 alone for most objects (黑色的车 'a black car'), though 黑 attaches directly to a few common nouns like 黑头发 (black hair)."
+    ],
+    "senses": [
+      {
+        "id": "30iv7g1mzta4buk",
+        "order": 0,
+        "definition": "Of the darkest color, like coal or the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "r10ayy88sj1duyn",
+            "text": "她的头发又黑又亮。",
+            "textLang": "zh",
+            "translation": "Her hair is black and shiny.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "黑",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "auqq24dclqz43kk",
+        "order": 1,
+        "definition": "Having little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark"
+            ]
+          }
+        ],
+        "domain": "darkness",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "rxc6sfthdt6aelq",
+            "text": "天黑了，我们回家吧。",
+            "textLang": "zh",
+            "translation": "It's getting dark, let's go home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and practical, noticing the changing time",
+            "note": null,
+            "matchedForm": "黑",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "黑",
+    "lemma": "黑",
+    "reading": "hēi",
+    "ipa": "/xei̯˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "black; dark",
+    "primaryGloss": "black",
+    "emotion": "matter-of-fact and direct, describing the world as it is",
+    "notes": [
       "In Chinese, '黑' is used to describe both the darkest colour and the state of having no light, which in English would be split between 'black' and 'dark'. Context usually makes it clear which one you mean."
     ],
     "senses": [
@@ -160,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The darkest color, like coal or night.",
+        "why": "Adjective defined as a noun rather than a quality."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "那是黑色的汽车。",
+        "why": "Uses the compound 黑色 instead of the adjective 黑 alone, and lacks a classifier."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Chinese, '黑' is used to describe both the darkest colour",
+        "why": "Merely restates the two senses; a grammar note on 黑 vs. 黑色 is needed."
+      }
+    ],
+    "growth": 0.931
   }
 }

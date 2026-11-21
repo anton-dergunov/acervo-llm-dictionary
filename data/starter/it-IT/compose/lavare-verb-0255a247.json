@@ -58,6 +58,113 @@
     "headword": "lavare",
     "lemma": "lavare",
     "reading": null,
+    "ipa": "/laˈva.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wash",
+    "primaryGloss": "to wash",
+    "emotion": "energetic and purposeful, getting things done around the house",
+    "notes": [
+      "For washing oneself or a part of one's body, use the reflexive form 'lavarsi' (e.g., 'lavarsi le mani' — to wash one's hands)."
+    ],
+    "senses": [
+      {
+        "id": "qpqmi3y2p4ul8v3",
+        "order": 0,
+        "definition": "To clean something using water and usually soap.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wash",
+              "to clean"
+            ]
+          }
+        ],
+        "domain": "clean",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "zmrt04nqytdf3pg",
+            "text": "Devo lavare i piatti dopo cena.",
+            "textLang": "it",
+            "translation": "I need to wash the dishes after dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and dutiful, facing the chores left at the end of the day",
+            "note": null,
+            "matchedForm": "lavare",
+            "matchedTranslationForm": "wash"
+          },
+          {
+            "id": "pazamqf9x1007te",
+            "text": "Oggi devo lavare i vestiti scuri.",
+            "textLang": "it",
+            "translation": "Today I need to wash the dark clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "organized and busy, sorting out the weekend chores",
+            "note": null,
+            "matchedForm": "lavare",
+            "matchedTranslationForm": "wash"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "qpqmi3y2p4ul8v3",
+      "from": "Pulire qualcosa usando acqua e sapone.",
+      "to": "Clean something using soap and water.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:47Z"
+    },
+    {
+      "sense": "fm5eo88o6wp9ew6",
+      "from": "Lavare i vestiti usando la lavatrice o a mano.",
+      "to": "Wash clothes by hand or with a machine.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:47Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "lavare",
+    "lemma": "lavare",
+    "reading": null,
     "ipa": "/laˈvaːre/",
     "pos": "verb",
     "gender": null,
@@ -161,22 +268,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "qpqmi3y2p4ul8v3",
-      "from": "Pulire qualcosa usando acqua e sapone.",
-      "to": "Clean something using soap and water.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:47Z"
-    },
-    {
-      "sense": "fm5eo88o6wp9ew6",
-      "from": "Lavare i vestiti usando la lavatrice o a mano.",
-      "to": "Wash clothes by hand or with a machine.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:47Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(clothes) Wash clothes by hand or with a machine.",
+        "why": "'Lavare i vestiti' is just the regular meaning of 'lavare' applied to clothes."
+      }
+    ],
+    "growth": 0.836
+  }
 }

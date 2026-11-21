@@ -58,6 +58,76 @@
     "headword": "가져가다",
     "lemma": "가져가다",
     "reading": null,
+    "ipa": "kadʑʌɡada",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to take (with one); to take away",
+    "primaryGloss": "to take",
+    "emotion": "focused and purposeful, like gathering things to head out the door",
+    "notes": [
+      "Use 가져가다 (take) when moving something away from the current location, and 가져오다 (bring) when moving it toward the current location.",
+      "Do not confuse with 가지다 (to have, to hold), which does not express movement to another place."
+    ],
+    "senses": [
+      {
+        "id": "6qb2x6qftgj8nh8",
+        "order": 0,
+        "definition": "To take or carry something with oneself away from the current place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to take",
+              "to take away",
+              "to carry away"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🏃",
+        "examples": [
+          {
+            "id": "lmw8cb8e10gpw0j",
+            "text": "비가 오니까 우산을 가져가세요.",
+            "textLang": "ko",
+            "translation": "It is raining, so please take an umbrella with you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "가져가세요",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "가져가다",
+    "lemma": "가져가다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -142,5 +212,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to take away; to bring",
+        "why": "'To bring' is 가져오다, the opposite of 가져가다; including it misleads the learner."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "가방을 가져가다.",
+        "why": "Bare infinitive phrase rather than a natural sentence, and redundant with example 0."
+      }
+    ],
+    "growth": 0.943
   }
 }

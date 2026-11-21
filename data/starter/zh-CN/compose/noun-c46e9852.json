@@ -71,6 +71,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "book",
+    "primaryGloss": "book",
+    "emotion": "academic and focused, enjoying the quiet of reading",
+    "notes": [
+      "Counted with the measure word 本 (běn): 一本书 (a book). In compounds, 书 can also refer to certificates or formal documents, such as 证书 (certificate)."
+    ],
+    "senses": [
+      {
+        "id": "wyo79mdiqupuugj",
+        "order": 0,
+        "definition": "A set of printed or written pages bound together inside a cover to be read.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "book"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "r9wo8fy7iyxzn76",
+            "text": "我在看一本很有意思的书。",
+            "textLang": "zh",
+            "translation": "I am reading a very interesting book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, sharing what one is currently reading",
+            "note": null,
+            "matchedForm": "书",
+            "matchedTranslationForm": "book"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "书",
+    "lemma": "书",
+    "reading": "shū",
+    "ipa": "/ʂu˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Home",
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "book; document",
     "primaryGloss": "book",
     "emotion": "academic and focused, enjoying the quiet of reading",
@@ -164,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Chinese, 书 is primarily a 'book' in the traditional sense",
+        "why": "Restates the definitions without adding useful grammar or usage info."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A document or a form of writing, often used in formal",
+        "why": "Bound/literary meaning; Example 1 uses a different word (书信) and mistranslates it."
+      }
+    ],
+    "growth": 0.489
   }
 }

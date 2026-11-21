@@ -58,6 +58,73 @@
     "headword": "mañana",
     "lemma": "mañana",
     "reading": null,
+    "ipa": "/maˈɲa.na/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "tomorrow",
+    "primaryGloss": "tomorrow",
+    "emotion": null,
+    "notes": [
+      "Do not confuse the adverb 'mañana' (tomorrow), which takes no article, with the feminine noun 'la mañana' (the morning). Together, 'mañana por la mañana' or 'mañana en la mañana' means 'tomorrow morning'."
+    ],
+    "senses": [
+      {
+        "id": "ovwmkp7rgsl9jwp",
+        "order": 0,
+        "definition": "On the day after today, or in the near future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tomorrow"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "hlk1spuo3txerxz",
+            "text": "Mañana voy a estudiar español.",
+            "textLang": "es",
+            "translation": "Tomorrow I am going to study Spanish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and focused, planning for the day ahead",
+            "note": null,
+            "matchedForm": "Mañana",
+            "matchedTranslationForm": "Tomorrow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "mañana",
+    "lemma": "mañana",
+    "reading": null,
     "ipa": "/maˈʝana/",
     "pos": "adv",
     "gender": null,
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/maˈʝana/",
+        "why": "Wrong phoneme /ʝ/ instead of palatal nasal /ɲ/ for 'ñ'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The first part of the day, between sunrise and noon.",
+        "why": "Includes the feminine noun 'la mañana' (morning) as a sense inside an adverb entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Don't confuse the adverb 'mañana' (tomorrow) with 'la mañana' (the morning).",
+        "why": "Duplicates note 0."
+      }
+    ],
+    "growth": 0.791
   }
 }

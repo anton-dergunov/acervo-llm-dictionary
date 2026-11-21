@@ -72,6 +72,114 @@
     "primaryGloss": "flower",
     "emotion": "gentle and admiring, looking at something pretty in a garden",
     "notes": [
+      "In the sense of 'flour', 'bloem' is uncountable and refers to finely sifted white flour (as opposed to 'het meel', which includes wholemeal flour)."
+    ],
+    "senses": [
+      {
+        "id": "9l437izd3i508ma",
+        "order": 0,
+        "definition": "The coloured part of a plant that grows from the stem.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "bloom"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌷",
+        "examples": [
+          {
+            "id": "t8pny0k2j7p78qd",
+            "text": "Zij plukte een mooie bloem in de tuin.",
+            "textLang": "nl",
+            "translation": "She picked a pretty flower in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and carefree, enjoying a sunny afternoon outside",
+            "note": null,
+            "matchedForm": "bloem",
+            "matchedTranslationForm": "flower"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "un49a2u85b2ykx9",
+        "order": 1,
+        "definition": "A fine white powder made from grain, used for baking bread or cake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flour"
+            ]
+          }
+        ],
+        "domain": "baking",
+        "emoji": "🌾",
+        "examples": [
+          {
+            "id": "7v3bd78gqlg49m7",
+            "text": "Je hebt bloem en suiker nodig om deze taart te bakken.",
+            "textLang": "nl",
+            "translation": "You need flour and sugar to bake this cake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, explaining a recipe in the kitchen",
+            "note": null,
+            "matchedForm": "bloem",
+            "matchedTranslationForm": "flour"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de bloem",
+    "lemma": "bloem",
+    "reading": null,
+    "ipa": "/blum/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌷",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "flower; flour",
+    "primaryGloss": "flower",
+    "emotion": "gentle and admiring, looking at something pretty in a garden",
+    "notes": [
       "The noun 'bloem' is common gender, so it takes 'de'.",
       "Be careful not to confuse 'bloem' (flower or flour) with 'bloempot' (flowerpot)."
     ],
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The noun 'bloem' is common gender, so it takes 'de'.",
+        "why": "Restates the grammatical gender already shown in the header and headword."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'bloem' (flower or flour) with 'bloempot' (flowerpot).",
+        "why": "Trivial compound warning; learners do not confuse 'bloem' with 'bloempot'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention countability difference between the two senses, and contrast with 'meel'."
+      }
+    ],
+    "growth": 1.056
   }
 }

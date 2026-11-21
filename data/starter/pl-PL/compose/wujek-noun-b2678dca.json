@@ -74,6 +74,113 @@
     "primaryGloss": "uncle",
     "emotion": null,
     "notes": [
+      "Traditionally, 'stryj' or 'stryjek' was used for a father's brother, but in modern everyday Polish 'wujek' is used for any uncle."
+    ],
+    "senses": [
+      {
+        "id": "apmf487fyhjirkv",
+        "order": 0,
+        "definition": "The brother of one's mother or father, or the husband of one's aunt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "xw1p8eer85n3e65",
+            "text": "Mój wujek przyjedzie do nas w niedzielę.",
+            "textLang": "pl",
+            "translation": "My uncle is coming to visit us on Sunday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, sharing a simple piece of family news",
+            "note": null,
+            "matchedForm": "wujek",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8ua709i30b9buj1",
+        "order": 1,
+        "definition": "A friendly or polite form of address used by children for an adult male family friend.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "om3h2ik4ha1c6vc",
+            "text": "Powiedz cześć wujkowi.",
+            "textLang": "pl",
+            "translation": "Say hello to uncle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and gentle, prompting a child to be polite",
+            "note": null,
+            "matchedForm": "wujkowi",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wujek",
+    "lemma": "wujek",
+    "reading": null,
+    "ipa": "/ˈvu.jɛk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "uncle",
+    "primaryGloss": "uncle",
+    "emotion": null,
+    "notes": [
       "In Polish, the word 'wujek' is specifically used for the brother of your mother (or her sister's husband).",
       "If you want to refer to your father's brother, the word is 'stryj', though in modern spoken Polish, 'wujek' is very commonly used for both sides of the family.",
       "It is also a polite way for children to address an adult man who is a family friend, even if there is no blood relation."
@@ -162,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the word 'wujek' is specifically used for the brother of your mother",
+        "why": "In contemporary Polish, 'wujek' is the standard everyday word for any uncle; note 1 contradicts note 0."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "The brother of one's parent.",
+        "why": "Incomplete: also covers the husband of one's aunt ('ciocia')."
+      }
+    ],
+    "growth": 0.67
   }
 }

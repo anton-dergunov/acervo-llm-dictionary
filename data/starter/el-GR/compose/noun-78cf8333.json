@@ -71,6 +71,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "sea",
+    "primaryGloss": "sea",
+    "emotion": "wide and serene, feeling the vastness of the horizon",
+    "notes": [
+      "In everyday phrases like 'πάμε στη θάλασσα' (let's go to the sea), it often translates naturally as 'the beach' or 'the seaside'.",
+      "Unlike 'το πέλαγος' (open sea), 'η θάλασσα' is the general, everyday word."
+    ],
+    "senses": [
+      {
+        "id": "uco9lmkwcdgwz0z",
+        "order": 0,
+        "definition": "The large body of salt water that covers much of the earth, or the coast where you go to swim.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea",
+              "seaside"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "p6rf4yitvnsmbhm",
+            "text": "Το καλοκαίρι πάμε στη θάλασσα κάθε μέρα.",
+            "textLang": "el",
+            "translation": "In the summer we go to the sea every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and nostalgic, anticipating the warmth of summer",
+            "note": null,
+            "matchedForm": "θάλασσα",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η θάλασσα",
+    "lemma": "θάλασσα",
+    "reading": null,
+    "ipa": "/ˈθa.la.sa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "sea; ocean",
     "primaryGloss": "sea",
     "emotion": "wide and serene, feeling the vastness of the horizon",
@@ -123,5 +193,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Note the spelling with two sigmas (σσ), which is the standard form.",
+        "why": "Pure filler; the spelling is visible in the headword."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "sea, ocean",
+        "why": "'Ocean' is 'ωκεανός'; 'θάλασσα' means sea (or going to the beach/seaside)."
+      }
+    ],
+    "growth": 0.968
   }
 }

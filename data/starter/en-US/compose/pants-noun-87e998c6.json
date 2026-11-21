@@ -68,6 +68,75 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "pantalones",
+    "primaryGloss": "pantalones",
+    "emotion": "casual and practical, getting dressed for the day",
+    "notes": [
+      "Se usa siempre en plural (These pants are new). Para contar prendas individuales se usa 'a pair of pants'.",
+      "En Estados Unidos significa 'pantalones' (en el Reino Unido se dice 'trousers', mientras que 'pants' allí significa ropa interior)."
+    ],
+    "senses": [
+      {
+        "id": "nhzenqxpp9mehg2",
+        "order": 0,
+        "definition": "Prenda de vestir exterior que cubre desde la cintura hasta los tobillos, con una parte para cada pierna.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pantalones",
+              "pantalón"
+            ]
+          }
+        ],
+        "domain": "ropa",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "ymub3hylnphy8w6",
+            "text": "He needs to buy a new pair of pants for work.",
+            "textLang": "en",
+            "translation": "Necesita comprar un par de pantalones nuevos para el trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pragmatic and focused on daily errands, planning an outfit",
+            "note": null,
+            "matchedForm": "pants",
+            "matchedTranslationForm": "pantalones"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "pants",
+    "lemma": "pants",
+    "reading": null,
+    "ipa": "/pænts/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": "en-US",
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "pantalones; bragas",
     "primaryGloss": "pantalones",
     "emotion": "casual and practical, getting dressed for the day",
@@ -160,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Ropa interior que se lleva ajustada debajo de la ropa",
+        "why": "British sense; in US English 'pants' never means underwear."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pantalones; bragas",
+        "why": "Includes British meaning 'bragas' in a US English entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note that 'pants' is pluralia tantum and uses 'a pair of'."
+      }
+    ],
+    "growth": 0.712
   }
 }

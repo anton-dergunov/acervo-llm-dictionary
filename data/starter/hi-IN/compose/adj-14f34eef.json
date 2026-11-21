@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old; former",
+    "primaryGloss": "old",
+    "emotion": "reflective and slightly nostalgic, looking back at something from a different time",
+    "notes": [
+      "Inflects for gender and number: पुराना (masculine singular), पुराने (masculine plural or oblique), पुरानी (feminine).",
+      "Never used for a person's or animal's biological age; use बूढ़ा (būṛhā) for an old person or animal. पुराना दोस्त means a longtime friend, not an elderly friend."
+    ],
+    "senses": [
+      {
+        "id": "mhsjm59uv9b05y4",
+        "order": 0,
+        "definition": "Of a thing or place: having existed or been used for a long time; not new.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "ancient"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "adckhkmwbz7xhz6",
+            "text": "वहाँ एक पुरानी इमारत है।",
+            "textLang": "hi",
+            "translation": "There is an old building there.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "awe-struck and appreciative of history",
+            "note": null,
+            "matchedForm": "पुरानी",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8lntto9om9vmk6n",
+        "order": 1,
+        "definition": "Known for a long time, or belonging to an earlier period.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "long-standing",
+              "former"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "t94m2e6pzweofko",
+            "text": "वह मेरा पुराना दोस्त है।",
+            "textLang": "hi",
+            "translation": "He is an old friend of mine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पुराना",
+            "matchedTranslationForm": "old"
+          },
+          {
+            "id": "razz5tasduowfdp",
+            "text": "यह मेरा पुराना घर है।",
+            "textLang": "hi",
+            "translation": "This is my old house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and sentimental, feeling connected to the past",
+            "note": null,
+            "matchedForm": "पुराना",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पुराना",
+    "lemma": "पुराना",
+    "reading": null,
+    "ipa": "/pʊ.ɾɑː.nɑː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕰️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "old; aged; ancient",
     "primaryGloss": "old",
     "emotion": "reflective and slightly nostalgic, looking back at something from a different time",
@@ -161,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for both living things that have aged and inanimate objects",
+        "why": "False: पुराना is NOT used for biological age of living things (that is बूढ़ा), contradicts note[1]."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "old, aged",
+        "why": "'Aged' implies biological old age, which पुराना never means."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(history) Belonging to a past time; ancient or from many years ago.",
+        "why": "Oversplit: 'old building' is the same sense; misses the common 'long-standing / former' sense (e.g. पुराना दोस्त)."
+      }
+    ],
+    "growth": 1.401
   }
 }

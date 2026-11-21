@@ -73,6 +73,157 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "market; purchase, shopping",
+    "primaryGloss": "market",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'το μαγαζί' (shop), which is a single store; 'η αγορά' is an open-air market or shopping area.",
+      "In the plural ('οι αγορές'), it often means 'shopping' or 'purchases' (e.g., 'κάνω αγορές' — to go shopping)."
+    ],
+    "senses": [
+      {
+        "id": "10mow2aoxjf0rib",
+        "order": 0,
+        "definition": "An area or street with many stalls or shops where people go to buy food and other goods.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "market",
+              "marketplace"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🥦",
+        "examples": [
+          {
+            "id": "mcwqdfa89l0c515",
+            "text": "Πήγαμε νωρίς το πρωί στην αγορά για φρέσκα φρούτα.",
+            "textLang": "el",
+            "translation": "We went to the market early in the morning for fresh fruit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "energetic and eager to find the best seasonal produce",
+            "note": null,
+            "matchedForm": "αγορά",
+            "matchedTranslationForm": "market"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "07yv1lvu4vo9bvz",
+        "order": 1,
+        "definition": "The act of buying something, or the thing bought.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "purchase",
+              "shopping"
+            ]
+          }
+        ],
+        "domain": "buying",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "qfetlhxvb8c6erj",
+            "text": "Η αγορά του αυτοκινήτου ήταν μια καλή απόφαση.",
+            "textLang": "el",
+            "translation": "The purchase of the car was a good decision.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "αγορά",
+            "matchedTranslationForm": "purchase"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iislak9lowcnsaw",
+        "order": 2,
+        "definition": "The business and trade of buying and selling goods in a country or area.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "market"
+            ]
+          }
+        ],
+        "domain": "economy",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "t0fbo4odt2cl6m4",
+            "text": "Η αγορά είναι ασταθής αυτή την περίοδο.",
+            "textLang": "el",
+            "translation": "The market is unstable during this period.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and observant, speaking with a touch of caution",
+            "note": null,
+            "matchedForm": "αγορά",
+            "matchedTranslationForm": "market"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η αγορά",
+    "lemma": "αγορά",
+    "reading": null,
+    "ipa": "/a.ɣoˈɾa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping",
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "market; shopping; the economy",
     "primaryGloss": "market",
     "emotion": null,
@@ -207,5 +358,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both physical markets (like a farmer's market) and the",
+        "why": "Merely restates the three senses already listed in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Κάνω την αγορά των δώρων μέσω διαδικτύου.",
+        "why": "Stilted nominalization; in plural 'αγορές' is natural for shopping, singular is a single purchase."
+      }
+    ],
+    "growth": 1.099
   }
 }

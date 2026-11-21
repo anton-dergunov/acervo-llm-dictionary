@@ -72,6 +72,98 @@
     "primaryGloss": "scary",
     "emotion": "tense and alert, body slightly drawn back in alarm",
     "notes": [
+      "Covers both 'scary' and 'afraid' in English. The thing you fear is marked with が (ga): 私は犬が怖い means 'Dogs are scary to me', i.e. 'I am afraid of dogs'.",
+      "Do not confuse with 恐ろしい (osoroshii), which is more formal and describes things that are truly terrifying."
+    ],
+    "senses": [
+      {
+        "id": "9ypkm3nmunq032b",
+        "order": 0,
+        "definition": "Causing fear, or feeling fear toward something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "scary",
+              "frightening",
+              "afraid",
+              "scared"
+            ]
+          }
+        ],
+        "domain": "fear",
+        "emoji": "👻",
+        "examples": [
+          {
+            "id": "mctcrpspvywulid",
+            "text": "怖い映画は嫌いです。",
+            "textLang": "ja",
+            "translation": "I don't like scary movies.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "repulsed and tense, shaking head at the thought",
+            "note": null,
+            "matchedForm": "怖い",
+            "matchedTranslationForm": "scary"
+          },
+          {
+            "id": "06061yv96z0be6d",
+            "text": "私は暗い夜道が怖いです。",
+            "textLang": "ja",
+            "translation": "I am afraid of dark streets at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "怖い",
+            "matchedTranslationForm": "afraid"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "怖い",
+    "lemma": "怖い",
+    "reading": "こわい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "scary; afraid",
+    "primaryGloss": "scary",
+    "emotion": "tense and alert, body slightly drawn back in alarm",
+    "notes": [
       "Used when someone or something causes you to feel fear, or when you are describing a situation that is frightening.",
       "Do not confuse with 恐ろしい (osoroshii), which is more formal and describes things that are truly terrifying or awe-inspiring."
     ],
@@ -161,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (scary) Causing a feeling of fear ... [1] (afraid) To feel afraid",
+        "why": "Japanese 怖い is a single adjective covering both English 'scary' and 'afraid'; splitting confuses the grammar, and sense 1 is defined as a verb."
+      },
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain that Japanese uses 怖い with が for the object of fear, bridging English 'scary' and 'afraid of'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when someone or something causes you to feel fear",
+        "why": "Just restates the definition without explaining how the adjective works grammatically."
+      }
+    ],
+    "growth": 0.986
   }
 }

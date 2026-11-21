@@ -68,6 +68,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry; dried",
+    "primaryGloss": "dry",
+    "emotion": "matter-of-fact and observational, describing the state of things",
+    "notes": [
+      "Opposite of 'ướt' (wet). When describing a dull personality or topic, the compound 'khô khan' is usually used."
+    ],
+    "senses": [
+      {
+        "id": "9rumy65wddnxv2x",
+        "order": 0,
+        "definition": "Having no water or moisture; not wet, or having had moisture removed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "dried"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "🏜️",
+        "examples": [
+          {
+            "id": "8pfim1us10na3xq",
+            "text": "Trời nắng làm đất khô.",
+            "textLang": "vi",
+            "translation": "The sunny weather makes the ground dry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and direct, noting the effect of the sun",
+            "note": null,
+            "matchedForm": "khô",
+            "matchedTranslationForm": "dry"
+          },
+          {
+            "id": "0nc8h7f8sryri25",
+            "text": "Tôi thích ăn cá khô.",
+            "textLang": "vi",
+            "translation": "I like to eat dried fish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and fond, talking about a favorite snack",
+            "note": null,
+            "matchedForm": "khô",
+            "matchedTranslationForm": "dried"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "khô",
+    "lemma": "khô",
+    "reading": null,
+    "ipa": "/xo˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; dehydrated; boring",
     "primaryGloss": "dry",
     "emotion": "matter-of-fact and observational, describing the state of things",
@@ -202,5 +291,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used to describe something that lacks moisture or liquid.",
+        "why": "Both notes merely restate the definitions."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Having been processed to remove all moisture, usually for food preservation.",
+        "why": "'Dried' is the same basic meaning of lacking moisture applied to food."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "Cuộc nói chuyện này thật là khô khan.",
+        "why": "Uses the compound 'khô khan' instead of the headword 'khô' alone."
+      }
+    ],
+    "growth": 0.456
   }
 }

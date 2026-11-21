@@ -58,6 +58,74 @@
     "headword": "क्योंकि",
     "lemma": "क्योंकि",
     "reading": null,
+    "ipa": "/kjõːkɪ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because; since",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "Placed between two clauses (result first, then কারণ/reason); unlike English 'because' or 'since', it does not start a sentence."
+    ],
+    "senses": [
+      {
+        "id": "yfeipfdt9uhvpmv",
+        "order": 0,
+        "definition": "For the reason that.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "8iqvb018v1ywql1",
+            "text": "मैं नहीं आऊँगा क्योंकि मुझे काम है।",
+            "textLang": "hi",
+            "translation": "I will not come because I have work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and straightforward, explaining a simple choice",
+            "note": null,
+            "matchedForm": "क्योंकि",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "क्योंकि",
+    "lemma": "क्योंकि",
+    "reading": null,
     "ipa": "/kʲõːkʲiː/",
     "pos": "expression",
     "gender": null,
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "क्योंकि is a subordinating conjunction, not an expression."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kʲõːkʲiː/",
+        "why": "The second क is not palatalized, and the final vowel is short /ɪ/: /kjõːkɪ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to introduce a reason or cause for a preceding statement.",
+        "why": "Restates the definition without adding grammar or usage detail."
+      }
+    ],
+    "growth": 0.701
   }
 }

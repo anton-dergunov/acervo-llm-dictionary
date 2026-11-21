@@ -58,6 +58,73 @@
     "headword": "il pasto",
     "lemma": "pasto",
     "reading": null,
+    "ipa": "/ˈpasto/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meal",
+    "primaryGloss": "meal",
+    "emotion": "hungry and ready to eat, sitting down at the table",
+    "notes": [
+      "Do not confuse with 'cibo' (food in general) or 'pasta' (pasta)."
+    ],
+    "senses": [
+      {
+        "id": "5hscw9f0fl1agig",
+        "order": 0,
+        "definition": "Food eaten at a regular time of day, such as breakfast, lunch, or dinner.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meal"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "pyf6fzjcrym8ecr",
+            "text": "Il pranzo è il pasto principale della giornata.",
+            "textLang": "it",
+            "translation": "Lunch is the main meal of the day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact and informative",
+            "note": null,
+            "matchedForm": "pasto",
+            "matchedTranslationForm": "meal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il pasto",
+    "lemma": "pasto",
+    "reading": null,
     "ipa": "/ˈpasta/",
     "pos": "noun",
     "gender": "masculine",
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈpasta/",
+        "why": "Wrong transcription: /ˈpasta/ is for 'pasta', should be /ˈpasto/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(feed) Food given to animals.",
+        "why": "Artificial split; 'pasto' for a pet is the same sense as 'meal' (feed is 'mangime')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'pasto' for any main meal of the day like lunch or",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.536
   }
 }

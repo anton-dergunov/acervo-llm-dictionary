@@ -71,6 +71,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to drink",
+    "primaryGloss": "to drink",
+    "emotion": "a simple, refreshing feeling of quenching thirst or enjoying a drink",
+    "notes": [
+      "In Spain, 'beber' is the normal everyday word for drinking any liquid, whereas in Latin America 'tomar' is much more common."
+    ],
+    "senses": [
+      {
+        "id": "pk0i10mc9k0rhkf",
+        "order": 0,
+        "definition": "To take liquid into the mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drink",
+              "drink"
+            ]
+          }
+        ],
+        "domain": "drinking",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "v8s64f7eur7rrz8",
+            "text": "Es importante beber mucha agua durante el día.",
+            "textLang": "es",
+            "translation": "It is important to drink plenty of water during the day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, giving good advice",
+            "note": null,
+            "matchedForm": "beber",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xf8jnwrin4c4n2q",
+        "order": 1,
+        "definition": "To drink alcohol, especially regularly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drink"
+            ]
+          }
+        ],
+        "domain": "alcohol",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "qxg5887qmsu4gbn",
+            "text": "Hoy no bebo porque tengo que conducir.",
+            "textLang": "es",
+            "translation": "I'm not drinking today because I have to drive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bebo",
+            "matchedTranslationForm": "drinking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "beber",
+    "lemma": "beber",
+    "reading": null,
+    "ipa": "/beˈβeɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to drink; to swallow a liquid",
     "primaryGloss": "to drink",
     "emotion": "a simple, refreshing feeling of quenching thirst or enjoying a drink",
@@ -163,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(swallow) To swallow a liquid intentionally or physically.",
+        "why": "Duplicates sense 0; 'beber' does not mean 'to swallow' (tragar) as a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'beber' with 'comer', which is the verb for eating solids.",
+        "why": "Trivial distinction that just restates the basic vocabulary meanings."
+      }
+    ],
+    "growth": 0.794
   }
 }

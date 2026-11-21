@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "sediento, con sed",
+    "primaryGloss": "sediento",
+    "emotion": "dry-throated and craving a cold glass of water on a hot afternoon",
+    "notes": [
+      "En inglés se usa con el verbo 'be' ('I am thirsty'), mientras que en español se usa 'tener sed' (no digas 'I have thirst')."
+    ],
+    "senses": [
+      {
+        "id": "n30h147wxyl1wqf",
+        "order": 0,
+        "definition": "Que siente la necesidad de beber.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "sediento",
+              "con sed"
+            ]
+          }
+        ],
+        "domain": "sed",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "2y7o7m2e3y2rpq8",
+            "text": "I am very thirsty after running outside.",
+            "textLang": "en",
+            "translation": "Tengo mucha sed después de correr afuera.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "breathing heavily and wiping sweat from the forehead",
+            "note": null,
+            "matchedForm": "thirsty",
+            "matchedTranslationForm": "sed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "thirsty",
+    "lemma": "thirsty",
+    "reading": null,
+    "ipa": "/ˈθɜːrsti/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "sediento; con muchas ganas",
     "primaryGloss": "sediento",
     "emotion": "dry-throated and craving a cold glass of water on a hot afternoon",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sediento; con muchas ganas",
+        "why": "Names a figurative sense ('con muchas ganas') not present in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para indicar que necesitas beber algo.",
+        "why": "Restates the definition instead of giving useful grammar/usage contrast with Spanish."
+      }
+    ],
+    "growth": 1.345
   }
 }

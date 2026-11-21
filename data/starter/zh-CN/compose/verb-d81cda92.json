@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to repair; to build; to take a course",
+    "primaryGloss": "repair",
+    "emotion": "focused and capable, getting right down to work",
+    "notes": [
+      "修 is used both for fixing broken items (修手机, 修车) and for building infrastructure like roads or bridges (修路, 修桥)."
+    ],
+    "senses": [
+      {
+        "id": "yn6f0ltchubo0ui",
+        "order": 0,
+        "definition": "To fix or mend something broken or damaged.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "repair",
+              "fix",
+              "mend"
+            ]
+          }
+        ],
+        "domain": "repair",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "2xq7k6pncr69mig",
+            "text": "师傅正在帮我修手机。",
+            "textLang": "zh",
+            "translation": "The technician is helping me repair my phone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and relieved, glad the problem is getting sorted out",
+            "note": null,
+            "matchedForm": "修",
+            "matchedTranslationForm": "repair"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9yabckrywwccbv0",
+        "order": 1,
+        "definition": "To build or construct roads, bridges, or waterworks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "build",
+              "construct"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "jxeincuafnvdg4n",
+            "text": "村里今年修了一条新路。",
+            "textLang": "zh",
+            "translation": "The village built a new road this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "修",
+            "matchedTranslationForm": "built"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "21voud7gycqigaz",
+        "order": 2,
+        "definition": "To study a subject or take a course at school or university.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "take a course",
+              "study"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "pf4y4khbub5f56k",
+            "text": "我这学期修了两门中文课。",
+            "textLang": "zh",
+            "translation": "I am taking two Chinese courses this semester.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and studious, thinking about a heavy semester",
+            "note": null,
+            "matchedForm": "修",
+            "matchedTranslationForm": "taking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "修",
+    "lemma": "修",
+    "reading": "xiū",
+    "ipa": "/ɕi̯ou̯˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔧",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "repair; study; build",
     "primaryGloss": "repair",
     "emotion": "focused and capable, getting right down to work",
@@ -203,5 +354,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[2].definition",
+        "quote": "To build, construct, or trim.",
+        "why": "Conflates two distinct meanings ('to build a road/bridge' and 'to trim/prune') into one sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "他们正在路边修剪树枝。",
+        "why": "Uses the compound verb 修剪 rather than the standalone verb 修."
+      }
+    ],
+    "growth": 1.087
   }
 }

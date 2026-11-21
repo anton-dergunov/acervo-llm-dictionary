@@ -74,6 +74,75 @@
     "primaryGloss": "pharmacy",
     "emotion": "a helpful and urgent need to find relief for an ache",
     "notes": [
+      "Literally 'shop of medicine'. In everyday speech in India, people also often say 'मेडिकल स्टोर' (medical store) or 'केमिस्ट' (chemist)."
+    ],
+    "senses": [
+      {
+        "id": "51nf4cqnui7zuni",
+        "order": 0,
+        "definition": "A shop where medicines are sold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pharmacy",
+              "chemist's shop",
+              "drugstore"
+            ]
+          }
+        ],
+        "domain": "pharmacy",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "s83zopj8clhd8bu",
+            "text": "मुझे दवा की दुकान से कुछ दवाइयाँ लेनी हैं।",
+            "textLang": "hi",
+            "translation": "I need to get some medicines from the pharmacy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "दवा की दुकान",
+            "matchedTranslationForm": "pharmacy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "दवा की दुकान",
+    "lemma": "दवा की दुकान",
+    "reading": null,
+    "ipa": "/d̪əʋaː kiː d̪ʊkaːn/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💊",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "pharmacy; chemist's shop",
+    "primaryGloss": "pharmacy",
+    "emotion": "a helpful and urgent need to find relief for an ache",
+    "notes": [
       "Literally 'shop of medicine', this is the standard term for a pharmacy in India.",
       "You will often see the English word 'medical' used colloquially in India to refer to a pharmacy, but 'दवा की दुकान' is the correct formal and descriptive term."
     ],
@@ -123,5 +192,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "मुझे दवा की दुकान से कुछ सिरप लेनी है।",
+        "why": "'सिरप' is masculine in Hindi, so the verb must be 'लेना', not 'लेनी'."
+      }
+    ],
+    "growth": 0.74
   }
 }

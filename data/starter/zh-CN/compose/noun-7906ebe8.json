@@ -68,6 +68,160 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "bag; package; pack",
+    "primaryGloss": "bag",
+    "emotion": "casual and practical, getting ready to leave the house",
+    "notes": [
+      "Also very common as a verb meaning 'to wrap' (e.g. 包饺子, to wrap dumplings).",
+      "As a noun, a 'package' or 'parcel' is more commonly called 包裹 (bāoguǒ) or 快递 (kuàidì)."
+    ],
+    "senses": [
+      {
+        "id": "1j0q2z4v2h8347f",
+        "order": 0,
+        "definition": "A container of cloth, leather, or plastic used for carrying things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bag",
+              "handbag",
+              "backpack"
+            ]
+          }
+        ],
+        "domain": "bag",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "ll6v4v326ylyr01",
+            "text": "我的手机在包里。",
+            "textLang": "zh",
+            "translation": "My phone is in the bag.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and reassuring, answering where something is",
+            "note": null,
+            "matchedForm": "包",
+            "matchedTranslationForm": "bag"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a7xitimnrxfjwi8",
+        "order": 1,
+        "definition": "A wrapped bundle or parcel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "package",
+              "parcel",
+              "bundle"
+            ]
+          }
+        ],
+        "domain": "package",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "zue2a5avhz2ke2z",
+            "text": "他手里拿了一个大包。",
+            "textLang": "zh",
+            "translation": "He is holding a big bundle in his hand.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "包",
+            "matchedTranslationForm": "bundle"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gcap916pg3goap1",
+        "order": 2,
+        "definition": "Used as a measure word for things in bags or packets.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pack",
+              "packet",
+              "bag"
+            ]
+          }
+        ],
+        "domain": "quantity",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5roogfrdoyz12lo",
+            "text": "我买了一包饼干。",
+            "textLang": "zh",
+            "translation": "I bought a pack of cookies.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "包",
+            "matchedTranslationForm": "pack"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "包",
+    "lemma": "包",
+    "reading": "bāo",
+    "ipa": "/pau̯˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "bag; package",
     "primaryGloss": "bag",
     "emotion": "casual and practical, getting ready to leave the house",
@@ -162,5 +316,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "包 (bāo) can mean both a bag you carry and a package",
+        "why": "Merely restates the two senses of the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "桌子上有一个包裹。",
+        "why": "Uses the compound word 包裹 (bāoguǒ) instead of the headword 包."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday classifier sense ('a pack/bag of') and steamed bun sense."
+      }
+    ],
+    "growth": 1.867
   }
 }

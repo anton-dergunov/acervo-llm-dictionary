@@ -72,6 +72,75 @@
     "primaryGloss": "there",
     "emotion": null,
     "notes": [
+      "In northern spoken Mandarin, 那儿 (nàr) is often used instead.",
+      "Do not confuse with 哪里 (nǎ li), which means 'where'."
+    ],
+    "senses": [
+      {
+        "id": "q7j8i2zhbh91a5r",
+        "order": 0,
+        "definition": "That place; in or to that location.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there",
+              "that place"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "hk2od2mmpcxfu7i",
+            "text": "我的书包在那里。",
+            "textLang": "zh",
+            "translation": "My schoolbag is over there.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "那里",
+            "matchedTranslationForm": "there"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "那里",
+    "lemma": "那里",
+    "reading": "nà li",
+    "ipa": "/na˥˩ li/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "there; that place",
+    "primaryGloss": "there",
+    "emotion": null,
+    "notes": [
       "Use 那里 to point to a specific place away from both the speaker and the listener.",
       "Do not confuse with 哪里 (nǎ li), which means 'where' or is used to politely decline a compliment."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "那里 is a demonstrative pronoun, functioning as a noun phrase after prepositions like 在."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 那里 to point to a specific place away from both",
+        "why": "Restates the basic meaning; should note the common spoken variant 那儿 (nàr) instead."
+      }
+    ],
+    "growth": 0.775
   }
 }

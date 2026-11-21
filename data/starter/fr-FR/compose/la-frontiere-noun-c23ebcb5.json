@@ -72,6 +72,133 @@
     "primaryGloss": "border",
     "emotion": "standing at a checkpoint, looking across into the next country",
     "notes": [
+      "The adjective 'sans frontières' means 'without borders' (e.g. Médecins Sans Frontières)."
+    ],
+    "senses": [
+      {
+        "id": "uiyfkqld6h4cdcm",
+        "order": 0,
+        "definition": "The dividing line between two countries.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "border",
+              "frontier"
+            ]
+          }
+        ],
+        "domain": "border",
+        "emoji": "🛂",
+        "examples": [
+          {
+            "id": "e2u8c7tvs8mvfee",
+            "text": "Nous avons traversé la frontière en voiture.",
+            "textLang": "fr",
+            "translation": "We crossed the border by car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and excited to enter a new country",
+            "note": null,
+            "matchedForm": "frontière",
+            "matchedTranslationForm": "border"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b5lwakbpcr31e83",
+        "order": 1,
+        "definition": "A limit between two areas, subjects, or ideas.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boundary",
+              "line"
+            ]
+          }
+        ],
+        "domain": "boundary",
+        "emoji": "🚧",
+        "examples": [
+          {
+            "id": "h0m9hoktue0cysm",
+            "text": "La frontière entre le travail et la vie privée est parfois floue.",
+            "textLang": "fr",
+            "translation": "The boundary between work and private life is sometimes blurry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "frontière",
+            "matchedTranslationForm": "boundary"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "uiyfkqld6h4cdcm",
+      "from": "La ligne qui sépare deux pays.",
+      "to": "The line that divides two countries.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:32Z"
+    },
+    {
+      "sense": "b5lwakbpcr31e83",
+      "from": "Une limite entre deux états, deux domaines ou deux idées.",
+      "to": "A limit between two areas, subjects, or ideas.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:32Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la frontière",
+    "lemma": "frontière",
+    "reading": null,
+    "ipa": "/fʁɔ̃.tjɛʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗺️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "border; boundary",
+    "primaryGloss": "border",
+    "emotion": "standing at a checkpoint, looking across into the next country",
+    "notes": [
       "Use frontière for the official political border between countries, as well as for a clear boundary between two regions or ideas."
     ],
     "senses": [
@@ -161,22 +288,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "uiyfkqld6h4cdcm",
-      "from": "La ligne qui sépare deux pays.",
-      "to": "The line that divides two countries.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:32Z"
-    },
-    {
-      "sense": "b5lwakbpcr31e83",
-      "from": "Une limite entre deux états, deux domaines ou deux idées.",
-      "to": "A limit between two areas, subjects, or ideas.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:32Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use frontière for the official political border between countries, as well as",
+        "why": "Restates the definitions of the two senses without adding useful information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il y a une frontière mince entre la réalité et l'illusion.",
+        "why": "Calque from English 'thin line'; French says 'la frontière est mince entre...' or 'une fine frontière'."
+      }
+    ],
+    "growth": 0.954
+  }
 }

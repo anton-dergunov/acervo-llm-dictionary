@@ -58,6 +58,74 @@
     "headword": "परिवार",
     "lemma": "परिवार",
     "reading": null,
+    "ipa": "/pəɾɪʋɑːɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "family",
+    "primaryGloss": "family",
+    "emotion": "warm and grounding, speaking of the people who matter most",
+    "notes": [
+      "Covers both immediate and extended family. For broader lineage or ancestry, ख़ानदान (xāndān) is also used."
+    ],
+    "senses": [
+      {
+        "id": "7348ekmkcfmjxkp",
+        "order": 0,
+        "definition": "A group of people consisting of parents, children, and close relatives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "family",
+              "household"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "wm13uxu55t88txg",
+            "text": "मेरा परिवार बहुत बड़ा है।",
+            "textLang": "hi",
+            "translation": "My family is very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "परिवार",
+            "matchedTranslationForm": "family"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "परिवार",
+    "lemma": "परिवार",
+    "reading": null,
     "ipa": "/pəɾɪˈʋɑːɾ/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "मेरा परिवार बहुत बड़ा है।",
+        "why": "Uses precomposed character U+095C (ड़ा) instead of canonical NFC रूप बड़ा (ड + ़)."
+      }
+    ],
+    "growth": 0.842
   }
 }

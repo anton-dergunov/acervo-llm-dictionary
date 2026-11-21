@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to find; to come across",
+    "primaryGloss": "find",
+    "emotion": "relieved and pleased after a successful search",
+    "notes": [
+      "Imperfective, used for repeated actions or the general ability to find things; the perfective pair is найти (used for a single result, e.g. Я не могу найти ключи — I can't find my keys).",
+      "Conjugation has a consonant change in the first person singular: я нахожу́, ты нахо́дишь."
+    ],
+    "senses": [
+      {
+        "id": "mqwhvm5hisc4c2b",
+        "order": 0,
+        "definition": "To discover where something or someone is, either after searching or by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "find",
+              "come across"
+            ]
+          }
+        ],
+        "domain": "discovery",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "h7l6vg3e82i9zee",
+            "text": "Он всегда находит время для друзей.",
+            "textLang": "ru",
+            "translation": "He always finds time for his friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "находит",
+            "matchedTranslationForm": "finds"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "находить",
+    "lemma": "находить",
+    "reading": null,
+    "ipa": "/nəxɐˈdʲitʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to find; to discover; to consider",
     "primaryGloss": "to find",
     "emotion": "relieved and pleased after a successful search",
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Я не могу находить мои ключи.",
+        "why": "Ungrammatical aspect in this context (requires perfective найти), as the entry's own note admits."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Я находить этот фильм очень интересным.",
+        "why": "Severe grammar error: unconjugated infinitive 'находить' used after 'Я' instead of 'нахожу'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(opinion) To have a certain opinion or view about something.",
+        "why": "Bookish/formal calque usage, not essential for an A2 beginner compared to basic 'find'."
+      }
+    ],
+    "growth": 0.746
   }
 }

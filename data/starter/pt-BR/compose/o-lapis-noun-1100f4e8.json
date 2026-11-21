@@ -72,6 +72,73 @@
     "primaryGloss": "pencil",
     "emotion": "handy and reliable, ready to jot down a quick thought",
     "notes": [
+      "Invariable in the plural: 'o lápis' (singular), 'os lápis' (plural)."
+    ],
+    "senses": [
+      {
+        "id": "08oykrnbs27jpmm",
+        "order": 0,
+        "definition": "A wooden tool with a thin stick of graphite inside, used for writing or drawing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pencil"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "nixgwugl1dlnxh9",
+            "text": "Eu preciso de um lápis para anotar o endereço.",
+            "textLang": "pt",
+            "translation": "I need a pencil to write down the address.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lápis",
+            "matchedTranslationForm": "pencil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o lápis",
+    "lemma": "lápis",
+    "reading": null,
+    "ipa": "/ˈla.pis/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✏️",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "pencil",
+    "primaryGloss": "pencil",
+    "emotion": "handy and reliable, ready to jot down a quick thought",
+    "notes": [
       "In Portuguese, 'o lápis' is masculine. The word is the same in both singular and plural (os lápis).",
       "Don't confuse 'lápis' (pencil) with 'caneta' (pen), which uses ink instead of graphite."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Don't confuse 'lápis' (pencil) with 'caneta' (pen), which uses ink",
+        "why": "Learners do not confuse 'lápis' and 'caneta', and the gender in note[0] is redundant."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Eu preciso de um lápis para escrever as notas.",
+        "why": "'Escrever as notas' is a calque of 'write the notes'; in Portuguese use 'anotar'."
+      }
+    ],
+    "growth": 0.683
   }
 }

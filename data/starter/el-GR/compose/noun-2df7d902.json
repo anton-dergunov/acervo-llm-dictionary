@@ -68,6 +68,154 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "hour; time",
+    "primaryGloss": "hour",
+    "emotion": "a practical sense of marking the passing day, steady and focused",
+    "notes": [
+      "For clock time and moments of the day, use 'ώρα', whereas for general or abstract time (or weather), use 'ο χρόνος' or 'ο καιρός'."
+    ],
+    "senses": [
+      {
+        "id": "7ntxu4ormrolt0j",
+        "order": 0,
+        "definition": "A period of sixty minutes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hour"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "sm1cty79lw0ljnf",
+            "text": "Το μάθημα διαρκεί μία ώρα.",
+            "textLang": "el",
+            "translation": "The lesson lasts one hour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, stating a schedule",
+            "note": null,
+            "matchedForm": "ώρα",
+            "matchedTranslationForm": "hour"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o60ob84hkv1biin",
+        "order": 1,
+        "definition": "The point in the day as shown on a clock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "time"
+            ]
+          }
+        ],
+        "domain": "clock time",
+        "emoji": "🕒",
+        "examples": [
+          {
+            "id": "fpdpw0hvzupm9ry",
+            "text": "Τι ώρα είναι;",
+            "textLang": "el",
+            "translation": "What time is it?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and slightly impatient, needing to check the schedule",
+            "note": null,
+            "matchedForm": "ώρα",
+            "matchedTranslationForm": "time"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jyb4jkgzpmm2p6t",
+        "order": 2,
+        "definition": "A suitable or specific time to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "time",
+              "moment"
+            ]
+          }
+        ],
+        "domain": "occasion",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "sz7kr590ktyogia",
+            "text": "Είναι ώρα να φύγουμε.",
+            "textLang": "el",
+            "translation": "It is time to leave.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ώρα",
+            "matchedTranslationForm": "time"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η ώρα",
+    "lemma": "ώρα",
+    "reading": null,
+    "ipa": "/ˈo.ɾa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "hour; time; moment",
     "primaryGloss": "hour",
     "emotion": "a practical sense of marking the passing day, steady and focused",
@@ -200,5 +348,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'ώρα' can mean the exact time on a clock, it is",
+        "why": "Merely restates the senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use the plural 'ώρες' when talking about duration, such as",
+        "why": "Obvious plural usage that works identically to English."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Είναι η ώρα να φύγουμε.",
+        "why": "'Είναι ώρα να...' (without the definite article) is the natural phrasing for 'it's time to'."
+      }
+    ],
+    "growth": 0.779
   }
 }

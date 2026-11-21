@@ -72,6 +72,115 @@
     "primaryGloss": "headache",
     "emotion": "throbbing and exhausted, holding one's temples in quiet misery",
     "notes": [
+      "Usually used with 'tener' without an article: 'Tengo dolor de cabeza' (I have a headache), unless an adjective is added ('Tengo un fuerte dolor de cabeza')."
+    ],
+    "senses": [
+      {
+        "id": "eexpz9qtx20fp5y",
+        "order": 0,
+        "definition": "A pain in the head.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "headache"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "r8xvd7g2i01y115",
+            "text": "Tengo un fuerte dolor de cabeza por trabajar todo el día frente a la pantalla.",
+            "textLang": "es",
+            "translation": "I have a bad headache from working all day in front of the screen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "complaining quietly while rubbing the forehead in exhaustion",
+            "note": null,
+            "matchedForm": "dolor de cabeza",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a3qvux77hc0de1x",
+        "order": 1,
+        "definition": "A frustrating situation or problem that causes annoyance and worry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "headache",
+              "nuisance",
+              "hassle"
+            ]
+          }
+        ],
+        "domain": "problem",
+        "emoji": "🤯",
+        "examples": [
+          {
+            "id": "rkqxr0ysxr5ktsf",
+            "text": "Arreglar los papeles del carro es un verdadero dolor de cabeza.",
+            "textLang": "es",
+            "translation": "Sorting out the car paperwork is a real hassle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dolor de cabeza",
+            "matchedTranslationForm": "hassle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el dolor de cabeza",
+    "lemma": "dolor de cabeza",
+    "reading": null,
+    "ipa": "/doˈloɾ de kaˈβe.sa/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "headache; nuisance",
+    "primaryGloss": "headache",
+    "emotion": "throbbing and exhausted, holding one's temples in quiet misery",
+    "notes": [
       "Used literally for a physical ache, and very commonly in a figurative sense to describe any annoying problem or stressful situation."
     ],
     "senses": [
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used literally for a physical ache, and very commonly in a figurative",
+        "why": "Restates the two senses; better to note the construction with 'tener'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Arreglar los papeles del coche es un verdadero dolor de cabeza.",
+        "why": "In Mexican Spanish, 'carro' or 'auto' is standard, not 'coche'."
+      }
+    ],
+    "growth": 1.03
   }
 }

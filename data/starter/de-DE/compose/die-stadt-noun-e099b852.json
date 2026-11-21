@@ -68,6 +68,118 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "city; town; town center",
+    "primaryGloss": "city",
+    "emotion": "bustling and alive, feeling the energy of a crowded place",
+    "notes": [
+      "Irregular plural with umlaut: die Städte.",
+      "German uses 'Stadt' for both 'city' and 'town' (any settlement larger than a 'Dorf', village); a big city can be called a 'Großstadt', a small town a 'Kleinstadt'."
+    ],
+    "senses": [
+      {
+        "id": "refvgw1v16n4yly",
+        "order": 0,
+        "definition": "A town or city; a settlement larger than a village, with many buildings, streets, and people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "settlement",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "vu8qrwn4fh9t0q6",
+            "text": "Berlin ist eine sehr große Stadt.",
+            "textLang": "de",
+            "translation": "Berlin is a very large city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, describing a familiar place",
+            "note": null,
+            "matchedForm": "Stadt",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k5e16l0crt8cws5",
+        "order": 1,
+        "definition": "The central shopping and business area of a town or city.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "town",
+              "downtown",
+              "city center",
+              "town center"
+            ]
+          }
+        ],
+        "domain": "city center",
+        "emoji": "🏘️",
+        "examples": [
+          {
+            "id": "75ljezj7uqijbxv",
+            "text": "Wir fahren heute in die Stadt, um einzukaufen.",
+            "textLang": "de",
+            "translation": "We are going into town today to go shopping.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and practical, looking forward to an errand",
+            "note": null,
+            "matchedForm": "Stadt",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Stadt",
+    "lemma": "Stadt",
+    "reading": null,
+    "ipa": "/ʃtat/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "city; town",
     "primaryGloss": "city",
     "emotion": "bustling and alive, feeling the energy of a crowded place",
@@ -159,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(town) A town of any size, or specifically the center",
+        "why": "German does not separate 'city' and 'town'; sense [1] also conflates settlement and downtown."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular plural with umlaut (die Städte), essential for A2."
+      }
+    ],
+    "growth": 1.2
   }
 }

@@ -68,6 +68,118 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "false; wrong; fake",
+    "primaryGloss": "false",
+    "emotion": "hesitant and doubtful, realizing something is not quite right",
+    "notes": [
+      "The feminine form is irregular: 'fausse' (/fos/). The masculine plural remains 'faux'.",
+      "Placed before the noun when it means 'fake' ('un faux passeport'), and usually after the noun or verb when it means 'incorrect' ('une réponse fausse')."
+    ],
+    "senses": [
+      {
+        "id": "k0xo2ryxattzvb1",
+        "order": 0,
+        "definition": "Not true or correct; contrary to fact.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "false",
+              "wrong",
+              "incorrect"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "ag0rf2nrchbdj8x",
+            "text": "Cette information est fausse.",
+            "textLang": "fr",
+            "translation": "This information is false.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and corrective, pointing out an error",
+            "note": null,
+            "matchedForm": "fausse",
+            "matchedTranslationForm": "false"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k9r8cxscuxo5uyu",
+        "order": 1,
+        "definition": "Made to look like something real in order to deceive, or not genuine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fake",
+              "forged",
+              "artificial"
+            ]
+          }
+        ],
+        "domain": "authenticity",
+        "emoji": "🕵️",
+        "examples": [
+          {
+            "id": "l6gi8y7epji6cwt",
+            "text": "Il voyageait avec un faux passeport.",
+            "textLang": "fr",
+            "translation": "He was traveling with a fake passport.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "faux",
+            "matchedTranslationForm": "fake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "faux",
+    "lemma": "faux",
+    "reading": null,
+    "ipa": "/fo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "false; fake; wrong",
     "primaryGloss": "false",
     "emotion": "hesitant and doubtful, realizing something is not quite right",
@@ -163,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'faux' (false/wrong) with 'veau' (calf).",
+        "why": "Unlikely confusion between an adjective and an unrelated animal noun."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il porte un faux passeport.",
+        "why": "Unnatural verb choice: in French one does not 'porter' a passport; 'avoir' or 'utiliser' is used."
+      }
+    ],
+    "growth": 1.413
   }
 }

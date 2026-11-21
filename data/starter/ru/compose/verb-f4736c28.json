@@ -58,6 +58,97 @@
     "headword": "рисовать",
     "lemma": "рисовать",
     "reading": null,
+    "ipa": "/rʲɪsɐˈvatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎨",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to draw; to paint",
+    "primaryGloss": "to draw",
+    "emotion": "focused and calm, creating something new on a blank page",
+    "notes": [
+      "Imperfective; the perfective is нарисовать.",
+      "Conjugates with the suffix -уй- in the present tense (я рисую, ты рисуешь, они рисуют).",
+      "In everyday speech, рисовать covers both drawing (with pencils or pens) and painting (with brushes and paints). Professional artists often use писать for painting in oils or watercolors."
+    ],
+    "senses": [
+      {
+        "id": "yqx9v1u03y5gyug",
+        "order": 0,
+        "definition": "To make a picture using a pencil, pen, crayons, or paints.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to draw",
+              "to paint"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "6quqf9ve381ciad",
+            "text": "Дети любят рисовать цветными карандашами.",
+            "textLang": "ru",
+            "translation": "Children love to draw with colored pencils.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "рисовать",
+            "matchedTranslationForm": "draw"
+          },
+          {
+            "id": "1yjpawt7crec9ck",
+            "text": "На уроке мы рисовали красками.",
+            "textLang": "ru",
+            "translation": "In class we painted with paints.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "рисовали",
+            "matchedTranslationForm": "painted"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "рисовать",
+    "lemma": "рисовать",
+    "reading": null,
     "ipa": "[rʲɪsɐˈvatʲ]",
     "pos": "verb",
     "gender": null,
@@ -160,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "though you can also use живописать for painting in a more artistic",
+        "why": "Misleading: живописать is archaic/bookish; artists actually use писать (писа́ть маслом) for serious painting."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with писать, which means to write text rather",
+        "why": "False: писать IS used by artists to mean 'to paint' (писать картину маслом)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Художник любит рисовать пейзажи маслом.",
+        "why": "Professional oil painting by an artist is normally 'писать маслом', not 'рисовать маслом'."
+      }
+    ],
+    "growth": 0.979
   }
 }

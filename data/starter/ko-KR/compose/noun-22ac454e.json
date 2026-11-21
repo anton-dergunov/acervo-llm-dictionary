@@ -72,6 +72,95 @@
     "primaryGloss": "price",
     "emotion": "matter-of-fact and analytical, like looking at a label or receipt",
     "notes": [
+      "'값' is the native Korean word for 'price' (and also 'value' or 'worth'). '가격' is Sino-Korean and is standard on price tags, menus, and in formal contexts."
+    ],
+    "senses": [
+      {
+        "id": "v3g2rsbz1ww3m5g",
+        "order": 0,
+        "definition": "The amount of money required to buy something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "price",
+              "cost"
+            ]
+          }
+        ],
+        "domain": "cost",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "xm6kp6jogwm8m19",
+            "text": "이 물건의 가격이 얼마예요?",
+            "textLang": "ko",
+            "translation": "What is the price of this item?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and curious, asking for information while shopping",
+            "note": null,
+            "matchedForm": "가격",
+            "matchedTranslationForm": "price"
+          },
+          {
+            "id": "m8r2on5bg4c47dn",
+            "text": "가격이 너무 비싸요.",
+            "textLang": "ko",
+            "translation": "The price is too high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly disappointed or hesitant, looking at a high tag",
+            "note": null,
+            "matchedForm": "가격",
+            "matchedTranslationForm": "price"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "가격",
+    "lemma": "가격",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "price; cost",
+    "primaryGloss": "price",
+    "emotion": "matter-of-fact and analytical, like looking at a label or receipt",
+    "notes": [
       "While '가격' refers to the monetary cost of an item, you may also hear '값', which is a more native Korean word that can mean 'price' but also 'value' or 'worth'. Use '가격' in most shopping and formal contexts."
     ],
     "senses": [
@@ -140,5 +229,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "The price is too expensive.",
+        "why": "Unnatural English calque; prices are 'high', whereas items are 'expensive'."
+      }
+    ],
+    "growth": 0.81
   }
 }

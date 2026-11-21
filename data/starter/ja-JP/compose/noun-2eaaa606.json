@@ -58,6 +58,98 @@
     "headword": "絵",
     "lemma": "絵",
     "reading": "え",
+    "ipa": "eꜜ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖼️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "picture; drawing; painting",
+    "primaryGloss": "picture",
+    "emotion": "contemplative and appreciative, lingering on a visual detail",
+    "notes": [
+      "Refers to drawn, painted, or printed pictures, not photographs (写真, shashin).",
+      "To draw or paint a picture is 絵を描く (e o kaku)."
+    ],
+    "senses": [
+      {
+        "id": "k65xjyo082b5xkl",
+        "order": 0,
+        "definition": "A visual image that is drawn, painted, or printed, such as a painting, drawing, or illustration.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "picture",
+              "drawing",
+              "painting",
+              "illustration"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "4dn8x4sl590npaz",
+            "text": "壁にきれいな絵が飾ってあります。",
+            "textLang": "ja",
+            "translation": "There is a beautiful picture hanging on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "絵",
+            "matchedTranslationForm": "picture"
+          },
+          {
+            "id": "v06hjhntk5vw178",
+            "text": "妹は絵を描くのが上手です。",
+            "textLang": "ja",
+            "translation": "My younger sister is good at drawing pictures.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "絵",
+            "matchedTranslationForm": "pictures"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "絵",
+    "lemma": "絵",
+    "reading": "え",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -162,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(art) ... (illustration) ...",
+        "why": "Painting, drawing, and book illustration are all one sense of 絵 (hand-drawn/painted picture)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'e' is used for many types of images, 'e-no-gu'",
+        "why": "Unasked-for vocabulary list instead of useful usage information such as the verb 描く (kaku)."
+      }
+    ],
+    "growth": 0.766
   }
 }

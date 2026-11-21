@@ -72,6 +72,73 @@
     "primaryGloss": "yellow",
     "emotion": "bright, warm, and cheerful, like a sunny day",
     "notes": [
+      "Spelled 'gele' with a single 'e' when an '-e' ending is added (e.g., 'een gele banaan', 'het gele huis', but 'een geel huis')."
+    ],
+    "senses": [
+      {
+        "id": "qnbd04qbjflettz",
+        "order": 0,
+        "definition": "Having the color of a lemon or a ripe banana.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "v4suxk625dp1pmv",
+            "text": "De citroen is geel.",
+            "textLang": "nl",
+            "translation": "The lemon is yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and simple, describing an object",
+            "note": null,
+            "matchedForm": "geel",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "geel",
+    "lemma": "geel",
+    "reading": null,
+    "ipa": "/ɣeːl/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💛",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow",
+    "primaryGloss": "yellow",
+    "emotion": "bright, warm, and cheerful, like a sunny day",
+    "notes": [
       "Geel is a basic color adjective. Like other adjectives in Dutch, it adds an -e ending when used before a noun (e.g., 'een gele citroen').",
       "It does not change for gender, only for the definiteness and number of the noun it modifies."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It does not change for gender, only for the definiteness and number",
+        "why": "False grammar: Dutch adjectives drop -e before indefinite singular neuter ('het') nouns ('een geel huis')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of a lemon or a ripe banana.",
+        "why": "Adjective defined as a noun instead of a quality ('Having the color...')."
+      }
+    ],
+    "growth": 0.698
   }
 }

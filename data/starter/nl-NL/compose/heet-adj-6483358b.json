@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "hot; spicy",
+    "primaryGloss": "hot",
+    "emotion": "cautionary and urgent, feeling the sudden warmth",
+    "notes": [
+      "Stronger than 'warm', which means pleasantly warm; 'heet' often means uncomfortably or dangerously hot.",
+      "Notice the spelling change when inflected: 'heet' becomes 'hete' (een hete zomer)."
+    ],
+    "senses": [
+      {
+        "id": "sfgxm0eqoooce5v",
+        "order": 0,
+        "definition": "Having a very high temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "scalding",
+              "scorching"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "i6hpdatrd31ettj",
+            "text": "De soep is nog veel te heet om te eten.",
+            "textLang": "nl",
+            "translation": "The soup is still much too hot to eat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warning someone away from a steaming bowl",
+            "note": null,
+            "matchedForm": "heet",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "xw9haw656r7kabp",
+            "text": "Het is vandaag erg heet in de zon.",
+            "textLang": "nl",
+            "translation": "It is very hot in the sun today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wiping sweat from the forehead on a bright afternoon",
+            "note": null,
+            "matchedForm": "heet",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "eh7ay0rergc576t",
+        "order": 1,
+        "definition": "Of food: having a strong, burning taste from chili or spices.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spicy",
+              "hot"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "92295kyht73j2q5",
+            "text": "Pas op, deze saus is erg heet.",
+            "textLang": "nl",
+            "translation": "Watch out, this sauce is very spicy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "heet",
+            "matchedTranslationForm": "spicy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "heet",
+    "lemma": "heet",
+    "reading": null,
+    "ipa": "/ɦeːt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "hot; very warm",
     "primaryGloss": "hot",
     "emotion": "cautionary and urgent, feeling the sudden warmth",
@@ -160,5 +292,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (temperature) ... [1] (weather)",
+        "why": "Physical heat of objects and weather are one sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'spicy' (of food)."
+      }
+    ],
+    "growth": 1.078
   }
 }

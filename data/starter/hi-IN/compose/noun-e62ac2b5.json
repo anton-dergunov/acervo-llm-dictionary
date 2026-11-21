@@ -58,6 +58,74 @@
     "headword": "सिर",
     "lemma": "सिर",
     "reading": null,
+    "ipa": "/sɪɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "head",
+    "primaryGloss": "head",
+    "emotion": "matter-of-fact and neutral as you point to a part of yourself",
+    "notes": [
+      "Also commonly pronounced and spelled 'सर' (sar) in everyday conversation.",
+      "Takes a plural verb when referring to more than one head, even though the direct plural form remains 'सिर'."
+    ],
+    "senses": [
+      {
+        "id": "8zmv8vithqdymvt",
+        "order": 0,
+        "definition": "The top part of the body that contains the brain, eyes, nose, mouth, and ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "1ghhlx11upc9jku",
+            "text": "मेरे सिर में दर्द है।",
+            "textLang": "hi",
+            "translation": "I have a headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly uncomfortable and weary from a headache",
+            "note": null,
+            "matchedForm": "सिर",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "सिर",
+    "lemma": "सिर",
+    "reading": null,
     "ipa": "/sɪr/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +228,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(top) The highest or upper part of something, such as a bed",
+        "why": "Calqued from English 'head'; Hindi uses चोटी for mountains and सिरहाना for beds."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "वह पहाड़ के सिर पर खड़ा है।",
+        "why": "Unidiomatic Hindi; 'mountain top' is पहाड़ की चोटी, not पहाड़ का सिर."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Be careful not to confuse 'sir' (head) with 'sar' (essence/substance/cream of something);",
+        "why": "'सर' (sar) is a common synonym for 'सिर' (head); 'essence' is 'सार' (sār)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I have a pain in my head.",
+        "why": "Calqued translation; natural English is 'I have a headache.'"
+      }
+    ],
+    "growth": 0.53
   }
 }

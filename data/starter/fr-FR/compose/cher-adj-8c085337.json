@@ -68,6 +68,135 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "expensive; dear",
+    "primaryGloss": "expensive",
+    "emotion": "hesitating at a price tag, thoughtful and a little concerned",
+    "notes": [
+      "Feminine: chère (/ʃɛʁ/).",
+      "Meaning depends on position: before a noun it means 'dear' (mon cher ami), after a noun or verb it means 'expensive' (un livre cher).",
+      "Also used as an adverb with verbs like coûter or payer: Ça coûte cher (It costs a lot)."
+    ],
+    "senses": [
+      {
+        "id": "nis3hfq20abmewh",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "💶",
+        "examples": [
+          {
+            "id": "d7fhe8absqvxqa8",
+            "text": "Cette robe est trop chère pour moi.",
+            "textLang": "fr",
+            "translation": "This dress is too expensive for me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and reluctant, putting a lovely item back on the rack",
+            "note": null,
+            "matchedForm": "chère",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tfmngkelq6il4pz",
+        "order": 1,
+        "definition": "Loved very much; also used to begin a letter or message.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dear",
+              "beloved"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "p6coqvtiyy9vowd",
+            "text": "Chère Marie, comment vas-tu ?",
+            "textLang": "fr",
+            "translation": "Dear Marie, how are you?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Chère",
+            "matchedTranslationForm": "Dear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "nis3hfq20abmewh",
+      "from": "Qui coûte beaucoup d'argent.",
+      "to": "Costing a lot of money.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:14Z"
+    },
+    {
+      "sense": "tfmngkelq6il4pz",
+      "from": "Qui est aimé tendrement.",
+      "to": "Loved very much and held close to the heart.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:14Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "cher",
+    "lemma": "cher",
+    "reading": null,
+    "ipa": "/ʃɛʁ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "expensive; dear; beloved",
     "primaryGloss": "expensive",
     "emotion": "hesitating at a price tag, thoughtful and a little concerned",
@@ -163,22 +292,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "nis3hfq20abmewh",
-      "from": "Qui coûte beaucoup d'argent.",
-      "to": "Costing a lot of money.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:14Z"
-    },
-    {
-      "sense": "tfmngkelq6il4pz",
-      "from": "Qui est aimé tendrement.",
-      "to": "Loved very much and held close to the heart.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:14Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "C'est un ami cher à mon cœur.",
+        "why": "Places 'cher' after the noun, contradicting the note about pre-nominal placement and everyday usage."
+      }
+    ],
+    "growth": 0.988
+  }
 }

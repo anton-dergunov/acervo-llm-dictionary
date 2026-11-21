@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "tree",
+    "primaryGloss": "tree",
+    "emotion": "calm and grounded, enjoying the cool shade on a quiet afternoon",
+    "notes": [
+      "Takes the measure word 棵 (kē): 一棵树 (yì kē shù, a tree)."
+    ],
+    "senses": [
+      {
+        "id": "m1ek0iuc04qx4e7",
+        "order": 0,
+        "definition": "A tall plant with a wooden trunk and branches.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "ffqept4ds2g8x0x",
+            "text": "公园里有很多大树。",
+            "textLang": "zh",
+            "translation": "There are many big trees in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and peaceful, pointing out the green scenery",
+            "note": null,
+            "matchedForm": "树",
+            "matchedTranslationForm": "trees"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "树",
+    "lemma": "树",
+    "reading": "shù",
+    "ipa": "/ʂu˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "tree; to plant; to establish",
     "primaryGloss": "tree",
     "emotion": "calm and grounded, enjoying the cool shade on a quiet afternoon",
@@ -160,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To establish or set up something abstract, such as an image",
+        "why": "Wrong POS (verb in a noun entry) and bound usage; example uses 树立, not 树."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "我们要树立好榜样。",
+        "why": "Uses the two-syllable compound verb 树立 rather than the headword 树."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tree; to plant; to establish",
+        "why": "Includes bound verb meanings inappropriate for a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 树 means tree.",
+        "why": "Restates the gloss and POS while omitting the essential measure word 棵 (kē)."
+      }
+    ],
+    "growth": 0.417
   }
 }

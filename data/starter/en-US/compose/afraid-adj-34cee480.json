@@ -68,6 +68,117 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "asustado, con miedo; me temo que",
+    "primaryGloss": "con miedo",
+    "emotion": "a nervous, vulnerable feeling, like someone carefully admitting to a secret fear",
+    "notes": [
+      "Siempre va después del verbo (como 'be' o 'feel'), nunca delante de un sustantivo. Para decir 'un niño asustado' se usa 'a scared child'.",
+      "Para indicar a qué se le tiene miedo se usa 'of' ('afraid of spiders'), y delante de un verbo se usa 'to' ('afraid to ask')."
+    ],
+    "senses": [
+      {
+        "id": "h131crmg2dys5u4",
+        "order": 0,
+        "definition": "Que siente miedo o temor ante algo o alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "con miedo",
+              "asustado",
+              "temeroso"
+            ]
+          }
+        ],
+        "domain": "fear",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "4ho3p3yfbkgjmpp",
+            "text": "The child is afraid of the dark.",
+            "textLang": "en",
+            "translation": "El niño tiene miedo de la oscuridad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a young child speaking with a small, cautious, and honest voice",
+            "note": null,
+            "matchedForm": "afraid",
+            "matchedTranslationForm": "miedo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k1ql60tyq6wl2pn",
+        "order": 1,
+        "definition": "Preocupado o apenado por algo desafortunado; se usa en 'I'm afraid' para dar malas noticias con cortesía.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "me temo que",
+              "lamentablemente"
+            ]
+          }
+        ],
+        "domain": "politeness",
+        "emoji": "😔",
+        "examples": [
+          {
+            "id": "oq5b075cpqy5t4j",
+            "text": "I am afraid the store is closed now.",
+            "textLang": "en",
+            "translation": "Me temo que la tienda ya está cerrada.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a helpful worker delivering slightly disappointing news with sympathy",
+            "note": null,
+            "matchedForm": "afraid",
+            "matchedTranslationForm": "temo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "afraid",
+    "lemma": "afraid",
+    "reading": null,
+    "ipa": "/əˈfreɪd/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "con miedo; temeroso",
     "primaryGloss": "con miedo",
     "emotion": "a nervous, vulnerable feeling, like someone carefully admitting to a secret fear",
@@ -161,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Sentir miedo o temor ante algo o alguien.",
+        "why": "Adjective defined as an infinitive verb phrase."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Forma educada de decir que algo desafortunado es verdad",
+        "why": "Adjective defined as a noun phrase ('Forma educada...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing crucial grammar note: 'afraid' is never used before a noun (unlike 'scared')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "con miedo; temeroso",
+        "why": "shortGloss does not cover the second sense."
+      }
+    ],
+    "growth": 1.046
   }
 }

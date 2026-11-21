@@ -74,6 +74,94 @@
     "primaryGloss": "snow",
     "emotion": null,
     "notes": [
+      "Usually uncountable and used only in the singular. The related verb is 'schneien' ('Es schneit' — It is snowing)."
+    ],
+    "senses": [
+      {
+        "id": "asswkiji59p5swr",
+        "order": 0,
+        "definition": "Soft, white flakes of frozen water that fall from the sky in cold weather.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snow"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "ns8zylnwyhtyo5w",
+            "text": "Der Schnee bedeckt die ganze Stadt.",
+            "textLang": "de",
+            "translation": "The snow covers the whole city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serene and observant, noting the peaceful stillness of the blanketed landscape",
+            "note": null,
+            "matchedForm": "Schnee",
+            "matchedTranslationForm": "snow"
+          },
+          {
+            "id": "o6a164vtiktaonh",
+            "text": "Heute fällt der erste Schnee.",
+            "textLang": "de",
+            "translation": "The first snow is falling today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheery, pointing out the arrival of the season",
+            "note": null,
+            "matchedForm": "Schnee",
+            "matchedTranslationForm": "snow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Schnee",
+    "lemma": "Schnee",
+    "reading": null,
+    "ipa": "/ʃneː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "snow",
+    "primaryGloss": "snow",
+    "emotion": null,
+    "notes": [
       "German uses the definite article 'der' for 'Schnee', as it is a masculine noun.",
       "Unlike in English, where you might say 'it is snowing' (verb), German often uses 'es schneit' (it snows)."
     ],
@@ -142,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "German uses the definite article 'der' for 'Schnee', as it is a masculine noun.",
+        "why": "Restates the grammatical gender already shown in the header."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike in English, where you might say 'it is snowing' (verb), German often uses",
+        "why": "Misleading contrast (English 'snow' is also a verb); an uncountability note is needed instead."
+      }
+    ],
+    "growth": 0.836
   }
 }

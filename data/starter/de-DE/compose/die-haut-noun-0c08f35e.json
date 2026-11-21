@@ -68,6 +68,114 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "skin",
+    "primaryGloss": "skin",
+    "emotion": "matter-of-fact and neutral, describing a part of the body",
+    "notes": [
+      "Mostly used in the singular; the plural is 'die Häute' (used mainly for animal hides or membranes).",
+      "Do not confuse with 'das Fell' (animal fur) or 'die Schale' (the thicker peel of fruit like oranges, bananas, or apples)."
+    ],
+    "senses": [
+      {
+        "id": "t5ha7emm5w3n61u",
+        "order": 0,
+        "definition": "The natural outer covering of the human or animal body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skin"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "4t5hf4uw6pqwmb0",
+            "text": "Sie hat sehr empfindliche Haut.",
+            "textLang": "de",
+            "translation": "She has very sensitive skin.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly concerned, noting a physical trait",
+            "note": null,
+            "matchedForm": "Haut",
+            "matchedTranslationForm": "skin"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2ec7fvjr5erclgb",
+        "order": 1,
+        "definition": "The thin outer layer of certain foods, such as tomatoes, peaches, or sausages, or the film that forms on hot milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skin"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "vnni2ht5fet9tcw",
+            "text": "Ich ziehe vor dem Kochen die Haut von den Tomaten ab.",
+            "textLang": "de",
+            "translation": "I peel the skin off the tomatoes before cooking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Haut",
+            "matchedTranslationForm": "skin"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Haut",
+    "lemma": "Haut",
+    "reading": null,
+    "ipa": "/haʊ̯t/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "skin; peel",
     "primaryGloss": "skin",
     "emotion": "matter-of-fact and neutral, describing a part of the body",
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'Haut' when referring to a person's skin or the outer",
+        "why": "Restates the definitions without giving new usage help; misses the irregular plural 'die Häute'."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "peel, skin",
+        "why": "'Haut' on food is a thin skin/membrane (tomato, milk, sausage); thick peel is 'Schale'."
+      }
+    ],
+    "growth": 1.249
   }
 }

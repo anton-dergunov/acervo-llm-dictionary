@@ -58,6 +58,73 @@
     "headword": "το παπούτσι",
     "lemma": "παπούτσι",
     "reading": null,
+    "ipa": "/paˈpu.tsi/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👟",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "shoe",
+    "primaryGloss": "shoe",
+    "emotion": "casual and practical, getting ready to head out the door",
+    "notes": [
+      "Usually used in the plural, 'τα παπούτσια' (shoes), when referring to a pair."
+    ],
+    "senses": [
+      {
+        "id": "45pr8oru56x030d",
+        "order": 0,
+        "definition": "An outer covering for the foot with a sturdy sole, worn for protection when walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shoe"
+            ]
+          }
+        ],
+        "domain": "footwear",
+        "emoji": "👟",
+        "examples": [
+          {
+            "id": "0t8jpiwtjv4s0ff",
+            "text": "Φόρεσα τα παπούτσια μου πριν βγω έξω.",
+            "textLang": "el",
+            "translation": "I put on my shoes before going outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "παπούτσια",
+            "matchedTranslationForm": "shoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το παπούτσι",
+    "lemma": "παπούτσι",
+    "reading": null,
     "ipa": "/paˈputsçi/",
     "pos": "noun",
     "gender": "neuter",
@@ -118,5 +185,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/paˈputsçi/",
+        "why": "Standard pronunciation is /paˈpu.t͡si/; there is no palatal fricative /ç/ here."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used generally for any kind of footwear worn on the foot",
+        "why": "Restates the obvious meaning of 'shoe' without adding useful grammar or usage info."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Φόρεσα το παπούτσι μου πριν βγω έξω.",
+        "why": "People put on their shoes (plural) before going outside, not a single shoe."
+      }
+    ],
+    "growth": 0.833
   }
 }

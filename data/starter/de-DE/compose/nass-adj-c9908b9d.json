@@ -68,6 +68,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "wet; soaked",
+    "primaryGloss": "wet",
+    "emotion": "chilly and uncomfortable, shivering slightly after stepping into a puddle",
+    "notes": [
+      "Do not confuse with 'feucht' (damp, moist), which means only slightly wet."
+    ],
+    "senses": [
+      {
+        "id": "t66flymygd3r8zn",
+        "order": 0,
+        "definition": "Covered in or soaked with water or another liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wet",
+              "soaked"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "ik43et2xf1z988b",
+            "text": "Meine Socken sind ganz nass.",
+            "textLang": "de",
+            "translation": "My socks are completely wet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and uncomfortable, wiggling toes in wet socks",
+            "note": null,
+            "matchedForm": "nass",
+            "matchedTranslationForm": "wet"
+          },
+          {
+            "id": "hi60mm50eb6cas1",
+            "text": "Nimm einen Schirm mit, draußen ist es nass.",
+            "textLang": "de",
+            "translation": "Take an umbrella with you, it's wet outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nass",
+            "matchedTranslationForm": "wet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "nass",
+    "lemma": "nass",
+    "reading": null,
+    "ipa": "/nas/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "wet; damp",
     "primaryGloss": "wet",
     "emotion": "chilly and uncomfortable, shivering slightly after stepping into a puddle",
@@ -160,5 +249,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "wet; damp",
+        "why": "'damp' contradicts note 1 (which rightly assigns 'damp' to 'feucht') and is not in senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'nass' to describe anything covered in water or liquid.",
+        "why": "Restates the definition."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Weather characterized by rain.",
+        "why": "'Nass' for weather still means 'wet', not 'rainy' ('regnerisch'); shade of sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Weather characterized by rain.",
+        "why": "Adjective defined as a noun phrase ('Weather...')."
+      }
+    ],
+    "growth": 0.658
   }
 }

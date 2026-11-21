@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to finish; to complete; to use up",
+    "primaryGloss": "finish",
+    "emotion": "satisfied and relieved, finally checking the last thing off the list",
+    "notes": [
+      "Bitirmek is transitive and takes a direct object (often in the accusative case), whereas bitmek is intransitive ('to end, to run out')."
+    ],
+    "senses": [
+      {
+        "id": "qlevfjgoyvtcjb5",
+        "order": 0,
+        "definition": "To bring something to an end or complete a task, course, or journey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "finish",
+              "complete",
+              "conclude"
+            ]
+          }
+        ],
+        "domain": "completion",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "kc78t5zmdk6wjhq",
+            "text": "Ödevimi bitirmek üzereyim.",
+            "textLang": "tr",
+            "translation": "I am about to finish my homework.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired but eager to be done with the work at last",
+            "note": null,
+            "matchedForm": "bitirmek",
+            "matchedTranslationForm": "finish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "84xe9ye6aixvylr",
+        "order": 1,
+        "definition": "To consume or use up the whole of something, such as food, drink, or money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "finish off",
+              "use up",
+              "consume"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "5dc8tb5etfgckq5",
+            "text": "Çorbanı tamamen bitir.",
+            "textLang": "tr",
+            "translation": "Finish all of your soup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and encouraging, waiting for the bowl to be emptied",
+            "note": null,
+            "matchedForm": "bitir",
+            "matchedTranslationForm": "Finish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "bitirmek",
+    "lemma": "bitirmek",
+    "reading": null,
+    "ipa": "/bi.tiɾˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to finish; to complete; to run out",
     "primaryGloss": "finish",
     "emotion": "satisfied and relieved, finally checking the last thing off the list",
@@ -204,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to finish; to complete; to run out",
+        "why": "'To run out' is intransitive (bitmek), which contradicts note 0 and the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[2]",
+        "quote": "To come to the end of something or reach its conclusion.",
+        "why": "Artificial split; 'yolu bitirmek' is simply completing something (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse bitirmek with başlamak, which means to start or begin.",
+        "why": "Learners do not confuse unrelated antonyms; note should mention taking the accusative case."
+      }
+    ],
+    "growth": 0.701
   }
 }

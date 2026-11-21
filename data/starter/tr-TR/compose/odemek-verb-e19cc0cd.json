@@ -85,6 +85,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to pay",
+    "primaryGloss": "pay",
+    "emotion": "matter-of-fact and direct, completing a transaction efficiently",
+    "notes": [
+      "The stem vowel -e narrows to -ü before -yor in the present continuous: ödüyorum (I am paying).",
+      "Takes the accusative case for the bill, price, or item paid, and the dative (-e/-a) for the person paid."
+    ],
+    "senses": [
+      {
+        "id": "ino0mswtaxwljji",
+        "order": 0,
+        "definition": "To give money in exchange for goods, services, or a debt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "p9iu7kaeu9zo5ty",
+            "text": "Hesabı ödemek istiyorum.",
+            "textLang": "tr",
+            "translation": "I want to pay the bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and confident, signalling the end of a meal",
+            "note": null,
+            "matchedForm": "ödemek",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ödemek",
+    "lemma": "ödemek",
+    "reading": null,
+    "ipa": "/ødeˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to pay; to compensate",
     "primaryGloss": "pay",
     "emotion": "matter-of-fact and direct, completing a transaction efficiently",
@@ -176,5 +245,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use ödemek for paying bills, prices, or debts.",
+        "why": "Restates the definition while omitting the irregular stem change (öde- -> ödüyor) and case governance."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Yaptığı hatayı ödemek zorunda kaldı.",
+        "why": "Unnatural collocation; Turkish says 'hatasının bedelini ödemek' (pay the price of one's mistake), which is sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To compensate or make up for a mistake, action, or loss.",
+        "why": "In Turkish this is normally expressed with 'bedelini ödemek' or 'ödetmek', not bare 'ödemek' at A2."
+      }
+    ],
+    "growth": 0.77
   }
 }

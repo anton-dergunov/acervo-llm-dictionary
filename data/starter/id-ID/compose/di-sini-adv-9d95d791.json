@@ -72,6 +72,96 @@
     "primaryGloss": "here",
     "emotion": null,
     "notes": [
+      "Written as two words ('di sini'), as 'di' is a preposition showing location; 'disini' is a common informal misspelling.",
+      "Use 'di sini' for location (in/at this place) and 'ke sini' for movement (to this place)."
+    ],
+    "senses": [
+      {
+        "id": "rz32vsac8ebn32h",
+        "order": 0,
+        "definition": "In or at this place, near the speaker.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here",
+              "in this place"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "qr61aozidsgs1px",
+            "text": "Saya menunggu di sini.",
+            "textLang": "id",
+            "translation": "I am waiting here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating where one is currently located",
+            "note": null,
+            "matchedForm": "di sini",
+            "matchedTranslationForm": "here"
+          },
+          {
+            "id": "7iuxx2ueiy2qsuh",
+            "text": "Cuaca di sini sangat panas.",
+            "textLang": "id",
+            "translation": "The weather here is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "complaining slightly about the current heat",
+            "note": null,
+            "matchedForm": "di sini",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "di sini",
+    "lemma": "di sini",
+    "reading": null,
+    "ipa": "/di si.ni/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "here; in this place",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
       "Di sini indicates a location near the speaker. It is written as two separate words, unlike 'disini' which is a common misspelling in informal writing.",
       "Use di sini when you are already at the location or referring to the place where you are standing."
     ],
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "In, at, or to this place or position.",
+        "why": "'di sini' only indicates static location (in/at); movement 'to this place' is 'ke sini'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use di sini when you are already at the location or referring",
+        "why": "Repeats the first note instead of contrasting 'di sini' (here) with 'ke sini' (to here)."
+      }
+    ],
+    "growth": 0.906
   }
 }

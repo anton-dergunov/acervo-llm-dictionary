@@ -72,6 +72,96 @@
     "primaryGloss": "here",
     "emotion": null,
     "notes": [
+      "Part of the こ・そ・あ・ど set of place words: ここ (here, near the speaker), そこ (there, near the listener), あそこ (over there, away from both), どこ (where).",
+      "Behaves like a noun in Japanese and takes particles such as は, に, で, and から (ここで待ってください — Please wait here)."
+    ],
+    "senses": [
+      {
+        "id": "k8ev6oogoke0h6s",
+        "order": 0,
+        "definition": "This place, where the speaker is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here",
+              "this place"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "9w5vk1uo6fv3xrd",
+            "text": "ここはどこですか。",
+            "textLang": "ja",
+            "translation": "Where is this place?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit confused, looking around while asking for directions",
+            "note": null,
+            "matchedForm": "ここ",
+            "matchedTranslationForm": "this place"
+          },
+          {
+            "id": "wv9so7vhg7fahe0",
+            "text": "ここに座ってください。",
+            "textLang": "ja",
+            "translation": "Please sit here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and welcoming, gesturing toward a seat",
+            "note": null,
+            "matchedForm": "ここ",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "ここ",
+    "lemma": "ここ",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "here; this place",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
       "Use 'koko' to refer to the place where the speaker currently is.",
       "Contrast this with 'soko' (that place near the listener) and 'asoko' (that place over there, away from both).",
       "It acts as a noun; you will often see it followed by particles like 'wa' (koko wa) or 'ni' (koko ni)."
@@ -142,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "ここ is a demonstrative pronoun (or noun), not an adverb, as notes[2] itself says."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'koko' to refer to the place where the speaker currently is.",
+        "why": "Restates the definition verbatim."
+      }
+    ],
+    "growth": 0.91
   }
 }

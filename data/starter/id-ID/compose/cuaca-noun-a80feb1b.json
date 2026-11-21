@@ -74,6 +74,94 @@
     "primaryGloss": "weather",
     "emotion": null,
     "notes": [
+      "Do not confuse with 'iklim' (climate), which refers to long-term weather patterns over many years."
+    ],
+    "senses": [
+      {
+        "id": "34uqt9w1xq01gyd",
+        "order": 0,
+        "definition": "The state of the atmosphere at a particular time and place, such as heat, wind, or rain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "1yuha1aw0pphzc2",
+            "text": "Cuaca hari ini sangat cerah dan panas.",
+            "textLang": "id",
+            "translation": "The weather today is very sunny and hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and relaxed, commenting on a pleasant sunny morning",
+            "note": null,
+            "matchedForm": "Cuaca",
+            "matchedTranslationForm": "weather"
+          },
+          {
+            "id": "b2bmkn5u3hdty4f",
+            "text": "Bagaimana cuaca di sana sekarang?",
+            "textLang": "id",
+            "translation": "How is the weather over there right now?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager, calling someone in a distant place",
+            "note": null,
+            "matchedForm": "cuaca",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "cuaca",
+    "lemma": "cuaca",
+    "reading": null,
+    "ipa": "/ˈtʃu.a.tʃa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "weather",
+    "primaryGloss": "weather",
+    "emotion": null,
+    "notes": [
       "Cuaca refers specifically to atmospheric conditions at a particular time and place, such as temperature, rain, or sunshine.",
       "Do not confuse with iklim, which refers to climate, the long-term weather patterns of a region over many years."
     ],
@@ -142,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Cuaca refers specifically to atmospheric conditions at a particular time and",
+        "why": "Restates the definition without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Today's weather is very bright and hot.",
+        "why": "Unnatural calque of 'cerah'; for weather, 'sunny' or 'clear' is natural."
+      }
+    ],
+    "growth": 0.705
   }
 }

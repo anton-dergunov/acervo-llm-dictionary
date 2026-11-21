@@ -72,6 +72,115 @@
     "primaryGloss": "day",
     "emotion": null,
     "notes": [
+      "Masculine despite ending in '-a': 'el día', 'buenos días'.",
+      "Notice the expressions 'de día' (during the day) and 'todos los días' (every day)."
+    ],
+    "senses": [
+      {
+        "id": "lhip546glajtb4y",
+        "order": 0,
+        "definition": "A period of 24 hours.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "9yiy9kt9jasgnuo",
+            "text": "La semana tiene siete días.",
+            "textLang": "es",
+            "translation": "The week has seven days.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "días",
+            "matchedTranslationForm": "days"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z9bpczn3zzu5qmv",
+        "order": 1,
+        "definition": "The part of the day when it is light outside, as opposed to night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "daytime"
+            ]
+          }
+        ],
+        "domain": "daytime",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "0q284o4u2vw125v",
+            "text": "Prefiero trabajar de día.",
+            "textLang": "es",
+            "translation": "I prefer to work during the day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and clear, expressing a personal preference",
+            "note": null,
+            "matchedForm": "día",
+            "matchedTranslationForm": "day"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el día",
+    "lemma": "día",
+    "reading": null,
+    "ipa": "/ˈdi.a/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "day; daytime",
+    "primaryGloss": "day",
+    "emotion": null,
+    "notes": [
       "Though it ends in -a, el día is a masculine noun.",
       "Distinguish between día (the 24-hour period or the light part) and jornada (a workday or a specific period of effort)."
     ],
@@ -160,5 +269,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tiene siete días la semana.",
+        "why": "Unnatural VSO word order for a neutral statement; should be 'La semana tiene siete días'."
+      }
+    ],
+    "growth": 0.878
   }
 }

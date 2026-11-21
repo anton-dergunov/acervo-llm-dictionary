@@ -68,6 +68,114 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new",
+    "primaryGloss": "new",
+    "emotion": "excited and proud of something fresh, showing it off with a smile",
+    "notes": [
+      "Do not confuse with 'другой', which means 'another' or 'different'."
+    ],
+    "senses": [
+      {
+        "id": "glgqouficlbxcwb",
+        "order": 0,
+        "definition": "Recently made, built, bought, or created; not used or old.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand-new"
+            ]
+          }
+        ],
+        "domain": "creation",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "cln0h88d8e4q9us",
+            "text": "Я купил новую машину.",
+            "textLang": "ru",
+            "translation": "I bought a new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and excited about a recent purchase",
+            "note": null,
+            "matchedForm": "новую",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pjvbdernuven1e2",
+        "order": 1,
+        "definition": "Replacing a previous one, or experienced for the first time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new"
+            ]
+          }
+        ],
+        "domain": "replacement",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "9jgxmpwgcbwhszq",
+            "text": "У нас новый учитель.",
+            "textLang": "ru",
+            "translation": "We have a new teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter of fact",
+            "note": null,
+            "matchedForm": "новый",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "новый",
+    "lemma": "новый",
+    "reading": null,
+    "ipa": "/ˈnovɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh; modern",
     "primaryGloss": "new",
     "emotion": "excited and proud of something fresh, showing it off with a smile",
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "new, fresh, modern",
+        "why": "Domain and gloss 'modern' do not match the definition ('different from the previous one') or example ('new teacher')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe things that have just been made, bought, or come",
+        "why": "Restates the definition."
+      }
+    ],
+    "growth": 0.746
   }
 }

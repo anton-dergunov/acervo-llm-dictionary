@@ -68,6 +68,73 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "arm",
+    "primaryGloss": "arm",
+    "emotion": "matter-of-fact and physical, pointing to the body",
+    "notes": [
+      "The final '-s' is silent, and the singular and plural forms are identical ('un bras', 'des bras')."
+    ],
+    "senses": [
+      {
+        "id": "i3ewrbxcz20rlxo",
+        "order": 0,
+        "definition": "The upper limb of the human body extending from the shoulder to the hand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "un79o4r1rhdta0a",
+            "text": "Il porte son sac sous le bras.",
+            "textLang": "fr",
+            "translation": "He is carrying his bag under his arm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bras",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le bras",
+    "lemma": "bras",
+    "reading": null,
+    "ipa": "/bʁa/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "arm; handle",
     "primaryGloss": "arm",
     "emotion": "matter-of-fact and physical, pointing to the body",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "arm; handle",
+        "why": "'handle' is not covered in the senses; senses only cover 'arm' and 'armrest'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The side part of a piece of furniture",
+        "why": "Usually 'accoudoir' in everyday French; 'bras' for an armchair is marginal at A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "For the hand alone, use 'la main'.",
+        "why": "English speakers do not confuse 'arm' and 'hand'; omits silent final -s and identical plural."
+      }
+    ],
+    "growth": 0.505
   }
 }

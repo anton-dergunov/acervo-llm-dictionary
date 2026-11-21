@@ -58,6 +58,75 @@
     "headword": "tất",
     "lemma": "tất",
     "reading": null,
+    "ipa": "/tət̚˧˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧦",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "sock",
+    "primaryGloss": "sock",
+    "emotion": "casual and practical, getting dressed for the day",
+    "notes": [
+      "Takes the classifier 'chiếc' for one sock or 'đôi' for a pair, and the verb 'đi' in the North (e.g. 'đi tất'). In Southern Vietnam, 'vớ' (with 'mang') is more common.",
+      "Do not confuse with the homonym 'tất' meaning 'all' (most often seen in 'tất cả')."
+    ],
+    "senses": [
+      {
+        "id": "zf73y1rh0xgbu3w",
+        "order": 0,
+        "definition": "A piece of soft clothing worn on the foot inside a shoe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sock",
+              "stocking"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🧦",
+        "examples": [
+          {
+            "id": "ifrucempzanxotc",
+            "text": "Tôi đi tất trắng trước khi xỏ giày.",
+            "textLang": "vi",
+            "translation": "I put on white socks before putting on my shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tất",
+            "matchedTranslationForm": "socks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tất",
+    "lemma": "tất",
+    "reading": null,
     "ipa": "/tɐt̚˧˥/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(quantity) Everything or all of something without exception.",
+        "why": "Etymologically unrelated homonym and not a noun (note[1] itself warns not to confuse them)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sock; all",
+        "why": "Includes 'all', which belongs to a different word and part of speech."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi mang tất trắng trước khi xỏ giày.",
+        "why": "In Northern Vietnamese, 'đi tất' is the natural collocation for wearing socks ('mang' is Southern)."
+      }
+    ],
+    "growth": 0.826
   }
 }

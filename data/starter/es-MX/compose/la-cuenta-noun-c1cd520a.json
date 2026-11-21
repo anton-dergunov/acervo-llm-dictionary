@@ -58,6 +58,132 @@
     "headword": "la cuenta",
     "lemma": "cuenta",
     "reading": null,
+    "ipa": "/ˈkwen.ta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill, check; account",
+    "primaryGloss": "bill",
+    "emotion": "polite and eager to leave after a nice meal",
+    "notes": [
+      "In restaurants in Mexico, you can ask for the bill by saying 'La cuenta, por favor'. It is also used in common phrases like 'darse cuenta' (to realize)."
+    ],
+    "senses": [
+      {
+        "id": "fy2hu51bkbh9j75",
+        "order": 0,
+        "definition": "A statement of the money owed for food, drinks, or a service.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "eslb1cqom5y1rs3",
+            "text": "Disculpe, ¿nos puede traer la cuenta, por favor?",
+            "textLang": "es",
+            "translation": "Excuse me, can you bring us the check, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cuenta",
+            "matchedTranslationForm": "check"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ec9qg0467mi1o3b",
+        "order": 1,
+        "definition": "An arrangement to keep money in a bank, or to use a website or service.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "account"
+            ]
+          }
+        ],
+        "domain": "banking, internet",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "1vn0ozl821gkvmf",
+            "text": "Abrí una cuenta nueva en el banco.",
+            "textLang": "es",
+            "translation": "I opened a new account at the bank.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and organized",
+            "note": null,
+            "matchedForm": "cuenta",
+            "matchedTranslationForm": "account"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "fy2hu51bkbh9j75",
+      "from": "Papel que muestra el dinero que debes pagar por una comida o servicio.",
+      "to": "A piece of paper showing the money you must pay for a meal or service.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    },
+    {
+      "sense": "ec9qg0467mi1o3b",
+      "from": "Registro de dinero que tienes en un banco.",
+      "to": "A record of money held in a bank.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la cuenta",
+    "lemma": "cuenta",
+    "reading": null,
     "ipa": "/ˈkwenta/",
     "pos": "noun",
     "gender": "feminine",
@@ -160,22 +286,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "fy2hu51bkbh9j75",
-      "from": "Papel que muestra el dinero que debes pagar por una comida o servicio.",
-      "to": "A piece of paper showing the money you must pay for a meal or service.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    },
-    {
-      "sense": "ec9qg0467mi1o3b",
-      "from": "Registro de dinero que tienes en un banco.",
-      "to": "A record of money held in a bank.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A record of money held in a bank.",
+        "why": "Too narrow; 'cuenta' is equally common for email and online user accounts at A2."
+      }
+    ],
+    "growth": 1.158
+  }
 }

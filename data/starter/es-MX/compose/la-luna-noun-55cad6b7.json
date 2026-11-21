@@ -68,6 +68,71 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "moon",
+    "primaryGloss": "moon",
+    "emotion": "quiet and contemplative, looking up at the sky in wonder",
+    "notes": [],
+    "senses": [
+      {
+        "id": "8yhkjb1xtixn33a",
+        "order": 0,
+        "definition": "The round object that moves around the Earth and shines in the sky at night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "moon"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "91xto55ira38dnc",
+            "text": "La luna está muy brillante esta noche.",
+            "textLang": "es",
+            "translation": "The moon is very bright tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and calm, pointing out the beauty of the evening",
+            "note": null,
+            "matchedForm": "luna",
+            "matchedTranslationForm": "moon"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la luna",
+    "lemma": "luna",
+    "reading": null,
+    "ipa": "/ˈluna/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌙",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "moon; satellite",
     "primaryGloss": "moon",
     "emotion": "quiet and contemplative, looking up at the sky in wonder",
@@ -119,5 +184,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Even though it ends in -a, luna is a feminine noun.",
+        "why": "Illogical filler note: nouns ending in -a are regularly feminine, and it restates gender."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike in English, you almost always include the article 'la'",
+        "why": "False contrast: English also says 'the moon' and 'the sun' with the definite article."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "moon; satellite",
+        "why": "'satellite' is not in the sense glosses."
+      }
+    ],
+    "growth": 0.422
   }
 }

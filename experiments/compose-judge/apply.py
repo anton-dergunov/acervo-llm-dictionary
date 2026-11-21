@@ -10,8 +10,11 @@ For every article the run corrected (`runs/<run>/results.json`, `corrected` not 
    lemma and topics, each sense's emoji (from the sense it `was`), an example's emotion where its
    text is unchanged.
 2. It is checked as compose checks a model's answer (`compose_parts`, the same check the builder
-   uses), and its prose may be at most `GROWTH` times the original's. Either failing keeps the
-   original, and the reason is listed.
+   uses). A refusal keeps the original, and so does a doubt about the definitions' language: the
+   translate step already put the original's definitions in the right language. A dictionary's
+   doubt is accepted, as compose accepts it, and counted. How much the correction grew is recorded,
+   never limited: the short originals are the ones a correction rightly lengthens
+   (experiments/compose-judge/README.md, "Full run").
 3. The draft is rebuilt by `draft_from`; a sense that `was` an original one keeps that sense's id, so
    the matches that name it stand. An unchanged example keeps its id and the model that wrote it;
    a new or changed one is credited to the judge's model.
@@ -44,7 +47,6 @@ _spec.loader.exec_module(build)
 
 from acervo.services.models import Demoted, Unusable  # noqa: E402
 
-GROWTH = 1.5
 CORRECTOR = f"vertex:{judge.MODEL}"
 
 
@@ -138,6 +140,7 @@ def apply(run: str, dry_run: bool) -> dict[str, Any]:
     concepts = {c.id: c for items in build.load_concepts().values() for c in items}
     outcome = collections.Counter()
     refused: list[dict[str, str]] = []
+    doubts: collections.Counter[str] = collections.Counter()
     growth: list[float] = []
     for path in sorted(judge.CORPUS.glob("*/compose/*.json")):
         result = results.get(judge.ident(path.parent.parent.name, path.stem))
@@ -155,17 +158,17 @@ def apply(run: str, dry_run: bool) -> dict[str, Any]:
         try:
             checked = check(answer).answer
         except Demoted as doubt:
+            if doubt.by == "language":
+                refused.append({"key": path.stem, "vocabulary": composed["vocabulary"], "why": str(doubt)})
+                outcome["refusedByLanguage"] += 1
+                continue
+            doubts[doubt.by] += 1
             checked = doubt.checked.answer  # a dictionary's doubt: compose would keep it too
         except Unusable as refusal:
             refused.append({"key": path.stem, "vocabulary": composed["vocabulary"], "why": str(refusal)})
-            outcome["refused"] += 1
+            outcome["refusedByCheck"] += 1
             continue
         ratio = prose_size(checked) / max(1, prose_size(before))
-        if ratio > GROWTH:
-            refused.append({"key": path.stem, "vocabulary": composed["vocabulary"],
-                            "why": f"{ratio:.2f} times as long as the original"})
-            outcome["too long"] += 1
-            continue
         growth.append(ratio)
         after = rebuilt(composed, checked, vocabulary)
         outcome["applied"] += 1
@@ -179,7 +182,7 @@ def apply(run: str, dry_run: bool) -> dict[str, Any]:
         topic = concepts[composed["word"]["concepts"][0]].topic
         update_matches(path.parent.parent, before, after, topic)
     growth.sort()
-    summary = {"run": run, **outcome, "refused": refused,
+    summary = {"run": run, **outcome, "acceptedWithDoubt": dict(doubts), "refused": refused,
                "growthMedian": round(growth[len(growth) // 2], 3) if growth else None,
                "growthMax": round(growth[-1], 3) if growth else None}
     return summary

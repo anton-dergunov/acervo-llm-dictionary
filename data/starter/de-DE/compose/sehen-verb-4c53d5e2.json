@@ -70,6 +70,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to see; to watch; to meet",
+    "primaryGloss": "to see",
+    "emotion": null,
+    "notes": [
+      "Irregular verb with a vowel change in the present tense: du siehst, er/sie/es sieht; past: sah; participle: hat gesehen.",
+      "Use 'sehen' for perceiving with your eyes. For deliberately looking at something, 'schauen' or 'gucken' is more common. Do not confuse with 'aussehen' (to look/appear, e.g. 'Du siehst müde aus')."
+    ],
+    "senses": [
+      {
+        "id": "xorzo2hj2s4nd4e",
+        "order": 0,
+        "definition": "To notice or perceive something with your eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to notice"
+            ]
+          }
+        ],
+        "domain": "perception",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "03ixnldip975oox",
+            "text": "Ich kann den Bus in der Ferne sehen.",
+            "textLang": "de",
+            "translation": "I can see the bus in the distance.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observational, tracking something moving slowly away",
+            "note": null,
+            "matchedForm": "sehen",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wghw5esvctxxtet",
+        "order": 1,
+        "definition": "To watch something for a period of time, such as a movie, show, or game.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to watch",
+              "to see"
+            ]
+          }
+        ],
+        "domain": "watching",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "vn49jvipzt9jq9k",
+            "text": "Wir sehen heute Abend einen Film.",
+            "textLang": "de",
+            "translation": "We are watching a movie tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and anticipating a cozy evening in",
+            "note": null,
+            "matchedForm": "sehen",
+            "matchedTranslationForm": "watching"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fnqeqbu867t9thl",
+        "order": 2,
+        "definition": "To meet or spend time with someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to meet"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "o6ube1jm9ceu3h6",
+            "text": "Wir sehen uns morgen im Büro.",
+            "textLang": "de",
+            "translation": "We'll see each other at the office tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sehen",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "sehen",
+    "lemma": "sehen",
+    "reading": null,
+    "ipa": "/ˈzeːən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to see; to watch; to look",
     "primaryGloss": "see",
     "emotion": null,
@@ -162,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular forms with vowel change in present tense (du siehst, er sieht; sah, gesehen)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to see; to watch; to look",
+        "why": "'to look' is in shortGloss, not in senses, and contradicted by note 0."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'to meet / see someone' (e.g. 'Wir sehen uns morgen')."
+      }
+    ],
+    "growth": 1.224
   }
 }

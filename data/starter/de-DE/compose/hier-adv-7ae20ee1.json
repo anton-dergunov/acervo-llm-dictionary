@@ -72,6 +72,94 @@
     "primaryGloss": "here",
     "emotion": null,
     "notes": [
+      "Refers to where the speaker is. Compare 'dort' (there, further away) and 'da' (either 'here' or 'there' depending on context, as in 'Ich bin wieder da' — I'm back here)."
+    ],
+    "senses": [
+      {
+        "id": "nkjx2lad36rfgoz",
+        "order": 0,
+        "definition": "In, at, or to this place, where the speaker is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "16cjbn2avsdiisc",
+            "text": "Ich bin hier.",
+            "textLang": "de",
+            "translation": "I am here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and present, stating one's location clearly",
+            "note": null,
+            "matchedForm": "hier",
+            "matchedTranslationForm": "here"
+          },
+          {
+            "id": "dul38f729daw7hp",
+            "text": "Komm bitte hierher! / Bleib bitte hier!",
+            "textLang": "de",
+            "translation": "Please come here! / Please stay here!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hier",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "hier",
+    "lemma": "hier",
+    "reading": null,
+    "ipa": "/hiːɐ̯/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "here",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
       "Use 'hier' for the location where the speaker is currently positioned.",
       "Do not confuse with 'da' or 'dort'. 'Hier' is very specific to the current location, while 'da' and 'dort' refer to places further away or at a distance."
     ],
@@ -119,5 +207,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'hier' for the location where the speaker is currently positioned.",
+        "why": "Restates the definition without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'da' and 'dort' refer to places further away",
+        "why": "Misleading: 'da' often means 'here' (e.g., 'Ich bin da') as well as 'there'."
+      }
+    ],
+    "growth": 1.099
   }
 }

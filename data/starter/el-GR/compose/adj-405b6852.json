@@ -72,6 +72,137 @@
     "primaryGloss": "lonely",
     "emotion": "quiet and reflective, feeling the emptiness of an empty room",
     "notes": [
+      "Usually describes someone's character or lifestyle ('solitary', 'loner') or a place/activity. To say 'I feel lonely right now', Greek normally uses νιώθω μόνος (ή μόνη) or νιώθω μοναξιά."
+    ],
+    "senses": [
+      {
+        "id": "e4kt6zxoxymlv17",
+        "order": 0,
+        "definition": "Spending a lot of time alone, or lived without company.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "solitary",
+              "lone",
+              "lonely"
+            ]
+          }
+        ],
+        "domain": "lifestyle",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "q8j1cncuka6rc3z",
+            "text": "Είναι μοναχικός άνθρωπος και έχει λίγους φίλους.",
+            "textLang": "el",
+            "translation": "He is a solitary person and has few friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μοναχικός",
+            "matchedTranslationForm": "solitary"
+          },
+          {
+            "id": "ob1j9pwt20fvifi",
+            "text": "Κάνει μια μοναχική ζωή στο χωριό.",
+            "textLang": "el",
+            "translation": "He lives a solitary life in the village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and accepting, describing a quiet way of living",
+            "note": null,
+            "matchedForm": "μοναχική",
+            "matchedTranslationForm": "solitary"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9mdrex3io9n922a",
+        "order": 1,
+        "definition": "Marked by a feeling of sadness from being alone, or secluded from others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lonely",
+              "isolated"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🥺",
+        "examples": [
+          {
+            "id": "u2cnz78pujig2jm",
+            "text": "Πέρασε ένα μοναχικό βράδυ στο καινούργιο σπίτι.",
+            "textLang": "el",
+            "translation": "He spent a lonely evening in the new house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μοναχικό",
+            "matchedTranslationForm": "lonely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "μοναχικός",
+    "lemma": "μοναχικός",
+    "reading": null,
+    "ipa": "/monaçiˈkos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "lonely; solitary",
+    "primaryGloss": "lonely",
+    "emotion": "quiet and reflective, feeling the emptiness of an empty room",
+    "notes": [
       "Μοναχικός can describe both a person who feels lonely and a lifestyle that is solitary or isolated."
     ],
     "senses": [
@@ -159,5 +290,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Αισθάνεται μοναχικός στο καινούργιο σπίτι.",
+        "why": "With 'feel lonely', Greek normally uses the adverb μοναχικά or νιώθω μόνος, not μοναχικός."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Μοναχικός can describe both a person who feels lonely and a lifestyle",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.686
   }
 }

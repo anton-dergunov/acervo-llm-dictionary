@@ -57,6 +57,117 @@
     "language": "ja",
     "headword": "火",
     "lemma": "火",
+    "reading": "ひ",
+    "ipa": "çi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "fire; heat",
+    "primaryGloss": "fire",
+    "emotion": "flickering and warm, pulling your attention toward the light",
+    "notes": [
+      "For an accidental or destructive house fire, use 火事 (kaji) instead.",
+      "Commonly used in cooking expressions like 火をつける (light the stove) and 火を通す (cook through)."
+    ],
+    "senses": [
+      {
+        "id": "8meyolgnxd1jt3q",
+        "order": 0,
+        "definition": "Flames that burn and give off heat and light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "fire",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "lh5lrmi3wpb0iio",
+            "text": "暖炉の火が燃えている。",
+            "textLang": "ja",
+            "translation": "The fire in the fireplace is burning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "火",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gz7h9d2sdwi5yzb",
+        "order": 1,
+        "definition": "The flame or heat of a stove used for cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heat",
+              "flame",
+              "burner"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "jyaeqrnfwystx7q",
+            "text": "火を止めてください。",
+            "textLang": "ja",
+            "translation": "Please turn off the heat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, instructing someone in the kitchen",
+            "note": null,
+            "matchedForm": "火",
+            "matchedTranslationForm": "heat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "火",
+    "lemma": "火",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji headword is missing its hiragana reading (ひ)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike English 'fire' which is often used abstractly, Japanese 'hi' refers primarily",
+        "why": "Vague and misleading (火 is also used figuratively in Japanese); replace with useful collocations."
+      }
+    ],
+    "growth": 0.966
   }
 }

@@ -68,6 +68,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to speak; to talk; to discuss",
+    "primaryGloss": "speak",
+    "emotion": "warm and engaging, eager to share thoughts and connect",
+    "notes": [
+      "When talking WITH someone, use 'ile' (or the suffix -(y)la/-(y)le): 'arkadaşımla konuşmak' (to talk with my friend). When discussing a topic, it can take a direct object in the accusative case ('bu konuyu konuşmak').",
+      "Do not confuse with 'demek' (to say) or 'söylemek' (to tell), which focus on delivering a specific message."
+    ],
+    "senses": [
+      {
+        "id": "jaz6e4ja853f2u3",
+        "order": 0,
+        "definition": "To produce words using the voice, or to be able to use a language.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to speak",
+              "to talk"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "014lffmqf1rl8i9",
+            "text": "Bebek henüz konuşmak için çok küçük.",
+            "textLang": "tr",
+            "translation": "The baby is still too young to speak.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and tender, smiling at the thought of a baby",
+            "note": null,
+            "matchedForm": "konuşmak",
+            "matchedTranslationForm": "to speak"
+          },
+          {
+            "id": "961n3rstbw0va9s",
+            "text": "İngilizce konuşmak artık çok önemli.",
+            "textLang": "tr",
+            "translation": "Speaking English is very important now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "konuşmak",
+            "matchedTranslationForm": "Speaking"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9se9vqtvkfpfz3g",
+        "order": 1,
+        "definition": "To have a conversation with someone or discuss a topic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to talk",
+              "to converse",
+              "to discuss"
+            ]
+          }
+        ],
+        "domain": "conversation",
+        "emoji": "💬",
+        "examples": [
+          {
+            "id": "hcdfy38wafstszm",
+            "text": "Seninle biraz konuşmak istiyorum.",
+            "textLang": "tr",
+            "translation": "I want to talk with you for a bit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "konuşmak",
+            "matchedTranslationForm": "to talk"
+          },
+          {
+            "id": "wnyqifhl2zxvsx8",
+            "text": "Yarın bu konuyu tekrar konuşalım.",
+            "textLang": "tr",
+            "translation": "Let's discuss this subject again tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "konuşalım",
+            "matchedTranslationForm": "discuss"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "konuşmak",
+    "lemma": "konuşmak",
+    "reading": null,
+    "ipa": "/ko.nuʃˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to speak; to talk; to converse",
     "primaryGloss": "speak",
     "emotion": "warm and engaging, eager to share thoughts and connect",
@@ -201,5 +354,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Yarın bu konuyu tekrar konuşmak istiyorum.",
+        "why": "Shows 'to discuss a topic' (takes direct object), not 'to converse with someone'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].text",
+        "quote": "To speak English is very important in the world now.",
+        "why": "Unnatural calqued English ('Speaking English is very important...')."
+      }
+    ],
+    "growth": 0.964
   }
 }

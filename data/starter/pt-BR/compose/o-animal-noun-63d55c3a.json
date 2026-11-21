@@ -71,6 +71,115 @@
     "shortGloss": "animal; beast",
     "primaryGloss": "animal",
     "emotion": "matter-of-fact and informative, describing a part of the natural world",
+    "notes": [
+      "The plural is 'animais'."
+    ],
+    "senses": [
+      {
+        "id": "rq093tny9csniqi",
+        "order": 0,
+        "definition": "A living creature that can move and feel, and is not a plant or a human.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "animal"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🐾",
+        "examples": [
+          {
+            "id": "b4zlhs6lmpr2h5o",
+            "text": "O gato é um animal doméstico muito popular.",
+            "textLang": "pt",
+            "translation": "The cat is a very popular domestic animal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and matter-of-fact, stating a common observation about pets",
+            "note": null,
+            "matchedForm": "animal",
+            "matchedTranslationForm": "animal"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d01bspg3hkreixx",
+        "order": 1,
+        "definition": "A cruel, wild, or brutal person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "animal",
+              "beast",
+              "brute"
+            ]
+          }
+        ],
+        "domain": "behavior",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "p2ijqa5ku07u97z",
+            "text": "Ele se comportou como um animal durante a briga.",
+            "textLang": "pt",
+            "translation": "He behaved like an animal during the fight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shocked and disapproving, reflecting on someone's poor conduct",
+            "note": null,
+            "matchedForm": "animal",
+            "matchedTranslationForm": "animal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o animal",
+    "lemma": "animal",
+    "reading": null,
+    "ipa": "/aniˈmaw/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "animal; beast",
+    "primaryGloss": "animal",
+    "emotion": "matter-of-fact and informative, describing a part of the natural world",
     "notes": [],
     "senses": [
       {
@@ -158,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The cat is a very popular house animal.",
+        "why": "Calqued translation; 'animal doméstico' is 'domestic animal' or 'pet', not 'house animal'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Used to describe someone who behaves in a wild, cruel, or aggressive",
+        "why": "Meta-language ('Used to describe...') instead of a direct noun definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular plural 'animais' (-al -> -ais), essential for A2 learners."
+      }
+    ],
+    "growth": 1.059
   }
 }

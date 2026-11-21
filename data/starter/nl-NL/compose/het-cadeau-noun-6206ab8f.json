@@ -72,6 +72,75 @@
     "primaryGloss": "gift",
     "emotion": "excited and generous, holding out a wrapped box",
     "notes": [
+      "Borrowed from French, so 'eau' is pronounced /oː/. The plural is 'cadeaus' and the very common diminutive is 'het cadeautje'.",
+      "A more formal synonym is 'het geschenk'."
+    ],
+    "senses": [
+      {
+        "id": "ga6dfx91447epjz",
+        "order": 0,
+        "definition": "Something that you give to someone, usually for a special occasion like a birthday.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gift",
+              "present"
+            ]
+          }
+        ],
+        "domain": "gift",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "pk49maah12heabf",
+            "text": "Ik kocht een mooi cadeau voor haar verjaardag.",
+            "textLang": "nl",
+            "translation": "I bought a nice gift for her birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and thoughtful, looking forward to their reaction",
+            "note": null,
+            "matchedForm": "cadeau",
+            "matchedTranslationForm": "gift"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het cadeau",
+    "lemma": "cadeau",
+    "reading": null,
+    "ipa": "/kaːˈdoː/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎁",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "gift; present",
+    "primaryGloss": "gift",
+    "emotion": "excited and generous, holding out a wrapped box",
+    "notes": [
       "The plural of 'cadeau' can be either 'cadeaus' or 'cadeaux'. Both are correct, though 'cadeaus' is more common in modern Dutch.",
       "Do not confuse 'cadeau' with 'gesギフト', which is a slightly more formal synonym."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'cadeau' with 'gesギフト', which is a slightly more",
+        "why": "Contains corrupted Japanese katakana ('gesギフト') instead of the Dutch word 'geschenk'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The plural of 'cadeau' can be either 'cadeaus' or 'cadeaux'.",
+        "why": "The standard Dutch plural is 'cadeaus'; 'cadeaux' is outdated and non-standard."
+      }
+    ],
+    "growth": 0.897
   }
 }

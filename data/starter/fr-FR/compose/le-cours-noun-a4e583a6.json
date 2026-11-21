@@ -68,6 +68,117 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "class, lesson; course",
+    "primaryGloss": "class",
+    "emotion": "focused and studious, settling down at a desk",
+    "notes": [
+      "The final '-s' is silent, and the singular and plural forms are identical ('un cours', 'des cours').",
+      "Do not confuse with 'la cour' (courtyard, schoolyard), which is feminine and spelled without '-s'."
+    ],
+    "senses": [
+      {
+        "id": "23xhysc254lalvt",
+        "order": 0,
+        "definition": "A scheduled period of instruction, or a series of lessons in a subject.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "class",
+              "lesson",
+              "course"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "👨‍🏫",
+        "examples": [
+          {
+            "id": "90n9t4dkpkd7vac",
+            "text": "J'ai un cours de français cet après-midi.",
+            "textLang": "fr",
+            "translation": "I have a French class this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking forward to learning something new today",
+            "note": null,
+            "matchedForm": "cours",
+            "matchedTranslationForm": "class"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "atzrc89dc9p5h0w",
+        "order": 1,
+        "definition": "The way something progresses over time, or the path of a river.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "course",
+              "flow"
+            ]
+          }
+        ],
+        "domain": "progression",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "pwi4z5xbssn0lw5",
+            "text": "La vie reprend son cours normal.",
+            "textLang": "fr",
+            "translation": "Life is returning to its normal course.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cours",
+            "matchedTranslationForm": "course"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le cours",
+    "lemma": "cours",
+    "reading": null,
+    "ipa": "/kuʁ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "class; lesson; stream",
     "primaryGloss": "class",
     "emotion": "focused and studious, settling down at a desk",
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il faut laisser le temps faire son cours.",
+        "why": "Broken idiom: conflates 'suivre son cours' and 'laisser le temps faire son œuvre'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "class; lesson; stream",
+        "why": "'stream' is not a gloss of 'cours' alone (only in 'cours d'eau')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'cours' translates as both 'class' ... and 'lesson'",
+        "why": "Restates the glosses while missing silent final '-s' and singular/plural identity."
+      }
+    ],
+    "growth": 1.102
   }
 }

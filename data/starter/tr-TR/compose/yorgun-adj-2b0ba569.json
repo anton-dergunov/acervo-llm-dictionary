@@ -68,6 +68,74 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "tired",
+    "primaryGloss": "tired",
+    "emotion": "heavy and drained, letting out a soft sigh of relief",
+    "notes": [
+      "Often used in the phrase yorgun düşmek (to fall tired / become worn out). Stronger exhaustion is expressed with bitkin or yorgunluktan ölmek (to be dead tired)."
+    ],
+    "senses": [
+      {
+        "id": "yu1abb7zc7xwdvo",
+        "order": 0,
+        "definition": "Needing rest or sleep because of physical or mental effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tired",
+              "fatigued"
+            ]
+          }
+        ],
+        "domain": "fatigue",
+        "emoji": "😫",
+        "examples": [
+          {
+            "id": "w2vg4o19yde5897",
+            "text": "Bugün çok yorgunum, erken yatacağım.",
+            "textLang": "tr",
+            "translation": "I am very tired today; I will go to bed early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yorgunum",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yorgun",
+    "lemma": "yorgun",
+    "reading": null,
+    "ipa": "/joɾˈɡun/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "tired; exhausted",
     "primaryGloss": "tired",
     "emotion": "heavy and drained, letting out a soft sigh of relief",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bugün çok yorgun hissediyorum.",
+        "why": "Calque of English 'feel tired'; natural Turkish is 'Bugün çok yorgunum' or 'kendimi yorgun hissediyorum'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Showing signs of wear or depletion through long use or age.",
+        "why": "Calling furniture 'yorgun' is a poetic metaphor, not an everyday A2 sense; 'eski' means old/worn."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "tired; exhausted",
+        "why": "'Exhausted' contradicts the note and isn't in the sense glosses."
+      }
+    ],
+    "growth": 0.621
   }
 }

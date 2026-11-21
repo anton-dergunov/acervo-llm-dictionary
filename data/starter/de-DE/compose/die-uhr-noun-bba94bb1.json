@@ -75,6 +75,138 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "clock, watch; o'clock",
+    "primaryGloss": "clock",
+    "emotion": "practical and matter-of-fact, checking the time",
+    "notes": [
+      "Covers both 'clock' and 'watch'; use 'die Armbanduhr' specifically for a wristwatch.",
+      "When telling the time, 'Uhr' remains singular: 'Es ist drei Uhr' (It is three o'clock)."
+    ],
+    "senses": [
+      {
+        "id": "642t4pwdws4emmb",
+        "order": 0,
+        "definition": "A device that shows what time it is, worn on the wrist or placed in a room.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clock",
+              "watch",
+              "wristwatch"
+            ]
+          }
+        ],
+        "domain": "device",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "9ri7ss6hxjx7djl",
+            "text": "An der Wand hängt eine Uhr.",
+            "textLang": "de",
+            "translation": "A clock is hanging on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and descriptive, pointing out the room",
+            "note": null,
+            "matchedForm": "Uhr",
+            "matchedTranslationForm": "clock"
+          },
+          {
+            "id": "uozvot5ntkv5hkv",
+            "text": "Er trägt eine neue Uhr am Handgelenk.",
+            "textLang": "de",
+            "translation": "He is wearing a new watch on his wrist.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and proud of the new accessory",
+            "note": null,
+            "matchedForm": "Uhr",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7f97t2j9g05gaw0",
+        "order": 1,
+        "definition": "Used after a number to state the time of day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "o'clock"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "l17p6viyi0bj2dk",
+            "text": "Der Zug fährt um acht Uhr ab.",
+            "textLang": "de",
+            "translation": "The train leaves at eight o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Uhr",
+            "matchedTranslationForm": "o'clock"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Uhr",
+    "lemma": "Uhr",
+    "reading": null,
+    "ipa": "/uːɐ̯/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time",
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "clock; watch",
     "primaryGloss": "clock",
     "emotion": "practical and matter-of-fact, checking the time",
@@ -166,5 +298,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 sense 'o'clock' (e.g., 'Es ist drei Uhr')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(watch) A small clock worn on the wrist to tell the time.",
+        "why": "'Uhr' means any timepiece; splitting into clock and watch is an English distinction."
+      }
+    ],
+    "growth": 1.267
   }
 }

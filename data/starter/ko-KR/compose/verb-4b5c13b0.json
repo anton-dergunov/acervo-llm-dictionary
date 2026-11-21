@@ -71,6 +71,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat; to have; to take",
+    "primaryGloss": "eat",
+    "emotion": "content and satisfied, simply enjoying a meal at the table",
+    "notes": [
+      "Unlike English 'eat', 먹다 is also commonly used in casual speech for drinks (커피를 먹다) and is the standard verb for taking medicine (약을 먹다).",
+      "When speaking to or about someone of higher status, use the honorific verb 드시다 or 잡수시다 instead."
+    ],
+    "senses": [
+      {
+        "id": "25a89hlhm06t7cf",
+        "order": 0,
+        "definition": "To put food into your mouth and swallow it, or to have a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eat",
+              "have"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "d1ht1m1ew3uuets",
+            "text": "점심을 맛있게 먹었어요.",
+            "textLang": "ko",
+            "translation": "I had a delicious lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and satisfied after a good lunch",
+            "note": null,
+            "matchedForm": "먹었어요",
+            "matchedTranslationForm": "had"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pvjw9vbghg2z4no",
+        "order": 1,
+        "definition": "To drink a liquid or take medicine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink",
+              "have",
+              "take"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "bxxk2cifjf9cs9q",
+            "text": "식사 후에 감기약을 먹었어요.",
+            "textLang": "ko",
+            "translation": "I took cold medicine after the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "먹었어요",
+            "matchedTranslationForm": "took"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "먹다",
+    "lemma": "먹다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to consume",
     "primaryGloss": "eat",
     "emotion": "content and satisfied, simply enjoying a meal at the table",
@@ -164,5 +276,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I ate lunch deliciously.",
+        "why": "'Ate lunch deliciously' is a calque of 맛있게 먹었어요; natural English is 'I really enjoyed lunch'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common and basic verb for consuming food",
+        "why": "Pure filler restating the definition."
+      }
+    ],
+    "growth": 1.029
   }
 }

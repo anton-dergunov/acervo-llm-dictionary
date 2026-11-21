@@ -74,6 +74,95 @@
     "primaryGloss": "dinner",
     "emotion": null,
     "notes": [
+      "In Mexico, the main meal of the day is 'la comida' (eaten in the afternoon). 'La cena' is eaten in the evening (around 8 or 9 PM) and is usually lighter, unless it is a social occasion."
+    ],
+    "senses": [
+      {
+        "id": "mtkn3tbyvps99qc",
+        "order": 0,
+        "definition": "The meal eaten in the evening, or a social gathering for this meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "supper"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "1asuymmb8jiwsdo",
+            "text": "Preparé una sopa caliente para la cena.",
+            "textLang": "es",
+            "translation": "I made a hot soup for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and caring, serving a comforting meal after a long day",
+            "note": null,
+            "matchedForm": "cena",
+            "matchedTranslationForm": "dinner"
+          },
+          {
+            "id": "ynnqbjn785dcq9m",
+            "text": "Tenemos una cena con amigos el sábado.",
+            "textLang": "es",
+            "translation": "We have a dinner with friends on Saturday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cena",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la cena",
+    "lemma": "cena",
+    "reading": null,
+    "ipa": "/ˈse.na/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner; supper",
+    "primaryGloss": "dinner",
+    "emotion": null,
+    "notes": [
       "In Spain and parts of Latin America, la cena is eaten quite late in the evening, often around 9:00 PM or later."
     ],
     "senses": [
@@ -162,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "la cena is eaten quite late in the evening",
+        "why": "'La cena' is the lightest meal in Mexico, not the main meal as defined."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "The main meal of the evening, eaten at the end of the day.",
+        "why": "In Mexico, 'la comida' (afternoon) is the main meal; 'la cena' is usually light."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(party) A social gathering or party where people eat an evening meal",
+        "why": "Regular extension of 'dinner' (having a dinner with friends), not a separate 'banquet' sense."
+      }
+    ],
+    "growth": 0.968
   }
 }

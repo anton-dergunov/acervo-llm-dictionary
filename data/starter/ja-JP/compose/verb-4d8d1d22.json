@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "会う",
     "lemma": "会う",
+    "reading": "あう",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to meet; to see (someone)",
+    "primaryGloss": "to meet",
+    "emotion": "friendly and anticipating, looking forward to a social interaction",
+    "notes": [
+      "A godan verb (会います, 会って). The person you meet is marked with に (or と when mutual), never を: 友だちに会う (to meet a friend).",
+      "Do not confuse with the homophone 合う (あう, to fit or match)."
+    ],
+    "senses": [
+      {
+        "id": "ok3s8tqds9px15z",
+        "order": 0,
+        "definition": "To come together with someone in the same place, either by arrangement or by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to meet",
+              "to see (someone)"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "gv2krahmv7updg5",
+            "text": "駅で友達に会った。",
+            "textLang": "ja",
+            "translation": "I met a friend at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "会った",
+            "matchedTranslationForm": "met"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "会う",
+    "lemma": "会う",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -120,5 +189,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (あう) for a word with kanji."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "會 (meeting) is often confused with 合う",
+        "why": "Uses non-standard traditional character 會 instead of the headword 会う."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "use 'hajimemashite' (nice to meet you) instead of 'au'",
+        "why": "はじめまして is a set greeting, not a verb replacing 会う; 初めて会う is completely normal."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain that 会う takes the particle に (or と) for the person met, not を."
+      }
+    ],
+    "growth": 0.948
   }
 }

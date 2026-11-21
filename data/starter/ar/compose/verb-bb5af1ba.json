@@ -70,6 +70,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be",
+    "primaryGloss": "to be",
+    "emotion": null,
+    "notes": [
+      "Arabic omits 'to be' in simple present-tense sentences. كَانَ is used to put a sentence into the past tense (and its present form يَكُونُ yakūnu is used for the future or after modal words).",
+      "The noun or adjective that follows كَانَ as its predicate takes the accusative case (-an): كَانَ الطَّقْسُ جَمِيلًا (The weather was nice)."
+    ],
+    "senses": [
+      {
+        "id": "wu64afhlzgu2t66",
+        "order": 0,
+        "definition": "Used as the past tense of 'to be' to state what someone or something was, or where or how they were.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "bxr08s5nd13p49u",
+            "text": "كَانَ أَبِي مُعَلِّمًا.",
+            "textLang": "ar",
+            "translation": "My father was a teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and slightly nostalgic, recalling a past role",
+            "note": null,
+            "matchedForm": "كَانَ",
+            "matchedTranslationForm": "was"
+          },
+          {
+            "id": "tkgbo3t0oqomqtd",
+            "text": "كَانَ الطَّقْسُ جَمِيلًا أَمْسِ.",
+            "textLang": "ar",
+            "translation": "The weather was beautiful yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "كَانَ",
+            "matchedTranslationForm": "was"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "كَانَ",
+    "lemma": "كَانَ",
+    "reading": null,
+    "ipa": "/kaːna/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be; to exist",
     "primaryGloss": "to be",
     "emotion": null,
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Identity and state are the same copular 'to be' sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to be; to exist",
+        "why": "Names 'to exist', which is absent from the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "كَانَ الطَّقْسُ جَمِيلًا فِي الْأَمْسِ.",
+        "why": "أَمْسِ is used directly without فِي الْـ (أَمْسِ or بِالأَمْسِ)."
+      }
+    ],
+    "growth": 0.911
   }
 }

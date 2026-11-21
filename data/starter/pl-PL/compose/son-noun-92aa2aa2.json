@@ -70,6 +70,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "elephant",
+    "primaryGloss": "elephant",
+    "emotion": null,
+    "notes": [
+      "The plural form is 'słonie' (e.g., 'dwa słonie'), and the genitive/accusative singular is 'słonia'."
+    ],
+    "senses": [
+      {
+        "id": "gqqp09hnzouch5g",
+        "order": 0,
+        "definition": "A very large, grey wild animal with big ears and a long trunk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "elephant"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "288e2ly407hzzfs",
+            "text": "W zoo widziałem dużego słonia.",
+            "textLang": "pl",
+            "translation": "I saw a big elephant at the zoo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and eager to share a fun memory from the zoo",
+            "note": null,
+            "matchedForm": "słonia",
+            "matchedTranslationForm": "elephant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "słoń",
+    "lemma": "słoń",
+    "reading": null,
+    "ipa": "/swɔɲ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "elephant; ivory",
     "primaryGloss": "elephant",
     "emotion": null,
@@ -138,5 +205,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The hard white material that forms the tusks of an elephant.",
+        "why": "False sense: 'słoń' never means ivory (which is 'kość słoniowa')."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "elephant; ivory",
+        "why": "Includes false meaning 'ivory'."
+      }
+    ],
+    "growth": 0.813
   }
 }

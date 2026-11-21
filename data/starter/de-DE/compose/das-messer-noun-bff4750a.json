@@ -72,6 +72,73 @@
     "primaryGloss": "knife",
     "emotion": "matter-of-fact and utilitarian, focused on the task at hand",
     "notes": [
+      "The plural form is unchanged: 'das Messer' → 'die Messer' (dative plural: 'den Messern')."
+    ],
+    "senses": [
+      {
+        "id": "mqkfmsz7glk6qjg",
+        "order": 0,
+        "definition": "A hand-held tool with a sharp blade used for cutting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "knife"
+            ]
+          }
+        ],
+        "domain": "tool",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "gwk0xc38ofbagwd",
+            "text": "Ich schneide das Brot mit einem scharfen Messer.",
+            "textLang": "de",
+            "translation": "I am cutting the bread with a sharp knife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and steady, concentrating on the action of cutting",
+            "note": null,
+            "matchedForm": "Messer",
+            "matchedTranslationForm": "knife"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Messer",
+    "lemma": "Messer",
+    "reading": null,
+    "ipa": "/ˈmɛsɐ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "knife",
+    "primaryGloss": "knife",
+    "emotion": "matter-of-fact and utilitarian, focused on the task at hand",
+    "notes": [
       "Used in the kitchen for food preparation or at the table for eating. It is a common, everyday object."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used in the kitchen for food preparation or at the table",
+        "why": "Restates what a knife is instead of giving grammar (e.g. unchanged plural 'die Messer')."
+      }
+    ],
+    "growth": 0.957
   }
 }

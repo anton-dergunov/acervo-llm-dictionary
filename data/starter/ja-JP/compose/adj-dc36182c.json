@@ -77,6 +77,115 @@
     "primaryGloss": "slow",
     "emotion": "measured and deliberate, acknowledging a steady, unhurried pace",
     "notes": [
+      "Contrasts with 速い (はやい, fast in speed) and 早い (はやい, early in time).",
+      "For arriving behind schedule, Japanese usually uses the verb 遅れる (おくれる, to be late/delayed) rather than 遅い."
+    ],
+    "senses": [
+      {
+        "id": "d5tdmbkpiwj7x5r",
+        "order": 0,
+        "definition": "Moving or acting with little speed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slow"
+            ]
+          }
+        ],
+        "domain": "speed",
+        "emoji": "🐢",
+        "examples": [
+          {
+            "id": "sttarxdz8s1uftb",
+            "text": "この電車はとても遅い。",
+            "textLang": "ja",
+            "translation": "This train is very slow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit impatient and frustrated with the lack of progress",
+            "note": null,
+            "matchedForm": "遅い",
+            "matchedTranslationForm": "slow"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4280arspqog08cx",
+        "order": 1,
+        "definition": "Late in the day or night; past the usual or expected time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "5fa4dvq0d4rpnf4",
+            "text": "もう遅いから、寝ましょう。",
+            "textLang": "ja",
+            "translation": "It's already late, so let's go to sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "遅い",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "遅い",
+    "lemma": "遅い",
+    "reading": "おそい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐢",
+    "topics": [
+      "Time",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "slow; late",
+    "primaryGloss": "slow",
+    "emotion": "measured and deliberate, acknowledging a steady, unhurried pace",
+    "notes": [
       "Use '遅い' for both speed (slow) and time (late). Context usually makes it clear which one you mean: 'bus is slow' vs 'bus is late'.",
       "It is often contrasted with '速い' (fast) when talking about speed, or '早い' (early) when talking about time."
     ],
@@ -164,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use '遅い' for both speed (slow) and time (late).",
+        "why": "Restates the senses; also wrongly says 'bus is late' for バスが遅い."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "帰宅が遅い時間になった。",
+        "why": "Awkward phrasing; 時間が遅い is much more natural for a beginner."
+      }
+    ],
+    "growth": 0.884
   }
 }

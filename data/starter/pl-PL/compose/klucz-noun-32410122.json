@@ -68,6 +68,155 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "key; wrench",
+    "primaryGloss": "key",
+    "emotion": "matter-of-fact and helpful, like finding the right item in your pocket",
+    "notes": [
+      "Takes the preposition 'do' + genitive for what it opens: 'klucz do drzwi' (key to the door), 'klucz do mieszkania' (key to the apartment)."
+    ],
+    "senses": [
+      {
+        "id": "latag07nxa2m1j8",
+        "order": 0,
+        "definition": "A small metal object used to open or close a lock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key"
+            ]
+          }
+        ],
+        "domain": "security",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "2sjjt0uw31cefz5",
+            "text": "Zapomniałem klucza do mieszkania.",
+            "textLang": "pl",
+            "translation": "I forgot the key to the apartment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and slightly anxious, realizing you are locked out",
+            "note": null,
+            "matchedForm": "klucza",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lxewdjx8n47ik9h",
+        "order": 1,
+        "definition": "A metal tool used for gripping and turning nuts and bolts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrench",
+              "spanner"
+            ]
+          }
+        ],
+        "domain": "tools",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "0x9tdmb4t3vowfc",
+            "text": "Podaj mi klucz, muszę dokręcić tę śrubę.",
+            "textLang": "pl",
+            "translation": "Pass me the wrench, I need to tighten this bolt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "klucz",
+            "matchedTranslationForm": "wrench"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t8bhon5ne5r07d0",
+        "order": 2,
+        "definition": "A guide that provides the answers to a test, puzzle, or code, or a way of achieving or understanding something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key",
+              "answer key"
+            ]
+          }
+        ],
+        "domain": "solution",
+        "emoji": "📝",
+        "examples": [
+          {
+            "id": "hkfvut82oarjl1v",
+            "text": "Nauczyciel sprawdził test, używając klucza odpowiedzi.",
+            "textLang": "pl",
+            "translation": "The teacher graded the test using the answer key.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "klucza",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "klucz",
+    "lemma": "klucz",
+    "reading": null,
+    "ipa": "/klut͡ʂ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "key; tool for opening locks",
     "primaryGloss": "key",
     "emotion": "matter-of-fact and helpful, like finding the right item in your pocket",
@@ -160,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'klucze' (plural), which is used for keys, but",
+        "why": "Singular 'klucz' also means wrench/spanner, not specifically the plural 'klucze'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'wrench, spanner' (tool for turning nuts and bolts)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for physical keys and abstract keys, like a key to",
+        "why": "Just restates the senses without adding grammatical or usage help."
+      }
+    ],
+    "growth": 1.18
   }
 }

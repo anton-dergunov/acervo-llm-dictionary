@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to cut; to cut off; to break up",
+    "primaryGloss": "cut",
+    "emotion": "purposeful and efficient, focused on the task at hand",
+    "notes": [
+      "The reflexive 'cortarse el pelo' usually means to get a haircut (done by someone else), not to cut one's own hair.",
+      "For chopping food into small pieces, Mexican Spanish commonly uses 'picar'."
+    ],
+    "senses": [
+      {
+        "id": "caseu2h7cjbq4qi",
+        "order": 0,
+        "definition": "To divide, open, or separate something using a sharp tool like a knife or scissors.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut",
+              "to slice"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "b0cnbqrohmp80yt",
+            "text": "Necesito cortar el pan para el desayuno.",
+            "textLang": "es",
+            "translation": "I need to cut the bread for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and practical, just getting the meal ready",
+            "note": null,
+            "matchedForm": "cortar",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8lzkudeig4fy44w",
+        "order": 1,
+        "definition": "To stop or interrupt a service, supply, or phone call.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cut off",
+              "to disconnect",
+              "to hang up"
+            ]
+          }
+        ],
+        "domain": "interruption",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "8iomuv700dtp51a",
+            "text": "Van a cortar el agua por unas horas.",
+            "textLang": "es",
+            "translation": "They are going to cut off the water for a few hours.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and informing someone of an inconvenience",
+            "note": null,
+            "matchedForm": "cortar",
+            "matchedTranslationForm": "cut off"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u9tfoa2sx3xcj2w",
+        "order": 2,
+        "definition": "To end a romantic relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to break up"
+            ]
+          }
+        ],
+        "domain": "relationships",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "e1tlnwrzh7nq3sg",
+            "text": "Sofía cortó con su novio la semana pasada.",
+            "textLang": "es",
+            "translation": "Sofía broke up with her boyfriend last week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cortó",
+            "matchedTranslationForm": "broke up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "cortar",
+    "lemma": "cortar",
+    "reading": null,
+    "ipa": "/koɾˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to cut; to chop; to slice",
     "primaryGloss": "cut",
     "emotion": "purposeful and efficient, focused on the task at hand",
@@ -203,5 +354,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When talking about cutting your own hair, you must say 'cortarse el pelo'.",
+        "why": "'Cortarse el pelo' usually means having one's hair cut (at a salon), not cutting it oneself."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to cut; to chop; to slice",
+        "why": "Only covers sense 0; ignores sense 1 (cut off/disconnect) and sense 2."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "To take a shorter path to arrive somewhere faster.",
+        "why": "Marginal sense compared to everyday Mexican uses like ending a call or breaking up."
+      }
+    ],
+    "growth": 0.951
   }
 }

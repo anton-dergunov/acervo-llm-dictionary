@@ -60,6 +60,115 @@
     "headword": "odiar",
     "lemma": "odiar",
     "reading": null,
+    "ipa": "/oˈðjaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hate",
+    "primaryGloss": "to hate",
+    "emotion": "intense and bitter, rejecting something with strong personal feeling",
+    "notes": [
+      "Followed directly by a noun or an infinitive without a preposition: 'odio los lunes' (I hate Mondays), 'odio esperar' (I hate waiting)."
+    ],
+    "senses": [
+      {
+        "id": "lkkerc5gd2xus5x",
+        "order": 0,
+        "definition": "To dislike someone or something very strongly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hate",
+              "to detest",
+              "can't stand"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "y6o1aw1li24xkd1",
+            "text": "Odio levantarme temprano los lunes.",
+            "textLang": "es",
+            "translation": "I hate waking up early on Mondays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grumpy and reluctant, complaining about the early morning start",
+            "note": null,
+            "matchedForm": "Odio",
+            "matchedTranslationForm": "hate"
+          },
+          {
+            "id": "gm612dxnre4kbvg",
+            "text": "Odia el frío y la lluvia.",
+            "textLang": "es",
+            "translation": "She hates the cold and the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Odia",
+            "matchedTranslationForm": "hates"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "lkkerc5gd2xus5x",
+      "from": "Sentir aversión o enemistad profunda hacia alguien o algo.",
+      "to": "To feel deep aversion or enmity toward someone or something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    },
+    {
+      "sense": "50pyvgyysvlfwap",
+      "from": "Disgustar o desagradar algo de manera muy intensa.",
+      "to": "To dislike or be displeased by something very intensely.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "odiar",
+    "lemma": "odiar",
+    "reading": null,
     "ipa": "/oˈdjaɾ/",
     "pos": "verb",
     "gender": null,
@@ -165,22 +274,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "lkkerc5gd2xus5x",
-      "from": "Sentir aversión o enemistad profunda hacia alguien o algo.",
-      "to": "To feel deep aversion or enmity toward someone or something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    },
-    {
-      "sense": "50pyvgyysvlfwap",
-      "from": "Disgustar o desagradar algo de manera muy intensa.",
-      "to": "To dislike or be displeased by something very intensely.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same meaning; hyperbole in both examples is one sense."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to can't stand",
+        "why": "'to can't stand' is ungrammatical in English ('can't' is a modal verb)."
+      }
+    ],
+    "growth": 0.635
+  }
 }

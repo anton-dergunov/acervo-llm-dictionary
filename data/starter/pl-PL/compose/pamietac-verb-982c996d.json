@@ -58,6 +58,116 @@
     "headword": "pamiętać",
     "lemma": "pamiętać",
     "reading": null,
+    "ipa": "/paˈmjɛn.tat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to remember; to keep in mind",
+    "primaryGloss": "remember",
+    "emotion": "warm and reminiscent, looking back fondly at a clear memory",
+    "notes": [
+      "Imperfective verb. Takes the accusative for recalling past things ('pamiętam to'), or 'o' + locative for not forgetting something ('pamiętaj o kluczach')."
+    ],
+    "senses": [
+      {
+        "id": "pduemnetjcr7f5w",
+        "order": 0,
+        "definition": "To have a memory of someone or something from the past.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remember",
+              "recall"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "se17i28qxx3dqa5",
+            "text": "Pamiętam nasz pierwszy spacer.",
+            "textLang": "pl",
+            "translation": "I remember our first walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and soft, smiling at an old memory",
+            "note": null,
+            "matchedForm": "Pamiętam",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gs9qqoupai7cu1n",
+        "order": 1,
+        "definition": "To keep something in mind so you do not forget it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remember",
+              "keep in mind",
+              "bear in mind"
+            ]
+          }
+        ],
+        "domain": "mindfulness",
+        "emoji": "📌",
+        "examples": [
+          {
+            "id": "qrc443qaaavrjd3",
+            "text": "Musisz pamiętać o kluczach.",
+            "textLang": "pl",
+            "translation": "You must remember the keys.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and reminding someone firmly before they leave",
+            "note": null,
+            "matchedForm": "pamiętać",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pamiętać",
+    "lemma": "pamiętać",
+    "reading": null,
     "ipa": "/paˈmjɛ.tat͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/paˈmjɛ.tat͡ɕ/",
+        "why": "Wrong transcription of nasal vowel 'ę': should be /paˈmjɛn.tat͡ɕ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the 'pamiętać o + locative' pattern used in sense 1's example."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "You must keep the keys in mind.",
+        "why": "Unnatural translation; in English one says 'remember to take the keys'."
+      }
+    ],
+    "growth": 1.045
   }
 }

@@ -68,6 +68,74 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "abroad",
+    "primaryGloss": "abroad",
+    "emotion": "dreamy and longing, thinking of far-off places",
+    "notes": [
+      "Describes location (where: 'жить за границей'). For movement to a foreign country (where to), use 'за границу' ('поехать за границу')."
+    ],
+    "senses": [
+      {
+        "id": "4blmlfxe3g0wc2s",
+        "order": 0,
+        "definition": "In a foreign country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "abroad",
+              "in a foreign country"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "fqdse9keuw2y4e8",
+            "text": "Они любят отдыхать за границей каждое лето.",
+            "textLang": "ru",
+            "translation": "They like to vacation abroad every summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, looking back on a nice vacation",
+            "note": null,
+            "matchedForm": "за границей",
+            "matchedTranslationForm": "abroad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "за границей",
+    "lemma": "за границей",
+    "reading": null,
+    "ipa": "/zə ɡrɐˈnʲit͡sɨj/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "abroad; in a foreign country",
     "primaryGloss": "abroad",
     "emotion": "dreamy and longing, thinking of far-off places",
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "In or to a foreign country.",
+        "why": "'За границей' only means 'in a foreign country' (location), never 'to' (direction, 'за границу')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when someone is living, traveling, or working outside their home country.",
+        "why": "Restates the definition of 'abroad'."
+      }
+    ],
+    "growth": 0.764
   }
 }

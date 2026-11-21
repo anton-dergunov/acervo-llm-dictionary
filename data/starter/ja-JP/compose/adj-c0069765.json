@@ -57,6 +57,116 @@
     "language": "ja",
     "headword": "柔らかい",
     "lemma": "柔らかい",
+    "reading": "やわらかい",
+    "ipa": "jawarakai",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☁️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "soft; tender; pliable",
+    "primaryGloss": "soft",
+    "emotion": "a gentle, comforting sensation, like touching something plush or delicate",
+    "notes": [
+      "An i-adjective. Also written 軟らかい, though 柔らかい is more common in everyday writing."
+    ],
+    "senses": [
+      {
+        "id": "7ztxdjhjwrh7eyj",
+        "order": 0,
+        "definition": "Easily pressed, bent, or changed in shape; not hard or stiff.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soft",
+              "pliable",
+              "flexible"
+            ]
+          }
+        ],
+        "domain": "texture",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "ahnudgassis5d19",
+            "text": "このパンはとても柔らかいです。",
+            "textLang": "ja",
+            "translation": "This bread is very soft.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and appreciative of the quality",
+            "note": null,
+            "matchedForm": "柔らかい",
+            "matchedTranslationForm": "soft"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "byd8ee8g215oh2s",
+        "order": 1,
+        "definition": "Of food, especially meat: easy to chew or cut.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tender",
+              "soft"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "980eg7lcxu21lrb",
+            "text": "よく煮込んだ肉は柔らかくて美味しい。",
+            "textLang": "ja",
+            "translation": "The well-stewed meat is tender and delicious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and content while enjoying a good meal",
+            "note": null,
+            "matchedForm": "柔らかく",
+            "matchedTranslationForm": "tender"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "柔らかい",
+    "lemma": "柔らかい",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for headword with kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "senses[1].examples[0]",
+        "quote": "Note the adverbial use 柔らかく (yawarakaku) to describe the state",
+        "why": "柔らかくて is the conjunctive te-form ('tender and...'), not an adverbial use."
+      }
+    ],
+    "growth": 0.59
   }
 }

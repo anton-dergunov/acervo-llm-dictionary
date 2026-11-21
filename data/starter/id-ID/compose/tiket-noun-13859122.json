@@ -72,6 +72,73 @@
     "primaryGloss": "ticket",
     "emotion": "excited and ready to leave for a trip",
     "notes": [
+      "A common synonym is 'karcis', which is especially used for short-distance transport, parking, or small admission booths."
+    ],
+    "senses": [
+      {
+        "id": "1ltlvddw1b7lnni",
+        "order": 0,
+        "definition": "A printed or digital pass that gives you the right to travel on a vehicle or enter an event or place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ticket"
+            ]
+          }
+        ],
+        "domain": "general",
+        "emoji": "🎟️",
+        "examples": [
+          {
+            "id": "5fanljclopcgpwk",
+            "text": "Saya membeli tiket kereta api ke Bandung.",
+            "textLang": "id",
+            "translation": "I bought a train ticket to Bandung.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased to have plans sorted out",
+            "note": null,
+            "matchedForm": "tiket",
+            "matchedTranslationForm": "ticket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tiket",
+    "lemma": "tiket",
+    "reading": null,
+    "ipa": "/ˈti.kɛt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎟️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "ticket",
+    "primaryGloss": "ticket",
+    "emotion": "excited and ready to leave for a trip",
+    "notes": [
       "Used for travel, events, and admission to places.",
       "Can also be spelled 'karcis', though 'tiket' is very common in modern Indonesian."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for travel, events, and admission to places.",
+        "why": "Restates the definition without adding usage value."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Can also be spelled 'karcis'",
+        "why": "'karcis' is a synonym (from Dutch), not an alternate spelling of 'tiket'."
+      }
+    ],
+    "growth": 0.939
   }
 }

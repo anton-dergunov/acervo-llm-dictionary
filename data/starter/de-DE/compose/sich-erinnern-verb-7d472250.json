@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to remember",
+    "primaryGloss": "remember",
+    "emotion": "reflective and thoughtful, bringing a memory back into focus",
+    "notes": [
+      "Takes an accusative reflexive pronoun ('mich', 'dich', etc.) and the preposition 'an' + accusative for the thing remembered: 'Ich erinnere mich an den Tag'.",
+      "Do not confuse with 'sich (etwas) merken', which means to memorize or keep something in mind so you do not forget it."
+    ],
+    "senses": [
+      {
+        "id": "o3g3puy0asnt75j",
+        "order": 0,
+        "definition": "To have or bring back a memory of someone or something from the past.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to remember",
+              "to recall"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "u0iphiyjhehtdsq",
+            "text": "Ich erinnere mich gerne an unsere Reise.",
+            "textLang": "de",
+            "translation": "I like to remember our trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and nostalgic, feeling pleasant about a past event",
+            "note": null,
+            "matchedForm": "erinnere mich",
+            "matchedTranslationForm": "remember"
+          },
+          {
+            "id": "c8e05cl32o33gav",
+            "text": "Erinnerst du dich noch an ihn?",
+            "textLang": "de",
+            "translation": "Do you still remember him?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Erinnerst du dich",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "sich erinnern",
+    "lemma": "sich erinnern",
+    "reading": null,
+    "ipa": "/zɪç ɛɐ̯ˈʔɪnɐn/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to remember; to recall",
     "primaryGloss": "remember",
     "emotion": "reflective and thoughtful, bringing a memory back into focus",
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(retention) To keep information or a fact in your mind",
+        "why": "Describes 'sich merken', not 'sich erinnern', contradicting note[1]."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Man muss sich diesen Termin gut erinnern.",
+        "why": "Ungrammatical in standard German; confounds 'sich erinnern an' with 'sich (Dat.) etwas merken'."
+      }
+    ],
+    "growth": 0.771
   }
 }

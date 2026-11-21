@@ -58,6 +58,95 @@
     "headword": "het raam",
     "lemma": "raam",
     "reading": null,
+    "ipa": "/raːm/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪟",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "window",
+    "primaryGloss": "window",
+    "emotion": "curious and observant, looking out at the street",
+    "notes": [
+      "Use 'het raam' for the whole window (frame and glass), and 'de ruit' for just the pane of glass.",
+      "Note the vowel change in the diminutive: 'het raampje' (plural: 'ramen')."
+    ],
+    "senses": [
+      {
+        "id": "zu3huxbzhur4575",
+        "order": 0,
+        "definition": "An opening in a wall or vehicle with glass in it to let in light and air.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "window"
+            ]
+          }
+        ],
+        "domain": "architecture",
+        "emoji": "🪟",
+        "examples": [
+          {
+            "id": "ii35yrpsop9x10l",
+            "text": "Ik kijk uit het raam naar de regen.",
+            "textLang": "nl",
+            "translation": "I am looking out the window at the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "raam",
+            "matchedTranslationForm": "window"
+          },
+          {
+            "id": "pw0oio93eobeb4m",
+            "text": "Zou je het raam open willen doen?",
+            "textLang": "nl",
+            "translation": "Would you mind opening the window?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "raam",
+            "matchedTranslationForm": "window"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het raam",
+    "lemma": "raam",
+    "reading": null,
     "ipa": "/ˈraːm/",
     "pos": "noun",
     "gender": "neuter",
@@ -159,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De foto zit in een mooi houten raam.",
+        "why": "A picture frame in Dutch is 'lijst' (fotolijst), not 'raam'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A rigid structure that holds something, such as a picture",
+        "why": "'Raam' as a physical frame is technical/specialized; picture frame is false."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "which is also the word for the Japanese noodle dish",
+        "why": "Trivial English/loanword homograph joke, unhelpful for A2 Dutch learners."
+      }
+    ],
+    "growth": 0.759
   }
 }

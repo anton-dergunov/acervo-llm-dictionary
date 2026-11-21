@@ -72,6 +72,96 @@
     "primaryGloss": "city",
     "emotion": "a sense of scale and bustle, feeling the vibrancy of urban life",
     "notes": [
+      "Covers both 'city' and 'town' (small towns are sometimes called 'η κωμόπολη'); contrasts with 'το χωριό' (village).",
+      "Do not confuse with 'πολύ' (/poˈli/, 'very/much'), which is stressed on the second syllable."
+    ],
+    "senses": [
+      {
+        "id": "jgj9mtbey07r6p8",
+        "order": 0,
+        "definition": "A large urban settlement where many people live and work, covering both a city and a town.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "50xxkc8979fmmk4",
+            "text": "Η Αθήνα είναι μια μεγάλη πόλη.",
+            "textLang": "el",
+            "translation": "Athens is a big city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and straightforward, stating a simple fact about the capital",
+            "note": null,
+            "matchedForm": "πόλη",
+            "matchedTranslationForm": "city"
+          },
+          {
+            "id": "wh7uhg2kl1ni6g9",
+            "text": "Πήγαμε σε μια παραθαλάσσια πόλη για το σαββατοκύριακο.",
+            "textLang": "el",
+            "translation": "We went to a seaside town for the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and pleasant, reflecting on a short trip",
+            "note": null,
+            "matchedForm": "πόλη",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η πόλη",
+    "lemma": "πόλη",
+    "reading": null,
+    "ipa": "/ˈpo.li/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "a sense of scale and bustle, feeling the vibrancy of urban life",
+    "notes": [
       "Note that 'η πόλη' is used for both large cities and towns. It differs from 'το χωριό' (the village), which describes smaller, rural settlements.",
       "Be careful not to confuse 'πόλη' (city) with 'πολύ' (very/much); although they sound very similar, one is a noun and the other is an adverb."
     ],
@@ -159,5 +249,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A densely populated urban area that is smaller than a city.",
+        "why": "Greek 'πόλη' does not distinguish 'city' from 'town'; this splits by English translation."
+      }
+    ],
+    "growth": 0.813
   }
 }

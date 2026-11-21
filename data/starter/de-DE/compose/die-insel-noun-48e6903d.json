@@ -72,6 +72,73 @@
     "primaryGloss": "island",
     "emotion": "wistful and calm, imagining a quiet place far away",
     "notes": [
+      "To say 'on an island', use the preposition 'auf' ('auf einer Insel'). For going to an island, use 'auf' with the accusative ('Wir fahren auf die Insel')."
+    ],
+    "senses": [
+      {
+        "id": "zqnyfqjw76n02x2",
+        "order": 0,
+        "definition": "A piece of land completely surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "h8txzaf8c1nvc7t",
+            "text": "Wir machen Urlaub auf einer kleinen Insel.",
+            "textLang": "de",
+            "translation": "We are on vacation on a small island.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dreamy and relaxed, looking forward to a break",
+            "note": null,
+            "matchedForm": "Insel",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Insel",
+    "lemma": "Insel",
+    "reading": null,
+    "ipa": "/ˈɪnzl̩/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": "wistful and calm, imagining a quiet place far away",
+    "notes": [
       "Remember that all feminine nouns in German take the article 'die'.",
       "Unlike English, where 'island' is often used in names, in German you might see 'Insel' attached to the end of a name (e.g., 'Mainau-Insel')."
     ],
@@ -160,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Remember that all feminine nouns in German take the article 'die'.",
+        "why": "Trivial grammar rule already shown in the headword 'die Insel'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "in German you might see 'Insel' attached to the end of",
+        "why": "False claim; Germans say 'die Insel Mainau' or 'die Insel Rügen', not 'Mainau-Insel'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "An area or feature that is separated or different from its",
+        "why": "Unnecessary sense for A2; the example actually uses the compound 'Verkehrsinsel', not 'Insel'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Der Fußgänger wartet sicher auf der Verkehrsinsel.",
+        "why": "Uses the compound 'Verkehrsinsel' rather than the headword 'Insel'."
+      }
+    ],
+    "growth": 0.46
   }
 }

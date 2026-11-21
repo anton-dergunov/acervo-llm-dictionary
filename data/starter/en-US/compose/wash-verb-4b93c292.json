@@ -68,6 +68,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "lavar; lavarse",
+    "primaryGloss": "lavar",
+    "emotion": "helpful and practical, ready to clean up a mess",
+    "notes": [
+      "Para partes del cuerpo se usa con adjetivo posesivo y sin pronombre reflexivo: 'wash your hands' (lávate las manos), no 'wash the hands'."
+    ],
+    "senses": [
+      {
+        "id": "ex56qvo71jz3fve",
+        "order": 0,
+        "definition": "Limpiar algo o una parte del cuerpo con agua y, por lo general, jabón o detergente.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "lavar",
+              "lavarse"
+            ]
+          }
+        ],
+        "domain": "limpieza",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "5yjpfnetbth9nmu",
+            "text": "I need to wash my hands before eating.",
+            "textLang": "en",
+            "translation": "Necesito lavarme las manos antes de comer.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "responsible and hygienic, heading straight to the sink",
+            "note": null,
+            "matchedForm": "wash",
+            "matchedTranslationForm": "lavarme"
+          },
+          {
+            "id": "ipvxyyko8rqhhpg",
+            "text": "She has to wash her clothes today.",
+            "textLang": "en",
+            "translation": "Hoy tiene que lavar su ropa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit burdened by household chores, looking at a full basket",
+            "note": null,
+            "matchedForm": "wash",
+            "matchedTranslationForm": "lavar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "wash",
+    "lemma": "wash",
+    "reading": null,
+    "ipa": "/wɑʃ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "lavar; limpiar",
     "primaryGloss": "lavar",
     "emotion": "helpful and practical, ready to clean up a mess",
@@ -160,5 +249,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "She has to wash her clothes today.",
+        "why": "Washing clothes with 'wash' + object is the same sense as sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Necesito lavar mis manos antes de comer.",
+        "why": "Calque of English possessive with body parts; natural Spanish is 'lavarme las manos'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para el cuerpo como para objetos y ropa, a diferencia",
+        "why": "True of Spanish 'lavar' as well; misses the needed note about reflexive pronouns."
+      }
+    ],
+    "growth": 0.896
   }
 }

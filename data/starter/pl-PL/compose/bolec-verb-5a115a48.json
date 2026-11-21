@@ -68,6 +68,138 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to hurt; to ache",
+    "primaryGloss": "to hurt",
+    "emotion": "a tired and weary complaint about a persistent physical ailment",
+    "notes": [
+      "The body part that hurts is the subject (in the nominative case), and the person feeling the pain is in the accusative case: 'Boli mnie głowa' (My head hurts), 'Bolą mnie nogi' (My legs hurt)."
+    ],
+    "senses": [
+      {
+        "id": "me6ydozmjdgkw9f",
+        "order": 0,
+        "definition": "Of a body part: to cause or feel physical pain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache",
+              "to be sore"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "7ne53xruooezitp",
+            "text": "Boli mnie brzuch.",
+            "textLang": "pl",
+            "translation": "My stomach hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a soft, pained expression of physical discomfort",
+            "note": null,
+            "matchedForm": "Boli",
+            "matchedTranslationForm": "hurts"
+          },
+          {
+            "id": "t27ucj2g39zcvdb",
+            "text": "Bardzo boli mnie ząb.",
+            "textLang": "pl",
+            "translation": "My tooth hurts a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "an urgent, frustrated tone indicating persistent pain",
+            "note": null,
+            "matchedForm": "boli",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9no0bq2iv3j8ei7",
+        "order": 1,
+        "definition": "To cause someone emotional pain, sadness, or distress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to pain",
+              "to distress"
+            ]
+          }
+        ],
+        "domain": "emotions",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "06kp3rynw93ctl2",
+            "text": "Boli mnie, że tak się stało.",
+            "textLang": "pl",
+            "translation": "It hurts me that it happened this way.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective, somber, and visibly regretful",
+            "note": null,
+            "matchedForm": "Boli",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "boleć",
+    "lemma": "boleć",
+    "reading": null,
+    "ipa": "/ˈbɔlɛt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to ache; to hurt",
     "primaryGloss": "to ache",
     "emotion": "a tired and weary complaint about a persistent physical ailment",
@@ -184,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "This verb is most often used with the dative case",
+        "why": "'Boleć' takes the accusative case for the person ('mnie', 'ją'), not the dative ('mnie/mi', 'jej')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To feel emotional distress, sadness, or regret about something.",
+        "why": "In the example ('Boli mnie, że...'), the subject causes emotional pain, not feels it."
+      }
+    ],
+    "growth": 0.849
   }
 }

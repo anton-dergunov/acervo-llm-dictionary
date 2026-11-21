@@ -68,6 +68,91 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "toilet",
+    "primaryGloss": "toilet",
+    "emotion": "matter-of-fact and practical, talking about a necessary part of the house",
+    "notes": [
+      "In Mexico, 'el excusado' or 'la taza del baño' refers to the toilet fixture itself, while the room is called 'el baño'."
+    ],
+    "senses": [
+      {
+        "id": "9l0qc2ojec7uh7x",
+        "order": 0,
+        "definition": "A large bowl with a seat and a flush, used for getting rid of bodily waste.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "toilet"
+            ]
+          }
+        ],
+        "domain": "household",
+        "emoji": "🚽",
+        "examples": [
+          {
+            "id": "hytskhc2ekm74vj",
+            "text": "Tengo que limpiar el excusado antes de que lleguen las visitas.",
+            "textLang": "es",
+            "translation": "I need to clean the toilet before the guests arrive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly reluctant and tired of doing chores",
+            "note": null,
+            "matchedForm": "excusado",
+            "matchedTranslationForm": "toilet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "9l0qc2ojec7uh7x",
+      "from": "Aparato sanitario que se usa para deshacerse de los desperdicios del cuerpo.",
+      "to": "A sanitary device used to get rid of bodily waste.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    },
+    {
+      "sense": "c5ld3uupgab56y2",
+      "from": "Habitación de una casa o establecimiento público que tiene este aparato sanitario y un lavabo.",
+      "to": "A room in a house or public building that contains a toilet and a sink.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el excusado",
+    "lemma": "excusado",
+    "reading": null,
+    "ipa": "/eks.kuˈsa.ðo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": "es-MX",
+    "emoji": "🚽",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "toilet; restroom",
     "primaryGloss": "toilet",
     "emotion": "matter-of-fact and practical, talking about a necessary part of the house",
@@ -162,22 +247,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "9l0qc2ojec7uh7x",
-      "from": "Aparato sanitario que se usa para deshacerse de los desperdicios del cuerpo.",
-      "to": "A sanitary device used to get rid of bodily waste.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    },
-    {
-      "sense": "c5ld3uupgab56y2",
-      "from": "Habitación de una casa o establecimiento público que tiene este aparato sanitario y un lavabo.",
-      "to": "A room in a house or public building that contains a toilet and a sink.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A room in a house or public building that contains a toilet",
+        "why": "In Mexico, 'excusado' is the toilet fixture; the room is 'el baño'."
+      }
+    ],
+    "growth": 0.481
+  }
 }

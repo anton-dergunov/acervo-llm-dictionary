@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "lion",
+    "primaryGloss": "lion",
+    "emotion": "proud and powerful, standing tall on the savannah",
+    "notes": [
+      "The plural is 'leeuwen'; a female lion is 'de leeuwin'."
+    ],
+    "senses": [
+      {
+        "id": "ixc7sm95quvg81y",
+        "order": 0,
+        "definition": "A large wild cat from Africa and parts of India, the male of which has a thick mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "57nik48govwwk1a",
+            "text": "De leeuw slaapt in de schaduw van de boom.",
+            "textLang": "nl",
+            "translation": "The lion is sleeping in the shade of the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and relaxed, watching the warm afternoon pass by",
+            "note": null,
+            "matchedForm": "leeuw",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de leeuw",
+    "lemma": "leeuw",
+    "reading": null,
+    "ipa": "/leːu/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "lion; Leo",
     "primaryGloss": "lion",
     "emotion": "proud and powerful, standing tall on the savannah",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the definite article 'de' because it is a common gender noun",
+        "why": "Restates gender and article already shown in the headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The fifth sign of the zodiac, represented by a lion.",
+        "why": "Zodiac sign (properly capitalized as 'Leeuw') is marginal for an A2 entry."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Mijn sterrenbeeld is de leeuw.",
+        "why": "In Dutch, zodiac signs in this construction omit the article and are capitalized ('is Leeuw')."
+      }
+    ],
+    "growth": 0.527
   }
 }

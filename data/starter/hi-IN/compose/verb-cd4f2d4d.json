@@ -60,6 +60,158 @@
     "headword": "होना",
     "lemma": "होना",
     "reading": null,
+    "ipa": "/ɦoː.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be; to happen; to become",
+    "primaryGloss": "to be",
+    "emotion": "matter-of-fact and fundamental, the bedrock of existence",
+    "notes": [
+      "Has irregular present forms (हूँ, है, हैं, हो) and past forms (था, थी, थे, थीं), while regular stems (होता, हुआ, होगा) express habitual, completed, or future states.",
+      "Also serves as the main auxiliary verb to form compound tenses, and expresses 'to have' with के पास, को, or का."
+    ],
+    "senses": [
+      {
+        "id": "0gu3ldhealcu3t9",
+        "order": 0,
+        "definition": "To exist, or to have a particular identity, quality, state, or location.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be",
+              "to exist"
+            ]
+          }
+        ],
+        "domain": "being",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "90rukkqk0322hei",
+            "text": "वहाँ होना मुश्किल है।",
+            "textLang": "hi",
+            "translation": "It is difficult to be there.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and hesitant, considering a difficult situation",
+            "note": null,
+            "matchedForm": "होना",
+            "matchedTranslationForm": "to be"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f0tl1h8bzrt7l5p",
+        "order": 1,
+        "definition": "To take place or occur.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to happen",
+              "to take place",
+              "to occur"
+            ]
+          }
+        ],
+        "domain": "event",
+        "emoji": "🎉",
+        "examples": [
+          {
+            "id": "0o93o9ynv6f4vd7",
+            "text": "कल एक पार्टी होगी।",
+            "textLang": "hi",
+            "translation": "There will be a party tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "होगी",
+            "matchedTranslationForm": "will be"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "frq66thbdgzqqzi",
+        "order": 2,
+        "definition": "To come into a state or condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to become",
+              "to get"
+            ]
+          }
+        ],
+        "domain": "change",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hqpg66st3hvvalx",
+            "text": "चाय ठंडी हो रही है।",
+            "textLang": "hi",
+            "translation": "The tea is getting cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "हो",
+            "matchedTranslationForm": "getting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "होना",
+    "lemma": "होना",
+    "reading": null,
     "ipa": "/ho.nɑː/",
     "pos": "verb",
     "gender": null,
@@ -203,5 +355,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(identity) To identify or classify ... (state) To exist",
+        "why": "Identity and state/location are both the basic copula 'to be' and should be merged."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to be; to happen; to become",
+        "why": "shortGloss includes 'to become', which is missing from the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "वह डॉक्टर होना चाहता है।",
+        "why": "Unnatural Hindi; 'to become a doctor' is 'डॉक्टर बनना', not 'होना'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "This is the most essential verb in Hindi",
+        "why": "Notes 0 and 1 merely restate the definitions; irregular forms and possession construction are needed."
+      }
+    ],
+    "growth": 0.942
   }
 }

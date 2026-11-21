@@ -72,6 +72,95 @@
     "primaryGloss": "red",
     "emotion": "matter-of-fact and direct, describing a primary colour",
     "notes": [
+      "Inflected form before a noun: 'rode' (with a single 'o' and 'd' instead of 't', e.g., 'de rode auto', 'het rode huis').",
+      "For red hair, Dutch often uses 'rood' or 'ros', and 'roodharig' (red-haired) as an adjective."
+    ],
+    "senses": [
+      {
+        "id": "xbs4ew85s1se967",
+        "order": 0,
+        "definition": "Having the colour of blood or a ripe strawberry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "6x3z679offppklm",
+            "text": "Zij draagt vandaag een mooie rode jurk.",
+            "textLang": "nl",
+            "translation": "She is wearing a nice red dress today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rode",
+            "matchedTranslationForm": "red"
+          },
+          {
+            "id": "5n5jk95d53hme8i",
+            "text": "Zijn gezicht werd helemaal rood toen hij moest spreken.",
+            "textLang": "nl",
+            "translation": "His face went completely red when he had to speak.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rood",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "rood",
+    "lemma": "rood",
+    "reading": null,
+    "ipa": "/roːt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "matter-of-fact and direct, describing a primary colour",
+    "notes": [
       "Used for colours of objects, clothing, and hair. As an adjective, it often takes an -e ending (rode) when used before a noun (e.g., 'de rode auto')."
     ],
     "senses": [
@@ -159,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of blood or a ripe strawberry.",
+        "why": "Defines an adjective as a noun ('The colour...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Having a complexion that has become flushed or pink",
+        "why": "A red face is just a normal application of the colour red, not a separate sense."
+      }
+    ],
+    "growth": 1.082
   }
 }

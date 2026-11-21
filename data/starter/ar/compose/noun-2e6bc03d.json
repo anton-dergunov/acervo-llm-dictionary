@@ -58,6 +58,73 @@
     "headword": "سَلَطَة",
     "lemma": "سَلَطَة",
     "reading": null,
+    "ipa": "/ˈsa.la.tˤa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥗",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salad",
+    "primaryGloss": "salad",
+    "emotion": "fresh and crisp, ready for a healthy meal",
+    "notes": [
+      "Without vowel marks, this looks identical to سُلْطَة (sulṭa, 'authority' or 'power')."
+    ],
+    "senses": [
+      {
+        "id": "s0kytkqsv88ja2w",
+        "order": 0,
+        "definition": "A cold dish of raw or cooked vegetables, often served with a dressing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salad"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "6ye0qw2f96xpk3n",
+            "text": "آكُلُ السَّلَطَةَ الطَّازَجَةَ كُلَّ يَوْمٍ.",
+            "textLang": "ar",
+            "translation": "I eat fresh salad every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and healthy, enjoying a meal",
+            "note": null,
+            "matchedForm": "السَّلَطَةَ",
+            "matchedTranslationForm": "salad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سَلَطَة",
+    "lemma": "سَلَطَة",
+    "reading": null,
     "ipa": "/saˈla.tˤa/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +185,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/saˈla.tˤa/",
+        "why": "Wrong stress placement; in three-light-syllable words stress falls on the first syllable: /ˈsa.la.tˤa/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used commonly for raw vegetable dishes dressed with oil, lemon, or vinegar.",
+        "why": "Restates the definition instead of noting the unpointed homograph سُلْطَة (authority)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I eat the fresh salad every day.",
+        "why": "Calques the generic Arabic definite article as 'the fresh salad'."
+      }
+    ],
+    "growth": 0.915
   }
 }

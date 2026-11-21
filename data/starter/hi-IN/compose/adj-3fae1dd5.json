@@ -60,6 +60,75 @@
     "headword": "बीमार",
     "lemma": "बीमार",
     "reading": null,
+    "ipa": "/biː.mɑːɾ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "ill; sick",
+    "primaryGloss": "ill",
+    "emotion": null,
+    "notes": [
+      "Invariable adjective: its form does not change for gender or number. With पड़ना (बीमार पड़ना) it means 'to fall ill'."
+    ],
+    "senses": [
+      {
+        "id": "np0m4agk13j8q6r",
+        "order": 0,
+        "definition": "Not in good health; suffering from an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ill",
+              "sick",
+              "unwell"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "xccxy6qj8dskzml",
+            "text": "वह आज बहुत बीमार है।",
+            "textLang": "hi",
+            "translation": "He is very ill today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and empathetic, as if checking on a friend",
+            "note": null,
+            "matchedForm": "बीमार",
+            "matchedTranslationForm": "ill"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बीमार",
+    "lemma": "बीमार",
+    "reading": null,
     "ipa": "/biːˈmɑːr/",
     "pos": "adj",
     "gender": null,
@@ -122,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "suffering from an illness or injury.",
+        "why": "बीमार means ill/sick from disease, not injured."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "बीमार is used for both temporary illnesses (like a cold)",
+        "why": "Obvious; works just like English 'ill/sick'."
+      }
+    ],
+    "growth": 0.691
   }
 }

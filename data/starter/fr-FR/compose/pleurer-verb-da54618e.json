@@ -72,6 +72,112 @@
     ],
     "status": "active",
     "shortGloss": "to cry; to weep",
+    "primaryGloss": "to cry",
+    "emotion": "sad and heavy, tears welling up in the eyes",
+    "notes": [],
+    "senses": [
+      {
+        "id": "63wvq8m98kx24wt",
+        "order": 0,
+        "definition": "To produce tears because of sadness, pain, strong emotion, or irritation to the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cry",
+              "to weep"
+            ]
+          }
+        ],
+        "domain": "tears",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "9wj838prcfxjqh8",
+            "text": "Elle commence à pleurer en regardant ce film triste.",
+            "textLang": "fr",
+            "translation": "She starts to cry while watching this sad movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and mournful, touched by the sad story",
+            "note": null,
+            "matchedForm": "pleurer",
+            "matchedTranslationForm": "cry"
+          },
+          {
+            "id": "v7pvow54gxeb4rd",
+            "text": "Couper des oignons me fait pleurer.",
+            "textLang": "fr",
+            "translation": "Cutting onions makes me cry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stinging and uncomfortable, blinking away the moisture",
+            "note": null,
+            "matchedForm": "pleurer",
+            "matchedTranslationForm": "cry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "63wvq8m98kx24wt",
+      "from": "Verser des larmes sous l'effet d'une douleur, d'un chagrin ou d'une émotion.",
+      "to": "To shed tears due to pain, sorrow, or emotion.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    },
+    {
+      "sense": "dc59fq8pbzz2154",
+      "from": "Avoir des larmes aux yeux, par exemple en épluchant des oignons.",
+      "to": "To have tears in the eyes, for example when peeling onions.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "pleurer",
+    "lemma": "pleurer",
+    "reading": null,
+    "ipa": "/plœ.ʁe/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cry; to weep",
     "primaryGloss": "cry",
     "emotion": "sad and heavy, tears welling up in the eyes",
     "notes": [
@@ -164,22 +270,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "63wvq8m98kx24wt",
-      "from": "Verser des larmes sous l'effet d'une douleur, d'un chagrin ou d'une émotion.",
-      "to": "To shed tears due to pain, sorrow, or emotion.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    },
-    {
-      "sense": "dc59fq8pbzz2154",
-      "from": "Avoir des larmes aux yeux, par exemple en épluchant des oignons.",
-      "to": "To have tears in the eyes, for example when peeling onions.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To have tears in the eyes, for example when peeling onions.",
+        "why": "Shedding tears from onions is the same basic sense; English gloss is also unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'pleurer' for both emotional crying and simply shedding tears",
+        "why": "Restates the two senses instead of giving useful grammar or usage."
+      }
+    ],
+    "growth": 0.64
+  }
 }

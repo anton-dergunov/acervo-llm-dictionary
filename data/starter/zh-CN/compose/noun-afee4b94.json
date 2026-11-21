@@ -57,6 +57,116 @@
     "language": "zh",
     "headword": "电视",
     "lemma": "电视",
+    "reading": "diànshì",
+    "ipa": "/ti̯ɛn˥˩ ʂɻ̩˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "television; TV set",
+    "primaryGloss": "television",
+    "emotion": "relaxed and settled, sitting on the sofa after a long day",
+    "notes": [
+      "When referring to the physical appliance, use the measure word 台 (tái): 一台电视 (yī tái diànshì); 电视机 (diànshìjī) also specifically means 'TV set'."
+    ],
+    "senses": [
+      {
+        "id": "kjf0xjxe3p1r6hs",
+        "order": 0,
+        "definition": "An electronic device with a screen used for watching broadcast programs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV set"
+            ]
+          }
+        ],
+        "domain": "electronics",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "3di2wunxf9bysjz",
+            "text": "我们买了一台新电视。",
+            "textLang": "zh",
+            "translation": "We bought a new TV set.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "电视",
+            "matchedTranslationForm": "TV set"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ne161bh9wt9qs8o",
+        "order": 1,
+        "definition": "Broadcast content or programs viewed on a television screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "television",
+              "TV",
+              "TV programs"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "🎬",
+        "examples": [
+          {
+            "id": "bvw4bgvh8kmvz1b",
+            "text": "我在看电视。",
+            "textLang": "zh",
+            "translation": "I am watching television.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bored and distracted, staring at the screen",
+            "note": null,
+            "matchedForm": "电视",
+            "matchedTranslationForm": "television"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "电视",
+    "lemma": "电视",
     "reading": "diàn shì",
     "ipa": "/ti̯ɛn˥˩ ʂɻ̩˥˩/",
     "pos": "noun",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "我在看电视。",
+        "why": "'Watching television' illustrates the broadcast medium (sense 1), not the physical appliance (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 电视 can refer to the television set itself, it is also",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.848
   }
 }

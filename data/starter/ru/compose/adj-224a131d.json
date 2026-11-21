@@ -58,6 +58,75 @@
     "headword": "смущённый",
     "lemma": "смущённый",
     "reading": null,
+    "ipa": "/smʊˈɕːɵnːɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "embarrassed, flustered",
+    "primaryGloss": "embarrassed",
+    "emotion": "hesitant and a little flustered, avoiding eye contact",
+    "notes": [
+      "Describes a temporary state of embarrassment (or an expression, voice, or smile showing it), whereas 'стеснительный' means shy by nature."
+    ],
+    "senses": [
+      {
+        "id": "dtdgjjxpuexs83a",
+        "order": 0,
+        "definition": "Feeling or showing awkwardness, self-consciousness, or mild confusion in front of others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "embarrassed",
+              "flustered",
+              "self-conscious"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😳",
+        "examples": [
+          {
+            "id": "4ubj5kqx4jvaj3a",
+            "text": "Он ответил со смущённой улыбкой.",
+            "textLang": "ru",
+            "translation": "He answered with an embarrassed smile.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "смущённой",
+            "matchedTranslationForm": "embarrassed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "смущённый",
+    "lemma": "смущённый",
+    "reading": null,
     "ipa": "/smʊˈɕːɵn.nɨj/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(confused) Confused or uncertain about what to think or do",
+        "why": "'Смущённый' means embarrassed/flustered, not generally baffled; the two senses are one meaning."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Она была смущённая, когда все начали ей хлопать.",
+        "why": "Unnatural Russian; predicate here requires the short form 'была смущена' or the verb 'смутилась'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'грустный' (sad), which describes a general low",
+        "why": "No learner confuses 'смущённый' with 'грустный'; 'стеснительный' (shy by nature) is the real contrast."
+      }
+    ],
+    "growth": 0.536
   }
 }

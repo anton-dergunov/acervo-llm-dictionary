@@ -71,6 +71,111 @@
     "shortGloss": "window",
     "primaryGloss": "window",
     "emotion": "looking outside on a quiet morning, calm and observant",
+    "notes": [],
+    "senses": [
+      {
+        "id": "qhstwszn5rdj4xa",
+        "order": 0,
+        "definition": "An opening in a wall, door, or vehicle with glass to let in light and air.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "window"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🪟",
+        "examples": [
+          {
+            "id": "09gve7cb5fgazgm",
+            "text": "Άνοιξε το παράθυρο να μπει φρέσκος αέρας.",
+            "textLang": "el",
+            "translation": "Open the window to let fresh air in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "παράθυρο",
+            "matchedTranslationForm": "window"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "57crrqcimcpvgow",
+        "order": 1,
+        "definition": "A separate area on a computer screen for viewing programs or documents.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "window"
+            ]
+          }
+        ],
+        "domain": "computing",
+        "emoji": "💻",
+        "examples": [
+          {
+            "id": "5vhnnpve8tu97qj",
+            "text": "Κλείσε αυτό το παράθυρο στην οθόνη.",
+            "textLang": "el",
+            "translation": "Close that window on the screen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and organizing the desktop",
+            "note": null,
+            "matchedForm": "παράθυρο",
+            "matchedTranslationForm": "window"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το παράθυρο",
+    "lemma": "παράθυρο",
+    "reading": null,
+    "ipa": "/paˈɾa.θi.ɾo/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪟",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "window",
+    "primaryGloss": "window",
+    "emotion": "looking outside on a quiet morning, calm and observant",
     "notes": [
       "Used both for physical openings in a building and for windows on a computer screen."
     ],
@@ -158,5 +263,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Άνοιξε το παράθυρο να μπει φρέσκο αέρα.",
+        "why": "Ungrammatical case: subject of 'μπει' must be nominative 'φρέσκος αέρας'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for physical openings in a building and for windows",
+        "why": "Merely restates the two senses already shown in the entry."
+      }
+    ],
+    "growth": 0.812
   }
 }

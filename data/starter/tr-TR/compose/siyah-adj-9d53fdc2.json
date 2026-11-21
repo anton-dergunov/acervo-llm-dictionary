@@ -72,6 +72,73 @@
     "primaryGloss": "black",
     "emotion": "steady and quiet, observing the dark night",
     "notes": [
+      "'Siyah' is the standard everyday word for black (including hair and clothes). The synonym 'kara' is mostly used in idioms, place names, or poetic expressions."
+    ],
+    "senses": [
+      {
+        "id": "ycpkogyesi9wwef",
+        "order": 0,
+        "definition": "Of the darkest colour, like coal or the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "⬛",
+        "examples": [
+          {
+            "id": "top4yenr1veed1i",
+            "text": "Gece gökyüzü siyah ve yıldızsızdı.",
+            "textLang": "tr",
+            "translation": "The night sky was black and starless.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and observant, looking out into the darkness",
+            "note": null,
+            "matchedForm": "siyah",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "siyah",
+    "lemma": "siyah",
+    "reading": null,
+    "ipa": "/siˈjah/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⬛",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "black",
+    "primaryGloss": "black",
+    "emotion": "steady and quiet, observing the dark night",
+    "notes": [
       "Siyah is of Arabic origin, while the native Turkish word for black is kara. While both mean black, kara is often used in idiomatic expressions, poetry, or for hair, whereas siyah is a common, neutral descriptor for objects and colors."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The darkest colour, absorbing all light and having no hue.",
+        "why": "Adjective defined as a noun rather than a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Siyah is of Arabic origin... kara is often used... for hair",
+        "why": "Siyah is of Persian origin, and hair is usually described as siyah, not kara."
+      }
+    ],
+    "growth": 0.775
   }
 }

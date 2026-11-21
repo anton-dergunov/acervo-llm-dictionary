@@ -72,6 +72,116 @@
     "primaryGloss": "sick",
     "emotion": "quietly miserable and achy, wrapped in a blanket at home",
     "notes": [
+      "In northern Vietnam, ốm means 'sick' (and gầy means 'thin'). In southern Vietnam, ốm usually means 'thin' (and bệnh means 'sick')."
+    ],
+    "senses": [
+      {
+        "id": "vqxjdegjr5otvhr",
+        "order": 0,
+        "definition": "Suffering from an illness or feeling unwell (mainly northern Vietnamese).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill",
+              "unwell"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "d5yw7iafa6w9qto",
+            "text": "Tôi cảm thấy mệt và hình như bị ốm rồi.",
+            "textLang": "vi",
+            "translation": "I feel tired and I think I got sick.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ốm",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e85i0wr1n5rjl40",
+        "order": 1,
+        "definition": "Having little flesh or fat on the body (mainly southern Vietnamese).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thin",
+              "skinny"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "kak7bd55rkd70k7",
+            "text": "Dạo này anh ấy ốm đi nhiều quá.",
+            "textLang": "vi",
+            "translation": "Lately he has gotten much thinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ốm",
+            "matchedTranslationForm": "thinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ốm",
+    "lemma": "ốm",
+    "reading": null,
+    "ipa": "/om˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "sick; thin",
+    "primaryGloss": "sick",
+    "emotion": "quietly miserable and achy, wrapped in a blanket at home",
+    "notes": [
       "Depending on the region, ốm means either sick or thin. In northern Vietnam, it generally means sick, while in southern Vietnam, it usually means thin (equivalent to gầy in the north). In central and northern speech, use gầy specifically for body weight to avoid confusion."
     ],
     "senses": [
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dạo này anh ấy gầy và ốm đi rất nhiều.",
+        "why": "Mixing northern 'gầy' and southern 'ốm' for 'thin' in one phrase is unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "thin, skinny, slender",
+        "why": "'Ốm' is not positive like 'slender'; it means thin or skinny."
+      }
+    ],
+    "growth": 0.783
   }
 }

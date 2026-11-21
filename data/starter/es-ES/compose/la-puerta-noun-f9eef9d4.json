@@ -70,6 +70,116 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "door; gate",
+    "primaryGloss": "door",
+    "emotion": null,
+    "notes": [
+      "Used for both a door inside a building and an outside gate, as well as the doorway itself."
+    ],
+    "senses": [
+      {
+        "id": "yo6ky5c64qaq2kq",
+        "order": 0,
+        "definition": "A movable barrier used to open and close the entrance to a room, building, or vehicle, or the entrance itself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door",
+              "doorway",
+              "gate"
+            ]
+          }
+        ],
+        "domain": "entrance",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "rzbz567w26afi27",
+            "text": "Cierra la puerta al salir.",
+            "textLang": "es",
+            "translation": "Close the door when you leave.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, giving a simple instruction to a housemate",
+            "note": null,
+            "matchedForm": "puerta",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dlc8nkfg2t5rmor",
+        "order": 1,
+        "definition": "The area in an airport where passengers board their plane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gate",
+              "boarding gate"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ma0m9pevgiqpvf3",
+            "text": "Nuestro vuelo sale por la puerta doce.",
+            "textLang": "es",
+            "translation": "Our flight leaves from gate twelve.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "puerta",
+            "matchedTranslationForm": "gate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la puerta",
+    "lemma": "puerta",
+    "reading": null,
+    "ipa": "/ˈpweɾta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "door",
     "primaryGloss": "door",
     "emotion": null,
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common A2 travel sense of an airport boarding gate ('puerta de embarque')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A formal or metaphorical way to enter a place",
+        "why": "Transparent figurative extension of 'door', not a distinct everyday sense."
+      }
+    ],
+    "growth": 0.79
   }
 }

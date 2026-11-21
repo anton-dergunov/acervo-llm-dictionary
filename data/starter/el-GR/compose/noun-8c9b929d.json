@@ -72,6 +72,73 @@
     "primaryGloss": "soup",
     "emotion": "comforting and warm, like eating on a cold day",
     "notes": [
+      "Common compounds combine the ingredient with -σούπα: κοτόσουπα (chicken soup), ψαρόσουπα (fish soup), χορτόσουπα (vegetable soup)."
+    ],
+    "senses": [
+      {
+        "id": "g423xrp4sf7xyp7",
+        "order": 0,
+        "definition": "A liquid food made by boiling meat, fish, or vegetables in water or stock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "c0rsmoda3ac0nnk",
+            "text": "Η σούπα είναι πολύ ζεστή.",
+            "textLang": "el",
+            "translation": "The soup is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and warning, making sure someone does not burn their mouth",
+            "note": null,
+            "matchedForm": "σούπα",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η σούπα",
+    "lemma": "σούπα",
+    "reading": null,
+    "ipa": "/ˈsu.pa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥣",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "soup",
+    "primaryGloss": "soup",
+    "emotion": "comforting and warm, like eating on a cold day",
+    "notes": [
       "Unlike some other languages where 'soup' might strictly mean a clear broth, in Greek 'σούπα' is a very broad term. It includes everything from light, clear broths to thick, creamy vegetable purées, and even hearty meat-and-vegetable stews that might be called 'stews' in English."
     ],
     "senses": [
@@ -139,5 +206,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "Μου αρέσει να τρώω κοτόσουπα όταν είμαι άρρωστος.",
+        "why": "Uses the compound 'κοτόσουπα' instead of the lemma 'σούπα'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike some other languages where 'soup' might strictly mean a clear broth",
+        "why": "Wordy filler; 'σούπα' and English 'soup' correspond directly."
+      }
+    ],
+    "growth": 0.417
   }
 }

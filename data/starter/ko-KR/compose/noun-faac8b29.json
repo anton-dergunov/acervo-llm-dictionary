@@ -79,6 +79,97 @@
     "primaryGloss": "clock",
     "emotion": "a practical, steady look at the time, reliable and constant",
     "notes": [
+      "Covers both clocks and wristwatches; to be specific, use 벽시계 (wall clock), 탁상시계 (desk clock), or 손목시계 (wristwatch).",
+      "To say 'wear a watch', use the verb 차다 (시계를 차다), not 입다."
+    ],
+    "senses": [
+      {
+        "id": "3nlx8xdxxm1yshx",
+        "order": 0,
+        "definition": "A device that shows the time, whether on a wall, on a desk, or worn on the wrist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clock",
+              "watch"
+            ]
+          }
+        ],
+        "domain": "timepiece",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "xo7xmyva4sucpml",
+            "text": "벽에 시계가 걸려 있어요.",
+            "textLang": "ko",
+            "translation": "There is a clock hanging on the wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, simply pointing out an object in the room",
+            "note": null,
+            "matchedForm": "시계",
+            "matchedTranslationForm": "clock"
+          },
+          {
+            "id": "lc2kzww9mnqnvq8",
+            "text": "저는 매일 손목에 시계를 차요.",
+            "textLang": "ko",
+            "translation": "I wear a watch on my wrist every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "habitual and organized, describing a daily routine",
+            "note": null,
+            "matchedForm": "시계",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "시계",
+    "lemma": "시계",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Time",
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "clock; watch",
+    "primaryGloss": "clock",
+    "emotion": "a practical, steady look at the time, reliable and constant",
+    "notes": [
       "In Korean, '시계' refers to both wall clocks and wristwatches.",
       "If you need to be specific, you can add '벽' (wall) for a wall clock (벽시계) or '손목' (wrist) for a wristwatch (손목시계)."
     ],
@@ -168,5 +259,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Korean '시계' is one concept (timepiece); clock vs. watch is an English distinction."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A device placed on a wall that shows the current time.",
+        "why": "Too narrow; '시계' includes desk and alarm clocks, not only wall clocks."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that a watch is worn with '차다', not '입다'."
+      }
+    ],
+    "growth": 0.854
   }
 }

@@ -72,6 +72,118 @@
     "primaryGloss": "to stop",
     "emotion": "firm and decisive, making a clear end to an action",
     "notes": [
+      "To say 'to stop doing something' or 'to quit', use the preposition 'met': 'stoppen met werken' (to stop working), 'stoppen met roken' (to quit smoking).",
+      "In the perfect tense, 'stoppen' takes 'zijn' when it means to halt or quit ('De trein is gestopt'), and 'hebben' when it means to put something inside ('Ik heb het in mijn tas gestopt')."
+    ],
+    "senses": [
+      {
+        "id": "xab8or10yuffpb1",
+        "order": 0,
+        "definition": "To cease moving or doing something; to bring to a halt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stop",
+              "to cease",
+              "to quit"
+            ]
+          }
+        ],
+        "domain": "halt",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "kk9zx6st78pq3m4",
+            "text": "De bus stopt zo bij de volgende halte.",
+            "textLang": "nl",
+            "translation": "The bus will stop at the next bus stop soon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "stopt",
+            "matchedTranslationForm": "stop"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bcqwe0326lv0zxd",
+        "order": 1,
+        "definition": "To put or push something into a pocket, bag, or small space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to tuck",
+              "to insert"
+            ]
+          }
+        ],
+        "domain": "placement",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "ag8nwt1p3l49qy7",
+            "text": "Ik stop mijn sleutels in mijn jaszak.",
+            "textLang": "nl",
+            "translation": "I put my keys in my coat pocket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and hurried, getting ready to leave the house",
+            "note": null,
+            "matchedForm": "stop",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "stoppen",
+    "lemma": "stoppen",
+    "reading": null,
+    "ipa": "/ˈstɔpə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stop; to put",
+    "primaryGloss": "to stop",
+    "emotion": "firm and decisive, making a clear end to an action",
+    "notes": [
       "Stoppen has two very common meanings: to halt/cease an activity, and to put something inside a pocket or container. Be careful not to confuse it with 'ophouden' (to quit/cease) when talking about habits."
     ],
     "senses": [
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "De bus zal zo stoppen bij dehalte.",
+        "why": "Missing space in 'de halte', and 'halte' means 'bus stop', not 'station'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Be careful not to confuse it with 'ophouden' (to quit/cease) when talking",
+        "why": "'Stoppen met' and 'ophouden met' are both completely normal for quitting habits."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Stoppen has two very common meanings: to halt/cease an activity, and to",
+        "why": "Restates the definitions while omitting the crucial auxiliary difference (zijn vs. hebben)."
+      }
+    ],
+    "growth": 1.337
   }
 }

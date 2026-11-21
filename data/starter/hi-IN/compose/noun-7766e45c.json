@@ -70,6 +70,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "mountain; large hill",
+    "primaryGloss": "mountain",
+    "emotion": "a sense of wonder and vast scale, looking up at something tall",
+    "notes": [
+      "Do not confuse with the feminine noun पहाड़ी (pahāṛī), which means a smaller hill, or as an adjective/noun, 'from the mountains'."
+    ],
+    "senses": [
+      {
+        "id": "hho9rn6cy8fhdlh",
+        "order": 0,
+        "definition": "A very high area of land with steep sides, much higher than a hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "large hill"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "789bx8g58mbnujc",
+            "text": "यह एक बहुत ऊँचा पहाड़ है।",
+            "textLang": "hi",
+            "translation": "This is a very high mountain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पहाड़",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पहाड़",
+    "lemma": "पहाड़",
+    "reading": null,
+    "ipa": "/pəˈɦɑːɽ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "mountain; a very high hill",
     "primaryGloss": "mountain",
     "emotion": "a sense of wonder and vast scale, looking up at something tall",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "A very high hill that stands prominently in the landscape.",
+        "why": "Artificial split: 'mountain' and 'very high hill' are the same sense of पहाड़."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "हिमालय एक बहुत ऊँचा पहाड़ है। — The Himalayas is a very",
+        "why": "Ungrammatical English ('The Himalayas is...'), and Himalayas are a range, not one mountain."
+      }
+    ],
+    "growth": 0.499
   }
 }

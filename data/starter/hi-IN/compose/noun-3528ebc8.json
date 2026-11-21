@@ -82,6 +82,137 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "lesson; chapter; recitation",
+    "primaryGloss": "lesson",
+    "emotion": "focused and industrious, ready to study or learn something new",
+    "notes": [
+      "For a school lesson or textbook unit, पाठ and सबक़ are synonyms; for a class period or classroom session, use क्लास or कक्षा.",
+      "Common collocations: पाठ पढ़ाना (to teach a lesson, also figuratively), पाठ करना (to recite a religious text)."
+    ],
+    "senses": [
+      {
+        "id": "xwsfdt105nk1yyh",
+        "order": 0,
+        "definition": "A unit of instruction or a numbered chapter in a textbook; something to be learned.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lesson",
+              "chapter"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "👨‍🏫",
+        "examples": [
+          {
+            "id": "mf42kqkxv5bnqmp",
+            "text": "आज का पाठ बहुत रोचक था।",
+            "textLang": "hi",
+            "translation": "Today's lesson was very interesting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and enthusiastic about the information just learned",
+            "note": null,
+            "matchedForm": "पाठ",
+            "matchedTranslationForm": "lesson"
+          },
+          {
+            "id": "oo6m87gio78rxl9",
+            "text": "अगला पाठ घर से पढ़कर आना।",
+            "textLang": "hi",
+            "translation": "Read the next chapter at home before coming.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पाठ",
+            "matchedTranslationForm": "chapter"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cu6okankki78mzu",
+        "order": 1,
+        "definition": "The reading aloud or recitation of a text, especially a religious scripture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "recitation",
+              "reading"
+            ]
+          }
+        ],
+        "domain": "religion",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "b6qwav8ikmya8wd",
+            "text": "दादी रोज़ सुबह रामायण का पाठ करती हैं।",
+            "textLang": "hi",
+            "translation": "Grandmother recites the Ramayana every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पाठ",
+            "matchedTranslationForm": "recites"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पाठ",
+    "lemma": "पाठ",
+    "reading": null,
+    "ipa": "/pɑːʈʰ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "lesson; chapter; reading",
     "primaryGloss": "lesson",
     "emotion": "focused and industrious, ready to study or learn something new",
@@ -175,5 +306,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "In textbooks and school, 'lesson' and 'chapter' are the same sense of पाठ; 'class' is कक्षा."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "lesson; chapter; reading",
+        "why": "'reading' is in shortGloss, but there is no sense for reading/recitation."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Hindi, the word 'पाठ' is used both for a chapter",
+        "why": "Just repeats the senses."
+      }
+    ],
+    "growth": 1.225
   }
 }

@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to swim",
+    "primaryGloss": "swim",
+    "emotion": "energetic and refreshed, enjoying the movement in the water",
+    "notes": [
+      "Strong verb: zwom, zwommen, gezwommen.",
+      "Takes 'hebben' in the perfect tense when focusing on the activity (ik heb gezwommen), but 'zijn' when swimming to a destination (ik ben naar de overkant gezwommen)."
+    ],
+    "senses": [
+      {
+        "id": "yzjrm4a5g21wori",
+        "order": 0,
+        "definition": "To move through water by moving the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "swim",
+              "to swim"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🏊",
+        "examples": [
+          {
+            "id": "8ic1sh0t7xyut15",
+            "text": "Ik ga in de zomer graag in de zee zwemmen.",
+            "textLang": "nl",
+            "translation": "I like to swim in the sea in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and sunny, looking forward to a warm afternoon",
+            "note": null,
+            "matchedForm": "zwemmen",
+            "matchedTranslationForm": "swim"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zwemmen",
+    "lemma": "zwemmen",
+    "reading": null,
+    "ipa": "/ˈzʋɛ.mən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏊",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to swim; to float",
     "primaryGloss": "swim",
     "emotion": "energetic and refreshed, enjoying the movement in the water",
@@ -159,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To float on or near the surface of a liquid",
+        "why": "'Zwemmen' means to swim; to float on water is 'drijven' (likely German 'schwimmen' interference)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De bladeren zwemmen op het water.",
+        "why": "Unnatural Dutch; leaves 'drijven' (float) on water, they do not 'zwemmen'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention irregular strong past tense forms 'zwom/zwommen' alongside 'gezwommen'."
+      }
+    ],
+    "growth": 0.749
   }
 }

@@ -72,6 +72,97 @@
     "primaryGloss": "glasses",
     "emotion": "casual and practical, adjusting them on the bridge of the nose",
     "notes": [
+      "Always used in the plural when referring to a pair of glasses ('une paire de lunettes'); 'des lunettes de soleil' means sunglasses.",
+      "Do not confuse with 'les verres', which means drinking glasses or the lenses inside a frame."
+    ],
+    "senses": [
+      {
+        "id": "4t97gyl8p1qkydm",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame worn on the face to see better or to protect the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "spectacles",
+              "eyeglasses"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "hcoph59gmmughrj",
+            "text": "J'ai oublié mes lunettes sur la table de la cuisine.",
+            "textLang": "fr",
+            "translation": "I left my glasses on the kitchen table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and searching around, realizing where they were left",
+            "note": null,
+            "matchedForm": "lunettes",
+            "matchedTranslationForm": "glasses"
+          },
+          {
+            "id": "zuzij49qz6ki46x",
+            "text": "Il y a beaucoup de soleil, mets tes lunettes de soleil.",
+            "textLang": "fr",
+            "translation": "It is very sunny, put on your sunglasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lunettes",
+            "matchedTranslationForm": "sunglasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "les lunettes",
+    "lemma": "lunettes",
+    "reading": null,
+    "ipa": "/ly.nɛt/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; spectacles",
+    "primaryGloss": "glasses",
+    "emotion": "casual and practical, adjusting them on the bridge of the nose",
+    "notes": [
       "Always used in the plural form in French when referring to a single pair.",
       "Do not confuse with 'des verres', which can mean drinking glasses as well as optical lenses."
     ],
@@ -161,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Il fait trop soleil, mets tes lunettes de soleil.",
+        "why": "'Il fait trop soleil' is ungrammatical in French; say 'Il y a trop de soleil'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(sun) Dark lenses worn to protect the eyes",
+        "why": "'Sunglasses' is the compound 'lunettes de soleil', not a separate sense of 'lunettes' alone."
+      }
+    ],
+    "growth": 1.063
   }
 }

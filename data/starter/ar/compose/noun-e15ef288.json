@@ -68,6 +68,75 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "grandfather; ancestor",
+    "primaryGloss": "grandfather",
+    "emotion": "warm and respectful, thinking of an older family member",
+    "notes": [
+      "Plural: أَجْدَاد (ʾajdād) or جُدُود (judūd); feminine: جَدَّة (jadda, grandmother).",
+      "Do not confuse with جِدّ (jidd, 'seriousness'), as in بِجِدّ (bi-jidd, 'seriously')."
+    ],
+    "senses": [
+      {
+        "id": "mmzg9r9bw8gk39q",
+        "order": 0,
+        "definition": "The father of your father or your mother; also, in the plural, a forefather or ancestor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grandfather",
+              "ancestor"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "ae8aqoeeyei66ph",
+            "text": "جَدِّي يُحِبُّ أَنْ يَحْكِيَ لَنَا قِصَصًا قَدِيمَةً.",
+            "textLang": "ar",
+            "translation": "My grandfather loves to tell us old stories.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "جَدِّي",
+            "matchedTranslationForm": "grandfather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَدّ",
+    "lemma": "جَدّ",
+    "reading": null,
+    "ipa": "/dʒadd/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "grandfather; seriousness",
     "primaryGloss": "grandfather",
     "emotion": "warm and respectful, thinking of an older family member",
@@ -159,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(seriousness) Earnestness or seriousness in behavior and speech.",
+        "why": "جَدّ (jadd) is grandfather; 'seriousness' is mostly جِدّ (jidd), a different vocalized lemma."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Talk to me with seriousness.",
+        "why": "Unnatural calque of 'talk to me seriously' (and uses جِدّ, not جَدّ)."
+      }
+    ],
+    "growth": 1.156
   }
 }

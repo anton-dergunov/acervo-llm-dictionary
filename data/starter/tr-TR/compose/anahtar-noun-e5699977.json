@@ -60,6 +60,114 @@
     "headword": "anahtar",
     "lemma": "anahtar",
     "reading": null,
+    "ipa": "/a.nahˈtaɾ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "key; wrench",
+    "primaryGloss": "key",
+    "emotion": null,
+    "notes": [
+      "Also used figuratively for a solution or answer Key (e.g., 'cevap anahtarı' — answer key)."
+    ],
+    "senses": [
+      {
+        "id": "tzmsu1igccmdt7q",
+        "order": 0,
+        "definition": "A small metal object that opens or closes a lock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key"
+            ]
+          }
+        ],
+        "domain": "lock",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "r7njub6mson6kie",
+            "text": "Evimin anahtarını masanın üzerinde unuttum.",
+            "textLang": "tr",
+            "translation": "I forgot my house key on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed at oneself while patting coat pockets",
+            "note": null,
+            "matchedForm": "anahtarını",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jxq8emnler9yjvt",
+        "order": 1,
+        "definition": "A metal tool used for gripping and turning nuts and bolts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrench",
+              "spanner"
+            ]
+          }
+        ],
+        "domain": "tool",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "s5q5xbevsfnvzkz",
+            "text": "Musluğu tamir etmek için bir İngiliz anahtarı gerekiyor.",
+            "textLang": "tr",
+            "translation": "A monkey wrench is needed to fix the faucet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "anahtarı",
+            "matchedTranslationForm": "wrench"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "anahtar",
+    "lemma": "anahtar",
+    "reading": null,
     "ipa": "/a.naːhˈtaɾ/",
     "pos": "noun",
     "gender": null,
@@ -201,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/a.naːhˈtaɾ/",
+        "why": "The second 'a' in 'anahtar' is short: /a.nahˈtaɾ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2].definition",
+        "quote": "A small device for turning an electrical circuit on or off.",
+        "why": "'anahtar' for light switch is technical; everyday speech uses 'düğme', making the example unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for door keys, mechanical wrenches, and electrical switches alike.",
+        "why": "merely repeats the senses."
+      }
+    ],
+    "growth": 0.756
   }
 }

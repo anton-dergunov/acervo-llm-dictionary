@@ -70,6 +70,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "fire; heat, burner (cooking)",
+    "primaryGloss": "fire",
+    "emotion": null,
+    "notes": [
+      "In Mexican Spanish, an uncontrolled fire (as in a house or forest) is 'un incendio', while a campfire or bonfire is 'una fogata'."
+    ],
+    "senses": [
+      {
+        "id": "wt69f855c09udj8",
+        "order": 0,
+        "definition": "The flames, heat, and light produced when something burns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "fire",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "a2oervf1w090roo",
+            "text": "Los niños se acercaron para calentarse con el fuego.",
+            "textLang": "es",
+            "translation": "The children moved closer to warm themselves by the fire.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and content, feeling the comfort of warmth on a cold day",
+            "note": null,
+            "matchedForm": "fuego",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8r90xp6ku5muew4",
+        "order": 1,
+        "definition": "The flame, heat, or burner on a stove used for cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heat",
+              "burner",
+              "flame"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "zs1216ie9c3zn8d",
+            "text": "Pon la sopa a fuego lento para que no se queme.",
+            "textLang": "es",
+            "translation": "Put the soup on low heat so it doesn't burn.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and careful, ensuring the meal is cooked just right",
+            "note": null,
+            "matchedForm": "fuego",
+            "matchedTranslationForm": "heat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el fuego",
+    "lemma": "fuego",
+    "reading": null,
+    "ipa": "/ˈfwe.ɣo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "fire; flames",
     "primaryGloss": "fire",
     "emotion": null,
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fire; flames",
+        "why": "Does not cover the second sense (cooking heat/burner)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A hearth, stove, or burner used for cooking food.",
+        "why": "In cooking, 'fuego' usually means the cooking heat or flame, as in the example."
+      }
+    ],
+    "growth": 1.431
   }
 }

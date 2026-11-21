@@ -58,6 +58,74 @@
     "headword": "batu",
     "lemma": "batu",
     "reading": null,
+    "ipa": "/ˈba.tu/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "stone; rock",
+    "primaryGloss": "stone",
+    "emotion": "hard and heavy, sitting firmly on the ground",
+    "notes": [
+      "In everyday speech, 'batu' is also used in 'batu baterai' (battery) and 'es batu' (ice cube)."
+    ],
+    "senses": [
+      {
+        "id": "s310tqz9fj3ueo9",
+        "order": 0,
+        "definition": "The hard solid mineral material of the earth, or a piece of it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stone",
+              "rock"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "t8cuhv1mav9zdvk",
+            "text": "Anak itu melempar batu ke sungai.",
+            "textLang": "id",
+            "translation": "The child threw a stone into the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and energetic, watching the splash",
+            "note": null,
+            "matchedForm": "batu",
+            "matchedTranslationForm": "stone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "batu",
+    "lemma": "batu",
+    "reading": null,
     "ipa": "/ba.tu/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The hard inner stone or pit of a fruit.",
+        "why": "Calque from English 'stone'; fruit pits in Indonesian are 'biji', not 'batu'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'batu' is also used for the hard seed or pit inside",
+        "why": "False claim; fruit seeds/pits are called 'biji' in Indonesian."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "stone; rock; pit",
+        "why": "Includes false meaning 'pit'."
+      }
+    ],
+    "growth": 0.699
   }
 }

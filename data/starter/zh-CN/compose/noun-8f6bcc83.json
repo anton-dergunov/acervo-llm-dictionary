@@ -72,6 +72,74 @@
     "primaryGloss": "bridge",
     "emotion": "a sense of sturdy connection, looking ahead while crossing over",
     "notes": [
+      "Usually takes the measure word 座 (zuò), e.g., 一座桥 (a bridge).",
+      "For a figurative 'bridge' or connection between people or cultures, the two-syllable word 桥梁 (qiáoliáng) is normally used instead."
+    ],
+    "senses": [
+      {
+        "id": "76kd1p4o53fwyf6",
+        "order": 0,
+        "definition": "A structure built over a river, road, or railway so that people and vehicles can cross.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bridge"
+            ]
+          }
+        ],
+        "domain": "structure",
+        "emoji": "🌉",
+        "examples": [
+          {
+            "id": "xm418hii2l1pmp2",
+            "text": "这座桥很长。",
+            "textLang": "zh",
+            "translation": "This bridge is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, observing the scale of the structure",
+            "note": null,
+            "matchedForm": "桥",
+            "matchedTranslationForm": "bridge"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "桥",
+    "lemma": "桥",
+    "reading": "qiáo",
+    "ipa": "/tɕʰi̯au̯˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bridge",
+    "primaryGloss": "bridge",
+    "emotion": "a sense of sturdy connection, looking ahead while crossing over",
+    "notes": [
       "Used for any structure crossing a river, road, or railway.",
       "Can also be used metaphorically to mean a connection or link between two things or people."
     ],
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for any structure crossing a river, road, or railway.",
+        "why": "Both notes just repeat the definitions; the measure word 座 is missing."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "文化交流是两国友谊的桥梁。",
+        "why": "Uses the disyllabic word 桥梁 instead of the monosyllabic headword 桥."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A metaphorical connection or link between two people, groups, or ideas.",
+        "why": "For metaphorical sense, Chinese uses 桥梁; 桥 alone is mainly physical at A2."
+      }
+    ],
+    "growth": 0.613
   }
 }

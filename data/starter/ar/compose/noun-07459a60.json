@@ -72,6 +72,114 @@
     "primaryGloss": "tooth",
     "emotion": "wincing and pointing to a painful spot in the mouth",
     "notes": [
+      "Feminine in standard Arabic despite not ending in ة (tāʾ marbūṭa).",
+      "In the sense 'tooth', the broken plural is أَسْنَان (ʾasnān)."
+    ],
+    "senses": [
+      {
+        "id": "3xqlms7oevmf71b",
+        "order": 0,
+        "definition": "One of the hard white structures in the mouth used for biting and chewing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tooth"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "s8ywi9qkgiisbju",
+            "text": "تُؤْلِمُنِي سِنِّي اليَوْمَ.",
+            "textLang": "ar",
+            "translation": "My tooth hurts today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "سِنِّي",
+            "matchedTranslationForm": "tooth"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8egk8z1qu7snayi",
+        "order": 1,
+        "definition": "The number of years that a person has lived.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "age"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "zcfzthtmebrj1t6",
+            "text": "هٰذَا الكِتَابُ مُنَاسِبٌ لِكُلِّ سِنٍّ.",
+            "textLang": "ar",
+            "translation": "This book is suitable for every age.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "سِنٍّ",
+            "matchedTranslationForm": "age"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سِنّ",
+    "lemma": "سِنّ",
+    "reading": null,
+    "ipa": "/sinː/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "tooth; age",
+    "primaryGloss": "tooth",
+    "emotion": "wincing and pointing to a painful spot in the mouth",
+    "notes": [
       "The plural is أَسْنَان (asnān), which is much more commonly used when talking about teeth in general."
     ],
     "senses": [
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "يؤلمني سِنّي اليوم.",
+        "why": "سِنّ is feminine, so the verb must be feminine: تُؤْلِمُنِي سِنِّي."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that سِنّ is feminine despite not ending in tāʾ marbūṭa."
+      }
+    ],
+    "growth": 1.057
   }
 }

@@ -69,6 +69,116 @@
     ],
     "status": "active",
     "shortGloss": "to taste; to experience",
+    "primaryGloss": "to taste",
+    "emotion": "curious and attentive, focusing completely on a flavour",
+    "notes": [
+      "Hollow verb (أجوف): the middle vowel changes to a long 'u' in the present tense (يَذُوقُ yaḏūqu)."
+    ],
+    "senses": [
+      {
+        "id": "zv15m3pdffwu2fl",
+        "order": 0,
+        "definition": "To test the flavor of food or drink by taking a small amount into the mouth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to taste",
+              "to try"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "q79nm2rio01hkz6",
+            "text": "ذَاقَ الطَّعَامَ لِيَتَأَكَّدَ مِنَ المِلْحِ.",
+            "textLang": "ar",
+            "translation": "He tasted the food to check the salt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ذَاقَ",
+            "matchedTranslationForm": "tasted"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vbaojdh8hgzye3s",
+        "order": 1,
+        "definition": "To experience or undergo something, such as hardship, pain, or success.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to experience",
+              "to taste",
+              "to feel"
+            ]
+          }
+        ],
+        "domain": "experience",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "55prr5s1zh9x33w",
+            "text": "ذَاقَ طَعْمَ النَّجَاحِ بَعْدَ تَعَبٍ طَوِيلٍ.",
+            "textLang": "ar",
+            "translation": "He tasted success after long hard work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and deeply satisfied after hard work",
+            "note": null,
+            "matchedForm": "ذَاقَ",
+            "matchedTranslationForm": "tasted"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "ذَاقَ",
+    "lemma": "ذاق",
+    "reading": null,
+    "ipa": "/ðaː.qa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to taste; to experience",
     "primaryGloss": "taste",
     "emotion": "curious and attentive, focusing completely on a flavour",
     "notes": [
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for tasting food and drink, but also commonly used metaphorically",
+        "why": "Restates the two senses without adding grammar; missing hollow verb imperfect form (يَذُوقُ)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "He tasted the cooking to make sure of the salt.",
+        "why": "Awkward calque; natural English is 'He tasted the food to check the salt.'"
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "He experienced the taste of success after a long fatigue.",
+        "why": "Awkward calque ('after a long fatigue'); natural English is 'He tasted success after long hard work.'"
+      }
+    ],
+    "growth": 0.921
   }
 }

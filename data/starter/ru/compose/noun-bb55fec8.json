@@ -73,6 +73,73 @@
     "headword": "полотенце",
     "lemma": "полотенце",
     "reading": null,
+    "ipa": "/pəɫɐˈtʲent͡sə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "towel",
+    "primaryGloss": "towel",
+    "emotion": "a practical, everyday comfort after a warm shower or bath",
+    "notes": [
+      "In the genitive plural, an 'е' appears before the final consonant: полоте́нец."
+    ],
+    "senses": [
+      {
+        "id": "b6se3pie1e0udbs",
+        "order": 0,
+        "definition": "A piece of cloth or paper used for drying your body or things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "towel"
+            ]
+          }
+        ],
+        "domain": "household",
+        "emoji": "🧖",
+        "examples": [
+          {
+            "id": "xzvtsjmhazyaamd",
+            "text": "После душа я взял чистое полотенце.",
+            "textLang": "ru",
+            "translation": "After the shower I took a clean towel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and refreshed after washing up",
+            "note": null,
+            "matchedForm": "полотенце",
+            "matchedTranslationForm": "towel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "полотенце",
+    "lemma": "полотенце",
+    "reading": null,
     "ipa": "/pəɫɐˈtʲent͡sɨ/",
     "pos": "noun",
     "gender": "neuter",
@@ -133,5 +200,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pəɫɐˈtʲent͡sɨ/",
+        "why": "Final unstressed '-це' in singular is pronounced /-t͡sə/, not /-t͡sɨ/ (which is the plural 'полотенца')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for drying the body or surfaces. Unlike some languages that distinguish between bath towels and hand towels",
+        "why": "Restates the definition and matches English 'towel' usage; misses the irregular genitive plural 'полотенец'."
+      }
+    ],
+    "growth": 0.493
   }
 }

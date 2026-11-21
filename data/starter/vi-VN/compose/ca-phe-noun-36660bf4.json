@@ -58,6 +58,115 @@
     "headword": "cà phê",
     "lemma": "cà phê",
     "reading": null,
+    "ipa": "/kaː˨˩ fe˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "coffee; café",
+    "primaryGloss": "coffee",
+    "emotion": "warm and comforting, slowing down for a relaxing morning routine",
+    "notes": [
+      "For a serving of coffee, use classifiers like 'ly' (mostly Southern), 'cốc' (Northern), or 'tách' (a small cup): một cốc cà phê (a cup of coffee).",
+      "Colloquially, 'đi cà phê' means to go to a café to hang out and chat, even if you order another drink."
+    ],
+    "senses": [
+      {
+        "id": "yroiuybf9stb7yj",
+        "order": 0,
+        "definition": "A hot or iced dark drink made from roasted coffee beans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coffee"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "lc8jhpxjej65rut",
+            "text": "Tôi uống một ly cà phê mỗi sáng.",
+            "textLang": "vi",
+            "translation": "I drink a cup of coffee every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and content, settling into a familiar morning routine",
+            "note": null,
+            "matchedForm": "cà phê",
+            "matchedTranslationForm": "coffee"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ygk1f3xjqw8e06a",
+        "order": 1,
+        "definition": "An outing or place to drink coffee and socialize (often in 'đi cà phê' or 'quán cà phê').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "café",
+              "coffee shop"
+            ]
+          }
+        ],
+        "domain": "venue",
+        "emoji": "🏬",
+        "examples": [
+          {
+            "id": "00cjal06ya4h1oa",
+            "text": "Chiều nay đi cà phê nhé?",
+            "textLang": "vi",
+            "translation": "Shall we go to a café this afternoon?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cà phê",
+            "matchedTranslationForm": "café"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cà phê",
+    "lemma": "cà phê",
+    "reading": null,
     "ipa": "/kaː˧ fɛː˧/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kaː˧ fɛː˧/",
+        "why": "Wrong tone on cà (should be falling ˨˩) and wrong vowel on phê (should be /e/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Chúng ta gặp nhau ở quán cà phê nhé?",
+        "why": "Uses 'quán cà phê' (shop of coffee) instead of 'cà phê' alone meaning a café."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It refers both to the drink itself and to the social space",
+        "why": "Merely restates the two senses; a note on classifiers (ly/cốc/tách) is much more useful."
+      }
+    ],
+    "growth": 1.165
   }
 }

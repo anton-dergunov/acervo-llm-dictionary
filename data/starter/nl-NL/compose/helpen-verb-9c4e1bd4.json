@@ -58,6 +58,116 @@
     "headword": "helpen",
     "lemma": "helpen",
     "reading": null,
+    "ipa": "/ˈɦɛlpə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to help; to work",
+    "primaryGloss": "to help",
+    "emotion": "kind and willing, eager to pitch in and be useful",
+    "notes": [
+      "Irregular verb: past tense 'hielp' ('hielpen'), past participle 'geholpen' (with 'hebben').",
+      "Use 'helpen met' for helping with a task, and 'helpen tegen' for a remedy against an illness or problem."
+    ],
+    "senses": [
+      {
+        "id": "pggtd8xxxmz1sl0",
+        "order": 0,
+        "definition": "To make it easier for someone to do something by giving them aid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to help",
+              "to assist"
+            ]
+          }
+        ],
+        "domain": "assistance",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "9jeddgsa8ztj03f",
+            "text": "Kan ik u helpen met de boodschappen?",
+            "textLang": "nl",
+            "translation": "Can I help you with the groceries?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and attentive, offering a hand to a customer",
+            "note": null,
+            "matchedForm": "helpen",
+            "matchedTranslationForm": "help"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4f5rtezkh85gvvp",
+        "order": 1,
+        "definition": "To be useful or effective in improving a situation or curing an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to help",
+              "to work"
+            ]
+          }
+        ],
+        "domain": "effect",
+        "emoji": "💊",
+        "examples": [
+          {
+            "id": "y05espj61s53jv5",
+            "text": "Een warme kop thee kan tegen keelpijn helpen.",
+            "textLang": "nl",
+            "translation": "A warm cup of tea can help against a sore throat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "comforting and knowing, sharing a home remedy",
+            "note": null,
+            "matchedForm": "helpen",
+            "matchedTranslationForm": "help"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "helpen",
+    "lemma": "helpen",
+    "reading": null,
     "ipa": "/ˈhɛlpə(n)/",
     "pos": "verb",
     "gender": null,
@@ -203,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 'helpen' with 'geven' (to give).",
+        "why": "Learners do not confuse 'helpen' with 'geven'; note is pure filler."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should give the irregular strong past forms (hielp, geholpen)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[1] (ease) ... [2] (remedy)",
+        "why": "Senses 1 and 2 both mean 'to be useful or effective' and should be merged."
+      }
+    ],
+    "growth": 0.695
   }
 }

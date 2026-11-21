@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to put; to place; to pour",
+    "primaryGloss": "to put",
+    "emotion": "matter-of-fact and direct, describing a simple everyday action",
+    "notes": [
+      "Takes the dative case (-e/-a) for the place where something is put (e.g., masaya koymak — to put on the table)."
+    ],
+    "senses": [
+      {
+        "id": "orrrfwzs1uxfsqi",
+        "order": 0,
+        "definition": "To move something into a particular place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to place"
+            ]
+          }
+        ],
+        "domain": "placement",
+        "emoji": "📥",
+        "examples": [
+          {
+            "id": "hwlu0xjspdxorzd",
+            "text": "Anahtarı masaya koydum.",
+            "textLang": "tr",
+            "translation": "I put the key on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved after finally finding where it belongs",
+            "note": null,
+            "matchedForm": "koydum",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0iip8my8y5iuaaw",
+        "order": 1,
+        "definition": "To pour a drink or put food into a cup, glass, or plate to serve it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pour",
+              "to serve",
+              "to add"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ejss787ykk6lzq7",
+            "text": "Sana bir bardak çay koyayım mı?",
+            "textLang": "tr",
+            "translation": "Shall I pour you a glass of tea?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "koyayım",
+            "matchedTranslationForm": "pour"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "koymak",
+    "lemma": "koymak",
+    "reading": null,
+    "ipa": "/kojˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📥",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to put; to place; to hurt",
     "primaryGloss": "to put",
     "emotion": "matter-of-fact and direct, describing a simple everyday action",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday A1/A2 sense 'to pour / to serve' (food or drink, e.g. çay koymak)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To cause emotional pain or to hurt someone's feelings.",
+        "why": "Colloquial/slang sense; much less essential for A2 than pouring/serving."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Koymak is one of the most common verbs in Turkish",
+        "why": "Pure filler restating the primary gloss."
+      }
+    ],
+    "growth": 0.896
   }
 }

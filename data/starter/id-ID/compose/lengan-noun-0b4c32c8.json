@@ -58,6 +58,113 @@
     "headword": "lengan",
     "lemma": "lengan",
     "reading": null,
+    "ipa": "/ləˈŋan/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "arm; sleeve",
+    "primaryGloss": "arm",
+    "emotion": "relaxed and natural, pointing to one's own body",
+    "notes": [
+      "For the body part, 'lengan' specifically means the arm from shoulder to wrist, though in casual speech 'tangan' (hand) is often used for the whole arm. For clothing, it is often used in 'lengan baju' (shirt sleeve), 'lengan panjang' (long-sleeved), and 'lengan pendek' (short-sleeved)."
+    ],
+    "senses": [
+      {
+        "id": "dr40pse4xjkvomk",
+        "order": 0,
+        "definition": "The upper limb of the human body, from the shoulder to the wrist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arm"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "kbdbm3sulw8fg50",
+            "text": "Lengan kanannya sakit setelah mengangkat kotak berat.",
+            "textLang": "id",
+            "translation": "His right arm hurts after lifting a heavy box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Lengan",
+            "matchedTranslationForm": "arm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pggh2lpbanwehx8",
+        "order": 1,
+        "definition": "The part of a piece of clothing that covers the arm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleeve"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "5tb6cayp3rt8koz",
+            "text": "Baju ini memiliki lengan panjang.",
+            "textLang": "id",
+            "translation": "This shirt has long sleeves.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing an outfit calmly and clearly",
+            "note": null,
+            "matchedForm": "lengan",
+            "matchedTranslationForm": "sleeves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lengan",
+    "lemma": "lengan",
+    "reading": null,
     "ipa": "/ləŋan/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Dia melipat lengan bajunya sebelum bekerja.",
+        "why": "'Lengan baju' means 'shirt sleeve' (sense 1), not the body part (sense 0)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Lengan refers to the entire upper limb of the body",
+        "why": "Both notes just restate the definitions of the two senses."
+      }
+    ],
+    "growth": 1.29
   }
 }

@@ -68,6 +68,113 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "black",
+    "primaryGloss": "black",
+    "emotion": "a flat, neutral observation of a property or color",
+    "notes": [
+      "Of coffee, 'zwart' means without milk ('koffie zwart'). Informally, 'zwart' also means undeclared or off the books, without paying taxes (e.g., 'zwart werken')."
+    ],
+    "senses": [
+      {
+        "id": "12lv7ucq3x555tr",
+        "order": 0,
+        "definition": "Having the darkest color, like coal or the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "kp5u9keb5jrg5z3",
+            "text": "De kat is helemaal zwart.",
+            "textLang": "nl",
+            "translation": "The cat is completely black.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, factual description of an animal",
+            "note": null,
+            "matchedForm": "zwart",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jq44i21yyvc0d1d",
+        "order": 1,
+        "definition": "Of coffee: served without milk or cream.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "87szmmsgroz9j7a",
+            "text": "Ik drink mijn koffie altijd zwart.",
+            "textLang": "nl",
+            "translation": "I always drink my coffee black.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a personal preference stated clearly and confidently",
+            "note": null,
+            "matchedForm": "zwart",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zwart",
+    "lemma": "zwart",
+    "reading": null,
+    "ipa": "/zʋɑrt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "black; dark",
     "primaryGloss": "black",
     "emotion": "a flat, neutral observation of a property or color",
@@ -158,5 +265,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Unlike English, it is also used in Dutch to describe coffee",
+        "why": "English also uses 'black' for coffee without milk ('black coffee'); and 'zwart' allows sugar."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Without milk or sugar, referring specifically to coffee or tea.",
+        "why": "'Zwarte koffie' means coffee without milk/cream (it can still have sugar), and is not used for tea."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color that absorbs all light and is the opposite of white.",
+        "why": "Defines the adjective as a noun ('The color that...')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "black; dark",
+        "why": "'dark' is not in any sense's glosses."
+      }
+    ],
+    "growth": 0.97
   }
 }

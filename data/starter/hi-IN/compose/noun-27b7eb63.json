@@ -74,6 +74,98 @@
     "primaryGloss": "glasses",
     "emotion": null,
     "notes": [
+      "Singular in Hindi (unlike English 'glasses'): one pair is 'एक चश्मा'.",
+      "covers both prescription glasses and sunglasses (often called धूप का चश्मा).",
+      "To say 'wear/put on glasses', use 'चश्मा लगाना' or 'चश्मा पहनना'."
+    ],
+    "senses": [
+      {
+        "id": "0c334vmm10j44a1",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame worn on the nose and ears, used to correct vision or protect the eyes from the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "spectacles",
+              "sunglasses"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "zfl9h0vk6qe0k6d",
+            "text": "पढ़ने के लिए मुझे चश्मा चाहिए।",
+            "textLang": "hi",
+            "translation": "I need glasses for reading.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, matter-of-fact request for help with a daily task",
+            "note": null,
+            "matchedForm": "चश्मा",
+            "matchedTranslationForm": "glasses"
+          },
+          {
+            "id": "l7jli6kdoua5w39",
+            "text": "धूप में बाहर जाने के लिए अपना चश्मा लगा लो।",
+            "textLang": "hi",
+            "translation": "Put on your sunglasses to go out in the sun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and protective, offering helpful advice",
+            "note": null,
+            "matchedForm": "चश्मा",
+            "matchedTranslationForm": "sunglasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "चश्मा",
+    "lemma": "चश्मा",
+    "reading": null,
+    "ipa": "/tʃəʃ.mɑː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; spectacles; sunglasses",
+    "primaryGloss": "glasses",
+    "emotion": null,
+    "notes": [
       "Used for both prescription glasses and sunglasses.",
       "While it is classified here under 'Clothes' as an accessory, it is very commonly associated with 'Body' or 'Health' when discussing vision."
     ],
@@ -162,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "senses: [0] ... glasses ... [1] ... sunglasses",
+        "why": "चश्मा means eyeglasses in general; prescription glasses and sunglasses are one sense in Hindi."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While it is classified here under 'Clothes' as an accessory",
+        "why": "Refers to internal app categories and gives no useful linguistic information."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that चश्मा is singular in Hindi, unlike English 'glasses', and give 'चश्मा लगाना'."
+      }
+    ],
+    "growth": 1.017
   }
 }

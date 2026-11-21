@@ -72,6 +72,94 @@
     "primaryGloss": "week",
     "emotion": "busy and structured, thinking about the work ahead",
     "notes": [
+      "The phrase 'en semaine' means 'during the week' or 'on weekdays' (Monday to Friday, as opposed to the weekend)."
+    ],
+    "senses": [
+      {
+        "id": "l9145qb3engg4hu",
+        "order": 0,
+        "definition": "A period of seven consecutive days, in France counted from Monday to Sunday, or the working days from Monday to Friday.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "bf8pson45krhlnm",
+            "text": "Je pars en vacances la semaine prochaine.",
+            "textLang": "fr",
+            "translation": "I am going on vacation next week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "semaine",
+            "matchedTranslationForm": "week"
+          },
+          {
+            "id": "jmrgmil34mtvyhb",
+            "text": "Je ne sors pas beaucoup en semaine.",
+            "textLang": "fr",
+            "translation": "I don't go out much during the week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "semaine",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la semaine",
+    "lemma": "semaine",
+    "reading": null,
+    "ipa": "/sə.mɛn/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": "busy and structured, thinking about the work ahead",
+    "notes": [
       "Used to mean a period of seven days, or specifically the working week from Monday to Friday.",
       "Do not confuse with 'le weekend', which refers strictly to Saturday and Sunday."
     ],
@@ -160,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used to mean a period of seven days, or specifically",
+        "why": "Both notes are filler restating the definition or contrasting an obvious word ('le weekend')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(work) The five working days of the week, excluding the weekend.",
+        "why": "Shades of the same meaning; 'en semaine' (on weekdays) is best explained in a note."
+      }
+    ],
+    "growth": 0.818
   }
 }

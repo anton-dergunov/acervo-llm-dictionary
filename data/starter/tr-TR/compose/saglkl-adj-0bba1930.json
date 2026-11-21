@@ -58,6 +58,116 @@
     "headword": "sağlıklı",
     "lemma": "sağlıklı",
     "reading": null,
+    "ipa": "/saːɫɯkˈɫɯ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍏",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "healthy; wholesome",
+    "primaryGloss": "healthy",
+    "emotion": "bright and reassuring, feeling good about taking care of oneself",
+    "notes": [
+      "Formed from 'sağlık' (health) + '-lı' (having); its opposite is 'sağlıksız' (unhealthy)."
+    ],
+    "senses": [
+      {
+        "id": "bw3tmykatb5spwk",
+        "order": 0,
+        "definition": "Of a person or body: well, strong, and not ill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "fit",
+              "well"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "4hijtjlhpsthb01",
+            "text": "Düzenli spor yaparak daha sağlıklı olabilirsiniz.",
+            "textLang": "tr",
+            "translation": "You can become healthier by exercising regularly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and warm, offering friendly advice",
+            "note": null,
+            "matchedForm": "sağlıklı",
+            "matchedTranslationForm": "healthier"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "crbj7kxjzkz4iy7",
+        "order": 1,
+        "definition": "Of food, habits, or conditions: good for your health.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "wholesome"
+            ]
+          }
+        ],
+        "domain": "lifestyle",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "ka0uo4s7kcwxdic",
+            "text": "Her gün taze sebze ve meyve yemek sağlıklıdır.",
+            "textLang": "tr",
+            "translation": "Eating fresh vegetables and fruit every day is healthy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and positive, endorsing good habits",
+            "note": null,
+            "matchedForm": "sağlıklıdır",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sağlıklı",
+    "lemma": "sağlıklı",
+    "reading": null,
     "ipa": "/saːɫɯkˈlɯ/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/saːɫɯkˈlɯ/",
+        "why": "After back vowel /ɯ/, the lateral in '-lı' is velarized /ɫ/: /saːɫɯkˈɫɯ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used for both people who are well and for food or habits",
+        "why": "Merely restates the two senses already shown in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "You can become more healthy by doing regular sports.",
+        "why": "Unnatural English calque; 'healthier by exercising regularly' is natural."
+      }
+    ],
+    "growth": 0.926
   }
 }

@@ -58,6 +58,116 @@
     "headword": "zielony",
     "lemma": "zielony",
     "reading": null,
+    "ipa": "/ʑɛˈlɔnɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; inexperienced",
+    "primaryGloss": "green",
+    "emotion": "calm and fresh, like a walk in a park in summer",
+    "notes": [
+      "In the masculine personal plural, the consonant softens and the form is 'zieloni'.",
+      "A very common informal idiom is 'nie mieć zielonego pojęcia' (to have no clue / not have the foggiest idea)."
+    ],
+    "senses": [
+      {
+        "id": "rke5ic22cugrvzu",
+        "order": 0,
+        "definition": "Of the color of fresh grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "6bqujx46tcpxqux",
+            "text": "Wiosną trawa jest soczyście zielona.",
+            "textLang": "pl",
+            "translation": "In spring the grass is lushly green.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and bright, appreciating the return of warm weather",
+            "note": null,
+            "matchedForm": "zielona",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g4kw6ewpyrphckr",
+        "order": 1,
+        "definition": "Informal: lacking experience or knowledge in a specific area.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green",
+              "inexperienced",
+              "clueless"
+            ]
+          }
+        ],
+        "domain": "inexperience",
+        "emoji": "👶",
+        "examples": [
+          {
+            "id": "92yqgtde7xshdeu",
+            "text": "Jestem zupełnie zielony w tym temacie.",
+            "textLang": "pl",
+            "translation": "I am completely clueless on this topic.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit embarrassed and humble, admitting a lack of knowledge",
+            "note": null,
+            "matchedForm": "zielony",
+            "matchedTranslationForm": "clueless"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "zielony",
+    "lemma": "zielony",
+    "reading": null,
     "ipa": "/ˈʑɛlɔnɨ/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈʑɛlɔnɨ/",
+        "why": "Polish switches stress is penultimate: /ʑɛˈlɔnɨ/, not initial."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of grass and leaves.",
+        "why": "Defines an adjective as a noun ('The color...') instead of a quality ('Of the color...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used literally for the color, but also metaphorically for someone who is",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.857
   }
 }

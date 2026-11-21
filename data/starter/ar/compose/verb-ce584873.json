@@ -69,6 +69,75 @@
     ],
     "status": "active",
     "shortGloss": "to dance",
+    "primaryGloss": "to dance",
+    "emotion": "energetic and rhythmic, feeling the music in your body",
+    "notes": [
+      "The non-past stem takes a 'u' vowel: يَرْقُصُ (yarquṣu), verbal noun رَقْص (raqṣ).",
+      "Do not confuse with رَكَضَ (rakaḍa, 'to run'), which differs in both the middle and final consonants."
+    ],
+    "senses": [
+      {
+        "id": "3qrwbqe5wwav8n6",
+        "order": 0,
+        "definition": "To move one's body rhythmically, usually to music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to dance",
+              "dance"
+            ]
+          }
+        ],
+        "domain": "dance",
+        "emoji": "💃",
+        "examples": [
+          {
+            "id": "n85yymjcl9lq1z0",
+            "text": "رَقَصَتْ في الحَفْلَةِ.",
+            "textLang": "ar",
+            "translation": "She danced at the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and carefree, enjoying the social atmosphere",
+            "note": null,
+            "matchedForm": "رَقَصَتْ",
+            "matchedTranslationForm": "danced"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رَقَصَ",
+    "lemma": "رَقَصَ",
+    "reading": null,
+    "ipa": "/ˈraqasˤa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💃",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to dance",
     "primaryGloss": "dance",
     "emotion": "energetic and rhythmic, feeling the music in your body",
     "notes": [
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the standard verb for dancing. Unlike some other movement verbs,",
+        "why": "Filler restating the definition; missing useful grammar like the non-past vowel (يَرْقُصُ)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "The difference is the Arabic letter 'ق' versus 'ك'.",
+        "why": "False: they also differ in the final letter (ص vs ض), not just ق vs ك."
+      }
+    ],
+    "growth": 0.805
   }
 }

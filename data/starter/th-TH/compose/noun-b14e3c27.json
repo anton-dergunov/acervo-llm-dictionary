@@ -58,6 +58,73 @@
     "headword": "แผนที่",
     "lemma": "แผนที่",
     "reading": null,
+    "ipa": "/pʰɛ̌ːn.tʰîː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗺️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "map",
+    "primaryGloss": "map",
+    "emotion": "helpful and guiding, pointing out the route on paper",
+    "notes": [
+      "Composed of แผน (plan) + ที่ (place). Its classifier is แผ่น (as a flat sheet) or ฉบับ."
+    ],
+    "senses": [
+      {
+        "id": "t1jgt4byehpcun6",
+        "order": 0,
+        "definition": "A drawing of an area of land or sea showing countries, cities, roads, etc.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "map"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🗺️",
+        "examples": [
+          {
+            "id": "u71vx9prv28uxhg",
+            "text": "เราดูแผนที่เพื่อหาร้านอาหาร",
+            "textLang": "th",
+            "translation": "We looked at the map to find a restaurant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and curious, looking for a place to eat",
+            "note": null,
+            "matchedForm": "แผนที่",
+            "matchedTranslationForm": "map"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แผนที่",
+    "lemma": "แผนที่",
+    "reading": null,
     "ipa": "/pʰaːn˨˩.tʰiː˥˩/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʰaːn˨˩.tʰiː˥˩/",
+        "why": "Wrong vowel and tone for แผน: it is /pʰɛ̌ːn/ (rising tone, open-mid front vowel), not /pʰaːn˨˩/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used both for physical paper maps and digital maps on a phone.",
+        "why": "True of English 'map' too; a note should give the Thai classifiers (ฉบับ, แผ่น) instead."
+      }
+    ],
+    "growth": 0.784
   }
 }

@@ -72,6 +72,84 @@
     "primaryGloss": "guest",
     "emotion": "welcoming and warm, pleased to see someone arrive at the door",
     "notes": [
+      "The feminine form is 'la invitada'.",
+      "Unlike English 'guest', 'invitado' is only for someone invited to a home or event; a paying guest at a hotel is 'un huésped' or 'un cliente'."
+    ],
+    "senses": [
+      {
+        "id": "su14x72xipum7w7",
+        "order": 0,
+        "definition": "A person who has been invited to visit a home or attend an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest"
+            ]
+          }
+        ],
+        "domain": "guest",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "d4efagmzws1rh1s",
+            "text": "Todos los invitados ya están sentados a la mesa.",
+            "textLang": "es",
+            "translation": "All the guests are already seated at the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "invitados",
+            "matchedTranslationForm": "guests"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "su14x72xipum7w7",
+      "from": "Persona que ha sido convidada a ir a una casa o a un acontecimiento.",
+      "to": "A person who has been invited to visit a home or attend an event.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el invitado",
+    "lemma": "invitado",
+    "reading": null,
+    "ipa": "/imbiˈtado/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "guest",
+    "primaryGloss": "guest",
+    "emotion": "welcoming and warm, pleased to see someone arrive at the door",
+    "notes": [
       "Use 'invitado' for anyone who has been invited to your home or to an event like a wedding or party."
     ],
     "senses": [
@@ -119,14 +197,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "su14x72xipum7w7",
-      "from": "Persona que ha sido convidada a ir a una casa o a un acontecimiento.",
-      "to": "A person who has been invited to visit a home or attend an event.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'invitado' for anyone who has been invited to your home",
+        "why": "Merely repeats the definition instead of distinguishing from 'huésped' (paying guest) or noting feminine 'invitada'."
+      }
+    ],
+    "growth": 1.281
+  }
 }

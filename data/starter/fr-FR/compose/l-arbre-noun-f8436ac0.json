@@ -58,6 +58,71 @@
     "headword": "l'arbre",
     "lemma": "arbre",
     "reading": null,
+    "ipa": "/aʁbʁ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "tree",
+    "primaryGloss": "tree",
+    "emotion": "calm and grounded, looking up at the green leaves overhead",
+    "notes": [],
+    "senses": [
+      {
+        "id": "mkoutanumeby5k7",
+        "order": 0,
+        "definition": "A tall plant with a wooden trunk, branches, and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "zelwsqsub2z3bj2",
+            "text": "Les enfants grimpent dans l'arbre.",
+            "textLang": "fr",
+            "translation": "The children are climbing the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "arbre",
+            "matchedTranslationForm": "tree"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'arbre",
+    "lemma": "arbre",
+    "reading": null,
     "ipa": "/laʁbʁ/",
     "pos": "noun",
     "gender": "masculine",
@@ -96,5 +161,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/laʁbʁ/",
+        "why": "Includes the elided definite article 'l'' in the lemma transcription."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "so it takes 'le' or 'l' ' in the singular.",
+        "why": "False: 'arbre' starts with a vowel so it never takes 'le' directly (only l')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'arbre' is masculine, so it takes 'le'",
+        "why": "Restates the grammatical gender already given in the entry fields."
+      }
+    ],
+    "growth": 1.091
   }
 }

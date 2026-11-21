@@ -68,6 +68,115 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "bored; squeezed",
+    "primaryGloss": "bored",
+    "emotion": "yawning and restless, wanting something better to do",
+    "notes": [
+      "Participle of 'sıkılmak' (to be bored / to be squeezed). Do not confuse with 'sıkıcı' (boring)."
+    ],
+    "senses": [
+      {
+        "id": "pml185u7hywz920",
+        "order": 0,
+        "definition": "Feeling weary and impatient because there is nothing interesting to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bored",
+              "fed up"
+            ]
+          }
+        ],
+        "domain": "boredom",
+        "emoji": "🥱",
+        "examples": [
+          {
+            "id": "fs0z6ezpgd16kvx",
+            "text": "Bana sıkılmış bir ifadeyle baktı.",
+            "textLang": "tr",
+            "translation": "He looked at me with a bored expression.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sıkılmış",
+            "matchedTranslationForm": "bored"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i78d1623es6gxv2",
+        "order": 1,
+        "definition": "Pressed or crushed to extract juice or liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "squeezed",
+              "freshly squeezed"
+            ]
+          }
+        ],
+        "domain": "physical",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "mkiysfdbyyd561v",
+            "text": "Kahvaltıda taze sıkılmış portakal suyu içtik.",
+            "textLang": "tr",
+            "translation": "We drank freshly squeezed orange juice at breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sıkılmış",
+            "matchedTranslationForm": "squeezed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sıkılmış",
+    "lemma": "sıkılmak",
+    "reading": null,
+    "ipa": "/sɯ.kɯɫˈmɯʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥱",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "bored; squeezed; tired of waiting",
     "primaryGloss": "bored",
     "emotion": "yawning and restless, wanting something better to do",
@@ -162,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bored; squeezed; tired of waiting",
+        "why": "'tired of waiting' is overly specific and not in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tüm gün evde oturmaktan çok sıkılmış.",
+        "why": "Uses 'sıkılmış' as an inferential finite verb rather than an adjective."
+      }
+    ],
+    "growth": 0.744
   }
 }

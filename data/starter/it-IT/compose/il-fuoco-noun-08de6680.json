@@ -68,6 +68,117 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "fire; burner",
+    "primaryGloss": "fire",
+    "emotion": "warm and cozy, watching the flames crackle in the hearth",
+    "notes": [
+      "The plural adds an h to keep the hard /k/ sound: i fuochi (as in i fuochi d'artificio, 'fireworks').",
+      "For a large, uncontrolled fire burning a building or forest, use l'incendio."
+    ],
+    "senses": [
+      {
+        "id": "bfxpmxmogiaskzl",
+        "order": 0,
+        "definition": "Flames that burn and give off heat and light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "flames",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "j1pnk4340bpu82z",
+            "text": "Il fuoco bruciava nel caminetto.",
+            "textLang": "it",
+            "translation": "The fire was burning in the fireplace.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and warm, enjoying the evening indoors",
+            "note": null,
+            "matchedForm": "fuoco",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "liza8bg4p7gj25i",
+        "order": 1,
+        "definition": "A burner or ring on a kitchen stove used for cooking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "burner",
+              "hob",
+              "ring"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "eebskhkjy2qqm1s",
+            "text": "Spegni il fuoco sotto la pentola.",
+            "textLang": "it",
+            "translation": "Turn off the burner under the pot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "attentive and cautious, finishing up in the kitchen",
+            "note": null,
+            "matchedForm": "fuoco",
+            "matchedTranslationForm": "burner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il fuoco",
+    "lemma": "fuoco",
+    "reading": null,
+    "ipa": "/ˈfwɔ.ko/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "fire; heat; fireplace",
     "primaryGloss": "fire",
     "emotion": "warm and cozy, watching the flames crackle in the hearth",
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fire; heat; fireplace",
+        "why": "'heat' and 'fireplace' are not in the senses, while sense 1 ('burner, stove') is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for a controlled fire (like in a fireplace or campfire)",
+        "why": "Fails to contrast with 'incendio' (an uncontrolled destructive fire), which learners need."
+      }
+    ],
+    "growth": 1.152
   }
 }

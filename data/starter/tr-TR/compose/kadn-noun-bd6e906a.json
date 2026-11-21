@@ -58,6 +58,74 @@
     "headword": "kadın",
     "lemma": "kadın",
     "reading": null,
+    "ipa": "/kɑˈdɯn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "woman",
+    "primaryGloss": "woman",
+    "emotion": "warm and welcoming, talking about someone familiar",
+    "notes": [
+      "Do not confuse with kız ('girl, daughter'). For 'wife', Turkish uses eş ('spouse', polite and standard) or karı (informal, often considered rude); kadın is not used for 'wife' in standard Turkish."
+    ],
+    "senses": [
+      {
+        "id": "wy8vo9zkvot77s9",
+        "order": 0,
+        "definition": "An adult female person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "woman",
+              "lady"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "m08u48xei006ftv",
+            "text": "O kadın otobüste beni gördü.",
+            "textLang": "tr",
+            "translation": "That woman saw me on the bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and clear, pointing someone out",
+            "note": null,
+            "matchedForm": "kadın",
+            "matchedTranslationForm": "woman"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kadın",
+    "lemma": "kadın",
+    "reading": null,
     "ipa": "/kaˈdɯn/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "commonly used colloquially to mean 'wife' in phrases like benim kadınım",
+        "why": "Calling one's wife 'kadın' or 'karım' can sound rude/dated; standard polite words are 'eşim' or 'hanımım'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(family) A married female partner; a wife.",
+        "why": "Provincial/dated and disrespectful in standard Turkish; teaching it to A2 learners without warning is harmful."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Evde kadını bekliyor.",
+        "why": "'Kadını' means 'the woman' (accusative) or 'her woman'; 'his wife' would require 'kadınını' (still unnatural)."
+      }
+    ],
+    "growth": 0.753
   }
 }

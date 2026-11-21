@@ -57,6 +57,96 @@
     "language": "ja",
     "headword": "傘",
     "lemma": "傘",
+    "reading": "かさ",
+    "ipa": "kasa",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☂️",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "umbrella; parasol",
+    "primaryGloss": "umbrella",
+    "emotion": "prepared for the weather, clutching the handle firmly",
+    "notes": [
+      "To open or hold up an umbrella is 傘をさす (kasa o sasu). Counted with 本 (ほん).",
+      "An umbrella used specifically against the sun is usually called 日傘 (ひがさ)."
+    ],
+    "senses": [
+      {
+        "id": "19lvob96k3cw5cu",
+        "order": 0,
+        "definition": "A folding canopy on a handle, carried for protection against rain or sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "umbrella",
+              "parasol"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "☂️",
+        "examples": [
+          {
+            "id": "d54u9gc2rmlrnq9",
+            "text": "雨が降っているので傘を持って行きます。",
+            "textLang": "ja",
+            "translation": "Since it is raining, I will take an umbrella.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a practical decision, making sure to stay dry",
+            "note": null,
+            "matchedForm": "傘",
+            "matchedTranslationForm": "umbrella"
+          },
+          {
+            "id": "zjnjsm5tmpzk5gt",
+            "text": "雨がやんだので傘を閉じた。",
+            "textLang": "ja",
+            "translation": "The rain stopped, so I closed my umbrella.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "傘",
+            "matchedTranslationForm": "umbrella"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "傘",
+    "lemma": "傘",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -160,5 +250,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading かさ for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(parasol) A light screen used for protection against the sun.",
+        "why": "傘 is one concept in Japanese; a sun parasol is specifically called 日傘."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "日差しが強いので日傘をさす。",
+        "why": "Uses the compound word 日傘 (higasa) rather than the headword 傘 (kasa)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While technically a 'clothing' accessory, it is more often considered",
+        "why": "Useless trivia; misses the essential verb (傘をさす) and counter (本)."
+      }
+    ],
+    "growth": 0.823
   }
 }

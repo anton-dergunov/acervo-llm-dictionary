@@ -58,6 +58,116 @@
     "headword": "los papás",
     "lemma": "papá",
     "reading": null,
+    "ipa": "/paˈpa/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": null,
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "parents; dads",
+    "primaryGloss": "parents",
+    "emotion": "warm and informal, reflecting a close family connection",
+    "notes": [
+      "In Spanish, the masculine plural is used for mixed-gender groups, so 'los papás' means either 'the dads' or 'the parents' (mom and dad).",
+      "In everyday Mexican conversation, 'los papás' is much more common than the more formal 'los padres'."
+    ],
+    "senses": [
+      {
+        "id": "razx8oedkrld83b",
+        "order": 0,
+        "definition": "A person's mother and father together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parents",
+              "mom and dad"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "pa9843bphw19jiv",
+            "text": "Los papás de Juan van a venir a la cena.",
+            "textLang": "es",
+            "translation": "Juan's parents are coming to dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and conversational, mentioning family plans",
+            "note": null,
+            "matchedForm": "papás",
+            "matchedTranslationForm": "parents"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "clhyvvkrlyevtmk",
+        "order": 1,
+        "definition": "More than one father.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dads",
+              "fathers"
+            ]
+          }
+        ],
+        "domain": "fathers",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "282tgex92qj135s",
+            "text": "En esta escuela, los papás también ayudan con los eventos.",
+            "textLang": "es",
+            "translation": "At this school, the dads also help with the events.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and appreciative of the help",
+            "note": null,
+            "matchedForm": "papás",
+            "matchedTranslationForm": "dads"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "los papás",
+    "lemma": "papá",
+    "reading": null,
     "ipa": "/los paˈpas/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/los paˈpas/",
+        "why": "IPA includes the article 'los' and uses the plural instead of the lemma."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "parents; dad and mom",
+        "why": "Omits sense 1 ('dads') and repeats sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "field.register",
+        "path": "register",
+        "quote": "neutral",
+        "why": "'Papás' is informal compared to the neutral 'padres', as the note itself states."
+      }
+    ],
+    "growth": 1.014
   }
 }

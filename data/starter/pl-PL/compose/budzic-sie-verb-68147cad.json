@@ -58,6 +58,117 @@
     "headword": "budzić się",
     "lemma": "budzić się",
     "reading": null,
+    "ipa": "/ˈbu.d͡ʑit͡ɕ ɕɛ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wake up; to awaken",
+    "primaryGloss": "wake up",
+    "emotion": "groggy and slow, rubbing sleep from tired eyes in the morning",
+    "notes": [
+      "Imperfective verb; its perfective partner is 'obudzić się'.",
+      "Use 'budzić się' when waking up on your own; 'budzić' (without 'się') means to wake someone else up."
+    ],
+    "senses": [
+      {
+        "id": "o2l8nbmyvwupsjx",
+        "order": 0,
+        "definition": "To stop sleeping and become awake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wake up",
+              "awaken"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "li1422twhsbgyob",
+            "text": "Zazwyczaj budzę się wcześnie rano.",
+            "textLang": "pl",
+            "translation": "I usually wake up early in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and routine, talking about the early morning alarm",
+            "note": null,
+            "matchedForm": "budzę się",
+            "matchedTranslationForm": "wake up"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fe0keqoiwlxg8w5",
+        "order": 1,
+        "definition": "Of nature, feelings, or activity: to become active or start to exist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "awaken",
+              "stir",
+              "come alive"
+            ]
+          }
+        ],
+        "domain": "figurative",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "26xhp0jue7wf7ki",
+            "text": "Wiosną cała przyroda budzi się do życia.",
+            "textLang": "pl",
+            "translation": "In spring, all of nature awakens to life.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "inspired and bright, watching the green world come alive",
+            "note": null,
+            "matchedForm": "budzi się",
+            "matchedTranslationForm": "awakens"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "budzić się",
+    "lemma": "budzić się",
+    "reading": null,
     "ipa": "/ˈbu.d͡ʑi͡ɕ ɕɛ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈbu.d͡ʑi͡ɕ ɕɛ/",
+        "why": "Malformed IPA tie bar on /i͡ɕ/; should be /ˈbu.d͡ʑit͡ɕ ɕɛ/."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To start to feel an emotion or a sense of awareness.",
+        "why": "False definition: the subject of 'budzić się' is the feeling or nature itself, not a person."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the essential perfective aspect partner 'obudzić się'."
+      }
+    ],
+    "growth": 1.19
   }
 }

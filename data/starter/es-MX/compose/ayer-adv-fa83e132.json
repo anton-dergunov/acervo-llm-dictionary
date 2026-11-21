@@ -72,6 +72,73 @@
     "primaryGloss": "yesterday",
     "emotion": null,
     "notes": [
+      "To say 'yesterday morning/afternoon', use 'ayer por la mañana / por la tarde'. For 'last night', use 'anoche' (not 'ayer por la noche')."
+    ],
+    "senses": [
+      {
+        "id": "y4trgqcayesvlcv",
+        "order": 0,
+        "definition": "On the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "ujt6qdfkmbs4ziy",
+            "text": "Ayer fui al cine con mis amigos.",
+            "textLang": "es",
+            "translation": "Yesterday I went to the movies with my friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing a simple memory",
+            "note": null,
+            "matchedForm": "Ayer",
+            "matchedTranslationForm": "Yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ayer",
+    "lemma": "ayer",
+    "reading": null,
+    "ipa": "/aˈʝeɾ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
       "Ayer refers to the day immediately preceding today. It is an adverb and does not change form regardless of the gender or number of the subject.",
       "Note the difference with 'anoche', which specifically means 'last night' rather than the full day."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ayer refers to the day immediately preceding today. It is an adverb",
+        "why": "Restates the definition and explains basic adverb grammar unnecessarily."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The day before today.",
+        "why": "Defined as a noun rather than an adverb ('on the day before today')."
+      }
+    ],
+    "growth": 0.716
   }
 }

@@ -68,6 +68,116 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "happy, glad; fun",
+    "primaryGloss": "happy",
+    "emotion": "light and warm, like a genuine smile sharing good news",
+    "notes": [
+      "Describes both how a person feels ('happy, glad') and what an event or activity is like ('fun')."
+    ],
+    "senses": [
+      {
+        "id": "q28ovsromhwqt5j",
+        "order": 0,
+        "definition": "Of a person: feeling pleased and in good spirits.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happy",
+              "glad",
+              "joyful"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "ckqx2xs1iyhl826",
+            "text": "Tôi rất vui khi được gặp bạn.",
+            "textLang": "vi",
+            "translation": "I am very happy to meet you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, greeting someone with genuine enthusiasm",
+            "note": null,
+            "matchedForm": "vui",
+            "matchedTranslationForm": "happy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uddowi29i1rfdz5",
+        "order": 1,
+        "definition": "Of an event, place, or activity: enjoyable and lively.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fun",
+              "enjoyable"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🎉",
+        "examples": [
+          {
+            "id": "8as7vij2236t8l0",
+            "text": "Buổi tiệc hôm nay thật là vui.",
+            "textLang": "vi",
+            "translation": "The party today was really fun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and animated, recalling a great time with friends",
+            "note": null,
+            "matchedForm": "vui",
+            "matchedTranslationForm": "fun"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "vui",
+    "lemma": "vui",
+    "reading": null,
+    "ipa": "/vuj˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "happy; glad; joyful",
     "primaryGloss": "happy",
     "emotion": "light and warm, like a genuine smile sharing good news",
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "happy; glad; joyful",
+        "why": "Omits the second sense ('fun, enjoyable')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe a state of happiness or a fun situation.",
+        "why": "Merely repeats the definitions of the two senses."
+      }
+    ],
+    "growth": 0.861
   }
 }

@@ -72,6 +72,136 @@
     "primaryGloss": "already",
     "emotion": null,
     "notes": [
+      "Translates as 'already' in statements and 'yet' in questions. Do not confuse with 'schön' (beautiful, nice)."
+    ],
+    "senses": [
+      {
+        "id": "r63ro6tz91h7zhy",
+        "order": 0,
+        "definition": "Before now, or earlier than expected.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "already",
+              "yet"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "hg10neh6y7iyxeh",
+            "text": "Ich bin schon zu Hause.",
+            "textLang": "de",
+            "translation": "I am already at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved to have arrived, satisfied and calm",
+            "note": null,
+            "matchedForm": "schon",
+            "matchedTranslationForm": "already"
+          },
+          {
+            "id": "sg7stoyjhof5dr8",
+            "text": "Bist du schon fertig?",
+            "textLang": "de",
+            "translation": "Are you finished yet?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impatient or curious, checking the progress of a task",
+            "note": null,
+            "matchedForm": "schon",
+            "matchedTranslationForm": "yet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z93v4ieauu1d7dl",
+        "order": 1,
+        "definition": "Used as a modal particle to reassure someone or express confidence that something will turn out well.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "surely",
+              "all right"
+            ]
+          }
+        ],
+        "domain": "reassurance",
+        "emoji": "👌",
+        "examples": [
+          {
+            "id": "ydyhkxutv3fb76i",
+            "text": "Das wird schon klappen.",
+            "textLang": "de",
+            "translation": "That will surely work out.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and optimistic, trying to calm someone down",
+            "note": null,
+            "matchedForm": "schon",
+            "matchedTranslationForm": "surely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "schon",
+    "lemma": "schon",
+    "reading": null,
+    "ipa": "/ʃoːn/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "already; yet; surely",
+    "primaryGloss": "already",
+    "emotion": null,
+    "notes": [
       "Schon implies that something happened earlier than expected. Do not confuse it with 'schön', which means 'beautiful' or 'nice'.",
       "In questions, it is often used to mean 'yet', asking if something has happened earlier than one might think."
     ],
@@ -200,5 +330,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Used in questions to ask if something has happened earlier",
+        "why": "'Already' in statements and 'yet' in questions are the same German sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In questions, it is often used to mean 'yet'",
+        "why": "Duplicates Sense 1 verbatim; better merged into a single note or sense."
+      }
+    ],
+    "growth": 0.721
   }
 }

@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "juice; soft drink",
+    "primaryGloss": "juice",
+    "emotion": "casual and refreshed, holding a cold cup on a warm day",
+    "notes": [
+      "Often used casually for any sweet soft drink or soda, not just fruit juice. Pure fruit juice is labeled 果汁100% (kajū hyaku pāsento)."
+    ],
+    "senses": [
+      {
+        "id": "l0ak6d78e5eagyi",
+        "order": 0,
+        "definition": "A liquid extracted from fruit or vegetables served as a drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "juice",
+              "fruit juice"
+            ]
+          }
+        ],
+        "domain": "fruit drink",
+        "emoji": "🍊",
+        "examples": [
+          {
+            "id": "rgclyr3y74cmxx5",
+            "text": "朝ごはんにオレンジジュースを飲みました。",
+            "textLang": "ja",
+            "translation": "I drank orange juice for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and routine, starting the day with a healthy habit",
+            "note": null,
+            "matchedForm": "ジュース",
+            "matchedTranslationForm": "juice"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "smq9b6kd7nfhl00",
+        "order": 1,
+        "definition": "Any sweet, non-alcoholic carbonated or non-carbonated drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soft drink",
+              "soda"
+            ]
+          }
+        ],
+        "domain": "soft drink",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "vy7bcmnu56n7zwl",
+            "text": "喉が渇いたから、自販機で何かジュースを買おう。",
+            "textLang": "ja",
+            "translation": "I'm thirsty, so let's buy a soft drink from the vending machine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ジュース",
+            "matchedTranslationForm": "soft drink"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "ジュース",
+    "lemma": "ジュース",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "juice; non-alcoholic drink",
     "primaryGloss": "juice",
     "emotion": "casual and refreshed, holding a cold cup on a warm day",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is written in katakana because it is a loanword from English.",
+        "why": "Basic script rule that applies to all loanwords; filler note."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I'm thirsty, so let's buy some juice.",
+        "why": "Translates the 'soft drink' sense as 'juice', failing to show the sense."
+      }
+    ],
+    "growth": 0.791
   }
 }

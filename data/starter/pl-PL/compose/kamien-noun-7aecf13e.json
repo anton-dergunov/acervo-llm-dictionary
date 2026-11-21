@@ -68,6 +68,117 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "stone; rock; limescale",
+    "primaryGloss": "stone",
+    "emotion": "solid and grounded, resting heavy in the hand",
+    "notes": [
+      "Do not confuse with 'skała', which refers to a large rock formation or cliff.",
+      "Unlike English 'stone', 'kamień' is never used for the hard seed inside fruit (which is 'pestka')."
+    ],
+    "senses": [
+      {
+        "id": "wabo4z8jlowcn5u",
+        "order": 0,
+        "definition": "A hard piece of solid mineral matter found on the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stone",
+              "rock"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "50ihrv5z1knhob8",
+            "text": "Dziecko rzuciło kamień do wody.",
+            "textLang": "pl",
+            "translation": "The child threw a stone into the water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and playful, watching the ripples spread",
+            "note": null,
+            "matchedForm": "kamień",
+            "matchedTranslationForm": "stone"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6m626xaae03peyc",
+        "order": 1,
+        "definition": "A hard crust that builds up inside kettles and pipes or on teeth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "limescale",
+              "scale",
+              "tartar"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "⚙️",
+        "examples": [
+          {
+            "id": "dqb9zjcwfvvbapa",
+            "text": "Muszę usunąć kamień z czajnika.",
+            "textLang": "pl",
+            "translation": "I need to remove the limescale from the kettle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed by household chores and maintenance",
+            "note": null,
+            "matchedForm": "kamień",
+            "matchedTranslationForm": "limescale"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kamień",
+    "lemma": "kamień",
+    "reading": null,
+    "ipa": "/ˈkamjɛɲ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "stone; rock; pit",
     "primaryGloss": "stone",
     "emotion": "solid and grounded, resting heavy in the hand",
@@ -202,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The hard seed inside a stone fruit such as a peach or",
+        "why": "False friend with English 'stone': a fruit stone/pit in Polish is 'pestka', never 'kamień'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "W środku brzoskwini jest duży kamień.",
+        "why": "Completely unidiomatic calque from English; Polish speakers say 'pestka'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "as well as the hard seed inside certain fruits like cherries or",
+        "why": "Teaches a false meaning based on English 'stone'."
+      }
+    ],
+    "growth": 0.673
   }
 }

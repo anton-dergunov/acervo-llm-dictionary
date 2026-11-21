@@ -58,6 +58,116 @@
     "headword": "đẩy",
     "lemma": "đẩy",
     "reading": null,
+    "ipa": "/ɗəj˧˩˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👉",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to push; to shove; to promote",
+    "primaryGloss": "push",
+    "emotion": "firm and steady, putting physical effort into moving an object forward",
+    "notes": [
+      "Its opposite is 'kéo' (to pull)."
+    ],
+    "senses": [
+      {
+        "id": "4f3030lwg4cgxe3",
+        "order": 0,
+        "definition": "To apply physical force to someone or something in order to move them away from you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "push",
+              "shove"
+            ]
+          }
+        ],
+        "domain": "motion",
+        "emoji": "👉",
+        "examples": [
+          {
+            "id": "g3msxnuzuoz1727",
+            "text": "Hãy đẩy cánh cửa này ra.",
+            "textLang": "vi",
+            "translation": "Push this door open.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "authoritative and clear, giving a direct instruction",
+            "note": null,
+            "matchedForm": "đẩy",
+            "matchedTranslationForm": "Push"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "oimqq28jps3j45n",
+        "order": 1,
+        "definition": "To make an activity, plan, or process move forward faster.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "push forward",
+              "promote",
+              "advance"
+            ]
+          }
+        ],
+        "domain": "progress",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "ssrxuta4t9jvnux",
+            "text": "Chúng ta cần đẩy tiến độ công việc lên.",
+            "textLang": "vi",
+            "translation": "We need to push the work progress forward.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and focused, urging a team to pick up the pace",
+            "note": null,
+            "matchedForm": "đẩy",
+            "matchedTranslationForm": "push"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đẩy",
+    "lemma": "đẩy",
+    "reading": null,
     "ipa": "/ɗəj˧ˀ˥/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɗəj˧ˀ˥/",
+        "why": "Wrong tone in IPA: 'đẩy' has the hỏi tone (/ɗəj˧˩˧/), not ngã (/˧ˀ˥/)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To cause something to move forward or advance, such as a project or a cart.",
+        "why": "Pushing a physical cart belongs to sense 0; sense 1 is figurative (progress, activity)."
+      }
+    ],
+    "growth": 0.831
   }
 }

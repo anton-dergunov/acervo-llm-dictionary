@@ -72,6 +72,74 @@
     "primaryGloss": "potato",
     "emotion": "down-to-earth and wholesome, preparing a hearty meal in a warm kitchen",
     "notes": [
+      "Usually used in the plural ('ziemniaki') when talking about food. In the singular accusative, it takes the ending '-a' like animate nouns (e.g., 'zjem ziemniaka').",
+      "In some regions, you will also hear 'kartofel' or (in Greater Poland) 'pyra'."
+    ],
+    "senses": [
+      {
+        "id": "zmcm3veky4nxvt8",
+        "order": 0,
+        "definition": "A common round underground vegetable with white or yellow flesh.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "potato"
+            ]
+          }
+        ],
+        "domain": "vegetable",
+        "emoji": "🥔",
+        "examples": [
+          {
+            "id": "tdmycfa23hvuoev",
+            "text": "Dziś na obiad zjem pieczonego ziemniaka.",
+            "textLang": "pl",
+            "translation": "Today for dinner I will eat a baked potato.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ziemniaka",
+            "matchedTranslationForm": "potato"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ziemniak",
+    "lemma": "ziemniak",
+    "reading": null,
+    "ipa": "/ˈʑɛm.ɲak/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥔",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "potato",
+    "primaryGloss": "potato",
+    "emotion": "down-to-earth and wholesome, preparing a hearty meal in a warm kitchen",
+    "notes": [
       "In Poland, this is the standard word for potato used across the entire country, though you may occasionally hear regional variants like 'kartofel' in some areas.",
       "Do not confuse it with 'bulwa', which refers generally to any bulb or tuber."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'bulwa', which refers generally to",
+        "why": "Beginners will not confuse 'ziemniak' with the biological term 'bulwa'; meanwhile, the animate-like accusative 'ziemniaka' is unmentioned."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Dziś na obiad zjem pieczony ziemniak.",
+        "why": "Fruits and vegetables typically take the ending '-a' in the singular accusative ('pieczonego ziemniaka')."
+      }
+    ],
+    "growth": 1.015
   }
 }

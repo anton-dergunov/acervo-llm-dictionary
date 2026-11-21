@@ -68,6 +68,156 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "ligero; claro; suave",
+    "primaryGloss": "ligero",
+    "emotion": "relaxed and easygoing, describing something effortless or simple",
+    "notes": [
+      "El opuesto de 'light' es 'heavy' cuando se habla de peso o intensidad (heavy bag, heavy rain), pero es 'dark' cuando se habla de colores (dark blue)."
+    ],
+    "senses": [
+      {
+        "id": "ichdlijdyxp54gn",
+        "order": 0,
+        "definition": "Que tiene poco peso.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ligero",
+              "liviano"
+            ]
+          }
+        ],
+        "domain": "peso",
+        "emoji": "🪶",
+        "examples": [
+          {
+            "id": "90cis29ued5hdyg",
+            "text": "This suitcase is very light.",
+            "textLang": "en",
+            "translation": "Esta maleta es muy ligera.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and pleased at how easy it is to carry",
+            "note": null,
+            "matchedForm": "light",
+            "matchedTranslationForm": "ligera"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zpcnz38fdhx3zqv",
+        "order": 1,
+        "definition": "De un color suave o pálido, no oscuro.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "claro"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "uwe9cqi24jmk920",
+            "text": "She is wearing a light blue dress.",
+            "textLang": "en",
+            "translation": "Ella lleva un vestido azul claro.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, noticing the details of someone's clothes",
+            "note": null,
+            "matchedForm": "light",
+            "matchedTranslationForm": "claro"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wity0h8wmlt0ru2",
+        "order": 2,
+        "definition": "De poca cantidad, fuerza o intensidad, o fácil de digerir.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ligero",
+              "suave",
+              "leve"
+            ]
+          }
+        ],
+        "domain": "intensidad",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "9t5v20f18e5onp5",
+            "text": "We had a light lunch before the trip.",
+            "textLang": "en",
+            "translation": "Tuvimos un almuerzo ligero antes del viaje.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "light",
+            "matchedTranslationForm": "ligero"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "light",
+    "lemma": "light",
+    "reading": null,
+    "ipa": "/laɪt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪶",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "ligero; de poco peso",
     "primaryGloss": "ligero",
     "emotion": "relaxed and easygoing, describing something effortless or simple",
@@ -160,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ligero; de poco peso",
+        "why": "Omits the everyday color sense ('claro') present in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense of mild, gentle, or small in amount (e.g., light rain/meal)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "También puede describir colores que no son oscuros, como 'light blue'",
+        "why": "Merely restates the second sense without adding grammar or usage info."
+      }
+    ],
+    "growth": 1.388
   }
 }

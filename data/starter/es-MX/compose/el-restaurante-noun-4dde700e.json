@@ -76,6 +76,72 @@
     "shortGloss": "restaurant",
     "primaryGloss": "restaurant",
     "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "7o63ub6pi1b1qvc",
+        "order": 0,
+        "definition": "A place where you pay to eat a meal prepared and served by staff.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "67es7fiqccxjwxb",
+            "text": "Vamos a cenar a un restaurante muy bueno en el centro.",
+            "textLang": "es",
+            "translation": "We are going to have dinner at a very good restaurant downtown.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and enthusiastic, making plans for a nice evening out",
+            "note": null,
+            "matchedForm": "restaurante",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el restaurante",
+    "lemma": "restaurante",
+    "reading": null,
+    "ipa": "/res.tauˈɾan.te/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "restaurant",
+    "primaryGloss": "restaurant",
+    "emotion": null,
     "notes": [
       "While the word comes from the French 'restaurer' (to restore), in Spanish it refers specifically to a commercial establishment for dining, not a place to 'restore' yourself in a general sense.",
       "Commonly shortened to 'el resto' in informal conversation in some regions, though 'restaurante' is the standard term in Mexico."
@@ -145,5 +211,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While the word comes from the French 'restaurer' (to restore)...",
+        "why": "Useless etymology warning against a false friend no English speaker would imagine."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Commonly shortened to 'el resto' in informal conversation in some regions...",
+        "why": "Irrelevant regionalism ('restó' is Rioplatense/Peninsular, not Mexican) for an A2 learner."
+      }
+    ],
+    "growth": 0.325
   }
 }

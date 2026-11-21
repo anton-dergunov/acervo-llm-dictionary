@@ -71,6 +71,96 @@
     "language": "zh",
     "headword": "便宜",
     "lemma": "便宜",
+    "reading": "piányi",
+    "ipa": "/pʰi̯ɛn˧˥ i/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cheap; inexpensive",
+    "primaryGloss": "cheap",
+    "emotion": "matter-of-fact and pragmatic, assessing value while browsing a store",
+    "notes": [
+      "Pronounced piányi (with a neutral tone on 宜), even though 便 is most often read biàn (as in 方便 fāngbiàn 'convenient').",
+      "Its opposite is 贵 (guì, 'expensive'). It simply means low-priced and does not imply poor quality."
+    ],
+    "senses": [
+      {
+        "id": "lf6i5mc7f70t034",
+        "order": 0,
+        "definition": "Costing little money; low in price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "inexpensive"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "5bsfp0lbc566pa8",
+            "text": "这本书很便宜。",
+            "textLang": "zh",
+            "translation": "This book is very cheap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and satisfied, noting a good deal on an item",
+            "note": null,
+            "matchedForm": "便宜",
+            "matchedTranslationForm": "cheap"
+          },
+          {
+            "id": "j3mppntqmq0i2h0",
+            "text": "有没有更便宜一点儿的？",
+            "textLang": "zh",
+            "translation": "Do you have anything a bit cheaper?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but direct, hoping to find a better price at a market",
+            "note": null,
+            "matchedForm": "便宜",
+            "matchedTranslationForm": "cheaper"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "便宜",
+    "lemma": "便宜",
     "reading": "pián yí",
     "ipa": "/pʰi̯ɛn˧˥ i˧˥/",
     "pos": "adj",
@@ -155,5 +245,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "pián yí",
+        "why": "Standard Mandarin pronunciation has a neutral tone on the second syllable (piányi), as note[0] states."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʰi̯ɛn˧˥ i˧˥/",
+        "why": "Second syllable has a neutral tone, not a second tone (/˧˥/)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Do not confuse this with 'biàn yí' which is a different term meaning 'to give an advantage to'.",
+        "why": "False: 'to give an advantage to' is also pronounced piányi; biànyí is literary for 'convenient'."
+      }
+    ],
+    "growth": 0.692
   }
 }

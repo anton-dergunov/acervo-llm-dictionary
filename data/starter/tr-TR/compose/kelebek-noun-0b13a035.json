@@ -58,6 +58,74 @@
     "headword": "kelebek",
     "lemma": "kelebek",
     "reading": null,
+    "ipa": "/ce.leˈbec/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦋",
+    "topics": [
+      "Animals",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "butterfly",
+    "primaryGloss": "butterfly",
+    "emotion": "delighted and gentle, watching something fragile and beautiful outdoors",
+    "notes": [
+      "Like most Turkish words ending in '-k', the final 'k' softens to 'ğ' before a vowel suffix: 'kelebeği' (the butterfly)."
+    ],
+    "senses": [
+      {
+        "id": "13jmyxhiqi2peu2",
+        "order": 0,
+        "definition": "An insect with four large, often brightly coloured wings that flies during the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "butterfly"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🦋",
+        "examples": [
+          {
+            "id": "ar9d9fpd7qhipbn",
+            "text": "Bahçede renkli bir kelebek uçuyor.",
+            "textLang": "tr",
+            "translation": "A colorful butterfly is flying in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and pointing something pretty out to a companion",
+            "note": null,
+            "matchedForm": "kelebek",
+            "matchedTranslationForm": "butterfly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kelebek",
+    "lemma": "kelebek",
+    "reading": null,
     "ipa": "/celebˈec/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A small bow tie shaped like the wings of an insect.",
+        "why": "In Turkish, a bow tie is 'papyon' (or 'kelebek kravat'), never just 'kelebek'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Kelebek can also mean a bow tie (papyon)",
+        "why": "False claim; 'kelebek' alone does not mean a bow tie in Turkish."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/celebˈec/",
+        "why": "Syllable division and stress placement are malformed; should be /ce.leˈbec/."
+      }
+    ],
+    "growth": 0.731
   }
 }

@@ -68,6 +68,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to open; to open up",
+    "primaryGloss": "open",
+    "emotion": "a helpful gesture performed with ease and a light touch",
+    "notes": [
+      "Irregular verb: in the present tense it conjugates like a regular -er verb (j'ouvre, tu ouvres, il ouvre), and its past participle is ouvert.",
+      "In France, do not use ouvrir to mean turning on an electrical light or appliance; use allumer instead (though on a tap or gas valve, ouvrir le robinet / le gaz is normal)."
+    ],
+    "senses": [
+      {
+        "id": "5gonlbym3a1yhtm",
+        "order": 0,
+        "definition": "To move something (such as a door or window) so it is no longer shut, or to undo the wrapping or lid of a container.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "open",
+              "unwrap"
+            ]
+          }
+        ],
+        "domain": "physical",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "oc84a643z3c47tm",
+            "text": "Elle ouvre la porte pour les invités.",
+            "textLang": "fr",
+            "translation": "She opens the door for the guests.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "welcoming and polite",
+            "note": null,
+            "matchedForm": "ouvre",
+            "matchedTranslationForm": "opens"
+          },
+          {
+            "id": "nlcyj8rmkpp8ix3",
+            "text": "J'ouvre mon cadeau avec enthousiasme.",
+            "textLang": "fr",
+            "translation": "I am opening my gift with excitement.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and impatient to see what is inside",
+            "note": null,
+            "matchedForm": "ouvre",
+            "matchedTranslationForm": "opening"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rcmo0sfclkwamck",
+        "order": 1,
+        "definition": "Of a shop, business, or service: to begin operating or welcoming people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "open",
+              "open up"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "by775wwivdocymt",
+            "text": "Le magasin ouvre à neuf heures du matin.",
+            "textLang": "fr",
+            "translation": "The store opens at nine in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine",
+            "note": null,
+            "matchedForm": "ouvre",
+            "matchedTranslationForm": "opens"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "ouvrir",
+    "lemma": "ouvrir",
+    "reading": null,
+    "ipa": "/u.vʁiʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔓",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to open; to turn on",
     "primaryGloss": "open",
     "emotion": "a helpful gesture performed with ease and a light touch",
@@ -201,5 +332,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to open; to turn on",
+        "why": "'to turn on' is not in the senses and Note 2 explicitly warns against it."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are both physical opening and should be merged."
+      }
+    ],
+    "growth": 1.016
   }
 }

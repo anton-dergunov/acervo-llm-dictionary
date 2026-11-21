@@ -68,6 +68,74 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "mirror",
+    "primaryGloss": "mirror",
+    "emotion": "matter-of-fact, looking at oneself or checking one's appearance briefly",
+    "notes": [
+      "The plural form is identical to the singular: 'die Spiegel'.",
+      "'Spiegel' is the mirror itself; for the reflection you see in it, use 'das Spiegelbild'."
+    ],
+    "senses": [
+      {
+        "id": "yab1vrdcn1y3mw4",
+        "order": 0,
+        "definition": "A piece of glass with a shiny backing that reflects images.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mirror"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🪞",
+        "examples": [
+          {
+            "id": "gfzz9rndabjql1v",
+            "text": "Sie schaut jeden Morgen in den Spiegel.",
+            "textLang": "de",
+            "translation": "She looks in the mirror every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Spiegel",
+            "matchedTranslationForm": "mirror"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Spiegel",
+    "lemma": "Spiegel",
+    "reading": null,
+    "ipa": "/ˈʃpiːɡl̩/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "mirror; reflection",
     "primaryGloss": "mirror",
     "emotion": "matter-of-fact, looking at oneself or checking one's appearance briefly",
@@ -114,5 +182,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "mirror; reflection",
+        "why": "'reflection' is not one of the senses, and 'Spiegel' means mirror, not reflection."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A common German weekly news magazine known for investigative journalism.",
+        "why": "Proper noun encyclopedic entry does not belong as a separate sense of common noun."
+      }
+    ],
+    "growth": 1.175
   }
 }

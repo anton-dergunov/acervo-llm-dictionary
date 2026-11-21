@@ -60,6 +60,75 @@
     "headword": "bán",
     "lemma": "bán",
     "reading": null,
+    "ipa": "/ɓaːn˧˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "to sell",
+    "emotion": "busy and businesslike, offering goods to a customer",
+    "notes": [
+      "Forms a common pair with its opposite 'mua' (to buy), as in 'mua bán' (to trade / do business)."
+    ],
+    "senses": [
+      {
+        "id": "sq5ijyaov49y850",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sell",
+              "sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "sadq7rzqj0brlex",
+            "text": "Cô ấy bán hoa quả ở chợ.",
+            "textLang": "vi",
+            "translation": "She sells fruit at the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, describing someone's work",
+            "note": null,
+            "matchedForm": "bán",
+            "matchedTranslationForm": "sells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "bán",
+    "lemma": "bán",
+    "reading": null,
     "ipa": "/bǎːn/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Being one of two equal parts into which something is divided.",
+        "why": "Sino-Vietnamese bound morpheme ('half-'), not a verb or standalone word in everyday speech."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tôi chỉ ăn bán phần thôi.",
+        "why": "Unnatural; 'half a portion' in everyday Vietnamese is 'nửa phần', not 'bán phần'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sell; to half",
+        "why": "Ungrammatical English ('to half') and includes the non-verb bound morpheme sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "bán means to sell goods or services in exchange for money.",
+        "why": "Restates the definition."
+      }
+    ],
+    "growth": 0.503
   }
 }

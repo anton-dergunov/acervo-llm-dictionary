@@ -71,6 +71,115 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "water; rain",
+    "primaryGloss": "water",
+    "emotion": null,
+    "notes": [
+      "The combination 'cq' is pronounced like a double 'c' (/kk/).",
+      "Ask for 'acqua naturale' (still water) or 'acqua frizzante' (sparkling water)."
+    ],
+    "senses": [
+      {
+        "id": "tg9cy6oi5bdgufk",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills the oceans, and is needed for all living things to drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "137c6a8szwtdxqp",
+            "text": "Bevo un bicchiere d'acqua fresca.",
+            "textLang": "it",
+            "translation": "I am drinking a glass of cool water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "acqua",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nz85klrbx5cvrz0",
+        "order": 1,
+        "definition": "Rain falling from the sky (informal).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rain"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌧️",
+        "examples": [
+          {
+            "id": "l035ek0wn9s99yl",
+            "text": "Prendi l'ombrello perché sta venendo giù tanta acqua.",
+            "textLang": "it",
+            "translation": "Take the umbrella because a lot of rain is coming down.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "acqua",
+            "matchedTranslationForm": "rain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'acqua",
+    "lemma": "acqua",
+    "reading": null,
+    "ipa": "/ˈakkwa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink",
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "water; body of water; rain",
     "primaryGloss": "water",
     "emotion": null,
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note the double 'cc' in the middle",
+        "why": "Spelling is 'cq', not 'cc', though pronounced as a geminate /kk/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "water; body of water; rain",
+        "why": "Includes 'body of water', which is not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I drink a glass of fresh water.",
+        "why": "'Acqua fresca' means cool/chilled water, not fresh (unsalted) water ('acqua dolce')."
+      }
+    ],
+    "growth": 1.108
   }
 }

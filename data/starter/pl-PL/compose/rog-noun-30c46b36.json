@@ -72,6 +72,114 @@
     "primaryGloss": "corner",
     "emotion": "standing on the sidewalk waiting to cross, observant and ready",
     "notes": [
+      "For the corner of a street or exterior object, use 'na rogu' (on the corner); for the inside corner of a room, use 'w rogu' (in the corner)."
+    ],
+    "senses": [
+      {
+        "id": "m30q75zzdwsy117",
+        "order": 0,
+        "definition": "The place or point where two streets, walls, or edges meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner",
+              "street corner"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📐",
+        "examples": [
+          {
+            "id": "8vbjx7481jc82dn",
+            "text": "Spotkamy się na rogu ulicy.",
+            "textLang": "pl",
+            "translation": "We will meet at the street corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and friendly, making plans to meet someone",
+            "note": null,
+            "matchedForm": "rogu",
+            "matchedTranslationForm": "street corner"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kvknl5ehk1gpr79",
+        "order": 1,
+        "definition": "A hard, pointed growth on the head of some animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "horn"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐂",
+        "examples": [
+          {
+            "id": "9yw0n84phbh0stz",
+            "text": "Byk ma dwa duże rogi.",
+            "textLang": "pl",
+            "translation": "The bull has two large horns.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and cautious, describing an animal",
+            "note": null,
+            "matchedForm": "rogi",
+            "matchedTranslationForm": "horns"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "róg",
+    "lemma": "róg",
+    "reading": null,
+    "ipa": "/ruk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📐",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "corner; horn",
+    "primaryGloss": "corner",
+    "emotion": "standing on the sidewalk waiting to cross, observant and ready",
+    "notes": [
       "róg has multiple distinct meanings: a street corner, an animal's horn, and a musical horn.",
       "When talking about a street intersection, use na rogu (on the corner)."
     ],
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "róg has multiple distinct meanings: a street corner, an animal's horn",
+        "why": "Restates the glosses and mentions a musical horn sense not in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "The place where two streets meet.",
+        "why": "Too narrow: 'róg' also means the corner of a room, table, or building."
+      }
+    ],
+    "growth": 1.015
   }
 }

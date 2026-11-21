@@ -72,6 +72,95 @@
     "primaryGloss": "blue",
     "emotion": "clear and calm, like looking up at a bright open sky",
     "notes": [
+      "The feminine form is زَرْقَاء (zarqāʾ) and the plural for people is زُرْق (zurq). Non-human plurals take the feminine singular زَرْقَاء.",
+      "Like other primary colour adjectives on the pattern أَفْعَل (afʿal), it does not take nunation (tanwīn)."
+    ],
+    "senses": [
+      {
+        "id": "iyec09hhfowcfm0",
+        "order": 0,
+        "definition": "Of the colour of a clear sky or the deep sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "aptr28radjlijko",
+            "text": "يَرْتَدِي قَمِيصًا أَزْرَقَ.",
+            "textLang": "ar",
+            "translation": "He is wearing a blue shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَزْرَقَ",
+            "matchedTranslationForm": "blue"
+          },
+          {
+            "id": "ulero8mcnmg5pmq",
+            "text": "السَّمَاءُ صَافِيَةٌ وَزَرْقَاءُ.",
+            "textLang": "ar",
+            "translation": "The sky is clear and blue.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "وَزَرْقَاءُ",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَزْرَق",
+    "lemma": "أَزْرَق",
+    "reading": null,
+    "ipa": "/ˈʔazraq/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": "clear and calm, like looking up at a bright open sky",
+    "notes": [
       "The feminine form of this word is زَرْقَاء (zarqā').",
       "In Arabic, colours often follow the pattern 'af'al' for masculine and 'fa'la' for feminine, which is different from most other adjectives."
     ],
@@ -119,5 +208,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "السَّمَاءُ صَافِيَةٌ وَأَزْرَقُ.",
+        "why": "Ungrammatical gender agreement: السماء (sky) is feminine, so it requires زرقاء, not أزرق."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of a clear sky or the deep sea.",
+        "why": "Defined as a noun ('The colour of...') rather than an adjective ('Of the colour...')."
+      }
+    ],
+    "growth": 1.366
   }
 }

@@ -58,6 +58,75 @@
     "headword": "электронная почта",
     "lemma": "электронная почта",
     "reading": null,
+    "ipa": "/ɪlʲɪkˈtronːəjə ˈpotɕtə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📧",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "email, e-mail",
+    "primaryGloss": "email",
+    "emotion": null,
+    "notes": [
+      "Uncountable: refers to the email system, an email address, or mail collectively. For a single email message, use (электро́нное) письмо́ or име́йл.",
+      "Often shortened to просто по́чта in everyday speech (e.g., скинь мне на по́чту — 'send it to my email')."
+    ],
+    "senses": [
+      {
+        "id": "zsoji6f2zc1902h",
+        "order": 0,
+        "definition": "The system for sending and receiving messages over the internet, or a person's email account.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "email",
+              "e-mail"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🌐",
+        "examples": [
+          {
+            "id": "zsehq6nndmzboy8",
+            "text": "Напишите мне по электронной почте.",
+            "textLang": "ru",
+            "translation": "Write to me by email.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "электронной почте",
+            "matchedTranslationForm": "email"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "электронная почта",
+    "lemma": "электронная почта",
+    "reading": null,
     "ipa": "/elʲɪkˈtro̟nʲɪvəjə ˈpotɕtə/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/elʲɪkˈtro̟nʲɪvəjə ˈpotɕtə/",
+        "why": "Corrupt transcription for электронная; should be /ɪlʲɪkˈtronːəjə ˈpotɕtə/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A specific message sent or received over the internet.",
+        "why": "Электронная почта is an uncountable system/collective noun; a single message is (электронное) письмо."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Мне пришла важная электронная почта от начальника.",
+        "why": "Unnatural Russian; natives say 'пришло важное письмо (по электронной почте)'."
+      }
+    ],
+    "growth": 0.837
   }
 }

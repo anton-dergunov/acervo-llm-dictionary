@@ -58,6 +58,74 @@
     "headword": "büyükbaba",
     "lemma": "büyükbaba",
     "reading": null,
+    "ipa": "/byˈjycbaba/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "grandfather",
+    "primaryGloss": "grandfather",
+    "emotion": "warm and respectful, speaking of an older family member with affection",
+    "notes": [
+      "A compound of 'büyük' (big/great) and 'baba' (father). In everyday speech, 'dede' is much more common, while 'büyükbaba' sounds somewhat more formal."
+    ],
+    "senses": [
+      {
+        "id": "r35r5why89qbj0c",
+        "order": 0,
+        "definition": "The father of one's father or mother.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grandfather",
+              "grandpa"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "4hv8maigp01hnqt",
+            "text": "Büyükbabam her yaz köyden bize gelir.",
+            "textLang": "tr",
+            "translation": "My grandfather comes to visit us from the village every summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Büyükbabam",
+            "matchedTranslationForm": "grandfather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "büyükbaba",
+    "lemma": "büyükbaba",
+    "reading": null,
     "ipa": "/byjycbaˈba/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "Dedede is a much more common, everyday alternative for grandfather",
+        "why": "Misspelled Turkish word: should be 'dede', not 'dedede'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Büyükbaba her yaz köyden bize gelir.",
+        "why": "Needs a possessive suffix ('büyükbabam') to sound natural as a subject."
+      }
+    ],
+    "growth": 0.887
   }
 }

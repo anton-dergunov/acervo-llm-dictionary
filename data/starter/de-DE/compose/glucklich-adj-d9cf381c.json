@@ -68,6 +68,116 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "happy; fortunate",
+    "primaryGloss": "happy",
+    "emotion": "warm, open, and genuinely content with one's current situation",
+    "notes": [
+      "To say 'I am lucky', use 'Ich habe Glück' ('Ich bin glücklich' means 'I am happy'). As 'fortunate/lucky', 'glücklich' is mainly used before nouns, as in 'ein glücklicher Zufall' (a lucky coincidence).",
+      "Do not confuse with 'fröhlich', which means 'cheerful' in a momentary way; 'glücklich' describes deeper happiness."
+    ],
+    "senses": [
+      {
+        "id": "yg4h93j7sws64ux",
+        "order": 0,
+        "definition": "Feeling or showing deep pleasure and contentment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happy",
+              "content"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "wpxq8in0bgitqfy",
+            "text": "Sie ist sehr glücklich mit ihrem neuen Job.",
+            "textLang": "de",
+            "translation": "She is very happy with her new job.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and satisfied, sharing good news with a friend",
+            "note": null,
+            "matchedForm": "glücklich",
+            "matchedTranslationForm": "happy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vnwoqu75g0d7rqp",
+        "order": 1,
+        "definition": "Bringing or resulting from good fortune.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fortunate",
+              "lucky"
+            ]
+          }
+        ],
+        "domain": "luck",
+        "emoji": "🍀",
+        "examples": [
+          {
+            "id": "d2pcsian6gnbmkw",
+            "text": "Durch einen glücklichen Zufall haben wir uns wiedergetroffen.",
+            "textLang": "de",
+            "translation": "By a lucky coincidence, we met again.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "glücklichen",
+            "matchedTranslationForm": "lucky"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "glücklich",
+    "lemma": "glücklich",
+    "reading": null,
+    "ipa": "/ˈɡlʏklɪç/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "happy; lucky",
     "primaryGloss": "happy",
     "emotion": "warm, open, and genuinely content with one's current situation",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Wir hatten glückliches Wetter während unseres Urlaubs.",
+        "why": "'Glückliches Wetter' is completely unnatural in German; one says 'Glück mit dem Wetter haben'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'glücklich' primarily means 'happy', it can also mean 'lucky' in",
+        "why": "Restates the two senses; better to warn how 'I am lucky' is actually expressed."
+      }
+    ],
+    "growth": 0.935
   }
 }

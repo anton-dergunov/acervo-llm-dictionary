@@ -58,6 +58,74 @@
     "headword": "el pez",
     "lemma": "pez",
     "reading": null,
+    "ipa": "/pes/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐟",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "fish (living)",
+    "primaryGloss": "fish",
+    "emotion": "a sense of wonder at nature, calm and observant",
+    "notes": [
+      "Use 'el pez' for a live fish in the water, and 'el pescado' for fish caught to be eaten as food.",
+      "The plural is 'los peces' (the 'z' changes to 'c' before 'e')."
+    ],
+    "senses": [
+      {
+        "id": "bssmcu48dlfvd73",
+        "order": 0,
+        "definition": "A cold-blooded animal with fins and gills that lives and swims in water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fish"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐟",
+        "examples": [
+          {
+            "id": "ykdwihd7km3z8f7",
+            "text": "Hay un pez muy colorido en la pecera.",
+            "textLang": "es",
+            "translation": "There is a very colorful fish in the tank.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and pointing out something beautiful",
+            "note": null,
+            "matchedForm": "pez",
+            "matchedTranslationForm": "fish"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el pez",
+    "lemma": "pez",
+    "reading": null,
     "ipa": "/peθ/",
     "pos": "noun",
     "gender": "masculine",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/peθ/",
+        "why": "Mexican Spanish uses seseo (/pes/), not the Peninsular interdental fricative /θ/."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fish (living); fish (as food)",
+        "why": "'Pez' only means a living fish; fish as food is 'pescado'."
+      }
+    ],
+    "growth": 0.982
   }
 }

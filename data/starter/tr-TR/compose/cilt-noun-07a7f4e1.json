@@ -68,6 +68,117 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "skin; volume, binding",
+    "primaryGloss": "skin",
+    "emotion": "matter-of-fact and analytical, like describing your own body",
+    "notes": [
+      "Before a suffix starting with a vowel, final '-t' voices to '-d-' (e.g. 'cildim', my skin).",
+      "For skin, 'cilt' is used mainly for human skin and skincare (e.g. 'cilt bakımı'), whereas 'deri' is the general word for skin, hide, or leather."
+    ],
+    "senses": [
+      {
+        "id": "tvmz5q8as5qnre5",
+        "order": 0,
+        "definition": "The outer layer of a person's body, especially in the context of health or appearance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "skin",
+              "complexion"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🧴",
+        "examples": [
+          {
+            "id": "hd1ms1mqpgxka41",
+            "text": "Bu krem cildimi çok yumuşak yapıyor.",
+            "textLang": "tr",
+            "translation": "This cream makes my skin very soft.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and appreciative, noticing the good result of a product",
+            "note": null,
+            "matchedForm": "cildimi",
+            "matchedTranslationForm": "skin"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yc59oen46akb2lh",
+        "order": 1,
+        "definition": "A single book that is part of a larger set or series, or the hard cover of a book.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "volume",
+              "binding",
+              "hardcover"
+            ]
+          }
+        ],
+        "domain": "books",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "cimv7jy47b853e6",
+            "text": "Ansiklopedi beş ciltten oluşuyor.",
+            "textLang": "tr",
+            "translation": "The encyclopedia consists of five volumes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and informative, describing a factual detail about a set",
+            "note": null,
+            "matchedForm": "ciltten",
+            "matchedTranslationForm": "volumes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "cilt",
+    "lemma": "cilt",
+    "reading": null,
+    "ipa": "/dʒilt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧴",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "skin; volume (book)",
     "primaryGloss": "skin",
     "emotion": "matter-of-fact and analytical, like describing your own body",
@@ -160,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When referring to books, 'cilt' refers to a single volume of",
+        "why": "Merely repeats the definition of sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on final consonant voicing ('cilt' -> 'cildi'), which appears in example 0."
+      }
+    ],
+    "growth": 1.098
   }
 }

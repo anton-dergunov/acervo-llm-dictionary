@@ -57,6 +57,75 @@
     "language": "zh",
     "headword": "疼痛",
     "lemma": "疼痛",
+    "reading": "téngtòng",
+    "ipa": "/tʰəŋ˧˥ tʰʊŋ˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "formal",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pain; ache; soreness",
+    "primaryGloss": "pain",
+    "emotion": "wincing slightly and speaking in a quiet, subdued voice",
+    "notes": [
+      "More formal and clinical than 疼 (téng) or 痛 (tòng), which are the everyday spoken words for saying something hurts."
+    ],
+    "senses": [
+      {
+        "id": "nt7v85gpp2n9ybq",
+        "order": 0,
+        "definition": "The physical feeling when a part of the body hurts or aches.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "ache",
+              "soreness"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "vsu40d86akzhnzx",
+            "text": "吃完药后，头部的疼痛减轻了很多。",
+            "textLang": "zh",
+            "translation": "After taking the medicine, the pain in my head lessened a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and calm, noticing an improvement after medicine",
+            "note": null,
+            "matchedForm": "疼痛",
+            "matchedTranslationForm": "pain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "疼痛",
+    "lemma": "疼痛",
     "reading": "ténɡ tònɡ",
     "ipa": null,
     "pos": "noun",
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "reading",
+        "quote": "ténɡ tònɡ",
+        "why": "Uses IPA Latin small letter script g (U+0261) instead of standard ASCII 'g', and splits single word with space."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "疼痛 is a general term for pain or ache in the body",
+        "why": "Note [0] and Note [1] repeat the same point about register and overlap with the definition."
+      }
+    ],
+    "growth": 0.635
   }
 }

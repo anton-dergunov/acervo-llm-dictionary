@@ -58,6 +58,117 @@
     "headword": "kolejka",
     "lemma": "kolejka",
     "reading": null,
+    "ipa": "/kɔˈlɛi̯.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "queue; line; local train; toy train",
+    "primaryGloss": "queue",
+    "emotion": "a patient, slightly weary acceptance of waiting in a busy place",
+    "notes": [
+      "In the first sense, used with the preposition 'w': stać w kolejce (to stand in line).",
+      "Do not confuse with 'kolej', which refers to the national railway system in general."
+    ],
+    "senses": [
+      {
+        "id": "fgg2g9l50nnukbf",
+        "order": 0,
+        "definition": "A line of people waiting for their turn to buy something or receive a service.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "queue",
+              "line"
+            ]
+          }
+        ],
+        "domain": "queue",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "zem9mu171kq1gkl",
+            "text": "Stoję w długiej kolejce do kasy.",
+            "textLang": "pl",
+            "translation": "I am standing in a long line at the checkout.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit frustrated and bored while waiting",
+            "note": null,
+            "matchedForm": "kolejce",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i3tgd40uxvbiutp",
+        "order": 1,
+        "definition": "A commuter or narrow-gauge train, a cable car, or a toy train.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "commuter train",
+              "cable car",
+              "toy train"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚂",
+        "examples": [
+          {
+            "id": "ib2vagmv0lugkvz",
+            "text": "Dziecko bawi się drewnianą kolejką.",
+            "textLang": "pl",
+            "translation": "The child is playing with a wooden toy train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and observant of a simple, happy moment",
+            "note": null,
+            "matchedForm": "kolejką",
+            "matchedTranslationForm": "toy train"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kolejka",
+    "lemma": "kolejka",
+    "reading": null,
     "ipa": "/kɔˈlɛi̯ka/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kolejka is a diminutive of 'kolej' (train/railway), which is why it also",
+        "why": "Wordy and repeats definitions; everyday 'kolejka' also means commuter train or cable car."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A small train, often a toy or one used in a park",
+        "why": "Too narrow; commonly refers to commuter trains, funiculars, or cable cars alongside toy trains."
+      }
+    ],
+    "growth": 0.767
   }
 }

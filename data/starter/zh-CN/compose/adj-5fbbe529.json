@@ -72,6 +72,96 @@
     "primaryGloss": "difficult",
     "emotion": "frowning slightly at a tricky puzzle, concentrated and thoughtful",
     "notes": [
+      "Often placed directly before a verb to mean 'hard to do' (e.g., 难学 'hard to learn', 难吃 'bad-tasting').",
+      "This character is also pronounced nàn in words related to disaster or distress (e.g., 灾难 zāinàn 'disaster')."
+    ],
+    "senses": [
+      {
+        "id": "ofsew3p9iuargub",
+        "order": 0,
+        "definition": "Not easy to do, understand, or deal with.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "difficult",
+              "hard"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "dhd2kjoa9vwi96q",
+            "text": "这个问题很难。",
+            "textLang": "zh",
+            "translation": "This question is very difficult.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tapping a pen against the desk, slightly puzzled",
+            "note": null,
+            "matchedForm": "难",
+            "matchedTranslationForm": "difficult"
+          },
+          {
+            "id": "mgwejlsotp0auy5",
+            "text": "汉字有点儿难写。",
+            "textLang": "zh",
+            "translation": "Chinese characters are a bit hard to write.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "难",
+            "matchedTranslationForm": "hard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "难",
+    "lemma": "难",
+    "reading": "nán",
+    "ipa": "/nan˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧩",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "difficult; hard",
+    "primaryGloss": "difficult",
+    "emotion": "frowning slightly at a tricky puzzle, concentrated and thoughtful",
+    "notes": [
       "Used as an adjective before nouns (e.g., 难题) or as a predicate after a subject.",
       "Do not confuse with nàn (disaster)."
     ],
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Hard to endure or experience.",
+        "why": "Expressed by compounds like 难过 or 难受; 难 alone rarely means this."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "生病的时候觉得日子很难。",
+        "why": "Unnatural collocation; native speakers say 日子很难过 or 很难熬."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as an adjective before nouns (e.g., 难题) or as a predicate",
+        "why": "Generic grammar note; misses the key A2 pattern 难 + verb (hard to do)."
+      }
+    ],
+    "growth": 1.098
   }
 }

@@ -68,6 +68,96 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "bread; bun",
+    "primaryGloss": "bread",
+    "emotion": "warm and comforting, smelling fresh from the oven",
+    "notes": [
+      "Covers both loaves of sliced bread ('roti tawar') and individual sweet or savory bread buns and rolls. Cakes, cookies, and pastries are called 'kue', not 'roti'."
+    ],
+    "senses": [
+      {
+        "id": "461xiipaij1llg2",
+        "order": 0,
+        "definition": "A baked food made from flour and water, including both loaves of bread and individual sweet or savory buns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bread",
+              "bun",
+              "roll"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍞",
+        "examples": [
+          {
+            "id": "0cd51s9tkjgl9qp",
+            "text": "Dia makan sepotong roti untuk sarapan.",
+            "textLang": "id",
+            "translation": "He ate a piece of bread for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and ordinary, settling in for the morning",
+            "note": null,
+            "matchedForm": "roti",
+            "matchedTranslationForm": "bread"
+          },
+          {
+            "id": "w6s245npxc4odd4",
+            "text": "Ibu membeli roti isi cokelat di toko.",
+            "textLang": "id",
+            "translation": "Mother bought a chocolate-filled bun at the shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "roti",
+            "matchedTranslationForm": "bun"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "roti",
+    "lemma": "roti",
+    "reading": null,
+    "ipa": "/ˈro.ti/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍞",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "bread; pastry",
     "primaryGloss": "bread",
     "emotion": "warm and comforting, smelling fresh from the oven",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "cover both western-style bread and various sweet or savory pastries, cakes, and buns.",
+        "why": "False claim: cakes and pastries are 'kue', not 'roti' (which covers bread and buns/rolls)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Bread loaves and filled bread buns/rolls are one concept in Indonesian; 'pastry' is misleading."
+      }
+    ],
+    "growth": 0.954
   }
 }

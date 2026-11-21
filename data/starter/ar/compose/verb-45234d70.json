@@ -72,6 +72,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to throw; to throw away",
+    "primaryGloss": "throw",
+    "emotion": null,
+    "notes": [
+      "A defective verb ending in ى (pronounced 'ā'): the present tense is يَرْمِي (yarmī), and before consonant suffixes in the past tense the ending becomes ـيْـ (رَمَيْتُ 'I threw').",
+      "It can take a direct object or the preposition بِـ with the thing thrown (رَمَى الكُرَةَ or رَمَى بِالكُرَةِ)."
+    ],
+    "senses": [
+      {
+        "id": "n802psh7v589hqd",
+        "order": 0,
+        "definition": "To propel an object through the air using the hand.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "throw",
+              "toss"
+            ]
+          }
+        ],
+        "domain": "throw",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "rap0zsywk3vp0vg",
+            "text": "رَمَى الطِّفْلُ الكُرَةَ بَعِيدًا.",
+            "textLang": "ar",
+            "translation": "The child threw the ball far away.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "رَمَى",
+            "matchedTranslationForm": "threw"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9iibt4172r033tm",
+        "order": 1,
+        "definition": "To get rid of something no longer wanted.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "throw away",
+              "discard"
+            ]
+          }
+        ],
+        "domain": "discard",
+        "emoji": "🗑️",
+        "examples": [
+          {
+            "id": "tzi0ov3atgaliu3",
+            "text": "رَمَى الرَّجُلُ القُمَامَةَ فِي السَّلَّةِ.",
+            "textLang": "ar",
+            "translation": "The man threw the trash in the bin.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "رَمَى",
+            "matchedTranslationForm": "threw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "رَمَى",
+    "lemma": "رَمَى",
+    "reading": null,
+    "ipa": "/raˈmaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "投",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to throw; to shoot; to cast",
     "primaryGloss": "throw",
     "emotion": null,
@@ -165,5 +275,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to throw; to shoot; to cast",
+        "why": "Includes 'to shoot', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb is highly versatile. It is used both for the",
+        "why": "Merely restates the two senses; misses the defective verb conjugation (يَرْمِي / رَمَيْتُ)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When used with the preposition 'ب' (bi-), it often means to",
+        "why": "With بـ it simply means 'to throw (something)'; hitting someone takes a direct object."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "بِعِيدًا",
+        "why": "Wrong vowel on 'ba'eedan': بِعِيدًا instead of بَعِيدًا."
+      }
+    ],
+    "growth": 0.993
   }
 }

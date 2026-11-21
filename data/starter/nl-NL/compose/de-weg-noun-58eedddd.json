@@ -58,6 +58,118 @@
     "headword": "de weg",
     "lemma": "weg",
     "reading": null,
+    "ipa": "/ʋɛx/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "road; way; route",
+    "primaryGloss": "road",
+    "emotion": null,
+    "notes": [
+      "The short vowel /ɛ/ lengthens to /eː/ in the plural: 'wegen' (/ˈʋeːɣə(n)/).",
+      "Do not confuse with the adverb/adjective 'weg' ('gone, away'), which has a short vowel in all forms (e.g., 'Mijn portemonnee is weg')."
+    ],
+    "senses": [
+      {
+        "id": "e57zl8nz78hgnh9",
+        "order": 0,
+        "definition": "A built track or surface for vehicles, cyclists, and pedestrians to travel on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "road",
+              "way",
+              "street"
+            ]
+          }
+        ],
+        "domain": "road",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "iuny7xg3c1575z2",
+            "text": "Deze weg leidt naar het stadscentrum.",
+            "textLang": "nl",
+            "translation": "This road leads to the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, pointing out the right direction",
+            "note": null,
+            "matchedForm": "weg",
+            "matchedTranslationForm": "road"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wv16irxq0dayki9",
+        "order": 1,
+        "definition": "A route or direction taken to get from one place to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "way",
+              "route",
+              "direction"
+            ]
+          }
+        ],
+        "domain": "direction",
+        "emoji": "🧭",
+        "examples": [
+          {
+            "id": "3okl56wz1vl4czl",
+            "text": "Kunt u mij de weg naar het station wijzen?",
+            "textLang": "nl",
+            "translation": "Can you show me the way to the station?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "weg",
+            "matchedTranslationForm": "way"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de weg",
+    "lemma": "weg",
+    "reading": null,
     "ipa": "/vɛχ/",
     "pos": "noun",
     "gender": "common",
@@ -163,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/vɛχ/",
+        "why": "Initial 'w' in Dutch is /ʋ/, not /v/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a masculine or feminine noun taking the article 'de', 'weg' most",
+        "why": "Restates gender and glosses; omits the irregular plural vowel lengthening 'wegen' /ˈʋeːɣə(n)/."
+      }
+    ],
+    "growth": 0.977
   }
 }

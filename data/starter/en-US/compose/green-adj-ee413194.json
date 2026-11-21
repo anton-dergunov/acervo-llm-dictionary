@@ -68,6 +68,153 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "verde; ecológico; inexperto",
+    "primaryGloss": "verde",
+    "emotion": "fresco y natural, como un paseo por un jardín en primavera",
+    "notes": [],
+    "senses": [
+      {
+        "id": "bbzmxkbj6438vtv",
+        "order": 0,
+        "definition": "Del color de la hierba fresca o de las hojas de los árboles.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "verde"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "59q0259pczn2d7m",
+            "text": "The grass in the park is very green today.",
+            "textLang": "en",
+            "translation": "La hierba del parque está muy verde hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tranquilo y observador, describiendo un paisaje agradable",
+            "note": null,
+            "matchedForm": "green",
+            "matchedTranslationForm": "verde"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4xdjq8fxeq6uzyf",
+        "order": 1,
+        "definition": "Que cuida el medio ambiente o utiliza energías limpias.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ecológico",
+              "verde"
+            ]
+          }
+        ],
+        "domain": "ecología",
+        "emoji": "♻️",
+        "examples": [
+          {
+            "id": "ml96b3mvfr23hpj",
+            "text": "We are trying to make more green choices at home.",
+            "textLang": "en",
+            "translation": "Estamos intentando tomar decisiones más ecológicas en casa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "decidido y consciente, hablando sobre mejorar los hábitos",
+            "note": null,
+            "matchedForm": "green",
+            "matchedTranslationForm": "ecológicas"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "76d3267yca0jv7b",
+        "order": 2,
+        "definition": "Que carece de experiencia o entrenamiento en un trabajo o actividad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "inexperto",
+              "verde"
+            ]
+          }
+        ],
+        "domain": "experiencia",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "4aqmi6vi609x9g9",
+            "text": "He is a bit green for such a big project.",
+            "textLang": "en",
+            "translation": "Él está un poco verde para un proyecto tan grande.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "crítico y honesto, evaluando la capacidad de alguien",
+            "note": null,
+            "matchedForm": "green",
+            "matchedTranslationForm": "verde"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "green",
+    "lemma": "green",
+    "reading": null,
+    "ipa": "/ɡriːn/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "verde; inexperto; ecológico",
     "primaryGloss": "verde",
     "emotion": "fresco y natural, como un paseo por un jardín en primavera",
@@ -201,5 +348,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "El color de la hierba fresca o de las hojas de los árboles.",
+        "why": "Adjective defined as a noun ('El color de...') instead of a quality ('Del color de...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Aunque 'green' se refiere principalmente al color, recuerda que también se usa",
+        "why": "Filler note that simply restates senses 1 and 2."
+      }
+    ],
+    "growth": 0.622
   }
 }

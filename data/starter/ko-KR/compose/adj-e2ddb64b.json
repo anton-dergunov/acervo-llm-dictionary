@@ -58,6 +58,75 @@
     "headword": "시끄럽다",
     "lemma": "시끄럽다",
     "reading": null,
+    "ipa": "/ɕik͈ɯɾʌp̚t͈a/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔊",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "noisy; loud",
+    "primaryGloss": "noisy",
+    "emotion": "annoyed by loud sound, holding hands over ears with a grimace",
+    "notes": [
+      "Irregular ㅂ-adjective: ㅂ changes to 우 before a vowel (시끄러워요, 시끄러운 곳).",
+      "As an exclamation, 시끄러워! or 시끄러! is used to tell someone 'Be quiet!' or 'Shut up!'."
+    ],
+    "senses": [
+      {
+        "id": "5ngjgj4xkwsh3t3",
+        "order": 0,
+        "definition": "Full of or making a lot of loud, unpleasant noise.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "noisy",
+              "loud"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "qlmi9guuzvnfuhl",
+            "text": "밖이 너무 시끄러워서 잘 수 없어요.",
+            "textLang": "ko",
+            "translation": "It is too noisy outside, so I cannot sleep.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated by loud street noises late at night, tossing and turning in bed",
+            "note": null,
+            "matchedForm": "시끄러워서",
+            "matchedTranslationForm": "noisy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "시끄럽다",
+    "lemma": "시끄럽다",
+    "reading": null,
     "ipa": "/si.k͈ɯ.ɾʌp.ta/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse it with 시끄러워요 (the polite form)",
+        "why": "Confusingly warns against its own polite form while omitting the irregular ㅂ-conjugation."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(annoyance) Bothersome or annoying because people keep talking too much",
+        "why": "Oversplit and mistranslated; its own example ('chat noisily') shows sense 0."
+      }
+    ],
+    "growth": 0.603
   }
 }

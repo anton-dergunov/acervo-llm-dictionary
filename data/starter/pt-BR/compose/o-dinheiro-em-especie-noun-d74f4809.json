@@ -58,6 +58,74 @@
     "headword": "o dinheiro em espécie",
     "lemma": "dinheiro em espécie",
     "reading": null,
+    "ipa": "/dʒĩˈɲej.ɾu ẽj̃ isˈpɛ.sji/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "💵",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cash; physical money",
+    "primaryGloss": "cash",
+    "emotion": "practical and firm, like confirming how you will pay",
+    "notes": [
+      "Somewhat formal; in everyday speech, people usually just say 'em dinheiro' or 'dinheiro vivo'. Often shortened to 'em espécie' after verbs like 'pagar'."
+    ],
+    "senses": [
+      {
+        "id": "ihsj8o0w5qycdk8",
+        "order": 0,
+        "definition": "Money in the form of physical coins and paper notes rather than cards or digital transfers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cash",
+              "hard cash"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "hyia0xofuu5ld30",
+            "text": "A loja não aceita cartão, apenas dinheiro em espécie.",
+            "textLang": "pt",
+            "translation": "The store does not accept cards, only cash.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "direct and informative, explaining a store policy clearly",
+            "note": null,
+            "matchedForm": "dinheiro em espécie",
+            "matchedTranslationForm": "cash"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o dinheiro em espécie",
+    "lemma": "dinheiro em espécie",
+    "reading": null,
     "ipa": "/dʒi.ˈnej.ɾu ẽ ĕs.ˈpɛ.si/",
     "pos": "noun",
     "gender": "masculine",
@@ -141,5 +209,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dʒi.ˈnej.ɾu ẽ ĕs.ˈpɛ.si/",
+        "why": "Wrong consonant /n/ instead of palatal /ɲ/ in 'dinheiro'; non-standard /ĕ/ and missing final vowel."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Eu prefiro pagar o aluguel em dinheiro em espécie.",
+        "why": "Saying 'em dinheiro em espécie' repeats 'em' awkwardly; 'pagar em espécie' or 'com dinheiro em espécie' is natural."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to specify that you are paying with physical notes and coins",
+        "why": "Restates the definition without adding usage information."
+      }
+    ],
+    "growth": 0.769
   }
 }

@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to build; to develop",
+    "primaryGloss": "build",
+    "emotion": "focused and industrious, intent on creating something lasting and solid",
+    "notes": [
+      "Formed from the root 'bangun' (to wake up / get up), but with the prefix 'meN-' it means 'to build'. To say 'wake someone up', use 'membangunkan' (with the suffix '-kan')."
+    ],
+    "senses": [
+      {
+        "id": "au3cl5y6yfxsdkr",
+        "order": 0,
+        "definition": "To make a building or other structure by putting parts together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "build",
+              "construct"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "avam6nhs47iqqcd",
+            "text": "Mereka sedang membangun rumah baru di dekat sungai.",
+            "textLang": "id",
+            "translation": "They are building a new house near the river.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and clear, describing a project underway",
+            "note": null,
+            "matchedForm": "membangun",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tbku2fxvcos55tc",
+        "order": 1,
+        "definition": "To create and develop something over time, such as a business, career, or relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "build",
+              "develop",
+              "establish"
+            ]
+          }
+        ],
+        "domain": "development",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "t176sf6hqbvify1",
+            "text": "Mereka bekerja keras untuk membangun bisnis keluarga.",
+            "textLang": "id",
+            "translation": "They worked hard to build the family business.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "membangun",
+            "matchedTranslationForm": "build"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "membangun",
+    "lemma": "membangun",
+    "reading": null,
+    "ipa": "/məmˈbaŋun/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏗️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to build; to construct; to wake someone up",
     "primaryGloss": "build",
     "emotion": "focused and industrious, intent on creating something lasting and solid",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To cause someone to stop sleeping.",
+        "why": "Waking someone up is 'membangunkan', not 'membangun', as the entry's own note admits."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tolong bangunkan adik sebelum jam tujuh.",
+        "why": "Uses 'bangunkan' (from 'membangunkan'), not the headword 'membangun'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to build; to construct; to wake someone up",
+        "why": "Includes false meaning 'to wake someone up' (which is 'membangunkan')."
+      }
+    ],
+    "growth": 0.704
   }
 }

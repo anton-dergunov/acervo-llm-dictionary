@@ -68,6 +68,73 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "village",
+    "primaryGloss": "village",
+    "emotion": "warm and nostalgic, thinking of the quiet family home",
+    "notes": [
+      "Often used to refer to one's family hometown or ancestral village (e.g., πάμε στο χωριό — we're going to our family village)."
+    ],
+    "senses": [
+      {
+        "id": "4pbdwu94vitvew4",
+        "order": 0,
+        "definition": "A very small town in the countryside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "village"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "a7npbvx7mbn45e5",
+            "text": "Το καλοκαίρι πάμε στο χωριό.",
+            "textLang": "el",
+            "translation": "In the summer we go to the village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and happy, looking forward to the holidays",
+            "note": null,
+            "matchedForm": "χωριό",
+            "matchedTranslationForm": "village"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το χωριό",
+    "lemma": "χωριό",
+    "reading": null,
+    "ipa": "/xoˈɾjo/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "village; countryside",
     "primaryGloss": "village",
     "emotion": "warm and nostalgic, thinking of the quiet family home",
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "village; countryside",
+        "why": "Includes 'countryside', which is absent from the sense glosses (and actually means εξοχή)."
+      }
+    ],
+    "growth": 0.923
   }
 }

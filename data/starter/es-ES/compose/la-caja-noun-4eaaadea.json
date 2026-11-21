@@ -68,6 +68,117 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "box; checkout; cash register",
+    "primaryGloss": "box",
+    "emotion": "a practical and organized feeling, like tidying up or storing items away",
+    "notes": [
+      "'Caja' refers to a rigid container (cardboard, wood, plastic). For a bag, use 'bolsa'."
+    ],
+    "senses": [
+      {
+        "id": "rl6gufh0q0ywkw1",
+        "order": 0,
+        "definition": "A rigid container with flat sides, often made of cardboard, wood, or metal, used for storing or carrying things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "box",
+              "crate",
+              "case"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "v90gjbn9cxvehdl",
+            "text": "He guardado los libros en una caja de cartón.",
+            "textLang": "es",
+            "translation": "I have stored the books in a cardboard box.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neat and methodical, putting things where they belong",
+            "note": null,
+            "matchedForm": "caja",
+            "matchedTranslationForm": "box"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "irftbbl8hx59da3",
+        "order": 1,
+        "definition": "The counter or machine in a shop where a customer pays for their items.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "checkout",
+              "till",
+              "cash register"
+            ]
+          }
+        ],
+        "domain": "checkout",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "acn0lwzb8y1fipx",
+            "text": "Hay mucha cola en la caja del supermercado.",
+            "textLang": "es",
+            "translation": "There is a long line at the supermarket checkout.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly impatient, waiting in a busy line",
+            "note": null,
+            "matchedForm": "caja",
+            "matchedTranslationForm": "checkout"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la caja",
+    "lemma": "caja",
+    "reading": null,
+    "ipa": "/ˈkaxa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "box; chest; cash register; checkout",
     "primaryGloss": "box",
     "emotion": "a practical and organized feeling, like tidying up or storing items away",
@@ -163,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "box; chest; cash register; checkout",
+        "why": "'chest' is not in any of the entry's senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In a supermarket, 'caja' refers to both the checkout counter",
+        "why": "Restates sense 1 and is tautological ('checkout counter and the place where you pay')."
+      }
+    ],
+    "growth": 0.781
   }
 }

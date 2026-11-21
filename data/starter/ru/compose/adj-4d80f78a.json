@@ -70,6 +70,140 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old; former",
+    "primaryGloss": "old",
+    "emotion": null,
+    "notes": [
+      "When speaking about people, пожилой (elderly) is more polite and respectful than старый.",
+      "Comparative form: старше (older, for age) or старее (older, for things)."
+    ],
+    "senses": [
+      {
+        "id": "g1mlmrlo88v7ew4",
+        "order": 0,
+        "definition": "Having lived or existed for a long time; not new or young.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "elderly",
+              "worn"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "3d1ugrx76ugbsis",
+            "text": "Мы живём в старом доме.",
+            "textLang": "ru",
+            "translation": "We live in an old house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "старом",
+            "matchedTranslationForm": "old"
+          },
+          {
+            "id": "wtq0sbl2ago5s6n",
+            "text": "Она надела свой старый свитер.",
+            "textLang": "ru",
+            "translation": "She put on her old sweater.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "старый",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nmgc30mdnolwc36",
+        "order": 1,
+        "definition": "Known for a long time, or dating from an earlier period; former.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "long-time",
+              "former",
+              "previous"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "z54onm0rmfp3xxa",
+            "text": "Вчера я встретил старого друга.",
+            "textLang": "ru",
+            "translation": "Yesterday I met an old friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "старого",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "старый",
+    "lemma": "старый",
+    "reading": null,
+    "ipa": "/ˈstarɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕰️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "old; aged; antique",
     "primaryGloss": "old",
     "emotion": null,
@@ -164,5 +298,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (age) Having lived or existed... [1] (condition) Not new; used...",
+        "why": "'Existed for a long time' and 'not new' are one core sense; 'former/previous' is missing."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'former, previous' or 'long-standing' (старый друг, старый адрес)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "old; aged; antique",
+        "why": "'Antique' is not in the senses and usually translates as старинный or антикварный."
+      }
+    ],
+    "growth": 1.314
   }
 }

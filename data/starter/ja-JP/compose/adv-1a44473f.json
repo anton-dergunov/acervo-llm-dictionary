@@ -70,6 +70,117 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "now; just now; soon",
+    "primaryGloss": "now",
+    "emotion": null,
+    "notes": [
+      "Can also act as a noun taking particles (e.g., 今の仕事 'current job', 今から 'from now'). Common combinations include 今すぐ (right now)."
+    ],
+    "senses": [
+      {
+        "id": "ln7wxe4751wlrb4",
+        "order": 0,
+        "definition": "At the present time or moment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "now",
+              "at present",
+              "right now"
+            ]
+          }
+        ],
+        "domain": "present",
+        "emoji": "🕒",
+        "examples": [
+          {
+            "id": "c33b516pch9mdzu",
+            "text": "今、何をしていますか。",
+            "textLang": "ja",
+            "translation": "What are you doing now?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and polite, asking about someone's current activity",
+            "note": null,
+            "matchedForm": "今",
+            "matchedTranslationForm": "now"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u74sucsv1wvjpxs",
+        "order": 1,
+        "definition": "A very short time ago, or very soon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "just now",
+              "just",
+              "right away"
+            ]
+          }
+        ],
+        "domain": "immediate time",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "92u580vgky8g1xq",
+            "text": "今、家に着いたところです。",
+            "textLang": "ja",
+            "translation": "I just got home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and calm, reporting that a task was recently finished",
+            "note": null,
+            "matchedForm": "今",
+            "matchedTranslationForm": "just"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "今",
+    "lemma": "今",
+    "reading": "いま",
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕒",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "now; at this moment; just now",
     "primaryGloss": "now",
     "emotion": null,
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When used as a noun, it refers to the present time",
+        "why": "Restates the definitions and glosses; doesn't mention noun usages like 今すぐ or 今のうち."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I just now arrived home.",
+        "why": "Unnatural English phrasing; 'I just got home' is natural."
+      }
+    ],
+    "growth": 0.617
   }
 }

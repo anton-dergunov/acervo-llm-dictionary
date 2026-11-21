@@ -74,6 +74,74 @@
     "primaryGloss": "sal",
     "emotion": null,
     "notes": [
+      "Es un sustantivo incontable en su uso cotidiano, por lo que no lleva el artículo 'a' ni forma plural ('some salt', 'a pinch of salt')."
+    ],
+    "senses": [
+      {
+        "id": "uy1entzwihbk5y0",
+        "order": 0,
+        "definition": "Sustancia blanca en forma de cristales que se usa para dar sabor a la comida.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "sal",
+              "sal de mesa"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🧂",
+        "examples": [
+          {
+            "id": "0tm951ewfexcx3t",
+            "text": "Can you pass the salt, please?",
+            "textLang": "en",
+            "translation": "¿Me pasas la sal, por favor?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and waiting at the dinner table",
+            "note": null,
+            "matchedForm": "salt",
+            "matchedTranslationForm": "sal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "salt",
+    "lemma": "salt",
+    "reading": null,
+    "ipa": "/sɔlt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "sal; sal de mesa",
+    "primaryGloss": "sal",
+    "emotion": null,
+    "notes": [
       "La palabra \"salt\" se usa tanto para el mineral que ponemos en la comida como en química para hablar de sales."
     ],
     "senses": [
@@ -139,5 +207,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Sustancia química formada por la reacción de un ácido y una base.",
+        "why": "Chemical sense is technical and unnecessary for an A2 learner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La palabra \"salt\" se usa tanto para el mineral que ponemos",
+        "why": "Merely restates the senses; should explain that 'salt' is an uncountable noun instead."
+      }
+    ],
+    "growth": 0.934
   }
 }

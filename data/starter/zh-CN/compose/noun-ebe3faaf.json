@@ -74,6 +74,75 @@
     "primaryGloss": "cup",
     "emotion": null,
     "notes": [
+      "The common measure word is 个 (gè). 杯 (bēi) itself is also used as a measure word for a cupful or glassful: 一杯水 (a glass of water)."
+    ],
+    "senses": [
+      {
+        "id": "34o1dmxf2d354rq",
+        "order": 0,
+        "definition": "A small container used for drinking liquids, such as a cup, glass, or mug.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "glass",
+              "mug"
+            ]
+          }
+        ],
+        "domain": "drinkware",
+        "emoji": "🥛",
+        "examples": [
+          {
+            "id": "y2edt6t8o4k14v5",
+            "text": "请给我一个杯子。",
+            "textLang": "zh",
+            "translation": "Please give me a cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "杯子",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "杯子",
+    "lemma": "杯子",
+    "reading": "bēi zi",
+    "ipa": "/pei̯˥ tsɹ̩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cup; glass; mug",
+    "primaryGloss": "cup",
+    "emotion": null,
+    "notes": [
       "While '杯子' is the general term for any drinking vessel, it covers everything from a simple plastic cup to a wine glass. Use this word if you are unsure which specific type of cup someone is using."
     ],
     "senses": [
@@ -117,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[1] (mug) A small container with a handle, for hot drinks.",
+        "why": "杯子 is a single general sense covering cup, glass, and mug in Chinese."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '杯子' is the general term for any drinking vessel",
+        "why": "Restates the glosses without giving useful grammar such as the measure word."
+      }
+    ],
+    "growth": 0.804
   }
 }

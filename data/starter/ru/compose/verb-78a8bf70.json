@@ -72,6 +72,117 @@
     "primaryGloss": "to call",
     "emotion": "hurried and routine, waiting for someone to pick up the phone",
     "notes": [
+      "Takes the dative case for the person called (звонить маме) and в + accusative for a place or organization (звонить в полицию).",
+      "Imperfective; the perfective pair is позвонить. In standard Russian, stress always falls on the ending in the present tense (звоню́, звони́шь, звоня́т)."
+    ],
+    "senses": [
+      {
+        "id": "xf162epddrd7dgv",
+        "order": 0,
+        "definition": "To use a telephone to contact someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to call",
+              "to phone",
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "phone",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "oxgzo92rnic36dd",
+            "text": "Я буду звонить маме вечером.",
+            "textLang": "ru",
+            "translation": "I will call my mom in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and anticipating, planning a nice family chat",
+            "note": null,
+            "matchedForm": "звонить",
+            "matchedTranslationForm": "call"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nykave9mg50sj92",
+        "order": 1,
+        "definition": "To make a ringing sound, or to press a bell so that it sounds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ring",
+              "to chime"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🔔",
+        "examples": [
+          {
+            "id": "xv40e3j3c0zmlmc",
+            "text": "Телефон начал громко звонить на столе.",
+            "textLang": "ru",
+            "translation": "The phone started ringing loudly on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "startled and hurried, reaching to turn the noise off",
+            "note": null,
+            "matchedForm": "звонить",
+            "matchedTranslationForm": "ringing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "звонить",
+    "lemma": "звонить",
+    "reading": null,
+    "ipa": "/zvɐˈnʲitʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to call; to ring",
+    "primaryGloss": "to call",
+    "emotion": "hurried and routine, waiting for someone to pick up the phone",
+    "notes": [
       "Takes the dative case (кому?) when meaning to telephone someone.",
       "Do not confuse with звонить (to ring a bell), though they share the same infinitive form."
     ],
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with звонить (to ring a bell), though they",
+        "why": "Treats the same polysemous verb as a separate homonym not to be confused with itself."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing aspect pair (позвонить) and standard stress note (звони́шь, звоня́т)."
+      }
+    ],
+    "growth": 1.348
   }
 }

@@ -68,6 +68,157 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "maternal aunt; auntie; housekeeper",
+    "primaryGloss": "aunt",
+    "emotion": "warm and respectful, greeting an older woman with familiarity and care",
+    "notes": [
+      "Refers specifically to a mother's sister; a father's sister is called 姑姑 (gūgu)."
+    ],
+    "senses": [
+      {
+        "id": "890udm65f175a09",
+        "order": 0,
+        "definition": "The sister of one's mother.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "maternal aunt",
+              "aunt"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "gnl5kzt9v1aebhf",
+            "text": "我周末去看望我的阿姨。",
+            "textLang": "zh",
+            "translation": "I am going to visit my aunt this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and dutiful, speaking of visiting family",
+            "note": null,
+            "matchedForm": "阿姨",
+            "matchedTranslationForm": "aunt"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d18bqjxsnmo08ng",
+        "order": 1,
+        "definition": "A polite term of address for a woman of one's parents' generation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "auntie",
+              "ma'am"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": "🙋‍♀️",
+        "examples": [
+          {
+            "id": "ndmia2bkd0cgt8t",
+            "text": "阿姨好，请问这里有人坐吗？",
+            "textLang": "zh",
+            "translation": "Hello auntie, is anyone sitting here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and cheerful, greeting an acquaintance on a bus",
+            "note": null,
+            "matchedForm": "阿姨",
+            "matchedTranslationForm": "auntie"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "m9il8hgfw1r9k2g",
+        "order": 2,
+        "definition": "A woman employed to do housework, clean, or look after children.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "housekeeper",
+              "nanny",
+              "cleaner"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "🧹",
+        "examples": [
+          {
+            "id": "32k5be66i7tv3yj",
+            "text": "家里的阿姨正在打扫卫生。",
+            "textLang": "zh",
+            "translation": "The housekeeper at home is cleaning up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and calm, describing routine chores at home",
+            "note": null,
+            "matchedForm": "阿姨",
+            "matchedTranslationForm": "housekeeper"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "阿姨",
+    "lemma": "阿姨",
+    "reading": "ā yí",
+    "ipa": "/a˥ i˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "aunt; childcare worker; cleaning lady",
     "primaryGloss": "aunt",
     "emotion": "warm and respectful, greeting an older woman with familiarity and care",
@@ -201,5 +352,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "The sister of one's father or mother.",
+        "why": "阿姨 specifically means maternal aunt (mother's sister); father's sister is 姑姑 (gūgu)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used not only for aunts, but also as a polite address",
+        "why": "Both notes merely repeat the definitions already given in senses 1 and 2."
+      }
+    ],
+    "growth": 0.77
   }
 }

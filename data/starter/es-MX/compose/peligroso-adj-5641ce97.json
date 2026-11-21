@@ -72,6 +72,97 @@
     "primaryGloss": "dangerous",
     "emotion": "serious and cautious, warning someone of a real risk",
     "notes": [
+      "Normally used with 'ser' for things that are generally dangerous, and with 'estar' for temporary conditions (e.g., 'la calle está peligrosa hoy').",
+      "Compare with 'arriesgado' (risky), which describes an action or decision involving a gamble rather than something that causes harm."
+    ],
+    "senses": [
+      {
+        "id": "4drfgqbo7ktb81b",
+        "order": 0,
+        "definition": "Able or likely to cause harm, injury, or a bad result.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "risky",
+              "hazardous"
+            ]
+          }
+        ],
+        "domain": "safety",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "1q3pa0yfmlauo64",
+            "text": "Es peligroso manejar bajo la lluvia fuerte.",
+            "textLang": "es",
+            "translation": "It is dangerous to drive in heavy rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and advising, trying to keep someone safe",
+            "note": null,
+            "matchedForm": "peligroso",
+            "matchedTranslationForm": "dangerous"
+          },
+          {
+            "id": "7dimytq3jc95jr3",
+            "text": "Ese perro es muy peligroso con los extraños.",
+            "textLang": "es",
+            "translation": "That dog is very dangerous with strangers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and protective, warning others to keep their distance",
+            "note": null,
+            "matchedForm": "peligroso",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "peligroso",
+    "lemma": "peligroso",
+    "reading": null,
+    "ipa": "/pe.liˈɣɾo.so/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dangerous; risky",
+    "primaryGloss": "dangerous",
+    "emotion": "serious and cautious, warning someone of a real risk",
+    "notes": [
       "Used to describe something that could cause physical harm or lead to a bad outcome.",
       "Do not confuse with 'arriesgado', which specifically describes a situation involving taking a risk, rather than a quality inherent to an object or person."
     ],
@@ -182,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Something that can cause damage, injury, or death",
+        "why": "Adjective defined as a noun ('Something that...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Involving a high level of risk or uncertainty.",
+        "why": "Mere shade of meaning of 'dangerous'; should be one sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe something that could cause physical harm",
+        "why": "Restates the definition without adding usage or grammar help."
+      }
+    ],
+    "growth": 0.832
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "bed",
     "emotion": "warm and tired, ready to rest after a long day",
     "notes": [
+      "Takes the classifier 'cái' or 'chiếc'."
+    ],
+    "senses": [
+      {
+        "id": "05q5d5pv9zfq9y1",
+        "order": 0,
+        "definition": "A piece of furniture for sleeping or resting on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bed"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "ejx0gvl6gbm7fob",
+            "text": "Mệt quá, tôi chỉ muốn nằm lên giường thôi.",
+            "textLang": "vi",
+            "translation": "I'm so tired, I just want to lie down on the bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "giường",
+            "matchedTranslationForm": "bed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "giường",
+    "lemma": "giường",
+    "reading": null,
+    "ipa": "/zɨəŋ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "bed",
+    "primaryGloss": "bed",
+    "emotion": "warm and tired, ready to rest after a long day",
+    "notes": [
       "Used with classifiers like cái for a standard bed."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi muốn đi nằm trên giường ngay bây giờ.",
+        "why": "Reads like a calque from English; 'nằm lên giường' or 'đi ngủ' is more natural."
+      }
+    ],
+    "growth": 0.973
   }
 }

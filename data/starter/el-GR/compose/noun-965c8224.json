@@ -68,6 +68,71 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "banana",
+    "primaryGloss": "banana",
+    "emotion": "casual and everyday, grabbing a quick snack",
+    "notes": [],
+    "senses": [
+      {
+        "id": "bsr09cxqzuc38r9",
+        "order": 0,
+        "definition": "A long curved yellow fruit that grows in clusters.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "banana"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍌",
+        "examples": [
+          {
+            "id": "jl69acixu8amfjr",
+            "text": "Τρώω μια μπανάνα για πρωινό.",
+            "textLang": "el",
+            "translation": "I am eating a banana for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and hurried, getting ready to leave the house",
+            "note": null,
+            "matchedForm": "μπανάνα",
+            "matchedTranslationForm": "banana"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η μπανάνα",
+    "lemma": "μπανάνα",
+    "reading": null,
+    "ipa": "/baˈnana/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍌",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "banana; banana split",
     "primaryGloss": "banana",
     "emotion": "casual and everyday, grabbing a quick snack",
@@ -158,5 +223,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "as a slang term for being crazy or foolish",
+        "why": "False claim transferred from English 'bananas'; Greek 'μπανάνα' does not mean crazy."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A dessert made with ice cream, banana, and toppings.",
+        "why": "Invented sense: 'μπανάνα' alone does not mean banana split (which is 'μπανάνα σπλιτ')."
+      }
+    ],
+    "growth": 0.285
   }
 }

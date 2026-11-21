@@ -72,6 +72,131 @@
     "primaryGloss": "floor",
     "emotion": "settled and comfortable, standing safely in a familiar room",
     "notes": [
+      "Only means the surface you walk on. For a floor or level of a building (e.g. 'the third floor'), use 'andar'."
+    ],
+    "senses": [
+      {
+        "id": "2xqlu6ivbc2oev5",
+        "order": 0,
+        "definition": "The horizontal surface of a room or house that you walk on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor"
+            ]
+          }
+        ],
+        "domain": "floor",
+        "emoji": "🪵",
+        "examples": [
+          {
+            "id": "uspfjkez4f4gu7q",
+            "text": "O gato dorme no chão da sala.",
+            "textLang": "pt",
+            "translation": "The cat sleeps on the living room floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and cozy, watching something peaceful",
+            "note": null,
+            "matchedForm": "chão",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lx4ccpktl9bn0am",
+        "order": 1,
+        "definition": "The outdoor surface of the Earth that you walk on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ground"
+            ]
+          }
+        ],
+        "domain": "ground",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "6npange94z0pc4f",
+            "text": "As maçãs caíram no chão.",
+            "textLang": "pt",
+            "translation": "The apples fell to the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit regretful about the fallen fruit",
+            "note": null,
+            "matchedForm": "chão",
+            "matchedTranslationForm": "ground"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2xqlu6ivbc2oev5",
+      "from": "A superfície horizontal de uma sala ou casa sobre a qual se anda.",
+      "to": "The horizontal surface of a room or house that you walk on.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:20Z"
+    },
+    {
+      "sense": "lx4ccpktl9bn0am",
+      "from": "A superfície da Terra ao ar livre; o solo.",
+      "to": "The outdoor surface of the Earth; the soil.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o chão",
+    "lemma": "chão",
+    "reading": null,
+    "ipa": "/ˈʃɐ̃w/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "floor; ground",
+    "primaryGloss": "floor",
+    "emotion": "settled and comfortable, standing safely in a familiar room",
+    "notes": [
       "Use 'chão' when talking about the floor inside a building or the ground outside."
     ],
     "senses": [
@@ -160,22 +285,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2xqlu6ivbc2oev5",
-      "from": "A superfície horizontal de uma sala ou casa sobre a qual se anda.",
-      "to": "The horizontal surface of a room or house that you walk on.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:20Z"
-    },
-    {
-      "sense": "lx4ccpktl9bn0am",
-      "from": "A superfície da Terra ao ar livre; o solo.",
-      "to": "The outdoor surface of the Earth; the soil.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'chão' when talking about the floor inside a building or the",
+        "why": "Merely restates the two senses; misses contrast with 'andar' (story/level of a building)."
+      }
+    ],
+    "growth": 1.093
+  }
 }

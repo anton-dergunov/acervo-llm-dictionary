@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "fruit",
+    "primaryGloss": "fruit",
+    "emotion": "refreshing and healthy, a crisp snack on a warm day",
+    "notes": [
+      "Like English 'fruit', singular 'la fruta' is often used collectively for fruit in general ('comer mucha fruta'), while 'una fruta' or 'las frutas' refers to individual pieces or types of fruit.",
+      "For the figurative 'fruit' or result of an effort (or botanical fruit in general), Spanish uses the masculine noun 'el fruto' ('dar fruto')."
+    ],
+    "senses": [
+      {
+        "id": "crsi7ydzwrphcwq",
+        "order": 0,
+        "definition": "The sweet, fleshy, edible part of a plant that contains seeds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "b3o8188jbx610bp",
+            "text": "Es importante comer mucha fruta y verdura para mantenerse sano.",
+            "textLang": "es",
+            "translation": "It is important to eat a lot of fruit and vegetables to stay healthy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and sensible, promoting a healthy lifestyle",
+            "note": null,
+            "matchedForm": "fruta",
+            "matchedTranslationForm": "fruit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la fruta",
+    "lemma": "fruta",
+    "reading": null,
+    "ipa": "/ˈfɾuta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "fruit; produce",
     "primaryGloss": "fruit",
     "emotion": "refreshing and healthy, a crisp snack on a warm day",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(abstract) The result, product, or outcome of an effort or action.",
+        "why": "Confuses 'la fruta' with the masculine noun 'el fruto' ('frutos' in the example)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "whereas in English we often use the plural 'fruit'",
+        "why": "'Fruit' is singular uncountable in English too, not plural."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fruit; produce",
+        "why": "'Produce' is not in the senses and includes vegetables."
+      }
+    ],
+    "growth": 0.677
   }
 }

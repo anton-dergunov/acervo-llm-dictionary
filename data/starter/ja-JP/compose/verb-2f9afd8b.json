@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "疲れる",
     "lemma": "疲れる",
+    "reading": "つかれる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to get tired; to be tired",
+    "primaryGloss": "to get tired",
+    "emotion": "heavy and sluggish, like needing to sit down after a long day",
+    "notes": [
+      "Intransitive ichidan verb meaning 'to become tired'. To say 'I am tired' right now, Japanese uses either the past form 疲れた ('I've gotten tired') or the resultative form 疲れている."
+    ],
+    "senses": [
+      {
+        "id": "503vsulixhflgo7",
+        "order": 0,
+        "definition": "To lose energy or feel worn out from physical or mental activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get tired",
+              "to become exhausted",
+              "to get worn out"
+            ]
+          }
+        ],
+        "domain": "fatigue",
+        "emoji": "😫",
+        "examples": [
+          {
+            "id": "d7wd1566doqja8m",
+            "text": "今日はたくさん歩いたので、とても疲れた。",
+            "textLang": "ja",
+            "translation": "I walked a lot today, so I'm very tired.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and satisfied, reflecting on a long day of movement",
+            "note": null,
+            "matchedForm": "疲れた",
+            "matchedTranslationForm": "tired"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "疲れる",
+    "lemma": "疲れる",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji word is missing its hiragana reading (つかれる)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "used in the past tense form 'tsukarete iru'",
+        "why": "疲れている is the te-iru (resultative state) form, not the past tense; 疲れた is also used for present tiredness."
+      }
+    ],
+    "growth": 0.807
   }
 }

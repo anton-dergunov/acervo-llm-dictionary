@@ -71,6 +71,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "pagar; valer la pena",
+    "primaryGloss": "pagar",
+    "emotion": "a simple, everyday transaction, handled with steady purpose and zero fuss",
+    "notes": [
+      "Para decir qué cosa se paga, se usa la preposición 'for' ('pay for the meal'), a diferencia del español donde no se usa preposición ('pagar la comida').",
+      "Es un verbo irregular: su pasado y participio es 'paid' (no 'payed').",
+      "También se usa en expresiones frecuentes como 'pay attention' (prestar atención) o 'pay a visit' (hacer una visita)."
+    ],
+    "senses": [
+      {
+        "id": "826l5tmtiu45lp7",
+        "order": 0,
+        "definition": "Dar dinero a alguien a cambio de un producto, un servicio o su trabajo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pagar",
+              "abonar"
+            ]
+          }
+        ],
+        "domain": "dinero",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "90ex8h36x1m6htf",
+            "text": "I need to pay for the groceries.",
+            "textLang": "en",
+            "translation": "Necesito pagar los comestibles.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a matter-of-fact realization, focusing on the task at hand",
+            "note": null,
+            "matchedForm": "pay",
+            "matchedTranslationForm": "pagar"
+          },
+          {
+            "id": "omhrcpmq8yzmooh",
+            "text": "They pay me every two weeks.",
+            "textLang": "en",
+            "translation": "Me pagan cada dos semanas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and regular, like clockwork",
+            "note": null,
+            "matchedForm": "pay",
+            "matchedTranslationForm": "pagan"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lofa09qh3ux27rx",
+        "order": 1,
+        "definition": "Resultar ventajoso o beneficioso hacer algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "valer la pena",
+              "compensar"
+            ]
+          }
+        ],
+        "domain": "beneficio",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "x68p9rpl8slm5nb",
+            "text": "It doesn't pay to be late.",
+            "textLang": "en",
+            "translation": "No vale la pena llegar tarde.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and cautionary, giving a piece of advice",
+            "note": null,
+            "matchedForm": "pay",
+            "matchedTranslationForm": "vale la pena"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "pay",
+    "lemma": "pay",
+    "reading": null,
+    "ipa": "/peɪ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "pagar; recompensar; prestar atención",
     "primaryGloss": "pagar",
     "emotion": "a simple, everyday transaction, handled with steady purpose and zero fuss",
@@ -205,5 +338,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Dar a alguien el dinero que se le debe por un trabajo",
+        "why": "Shades of the same meaning ('pagar'); should be one sense for A2."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pagar; recompensar; prestar atención",
+        "why": "'Prestar atención' is not in the senses, and 'recompensar' does not match sense 2."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing crucial usage note on 'pay for [something]' vs Spanish 'pagar [algo]'."
+      }
+    ],
+    "growth": 1.048
   }
 }

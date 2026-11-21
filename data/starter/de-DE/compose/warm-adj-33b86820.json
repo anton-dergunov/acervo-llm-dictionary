@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "warm; hot (food)",
+    "primaryGloss": "warm",
+    "emotion": "relaxed and comfortable, sensing a gentle heat or kindness",
+    "notes": [
+      "Comparative: 'wärmer', superlative: 'am wärmsten'.",
+      "To say that a person feels warm, use the dative ('Mir ist warm'), never 'Ich bin warm'.",
+      "In German, cooked meals are called 'warmes Essen' (where English often says 'a hot meal')."
+    ],
+    "senses": [
+      {
+        "id": "fleqqf34i4vt1su",
+        "order": 0,
+        "definition": "Having a moderately high, pleasant temperature; or (of clothes) keeping the body warm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "j3jvtwynctjj0hp",
+            "text": "Heute ist es angenehm warm.",
+            "textLang": "de",
+            "translation": "Today it is pleasantly warm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying the nice weather",
+            "note": null,
+            "matchedForm": "warm",
+            "matchedTranslationForm": "warm"
+          },
+          {
+            "id": "4ez87c6muhjy58x",
+            "text": "Zieh dir eine warme Jacke an!",
+            "textLang": "de",
+            "translation": "Put on a warm jacket!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "warme",
+            "matchedTranslationForm": "warm"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "o4ab4f4efoz2tef",
+        "order": 1,
+        "definition": "Of food or meals: cooked and served hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "warm",
+              "cooked"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vk55cbwbr5ry2jw",
+            "text": "Abends essen wir meistens warm.",
+            "textLang": "de",
+            "translation": "In the evening we usually eat a hot meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "warm",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "warm",
+    "lemma": "warm",
+    "reading": null,
+    "ipa": "/vaʁm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "warm; pleasant",
     "primaryGloss": "warm",
     "emotion": "relaxed and comfortable, sensing a gentle heat or kindness",
@@ -161,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Sie ist ein sehr warmer Mensch.",
+        "why": "Calling a person 'warm' is unidiomatic or implies 'gay' in slang; Germans use 'herzlich' or 'warmherzig'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When talking about people, 'warm' often describes a kind, friendly personality.",
+        "why": "False for people directly; 'warm' is used for words/greetings, while people are 'warmherzig' or 'herzlich'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial dative construction 'Mir ist warm' (not 'Ich bin warm')."
+      }
+    ],
+    "growth": 1.237
   }
 }

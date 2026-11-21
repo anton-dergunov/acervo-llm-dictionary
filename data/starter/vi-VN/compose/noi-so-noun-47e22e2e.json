@@ -72,6 +72,96 @@
     "primaryGloss": "fear",
     "emotion": "nervous and tense, anticipating something bad",
     "notes": [
+      "The classifier 'nỗi' (used for abstract inner feelings) combines with the verb 'sợ' (to be afraid) to form the noun 'nỗi sợ'."
+    ],
+    "senses": [
+      {
+        "id": "8tnv5m3y60jas28",
+        "order": 0,
+        "definition": "An unpleasant feeling of being afraid of danger, pain, or something bad that might happen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fear",
+              "dread",
+              "fright"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "0b8ad61pnaagl4b",
+            "text": "Cô ấy vượt qua nỗi sợ để nói trước đám đông.",
+            "textLang": "vi",
+            "translation": "She overcame her fear to speak in front of the crowd.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "brave and determined, overcoming inner anxiety",
+            "note": null,
+            "matchedForm": "nỗi sợ",
+            "matchedTranslationForm": "fear"
+          },
+          {
+            "id": "6h3rpa33m8nbqyz",
+            "text": "Nỗi sợ thất bại khiến anh ấy ngần ngại bắt đầu.",
+            "textLang": "vi",
+            "translation": "The fear of failure made him hesitate to start.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and burdened by lingering worries",
+            "note": null,
+            "matchedForm": "Nỗi sợ",
+            "matchedTranslationForm": "fear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "nỗi sợ",
+    "lemma": "nỗi sợ",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "fear; dread",
+    "primaryGloss": "fear",
+    "emotion": "nervous and tense, anticipating something bad",
+    "notes": [
       "The word kết hợp 'nỗi' turns the emotion 'sợ' into a noun representing an inner feeling or state.",
       "Do not confuse it with the bare verb 'sợ', which means 'to be afraid'."
     ],
@@ -163,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "The word kết hợp 'nỗi' turns the emotion 'sợ'",
+        "why": "Untranslated Vietnamese phrase 'kết hợp' left in the English note."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'nỗi sợ' is simply 'fear'; splitting 'fear' and 'dread' is artificial."
+      }
+    ],
+    "growth": 0.767
   }
 }

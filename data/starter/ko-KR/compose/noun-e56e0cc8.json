@@ -68,6 +68,117 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "guest; customer; passenger",
+    "primaryGloss": "guest",
+    "emotion": "welcoming and attentive, thinking of someone visiting your home",
+    "notes": [
+      "Also used directly by staff to address a customer or passenger politely ('Excuse me, sir/ma'am').",
+      "Takes the honorific counter 분 (bun) rather than 명 (myeong) in polite service contexts (e.g., 손님 두 분, 'two guests/customers')."
+    ],
+    "senses": [
+      {
+        "id": "lcyc3hnfr5bzg7l",
+        "order": 0,
+        "definition": "A person invited to a home or attending an event as a visitor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest",
+              "visitor"
+            ]
+          }
+        ],
+        "domain": "visitor",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "h5zumarggou1tfb",
+            "text": "오늘 집에 손님이 와서 요리를 많이 했어요.",
+            "textLang": "ko",
+            "translation": "I cooked a lot because guests came to my house today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bustling and slightly tired, but happy to prepare for a visitor",
+            "note": null,
+            "matchedForm": "손님",
+            "matchedTranslationForm": "guests"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "il3a7sy7aeek9ep",
+        "order": 1,
+        "definition": "A person who buys goods or services from a shop, restaurant, or business, or uses a taxi or public transport.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "customer",
+              "client",
+              "passenger"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "34qi0cas3sda6r8",
+            "text": "가게에 손님이 아주 많아요.",
+            "textLang": "ko",
+            "translation": "There are a lot of customers in the store.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and matter-of-fact, noting the busy shop environment",
+            "note": null,
+            "matchedForm": "손님",
+            "matchedTranslationForm": "customers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "손님",
+    "lemma": "손님",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "guest; customer",
     "primaryGloss": "guest",
     "emotion": "welcoming and attentive, thinking of someone visiting your home",
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "you might see the word '손님' used as a polite title following",
+        "why": "손님 is used on its own as a form of address, not after a name."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '손님' means both guest and customer, context usually makes it clear",
+        "why": "Restates the two senses without adding usage information."
+      }
+    ],
+    "growth": 0.995
   }
 }

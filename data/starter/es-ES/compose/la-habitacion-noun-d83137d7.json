@@ -58,6 +58,106 @@
     "headword": "la habitación",
     "lemma": "habitación",
     "reading": null,
+    "ipa": "/aβitaˈθjon/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "room; bedroom",
+    "primaryGloss": "room",
+    "emotion": "quiet and cozy, feeling settled in at home",
+    "notes": [
+      "While 'habitación' can mean any room in a building, in a home it usually refers to a bedroom.",
+      "Compare with 'el cuarto' (also very common for a room or bedroom) and 'el dormitorio' (specifically a bedroom)."
+    ],
+    "senses": [
+      {
+        "id": "3id6ya8ffn4m09w",
+        "order": 0,
+        "definition": "A separate space inside a building, especially a bedroom or a hotel room.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room",
+              "bedroom"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "drqsjzfartb9qt9",
+            "text": "Mi habitación está en la planta alta.",
+            "textLang": "es",
+            "translation": "My bedroom is on the top floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, showing someone around the house",
+            "note": null,
+            "matchedForm": "habitación",
+            "matchedTranslationForm": "bedroom"
+          },
+          {
+            "id": "ki1eu4c6r78s8x3",
+            "text": "Necesitamos una habitación doble para el fin de semana.",
+            "textLang": "es",
+            "translation": "We need a double room for the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "organized and polite, booking a place to stay",
+            "note": null,
+            "matchedForm": "habitación",
+            "matchedTranslationForm": "room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "tkva0u2vv8iceps",
+      "from": "El acto de habitar o vivir en un lugar.",
+      "to": "The act of living or dwelling in a place.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:14Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la habitación",
+    "lemma": "habitación",
+    "reading": null,
     "ipa": "/aβi.taˈsjon/",
     "pos": "noun",
     "gender": "feminine",
@@ -184,14 +284,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "tkva0u2vv8iceps",
-      "from": "El acto de habitar o vivir en un lugar.",
-      "to": "The act of living or dwelling in a place.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:14Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aβi.taˈsjon/",
+        "why": "Castilian Spanish (es-ES) uses /θ/ for 'ci', not /s/ (/aβitaˈθjon/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The act of living or dwelling in a place.",
+        "why": "Rare, legal/formal sense inappropriate for an A2 learner."
+      }
+    ],
+    "growth": 0.746
+  }
 }

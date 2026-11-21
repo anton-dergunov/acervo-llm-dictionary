@@ -74,6 +74,155 @@
     "primaryGloss": "pierna",
     "emotion": null,
     "notes": [
+      "En inglés se usa 'leg' tanto para la 'pierna' de una persona como para la 'pata' de un animal o de un mueble."
+    ],
+    "senses": [
+      {
+        "id": "opa8zvrike9mobk",
+        "order": 0,
+        "definition": "Extremidad inferior del cuerpo humano o extremidad de un animal que sirve para caminar y sostenerse.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pierna",
+              "pata"
+            ]
+          }
+        ],
+        "domain": "anatomía",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "g74xzpdkok3bw10",
+            "text": "She hurt her leg while running in the park.",
+            "textLang": "en",
+            "translation": "Se lastimó la pierna mientras corría en el parque.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "preocupado y un poco apenado por el dolor de alguien",
+            "note": null,
+            "matchedForm": "leg",
+            "matchedTranslationForm": "pierna"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jwes2phf7xrd42b",
+        "order": 1,
+        "definition": "Soporte vertical de un mueble, como una mesa o una silla.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pata"
+            ]
+          }
+        ],
+        "domain": "muebles",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "fkethyodwb25cq3",
+            "text": "The table has a broken leg.",
+            "textLang": "en",
+            "translation": "La mesa tiene una pata rota.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ligeramente molesto por tener que reparar algo",
+            "note": null,
+            "matchedForm": "leg",
+            "matchedTranslationForm": "pata"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p1stgoc6e014s24",
+        "order": 2,
+        "definition": "Sección o parte de un viaje o una competición.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "etapa",
+              "tramo"
+            ]
+          }
+        ],
+        "domain": "viaje",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "cm3knhkllgxwdqv",
+            "text": "The first leg of the flight was very long.",
+            "textLang": "en",
+            "translation": "El primer tramo del vuelo fue muy largo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cansado, recordando la fatiga de un viaje largo",
+            "note": null,
+            "matchedForm": "leg",
+            "matchedTranslationForm": "tramo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "leg",
+    "lemma": "leg",
+    "reading": null,
+    "ipa": "/lɛɡ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pierna; pata; etapa",
+    "primaryGloss": "pierna",
+    "emotion": null,
+    "notes": [
       "Se refiere tanto a la extremidad humana como a la de animales o muebles. Para evitar confusiones, recuerda que 'leg' es la pierna completa, mientras que 'foot' es solo el pie."
     ],
     "senses": [
@@ -201,5 +350,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses[0]",
+        "quote": "Parte del cuerpo que va desde la cadera hasta el pie",
+        "why": "In Spanish, 'leg' is 'pierna' (human) or 'pata' (animal/furniture); animals are missing from senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "recuerda que 'leg' es la pierna completa, mientras que 'foot' es",
+        "why": "Spanish speakers do not confuse 'pierna' (leg) with 'pie' (foot)."
+      }
+    ],
+    "growth": 0.917
   }
 }

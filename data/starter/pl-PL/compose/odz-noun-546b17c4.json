@@ -68,6 +68,74 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "boat",
+    "primaryGloss": "boat",
+    "emotion": "a sense of calm, picturing something gentle floating on the water",
+    "notes": [
+      "In everyday speech, the diminutive 'łódka' is often used for a small boat.",
+      "Notice the vowel change in other forms, such as genitive/locative singular 'łodzi' and nominative plural 'łodzie'. Capitalized as 'Łódź', this word is also the name of a major Polish city (w Łodzi = in Łódź)."
+    ],
+    "senses": [
+      {
+        "id": "rrnkjozm281rcy7",
+        "order": 0,
+        "definition": "A small vessel used for traveling on water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boat"
+            ]
+          }
+        ],
+        "domain": "watercraft",
+        "emoji": "🛶",
+        "examples": [
+          {
+            "id": "nvy3pvpav18yxte",
+            "text": "Mała łódź płynie powoli przez jezioro.",
+            "textLang": "pl",
+            "translation": "A small boat is moving slowly across the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching the scene unfold",
+            "note": null,
+            "matchedForm": "łódź",
+            "matchedTranslationForm": "boat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "łódź",
+    "lemma": "łódź",
+    "reading": null,
+    "ipa": "/wut͡ɕ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛶",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "boat; the city of Łódź",
     "primaryGloss": "boat",
     "emotion": "a sense of calm, picturing something gentle floating on the water",
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(city) The name of a major city located in central Poland.",
+        "why": "The headword is lowercase 'łódź' (common noun), not the proper noun 'Łódź'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "boat; the city of Łódź",
+        "why": "Includes the proper noun 'Łódź', which is not a sense of lowercase 'łódź'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Moi rodzice mieszkają w mieście Łódź.",
+        "why": "Unnatural avoidance of declining the city name ('mieszkają w Łodzi' is standard Polish)."
+      }
+    ],
+    "growth": 0.779
   }
 }

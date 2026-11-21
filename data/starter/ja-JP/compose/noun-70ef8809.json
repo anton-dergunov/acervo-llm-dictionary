@@ -72,6 +72,115 @@
     "primaryGloss": "meat",
     "emotion": "a hearty and satisfying appreciation for a good meal",
     "notes": [
+      "In everyday speech, the polite prefix お (o-) is very often added: お肉 (o-niku).",
+      "When referring to a person's body (as in 肉がつく, 'to put on weight'), it means soft flesh or body fat."
+    ],
+    "senses": [
+      {
+        "id": "s6z6kxhwoeihfng",
+        "order": 0,
+        "definition": "The flesh of an animal eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "z9idxlnkdra3zhc",
+            "text": "スーパーで肉を買います。",
+            "textLang": "ja",
+            "translation": "I will buy meat at the supermarket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the shopping task",
+            "note": null,
+            "matchedForm": "肉",
+            "matchedTranslationForm": "meat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "be9ms7mepdh7xfo",
+        "order": 1,
+        "definition": "The soft tissue or fat of a person's or animal's body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flesh",
+              "fat"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🍖",
+        "examples": [
+          {
+            "id": "m2ltv6dhmcydpvn",
+            "text": "最近お腹に肉がついてきた。",
+            "textLang": "ja",
+            "translation": "I have been putting on weight around my stomach lately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "肉",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "肉",
+    "lemma": "肉",
+    "reading": "にく",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat; flesh",
+    "primaryGloss": "meat",
+    "emotion": "a hearty and satisfying appreciation for a good meal",
+    "notes": [
       "肉 refers specifically to animal flesh used as food, whereas the word 肌 (hada) or 体 (karada) is used for human skin or body. In casual speech, it is often combined with prefixes like お (o-) to make お肉 (o-niku) when talking about a meal."
     ],
     "senses": [
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "肉 refers specifically to animal flesh used as food",
+        "why": "Contradicts sense 1; 肉 is also used for human body fat/flesh (e.g. 肉がつく)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "筋肉は体を動かすための肉です。",
+        "why": "Unnatural encyclopedic definition; everyday usage of 肉 for the body refers to putting on weight/flesh."
+      }
+    ],
+    "growth": 0.883
   }
 }

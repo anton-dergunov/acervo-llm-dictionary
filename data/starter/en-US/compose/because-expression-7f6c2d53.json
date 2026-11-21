@@ -58,6 +58,94 @@
     "headword": "because",
     "lemma": "because",
     "reading": null,
+    "ipa": "/bɪˈkɔːz/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "porque",
+    "primaryGloss": "porque",
+    "emotion": null,
+    "notes": [
+      "Se usa antes de una oración con sujeto y verbo ('because it was raining'). Antes de un sustantivo o pronombre se usa 'because of' ('because of the rain', por la lluvia)."
+    ],
+    "senses": [
+      {
+        "id": "u97iv3hdeizn0ht",
+        "order": 0,
+        "definition": "Introduce la causa o razón de algo, o responde a la pregunta 'why?'.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "porque"
+            ]
+          }
+        ],
+        "domain": "causa",
+        "emoji": "➡️",
+        "examples": [
+          {
+            "id": "3c6r0gre229zh8g",
+            "text": "I was late because I missed the bus.",
+            "textLang": "en",
+            "translation": "Llegué tarde porque perdí el autobús.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "explicativo, dando una razón clara y directa",
+            "note": null,
+            "matchedForm": "because",
+            "matchedTranslationForm": "porque"
+          },
+          {
+            "id": "90pr0432jjzqkhc",
+            "text": "Why are you sad? — Because I lost my keys.",
+            "textLang": "en",
+            "translation": "¿Por qué estás triste? — Porque perdí mis llaves.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Because",
+            "matchedTranslationForm": "Porque"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "because",
+    "lemma": "because",
+    "reading": null,
     "ipa": "/bɪˈkɒz/",
     "pos": "expression",
     "gender": null,
@@ -159,5 +247,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(respuesta) Se usa para responder a la pregunta '¿Por qué?'.",
+        "why": "Answering 'why?' is the exact same causal conjunction sense as sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "porque; debido a",
+        "why": "'Debido a' corresponds to 'because of' (which the note explicitly warns against) and is not in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/bɪˈkɒz/",
+        "why": "Uses British vowel /ɒ/ instead of US /ɔː/ or /ʌ/."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'because' is a conjunction, not a multi-word expression."
+      }
+    ],
+    "growth": 0.796
   }
 }

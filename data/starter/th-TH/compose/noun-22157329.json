@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "banana",
+    "primaryGloss": "banana",
+    "emotion": "casual and friendly, offering a healthy snack",
+    "notes": [
+      "Counted with ลูก or ผล for a single banana, and หวี for a hand (bunch) of bananas.",
+      "In informal speech, กล้วย or กล้วย ๆ is used as an adjective meaning 'very easy' or 'a piece of cake' (e.g., เรื่องกล้วย ๆ 'an easy matter')."
+    ],
+    "senses": [
+      {
+        "id": "m0jiycfy1rw18bq",
+        "order": 0,
+        "definition": "A long curved fruit with yellow or green skin.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "banana"
+            ]
+          }
+        ],
+        "domain": "fruit",
+        "emoji": "🍌",
+        "examples": [
+          {
+            "id": "i9qiig0f2m05jcr",
+            "text": "ฉันชอบกินกล้วยตอนเช้า",
+            "textLang": "th",
+            "translation": "I like to eat bananas in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and relaxed, enjoying a morning routine",
+            "note": null,
+            "matchedForm": "กล้วย",
+            "matchedTranslationForm": "bananas"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "กล้วย",
+    "lemma": "กล้วย",
+    "reading": null,
+    "ipa": "/klûaj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍌",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "banana; something very easy",
     "primaryGloss": "banana",
     "emotion": "casual and friendly, offering a healthy snack",
@@ -159,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Thai, 'กล้วย' is not only the fruit but also a common",
+        "why": "Merely restates the two senses; missing useful classifier info (ลูก, ผล, หวี)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(idiom) Something very easy to do.",
+        "why": "Colloquial adjectival use (often reduplicated กล้วย ๆ) is misplaced as a plain noun sense."
+      }
+    ],
+    "growth": 0.997
   }
 }

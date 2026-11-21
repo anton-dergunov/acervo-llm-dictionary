@@ -72,6 +72,73 @@
     "primaryGloss": "uva",
     "emotion": "fresh and juicy, sweet to bite into on a warm afternoon",
     "notes": [
+      "Es un sustantivo contable; se usa habitualmente en plural ('grapes') cuando se habla de comerlas (por ejemplo, 'a bunch of grapes')."
+    ],
+    "senses": [
+      {
+        "id": "aek1vpi5h2v93za",
+        "order": 0,
+        "definition": "Fruta pequeña y redonda que crece en racimos y con la que se hace el vino.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "uva"
+            ]
+          }
+        ],
+        "domain": "fruta",
+        "emoji": "🍇",
+        "examples": [
+          {
+            "id": "04hib3jw9bdn07o",
+            "text": "She bought a bunch of green grapes.",
+            "textLang": "en",
+            "translation": "Compró un racimo de uvas verdes.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "grapes",
+            "matchedTranslationForm": "uvas"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "grape",
+    "lemma": "grape",
+    "reading": null,
+    "ipa": "/ɡreɪp/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍇",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "uva",
+    "primaryGloss": "uva",
+    "emotion": "fresh and juicy, sweet to bite into on a warm afternoon",
+    "notes": [
       "Se usa principalmente para la fruta fresca o para hacer vino."
     ],
     "senses": [
@@ -96,5 +163,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa principalmente para la fruta fresca o para hacer vino.",
+        "why": "Filler note restating the definition without adding grammar or usage guidance."
+      },
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "senses[0].domain",
+        "quote": "fruit",
+        "why": "Domain is in English instead of Spanish."
+      }
+    ],
+    "growth": 1.979
   }
 }

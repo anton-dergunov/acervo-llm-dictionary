@@ -72,6 +72,137 @@
     "primaryGloss": "low",
     "emotion": "a factual observation, matter-of-fact and neutral",
     "notes": [
+      "Covers both 'low' (ceilings, tables, prices, temperatures) and 'short' in height (people), though невысокий ('not tall') is more polite when describing a person directly.",
+      "Has an irregular comparative form: ниже (lower, shorter)."
+    ],
+    "senses": [
+      {
+        "id": "6vpmru2s1r7aaf8",
+        "order": 0,
+        "definition": "Of little height from the ground or base; not high or tall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "low",
+              "short"
+            ]
+          }
+        ],
+        "domain": "height",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "jqqttogkb311h4q",
+            "text": "Здесь очень низкий потолок.",
+            "textLang": "ru",
+            "translation": "The ceiling is very low here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "noticing a physical limitation in the environment",
+            "note": null,
+            "matchedForm": "низкий",
+            "matchedTranslationForm": "low"
+          },
+          {
+            "id": "raeyn0r1c2mkev6",
+            "text": "У него низкий рост.",
+            "textLang": "ru",
+            "translation": "He is short in stature.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "objective and descriptive",
+            "note": null,
+            "matchedForm": "низкий",
+            "matchedTranslationForm": "short"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4bnkmpddxyo1w0b",
+        "order": 1,
+        "definition": "Below average in amount, degree, value, quality, or pitch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "low",
+              "deep"
+            ]
+          }
+        ],
+        "domain": "level",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5z4v01a5bgro31f",
+            "text": "Сегодня на улице низкая температура.",
+            "textLang": "ru",
+            "translation": "The temperature outside is low today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "низкая",
+            "matchedTranslationForm": "low"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "низкий",
+    "lemma": "низкий",
+    "reading": null,
+    "ipa": "/ˈnʲiskʲɪj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📉",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "low; short (in height)",
+    "primaryGloss": "low",
+    "emotion": "a factual observation, matter-of-fact and neutral",
+    "notes": [
       "When describing people, 'низкий' specifically means 'short' in height. Do not confuse this with 'маленький', which refers to general size or being 'small'.",
       "For objects, it refers to items positioned near the ground, like a low table or a low ceiling."
     ],
@@ -159,5 +290,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense of low in degree, level, or value (prices, temperature, quality)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[0]",
+        "quote": "(height) Having little height, not tall.",
+        "why": "Splits physical lowness/shortness into two senses based on English 'short' vs 'low'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "For objects, it refers to items positioned near the ground",
+        "why": "Restates the definition instead of noting irregular comparative 'ниже' or 'невысокий' for people."
+      }
+    ],
+    "growth": 1.19
   }
 }

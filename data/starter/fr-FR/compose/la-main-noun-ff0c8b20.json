@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "hand",
+    "primaryGloss": "hand",
+    "emotion": "practical and ready, reaching out to touch or hold something",
+    "notes": [
+      "Take care not to confuse 'main' (/mɛ̃/) with 'moins' (/mwɛ̃/, less).",
+      "Common expressions: 'donner un coup de main' (to give a hand / to help), 'serrer la main' (to shake hands)."
+    ],
+    "senses": [
+      {
+        "id": "h7syvo5kyd4tag9",
+        "order": 0,
+        "definition": "The part of the body at the end of the arm, including the fingers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "424jk6zhc45akr6",
+            "text": "Il a levé la main pour poser une question.",
+            "textLang": "fr",
+            "translation": "He raised his hand to ask a question.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "attentive and eager to speak in class",
+            "note": null,
+            "matchedForm": "main",
+            "matchedTranslationForm": "hand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la main",
+    "lemma": "main",
+    "reading": null,
+    "ipa": "/mɛ̃/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "hand; handwriting",
     "primaryGloss": "hand",
     "emotion": "practical and ready, reaching out to touch or hold something",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Remember that main is feminine: la main, une main.",
+        "why": "Restates the grammatical gender already shown in the entry fields."
+      },
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The style of a person's handwriting.",
+        "why": "Archaic/literary sense; everyday French uses 'écriture' for handwriting."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Elle écrit avec une belle main.",
+        "why": "Unnatural in modern French; native speakers say 'Elle a une belle écriture'."
+      }
+    ],
+    "growth": 0.879
   }
 }

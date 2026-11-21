@@ -70,6 +70,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to finish; to graduate; to turn (an age)",
+    "primaryGloss": "finish",
+    "emotion": null,
+    "notes": [
+      "Imperfective; its perfective pair is 'skończyć' (or more formal 'zakończyć').",
+      "For intransitive 'to end / come to an end', use the reflexive 'kończyć się' (e.g. 'Film się kończy' — The movie is ending)."
+    ],
+    "senses": [
+      {
+        "id": "miocbee4dby7inb",
+        "order": 0,
+        "definition": "To bring an activity, task, or thing to an end.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to finish",
+              "to end",
+              "to complete"
+            ]
+          }
+        ],
+        "domain": "completion",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "hygta7m6a5j2fv2",
+            "text": "Zwykle kończę pracę o piątej.",
+            "textLang": "pl",
+            "translation": "I usually finish work at five.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kończę",
+            "matchedTranslationForm": "finish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jbp86zxjeqa9qub",
+        "order": 1,
+        "definition": "To complete one's studies at a school or university.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to graduate from",
+              "to finish"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "2iy7fqbn7uphh8r",
+            "text": "W tym roku kończę studia.",
+            "textLang": "pl",
+            "translation": "I am graduating from university this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kończę",
+            "matchedTranslationForm": "graduating"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g8fy6bquzwqeafw",
+        "order": 2,
+        "definition": "To reach a particular age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to turn"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "1kv93et5ssgwfk1",
+            "text": "Jutro mój syn kończy dziesięć lat.",
+            "textLang": "pl",
+            "translation": "Tomorrow my son turns ten.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kończy",
+            "matchedTranslationForm": "turns"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kończyć",
+    "lemma": "kończyć",
+    "reading": null,
+    "ipa": "/ˈkɔɲ.t͡ʂɨt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to finish; to end; to complete",
     "primaryGloss": "finish",
     "emotion": null,
@@ -163,5 +314,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(finish) To come to the end ... / (conclude) To bring a period",
+        "why": "Both senses describe transitive 'to finish/end', while the definitions mix up transitivity."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Film powoli kończy się.",
+        "why": "Unnatural clitic placement ('się kończy' is natural), and uses the reflexive verb 'kończyć się'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday A2 sense 'to graduate from (a school)' or 'to turn (an age)'."
+      }
+    ],
+    "growth": 0.997
   }
 }

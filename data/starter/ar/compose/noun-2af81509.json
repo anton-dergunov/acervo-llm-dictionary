@@ -72,6 +72,115 @@
     "primaryGloss": "price",
     "emotion": "matter-of-fact and direct, checking the cost of an item",
     "notes": [
+      "Takes the irregular (broken) plural أَسْعَار (ʾasʿār).",
+      "Close in meaning to ثَمَن (thaman); سِعْر is preferred for market prices and exchange rates, while ثَمَن is also used figuratively ('pay the price')."
+    ],
+    "senses": [
+      {
+        "id": "44zynhorlhjk3rl",
+        "order": 0,
+        "definition": "The amount of money required to buy something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "price",
+              "cost"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "nf5o4gq8mwi988u",
+            "text": "ما هُوَ سِعْرُ هَذَا القَمِيصِ؟",
+            "textLang": "ar",
+            "translation": "What is the price of this shirt?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and helpful, asking for the cost while shopping",
+            "note": null,
+            "matchedForm": "سِعْرُ",
+            "matchedTranslationForm": "price"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "j18zvye3phbx85f",
+        "order": 1,
+        "definition": "The ratio at which one currency is exchanged for another, or a fixed percentage charge.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rate"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "1uwzc8gutoqe2nh",
+            "text": "اِرْتَفَعَ سِعْرُ صَرْفِ الدُّولَارِ اليَوْمَ.",
+            "textLang": "ar",
+            "translation": "The dollar exchange rate rose today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "سِعْرُ",
+            "matchedTranslationForm": "rate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "سِعْر",
+    "lemma": "سِعْر",
+    "reading": null,
+    "ipa": "/siʕr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "price; rate",
+    "primaryGloss": "price",
+    "emotion": "matter-of-fact and direct, checking the cost of an item",
+    "notes": [
       "سِعْر (si'r) refers specifically to the monetary value or price of a good or service.",
       "Do not confuse it with ثَمَن (thaman), which also means price but is often used in broader or more general contexts."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "تَغَيَّرَتْ أَسْعَارُ السِلَعِ فِي السُوقِ.",
+        "why": "أَسْعَارُ السِّلَعِ means 'prices of goods' (sense 0), not exchange or interest rates."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "سِعْر (si'r) refers specifically to the monetary value or price",
+        "why": "Restates the definition; omits the irregular plural أَسْعَار (ʾasʿār)."
+      }
+    ],
+    "growth": 0.96
   }
 }

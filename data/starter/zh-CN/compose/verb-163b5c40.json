@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to throw; to throw away",
+    "primaryGloss": "to throw",
+    "emotion": "casual and direct, performing the quick movement without a second thought",
+    "notes": [
+      "Do not confuse with 丢 (diū), which can also mean 'to throw away' but commonly means 'to lose accidentally' (扔 never means 'to lose')."
+    ],
+    "senses": [
+      {
+        "id": "17vpet0nfhtcibg",
+        "order": 0,
+        "definition": "To send something through the air with a movement of your hand and arm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to throw",
+              "to toss"
+            ]
+          }
+        ],
+        "domain": "throwing",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "6ago9exvtet0vgm",
+            "text": "他把球扔给我。",
+            "textLang": "zh",
+            "translation": "He threw the ball to me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and energetic, making sure the catch is successful",
+            "note": null,
+            "matchedForm": "扔",
+            "matchedTranslationForm": "threw"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "v2vi4p9vollgq5v",
+        "order": 1,
+        "definition": "To get rid of something that is no longer wanted.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to throw away",
+              "to discard"
+            ]
+          }
+        ],
+        "domain": "discarding",
+        "emoji": "🗑️",
+        "examples": [
+          {
+            "id": "6lsel9m85bgia0a",
+            "text": "别把塑料瓶随便扔在地上。",
+            "textLang": "zh",
+            "translation": "Don't just throw plastic bottles on the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and disapproving, correcting someone's bad habit",
+            "note": null,
+            "matchedForm": "扔",
+            "matchedTranslationForm": "throw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "扔",
+    "lemma": "扔",
+    "reading": "rēng",
+    "ipa": "/ʐəŋ˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗑️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to throw; to discard; to lose",
     "primaryGloss": "throw",
     "emotion": "casual and direct, performing the quick movement without a second thought",
@@ -203,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "To lose something due to carelessness.",
+        "why": "扔 does not mean 'to accidentally lose'; that is 丢 (diū), as Note 1 itself states."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "粗心大意的人容易把东西扔了。",
+        "why": "把东西扔了 means 'threw things away', not 'lost things'; contradicts the translation."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to throw; to discard; to lose",
+        "why": "Includes false gloss 'to lose'."
+      }
+    ],
+    "growth": 0.664
   }
 }

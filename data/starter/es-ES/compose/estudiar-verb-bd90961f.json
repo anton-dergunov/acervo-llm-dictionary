@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to study; to examine",
+    "primaryGloss": "to study",
+    "emotion": "a focused and quiet moment of concentration, serious and determined",
+    "notes": [
+      "Use 'estudiar' for studying a subject, preparing for an exam, or attending university. For acquiring a new skill (like swimming or driving), use 'aprender'."
+    ],
+    "senses": [
+      {
+        "id": "k6jv17fpxm5vbxz",
+        "order": 0,
+        "definition": "To spend time learning about an academic subject or preparing for an exam.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to study"
+            ]
+          }
+        ],
+        "domain": "study",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "pxzxtm8k05pk0jm",
+            "text": "Tengo que estudiar mucho para el examen de mañana.",
+            "textLang": "es",
+            "translation": "I have to study a lot for tomorrow's exam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit stressed and feeling the pressure of time, focused",
+            "note": null,
+            "matchedForm": "estudiar",
+            "matchedTranslationForm": "study"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dr5mvdvgoyst2nf",
+        "order": 1,
+        "definition": "To examine or observe something carefully in order to understand it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to study",
+              "to examine",
+              "to analyze"
+            ]
+          }
+        ],
+        "domain": "analyze",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "cd7m2ojsd1uhyny",
+            "text": "Los arquitectos estudian el terreno antes de construir.",
+            "textLang": "es",
+            "translation": "The architects study the terrain before building.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and careful, taking things seriously",
+            "note": null,
+            "matchedForm": "estudian",
+            "matchedTranslationForm": "study"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "estudiar",
+    "lemma": "estudiar",
+    "reading": null,
+    "ipa": "/es.tuˈðjaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to study; to learn",
     "primaryGloss": "to study",
     "emotion": "a focused and quiet moment of concentration, serious and determined",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to study; to learn",
+        "why": "'to learn' is not in any sense's glosses, and the note contrasts 'estudiar' with 'aprender'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Distinguish this from 'leer', which simply means to read;",
+        "why": "Unnecessary filler; English speakers do not confuse 'to study' with 'to read'."
+      }
+    ],
+    "growth": 0.828
   }
 }

@@ -72,6 +72,83 @@
     "primaryGloss": "water",
     "emotion": null,
     "notes": [
+      "Feminine noun, but takes 'el' and 'un' directly before it in the singular because it begins with a stressed 'a-' (el agua, un agua). Adjectives and plurals stay feminine (el agua fría, las aguas)."
+    ],
+    "senses": [
+      {
+        "id": "lrbybme13h831t3",
+        "order": 0,
+        "definition": "A clear, colorless liquid that falls as rain, forms rivers and seas, and is necessary for life.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "mhsy276ykrh9yyr",
+            "text": "Quiero un vaso de agua, por favor.",
+            "textLang": "es",
+            "translation": "I want a glass of water, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and thirsty, asking for a refreshing drink",
+            "note": null,
+            "matchedForm": "agua",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "lrbybme13h831t3",
+      "from": "Líquido transparente, incoloro e inodoro que forma los ríos, los lagos y los mares, y que es necesario para la vida.",
+      "to": "A clear, colorless, and odorless liquid that forms rivers, lakes, and seas and is necessary for life.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el agua",
+    "lemma": "agua",
+    "reading": null,
+    "ipa": "/ˈa.ɣwa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": null,
+    "notes": [
       "Aunque 'agua' es un sustantivo femenino, toma el artículo masculino 'el' en el singular cuando empieza con 'a' tónica (el agua, un agua) para evitar el choque de sonidos. Sin embargo, los adjetivos y plurales siguen siendo femeninos (el agua fría, las aguas)."
     ],
     "senses": [
@@ -119,14 +196,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "lrbybme13h831t3",
-      "from": "Líquido transparente, incoloro e inodoro que forma los ríos, los lagos y los mares, y que es necesario para la vida.",
-      "to": "A clear, colorless, and odorless liquid that forms rivers, lakes, and seas and is necessary for life.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "Aunque 'agua' es un sustantivo femenino, toma el artículo masculino 'el'",
+        "why": "Note is written in Spanish instead of English."
+      }
+    ],
+    "growth": 0.842
+  }
 }

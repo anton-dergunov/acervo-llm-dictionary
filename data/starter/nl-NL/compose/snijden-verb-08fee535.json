@@ -58,6 +58,97 @@
     "headword": "snijden",
     "lemma": "snijden",
     "reading": null,
+    "ipa": "/ˈsnɛi.də(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cut; to slice",
+    "primaryGloss": "cut",
+    "emotion": "matter-of-fact and focused, intent on the task at hand",
+    "notes": [
+      "Irregular (strong) verb: sneed, hebben gesneden.",
+      "Used for cutting with a knife or sharp blade. For cutting with scissors (such as paper or hair), use 'knippen'."
+    ],
+    "senses": [
+      {
+        "id": "vs83wmswmt9au4n",
+        "order": 0,
+        "definition": "To divide, slice, or cut into something with a knife or other sharp edge.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cut",
+              "slice",
+              "carve"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "mxsolgdz7isg6kg",
+            "text": "Ik moet de groenten snijden voor het avondeten.",
+            "textLang": "nl",
+            "translation": "I have to cut the vegetables for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "snijden",
+            "matchedTranslationForm": "cut"
+          },
+          {
+            "id": "czn3rk75vhbsenq",
+            "text": "Pas op, anders snijd je je aan dat mes!",
+            "textLang": "nl",
+            "translation": "Watch out, or you will cut yourself on that knife!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "snijd",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "snijden",
+    "lemma": "snijden",
+    "reading": null,
     "ipa": "/ˈsnɛidə(n)/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(injury) To accidentally hurt one's skin with a sharp object.",
+        "why": "'zich snijden' is just the reflexive use of 'cut with a blade', not a separate core sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "note 0 is filler and misses the irregular past forms ('sneed', 'gesneden')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Pas op, anders zul je je snijden aan dat mes.",
+        "why": "'zul je je snijden' is unidiomatic in Dutch; present tense 'snijd je je' is natural."
+      }
+    ],
+    "growth": 0.76
   }
 }

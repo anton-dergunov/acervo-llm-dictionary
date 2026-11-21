@@ -58,6 +58,75 @@
     "headword": "οι διακοπές",
     "lemma": "διακοπές",
     "reading": null,
+    "ipa": "/ðja.koˈpes/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "vacation; holidays",
+    "primaryGloss": "vacation",
+    "emotion": "relaxed and lighthearted, anticipating a well-deserved time away",
+    "notes": [
+      "Always plural in this meaning, even for a single vacation. The singular η διακοπή means 'interruption' or 'outage' (e.g. διακοπή ρεύματος, 'power cut')."
+    ],
+    "senses": [
+      {
+        "id": "muoh0p4pvfrnw9e",
+        "order": 0,
+        "definition": "A period of time away from work or school for rest, travel, or leisure.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vacation",
+              "holidays",
+              "holiday"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "hot8bq3fta8hux9",
+            "text": "Θα πάμε διακοπές στο νησί το καλοκαίρι.",
+            "textLang": "el",
+            "translation": "We are going on vacation to the island in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheerful, looking forward to the upcoming trip",
+            "note": null,
+            "matchedForm": "διακοπές",
+            "matchedTranslationForm": "vacation"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "οι διακοπές",
+    "lemma": "διακοπές",
+    "reading": null,
     "ipa": "/di.a.koˈpes/",
     "pos": "noun",
     "gender": "feminine",
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/di.a.koˈpes/",
+        "why": "Greek δ is /ð/, and unstressed ι before a vowel is /j/: /ðja.koˈpes/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Το μάθημα έχει διακοπές για ξεκούραση.",
+        "why": "Lesson breaks are 'διαλείμματα'; 'διακοπές' as plural of 'διακοπή' (interruption/outage) is not used here."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(break) A pause or interval in an activity or process.",
+        "why": "'Interruptions/outages' belongs to the singular lemma 'η διακοπή', not the pluralia tantum 'οι διακοπές'."
+      }
+    ],
+    "growth": 0.705
   }
 }

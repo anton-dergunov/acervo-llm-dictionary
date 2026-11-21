@@ -58,6 +58,114 @@
     "headword": "de pasta",
     "lemma": "pasta",
     "reading": null,
+    "ipa": "/ˈpɑs.taː/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "pasta; paste, spread",
+    "primaryGloss": "pasta",
+    "emotion": "hungry and looking forward to a warm, comforting meal",
+    "notes": [
+      "Usually uncountable for food, with plural 'pasta's' for types or dishes (takes an apostrophe). Also appears in compounds for spreads and pastes, such as 'chocoladepasta' (chocolate spread) and 'tandpasta' (toothpaste)."
+    ],
+    "senses": [
+      {
+        "id": "q4dlg2dm1zsnvfi",
+        "order": 0,
+        "definition": "Food made from flour, water, and sometimes eggs, shaped and boiled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pasta"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍝",
+        "examples": [
+          {
+            "id": "ne29rqhkt0u4f60",
+            "text": "We eten vanavond pasta met tomatensaus.",
+            "textLang": "nl",
+            "translation": "We are having pasta with tomato sauce tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pasta",
+            "matchedTranslationForm": "pasta"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7tl59qhzte7xquh",
+        "order": 1,
+        "definition": "A thick, soft mixture or sweet spread for bread.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paste",
+              "spread"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "bxkn4tpky9575sh",
+            "text": "Wil je kaas of chocoladepasta op je brood?",
+            "textLang": "nl",
+            "translation": "Do you want cheese or chocolate spread on your bread?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "chocoladepasta",
+            "matchedTranslationForm": "chocolate spread"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de pasta",
+    "lemma": "pasta",
+    "reading": null,
     "ipa": "/ˈpɑs.tɑ/",
     "pos": "noun",
     "gender": "common",
@@ -118,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pasta; dough or paste",
+        "why": "Includes 'dough or paste', which is absent from the senses ('dough' is also wrong: 'deeg')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'pasta' most commonly refers to Italian flour-and-water dishes",
+        "why": "Restates the definition and gloss without adding useful information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik kook water om de pasta te bereiden.",
+        "why": "'Bereiden' is stiff here; in everyday Dutch one says 'pasta koken' or 'klaarmaken'."
+      }
+    ],
+    "growth": 1.7
   }
 }

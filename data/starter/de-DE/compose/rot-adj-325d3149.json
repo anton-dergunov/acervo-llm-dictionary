@@ -68,6 +68,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "bold and attention-grabbing, like a bright sign or a warning",
+    "notes": [
+      "Takes an umlaut in the comparative and superlative: röter, am rötesten.",
+      "The phrase 'rot werden' (to turn red) commonly means to blush (e.g., Er wurde rot vor Scham)."
+    ],
+    "senses": [
+      {
+        "id": "jgerr90sclytiy9",
+        "order": 0,
+        "definition": "Having the color of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "yr4eczfjutponzr",
+            "text": "Sie trägt ein rotes Kleid.",
+            "textLang": "de",
+            "translation": "She is wearing a red dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and descriptive",
+            "note": null,
+            "matchedForm": "rotes",
+            "matchedTranslationForm": "red"
+          },
+          {
+            "id": "3t5m21lncj24l9z",
+            "text": "Die Ampel ist rot.",
+            "textLang": "de",
+            "translation": "The traffic light is red.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rot",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "rot",
+    "lemma": "rot",
+    "reading": null,
+    "ipa": "/ʁoːt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "red; crimson",
     "primaryGloss": "red",
     "emotion": "bold and attention-grabbing, like a bright sign or a warning",
@@ -178,5 +267,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of blood or a ripe tomato.",
+        "why": "Adjective defined as a noun ('The colour...') instead of a quality ('Having the colour...')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To become red in the face due to shame or excitement.",
+        "why": "Adjective defined as a verb ('To become red', which translates 'rot werden', not 'rot')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To become red in the face due to shame or excitement.",
+        "why": "Blushing is the idiomatic phrase 'rot werden', not a separate sense of 'rot'; belong in notes."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "red; crimson",
+        "why": "'Crimson' is too specific for basic 'rot' and not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing umlaut in comparative and superlative forms (röter, am rötesten)."
+      }
+    ],
+    "growth": 0.934
   }
 }

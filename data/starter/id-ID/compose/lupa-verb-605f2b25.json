@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to forget",
+    "primaryGloss": "forget",
+    "emotion": "frustrated, realizing something important slipped the mind",
+    "notes": [
+      "Can be followed directly by a noun ('lupa namanya'), by 'akan'/'sama' before a noun, or by a verb ('lupa membawa').",
+      "Do not confuse with 'melupakan', which means to forget something completely or to intentionally put it behind you."
+    ],
+    "senses": [
+      {
+        "id": "fgj06ystqp6fbua",
+        "order": 0,
+        "definition": "To fail to remember a fact, a thing, or something you intended to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "forget",
+              "slip one's mind"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "🤔",
+        "examples": [
+          {
+            "id": "mmg0c940dg1hjo2",
+            "text": "Saya lupa namanya.",
+            "textLang": "id",
+            "translation": "I forgot his name.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lupa",
+            "matchedTranslationForm": "forgot"
+          },
+          {
+            "id": "zra2gscxzddbkg9",
+            "text": "Jangan lupa menelepon ibu nanti.",
+            "textLang": "id",
+            "translation": "Don't forget to call mother later.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "caring and reminding someone warmly",
+            "note": null,
+            "matchedForm": "lupa",
+            "matchedTranslationForm": "forget"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lupa",
+    "lemma": "lupa",
+    "reading": null,
+    "ipa": "/ˈlupa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to forget; to be unaware of",
     "primaryGloss": "forget",
     "emotion": "frustrated, realizing something important slipped the mind",
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same meaning; sense 0's example already shows sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to forget; to be unaware of",
+        "why": "'To be unaware of' is not covered by the senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'lupa' when you cannot remember something or accidentally fail",
+        "why": "Merely restates the definitions."
+      }
+    ],
+    "growth": 0.822
   }
 }

@@ -58,6 +58,118 @@
     "headword": "trống",
     "lemma": "trống",
     "reading": null,
+    "ipa": "/tɕəwŋ͡m˧˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕳️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "empty, vacant; male (of birds)",
+    "primaryGloss": "empty",
+    "emotion": "looking inside and finding nothing there at all, quiet and bare",
+    "notes": [
+      "For rooms, seats, or schedules with nothing or no one in them, use trống; for hollow objects or empty containers, rỗng is more common.",
+      "As a noun, trống is a homonym meaning 'drum'."
+    ],
+    "senses": [
+      {
+        "id": "0wcz7c0q4sfxrbx",
+        "order": 0,
+        "definition": "Of a room, seat, space, or time slot: unoccupied, available, or having nothing in it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "vacant",
+              "free",
+              "blank"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🕳️",
+        "examples": [
+          {
+            "id": "wvij9os1hh6f0bt",
+            "text": "Căn phòng này vẫn còn trống.",
+            "textLang": "vi",
+            "translation": "This room is still vacant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "trống",
+            "matchedTranslationForm": "vacant"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3m9nforj1kaf94l",
+        "order": 1,
+        "definition": "Of birds and certain other animals: male.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "male",
+              "cock"
+            ]
+          }
+        ],
+        "domain": "animals",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6o74avf5bfxhogf",
+            "text": "Nhà bà tôi nuôi một con gà trống.",
+            "textLang": "vi",
+            "translation": "My grandmother's family keeps a rooster.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "trống",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "trống",
+    "lemma": "trống",
+    "reading": null,
     "ipa": "/ʈwəŋ˧˥/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʈwəŋ˧˥/",
+        "why": "Wrong initial, vowel, and coda for Hanoi Vietnamese; should be /tɕəwŋ͡m˧˦/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Having an empty space inside; not solid.",
+        "why": "'Hollow' (as of a tree trunk) is 'rỗng', not 'trống'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Thân cây này trống ở bên trong.",
+        "why": "Unnatural word choice; native speakers use 'rỗng' for a hollow tree trunk."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense 'male' (used for birds, especially 'gà trống' = rooster)."
+      }
+    ],
+    "growth": 1.296
   }
 }

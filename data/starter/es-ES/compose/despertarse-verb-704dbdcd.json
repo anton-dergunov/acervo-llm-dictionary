@@ -68,6 +68,93 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wake up",
+    "primaryGloss": "to wake up",
+    "emotion": "sleepy and yawning, blinking against the morning light",
+    "notes": [
+      "Stem-changing verb (e > ie) in stressed syllables: me despierto, te despiertas.",
+      "Use reflexive 'despertarse' when waking up on your own, and 'despertar' (without 'se') for waking someone else up."
+    ],
+    "senses": [
+      {
+        "id": "ecm6z46aa99fm8o",
+        "order": 0,
+        "definition": "To stop sleeping and become awake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wake up",
+              "to awaken"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "mw83gq101ur3p7s",
+            "text": "Siempre me despierto muy temprano los lunes.",
+            "textLang": "es",
+            "translation": "I always wake up very early on Mondays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grumpy and reluctant, wishing for more sleep",
+            "note": null,
+            "matchedForm": "me despierto",
+            "matchedTranslationForm": "wake up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "ecm6z46aa99fm8o",
+      "from": "Dejar de dormir y abrir los ojos por la mañana.",
+      "to": "To stop sleeping and open your eyes in the morning.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    },
+    {
+      "sense": "9811p2s6uu4syb3",
+      "from": "Empezar a sentir interés o conciencia por algo.",
+      "to": "To begin to feel interest or awareness about something.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "despertarse",
+    "lemma": "despertarse",
+    "reading": null,
+    "ipa": "/des.peɾˈtaɾ.se/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wake up; to become alert",
     "primaryGloss": "wake up",
     "emotion": "sleepy and yawning, blinking against the morning light",
@@ -163,22 +250,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "ecm6z46aa99fm8o",
-      "from": "Dejar de dormir y abrir los ojos por la mañana.",
-      "to": "To stop sleeping and open your eyes in the morning.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    },
-    {
-      "sense": "9811p2s6uu4syb3",
-      "from": "Empezar a sentir interés o conciencia por algo.",
-      "to": "To begin to feel interest or awareness about something.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular stem-changing conjugation (e > ie: me despierto)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(awareness) To begin to feel interest or awareness about something.",
+        "why": "Figurative sense of a feeling awakening is not needed at A2; keep entry focused."
+      }
+    ],
+    "growth": 0.635
+  }
 }

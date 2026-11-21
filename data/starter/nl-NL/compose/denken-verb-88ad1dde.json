@@ -68,6 +68,98 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to think; to suppose",
+    "primaryGloss": "think",
+    "emotion": "focused and steady, mentally turning something over in one's mind",
+    "notes": [
+      "Irregular verb: past tense 'dacht' / 'dachten', past participle 'gedacht' (hebben).",
+      "Takes the preposition 'aan' for thinking of someone or something ('Ik denk aan jou'). For pondering or reflecting on something, use the separable verb 'nadenken (over)'.",
+      "For a personal opinion or taste ('I think it's nice'), Dutch uses 'vinden' rather than 'denken' ('Ik vind het leuk'). Use 'denken' for a supposition or guess ('Ik denk dat hij komt')."
+    ],
+    "senses": [
+      {
+        "id": "npirmoy6ws03a4s",
+        "order": 0,
+        "definition": "To use the mind to consider something, or to believe that something is likely to be true.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "think",
+              "suppose",
+              "believe"
+            ]
+          }
+        ],
+        "domain": "thought",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "7p6cs9x3ll0hcjx",
+            "text": "Ik denk dat het morgen gaat regenen.",
+            "textLang": "nl",
+            "translation": "I think it is going to rain tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tentative and slightly uncertain, looking up at the sky",
+            "note": null,
+            "matchedForm": "denk",
+            "matchedTranslationForm": "think"
+          },
+          {
+            "id": "ekwjfpfbfv89koe",
+            "text": "Waar denk je aan?",
+            "textLang": "nl",
+            "translation": "What are you thinking about?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "denk",
+            "matchedTranslationForm": "thinking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "denken",
+    "lemma": "denken",
+    "reading": null,
+    "ipa": "/ˈdɛŋkə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to think; to have an opinion",
     "primaryGloss": "think",
     "emotion": "focused and steady, mentally turning something over in one's mind",
@@ -141,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "use 'Ik denk dat...' followed by a standard word order clause.",
+        "why": "In Dutch, 'dat' introduces a subordinate clause, which sends the conjugated verb to the end."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'denken' when you are considering an idea or forming an opinion.",
+        "why": "Merely restates the definition without adding usage or grammar information."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Laat me er even over denken.",
+        "why": "In this phrasing, native speakers normally use 'nadenken' ('er even over nadenken')."
+      }
+    ],
+    "growth": 1.225
   }
 }

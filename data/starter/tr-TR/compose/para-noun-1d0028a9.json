@@ -68,6 +68,96 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "money; cash",
+    "primaryGloss": "money",
+    "emotion": "matter-of-fact and practical, talking about paying for everyday things",
+    "notes": [
+      "Often used in the plural ('paralar') to refer to someone's cash, coins, or banknotes (e.g., 'Paralarımı kaybettim' = I lost my money)."
+    ],
+    "senses": [
+      {
+        "id": "syuvssm45b365x3",
+        "order": 0,
+        "definition": "Coins, banknotes, or funds used to buy things and pay for services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money",
+              "cash",
+              "currency"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "u78wb5op94dvosu",
+            "text": "Bu ceket için yeterli param yok.",
+            "textLang": "tr",
+            "translation": "I don't have enough money for this jacket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit disappointed, realizing you cannot afford something",
+            "note": null,
+            "matchedForm": "param",
+            "matchedTranslationForm": "money"
+          },
+          {
+            "id": "2721dvbnpycgsmk",
+            "text": "Çok para insanı her zaman mutlu etmez.",
+            "textLang": "tr",
+            "translation": "A lot of money does not always make a person happy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and wise, sharing a life lesson",
+            "note": null,
+            "matchedForm": "para",
+            "matchedTranslationForm": "money"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "para",
+    "lemma": "para",
+    "reading": null,
+    "ipa": "/paˈɾa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💵",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "money; coin; wealth",
     "primaryGloss": "money",
     "emotion": "matter-of-fact and practical, talking about paying for everyday things",
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "money; coin; wealth",
+        "why": "'coin' is not a sense in the entry (coins are 'madeni para' or 'bozuk para')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(wealth) Wealth or riches possessed by a person.",
+        "why": "Sense 1 is just a shade of 'money' (as seen in its example translation)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse para with the postposition para meaning 'for' in other",
+        "why": "Note 0 restates the definition; Note 1 warns about Spanish/Portuguese in an English-Turkish entry."
+      }
+    ],
+    "growth": 0.817
   }
 }

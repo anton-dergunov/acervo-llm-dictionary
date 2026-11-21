@@ -68,6 +68,159 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "big; large; old; great",
+    "primaryGloss": "big",
+    "emotion": "a simple, clear, and direct way to point out something's significant size",
+    "notes": [
+      "When describing people, it means 'old', 'older' (e.g. ο μεγάλος αδερφός, 'the older brother'), or 'grown-up'. For someone elderly, ηλικιωμένος is more polite."
+    ],
+    "senses": [
+      {
+        "id": "i3fhyzos9ikplgt",
+        "order": 0,
+        "definition": "Of more than average size, extent, or amount.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "big",
+              "large"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "s7glbqvnxcjw5sa",
+            "text": "Το σπίτι τους είναι πολύ μεγάλο.",
+            "textLang": "el",
+            "translation": "Their house is very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, describing a place clearly",
+            "note": null,
+            "matchedForm": "μεγάλο",
+            "matchedTranslationForm": "big"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zwqz85cfvvmbb45",
+        "order": 1,
+        "definition": "Of a person: grown-up, older, or advanced in years.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "older",
+              "grown-up",
+              "big"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "lkmg7ozijt8wa3l",
+            "text": "Ο μεγάλος μου αδερφός μένει στην Αθήνα.",
+            "textLang": "el",
+            "translation": "My older brother lives in Athens.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μεγάλος",
+            "matchedTranslationForm": "older"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "furgjssjdra17kh",
+        "order": 2,
+        "definition": "Important, significant, or intense.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "great",
+              "big",
+              "major"
+            ]
+          }
+        ],
+        "domain": "importance",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "psnet8kq8r1okb9",
+            "text": "Αυτή είναι μια μεγάλη ευκαιρία για σένα.",
+            "textLang": "el",
+            "translation": "This is a great opportunity for you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μεγάλη",
+            "matchedTranslationForm": "great"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "μεγάλος",
+    "lemma": "μεγάλος",
+    "reading": null,
+    "ipa": "/meˈɣa.los/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "big; large; great; old",
     "primaryGloss": "big",
     "emotion": "a simple, clear, and direct way to point out something's significant size",
@@ -163,5 +316,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "μεγάλος is the most common way to say 'big' or 'large'",
+        "why": "Restates the glosses and senses without adding new usage information."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common figurative sense 'great, important, major'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ο μεγάλος αδερφός μου μένει στην Αθήνα.",
+        "why": "Example means 'older brother', which was omitted from the sense definition and glosses."
+      }
+    ],
+    "growth": 1.074
   }
 }

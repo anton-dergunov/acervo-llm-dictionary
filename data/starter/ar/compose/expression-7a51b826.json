@@ -68,6 +68,95 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Followed by a noun in the genitive case, or by أنْ (an) before a verb.",
+      "Interchangeable with بِلَا (bilā)."
+    ],
+    "senses": [
+      {
+        "id": "rhqdsc7or79jx3y",
+        "order": 0,
+        "definition": "Not having or not using something; in the absence of.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "1dmjxibhjvae6dz",
+            "text": "لا أستطيع الخروج بدون مفاتيحي.",
+            "textLang": "ar",
+            "translation": "I cannot go out without my keys.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little frustrated because of a minor inconvenience",
+            "note": null,
+            "matchedForm": "بدون",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "lvlox2nob6qo48c",
+            "text": "أحب القهوة بدون سكر.",
+            "textLang": "ar",
+            "translation": "I like coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and matter-of-fact stating a personal preference",
+            "note": null,
+            "matchedForm": "بدون",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بِدُون",
+    "lemma": "بِدُون",
+    "reading": null,
+    "ipa": "/biˈduːn/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "without; lacking",
     "primaryGloss": "without",
     "emotion": null,
@@ -141,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This expression is used to indicate the absence or lack of something.",
+        "why": "Restates the definition without adding usage information."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "interchangeable with the prefix 'bi-' (without) in some contexts",
+        "why": "The prefix 'bi-' means 'with/by', not 'without' (which is 'bilā')."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Should be classified as a preposition."
+      }
+    ],
+    "growth": 0.692
   }
 }

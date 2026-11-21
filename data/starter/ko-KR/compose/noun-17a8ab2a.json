@@ -68,6 +68,158 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "fever; heat; row",
+    "primaryGloss": "fever",
+    "emotion": "concerned and slightly uncomfortable, like someone feeling their own forehead",
+    "notes": [
+      "To say you have a fever, use the verb 나다: 열이 나요 ('I have a fever'). To take someone's temperature, say 열을 재다.",
+      "Do not confuse this with the native Korean number 열 ('ten')."
+    ],
+    "senses": [
+      {
+        "id": "5mcaww4sdy6bp7m",
+        "order": 0,
+        "definition": "A body temperature that is higher than normal due to illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever",
+              "temperature"
+            ]
+          }
+        ],
+        "domain": "fever",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "jenu8oxyhb6ik2x",
+            "text": "감기에 걸려서 열이 많이 나요.",
+            "textLang": "ko",
+            "translation": "I caught a cold and have a high fever.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "열",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8qb8jio9qyruy01",
+        "order": 1,
+        "definition": "The quality of being hot, or energy in the form of warmth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "heat",
+              "warmth"
+            ]
+          }
+        ],
+        "domain": "heat",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "er3u3iwy75kb3rk",
+            "text": "이 유리는 열에 강해요.",
+            "textLang": "ko",
+            "translation": "This glass is resistant to heat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "열",
+            "matchedTranslationForm": "heat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qrb5une39vwxqys",
+        "order": 2,
+        "definition": "A straight line of people or things, especially seats or columns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "row",
+              "line",
+              "column"
+            ]
+          }
+        ],
+        "domain": "row",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "xz0f8kfznfp0nyc",
+            "text": "학생들이 열을 맞춰 서 있어요.",
+            "textLang": "ko",
+            "translation": "The students are standing in line.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "열",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "열",
+    "lemma": "열",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "fever; heat",
     "primaryGloss": "fever",
     "emotion": "concerned and slightly uncomfortable, like someone feeling their own forehead",
@@ -161,5 +313,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "열을 내리기 위해 물을 마셨어요.",
+        "why": "열을 내리다 means bringing down a fever/body heat (sense 0), not physical heat (sense 1)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday homonym meaning 'row; line' (e.g. seating, columns)."
+      }
+    ],
+    "growth": 1.162
   }
 }

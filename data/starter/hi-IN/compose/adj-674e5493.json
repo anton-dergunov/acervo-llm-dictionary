@@ -60,6 +60,115 @@
     "headword": "पीला",
     "lemma": "पीला",
     "reading": null,
+    "ipa": "/piːlaː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟡",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "yellow; pale",
+    "primaryGloss": "yellow",
+    "emotion": null,
+    "notes": [
+      "Inflects for gender, number, and case: पीली (feminine) and पीले (masculine plural or oblique).",
+      "Often used with पड़ना ('to turn pale', literally 'to fall yellow'): उसका चेहरा पीला पड़ गया (his face turned pale)."
+    ],
+    "senses": [
+      {
+        "id": "mgswx8r76pmuylj",
+        "order": 0,
+        "definition": "Having the bright colour of a ripe lemon or a sunflower.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yellow"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "meqdmdc32rq0z9r",
+            "text": "नींबू पीला होता है।",
+            "textLang": "hi",
+            "translation": "A lemon is yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and simple, stating a basic truth about the world",
+            "note": null,
+            "matchedForm": "पीला",
+            "matchedTranslationForm": "yellow"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1czmmlih287fhh4",
+        "order": 1,
+        "definition": "Of a person's face or skin: having lost its normal colour because of illness or fear.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pale",
+              "sallow"
+            ]
+          }
+        ],
+        "domain": "complexion",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "rpr96onydyfv3x2",
+            "text": "बीमारी के कारण उसका चेहरा पीला पड़ गया।",
+            "textLang": "hi",
+            "translation": "His face turned pale due to illness.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and empathetic, observing someone's poor state",
+            "note": null,
+            "matchedForm": "पीला",
+            "matchedTranslationForm": "pale"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पीला",
+    "lemma": "पीला",
+    "reading": null,
     "ipa": "/piː.laː/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "yellow",
+        "why": "Omits the second sense ('pale')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike some other color words in Hindi, 'पीला' is very commonly",
+        "why": "Trivial filler saying the word for yellow is used for yellow things."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The bright color of a ripe lemon or a sunflower.",
+        "why": "Defined as a noun ('The bright color...') instead of an adjective ('Having the...')."
+      }
+    ],
+    "growth": 1.038
   }
 }

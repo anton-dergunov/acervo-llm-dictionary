@@ -68,6 +68,116 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "man; humankind",
+    "primaryGloss": "man",
+    "emotion": "a steady, grounded sense of recognition, observing someone as they are",
+    "notes": [
+      "Do not confuse 'el hombre' (man) with 'el hambre' (hunger).",
+      "Often used in Spain as an informal exclamation ('¡Hombre!') to show surprise, agreement, or greeting."
+    ],
+    "senses": [
+      {
+        "id": "dby7ksm9hflo7bo",
+        "order": 0,
+        "definition": "An adult male human being.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "man"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "oh29658eh2i5m6n",
+            "text": "Aquel hombre camina muy rápido por la calle.",
+            "textLang": "es",
+            "translation": "That man is walking very fast down the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, noting a detail about someone passing by",
+            "note": null,
+            "matchedForm": "hombre",
+            "matchedTranslationForm": "man"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i61jb50z5uvpkw3",
+        "order": 1,
+        "definition": "Human beings in general, or a person regardless of sex or age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "humankind",
+              "mankind",
+              "human"
+            ]
+          }
+        ],
+        "domain": "humanity",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "rum2wpa1mcx6xg2",
+            "text": "El perro es el mejor amigo del hombre.",
+            "textLang": "es",
+            "translation": "A dog is man's best friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hombre",
+            "matchedTranslationForm": "man's"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el hombre",
+    "lemma": "hombre",
+    "reading": null,
+    "ipa": "/ˈom.bɾe/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "man; human",
     "primaryGloss": "man",
     "emotion": "a steady, grounded sense of recognition, observing someone as they are",
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Es un gran paso para el hombre.",
+        "why": "In Armstrong's quote, 'para el hombre' translates 'for a man', whereas 'mankind' is 'la humanidad'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'hombre' is also used to mean 'mankind'",
+        "why": "Simply repeats sense 1 without adding extra grammatical or usage information."
+      }
+    ],
+    "growth": 1.076
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "here",
     "emotion": null,
     "notes": [
+      "Refers to a place close to the speaker, contrast with 거기 (near the listener) and 저기 (far from both).",
+      "Although translated as 'here', it is a pronoun and takes particles such as 에, 에서, or 은/는 (often contracted to 여긴 in speech)."
+    ],
+    "senses": [
+      {
+        "id": "21h4loparzzycys",
+        "order": 0,
+        "definition": "This place, near the speaker.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here",
+              "this place"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "i3sw8d008outgd7",
+            "text": "여기에 앉으세요.",
+            "textLang": "ko",
+            "translation": "Please sit here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and welcoming, gesturing toward a seat",
+            "note": null,
+            "matchedForm": "여기에",
+            "matchedTranslationForm": "here"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e7sd7i5dj4bc31a",
+        "order": 1,
+        "definition": "Used when handing something to someone or calling someone's attention (e.g., a waiter).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "here",
+              "excuse me"
+            ]
+          }
+        ],
+        "domain": "attention",
+        "emoji": "👉",
+        "examples": [
+          {
+            "id": "7ttbh6p3024wz0c",
+            "text": "여기 거스름돈입니다.",
+            "textLang": "ko",
+            "translation": "Here is your change.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and polite, handing over the money",
+            "note": null,
+            "matchedForm": "여기",
+            "matchedTranslationForm": "Here"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "여기",
+    "lemma": "여기",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "here; this place",
+    "primaryGloss": "here",
+    "emotion": null,
+    "notes": [
       "여기 points to a place close to the speaker. It often takes the topic marker 는 to become 여긴 when speaking casually.",
       "Do not confuse 여기 with 이 곳 ('this place'). 여기 is much more common in everyday speech."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "여기 is a place pronoun (대명사), taking case particles like 에, 에서, 가, 를."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse 여기 with 이 곳 ('this place').",
+        "why": "이곳 (spelled as one word) and 여기 are near-synonyms; learners do not confuse them negatively."
+      }
+    ],
+    "growth": 1.071
   }
 }

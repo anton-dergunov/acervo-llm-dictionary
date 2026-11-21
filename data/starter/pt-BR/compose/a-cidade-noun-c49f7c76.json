@@ -72,6 +72,96 @@
     "primaryGloss": "city",
     "emotion": "wide and expansive, thinking of tall buildings and busy streets",
     "notes": [
+      "Covers both 'city' and 'town'. To specify a very small town, use the diminutive 'cidadezinha'.",
+      "Also used to mean 'downtown' or the city center (e.g., 'Vou para a cidade' — I'm going downtown)."
+    ],
+    "senses": [
+      {
+        "id": "s86w4stz5szxwaw",
+        "order": 0,
+        "definition": "A large or medium-sized place where many people live and work, with streets, buildings, and shops.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "tehke1ce5vv48fl",
+            "text": "São Paulo é uma cidade muito grande.",
+            "textLang": "pt",
+            "translation": "São Paulo is a very big city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a well-known geographic observation",
+            "note": null,
+            "matchedForm": "cidade",
+            "matchedTranslationForm": "city"
+          },
+          {
+            "id": "us8lhfcryj4c19l",
+            "text": "Eu moro em uma cidade pequena no interior.",
+            "textLang": "pt",
+            "translation": "I live in a small town in the countryside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and calm, reflecting on a simple way of life",
+            "note": null,
+            "matchedForm": "cidade",
+            "matchedTranslationForm": "town"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a cidade",
+    "lemma": "cidade",
+    "reading": null,
+    "ipa": "/siˈda.dʒi/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "wide and expansive, thinking of tall buildings and busy streets",
+    "notes": [
       "In Portuguese, 'cidade' is used for both large cities and smaller towns. If you want to specify a very small town, you can use the diminutive 'cidadezinha'.",
       "It is common to say 'vou para a cidade' when heading to the downtown or urban area from a rural or suburban neighborhood."
     ],
@@ -160,5 +250,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(city) A large human settlement ... (town) A place where people live",
+        "why": "Portuguese 'cidade' does not distinguish between 'city' and 'town'; this is an English distinction."
+      }
+    ],
+    "growth": 0.763
   }
 }

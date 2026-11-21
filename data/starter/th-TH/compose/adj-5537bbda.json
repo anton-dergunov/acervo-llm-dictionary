@@ -74,6 +74,96 @@
     "primaryGloss": "dark",
     "emotion": null,
     "notes": [
+      "มืด refers to the absence of light (or dark shades of color), not the color black (สีดำ). For dark shades of a specific color, เข้ม is more common (e.g. สีน้ำเงินเข้ม 'dark blue').",
+      "Often used with แล้ว (มืดแล้ว 'it's dark already') to mean night has fallen."
+    ],
+    "senses": [
+      {
+        "id": "ubmk8h5endulbwx",
+        "order": 0,
+        "definition": "Having little or no light; after sunset.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "dim"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "n9zwsnfwzmnj3rn",
+            "text": "ในห้องนี้มืดมาก",
+            "textLang": "th",
+            "translation": "It is very dark in this room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a simple, factual observation of a room that needs a light turned on",
+            "note": null,
+            "matchedForm": "มืด",
+            "matchedTranslationForm": "dark"
+          },
+          {
+            "id": "wekbbpa5nluhog7",
+            "text": "ข้างนอกมืดแล้ว กลับบ้านกันเถอะ",
+            "textLang": "th",
+            "translation": "It's dark outside already, let's go home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a concerned and urgent reminder that it is getting too late to be out",
+            "note": null,
+            "matchedForm": "มืด",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "มืด",
+    "lemma": "มืด",
+    "reading": null,
+    "ipa": "/mɯ̂ːt/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dark; dim",
+    "primaryGloss": "dark",
+    "emotion": null,
+    "notes": [
       "มืด refers specifically to the absence of light. Do not confuse this with words for 'black' (สีดำ), which describe color, though 'dark' things are often 'black'.",
       "It can also be used as a verb to mean 'to become dark' or 'to get late' in the evening."
     ],
@@ -163,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are both 'dark' (without light); 'dusk' is a noun."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "dark, dusk",
+        "why": "'Dusk' is a noun, not an adjective."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday color modifier sense ('dark', as in สีน้ำเงินมืด / สีมืด)."
+      }
+    ],
+    "growth": 0.945
   }
 }

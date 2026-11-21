@@ -58,6 +58,113 @@
     "headword": "dondurma",
     "lemma": "dondurma",
     "reading": null,
+    "ipa": "/donˈduɾma/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍦",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "ice cream; freezing",
+    "primaryGloss": "ice cream",
+    "emotion": "craving something sweet on a hot afternoon, eager and delighted",
+    "notes": [
+      "Comes from 'dondurmak' (to freeze). When meaning 'ice cream', stress is on the middle syllable (don-DUR-ma); when meaning the act of freezing or 'don't freeze!', stress is on the last syllable (don-dur-MA)."
+    ],
+    "senses": [
+      {
+        "id": "1wobvsp2myfzhoa",
+        "order": 0,
+        "definition": "A sweet frozen food made from milk or cream, sugar, and flavorings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ice cream"
+            ]
+          }
+        ],
+        "domain": "dessert",
+        "emoji": "🍦",
+        "examples": [
+          {
+            "id": "44pa1r8q3qm27ii",
+            "text": "Sıcak yaz gününde vanilyalı dondurma yedik.",
+            "textLang": "tr",
+            "translation": "We ate vanilla ice cream on a hot summer day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and refreshed, enjoying a cold treat",
+            "note": null,
+            "matchedForm": "dondurma",
+            "matchedTranslationForm": "ice cream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cj8qxqwy0s7ptm8",
+        "order": 1,
+        "definition": "The act of freezing something or making it solid with cold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "freezing"
+            ]
+          }
+        ],
+        "domain": "process",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "9o0qj4leu1hzd6m",
+            "text": "Sebzeleri dondurma işlemi oldukça kolaydır.",
+            "textLang": "tr",
+            "translation": "The process of freezing vegetables is quite easy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dondurma",
+            "matchedTranslationForm": "freezing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dondurma",
+    "lemma": "dondurma",
+    "reading": null,
     "ipa": "/donduɾˈma/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +266,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/donduɾˈma/",
+        "why": "The noun meaning 'ice cream' has stress on the penult (/donˈduɾma/), while the verbal noun has final stress."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Etin dondurma işlemi birkaç saat sürer.",
+        "why": "Unnatural Turkish phrasing; native speakers say 'Eti dondurma işlemi' (accusative) or 'Et dondurma işlemi'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Traditional Maraş dondurması has a famously chewy and elastic texture",
+        "why": "Cultural trivia rather than a linguistic note; a note on stress distinction is needed instead."
+      }
+    ],
+    "growth": 1.109
   }
 }

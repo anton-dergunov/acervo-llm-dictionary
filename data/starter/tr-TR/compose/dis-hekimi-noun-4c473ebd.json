@@ -60,6 +60,74 @@
     "headword": "diş hekimi",
     "lemma": "diş hekimi",
     "reading": null,
+    "ipa": "/diʃ heciˈmi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Work",
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "dentist",
+    "primaryGloss": "dentist",
+    "emotion": "nervous and bracing oneself in the waiting room",
+    "notes": [
+      "Literally 'tooth physician'. In everyday speech, 'dişçi' is also very common, while 'diş hekimi' is the standard, polite term."
+    ],
+    "senses": [
+      {
+        "id": "ne663gpz3cfo9wq",
+        "order": 0,
+        "definition": "A doctor who treats teeth and gums.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dentist"
+            ]
+          }
+        ],
+        "domain": "profession",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "8m73fa7952mrqwu",
+            "text": "Yarın diş hekiminde randevum var.",
+            "textLang": "tr",
+            "translation": "I have an appointment at the dentist's tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "diş hekiminde",
+            "matchedTranslationForm": "dentist's"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "diş hekimi",
+    "lemma": "diş hekimi",
+    "reading": null,
     "ipa": "/diʃ he.ciˈmi/",
     "pos": "noun",
     "gender": null,
@@ -123,5 +191,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yarın diş hekimine randevum var.",
+        "why": "Ungrammatical case; 'randevum var' takes '-de' or '-den' (diş hekiminde randevum var), not '-e'."
+      }
+    ],
+    "growth": 0.707
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "taxi",
     "emotion": "in a rush, trying to catch someone's attention on a busy street",
     "notes": [
+      "Commonly used with the verbs 乗る (タクシーに乗る, to take a taxi) and 拾う (タクシーを拾う, to hail a taxi)."
+    ],
+    "senses": [
+      {
+        "id": "y7ruwosx3e06nqf",
+        "order": 0,
+        "definition": "A car with a driver that you pay to take you somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "taxi",
+              "cab"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚕",
+        "examples": [
+          {
+            "id": "bqmdl68uhoz1fim",
+            "text": "駅の前でタクシーを拾います。",
+            "textLang": "ja",
+            "translation": "I will hail a taxi in front of the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, explaining a plan to someone",
+            "note": null,
+            "matchedForm": "タクシー",
+            "matchedTranslationForm": "taxi"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "タクシー",
+    "lemma": "タクシー",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚕",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "taxi; cab",
+    "primaryGloss": "taxi",
+    "emotion": "in a rush, trying to catch someone's attention on a busy street",
+    "notes": [
       "Note that the word is an abbreviation of the English 'taxicab'.",
       "In Japan, the rear left passenger door of a taxi is operated automatically by the driver, so you should wait for them to open it for you."
     ],
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that the word is an abbreviation of the English 'taxicab'.",
+        "why": "English etymology trivia is not useful usage guidance for a Japanese learner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In Japan, the rear left passenger door of a taxi is operated",
+        "why": "Travel etiquette rather than linguistic usage; could mention collocations like タクシーを拾う/に乗る instead."
+      }
+    ],
+    "growth": 0.613
   }
 }

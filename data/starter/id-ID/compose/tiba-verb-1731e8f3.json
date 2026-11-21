@@ -58,6 +58,76 @@
     "headword": "tiba",
     "lemma": "tiba",
     "reading": null,
+    "ipa": "/ˈtiba/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to arrive",
+    "primaryGloss": "arrive",
+    "emotion": "focused and purposeful, finishing a journey",
+    "notes": [
+      "Often followed by the preposition 'di' to indicate the destination (e.g., 'tiba di rumah').",
+      "Slightly more formal than 'datang' or 'sampai', which are more common in casual speech."
+    ],
+    "senses": [
+      {
+        "id": "l67vq20uga0e2gx",
+        "order": 0,
+        "definition": "To reach a place at the end of a journey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arrive",
+              "reach",
+              "get to"
+            ]
+          }
+        ],
+        "domain": "arrival",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "3avlrrg3xamsp4x",
+            "text": "Kami tiba di stasiun tepat waktu.",
+            "textLang": "id",
+            "translation": "We arrived at the station on time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and satisfied, having made the schedule work",
+            "note": null,
+            "matchedForm": "tiba",
+            "matchedTranslationForm": "arrived"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tiba",
+    "lemma": "tiba",
+    "reading": null,
     "ipa": "/ˈtɪba/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(suddenly) Happening without warning or expectation.",
+        "why": "Single 'tiba' does not mean 'suddenly'; only the reduplicated form 'tiba-tiba' does."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hujan turun tiba tanpa disangka.",
+        "why": "Ungrammatical in Indonesian; requires 'tiba-tiba' to mean 'suddenly'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to arrive; suddenly",
+        "why": "Includes the false meaning 'suddenly'."
+      }
+    ],
+    "growth": 0.852
   }
 }

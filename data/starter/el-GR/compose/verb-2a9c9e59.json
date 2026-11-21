@@ -71,6 +71,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to drink",
+    "primaryGloss": "drink",
+    "emotion": "relaxed and natural, like someone enjoying a refreshing drink",
+    "notes": [
+      "Irregular in the past and future: past ήπια (I drank), subjunctive/future να πιω (to drink), imperative πιες! (drink!)."
+    ],
+    "senses": [
+      {
+        "id": "4gu2f5q1coysz31",
+        "order": 0,
+        "definition": "To take a liquid into your mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink",
+              "have"
+            ]
+          }
+        ],
+        "domain": "drinking",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "wxi6u4sen5epxzz",
+            "text": "Πίνω κάθε πρωί έναν καφέ.",
+            "textLang": "el",
+            "translation": "I drink a coffee every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented and calm, starting the day with a simple routine",
+            "note": null,
+            "matchedForm": "Πίνω",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qjviu7r6wd3ehpt",
+        "order": 1,
+        "definition": "To drink alcohol, especially regularly or socially.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink"
+            ]
+          }
+        ],
+        "domain": "alcohol",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "e3ujhr4l25xhz0k",
+            "text": "Δεν πίνω όταν οδηγώ.",
+            "textLang": "el",
+            "translation": "I don't drink when I drive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πίνω",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "πίνω",
+    "lemma": "πίνω",
+    "reading": null,
+    "ipa": "/ˈpi.no/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to drink; to swallow",
     "primaryGloss": "drink",
     "emotion": "relaxed and natural, like someone enjoying a refreshing drink",
@@ -163,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "in the past tense (aorist): the stem changes to 'πιο-'",
+        "why": "False: the aorist is 'ήπια' (stem 'πι-'); there is no 'πιο-' stem."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To swallow a liquid, such as medicine or a remedy.",
+        "why": "Drinking liquid medicine is just drinking; not a separate sense, and 'swallow' is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I must swallow my syrup three times a day.",
+        "why": "Unnatural English; one says 'take my cough syrup', and this is just sense 0."
+      }
+    ],
+    "growth": 0.781
   }
 }

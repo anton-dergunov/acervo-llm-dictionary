@@ -72,6 +72,116 @@
     "primaryGloss": "bill",
     "emotion": "polite and ready to pay at the end of a nice meal",
     "notes": [
+      "Common in the expression 'rekening houden met' (to take into account / keep in mind)."
+    ],
+    "senses": [
+      {
+        "id": "hq1evu7a9007qdw",
+        "order": 0,
+        "definition": "A statement of how much money you owe for goods, services, or a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check",
+              "invoice"
+            ]
+          }
+        ],
+        "domain": "payment",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "lp83fex2pc52jvq",
+            "text": "Mag ik de rekening, alstublieft?",
+            "textLang": "nl",
+            "translation": "Could I have the bill, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and friendly when asking the waiter to pay",
+            "note": null,
+            "matchedForm": "rekening",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lil45zl5lw7aw0p",
+        "order": 1,
+        "definition": "An arrangement with a bank or service to hold money or track payments.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "account",
+              "bank account"
+            ]
+          }
+        ],
+        "domain": "banking",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "u6va8uw83a3lgdg",
+            "text": "Ik moet geld overmaken naar mijn nieuwe rekening.",
+            "textLang": "nl",
+            "translation": "I need to transfer money to my new account.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rekening",
+            "matchedTranslationForm": "account"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de rekening",
+    "lemma": "recounting",
+    "reading": null,
+    "ipa": "/ˈreː.kə.nɪŋ/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check; account",
+    "primaryGloss": "bill",
+    "emotion": "polite and ready to pay at the end of a nice meal",
+    "notes": [
       "In a restaurant, you ask for 'de rekening' when you are ready to pay."
     ],
     "senses": [
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "for a meal or drinks in a restaurant.",
+        "why": "Too narrow; 'rekening' is also used for utility bills and invoices, not just restaurants."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik moet Geld overmaken",
+        "why": "Nouns are not capitalized in Dutch ('geld', not 'Geld')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In a restaurant, you ask for 'de rekening'",
+        "why": "Restates sense 0 instead of teaching a common idiom like 'rekening houden met'."
+      }
+    ],
+    "growth": 1.046
   }
 }

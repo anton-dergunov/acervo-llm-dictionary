@@ -72,6 +72,76 @@
     "primaryGloss": "glasses",
     "emotion": "someone adjusting their frames to see something clearly, thoughtful and focused",
     "notes": [
+      "To say 'wear/put on glasses', Japanese uses the verb かける (kakeru): 眼鏡をかける.",
+      "Very often written in katakana (メガネ) or hiragana (めがね) in everyday contexts."
+    ],
+    "senses": [
+      {
+        "id": "6k82ntq2f0et89j",
+        "order": 0,
+        "definition": "A pair of lenses in a frame worn on the face to help a person see better.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "eyeglasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "237zfwmwitajxis",
+            "text": "新しい眼鏡を買いました。",
+            "textLang": "ja",
+            "translation": "I bought new glasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "feeling satisfied and pleased with a recent purchase",
+            "note": null,
+            "matchedForm": "眼鏡",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "眼鏡",
+    "lemma": "眼鏡",
+    "reading": "めがね",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; spectacles",
+    "primaryGloss": "glasses",
+    "emotion": "someone adjusting their frames to see something clearly, thoughtful and focused",
+    "notes": [
       "While technically an accessory worn like clothes, these are primarily a medical or visual aid. If you are talking specifically about the lenses themselves, you might use 'レンズ' (renzu).",
       "In very casual or modern settings, you might hear people use the katakana loanword 'メガネ' written with katakana instead of kanji for emphasis."
     ],
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "you might hear people use the katakana loanword 'メガネ'",
+        "why": "メガネ is a native Japanese word (wago), not a loanword, nor is katakana 'heard'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While technically an accessory worn like clothes, these are primarily a",
+        "why": "Verbose filler; learners need to know the verb (かける) used to 'wear' glasses instead."
+      }
+    ],
+    "growth": 0.64
   }
 }

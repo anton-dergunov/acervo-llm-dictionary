@@ -74,6 +74,73 @@
     "primaryGloss": "restaurante",
     "emotion": "hungry and looking forward to a nice meal out with friends",
     "notes": [
+      "Aunque se escribe con 'au', la segunda sílaba suele ser muy corta o muda al hablar (/ˈrɛstrɑnt/)."
+    ],
+    "senses": [
+      {
+        "id": "4xjfzo72nwfj5he",
+        "order": 0,
+        "definition": "Establecimiento donde se preparan y sirven comidas para que los clientes las consuman allí.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "restaurante"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "k0k04dm66fl60uv",
+            "text": "We decided to go to a nice restaurant for our anniversary.",
+            "textLang": "en",
+            "translation": "Decidimos ir a un buen restaurante por nuestro aniversario.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and romantic, planning a special evening together",
+            "note": null,
+            "matchedForm": "restaurant",
+            "matchedTranslationForm": "restaurante"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "restaurant",
+    "lemma": "restaurant",
+    "reading": null,
+    "ipa": "/ˈrɛstərənt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "restaurante",
+    "primaryGloss": "restaurante",
+    "emotion": "hungry and looking forward to a nice meal out with friends",
+    "notes": [
       "Se usa para referirse al establecimiento donde se sirve comida a cambio de dinero.",
       "A menudo se abrevia simplemente como 'place to eat' o se usa la palabra 'diner' para un estilo más informal y tradicional en Estados Unidos."
     ],
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para referirse al establecimiento donde se sirve comida",
+        "why": "Restates the definition without adding useful learner information."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "A menudo se abrevia simplemente como 'place to eat'",
+        "why": "'Place to eat' is not an abbreviation of 'restaurant'."
+      }
+    ],
+    "growth": 0.75
   }
 }

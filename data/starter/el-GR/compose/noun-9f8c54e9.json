@@ -70,6 +70,135 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "corner; angle",
+    "primaryGloss": "corner",
+    "emotion": null,
+    "notes": [
+      "In the common phrase 'στη γωνία' (at/around the corner), it usually means a street corner or a place very close by."
+    ],
+    "senses": [
+      {
+        "id": "89ke942i76j6qzq",
+        "order": 0,
+        "definition": "The place or point where two streets, walls, or edges meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner",
+              "street corner"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🚏",
+        "examples": [
+          {
+            "id": "i40e0u7it6mu2ry",
+            "text": "Περιμένω στη γωνία.",
+            "textLang": "el",
+            "translation": "I am waiting at the corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "waiting patiently for someone to arrive, calm and relaxed",
+            "note": null,
+            "matchedForm": "γωνία",
+            "matchedTranslationForm": "corner"
+          },
+          {
+            "id": "w8qcnwv59ce12k0",
+            "text": "Άφησε την τσάντα στη γωνία του δωματίου.",
+            "textLang": "el",
+            "translation": "Leave the bag in the corner of the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tidying up quickly and pointing out where to put things",
+            "note": null,
+            "matchedForm": "γωνία",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xxjog7t2nf1koh1",
+        "order": 1,
+        "definition": "The space between two lines or surfaces that meet, measured in degrees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "angle"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": "📐",
+        "examples": [
+          {
+            "id": "rsuz4ii416iqjc8",
+            "text": "Αυτή η γωνία είναι ενενήντα μοιρών.",
+            "textLang": "el",
+            "translation": "This angle is ninety degrees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "explaining a geometric shape clearly and precisely",
+            "note": null,
+            "matchedForm": "γωνία",
+            "matchedTranslationForm": "angle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η γωνία",
+    "lemma": "γωνία",
+    "reading": null,
+    "ipa": "/ɣoˈni.a/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "corner; street corner; angle",
     "primaryGloss": "corner",
     "emotion": null,
@@ -201,5 +330,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Street corner and room corner are both 'corner' in Greek and English; merge them."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both indoor corners (like the corner of a room)",
+        "why": "Restates what the senses already show and works just like English 'corner'."
+      }
+    ],
+    "growth": 0.909
   }
 }

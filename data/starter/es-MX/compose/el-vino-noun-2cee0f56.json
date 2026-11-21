@@ -72,6 +72,84 @@
     "primaryGloss": "wine",
     "emotion": "relaxed and appreciative, sitting down for a good meal",
     "notes": [
+      "Note that 'red wine' is called 'vino tinto' in Spanish, never 'vino rojo'.",
+      "'Vino' is also the past tense (él/ella/usted form) of the verb 'venir' (to come)."
+    ],
+    "senses": [
+      {
+        "id": "8pucokv9jqdzq7j",
+        "order": 0,
+        "definition": "An alcoholic drink made from fermented grape juice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wine"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "n5yfae6kcj5panf",
+            "text": "Nos gusta tomar una copa de vino tinto con la cena.",
+            "textLang": "es",
+            "translation": "We like to have a glass of red wine with dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vino",
+            "matchedTranslationForm": "wine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "8pucokv9jqdzq7j",
+      "from": "Bebida alcohólica que se hace con uvas.",
+      "to": "An alcoholic beverage made from grapes.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el vino",
+    "lemma": "vino",
+    "reading": null,
+    "ipa": "/ˈbi.no/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍷",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "wine",
+    "primaryGloss": "wine",
+    "emotion": "relaxed and appreciative, sitting down for a good meal",
+    "notes": [
       "Do not confuse vino (wine) with viene (comes, from the verb venir)."
     ],
     "senses": [
@@ -119,14 +197,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "8pucokv9jqdzq7j",
-      "from": "Bebida alcohólica que se hace con uvas.",
-      "to": "An alcoholic beverage made from grapes.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Nos gusta tomar una copa de vino rojo con la cena.",
+        "why": "'Red wine' is 'vino tinto' in Spanish; 'vino rojo' is an English calque."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse vino (wine) with viene (comes, from the verb venir).",
+        "why": "The actual homonym is 'vino' (he/she came, preterite of 'venir'), not 'viene', and 'vino tinto' is a much more important note."
+      }
+    ],
+    "growth": 1.476
+  }
 }

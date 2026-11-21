@@ -58,6 +58,75 @@
     "headword": "瓶",
     "lemma": "瓶",
     "reading": "びん",
+    "ipa": "biɴ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "glass bottle; jar",
+    "primaryGloss": "bottle",
+    "emotion": "a casual, everyday moment, like grabbing a cold drink from the fridge",
+    "notes": [
+      "Refers to glass (or ceramic) bottles and jars, often written in katakana as ビン. Plastic beverage bottles are called ペットボトル, not 瓶."
+    ],
+    "senses": [
+      {
+        "id": "wqk4brcllhh14ow",
+        "order": 0,
+        "definition": "A rigid container made of glass or ceramic with a narrow neck or wide mouth, used for storing liquids or food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle",
+              "glass bottle",
+              "jar"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "e4kdnt0scfwnjpj",
+            "text": "ビールの瓶をテーブルに置いた。",
+            "textLang": "ja",
+            "translation": "I put the beer bottle on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "瓶",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "瓶",
+    "lemma": "瓶",
+    "reading": "びん",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -118,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "usually made of glass or plastic, with a narrow neck.",
+        "why": "瓶 denotes glass or ceramic bottles and jars; plastic bottles are ペットボトル or ボトル."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A container for liquid, typically with a narrow neck",
+        "why": "Omits that 瓶 is made of glass/ceramic and also covers glass jars."
+      }
+    ],
+    "growth": 1.09
   }
 }

@@ -2,6 +2,13 @@
 
 Small defects, each deleted once fixed.
 
+- **Compose's two-scripts check refuses IPA inside a note and some real mixed words.** `vet.py`
+  refuses an answer with a word written in two scripts. It fires on IPA quoted in a note, because IPA
+  borrows Greek letters (`θɔt`, `θruː`, `kaˈθre`, `maˈθi`, `fθiˈnos`), and on words that really mix scripts,
+  such as the Korean `PC방`. Six of the fifteen judge corrections it refused
+  (`experiments/compose-judge/runs/full/applied.json`) were these. A word between slashes or
+  brackets, or carrying IPA's own marks (ˈ, ː), and a Latin acronym joined to Hangul, should pass.
+
 - **Arabic is looked up vowelled; Wiktionary files it bare.** Compose writes Arabic headwords fully
   vowelled (`حَقِيبَة`), and `kaikki-ar-en` (added to the catalogue 21 Nov 2026) keys them without
   the marks (`حقيبة`), so 34 of 40 starter words found nothing. The judge strips U+064B–U+065F,

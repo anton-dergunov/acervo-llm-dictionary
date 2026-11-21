@@ -72,6 +72,73 @@
     "primaryGloss": "lion",
     "emotion": "authoritative and grand, admiring the strength of a king of the jungle",
     "notes": [
+      "The classifier for lions and other animals is ตัว (e.g. สิงโตสองตัว — two lions)."
+    ],
+    "senses": [
+      {
+        "id": "y2qjrh382s20iul",
+        "order": 0,
+        "definition": "A large wild cat found in Africa and India, known for the male's thick mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "l32agf31fpmwy5o",
+            "text": "สิงโตเป็นเจ้าป่า",
+            "textLang": "th",
+            "translation": "The lion is the king of the jungle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "respectful and factual, stating a well-known truth about nature",
+            "note": null,
+            "matchedForm": "สิงโต",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สิงโต",
+    "lemma": "สิงโต",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "lion",
+    "primaryGloss": "lion",
+    "emotion": "authoritative and grand, admiring the strength of a king of the jungle",
+    "notes": [
       "Used to refer to the African lion. It is a loanword from Chinese, specifically from the Hokkien pronunciation of stone-lion statues found in temples, which is why the word doesn't follow typical Thai phonetic roots for animals."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is a loanword from Chinese, specifically from the Hokkien",
+        "why": "False etymology; สิงห์ is from Sanskrit siṃha and โต means 'big/large'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential classifier (ตัว) for a concrete animal noun."
+      }
+    ],
+    "growth": 0.568
   }
 }

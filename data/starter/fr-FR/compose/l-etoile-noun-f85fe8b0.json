@@ -58,6 +58,113 @@
     "headword": "l'étoile",
     "lemma": "étoile",
     "reading": null,
+    "ipa": "/e.twal/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "star",
+    "primaryGloss": "star",
+    "emotion": "wondering and looking up at the night sky, quiet and serene",
+    "notes": [
+      "For a famous person (a movie or pop star), everyday French usually uses the English loanword 'une star'."
+    ],
+    "senses": [
+      {
+        "id": "1vva3qi3o6oiidu",
+        "order": 0,
+        "definition": "A bright point of light visible in the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "vh8vlw68k5wfik9",
+            "text": "Regarde, il y a plein d'étoiles dans le ciel ce soir.",
+            "textLang": "fr",
+            "translation": "Look, there are lots of stars in the sky tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "étoiles",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lizt3ihp9e919cm",
+        "order": 1,
+        "definition": "A shape with five or more points, often used as a symbol to rate hotels or restaurants.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "symbol",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "s8xiw7fmbowh5nj",
+            "text": "Nous avons dormi dans un hôtel quatre étoiles.",
+            "textLang": "fr",
+            "translation": "We slept in a four-star hotel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "étoiles",
+            "matchedTranslationForm": "star"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'étoile",
+    "lemma": "étoile",
+    "reading": null,
     "ipa": "/etʁwal/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +266,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/etʁwal/",
+        "why": "Wrong IPA transcription: contains an extraneous /ʁ/ sound instead of /e.twal/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the celestial body in the night sky and metaphorically",
+        "why": "Merely restates the senses; misses that French usually uses 'une star' for celebrities."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(fame) A famous person, especially in entertainment or sports.",
+        "why": "For a famous person, French normally uses 'une star'; shape/rating sense is more useful."
+      }
+    ],
+    "growth": 0.943
   }
 }

@@ -68,6 +68,74 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "often",
+    "primaryGloss": "often",
+    "emotion": null,
+    "notes": [
+      "Do not confuse 'vaak' (often, many times) with 'meestal' (usually, most of the time)."
+    ],
+    "senses": [
+      {
+        "id": "u4lx2329jlqjuad",
+        "order": 0,
+        "definition": "On many occasions or at short intervals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "ygwccjvu6yubfv1",
+            "text": "Ik zie hem vaak in de supermarkt.",
+            "textLang": "nl",
+            "translation": "I often see him in the supermarket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and matter-of-fact, mentioning a regular routine",
+            "note": null,
+            "matchedForm": "vaak",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "vaak",
+    "lemma": "vaak",
+    "reading": null,
+    "ipa": "/vaːk/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "often; sleepy",
     "primaryGloss": "often",
     "emotion": null,
@@ -162,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(sleepy) Feeling the need for sleep. | glosses en: sleepy, drowsy",
+        "why": "False meaning and pos: 'vaak' is a regional/archaic noun ('vaak hebben'), never an adjective."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Na het eten word ik altijd vaak.",
+        "why": "Completely ungrammatical and nonsensical in Dutch."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can mean 'sleepy' as an adjective used after a verb",
+        "why": "Teaches a false grammatical construction and meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "often; sleepy",
+        "why": "Includes the false gloss 'sleepy'."
+      }
+    ],
+    "growth": 0.348
   }
 }

@@ -72,6 +72,75 @@
     "primaryGloss": "leaf",
     "emotion": "a soft, quiet appreciation for something natural and delicate",
     "notes": [
+      "In everyday conversation, people very often say 葉っぱ (happa) instead of 葉 (ha).",
+      "Do not confuse with the homophone 歯 (ha), which means 'tooth' (and also has a different pitch accent)."
+    ],
+    "senses": [
+      {
+        "id": "2hv7jphthho2qxz",
+        "order": 0,
+        "definition": "A flat, usually green part of a plant or tree that grows from a stem or branch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf",
+              "foliage"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "vy2b87ofj38qpyp",
+            "text": "秋になると、葉が赤や黄色に変わります。",
+            "textLang": "ja",
+            "translation": "When autumn comes, the leaves turn red and yellow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and observant, noticing the change of seasons",
+            "note": null,
+            "matchedForm": "葉",
+            "matchedTranslationForm": "leaves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "葉",
+    "lemma": "葉",
+    "reading": "は",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "leaf; foliage",
+    "primaryGloss": "leaf",
+    "emotion": "a soft, quiet appreciation for something natural and delicate",
+    "notes": [
       "When talking about a single leaf, use 'ha'. When talking about leaves in general or collectively on a tree, they are often referred to as 'ha' or 'konoha'.",
       "Do not confuse this with 'ha' (歯), which means 'tooth'. Context from the sentence will almost always make it clear which one is being used."
     ],
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "leaf; foliage",
+        "why": "shortGloss includes 'foliage', which is absent from the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When talking about a single leaf, use 'ha'.",
+        "why": "Misses the key beginner point: 葉っぱ (happa) is much more common in everyday speech."
+      }
+    ],
+    "growth": 0.796
   }
 }

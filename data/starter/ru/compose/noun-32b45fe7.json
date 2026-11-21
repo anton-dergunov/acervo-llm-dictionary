@@ -72,6 +72,135 @@
     "primaryGloss": "food",
     "emotion": "warm and welcoming, looking forward to a good meal",
     "notes": [
+      "Uncountable (singular only), like English 'food'. In formal style, пища is used instead."
+    ],
+    "senses": [
+      {
+        "id": "qhzezw28g0mrx68",
+        "order": 0,
+        "definition": "What people or animals eat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "food"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "eplmla3cvnj6kp6",
+            "text": "Домашняя еда всегда самая вкусная.",
+            "textLang": "ru",
+            "translation": "Home-cooked food is always the tastiest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and cozy, thinking of a family dinner",
+            "note": null,
+            "matchedForm": "еда",
+            "matchedTranslationForm": "food"
+          },
+          {
+            "id": "x8pax3ptgqmvp56",
+            "text": "После долгой дороги горячая еда была очень кстати.",
+            "textLang": "ru",
+            "translation": "After the long journey, hot food was very welcome.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and grateful, finally sitting down to eat",
+            "note": null,
+            "matchedForm": "еда",
+            "matchedTranslationForm": "food"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "39xt21wit42l9h2",
+        "order": 1,
+        "definition": "An occasion when food is eaten; mealtime.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meal",
+              "eating"
+            ]
+          }
+        ],
+        "domain": "mealtime",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "cj0t823muc4vecn",
+            "text": "Принимайте это лекарство три раза в день после еды.",
+            "textLang": "ru",
+            "translation": "Take this medicine three times a day after meals.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "еды",
+            "matchedTranslationForm": "meals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "еда",
+    "lemma": "еда",
+    "reading": null,
+    "ipa": "/jɪˈda/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "food; meal",
+    "primaryGloss": "food",
+    "emotion": "warm and welcoming, looking forward to a good meal",
+    "notes": [
       "Used as a general uncountable noun for food, similar to English 'food'."
     ],
     "senses": [
@@ -158,5 +287,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "After the long road, a hot meal was very timely.",
+        "why": "Calqued translation ('the long road' instead of 'the long journey') and 'горячая еда' means 'hot food'."
+      }
+    ],
+    "growth": 1.113
   }
 }

@@ -68,6 +68,76 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to pull; to tug",
+    "primaryGloss": "to pull",
+    "emotion": "assertive and purposeful, moving something with a steady, physical motion",
+    "notes": [
+      "Often seen on doors as the opposite of ผลัก (phlàk, 'to push away') or ดัน (dan, 'to push/press').",
+      "To mean 'to attract' attention or interest, the compound ดึงดูด (dɯng-dùut) is usually used rather than ดึง alone."
+    ],
+    "senses": [
+      {
+        "id": "2hx3hjarhm1apvl",
+        "order": 0,
+        "definition": "To apply force to move something towards yourself or in the direction of the force.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pull",
+              "to tug",
+              "to draw"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🫳",
+        "examples": [
+          {
+            "id": "p3aj7da2p1dhi2h",
+            "text": "เขาดึงประตูให้เปิดออก",
+            "textLang": "th",
+            "translation": "He pulled the door open.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and deliberate, ensuring the door moves as intended",
+            "note": null,
+            "matchedForm": "ดึง",
+            "matchedTranslationForm": "pulled"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ดึง",
+    "lemma": "ดึง",
+    "reading": null,
+    "ipa": "/dɯŋ˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to pull; to attract; to stretch",
     "primaryGloss": "pull",
     "emotion": "assertive and purposeful, moving something with a steady, physical motion",
@@ -162,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to pull; to attract; to stretch",
+        "why": "Includes 'to stretch', which is not in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "สีแดงช่วยดึงดูดสายตาได้ดี",
+        "why": "Uses the distinct compound verb ดึงดูด (to attract) instead of the lemma ดึง."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Use 'ดึง' when you physically pull an object towards yourself",
+        "why": "Notes 0 and 2 merely repeat the definitions of senses 0 and 1."
+      }
+    ],
+    "growth": 0.622
   }
 }

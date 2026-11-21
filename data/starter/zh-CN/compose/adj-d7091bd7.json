@@ -69,6 +69,77 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "rude; boorish",
+    "primaryGloss": "rude",
+    "emotion": "frustrated and annoyed by someone's bad manners",
+    "notes": [
+      "Describes only people's manners, speech, or actions. For rough surfaces or workmanship, use 粗糙 (cūcāo)."
+    ],
+    "senses": [
+      {
+        "id": "bvpaa66iwmjqw5u",
+        "order": 0,
+        "definition": "Of a person, speech, or behavior: rough and lacking manners or respect.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rude",
+              "impolite",
+              "crude",
+              "boorish"
+            ]
+          }
+        ],
+        "domain": "manners",
+        "emoji": "😠",
+        "examples": [
+          {
+            "id": "oyqmxexepr7fu12",
+            "text": "他的态度非常粗鲁，让人很不高兴。",
+            "textLang": "zh",
+            "translation": "His attitude was very rude and made people unhappy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "displeased and complaining about someone's bad behavior",
+            "note": null,
+            "matchedForm": "粗鲁",
+            "matchedTranslationForm": "rude"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "粗鲁",
+    "lemma": "粗鲁",
+    "reading": "cū lǔ",
+    "ipa": "/tsʰu˥ lu˨˩˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "rude; rough",
     "primaryGloss": "rude",
     "emotion": "frustrated and annoyed by someone's bad manners",
@@ -163,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Rough and unrefined in movement, action, or making things.",
+        "why": "粗鲁 only describes manners/speech; rough workmanship is 粗糙 (cūcāo), not 粗鲁."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "这个木工活做得很粗鲁。",
+        "why": "Ungrammatical collocation; 粗鲁 cannot describe craftsmanship or objects."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "粗鲁 describes behavior or speech that lacks basic manners and respect.",
+        "why": "merely restates the definition."
+      }
+    ],
+    "growth": 0.665
   }
 }

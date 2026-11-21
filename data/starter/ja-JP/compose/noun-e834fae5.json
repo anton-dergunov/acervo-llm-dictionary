@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "写真",
     "lemma": "写真",
+    "reading": "しゃしん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📷",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "photograph; picture; photo",
+    "primaryGloss": "photograph",
+    "emotion": "nostalgic and warm, looking back at a happy memory",
+    "notes": [
+      "Used with the verb 撮る (toru) in the phrase 写真を撮る (shashin o toru, 'to take a photo'); note the kanji 撮る rather than 取る."
+    ],
+    "senses": [
+      {
+        "id": "mv38ot3lt8m9yhl",
+        "order": 0,
+        "definition": "An image taken with a camera.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "photograph",
+              "photo",
+              "picture"
+            ]
+          }
+        ],
+        "domain": "photography",
+        "emoji": "📷",
+        "examples": [
+          {
+            "id": "pm1s22zx0975nfq",
+            "text": "旅の思い出に写真をたくさん撮りました。",
+            "textLang": "ja",
+            "translation": "I took many photographs as travel memories.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and satisfied, recalling a fun trip",
+            "note": null,
+            "matchedForm": "写真",
+            "matchedTranslationForm": "photographs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "写真",
+    "lemma": "写真",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Kanji headword 写真 is missing its hiragana reading (しゃしん)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both physical prints and digital images captured with a camera.",
+        "why": "True of English 'photo' as well; states the obvious."
+      }
+    ],
+    "growth": 0.956
   }
 }

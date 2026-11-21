@@ -74,6 +74,114 @@
     "primaryGloss": "dream",
     "emotion": null,
     "notes": [
+      "The plural is 'dromen' (with a single 'o'). The related verb is also 'dromen' (to dream), used with the preposition 'over' or 'van'."
+    ],
+    "senses": [
+      {
+        "id": "0j7dl1tw4lgt3jt",
+        "order": 0,
+        "definition": "A series of images, thoughts, or feelings experienced during sleep.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "hgt1veluskzijks",
+            "text": "Ik had vannacht een heel vreemde droom.",
+            "textLang": "nl",
+            "translation": "I had a very strange dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "droom",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nrmyikoxmy10k72",
+        "order": 1,
+        "definition": "A strong hope, wish, or goal for the future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream",
+              "ambition"
+            ]
+          }
+        ],
+        "domain": "ambition",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "9l86ixsgy1vl76h",
+            "text": "Het is mijn droom om een wereldreis te maken.",
+            "textLang": "nl",
+            "translation": "It is my dream to travel around the world.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "droom",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de droom",
+    "lemma": "droom",
+    "reading": null,
+    "ipa": "/droːm/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "dream",
+    "primaryGloss": "dream",
+    "emotion": null,
+    "notes": [
       "In Dutch, as in English, 'droom' refers both to the images you see while sleeping and to your personal ambitions or goals for the future.",
       "Do not confuse this with 'slapen' (to sleep), which is the verb for the activity itself."
     ],
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Het is mijn droom om de wereld te reizen.",
+        "why": "Calque of English 'travel the world'; Dutch requires 'over de wereld reizen' or 'rondreizen'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, as in English, 'droom' refers both to the images",
+        "why": "Both notes are pure filler (restating the two senses and comparing with an unrelated verb)."
+      }
+    ],
+    "growth": 0.835
   }
 }

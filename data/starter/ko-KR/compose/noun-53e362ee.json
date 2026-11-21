@@ -58,6 +58,95 @@
     "headword": "택시",
     "lemma": "택시",
     "reading": null,
+    "ipa": "/tʰɛk.͈ɕi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚕",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "taxi",
+    "primaryGloss": "taxi",
+    "emotion": "hurried and purposeful, needing to get somewhere else on time",
+    "notes": [
+      "Pronounced [택씨] with a tense ㅅ. Common collocations: 택시를 잡다 (to hail a taxi), 택시를 부르다 (to call a taxi), 택시를 타다 (to take a taxi)."
+    ],
+    "senses": [
+      {
+        "id": "orel95w4ngwcq80",
+        "order": 0,
+        "definition": "A car with a driver that you pay to take you somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "taxi",
+              "cab"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚕",
+        "examples": [
+          {
+            "id": "yuuoykrwscjubib",
+            "text": "늦어서 택시를 탔어요.",
+            "textLang": "ko",
+            "translation": "I was late, so I took a taxi.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "택시",
+            "matchedTranslationForm": "taxi"
+          },
+          {
+            "id": "2yuh7kjigk3dagn",
+            "text": "길에서 택시를 잡기가 힘들어요.",
+            "textLang": "ko",
+            "translation": "It is hard to hail a taxi on the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "택시",
+            "matchedTranslationForm": "taxi"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "택시",
+    "lemma": "택시",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Note the pronunciation: it is a loanword from English, so the sound",
+        "why": "Both notes are pure filler; they omit useful collocations and the tensified pronunciation [택씨]."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "택시가 길에서 기다려요.",
+        "why": "Personifies the taxi awkwardly and uses simple present instead of progressive."
+      }
+    ],
+    "growth": 0.83
   }
 }

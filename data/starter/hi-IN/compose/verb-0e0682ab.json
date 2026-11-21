@@ -68,6 +68,94 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sing",
+    "primaryGloss": "to sing",
+    "emotion": "joyful and expressive, letting the melody out with feeling",
+    "notes": [
+      "Also used as a masculine noun meaning 'song', often in the phrase गाना गाना (to sing a song)."
+    ],
+    "senses": [
+      {
+        "id": "2f5cg92z9nif5xt",
+        "order": 0,
+        "definition": "To make musical sounds with your voice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sing"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎤",
+        "examples": [
+          {
+            "id": "fcuo3tlz4jle8n4",
+            "text": "तुम बहुत अच्छा गाना गाते हो।",
+            "textLang": "hi",
+            "translation": "You sing songs very well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "गाते हो",
+            "matchedTranslationForm": "sing"
+          },
+          {
+            "id": "6xwfqei1ve0f6rn",
+            "text": "मुझे गाना बहुत पसंद है।",
+            "textLang": "hi",
+            "translation": "I like to sing very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "गाना",
+            "matchedTranslationForm": "to sing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "गाना",
+    "lemma": "गाना",
+    "reading": null,
+    "ipa": "/ɡɑːnɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎵",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sing; song",
     "primaryGloss": "to sing",
     "emotion": "joyful and expressive, letting the melody out with feeling",
@@ -158,5 +246,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "(song) A musical composition with words.",
+        "why": "Entry POS is verb, but sense 1 is a noun."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "वह बहुत अच्छा गाना गाती है।",
+        "why": "Uses गाना as the noun 'song' while the verb is गाती है."
+      }
+    ],
+    "growth": 0.87
   }
 }

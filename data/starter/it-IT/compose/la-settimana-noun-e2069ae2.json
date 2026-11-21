@@ -58,6 +58,73 @@
     "headword": "la settimana",
     "lemma": "settimana",
     "reading": null,
+    "ipa": "/set.tiˈma.na/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": "busy and purposeful, planning the days ahead",
+    "notes": [
+      "Common expressions: 'la settimana prossima' (next week), 'la settimana scorsa' (last week), 'il fine settimana' (the weekend)."
+    ],
+    "senses": [
+      {
+        "id": "0pdnvh4652to8es",
+        "order": 0,
+        "definition": "A period of seven consecutive days, in Italy starting on Monday.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "5t6xwvr3e3enc8r",
+            "text": "Questa settimana ho molto lavoro da fare.",
+            "textLang": "it",
+            "translation": "This week I have a lot of work to do.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "overwhelmed by a busy schedule",
+            "note": null,
+            "matchedForm": "settimana",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la settimana",
+    "lemma": "settimana",
+    "reading": null,
     "ipa": "/settiˈmana/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The working days of the week, excluding the weekend.",
+        "why": "Contextual shade of 'week' (as in English), not a separate lexical sense."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "preceded by the masculine article 'il' when talking about a specific day",
+        "why": "In Italian, 'il lunedì' means 'on Mondays' (habitual); a specific Monday takes no article."
+      }
+    ],
+    "growth": 0.556
   }
 }

@@ -68,6 +68,74 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "because",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "Becomes 'parce qu'' before a vowel, as in 'parce qu'il', 'parce qu'elle', or 'parce qu'on'.",
+      "Followed by a full clause (subject + verb), unlike 'à cause de', which is followed by a noun."
+    ],
+    "senses": [
+      {
+        "id": "ep4odnz9sfzvvc7",
+        "order": 0,
+        "definition": "For the reason that; introduces the cause or reason for something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "thu663oj32cd7uw",
+            "text": "Je reste à la maison parce qu'il pleut.",
+            "textLang": "fr",
+            "translation": "I am staying at home because it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "parce qu'",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "parce que",
+    "lemma": "parce que",
+    "reading": null,
+    "ipa": "/paʁs kə/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💬",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "because; for the reason that",
     "primaryGloss": "because",
     "emotion": null,
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Je reste à la maison parce que il pleut.",
+        "why": "Ungrammatical; 'que' must elide to 'qu'' before 'il' (parce qu'il)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "senses[0].examples[0]",
+        "quote": "Note that 'parce que' becomes 'parc'qu'' before a vowel",
+        "why": "Standard mandatory spelling before a vowel is 'parce qu'', not 'parc'qu''."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain mandatory elision to 'parce qu'' before vowels (il, elle, on, un, etc.)."
+      }
+    ],
+    "growth": 0.665
   }
 }

@@ -75,6 +75,118 @@
     "primaryGloss": "to buy",
     "emotion": "busy and purposeful, ticking items off a list at the market",
     "notes": [
+      "Imperfective verb used for ongoing, habitual, or repeated buying. Its perfective partner is 'kupić' (for a single completed purchase).",
+      "In the present tense, the '-ow-' changes to '-uj-': ja kupuję, ty kupujesz, on/ona kupuje."
+    ],
+    "senses": [
+      {
+        "id": "mfqk2b9hmdpboez",
+        "order": 0,
+        "definition": "To get something by paying money for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to purchase"
+            ]
+          }
+        ],
+        "domain": "buy",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "r2ax9thys9xo86u",
+            "text": "Zawsze kupuję świeże owoce na targu.",
+            "textLang": "pl",
+            "translation": "I always buy fresh fruit at the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kupuję",
+            "matchedTranslationForm": "buy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jgzx5p3p0ecjdj9",
+        "order": 1,
+        "definition": "(informal) To accept an explanation, story, or excuse as true.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to fall for",
+              "to swallow"
+            ]
+          }
+        ],
+        "domain": "believe",
+        "emoji": "🤔",
+        "examples": [
+          {
+            "id": "20i784p6g48jydo",
+            "text": "Nikt nie kupuje jego głupich wymówek.",
+            "textLang": "pl",
+            "translation": "Nobody is buying his stupid excuses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "skeptical and amused, seeing right through a clumsy lie",
+            "note": null,
+            "matchedForm": "kupuje",
+            "matchedTranslationForm": "buying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kupować",
+    "lemma": "kupować",
+    "reading": null,
+    "ipa": "/kuˈpɔ.vat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to buy; to purchase; to fall for",
+    "primaryGloss": "to buy",
+    "emotion": "busy and purposeful, ticking items off a list at the market",
+    "notes": [
       "Kupować is an imperfective verb used for ongoing, habitual, or repeated buying. Use the perfective form kupić when you mean you successfully completed the purchase of a specific item.",
       "Do not confuse kupować with sprzedawać, which means to sell."
     ],
@@ -165,5 +277,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę kupować świeże owoce na targowisku.",
+        "why": "After 'muszę', the imperfective requires a clear habitual context; 'targ' is more common than 'targowisko'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse kupować with sprzedawać, which means to sell.",
+        "why": "Giving a basic antonym is filler, not a genuine point of confusion; conjugation is needed."
+      }
+    ],
+    "growth": 0.975
   }
 }

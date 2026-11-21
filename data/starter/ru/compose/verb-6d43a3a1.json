@@ -69,6 +69,115 @@
     ],
     "status": "active",
     "shortGloss": "to think; to believe",
+    "primaryGloss": "to think",
+    "emotion": "thoughtful and calm, pausing to consider something",
+    "notes": [
+      "Imperfective; the perfective partner is подумать. Takes о (об, обо) + prepositional case for 'to think about' (думать о работе)."
+    ],
+    "senses": [
+      {
+        "id": "fvon70uwsx3ze8d",
+        "order": 0,
+        "definition": "To consider something or have someone or something on your mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to think"
+            ]
+          }
+        ],
+        "domain": "thought",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "f0kscp4zjt273y9",
+            "text": "Я часто думаю о будущем.",
+            "textLang": "ru",
+            "translation": "I often think about the future.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "думаю",
+            "matchedTranslationForm": "think"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qbh6eb9ykjl2isx",
+        "order": 1,
+        "definition": "To have a particular opinion or belief about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to think",
+              "to believe",
+              "to suppose"
+            ]
+          }
+        ],
+        "domain": "opinion",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ox5rlbn7on8wfqn",
+            "text": "Я думаю, что он прав.",
+            "textLang": "ru",
+            "translation": "I think that he is right.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "думаю",
+            "matchedTranslationForm": "think"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "думать",
+    "lemma": "думать",
+    "reading": null,
+    "ipa": "/ˈdumətʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to think; to believe",
     "primaryGloss": "think",
     "emotion": "thoughtful and calm, pausing to consider something",
     "notes": [
@@ -119,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To use your mind; to have an opinion.",
+        "why": "Merges two distinct A1/A2 senses ('think about' vs 'think that / believe') into one."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use думать when you are actively using your mind or expressing an opinion",
+        "why": "Restates the definition instead of giving the aspect pair (подумать) and preposition (о + prepositional)."
+      }
+    ],
+    "growth": 1.772
   }
 }

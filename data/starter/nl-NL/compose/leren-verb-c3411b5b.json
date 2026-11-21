@@ -58,6 +58,115 @@
     "headword": "leren",
     "lemma": "leren",
     "reading": null,
+    "ipa": "/ˈleː.rə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to learn; to teach",
+    "primaryGloss": "learn",
+    "emotion": "focused and curious, preparing to take in new information",
+    "notes": [
+      "Means both 'to learn' and 'to teach' (e.g., 'hij leert mij zwemmen' = he teaches me how to swim).",
+      "Do not confuse with 'studeren', which means studying at a university or college."
+    ],
+    "senses": [
+      {
+        "id": "gcnoep9v6slvzmk",
+        "order": 0,
+        "definition": "To acquire knowledge or a new skill, or to study for a test.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to learn",
+              "to study"
+            ]
+          }
+        ],
+        "domain": "learning",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "xen99bsfcolx94g",
+            "text": "Ik wil graag Nederlands leren.",
+            "textLang": "nl",
+            "translation": "I would like to learn Dutch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "eager and optimistic, expressing a personal goal",
+            "note": null,
+            "matchedForm": "leren",
+            "matchedTranslationForm": "learn"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hl77pxfs0phk37o",
+        "order": 1,
+        "definition": "To give someone knowledge or show them how to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to teach"
+            ]
+          }
+        ],
+        "domain": "teaching",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "ehqmmoacm7ht1ue",
+            "text": "Mijn vader leert mij autorijden.",
+            "textLang": "nl",
+            "translation": "My father is teaching me how to drive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "leert",
+            "matchedTranslationForm": "teaching"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "leren",
+    "lemma": "leren",
+    "reading": null,
     "ipa": "/ˈleːrə(n)/",
     "pos": "verb",
     "gender": null,
@@ -159,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Mijn vader gaat mij autorijden leren.",
+        "why": "Unnatural Dutch; with an infinitive it is 'mijn vader leert mij autorijden'."
+      }
+    ],
+    "growth": 0.823
   }
 }

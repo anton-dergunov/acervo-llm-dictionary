@@ -69,6 +69,75 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "busy",
+    "primaryGloss": "busy",
+    "emotion": "hurried and slightly overwhelmed, rushing to finish everything on the list",
+    "notes": [
+      "Can also be used as a verb meaning 'to be busy with' (e.g. 你在忙什么？ — What are you busy working on?)."
+    ],
+    "senses": [
+      {
+        "id": "4xq4si2sgaxzbi9",
+        "order": 0,
+        "definition": "Having a lot of things to do; occupied with work or tasks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "busy",
+              "occupied"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🏃",
+        "examples": [
+          {
+            "id": "8gn097ddgimel3l",
+            "text": "我今天很忙，没有时间。",
+            "textLang": "zh",
+            "translation": "I am very busy today and have no time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "忙",
+            "matchedTranslationForm": "busy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "忙",
+    "lemma": "忙",
+    "reading": "máng",
+    "ipa": "/maŋ˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏃",
+    "topics": [
+      "Work",
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "busy; in a hurry",
     "primaryGloss": "busy",
     "emotion": "hurried and slightly overwhelmed, rushing to finish everything on the list",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "他们在厨房里忙什么呢？",
+        "why": "Uses 忙 as a verb ('busy doing what'), not in the 'hurried' adjective sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often used directly with 太 (tài) as 太忙了 (tài máng le)",
+        "why": "Any gradable Chinese adjective can take 太…了; this is not specific to 忙."
+      }
+    ],
+    "growth": 0.694
   }
 }

@@ -68,6 +68,115 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "leaf; sheet; phyllo pastry",
+    "primaryGloss": "leaf",
+    "emotion": "calm and grounded, observing the beauty of nature",
+    "notes": [
+      "Sounds identical to 'το φύλο' (gender, sex), which is spelled with one 'λ'."
+    ],
+    "senses": [
+      {
+        "id": "fyfkw3dre0lp3g6",
+        "order": 0,
+        "definition": "A flat, usually green part of a plant that grows from a stem or branch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "dg1jpa1gpxjv59w",
+            "text": "Το φθινόπωρο τα φύλλα πέφτουν από τα δέντρα.",
+            "textLang": "el",
+            "translation": "In autumn, the leaves fall from the trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "φύλλα",
+            "matchedTranslationForm": "leaves"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dxs9j901uzmlus7",
+        "order": 1,
+        "definition": "A thin, flat piece of paper, dough, or other material.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheet",
+              "layer",
+              "phyllo"
+            ]
+          }
+        ],
+        "domain": "materials",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "a57imbkqdjfcvih",
+            "text": "Χρειάζομαι ένα φύλλο χαρτί για να γράψω.",
+            "textLang": "el",
+            "translation": "I need a sheet of paper to write on.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and focused, looking for supplies",
+            "note": null,
+            "matchedForm": "φύλλο",
+            "matchedTranslationForm": "sheet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το φύλλο",
+    "lemma": "φύλλο",
+    "reading": null,
+    "ipa": "/ˈfi.lo/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "leaf; sheet of paper; dough layer",
     "primaryGloss": "leaf",
     "emotion": "calm and grounded, observing the beauty of nature",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Be careful not to confuse it with 'η φύλλα'",
+        "why": "'η φύλλα' does not exist in standard Greek; foliage is 'το φύλλωμα' or 'τα φύλλα'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "The word is highly polysemous. While it refers to a plant part,",
+        "why": "Merely restates the definitions and glosses of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Το φθινόπωρο το φύλλο πέφτει από το δέντρο.",
+        "why": "Singular 'the leaf falls in autumn' is unnatural; plural 'τα φύλλα πέφτουν' is natural."
+      }
+    ],
+    "growth": 0.609
   }
 }

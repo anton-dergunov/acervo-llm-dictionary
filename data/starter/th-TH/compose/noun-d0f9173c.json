@@ -58,6 +58,77 @@
     "headword": "หมวก",
     "lemma": "หมวก",
     "reading": null,
+    "ipa": "/muak˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧢",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "hat; cap; helmet",
+    "primaryGloss": "hat",
+    "emotion": null,
+    "notes": [
+      "Covers all headwear. Add a modifier to be specific: หมวกแก๊ป (baseball cap), หมวกกันน็อก (motorcycle helmet), หมวกนิรภัย (safety helmet/hard hat).",
+      "Takes the classifier ใบ, and is used with the verb สวม or ใส่ (to wear/put on)."
+    ],
+    "senses": [
+      {
+        "id": "jh7gdqbf6pr91o5",
+        "order": 0,
+        "definition": "Any covering worn on the head, including hats, caps, and helmets.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hat",
+              "cap",
+              "helmet",
+              "headgear"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🧢",
+        "examples": [
+          {
+            "id": "249wipc2b9rdqa4",
+            "text": "วันนี้แดดร้อน อย่าลืมใส่หมวกนะ",
+            "textLang": "th",
+            "translation": "The sun is hot today; don't forget to wear a hat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "หมวก",
+            "matchedTranslationForm": "hat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "หมวก",
+    "lemma": "หมวก",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -116,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A hard protective covering for the head, such as a helmet",
+        "why": "หมวก is a single general concept in Thai; splitting hat and helmet follows English, not Thai."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Thai, 'หมวก' is a general term used for any",
+        "why": "Notes [0] and [1] repeat the exact same point twice; classifier ใบ is missing."
+      }
+    ],
+    "growth": 0.758
   }
 }

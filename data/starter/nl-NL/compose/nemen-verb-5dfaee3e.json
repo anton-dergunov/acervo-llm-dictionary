@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to take; to have (food/drink)",
+    "primaryGloss": "take",
+    "emotion": "matter-of-fact and direct, describing the act of picking something up",
+    "notes": [
+      "Strong verb: nemen – nam – heeft genomen.",
+      "For physically picking up or grabbing an object, Dutch usually prefers 'pakken'. For taking someone or something to a place, use 'brengen' or 'meenemen', not 'nemen'."
+    ],
+    "senses": [
+      {
+        "id": "ipwc9ew5dzk1i00",
+        "order": 0,
+        "definition": "To take hold of something or bring it with you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "take",
+              "get"
+            ]
+          }
+        ],
+        "domain": "action",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "z2x9hoimp7b1fxo",
+            "text": "Vergeet niet een paraplu te nemen.",
+            "textLang": "nl",
+            "translation": "Don't forget to take an umbrella.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nemen",
+            "matchedTranslationForm": "take"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jplwb7zgv79kmw0",
+        "order": 1,
+        "definition": "To choose, or to use a route or form of transport.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "take",
+              "choose"
+            ]
+          }
+        ],
+        "domain": "choice",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "36xaodh4itgk09l",
+            "text": "Ik neem de trein naar Amsterdam.",
+            "textLang": "nl",
+            "translation": "I am taking the train to Amsterdam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and purposeful, planning a travel route",
+            "note": null,
+            "matchedForm": "neem",
+            "matchedTranslationForm": "taking"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "buya1joo98csz9h",
+        "order": 2,
+        "definition": "To have or accept food, drink, or medicine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "have",
+              "take"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "t3yghcrf3nzd7gm",
+            "text": "Neem jij nog een koekje bij de koffie?",
+            "textLang": "nl",
+            "translation": "Will you have another cookie with your coffee?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and friendly, offering hospitality to a guest",
+            "note": null,
+            "matchedForm": "Neem",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "nemen",
+    "lemma": "nemen",
+    "reading": null,
+    "ipa": "/ˈneːmə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to take; to grab",
     "primaryGloss": "take",
     "emotion": "matter-of-fact and direct, describing the act of picking something up",
@@ -203,5 +354,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Unlike English 'take', it often implies grabbing or physically moving something",
+        "why": "Contradicts itself; 'pakken' is preferred for physical grabbing, while 'nemen' is more abstract."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik neem de sleutels van de tafel.",
+        "why": "In Netherlands Dutch, 'pakken' is normally used for picking up keys from a table."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To accept something that is offered or provided to you.",
+        "why": "Should cover having food, drink, or medicine, which is how the example uses it."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs the irregular principal parts (nam, heeft genomen)."
+      }
+    ],
+    "growth": 0.862
   }
 }

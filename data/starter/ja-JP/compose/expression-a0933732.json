@@ -72,6 +72,137 @@
     "primaryGloss": "no",
     "emotion": "polite and firm, setting a clear boundary",
     "notes": [
+      "When refusing an offer or invitation, saying 'いいえ' directly can sound blunt; people often soften it with phrases like 'ちょっと…' (chotto...).",
+      "In response to a negative question (e.g., 'Aren't you going?'), 'いいえ' confirms the negative ('No, I'm not going') or disagrees with the assumption ('No, I am going')."
+    ],
+    "senses": [
+      {
+        "id": "fxkm18vcnqr8frb",
+        "order": 0,
+        "definition": "Used to give a negative answer, disagree with a statement, or decline an offer.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no"
+            ]
+          }
+        ],
+        "domain": "negation",
+        "emoji": "🙅",
+        "examples": [
+          {
+            "id": "qt5fh9iwziz4ja7",
+            "text": "いいえ、違います。",
+            "textLang": "ja",
+            "translation": "No, that's not right.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "corrective and helpful, clarifying the situation",
+            "note": null,
+            "matchedForm": "いいえ",
+            "matchedTranslationForm": "No"
+          },
+          {
+            "id": "igw0kdkn6izwhyl",
+            "text": "いいえ、大丈夫です。",
+            "textLang": "ja",
+            "translation": "No, thank you, I'm fine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "kind and appreciative, declining an offer gracefully",
+            "note": null,
+            "matchedForm": "いいえ",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "puxmd47qjtuss8c",
+        "order": 1,
+        "definition": "Used to politely deflect thanks, praise, or an apology.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "not at all",
+              "don't mention it",
+              "you're welcome"
+            ]
+          }
+        ],
+        "domain": "politeness",
+        "emoji": "🙇",
+        "examples": [
+          {
+            "id": "ss85us4yioqbmyk",
+            "text": "「ありがとうございます。」「いいえ、どういたしまして。」",
+            "textLang": "ja",
+            "translation": "\"Thank you.\" \"Not at all, you're welcome.\"",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "いいえ",
+            "matchedTranslationForm": "Not at all"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "いいえ",
+    "lemma": "いいえ",
+    "reading": null,
+    "ipa": null,
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙅",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "no; not at all",
+    "primaryGloss": "no",
+    "emotion": "polite and firm, setting a clear boundary",
+    "notes": [
       "While 'iie' is the direct translation of 'no', it is often considered quite direct or blunt in Japanese conversation. In many casual or polite situations, people prefer to soften their refusal by saying 'chotto...' (a little...) followed by an implied 'no'.",
       "Use 'iie' when you need to be explicitly clear, such as when correcting a misunderstanding or responding to a formal question."
     ],
@@ -160,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A polite way to decline an offer, invitation, or express modesty",
+        "why": "Conflates declining offers (which belongs in sense 0) with deflecting thanks or praise."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "いいえ、大丈夫です。",
+        "why": "Example shows declining an offer (sense 0), not responding to thanks or praise."
+      }
+    ],
+    "growth": 0.954
   }
 }

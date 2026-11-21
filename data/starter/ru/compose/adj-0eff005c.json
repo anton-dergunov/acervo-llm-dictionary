@@ -83,6 +83,74 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "white",
+    "primaryGloss": "white",
+    "emotion": "calm and pure, like looking out at a fresh morning snowfall",
+    "notes": [
+      "Also used in set phrases where English uses other words, such as 'белый хлеб' (white bread), 'белое вино' (white wine), and 'белые ночи' (white nights).",
+      "Do not confuse with 'светлый', which means 'light' in shade or brightness rather than 'white' in color."
+    ],
+    "senses": [
+      {
+        "id": "7jj8hpw8vq7ix1d",
+        "order": 0,
+        "definition": "Having the color of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "8moib92dintaj3u",
+            "text": "На ней было красивое белое платье.",
+            "textLang": "ru",
+            "translation": "She was wearing a beautiful white dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "белое",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "белый",
+    "lemma": "белый",
+    "reading": null,
+    "ipa": "/ˈbʲelɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤍",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "white; light-colored",
     "primaryGloss": "white",
     "emotion": "calm and pure, like looking out at a fresh morning snowfall",
@@ -134,5 +202,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of snow or milk.",
+        "why": "Defined as a noun ('The color...') instead of an adjective ('Having the color...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Зимой весь город стал белый от снега.",
+        "why": "With 'стал' (became), the instrumental case 'белым' is much more natural than nominative 'белый'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "white; light-colored",
+        "why": "'light-colored' is in shortGloss, not in the senses, and contradicts the notes."
+      }
+    ],
+    "growth": 1.181
   }
 }

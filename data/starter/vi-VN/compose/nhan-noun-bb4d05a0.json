@@ -58,6 +58,74 @@
     "headword": "nhẫn",
     "lemma": "nhẫn",
     "reading": null,
+    "ipa": "/ɲən˦ˀ˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💍",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "ring",
+    "primaryGloss": "ring",
+    "emotion": "glancing down at one's hand with a quiet, pleased smile",
+    "notes": [
+      "Takes the classifier 'chiếc' or 'cái' (e.g., 'một chiếc nhẫn' — a ring)."
+    ],
+    "senses": [
+      {
+        "id": "5s62qda9yoxgsij",
+        "order": 0,
+        "definition": "A small circular band, typically of precious metal, worn on a finger.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ring",
+              "finger ring"
+            ]
+          }
+        ],
+        "domain": "jewelry",
+        "emoji": "💍",
+        "examples": [
+          {
+            "id": "fhzbiybuwe7ri0s",
+            "text": "Anh ấy tặng cô ấy một chiếc nhẫn bạc.",
+            "textLang": "vi",
+            "translation": "He gave her a silver ring.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and affectionate, showing a meaningful gift",
+            "note": null,
+            "matchedForm": "nhẫn",
+            "matchedTranslationForm": "ring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "nhẫn",
+    "lemma": "nhẫn",
+    "reading": null,
     "ipa": "/ɲəŋ˧˥/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɲəŋ˧˥/",
+        "why": "Southern pronunciation with wrong tone; Hanoi IPA for 'nhẫn' is /ɲən˦ˀ˥/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To endure hardship or keep calm; patience and self-restraint.",
+        "why": "Sino-Vietnamese bound root (used in compounds like 'nhẫn nại'), not a standalone noun."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "ring; patient",
+        "why": "'patient' is an adjective and comes from a bound Sino-Vietnamese root, not this noun."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "As an adjective or verb, it relates to patience and forbearance",
+        "why": "'nhẫn' is a bound Sino-Vietnamese root in 'nhẫn nại', not a standalone A2 adjective/verb."
+      }
+    ],
+    "growth": 0.478
   }
 }

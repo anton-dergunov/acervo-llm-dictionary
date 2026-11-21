@@ -68,6 +68,158 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be in or at; in, at, on; (progressive marker)",
+    "primaryGloss": "to be in",
+    "emotion": null,
+    "notes": [
+      "As a location preposition ('in/at/on'), 在 + place normally comes before the main verb (e.g., 我在家工作, 'I work at home')."
+    ],
+    "senses": [
+      {
+        "id": "h5pyuqlhgdd415p",
+        "order": 0,
+        "definition": "To be located or present in, at, or on a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be in",
+              "to be at",
+              "to be located"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "gk4mw9ihtjjdevk",
+            "text": "我在家。",
+            "textLang": "zh",
+            "translation": "I am at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "在",
+            "matchedTranslationForm": "am at"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fsorqqsadff4vm3",
+        "order": 1,
+        "definition": "(before a place and a verb) In, at, or on a place where an action happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "at",
+              "in",
+              "on"
+            ]
+          }
+        ],
+        "domain": "preposition",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5q6pizizglnhlb9",
+            "text": "我在学校学中文。",
+            "textLang": "zh",
+            "translation": "I study Chinese at school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "在",
+            "matchedTranslationForm": "at"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e27c9w2olri6ky8",
+        "order": 2,
+        "definition": "(before a verb) Used to show that an action is currently in progress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be -ing",
+              "in the middle of"
+            ]
+          }
+        ],
+        "domain": "progress",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "xjiu7t4i4n6wsqk",
+            "text": "他在吃饭。",
+            "textLang": "zh",
+            "translation": "He is eating.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "在",
+            "matchedTranslationForm": "is"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "在",
+    "lemma": "在",
+    "reading": "zài",
+    "ipa": "/tsai̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be in, at, or on; at; in",
     "primaryGloss": "to be in",
     "emotion": null,
@@ -161,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential everyday sense 'at; in; on' (preposition/coverb introducing where an action happens)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to be in, at, or on; at; in",
+        "why": "Includes 'at; in' which was missing from the senses, and omits the progressive sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "他正在吃饭。",
+        "why": "Uses the compound word 正在 instead of standalone 在 as the progressive marker."
+      }
+    ],
+    "growth": 1.376
   }
 }

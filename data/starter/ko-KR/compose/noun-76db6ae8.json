@@ -72,6 +72,94 @@
     "primaryGloss": "weather",
     "emotion": "a simple, everyday observation about the day's conditions",
     "notes": [
+      "Refers to day-to-day weather (e.g., 날씨가 좋다/나쁘다 'the weather is good/bad'), as opposed to 기후 (climate)."
+    ],
+    "senses": [
+      {
+        "id": "is26qyoecpy5k4m",
+        "order": 0,
+        "definition": "The state of the atmosphere at a place and time, such as sun, rain, or wind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "4k5anb1pw9hrotm",
+            "text": "오늘 날씨가 정말 좋아요.",
+            "textLang": "ko",
+            "translation": "The weather is really nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleasant, enjoying a bright day",
+            "note": null,
+            "matchedForm": "날씨",
+            "matchedTranslationForm": "weather"
+          },
+          {
+            "id": "vu4nupy6i6f1n4v",
+            "text": "내일은 날씨가 흐릴 거예요.",
+            "textLang": "ko",
+            "translation": "The weather will be cloudy tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, providing a standard forecast",
+            "note": null,
+            "matchedForm": "날씨",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "날씨",
+    "lemma": "날씨",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "weather",
+    "primaryGloss": "weather",
+    "emotion": "a simple, everyday observation about the day's conditions",
+    "notes": [
       "While '날씨' specifically refers to atmospheric conditions, you might hear people use '기온' (temperature) when discussing how hot or cold it is specifically."
     ],
     "senses": [
@@ -139,5 +227,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While '날씨' specifically refers to atmospheric conditions, you might hear",
+        "why": "Unhelpful comparison with 'temperature'; should instead contrast with 기후 (climate) or give collocations."
+      }
+    ],
+    "growth": 0.848
   }
 }

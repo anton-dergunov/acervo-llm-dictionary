@@ -70,6 +70,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be",
+    "primaryGloss": "be",
+    "emotion": "quietly present, stating a fact with calm certainty",
+    "notes": [
+      "Highly irregular verb in the present tense: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+      "Used as an auxiliary with reflexive verbs and key verbs of movement (like 'aller', 'venir', 'partir'), while most verbs take 'avoir'."
+    ],
+    "senses": [
+      {
+        "id": "4800pjcackq1lp6",
+        "order": 0,
+        "definition": "To have a particular identity, quality, or state.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "jahmd8qasyvmkfu",
+            "text": "Je suis fatigué aujourd'hui.",
+            "textLang": "fr",
+            "translation": "I am tired today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and quiet, feeling the exhaustion of a long day",
+            "note": null,
+            "matchedForm": "suis",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hs93qppnv9igolf",
+        "order": 1,
+        "definition": "To be in a particular place or at a particular time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be",
+              "be located"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "zc3qm8wrgus4s37",
+            "text": "Le livre est sur la table.",
+            "textLang": "fr",
+            "translation": "The book is on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and helpful, pointing something out in the room",
+            "note": null,
+            "matchedForm": "est",
+            "matchedTranslationForm": "is"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ahu7qf8917smbo5",
+        "order": 2,
+        "definition": "Used with a past participle to form compound tenses of reflexive verbs and certain verbs of movement or change of state, and to form the passive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "have",
+              "be"
+            ]
+          }
+        ],
+        "domain": "auxiliary",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "sgjxxm9uum5lm9t",
+            "text": "Elle est arrivée ce matin.",
+            "textLang": "fr",
+            "translation": "She arrived this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "est",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "être",
+    "lemma": "être",
+    "reading": null,
+    "ipa": "/ɛtʁ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be; to be located",
     "primaryGloss": "be",
     "emotion": "quietly present, stating a fact with calm certainty",
@@ -162,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "As the most common auxiliary verb in French, 'être' is used",
+        "why": "'Avoir' is the most common auxiliary verb in French, not 'être'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To indicate the location or temporary state of someone or something.",
+        "why": "Temporary states (like 'fatigué' in sense 0) belong in sense 0; French does not split 'be' like Spanish ser/estar."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential everyday auxiliary sense (used to form compound tenses like the passé composé)."
+      }
+    ],
+    "growth": 1.339
   }
 }

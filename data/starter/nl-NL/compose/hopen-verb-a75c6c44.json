@@ -68,6 +68,96 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to hope",
+    "primaryGloss": "to hope",
+    "emotion": "hopeful and longing, looking forward to a positive outcome",
+    "notes": [
+      "Followed by 'op' when hoping for a noun (e.g., 'hopen op goed weer' — to hope for good weather).",
+      "Do not confuse with 'verwachten' (to expect), which implies certainty rather than a wish."
+    ],
+    "senses": [
+      {
+        "id": "fvnm9bi07i31n47",
+        "order": 0,
+        "definition": "To want something to happen and think that it is possible.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hope",
+              "to hope for"
+            ]
+          }
+        ],
+        "domain": "hope",
+        "emoji": "🤞",
+        "examples": [
+          {
+            "id": "g6lefer46kbvn2i",
+            "text": "Ik hoop dat je morgen komt.",
+            "textLang": "nl",
+            "translation": "I hope that you come tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, looking forward to seeing someone",
+            "note": null,
+            "matchedForm": "hoop",
+            "matchedTranslationForm": "hope"
+          },
+          {
+            "id": "v1n04ho80lhx0ou",
+            "text": "We hopen op goed weer tijdens de vakantie.",
+            "textLang": "nl",
+            "translation": "We are hoping for good weather during the holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and optimistic about a future trip",
+            "note": null,
+            "matchedForm": "hopen",
+            "matchedTranslationForm": "hoping"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "hopen",
+    "lemma": "hopen",
+    "reading": null,
+    "ipa": "/ˈɦoːpə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤞",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to hope; to expect",
     "primaryGloss": "to hope",
     "emotion": "hopeful and longing, looking forward to a positive outcome",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hope; to expect",
+        "why": "'To expect' contradicts Note 1 and is not a gloss in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To look forward to an event with a positive expectation.",
+        "why": "'Hopen op' is a grammatical construction of the same meaning, not a separate sense 'look forward to'."
+      }
+    ],
+    "growth": 0.784
   }
 }

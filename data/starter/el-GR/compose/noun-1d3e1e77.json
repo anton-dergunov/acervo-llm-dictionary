@@ -72,6 +72,73 @@
     "primaryGloss": "bird",
     "emotion": "gentle and observant, watching something outside",
     "notes": [
+      "The diminutive form 'το πουλάκι' (little bird) is very common in everyday speech, and is also used as a term of endearment ('πουλάκι μου')."
+    ],
+    "senses": [
+      {
+        "id": "mm46m9yow72clxr",
+        "order": 0,
+        "definition": "An animal with feathers, wings, and a beak, usually able to fly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bird"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐦",
+        "examples": [
+          {
+            "id": "xecv3pom2jl79r4",
+            "text": "Ένα μικρό πουλί κάθεται στο δέντρο.",
+            "textLang": "el",
+            "translation": "A small bird is sitting in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and quiet, pointing out something small",
+            "note": null,
+            "matchedForm": "πουλί",
+            "matchedTranslationForm": "bird"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το πουλί",
+    "lemma": "πουλί",
+    "reading": null,
+    "ipa": "/puˈli/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐦",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bird",
+    "primaryGloss": "bird",
+    "emotion": "gentle and observant, watching something outside",
+    "notes": [
       "As with many common animal names in Greek, the diminutive form 'πουλάκι' is often used affectionately."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "A small bird is sitting on the tree.",
+        "why": "Unnatural English preposition; birds sit 'in' a tree."
+      }
+    ],
+    "growth": 1.151
   }
 }

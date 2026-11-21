@@ -68,6 +68,74 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "bag",
+    "primaryGloss": "bag",
+    "emotion": "casual and everyday, grabbing belongings before heading out the door",
+    "notes": [
+      "In Belgium and the south of the Netherlands, 'tas' is also used to mean a cup (e.g. 'een tas koffie'), where standard Netherlandic Dutch uses 'kop' or 'kopje'."
+    ],
+    "senses": [
+      {
+        "id": "v3ubgdpdnqwn5x8",
+        "order": 0,
+        "definition": "A container made of cloth, leather, paper, or plastic, used for carrying things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bag",
+              "handbag"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "ali01qmyij7vd9i",
+            "text": "Ik ben mijn tas in de trein vergeten.",
+            "textLang": "nl",
+            "translation": "I left my bag on the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tas",
+            "matchedTranslationForm": "bag"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de tas",
+    "lemma": "tas",
+    "reading": null,
+    "ipa": "/tɑs/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "bag; cup",
     "primaryGloss": "bag",
     "emotion": "casual and everyday, grabbing belongings before heading out the door",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In the Netherlands, 'een tas' ... is also frequently used to mean a cup",
+        "why": "'Tas' for 'cup' is Belgian and southern regional Dutch, not standard in the Netherlands."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A cup or mug used for drinking coffee or tea.",
+        "why": "'Tas' meaning 'cup' is Belgian/southern dialectal; in nl-NL standard is 'kopje' or 'mok'."
+      }
+    ],
+    "growth": 0.723
   }
 }

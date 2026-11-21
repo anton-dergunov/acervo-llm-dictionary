@@ -83,6 +83,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to answer; to be responsible for",
+    "primaryGloss": "to answer",
+    "emotion": "attentive and ready, turning to address someone directly",
+    "notes": [
+      "Imperfective; perfective: ответить.",
+      "Takes the dative for the person answered (отвечать другу), на + accusative for a question or message (отвечать на вопрос), and за + accusative in the sense 'be responsible for' (отвечать за безопасность)."
+    ],
+    "senses": [
+      {
+        "id": "p88l9xt88gz5mqb",
+        "order": 0,
+        "definition": "To give a reply to someone, a question, or a message.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to answer",
+              "to reply"
+            ]
+          }
+        ],
+        "domain": "reply",
+        "emoji": "💬",
+        "examples": [
+          {
+            "id": "sygxdjjkdrqxrjn",
+            "text": "Почему ты не отвечаешь на мои звонки?",
+            "textLang": "ru",
+            "translation": "Why aren't you answering my calls?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "отвечаешь",
+            "matchedTranslationForm": "answering"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8js7lrgqlhsjbrz",
+        "order": 1,
+        "definition": "To be responsible or accountable for someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be responsible for",
+              "to answer for"
+            ]
+          }
+        ],
+        "domain": "responsibility",
+        "emoji": "🛡️",
+        "examples": [
+          {
+            "id": "7ltid3mzhmoimlv",
+            "text": "Кто будет отвечать за безопасность?",
+            "textLang": "ru",
+            "translation": "Who is going to be responsible for security?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and firm, demanding accountability",
+            "note": null,
+            "matchedForm": "отвечать",
+            "matchedTranslationForm": "be responsible"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "отвечать",
+    "lemma": "отвечать",
+    "reading": null,
+    "ipa": "/ɐtʲvʲɪˈtɕatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💬",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to answer; to be responsible",
     "primaryGloss": "to answer",
     "emotion": "attentive and ready, turning to address someone directly",
@@ -175,5 +285,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Я не знаю, что отвечать на этот вопрос.",
+        "why": "A specific question takes perfective ответить here; imperfective needs a habitual context."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "отвечать can mean both to answer a question and to take responsibility",
+        "why": "Restates the senses; should state aspect pair (ответить) and prepositions/cases (кому, на что, за что)."
+      }
+    ],
+    "growth": 1.207
   }
 }

@@ -68,6 +68,97 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "tiempo; clima",
+    "primaryGloss": "tiempo",
+    "emotion": "contemplative, looking out a window and noticing the state of the day",
+    "notes": [
+      "Es un sustantivo incontable: no se usa en plural ni con 'a' (se dice 'good weather', nunca 'a good weather').",
+      "Se traduce como 'tiempo' (o 'clima' en América Latina); para el clima de una región a largo plazo se usa 'climate'.",
+      "No confundir con 'whether' (si condicional/dubitativo), que se pronuncia igual."
+    ],
+    "senses": [
+      {
+        "id": "yptiylob520tz0z",
+        "order": 0,
+        "definition": "Estado de la atmósfera en un lugar y momento determinados, como la lluvia, el sol o el viento.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tiempo",
+              "clima"
+            ]
+          }
+        ],
+        "domain": "tiempo atmosférico",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "hzydzogzce5s6yk",
+            "text": "The weather is very nice today.",
+            "textLang": "en",
+            "translation": "El tiempo está muy agradable hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleasant, enjoying a lovely day outdoors",
+            "note": null,
+            "matchedForm": "weather",
+            "matchedTranslationForm": "tiempo"
+          },
+          {
+            "id": "68vap5qu0k9t9dl",
+            "text": "Bad weather can ruin a trip.",
+            "textLang": "en",
+            "translation": "El mal tiempo puede arruinar un viaje.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disappointed and realistic about how rain affects plans",
+            "note": null,
+            "matchedForm": "weather",
+            "matchedTranslationForm": "tiempo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "weather",
+    "lemma": "weather",
+    "reading": null,
+    "ipa": "/ˈwɛðər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "clima; tiempo",
     "primaryGloss": "clima",
     "emotion": "contemplative, looking out a window and noticing the state of the day",
@@ -141,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "clima, tiempo",
+        "why": "As note[0] states, 'tiempo' is the primary translation; 'clima' is mostly Latin American/colloquial."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing a crucial note that 'weather' is an uncountable noun (never *a weather)."
+      }
+    ],
+    "growth": 1.052
   }
 }

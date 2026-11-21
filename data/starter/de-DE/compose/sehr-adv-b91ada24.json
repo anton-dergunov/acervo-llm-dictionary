@@ -68,6 +68,115 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "very; very much",
+    "primaryGloss": "very",
+    "emotion": null,
+    "notes": [
+      "Use 'sehr' before adjectives and adverbs ('sehr gut') and with verbs of feeling or liking ('Es gefällt mir sehr'). For quantities with nouns, use 'viel' ('viel Arbeit')."
+    ],
+    "senses": [
+      {
+        "id": "huysas9kq8a166t",
+        "order": 0,
+        "definition": "To a high degree; used before adjectives and adverbs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "very",
+              "really"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "aot7ael39yl0w0d",
+            "text": "Das Wetter ist heute sehr schön.",
+            "textLang": "de",
+            "translation": "The weather is very nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and appreciative, noticing the nice weather",
+            "note": null,
+            "matchedForm": "sehr",
+            "matchedTranslationForm": "very"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vlxuc8hxoeqlz9u",
+        "order": 1,
+        "definition": "Greatly or a lot; used with verbs of feeling, liking, or thanking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "very much",
+              "a lot"
+            ]
+          }
+        ],
+        "domain": "intensity",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "86cidfauuivbo4y",
+            "text": "Ich freue mich sehr auf das Wochenende.",
+            "textLang": "de",
+            "translation": "I am looking forward to the weekend very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sehr",
+            "matchedTranslationForm": "very much"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "sehr",
+    "lemma": "sehr",
+    "reading": null,
+    "ipa": "/zeːɐ̯/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📈",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "very; a lot",
     "primaryGloss": "very",
     "emotion": null,
@@ -142,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "very; a lot",
+        "why": "shortGloss includes 'a lot', which is missing from the senses."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Unlike 'viel', which usually modifies verbs or nouns",
+        "why": "'sehr' also modifies verbs of feeling or liking (e.g., 'Ich freue mich sehr')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common sense modifying verbs ('a lot, very much', e.g., 'vielen Dank / danke sehr')."
+      }
+    ],
+    "growth": 1.097
   }
 }

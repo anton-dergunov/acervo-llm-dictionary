@@ -68,6 +68,83 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "money",
+    "primaryGloss": "money",
+    "emotion": "practical and grounded, thinking about everyday expenses",
+    "notes": [
+      "Usually uncountable and used in the singular without an article when talking about money in general. For cash Specifically, German also uses 'das Bargeld'."
+    ],
+    "senses": [
+      {
+        "id": "1ywpbhwclg64utg",
+        "order": 0,
+        "definition": "What you earn, save, and use to buy things, in the form of coins, banknotes, or in a bank account.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "💶",
+        "examples": [
+          {
+            "id": "deersjijp8rej02",
+            "text": "Ich habe kein Geld dabei.",
+            "textLang": "de",
+            "translation": "I don't have any money with me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit apologetic, checking pockets while standing at the cash register",
+            "note": null,
+            "matchedForm": "Geld",
+            "matchedTranslationForm": "money"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "1ywpbhwclg64utg",
+      "from": "Münzen und Scheine, die man benutzt, um Dinge zu kaufen.",
+      "to": "Coins and banknotes used to buy things.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:11:15Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Geld",
+    "lemma": "Geld",
+    "reading": null,
+    "ipa": "/ɡɛlt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💶",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "money; currency",
     "primaryGloss": "money",
     "emotion": "practical and grounded, thinking about everyday expenses",
@@ -122,14 +199,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "1ywpbhwclg64utg",
-      "from": "Münzen und Scheine, die man benutzt, um Dinge zu kaufen.",
-      "to": "Coins and banknotes used to buy things.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:11:15Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Always capitalized like all nouns in German.",
+        "why": "All German nouns are capitalized; this is unhelpful filler."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "money; currency",
+        "why": "'Das Geld' means money, not a national currency ('die Währung')."
+      }
+    ],
+    "growth": 1.297
+  }
 }

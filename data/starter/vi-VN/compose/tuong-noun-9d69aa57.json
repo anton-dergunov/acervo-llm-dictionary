@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "wall",
+    "primaryGloss": "wall",
+    "emotion": "solid and steady, pointing out a boundary in the room",
+    "notes": [
+      "Takes the classifier 'bức' (bức tường)."
+    ],
+    "senses": [
+      {
+        "id": "8ktpuhicrqje7ow",
+        "order": 0,
+        "definition": "A vertical structure that divides or encloses a room, building, or area.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wall"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🧱",
+        "examples": [
+          {
+            "id": "io74qr2um2e3qkn",
+            "text": "Bức tường phòng khách được sơn màu trắng.",
+            "textLang": "vi",
+            "translation": "The living room wall is painted white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and descriptive, observing the space",
+            "note": null,
+            "matchedForm": "tường",
+            "matchedTranslationForm": "wall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tường",
+    "lemma": "tường",
+    "reading": null,
+    "ipa": "/tɨəŋ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧱",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "wall; clear, thoroughly informed",
     "primaryGloss": "wall",
     "emotion": "solid and steady, pointing out a boundary in the room",
@@ -159,5 +226,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(knowledge) To know or understand something thoroughly and clearly.",
+        "why": "Entry is a noun; this sense is a literary verb/adjective and confuses POS."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anh ấy hiểu tường tận mọi chuyện.",
+        "why": "Uses the compound word 'tường tận' instead of standalone 'tường'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 'tường' refers to a vertical structure like a wall.",
+        "why": "Restates the definitions; should instead give the common classifier 'bức'."
+      }
+    ],
+    "growth": 0.426
   }
 }

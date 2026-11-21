@@ -71,6 +71,71 @@
     "shortGloss": "araña",
     "primaryGloss": "araña",
     "emotion": "caution mixed with a little bit of uneasy curiosity",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ofhaommssl5t6bk",
+        "order": 0,
+        "definition": "Animal pequeño de ocho patas que teje redes para atrapar insectos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "araña"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🕷️",
+        "examples": [
+          {
+            "id": "4ij68lj0zexlzgt",
+            "text": "The spider is spinning a web in the corner.",
+            "textLang": "en",
+            "translation": "La araña está tejiendo una telaraña en la esquina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, pointing out a quiet detail",
+            "note": null,
+            "matchedForm": "spider",
+            "matchedTranslationForm": "araña"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "spider",
+    "lemma": "spider",
+    "reading": null,
+    "ipa": "/ˈspaɪdər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕷️",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "araña",
+    "primaryGloss": "araña",
+    "emotion": "caution mixed with a little bit of uneasy curiosity",
     "notes": [
       "Se utiliza para referirse a cualquier arácnido. Recuerda que no es un insecto, aunque en el habla cotidiana a menudo se agrupan por error.",
       "No confundir con 'spy' (espía), que suena parecido pero significa algo totalmente distinto."
@@ -119,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Se utiliza para referirse a cualquier arácnido.",
+        "why": "False: 'spider' does not refer to scorpions, ticks, or other non-spider arachnids."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "No confundir con 'spy' (espía), que suena parecido",
+        "why": "Unhelpful filler note; learners rarely confuse 'spider' and 'spy'."
+      }
+    ],
+    "growth": 0.407
   }
 }

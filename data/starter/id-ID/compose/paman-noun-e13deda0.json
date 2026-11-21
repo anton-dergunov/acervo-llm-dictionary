@@ -72,6 +72,74 @@
     "primaryGloss": "uncle",
     "emotion": "warm and welcoming, greeting an older relative at the door",
     "notes": [
+      "Used for both maternal and paternal uncles, as well as the husband of one's aunt.",
+      "In casual daily conversation, Indonesians often use 'om' (from Dutch) instead of 'paman'."
+    ],
+    "senses": [
+      {
+        "id": "03581mby9z0g52a",
+        "order": 0,
+        "definition": "The brother of one's father or mother, or the husband of one's aunt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "uncle"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨",
+        "examples": [
+          {
+            "id": "4uu2bmppq31ygir",
+            "text": "Paman saya datang berkunjung kemarin.",
+            "textLang": "id",
+            "translation": "My uncle came to visit yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and conversational, sharing family news with a friend",
+            "note": null,
+            "matchedForm": "Paman",
+            "matchedTranslationForm": "uncle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "paman",
+    "lemma": "paman",
+    "reading": null,
+    "ipa": "/ˈpaman/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "uncle",
+    "primaryGloss": "uncle",
+    "emotion": "warm and welcoming, greeting an older relative at the door",
+    "notes": [
       "Paman is the standard word for uncle, used for both maternal and paternal uncles.",
       "In daily conversation, Indonesians often use 'om' as a more casual, colloquial alternative borrowed from Dutch, especially with people of a parent's age whom one is close to."
     ],
@@ -160,5 +228,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bolehkah saya beli buah ini, paman?",
+        "why": "Addressing a seller as 'paman' is unnatural in modern daily Indonesian; 'Pak' is used."
+      }
+    ],
+    "growth": 0.58
   }
 }

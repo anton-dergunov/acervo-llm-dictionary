@@ -62,6 +62,114 @@
     "headword": "koken",
     "lemma": "koken",
     "reading": null,
+    "ipa": "/ˈkoːkə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to cook; to boil",
+    "primaryGloss": "to cook",
+    "emotion": null,
+    "notes": [
+      "Unlike English 'to cook', 'koken' is also the standard word for 'to boil' (een ei koken = to boil an egg; het water kookt = the water is boiling)."
+    ],
+    "senses": [
+      {
+        "id": "kf9b1fbn3nsxbe6",
+        "order": 0,
+        "definition": "To prepare food or a meal by heating it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook",
+              "to prepare food"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "x045acn0bxgzoqi",
+            "text": "Ik ga vandaag lekker voor ons koken.",
+            "textLang": "nl",
+            "translation": "I am going to cook a nice meal for us today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and cheerful, looking forward to a nice meal",
+            "note": null,
+            "matchedForm": "koken",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zvb3g2a2c8jlt5j",
+        "order": 1,
+        "definition": "Of a liquid: to reach the temperature at which it bubbles; or to heat a liquid or food in this way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to boil"
+            ]
+          }
+        ],
+        "domain": "boiling",
+        "emoji": "🫧",
+        "examples": [
+          {
+            "id": "eu436yj0oe54p6m",
+            "text": "Het water begint te koken.",
+            "textLang": "nl",
+            "translation": "The water is starting to boil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "attentive and watchful, waiting for the pot to bubble",
+            "note": null,
+            "matchedForm": "koken",
+            "matchedTranslationForm": "boil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "koken",
+    "lemma": "koken",
+    "reading": null,
     "ipa": "/ˈkoː.kə(n)/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To heat a liquid until it bubbles and turns to steam.",
+        "why": "Defines only the transitive use, while the example is intransitive ('Het water begint te koken')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use koken for preparing food in general, but also specifically...",
+        "why": "Merely repeats the two senses listed below."
+      }
+    ],
+    "growth": 1.174
   }
 }

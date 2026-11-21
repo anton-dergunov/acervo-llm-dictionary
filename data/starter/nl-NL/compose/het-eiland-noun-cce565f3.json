@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": "dreamy and calm, picturing a sunny getaway",
+    "notes": [
+      "Like English, Dutch uses the preposition 'op' (on) with islands: 'op een eiland wonen' (to live on an island)."
+    ],
+    "senses": [
+      {
+        "id": "b8pu2o9ctkfe5t6",
+        "order": 0,
+        "definition": "A piece of land completely surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "jyiynsiej1tiau9",
+            "text": "Het schip voer naar een verlaten eiland.",
+            "textLang": "nl",
+            "translation": "The ship sailed to a deserted island.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "adventurous and curious, gazing across the horizon",
+            "note": null,
+            "matchedForm": "eiland",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het eiland",
+    "lemma": "eiland",
+    "reading": null,
+    "ipa": "/ˈɛi.lɑnt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "island; traffic island",
     "primaryGloss": "island",
     "emotion": "dreamy and calm, picturing a sunny getaway",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(traffic) A raised area in the middle of a road",
+        "why": "A traffic island in Dutch is a 'vluchtheuvel' or 'verkeerseiland', rarely bare 'eiland'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use the neuter article 'het' for this word: 'het eiland', plural 'eilanden'.",
+        "why": "Restates the gender/article shown in the headword and regular plural."
+      }
+    ],
+    "growth": 0.438
   }
 }

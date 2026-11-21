@@ -68,6 +68,90 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "sheep",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and pastoral, watching the flock graze in the quiet meadow",
+    "notes": [],
+    "senses": [
+      {
+        "id": "s87oer03vsllo9z",
+        "order": 0,
+        "definition": "A farm animal with thick curly wool, raised for its wool, milk, and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep",
+              "ewe"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "vtb2898phwxtcf7",
+            "text": "Le pecore mangiano l'erba nel prato.",
+            "textLang": "it",
+            "translation": "The sheep are eating grass in the meadow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pecore",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "s87oer03vsllo9z",
+      "from": "Mammifero ruminante allevato per la lana, la carne e il latte.",
+      "to": "A farm mammal raised for its wool, meat, and milk.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    },
+    {
+      "sense": "i11y36pocnalwqg",
+      "from": "Persona timida o che si conforma passivamente al comportamento altrui.",
+      "to": "A shy person who passively copies what others do.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la pecora",
+    "lemma": "pecora",
+    "reading": null,
+    "ipa": "/ˈpɛ.ko.ra/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "sheep; timid or easily influenced person",
     "primaryGloss": "sheep",
     "emotion": "gentle and pastoral, watching the flock graze in the quiet meadow",
@@ -161,22 +245,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "s87oer03vsllo9z",
-      "from": "Mammifero ruminante allevato per la lana, la carne e il latte.",
-      "to": "A farm mammal raised for its wool, meat, and milk.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    },
-    {
-      "sense": "i11y36pocnalwqg",
-      "from": "Persona timida o che si conforma passivamente al comportamento altrui.",
-      "to": "A shy person who passively copies what others do.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used literally for the farm animal, and metaphorically for someone who blindly",
+        "why": "Merely restates the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A shy person who passively copies what others do.",
+        "why": "Figurative use is secondary for A2 and easily understood from English 'sheep'."
+      }
+    ],
+    "growth": 0.364
+  }
 }

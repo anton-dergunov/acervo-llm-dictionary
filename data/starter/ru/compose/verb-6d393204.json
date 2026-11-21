@@ -58,6 +58,114 @@
     "headword": "выигрывать",
     "lemma": "выигрывать",
     "reading": null,
+    "ipa": "/vɨˈiɡrɨvətʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏆",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to win; to gain",
+    "primaryGloss": "to win",
+    "emotion": "excited and triumphant, celebrating a great victory",
+    "notes": [
+      "Imperfective; the perfective partner is выиграть. Takes a direct object for a prize or match (выигрывать матч, деньги) or в + accusative for the game (выигрывать в шахматы)."
+    ],
+    "senses": [
+      {
+        "id": "c2a1ihelvaag7ms",
+        "order": 0,
+        "definition": "To come first or succeed in a game, competition, lottery, or bet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to win"
+            ]
+          }
+        ],
+        "domain": "competition",
+        "emoji": "🥇",
+        "examples": [
+          {
+            "id": "w2dldzawiwn4ewv",
+            "text": "Наша команда почти всегда выигрывает домашние матчи.",
+            "textLang": "ru",
+            "translation": "Our team almost always wins its home matches.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "выигрывает",
+            "matchedTranslationForm": "wins"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9w8t4qi0havgzf9",
+        "order": 1,
+        "definition": "To gain an advantage, such as time, or benefit from something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to gain",
+              "to benefit"
+            ]
+          }
+        ],
+        "domain": "benefit",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "pfmgzwdab9zcpsg",
+            "text": "От этого решения выигрывают все.",
+            "textLang": "ru",
+            "translation": "Everyone benefits from this decision.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "выигрывают",
+            "matchedTranslationForm": "benefits"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "выигрывать",
+    "lemma": "выигрывать",
+    "reading": null,
     "ipa": "/ˈvɨjɡrɨvətʲ/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈvɨjɡrɨvətʲ/",
+        "why": "Wrong stress: 'выи́грывать' is stressed on the second syllable /vɨˈiɡrɨvətʲ/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Наша команда любит выигрывать в футбол каждый матч.",
+        "why": "Mixing 'выигрывать в футбол' and 'выигрывать каждый матч' in one clause is ungrammatical."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Мы можем выигрывать время, если поедем на метро.",
+        "why": "Wrong aspect: a single conditional future event ('если поедем') requires perfective 'выиграть время'."
+      }
+    ],
+    "growth": 1.133
   }
 }

@@ -69,6 +69,139 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to hurt; to feel pain; to be hurt",
+    "primaryGloss": "hurt",
+    "emotion": "a simple, clear expression of physical distress or discomfort",
+    "notes": [
+      "เจ็บ is used for sharp, surface, or localized pain (such as a cut, wound, or sore throat: เจ็บคอ). Do not confuse it with ปวด, which is used for dull, deep, or aching pain inside the body (such as a headache: ปวดหัว, or stomachache: ปวดท้อง)."
+    ],
+    "senses": [
+      {
+        "id": "fcrqnip449xrk58",
+        "order": 0,
+        "definition": "To feel or cause physical pain or soreness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hurt",
+              "feel pain",
+              "be painful",
+              "be sore"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "8qw6liy3qm0ya6y",
+            "text": "วันนี้ฉันเจ็บคอมาก",
+            "textLang": "th",
+            "translation": "My throat hurts a lot today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เจ็บ",
+            "matchedTranslationForm": "hurts"
+          },
+          {
+            "id": "yk59uko6tjfae6x",
+            "text": "แผลนี้เจ็บมาก",
+            "textLang": "th",
+            "translation": "This wound is very painful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grimacing slightly while describing a sharp sensation",
+            "note": null,
+            "matchedForm": "เจ็บ",
+            "matchedTranslationForm": "painful"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lbiaz6hs6ocf902",
+        "order": 1,
+        "definition": "To experience emotional hurt or distress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "be hurt",
+              "feel hurt"
+            ]
+          }
+        ],
+        "domain": "feelings",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "0c9znkg3a0evnyv",
+            "text": "ฉันเจ็บที่เขาไม่พูดความจริง",
+            "textLang": "th",
+            "translation": "I am hurt that he did not tell the truth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hollow and sad, reflecting on a betrayal",
+            "note": null,
+            "matchedForm": "เจ็บ",
+            "matchedTranslationForm": "hurt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เจ็บ",
+    "lemma": "เจ็บ",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body",
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to ache; to feel pain; to be painful",
     "primaryGloss": "ache",
     "emotion": "a simple, clear expression of physical distress or discomfort",
@@ -185,5 +318,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 'เจ็บ' for physical pain (like a headache or a cut).",
+        "why": "A headache in Thai is ปวดหัว, not เจ็บหัว (which means a sore scalp/head injury)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ฉันเจ็บหัว — I have a headache.",
+        "why": "Unnatural Thai for a headache; speakers say ปวดหัว."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "When talking about emotional pain, 'เจ็บ' is often used to describe hurt",
+        "why": "Merely restates sense 1."
+      }
+    ],
+    "growth": 0.957
   }
 }

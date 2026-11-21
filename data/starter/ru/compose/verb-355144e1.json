@@ -58,6 +58,96 @@
     "headword": "иметь",
     "lemma": "иметь",
     "reading": null,
+    "ipa": "/ɪˈmʲetʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to have; to possess",
+    "primaryGloss": "to have",
+    "emotion": null,
+    "notes": [
+      "Imperfective only. For everyday possession, Russian usually uses 'у меня есть...' instead of иметь. Иметь is mainly used in formal contexts and fixed abstract phrases (иметь право 'to have the right', иметь смысл 'to make sense', иметь в виду 'to mean')."
+    ],
+    "senses": [
+      {
+        "id": "e8gk3p2aynietfb",
+        "order": 0,
+        "definition": "To possess or hold something, especially an abstract quality, right, or feature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to possess",
+              "to own"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "k9k5xnz8n9d5bwj",
+            "text": "Вы имеете право хранить молчание.",
+            "textLang": "ru",
+            "translation": "You have the right to remain silent.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "имеете",
+            "matchedTranslationForm": "have"
+          },
+          {
+            "id": "o8okeyh0oatemif",
+            "text": "Это не имеет смысла.",
+            "textLang": "ru",
+            "translation": "This makes no sense.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dismissive and firm, confirming a lack of logic",
+            "note": null,
+            "matchedForm": "имеет",
+            "matchedTranslationForm": "makes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "иметь",
+    "lemma": "иметь",
+    "reading": null,
     "ipa": "/iˈmʲetʲ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To maintain a specific position or meaning, often used in abstract concepts.",
+        "why": "Physical and abstract 'have' are one sense; separate only if meaning truly shifts."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он имеет большой дом.",
+        "why": "Unnatural in everyday Russian (as the note itself admits); use a natural context for 'иметь'."
+      }
+    ],
+    "growth": 0.775
   }
 }

@@ -60,6 +60,116 @@
     "headword": "precisar",
     "lemma": "precisar",
     "reading": null,
+    "ipa": "/pɾe.siˈzaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to have to",
+    "primaryGloss": "to need",
+    "emotion": null,
+    "notes": [
+      "Before a noun or pronoun, 'precisar' takes the preposition 'de' (e.g., 'Preciso de ajuda'). Before another verb in the infinitive, no preposition is used (e.g., 'Preciso ir')."
+    ],
+    "senses": [
+      {
+        "id": "2gwauwzgz3172zb",
+        "order": 0,
+        "definition": "To require something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "need",
+        "emoji": "🖐️",
+        "examples": [
+          {
+            "id": "8dvhicggah2tgip",
+            "text": "Eu preciso de um café para acordar.",
+            "textLang": "pt",
+            "translation": "I need a coffee to wake up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly groggy but hopeful, craving that first sip of coffee",
+            "note": null,
+            "matchedForm": "preciso",
+            "matchedTranslationForm": "need"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "eim21gwgx6otaxp",
+        "order": 1,
+        "definition": "Followed by an infinitive: to have to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need to",
+              "to have to",
+              "must"
+            ]
+          }
+        ],
+        "domain": "obligation",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "i82y7ukikak18dr",
+            "text": "Preciso trabalhar amanhã cedo.",
+            "textLang": "pt",
+            "translation": "I have to work early tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Preciso",
+            "matchedTranslationForm": "have to"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "precisar",
+    "lemma": "precisar",
+    "reading": null,
     "ipa": "/pɾe.si.ˈzaɾ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +272,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Você precisa de um visto para entrar no país.",
+        "why": "Uses 'precisar de' + noun (Sense 0) instead of 'precisar' + infinitive for obligation."
+      }
+    ],
+    "growth": 0.676
   }
 }

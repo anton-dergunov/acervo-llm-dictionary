@@ -68,6 +68,155 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be (location, state, ongoing action)",
+    "primaryGloss": "to be",
+    "emotion": "matter-of-fact and direct, pointing out where something is",
+    "notes": [
+      "Irregular first-person singular in the present (estoy) and irregular stress in the present (estás, está, están). Irregular preterite stem: estuv- (estuve, estuviste, etc.).",
+      "Use 'estar' for physical locations (even permanent ones, except for events), temporary states or moods, and ongoing actions. Use 'ser' for identity, origin, time, and inherent qualities."
+    ],
+    "senses": [
+      {
+        "id": "z9jrjf5dkjkdzk8",
+        "order": 0,
+        "definition": "To be situated in a particular place or position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "gykiyuvxx3vkfca",
+            "text": "Las llaves están sobre la mesa.",
+            "textLang": "es",
+            "translation": "The keys are on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and pointing out where something was left",
+            "note": null,
+            "matchedForm": "están",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7ggogdo1oojnnaa",
+        "order": 1,
+        "definition": "To be in a particular physical or emotional state or condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be",
+              "to feel"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "lnob09a3n3jgsfz",
+            "text": "Hoy estoy muy cansado por el trabajo.",
+            "textLang": "es",
+            "translation": "Today I am very tired because of work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and unhurried at the end of a long day",
+            "note": null,
+            "matchedForm": "estoy",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dcvx3eh0qtsrwlr",
+        "order": 2,
+        "definition": "Used with a gerund (-ando, -iendo) to show an action is in progress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "ongoing action",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "yoav0pjiddg5zeg",
+            "text": "Estoy estudiando español.",
+            "textLang": "es",
+            "translation": "I am studying Spanish.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Estoy",
+            "matchedTranslationForm": "am"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "estar",
+    "lemma": "estar",
+    "reading": null,
+    "ipa": "/esˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be (temporary states, locations); to be feeling",
     "primaryGloss": "to be",
     "emotion": "matter-of-fact and direct, pointing out where something is",
@@ -158,5 +307,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To indicate the temporary location of a person, place, or thing.",
+        "why": "False: 'estar' is used for permanent locations of places too (e.g., México está en Norteamérica)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 auxiliary sense with the gerund for ongoing actions (estar + -ndo)."
+      }
+    ],
+    "growth": 1.652
   }
 }

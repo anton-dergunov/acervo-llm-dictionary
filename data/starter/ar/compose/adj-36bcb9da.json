@@ -68,6 +68,97 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "sick; ill",
+    "primaryGloss": "sick",
+    "emotion": "quiet and weary, feeling under the weather",
+    "notes": [
+      "Often used as a noun meaning 'patient' (feminine مَرِيضَة).",
+      "Takes the broken plural مَرْضَى (marḍā) for both the adjective and the noun."
+    ],
+    "senses": [
+      {
+        "id": "lxo10ujrb0alem5",
+        "order": 0,
+        "definition": "Not feeling well; suffering from an illness or disease.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill",
+              "unwell"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "hu5qb76dwo4ww84",
+            "text": "اليَوْمَ أَنَا مَرِيضٌ وَلَنْ أَذْهَبَ إِلَى العَمَلِ.",
+            "textLang": "ar",
+            "translation": "Today I am sick and I will not go to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "مَرِيضٌ",
+            "matchedTranslationForm": "sick"
+          },
+          {
+            "id": "57dfziwvqmjw0xm",
+            "text": "الطَّبِيبُ يَفْحَصُ المَرِيضَ فِي العِيَادَةِ.",
+            "textLang": "ar",
+            "translation": "The doctor examines the patient in the clinic.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and professional, describing a routine medical visit",
+            "note": null,
+            "matchedForm": "المَرِيضَ",
+            "matchedTranslationForm": "patient"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "مَرِيض",
+    "lemma": "مَرِيض",
+    "reading": null,
+    "ipa": "/maˈriːdˤ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "sick; ill; patient",
     "primaryGloss": "sick",
     "emotion": "quiet and weary, feeling under the weather",
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A person who receives medical treatment in a hospital or clinic.",
+        "why": "Entry POS is adjective, so defining sense 1 as a noun ('A person...') mismatches."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Can be used both as an adjective meaning 'sick' or 'ill'",
+        "why": "Restates the senses and glosses; omits the irregular broken plural مَرْضَى."
+      }
+    ],
+    "growth": 0.883
   }
 }

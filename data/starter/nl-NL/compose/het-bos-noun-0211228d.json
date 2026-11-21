@@ -72,6 +72,116 @@
     "primaryGloss": "forest",
     "emotion": "peaceful and quiet, walking through the trees on a crisp morning",
     "notes": [
+      "Plural: 'bossen'.",
+      "Gender changes with meaning: 'het bos' (neuter) means 'forest', whereas 'de bos' (common gender) is used for a 'bunch' or 'bouquet' (e.g., 'een mooie bos bloemen')."
+    ],
+    "senses": [
+      {
+        "id": "tclakc7jjm1jh0s",
+        "order": 0,
+        "definition": "A large area of land covered with trees and undergrowth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "forest",
+              "woods"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌲",
+        "examples": [
+          {
+            "id": "t31r7wumbepufbu",
+            "text": "We maken een lange wandeling door het bos.",
+            "textLang": "nl",
+            "translation": "We are taking a long walk through the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and relaxed, enjoying nature with a friend",
+            "note": null,
+            "matchedForm": "bos",
+            "matchedTranslationForm": "forest"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bd7xhfmq9dts4rj",
+        "order": 1,
+        "definition": "A collection of things held or tied together, such as flowers or keys.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bunch",
+              "bouquet"
+            ]
+          }
+        ],
+        "domain": "objects",
+        "emoji": "💐",
+        "examples": [
+          {
+            "id": "yhoj2tfch7i16dq",
+            "text": "Ik kreeg een mooie bos bloemen voor mijn verjaardag.",
+            "textLang": "nl",
+            "translation": "I got a nice bouquet of flowers for my birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and grateful, remembering a nice gift",
+            "note": null,
+            "matchedForm": "bos",
+            "matchedTranslationForm": "bouquet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het bos",
+    "lemma": "bos",
+    "reading": null,
+    "ipa": "/bɔs/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌲",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "forest, woods; bunch, bouquet",
+    "primaryGloss": "forest",
+    "emotion": "peaceful and quiet, walking through the trees on a crisp morning",
+    "notes": [
       "Bos has two very common meanings: a large area of trees (forest), and a bunch or bouquet of flowers or keys (een bos bloemen, een bos sleutels).",
       "Do not confuse with 'boom', which means a single tree."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that sense 2 ('bunch') is a 'de' word ('de bos'), despite headword 'het bos'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Bos has two very common meanings: a large area of",
+        "why": "Merely restates the definitions of the two senses."
+      }
+    ],
+    "growth": 0.955
   }
 }

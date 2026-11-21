@@ -58,6 +58,156 @@
     "headword": "ở",
     "lemma": "ở",
     "reading": null,
+    "ipa": "/ʔəː˧˩˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be at; to live; at, in",
+    "primaryGloss": "to be at",
+    "emotion": "calm and matter-of-fact, stating where someone or something is",
+    "notes": [
+      "Also very commonly used after another verb like the English prepositions 'in' or 'at' (e.g. 'làm việc ở Hà Nội' = 'to work in Hanoi')."
+    ],
+    "senses": [
+      {
+        "id": "jz5cpflep1o7lzb",
+        "order": 0,
+        "definition": "To be located in or at a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be at",
+              "to be in"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "65cxz9k0dkjuci0",
+            "text": "Hôm nay tôi ở nhà.",
+            "textLang": "vi",
+            "translation": "Today I am at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ở",
+            "matchedTranslationForm": "am at"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lww70ox1pb320ah",
+        "order": 1,
+        "definition": "To live, reside, or stay in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to live",
+              "to stay"
+            ]
+          }
+        ],
+        "domain": "residence",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "a59g95ysrampqwg",
+            "text": "Anh ấy ở Hà Nội.",
+            "textLang": "vi",
+            "translation": "He lives in Hanoi.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and informative, mentioning someone's residence",
+            "note": null,
+            "matchedForm": "ở",
+            "matchedTranslationForm": "lives"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ci2e00u3aotnoh3",
+        "order": 2,
+        "definition": "Used before a noun to show where an action happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "in",
+              "at"
+            ]
+          }
+        ],
+        "domain": "preposition",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tmtdjycnryuykjr",
+            "text": "Chị tôi làm việc ở bệnh viện.",
+            "textLang": "vi",
+            "translation": "My sister works at the hospital.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ở",
+            "matchedTranslationForm": "at"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ở",
+    "lemma": "ở",
+    "reading": null,
     "ipa": "/ʔəː˧˥/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʔəː˧˥/",
+        "why": "Wrong tone: hỏi tone in Hanoi Vietnamese is dipping/low-falling (/˧˩˧/ or /˨˩̰/), not high-rising /˧˥/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "One of the most common verbs in Vietnamese, used both to indicate",
+        "why": "Restates the senses without explaining its very common prepositional use ('in, at')."
+      }
+    ],
+    "growth": 1.507
   }
 }

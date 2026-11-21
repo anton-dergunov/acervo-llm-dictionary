@@ -58,6 +58,96 @@
     "headword": "نَامَ",
     "lemma": "نَامَ",
     "reading": null,
+    "ipa": "/ˈnaːma/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep; to go to sleep",
+    "primaryGloss": "to sleep",
+    "emotion": "peaceful and quiet, drifting off into a calm rest",
+    "notes": [
+      "A hollow verb (root ن-و-م) with an 'a' vowel in the non-past: يَنَامُ (yanāmu). In the past tense, the long 'ā' becomes a short 'i' before consonant suffixes: نِمْتُ (nimtu, 'I slept'), نِمْنَا (nimnā, 'we slept')."
+    ],
+    "senses": [
+      {
+        "id": "yblwo2wixphrfrx",
+        "order": 0,
+        "definition": "To be in or fall into the natural state of rest in which the eyes are closed and the mind is unconscious.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep",
+              "to go to sleep",
+              "to fall asleep"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "6chjr6rr6twkp14",
+            "text": "نَامَ الطِّفْلُ فِي سَرِيرِهِ.",
+            "textLang": "ar",
+            "translation": "The child slept in his bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "نَامَ",
+            "matchedTranslationForm": "slept"
+          },
+          {
+            "id": "cxaua45qvepdtzs",
+            "text": "نِمْتُ مُبَكِّرًا أَمْسِ.",
+            "textLang": "ar",
+            "translation": "I went to sleep early yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "نِمْتُ",
+            "matchedTranslationForm": "went to sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "نَامَ",
+    "lemma": "نَامَ",
+    "reading": null,
     "ipa": "/naːma/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note that the root n-w-m is very regular, but the 'a' sound",
+        "why": "False: n-w-m is a hollow root and the 'a' shortens to 'i' in 1st/2nd person past (نِمْتُ)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "نَمْنَا عِنْدَ صَدِيقِنَا.",
+        "why": "Wrong vowel: 1st person plural past of نَامَ is نِمْنَا (nimnā), not نَمْنَا."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To spend the night in a place.",
+        "why": "Sleeping at someone's place is the same sense of نَامَ, or belongs to بَاتَ."
+      }
+    ],
+    "growth": 1.254
   }
 }

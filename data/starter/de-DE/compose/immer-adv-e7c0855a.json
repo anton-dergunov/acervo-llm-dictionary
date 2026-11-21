@@ -68,6 +68,115 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "always; more and more",
+    "primaryGloss": "always",
+    "emotion": null,
+    "notes": [
+      "Followed by a comparative adjective, 'immer' means 'more and more' (e.g., 'immer größer' = 'bigger and bigger').",
+      "In the phrase 'immer noch', it reinforces 'noch' (still): 'Es regnet immer noch' (It is still raining)."
+    ],
+    "senses": [
+      {
+        "id": "u6r48v2ttvsp8xb",
+        "order": 0,
+        "definition": "At all times; on every occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "always"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "yuya5zfmkuhycuk",
+            "text": "Ich bin immer pünktlich.",
+            "textLang": "de",
+            "translation": "I am always on time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident, reliable, and straightforward",
+            "note": null,
+            "matchedForm": "immer",
+            "matchedTranslationForm": "always"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rt1se5kqqqhz66l",
+        "order": 1,
+        "definition": "Used before a comparative to show that something is increasing over time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "more and more",
+              "increasingly"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vufeoktool87kui",
+            "text": "Das Wetter wird immer besser.",
+            "textLang": "de",
+            "translation": "The weather is getting better and better.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "immer",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "immer",
+    "lemma": "immer",
+    "reading": null,
+    "ipa": "/ˈɪmɐ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "always; still; every time",
     "primaryGloss": "always",
     "emotion": null,
@@ -160,5 +269,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Continuing to be; indicating that something has not changed.",
+        "why": "'still' is 'noch' (or 'immer noch'), not 'immer' by itself."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can also mean 'still' when used to describe",
+        "why": "'immer' only means 'still' when combined with 'noch' ('immer noch')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common A2 usage 'immer + comparative' (more and more)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "always; still; every time",
+        "why": "'still' is wrong, and 'every time' is not covered in the senses."
+      }
+    ],
+    "growth": 0.859
   }
 }

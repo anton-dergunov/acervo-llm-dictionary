@@ -70,6 +70,114 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "grass; weed",
+    "primaryGloss": "grass",
+    "emotion": null,
+    "notes": [
+      "Use the classifier 'ngọn' or 'cọng' for a single blade of grass, and 'bãi' or 'thảm' for a lawn or patch of grass.",
+      "Do not confuse 'cỏ' with 'cây', which refers to larger plants, bushes, or trees."
+    ],
+    "senses": [
+      {
+        "id": "68sn2b8aicm63sa",
+        "order": 0,
+        "definition": "Common wild low-growing green plants with narrow leaves that cover the ground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grass"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "zv7ne6d5jo3rtco",
+            "text": "Bãi cỏ này rất xanh và đẹp.",
+            "textLang": "vi",
+            "translation": "This lawn is very green and beautiful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and appreciative of a pleasant landscape",
+            "note": null,
+            "matchedForm": "cỏ",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s8j5patmjx3upm5",
+        "order": 1,
+        "definition": "Any wild plant growing where it is not wanted, especially in a garden or field.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weed"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "ilwtzfpqlqsj1gh",
+            "text": "Cuối tuần này tôi phải nhổ cỏ trong vườn.",
+            "textLang": "vi",
+            "translation": "This weekend I have to pull the weeds in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cỏ",
+            "matchedTranslationForm": "weeds"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cỏ",
+    "lemma": "cỏ",
+    "reading": null,
+    "ipa": "/kɔ˧˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "grass; herb",
     "primaryGloss": "grass",
     "emotion": null,
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A small plant that is often used for medicine or seasoning.",
+        "why": "'Cỏ' means grass or unwanted weed, not culinary/medicinal herb ('thảo mộc', 'rau thơm')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "grass; herb",
+        "why": "'Herb' is an incorrect translation for 'cỏ'; should be 'grass; weed'."
+      }
+    ],
+    "growth": 0.983
   }
 }

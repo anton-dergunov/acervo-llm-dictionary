@@ -68,6 +68,115 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "line, queue; tail",
+    "primaryGloss": "line",
+    "emotion": "patient and resigned, shifting weight while waiting for a turn",
+    "notes": [
+      "Use the expression 'faire la queue' for 'to stand in line' or 'to wait in a queue'.",
+      "In informal slang, 'la queue' also refers to the penis, so learners may hear it used in jokes or vulgar contexts."
+    ],
+    "senses": [
+      {
+        "id": "a61h4tkrqfuq4y1",
+        "order": 0,
+        "definition": "A line of people or vehicles waiting for their turn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "line",
+              "queue"
+            ]
+          }
+        ],
+        "domain": "waiting",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "6lhuk519zbxkdbe",
+            "text": "Il y a une longue queue devant le magasin.",
+            "textLang": "fr",
+            "translation": "There is a long line in front of the store.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bored and slightly irritated by the delay",
+            "note": null,
+            "matchedForm": "queue",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1izp7n60xywe8dq",
+        "order": 1,
+        "definition": "The long, flexible part extending from the back of an animal's body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tail"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "fxz4fk9biiyu39y",
+            "text": "Le chien remue la queue quand il est content.",
+            "textLang": "fr",
+            "translation": "The dog wags its tail when it is happy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and observant, noticing a simple pleasant detail",
+            "note": null,
+            "matchedForm": "queue",
+            "matchedTranslationForm": "tail"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la queue",
+    "lemma": "queue",
+    "reading": null,
+    "ipa": "/kø/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "line; tail; rear",
     "primaryGloss": "line",
     "emotion": "patient and resigned, shifting weight while waiting for a turn",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "line; tail; rear",
+        "why": "Includes 'rear', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful: it also means 'tail' in an animal context. Do not",
+        "why": "Restates a sense and the grammatical gender while missing a needed register warning."
+      }
+    ],
+    "growth": 0.861
   }
 }

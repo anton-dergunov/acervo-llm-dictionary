@@ -72,6 +72,117 @@
     "primaryGloss": "find",
     "emotion": "pleasantly surprised and satisfied to have finally located what was lost",
     "notes": [
+      "Irregular aorist (simple past): βρήκα; perfective subjunctive/future: να/θα βρω."
+    ],
+    "senses": [
+      {
+        "id": "8sb4cwkzsl5x5jc",
+        "order": 0,
+        "definition": "To discover or locate something or someone, either after searching or by chance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "find",
+              "discover",
+              "locate"
+            ]
+          }
+        ],
+        "domain": "locating",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "sqs4v2zhtwtvkyu",
+            "text": "Δεν βρίσκω τα κλειδιά μου πουθενά.",
+            "textLang": "el",
+            "translation": "I cannot find my keys anywhere.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and frantic while searching the room",
+            "note": null,
+            "matchedForm": "βρίσκω",
+            "matchedTranslationForm": "find"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8v2i41fvqxkvshf",
+        "order": 1,
+        "definition": "To have a particular opinion or impression of someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "find",
+              "think",
+              "consider"
+            ]
+          }
+        ],
+        "domain": "opinion",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "mu2gdhbwbvmmgwd",
+            "text": "Βρίσκω αυτή την ιδέα πολύ ενδιαφέρουσα.",
+            "textLang": "el",
+            "translation": "I find this idea very interesting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Βρίσκω",
+            "matchedTranslationForm": "find"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "βρίσκω",
+    "lemma": "βρίσκω",
+    "reading": null,
+    "ipa": "/ˈvɾis.ko/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to find; to discover; to think",
+    "primaryGloss": "find",
+    "emotion": "pleasantly surprised and satisfied to have finally located what was lost",
+    "notes": [
       "βρίσκω is one of the most common verbs in Greek and is used both for physical objects and abstract concepts like solutions or answers.",
       "In the past tense (aorist), the form changes completely to βρήκα, which catches many learners off guard."
     ],
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Βρίσκω αυτή τη ιδέα πολύ ενδιαφέρουσα.",
+        "why": "Ungrammatical omission of final -ν before a vowel: must be 'την ιδέα', not 'τη ιδέα'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "βρίσκω is one of the most common verbs in Greek",
+        "why": "Pure filler note."
+      }
+    ],
+    "growth": 0.793
   }
 }

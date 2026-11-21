@@ -58,6 +58,73 @@
     "headword": "dün",
     "lemma": "dün",
     "reading": null,
+    "ipa": "/dyn/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
+      "Combines directly with parts of the day: 'dün sabah' (yesterday morning), 'dün akşam' (yesterday evening), 'dün gece' (last night)."
+    ],
+    "senses": [
+      {
+        "id": "baoyoi4d4ffrosm",
+        "order": 0,
+        "definition": "On the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "611i1pt2azuwesg",
+            "text": "Dün hava çok güzeldi.",
+            "textLang": "tr",
+            "translation": "The weather was very nice yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Dün",
+            "matchedTranslationForm": "yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "dün",
+    "lemma": "dün",
+    "reading": null,
     "ipa": "/døn/",
     "pos": "adv",
     "gender": null,
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/døn/",
+        "why": "Wrong vowel: 'ü' is /y/ (/dyn/), whereas /døn/ is 'dön' (turn)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse dün (yesterday) with yarın (tomorrow).",
+        "why": "'Dün' and 'yarın' do not look or sound alike; a note on 'dün gece' vs 'bu gece' is much more useful."
+      }
+    ],
+    "growth": 0.931
   }
 }

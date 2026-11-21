@@ -58,6 +58,97 @@
     "headword": "hata",
     "lemma": "hata",
     "reading": null,
+    "ipa": "/haˈtaː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "mistake; error; fault",
+    "primaryGloss": "mistake",
+    "emotion": "regretful and apologetic, realizing something went wrong",
+    "notes": [
+      "Commonly used with the verb 'yapmak' ('hata yapmak' = to make a mistake). With machines or software, 'hata vermek' means 'to give an error'.",
+      "As a near-synonym, 'yanlış' is both an adjective ('wrong') and a noun ('mistake/wrong answer'), while 'hata' is only a noun."
+    ],
+    "senses": [
+      {
+        "id": "qn1rrcw1l8d7loj",
+        "order": 0,
+        "definition": "An action, decision, or result that is wrong or not intended, including a fault in a system.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mistake",
+              "error",
+              "fault"
+            ]
+          }
+        ],
+        "domain": "general",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "50x5hj5yi9izgj5",
+            "text": "Raporu hazırlarken küçük bir hata yaptım.",
+            "textLang": "tr",
+            "translation": "I made a small mistake while preparing the report.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "embarrassed and admitting a fault to a colleague",
+            "note": null,
+            "matchedForm": "hata",
+            "matchedTranslationForm": "mistake"
+          },
+          {
+            "id": "409izf71xsz63g8",
+            "text": "Program çalışırken beklenmeyen bir hata verdi.",
+            "textLang": "tr",
+            "translation": "The program gave an unexpected error while running.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated by a computer problem",
+            "note": null,
+            "matchedForm": "hata",
+            "matchedTranslationForm": "error"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hata",
+    "lemma": "hata",
+    "reading": null,
     "ipa": "/haˈta/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/haˈta/",
+        "why": "The final 'a' is long in standard Turkish (/haˈtaː/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(technical) A technical malfunction, flaw, or system failure.",
+        "why": "A computer or technical error is the same basic sense of 'error/mistake' for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Hata is a very common word for a mistake",
+        "why": "Pure filler restating the gloss; should instead note the common verb collocation 'hata yapmak'."
+      }
+    ],
+    "growth": 0.986
   }
 }

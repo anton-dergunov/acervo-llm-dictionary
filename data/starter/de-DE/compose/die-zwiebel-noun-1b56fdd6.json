@@ -68,6 +68,113 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "onion; bulb",
+    "primaryGloss": "onion",
+    "emotion": "matter-of-fact and culinary, like selecting fresh produce at the market",
+    "notes": [
+      "The plural is 'die Zwiebeln'."
+    ],
+    "senses": [
+      {
+        "id": "eew0ksqhh442tdl",
+        "order": 0,
+        "definition": "A round vegetable with many layers and a strong smell and taste.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "onion"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧅",
+        "examples": [
+          {
+            "id": "vz5yhir5d72y961",
+            "text": "Beim Schneiden der Zwiebel muss ich immer weinen.",
+            "textLang": "de",
+            "translation": "I always have to cry when cutting the onion.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit annoyed and teary-eyed, complaining about the cooking process",
+            "note": null,
+            "matchedForm": "Zwiebel",
+            "matchedTranslationForm": "onion"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ek135eplgknq3ei",
+        "order": 1,
+        "definition": "The round underground part of certain plants, such as tulips, from which the flower grows.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bulb"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "🌷",
+        "examples": [
+          {
+            "id": "irn3vitr3uoj1pd",
+            "text": "Im Herbst steckt man die Zwiebeln der Tulpen in die Erde.",
+            "textLang": "de",
+            "translation": "In autumn, you put the tulip bulbs into the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Zwiebeln",
+            "matchedTranslationForm": "bulbs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Zwiebel",
+    "lemma": "Zwiebel",
+    "reading": null,
+    "ipa": "/ˈt͡sviːbl̩/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "onion",
     "primaryGloss": "onion",
     "emotion": "matter-of-fact and culinary, like selecting fresh produce at the market",
@@ -159,5 +266,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Im Herbst pflanzt man die Blumenzwiebel in die Erde.",
+        "why": "Uses the compound 'Blumenzwiebel' instead of the standalone headword 'Zwiebel'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In German, the word 'Zwiebel' is used for both the vegetable and",
+        "why": "Merely repeats what the two senses already show."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "onion",
+        "why": "Does not cover the second sense ('bulb')."
+      }
+    ],
+    "growth": 0.727
   }
 }

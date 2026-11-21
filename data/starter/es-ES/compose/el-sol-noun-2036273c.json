@@ -72,6 +72,125 @@
     "primaryGloss": "sun",
     "emotion": null,
     "notes": [
+      "For sunny weather, Spanish uses 'hacer': 'hace sol' (it's sunny). Note also the common expression 'tomar el sol' (to sunbathe)."
+    ],
+    "senses": [
+      {
+        "id": "h1f7staezbt2sz4",
+        "order": 0,
+        "definition": "The star that gives the earth light and heat by day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sun"
+            ]
+          }
+        ],
+        "domain": "star",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "rhcnbrmrkwbvlal",
+            "text": "El sol brilla en el cielo.",
+            "textLang": "es",
+            "translation": "The sun is shining in the sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sol",
+            "matchedTranslationForm": "sun"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "36r1molknektx5k",
+        "order": 1,
+        "definition": "The light or warmth that comes from the sun.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sunshine",
+              "sun",
+              "sunlight"
+            ]
+          }
+        ],
+        "domain": "sunlight",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "cez9ulc0kuimcnp",
+            "text": "Me gusta tomar el sol en la playa.",
+            "textLang": "es",
+            "translation": "I like to sunbathe on the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and warm, enjoying a quiet afternoon outside",
+            "note": null,
+            "matchedForm": "sol",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "36r1molknektx5k",
+      "from": "La luz o el calor que viene de este astro.",
+      "to": "The light or warmth that comes from this celestial body.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el sol",
+    "lemma": "sol",
+    "reading": null,
+    "ipa": "/sol/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "sun; sunshine",
+    "primaryGloss": "sun",
+    "emotion": null,
+    "notes": [
       "Used with the masculine article 'el'.",
       "Can also refer to sunlight or sunshine when talking about being outside."
     ],
@@ -161,14 +280,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "36r1molknektx5k",
-      "from": "La luz o el calor que viene de este astro.",
-      "to": "The light or warmth that comes from this celestial body.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used with the masculine article 'el'.",
+        "why": "Restates the grammatical gender and headword already shown."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also refer to sunlight or sunshine when talking about being outside.",
+        "why": "Merely restates sense 1 without adding usage information."
+      }
+    ],
+    "growth": 1.098
+  }
 }

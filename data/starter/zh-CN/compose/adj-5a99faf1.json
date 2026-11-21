@@ -68,6 +68,96 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "empty; vacant; hollow",
+    "primaryGloss": "empty",
+    "emotion": "looking inside a box and finding nothing there",
+    "notes": [
+      "When pronounced kōng, it means 'empty' or 'hollow'. When pronounced kòng, it means 'free time' (有空, to be free) or 'blank space'."
+    ],
+    "senses": [
+      {
+        "id": "d79be3o4r406sit",
+        "order": 0,
+        "definition": "Containing nothing, or having nobody inside; not occupied or filled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "vacant",
+              "hollow"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "h6bzc24bwojh4kb",
+            "text": "这个箱子是空的。",
+            "textLang": "zh",
+            "translation": "This box is empty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised to find the box completely empty",
+            "note": null,
+            "matchedForm": "空",
+            "matchedTranslationForm": "empty"
+          },
+          {
+            "id": "7upyqs18r1scnso",
+            "text": "房间里空空的，什么家具也没有。",
+            "textLang": "zh",
+            "translation": "The room is completely empty, with no furniture at all.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "空",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "空",
+    "lemma": "空",
+    "reading": "kōng",
+    "ipa": "/kʰʊŋ˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🈳",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "empty; hollow; in vain",
     "primaryGloss": "empty",
     "emotion": "looking inside a box and finding nothing there",
@@ -162,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Done without result, purpose, or substance.",
+        "why": "The adverb/noun sense 'in vain' is bound in compounds/idioms, not a basic A2 adjective."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "他的承诺只是一场空。",
+        "why": "In 一场空, 空 is used as a noun, not an adjective."
+      }
+    ],
+    "growth": 0.932
   }
 }

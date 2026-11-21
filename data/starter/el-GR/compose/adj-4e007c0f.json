@@ -58,6 +58,114 @@
     "headword": "νόστιμος",
     "lemma": "νόστιμος",
     "reading": null,
+    "ipa": "/ˈno.sti.mos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "tasty; delicious; cute",
+    "primaryGloss": "tasty",
+    "emotion": "warm and satisfied, like finishing a meal you really loved",
+    "notes": [],
+    "senses": [
+      {
+        "id": "nfh81gkgjg3ffs3",
+        "order": 0,
+        "definition": "Of food or drink: having a very pleasant flavour.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tasty",
+              "delicious"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "pfaz0roht3l0y16",
+            "text": "Το φαγητό ήταν πολύ νόστιμο.",
+            "textLang": "el",
+            "translation": "The food was very tasty.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and appreciative, reflecting on a good meal",
+            "note": null,
+            "matchedForm": "νόστιμο",
+            "matchedTranslationForm": "tasty"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wylmfb7vrm1vxlr",
+        "order": 1,
+        "definition": "Of a person or thing: pretty, cute, or pleasing in an endearing way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cute",
+              "pretty",
+              "charming"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "tdj8gq3eq4jwyxv",
+            "text": "Είναι ένα πολύ νόστιμο κορίτσι.",
+            "textLang": "el",
+            "translation": "She is a very cute girl.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "νόστιμο",
+            "matchedTranslationForm": "cute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "νόστιμος",
+    "lemma": "νόστιμος",
+    "reading": null,
     "ipa": "/ˈnostimos/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used primarily for food that tastes very good.",
+        "why": "Both notes merely repeat the two sense definitions."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "delicious; tasty",
+        "why": "Omits the second sense ('cute, pretty')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The food was very delicious.",
+        "why": "'Very delicious' is unidiomatic in English; 'very tasty' or 'delicious' is natural."
+      }
+    ],
+    "growth": 0.548
   }
 }

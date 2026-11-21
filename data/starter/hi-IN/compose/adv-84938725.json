@@ -60,6 +60,97 @@
     "headword": "विदेश में",
     "lemma": "विदेश में",
     "reading": null,
+    "ipa": "/ʋɪ.d̪eːʃ mẽː/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "abroad; in a foreign country",
+    "primaryGloss": "abroad",
+    "emotion": null,
+    "notes": [
+      "Formed from विदेश ('foreign country') + में ('in').",
+      "Used for location ('being/living abroad'). For movement ('going abroad'), में is usually dropped: विदेश जाना ('to go abroad')."
+    ],
+    "senses": [
+      {
+        "id": "l0r30eg4a6qnbvg",
+        "order": 0,
+        "definition": "In a country other than one's own.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "abroad",
+              "in a foreign country",
+              "overseas"
+            ]
+          }
+        ],
+        "domain": "location",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "3lsbq0apqpclbo8",
+            "text": "वह अभी विदेश में काम कर रहा है।",
+            "textLang": "hi",
+            "translation": "He is working abroad right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating someone's current location to a colleague",
+            "note": null,
+            "matchedForm": "विदेश में",
+            "matchedTranslationForm": "abroad"
+          },
+          {
+            "id": "zjyxpv0dmfq7mex",
+            "text": "मुझे विदेश में रहना पसंद है।",
+            "textLang": "hi",
+            "translation": "I like living abroad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and open-minded, sharing a personal preference",
+            "note": null,
+            "matchedForm": "विदेश में",
+            "matchedTranslationForm": "abroad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "विदेश में",
+    "lemma": "विदेश में",
+    "reading": null,
     "ipa": null,
     "pos": "adv",
     "gender": null,
@@ -143,5 +234,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use this to describe location (being abroad) or direction (going abroad)",
+        "why": "'विदेश में' only expresses location ('in a foreign country'); direction ('going abroad') drops 'में' ('विदेश जाना')"
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "In or to a country other than one's own.",
+        "why": "includes 'to a country', which requires 'विदेश' without 'में'"
+      }
+    ],
+    "growth": 0.787
   }
 }

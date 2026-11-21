@@ -58,6 +58,135 @@
     "headword": "tinggi",
     "lemma": "tinggi",
     "reading": null,
+    "ipa": "/ˈtiŋ.ɡi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦒",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "tall; high",
+    "primaryGloss": "tall",
+    "emotion": null,
+    "notes": [
+      "Covers both English 'tall' (for people, trees, buildings) and 'high' (for mountains, walls, prices, temperatures). For long horizontal things, use 'panjang'."
+    ],
+    "senses": [
+      {
+        "id": "qjtbd1ufifr027i",
+        "order": 0,
+        "definition": "Of great vertical extent from bottom to top, or of more than average height.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "height",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "etqp2hd4fskt990",
+            "text": "Adik saya sangat tinggi sekarang.",
+            "textLang": "id",
+            "translation": "My younger sibling is very tall now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and amused at how fast someone is growing",
+            "note": null,
+            "matchedForm": "tinggi",
+            "matchedTranslationForm": "tall"
+          },
+          {
+            "id": "qg5ecnhy8n79w83",
+            "text": "Gedung itu sangat tinggi.",
+            "textLang": "id",
+            "translation": "That building is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the scale of the architecture",
+            "note": null,
+            "matchedForm": "tinggi",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "di9t5rwrmpffbwq",
+        "order": 1,
+        "definition": "Greater than normal in degree, amount, level, or cost.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "high"
+            ]
+          }
+        ],
+        "domain": "level",
+        "emoji": "📈",
+        "examples": [
+          {
+            "id": "64dmczftr7r88uj",
+            "text": "Harga makanan di sini cukup tinggi.",
+            "textLang": "id",
+            "translation": "The price of food here is quite high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and slightly put off by the expense",
+            "note": null,
+            "matchedForm": "tinggi",
+            "matchedTranslationForm": "high"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "tinggi",
+    "lemma": "tinggi",
+    "reading": null,
     "ipa": "/tiŋ.ɡi/",
     "pos": "adj",
     "gender": null,
@@ -200,5 +329,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(height) (of a person) of more than average height",
+        "why": "Senses 0 and 1 are both physical height; splitting 'tall' and 'high' is an English distinction."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "whereas for objects or places it usually means high.",
+        "why": "For buildings, trees, and towers, 'tinggi' translates to 'tall' just as naturally as 'high'."
+      }
+    ],
+    "growth": 0.864
   }
 }

@@ -72,6 +72,114 @@
     "primaryGloss": "why",
     "emotion": null,
     "notes": [
+      "In Greek, the same word is used for both the question 'why?' and the answer 'because'. For 'because', you can also use the slightly more formal 'επειδή'."
+    ],
+    "senses": [
+      {
+        "id": "fa1k7o1mj8a5lkb",
+        "order": 0,
+        "definition": "Used to ask for the reason or purpose of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "why"
+            ]
+          }
+        ],
+        "domain": "question",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "680w76oca8m0mxv",
+            "text": "Γιατί δεν ήρθες χθες;",
+            "textLang": "el",
+            "translation": "Why didn't you come yesterday?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and waiting for an explanation",
+            "note": null,
+            "matchedForm": "Γιατί",
+            "matchedTranslationForm": "Why"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gncgpvvgrzg6nei",
+        "order": 1,
+        "definition": "Used to introduce the reason for something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "for"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "h4v9n66gn2k6y7f",
+            "text": "Δεν μπορώ να βγω γιατί έχω δουλειά.",
+            "textLang": "el",
+            "translation": "I cannot go out because I have work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and slightly apologetic",
+            "note": null,
+            "matchedForm": "γιατί",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "γιατί",
+    "lemma": "γιατί",
+    "reading": null,
+    "ipa": "/ʝaˈti/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❓",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "why; because",
+    "primaryGloss": "why",
+    "emotion": null,
+    "notes": [
       "In Greek, the same word is used for both the question 'why?' and the answer 'because'. Context and the position of the word in the sentence usually make the meaning clear.",
       "When used as 'because', it is often written as 'γιατί' without an accent (γιατι), though in modern standard Greek, the accented form is accepted for both meanings."
     ],
@@ -161,5 +269,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "When used as 'because', it is often written as 'γιατί' without an accent (γιατι)",
+        "why": "False: multisyllabic Greek words always take an accent; «γιατί» is always accented in both senses."
+      }
+    ],
+    "growth": 0.659
   }
 }

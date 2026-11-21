@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to call; to ring (a bell)",
+    "primaryGloss": "to call",
+    "emotion": "casual and conversational, reaching out to someone familiar",
+    "notes": [
+      "When calling a person on the phone, 'bellen' can be used with a direct object ('Ik bel mijn moeder') or with 'met' ('Ik bel met mijn moeder').",
+      "For the sound a phone makes when it rings, Dutch uses 'gaan' or 'rinkelen' ('De telefoon gaat'), not 'bellen'."
+    ],
+    "senses": [
+      {
+        "id": "67a6k2s99r33mci",
+        "order": 0,
+        "definition": "To contact or speak to someone by telephone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to call",
+              "to phone",
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "phone",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "h9v2exqayoungnh",
+            "text": "Ik ga mijn moeder even bellen.",
+            "textLang": "nl",
+            "translation": "I am going to call my mother quickly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and relaxed, planning a quick chat with family",
+            "note": null,
+            "matchedForm": "bellen",
+            "matchedTranslationForm": "call"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "or2533138wgp70p",
+        "order": 1,
+        "definition": "To press or ring a bell, such as a doorbell or bicycle bell.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "bell",
+        "emoji": "🔔",
+        "examples": [
+          {
+            "id": "cn87wruimhf4kzd",
+            "text": "Er wordt bij de voordeur gebeld.",
+            "textLang": "nl",
+            "translation": "Someone is ringing the front doorbell.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gebeld",
+            "matchedTranslationForm": "ringing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "bellen",
+    "lemma": "bellen",
+    "reading": null,
+    "ipa": "/ˈbɛlə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📱",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to call; to ring",
     "primaryGloss": "to call",
     "emotion": "casual and conversational, reaching out to someone familiar",
@@ -161,5 +271,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To make a ringing sound, like a bell or a telephone.",
+        "why": "People 'bellen' (ring a bell); a phone 'gaat' or 'rinkelt', it does not 'bel'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "De telefoon zit de hele dag te bellen.",
+        "why": "Unidiomatic Dutch; a telephone does not 'bellen' (people do), it 'gaat' or 'rinkelt'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for making a phone call and for a doorbell",
+        "why": "Restates the senses and falsely claims it is used for a telephone ringing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'bellen' meaning blowing soap bubbles",
+        "why": "Soap bubbles are 'bellen blazen' (noun plural); unlikely confusion and 'bel' is the same noun."
+      }
+    ],
+    "growth": 1.184
   }
 }

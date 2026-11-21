@@ -57,6 +57,156 @@
     "language": "ja",
     "headword": "青い",
     "lemma": "青い",
+    "reading": "あおい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue; green; unripe",
+    "primaryGloss": "blue",
+    "emotion": "crisp, clear, and bright, like a calm day",
+    "notes": [
+      "Traditionally covers both blue and shades of green, so it is still used for traffic lights (青信号, 'green light'), fresh vegetation, and green apples, even though 緑 (midori) is the modern word for green.",
+      "Can also describe a person's face as 'pale' from shock or illness (顔が青い)."
+    ],
+    "senses": [
+      {
+        "id": "v51yygjtvcyjgtz",
+        "order": 0,
+        "definition": "Having the color of a clear sky or the deep sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "blue color",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "x3yhq04jpaledbg",
+            "text": "今日は青い空が広がっています。",
+            "textLang": "ja",
+            "translation": "A blue sky stretches out today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "青い",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2tkw2mizty167cx",
+        "order": 1,
+        "definition": "Of plants, fresh produce, or traffic lights: green in color.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "green color",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "lbcadj27fr38bg2",
+            "text": "信号が青くなったら、渡ってください。",
+            "textLang": "ja",
+            "translation": "Please cross when the light turns green.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "青く",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y8322ed8xu2zx82",
+        "order": 2,
+        "definition": "Of fruit or crops: not yet ripe; or of a person: young and inexperienced.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green",
+              "inexperienced"
+            ]
+          }
+        ],
+        "domain": "ripeness",
+        "emoji": "🍏",
+        "examples": [
+          {
+            "id": "f8sobv9jch5j8z2",
+            "text": "このトマトはまだ青いです。",
+            "textLang": "ja",
+            "translation": "This tomato is still unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "青い",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "青い",
+    "lemma": "青い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -161,5 +311,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (あおい) for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "blue; green (for plants/traffic lights); unripe",
+        "why": "shortGloss and notes feature the 'green' sense, which is missing from senses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of a clear, bright sky or deep water.",
+        "why": "Defines an adjective as a noun ('The color of...') instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Be careful: it also describes fruit that is 'unripe' or 'green'",
+        "why": "Merely restates sense 1."
+      }
+    ],
+    "growth": 1.083
   }
 }

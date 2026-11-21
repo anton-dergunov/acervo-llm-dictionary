@@ -58,6 +58,115 @@
     "headword": "슬프다",
     "lemma": "슬프다",
     "reading": null,
+    "ipa": "sɯlpʰɯda",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "sad; sorrowful",
+    "primaryGloss": "sad",
+    "emotion": "heavy-hearted and sorrowful, speaking with a gentle, downcast voice",
+    "notes": [
+      "ㅡ-irregular adjective: 'ㅡ' drops before '-아/어' (슬퍼요, 슬펐어요). Before a noun, it becomes '슬픈' (슬픈 영화 = a sad movie).",
+      "In statements about a third person ('He is sad'), add '-아/어하다' to turn it into a verb: '슬퍼하다'."
+    ],
+    "senses": [
+      {
+        "id": "12cyjizvid84yh5",
+        "order": 0,
+        "definition": "Feeling sorrow or grief, or causing such a feeling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sad",
+              "sorrowful",
+              "unhappy"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "y5v1p0sf1554w9s",
+            "text": "그 슬픈 영화를 보고 많이 울었어요.",
+            "textLang": "ko",
+            "translation": "I watched that sad movie and cried a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and quietly tearful, recalling a touching moment",
+            "note": null,
+            "matchedForm": "슬픈",
+            "matchedTranslationForm": "sad"
+          },
+          {
+            "id": "wx8f2lvx078jdue",
+            "text": "친구와 헤어져서 정말 슬퍼요.",
+            "textLang": "ko",
+            "translation": "I am really sad because I parted ways with my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "슬퍼요",
+            "matchedTranslationForm": "sad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "12cyjizvid84yh5",
+      "from": "마음에 섭섭하고 메스꺼운 느낌이 있다.",
+      "to": "Feeling disappointed and displeased at heart.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    },
+    {
+      "sense": "thmc9t9rzcblfp5",
+      "from": "마음이 기쁘지 못하고 언짢거나 불행하다.",
+      "to": "Feeling unhappy and unfortunate because things are not going well.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "슬프다",
+    "lemma": "슬프다",
+    "reading": null,
     "ipa": "/sɯlpʰɯda/",
     "pos": "adj",
     "gender": null,
@@ -164,22 +273,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "12cyjizvid84yh5",
-      "from": "마음에 섭섭하고 메스꺼운 느낌이 있다.",
-      "to": "Feeling disappointed and displeased at heart.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    },
-    {
-      "sense": "thmc9t9rzcblfp5",
-      "from": "마음이 기쁘지 못하고 언짢거나 불행하다.",
-      "to": "Feeling unhappy and unfortunate because things are not going well.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Splits one core meaning ('sad') into two nearly identical senses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Feeling disappointed and displeased at heart.",
+        "why": "'Disappointed and displeased' describes annoyance/disappointment, not sadness or grief; also omits sad things."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "슬프다 is an adjective used to describe a feeling of sadness or",
+        "why": "Restates the basic meaning without adding useful grammatical or usage information."
+      }
+    ],
+    "growth": 0.877
+  }
 }

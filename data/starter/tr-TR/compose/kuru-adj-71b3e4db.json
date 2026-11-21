@@ -68,6 +68,116 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry; plain, unaccompanied",
+    "primaryGloss": "dry",
+    "emotion": "matter-of-fact and straightforward, describing things simply as they are",
+    "notes": [
+      "Do not confuse the adjective 'kuru' (dry) with the verb stem 'kuru-' from 'kurumak' (to dry, become dry).",
+      "Often used with food terms for dried ingredients (e.g. kuru fasulye 'dried beans', kuru üzüm 'raisins')."
+    ],
+    "senses": [
+      {
+        "id": "6ie6r1kdtmt8cne",
+        "order": 0,
+        "definition": "Free from moisture or liquid; not wet; dried.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "dried"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "xn5dyttwyxr0k2c",
+            "text": "Bana kuru bir havlu verir misin?",
+            "textLang": "tr",
+            "translation": "Can you give me a dry towel?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kuru",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q80dva0911d1mjk",
+        "order": 1,
+        "definition": "Of food: eaten by itself without side dishes, sauce, or accompaniment; plain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "plain",
+              "dry"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍞",
+        "examples": [
+          {
+            "id": "lnllm3gh7ok8gcc",
+            "text": "Yolculukta sadece kuru ekmek yedik.",
+            "textLang": "tr",
+            "translation": "We only ate plain bread on the journey.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and uninspired by the plain meal",
+            "note": null,
+            "matchedForm": "kuru",
+            "matchedTranslationForm": "plain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kuru",
+    "lemma": "kuru",
+    "reading": null,
+    "ipa": "/kuˈɾu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏜️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; plain, boring; penniless",
     "primaryGloss": "dry",
     "emotion": "matter-of-fact and straightforward, describing things simply as they are",
@@ -200,5 +310,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "Having no money or resources; broke.",
+        "why": "'Kuru' does not mean 'broke/penniless' (that is 'parasız' or 'çulsuz'); the example is unnatural."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "and colloquially to mean 'broke' or penniless (kuru para).",
+        "why": "'Kuru' does not mean broke, and 'kuru para' is not an expression for being penniless."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yağmur durduktan sonra yerler hemen kuru oldu.",
+        "why": "Unnatural phrasing: Turkish uses the verb 'kurumak' ('yerler hemen kurudu'), not 'kuru oldu'."
+      }
+    ],
+    "growth": 0.752
   }
 }

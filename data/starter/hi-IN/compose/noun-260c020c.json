@@ -72,6 +72,74 @@
     "primaryGloss": "colleague",
     "emotion": "friendly and professional, talking about a member of the team",
     "notes": [
+      "Compound of 'सह-' (together) and 'कर्मी' (worker). Plural oblique form is 'सहकर्मियों' (sahkarmiyõ)."
+    ],
+    "senses": [
+      {
+        "id": "tsxaq03ivd9shb5",
+        "order": 0,
+        "definition": "A person you work with in the same organization or profession.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "colleague",
+              "coworker"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "🧑‍💼",
+        "examples": [
+          {
+            "id": "4krwsnumpptvu2l",
+            "text": "मेरे सभी सहकर्मी बहुत मिलनसार हैं।",
+            "textLang": "hi",
+            "translation": "All my colleagues are very friendly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "सहकर्मी",
+            "matchedTranslationForm": "colleagues"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "सहकर्मी",
+    "lemma": "सहकर्मी",
+    "reading": null,
+    "ipa": "/səɦ.kəɾ.miː/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑‍💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "colleague; coworker",
+    "primaryGloss": "colleague",
+    "emotion": "friendly and professional, talking about a member of the team",
+    "notes": [
       "Used to refer to someone you work with in an office, organization, or professional setting.",
       "It is a compound of 'सह-' (together) and 'कर्मी' (worker)."
     ],
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "िमलनसार",
+        "why": "Devanagari vowel sign 'ि' is placed before the consonant instead of after 'म' (मिलनसार)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to refer to someone you work with in an office",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 0.845
   }
 }

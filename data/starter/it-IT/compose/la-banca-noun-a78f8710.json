@@ -71,6 +71,84 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "bank",
+    "primaryGloss": "bank",
+    "emotion": "busy and purposeful, running errands in town",
+    "notes": [
+      "Do not confuse 'la banca' (the financial institution) with 'il banco' (a desk, counter, or market stall) or 'la panca' / 'la panchina' (a bench)."
+    ],
+    "senses": [
+      {
+        "id": "ue4jk7qvppljrf5",
+        "order": 0,
+        "definition": "A financial institution where money is kept, lent, and exchanged.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "u1jv776d3k3ah2u",
+            "text": "Devo andare in banca a prelevare dei contanti.",
+            "textLang": "it",
+            "translation": "I have to go to the bank to withdraw some cash.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and focused on getting the errand done",
+            "note": null,
+            "matchedForm": "banca",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "1a0m8ymr1qam8w1",
+      "from": "Sedile lungo di legno o di pietra, di solito situato in parchi o luoghi pubblici.",
+      "to": "A long seat made of wood or stone, often found in parks or public areas.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:17:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la banca",
+    "lemma": "banca",
+    "reading": null,
+    "ipa": "/ˈbaŋ.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "bank; bench",
     "primaryGloss": "bank",
     "emotion": "busy and purposeful, running errands in town",
@@ -162,14 +240,41 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "1a0m8ymr1qam8w1",
-      "from": "Sedile lungo di legno o di pietra, di solito situato in parchi o luoghi pubblici.",
-      "to": "A long seat made of wood or stone, often found in parks or public areas.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:17:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].definition",
+        "quote": "Institución financiera donde se guarda y se maneja dinero.",
+        "why": "Definition is in Spanish instead of English."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(furniture) A long seat made of wood or stone",
+        "why": "'Banca' means bank, not bench ('panca' or 'panchina')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "with 'panca', which is dialectal for a bench",
+        "why": "False claim: 'panca' is standard Italian for bench, while 'banca' is bank."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bank; bench",
+        "why": "Includes the false meaning 'bench'."
+      }
+    ],
+    "growth": 0.676
+  }
 }

@@ -72,6 +72,115 @@
     "primaryGloss": "green",
     "emotion": "fresh and bright, looking at leaves in the park",
     "notes": [
+      "The final 't' is silent in the masculine (vert /vɛʁ/), but pronounced in the feminine (verte /vɛʁt/).",
+      "Wait: compound colours like 'vert clair' (light green) or 'vert foncé' (dark green) are invariable and never add -e or -s."
+    ],
+    "senses": [
+      {
+        "id": "eavmfbhim25tejs",
+        "order": 0,
+        "definition": "Having the colour of fresh grass or leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🟢",
+        "examples": [
+          {
+            "id": "dqu3n4cwbhevp3k",
+            "text": "Elle porte une jolie robe verte.",
+            "textLang": "fr",
+            "translation": "She is wearing a pretty green dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "verte",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cz911iun7b5tjvz",
+        "order": 1,
+        "definition": "Of fruit or plants: not ripe yet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unripe",
+              "green"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍏",
+        "examples": [
+          {
+            "id": "erb0xyers4moxcf",
+            "text": "Ne mange pas cette pomme, elle est encore verte.",
+            "textLang": "fr",
+            "translation": "Do not eat that apple, it is still unripe.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warning someone with a slight smile",
+            "note": null,
+            "matchedForm": "verte",
+            "matchedTranslationForm": "unripe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "vert",
+    "lemma": "vert",
+    "reading": null,
+    "ipa": "/vɛʁ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🟢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; unripe",
+    "primaryGloss": "green",
+    "emotion": "fresh and bright, looking at leaves in the park",
+    "notes": [
       "Agreement: the feminine form is 'verte' and adds a [t] sound at the end.",
       "Used for fruit that is not ripe yet, as well as the colour."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of grass and leaves.",
+        "why": "Adjective defined as a noun ('The colour...') instead of a quality ('Of the colour...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Used for fruit that is not ripe yet, as well as the colour.",
+        "why": "Simply repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 1.18
   }
 }

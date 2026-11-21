@@ -58,6 +58,100 @@
     "headword": "jechać",
     "lemma": "jechać",
     "reading": null,
+    "ipa": "/ˈjɛ.xat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Actions",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "to go (by vehicle), to ride, to drive",
+    "primaryGloss": "to go",
+    "emotion": "purposeful and moving forward, like the start of a journey",
+    "notes": [
+      "Used for going by any vehicle (car, bus, train, bike); for going on foot, use 'iść'.",
+      "Describes a single trip in one direction ('Teraz jadę do pracy'). For regular or repeated trips, use 'jeździć'; for a completed trip, use the perfective 'pojechać'.",
+      "Conjugates with the stem 'jad-' in the 1st person singular and 3rd person plural ('jadę', 'jadą') and 'jedzi-' elsewhere ('jedziesz', 'jedzie')."
+    ],
+    "senses": [
+      {
+        "id": "inzzw7jbracc4c1",
+        "order": 0,
+        "definition": "To go from one place to another by vehicle, or (of a vehicle) to travel along a route.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go",
+              "to travel",
+              "to ride",
+              "to drive"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "n42uc1j11ngi46w",
+            "text": "Jadę do pracy autobusem.",
+            "textLang": "pl",
+            "translation": "I am going to work by bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and slightly tired, starting the morning commute",
+            "note": null,
+            "matchedForm": "Jadę",
+            "matchedTranslationForm": "going"
+          },
+          {
+            "id": "znrdbhh9skj53xf",
+            "text": "Pociąg szybko jedzie przez las.",
+            "textLang": "pl",
+            "translation": "The train is moving fast through the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, watching the scenery pass by",
+            "note": null,
+            "matchedForm": "jedzie",
+            "matchedTranslationForm": "moving"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "jechać",
+    "lemma": "jechać",
+    "reading": null,
     "ipa": "/ˈjɛxat͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -184,5 +278,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "This verb describes a movement that is currently in progress or is a regular habit.",
+        "why": "False: 'jechać' is unidirectional (one trip); habitual trips use the indeterminate verb 'jeździć'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To move or be in motion, usually while inside a moving object.",
+        "why": "A vehicle moving and a person travelling by vehicle are the same basic sense."
+      }
+    ],
+    "growth": 1.102
   }
 }

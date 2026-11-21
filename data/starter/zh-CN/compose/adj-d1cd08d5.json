@@ -70,6 +70,114 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "early; good morning",
+    "primaryGloss": "early",
+    "emotion": null,
+    "notes": [
+      "The opposite is 晚 (wǎn, late). For the noun 'morning', use 早上 (zǎoshang)."
+    ],
+    "senses": [
+      {
+        "id": "mh5aaooom5n64n5",
+        "order": 0,
+        "definition": "Happening or done before the usual or expected time, or near the beginning of the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "early"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "8z6gd7rk1n22tgu",
+            "text": "他每天都起得很早。",
+            "textLang": "zh",
+            "translation": "He gets up very early every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "早",
+            "matchedTranslationForm": "early"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mm1pnw3j4nwcq5o",
+        "order": 1,
+        "definition": "Used alone as a casual greeting in the morning.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good morning",
+              "morning"
+            ]
+          }
+        ],
+        "domain": "greeting",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "hsnecwytkg4bbi0",
+            "text": "早！你吃早饭了吗？",
+            "textLang": "zh",
+            "translation": "Morning! Have you eaten breakfast?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "早",
+            "matchedTranslationForm": "Morning"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "早",
+    "lemma": "早",
+    "reading": "zǎo",
+    "ipa": "/tsau̯˨˩˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "early; morning",
     "primaryGloss": "early",
     "emotion": null,
@@ -162,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "今天早，天气很好。",
+        "why": "Ungrammatical: 'this morning' is 今天早上, never 今天早."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "The beginning of the day.",
+        "why": "Defines an adjective as a noun ('morning'); standalone 早 is a greeting ('Morning!'), not a free noun."
+      }
+    ],
+    "growth": 0.793
   }
 }

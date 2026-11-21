@@ -72,6 +72,114 @@
     "primaryGloss": "child",
     "emotion": "tender and protective, often used when referring to someone loved",
     "notes": [
+      "The plural is 'die Kinder' (dative plural 'den Kindern')."
+    ],
+    "senses": [
+      {
+        "id": "b2s3z52ybxoit4p",
+        "order": 0,
+        "definition": "A young human who is not yet an adult.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "kid"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🧒",
+        "examples": [
+          {
+            "id": "b6121dfafux2flc",
+            "text": "Das Kind spielt im Garten.",
+            "textLang": "de",
+            "translation": "The child is playing in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, noting a simple moment",
+            "note": null,
+            "matchedForm": "Kind",
+            "matchedTranslationForm": "child"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tsp8o4cyyv5rmph",
+        "order": 1,
+        "definition": "A person's son or daughter of any age.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "627qyn8aktwv6gh",
+            "text": "Haben Sie Kinder?",
+            "textLang": "de",
+            "translation": "Do you have children?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Kinder",
+            "matchedTranslationForm": "children"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Kind",
+    "lemma": "Kind",
+    "reading": null,
+    "ipa": "/kɪnt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧒",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "child; kid",
+    "primaryGloss": "child",
+    "emotion": "tender and protective, often used when referring to someone loved",
+    "notes": [
       "Plural is 'Kinder'.",
       "In German, 'Kind' is neuter (das), unlike the English 'boy' or 'girl'. You must use 'das' even when referring to a girl."
     ],
@@ -120,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday relational sense 'someone's son or daughter' (even when grown up)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In German, 'Kind' is neuter (das), unlike the English 'boy'",
+        "why": "Restates the gender field and falsely implies English has grammatical gender."
+      }
+    ],
+    "growth": 0.992
   }
 }

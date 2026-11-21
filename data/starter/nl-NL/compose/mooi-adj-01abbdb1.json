@@ -58,6 +58,118 @@
     "headword": "mooi",
     "lemma": "mooi",
     "reading": null,
+    "ipa": "/moːi̯/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "beautiful; nice; fine",
+    "primaryGloss": "beautiful",
+    "emotion": "warm and appreciative, noticing something lovely in the world",
+    "notes": [
+      "For weather, experiences, or food, Dutch speakers also very often use 'lekker' (nice, pleasant, tasty) where English uses 'nice'."
+    ],
+    "senses": [
+      {
+        "id": "36ewgy5njnt96qf",
+        "order": 0,
+        "definition": "Very pleasant to look at or listen to.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beautiful",
+              "pretty",
+              "lovely",
+              "handsome"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "3bma2f2t81y2dc1",
+            "text": "Wat een mooie jurk heb je aan.",
+            "textLang": "nl",
+            "translation": "What a beautiful dress you are wearing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and complimentary, admiring a friend",
+            "note": null,
+            "matchedForm": "mooie",
+            "matchedTranslationForm": "beautiful"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ha3beq32vrc0yt9",
+        "order": 1,
+        "definition": "Pleasant, enjoyable, or favourable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nice",
+              "fine",
+              "good"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "dpct01vqtsov34r",
+            "text": "We hebben morgen mooi weer.",
+            "textLang": "nl",
+            "translation": "We are having nice weather tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and optimistic about the day ahead",
+            "note": null,
+            "matchedForm": "mooi",
+            "matchedTranslationForm": "nice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "mooi",
+    "lemma": "mooi",
+    "reading": null,
     "ipa": "/mɔi̯/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mɔi̯/",
+        "why": "Wrong vowel: Dutch 'ooi' has a long tense /oː/, so /moːi̯/."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "Moọi is the standard word",
+        "why": "Contains a corrupt Vietnamese character 'ọ' with an underdot."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Moọi is the standard word for both 'beautiful' and 'nice'",
+        "why": "Merely restates the glosses and senses without adding grammar or usage help."
+      }
+    ],
+    "growth": 0.85
   }
 }

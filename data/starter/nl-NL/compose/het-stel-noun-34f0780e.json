@@ -68,6 +68,116 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "couple; set; bunch",
+    "primaryGloss": "couple",
+    "emotion": "matter-of-fact and observational, describing a unit or a pair",
+    "notes": [
+      "Plural: 'stellen'. Often used in the diminutive 'het stelletje' for a romantic couple.",
+      "For matching pairs worn together (like shoes, socks, or gloves), use 'het paar' instead of 'het stel'."
+    ],
+    "senses": [
+      {
+        "id": "3tfxoipt9ydufd6",
+        "order": 0,
+        "definition": "Two people who are in a romantic relationship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "couple"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👫",
+        "examples": [
+          {
+            "id": "kpuwyc9z32xzz69",
+            "text": "Zij zijn een leuk stel.",
+            "textLang": "nl",
+            "translation": "They are a nice couple.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and approving, expressing a positive opinion about the pair",
+            "note": null,
+            "matchedForm": "stel",
+            "matchedTranslationForm": "couple"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2x3zvxm7vavroqb",
+        "order": 1,
+        "definition": "A small group of people or a set of things that belong together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "set",
+              "pair",
+              "bunch"
+            ]
+          }
+        ],
+        "domain": "group",
+        "emoji": "🗂️",
+        "examples": [
+          {
+            "id": "9vgmjbmx8g3z4dt",
+            "text": "Ik heb een stel schone kleren meegenomen.",
+            "textLang": "nl",
+            "translation": "I brought a set of clean clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "stel",
+            "matchedTranslationForm": "set"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het stel",
+    "lemma": "stel",
+    "reading": null,
+    "ipa": "/stɛl/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👫",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "couple; set; pair",
     "primaryGloss": "couple",
     "emotion": "matter-of-fact and observational, describing a unit or a pair",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'stel' is often used for a pair of matching items, like shoes or gloves.",
+        "why": "Matching pairs like shoes and gloves take 'een paar', not 'een stel'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik heb een nieuw stel handschoenen gekocht.",
+        "why": "Unnatural; 'een paar handschoenen' is standard for gloves."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "When used to mean 'a romantic couple', it is very common and neutral.",
+        "why": "Restates the sense and register already given in the entry."
+      }
+    ],
+    "growth": 0.903
   }
 }

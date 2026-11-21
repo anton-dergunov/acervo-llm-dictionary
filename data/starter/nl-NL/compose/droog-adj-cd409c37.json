@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dry",
+    "primaryGloss": "dry",
+    "emotion": "matter-of-fact and observational, describing a simple state of affairs",
+    "notes": [
+      "Spelled with a single 'o' in open syllables when inflected: droge (droger, droogst).",
+      "About the weather, 'Het is droog' means it is not raining."
+    ],
+    "senses": [
+      {
+        "id": "qoa7jhf04ae5n3o",
+        "order": 0,
+        "definition": "Not wet; having no water or moisture.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry"
+            ]
+          }
+        ],
+        "domain": "moisture",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "a57fddd2npncoq5",
+            "text": "De handdoek is na een uur in de zon helemaal droog.",
+            "textLang": "nl",
+            "translation": "The towel is completely dry after an hour in the sun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and satisfied that the task is finished",
+            "note": null,
+            "matchedForm": "droog",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ct4ety0o61c7q30",
+        "order": 1,
+        "definition": "Of humor or a remark: subtle, understated, or deadpan.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dry",
+              "deadpan"
+            ]
+          }
+        ],
+        "domain": "humor",
+        "emoji": "😐",
+        "examples": [
+          {
+            "id": "c9p9dqz4w94e926",
+            "text": "Ze staat bekend om haar droge humor.",
+            "textLang": "nl",
+            "translation": "She is known for her dry sense of humor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "droge",
+            "matchedTranslationForm": "dry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "droog",
+    "lemma": "droog",
+    "reading": null,
+    "ipa": "/droːx/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dry; not wet",
     "primaryGloss": "dry",
     "emotion": "matter-of-fact and observational, describing a simple state of affairs",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe something that is not wet, but also used figuratively",
+        "why": "Restates the two senses without adding grammar or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'dorst' (thirst)",
+        "why": "'Dorst' and 'droog' are unrelated in form and meaning; learners do not confuse them."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij vertelde een grap met een heel droog gezicht.",
+        "why": "'Een droog gezicht' is not idiomatic Dutch (it would be 'een stalen gezicht')."
+      }
+    ],
+    "growth": 0.838
   }
 }

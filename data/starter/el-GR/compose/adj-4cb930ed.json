@@ -72,6 +72,116 @@
     "primaryGloss": "expensive",
     "emotion": "hesitant and slightly reluctant at the high cost",
     "notes": [
+      "Do not confuse with the adverb ακριβώς ('exactly'), which has the stress on the last syllable and is spelled with ω."
+    ],
+    "senses": [
+      {
+        "id": "6t97it97hxfu2bi",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "5uhr4vjzashrd4h",
+            "text": "Αυτό το φόρεμα είναι πολύ ακριβό.",
+            "textLang": "el",
+            "translation": "This dress is very expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ακριβό",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wrwy1466zhn012p",
+        "order": 1,
+        "definition": "Beloved or highly valued by someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dear",
+              "precious",
+              "beloved"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "2rcfhsjqiy9w8wg",
+            "text": "Είναι ένας πολύ ακριβός φίλος.",
+            "textLang": "el",
+            "translation": "He is a very dear friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and sincere, speaking with genuine affection",
+            "note": null,
+            "matchedForm": "ακριβός",
+            "matchedTranslationForm": "dear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ακριβός",
+    "lemma": "ακριβός",
+    "reading": null,
+    "ipa": "/akɾiˈvos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "expensive; dear",
+    "primaryGloss": "expensive",
+    "emotion": "hesitant and slightly reluctant at the high cost",
+    "notes": [
       "Used both for high prices and as a term of endearment meaning dear or beloved."
     ],
     "senses": [
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Αυτό το φόρεμα είναι πολύ ακριβός.",
+        "why": "Agreement error: neuter noun φόρεμα requires neuter adjective ακριβό, not masculine ακριβός."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for high prices and as a term of endearment",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.152
   }
 }

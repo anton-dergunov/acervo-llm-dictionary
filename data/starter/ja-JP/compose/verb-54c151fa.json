@@ -74,6 +74,117 @@
     "primaryGloss": "to love",
     "emotion": "earnest and deeply sincere, expressing a profound and lasting bond",
     "notes": [
+      "Usually used in the ongoing form 愛している (aishiteiru) to describe a current state of love.",
+      "More intense, formal, or literary than 好き (suki), which is the everyday word for liking or loving someone in conversation."
+    ],
+    "senses": [
+      {
+        "id": "dd9gdtmiixf68cw",
+        "order": 0,
+        "definition": "To feel deep affection and devotion for someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to love",
+              "to cherish",
+              "to adore"
+            ]
+          }
+        ],
+        "domain": "love",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "9xo8amsx0vyeqpj",
+            "text": "私は家族を深く愛している。",
+            "textLang": "ja",
+            "translation": "I deeply love my family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "愛して",
+            "matchedTranslationForm": "love"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ifp7cju5upw7j48",
+        "order": 1,
+        "definition": "To value something very much or have a strong passion for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to love",
+              "to be passionate about"
+            ]
+          }
+        ],
+        "domain": "passion",
+        "emoji": "🎻",
+        "examples": [
+          {
+            "id": "bmv9k7pe1u17csh",
+            "text": "彼は心から音楽を愛している。",
+            "textLang": "ja",
+            "translation": "He loves music from the bottom of his heart.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "愛して",
+            "matchedTranslationForm": "loves"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "愛する",
+    "lemma": "愛する",
+    "reading": "あいする",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to love; to cherish",
+    "primaryGloss": "to love",
+    "emotion": "earnest and deeply sincere, expressing a profound and lasting bond",
+    "notes": [
       "While 'suki' is the standard way to say you like or love someone, 'aisuru' is a much deeper, more literary, and intense term. It is rarely used in everyday casual conversation between friends or new couples.",
       "Unlike 'suki', which focuses on personal preference or affection, 'aisuru' implies a commitment or a profound emotional devotion, often used in literature, song lyrics, or formal vows."
     ],
@@ -163,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike 'suki', which focuses on personal preference or affection, 'aisuru' implies",
+        "why": "Repeats the exact same comparison with 'suki' already made in note[0]."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "家族を深く愛する。",
+        "why": "Natural Japanese uses the stative form 愛している rather than the dictionary form."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "彼は音楽を愛する。",
+        "why": "Needs the stative form 愛している to express an ongoing passion naturally."
+      }
+    ],
+    "growth": 0.699
   }
 }

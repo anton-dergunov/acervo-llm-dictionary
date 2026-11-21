@@ -58,6 +58,73 @@
     "headword": "포크",
     "lemma": "포크",
     "reading": null,
+    "ipa": "pʰo.kʰɯ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍴",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fork",
+    "primaryGloss": "fork",
+    "emotion": "casual and everyday, preparing to enjoy a meal",
+    "notes": [
+      "Often paired with 나이프 (knife) when talking about Western tableware, as opposed to 수저 (spoon and chopsticks)."
+    ],
+    "senses": [
+      {
+        "id": "7xkrwdisyuybcf2",
+        "order": 0,
+        "definition": "A small tool with three or four sharp points and a handle, used for picking up and eating food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fork"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🍴",
+        "examples": [
+          {
+            "id": "5yxqhutnffzy6hz",
+            "text": "포크로 파스타를 돌돌 말아 먹었어요.",
+            "textLang": "ko",
+            "translation": "I twirled the pasta with a fork and ate it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and content, enjoying a good meal",
+            "note": null,
+            "matchedForm": "포크",
+            "matchedTranslationForm": "fork"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "포크",
+    "lemma": "포크",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -138,5 +205,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(hair) A type of hairstyle or technique used to add volume",
+        "why": "Hallucinated sense; 포크 does not mean a hair perm."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is also occasionally used in casual hair salons to describe",
+        "why": "Repeats the hallucinated hair perm meaning."
+      }
+    ],
+    "growth": 0.62
   }
 }

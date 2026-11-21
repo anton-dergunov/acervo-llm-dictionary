@@ -68,6 +68,92 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "to visit (a place)",
+    "primaryGloss": "to visit",
+    "emotion": "curious and eager, ready to explore a new place",
+    "notes": [
+      "Use 'visiter' only for places (cities, museums, apartments). To visit a person, say 'rendre visite à quelqu'un' or 'aller voir quelqu'un', never 'visiter quelqu'un'."
+    ],
+    "senses": [
+      {
+        "id": "7fbw3suhzcq52hx",
+        "order": 0,
+        "definition": "To go to a place in order to see or explore it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to visit",
+              "to tour"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏛️",
+        "examples": [
+          {
+            "id": "lkg1m8nx7gnz5zm",
+            "text": "Nous allons visiter le musée du Louvre demain.",
+            "textLang": "fr",
+            "translation": "We are going to visit the Louvre museum tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and anticipating a great day out",
+            "note": null,
+            "matchedForm": "visiter",
+            "matchedTranslationForm": "visit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "7fbw3suhzcq52hx",
+      "from": "Aller dans un lieu pour le découvrir ou le voir.",
+      "to": "To go to a place in order to see or explore it.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:18Z"
+    },
+    {
+      "sense": "yc5rtsnqt52gxhh",
+      "from": "Aller voir quelqu'un pour lui tenir compagnie.",
+      "to": "To go see someone to keep them company.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:18Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "visiter",
+    "lemma": "visiter",
+    "reading": null,
+    "ipa": "/vi.zi.te/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏛️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "to visit a place; to visit someone",
     "primaryGloss": "visit",
     "emotion": "curious and eager, ready to explore a new place",
@@ -160,22 +246,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "7fbw3suhzcq52hx",
-      "from": "Aller dans un lieu pour le découvrir ou le voir.",
-      "to": "To go to a place in order to see or explore it.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:18Z"
-    },
-    {
-      "sense": "yc5rtsnqt52gxhh",
-      "from": "Aller voir quelqu'un pour lui tenir compagnie.",
-      "to": "To go see someone to keep them company.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:18Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(person) To go see someone to keep them company.",
+        "why": "In standard French, 'visiter' is not used for visiting people (as Note 0 rightly says)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Je veux visiter mes grands-parents ce week-end.",
+        "why": "Classic learner error; in France one says 'rendre visite à' or 'aller voir'."
+      }
+    ],
+    "growth": 0.728
+  }
 }

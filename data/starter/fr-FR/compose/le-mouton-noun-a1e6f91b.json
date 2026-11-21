@@ -72,6 +72,131 @@
     "primaryGloss": "sheep",
     "emotion": "gentle and pastoral, picturing a quiet flock grazing in a green meadow",
     "notes": [
+      "For the meat, 'l'agneau' (lamb, a young sheep) is much more commonly eaten in France than 'le mouton' (mutton, an adult sheep)."
+    ],
+    "senses": [
+      {
+        "id": "fd9awh0ds27kw9h",
+        "order": 0,
+        "definition": "A farm animal raised for its thick wool and its meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "y6cb4r6il0psp9u",
+            "text": "Les moutons mangent de l'herbe dans le pré.",
+            "textLang": "fr",
+            "translation": "The sheep are eating grass in the meadow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "moutons",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xrh63britayyces",
+        "order": 1,
+        "definition": "The meat of an adult sheep eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mutton"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "di0a3e4tdrhhzbt",
+            "text": "Nous mangeons du mouton ce soir.",
+            "textLang": "fr",
+            "translation": "We are eating mutton tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and hungry, anticipating a hearty home-cooked meal",
+            "note": null,
+            "matchedForm": "mouton",
+            "matchedTranslationForm": "mutton"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "fd9awh0ds27kw9h",
+      "from": "Animal domestique élevé pour sa laine et sa viande.",
+      "to": "A farm animal raised for its wool and meat.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    },
+    {
+      "sense": "xrh63britayyces",
+      "from": "Viande de cet animal.",
+      "to": "The meat of this animal, eaten as food.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le mouton",
+    "lemma": "mouton",
+    "reading": null,
+    "ipa": "/mu.tɔ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "sheep; mutton",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and pastoral, picturing a quiet flock grazing in a green meadow",
+    "notes": [
       "Refers to both the live animal (sheep) and its meat when cooked (mutton or lamb, though 'agneau' is specifically young sheep)."
     ],
     "senses": [
@@ -159,22 +284,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "fd9awh0ds27kw9h",
-      "from": "Animal domestique élevé pour sa laine et sa viande.",
-      "to": "A farm animal raised for its wool and meat.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    },
-    {
-      "sense": "xrh63britayyces",
-      "from": "Viande de cet animal.",
-      "to": "The meat of this animal, eaten as food.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers to both the live animal (sheep) and its meat",
+        "why": "Restates the two senses; only the contrast with 'agneau' is useful."
+      }
+    ],
+    "growth": 1.063
+  }
 }

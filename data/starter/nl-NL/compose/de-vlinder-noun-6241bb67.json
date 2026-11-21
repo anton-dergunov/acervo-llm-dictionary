@@ -68,6 +68,71 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "butterfly",
+    "primaryGloss": "butterfly",
+    "emotion": "light and delighted, watching something beautiful flutter past",
+    "notes": [],
+    "senses": [
+      {
+        "id": "4oobtqb47yjaocq",
+        "order": 0,
+        "definition": "An insect with large, often colourful wings and a slender body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "butterfly"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🦋",
+        "examples": [
+          {
+            "id": "0ba8dfrcwt4bmtd",
+            "text": "Er zit een mooie vlinder op de bloem in de tuin.",
+            "textLang": "nl",
+            "translation": "There is a beautiful butterfly sitting on the flower in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vlinder",
+            "matchedTranslationForm": "butterfly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de vlinder",
+    "lemma": "vlinder",
+    "reading": null,
+    "ipa": "/ˈvlɪn.dər/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦋",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "butterfly; bow tie",
     "primaryGloss": "butterfly",
     "emotion": "light and delighted, watching something beautiful flutter past",
@@ -158,5 +223,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A small bow-shaped necktie worn around the collar.",
+        "why": "A bow tie in Dutch is 'strik' or 'vlinderdas'/'vlinderstrik' (sometimes diminutive 'vlindertje'), not 'vlinder'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "a bow tie is also called a 'vlinderstrik' or simply a 'vlinder'",
+        "why": "Unmodified 'vlinder' does not mean bow tie in standard Dutch."
+      }
+    ],
+    "growth": 0.445
   }
 }

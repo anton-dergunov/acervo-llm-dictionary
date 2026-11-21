@@ -57,6 +57,94 @@
     "language": "ja",
     "headword": "白い",
     "lemma": "白い",
+    "reading": "しろい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white",
+    "primaryGloss": "white",
+    "emotion": "light and clean, like fresh paper or a bright morning",
+    "notes": [
+      "白い (shiroi) is an i-adjective placed directly before a noun: 白いシャツ (a white shirt). The noun 'white' is 白 (shiro), which needs の before another noun."
+    ],
+    "senses": [
+      {
+        "id": "z5b8u4m9pza5u9o",
+        "order": 0,
+        "definition": "Of the color of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "espwwt48pz4qmcs",
+            "text": "雪は白いです。",
+            "textLang": "ja",
+            "translation": "Snow is white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "白い",
+            "matchedTranslationForm": "white"
+          },
+          {
+            "id": "h2wyy3bu9z3ht6u",
+            "text": "白い紙に名前を書いた。",
+            "textLang": "ja",
+            "translation": "I wrote my name on a white piece of paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and deliberate, preparing to do something",
+            "note": null,
+            "matchedForm": "白い",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "白い",
+    "lemma": "白い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -159,5 +247,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (しろい) for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of snow or milk.",
+        "why": "Defined as a noun ('the color...'), but 白い is an adjective ('of the color...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Blank, or having no markings or writing.",
+        "why": "白い紙 just means 'white paper' (as opposed to真っ白 for completely blank); this is not a separate sense."
+      }
+    ],
+    "growth": 0.853
   }
 }

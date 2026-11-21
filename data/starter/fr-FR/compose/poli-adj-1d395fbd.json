@@ -68,6 +68,133 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "polite; polished",
+    "primaryGloss": "polite",
+    "emotion": "warm and well-mannered, greeting someone with a gentle smile",
+    "notes": [
+      "Feminine: polie (pronounced the same). Opposite: impoli (impolite, rude). Takes 'avec' or 'envers' before a person."
+    ],
+    "senses": [
+      {
+        "id": "f12oulufci4n0eq",
+        "order": 0,
+        "definition": "Of a person or their behavior: having good manners and showing respect for others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "polite",
+              "courteous"
+            ]
+          }
+        ],
+        "domain": "manners",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "fk6fh10xbw4109z",
+            "text": "Il est toujours très poli avec ses voisins.",
+            "textLang": "fr",
+            "translation": "He is always very polite to his neighbors.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and warm, praising someone's good manners",
+            "note": null,
+            "matchedForm": "poli",
+            "matchedTranslationForm": "polite"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "aeqd23c2gs044vv",
+        "order": 1,
+        "definition": "Of a surface: made smooth and shiny by rubbing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "polished",
+              "smooth"
+            ]
+          }
+        ],
+        "domain": "surface",
+        "emoji": "🪞",
+        "examples": [
+          {
+            "id": "nfvvorumvxohx6y",
+            "text": "La table est en bois poli.",
+            "textLang": "fr",
+            "translation": "The table is made of polished wood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "poli",
+            "matchedTranslationForm": "polished"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "f12oulufci4n0eq",
+      "from": "Qui a de bonnes manières et se montre courtois envers les autres.",
+      "to": "Having good manners and showing courtesy toward others.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    },
+    {
+      "sense": "aeqd23c2gs044vv",
+      "from": "Qui a une surface unie et brillante.",
+      "to": "Having a flat, even, and shiny surface.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:16Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "poli",
+    "lemma": "poli",
+    "reading": null,
+    "ipa": "/pɔ.li/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "polite; polished, smooth",
     "primaryGloss": "polite",
     "emotion": "warm and well-mannered, greeting someone with a gentle smile",
@@ -161,22 +288,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "f12oulufci4n0eq",
-      "from": "Qui a de bonnes manières et se montre courtois envers les autres.",
-      "to": "Having good manners and showing courtesy toward others.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    },
-    {
-      "sense": "aeqd23c2gs044vv",
-      "from": "Qui a une surface unie et brillante.",
-      "to": "Having a flat, even, and shiny surface.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:16Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cette table a un bois bien poli.",
+        "why": "Unnatural French phrasing and awkward English translation ('has a very smooth wood')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Poli comes from the verb polir (to polish), which is why",
+        "why": "Etymology filler; preposition usage ('poli avec') and antonym ('impoli') are more useful."
+      }
+    ],
+    "growth": 1.016
+  }
 }

@@ -71,6 +71,119 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat, to have a meal; to suffer or receive",
+    "primaryGloss": "to eat",
+    "emotion": "relaxed and content, sitting down for a warm meal",
+    "notes": [
+      "The stem ye- narrows to yi- before suffixes starting with -y-, such as yiyor (is eating), yiyecek (will eat), and yiyen (eating). Imperative: ye! (eat!).",
+      "In Turkish, soup (çorba) takes içmek ('to drink') rather than yemek."
+    ],
+    "senses": [
+      {
+        "id": "zi2rxk0fdldirrq",
+        "order": 0,
+        "definition": "To put food in your mouth, chew it, and swallow it, or to have a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to eat",
+              "to have a meal"
+            ]
+          }
+        ],
+        "domain": "eating",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "k3ypdwpkfjcajhh",
+            "text": "Her gün saat yedide akşam yemeği yiyoruz.",
+            "textLang": "tr",
+            "translation": "We eat dinner every day at seven o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yiyoruz",
+            "matchedTranslationForm": "eat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bf60kkd56jkmw7y",
+        "order": 1,
+        "definition": "In everyday expressions, to receive or suffer something unpleasant, such as a fine, a goal, cold weather, or a scolding.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get",
+              "to receive",
+              "to concede",
+              "to catch"
+            ]
+          }
+        ],
+        "domain": "receiving",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hbjg221ltjaki81",
+            "text": "Yanlış yere park ettiği için ceza yedi.",
+            "textLang": "tr",
+            "translation": "He got a fine for parking in the wrong place.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yedi",
+            "matchedTranslationForm": "got"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yemek",
+    "lemma": "yemek",
+    "reading": null,
+    "ipa": "/jeˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to have a meal; to consume",
     "primaryGloss": "to eat",
     "emotion": "relaxed and content, sitting down for a warm meal",
@@ -163,5 +276,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(meal) To have a meal at a certain time of day.",
+        "why": "Eating food and eating a meal are one sense; missing the everyday 'spend/receive' sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to eat; to have a meal; to consume",
+        "why": "Includes 'to consume' which is not in the senses."
+      }
+    ],
+    "growth": 1.372
   }
 }

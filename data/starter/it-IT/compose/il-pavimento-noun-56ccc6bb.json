@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "floor",
+    "primaryGloss": "floor",
+    "emotion": "steady and grounded, walking across a room with firm footsteps",
+    "notes": [
+      "False friend: 'pavimento' means the indoor floor of a room. For the outdoor pavement or sidewalk, use 'marciapiede'; for a storey of a building, use 'piano'."
+    ],
+    "senses": [
+      {
+        "id": "1ws0ee1fpz4snp7",
+        "order": 0,
+        "definition": "The lower surface of a room on which one walks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🧹",
+        "examples": [
+          {
+            "id": "e564csikuwgblfy",
+            "text": "Ho fatto cadere le chiavi sul pavimento.",
+            "textLang": "it",
+            "translation": "I dropped the keys on the floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and looking down, searching for dropped keys",
+            "note": null,
+            "matchedForm": "pavimento",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il pavimento",
+    "lemma": "pavimento",
+    "reading": null,
+    "ipa": "/paviˈmento/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "floor; pavement",
     "primaryGloss": "floor",
     "emotion": "steady and grounded, walking across a room with firm footsteps",
@@ -159,5 +226,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(pavement) The hard surface of a road or path made for walking",
+        "why": "False-friend trap; outdoor road surface is 'manto stradale' or 'marciapiede', contradicting note[0]."
+      }
+    ],
+    "growth": 0.675
   }
 }

@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "oler",
+    "primaryGloss": "oler",
+    "emotion": "inquisitive and alert, focused on the scent in the air",
+    "notes": [
+      "Para describir un olor se usa con un adjetivo ('it smells good', no 'well'); para comparar o indicar el origen se usa 'smell like' o 'smell of' ('it smells like coffee').",
+      "Para hablar de lo que uno percibe en el momento, suele usarse con 'can' ('I can smell...')."
+    ],
+    "senses": [
+      {
+        "id": "sfyp5g8u53t20py",
+        "order": 0,
+        "definition": "Percibir un olor usando la nariz.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "oler"
+            ]
+          }
+        ],
+        "domain": "percepción",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "6wfqswvx3wvt0kx",
+            "text": "I can smell fresh bread from the kitchen.",
+            "textLang": "en",
+            "translation": "Puedo oler pan recién hecho desde la cocina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contento y hambriento al notar un aroma delicioso",
+            "note": null,
+            "matchedForm": "smell",
+            "matchedTranslationForm": "oler"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c8v7337uk76axhg",
+        "order": 1,
+        "definition": "Tener o despedir un olor determinado.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "oler",
+              "oler a"
+            ]
+          }
+        ],
+        "domain": "aroma",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "s2w1tda9dsz15ca",
+            "text": "These flowers smell wonderful.",
+            "textLang": "en",
+            "translation": "Estas flores huelen de maravilla.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admirado y feliz al disfrutar de un aroma agradable",
+            "note": null,
+            "matchedForm": "smell",
+            "matchedTranslationForm": "huelen"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "smell",
+    "lemma": "smell",
+    "reading": null,
+    "ipa": "/smɛl/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "oler; tener un olor",
     "primaryGloss": "oler",
     "emotion": "inquisitive and alert, focused on the scent in the air",
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "No confundas 'smell' (oler) con 'scent' (esencia o perfume)",
+        "why": "Compares the verb 'smell' with the noun 'scent' instead of giving verb usage notes."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "oler a",
+        "why": "Should include 'oler' as the primary gloss since it takes adjectives without 'a'."
+      }
+    ],
+    "growth": 1.033
   }
 }

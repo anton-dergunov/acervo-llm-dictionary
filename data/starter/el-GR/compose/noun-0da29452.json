@@ -73,6 +73,71 @@
     "shortGloss": "airport",
     "primaryGloss": "airport",
     "emotion": "busy and purposeful, heading out on a trip with excitement",
+    "notes": [],
+    "senses": [
+      {
+        "id": "0tc6ju21cl9j9im",
+        "order": 0,
+        "definition": "A place where airplanes take off and land, with buildings for passengers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "airport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "72gt6ap35o3gl0c",
+            "text": "Φτάσαμε στο αεροδρόμιο πολύ νωρίς.",
+            "textLang": "el",
+            "translation": "We arrived at the airport very early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rushed and eager to get through security",
+            "note": null,
+            "matchedForm": "αεροδρόμιο",
+            "matchedTranslationForm": "airport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το αεροδρόμιο",
+    "lemma": "αεροδρόμιο",
+    "reading": null,
+    "ipa": "/a.e.ɾoˈðɾo.mi.o/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "airport",
+    "primaryGloss": "airport",
+    "emotion": "busy and purposeful, heading out on a trip with excitement",
     "notes": [
       "Used for commercial passenger flights as well as general aviation.",
       "Do not confuse with το λιμάνι (port/harbor), which is for ships and boats."
@@ -121,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for commercial passenger flights as well as general aviation.",
+        "why": "Filler note stating the obvious meaning of airport."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with το λιμάνι (port/harbor), which is for ships",
+        "why": "Unlikely confusion between completely different words."
+      }
+    ],
+    "growth": 0.53
   }
 }

@@ -58,6 +58,76 @@
     "headword": "รูปถ่าย",
     "lemma": "รูปถ่าย",
     "reading": null,
+    "ipa": "/rûːp.tʰàːj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📷",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "photograph; photo",
+    "primaryGloss": "photograph",
+    "emotion": "nostalgic and warm, looking back at a fond memory captured on film",
+    "notes": [
+      "Formed from รูป (picture, image) + ถ่าย (to take a photo); in everyday speech, it is often shortened simply to รูป.",
+      "The classifier for photographs is ใบ (bai) or รูป (ruup)."
+    ],
+    "senses": [
+      {
+        "id": "buoat1m3qbb8x5c",
+        "order": 0,
+        "definition": "A picture taken with a camera.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "photograph",
+              "photo",
+              "picture"
+            ]
+          }
+        ],
+        "domain": "photography",
+        "emoji": "📷",
+        "examples": [
+          {
+            "id": "c4ykqyuxj0ueq0q",
+            "text": "ฉันชอบดูรูปถ่ายเก่า ๆ ของครอบครัว",
+            "textLang": "th",
+            "translation": "I like looking at old family photos.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "รูปถ่าย",
+            "matchedTranslationForm": "photos"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "รูปถ่าย",
+    "lemma": "รูปถ่าย",
+    "reading": null,
     "ipa": "/ruːp̚˨˩.tʰaːj˨˩/",
     "pos": "noun",
     "gender": null,
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ruːp̚˨˩.tʰaːj˨˩/",
+        "why": "First syllable รูป has a falling tone (/rûːp/), not a low tone."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[1]",
+        "quote": "It refers specifically to a photograph taken with a camera, as requested.",
+        "why": "Leaked AI prompt meta-commentary ('as requested') and restates the definition."
+      }
+    ],
+    "growth": 0.883
   }
 }

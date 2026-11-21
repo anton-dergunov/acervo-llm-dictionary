@@ -74,6 +74,96 @@
     "primaryGloss": "stairs",
     "emotion": null,
     "notes": [
+      "Commonly paired with the particle を (o) and verbs of movement: 階段を上る (noboru, go up the stairs) and 階段を下りる (oriru, go down the stairs)."
+    ],
+    "senses": [
+      {
+        "id": "jx142t59lygmccy",
+        "order": 0,
+        "definition": "A set of steps leading from one floor or level to another.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stairs",
+              "staircase",
+              "steps"
+            ]
+          }
+        ],
+        "domain": "structure",
+        "emoji": "🪜",
+        "examples": [
+          {
+            "id": "o178xm34zzeo23x",
+            "text": "エレベーターを使わずに階段を上った。",
+            "textLang": "ja",
+            "translation": "I went up the stairs without using the elevator.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "階段",
+            "matchedTranslationForm": "stairs"
+          },
+          {
+            "id": "7hnw2aydjc5ztc0",
+            "text": "階段から落ちないように気をつけてください。",
+            "textLang": "ja",
+            "translation": "Please be careful not to fall down the stairs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cautious and caring, offering a word of advice",
+            "note": null,
+            "matchedForm": "階段",
+            "matchedTranslationForm": "stairs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "階段",
+    "lemma": "階段",
+    "reading": "かいだん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪜",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "stairs; staircase",
+    "primaryGloss": "stairs",
+    "emotion": null,
+    "notes": [
       "While 階段 refers to the stairs as a structure (the flight of steps), you can also use it to refer to the act of climbing or descending them when combined with verbs like 上る (noboru - to climb) or 下りる (oriru - to go down)."
     ],
     "senses": [
@@ -142,5 +232,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "you can also use it to refer to the act of climbing",
+        "why": "階段 never means the act of climbing; the verbs 上る/下りる provide that meaning."
+      }
+    ],
+    "growth": 0.888
   }
 }

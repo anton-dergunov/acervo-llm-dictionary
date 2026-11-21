@@ -74,6 +74,117 @@
     "primaryGloss": "healthy",
     "emotion": null,
     "notes": [
+      "An invariable adjective; it does not change form for gender or number.",
+      "Unlike ठीक ('fine, okay'), स्वस्थ specifically means in good health, and is slightly more formal than तंदुरुस्त ('fit, healthy')."
+    ],
+    "senses": [
+      {
+        "id": "ks4v365kouxn36d",
+        "order": 0,
+        "definition": "Well and strong in body; not sick.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "well",
+              "fit"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "e49s61l6163wdzt",
+            "text": "वह बहुत स्वस्थ है।",
+            "textLang": "hi",
+            "translation": "He is very healthy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "positive and bright, observing someone's good condition",
+            "note": null,
+            "matchedForm": "स्वस्थ",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "kxrxzj5ostsov2b",
+        "order": 1,
+        "definition": "Good for your body and physical condition.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "wholesome"
+            ]
+          }
+        ],
+        "domain": "lifestyle",
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "5sjoelk4gvvtip8",
+            "text": "स्वस्थ भोजन करना महत्वपूर्ण है।",
+            "textLang": "hi",
+            "translation": "Eating healthy food is important.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and encouraging, like giving sensible advice",
+            "note": null,
+            "matchedForm": "स्वस्थ",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "स्वस्थ",
+    "lemma": "स्वस्थ",
+    "reading": null,
+    "ipa": "/sʋəst̪ʰ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "healthy; well",
+    "primaryGloss": "healthy",
+    "emotion": null,
+    "notes": [
       "Used to describe someone who is physically well or a lifestyle that supports good health.",
       "Unlike 'ठीक' (thik), which can mean 'okay' or 'functioning', 'स्वस्थ' specifically implies a state of vitality and wellness."
     ],
@@ -164,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe someone who is physically well or a lifestyle",
+        "why": "Merely restates the two sense definitions without adding grammar or usage help."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "wholesome, healthful",
+        "why": "Lacks the most natural everyday translation 'healthy'."
+      }
+    ],
+    "growth": 0.948
   }
 }

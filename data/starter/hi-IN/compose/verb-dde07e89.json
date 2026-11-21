@@ -69,6 +69,137 @@
     ],
     "status": "active",
     "shortGloss": "to speak; to say",
+    "primaryGloss": "to speak",
+    "emotion": "straightforward and communicative, the normal act of sharing thoughts with others",
+    "notes": [
+      "The person spoken to is marked with से (se): मुझसे बोलो (speak to me).",
+      "Unlike most transitive-looking verbs of speech (such as कहना), बोलना is intransitive in the past and does not take ने (ne): वह बोला (he spoke/said)."
+    ],
+    "senses": [
+      {
+        "id": "mzqp0oj7nkjii1r",
+        "order": 0,
+        "definition": "To produce words with the voice; to talk or speak a language.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to speak",
+              "to talk"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "nphvcmxgzk0b3gf",
+            "text": "वह बहुत तेज़ बोलता है।",
+            "textLang": "hi",
+            "translation": "He speaks very fast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and observant, describing someone's typical speaking style",
+            "note": null,
+            "matchedForm": "बोलता",
+            "matchedTranslationForm": "speaks"
+          },
+          {
+            "id": "ftoq6yc63bqn11w",
+            "text": "क्या आप हिंदी बोलते हैं?",
+            "textLang": "hi",
+            "translation": "Do you speak Hindi?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बोलते",
+            "matchedTranslationForm": "speak"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3zu63chk9ipnxqv",
+        "order": 1,
+        "definition": "To express or state something aloud.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to say",
+              "to tell"
+            ]
+          }
+        ],
+        "domain": "utterance",
+        "emoji": "💬",
+        "examples": [
+          {
+            "id": "mkd9ccy790ab234",
+            "text": "हमेशा सच बोलो।",
+            "textLang": "hi",
+            "translation": "Always tell the truth.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बोलो",
+            "matchedTranslationForm": "tell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बोलना",
+    "lemma": "बोलना",
+    "reading": null,
+    "ipa": "/boːlnaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to speak; to say",
     "primaryGloss": "speak",
     "emotion": "straightforward and communicative, the normal act of sharing thoughts with others",
     "notes": [
@@ -200,5 +331,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[2]",
+        "quote": "(language) To speak a specific language.",
+        "why": "Speaking a language is a shade of sense 0, not a separate sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "सत्य बोलो।",
+        "why": "सत्य is overly Sanskritized; everyday Hindi uses सच बोलो."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention that बोलना does not take ने (ne) in the perfective."
+      }
+    ],
+    "growth": 1.106
   }
 }

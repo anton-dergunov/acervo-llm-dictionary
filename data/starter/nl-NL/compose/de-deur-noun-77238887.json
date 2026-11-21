@@ -71,6 +71,71 @@
     "shortGloss": "door",
     "primaryGloss": "door",
     "emotion": "welcoming and open, ready to step inside",
+    "notes": [],
+    "senses": [
+      {
+        "id": "rulj7nr18j0x1ko",
+        "order": 0,
+        "definition": "A movable barrier used to open and close the entrance to a building, room, or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "02m6k5w5b6f9v24",
+            "text": "Doe alstublieft de deur dicht.",
+            "textLang": "nl",
+            "translation": "Please close the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and firm, wanting to keep the warmth inside",
+            "note": null,
+            "matchedForm": "deur",
+            "matchedTranslationForm": "door"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de deur",
+    "lemma": "deur",
+    "reading": null,
+    "ipa": "/døːr/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "door",
+    "primaryGloss": "door",
+    "emotion": "welcoming and open, ready to step inside",
     "notes": [
       "Use 'de deur' when talking about the physical barrier you open and close to enter a room or building.",
       "Remember that 'deur' is a de-word, so it takes 'de' instead of 'het'."
@@ -119,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de deur' when talking about the physical barrier",
+        "why": "Pure filler that just repeats the definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Remember that 'deur' is a de-word, so it takes 'de'",
+        "why": "Restates the grammatical gender already shown in the headword."
+      }
+    ],
+    "growth": 0.437
   }
 }

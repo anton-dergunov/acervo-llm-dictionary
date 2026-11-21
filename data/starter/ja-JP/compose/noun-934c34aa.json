@@ -71,6 +71,75 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "supermarket",
+    "primaryGloss": "supermarket",
+    "emotion": "convenient and everyday, thinking about what to make for dinner",
+    "notes": [
+      "Short for スーパーマーケット (supermarket); the shortened form is standard in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "lv8o3c9dco53utq",
+        "order": 0,
+        "definition": "A large store that sells food, drinks, and household goods.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "supermarket",
+              "grocery store"
+            ]
+          }
+        ],
+        "domain": "shopping",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "rynyn6z4ufbo70s",
+            "text": "仕事の帰りにスーパーで買い物をしました。",
+            "textLang": "ja",
+            "translation": "I went shopping at the supermarket on my way home from work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing a routine daily chore",
+            "note": null,
+            "matchedForm": "スーパー",
+            "matchedTranslationForm": "supermarket"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "スーパー",
+    "lemma": "スーパー",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛒",
+    "topics": [
+      "Shopping",
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "supermarket; super-",
     "primaryGloss": "supermarket",
     "emotion": "convenient and everyday, thinking about what to make for dinner",
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(describing) A prefix meaning very or excellent; super-.",
+        "why": "Prefix is a different POS; the standalone noun means supermarket."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "彼はスーパーマンです。",
+        "why": "Uses the loanword スーパーマン (Superman), not スーパー."
+      }
+    ],
+    "growth": 0.572
   }
 }

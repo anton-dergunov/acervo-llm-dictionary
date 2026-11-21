@@ -68,6 +68,94 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "train station",
+    "primaryGloss": "train station",
+    "emotion": "hurried and bustling, catching a connection before departure time",
+    "notes": [
+      "The plural is 'die Bahnhöfe' (with an umlaut).",
+      "To say 'at the station', German uses 'am Bahnhof' (short for 'an dem Bahnhof'). A main central station is 'der Hauptbahnhof' (often abbreviated 'Hbf')."
+    ],
+    "senses": [
+      {
+        "id": "9acpj6gne74e15l",
+        "order": 0,
+        "definition": "A building and set of tracks where trains stop for passengers to get on and off.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "train station",
+              "railway station",
+              "station"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚆",
+        "examples": [
+          {
+            "id": "i0hcdpvl15t6phr",
+            "text": "Wir treffen uns morgen am Bahnhof.",
+            "textLang": "de",
+            "translation": "We are meeting tomorrow at the train station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and expectant, waiting for someone to arrive",
+            "note": null,
+            "matchedForm": "Bahnhof",
+            "matchedTranslationForm": "train station"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "9acpj6gne74e15l",
+      "from": "Ein Ort, an dem Züge halten, damit Fahrgäste ein- und aussteigen können.",
+      "to": "A place where trains stop so that passengers can get on and off.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:11:15Z"
+    },
+    {
+      "sense": "qvx9iudbb9scwsr",
+      "from": "Ein zentraler Haltepunkt für Fernbusse und den öffentlichen Nahverkehr.",
+      "to": "A central stop for long-distance buses and public transportation.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:11:15Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Bahnhof",
+    "lemma": "Bahnhof",
+    "reading": null,
+    "ipa": "/ˈbaːnhoːf/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "train station; bus station",
     "primaryGloss": "train station",
     "emotion": "hurried and bustling, catching a connection before departure time",
@@ -161,22 +249,41 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "9acpj6gne74e15l",
-      "from": "Ein Ort, an dem Züge halten, damit Fahrgäste ein- und aussteigen können.",
-      "to": "A place where trains stop so that passengers can get on and off.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:11:15Z"
-    },
-    {
-      "sense": "qvx9iudbb9scwsr",
-      "from": "Ein zentraler Haltepunkt für Fernbusse und den öffentlichen Nahverkehr.",
-      "to": "A central stop for long-distance buses and public transportation.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:11:15Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(bus station) A central stop for long-distance buses and public transportation.",
+        "why": "'Bahnhof' alone means train station; bus station is 'Busbahnhof'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Der Bus fährt direkt am Busbahnhof ab.",
+        "why": "Uses the compound 'Busbahnhof' instead of the headword 'Bahnhof'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used for both train stations and major bus hubs where long-distance coaches",
+        "why": "False: 'Bahnhof' by itself refers to a train station, not a bus station."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the plural 'die Bahnhöfe' and common preposition 'am Bahnhof'."
+      }
+    ],
+    "growth": 0.914
+  }
 }

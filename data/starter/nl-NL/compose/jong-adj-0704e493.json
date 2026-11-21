@@ -68,6 +68,94 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "young",
+    "primaryGloss": "young",
+    "emotion": "warm and bright, thinking of someone full of life and energy",
+    "notes": [
+      "For wine or Dutch cheese ('jonge kaas'), 'jong' means only briefly aged, with a mild flavour (as opposed to 'belegen' or 'oud')."
+    ],
+    "senses": [
+      {
+        "id": "s0xp49fidbf0lon",
+        "order": 0,
+        "definition": "Having lived or existed for only a short time; not old.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "young"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "👶",
+        "examples": [
+          {
+            "id": "5ebfdpntpeq7tff",
+            "text": "Haar broer is nog erg jong.",
+            "textLang": "nl",
+            "translation": "Her brother is still very young.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "jong",
+            "matchedTranslationForm": "young"
+          },
+          {
+            "id": "sy9pqmsvvjiezip",
+            "text": "Ik heb een jongere zus.",
+            "textLang": "nl",
+            "translation": "I have a younger sister.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and casual, mentioning family",
+            "note": null,
+            "matchedForm": "jongere",
+            "matchedTranslationForm": "younger"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "jong",
+    "lemma": "jong",
+    "reading": null,
+    "ipa": "/jɔŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "young; younger; offspring",
     "primaryGloss": "young",
     "emotion": "warm and bright, thinking of someone full of life and energy",
@@ -201,5 +289,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(animals) The offspring of an animal. | glosses en: young, cub, offspring",
+        "why": "'het jong' (plural 'jongen') is a neuter noun, not a sense of the adjective 'jong'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(family) In a lower position in age relative to another person",
+        "why": "'jongere' is simply the regular comparative of 'jong' (sense 0), not a separate meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "young; younger; offspring",
+        "why": "Includes comparative 'younger' and noun 'offspring' for the adjective 'jong'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for people, animals, and plants that have not lived or existed",
+        "why": "Restates the basic definition."
+      }
+    ],
+    "growth": 0.528
   }
 }

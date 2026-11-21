@@ -74,6 +74,96 @@
     "primaryGloss": "mountain",
     "emotion": "standing in awe before a grand, towering landscape",
     "notes": [
+      "Counted with the measure word 座 (zuò): 一座山 (a mountain).",
+      "Covers both mountains and hills; a small hill can be called 小山 (xiǎoshān)."
+    ],
+    "senses": [
+      {
+        "id": "03hyam1430p761v",
+        "order": 0,
+        "definition": "A mountain or hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "hill"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "qe09hpgk4f3nqnh",
+            "text": "周末我们去爬山吧。",
+            "textLang": "zh",
+            "translation": "Let's go hike in the mountains this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "山",
+            "matchedTranslationForm": "mountains"
+          },
+          {
+            "id": "dio7d0m2j2kh6un",
+            "text": "那座山很高。",
+            "textLang": "zh",
+            "translation": "That mountain is very high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, describing the landscape",
+            "note": null,
+            "matchedForm": "山",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "山",
+    "lemma": "山",
+    "reading": "shān",
+    "ipa": "/ʂan˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "mountain; hill",
+    "primaryGloss": "mountain",
+    "emotion": "standing in awe before a grand, towering landscape",
+    "notes": [
       "In Chinese, the word shān covers both large mountains and smaller hills. Context or adjectives like 'high' or 'small' help distinguish the size.",
       "Do not confuse this with 'hill' (sometimes expressed specifically as 小山), as shān is a broad term that naturally includes very high hills."
     ],
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[1] (hill) A very high hill.",
+        "why": "山 does not distinguish mountain and hill; both belong in one sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'hill' (sometimes expressed specifically as 小山)",
+        "why": "Redundant with note 0 and weirdly formulated; missing the measure word 座."
+      }
+    ],
+    "growth": 0.525
   }
 }

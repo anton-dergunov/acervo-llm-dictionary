@@ -68,6 +68,71 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "park",
+    "primaryGloss": "park",
+    "emotion": "relaxed and appreciative, imagining a green space in the city",
+    "notes": [],
+    "senses": [
+      {
+        "id": "zb1eo5flga85fwg",
+        "order": 0,
+        "definition": "A public area of land in a town or city with trees, grass, and paths, where people go to walk, relax, or play.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "park"
+            ]
+          }
+        ],
+        "domain": "city",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "f9bsjpq8bnrre64",
+            "text": "Vamos a caminar al parque esta tarde.",
+            "textLang": "es",
+            "translation": "We are going to walk to the park this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "parque",
+            "matchedTranslationForm": "park"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el parque",
+    "lemma": "parque",
+    "reading": null,
+    "ipa": "/ˈpaɾke/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "park; play area",
     "primaryGloss": "park",
     "emotion": "relaxed and appreciative, imagining a green space in the city",
@@ -158,5 +223,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A place equipped with swings, slides, and other gear",
+        "why": "A park with children's play equipment is not a separate lexical sense of 'parque'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'parque' is standard for a public garden, it is also used",
+        "why": "Restates the artificial sense split; in Mexico a playground area is 'los juegos'."
+      }
+    ],
+    "growth": 0.37
   }
 }

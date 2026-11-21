@@ -68,6 +68,74 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "mascota; animal de compañía",
+    "primaryGloss": "mascota",
+    "emotion": "affectionate and gentle, smiling warmly at an animal",
+    "notes": [
+      "También se usa como verbo ('to pet') con el significado de acariciar a un animal."
+    ],
+    "senses": [
+      {
+        "id": "xxyr6x288qk36ui",
+        "order": 0,
+        "definition": "Animal que se cría y se cuida en casa como compañía.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mascota",
+              "animal de compañía"
+            ]
+          }
+        ],
+        "domain": "animales",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "8oyhc7kj1eym9et",
+            "text": "Do you have any pets at home?",
+            "textLang": "en",
+            "translation": "¿Tienes alguna mascota en casa?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pets",
+            "matchedTranslationForm": "mascota"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "pet",
+    "lemma": "pet",
+    "reading": null,
+    "ipa": "/pɛt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "animal de compañía; favorito",
     "primaryGloss": "animal de compañía",
     "emotion": "affectionate and gentle, smiling warmly at an animal",
@@ -116,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia de 'animal' en general, 'pet' se refiere específicamente a los",
+        "why": "Restates the definition; 'mascota' already carries this exact distinction in Spanish."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(favorito) Persona o cosa que recibe un trato de favoritismo o preferencia.",
+        "why": "Noun sense 'favorite' is rare outside the fixed phrase 'teacher's pet', unsuitable for A2."
+      }
+    ],
+    "growth": 0.798
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "to read",
     "emotion": "quiet and absorbed, lost in the pages of a good book",
     "notes": [
+      "Imperfective; the basic perfective partner is прочитать.",
+      "Used in phrases like читать лекцию (to give a lecture) and читать стихи (to recite poetry)."
+    ],
+    "senses": [
+      {
+        "id": "p0nzcx6crjxr37b",
+        "order": 0,
+        "definition": "To look at written words and understand what they mean.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to read"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "sb4vwfgv43ftxqq",
+            "text": "Я люблю читать книги вечером.",
+            "textLang": "ru",
+            "translation": "I like to read books in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and cozy, unwinding at the end of the day",
+            "note": null,
+            "matchedForm": "читать",
+            "matchedTranslationForm": "read"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7cciwz51fzc0bqj",
+        "order": 1,
+        "definition": "To deliver a lecture or recite a text aloud to an audience.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to lecture",
+              "to give a lecture",
+              "to recite"
+            ]
+          }
+        ],
+        "domain": "speaking",
+        "emoji": "👨‍🏫",
+        "examples": [
+          {
+            "id": "91zmgxkz30tlyqa",
+            "text": "Профессор будет читать лекцию по истории.",
+            "textLang": "ru",
+            "translation": "The professor will give a history lecture.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "attentive and formal, listening in a quiet lecture hall",
+            "note": null,
+            "matchedForm": "читать",
+            "matchedTranslationForm": "give"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "читать",
+    "lemma": "читать",
+    "reading": null,
+    "ipa": "/tɕɪˈtatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to read; to lecture",
+    "primaryGloss": "to read",
+    "emotion": "quiet and absorbed, lost in the pages of a good book",
+    "notes": [
       "Use читать when you look at printed or written words and understand them.",
       "Do not confuse читать (to read) with учить (to study or to learn)."
     ],
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use читать when you look at printed or written words",
+        "why": "Restates the first definition instead of giving grammar or aspect info."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse читать (to read) with учить (to study",
+        "why": "Not a real confusion pair for learners; aspect pair (прочитать) is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the irregular present-tense stem (-аю, -аешь) and perfective partner прочитать."
+      }
+    ],
+    "growth": 1.083
   }
 }

@@ -58,6 +58,117 @@
     "headword": "แพง",
     "lemma": "แพง",
     "reading": null,
+    "ipa": "/pʰɛːŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "expensive; classy",
+    "primaryGloss": "expensive",
+    "emotion": "surprised and a little hesitant at the high price",
+    "notes": [
+      "The opposite is ถูก (thùuk, 'cheap').",
+      "In modern slang, ดูแพง (duu phaeng, literally 'to look expensive') describes someone or something that looks classy, elegant, or sophisticated."
+    ],
+    "senses": [
+      {
+        "id": "xcrmp3kth90w4eu",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "aob3qwhbjhqhv5w",
+            "text": "เสื้อตัวนี้แพงเกินไป",
+            "textLang": "th",
+            "translation": "This shirt is too expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and disappointed by the high price",
+            "note": null,
+            "matchedForm": "แพง",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "op06xmja09wewi8",
+        "order": 1,
+        "definition": "Looking sophisticated, elegant, or high-class (usually in the phrase ดูแพง).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "classy",
+              "elegant",
+              "sophisticated"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "💎",
+        "examples": [
+          {
+            "id": "w4my8pb8ufrf6rc",
+            "text": "ชุดนี้ดูแพงมาก",
+            "textLang": "th",
+            "translation": "This outfit looks very classy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แพง",
+            "matchedTranslationForm": "classy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แพง",
+    "lemma": "แพง",
+    "reading": null,
     "ipa": "/pʰaːŋ˧/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʰaːŋ˧/",
+        "why": "Wrong vowel: แพง has vowel /ɛː/ (/pʰɛːŋ/), not /aː/ (which is พาง)."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "รอยยิ้มของเธอดູแพงมาก",
+        "why": "Contains Lao vowel character U+0EB9 (ູ) instead of Thai U+0E39 (ู) in ดู."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Valuable, precious, or high in worth. | glosses en: precious, valuable",
+        "why": "แพง does not mean 'precious/valuable' (มีค่า); ดูแพง is modern slang for 'classy/elegant'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "แพง is used for things that cost a lot of money.",
+        "why": "Simply restates the definition."
+      }
+    ],
+    "growth": 1.281
   }
 }

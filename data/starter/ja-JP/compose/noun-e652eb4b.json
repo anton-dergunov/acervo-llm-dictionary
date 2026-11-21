@@ -68,6 +68,74 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "secret",
+    "primaryGloss": "secret",
+    "emotion": "hushed and conspiratorial, like sharing a private story with a friend",
+    "notes": [
+      "Can modify another noun using の, as in 秘密の部屋 (himitsu no heya, 'secret room').",
+      "Often used in the phrase 秘密にする (himitsu ni suru, 'to keep something a secret')."
+    ],
+    "senses": [
+      {
+        "id": "511h9x2mu0u0k8u",
+        "order": 0,
+        "definition": "Information that is kept hidden from other people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "secret"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "bv0sn03pf7wxu9d",
+            "text": "この話は誰にも秘密にしてください。",
+            "textLang": "ja",
+            "translation": "Please keep this story a secret from everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "秘密",
+            "matchedTranslationForm": "secret"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "秘密",
+    "lemma": "秘密",
+    "reading": "ひみつ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "secret; privacy",
     "primaryGloss": "secret",
     "emotion": "hushed and conspiratorial, like sharing a private story with a friend",
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "secret; privacy",
+        "why": "'privacy' is not in the sense glosses and is a misleading translation for 秘密."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both personal secrets and classified or restricted information.",
+        "why": "Same as English 'secret'; adds no useful usage information for a learner."
+      }
+    ],
+    "growth": 0.904
   }
 }

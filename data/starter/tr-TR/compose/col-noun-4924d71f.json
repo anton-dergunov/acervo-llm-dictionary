@@ -58,6 +58,71 @@
     "headword": "çöl",
     "lemma": "çöl",
     "reading": null,
+    "ipa": "/tʃœlʲ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏜️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "desert",
+    "primaryGloss": "desert",
+    "emotion": "vast, hot, and completely silent",
+    "notes": [],
+    "senses": [
+      {
+        "id": "gpt3ftilo9k523p",
+        "order": 0,
+        "definition": "A large, dry area of land with very little rain and few plants.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "desert"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏜️",
+        "examples": [
+          {
+            "id": "jwkp0veq257uw9t",
+            "text": "Sahra Çölü yaz aylarında çok sıcak olur.",
+            "textLang": "tr",
+            "translation": "The Sahara Desert gets very hot in the summer months.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Çölü",
+            "matchedTranslationForm": "Desert"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "çöl",
+    "lemma": "çöl",
+    "reading": null,
     "ipa": "/dʒœl/",
     "pos": "noun",
     "gender": null,
@@ -118,5 +183,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dʒœl/",
+        "why": "Turkish 'ç' is voiceless /tʃ/, not voiced /dʒ/; 'l' in 'çöl' is palatalized /lʲ/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe dry, barren landscapes with extreme temperatures and very little",
+        "why": "Merely repeats the definition."
+      }
+    ],
+    "growth": 0.669
   }
 }

@@ -68,6 +68,118 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "bathroom; bathhouse",
+    "primaryGloss": "bathroom",
+    "emotion": "relaxed and refreshed, stepping into a warm room",
+    "notes": [
+      "Plural: حَمَّامَات (ḥammāmāt).",
+      "Do not confuse with حَمَام (ḥamām, without shadda on the م), which means 'pigeons, doves'."
+    ],
+    "senses": [
+      {
+        "id": "pbs3zjo14o3zwhl",
+        "order": 0,
+        "definition": "A room in a house or public building with a toilet, sink, and often a bath or shower.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bathroom",
+              "restroom",
+              "toilet"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "ifahwe0d43flp4a",
+            "text": "الْحَمَّامُ نَظِيفٌ وَمُرَتَّبٌ.",
+            "textLang": "ar",
+            "translation": "The bathroom is clean and tidy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and pleased with a clean home",
+            "note": null,
+            "matchedForm": "الْحَمَّامُ",
+            "matchedTranslationForm": "bathroom"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b68ghak2w71l4bz",
+        "order": 1,
+        "definition": "A traditional public bathhouse with steam rooms.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bathhouse",
+              "steam bath",
+              "hammam"
+            ]
+          }
+        ],
+        "domain": "spa",
+        "emoji": "♨️",
+        "examples": [
+          {
+            "id": "yigm7375ndz3ww3",
+            "text": "ذَهَبْنَا إِلَى الْحَمَّامِ التَّقْلِيدِيِّ لِلِاسْتِرْخَاءِ.",
+            "textLang": "ar",
+            "translation": "We went to the traditional bathhouse to relax.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "soothed and unwwinded after a long day",
+            "note": null,
+            "matchedForm": "الْحَمَّامِ",
+            "matchedTranslationForm": "bathhouse"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حَمَّام",
+    "lemma": "حَمَّام",
+    "reading": null,
+    "ipa": "/ħamˈmaːm/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛁",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "bathroom; bath",
     "primaryGloss": "bathroom",
     "emotion": "relaxed and refreshed, stepping into a warm room",
@@ -161,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with مَرْحَضَة, which specifically refers to a toilet room.",
+        "why": "The Arabic word for toilet/lavatory is مِرْحَاض (mirḥāḍ), not مَرْحَضَة."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both the room with a shower or bathtub and a",
+        "why": "Merely repeats the two senses already given in the entry."
+      }
+    ],
+    "growth": 1.027
   }
 }

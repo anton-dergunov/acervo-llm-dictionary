@@ -58,6 +58,131 @@
     "headword": "el parque",
     "lemma": "parque",
     "reading": null,
+    "ipa": "/ˈpaɾke/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "park; playground",
+    "primaryGloss": "park",
+    "emotion": "relaxed and leisurely, enjoying a quiet afternoon outside",
+    "notes": [
+      "False friend: do not confuse with English 'to park' or 'car park' ('el aparcamiento' or 'el parking' in Spain)."
+    ],
+    "senses": [
+      {
+        "id": "p3ankxljt7o8dxz",
+        "order": 0,
+        "definition": "A public area with grass and trees in a town or city for walking and relaxing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "park"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "2eulrixj6vts4li",
+            "text": "Vamos a dar un paseo por el parque esta tarde.",
+            "textLang": "es",
+            "translation": "Let's go for a walk in the park this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and upbeat, suggesting a pleasant outdoor activity",
+            "note": null,
+            "matchedForm": "parque",
+            "matchedTranslationForm": "park"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7lt5tjo619jksox",
+        "order": 1,
+        "definition": "An outdoor area equipped with swings, slides, and other structures for children to play on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "playground"
+            ]
+          }
+        ],
+        "domain": "recreation",
+        "emoji": "🛝",
+        "examples": [
+          {
+            "id": "hnreyiyr4cvdcxb",
+            "text": "Llevé a los niños a los columpios del parque.",
+            "textLang": "es",
+            "translation": "I took the children to the swings at the playground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "parque",
+            "matchedTranslationForm": "playground"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "p3ankxljt7o8dxz",
+      "from": "Terreno con plantas y árboles en una ciudad para pasear y descansar.",
+      "to": "An area with plants and trees in a city for walking and relaxing.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    },
+    {
+      "sense": "7lt5tjo619jksox",
+      "from": "Área con juegos para que los niños jueguen.",
+      "to": "An area equipped with structures for children to play on.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el parque",
+    "lemma": "parque",
+    "reading": null,
     "ipa": "/ˈpaɾ.ke/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,22 +285,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "p3ankxljt7o8dxz",
-      "from": "Terreno con plantas y árboles en una ciudad para pasear y descansar.",
-      "to": "An area with plants and trees in a city for walking and relaxing.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    },
-    {
-      "sense": "7lt5tjo619jksox",
-      "from": "Área con juegos para que los niños jueguen.",
-      "to": "An area equipped with structures for children to play on.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'parque' for both a public green space and a children's",
+        "why": "Restates the two senses directly."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Los niños juegan al fútbol en el parque.",
+        "why": "Playing football fits a general park, not a playground with play structures."
+      }
+    ],
+    "growth": 1.033
+  }
 }

@@ -58,6 +58,96 @@
     "headword": "czekać",
     "lemma": "czekać",
     "reading": null,
+    "ipa": "/ˈt͡ʂɛ.kat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wait",
+    "primaryGloss": "wait",
+    "emotion": "patient and still, letting the time pass while anticipation builds",
+    "notes": [
+      "Imperfective verb; its perfective pair is 'poczekać'.",
+      "To say 'wait for someone or something', use the preposition 'na' followed by the accusative case: 'Czekam na autobus' (I am waiting for the bus)."
+    ],
+    "senses": [
+      {
+        "id": "iqwdnawtsjicgi5",
+        "order": 0,
+        "definition": "To stay in one place or delay action until someone arrives or something happens.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wait",
+              "await"
+            ]
+          }
+        ],
+        "domain": "waiting",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "ehimmbi9f79ps2p",
+            "text": "Muszę czekać na autobus w deszczu.",
+            "textLang": "pl",
+            "translation": "I have to wait for the bus in the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly annoyed and cold, just wanting to get home",
+            "note": null,
+            "matchedForm": "czekać",
+            "matchedTranslationForm": "wait"
+          },
+          {
+            "id": "5n8pqku7v86owd5",
+            "text": "Z niecierpliwością czekamy na wakacje.",
+            "textLang": "pl",
+            "translation": "We are eagerly waiting for the holidays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "czekamy",
+            "matchedTranslationForm": "waiting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "czekać",
+    "lemma": "czekać",
+    "reading": null,
     "ipa": "/ˈt͡ʂɛkat͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "The verb requires the genitive case when you wait for someone",
+        "why": "False and self-contradictory: 'czekać' takes 'na' + accusative, not genitive."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dzieci nie mogą się doczekać świąt.",
+        "why": "Uses the reflexive verb 'doczekać się', not the headword 'czekać'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean 'to wait (for)'; splits one basic meaning."
+      }
+    ],
+    "growth": 0.595
   }
 }

@@ -68,6 +68,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "manejar, conducir; llevar en auto",
+    "primaryGloss": "manejar",
+    "emotion": "focused and confident, paying attention to the road ahead",
+    "notes": [
+      "Verbo irregular: pasado 'drove' (/droʊv/), participio 'driven' (/ˈdrɪvən/).",
+      "No confundas 'drive' con 'ride'. 'Drive' implica controlar el vehículo; 'ride' se usa cuando vas como pasajero o cuando montas en bicicleta, moto o a caballo."
+    ],
+    "senses": [
+      {
+        "id": "x6a0zd4w9so82zx",
+        "order": 0,
+        "definition": "Operar y controlar la dirección de un vehículo, como un coche o un camión.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "manejar",
+              "conducir"
+            ]
+          }
+        ],
+        "domain": "vehículo",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "r2xgvdqpx7y16fg",
+            "text": "I drive to work every morning.",
+            "textLang": "en",
+            "translation": "Manejo al trabajo cada mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine, calm, and matter-of-fact",
+            "note": null,
+            "matchedForm": "drive",
+            "matchedTranslationForm": "Manejo"
+          },
+          {
+            "id": "obougma3f2bvghk",
+            "text": "She is learning how to drive a car.",
+            "textLang": "en",
+            "translation": "Ella está aprendiendo a conducir un coche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and excited about a new skill",
+            "note": null,
+            "matchedForm": "drive",
+            "matchedTranslationForm": "conducir"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e5o1njemcqdy4cj",
+        "order": 1,
+        "definition": "Llevar a alguien a algún lugar en un vehículo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llevar en auto",
+              "llevar en coche"
+            ]
+          }
+        ],
+        "domain": "transporte",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "kkkom65jxb0t07a",
+            "text": "Can you drive me to the station?",
+            "textLang": "en",
+            "translation": "¿Me puedes llevar en auto a la estación?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "drive",
+            "matchedTranslationForm": "llevar en auto"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "drive",
+    "lemma": "drive",
+    "reading": null,
+    "ipa": "/draɪv/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "manejar un vehículo; ir en auto",
     "primaryGloss": "manejar",
     "emotion": "focused and confident, paying attention to the road ahead",
@@ -141,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "En otros países hispanohablantes, puedes escuchar 'conducir'",
+        "why": "Confuses English usage with Spanish regional synonyms; 'conducir' is not an English word."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past forms (drove, driven), essential for A2 learners."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday transitive sense 'llevar en coche' (drive someone somewhere)."
+      }
+    ],
+    "growth": 1.133
   }
 }

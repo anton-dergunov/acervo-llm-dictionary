@@ -57,6 +57,75 @@
     "language": "zh",
     "headword": "切",
     "lemma": "切",
+    "reading": "qiē",
+    "ipa": "/tɕʰi̯e˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cut; to slice",
+    "primaryGloss": "cut",
+    "emotion": "focused and steady, measuring the movement",
+    "notes": [
+      "Pronounced qiē (first tone) when it means to cut or slice with a knife. This character is also pronounced qiè (fourth tone) in words like 一切 (yíqiè, 'all/everything') and 亲切 (qīnqiè, 'kind/warm')."
+    ],
+    "senses": [
+      {
+        "id": "wautuuxrkvv4tqm",
+        "order": 0,
+        "definition": "To cut or slice something into pieces using a knife or sharp blade.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cut",
+              "slice",
+              "chop"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "vt3ih4p5d0539ml",
+            "text": "请帮我把西红柿切成两半。",
+            "textLang": "zh",
+            "translation": "Please help me cut the tomato in half.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and polite, asking someone for a favor in the kitchen",
+            "note": null,
+            "matchedForm": "切",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "切",
+    "lemma": "切",
     "reading": "qiè",
     "ipa": "/tɕʰi̯e˥˩/",
     "pos": "verb",
@@ -161,5 +230,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "qiè",
+        "why": "As the verb 'to cut', 切 is pronounced qiē (first tone), not qiè."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tɕʰi̯e˥˩/",
+        "why": "IPA has fourth tone instead of first tone /tɕʰi̯e˥/ for the verb 'to cut'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(eager) To feel eager, intense, or close.",
+        "why": "Wrong pronunciation (qiè) and bound morpheme; not a standalone A2 verb sense."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "大家对这个消息感到切合实际。",
+        "why": "Ungrammatical collocation: cannot say 对…消息感到切合实际."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to cut; to carve; eager; all",
+        "why": "Includes meanings from the bound morpheme qiè that do not belong to the verb qiē."
+      }
+    ],
+    "growth": 0.793
   }
 }

@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to remember",
+    "primaryGloss": "remember",
+    "emotion": "reflective and thoughtful, looking back into the past",
+    "notes": [
+      "Compare with 기억나다 and 생각나다 ('to come to mind'), which are used when a memory comes back spontaneously, while 기억하다 is used for holding something in your memory or recalling it."
+    ],
+    "senses": [
+      {
+        "id": "8nb8jn8phq3ficl",
+        "order": 0,
+        "definition": "To keep a fact, event, or person in your memory, or bring it back to mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "remember",
+              "recall",
+              "keep in mind"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "vabx7lr3hmk46wg",
+            "text": "어릴 때의 추억을 선명하게 기억합니다.",
+            "textLang": "ko",
+            "translation": "I clearly remember my childhood memories.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nostalgic and warm, smiling softly at an old memory",
+            "note": null,
+            "matchedForm": "기억합니다",
+            "matchedTranslationForm": "remember"
+          },
+          {
+            "id": "8ug45wphc5w45x0",
+            "text": "선생님의 말씀을 늘 기억하겠습니다.",
+            "textLang": "ko",
+            "translation": "I will always remember the teacher's words.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and respectful, making a quiet promise",
+            "note": null,
+            "matchedForm": "기억하겠습니다",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "기억하다",
+    "lemma": "기억하다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to remember; to keep in mind",
     "primaryGloss": "remember",
     "emotion": "reflective and thoughtful, looking back into the past",
@@ -162,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Retaining in memory and recalling are shades of one meaning for 기억하다."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "memorize",
+        "why": "To memorize is 외우다 or 암기하다, not 기억하다."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "기억하다 is used for actively remembering or retaining information",
+        "why": "Both notes are filler; comparing with 생각하다 (to think) instead of 생각나다 is unhelpful."
+      }
+    ],
+    "growth": 0.758
   }
 }

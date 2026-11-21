@@ -58,6 +58,74 @@
     "headword": "pero",
     "lemma": "pero",
     "reading": null,
+    "ipa": "/ˈpeɾo/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔀",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; however",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
+      "When following a negative statement to mean 'but rather' or 'instead', use 'sino' instead of 'pero' (No es lunes, sino martes)."
+    ],
+    "senses": [
+      {
+        "id": "3wucu6jerf8q12l",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with or limits what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "however"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "🔀",
+        "examples": [
+          {
+            "id": "d9smca03dvbbnqi",
+            "text": "Quiero ir al parque, pero está lloviendo.",
+            "textLang": "es",
+            "translation": "I want to go to the park, but it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disappointed and hesitant about the change in plans",
+            "note": null,
+            "matchedForm": "pero",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pero",
+    "lemma": "pero",
+    "reading": null,
     "ipa": "/ˈpe.ɾo/",
     "pos": "expression",
     "gender": null,
@@ -162,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'pero' is a coordinating conjunction, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'pero' to introduce a contrasting idea or restriction, much like 'but'",
+        "why": "Merely restates the definition and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(objection) An objection or difficulty raised against something.",
+        "why": "Noun sense ('un pero') belongs to a different POS and is not core A2."
+      }
+    ],
+    "growth": 0.564
   }
 }

@@ -58,6 +58,116 @@
     "headword": "समझना",
     "lemma": "समझना",
     "reading": null,
+    "ipa": "/sə.mədʒʱ.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to understand; to think; to consider",
+    "primaryGloss": "to understand",
+    "emotion": "thoughtful and attentive, catching the meaning of something clearly",
+    "notes": [
+      "Do not confuse with जानना (jānnā), which means to know a fact or a person, or समझाना (samjhānā), the causative verb meaning 'to explain'."
+    ],
+    "senses": [
+      {
+        "id": "2cptirffq2k6c9x",
+        "order": 0,
+        "definition": "To grasp the meaning of something or know what someone means.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to understand",
+              "to comprehend"
+            ]
+          }
+        ],
+        "domain": "comprehension",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "283gn6qhvkxl6a3",
+            "text": "मैं इस वाक्य का अर्थ नहीं समझ रहा हूँ।",
+            "textLang": "hi",
+            "translation": "I don't understand the meaning of this sentence.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "puzzled and trying hard to figure something out",
+            "note": null,
+            "matchedForm": "समझ",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2mgbv2bbrmqvgs9",
+        "order": 1,
+        "definition": "To think of someone or something in a particular way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to consider",
+              "to think",
+              "to regard as"
+            ]
+          }
+        ],
+        "domain": "opinion",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "conexspakzhwpop",
+            "text": "वह अपने आपको बहुत होशियार समझता है।",
+            "textLang": "hi",
+            "translation": "He considers himself very clever.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "समझता",
+            "matchedTranslationForm": "considers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "समझना",
+    "lemma": "समझना",
+    "reading": null,
     "ipa": "/səməɡʰnɑː/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +273,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/səməɡʰnɑː/",
+        "why": "झ is /dʒʱ/, not /ɡʰ/."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "वह अपने आपको बहुतशियार समझता है।",
+        "why": "Corrupted text: 'बहुत होशियार' is mangled into 'बहुतशियार'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I am not understanding the meaning of this sentence.",
+        "why": "Calqued progressive ('I am not understanding') is unnatural in standard English; should be 'I do not understand'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for grasping a concept or an explanation",
+        "why": "Merely restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.844
   }
 }

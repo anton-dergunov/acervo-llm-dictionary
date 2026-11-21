@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to repair; to fix; to mend",
+    "primaryGloss": "repair",
+    "emotion": "focused and practical, feeling capable while solving a problem",
+    "notes": [
+      "Imperfective; the perfective pair is 'naprawić'.",
+      "Do not confuse with 'poprawiać', which is used for correcting errors in text, tests, or speech, or making something slightly better."
+    ],
+    "senses": [
+      {
+        "id": "e9660wjkwo3u6p4",
+        "order": 0,
+        "definition": "To make a damaged or broken object work again.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "repair",
+              "fix",
+              "mend"
+            ]
+          }
+        ],
+        "domain": "repair",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "hgj1n3jgjwc6wg6",
+            "text": "Tata jest w garażu i naprawia zepsuty rower.",
+            "textLang": "pl",
+            "translation": "Dad is in the garage repairing the broken bike.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "naprawia",
+            "matchedTranslationForm": "repairing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ocl78pgup2ywbq5",
+        "order": 1,
+        "definition": "To set right a bad situation, relationship, or past mistake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fix",
+              "mend",
+              "put right"
+            ]
+          }
+        ],
+        "domain": "remedy",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "zqutcdq04g9qdn1",
+            "text": "Musimy naprawiać nasze błędy, póki mamy czas.",
+            "textLang": "pl",
+            "translation": "We have to fix our mistakes while we still have time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "naprawiać",
+            "matchedTranslationForm": "fix"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "naprawiać",
+    "lemma": "naprawiać",
+    "reading": null,
+    "ipa": "/naˈpra.vʲat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛠️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to repair; to fix; to correct",
     "primaryGloss": "to repair",
     "emotion": "focused and practical, feeling capable while solving a problem",
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tata musi naprawiać zepsuty rower.",
+        "why": "Wrong aspect: a single obligation to fix one bike requires perfective 'naprawić', not imperfective 'naprawiać'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "For fixing abstract things like a mistake or a relationship, Polish often",
+        "why": "Contradicts sense 1; 'naprawiać błędy/relacje' (remedy mistakes/relationships) is standard Polish, whereas 'poprawiać' corrects errors in work."
+      }
+    ],
+    "growth": 0.839
   }
 }

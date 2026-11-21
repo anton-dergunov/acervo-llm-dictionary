@@ -58,6 +58,137 @@
     "headword": "บ้าน",
     "lemma": "บ้าน",
     "reading": null,
+    "ipa": "/bâːn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house; home; hometown",
+    "primaryGloss": "house",
+    "emotion": "warm and grounding, thinking of the place where one truly belongs",
+    "notes": [
+      "The classifier for a house as a physical building is หลัง (/lǎŋ/)."
+    ],
+    "senses": [
+      {
+        "id": "tivdyb3dvue3moo",
+        "order": 0,
+        "definition": "A building or place where a person or family lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "residence",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "6yeo4etwpc7ljw8",
+            "text": "บ้านของฉันอยู่ที่กรุงเทพฯ",
+            "textLang": "th",
+            "translation": "My house is in Bangkok.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing simple personal information",
+            "note": null,
+            "matchedForm": "บ้าน",
+            "matchedTranslationForm": "house"
+          },
+          {
+            "id": "8mmbef7tjfedbl7",
+            "text": "ฉันอยากกลับบ้าน",
+            "textLang": "th",
+            "translation": "I want to go home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wistful and longing, tired and ready to return to a familiar place",
+            "note": null,
+            "matchedForm": "บ้าน",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w1ppm6f5f0cob70",
+        "order": 1,
+        "definition": "The town, province, or country where a person is originally from.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hometown",
+              "home",
+              "homeland"
+            ]
+          }
+        ],
+        "domain": "origin",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "fpklv9tme7t115n",
+            "text": "ช่วงสงกรานต์คนชอบกลับบ้านที่ต่างจังหวัด",
+            "textLang": "th",
+            "translation": "During Songkran, people like to go back to their hometowns in the provinces.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "บ้าน",
+            "matchedTranslationForm": "hometowns"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "บ้าน",
+    "lemma": "บ้าน",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +292,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "บ้าน can mean both the physical structure of a 'house' and the",
+        "why": "Restates the glosses and senses without adding new usage information."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used with personal pronouns like 'my house', Thai speakers often use",
+        "why": "Generic rule about Thai possessive pronouns that applies to all nouns, not this word."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "ฉันอยากกลับบ้าน — I want to go home.",
+        "why": "Normally exemplifies sense 0 ('home'), not specifically 'hometown' or 'homeland'."
+      }
+    ],
+    "growth": 0.897
   }
 }

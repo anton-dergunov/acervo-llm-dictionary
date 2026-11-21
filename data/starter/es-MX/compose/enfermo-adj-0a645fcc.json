@@ -68,6 +68,75 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "sick; ill",
+    "primaryGloss": "sick",
+    "emotion": "tired and miserable, aching with a bad cold",
+    "notes": [
+      "Used with 'estar' (estar enfermo) to talk about being sick.",
+      "Also used as a noun (un enfermo / una enferma) meaning 'a sick person' or 'a patient'."
+    ],
+    "senses": [
+      {
+        "id": "kbry2wiq6y13cwg",
+        "order": 0,
+        "definition": "Suffering from an illness or not feeling well.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sick",
+              "ill"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "e3dh2b27ic0bom3",
+            "text": "Hoy estoy enfermo y quiero descansar en la cama.",
+            "textLang": "es",
+            "translation": "I am sick today and want to rest in bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "enfermo",
+            "matchedTranslationForm": "sick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "enfermo",
+    "lemma": "enfermo",
+    "reading": null,
+    "ipa": "/enˈfeɾmo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "sick; ill; patient",
     "primaryGloss": "sick",
     "emotion": "tired and miserable, aching with a bad cold",
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "A person who receives medical care in a hospital.",
+        "why": "Entry POS is adjective, so a noun sense ('patient') does not belong in senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs a note on 'estar enfermo' vs 'ser enfermo' for A2 learners."
+      }
+    ],
+    "growth": 0.704
   }
 }

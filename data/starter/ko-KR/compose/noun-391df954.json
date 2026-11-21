@@ -58,6 +58,117 @@
     "headword": "회사",
     "lemma": "회사",
     "reading": null,
+    "ipa": "høsa",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "company; work, office",
+    "primaryGloss": "company",
+    "emotion": "a mix of steady duty and the fatigue of a long day",
+    "notes": [
+      "Commonly used in expressions like 회사에 다니다 ('to work for a company') and 회사에 가다 ('to go to work / the office').",
+      "Refers to an office-based business or corporation, unlike 가게 ('small shop, store')."
+    ],
+    "senses": [
+      {
+        "id": "c6ykyrsxmtfscga",
+        "order": 0,
+        "definition": "A business organization that sells goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "company",
+              "firm",
+              "corporation"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "eyakvbq7toj1o9c",
+            "text": "그는 큰 회사에서 일합니다.",
+            "textLang": "ko",
+            "translation": "He works at a big company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple career detail",
+            "note": null,
+            "matchedForm": "회사",
+            "matchedTranslationForm": "company"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3yk3r3j2rkg5mab",
+        "order": 1,
+        "definition": "The office or workplace where one does one's job.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "work",
+              "office"
+            ]
+          }
+        ],
+        "domain": "workplace",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "dxs862k9dz0bdcy",
+            "text": "오늘 회사에 늦게 도착했어요.",
+            "textLang": "ko",
+            "translation": "I arrived at work late today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly flustered and apologetic",
+            "note": null,
+            "matchedForm": "회사",
+            "matchedTranslationForm": "work"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "회사",
+    "lemma": "회사",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "company; firm",
+        "why": "Lacks the second sense ('work, office')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for any organization that conducts business.",
+        "why": "Restates the definition; notes on common collocations (회사에 다니다/가다) are much more useful for A2."
+      }
+    ],
+    "growth": 0.802
   }
 }

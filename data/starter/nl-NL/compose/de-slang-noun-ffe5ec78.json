@@ -71,6 +71,112 @@
     "shortGloss": "snake; hose",
     "primaryGloss": "snake",
     "emotion": "cautious and alert, spotting danger in the grass",
+    "notes": [],
+    "senses": [
+      {
+        "id": "upwxw50w46h2wtj",
+        "order": 0,
+        "definition": "A long reptile with scales and no legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [
+          {
+            "id": "qtx1d7ga291elb2",
+            "text": "Pas op, er ligt een slang in het gras.",
+            "textLang": "nl",
+            "translation": "Watch out, there is a snake in the grass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "startled and warning someone urgently",
+            "note": null,
+            "matchedForm": "slang",
+            "matchedTranslationForm": "snake"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gnuciye0lb186fe",
+        "order": 1,
+        "definition": "A flexible tube through which water, air, or gas flows.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hose",
+              "tube"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🛜",
+        "examples": [
+          {
+            "id": "vvp0bkcop3p3lrk",
+            "text": "Sluit de slang aan op de buitenkraan.",
+            "textLang": "nl",
+            "translation": "Connect the hose to the outside tap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "slang",
+            "matchedTranslationForm": "hose"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de slang",
+    "lemma": "slang",
+    "reading": null,
+    "ipa": "/slɑŋ/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "snake; hose",
+    "primaryGloss": "snake",
+    "emotion": "cautious and alert, spotting danger in the grass",
     "notes": [
       "The word 'slang' in Dutch has two very common meanings: the animal (snake) and the flexible tube used for water or air (hose). Context will always make it clear which one is meant."
     ],
@@ -160,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'slang' in Dutch has two very common meanings",
+        "why": "Merely restates the two senses already shown in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik sproei de tuin met de tuinslang.",
+        "why": "Uses the compound 'tuinslang' rather than the headword 'slang'."
+      }
+    ],
+    "growth": 0.559
   }
 }

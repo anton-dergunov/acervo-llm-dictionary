@@ -72,6 +72,95 @@
     "primaryGloss": "yesterday",
     "emotion": null,
     "notes": [
+      "Used both as an adverb without a particle (어제 만났어요) and as a noun taking particles (어제는, 어제부터).",
+      "Remember that in Korean, the verb must still take the past tense ending (-았/었-) even when 어제 is in the sentence."
+    ],
+    "senses": [
+      {
+        "id": "hc29573ow332isb",
+        "order": 0,
+        "definition": "On the day before today; the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🗓️",
+        "examples": [
+          {
+            "id": "qghkyw2gvq8gpy2",
+            "text": "어제 친구를 만났어요.",
+            "textLang": "ko",
+            "translation": "I met a friend yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing a simple personal update",
+            "note": null,
+            "matchedForm": "어제",
+            "matchedTranslationForm": "yesterday"
+          },
+          {
+            "id": "hf5csd66mesg4ox",
+            "text": "어제는 날씨가 정말 좋았어요.",
+            "textLang": "ko",
+            "translation": "The weather was really nice yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and reflective, recalling a nice moment",
+            "note": null,
+            "matchedForm": "어제는",
+            "matchedTranslationForm": "yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "어제",
+    "lemma": "어제",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
       "어제 functions as an adverb meaning 'the day before today'. In casual speech, it is sometimes shortened to '어저께'.",
       "Remember that in Korean, when talking about past events, you must change the verb ending to the past tense, even if you already used the word '어제'."
     ],
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In casual speech, it is sometimes shortened to '어저께'.",
+        "why": "어저께 is three syllables and longer than 어제 (two syllables); अ제 is shortened from 어저께."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The day before today.",
+        "why": "Defined as a noun while pos is adv and example[1] uses it as a noun."
+      }
+    ],
+    "growth": 0.933
   }
 }

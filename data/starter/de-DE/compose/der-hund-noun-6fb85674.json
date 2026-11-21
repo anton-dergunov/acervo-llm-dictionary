@@ -72,6 +72,74 @@
     "primaryGloss": "dog",
     "emotion": "fond and smiling, thinking of a friendly pet",
     "notes": [
+      "Plural: 'die Hunde'. A female dog specifically is 'die Hündin'."
+    ],
+    "senses": [
+      {
+        "id": "e41y6nl6d82qu7u",
+        "order": 0,
+        "definition": "A common four-legged animal that barks and is often kept as a pet or working animal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dog",
+              "hound"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐶",
+        "examples": [
+          {
+            "id": "3ned04516k73xbd",
+            "text": "Der Hund bellt im Garten.",
+            "textLang": "de",
+            "translation": "The dog is barking in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alert and pointing out a sound",
+            "note": null,
+            "matchedForm": "Hund",
+            "matchedTranslationForm": "dog"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "der Hund",
+    "lemma": "Hund",
+    "reading": null,
+    "ipa": "/hʊnt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐶",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "dog",
+    "primaryGloss": "dog",
+    "emotion": "fond and smiling, thinking of a friendly pet",
+    "notes": [
       "Takes the masculine article 'der'. The plural is 'die Hunde'."
     ],
     "senses": [
@@ -118,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:36Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the masculine article 'der'. The plural is 'die Hunde'.",
+        "why": "Restates the gender already shown in the headword and gender field."
+      }
+    ],
+    "growth": 1.213
   }
 }

@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "head; leader",
+    "primaryGloss": "head",
+    "emotion": "matter-of-fact and ordinary, pointing out a basic part of the body",
+    "notes": [
+      "Often used figuratively for one's mind or stubbornness, as in 'κάνω του κεφαλιού μου' (to do things one's own way)."
+    ],
+    "senses": [
+      {
+        "id": "qpq6phivmkkvkup",
+        "order": 0,
+        "definition": "The upper part of the body of a person or animal that contains the brain, eyes, ears, nose, and mouth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "cpn2tupnyd8bgjn",
+            "text": "Με πονάει το κεφάλι μου.",
+            "textLang": "el",
+            "translation": "My head hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncomfortable and tired, complaining about a mild ache",
+            "note": null,
+            "matchedForm": "κεφάλι",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "09ov58a2eyo6vxj",
+        "order": 1,
+        "definition": "The person in charge of a group or organization.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head",
+              "leader",
+              "boss"
+            ]
+          }
+        ],
+        "domain": "leader",
+        "emoji": "👑",
+        "examples": [
+          {
+            "id": "5aovcj823g0fmze",
+            "text": "Αυτός είναι το κεφάλι της εταιρείας.",
+            "textLang": "el",
+            "translation": "He is the head of the company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and definitive, pointing out who holds the authority",
+            "note": null,
+            "matchedForm": "κεφάλι",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το κεφάλι",
+    "lemma": "κεφάλι",
+    "reading": null,
+    "ipa": "/ceˈfali/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "head; leader; mind",
     "primaryGloss": "head",
     "emotion": "matter-of-fact and ordinary, pointing out a basic part of the body",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "head; leader; mind",
+        "why": "Includes 'mind', which is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers to the top part of the human body containing the brain",
+        "why": "Both notes merely repeat the definitions of the two senses."
+      }
+    ],
+    "growth": 0.913
   }
 }

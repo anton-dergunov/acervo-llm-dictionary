@@ -57,6 +57,117 @@
     "language": "ja",
     "headword": "切る",
     "lemma": "切る",
+    "reading": "きる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cut; to hang up; to turn off",
+    "primaryGloss": "cut",
+    "emotion": "matter-of-fact and focused, performing a simple task with precision",
+    "notes": [
+      "切る (kiru) is a godan (Group 1) verb: its て-form is 切って and polite form is 切ります. Do not confuse it with the homophone 着る (to wear), which is an ichidan (Group 2) verb (着て, 着ます)."
+    ],
+    "senses": [
+      {
+        "id": "h1df688m498fziv",
+        "order": 0,
+        "definition": "To divide, separate, or trim something using a knife, scissors, or another sharp tool.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cut",
+              "slice",
+              "chop"
+            ]
+          }
+        ],
+        "domain": "cutting",
+        "emoji": "🔪",
+        "examples": [
+          {
+            "id": "oe9hbt2mji17era",
+            "text": "ナイフでパンを切る。",
+            "textLang": "ja",
+            "translation": "I cut the bread with a knife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "methodical and calm, busy in the kitchen",
+            "note": null,
+            "matchedForm": "切る",
+            "matchedTranslationForm": "cut"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1kv5r519zazpj0w",
+        "order": 1,
+        "definition": "To end a phone call, turn off a switch, or break off a connection.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hang up",
+              "turn off",
+              "cut off"
+            ]
+          }
+        ],
+        "domain": "disconnecting",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "3u28cl6goj27dzr",
+            "text": "電話を切る。",
+            "textLang": "ja",
+            "translation": "I hang up the phone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sharp and abrupt, ending the conversation immediately",
+            "note": null,
+            "matchedForm": "切る",
+            "matchedTranslationForm": "hang up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "切る",
+    "lemma": "切る",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Pay attention to the long or short 'u' sound.",
+        "why": "切る (kiru) and 来る (kuru) differ in the first vowel (i vs u), not vowel length."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Japanese, it is used for everything from slicing vegetables",
+        "why": "Restates the definitions instead of explaining grammar or homophones."
+      }
+    ],
+    "growth": 0.871
   }
 }

@@ -71,6 +71,75 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "tienda, comercio",
+    "primaryGloss": "tienda",
+    "emotion": "someone chatting about their day, light and informative",
+    "notes": [
+      "En inglés estadounidense, 'store' es la palabra habitual para cualquier tienda o supermercado ('grocery store', 'clothing store'). En inglés británico es más común 'shop'."
+    ],
+    "senses": [
+      {
+        "id": "p3w19g9pglcip63",
+        "order": 0,
+        "definition": "Establecimiento comercial donde se venden productos al público.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tienda",
+              "comercio"
+            ]
+          }
+        ],
+        "domain": "comercio",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "ea2l07vjz183hlr",
+            "text": "I need to go to the grocery store to buy some milk.",
+            "textLang": "en",
+            "translation": "Necesito ir a la tienda de comestibles para comprar leche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and practical, planning an everyday task",
+            "note": null,
+            "matchedForm": "store",
+            "matchedTranslationForm": "tienda"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "store",
+    "lemma": "store",
+    "reading": null,
+    "ipa": "/stɔːr/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping",
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "tienda; almacén",
     "primaryGloss": "tienda",
     "emotion": "someone chatting about their day, light and informative",
@@ -164,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "We keep the winter clothes in storage during the summer.",
+        "why": "Uses a different noun ('storage') instead of the headword ('store')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Lugar o espacio donde se guardan provisiones o mercancías para su uso",
+        "why": "As a noun meaning storage place, 'store' is rare in US English ('storage' or 'warehouse' is used)."
+      }
+    ],
+    "growth": 0.503
   }
 }

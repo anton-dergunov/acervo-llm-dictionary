@@ -72,6 +72,113 @@
     "primaryGloss": "no",
     "emotion": null,
     "notes": [
+      "Used alone as 'no', or before nouns, adjectives, and adverbs as 'not' (e.g., όχι ακόμα — not yet). To negate a finite verb, use 'δεν' or 'μην' instead."
+    ],
+    "senses": [
+      {
+        "id": "ts9t7cj9aa82r14",
+        "order": 0,
+        "definition": "Used to give a negative answer, refuse, or disagree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no"
+            ]
+          }
+        ],
+        "domain": "reply",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "2hp4uss9ru4frdf",
+            "text": "— Θέλεις καφέ; — Όχι, ευχαριστώ.",
+            "textLang": "el",
+            "translation": "— Do you want coffee? — No, thank you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite, clear, and firm refusal",
+            "note": null,
+            "matchedForm": "Όχι",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yi3l5pvvlm3iqa2",
+        "order": 1,
+        "definition": "Used to negate a word or phrase other than a verb.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "not"
+            ]
+          }
+        ],
+        "domain": "negation",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "woyn4hox3t1m3bf",
+            "text": "Θα πάμε αύριο, όχι σήμερα.",
+            "textLang": "el",
+            "translation": "We will go tomorrow, not today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "όχι",
+            "matchedTranslationForm": "not"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "όχι",
+    "lemma": "όχι",
+    "reading": null,
+    "ipa": "/ˈoçi/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "no; not",
+    "primaryGloss": "no",
+    "emotion": null,
+    "notes": [
       "Used as a standalone refusal or to negate a statement. It is the direct opposite of 'ναι' (yes).",
       "When negating a verb, use 'δεν' instead. 'Όχι' is for whole-sentence negation or disagreement, not for modifying verbs directly."
     ],
@@ -160,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Used to show disapproval or to forbid something.",
+        "why": "Repeats the meaning 'no' from sense 0 instead of covering the adverbial meaning 'not'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Lacks a proper sense and example for 'not' (negating non-verb phrases, e.g., όχι τώρα)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a standalone refusal or to negate a statement.",
+        "why": "Restates the definitions and basic gloss."
+      }
+    ],
+    "growth": 0.8
   }
 }

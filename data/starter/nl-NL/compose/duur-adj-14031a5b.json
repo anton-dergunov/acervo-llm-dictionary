@@ -68,6 +68,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "expensive",
+    "primaryGloss": "expensive",
+    "emotion": "straightforward and practical, evaluating the price of something",
+    "notes": [
+      "Spelled with a single 'u' when inflected (dure), and adds '-d-' in the comparative: duurder, duurst."
+    ],
+    "senses": [
+      {
+        "id": "oyceum06eohr1by",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "6xxdxyu9c2whuwo",
+            "text": "Die auto is erg duur.",
+            "textLang": "nl",
+            "translation": "That car is very expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit surprised or overwhelmed by a high price",
+            "note": null,
+            "matchedForm": "duur",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "duur",
+    "lemma": "duur",
+    "reading": null,
+    "ipa": "/dyːr/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "expensive; dear",
     "primaryGloss": "expensive",
     "emotion": "straightforward and practical, evaluating the price of something",
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(emotion) Valued or precious to someone.",
+        "why": "'Duur' does not mean emotionally dear in modern Dutch ('dierbaar' does); likely confused with English 'dear'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij is mij erg dierbaar, een duur vriend.",
+        "why": "'Een duur vriend' is ungrammatical (wrong inflection) and nonsensical in Dutch."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "expensive; dear",
+        "why": "Includes 'dear', which is either British slang or a false sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse this with 'dier', which means 'animal'.",
+        "why": "Unrelated word warning, while omitting the irregular comparative 'duurder' and spelling change 'dure'."
+      }
+    ],
+    "growth": 0.411
   }
 }

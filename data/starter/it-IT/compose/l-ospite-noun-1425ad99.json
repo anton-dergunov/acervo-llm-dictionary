@@ -58,6 +58,116 @@
     "headword": "l'ospite",
     "lemma": "ospite",
     "reading": null,
+    "ipa": "/ˈɔspite/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "guest; host",
+    "primaryGloss": "guest",
+    "emotion": "warm and welcoming, glad to have someone over",
+    "notes": [
+      "Can mean both the visitor (guest) and the person receiving them (host), though 'guest' is much more common.",
+      "Same form for masculine and feminine (plural: gli ospiti / le ospiti); in the singular, 'un ospite' is masculine and 'un'ospite' (with an apostrophe) is feminine."
+    ],
+    "senses": [
+      {
+        "id": "4p5z42yjlayk82a",
+        "order": 0,
+        "definition": "A person invited to visit someone's home, stay at a hotel, or attend an event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest",
+              "visitor"
+            ]
+          }
+        ],
+        "domain": "visitor",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "pv578eliv46ai2b",
+            "text": "Stasera abbiamo un ospite a cena.",
+            "textLang": "it",
+            "translation": "Tonight we have a guest for dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and busy preparing for visitors",
+            "note": null,
+            "matchedForm": "ospite",
+            "matchedTranslationForm": "guest"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "skf84fxcy8inc18",
+        "order": 1,
+        "definition": "A person who receives and entertains guests in their home.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "host",
+              "hostess"
+            ]
+          }
+        ],
+        "domain": "host",
+        "emoji": "🏨",
+        "examples": [
+          {
+            "id": "g7ps6wy6ugrbtpn",
+            "text": "Marco è stato un ospite molto generoso con noi.",
+            "textLang": "it",
+            "translation": "Marco was a very generous host to us.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ospite",
+            "matchedTranslationForm": "host"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'ospite",
+    "lemma": "ospite",
+    "reading": null,
     "ipa": "/ˈɔspi.te/",
     "pos": "noun",
     "gender": "common",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "only the article changes (l'ospite).",
+        "why": "singular definite article is l' for both genders; indefinite (un/un') and plural (gli/le) distinguish gender"
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "host, hotel",
+        "why": "ospite never means 'hotel'"
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "L'albergo è un ottimo ospite per i turisti.",
+        "why": "unnatural; ospite as 'host' refers to a person, not a hotel building"
+      }
+    ],
+    "growth": 1.075
   }
 }

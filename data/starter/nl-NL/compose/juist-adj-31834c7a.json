@@ -68,6 +68,97 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "correct; right; exact",
+    "primaryGloss": "correct",
+    "emotion": "confident and satisfied, affirming that something is exactly as it should be",
+    "notes": [
+      "As an adverb, 'juist' is very common in conversation to emphasize a point or a contrast ('precisely', 'actually', 'on the contrary'), as in 'Dat is juist leuk!' (That is actually fun!)."
+    ],
+    "senses": [
+      {
+        "id": "qyw18trf3e9a68r",
+        "order": 0,
+        "definition": "Free from error, or fitting the situation; right or exact.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "correct",
+              "right",
+              "exact",
+              "proper"
+            ]
+          }
+        ],
+        "domain": "correctness",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "sp68ffkfvntyipu",
+            "text": "Dat is een juist antwoord.",
+            "textLang": "nl",
+            "translation": "That is a correct answer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and approving, confirming the accuracy of a statement",
+            "note": null,
+            "matchedForm": "juist",
+            "matchedTranslationForm": "correct"
+          },
+          {
+            "id": "cx1wj2xt1e6gqdk",
+            "text": "Hij gaf de juiste datum door.",
+            "textLang": "nl",
+            "translation": "He passed on the right date.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and helpful, emphasizing the need for specific information",
+            "note": null,
+            "matchedForm": "juiste",
+            "matchedTranslationForm": "right"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "juist",
+    "lemma": "juist",
+    "reading": null,
+    "ipa": "/jœyst/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✅",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "correct; accurate; right",
     "primaryGloss": "correct",
     "emotion": "confident and satisfied, affirming that something is exactly as it should be",
@@ -163,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are shades of 'correct/right'; the example for 1 means 'correct date'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Juist can mean both 'correct' (the opposite of wrong) and 'precise'",
+        "why": "Merely restates the glosses."
+      }
+    ],
+    "growth": 0.804
   }
 }

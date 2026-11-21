@@ -60,6 +60,117 @@
     "headword": "पसंद करना",
     "lemma": "पसंद करना",
     "reading": null,
+    "ipa": "/pəˈsənd̪ kəɾˈnɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to like; to choose",
+    "primaryGloss": "to like",
+    "emotion": "warm and approving, expressing a genuine preference",
+    "notes": [
+      "Takes a direct subject (e.g. मैं इसे पसंद करता हूँ). In everyday speech, the dative construction पसंद होना (मुझे यह पसंद है) is more common for 'to like'.",
+      "Less intense than प्यार करना (to love), expressing fondness or approval rather than deep devotion."
+    ],
+    "senses": [
+      {
+        "id": "6eoyi8c89c7meuk",
+        "order": 0,
+        "definition": "To find something pleasant or have a favorable feeling toward someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to enjoy"
+            ]
+          }
+        ],
+        "domain": "liking",
+        "emoji": "👍",
+        "examples": [
+          {
+            "id": "mil7a3wytibd1b0",
+            "text": "बच्चे मिठाई बहुत पसंद करते हैं।",
+            "textLang": "hi",
+            "translation": "Children like sweets very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पसंद करते",
+            "matchedTranslationForm": "like"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mcmh6fm1cn5g1pw",
+        "order": 1,
+        "definition": "To select something out of various options according to one's taste.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to choose",
+              "to select"
+            ]
+          }
+        ],
+        "domain": "choice",
+        "emoji": "🎯",
+        "examples": [
+          {
+            "id": "n8i8an724vttmy3",
+            "text": "उसने अपने लिए एक नई गाड़ी पसंद की।",
+            "textLang": "hi",
+            "translation": "He chose a new car for himself.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and decisive, showing off a new purchase",
+            "note": null,
+            "matchedForm": "पसंद की",
+            "matchedTranslationForm": "chose"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पसंद करना",
+    "lemma": "पसंद करना",
+    "reading": null,
     "ipa": "/pəˈsənd kəɾˈnɑː/",
     "pos": "verb",
     "gender": null,
@@ -164,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "मुझे यह किताब बहुत पसंद करना है।",
+        "why": "Ungrammatical/unnatural for 'I like this book'; पसंद करना takes a direct nominative subject."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "पसंद करना combines the Persian loanword पसंद (choice, liking) with करना (to do).",
+        "why": "Etymology is filler; should explain the contrast with the more common 'पसंद होना' construction."
+      }
+    ],
+    "growth": 1.119
   }
 }

@@ -60,6 +60,97 @@
     "headword": "بَكَى",
     "lemma": "بَكَى",
     "reading": null,
+    "ipa": "/ˈbakaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to cry; to weep",
+    "primaryGloss": "cry",
+    "emotion": "raw and vulnerable, the quiet release of pent-up emotion",
+    "notes": [
+      "Defective verb (ending in -ā); imperfect: يَبْكِي (yabkiː), first-person past: بَكَيْتُ (bakaytu).",
+      "Takes the preposition عَلَى (ʕalaː) to mean 'to cry over' or 'to mourn' someone or something."
+    ],
+    "senses": [
+      {
+        "id": "ggj2c50oa2nosjp",
+        "order": 0,
+        "definition": "To shed tears because of sadness, pain, or strong emotion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cry",
+              "weep"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "pv2uks8mey3xv5t",
+            "text": "بَكَى الطِّفْلُ لِأَنَّهُ جَائِعٌ.",
+            "textLang": "ar",
+            "translation": "The baby cried because he was hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "distressed and insistent, needing immediate attention",
+            "note": null,
+            "matchedForm": "بَكَى",
+            "matchedTranslationForm": "cried"
+          },
+          {
+            "id": "600pkabscg33gsm",
+            "text": "بَكَتْ بِسَبَبِ الأَخْبَارِ السَّيِّئَةِ.",
+            "textLang": "ar",
+            "translation": "She cried because of the bad news.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quietly heartbroken and overwhelmed by sadness",
+            "note": null,
+            "matchedForm": "بَكَتْ",
+            "matchedTranslationForm": "cried"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَكَى",
+    "lemma": "بَكَى",
+    "reading": null,
     "ipa": "/baˈkaː/",
     "pos": "verb",
     "gender": null,
@@ -143,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/baˈkaː/",
+        "why": "Wrong stress; the stress in /bakaː/ falls on the first syllable: /ˈbakaː/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike some verbs, baka implies the physical act of shedding tears",
+        "why": "Restates the definition and misses the defective verb conjugation (يَبْكِي) and preposition (عَلَى)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The baby cried because he is hungry.",
+        "why": "Unnatural tense sequence in English; should be 'because he was hungry'."
+      }
+    ],
+    "growth": 0.988
   }
 }

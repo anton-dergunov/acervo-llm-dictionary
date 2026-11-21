@@ -57,6 +57,73 @@
     "language": "zh",
     "headword": "啤酒",
     "lemma": "啤酒",
+    "reading": "píjiǔ",
+    "ipa": "/pʰi˧˥ tɕi̯ou̯˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍺",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "beer",
+    "primaryGloss": "beer",
+    "emotion": "relaxed and social, clinking glasses with friends at dinner",
+    "notes": [
+      "Common measure words: 杯 (bēi, glass/cup), 瓶 (píng, bottle), 罐 (guàn, can). Notice how 酒 (jiǔ, alcohol) forms the names of many drinks, such as 红酒 (hóngjiǔ, red wine)."
+    ],
+    "senses": [
+      {
+        "id": "lbbxx4qyl3zgq97",
+        "order": 0,
+        "definition": "An alcoholic drink made from fermented grains.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beer"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍺",
+        "examples": [
+          {
+            "id": "tm59bbs92lk4nqq",
+            "text": "服务员，请给我来两瓶冰啤酒。",
+            "textLang": "zh",
+            "translation": "Waiter, please bring me two bottles of cold beer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "啤酒",
+            "matchedTranslationForm": "beer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "啤酒",
+    "lemma": "啤酒",
     "reading": "pí jiǔ",
     "ipa": "/pʰi˧˥ tɕi̯ou̯˨˩˦/",
     "pos": "noun",
@@ -97,5 +164,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In China, beer is almost always served chilled",
+        "why": "False cultural claim (room-temperature beer is very common in China) and irrelevant filler."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Note that '啤酒' refers specifically to the fermented, carbonated alcoholic beverage",
+        "why": "Restates the definition without giving useful grammar like measure words."
+      },
+      {
+        "severity": 2,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "pí jiǔ",
+        "why": "Standard Pinyin writes disyllabic words without a space between syllables."
+      }
+    ],
+    "growth": 0.775
   }
 }

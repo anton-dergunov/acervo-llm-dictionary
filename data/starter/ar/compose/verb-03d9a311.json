@@ -58,6 +58,116 @@
     "headword": "اتَّصَلَ",
     "lemma": "اتصل",
     "reading": null,
+    "ipa": "/it.ta.sˤa.la/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to call; to contact; to connect",
+    "primaryGloss": "to call",
+    "emotion": "purposeful and direct, reaching out to someone to share information",
+    "notes": [
+      "Always takes the preposition بِـ (bi-) before the person or thing contacted or connected to."
+    ],
+    "senses": [
+      {
+        "id": "q8wdz5h241ltwgd",
+        "order": 0,
+        "definition": "To contact someone, especially by telephone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to call",
+              "to contact",
+              "to get in touch with"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "7rk4oqpof7eohst",
+            "text": "اتَّصَلْتُ بِصَدِيقِي أَمْسِ.",
+            "textLang": "ar",
+            "translation": "I called my friend yesterday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "اتَّصَلْتُ",
+            "matchedTranslationForm": "called"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rkk2ww48jpt1x9s",
+        "order": 1,
+        "definition": "To be linked or joined to something else, such as a room or a network.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to connect",
+              "to be connected"
+            ]
+          }
+        ],
+        "domain": "connection",
+        "emoji": "🔗",
+        "examples": [
+          {
+            "id": "ozyeimoz5h6jim0",
+            "text": "هَذِهِ الْغُرْفَةُ تَتَّصِلُ بِالْمَطْبَخِ مُبَاشَرَةً.",
+            "textLang": "ar",
+            "translation": "This room connects directly to the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "تَتَّصِلُ",
+            "matchedTranslationForm": "connects"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "اتَّصَلَ",
+    "lemma": "اتصل",
+    "reading": null,
     "ipa": "/it.tˤa.sˤa.la/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/it.tˤa.sˤa.la/",
+        "why": "The geminate /t/ in اتَّصَلَ (from و-ص-ل) is plain /t/, not emphatic /tˤ/."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To join two things together or to be physically linked.",
+        "why": "اتَّصَلَ is intransitive ('to be connected'); it does not mean 'to join two things together'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "This verb is also used for physical connections, like two wires",
+        "why": "Merely restates sense 1 instead of noting that بِ (bi-) is required in all senses."
+      }
+    ],
+    "growth": 0.95
   }
 }

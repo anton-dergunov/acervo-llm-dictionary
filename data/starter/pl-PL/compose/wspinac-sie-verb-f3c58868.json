@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to climb",
+    "primaryGloss": "climb",
+    "emotion": "determined and focused, engaging the whole body to reach a peak",
+    "notes": [
+      "Imperfective verb (perfective: 'wspiąć się'). Usually followed by the preposition 'na' + accusative (e.g., 'wspinać się na górę / na drzewo').",
+      "Contrast with 'wchodzić' (to walk up/go up), which is used for everyday things like stairs or hills."
+    ],
+    "senses": [
+      {
+        "id": "m8n3m1myq726yu7",
+        "order": 0,
+        "definition": "To go up a steep surface, such as a mountain, rock, or tree, often using both hands and feet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "climb",
+              "scale"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🧗",
+        "examples": [
+          {
+            "id": "pmba7lkuwyfk6pk",
+            "text": "Musimy wspinać się na tę górę przez kilka godzin.",
+            "textLang": "pl",
+            "translation": "We have to climb this mountain for several hours.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly breathless, preparing for a long and difficult journey",
+            "note": null,
+            "matchedForm": "wspinać się",
+            "matchedTranslationForm": "climb"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wspinać się",
+    "lemma": "wspinać się",
+    "reading": null,
+    "ipa": "/ˈfspi.nat͡ɕ ɕɛ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧗",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to climb; to scale",
     "primaryGloss": "climb",
     "emotion": "determined and focused, engaging the whole body to reach a peak",
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ceny paliwa ciągle wspinają się w górę.",
+        "why": "Unnatural English calque; in Polish, prices 'rosną' or 'idą w górę', not 'wspinają się'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To gradually increase or make progress toward a higher level or position.",
+        "why": "Figurative sense is literary or rare; not needed for A2 and caused a bad calque."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should state the preposition and case used for the destination: 'na' + accusative."
+      }
+    ],
+    "growth": 0.775
   }
 }

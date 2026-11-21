@@ -70,6 +70,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "soup",
+    "primaryGloss": "soup",
+    "emotion": null,
+    "notes": [
+      "Use 'zuppa' for a thick, hearty soup (often with bread, beans, or vegetables, but without pasta or rice). For a broth-based soup with pasta or rice, Italians use 'minestra'."
+    ],
+    "senses": [
+      {
+        "id": "mi1fmi0j6hy2qyv",
+        "order": 0,
+        "definition": "A thick hot dish made of vegetables, pulses, meat, or fish cooked in liquid, often served with bread.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "soup"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "hoerq3fq5k1g48j",
+            "text": "La zuppa di verdure è calda e saporita.",
+            "textLang": "it",
+            "translation": "The vegetable soup is hot and flavorful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and eager, blowing on a steaming spoonful",
+            "note": null,
+            "matchedForm": "zuppa",
+            "matchedTranslationForm": "soup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la zuppa",
+    "lemma": "zuppa",
+    "reading": null,
+    "ipa": "/ˈt͡sup.pa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "soup; mess",
     "primaryGloss": "soup",
     "emotion": null,
@@ -161,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(mess) A complete mess or a hopeless tangle of things.",
+        "why": "Unnatural as a standalone sense; the idiom 'la stessa zuppa' means 'the same old story'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Questa situazione è una vera zuppa.",
+        "why": "Unidiomatic; 'zuppa' alone is not used this way to mean a mess."
+      }
+    ],
+    "growth": 0.793
   }
 }

@@ -68,6 +68,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "stone; rock; gem",
+    "primaryGloss": "stone",
+    "emotion": "solid and unchanging, holding something heavy and permanent in your hand",
+    "notes": [
+      "Loses the vowel е in all other forms: ка́мня (genitive), ка́мни (plural). Because it ends in -ь, remember it is masculine."
+    ],
+    "senses": [
+      {
+        "id": "q8r6tad5gtonyo6",
+        "order": 0,
+        "definition": "The hard solid mineral substance found in the ground, or a piece of it of any size.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stone",
+              "rock"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "a25mempy58cmx7i",
+            "text": "Он поднял камень с земли.",
+            "textLang": "ru",
+            "translation": "He picked up a stone from the ground.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and deliberate, looking at something interesting on the path",
+            "note": null,
+            "matchedForm": "камень",
+            "matchedTranslationForm": "stone"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8fgrvl6dljatv01",
+        "order": 1,
+        "definition": "A cut and polished precious stone used in jewelry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gem",
+              "precious stone",
+              "stone"
+            ]
+          }
+        ],
+        "domain": "jewelry",
+        "emoji": "💎",
+        "examples": [
+          {
+            "id": "c5yu88nxuk4j04i",
+            "text": "На её кольце сиял красивый камень.",
+            "textLang": "ru",
+            "translation": "A beautiful stone was shining on her ring.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and appreciative, catching the sparkle of light",
+            "note": null,
+            "matchedForm": "камень",
+            "matchedTranslationForm": "stone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "камень",
+    "lemma": "камень",
+    "reading": null,
+    "ipa": "/ˈkamʲɪnʲ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "stone; rock",
     "primaryGloss": "stone",
     "emotion": "solid and unchanging, holding something heavy and permanent in your hand",
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A small hard piece of rock found on the ground.",
+        "why": "Contradicts note[0] and misses rock as a material or large boulder; glosses omit 'rock'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[1]",
+        "quote": "Be careful: it is masculine, so use 'большой камень' (big stone)",
+        "why": "Restates the gender field while omitting the fleeting vowel 'е' in declined forms (камня, камни)."
+      }
+    ],
+    "growth": 0.903
   }
 }

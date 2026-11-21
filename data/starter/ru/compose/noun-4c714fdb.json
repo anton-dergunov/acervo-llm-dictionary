@@ -68,6 +68,74 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "bread; loaf",
+    "primaryGloss": "bread",
+    "emotion": "simple and comforting, like the smell of a warm loaf",
+    "notes": [
+      "Usually uncountable as a food ('купить хлеба' / 'купить хлеб'), though it can also mean a single loaf; 'буханка хлеба' or 'батон' are common for a loaf."
+    ],
+    "senses": [
+      {
+        "id": "hvr21i0vbc0lix9",
+        "order": 0,
+        "definition": "A basic baked food made from flour, water, and usually yeast.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bread",
+              "loaf"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍞",
+        "examples": [
+          {
+            "id": "sxxpbzc5seo905f",
+            "text": "Я купил свежий хлеб в магазине.",
+            "textLang": "ru",
+            "translation": "I bought fresh bread at the store.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and satisfied after finishing a quick chore",
+            "note": null,
+            "matchedForm": "хлеб",
+            "matchedTranslationForm": "bread"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "хлеб",
+    "lemma": "хлеб",
+    "reading": null,
+    "ipa": "/xlʲep/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍞",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "bread; grain",
     "primaryGloss": "bread",
     "emotion": "simple and comforting, like the smell of a warm loaf",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'хлеб' refers specifically to the baked food, not to a generic grain",
+        "why": "False claim, and it directly contradicts Sense 1 ('grain, crops') in the very same entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Cereal crops grown in fields, such as wheat or rye.",
+        "why": "The agricultural 'grain/crops' sense (plural 'хлеба́') is not A2 everyday vocabulary."
+      }
+    ],
+    "growth": 0.516
   }
 }

@@ -68,6 +68,74 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "because",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "Do not confuse 'porque' (because, in answers and statements) with 'por qué' (why, in questions) or 'el porqué' (the reason)."
+    ],
+    "senses": [
+      {
+        "id": "pe0qoz8pl6jbt7h",
+        "order": 0,
+        "definition": "For the reason that; used to introduce a cause or explanation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "gl35iqq7xa57edb",
+            "text": "No fui a la fiesta porque estaba cansado.",
+            "textLang": "es",
+            "translation": "I didn't go to the party because I was tired.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and needing to justify a decision",
+            "note": null,
+            "matchedForm": "porque",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "porque",
+    "lemma": "porque",
+    "reading": null,
+    "ipa": "/ˈpoɾ.ke/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💬",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "because; for the reason that",
     "primaryGloss": "because",
     "emotion": null,
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'Porque' is a single-word subordinating conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use 'porque' to explain a cause or reason in a statement",
+        "why": "Restates the definition and is better combined with the contrast against 'por qué'."
+      }
+    ],
+    "growth": 0.871
   }
 }

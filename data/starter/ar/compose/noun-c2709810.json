@@ -58,6 +58,74 @@
     "headword": "بَنْطَلُون",
     "lemma": "بَنْطَلُون",
     "reading": null,
+    "ipa": "/ban.tˤa.luːn/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👖",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "pants; trousers",
+    "primaryGloss": "pants",
+    "emotion": "casual and practical, getting dressed for the day",
+    "notes": [
+      "A loanword used across the Arab world; in more formal Modern Standard Arabic, سِرْوَال (sirwāl) is also common. The plural is بَنَاطِيل (banāṭīl) or بَنْطَلُونَات (banṭalūnāt)."
+    ],
+    "senses": [
+      {
+        "id": "nmprvnjqydwc4w2",
+        "order": 0,
+        "definition": "A piece of clothing that covers the body from the waist to the ankles, with a separate part for each leg.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pants",
+              "trousers"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👖",
+        "examples": [
+          {
+            "id": "mcumw53glvorh4o",
+            "text": "اشْتَرَيْتُ بَنْطَلُونًا جَدِيدًا لِلْعَمَلِ.",
+            "textLang": "ar",
+            "translation": "I bought a new pair of pants for work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and satisfied with a new purchase",
+            "note": null,
+            "matchedForm": "بَنْطَلُونًا",
+            "matchedTranslationForm": "pants"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَنْطَلُون",
+    "lemma": "بَنْطَلُون",
+    "reading": null,
     "ipa": "/ban.ta.luːn/",
     "pos": "noun",
     "gender": "masculine",
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ban.ta.luːn/",
+        "why": "Arabic ط is pharyngealized /tˤ/, not plain /t/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used commonly across the Arab world for trousers or pants.",
+        "why": "Restates the gloss; a note on the MSA synonym سِرْوَال is much more useful."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Often paired with adjectives like 'jeans' or 'classic' to specify the style.",
+        "why": "Trivial information that applies to clothing nouns in any language."
+      }
+    ],
+    "growth": 1.15
   }
 }

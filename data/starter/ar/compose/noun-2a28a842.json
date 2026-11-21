@@ -70,6 +70,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "sea",
+    "primaryGloss": "sea",
+    "emotion": "calm and breezy, smelling the salt air by the shore",
+    "notes": [
+      "Common broken plurals are بِحَار (biḥār) and أَبْحُر (ʾabḥur). For 'ocean', Arabic uses مُحِيط (muḥīṭ)."
+    ],
+    "senses": [
+      {
+        "id": "jdchuqh15d0dup3",
+        "order": 0,
+        "definition": "A very large area of salt water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sea"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "vixso8p4qdrq74m",
+            "text": "نُحِبُّ السِّبَاحَةَ فِي البَحْرِ صَيْفًا.",
+            "textLang": "ar",
+            "translation": "We like swimming in the sea in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "البَحْرِ",
+            "matchedTranslationForm": "sea"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "بَحْر",
+    "lemma": "بَحْر",
+    "reading": null,
+    "ipa": "/baħr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "sea; ocean; vast amount",
     "primaryGloss": "sea",
     "emotion": "calm and breezy, smelling the salt air by the shore",
@@ -164,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used to describe the vast expanse of salt water covering",
+        "why": "Both notes merely restate the definitions while omitting the irregular broken plurals."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "النَّصْرُ مِنْ عِنْدِ اللَّهِ وَالْبَحْرُ أَمَامَنَا.",
+        "why": "Rhetorical quote is unnatural for A2; a plain everyday sentence is needed."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large amount or abundance of something.",
+        "why": "Transparent figurative metaphor, not a core A2 sense."
+      }
+    ],
+    "growth": 0.403
   }
 }

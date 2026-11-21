@@ -58,6 +58,96 @@
     "headword": "साफ़ करना",
     "lemma": "साफ़ करना",
     "reading": null,
+    "ipa": "/sɑːf kəɾ.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧹",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to clean; to tidy up",
+    "primaryGloss": "to clean",
+    "emotion": "diligent and purposeful, focused on getting the job done",
+    "notes": [
+      "Formed from the adjective 'साफ़' (clean) and 'करना' (to do). Note the nuqta under फ, pronounced /f/."
+    ],
+    "senses": [
+      {
+        "id": "crf7fghtvbiwt3r",
+        "order": 0,
+        "definition": "To remove dirt, dust, or mess from a surface, object, or space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to clean",
+              "to tidy up",
+              "to wipe"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧽",
+        "examples": [
+          {
+            "id": "9ephflozx9ebxtw",
+            "text": "मैं अपनी मेज़ साफ़ कर रहा हूँ।",
+            "textLang": "hi",
+            "translation": "I am cleaning my desk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and steady, busy with a routine chore",
+            "note": null,
+            "matchedForm": "साफ़ कर रहा",
+            "matchedTranslationForm": "cleaning"
+          },
+          {
+            "id": "jfx28sy4ce1rume",
+            "text": "मेहमानों के आने से पहले कमरा साफ़ कर लो।",
+            "textLang": "hi",
+            "translation": "Clean the room before the guests arrive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "साफ़ कर",
+            "matchedTranslationForm": "Clean"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "साफ़ करना",
+    "lemma": "साफ़ करना",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "खाने के बाद उसने थाली साफ़ की।",
+        "why": "थाली साफ़ करना means either washing a plate or eating everything on it, not clearing clutter."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Cleaning a surface and tidying a room are one everyday sense of साफ़ करना."
+      }
+    ],
+    "growth": 0.687
   }
 }

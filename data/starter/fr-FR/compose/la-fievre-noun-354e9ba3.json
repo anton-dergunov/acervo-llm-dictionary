@@ -68,6 +68,74 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "fever",
+    "primaryGloss": "fever",
+    "emotion": "tired and achy, feeling unwell under a heavy blanket",
+    "notes": [
+      "Use the expression 'avoir de la fièvre' to say that someone has a fever."
+    ],
+    "senses": [
+      {
+        "id": "s0nufz57r4pn93g",
+        "order": 0,
+        "definition": "An abnormally high body temperature, usually caused by illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever",
+              "temperature"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "4zfpanvv08vhhk1",
+            "text": "L'enfant a de la fièvre ce matin.",
+            "textLang": "fr",
+            "translation": "The child has a fever this morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and caring, checking a child's forehead",
+            "note": null,
+            "matchedForm": "fièvre",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la fièvre",
+    "lemma": "fièvre",
+    "reading": null,
+    "ipa": "/fjɛvʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "fever; excitement",
     "primaryGloss": "fever",
     "emotion": "tired and achy, feeling unwell under a heavy blanket",
@@ -162,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Not to be confused with 'la pain', which is bread; fever is",
+        "why": "'Pain' is masculine ('le pain') and bears no resemblance to 'fièvre'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(emotion) A state of nervous excitement or agitation.",
+        "why": "Literary/figurative sense not needed at A2; example is unnatural."
+      }
+    ],
+    "growth": 0.546
   }
 }

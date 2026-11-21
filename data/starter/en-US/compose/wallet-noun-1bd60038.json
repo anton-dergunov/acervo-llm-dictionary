@@ -72,6 +72,74 @@
     "primaryGloss": "cartera",
     "emotion": "reaching into a pocket to pay for something quickly and smoothly",
     "notes": [
+      "'Wallet' es el estuche pequeño que se guarda en el bolsillo o bolso; no lo confundas con 'purse', que en Estados Unidos significa 'bolso de mano'."
+    ],
+    "senses": [
+      {
+        "id": "yfzd5j6lzel3i8o",
+        "order": 0,
+        "definition": "Pequeño estuche plegable para llevar billetes, tarjetas y documentos de identidad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "cartera",
+              "billetera"
+            ]
+          }
+        ],
+        "domain": "objeto",
+        "emoji": "👛",
+        "examples": [
+          {
+            "id": "kdd5kl71lnj2q2s",
+            "text": "I left my wallet on the kitchen table.",
+            "textLang": "en",
+            "translation": "Dejé mi cartera en la mesa de la cocina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wallet",
+            "matchedTranslationForm": "cartera"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "wallet",
+    "lemma": "wallet",
+    "reading": null,
+    "ipa": "/ˈwɑːlɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👛",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cartera; billetera",
+    "primaryGloss": "cartera",
+    "emotion": "reaching into a pocket to pay for something quickly and smoothly",
+    "notes": [
       "En Estados Unidos se usa 'wallet' tanto para hombres como para mujeres, aunque en otros contextos 'purse' puede referirse a un bolso de mano."
     ],
     "senses": [
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "He left my wallet on the kitchen table. — Dejé mi cartera",
+        "why": "Subject mismatch: 'He left' is translated as 'Dejé' ('I left')."
+      }
+    ],
+    "growth": 1.018
   }
 }

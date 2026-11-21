@@ -68,6 +68,132 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "star; celebrity",
+    "primaryGloss": "star",
+    "emotion": "wondering and calm, looking up at the night sky",
+    "notes": [
+      "The classifier for stars in the sky and star shapes is ดวง (duang). For movie or music stars, ดารา is even more common in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "mesek7p2druf4tu",
+        "order": 0,
+        "definition": "A bright point of light in the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "a1jwzxbdimmnz3l",
+            "text": "คืนนี้มีดาวเต็มฟ้า",
+            "textLang": "th",
+            "translation": "Tonight the sky is full of stars.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ดาว",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6v2hg66kx5al241",
+        "order": 1,
+        "definition": "A five-pointed figure or symbol, often used for ratings or rank.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "symbol",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "k6f41jq5atoaetz",
+            "text": "โรงแรมนี้ได้ห้าดาว",
+            "textLang": "th",
+            "translation": "This hotel got five stars.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ดาว",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wg76m1ewl54ljjg",
+        "order": 2,
+        "definition": "A famous or talented person in entertainment, sports, or a group.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star",
+              "celebrity"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🌟",
+        "examples": [],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ดาว",
+    "lemma": "ดาว",
+    "reading": null,
+    "ipa": "/daːw˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "star; famous person; asterisk",
     "primaryGloss": "star",
     "emotion": "wondering and calm, looking up at the night sky",
@@ -135,5 +261,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[2].glosses",
+        "quote": "star, asterisk",
+        "why": "ดาว means a star shape or rating star; 'asterisk' is ดอกจัน, not ดาว."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "star; famous person; asterisk",
+        "why": "Includes 'asterisk', which is an inaccurate translation of ดาว."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used metaphorically for a celebrity or a person with great talent",
+        "why": "Both notes merely restate senses 1 and 2 while omitting the classifier ดวง."
+      }
+    ],
+    "growth": 1.055
   }
 }

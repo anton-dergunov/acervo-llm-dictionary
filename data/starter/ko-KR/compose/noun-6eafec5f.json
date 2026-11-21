@@ -70,6 +70,92 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "dress",
+    "primaryGloss": "dress",
+    "emotion": null,
+    "notes": [
+      "A false friend from English 'one-piece': alone, it refers to a women's one-piece dress, not a swimsuit or jumpsuit (a one-piece swimsuit is '원피스 수영복')."
+    ],
+    "senses": [
+      {
+        "id": "waerxfl29tanfed",
+        "order": 0,
+        "definition": "A women's garment in which the top and skirt are joined together as one piece.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dress",
+              "one-piece dress"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "v3f5mc8xgiu8pmi",
+            "text": "오늘 예쁜 원피스를 입었어요.",
+            "textLang": "ko",
+            "translation": "I wore a pretty dress today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and confident, showing off a new outfit to friends",
+            "note": null,
+            "matchedForm": "원피스를",
+            "matchedTranslationForm": "dress"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "waerxfl29tanfed",
+      "from": "윗옷과 치마가 하나로 이어진 여성용 옷.",
+      "to": "A women's garment in which the top and skirt are joined together as one piece.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:12Z"
+    },
+    {
+      "sense": "8zap0kpaur67hdy",
+      "from": "상의와 하의가 연결된 형태의 수영복이나 옷.",
+      "to": "A swimsuit or garment in which the top and bottom are connected.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:12Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "원피스",
+    "lemma": "원피스",
+    "reading": null,
+    "ipa": "/wʌn.pʰi.sɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👗",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "dress; one-piece",
     "primaryGloss": "dress",
     "emotion": null,
@@ -163,22 +249,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "waerxfl29tanfed",
-      "from": "윗옷과 치마가 하나로 이어진 여성용 옷.",
-      "to": "A women's garment in which the top and skirt are joined together as one piece.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:12Z"
-    },
-    {
-      "sense": "8zap0kpaur67hdy",
-      "from": "상의와 하의가 연결된 형태의 수영복이나 옷.",
-      "to": "A swimsuit or garment in which the top and bottom are connected.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:12Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(garment) A swimsuit or garment in which the top and bottom are",
+        "why": "Contradicts note [0]; alone, 원피스 means a dress, not a swimsuit or jumpsuit."
+      }
+    ],
+    "growth": 0.645
+  }
 }

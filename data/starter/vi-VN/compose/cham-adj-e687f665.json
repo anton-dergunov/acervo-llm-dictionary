@@ -58,6 +58,116 @@
     "headword": "chậm",
     "lemma": "chậm",
     "reading": null,
+    "ipa": "/t͡ɕə̆m˧˨ʔ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "slow; late",
+    "primaryGloss": "slow",
+    "emotion": "measured and unhurried, taking all the time needed",
+    "notes": [
+      "Like many Vietnamese adjectives, 'chậm' can also function directly as an adverb ('slowly') after a verb without changing form."
+    ],
+    "senses": [
+      {
+        "id": "oj8rtmuaw5lpgxf",
+        "order": 0,
+        "definition": "Moving, happening, or doing something at a low speed; not fast.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slow",
+              "slowly"
+            ]
+          }
+        ],
+        "domain": "speed",
+        "emoji": "🐢",
+        "examples": [
+          {
+            "id": "8ayosna8mkt3rso",
+            "text": "Xe buýt chạy rất chậm.",
+            "textLang": "vi",
+            "translation": "The bus goes very slowly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and resigned while waiting for transport",
+            "note": null,
+            "matchedForm": "chậm",
+            "matchedTranslationForm": "slowly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dcs92gj9lje50sy",
+        "order": 1,
+        "definition": "Arriving or happening after the expected or scheduled time, or running behind time (of a clock).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late",
+              "delayed",
+              "slow"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "14t82e3hbq927tp",
+            "text": "Anh ấy đến chậm mười phút.",
+            "textLang": "vi",
+            "translation": "He arrived ten minutes late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly apologetic about the delay",
+            "note": null,
+            "matchedForm": "chậm",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "chậm",
+    "lemma": "chậm",
+    "reading": null,
     "ipa": "/tɕam˧ˀ˨/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tɕam˧ˀ˨/",
+        "why": "Wrong vowel quality: 'â' represents /ə̆/, so 'chậm' is /t͡ɕə̆m˧˨ʔ/, not /a/."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The bus runs very slow.",
+        "why": "Should be 'The bus goes very slowly' in standard English."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used to describe both physical movement and the passage of time",
+        "why": "Notes restate the senses and a generic 'quá' construction."
+      }
+    ],
+    "growth": 1.186
   }
 }

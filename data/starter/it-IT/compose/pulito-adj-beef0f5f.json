@@ -68,6 +68,132 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "clean; neat; tidy",
+    "primaryGloss": "clean",
+    "emotion": "fresh and satisfied, looking at something neat and orderly",
+    "notes": [],
+    "senses": [
+      {
+        "id": "2z1881ppjgdqyf6",
+        "order": 0,
+        "definition": "Free from dirt or stains; not dirty.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean",
+              "spotless"
+            ]
+          }
+        ],
+        "domain": "clean",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "cki1vkn6nd8hc29",
+            "text": "Ho messo una camicia pulita per la festa.",
+            "textLang": "it",
+            "translation": "I put on a clean shirt for the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neat and well-prepared, feeling good about one's appearance",
+            "note": null,
+            "matchedForm": "pulita",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5by8t9uwijta8w3",
+        "order": 1,
+        "definition": "Kept in good order or done with care and precision; without mess.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "neat",
+              "tidy",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "neat",
+        "emoji": "📋",
+        "examples": [
+          {
+            "id": "djwarc8cxo3d28d",
+            "text": "Ha una scrittura molto pulita e facile da leggere.",
+            "textLang": "it",
+            "translation": "He has very neat handwriting that is easy to read.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciating good craftsmanship or careful work",
+            "note": null,
+            "matchedForm": "pulita",
+            "matchedTranslationForm": "neat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2z1881ppjgdqyf6",
+      "from": "Libero da sporco; non sporco.",
+      "to": "Free from dirt; not dirty.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    },
+    {
+      "sense": "5by8t9uwijta8w3",
+      "from": "Ordinato e curato, senza disordine.",
+      "to": "Ordered and well-cared for, without mess.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "pulito",
+    "lemma": "pulito",
+    "reading": null,
+    "ipa": "/puˈli.to/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "clean; neat; clear",
     "primaryGloss": "clean",
     "emotion": "fresh and satisfied, looking at something neat and orderly",
@@ -161,22 +287,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2z1881ppjgdqyf6",
-      "from": "Libero da sporco; non sporco.",
-      "to": "Free from dirt; not dirty.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    },
-    {
-      "sense": "5by8t9uwijta8w3",
-      "from": "Ordinato e curato, senza disordine.",
-      "to": "Ordered and well-cared for, without mess.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "clean; neat; clear",
+        "why": "'clear' is not supported by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for physical cleanliness (clean clothes, a clean room) and abstract",
+        "why": "Merely restates the senses without adding grammatical or usage insight."
+      }
+    ],
+    "growth": 0.807
+  }
 }

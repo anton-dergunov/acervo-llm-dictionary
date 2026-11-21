@@ -70,6 +70,117 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "restaurant; cafeteria",
+    "primaryGloss": "restaurant",
+    "emotion": "hungry and looking forward to a warm meal",
+    "notes": [
+      "'식당' is used for everyday restaurants and cafeterias; '레스토랑' is used specifically for Western-style or upscale restaurants."
+    ],
+    "senses": [
+      {
+        "id": "7tp0er1m71hzyux",
+        "order": 0,
+        "definition": "A place where meals are prepared and served to paying customers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant",
+              "diner",
+              "eatery"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "cp9tj8r7d1qtyj3",
+            "text": "이 근처에 맛있는 식당이 있어요?",
+            "textLang": "ko",
+            "translation": "Is there a good restaurant around here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager to find a good place to eat",
+            "note": null,
+            "matchedForm": "식당",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uwtbgxqw2r9dlxh",
+        "order": 1,
+        "definition": "A room or hall in a school, workplace, or other building where people eat meals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cafeteria",
+              "dining hall",
+              "canteen"
+            ]
+          }
+        ],
+        "domain": "facility",
+        "emoji": "🏫",
+        "examples": [
+          {
+            "id": "qbludjk47l5crvt",
+            "text": "점심 시간에 학생 식당으로 갔어요.",
+            "textLang": "ko",
+            "translation": "I went to the student cafeteria at lunchtime.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurrying along with friends for lunch",
+            "note": null,
+            "matchedForm": "식당",
+            "matchedTranslationForm": "cafeteria"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "식당",
+    "lemma": "식당",
+    "reading": null,
+    "ipa": "/ɕik̚.t͈aŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "restaurant; dining room",
     "primaryGloss": "restaurant",
     "emotion": "hungry and looking forward to a warm meal",
@@ -164,5 +275,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 식당 most commonly means a commercial restaurant, it can also refer",
+        "why": "Restates the two senses and glosses without adding usage information."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "restaurant; dining room",
+        "why": "Uses 'dining room', which does not appear in the sense glosses ('cafeteria, dining hall, canteen')."
+      }
+    ],
+    "growth": 1.065
   }
 }

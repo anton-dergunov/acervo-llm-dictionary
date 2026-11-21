@@ -68,6 +68,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to teach",
+    "primaryGloss": "to teach",
+    "emotion": "focused and encouraging, guiding someone step by step",
+    "notes": [
+      "Imperfective aspect (perfective: 'nauczyć').",
+      "Takes the accusative case for the person being taught and the genitive case for the subject (e.g., 'uczyć dzieci matematyki'). With 'się' ('uczyć się'), it means 'to learn' or 'to study'."
+    ],
+    "senses": [
+      {
+        "id": "q91grhrtd6vzjjz",
+        "order": 0,
+        "definition": "To help someone gain knowledge or a skill, or to give lessons in a subject.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to teach"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "👩‍🏫",
+        "examples": [
+          {
+            "id": "r6a1a1pg24qe8jx",
+            "text": "Moja mama uczy matematyki w szkole.",
+            "textLang": "pl",
+            "translation": "My mom teaches math at a school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "uczy",
+            "matchedTranslationForm": "teaches"
+          },
+          {
+            "id": "mx2xyzln2qot7w3",
+            "text": "Nauczyciel musi uczyć dzieci z cierpliwością.",
+            "textLang": "pl",
+            "translation": "A teacher must teach children with patience.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and warm, explaining something important",
+            "note": null,
+            "matchedForm": "uczyć",
+            "matchedTranslationForm": "teach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "uczyć",
+    "lemma": "uczyć",
+    "reading": null,
+    "ipa": "/ˈut͡ʂɨt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to teach; to learn",
     "primaryGloss": "to teach",
     "emotion": "focused and encouraging, guiding someone step by step",
@@ -159,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To study or acquire new knowledge or skills for oneself.",
+        "why": "Non-reflexive 'uczyć' means 'to teach'; 'to learn/study' requires the reflexive 'uczyć się'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to teach; to learn",
+        "why": "Without 'się', 'uczyć' only means 'to teach'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should state case governance: accusative for the person taught, genitive for the subject."
+      }
+    ],
+    "growth": 1.051
   }
 }

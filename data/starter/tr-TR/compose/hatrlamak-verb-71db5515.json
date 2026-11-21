@@ -58,6 +58,96 @@
     "headword": "hatırlamak",
     "lemma": "hatırlamak",
     "reading": null,
+    "ipa": "/ha.tɯɾ.laˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to remember; to recall",
+    "primaryGloss": "to remember",
+    "emotion": "thoughtful and searching, trying to pull a memory back",
+    "notes": [
+      "Takes a direct object in the accusative case when specific (e.g., 'Onu hatırlıyorum' — I remember him/her/it).",
+      "For 'Remember to do X!' in English, Turkish normally uses the negative of 'unutmak' (to forget): 'Unutma!' (Don't forget!), rather than 'hatırlamak'."
+    ],
+    "senses": [
+      {
+        "id": "rza68aj1q81qx68",
+        "order": 0,
+        "definition": "To have or bring a fact, event, or person back into your mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to remember",
+              "to recall"
+            ]
+          }
+        ],
+        "domain": "memory",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "25dcz4qwxukxd0y",
+            "text": "Yarın doğum günün olduğunu yeni hatırladım.",
+            "textLang": "tr",
+            "translation": "I just remembered that tomorrow is your birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and a little apologetic, realizing something just in time",
+            "note": null,
+            "matchedForm": "hatırladım",
+            "matchedTranslationForm": "remembered"
+          },
+          {
+            "id": "1b7ryxpqcpntcy9",
+            "text": "Adını hatırlıyorum ama yüzünü unuttum.",
+            "textLang": "tr",
+            "translation": "I remember his name, but I forgot his face.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hatırlıyorum",
+            "matchedTranslationForm": "remember"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hatırlamak",
+    "lemma": "hatırlamak",
+    "reading": null,
     "ipa": "/hatɯɾlaˈmak/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(mind) To keep something in your mind and not forget it.",
+        "why": "Oversplit; 'keep in mind' in Turkish is usually 'aklında tutmak' or 'unutmamak', not a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bu önemli kuralı her zaman hatırlamak gerek.",
+        "why": "Reads like an English calque of 'always remember this rule'; natives say 'unutmamak gerek' or 'akılda tutmak gerek'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use hatırlamak when something comes back to your mind",
+        "why": "Restates the definition without adding grammar or usage information."
+      }
+    ],
+    "growth": 1.011
   }
 }

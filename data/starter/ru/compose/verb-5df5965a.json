@@ -68,6 +68,157 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to hurt; to be ill; to root for",
+    "primaryGloss": "to hurt",
+    "emotion": "dull and persistent, feeling worn down by physical discomfort",
+    "notes": [
+      "This verb has two different conjugations depending on meaning. For 'to hurt' (sense 1), use 3rd person forms болит (singular) and болят (plural) with у + genitive for the person: у меня болит голова.",
+      "For 'to be ill' (sense 2, takes instrumental for the illness) and 'to root for' (sense 3, takes за + accusative), conjugate as: я болею, ты болеешь, они болеют."
+    ],
+    "senses": [
+      {
+        "id": "z99b5q9ggcvjs2a",
+        "order": 0,
+        "definition": "Of a part of the body: to cause pain or feel sore.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "b14o3njx7a5y6ig",
+            "text": "У меня болит голова.",
+            "textLang": "ru",
+            "translation": "My head hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and low energy, holding one's head in frustration",
+            "note": null,
+            "matchedForm": "болит",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ldh99d9ufcvqwpp",
+        "order": 1,
+        "definition": "To be unwell or suffer from an illness or disease.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be ill",
+              "to be sick"
+            ]
+          }
+        ],
+        "domain": "illness",
+        "emoji": "🤒",
+        "examples": [
+          {
+            "id": "wcb1v6v813vwfl5",
+            "text": "Он часто болеет гриппом зимой.",
+            "textLang": "ru",
+            "translation": "He is often ill with the flu in winter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact but slightly concerned about the recurring health issue",
+            "note": null,
+            "matchedForm": "болеет",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dnlvgnyigbiuhxl",
+        "order": 2,
+        "definition": "To support a person or sports team and hope they win.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to root for",
+              "to support"
+            ]
+          }
+        ],
+        "domain": "sports",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "c0ooza6wrpshhfq",
+            "text": "За какую команду ты болеешь?",
+            "textLang": "ru",
+            "translation": "Which team do you root for?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "болеешь",
+            "matchedTranslationForm": "root"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "болеть",
+    "lemma": "болеть",
+    "reading": null,
+    "ipa": "/bɐˈlʲetʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to ache; to be ill",
     "primaryGloss": "ache",
     "emotion": "dull and persistent, feeling worn down by physical discomfort",
@@ -161,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'to root for / support a sports team' (болеть за)."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note the shift in stress: when meaning 'to ache', the verb conjugates",
+        "why": "Not a stress shift; the two senses have completely different conjugation patterns (болит vs болеет)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To feel pain in a specific part of the body.",
+        "why": "Subject of болеть is the body part that hurts, not the person feeling pain."
+      }
+    ],
+    "growth": 1.378
   }
 }

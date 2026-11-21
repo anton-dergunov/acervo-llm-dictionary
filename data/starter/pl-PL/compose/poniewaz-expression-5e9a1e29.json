@@ -72,6 +72,75 @@
     "primaryGloss": "because",
     "emotion": null,
     "notes": [
+      "Slightly more formal than bo, which is preferred in everyday conversation. Always preceded by a comma when introducing a clause inside a sentence."
+    ],
+    "senses": [
+      {
+        "id": "krevaz2h1cauatf",
+        "order": 0,
+        "definition": "Used to introduce a reason or cause.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since",
+              "as"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "🔗",
+        "examples": [
+          {
+            "id": "6ra0n7ank6wl86s",
+            "text": "Zostaję w domu, ponieważ pada deszcz.",
+            "textLang": "pl",
+            "translation": "I am staying home because it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and straightforward, giving a simple reason",
+            "note": null,
+            "matchedForm": "ponieważ",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ponieważ",
+    "lemma": "ponieważ",
+    "reading": null,
+    "ipa": "/pɔ.ɲɛˈvaʂ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because; since",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
       "Ponieważ is a standard conjunction used to introduce a reason or cause, similar to \"because\" in English.",
       "It is slightly more formal than bo, which is very common in everyday spoken Polish. In casual conversation, native speakers often prefer bo."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Single-word subordinating conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ponieważ is a standard conjunction used to introduce a reason or cause",
+        "why": "Restates the definition and gloss without adding usage information."
+      }
+    ],
+    "growth": 0.702
   }
 }

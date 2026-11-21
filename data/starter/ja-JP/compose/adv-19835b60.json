@@ -68,6 +68,76 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "probably; perhaps",
+    "primaryGloss": "probably",
+    "emotion": "thoughtful and hesitant, weighing the likelihood of something before speaking",
+    "notes": [
+      "Often followed by a conjectural ending such as でしょう, だろう, or と思う.",
+      "More casual and common in everyday speech than おそらく (probably), and indicates a much higher likelihood than もしかすると (perhaps / by some chance)."
+    ],
+    "senses": [
+      {
+        "id": "2q3fj24apebg3y9",
+        "order": 0,
+        "definition": "Almost certainly; as one expects to be the case.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "probably",
+              "likely",
+              "perhaps"
+            ]
+          }
+        ],
+        "domain": "probability",
+        "emoji": "☁️",
+        "examples": [
+          {
+            "id": "3v3rab7jap5nl3c",
+            "text": "たぶん明日雨が降るでしょう。",
+            "textLang": "ja",
+            "translation": "It will probably rain tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncertain and looking out the window, observing the grey clouds",
+            "note": null,
+            "matchedForm": "たぶん",
+            "matchedTranslationForm": "probably"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "たぶん",
+    "lemma": "たぶん",
+    "reading": null,
+    "ipa": null,
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤔",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "perhaps; probably",
     "primaryGloss": "perhaps",
     "emotion": "thoughtful and hesitant, weighing the likelihood of something before speaking",
@@ -121,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "perhaps, probably, likely",
+        "why": "たぶん expresses high probability ('probably'), so 'probably' must precede 'perhaps'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note that たぶん typically pairs with conjectural endings like でしょう, だろう, or と思う."
+      }
+    ],
+    "growth": 0.901
   }
 }

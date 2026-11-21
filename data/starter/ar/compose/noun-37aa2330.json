@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "room",
+    "primaryGloss": "room",
+    "emotion": "quiet and enclosed, feeling safe inside the house",
+    "notes": [
+      "The plural is غُرَف (ḡuraf). Often used in compounds for specific rooms, such as غُرْفَة نَوْم (bedroom) and غُرْفَة جُلُوس (living room)."
+    ],
+    "senses": [
+      {
+        "id": "ppfzr9mmpjjn9t5",
+        "order": 0,
+        "definition": "A space inside a building with its own walls, floor, and ceiling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🛏️",
+        "examples": [
+          {
+            "id": "x64nqufztu5zg4w",
+            "text": "هَذِهِ غُرْفَةُ نَوْمٍ نَظِيفَةٌ.",
+            "textLang": "ar",
+            "translation": "This is a clean bedroom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and satisfied, looking around a tidy space",
+            "note": null,
+            "matchedForm": "غُرْفَةُ",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غُرْفَة",
+    "lemma": "غُرْفَة",
+    "reading": null,
+    "ipa": "/ˈɣur.fa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "room; compartment",
     "primaryGloss": "room",
     "emotion": "quiet and enclosed, feeling safe inside the house",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "room; compartment",
+        "why": "'compartment' is not in the sense glosses or definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used mainly for indoor spaces enclosed by walls, like a bedroom or",
+        "why": "Restates the definition instead of giving the irregular plural غُرَف."
+      }
+    ],
+    "growth": 1.247
   }
 }

@@ -58,6 +58,117 @@
     "headword": "karena",
     "lemma": "karena",
     "reading": null,
+    "ipa": "/ka.rə.na/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔗",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because; because of",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "Often pronounced as two syllables, 'karna', in everyday speech.",
+      "Do not confuse with oleh karena itu, which means 'therefore'."
+    ],
+    "senses": [
+      {
+        "id": "13epytzt1upigau",
+        "order": 0,
+        "definition": "Used before a clause to give the reason for something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because",
+              "since",
+              "as"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "🔗",
+        "examples": [
+          {
+            "id": "1vw642paqx8szid",
+            "text": "Saya tetap di rumah karena sedang hujan.",
+            "textLang": "id",
+            "translation": "I stayed at home because it was raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "karena",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "la70jysel3hgoto",
+        "order": 1,
+        "definition": "Used before a noun or pronoun to state who or what caused something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because of",
+              "due to"
+            ]
+          }
+        ],
+        "domain": "cause",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fgrc41hzytiatsn",
+            "text": "Dia terlambat karena macet.",
+            "textLang": "id",
+            "translation": "He was late because of the traffic jam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "karena",
+            "matchedTranslationForm": "because of"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "karena",
+    "lemma": "karena",
+    "reading": null,
     "ipa": "/kaˈra.na/",
     "pos": "expression",
     "gender": null,
@@ -120,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kaˈra.na/",
+        "why": "Wrong vowel: the second syllable has schwa /ə/, /ka.rə.na/ (often pronounced /kar.na/)."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Single-word conjunction/preposition, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common prepositional use 'because of' before a noun (e.g. karena hujan)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Saya tinggal di rumah karena hari hujan.",
+        "why": "'Tinggal di rumah' means 'live in a house'; 'stayed home' is 'tetap di rumah'."
+      }
+    ],
+    "growth": 1.432
   }
 }

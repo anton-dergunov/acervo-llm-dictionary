@@ -61,6 +61,76 @@
     "ipa": null,
     "pos": "expression",
     "gender": null,
+    "register": null,
+    "dialect": null,
+    "emoji": "🙏",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "thank you",
+    "primaryGloss": "thank you",
+    "emotion": "sincere and polite, showing genuine appreciation and respect",
+    "notes": [
+      "The standard polite way to thank someone. With friends and family, use the casual 'ありがとう' (arigatō).",
+      "When thanking someone for something that has already ended, use the past form 'ありがとうございました' (arigatō gozaimashita)."
+    ],
+    "senses": [
+      {
+        "id": "5fte8ds335kwnyu",
+        "order": 0,
+        "definition": "A polite expression used to show gratitude.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thank you",
+              "thank you very much",
+              "thanks"
+            ]
+          }
+        ],
+        "domain": "gratitude",
+        "emoji": "🙏",
+        "examples": [
+          {
+            "id": "5qv81wtgerf16yz",
+            "text": "手伝ってくれて、ありがとうございます。",
+            "textLang": "ja",
+            "translation": "Thank you for helping me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ありがとうございます",
+            "matchedTranslationForm": "Thank you"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "ありがとうございます",
+    "lemma": "ありがとうございます",
+    "reading": null,
+    "ipa": null,
+    "pos": "expression",
+    "gender": null,
     "register": "neutral",
     "dialect": null,
     "emoji": "🙏",
@@ -98,5 +168,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.register",
+        "path": "register",
+        "quote": "neutral",
+        "why": "Uses polite 'ございます' form; register should be 'polite', as Note 0 itself states."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Learners need the past tense 'ありがとうございました' for thanking after something is finished."
+      }
+    ],
+    "growth": 1.456
   }
 }

@@ -58,6 +58,95 @@
     "headword": "necesitar",
     "lemma": "necesitar",
     "reading": null,
+    "ipa": "/nesesiˈtaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙏",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to need; to require",
+    "primaryGloss": "to need",
+    "emotion": "earnest and focused, expressing a genuine requirement for something",
+    "notes": [
+      "Can be followed directly by a noun ('Necesito ayuda') or by an infinitive verb ('Necesito descansar')."
+    ],
+    "senses": [
+      {
+        "id": "ylqlq1go666b7fh",
+        "order": 0,
+        "definition": "To require something or have to do something because it is essential or very important.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to need",
+              "to require"
+            ]
+          }
+        ],
+        "domain": "need",
+        "emoji": "🧰",
+        "examples": [
+          {
+            "id": "xe1lom4b5tdinxs",
+            "text": "Necesito un paraguas porque va a llover.",
+            "textLang": "es",
+            "translation": "I need an umbrella because it is going to rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit worried about getting wet, looking for a solution",
+            "note": null,
+            "matchedForm": "Necesito",
+            "matchedTranslationForm": "need"
+          },
+          {
+            "id": "mf8pgm00w8wndsn",
+            "text": "Necesito descansar un poco antes de seguir.",
+            "textLang": "es",
+            "translation": "I need to rest a little before continuing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Necesito",
+            "matchedTranslationForm": "need"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "necesitar",
+    "lemma": "necesitar",
+    "reading": null,
     "ipa": "/neseθiˈtaɾ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/neseθiˈtaɾ/",
+        "why": "Mexican Spanish has seseo (/s/), not /θ/, and cannot mix both in 'necesitar'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'necesitar' is used when you are lacking something necessary, such as an object",
+        "why": "False restriction: 'necesitar' is also very commonly followed by an infinitive verb."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To have to have something; to be unable to function",
+        "why": "Sense 1 is the exact same meaning as sense 0, just used hyperbolically."
+      }
+    ],
+    "growth": 0.676
   }
 }

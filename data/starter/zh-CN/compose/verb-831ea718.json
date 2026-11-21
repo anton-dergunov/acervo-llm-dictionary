@@ -68,6 +68,96 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "to smell; to sniff",
+    "primaryGloss": "smell",
+    "emotion": "curious and attentive, leaning in to catch a scent",
+    "notes": [
+      "In modern spoken Chinese, 闻 as a standalone verb only means 'to smell' (unlike 听 tīng, 'to listen/hear').",
+      "Its older meaning 'to hear' survives in common compound words like 新闻 (xīnwén, news) and 听说 / 耳闻."
+    ],
+    "senses": [
+      {
+        "id": "svhsk2gqge43f71",
+        "order": 0,
+        "definition": "To perceive a scent or odor with the nose, or to sniff at something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smell",
+              "sniff"
+            ]
+          }
+        ],
+        "domain": "smell",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "voxqv7q3ly0xegt",
+            "text": "我闻到了饭菜的香味。",
+            "textLang": "zh",
+            "translation": "I smelled the aroma of the food.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and hungry, enjoying a delicious meal cooking",
+            "note": null,
+            "matchedForm": "闻",
+            "matchedTranslationForm": "smelled"
+          },
+          {
+            "id": "yzbcu86w5ksbo4v",
+            "text": "你闻闻这朵花，真香！",
+            "textLang": "zh",
+            "translation": "Smell this flower, it smells so good!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "闻闻",
+            "matchedTranslationForm": "Smell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "闻",
+    "lemma": "闻",
+    "reading": "wén",
+    "ipa": "/u̯ən˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "to smell; to hear; news",
     "primaryGloss": "smell",
     "emotion": "curious and attentive, leaning in to catch a scent",
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to smell; to hear; news",
+        "why": "Includes noun 'news' and literary 'hear' which is not an everyday standalone verb sense."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To perceive sound with the ears; to hear about something.",
+        "why": "As a standalone verb in modern Mandarin, 闻 only means 'to smell'; 'hear' is literary/bound."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "此 闻 让 人 惊 讶 。",
+        "why": "Ungrammatical pseudo-classical sentence with spaces between characters, using 闻 as a noun."
+      }
+    ],
+    "growth": 1.005
   }
 }

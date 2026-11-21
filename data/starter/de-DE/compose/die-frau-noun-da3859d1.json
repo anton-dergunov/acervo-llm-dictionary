@@ -68,6 +68,156 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "woman; wife; Ms. / Mrs.",
+    "primaryGloss": "woman",
+    "emotion": "matter-of-fact and ordinary, like describing someone you see every day",
+    "notes": [
+      "As a title before a surname (without the article 'die'), 'Frau' is used for any adult woman regardless of marital status, like English 'Ms.' or 'Mrs.'",
+      "Distinguish from 'die Dame' (lady), which is used in more formal or polite contexts (e.g., 'Meine Damen und Herren')."
+    ],
+    "senses": [
+      {
+        "id": "flqxf1ni2dv74wf",
+        "order": 0,
+        "definition": "An adult female person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "woman"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "stssnl215782xnr",
+            "text": "Die Frau wartet auf den Bus.",
+            "textLang": "de",
+            "translation": "The woman is waiting for the bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, simply noting a scene in the street",
+            "note": null,
+            "matchedForm": "Frau",
+            "matchedTranslationForm": "woman"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3ukk0lhngd9jfas",
+        "order": 1,
+        "definition": "A woman in relation to her spouse.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wife"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "💍",
+        "examples": [
+          {
+            "id": "e4rf2fnb03o4jq8",
+            "text": "Er geht mit seiner Frau spazieren.",
+            "textLang": "de",
+            "translation": "He is going for a walk with his wife.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and pleasant, describing a nice afternoon activity",
+            "note": null,
+            "matchedForm": "Frau",
+            "matchedTranslationForm": "wife"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0wanv20glodwzyc",
+        "order": 2,
+        "definition": "A polite title used before a woman's surname or when addressing her formally.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "Ms.",
+              "Mrs.",
+              "ma'am"
+            ]
+          }
+        ],
+        "domain": "address",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "317ktw6igelc32o",
+            "text": "Guten Tag, Frau Müller!",
+            "textLang": "de",
+            "translation": "Hello, Ms. Müller!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Frau",
+            "matchedTranslationForm": "Ms."
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Frau",
+    "lemma": "Frau",
+    "reading": null,
+    "ipa": "/fʁaʊ̯/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "woman; wife; Mrs.",
     "primaryGloss": "woman",
     "emotion": "matter-of-fact and ordinary, like describing someone you see every day",
@@ -159,5 +309,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "woman; wife; Mrs.",
+        "why": "Includes 'Mrs.', which is missing from the senses."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the essential A1/A2 sense as a polite title ('Ms.', 'Mrs.') before surnames."
+      }
+    ],
+    "growth": 1.478
   }
 }

@@ -72,6 +72,137 @@
     "primaryGloss": "dark",
     "emotion": "quiet and calm, describing a space where the light has faded",
     "notes": [
+      "When 'dunkel' takes an ending or forms the comparative, the 'e' before the 'l' is dropped: 'ein dunkler Raum' (a dark room), 'dunkler' (darker).",
+      "It often combines with colour words as a prefix: 'dunkelblau' (dark blue), 'dunkelgrün' (dark green)."
+    ],
+    "senses": [
+      {
+        "id": "eebppxpx0l0e5kf",
+        "order": 0,
+        "definition": "With little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "dim"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "bxopc9jn55j0gzg",
+            "text": "Es wird langsam dunkel draußen.",
+            "textLang": "de",
+            "translation": "It is slowly getting dark outside.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and a little wistful as the day ends",
+            "note": null,
+            "matchedForm": "dunkel",
+            "matchedTranslationForm": "dark"
+          },
+          {
+            "id": "s8al7kix1j6ephm",
+            "text": "In meinem Zimmer ist es sehr dunkel.",
+            "textLang": "de",
+            "translation": "It is very dark in my room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple condition of the environment",
+            "note": null,
+            "matchedForm": "dunkel",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jtv2lxptbyyhvo2",
+        "order": 1,
+        "definition": "Of a colour, hair, or eyes: deep in shade, not light or pale.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "deep"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "k87kfw44zqshrrt",
+            "text": "Er trägt heute einen dunklen Anzug.",
+            "textLang": "de",
+            "translation": "He is wearing a dark suit today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dunklen",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "dunkel",
+    "lemma": "dunkel",
+    "reading": null,
+    "ipa": "/ˈdʊŋkl̩/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dark; dim",
+    "primaryGloss": "dark",
+    "emotion": "quiet and calm, describing a space where the light has faded",
+    "notes": [
       "Dunkel is the standard word for 'dark'. When talking about colours, it functions as a prefix: dunkelblau (dark blue), dunkelgrün (dark green).",
       "Do not confuse this with 'schwarz' (black). A room can be 'dunkel' without being pitch black."
     ],
@@ -141,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense of dark color or hair/skin tone."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note that the '-e-' drops in inflected forms ('dunkle')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'schwarz' (black).",
+        "why": "English speakers do not confuse 'dark' with 'black'; obvious filler."
+      }
+    ],
+    "growth": 1.362
   }
 }

@@ -58,6 +58,74 @@
     "headword": "แกะ",
     "lemma": "แกะ",
     "reading": null,
+    "ipa": "/kɛʔ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "sheep",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and pastoral, imagining a soft farm animal",
+    "notes": [
+      "The classifier for sheep is ตัว (tua), e.g., แกะสามตัว (three sheep). For mutton or lamb meat, use เนื้อแกะ.",
+      "Homophonous with the common verb แกะ, which means 'to unwrap', 'to peel', or 'to carve'."
+    ],
+    "senses": [
+      {
+        "id": "w7xzhqv15kyt9xx",
+        "order": 0,
+        "definition": "A farm animal with thick wool, kept for its wool and meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "0mgodocsbhbol2r",
+            "text": "ฉันเห็นแกะหลายตัวในทุ่งหญ้า",
+            "textLang": "th",
+            "translation": "I see many sheep in the meadow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "แกะ",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "แกะ",
+    "lemma": "แกะ",
+    "reading": null,
     "ipa": "/kɛ̀ʔ/",
     "pos": "noun",
     "gender": null,
@@ -202,5 +270,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[0].text",
+        "quote": "ฉันเห็นแกะหลายตัว in the meadow.",
+        "why": "Contains English words 'in the meadow.' inside the Thai example."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(carve) To carve, chisel, or engrave wood or ice.",
+        "why": "Entry POS is noun, but senses 1 and 2 are verbs."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(unpack) To unwrap, peel, or open something packaging.",
+        "why": "Entry POS is noun, not verb; also 'something packaging' is ungrammatical English."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sheep; to carve; to unpack",
+        "why": "Includes verb glosses in a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse the animal meaning with the action meanings",
+        "why": "Repetitive filler notes; misses the noun classifier (ตัว)."
+      }
+    ],
+    "growth": 0.516
   }
 }

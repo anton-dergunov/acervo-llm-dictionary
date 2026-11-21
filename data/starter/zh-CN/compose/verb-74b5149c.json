@@ -57,6 +57,138 @@
     "language": "zh",
     "headword": "认识",
     "lemma": "认识",
+    "reading": "rènshi",
+    "ipa": "/ʐən˥˩ ʂɻ̩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to know; to recognize; to get to know",
+    "primaryGloss": "know",
+    "emotion": "warm and friendly, greeting someone you are glad to see again",
+    "notes": [
+      "Use 认识 for being acquainted with a person, knowing a place, or recognizing written characters. Use 知道 (zhīdào) for knowing a fact or piece of information."
+    ],
+    "senses": [
+      {
+        "id": "116ke42nnulal3n",
+        "order": 0,
+        "definition": "To know or be familiar with a person, place, or written character; or to meet and get to know someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "know",
+              "recognize",
+              "be familiar with",
+              "meet"
+            ]
+          }
+        ],
+        "domain": "familiarity",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "829rhw70na0vf21",
+            "text": "我认识这个人，他是我的老朋友。",
+            "textLang": "zh",
+            "translation": "I know this person; he is my old friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and reminiscent, talking about someone dear to you",
+            "note": null,
+            "matchedForm": "认识",
+            "matchedTranslationForm": "know"
+          },
+          {
+            "id": "3g3lra8uz1l16y2",
+            "text": "这个汉字你认识吗？",
+            "textLang": "zh",
+            "translation": "Do you recognize this Chinese character?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "认识",
+            "matchedTranslationForm": "recognize"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zdfgrt737v9ltri",
+        "order": 1,
+        "definition": "To understand the nature or significance of a situation or issue.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "understand",
+              "realize"
+            ]
+          }
+        ],
+        "domain": "understanding",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "dm70eocb4958b4e",
+            "text": "我们应该正确认识这个问题。",
+            "textLang": "zh",
+            "translation": "We should properly understand this issue.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and thoughtful, discussing an important matter",
+            "note": null,
+            "matchedForm": "认识",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "认识",
+    "lemma": "认识",
     "reading": "rèn shi",
     "ipa": "/ʐən˥˩ ʂɻ̩/",
     "pos": "verb",
@@ -225,5 +357,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "虽然多年没见，但我一眼就认识了她。",
+        "why": "Ungrammatical for 'recognized at a glance'; Chinese requires the resultative 认出(来), not 认识了."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(identification) To identify someone or something by sight, hearing, or prior experience.",
+        "why": "Recognizing characters/things by familiarity belongs with sense 0; instant identification is 认出."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[2].glosses",
+        "quote": "understand, realize, cognition",
+        "why": "'cognition' is a noun, but the entry and sense are for a verb."
+      }
+    ],
+    "growth": 0.73
   }
 }

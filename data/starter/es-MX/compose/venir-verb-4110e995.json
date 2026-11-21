@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to come",
+    "primaryGloss": "to come",
+    "emotion": "a direct, welcoming call, inviting someone to move closer",
+    "notes": [
+      "Use 'venir' for movement toward the speaker's location, and 'ir' (to go) for movement toward another destination. Unlike in English, do not say 'Ya vengo' for 'I'm coming (there)'; say 'Ya voy'.",
+      "Irregular verb: 'yo vengo', 'tú vienes' (present), 'yo vine' (preterite), 'ven' (informal imperative)."
+    ],
+    "senses": [
+      {
+        "id": "mzaxsfcf665kjbl",
+        "order": 0,
+        "definition": "To move or travel toward the place or event where the speaker is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to come",
+              "to arrive"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "👣",
+        "examples": [
+          {
+            "id": "1rj0w4snltf1h3m",
+            "text": "Ven aquí ahora mismo.",
+            "textLang": "es",
+            "translation": "Come here right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "authoritative and firm, expecting immediate compliance",
+            "note": null,
+            "matchedForm": "Ven",
+            "matchedTranslationForm": "Come"
+          },
+          {
+            "id": "fno2tqk7v8txfdd",
+            "text": "Ellos vienen a la fiesta más tarde.",
+            "textLang": "es",
+            "translation": "They are coming to the party later.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing a plan",
+            "note": null,
+            "matchedForm": "vienen",
+            "matchedTranslationForm": "coming"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "venir",
+    "lemma": "venir",
+    "reading": null,
+    "ipa": "/beˈniɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👣",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to come; to arrive; to fit",
     "primaryGloss": "come",
     "emotion": "a direct, welcoming call, inviting someone to move closer",
@@ -200,5 +290,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Los zapatos me vienen apretados.",
+        "why": "Peninsular Spanish; in Mexico 'quedar' is used for how clothes fit, not 'venir'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To be the right or wrong size or shape for someone.",
+        "why": "Clothing-fit sense of 'venir' is Peninsular Spanish, not everyday Mexican Spanish."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[2]",
+        "quote": "To arrive at a specific time or event.",
+        "why": "Shades of the same movement meaning as sense 0; example translates as 'coming'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on high-frequency stem changes and irregular forms (vengo, vienes, vine, ven)."
+      }
+    ],
+    "growth": 0.782
   }
 }

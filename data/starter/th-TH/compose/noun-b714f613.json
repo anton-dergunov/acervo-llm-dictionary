@@ -72,6 +72,75 @@
     "primaryGloss": "dinner",
     "emotion": "relaxed and appreciative, looking forward to the end of a long day",
     "notes": [
+      "Compound of อาหาร (food) and เย็น (evening).",
+      "In everyday conversation, people very often say ข้าวเย็น (evening rice) instead, and มื้อเย็น when referring to the meal time."
+    ],
+    "senses": [
+      {
+        "id": "srqwg8bxafspxil",
+        "order": 0,
+        "definition": "The main meal eaten in the evening.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dinner",
+              "evening meal"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "npr3dgp5a2calsq",
+            "text": "เย็นนี้เราจะทานอาหารเย็นที่ไหนดี",
+            "textLang": "th",
+            "translation": "Where should we have dinner this evening?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "อาหารเย็น",
+            "matchedTranslationForm": "dinner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "อาหารเย็น",
+    "lemma": "อาหารเย็น",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "dinner",
+    "primaryGloss": "dinner",
+    "emotion": "relaxed and appreciative, looking forward to the end of a long day",
+    "notes": [
       "อาหาร (aa-hǎan) means 'food' and เย็น (yen) means 'cool' or 'evening'. Together they refer specifically to the evening meal.",
       "Unlike some other languages that use specific loanwords for dining, Thai uses this compound consistently to describe the main evening meal regardless of how fancy or simple it is."
     ],
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike some other languages that use specific loanwords for dining",
+        "why": "Vague filler note; a note on the common synonym ข้าวเย็น is much more useful."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "คืนนี้เราจะทานอาหารเย็นที่ไหนดี",
+        "why": "คืนนี้ (tonight) is late night; เย็นนี้ (this evening) is natural with อาหารเย็น."
+      }
+    ],
+    "growth": 0.668
   }
 }

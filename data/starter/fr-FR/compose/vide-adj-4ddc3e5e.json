@@ -68,6 +68,113 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "empty",
+    "primaryGloss": "empty",
+    "emotion": "looking inside a box and finding nothing at all, light and hollow",
+    "notes": [
+      "Has the same form in masculine and feminine singular (un verre vide, une boîte vide).",
+      "For an available seat or room, use 'libre' (free), and for a blank page, use 'blanc / blanche'."
+    ],
+    "senses": [
+      {
+        "id": "xk41bmbb5r61uzd",
+        "order": 0,
+        "definition": "Having nothing or nobody inside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty"
+            ]
+          }
+        ],
+        "domain": "contents",
+        "emoji": "🫙",
+        "examples": [
+          {
+            "id": "pmrmjo6ogzfjjxc",
+            "text": "La bouteille est vide, il faut en racheter.",
+            "textLang": "fr",
+            "translation": "The bottle is empty, we need to buy more.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing at a finished drink on the table, slightly disappointed",
+            "note": null,
+            "matchedForm": "vide",
+            "matchedTranslationForm": "empty"
+          },
+          {
+            "id": "jfiik43ar7pfjpe",
+            "text": "Les rues sont vides le dimanche matin.",
+            "textLang": "fr",
+            "translation": "The streets are empty on Sunday mornings.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vides",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "xk41bmbb5r61uzd",
+      "from": "Qui ne contient rien à l'intérieur.",
+      "to": "Containing nothing at all on the inside.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:19Z"
+    },
+    {
+      "sense": "o59rw23k3cmqtpz",
+      "from": "Qui n'est occupé par personne, libre.",
+      "to": "Not currently taken or used by anyone.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "vide",
+    "lemma": "vide",
+    "reading": null,
+    "ipa": "/vid/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫙",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "empty; vacant; blank",
     "primaryGloss": "empty",
     "emotion": "looking inside a box and finding nothing at all, light and hollow",
@@ -163,22 +270,41 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "xk41bmbb5r61uzd",
-      "from": "Qui ne contient rien à l'intérieur.",
-      "to": "Containing nothing at all on the inside.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:19Z"
-    },
-    {
-      "sense": "o59rw23k3cmqtpz",
-      "from": "Qui n'est occupé par personne, libre.",
-      "to": "Not currently taken or used by anyone.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "empty; vacant; blank",
+        "why": "Includes 'blank', which is absent from the senses and explicitly contradicted in Note 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cette chaise est vide, vous pouvez vous asseoir.",
+        "why": "For an unoccupied seat, French naturally uses 'libre', not 'vide'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(space) Not currently taken or used by anyone.",
+        "why": "An empty room or place is the same basic sense as an empty container."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use vide for anything that has nothing inside it",
+        "why": "Restates the definition of the word."
+      }
+    ],
+    "growth": 0.859
+  }
 }

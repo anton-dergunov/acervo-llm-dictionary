@@ -68,6 +68,75 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to feel pain; to suffer",
+    "primaryGloss": "to feel pain",
+    "emotion": "hurting and tired, speaking in a quiet voice",
+    "notes": [
+      "Present tense is يَأْلَمُ (yaʾlamu). Usually takes the person feeling pain (or emotional sorrow) as the subject; in everydayMSA, تَأَلَّمَ (taʾallama) is more common for 'to be in pain', and آلَمَ (ʾālama) is used for a body part hurting someone (e.g., يُؤْلِمُنِي رَأْسِي 'my head hurts me')."
+    ],
+    "senses": [
+      {
+        "id": "biaq9rd0p0wr60u",
+        "order": 0,
+        "definition": "To feel physical pain or emotional distress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to feel pain",
+              "to ache",
+              "to suffer"
+            ]
+          }
+        ],
+        "domain": "sensation",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "x9ahlvut8cug4iz",
+            "text": "أَلِمَ المَرِيضُ شَدِيدًا بَعْدَ العَمَلِيَّةِ.",
+            "textLang": "ar",
+            "translation": "The patient felt severe pain after the operation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَلِمَ",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَلِمَ",
+    "lemma": "أَلِمَ",
+    "reading": null,
+    "ipa": "/ʔa.li.ma/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to feel pain; to ache",
     "primaryGloss": "to feel pain",
     "emotion": "hurting and tired, speaking in a quiet voice",
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "أَلِمَ رَأْسُهُ مِنَ الصُّدَاعِ.",
+        "why": "'His head hurt from the headache' is tautological, and أَلِمَ takes the person as subject."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe physical pain or aching in a part",
+        "why": "Restates the definition and misses that Form IV آلَمَ is used when body parts ache."
+      }
+    ],
+    "growth": 2.42
   }
 }

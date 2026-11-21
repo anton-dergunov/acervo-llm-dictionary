@@ -58,6 +58,97 @@
     "headword": "sujo",
     "lemma": "sujo",
     "reading": null,
+    "ipa": "/ˈsuʒu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dirty; soiled",
+    "primaryGloss": "dirty",
+    "emotion": "repulsed and bothered, noticing a mess that needs to be cleaned",
+    "notes": [
+      "Typically used with the verb 'estar' because being dirty is a temporary state: 'O prato está sujo' (The plate is dirty).",
+      "To say what something is dirty with, use the preposition 'de': 'sujo de lama' (dirty with mud)."
+    ],
+    "senses": [
+      {
+        "id": "ca165y31fvn4n8u",
+        "order": 0,
+        "definition": "Not clean; covered with dirt, stains, or marks, or needing to be washed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dirty",
+              "soiled",
+              "unwashed"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "💩",
+        "examples": [
+          {
+            "id": "4hxcaqp7merx9rb",
+            "text": "O chão está muito sujo depois da chuva.",
+            "textLang": "pt",
+            "translation": "The floor is very dirty after the rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed at the extra work needed to clean the floor",
+            "note": null,
+            "matchedForm": "sujo",
+            "matchedTranslationForm": "dirty"
+          },
+          {
+            "id": "zcdexqcjcte0qr0",
+            "text": "Preciso lavar a roupa suja.",
+            "textLang": "pt",
+            "translation": "I need to wash the dirty clothes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and focused on the household task",
+            "note": null,
+            "matchedForm": "suja",
+            "matchedTranslationForm": "dirty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "sujo",
+    "lemma": "sujo",
+    "reading": null,
     "ipa": "/ˈsu.ʒu/",
     "pos": "adj",
     "gender": null,
@@ -162,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "Not washed or used.",
+        "why": "Ambiguous and false if read as 'not used'; dirty laundry is used and not washed."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(laundry) Not washed or used.",
+        "why": "Unwashed clothes or dishes are simply the normal literal meaning of 'sujo', not a separate sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'sujo' for things that are physically covered in dirt",
+        "why": "Restates the definition; misses the required preposition 'sujo de' (dirty with)."
+      }
+    ],
+    "growth": 1.109
   }
 }

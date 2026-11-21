@@ -60,6 +60,75 @@
     "headword": "치과의사",
     "lemma": "치과의사",
     "reading": null,
+    "ipa": "/tɕʰi.k͈wa.ɰi.sa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦷",
+    "topics": [
+      "Work",
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "dentist",
+    "primaryGloss": "dentist",
+    "emotion": "professional and calm, someone who knows exactly how to fix the problem",
+    "notes": [
+      "Compound of 치과 (dentistry/dental clinic) and 의사 (doctor); usually written with a space as 치과 의사.",
+      "When addressing a dentist directly, use 의사 선생님 or 치과 선생님 rather than 치과의사."
+    ],
+    "senses": [
+      {
+        "id": "q79dlh8lotlzi79",
+        "order": 0,
+        "definition": "A doctor who treats teeth and gums.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dentist"
+            ]
+          }
+        ],
+        "domain": "medicine",
+        "emoji": "🦷",
+        "examples": [
+          {
+            "id": "qpbeuw0l97hgkjg",
+            "text": "치과의사는 정기적인 검진이 중요하다고 말했습니다.",
+            "textLang": "ko",
+            "translation": "The dentist said that regular checkups are important.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, relaying professional health advice",
+            "note": null,
+            "matchedForm": "치과의사",
+            "matchedTranslationForm": "dentist"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "치과의사",
+    "lemma": "치과의사",
+    "reading": null,
     "ipa": "/tɕʰi.ɡwa.ɰi.s͈a/",
     "pos": "noun",
     "gender": null,
@@ -122,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tɕʰi.ɡwa.ɰi.s͈a/",
+        "why": "Wrong tensification in IPA: 의사 does not tensify to [s͈a]; 과 tensifies to [k͈wa]."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "use the shorter version '치과 선생님'",
+        "why": "'치과 선생님' is actually longer than '치과의사', and is a title of address."
+      }
+    ],
+    "growth": 0.689
   }
 }

@@ -72,6 +72,94 @@
     "primaryGloss": "white",
     "emotion": null,
     "notes": [
+      "Do not confuse with the identical verb form 'weiß' (from 'wissen', meaning 'I know' or 'he/she/it knows')."
+    ],
+    "senses": [
+      {
+        "id": "3jzdqi7z4iox4y7",
+        "order": 0,
+        "definition": "Having the color of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "nc4evkafrcwqoug",
+            "text": "Der Schnee ist heute überall weiß.",
+            "textLang": "de",
+            "translation": "The snow is white everywhere today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the winter scenery",
+            "note": null,
+            "matchedForm": "weiß",
+            "matchedTranslationForm": "white"
+          },
+          {
+            "id": "aijn545bqpv1n50",
+            "text": "Sie trägt ein weißes Kleid.",
+            "textLang": "de",
+            "translation": "She is wearing a white dress.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "weißes",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "weiß",
+    "lemma": "weiß",
+    "reading": null,
+    "ipa": "/vaɪ̯s/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "white",
+    "primaryGloss": "white",
+    "emotion": null,
+    "notes": [
       "Note that 'weiß' is an adjective here. Do not confuse it with 'weiß' (the verb form of 'wissen', meaning 'I know' or 'he/she knows').",
       "Adjective endings change depending on the noun's gender and case, for example: 'ein weißes Auto' (neuter) or 'eine weiße Katze' (feminine)."
     ],
@@ -119,5 +207,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of snow or milk.",
+        "why": "Defined as a noun instead of an adjective ('Having the color of...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Adjective endings change depending on the noun's gender and case",
+        "why": "Generic grammar rule that applies to every German adjective, not specific to 'weiß'."
+      }
+    ],
+    "growth": 0.727
   }
 }

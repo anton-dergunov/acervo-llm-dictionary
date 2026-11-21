@@ -68,6 +68,73 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "fever",
+    "primaryGloss": "fever",
+    "emotion": "aching and tired, feeling warm and unwell under heavy blankets",
+    "notes": [
+      "Uncountable in Dutch: say 'koorts hebben' (to have a fever) and 'hoge koorts' (a high fever), without 'een'."
+    ],
+    "senses": [
+      {
+        "id": "2wemkw7yidivz9b",
+        "order": 0,
+        "definition": "A body temperature higher than normal, caused by an illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fever"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "iq0q7wwrxsw59l6",
+            "text": "Hij heeft hoge koorts en moet in bed blijven.",
+            "textLang": "nl",
+            "translation": "He has a high fever and needs to stay in bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "worried and caring, looking after a sick person",
+            "note": null,
+            "matchedForm": "koorts",
+            "matchedTranslationForm": "fever"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de koorts",
+    "lemma": "koorts",
+    "reading": null,
+    "ipa": "/koːrts/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤒",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "fever; excitement",
     "primaryGloss": "fever",
     "emotion": "aching and tired, feeling warm and unwell under heavy blankets",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A state of intense nervous excitement or passion.",
+        "why": "Figurative sense is literary or restricted to compounds; not needed as a separate A2 sense."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "De goudkoorts heerste onder de kolonisten.",
+        "why": "Uses the compound word 'goudkoorts' instead of the lemma 'koorts'."
+      }
+    ],
+    "growth": 0.532
   }
 }

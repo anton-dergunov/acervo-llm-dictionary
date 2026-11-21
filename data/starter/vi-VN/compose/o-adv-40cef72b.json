@@ -58,6 +58,136 @@
     "headword": "đó",
     "lemma": "đó",
     "reading": null,
+    "ipa": "/ɗɔ˧˥/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "that; there",
+    "primaryGloss": "that",
+    "emotion": null,
+    "notes": [
+      "Placed after a noun to mean 'that' (e.g. 'người đó' = 'that person', 'lúc đó' = 'at that time').",
+      "In northern speech, 'đấy' is often used interchangeably with 'đó'."
+    ],
+    "senses": [
+      {
+        "id": "gtwm6r2y0g3laea",
+        "order": 0,
+        "definition": "Referring to a person, thing, or time already mentioned or away from the speaker.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "that",
+              "those"
+            ]
+          }
+        ],
+        "domain": "reference",
+        "emoji": "👉",
+        "examples": [
+          {
+            "id": "pwjgc5jmrex2rwo",
+            "text": "Người đó là bạn tôi.",
+            "textLang": "vi",
+            "translation": "That person is my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nodding toward someone standing nearby",
+            "note": null,
+            "matchedForm": "đó",
+            "matchedTranslationForm": "That"
+          },
+          {
+            "id": "3miyfcw93dogzhv",
+            "text": "Lúc đó trời đang mưa.",
+            "textLang": "vi",
+            "translation": "At that time it was raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reminiscing about a past moment",
+            "note": null,
+            "matchedForm": "đó",
+            "matchedTranslationForm": "that"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "khw12sevp79unov",
+        "order": 1,
+        "definition": "In or to that place; at that location.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "pfp9ttimx0bcns5",
+            "text": "Cuốn sách ở đó.",
+            "textLang": "vi",
+            "translation": "The book is there.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing casually to a spot across the room",
+            "note": null,
+            "matchedForm": "đó",
+            "matchedTranslationForm": "there"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đó",
+    "lemma": "đó",
+    "reading": null,
     "ipa": "/dɔː̚˧˥/",
     "pos": "adv",
     "gender": null,
@@ -199,5 +329,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/dɔː̚˧˥/",
+        "why": "Wrong initial consonant (/ɗ/, not /d/) and invalid unreleased diacritic on a vowel."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "'đó' is a demonstrative pronoun/determiner ('that', 'there'), not an adverb."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[2]",
+        "quote": "(time) At that time; then.",
+        "why": "'đó' does not mean 'then' on its own; 'lúc đó' literally means 'that time'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'đó' to point to a place or time that is away",
+        "why": "Restates the glosses instead of explaining grammar or regional usage (e.g. northern 'đấy')."
+      }
+    ],
+    "growth": 0.967
   }
 }

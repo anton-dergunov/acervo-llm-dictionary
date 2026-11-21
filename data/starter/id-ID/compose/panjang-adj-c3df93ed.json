@@ -58,6 +58,134 @@
     "headword": "panjang",
     "lemma": "panjang",
     "reading": null,
+    "ipa": "/ˈpandʒaŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "long",
+    "primaryGloss": "long",
+    "emotion": "measured and observant, tracing something from one end to the other",
+    "notes": [
+      "Used for objects, distances, hair, and time. For a person's or building's height, use 'tinggi' (tall). For a long duration of time, 'lama' is also very common."
+    ],
+    "senses": [
+      {
+        "id": "tzg4npg0kw2w8tz",
+        "order": 0,
+        "definition": "Measuring a great distance from one end to the other.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "long"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "xx449oaotab3ykc",
+            "text": "Sungai itu sangat panjang.",
+            "textLang": "id",
+            "translation": "That river is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the sheer scale of the landscape",
+            "note": null,
+            "matchedForm": "panjang",
+            "matchedTranslationForm": "long"
+          },
+          {
+            "id": "lr6v6g6i2sj44ob",
+            "text": "Anak itu memiliki rambut yang panjang.",
+            "textLang": "id",
+            "translation": "That child has long hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing someone's appearance calmly to a friend",
+            "note": null,
+            "matchedForm": "panjang",
+            "matchedTranslationForm": "long"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "htysotub8fzbcq5",
+        "order": 1,
+        "definition": "Lasting or taking a great amount of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "long"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "2zn9epowc68vdi4",
+            "text": "Kami punya waktu libur yang panjang.",
+            "textLang": "id",
+            "translation": "We have a long holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "panjang",
+            "matchedTranslationForm": "long"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "panjang",
+    "lemma": "panjang",
+    "reading": null,
     "ipa": "/ˈpaɲaŋ/",
     "pos": "adj",
     "gender": null,
@@ -158,5 +286,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈpaɲaŋ/",
+        "why": "Missing the affricate /dʒ/: should be /ˈpandʒaŋ/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "Having a height that is greater than average, used for people.",
+        "why": "'Panjang' never means 'tall' for people; the entry's own note contradicts this sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anak itu memiliki rambut yang panjang.",
+        "why": "Example shows 'long hair' (sense 0), not a tall person."
+      }
+    ],
+    "growth": 1.045
   }
 }

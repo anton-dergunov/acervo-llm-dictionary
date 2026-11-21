@@ -58,6 +58,96 @@
     "headword": "가져오다",
     "lemma": "가져오다",
     "reading": null,
+    "ipa": "ka.dʑʌ.o.da",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to bring (an object)",
+    "primaryGloss": "to bring",
+    "emotion": "helpful and forward-looking, focused on the act of delivering something",
+    "notes": [
+      "Used only for inanimate objects (and plants). To bring a person or animal, use 데려오다 instead.",
+      "Combines 가지다 (to have/hold) and 오다 (to come), indicating movement toward the speaker. For taking something away from the speaker, use 가져가다."
+    ],
+    "senses": [
+      {
+        "id": "5iag8pjo27m2vhk",
+        "order": 0,
+        "definition": "To carry or take a thing with you to the place where the speaker is.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to bring",
+              "to fetch"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "2bfkrva8qa7chnf",
+            "text": "내일 우산을 꼭 가져와.",
+            "textLang": "ko",
+            "translation": "Make sure to bring your umbrella tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "가져와",
+            "matchedTranslationForm": "bring"
+          },
+          {
+            "id": "f3xvxbp1m8g7h39",
+            "text": "책 좀 가져와 줄래요?",
+            "textLang": "ko",
+            "translation": "Could you bring me the book?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but direct, asking for a small favor",
+            "note": null,
+            "matchedForm": "가져와",
+            "matchedTranslationForm": "bring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "가져오다",
+    "lemma": "가져오다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "내일 친구를 집으로 가져와.",
+        "why": "가져오다 is only for inanimate objects; bringing a person requires 데려오다."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[0].definition",
+        "quote": "To carry something or someone with you",
+        "why": "False claim that 가져오다 can be used for bringing a person ('someone')."
+      }
+    ],
+    "growth": 1.097
   }
 }

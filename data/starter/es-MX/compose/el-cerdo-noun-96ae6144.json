@@ -58,6 +58,114 @@
     "headword": "el cerdo",
     "lemma": "cerdo",
     "reading": null,
+    "ipa": "/ˈseɾðo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐷",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pig; pork",
+    "primaryGloss": "pig",
+    "emotion": "matter-of-fact, like pointing out a common farm animal",
+    "notes": [
+      "In Mexico, 'puerco' and 'marrano' are also very common everyday words for a pig, and pork is often called 'carne de cerdo' or 'carne de puerco'."
+    ],
+    "senses": [
+      {
+        "id": "lcci8jaueq586ti",
+        "order": 0,
+        "definition": "A pink or spotted farm animal with short legs, raised for its meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "hog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐷",
+        "examples": [
+          {
+            "id": "zb36rfxa49iei6b",
+            "text": "El cerdo vive en la granja.",
+            "textLang": "es",
+            "translation": "The pig lives on the farm.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and straightforward, stating a simple fact",
+            "note": null,
+            "matchedForm": "cerdo",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tkz19d6q73kuh6i",
+        "order": 1,
+        "definition": "The meat of a pig, eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pork"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥓",
+        "examples": [
+          {
+            "id": "kvgm2w4w4ptwlxe",
+            "text": "Hoy vamos a comer cerdo asado.",
+            "textLang": "es",
+            "translation": "Today we are going to eat roast pork.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anticipatory and hungry, looking forward to a meal",
+            "note": null,
+            "matchedForm": "cerdo",
+            "matchedTranslationForm": "pork"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el cerdo",
+    "lemma": "cerdo",
+    "reading": null,
     "ipa": "/ˈθeɾðo/",
     "pos": "noun",
     "gender": "masculine",
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈθeɾðo/",
+        "why": "Uses Peninsular /θ/; Mexican Spanish has seseo and pronounces this /ˈseɾðo/."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "While 'puerco' is also used for the animal, it is more commonly used in slang",
+        "why": "In Mexico, 'puerco' (e.g. 'carne de puerco') is completely standard and everyday for pork/pig."
+      }
+    ],
+    "growth": 0.833
   }
 }

@@ -58,6 +58,73 @@
     "headword": "أَسْوَد",
     "lemma": "أَسْوَد",
     "reading": null,
+    "ipa": "/ˈʔas.wad/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "black",
+    "primaryGloss": "black",
+    "emotion": "matter-of-fact and direct, pointing out a basic visual quality",
+    "notes": [
+      "Like other basic colors in Arabic, it has an irregular feminine singular form, سَوْدَاء (sawdāʾ), and a broken plural for people/things, سُود (sūd)."
+    ],
+    "senses": [
+      {
+        "id": "asw0nxjg5ndortl",
+        "order": 0,
+        "definition": "Having the darkest color, like coal or the night sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "t30y7wpbt6mq8ly",
+            "text": "اشْتَرَيْتُ مِعْطَفًا أَسْوَدَ.",
+            "textLang": "ar",
+            "translation": "I bought a black coat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَسْوَدَ",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَسْوَد",
+    "lemma": "أَسْوَد",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "قَطَّتِي أَسْوَدُ اللَّوْنِ.",
+        "why": "Ungrammatical gender agreement (feminine noun قِطَّتِي with masculine أَسْوَد) and wrong vowel قَطَّتِي."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The darkest color, like the color of coal or the night sky.",
+        "why": "Defined as a noun ('The darkest color') instead of an adjective ('Of the darkest color')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "making it a unique descriptor for this specific color.",
+        "why": "False: the أَفْعَل / فَعْلَاء pattern is standard for all primary colors in Arabic, not unique to black."
+      }
+    ],
+    "growth": 0.828
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "to sleep",
     "emotion": "drowsy and soft, winding down at the end of a long day",
     "notes": [
+      "Stem-changing verb: the 'o' changes to 'ue' in the present tense (duermo, duermes...) and to 'u' in the third-person preterite (durmió, durmieron) and gerund (durmiendo).",
+      "For the action of falling asleep, use the reflexive form 'dormirse'."
+    ],
+    "senses": [
+      {
+        "id": "bc1oq9vcyvsbqp0",
+        "order": 0,
+        "definition": "To rest with your eyes closed and your body inactive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sleep",
+              "to rest"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "0m70ayjjs25o57w",
+            "text": "Los niños necesitan dormir ocho horas.",
+            "textLang": "es",
+            "translation": "Children need to sleep eight hours.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and reassuring, stating a simple fact about children",
+            "note": null,
+            "matchedForm": "dormir",
+            "matchedTranslationForm": "to sleep"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a3wmmic4p6jc28i",
+        "order": 1,
+        "definition": "(reflexive, dormirse) To pass into the state of sleep.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to fall asleep",
+              "to go to sleep"
+            ]
+          }
+        ],
+        "domain": "falling asleep",
+        "emoji": "🌙",
+        "examples": [
+          {
+            "id": "3rht2i1srbhxvy5",
+            "text": "Siempre me duermo leyendo un libro.",
+            "textLang": "es",
+            "translation": "I always fall asleep reading a book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "me duermo",
+            "matchedTranslationForm": "fall asleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "dormir",
+    "lemma": "dormir",
+    "reading": null,
+    "ipa": "/doɾˈmiɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep; to fall asleep",
+    "primaryGloss": "to sleep",
+    "emotion": "drowsy and soft, winding down at the end of a long day",
+    "notes": [
       "To say you are going to sleep (the action of falling asleep), use the reflexive form 'dormirse'."
     ],
     "senses": [
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential A2 grammar note: stem-changing verb (o > ue in present, o > u in preterite)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Siempre me suelo dormir leyendo un libro.",
+        "why": "'Siempre' + 'soler' is redundant; also splits the pronominal 'dormirse' awkwardly for A2."
+      }
+    ],
+    "growth": 1.29
   }
 }

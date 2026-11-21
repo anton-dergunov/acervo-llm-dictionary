@@ -74,6 +74,92 @@
     "primaryGloss": "mountain",
     "emotion": "awestruck and small, looking up at a towering peak",
     "notes": [
+      "산 covers a wider range than English 'mountain' and is often used for large, wooded hills around cities as well."
+    ],
+    "senses": [
+      {
+        "id": "xxylyss70bijniy",
+        "order": 0,
+        "definition": "A large, high raised area of land, taller than a small hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "hill"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "c0lgav9q7bxjyc0",
+            "text": "주말에 가족들과 함께 산에 갔어요.",
+            "textLang": "ko",
+            "translation": "I went to the mountains with my family on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and upbeat, anticipating a refreshing outdoor hike",
+            "note": null,
+            "matchedForm": "산",
+            "matchedTranslationForm": "mountains"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "xxylyss70bijniy",
+      "from": "지구의 표면이 높이 솟아 있는 부분.",
+      "to": "A very high raised part of the earth's surface.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:04Z"
+    },
+    {
+      "sense": "f11ynpgfop6yuui",
+      "from": "산처럼 높이 솟아 있는 아주 높은 언덕.",
+      "to": "A very high hill that rises sharply above the surrounding land.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "산",
+    "lemma": "산",
+    "reading": null,
+    "ipa": "/sʰa̠n/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "mountain; hill",
+    "primaryGloss": "mountain",
+    "emotion": "awestruck and small, looking up at a towering peak",
+    "notes": [
       "산 can refer to both a majestic high mountain and a very high hill that feels like a mountain."
     ],
     "senses": [
@@ -161,22 +247,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "xxylyss70bijniy",
-      "from": "지구의 표면이 높이 솟아 있는 부분.",
-      "to": "A very high raised part of the earth's surface.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:04Z"
-    },
-    {
-      "sense": "f11ynpgfop6yuui",
-      "from": "산처럼 높이 솟아 있는 아주 높은 언덕.",
-      "to": "A very high hill that rises sharply above the surrounding land.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(hill) A very high hill that rises sharply above the surrounding land.",
+        "why": "Korean 산 covers both mountains and large hills as one concept, not two separate senses."
+      }
+    ],
+    "growth": 0.644
+  }
 }

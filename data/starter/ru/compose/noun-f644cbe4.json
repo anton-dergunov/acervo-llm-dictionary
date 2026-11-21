@@ -72,6 +72,73 @@
     "primaryGloss": "fruit",
     "emotion": "refreshing and pleasant, thinking of a juicy snack on a warm day",
     "notes": [
+      "Countable in Russian, so the plural фрукты is used for fruit in general. Small soft fruits like strawberries or grapes are usually called ягоды (berries) rather than фрукты."
+    ],
+    "senses": [
+      {
+        "id": "j4bak08o0ovxvxz",
+        "order": 0,
+        "definition": "The sweet and fleshy product of a tree or other plant that contains seeds and is eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "rbtkngmy5eqj484",
+            "text": "Я ем свежие фрукты каждый день.",
+            "textLang": "ru",
+            "translation": "I eat fresh fruit every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "фрукты",
+            "matchedTranslationForm": "fruit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "фрукт",
+    "lemma": "фрукт",
+    "reading": null,
+    "ipa": "/frukt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fruit",
+    "primaryGloss": "fruit",
+    "emotion": "refreshing and pleasant, thinking of a juicy snack on a warm day",
+    "notes": [
       "Use фрукт for sweet plant parts containing seeds. Do not confuse it with овощ (vegetable), which usually refers to savory or leafy garden plants."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use фрукт for sweet plant parts containing seeds. Do not confuse",
+        "why": "Explains English 'fruit' vs 'vegetable'; misses that фрукт is countable (plural фрукты) and excludes berries."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Я ем свежий фрукт каждый день.",
+        "why": "Singular 'свежий фрукт' is unnatural here; Russians use plural 'свежие фрукты'. English 'a fruit' is ungrammatical."
+      }
+    ],
+    "growth": 1.077
   }
 }

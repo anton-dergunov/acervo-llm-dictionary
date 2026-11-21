@@ -68,6 +68,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "cash",
+    "primaryGloss": "cash",
+    "emotion": "practical and down-to-earth, holding a few notes ready to pay",
+    "notes": [
+      "Most often used in the phrase 'en efectivo' (in cash), especially with the verb 'pagar' (to pay)."
+    ],
+    "senses": [
+      {
+        "id": "ahj282jzizp6333",
+        "order": 0,
+        "definition": "Money in the form of coins and notes, rather than cards or bank transfers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cash",
+              "hard cash"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "us38birajb24k4t",
+            "text": "No tengo tarjeta, ¿puedo pagar en efectivo?",
+            "textLang": "es",
+            "translation": "I don't have a card, can I pay in cash?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and inquiring, asking a shop assistant about payment",
+            "note": null,
+            "matchedForm": "efectivo",
+            "matchedTranslationForm": "cash"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el efectivo",
+    "lemma": "efectivo",
+    "reading": null,
+    "ipa": "/e.fekˈti.βo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💵",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "cash; effective",
     "primaryGloss": "cash",
     "emotion": "practical and down-to-earth, holding a few notes ready to pay",
@@ -161,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A quality that produces a desired result or works well in practice.",
+        "why": "Includes the adjective sense ('effective') in a noun entry ('el efectivo')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cash; effective",
+        "why": "'effective' is an adjective, not a meaning of the noun 'el efectivo'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'efectivo' when you need to pay with physical coins or paper",
+        "why": "Restates the definition instead of highlighting the key collocation 'en efectivo'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'tarjeta', which means card.",
+        "why": "Learners do not confuse 'efectivo' and 'tarjeta'; they are merely semantic opposites."
+      }
+    ],
+    "growth": 0.523
   }
 }

@@ -68,6 +68,85 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "monkey, ape",
+    "primaryGloss": "monkey",
+    "emotion": "playful and curious, watching an animal at the zoo",
+    "notes": [
+      "Used in everyday Italian for both monkeys and tailless apes.",
+      "The plural is 'le scimmie' (keeping the '-i-')."
+    ],
+    "senses": [
+      {
+        "id": "veuxqlbdingrhc1",
+        "order": 0,
+        "definition": "A primate that climbs trees, typically having a long tail; also used generally for apes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey",
+              "ape"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "jc6plehtiu42zos",
+            "text": "La scimmia mangia una banana sull'albero.",
+            "textLang": "it",
+            "translation": "The monkey is eating a banana in the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "amused and smiling at the playful animal",
+            "note": null,
+            "matchedForm": "scimmia",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "g3tylc2vzpc1moc",
+      "from": "Sensazione di malessere il giorno dopo aver bevuto troppo alcol.",
+      "to": "A physical feeling of illness the day after drinking too much alcohol.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la scimmia",
+    "lemma": "scimmia",
+    "reading": null,
+    "ipa": "/ˈʃim.mja/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "monkey; hangover",
     "primaryGloss": "monkey",
     "emotion": "playful and curious, watching an animal at the zoo",
@@ -159,14 +238,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "g3tylc2vzpc1moc",
-      "from": "Sensazione di malessere il giorno dopo aver bevuto troppo alcol.",
-      "to": "A physical feeling of illness the day after drinking too much alcohol.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(slang) A physical feeling of illness the day after drinking too much",
+        "why": "'Avere la scimmia' means a strong craving or obsession, not a hangover ('postumi della sbornia')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'avere la scimmia' is a common idiom meaning to have a hangover",
+        "why": "False meaning; 'avere la scimmia' means to have an addiction, craving, or obsession."
+      }
+    ],
+    "growth": 0.662
+  }
 }

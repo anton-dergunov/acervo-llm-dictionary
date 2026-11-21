@@ -72,6 +72,114 @@
     "primaryGloss": "celoso",
     "emotion": "a sharp, uncomfortable sting that makes you feel small and resentful",
     "notes": [
+      "Se construye con la preposición 'of' para indicar la causa: 'jealous of someone/something' (celoso o envidioso de alguien/algo)."
+    ],
+    "senses": [
+      {
+        "id": "y1wbsyr1uh37ev9",
+        "order": 0,
+        "definition": "Que siente malestar o deseo porque otra persona tiene algo que uno quisiera tener.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "envidioso",
+              "celoso"
+            ]
+          }
+        ],
+        "domain": "envidia",
+        "emoji": "😒",
+        "examples": [
+          {
+            "id": "4m5snc6mt3331t5",
+            "text": "He was jealous of his brother's new car.",
+            "textLang": "en",
+            "translation": "Estaba envidioso del auto nuevo de su hermano.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bitter and comparing one's own luck to someone else's",
+            "note": null,
+            "matchedForm": "jealous",
+            "matchedTranslationForm": "envidioso"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3o1t4qmu29w3t3g",
+        "order": 1,
+        "definition": "Que siente temor o inseguridad de que su pareja o un ser querido preste atención a otra persona.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "celoso"
+            ]
+          }
+        ],
+        "domain": "relaciones",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "6f628ts7egev7gx",
+            "text": "She gets jealous when he talks to other people.",
+            "textLang": "en",
+            "translation": "Ella se pone celosa cuando él habla con otras personas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "insecure and possessive, showing a lack of trust",
+            "note": null,
+            "matchedForm": "jealous",
+            "matchedTranslationForm": "celosa"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "jealous",
+    "lemma": "jealous",
+    "reading": null,
+    "ipa": "/ˈdʒɛl.əs/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😒",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "celoso; envidioso",
+    "primaryGloss": "celoso",
+    "emotion": "a sharp, uncomfortable sting that makes you feel small and resentful",
+    "notes": [
       "Aunque 'celoso' se usa para ambos significados, en inglés es muy importante distinguir entre 'jealous' (sentir que alguien más tiene algo que tú quieres) y 'envious' (sentir resentimiento por la posesión de otro). 'Jealous' también se usa comúnmente en el contexto de relaciones amorosas cuando temes perder a alguien por culpa de un tercero."
     ],
     "senses": [
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Sentir infelicidad o malestar porque alguien más tiene algo que tú deseas.",
+        "why": "Adjective defined as a verb in the infinitive ('Sentir...') instead of a quality ('Que siente...')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Sentir miedo o inseguridad de que tu pareja pueda interesarse por otra",
+        "why": "Adjective defined as an infinitive verb ('Sentir...') instead of an adjectival phrase."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "en inglés es muy importante distinguir entre 'jealous' (sentir que alguien más",
+        "why": "Confusingly defines 'jealous' and 'envious' identically while claiming it is very important to distinguish them."
+      }
+    ],
+    "growth": 0.738
   }
 }

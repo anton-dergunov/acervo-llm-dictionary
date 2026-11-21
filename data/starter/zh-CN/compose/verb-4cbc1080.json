@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to speak, to say; to scold",
+    "primaryGloss": "to speak",
+    "emotion": "straightforward and engaging, communicating a thought clearly to someone",
+    "notes": [
+      "说 takes the words spoken or the language (说中文) as its direct object; to simply 'talk' with no object, use 说话 (shuōhuà).",
+      "Do not confuse with 告诉 (gàosu, to tell someone); 说 cannot take the listener as a direct object (*说他)."
+    ],
+    "senses": [
+      {
+        "id": "h4z0gegfc2lh4c3",
+        "order": 0,
+        "definition": "To utter words, express something in words, or speak a language.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to speak",
+              "to say",
+              "to talk"
+            ]
+          }
+        ],
+        "domain": "speech",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "bdikmimioc9t4oh",
+            "text": "请慢一点说，我听不懂。",
+            "textLang": "zh",
+            "translation": "Please speak a little slower, I don't understand.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and slightly hesitant, asking for help",
+            "note": null,
+            "matchedForm": "说",
+            "matchedTranslationForm": "speak"
+          },
+          {
+            "id": "sa7y9cjtp6f2ki0",
+            "text": "他会说一点儿汉语。",
+            "textLang": "zh",
+            "translation": "He can speak a little Chinese.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "说",
+            "matchedTranslationForm": "speak"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jb57e4x349k9y14",
+        "order": 1,
+        "definition": "To scold or criticize someone for a fault.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to scold",
+              "to criticize"
+            ]
+          }
+        ],
+        "domain": "reproof",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "ooie6ahkte881g4",
+            "text": "因为我迟到了，老师说了我几句。",
+            "textLang": "zh",
+            "translation": "Because I was late, the teacher scolded me a bit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "regretful and slightly embarrassed about being late",
+            "note": null,
+            "matchedForm": "说",
+            "matchedTranslationForm": "scolded"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "说",
+    "lemma": "说",
+    "reading": "shuō",
+    "ipa": "/ʂu̯o˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗣️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to speak; to say; to explain",
     "primaryGloss": "to speak",
     "emotion": "straightforward and engaging, communicating a thought clearly to someone",
@@ -162,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to speak; to say; to explain",
+        "why": "'To explain' is not in the glosses, while 'to scold' is missing from shortGloss."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To explain or scold someone for a mistake.",
+        "why": "Conflates 'explain' with 'scold', while the glosses and example only cover scolding."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "说 (shuō) is the most common verb for speaking, talking, or saying",
+        "why": "Restates the glosses without adding usage information."
+      }
+    ],
+    "growth": 1.178
   }
 }

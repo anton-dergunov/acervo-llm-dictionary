@@ -74,6 +74,74 @@
     "primaryGloss": "bathtub",
     "emotion": null,
     "notes": [
+      "Refers only to the physical tub; for the room use 'banyo', and for the act of taking a bath use 'banyo yapmak'."
+    ],
+    "senses": [
+      {
+        "id": "ydezalplx0rguki",
+        "order": 0,
+        "definition": "A large container that you fill with water and sit or lie in to wash your body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bathtub",
+              "tub"
+            ]
+          }
+        ],
+        "domain": "bathroom",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "lp4u5a2avfbbdcx",
+            "text": "Küveti sıcak suyla doldurdum.",
+            "textLang": "tr",
+            "translation": "I filled the bathtub with hot water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Küveti",
+            "matchedTranslationForm": "bathtub"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "küvet",
+    "lemma": "küvet",
+    "reading": null,
+    "ipa": "/cyˈvet/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛁",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "bathtub",
+    "primaryGloss": "bathtub",
+    "emotion": null,
+    "notes": [
       "Küvet specifically refers to the bathtub you sit or lie in to wash your body, whereas duş (or duş teknesi) is used for a standing shower."
     ],
     "senses": [
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Küvet specifically refers to the bathtub you sit or lie in",
+        "why": "Merely restates the definition and contrasts two unrelated English words (bathtub vs. shower)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Sıcak bir küvet keyfi bütün yorgunluğumu aldı.",
+        "why": "Banyo keyfi is natural for a bath; küvet refers to the physical fixture itself."
+      }
+    ],
+    "growth": 0.866
   }
 }

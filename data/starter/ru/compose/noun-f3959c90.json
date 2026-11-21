@@ -72,6 +72,115 @@
     "primaryGloss": "house",
     "emotion": "a warm, stable place where you feel safe and relaxed",
     "notes": [
+      "Irregular plural: «дома́» (stress on the last syllable). Do not confuse this with the adverb «до́ма» (at home, stress on the first syllable) or «домо́й» (homeward, going home)."
+    ],
+    "senses": [
+      {
+        "id": "pqm6oypbcikdkg0",
+        "order": 0,
+        "definition": "A building in which people live, whether a single-family house or an apartment block.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "apartment building",
+              "building"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "43knjrnc6k117bi",
+            "text": "Мы купили новый дом.",
+            "textLang": "ru",
+            "translation": "We bought a new house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and excited about a new life chapter",
+            "note": null,
+            "matchedForm": "дом",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s0b0arjclv2dcl7",
+        "order": 1,
+        "definition": "The place where one lives and feels one belongs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "home"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "kic3ihw53bss17z",
+            "text": "Здесь мой дом и моя семья.",
+            "textLang": "ru",
+            "translation": "My home and my family are here.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "дом",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "дом",
+    "lemma": "дом",
+    "reading": null,
+    "ipa": "/dom/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house; home",
+    "primaryGloss": "house",
+    "emotion": "a warm, stable place where you feel safe and relaxed",
+    "notes": [
       "In Russian, 'дом' can mean both the physical building (house/apartment building) and the abstract concept of 'home'. Use 'домой' when you are talking about moving toward your home (going home)."
     ],
     "senses": [
@@ -159,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Я иду домой.",
+        "why": "Uses the adverb домой instead of the noun дом (or adverb дома)."
+      }
+    ],
+    "growth": 1.061
   }
 }

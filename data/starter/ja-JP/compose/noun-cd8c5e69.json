@@ -68,6 +68,75 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "apartment; apartment building",
+    "primaryGloss": "apartment",
+    "emotion": "matter-of-fact, describing where someone lives",
+    "notes": [
+      "In Japan, アパート typically refers to a smaller, two-story wooden or light-steel residential building without an elevator, or a unit within one. Larger, modern concrete apartment buildings are called マンション (manshon)."
+    ],
+    "senses": [
+      {
+        "id": "mfw6mpsk85q5v0o",
+        "order": 0,
+        "definition": "A relatively small, low-rise residential building divided into rental units, or an individual home within such a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "apartment",
+              "flat",
+              "apartment building"
+            ]
+          }
+        ],
+        "domain": "housing",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "djzyjwu717pg4dx",
+            "text": "駅の近くのアパートに住んでいます。",
+            "textLang": "ja",
+            "translation": "I live in an apartment near the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "アパート",
+            "matchedTranslationForm": "apartment"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "アパート",
+    "lemma": "アパート",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "apartment; flat",
     "primaryGloss": "apartment",
     "emotion": "matter-of-fact, describing where someone lives",
@@ -116,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(housing) A residential building... / (unit) A home located on one floor",
+        "why": "Building and individual unit in it are standard metonymy; better combined with an example."
+      }
+    ],
+    "growth": 1.069
   }
 }

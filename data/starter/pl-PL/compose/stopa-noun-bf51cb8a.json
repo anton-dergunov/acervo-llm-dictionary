@@ -68,6 +68,114 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "foot; rate",
+    "primaryGloss": "foot",
+    "emotion": "matter-of-fact and literal, grounding the speaker in their own body",
+    "notes": [
+      "Refers specifically to the foot from the ankle down. Do not confuse it with 'noga', which refers to the entire leg (and is also often used colloquially where English uses 'foot').",
+      "Note the vowel change in the genitive plural: 'stóp' (e.g., 'pięć stóp')."
+    ],
+    "senses": [
+      {
+        "id": "oveoy7s7a51g20q",
+        "order": 0,
+        "definition": "The lower part of the leg below the ankle, on which a person stands or walks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foot"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👣",
+        "examples": [
+          {
+            "id": "5v1u29ttqudzzas",
+            "text": "Boli mnie prawa stopa.",
+            "textLang": "pl",
+            "translation": "My right foot hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "uncomfortable and complaining, drawing attention to a minor pain",
+            "note": null,
+            "matchedForm": "stopa",
+            "matchedTranslationForm": "foot"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7mnicvjca2ep0t2",
+        "order": 1,
+        "definition": "A percentage or ratio used in economics and finance, such as an interest rate or unemployment rate.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rate"
+            ]
+          }
+        ],
+        "domain": "economics",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "p30e7max56d8c4x",
+            "text": "Stopa bezrobocia w tym roku spadła.",
+            "textLang": "pl",
+            "translation": "The unemployment rate fell this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Stopa",
+            "matchedTranslationForm": "rate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "stopa",
+    "lemma": "stopa",
+    "reading": null,
+    "ipa": "/ˈstɔpa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👣",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "foot; rate; pace",
     "primaryGloss": "foot",
     "emotion": "matter-of-fact and literal, grounding the speaker in their own body",
@@ -161,5 +269,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A unit of measure or a rate/pace at which something happens.",
+        "why": "'Stopa' does not mean 'pace'; conflates unit of length, economic rate, and a fixed idiom."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "rate, pace, foot (unit)",
+        "why": "'Stopa' does not mean 'pace' in Polish."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "used in a figurative sense to mean 'pace' or 'rate' (e.g., 'na dużej stopie'",
+        "why": "'Stopa' does not mean 'pace', and the idiom is 'na wysokiej/szerokiej stopie', not 'dużej'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "senses[1].examples[0]",
+        "quote": "undergoes a consonant shift (t -> ci) in the locative case, becoming 'stopie'.",
+        "why": "False grammar claim in example note: 'p' softens to 'pi' in 'stopie', not 't' to 'ci'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Żyją na wysokiej stopie.",
+        "why": "Illustrates an idiom ('living standard') rather than the unit of measurement or economic rate."
+      }
+    ],
+    "growth": 0.854
   }
 }

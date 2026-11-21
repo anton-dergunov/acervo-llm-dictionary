@@ -71,6 +71,154 @@
     ],
     "status": "active",
     "shortGloss": "to play; to act",
+    "primaryGloss": "to play",
+    "emotion": "lighthearted and carefree, enjoying a game or activity with friends",
+    "notes": [
+      "Unlike in English, 'spelen' takes no preposition before a musical instrument: 'piano spelen' (to play the piano)."
+    ],
+    "senses": [
+      {
+        "id": "er9lymvvafxlhrg",
+        "order": 0,
+        "definition": "To take part in a game, sport, or fun activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "game",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "xd94lsendumn9vr",
+            "text": "De kinderen spelen buiten op het plein.",
+            "textLang": "nl",
+            "translation": "The children are playing outside on the square.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "spelen",
+            "matchedTranslationForm": "playing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g6l8freq4an98hq",
+        "order": 1,
+        "definition": "To make music on a musical instrument.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎸",
+        "examples": [
+          {
+            "id": "z2d02jh46gwwz6m",
+            "text": "Hij kan heel goed gitaar spelen.",
+            "textLang": "nl",
+            "translation": "He can play the guitar very well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and appreciative of someone's musical talent",
+            "note": null,
+            "matchedForm": "spelen",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zvdgmfzin88hw9z",
+        "order": 2,
+        "definition": "To perform a role in a play, movie, or show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to act",
+              "to play"
+            ]
+          }
+        ],
+        "domain": "theater",
+        "emoji": "🎭",
+        "examples": [
+          {
+            "id": "y996gk3hl0qzx1m",
+            "text": "Zij speelt de hoofdrol in de nieuwe film.",
+            "textLang": "nl",
+            "translation": "She plays the lead role in the new movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "speelt",
+            "matchedTranslationForm": "plays"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "spelen",
+    "lemma": "spelen",
+    "reading": null,
+    "ipa": "/ˈspeːlə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚽",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to play; to act",
     "primaryGloss": "play",
     "emotion": "lighthearted and carefree, enjoying a game or activity with friends",
     "notes": [
@@ -202,5 +350,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'spelen' when children play, when playing a sport or game",
+        "why": "Merely restates the senses without adding grammatical or usage insight."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'spelen' in the sense of acting",
+        "why": "Nonsensical warning telling the learner not to confuse the word with itself."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "De kinderen spelen buiten op hetplein.",
+        "why": "Missing space between 'het' and 'plein'."
+      }
+    ],
+    "growth": 0.856
   }
 }

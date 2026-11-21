@@ -60,6 +60,75 @@
     "headword": "verkopen",
     "lemma": "verkopen",
     "reading": null,
+    "ipa": "/vərˈkoːpə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "sell",
+    "emotion": "proud and eager, talking about a successful deal",
+    "notes": [
+      "Irregular verb: verkopen – verkocht, verkochten – heeft verkocht.",
+      "Do not confuse verkopen (to sell) with kopen (to buy)."
+    ],
+    "senses": [
+      {
+        "id": "sscgzfv5r62irz1",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "fg6z82ci19wi6kp",
+            "text": "Hij wil zijn oude fiets verkopen op internet.",
+            "textLang": "nl",
+            "translation": "He wants to sell his old bicycle on the internet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and practical, planning to get rid of old things",
+            "note": null,
+            "matchedForm": "verkopen",
+            "matchedTranslationForm": "sell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "verkopen",
+    "lemma": "verkopen",
+    "reading": null,
     "ipa": "/vərˈkoːpən/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To betray someone or disloyally hand them over to someone else.",
+        "why": "False friend with German 'verkaufen' / English 'sell out'; Dutch uses 'verraden'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij zou zijn vrienden nooit verkopen.",
+        "why": "Unidiomatic calque; Dutch speakers do not say 'vrienden verkopen' for 'betray friends'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular principal parts (verkocht, heeft verkocht)."
+      }
+    ],
+    "growth": 0.579
   }
 }

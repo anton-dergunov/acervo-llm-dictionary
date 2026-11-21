@@ -70,6 +70,95 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "dormir",
+    "primaryGloss": "dormir",
+    "emotion": null,
+    "notes": [
+      "Verbo irregular: pasado y participio 'slept'.",
+      "A diferencia de 'fall asleep' (quedarse dormido), 'sleep' describe el estado de estar durmiendo."
+    ],
+    "senses": [
+      {
+        "id": "oe7fw6an5apm5qk",
+        "order": 0,
+        "definition": "Descansar con los ojos cerrados en un estado de inconsciencia natural.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dormir"
+            ]
+          }
+        ],
+        "domain": "descanso",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "m704lwgosiw4mod",
+            "text": "I need to sleep eight hours every night.",
+            "textLang": "en",
+            "translation": "Necesito dormir ocho horas cada noche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and steady, stating a basic health need plainly",
+            "note": null,
+            "matchedForm": "sleep",
+            "matchedTranslationForm": "dormir"
+          },
+          {
+            "id": "2ja4ioiqyjh66hh",
+            "text": "We can sleep at my friend's house.",
+            "textLang": "en",
+            "translation": "Podemos dormir en la casa de mi amigo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and reassuring, offering a simple solution to a travel problem",
+            "note": null,
+            "matchedForm": "sleep",
+            "matchedTranslationForm": "dormir"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sleep",
+    "lemma": "sleep",
+    "reading": null,
+    "ipa": "/sliːp/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "dormir; pasar la noche",
     "primaryGloss": "dormir",
     "emotion": null,
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Pasar la noche en un lugar determinado.",
+        "why": "Sleeping at a place is the same basic sense of 'sleep', not a separate sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the irregular past and past participle form 'slept'."
+      }
+    ],
+    "growth": 0.827
   }
 }

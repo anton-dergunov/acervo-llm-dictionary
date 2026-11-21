@@ -68,6 +68,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to answer (a phone); to pick up (someone); to catch; to take",
+    "primaryGloss": "to pick up",
+    "emotion": "attentive and ready, hands outstretched to take what comes",
+    "notes": [
+      "When meaning 'to pick someone up' or 'to meet someone arriving', its opposite is 送 (sòng, to see someone off or drop someone off)."
+    ],
+    "senses": [
+      {
+        "id": "hytflywxzchh9h7",
+        "order": 0,
+        "definition": "To answer a telephone or video call.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to answer",
+              "to pick up",
+              "to take"
+            ]
+          }
+        ],
+        "domain": "phone",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "nw3nohf1bpoj2dz",
+            "text": "电话响了，我去接一下。",
+            "textLang": "zh",
+            "translation": "The phone is ringing; I'll go answer it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and responsive, reacting to a ringing phone",
+            "note": null,
+            "matchedForm": "接",
+            "matchedTranslationForm": "answer"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6u5xkb0awgwtysf",
+        "order": 1,
+        "definition": "To go to a place to meet and pick up someone who is arriving.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pick up",
+              "to meet",
+              "to collect"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "tcaw0swpj3bcd4y",
+            "text": "我去机场接朋友。",
+            "textLang": "zh",
+            "translation": "I am going to the airport to pick up a friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, looking forward to greeting someone",
+            "note": null,
+            "matchedForm": "接",
+            "matchedTranslationForm": "pick up"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mhtrb8gx4yn0yi3",
+        "order": 2,
+        "definition": "To catch a moving object or take something handed over by someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to catch",
+              "to take",
+              "to receive"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🥎",
+        "examples": [
+          {
+            "id": "mkwyvhac1pqt9nz",
+            "text": "帮我接一下这个球。",
+            "textLang": "zh",
+            "translation": "Help me catch this ball.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "urgent and focused, asking someone to grab a flying object",
+            "note": null,
+            "matchedForm": "接",
+            "matchedTranslationForm": "catch"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "接",
+    "lemma": "接",
+    "reading": "jiē",
+    "ipa": "/tɕi̯e˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to catch; to receive; to meet",
     "primaryGloss": "catch",
     "emotion": "attentive and ready, hands outstretched to take what comes",
@@ -243,5 +396,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "接 (jiē) has a wide range of meanings centered around coming into",
+        "why": "Just lists the four senses in prose; fails to contrast with 送 (to see off/drop off)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(receive) To receive something offered or handed over by someone.",
+        "why": "Taking something handed over or catching a ball can be combined at A2; phone/person are most common."
+      }
+    ],
+    "growth": 0.813
   }
 }

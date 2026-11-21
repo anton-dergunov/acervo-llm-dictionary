@@ -72,6 +72,73 @@
     "primaryGloss": "water",
     "emotion": "refreshing and clear, quenching a deep thirst on a hot day",
     "notes": [
+      "Uncountable in everyday use; the plural مِيَاه (miyāh) is used for bodies or supplies of water."
+    ],
+    "senses": [
+      {
+        "id": "81ahjbq5n7x7abq",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain and is used for drinking, cooking, and washing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "6n4wqzjdp5b04z4",
+            "text": "أَشْرَبُ المَاءَ البَارِدَ كُلَّ يَوْمٍ.",
+            "textLang": "ar",
+            "translation": "I drink cold water every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thirsty and relieved, enjoying a cold drink",
+            "note": null,
+            "matchedForm": "المَاءَ",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "مَاء",
+    "lemma": "مَاء",
+    "reading": null,
+    "ipa": "/maːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and clear, quenching a deep thirst on a hot day",
+    "notes": [
       "In Classical Arabic and formal contexts, the dual is مَاءَانِ and the plural is أَمْوَاهغ.",
       "Do not confuse with مَنْء (man') which is not a common word; water is one of the most basic vocabulary items."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "and the plural is أَمْوَاهغ.",
+        "why": "Corrupted Arabic spelling (أَمْوَاهغ instead of أَمْوَاه) and omits the common plural مِيَاه."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with مَنْء (man') which is not a common word",
+        "why": "Useless filler warning against an obscure word no beginner would ever encounter."
+      }
+    ],
+    "growth": 0.712
   }
 }

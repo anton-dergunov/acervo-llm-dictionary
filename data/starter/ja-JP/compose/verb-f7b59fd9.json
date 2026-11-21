@@ -69,6 +69,75 @@
     ],
     "status": "active",
     "shortGloss": "to live; to reside",
+    "primaryGloss": "to live",
+    "emotion": "matter-of-fact and settled, describing where someone has made their home",
+    "notes": [
+      "Takes the particle に (ni) to mark the place of residence, and is usually used in the -te iru form: 東京に住んでいます (I live in Tokyo).",
+      "Used for where one's home is. For staying temporarily at a hotel or someone's house, use 泊まる (tomaru)."
+    ],
+    "senses": [
+      {
+        "id": "goqcqr0i60c9m73",
+        "order": 0,
+        "definition": "To have your home in a particular place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to live",
+              "to reside"
+            ]
+          }
+        ],
+        "domain": "residence",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "wivno2ncbso7v4f",
+            "text": "私は東京に住んでいます。",
+            "textLang": "ja",
+            "translation": "I live in Tokyo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "clear and informative, sharing a simple personal fact",
+            "note": null,
+            "matchedForm": "住んで",
+            "matchedTranslationForm": "live"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "住む",
+    "lemma": "住む",
+    "reading": "すむ",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "to live; to reside",
     "primaryGloss": "live",
     "emotion": "matter-of-fact and settled, describing where someone has made their home",
     "notes": [
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[1]",
+        "quote": "it is common to use the te-form: 住んでいる (sunde iru).",
+        "why": "Calls 住んでいる the 'te-form' instead of '-te iru', and omits the required particle に."
+      }
+    ],
+    "growth": 1.089
   }
 }

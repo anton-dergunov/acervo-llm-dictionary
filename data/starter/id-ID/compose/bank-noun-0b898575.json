@@ -60,6 +60,73 @@
     "headword": "bank",
     "lemma": "bank",
     "reading": null,
+    "ipa": "/baŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bank",
+    "primaryGloss": "bank",
+    "emotion": "matter-of-fact and straightforward, stating a location",
+    "notes": [
+      "Pronounced /baŋ/ (like 'bang' in English); the final 'k' is usually silent."
+    ],
+    "senses": [
+      {
+        "id": "v1jbb5b9hpuofjn",
+        "order": 0,
+        "definition": "A financial institution where people keep money, withdraw cash, and take out loans.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "byu99ic6gd5lhq5",
+            "text": "Saya pergi ke bank untuk mengambil uang.",
+            "textLang": "id",
+            "translation": "I went to the bank to withdraw money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and routine, running a quick errand",
+            "note": null,
+            "matchedForm": "bank",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "bank",
+    "lemma": "bank",
+    "reading": null,
     "ipa": "/baŋk/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The land alongside or sloping down to a river or lake.",
+        "why": "English homonym confusion: Indonesian 'bank' never means riverbank ('tepi sungai')."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "it can also mean a riverbank (tepi sungai)",
+        "why": "Completely false; 'bank' in Indonesian only means the financial or storage institution."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Mereka duduk di bank sungai sambil menikmati pemandangan.",
+        "why": "Nonsensical calque of English 'riverbank'."
+      }
+    ],
+    "growth": 0.416
   }
 }

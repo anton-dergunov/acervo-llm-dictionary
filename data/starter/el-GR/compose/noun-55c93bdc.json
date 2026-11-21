@@ -73,6 +73,76 @@
     "primaryGloss": "café",
     "emotion": "relaxed and sociable, looking forward to a coffee with friends",
     "notes": [
+      "False friend: despite looking like English 'cafeteria', it means a modern café or coffee bar, not a self-service canteen.",
+      "Contrast with 'το καφενείο', a traditional Greek coffee house."
+    ],
+    "senses": [
+      {
+        "id": "k7qr6bp93fmdiah",
+        "order": 0,
+        "definition": "A modern café where people meet to drink coffee and other beverages.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "café",
+              "coffee shop"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "2mjb17b7lbyjsi0",
+            "text": "Πάμε σε μια καφετέρια για έναν καφέ.",
+            "textLang": "el",
+            "translation": "Let's go to a café for a coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and inviting, suggesting a pleasant break",
+            "note": null,
+            "matchedForm": "καφετέρια",
+            "matchedTranslationForm": "café"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η καφετέρια",
+    "lemma": "καφετέρια",
+    "reading": null,
+    "ipa": "/kafeˈteɾia/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "City",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "café; coffee shop",
+    "primaryGloss": "café",
+    "emotion": "relaxed and sociable, looking forward to a coffee with friends",
+    "notes": [
       "Used extensively in Greece to mean both a traditional coffee shop and a modern café.",
       "Do not confuse with 'το καφενείο', which is traditionally a men's coffee house often found in villages."
     ],
@@ -121,5 +191,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used extensively in Greece to mean both a traditional coffee shop and",
+        "why": "Contradicts note 1 and is false: a traditional Greek coffee house is 'το καφενείο', not 'η καφετέρια'."
+      }
+    ],
+    "growth": 1.087
   }
 }

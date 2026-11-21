@@ -58,6 +58,115 @@
     "headword": "bàn",
     "lemma": "bàn",
     "reading": null,
+    "ipa": "/ɓaːn˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "table; desk; goal",
+    "primaryGloss": "table",
+    "emotion": "steady and domestic, gathering around for a meal or a chat",
+    "notes": [
+      "Takes the classifier 'cái' or 'chiếc' for a piece of furniture."
+    ],
+    "senses": [
+      {
+        "id": "loe9qoe98y7d804",
+        "order": 0,
+        "definition": "A piece of furniture with a flat top and legs, used for eating, working, or putting things on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "table",
+              "desk"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "zqfcw1mbysvj6yr",
+            "text": "Chúng tôi ngồi quanh cái bàn trong bếp.",
+            "textLang": "vi",
+            "translation": "We sat around the table in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bàn",
+            "matchedTranslationForm": "table"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lycxpn5e89wux1y",
+        "order": 1,
+        "definition": "A point scored in a game such as football (often 'bàn thắng').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "goal",
+              "point"
+            ]
+          }
+        ],
+        "domain": "sports",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "354wnigkn7rv7ds",
+            "text": "Đội nhà đã ghi được hai bàn.",
+            "textLang": "vi",
+            "translation": "The home team scored two goals.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bàn",
+            "matchedTranslationForm": "goals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "bàn",
+    "lemma": "bàn",
+    "reading": null,
     "ipa": "/bàːn/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(discussion) To discuss or talk over a plan, problem, or topic",
+        "why": "Entry POS is noun; verb 'to discuss' is a different part of speech."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 'bàn' means table or desk. As a verb",
+        "why": "Merely restates the glosses of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi ngồi ở bàn làm việc cả ngày.",
+        "why": "Uses the compound 'bàn làm việc' or verb phrase 'làm việc', obscuring standalone noun 'bàn'."
+      }
+    ],
+    "growth": 0.875
   }
 }

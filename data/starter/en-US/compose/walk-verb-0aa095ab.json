@@ -74,6 +74,140 @@
     "primaryGloss": "caminar",
     "emotion": null,
     "notes": [
+      "La letra 'l' es muda; no se pronuncia.",
+      "Para caminatas largas por la naturaleza o la montaña (senderismo), se suele usar 'hike'."
+    ],
+    "senses": [
+      {
+        "id": "qlsug23rp0i7xxk",
+        "order": 0,
+        "definition": "Moverse o desplazarse de un lugar a otro dando pasos a pie.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "caminar",
+              "andar",
+              "ir a pie",
+              "pasear"
+            ]
+          }
+        ],
+        "domain": "movimiento",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "456heuxcbrn4ap8",
+            "text": "I like to walk to school every morning.",
+            "textLang": "en",
+            "translation": "Me gusta caminar a la escuela cada mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tranquilo y constante, disfrutando del aire de la mañana",
+            "note": null,
+            "matchedForm": "walk",
+            "matchedTranslationForm": "caminar"
+          },
+          {
+            "id": "vm1ycu0m711zr7a",
+            "text": "We decided to walk through the park after lunch.",
+            "textLang": "en",
+            "translation": "Decidimos pasear por el parque después de almorzar.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relajado y despreocupado, aprovechando un momento de descanso",
+            "note": null,
+            "matchedForm": "walk",
+            "matchedTranslationForm": "pasear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ggacueom2k55c6i",
+        "order": 1,
+        "definition": "Llevar a un animal a dar un paseo, o acompañar a alguien a pie hasta un lugar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pasear",
+              "sacar a pasear",
+              "acompañar"
+            ]
+          }
+        ],
+        "domain": "acompañar",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "w2jqybzcxfs6ird",
+            "text": "She walks her dog every evening.",
+            "textLang": "en",
+            "translation": "Ella saca a pasear a su perro todas las tardes.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "walks",
+            "matchedTranslationForm": "saca a pasear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "walk",
+    "lemma": "walk",
+    "reading": null,
+    "ipa": "/wɔːk/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "caminar; pasear",
+    "primaryGloss": "caminar",
+    "emotion": null,
+    "notes": [
       "A diferencia de 'run' (correr), 'walk' implica un ritmo pausado donde siempre tienes un pie en el suelo.",
       "No confundir con 'hike', que se usa específicamente para caminatas largas en la naturaleza o senderismo."
     ],
@@ -163,5 +297,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (movimiento) Moverse de un lugar a otro ... [1] (ocio) Pasear por placer",
+        "why": "Walking somewhere and walking in a park are the same intransitive verb sense in English."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common transitive sense 'to walk a dog / walk someone home' (pasear al perro / acompañar a pie)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia de 'run' (correr), 'walk' implica un ritmo pausado",
+        "why": "Explaining the difference between walking and running is unnecessary filler."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that the 'l' is silent in pronunciation (/wɔːk/ or /wɑːk/)."
+      }
+    ],
+    "growth": 1.074
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "shower",
     "emotion": "refreshed and clean, waking up under the warm water",
     "notes": [
+      "To say 'to take a shower', Turkish uses duş almak or duş yapmak."
+    ],
+    "senses": [
+      {
+        "id": "072495r8mtyk5wk",
+        "order": 0,
+        "definition": "An act of washing oneself under sprayed water, or the bathroom fixture used for this.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shower"
+            ]
+          }
+        ],
+        "domain": "washing",
+        "emoji": "🚿",
+        "examples": [
+          {
+            "id": "436zrkwvs3gcd1c",
+            "text": "Sabahları soğuk bir duş alıyorum.",
+            "textLang": "tr",
+            "translation": "I take a cold shower in the mornings.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "energetic and bracing, starting the day with a wake-up splash",
+            "note": null,
+            "matchedForm": "duş",
+            "matchedTranslationForm": "shower"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "duş",
+    "lemma": "duş",
+    "reading": null,
+    "ipa": "/duʃ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚿",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "shower",
+    "primaryGloss": "shower",
+    "emotion": "refreshed and clean, waking up under the warm water",
+    "notes": [
       "Borrowed from French 'douche', 'duş' is used both for the bathroom fixture and the act of washing oneself under it."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Borrowed from French 'douche', 'duş' is used both for the bathroom fixture",
+        "why": "Etymology and obvious usage are filler; misses essential collocations 'duş almak' and 'duş yapmak'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Water sprayed on you to wash.",
+        "why": "Defines the water rather than the act of washing or the bathroom fixture."
+      }
+    ],
+    "growth": 1.022
   }
 }

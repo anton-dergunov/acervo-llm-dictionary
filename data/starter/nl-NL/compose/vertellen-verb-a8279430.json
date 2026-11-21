@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to tell",
+    "primaryGloss": "to tell",
+    "emotion": "warm and engaging, sharing a story with someone interested",
+    "notes": [
+      "Takes the person being told as an indirect object or with 'aan' (e.g., 'vertel het mij' or 'vertel het aan mij'), and often takes 'over' for the topic.",
+      "Do not confuse with 'zeggen' (to say), which focuses on the words spoken rather than sharing information or a story."
+    ],
+    "senses": [
+      {
+        "id": "grewkjquvy5bohh",
+        "order": 0,
+        "definition": "To give information to someone in words, or to relate a story.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to tell",
+              "to relate"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "eep72sbur1rksj7",
+            "text": "Kun je mij dat verhaal nog eens vertellen?",
+            "textLang": "nl",
+            "translation": "Can you tell me that story again?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and eager to hear a good story again",
+            "note": null,
+            "matchedForm": "vertellen",
+            "matchedTranslationForm": "tell"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "vertellen",
+    "lemma": "vertellen",
+    "reading": null,
+    "ipa": "/vərˈtɛlə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to tell; to narrate",
     "primaryGloss": "to tell",
     "emotion": "warm and engaging, sharing a story with someone interested",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To narrate a fictional story, book, or film to an audience.",
+        "why": "Telling a story is already covered by sense 0 and its example."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or simply the direct object.",
+        "why": "The person being told is the indirect object, not the direct object."
+      }
+    ],
+    "growth": 0.634
   }
 }

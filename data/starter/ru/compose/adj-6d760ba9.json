@@ -58,6 +58,74 @@
     "headword": "застенчивый",
     "lemma": "застенчивый",
     "reading": null,
+    "ipa": "/zɐˈstʲenʲtɕɪvɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😳",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "shy; timid",
+    "primaryGloss": "shy",
+    "emotion": "quiet and hesitant, softly speaking while looking down",
+    "notes": [
+      "Do not confuse with 'скромный' (modest), which is about not boasting rather than feeling nervous around people."
+    ],
+    "senses": [
+      {
+        "id": "kypso0wukm8cc1m",
+        "order": 0,
+        "definition": "Nervous or uncomfortable with other people, especially strangers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shy",
+              "timid"
+            ]
+          }
+        ],
+        "domain": "personality",
+        "emoji": "😳",
+        "examples": [
+          {
+            "id": "ylk23tzrtxxnv86",
+            "text": "В детстве он был очень застенчивым мальчиком.",
+            "textLang": "ru",
+            "translation": "As a child, he was a very shy boy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "застенчивым",
+            "matchedTranslationForm": "shy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "застенчивый",
+    "lemma": "застенчивый",
+    "reading": null,
     "ipa": "/zɐˈstʲenj.tɕɪ.vɨj/",
     "pos": "adj",
     "gender": null,
@@ -121,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/zɐˈstʲenj.tɕɪ.vɨj/",
+        "why": "Corrupt IPA symbol 'nj' instead of palatalization mark 'nʲ'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often used to describe children or quiet adults who avoid drawing attention",
+        "why": "Filler note that merely restates the meaning."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он был очень застенчивый мальчик и редко смотрел людям в глаза.",
+        "why": "Instrumental case 'застенчивым мальчиком' is much more natural after 'был'."
+      }
+    ],
+    "growth": 0.623
   }
 }

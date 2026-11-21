@@ -72,6 +72,96 @@
     "primaryGloss": "glasses",
     "emotion": "a practical and clarifying moment, like finally seeing things clearly",
     "notes": [
+      "In standard Portuguese, 'óculos' is plural even for a single pair ('Os meus óculos são novos'). In casual Brazilian speech, however, people very often treat it as singular ('O meu óculos').",
+      "Use 'óculos de grau' for prescription glasses and 'óculos de sol' for sunglasses."
+    ],
+    "senses": [
+      {
+        "id": "9mdgmg10lxkx4yg",
+        "order": 0,
+        "definition": "A pair of lenses set in a frame worn on the face to correct vision or protect the eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "eyeglasses"
+            ]
+          }
+        ],
+        "domain": "eyewear",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "3z4utuzdbwvxrtq",
+            "text": "Eu preciso dos meus óculos para ler este livro.",
+            "textLang": "pt",
+            "translation": "I need my glasses to read this book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit frustrated by small print, then relieved when finding the glasses",
+            "note": null,
+            "matchedForm": "óculos",
+            "matchedTranslationForm": "glasses"
+          },
+          {
+            "id": "3waenwj7hiyoq1h",
+            "text": "O sol está forte, vou colocar os meus óculos de sol.",
+            "textLang": "pt",
+            "translation": "The sun is strong, I'm going to put on my sunglasses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and preparing for a sunny day outdoors",
+            "note": null,
+            "matchedForm": "óculos",
+            "matchedTranslationForm": "sunglasses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "os óculos",
+    "lemma": "óculos",
+    "reading": null,
+    "ipa": "/ˈɔ.ku.lus/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "glasses; eyeglasses",
+    "primaryGloss": "glasses",
+    "emotion": "a practical and clarifying moment, like finally seeing things clearly",
+    "notes": [
       "In Portuguese, 'óculos' is always plural, even when referring to a single pair.",
       "Remember to use the plural verb form with it: 'Os óculos são novos' (The glasses are new)."
     ],
@@ -160,5 +250,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A frame with dark lenses worn to protect the eyes from",
+        "why": "'Óculos de sol' is a compound; 'óculos' has one sense covering spectacles and sunglasses."
+      }
+    ],
+    "growth": 1.096
   }
 }

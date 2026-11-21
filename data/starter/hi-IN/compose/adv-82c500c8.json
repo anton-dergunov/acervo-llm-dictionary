@@ -58,6 +58,74 @@
     "headword": "लेट",
     "lemma": "लेट",
     "reading": null,
+    "ipa": "/leːʈ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "colloquial",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "late",
+    "primaryGloss": "late",
+    "emotion": "rushed and apologetic, looking at a watch and hurrying",
+    "notes": [
+      "Very common English loanword in everyday speech; the native Hindi equivalent is देर से (der se) or देरी से (derī se).",
+      "Do not confuse with the native verb stem लेट- in लेटना (leṭnā, 'to lie down')."
+    ],
+    "senses": [
+      {
+        "id": "re23l6vezbd0n13",
+        "order": 0,
+        "definition": "After the expected or usual time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "late"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "hehxdewk2unjbux",
+            "text": "मैं आज ऑफिस के लिए लेट हो गया।",
+            "textLang": "hi",
+            "translation": "I was late for the office today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and flustered, explaining a delay",
+            "note": null,
+            "matchedForm": "लेट",
+            "matchedTranslationForm": "late"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "लेट",
+    "lemma": "लेट",
+    "reading": null,
     "ipa": "/leʈ/",
     "pos": "adv",
     "gender": null,
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/leʈ/",
+        "why": "vowel ए is long /eː/ in Hindi (/leːʈ/)"
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I got late for office today.",
+        "why": "unnatural Indianism in standard English; should be 'I was late for the office today'"
+      }
+    ],
+    "growth": 0.983
   }
 }

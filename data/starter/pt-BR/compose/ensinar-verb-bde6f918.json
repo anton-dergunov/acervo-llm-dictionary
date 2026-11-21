@@ -58,6 +58,97 @@
     "headword": "ensinar",
     "lemma": "ensinar",
     "reading": null,
+    "ipa": "/ẽ.si.ˈna(ʁ)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to teach; to show how",
+    "primaryGloss": "teach",
+    "emotion": "patient and encouraging, like a mentor sharing a helpful piece of knowledge",
+    "notes": [
+      "Followed by the preposition 'a' before a verb: 'ensinar alguém a fazer algo' (to teach someone to do something).",
+      "Do not confuse with 'aprender' (to learn)."
+    ],
+    "senses": [
+      {
+        "id": "cvcuhbxyn4sjmjq",
+        "order": 0,
+        "definition": "To help someone learn a subject or skill, or show them how to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "teach",
+              "instruct",
+              "show how"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "👩‍🏫",
+        "examples": [
+          {
+            "id": "mln8zxt1uqcbwo3",
+            "text": "Ela gosta de ensinar matemática para as crianças.",
+            "textLang": "pt",
+            "translation": "She likes to teach math to the children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and dedicated, feeling a sense of purpose in her work",
+            "note": null,
+            "matchedForm": "ensinar",
+            "matchedTranslationForm": "teach"
+          },
+          {
+            "id": "hh16w4trgyaj9xh",
+            "text": "Você pode me ensinar a dirigir?",
+            "textLang": "pt",
+            "translation": "Can you teach me how to drive?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ensinar",
+            "matchedTranslationForm": "teach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "ensinar",
+    "lemma": "ensinar",
+    "reading": null,
     "ipa": "/ẽ.zi.ˈna(ʁ)/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ẽ.zi.ˈna(ʁ)/",
+        "why": "'s' after a nasal vowel is voiceless /s/, not /z/: /ẽ.si.ˈna(ʁ)/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(demonstration) To show someone how to do something by demonstrating it.",
+        "why": "Showing someone how to do something is the same core sense as teaching; oversplit."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'ensinar' when you are formally instructing someone or helping them",
+        "why": "Restates the definition without adding grammatical or usage information (like 'ensinar a + infinitive')."
+      }
+    ],
+    "growth": 0.822
   }
 }

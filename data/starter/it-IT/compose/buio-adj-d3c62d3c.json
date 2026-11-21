@@ -58,6 +58,93 @@
     "headword": "buio",
     "lemma": "buio",
     "reading": null,
+    "ipa": "/ˈbu.jo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dark",
+    "primaryGloss": "dark",
+    "emotion": "hesitant and cautious, squinting to see in the shadows",
+    "notes": [
+      "Used only for the absence of light (e.g., 'una stanza buia', 'è buio fuori'). To describe dark colors, use 'scuro' instead (e.g., 'blu scuro').",
+      "Often used as a masculine noun (il buio) meaning 'the dark' or 'darkness' (e.g., 'avere paura del buio', to be afraid of the dark)."
+    ],
+    "senses": [
+      {
+        "id": "977zgpvny2558qh",
+        "order": 0,
+        "definition": "Having little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "dim"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "iiqv505pqxkqcbn",
+            "text": "La stanza è buia e non si vede nulla.",
+            "textLang": "it",
+            "translation": "The room is dark and you can't see anything.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fearful and whispering, uneasy in the shadows",
+            "note": null,
+            "matchedForm": "buia",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "977zgpvny2558qh",
+      "from": "Con poca o ninguna luz.",
+      "to": "Having very little light.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    },
+    {
+      "sense": "h9tta4kpqby9tsh",
+      "from": "Di colore scuro.",
+      "to": "Having a dark color.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:21Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "buio",
+    "lemma": "buio",
+    "reading": null,
     "ipa": "/ˈbuːjo/",
     "pos": "adj",
     "gender": null,
@@ -161,22 +248,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "977zgpvny2558qh",
-      "from": "Con poca o ninguna luz.",
-      "to": "Having very little light.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    },
-    {
-      "sense": "h9tta4kpqby9tsh",
-      "from": "Di colore scuro.",
-      "to": "Having a dark color.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:21Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(color) Having a dark color.",
+        "why": "'Buio' means dark (without light); for dark colors Italian uses 'scuro', never 'buio'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ho comprato un cappotto blu buio.",
+        "why": "Ungrammatical/unidiomatic in Italian; 'dark blue' is 'blu scuro', never 'blu buio'."
+      }
+    ],
+    "growth": 0.997
+  }
 }

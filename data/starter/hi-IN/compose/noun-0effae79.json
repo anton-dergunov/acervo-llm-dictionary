@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "pain, ache; sorrow",
+    "primaryGloss": "pain",
+    "emotion": "a dull, steady throb that makes it hard to focus",
+    "notes": [
+      "Often used with होना ('to happen/be') to express feeling pain: मुझे दर्द हो रहा है ('I am in pain')."
+    ],
+    "senses": [
+      {
+        "id": "z1r8cv48c5afczb",
+        "order": 0,
+        "definition": "A physical feeling of discomfort or suffering in a part of the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "ache"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "imkkdtqw91r2l3m",
+            "text": "मेरे सिर में बहुत दर्द है।",
+            "textLang": "hi",
+            "translation": "I have a bad headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and tired, rubbing one's temples while speaking",
+            "note": null,
+            "matchedForm": "दर्द",
+            "matchedTranslationForm": "headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2luaog715iu1wp1",
+        "order": 1,
+        "definition": "A deep feeling of sadness or emotional distress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pain",
+              "sorrow",
+              "grief"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "dr69q86yqgnntj6",
+            "text": "उसकी बातों में बहुत दर्द था।",
+            "textLang": "hi",
+            "translation": "There was a lot of pain in his words.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and reflective, moved by the weight of someone's story",
+            "note": null,
+            "matchedForm": "दर्द",
+            "matchedTranslationForm": "pain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "दर्द",
+    "lemma": "दर्द",
+    "reading": null,
+    "ipa": "/d̪əɾd̪/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "pain; ache",
     "primaryGloss": "pain",
     "emotion": "a dull, steady throb that makes it hard to focus",
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pain; ache",
+        "why": "Does not cover sense 1 (sorrow, grief)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "I have a lot of pain in my head.",
+        "why": "Calqued translation; natural English is 'I have a bad headache'."
+      }
+    ],
+    "growth": 0.804
   }
 }

@@ -60,6 +60,113 @@
     "headword": "sentarse",
     "lemma": "sentar",
     "reading": null,
+    "ipa": "/senˈtaɾ.se/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sit down",
+    "primaryGloss": "sit down",
+    "emotion": null,
+    "notes": [
+      "Stem-changing verb (e → ie) in the present tense: me siento, te sientas, se sienta, nos sentamos, os sentáis, se sientan."
+    ],
+    "senses": [
+      {
+        "id": "bak47olq3zibbew",
+        "order": 0,
+        "definition": "To lower oneself into a sitting position, usually on a chair or seat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sit down",
+              "take a seat"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "o8ugfy39ei5fcpv",
+            "text": "Voy a sentarme en esta silla porque estoy muy cansado.",
+            "textLang": "es",
+            "translation": "I am going to sit down on this chair because I am very tired.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sentarme",
+            "matchedTranslationForm": "sit down"
+          },
+          {
+            "id": "6rikqzqn5ms70wv",
+            "text": "¿Dónde quieres sentarte?",
+            "textLang": "es",
+            "translation": "Where do you want to sit?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sentarte",
+            "matchedTranslationForm": "sit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "bak47olq3zibbew",
+      "from": "Adoptar una posición en la que el cuerpo descansa sobre las nalgas, generalmente en una silla o banco.",
+      "to": "To take a position where the body rests on the bottom, usually on a chair or bench.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    },
+    {
+      "sense": "ubr7rvw3awdo7r5",
+      "from": "Dicho de una ropa o de algo que se lleva puesto, quedar bien o mal en el cuerpo.",
+      "to": "To fit well or poorly on the body, used of clothing or something worn.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:08:20Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "sentarse",
+    "lemma": "sentar",
+    "reading": null,
     "ipa": "/senˈtaɾse/",
     "pos": "verb",
     "gender": null,
@@ -163,22 +270,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "bak47olq3zibbew",
-      "from": "Adoptar una posición en la que el cuerpo descansa sobre las nalgas, generalmente en una silla o banco.",
-      "to": "To take a position where the body rests on the bottom, usually on a chair or bench.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    },
-    {
-      "sense": "ubr7rvw3awdo7r5",
-      "from": "Dicho de una ropa o de algo que se lleva puesto, quedar bien o mal en el cuerpo.",
-      "to": "To fit well or poorly on the body, used of clothing or something worn.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:08:20Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Voy a sentarse en esta silla porque estoy muy cansado.",
+        "why": "Ungrammatical: 'voy a' (1st person) requires 'sentarme', not 'sentarse'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To fit well or poorly on the body, used of clothing",
+        "why": "This is a sense of non-reflexive 'sentar' (sentarle bien/mal a alguien), not reflexive 'sentarse'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial e → ie stem change in the present tense (me siento)."
+      }
+    ],
+    "growth": 0.802
+  }
 }

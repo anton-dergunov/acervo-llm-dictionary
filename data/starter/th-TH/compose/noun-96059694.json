@@ -58,6 +58,115 @@
     "headword": "อากาศ",
     "lemma": "อากาศ",
     "reading": null,
+    "ipa": "/ʔaː˧.kaːt̚˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "weather; air",
+    "primaryGloss": "weather",
+    "emotion": "looking up at the sky, calm and observant",
+    "notes": [
+      "Final ศ is pronounced like a final /t/ stop; often paired with สภาพ in สภาพอากาศ ('weather conditions')."
+    ],
+    "senses": [
+      {
+        "id": "t36fisz58300wl9",
+        "order": 0,
+        "definition": "The conditions outside at a particular time, such as heat, coolness, rain, or sunshine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather",
+              "climate"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "hrxgbjlmfcxzlsd",
+            "text": "วันนี้อากาศดีมาก เหมาะกับการไปเดินเล่น",
+            "textLang": "th",
+            "translation": "The weather is very nice today, great for going for a walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and relaxed, enjoying a sunny day outdoors",
+            "note": null,
+            "matchedForm": "อากาศ",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8fg2mtrije77vwc",
+        "order": 1,
+        "definition": "The invisible gas around the earth that people and animals breathe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "air",
+              "atmosphere"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "wwfufwiz46v57hh",
+            "text": "เปิดหน้าต่างเพื่อให้มีอากาศบริสุทธิ์เข้ามา",
+            "textLang": "th",
+            "translation": "Open the window to let fresh air in.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "อากาศ",
+            "matchedTranslationForm": "air"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "อากาศ",
+    "lemma": "อากาศ",
+    "reading": null,
     "ipa": "/ʔaː˨˩.kaːt̚˥˩/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʔaː˨˩.kaːt̚˥˩/",
+        "why": "Wrong tones for อากาศ: อา is mid tone /˧/ and กาศ is low tone /˨˩/."
+      },
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[1].examples[0].text",
+        "quote": "เปิดหน้าต่างเพื่อให้มีอากาศ fresh เข้ามา",
+        "why": "Untranslated English word 'fresh' mixed into the Thai example sentence."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "[0] อากาศ covers both 'the air we breathe'",
+        "why": "Note [0] restates the senses; note [1] compares unrelated words for seasons."
+      }
+    ],
+    "growth": 0.796
   }
 }

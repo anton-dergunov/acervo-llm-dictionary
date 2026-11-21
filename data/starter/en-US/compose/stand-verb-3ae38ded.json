@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "estar de pie; ponerse de pie; soportar",
+    "primaryGloss": "estar de pie",
+    "emotion": "firm and steady, planting both feet firmly on the ground",
+    "notes": [
+      "Verbo irregular: pasado y participio 'stood' (/stʊd/).",
+      "Para la acción de levantarse se suele añadir 'up' ('stand up'). En el sentido de 'soportar', se usa casi siempre en frases negativas con 'can't'."
+    ],
+    "senses": [
+      {
+        "id": "x6nx9gfivb2nbq8",
+        "order": 0,
+        "definition": "Estar en posición vertical sobre los pies, o levantarse para quedar en esa posición.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "estar de pie",
+              "ponerse de pie",
+              "pararse"
+            ]
+          }
+        ],
+        "domain": "postura",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "9f3dv3zaha4cnhk",
+            "text": "We had to stand on the bus because there were no seats.",
+            "textLang": "en",
+            "translation": "Tuvimos que ir de pie en el autobús porque no había asientos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "stand",
+            "matchedTranslationForm": "de pie"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uenwa8gt7c1bu1g",
+        "order": 1,
+        "definition": "Tolerar o soportar algo o a alguien desagradable.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "soportar",
+              "aguantar",
+              "tolerar"
+            ]
+          }
+        ],
+        "domain": "tolerancia",
+        "emoji": "😣",
+        "examples": [
+          {
+            "id": "artuulcr5ubjnez",
+            "text": "I can't stand this loud noise anymore.",
+            "textLang": "en",
+            "translation": "No puedo soportar este ruido fuerte más tiempo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and annoyed, losing patience with something loud",
+            "note": null,
+            "matchedForm": "stand",
+            "matchedTranslationForm": "soportar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "stand",
+    "lemma": "stand",
+    "reading": null,
+    "ipa": "/stænd/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "estar de pie; soportar; un puesto",
     "primaryGloss": "estar de pie",
     "emotion": "firm and steady, planting both feet firmly on the ground",
@@ -203,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "(shop) Mueble o pequeño establecimiento comercial donde se venden cosas.",
+        "why": "Sense 2 is a noun, but the entry's POS is verb."
+      },
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[1].definition",
+        "quote": "Tolorar o soportar algo o a alguien desagradable.",
+        "why": "Typo in Spanish definition: 'Tolorar' instead of 'Tolerar'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Please stand up when the teacher enters the room.",
+        "why": "Definition is 'estar de pie', but example uses phrasal verb 'stand up' ('ponerse de pie')."
+      }
+    ],
+    "growth": 1.023
   }
 }

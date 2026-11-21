@@ -68,6 +68,91 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "stomach",
+    "primaryGloss": "stomach",
+    "emotion": "uncomfortable and heavy after eating too much, rubbing the belly",
+    "notes": [
+      "Unlike English 'stomach', 'estómago' refers specifically to the internal organ (e.g. for digestion or stomach ache). For the outside of the belly or tummy, use 'la barriga', 'la tripa', or 'el vientre'."
+    ],
+    "senses": [
+      {
+        "id": "4lqpuhl4o8mkr54",
+        "order": 0,
+        "definition": "The organ inside the body where food goes and is digested.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stomach"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🫀",
+        "examples": [
+          {
+            "id": "x8d8iqf8dv7d7k6",
+            "text": "Me duele el estómago después de comer tanto.",
+            "textLang": "es",
+            "translation": "My stomach hurts after eating so much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pained and regretting the heavy meal, holding the abdomen",
+            "note": null,
+            "matchedForm": "estómago",
+            "matchedTranslationForm": "stomach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "4lqpuhl4o8mkr54",
+      "from": "Órgano del cuerpo donde se digiere la comida.",
+      "to": "The organ in the body where food is digested.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    },
+    {
+      "sense": "y4v58bcr9srgfbu",
+      "from": "La parte del cuerpo donde está este órgano; la barriga.",
+      "to": "The part of the body where this organ is located.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el estómago",
+    "lemma": "estómago",
+    "reading": null,
+    "ipa": "/esˈto.ma.ɣo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫄",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "stomach; belly",
     "primaryGloss": "stomach",
     "emotion": "uncomfortable and heavy after eating too much, rubbing the belly",
@@ -161,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "4lqpuhl4o8mkr54",
-      "from": "Órgano del cuerpo donde se digiere la comida.",
-      "to": "The organ in the body where food is digested.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    },
-    {
-      "sense": "y4v58bcr9srgfbu",
-      "from": "La parte del cuerpo donde está este órgano; la barriga.",
-      "to": "The part of the body where this organ is located.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "The part of the body where this organ is located.",
+        "why": "Spanish 'estómago' is the internal organ, not the outer belly ('barriga', 'tripa', 'vientre')."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "El gato tiene el estómago suave y caliente.",
+        "why": "Unnatural in Spanish; a cat's external belly is 'barriga' or 'tripa', never 'estómago'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used both for the internal organ and generally for the belly",
+        "why": "False claim; English uses 'stomach' for the outer belly, but Spanish uses 'barriga' or 'tripa'."
+      }
+    ],
+    "growth": 0.981
+  }
 }

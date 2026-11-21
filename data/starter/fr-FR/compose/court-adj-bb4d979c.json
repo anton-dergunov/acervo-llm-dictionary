@@ -72,6 +72,132 @@
     "primaryGloss": "short",
     "emotion": "matter-of-fact and direct, measuring a length",
     "notes": [
+      "The final 't' is silent in the masculine ('court' /kuʁ/), but pronounced in the feminine ('courte' /kuʁt/)."
+    ],
+    "senses": [
+      {
+        "id": "lxtn3l8hfgsoxs8",
+        "order": 0,
+        "definition": "Measuring a small distance from one end to the other.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "short"
+            ]
+          }
+        ],
+        "domain": "length",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "oqesymp3i84exj2",
+            "text": "Elle a les cheveux courts.",
+            "textLang": "fr",
+            "translation": "She has short hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "courts",
+            "matchedTranslationForm": "short"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u6y94nywjd477m1",
+        "order": 1,
+        "definition": "Lasting for a small amount of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "short",
+              "brief"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⏱️",
+        "examples": [
+          {
+            "id": "9x45nar7zg27fel",
+            "text": "Nous avons fait une courte pause avant de continuer.",
+            "textLang": "fr",
+            "translation": "We took a short break before continuing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "courte",
+            "matchedTranslationForm": "short"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "lxtn3l8hfgsoxs8",
+      "from": "Qui a une faible longueur dans l'espace.",
+      "to": "Having a small distance from one end to the other in space.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:19Z"
+    },
+    {
+      "sense": "u6y94nywjd477m1",
+      "from": "Qui a une faible durée dans le temps.",
+      "to": "Lasting for only a short period of time.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:14:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "court",
+    "lemma": "court",
+    "reading": null,
+    "ipa": "/kuʁ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "short; brief",
+    "primaryGloss": "short",
+    "emotion": "matter-of-fact and direct, measuring a length",
+    "notes": [
       "Opposite of 'long'.",
       "Feminine form is 'courte'."
     ],
@@ -161,22 +287,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "lxtn3l8hfgsoxs8",
-      "from": "Qui a une faible longueur dans l'espace.",
-      "to": "Having a small distance from one end to the other in space.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:19Z"
-    },
-    {
-      "sense": "u6y94nywjd477m1",
-      "from": "Qui a une faible durée dans le temps.",
-      "to": "Lasting for only a short period of time.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:14:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "C'est un voyage court.",
+        "why": "Natural French places 'court' before the noun in this sense, or uses a clearer time noun."
+      }
+    ],
+    "growth": 1.34
+  }
 }

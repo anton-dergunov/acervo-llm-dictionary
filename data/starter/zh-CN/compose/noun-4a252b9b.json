@@ -68,6 +68,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "wind",
+    "primaryGloss": "wind",
+    "emotion": "a refreshing, cool, and invisible presence felt against the skin",
+    "notes": [
+      "To say 'the wind is blowing', Chinese uses the verb 刮 (guā): 刮风 (guā fēng).",
+      "Also appears as a root meaning 'style' or 'custom' in common compound words like 风格 (fēnggé, style) and 风俗 (fēngsú, custom)."
+    ],
+    "senses": [
+      {
+        "id": "v06z6tx1vxzin4u",
+        "order": 0,
+        "definition": "Air that moves naturally outside.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wind"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌬️",
+        "examples": [
+          {
+            "id": "p0ehu3v2k3b8cdq",
+            "text": "今天风很大。",
+            "textLang": "zh",
+            "translation": "The wind is very strong today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and a little wary of the weather",
+            "note": null,
+            "matchedForm": "风",
+            "matchedTranslationForm": "wind"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "风",
+    "lemma": "风",
+    "reading": "fēng",
+    "ipa": "/fəŋ˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌬️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "wind; style; custom",
     "primaryGloss": "wind",
     "emotion": "a refreshing, cool, and invisible presence felt against the skin",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A prevailing trend, custom, or social atmosphere.",
+        "why": "Bound morpheme sense (as in 校风, 风俗); standalone 风 at A2 only means 'wind'."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "我们要保持良好的校风。",
+        "why": "Uses the separate compound word 校风, not the standalone noun 风."
+      }
+    ],
+    "growth": 0.581
   }
 }

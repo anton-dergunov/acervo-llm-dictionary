@@ -72,6 +72,74 @@
     "primaryGloss": "cheese",
     "emotion": "mouth-watering and eager, thinking about a tasty snack",
     "notes": [
+      "Commonly used in the phrases 'ser żółty' (hard yellow cheese) and 'ser biały' or 'twaróg' (fresh curd cheese).",
+      "Takes the genitive/partitive ending '-a' (e.g. 'kawałek sera' — a piece of cheese)."
+    ],
+    "senses": [
+      {
+        "id": "epjm83i2ao0ivmc",
+        "order": 0,
+        "definition": "A food made from milk, can be hard or soft and is usually yellow or white.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheese"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧀",
+        "examples": [
+          {
+            "id": "hidrvno8gmr6da4",
+            "text": "Kupiłem w sklepie żółty ser na kanapki.",
+            "textLang": "pl",
+            "translation": "I bought yellow cheese at the store for sandwiches.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and hungry, talking about a good meal",
+            "note": null,
+            "matchedForm": "ser",
+            "matchedTranslationForm": "cheese"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ser",
+    "lemma": "ser",
+    "reading": null,
+    "ipa": "/sɛr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧀",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cheese",
+    "primaryGloss": "cheese",
+    "emotion": "mouth-watering and eager, thinking about a tasty snack",
+    "notes": [
       "Do not confuse 'ser' (cheese) with the verb 'być', which has forms like 'jest' (is), though in some Slavic languages they share roots.",
       "Poland has a huge variety of cheeses, both yellow (żółty) and white (biały / twaróg)."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Do not confuse 'ser' (cheese) with the verb 'być', which has forms",
+        "why": "Bizarre hallucination; 'ser' and 'być'/'jest' do not look alike or share roots."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Poland has a huge variety of cheeses, both yellow (żółty) and white",
+        "why": "Trivial cultural filler, though mentioning 'ser żółty' vs 'ser biały' as collocations is useful."
+      }
+    ],
+    "growth": 0.92
   }
 }

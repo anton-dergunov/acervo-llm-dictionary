@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sit; to fit",
+    "primaryGloss": "sit",
+    "emotion": "relaxed and still, settled into a chair or place after moving",
+    "notes": [
+      "'sitzen' describes the state of being seated (takes a dative preposition, e.g., 'auf dem Stuhl'). Use 'sich setzen' for the action of sitting down.",
+      "Irregular verb: er sitzt, saß, hat gesessen (in Southern German also 'ist gesessen')."
+    ],
+    "senses": [
+      {
+        "id": "nx5hs1z7q6gacx7",
+        "order": 0,
+        "definition": "To rest on a chair, sofa, or other surface in a seated position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sit",
+              "be seated"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "jey0zn7acq0jy7d",
+            "text": "Ich sitze gerne auf diesem Stuhl.",
+            "textLang": "de",
+            "translation": "I like to sit on this chair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying a comfortable moment",
+            "note": null,
+            "matchedForm": "sitze",
+            "matchedTranslationForm": "sit"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "em5y251y8atj6q4",
+        "order": 1,
+        "definition": "Of clothing: to fit the body in a particular way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fit"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👗",
+        "examples": [
+          {
+            "id": "2le26ozm4vbbl01",
+            "text": "Das Kleid sitzt perfekt.",
+            "textLang": "de",
+            "translation": "The dress fits perfectly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and satisfied with how something looks",
+            "note": null,
+            "matchedForm": "sitzt",
+            "matchedTranslationForm": "fits"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "sitzen",
+    "lemma": "sitzen",
+    "reading": null,
+    "ipa": "/ˈzɪtsən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sit; to be located",
     "primaryGloss": "sit",
     "emotion": "relaxed and still, settled into a chair or place after moving",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sit; to be located",
+        "why": "Omits the primary 'fit' meaning of sense 1 and uses 'be located' instead."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To fit or be positioned in a certain way on the body or in a location.",
+        "why": "Conflates how clothes fit with general location, which is unhelpful for A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In German, 'sitzen' is also commonly used to describe where things are located",
+        "why": "Restates sense 1 instead of giving irregular principal parts and auxiliary."
+      }
+    ],
+    "growth": 0.8
   }
 }

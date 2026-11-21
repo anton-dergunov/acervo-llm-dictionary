@@ -68,6 +68,73 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "blood",
+    "primaryGloss": "blood",
+    "emotion": "somewhat alarming and visceral, reflecting the gravity of an injury or illness",
+    "notes": [
+      "Commonly used with 나다 ('to come out', i.e., to bleed) or 흘리다 ('to shed blood'). In formal or medical contexts, the Sino-Korean word 혈액 is used."
+    ],
+    "senses": [
+      {
+        "id": "nvmzog9jvly4spo",
+        "order": 0,
+        "definition": "The red liquid that flows inside the bodies of humans and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blood"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩸",
+        "examples": [
+          {
+            "id": "90okz237gid8mrd",
+            "text": "넘어져서 무릎에서 피가 나요.",
+            "textLang": "ko",
+            "translation": "I fell down and my knee is bleeding.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "distressed and slightly panicked, reporting an injury to someone nearby",
+            "note": null,
+            "matchedForm": "피",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "피",
+    "lemma": "피",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩸",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "blood; shed (husk/grain)",
     "primaryGloss": "blood",
     "emotion": "somewhat alarming and visceral, reflecting the gravity of an injury or illness",
@@ -137,5 +204,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The husk or outer shell of grains, especially of barnyard millet",
+        "why": "피 does not mean husk; as anunrelated homonym it is a marginal weed/millet."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "shortGloss",
+        "quote": "blood; shed (husk/grain)",
+        "why": "'shed' and 'husk' are wrong translations for 피."
+      }
+    ],
+    "growth": 0.636
   }
 }

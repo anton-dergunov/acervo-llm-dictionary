@@ -68,6 +68,97 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "incorrect; wrong",
+    "primaryGloss": "incorrect",
+    "emotion": "certain of the fact, pointing out a mistake directly",
+    "notes": [
+      "More formal than zły (wrong/bad); often used with nouns like odpowiedź (answer), decyzja (decision), or koło (błędne koło — vicious circle)."
+    ],
+    "senses": [
+      {
+        "id": "hhofyze4umn0gg9",
+        "order": 0,
+        "definition": "Not correct; containing or based on a mistake.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "incorrect",
+              "wrong",
+              "erroneous",
+              "mistaken"
+            ]
+          }
+        ],
+        "domain": "accuracy",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "gsndu1uxd2v47uk",
+            "text": "Twoje obliczenia są błędne.",
+            "textLang": "pl",
+            "translation": "Your calculations are incorrect.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, pointing directly to the error",
+            "note": null,
+            "matchedForm": "błędne",
+            "matchedTranslationForm": "incorrect"
+          },
+          {
+            "id": "pl1wtoy5wdrokf3",
+            "text": "To była błędna decyzja.",
+            "textLang": "pl",
+            "translation": "That was a wrong decision.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "błędna",
+            "matchedTranslationForm": "wrong"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "błędny",
+    "lemma": "błędny",
+    "reading": null,
+    "ipa": "/ˈbwɛnd.nɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "incorrect; erroneous; misled",
     "primaryGloss": "incorrect",
     "emotion": "certain of the fact, pointing out a mistake directly",
@@ -162,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(direction) Led astray, wandering, or taking a wrong direction.",
+        "why": "Archaic/idiomatic sense ('errant'); moreover, its example ('błędny trop') actually shows sense 0 ('false/wrong')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Szedł błędnym tropem przez całe śledztwo.",
+        "why": "'Błędny trop' means 'false/wrong lead' (sense 0), not 'misled' or 'wandering'."
+      }
+    ],
+    "growth": 0.824
   }
 }

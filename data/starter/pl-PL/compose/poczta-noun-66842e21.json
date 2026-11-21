@@ -68,6 +68,155 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "post office; mail, post; email",
+    "primaryGloss": "post office",
+    "emotion": "waiting in line with a stack of envelopes, calm and slightly impatient",
+    "notes": [
+      "For the building, use the preposition 'na', not 'w': 'na poczcie' (at the post office), 'iść na pocztę' (to go to the post office)."
+    ],
+    "senses": [
+      {
+        "id": "txc4uw78djg9kkf",
+        "order": 0,
+        "definition": "A place where you send letters, buy stamps, and pick up parcels.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "post office"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏣",
+        "examples": [
+          {
+            "id": "8tkkhw537tq8bg1",
+            "text": "Muszę pójść na pocztę, żeby wysłać paczkę.",
+            "textLang": "pl",
+            "translation": "I need to go to the post office to send a parcel.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined to get an errand done before closing time",
+            "note": null,
+            "matchedForm": "pocztę",
+            "matchedTranslationForm": "post office"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "aj43xvh2pmkm1hw",
+        "order": 1,
+        "definition": "Letters and parcels that are sent or delivered, or the system that delivers them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mail",
+              "post"
+            ]
+          }
+        ],
+        "domain": "mail",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "tp7pnca7dh46mnr",
+            "text": "Dzisiaj nie było żadnej poczty w skrzynce.",
+            "textLang": "pl",
+            "translation": "There was no mail in the mailbox today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "disappointed to find the mailbox completely empty",
+            "note": null,
+            "matchedForm": "poczty",
+            "matchedTranslationForm": "mail"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gg7uqghenjgtkoy",
+        "order": 2,
+        "definition": "Electronic mail or an email inbox.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "email",
+              "inbox"
+            ]
+          }
+        ],
+        "domain": "computing",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tze7vx5jychyk3g",
+            "text": "Codziennie rano sprawdzam pocztę.",
+            "textLang": "pl",
+            "translation": "I check my email every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pocztę",
+            "matchedTranslationForm": "email"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "poczta",
+    "lemma": "poczta",
+    "reading": null,
+    "ipa": "/ˈpɔt͡ʂ.ta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏣",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "post office; mail; post",
     "primaryGloss": "post office",
     "emotion": "waiting in line with a stack of envelopes, calm and slightly impatient",
@@ -159,5 +308,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Poczta refers both to the building (the post office) and to the",
+        "why": "Restates the two senses; misses the needed preposition note ('na poczcie' / 'na pocztę')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense 'email / inbox' (sprawdzić pocztę)."
+      }
+    ],
+    "growth": 1.451
   }
 }

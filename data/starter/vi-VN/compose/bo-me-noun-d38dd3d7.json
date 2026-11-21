@@ -58,6 +58,74 @@
     "headword": "bố mẹ",
     "lemma": "bố mẹ",
     "reading": null,
+    "ipa": "/ɓo˧˥ mɛ˧˨ʔ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍👩‍👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "parents; father and mother",
+    "primaryGloss": "parents",
+    "emotion": "warm and familiar, speaking of one's family with natural affection",
+    "notes": [
+      "Standard in northern Vietnam ('bố' = father, 'mẹ' = mother). In southern Vietnam, 'ba má' or 'ba mẹ' is much more common."
+    ],
+    "senses": [
+      {
+        "id": "hjzdw0dyhafkgpa",
+        "order": 0,
+        "definition": "A person's father and mother together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parents",
+              "father and mother"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👨‍👩‍👦",
+        "examples": [
+          {
+            "id": "i5r4ep1w872ls3b",
+            "text": "Bố mẹ tôi đang nấu ăn trong bếp.",
+            "textLang": "vi",
+            "translation": "My parents are cooking in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, describing a cozy household moment",
+            "note": null,
+            "matchedForm": "Bố mẹ",
+            "matchedTranslationForm": "parents"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "bố mẹ",
+    "lemma": "bố mẹ",
+    "reading": null,
     "ipa": "/bo˧˥ mɛ˧˥/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/bo˧˥ mɛ˧˥/",
+        "why": "Wrong tone on 'mẹ': nặng tone is low glottalized /mɛ˧˨ʔ/, not rising /mɛ˧˥/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "While 'bố' and 'mẹ' can be used separately to address or",
+        "why": "Filler explanation of the obvious fact that 'father' + 'mother' means 'parents'."
+      }
+    ],
+    "growth": 0.623
   }
 }

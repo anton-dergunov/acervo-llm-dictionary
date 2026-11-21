@@ -68,6 +68,74 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "meeting, gathering",
+    "primaryGloss": "meeting",
+    "emotion": "busy and focused, preparing files and notes for a discussion",
+    "notes": [
+      "Takes the sound feminine plural اجْتِمَاعَات (ijtimāʿāt)."
+    ],
+    "senses": [
+      {
+        "id": "ov1ex976wjfzhm9",
+        "order": 0,
+        "definition": "An occasion when people come together to discuss work, business, or official matters.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meeting",
+              "gathering"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "jd3msle2lk7j9yw",
+            "text": "عِنْدِي اجْتِمَاعٌ مُهِمٌّ مَعَ الْمُدِيرِ فِي الصَّبَاحِ.",
+            "textLang": "ar",
+            "translation": "I have an important meeting with the manager in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "اجْتِمَاعٌ",
+            "matchedTranslationForm": "meeting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "اجْتِمَاع",
+    "lemma": "اجْتِمَاع",
+    "reading": null,
+    "ipa": "/idʒ.tiˈmaːʕ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "meeting; gathering",
     "primaryGloss": "meeting",
     "emotion": "busy and focused, preparing files and notes for a discussion",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "عِنْدِي اجْتِمَاعٌ مُهِمٌّ مَعَ الْمُدِيرِ الصَّبَاحَ.",
+        "why": "Bare الصَّبَاحَ for 'in the morning' is unnatural; use فِي الصَّبَاحِ or هٰذَا الصَّبَاحَ."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used frequently in both professional and formal contexts to refer to scheduled",
+        "why": "Restates the definition and misses the plural اجْتِمَاعَات."
+      }
+    ],
+    "growth": 0.91
   }
 }

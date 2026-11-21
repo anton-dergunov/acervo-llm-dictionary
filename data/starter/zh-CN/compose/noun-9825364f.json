@@ -68,6 +68,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "money",
+    "primaryGloss": "money",
+    "emotion": "practical and grounded, thinking about the cost of things",
+    "notes": [
+      "Usually used without a measure word (很多钱, 多少钱). For a sum of money, use 笔 (bǐ): 一笔钱 (a sum of money)."
+    ],
+    "senses": [
+      {
+        "id": "he4uix8zcckz2wo",
+        "order": 0,
+        "definition": "Coins and banknotes, or wealth in general, used to buy things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "money",
+              "cash"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "l4kg7gh233x62uk",
+            "text": "我有很多钱。",
+            "textLang": "zh",
+            "translation": "I have a lot of money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and satisfied, showing off some savings",
+            "note": null,
+            "matchedForm": "钱",
+            "matchedTranslationForm": "money"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "钱",
+    "lemma": "钱",
+    "reading": "qián",
+    "ipa": "/tɕʰi̯ɛn˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "money; coin",
     "primaryGloss": "money",
     "emotion": "practical and grounded, thinking about the cost of things",
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "money; coin",
+        "why": "'coin' is not in the senses; in modern Mandarin 钱 alone means 'money'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "钱 is a general term for money, including both paper notes and",
+        "why": "Restates the definition; should give countability or measure word (一笔钱, 块钱) instead."
+      }
+    ],
+    "growth": 1.289
   }
 }

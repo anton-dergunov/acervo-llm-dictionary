@@ -58,6 +58,75 @@
     "headword": "die Nudeln",
     "lemma": "Nudel",
     "reading": null,
+    "ipa": "/ˈnuːdl̩n/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "pasta; noodles",
+    "primaryGloss": "pasta",
+    "emotion": "warm and satisfied, thinking about a favorite meal",
+    "notes": [
+      "Usually used in the plural ('die Nudeln'); the singular for a single piece is 'die Nudel' (feminine).",
+      "In German, 'Nudeln' is the everyday word for both Italian pasta (spaghetti, penne, etc.) and Asian noodles."
+    ],
+    "senses": [
+      {
+        "id": "7sl17bif0hg5cnp",
+        "order": 0,
+        "definition": "Food made from flour, water, and sometimes egg, shaped into strings, tubes, or other pieces and boiled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pasta",
+              "noodles"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍝",
+        "examples": [
+          {
+            "id": "5h0hjl1zxo310hv",
+            "text": "Ich esse heute Abend Nudeln mit Tomatensoße.",
+            "textLang": "de",
+            "translation": "I am eating pasta with tomato sauce tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and looking forward to a simple, tasty dinner",
+            "note": null,
+            "matchedForm": "Nudeln",
+            "matchedTranslationForm": "pasta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Nudeln",
+    "lemma": "Nudel",
+    "reading": null,
     "ipa": "/diː ˈnuːdln̩/",
     "pos": "noun",
     "gender": "feminine",
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/diː ˈnuːdln̩/",
+        "why": "IPA includes the definite article 'die'; should transcribe only the noun."
+      },
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "gender",
+        "quote": "feminine",
+        "why": "Headword is plural ('die Nudeln'), while singular 'die Nudel' is feminine; needs clear plural note."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'die Suppennudeln'",
+        "why": "Unhelpful filler about a transparent compound noun."
+      }
+    ],
+    "growth": 0.889
   }
 }

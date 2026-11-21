@@ -79,6 +79,97 @@
     "primaryGloss": "hot",
     "emotion": null,
     "notes": [
+      "For weather and clothing, 'quente' covers both 'hot' and pleasantly 'warm'; for lukewarm food or water, use 'morno'.",
+      "Do not confuse with the noun 'calor' (heat): say 'O dia está quente' (The day is hot), but 'Estou com calor' (I am/feel hot)."
+    ],
+    "senses": [
+      {
+        "id": "p8f9mj9jp1t5uo1",
+        "order": 0,
+        "definition": "Having a high temperature; hot or warm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hot",
+              "warm"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "aogvqpg6vlb2ah3",
+            "text": "O café está muito quente agora.",
+            "textLang": "pt",
+            "translation": "The coffee is very hot right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "careful and cautious, testing the temperature of a drink",
+            "note": null,
+            "matchedForm": "quente",
+            "matchedTranslationForm": "hot"
+          },
+          {
+            "id": "4cbuwyknd53wwqh",
+            "text": "Hoje está um dia bastante quente.",
+            "textLang": "pt",
+            "translation": "Today is quite a hot day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "quente",
+            "matchedTranslationForm": "hot"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "quente",
+    "lemma": "quente",
+    "reading": null,
+    "ipa": "/ˈkẽtʃi/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "hot; warm",
+    "primaryGloss": "hot",
+    "emotion": null,
+    "notes": [
       "Use 'quente' for anything that is physically hot. Unlike English, where you might distinguish between 'hot' and 'warm' quite strictly, Portuguese speakers use 'quente' for both.",
       "Do not confuse this with 'calor', which is the noun for 'heat'. You would say 'O dia está quente' (The day is hot) or 'Eu sinto calor' (I feel hot)."
     ],
@@ -168,5 +259,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Hot objects and hot weather are the same basic meaning of 'quente'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Unlike English, where you might distinguish between 'hot' and 'warm' quite strictly",
+        "why": "Misleading: Portuguese uses 'morno' for warm/lukewarm liquids and objects."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Today is a quite hot day.",
+        "why": "Unnatural English word order ('a quite hot day' instead of 'quite a hot day')."
+      }
+    ],
+    "growth": 0.712
   }
 }

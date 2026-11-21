@@ -68,6 +68,98 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to jump; to hop",
+    "primaryGloss": "to jump",
+    "emotion": "energetic and lively, describing movement with a bit of momentum",
+    "notes": [
+      "Imperfective (ongoing or repeated jumping); the perfective pair for a single jump is 'skoczyć'.",
+      "Note the stem change in the present tense: 'ja skaczę', 'ty skaczesz', 'oni skaczą'."
+    ],
+    "senses": [
+      {
+        "id": "89e011oligvk6kk",
+        "order": 0,
+        "definition": "To push yourself off the ground into the air with your legs, or to move by jumping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to jump",
+              "to hop",
+              "to leap",
+              "to skip"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🦘",
+        "examples": [
+          {
+            "id": "dy2pdfh7axxb074",
+            "text": "Dzieci lubią skakać na trampolinie.",
+            "textLang": "pl",
+            "translation": "Children like to jump on the trampoline.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and bubbly, imagining kids playing",
+            "note": null,
+            "matchedForm": "skakać",
+            "matchedTranslationForm": "to jump"
+          },
+          {
+            "id": "82xdi1grrfrien2",
+            "text": "Zając szybko skacze przez pole.",
+            "textLang": "pl",
+            "translation": "A hare hops quickly across the field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "skacze",
+            "matchedTranslationForm": "hops"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "skakać",
+    "lemma": "skakać",
+    "reading": null,
+    "ipa": "/ˈska.kat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤸",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to jump; to skip; to bounce",
     "primaryGloss": "to jump",
     "emotion": "energetic and lively, describing movement with a bit of momentum",
@@ -161,5 +253,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to jump; to skip; to bounce",
+        "why": "shortGloss includes 'to bounce', which is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To move by taking short, quick jumps.",
+        "why": "Jumping, hopping, and skipping are shades of one meaning in Polish 'skakać'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on irregular stem alternation in present tense (skaczę, skaczesz)."
+      }
+    ],
+    "growth": 0.747
   }
 }

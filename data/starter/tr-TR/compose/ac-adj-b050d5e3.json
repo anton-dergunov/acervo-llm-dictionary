@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "hungry",
+    "primaryGloss": "hungry",
+    "emotion": "craving something tasty, rubbing the stomach with eager anticipation",
+    "notes": [
+      "To say 'I am hungry', Turkish speakers often say 'karnım aç' (literally 'my stomach is hungry') as well as 'açım'.",
+      "Do not confuse with 'açık' (open). However, 'aç' is also the imperative form of 'açmak' (to open), so 'Kapıyı aç!' means 'Open the door!'."
+    ],
+    "senses": [
+      {
+        "id": "1hh6s9wo9bautol",
+        "order": 0,
+        "definition": "Feeling a need or desire for food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hungry",
+              "starving"
+            ]
+          }
+        ],
+        "domain": "hunger",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "4dw3vgvvqag3jxd",
+            "text": "Kahvaltı yapmadım, karnım çok aç.",
+            "textLang": "tr",
+            "translation": "I didn't have breakfast; I am very hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "aç",
+            "matchedTranslationForm": "hungry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "aç",
+    "lemma": "aç",
+    "reading": null,
+    "ipa": "/atʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "hungry; open",
     "primaryGloss": "hungry",
     "emotion": "craving something tasty, rubbing the stomach with eager anticipation",
@@ -160,5 +229,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Not closed or fastened; allowing access.",
+        "why": "'aç' does not mean open as an adjective; 'açık' means open."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "it also doubles as the opposite of kapalı (closed)",
+        "why": "False claim; 'açık' is the adjective for open, while 'aç' is imperative of 'açmak'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse 'aç' (hungry or open, depending on context) with 'ilaç'",
+        "why": "Unlikely confusion and contains the false claim that 'aç' means open."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yemek saatine kadar çok aç hissediyorum.",
+        "why": "Unnatural calque of 'feel hungry'; Turkish uses 'açım' or 'karnım aç'."
+      }
+    ],
+    "growth": 0.709
   }
 }

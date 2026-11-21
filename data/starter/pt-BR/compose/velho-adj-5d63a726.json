@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "old; aged; worn",
+    "primaryGloss": "old",
+    "emotion": "reflective and slightly nostalgic, looking back at something from the past",
+    "notes": [
+      "When referring to people, 'velho' can sound blunt or disrespectful; 'idoso' (elderly) is more polite.",
+      "Do not confuse with 'antigo', which means 'ancient', 'old-fashioned', or 'former' (as in 'meu antigo trabalho', my former job)."
+    ],
+    "senses": [
+      {
+        "id": "1as8i0kn67frppy",
+        "order": 0,
+        "definition": "Having lived or existed for a long time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "aged"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "1oyxw4k0w1wbut1",
+            "text": "O meu avô é um homem muito velho.",
+            "textLang": "pt",
+            "translation": "My grandfather is a very old man.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and affectionate, speaking about a family member with fondness",
+            "note": null,
+            "matchedForm": "velho",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "td73u9f1nd8v4m7",
+        "order": 1,
+        "definition": "Of an object: having been owned or used for a long time, often worn out.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "worn",
+              "used"
+            ]
+          }
+        ],
+        "domain": "condition",
+        "emoji": "🧥",
+        "examples": [
+          {
+            "id": "d04798ao7p5wr0s",
+            "text": "Eu comprei um carro velho.",
+            "textLang": "pt",
+            "translation": "I bought an old car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple observation about the car's state",
+            "note": null,
+            "matchedForm": "velho",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "velho",
+    "lemma": "velho",
+    "reading": null,
+    "ipa": "/ˈvɛ.ʎu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "old; ancient",
     "primaryGloss": "old",
     "emotion": "reflective and slightly nostalgic, looking back at something from the past",
@@ -162,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that has been owned or used for a long time, often",
+        "why": "Defines an adjective as a noun ('Something that...')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "old; ancient",
+        "why": "Includes 'ancient', which is absent from the senses and misleading (see note 1)."
+      }
+    ],
+    "growth": 0.69
   }
 }

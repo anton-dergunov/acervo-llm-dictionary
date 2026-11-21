@@ -58,6 +58,115 @@
     "headword": "mendengar",
     "lemma": "dengar",
     "reading": null,
+    "ipa": "/mən.də.ŋar/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to hear",
+    "primaryGloss": "hear",
+    "emotion": "attentive and present, focused on the sounds of the world around",
+    "notes": [
+      "Formed from the root 'dengar' with the prefix 'meN-'.",
+      "Use 'mendengar' when you perceive sound naturally or hear news. Use 'mendengarkan' when paying active attention, such as listening to music or a teacher."
+    ],
+    "senses": [
+      {
+        "id": "7a2abrt83mc9w60",
+        "order": 0,
+        "definition": "To perceive a sound with your ears.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "👂",
+        "examples": [
+          {
+            "id": "cqtmcs4ya4wzhew",
+            "text": "Saya mendengar suara burung di pagi hari.",
+            "textLang": "id",
+            "translation": "I hear the sound of birds in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, noticing the quiet start of the day",
+            "note": null,
+            "matchedForm": "mendengar",
+            "matchedTranslationForm": "hear"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "juj8blr0k8igskl",
+        "order": 1,
+        "definition": "To be told or find out about news or information.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hear",
+              "learn"
+            ]
+          }
+        ],
+        "domain": "news",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "90njqpmfg8qcxc0",
+            "text": "Saya mendengar bahwa dia sudah pindah ke Jakarta.",
+            "textLang": "id",
+            "translation": "I heard that he has moved to Jakarta.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "mendengar",
+            "matchedTranslationForm": "heard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "mendengar",
+    "lemma": "dengar",
+    "reading": null,
     "ipa": "/məˈdəŋar/",
     "pos": "verb",
     "gender": null,
@@ -158,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/məˈdəŋar/",
+        "why": "Missing the nasal /n/ in the prefix 'men-'; should be /mən.də.ŋar/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(listen) To pay attention to someone or something that is speaking",
+        "why": "Contradicts note[0]; standard Indonesian uses 'mendengarkan' for active listening, while 'mendengar' means to hear/learn."
+      }
+    ],
+    "growth": 1.006
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "week",
     "emotion": "matter-of-fact and steady, marking the passing days",
     "notes": [
+      "The plural is أَسَابِيع (asābīʿ), which is diptote (does not take nunation)."
+    ],
+    "senses": [
+      {
+        "id": "f492bqytrv67ozs",
+        "order": 0,
+        "definition": "A period of seven days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📆",
+        "examples": [
+          {
+            "id": "t78nbfuykkhnkwl",
+            "text": "سَأُسَافِرُ بَعْدَ أُسْبُوعٍ.",
+            "textLang": "ar",
+            "translation": "I will travel in a week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking forward to a trip with calm anticipation",
+            "note": null,
+            "matchedForm": "أُسْبُوعٍ",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أُسْبُوع",
+    "lemma": "أُسْبُوع",
+    "reading": null,
+    "ipa": "/ʔusˈbuːʕ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": "matter-of-fact and steady, marking the passing days",
+    "notes": [
       "The plural is أسابيع (asābīʕ).",
       "It is commonly used with numbers to count weeks, e.g., أسبوعان (two weeks)."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is commonly used with numbers to count weeks, e.g., أسبوعان",
+        "why": "Unhelpful filler; أُسْبُوعَانِ is the dual form without a number, and any time unit is counted."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I will travel after a week.",
+        "why": "Calque of بَعْدَ أُسْبُوعٍ; natural English is 'in a week'."
+      }
+    ],
+    "growth": 0.833
   }
 }

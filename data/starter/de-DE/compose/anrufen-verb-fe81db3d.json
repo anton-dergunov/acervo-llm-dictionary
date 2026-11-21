@@ -72,6 +72,76 @@
     "primaryGloss": "to call",
     "emotion": "matter-of-fact and direct, the intent to reach someone",
     "notes": [
+      "Separable verb (an·rufen) taking a direct object (accusative): 'Ich rufe dich später an.' Past participle: angerufen.",
+      "Do not confuse with 'rufen' (to shout or call out to someone nearby) or 'nennen' (to name)."
+    ],
+    "senses": [
+      {
+        "id": "a4rqnjjynfseo4v",
+        "order": 0,
+        "definition": "To contact someone or a place by telephone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to call",
+              "to phone",
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "6cq6g0z3ee486xd",
+            "text": "Ich rufe dich morgen an.",
+            "textLang": "de",
+            "translation": "I will call you tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and reassuring, setting a plan in motion",
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "call"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "anrufen",
+    "lemma": "anrufen",
+    "reading": null,
+    "ipa": "/ˈanˌʁuːfən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to call (someone); to telephone",
+    "primaryGloss": "to call",
+    "emotion": "matter-of-fact and direct, the intent to reach someone",
+    "notes": [
       "This is a separable verb. In a main clause, the prefix 'an-' moves to the end of the sentence: 'Ich rufe dich später an.'",
       "Don't confuse this with 'nennen' (to name) or 'rufen' (to shout/call out to someone nearby). 'Anrufen' is specific to telephoning."
     ],
@@ -161,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To call out to someone to get their attention.",
+        "why": "False sense for 'anrufen' (which is 'rufen'); even note[1] explicitly states this."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Er hat den Kellner angerufen.",
+        "why": "Means he phoned the waiter, not called out to him in a restaurant."
+      }
+    ],
+    "growth": 0.703
   }
 }

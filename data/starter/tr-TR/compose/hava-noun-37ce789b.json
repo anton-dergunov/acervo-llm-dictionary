@@ -68,6 +68,155 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "weather; air; atmosphere",
+    "primaryGloss": "weather",
+    "emotion": "looking out the window to check the sky before heading out",
+    "notes": [
+      "Common expressions: 'hava almak' (to get some fresh air), 'hava durumu' (weather forecast), and informal 'hava atmak' (to show off)."
+    ],
+    "senses": [
+      {
+        "id": "k0i79zn6ipfhw9a",
+        "order": 0,
+        "definition": "The state of the sky and temperature at a particular time and place, such as rain, sun, heat, or wind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "fmrzhbxi9x4s2l8",
+            "text": "Bugün hava çok güzel.",
+            "textLang": "tr",
+            "translation": "Today the weather is very nice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleased with the bright day",
+            "note": null,
+            "matchedForm": "hava",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ei34wew02g1cjpe",
+        "order": 1,
+        "definition": "The invisible gas surrounding the earth that we breathe, or open outdoor space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "air"
+            ]
+          }
+        ],
+        "domain": "air",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "eb9sv6vznixqvau",
+            "text": "Oda çok sıcak oldu, biraz temiz hava alalım.",
+            "textLang": "tr",
+            "translation": "The room has gotten very hot; let's get some fresh air.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hava",
+            "matchedTranslationForm": "air"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "a5pw1095rvdswmm",
+        "order": 2,
+        "definition": "The general mood, feeling, or atmosphere of a place, thing, or person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "atmosphere",
+              "mood",
+              "vibe"
+            ]
+          }
+        ],
+        "domain": "atmosphere",
+        "emoji": "🎭",
+        "examples": [
+          {
+            "id": "ij6n1ts11s79v7m",
+            "text": "Bu kafenin havası çok hoş.",
+            "textLang": "tr",
+            "translation": "The atmosphere of this café is very pleasant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "havası",
+            "matchedTranslationForm": "atmosphere"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hava",
+    "lemma": "hava",
+    "reading": null,
+    "ipa": "/haˈva/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "weather; air; tune; mood",
     "primaryGloss": "weather",
     "emotion": "looking out the window to check the sky before heading out",
@@ -240,5 +389,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Derin bir hava al.",
+        "why": "Unidiomatic Turkish; 'take a deep breath' is 'derin bir nefes al', while 'hava almak' means to get fresh air."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[2].examples[0].text",
+        "quote": "Bu şarkının havası çok hoş.",
+        "why": "'Şarkının havası' means the vibe/feel of the song, not its melody."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word hava has several common meanings.",
+        "why": "Merely repeats all the senses already listed in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2].definition",
+        "quote": "A tune or melody of a song.",
+        "why": "Folk 'tune/air' sense is marginal for A2 compared to weather, air, and atmosphere/vibe."
+      }
+    ],
+    "growth": 0.915
   }
 }

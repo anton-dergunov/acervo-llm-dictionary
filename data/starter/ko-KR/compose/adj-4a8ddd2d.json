@@ -72,6 +72,74 @@
     "primaryGloss": "thirsty",
     "emotion": "a dry, parched throat looking for a cool drink of water",
     "notes": [
+      "Pronounced [몽마르다] due to nasal assimilation before ㅁ.",
+      "Conjugates as a 르-irregular adjective: 목마르다 → 목말라요. Also commonly expressed as the phrase 목이 마르다."
+    ],
+    "senses": [
+      {
+        "id": "vzojbdidvi0xsh0",
+        "order": 0,
+        "definition": "Feeling a need to drink water or another liquid.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thirsty"
+            ]
+          }
+        ],
+        "domain": "thirst",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "bv1km27vqwe3pks",
+            "text": "너무 더워서 목말라요.",
+            "textLang": "ko",
+            "translation": "I am thirsty because it is so hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "feeling tired and worn out by the heat of the day",
+            "note": null,
+            "matchedForm": "목말라요",
+            "matchedTranslationForm": "thirsty"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "목마르다",
+    "lemma": "목마르다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "thirsty",
+    "primaryGloss": "thirsty",
+    "emotion": "a dry, parched throat looking for a cool drink of water",
+    "notes": [
       "This is the standard adjective for feeling thirsty.",
       "Do not confuse this with '목을 매다', which means to hang oneself or metaphorically to be obsessed with something."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "This is the standard adjective for feeling thirsty.",
+        "why": "Both notes are filler; missing needed notes on [몽마르다] nasalization and 르-irregular conjugation."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To feel the need to drink something.",
+        "why": "Defined as an infinitive verb ('To feel...') instead of an adjective."
+      }
+    ],
+    "growth": 1.004
   }
 }

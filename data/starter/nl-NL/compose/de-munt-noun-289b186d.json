@@ -72,6 +72,113 @@
     "primaryGloss": "coin",
     "emotion": "matter-of-fact and helpful, checking pockets for small change",
     "notes": [
+      "In everyday speech, the diminutive 'het muntje' is very often used for a single coin."
+    ],
+    "senses": [
+      {
+        "id": "c5ct3lizys9vxnx",
+        "order": 0,
+        "definition": "A small, flat, round piece of metal used as money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "coin"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "🪙",
+        "examples": [
+          {
+            "id": "lof6dja5y2rwsen",
+            "text": "Heb je een munt van één euro voor het winkelwagentje?",
+            "textLang": "nl",
+            "translation": "Do you have a one-euro coin for the shopping cart?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "munt",
+            "matchedTranslationForm": "coin"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ea7f311aofoeat7",
+        "order": 1,
+        "definition": "An aromatic herb with green leaves, used in cooking and tea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mint"
+            ]
+          }
+        ],
+        "domain": "herb",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "iq4zttuu0iyfvwr",
+            "text": "Verse munt in de thee smaakt erg lekker.",
+            "textLang": "nl",
+            "translation": "Fresh mint in the tea tastes very good.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshed and pleased, enjoying a warm cup of tea",
+            "note": null,
+            "matchedForm": "munt",
+            "matchedTranslationForm": "mint"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de munt",
+    "lemma": "munt",
+    "reading": null,
+    "ipa": "/mʏnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪙",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "coin; mint",
+    "primaryGloss": "coin",
+    "emotion": "matter-of-fact and helpful, checking pockets for small change",
+    "notes": [
       "Munt is a homonym in Dutch. It means both physical money (coin) and the herb (mint), as well as the institution where money is made (mint).",
       "Do not confuse 'munt' (coin) with 'maand' (month) or 'mond' (mouth)."
     ],
@@ -177,5 +284,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "A factory where coins are made.",
+        "why": "Coin factory is a rare, specialized sense not needed at A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Munt is a homonym in Dutch. It means both physical money",
+        "why": "Restates the senses instead of giving useful grammar or usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik heb geen enkele munt bij me voor de winkelmand.",
+        "why": "Shopping baskets do not take coins; shopping carts ('winkelwagentjes') do, usually taking 'een muntje'."
+      }
+    ],
+    "growth": 0.751
   }
 }

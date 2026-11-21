@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "blue; drunk",
+    "primaryGloss": "blue",
+    "emotion": "a clear and steady tone, identifying a color in the world",
+    "notes": [
+      "Unlike English 'blue', German 'blau' does not mean sad. However, 'ein blaues Auge' is a 'black eye', and 'blau machen' (to skip work or school) is a common informal idiom."
+    ],
+    "senses": [
+      {
+        "id": "g4tfy8ucb9p4t7y",
+        "order": 0,
+        "definition": "Having the color of a clear sky or the deep sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "46291ae5x8jij3v",
+            "text": "Der Himmel ist heute strahlend blau.",
+            "textLang": "de",
+            "translation": "The sky is bright blue today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and observant, pointing out the pleasant weather",
+            "note": null,
+            "matchedForm": "blau",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8hlsyis40g7gdhl",
+        "order": 1,
+        "definition": "(informal) Intoxicated from alcohol.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drunk",
+              "wasted",
+              "tipsy"
+            ]
+          }
+        ],
+        "domain": "intoxication",
+        "emoji": "🍺",
+        "examples": [
+          {
+            "id": "drf20el9h61zwxf",
+            "text": "Er war nach drei Bier schon völlig blau.",
+            "textLang": "de",
+            "translation": "He was already completely drunk after three beers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit judgmental or gossipy, sharing details about someone else",
+            "note": null,
+            "matchedForm": "blau",
+            "matchedTranslationForm": "drunk"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "blau",
+    "lemma": "blau",
+    "reading": null,
+    "ipa": "/blaʊ̯/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "blue; intoxicated",
     "primaryGloss": "blue",
     "emotion": "a clear and steady tone, identifying a color in the world",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of the clear sky or the deep ocean.",
+        "why": "Adjective defined as a noun ('The color...') and sense 1 defined as a verb."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "In colloquial German, 'blau' is also a common slang term",
+        "why": "Note 0 restates sense 1; Note 1 warns about a rare culinary loanword."
+      }
+    ],
+    "growth": 0.932
   }
 }

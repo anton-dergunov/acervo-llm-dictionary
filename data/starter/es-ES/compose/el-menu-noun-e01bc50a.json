@@ -68,6 +68,115 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "set menu; menu",
+    "primaryGloss": "menu",
+    "emotion": "anticipatory and curious, scanning the options at a table",
+    "notes": [
+      "In Spain, 'el menú' (or 'el menú del día') usually means a fixed-price lunch of two courses, drink, and dessert or coffee. For the full list of dishes, ask for 'la carta'."
+    ],
+    "senses": [
+      {
+        "id": "968y6t9i5ggi7qa",
+        "order": 0,
+        "definition": "A fixed-price meal at a restaurant consisting of several courses.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "set menu",
+              "fixed-price meal",
+              "set-price meal"
+            ]
+          }
+        ],
+        "domain": "meal",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "9q0i6vaiobv10qk",
+            "text": "Hoy hemos comido el menú del día en la plaza.",
+            "textLang": "es",
+            "translation": "Today we had the set lunch menu in the square.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "menú",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "75wztthzfdp7bpg",
+        "order": 1,
+        "definition": "The list of dishes and drinks available in a restaurant, or a list of options on a screen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "menu"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "lrimwbvnxsbc55z",
+            "text": "¿Podría ver el menú, por favor?",
+            "textLang": "es",
+            "translation": "Could I see the menu, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "menú",
+            "matchedTranslationForm": "menu"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el menú",
+    "lemma": "menú",
+    "reading": null,
+    "ipa": "/meˈnu/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📜",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "menu; fixed-price meal",
     "primaryGloss": "menu",
     "emotion": "anticipatory and curious, scanning the options at a table",
@@ -159,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Podría ver el menú, por favor?",
+        "why": "Missing required Spanish opening question mark '¿'."
+      }
+    ],
+    "growth": 0.996
   }
 }

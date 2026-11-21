@@ -68,6 +68,115 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "farmer; burp",
+    "primaryGloss": "farmer",
+    "emotion": "down-to-earth and hardworking, tending to the land with practical pride",
+    "notes": [
+      "A female farmer is 'de boerin'.",
+      "In informal speech, calling someone 'een boer' can also mean they are rude or unmannered."
+    ],
+    "senses": [
+      {
+        "id": "ltibuzsvj9f950p",
+        "order": 0,
+        "definition": "A person who owns or runs a farm, grows crops, or keeps animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "farmer"
+            ]
+          }
+        ],
+        "domain": "agriculture",
+        "emoji": "🚜",
+        "examples": [
+          {
+            "id": "9ndhf1udeplcjuc",
+            "text": "De boer werkt elke dag hard op het land.",
+            "textLang": "nl",
+            "translation": "The farmer works hard on the land every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "respectful and admiring of daily physical labor",
+            "note": null,
+            "matchedForm": "boer",
+            "matchedTranslationForm": "farmer"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dklhx87lxxemxtg",
+        "order": 1,
+        "definition": "Air from the stomach that comes out noisily through the mouth (often in the diminutive 'boertje').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "burp",
+              "belch"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "ktgli181dpe2z3j",
+            "text": "De baby liet een boertje na het drinken.",
+            "textLang": "nl",
+            "translation": "The baby let out a little burp after drinking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "boertje",
+            "matchedTranslationForm": "burp"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de boer",
+    "lemma": "boer",
+    "reading": null,
+    "ipa": "/buːr/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚜",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "farmer; peasant",
     "primaryGloss": "farmer",
     "emotion": "down-to-earth and hardworking, tending to the land with practical pride",
@@ -119,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "farmer; peasant",
+        "why": "'Peasant' is not in the senses and contradicts note [1]."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "the Dutch 'boer' is purely a professional title and does not carry",
+        "why": "False: 'boer' is also commonly used figuratively for someone rude or uncultured (boor)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Dutch, 'boer' is the standard word for someone who runs a",
+        "why": "Merely restates the definition."
+      }
+    ],
+    "growth": 1.127
   }
 }

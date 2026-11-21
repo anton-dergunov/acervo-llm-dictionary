@@ -58,6 +58,115 @@
     "headword": "tên",
     "lemma": "tên",
     "reading": null,
+    "ipa": "/ten˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📛",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "name; arrow",
+    "primaryGloss": "name",
+    "emotion": "friendly and direct, introducing oneself to a new acquaintance",
+    "notes": [
+      "Usually refers to a person's given name; a full name is 'họ và tên' (surname and given name).",
+      "Before a noun for a bad person, 'tên' acts as a derogatory classifier: 'tên trộm' (a thief), 'tên cướp' (a robber)."
+    ],
+    "senses": [
+      {
+        "id": "041zj4sldq8h0j9",
+        "order": 0,
+        "definition": "The word or words that a person, place, or thing is called.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "name",
+              "given name"
+            ]
+          }
+        ],
+        "domain": "name",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "nt5zn92aqf4h0l9",
+            "text": "Tên tôi là An.",
+            "textLang": "vi",
+            "translation": "My name is An.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and polite when meeting someone new",
+            "note": null,
+            "matchedForm": "Tên",
+            "matchedTranslationForm": "name"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5jpzlw8ndiry28t",
+        "order": 1,
+        "definition": "A thin pointed weapon shot from a bow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "arrow"
+            ]
+          }
+        ],
+        "domain": "weapon",
+        "emoji": "🏹",
+        "examples": [
+          {
+            "id": "jvc4cyxnbbhlbyq",
+            "text": "Anh ấy bắn một mũi tên trúng đích.",
+            "textLang": "vi",
+            "translation": "He shot an arrow that hit the target.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tên",
+            "matchedTranslationForm": "arrow"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tên",
+    "lemma": "tên",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A classifier used for arrows, darts, and bullets.",
+        "why": "'Tên' is the noun for 'arrow' (taking classifier 'mũi'), not a classifier for bullets."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is also used as a classifier for arrows and bullets",
+        "why": "False grammar claim: 'tên' is not a classifier for arrows or bullets."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anh ấy bắn ba tên bay vút đi.",
+        "why": "Ungrammatical without the classifier 'mũi' ('ba mũi tên'), and unnatural phrasing."
+      }
+    ],
+    "growth": 1.0
   }
 }

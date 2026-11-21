@@ -72,6 +72,97 @@
     "primaryGloss": "difficult",
     "emotion": "thoughtful and measured, weighing a challenge before committing to it",
     "notes": [
+      "In the sense of 'difficult', 'schwierig' and 'schwer' are often interchangeable, though 'schwierig' emphasizes complexity while 'schwer' emphasizes effort.",
+      "For physically hard or solid things (like a stone), use 'hart', not 'schwierig' or 'schwer'."
+    ],
+    "senses": [
+      {
+        "id": "c43ovm6b6amcnqu",
+        "order": 0,
+        "definition": "Not easy; requiring effort, skill, or care to do, understand, or deal with.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "difficult",
+              "hard",
+              "complicated"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "jnc6cza1ioknxmb",
+            "text": "Die Prüfung war sehr schwierig.",
+            "textLang": "de",
+            "translation": "The exam was very difficult.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary, reflecting on a stressful experience just finished",
+            "note": null,
+            "matchedForm": "schwierig",
+            "matchedTranslationForm": "difficult"
+          },
+          {
+            "id": "jqwy4sqn72kfy8t",
+            "text": "Das ist eine schwierige Situation für uns.",
+            "textLang": "de",
+            "translation": "That is a difficult situation for us.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and empathetic, acknowledging a shared burden",
+            "note": null,
+            "matchedForm": "schwierige",
+            "matchedTranslationForm": "difficult"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "schwierig",
+    "lemma": "schwierig",
+    "reading": null,
+    "ipa": "/ˈʃviːʁɪç/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧩",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "difficult; hard; complicated",
+    "primaryGloss": "difficult",
+    "emotion": "thoughtful and measured, weighing a challenge before committing to it",
+    "notes": [
       "Use 'schwierig' for abstract concepts or situations that require effort, like a 'schwierige Aufgabe' (difficult task).",
       "Use 'hart' instead when something is physically hard, like a hard stone ('ein harter Stein') or physical labor ('harte Arbeit').",
       "Do not use 'schwierig' for 'solid'; for that, use 'hart' or 'fest'."
@@ -162,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are shades of the same everyday meaning ('difficult')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "Do not use 'schwierig' for 'solid'; for that, use 'hart' or 'fest'.",
+        "why": "Redundant with note 1 and warns against an unlikely confusion ('solid')."
+      }
+    ],
+    "growth": 0.814
   }
 }

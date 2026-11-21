@@ -72,6 +72,97 @@
     "primaryGloss": "free",
     "emotion": "straightforward and practical, focused on the value or lack of cost",
     "notes": [
+      "Takes の (no) to modify a noun (無料の飲み物, 'free drinks') and で (de) to mean 'for free' as an adverb (無料で使える, 'can be used for free').",
+      "In casual speech, タダ (tada) is often used instead."
+    ],
+    "senses": [
+      {
+        "id": "au8ey902pghoqag",
+        "order": 0,
+        "definition": "The state of costing no money; absence of a fee or charge.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "free of charge",
+              "free",
+              "no charge"
+            ]
+          }
+        ],
+        "domain": "cost",
+        "emoji": "🆓",
+        "examples": [
+          {
+            "id": "z0mzh63na0d773e",
+            "text": "このサービスは無料です。",
+            "textLang": "ja",
+            "translation": "This service is free.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, clarifying that no payment is required",
+            "note": null,
+            "matchedForm": "無料",
+            "matchedTranslationForm": "free"
+          },
+          {
+            "id": "zzt1nnw6t3t77l8",
+            "text": "無料の飲み物があります。",
+            "textLang": "ja",
+            "translation": "There are free drinks.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "welcoming and inviting, sharing a nice perk",
+            "note": null,
+            "matchedForm": "無料",
+            "matchedTranslationForm": "free"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "無料",
+    "lemma": "無料",
+    "reading": "むりょう",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🆓",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "free of charge",
+    "primaryGloss": "free",
+    "emotion": "straightforward and practical, focused on the value or lack of cost",
+    "notes": [
       "While 無料 (muryō) refers strictly to 'no cost,' the loanword タダ (tada) is often used in colloquial speech to mean the same thing.",
       "Use 無料 for formal signs, advertisements, or serious contexts; use タダ in casual conversation with friends."
     ],
@@ -142,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Not costing any money; free of charge.",
+        "why": "Defined as an adjective, though the part of speech is a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Notes repeat the same register contrast twice and omit how 無料 modifies nouns (無料の) or verbs (無料で)."
+      }
+    ],
+    "growth": 0.894
   }
 }

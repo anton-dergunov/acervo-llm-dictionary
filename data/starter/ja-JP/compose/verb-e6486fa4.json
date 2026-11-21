@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to study",
+    "primaryGloss": "study",
+    "emotion": "focused and steady, determined to improve oneself",
+    "notes": [
+      "Formed from the noun 勉強 plus する. The subject being studied is marked with を (日本語を勉強する), or the noun can be used directly with の勉強をする.",
+      "Used for actively working to learn a subject (through books, classes, or homework), whereas 習う (ならう) means to learn from a teacher and 学ぶ (まなぶ) is more formal or general."
+    ],
+    "senses": [
+      {
+        "id": "r359p3muo1g4lfw",
+        "order": 0,
+        "definition": "To spend time learning an academic subject or skill through reading, classes, or practice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to study"
+            ]
+          }
+        ],
+        "domain": "learning",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "f8el65bf01xt9ay",
+            "text": "毎日日本語を勉強しています。",
+            "textLang": "ja",
+            "translation": "I study Japanese every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "勉強して",
+            "matchedTranslationForm": "study"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "勉強する",
+    "lemma": "勉強する",
+    "reading": "べんきょうする",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to study; to learn",
     "primaryGloss": "study",
     "emotion": "focused and steady, determined to improve oneself",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To gain experience or gain a deeper understanding",
+        "why": "The expression 勉強になる uses the noun 勉強 with なる, not the verb 勉強する."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "いい勉強になりました。",
+        "why": "Uses the noun 勉強 + なる, not the headword verb 勉強する."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 勉強する literally means 'study', it implies a focused effort",
+        "why": "Restates the definition without adding grammar or usage info."
+      }
+    ],
+    "growth": 0.789
   }
 }

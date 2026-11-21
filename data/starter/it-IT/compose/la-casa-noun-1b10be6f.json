@@ -58,6 +58,138 @@
     "headword": "la casa",
     "lemma": "casa",
     "reading": null,
+    "ipa": "/ˈka.sa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "house, home; company",
+    "primaryGloss": "house",
+    "emotion": "warm and welcoming, thinking of returning to a comfortable place",
+    "notes": [
+      "Covers both the building ('house', or an apartment someone lives in) and the place where you belong ('home').",
+      "To say 'at home' or '(going) home', drop the article: 'sono a casa' (I'm at home), 'vado a casa' (I'm going home)."
+    ],
+    "senses": [
+      {
+        "id": "8ybarz6dl116pq8",
+        "order": 0,
+        "definition": "The building or apartment where someone lives; one's home.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "living place",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "wwu2x72zrm0skz4",
+            "text": "La nostra casa ha un giardino grande.",
+            "textLang": "it",
+            "translation": "Our house has a large garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and fond of the place where one lives",
+            "note": null,
+            "matchedForm": "casa",
+            "matchedTranslationForm": "house"
+          },
+          {
+            "id": "j3c64sy59lxsejd",
+            "text": "Vado a casa dopo il lavoro.",
+            "textLang": "it",
+            "translation": "I am going home after work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and looking forward to resting",
+            "note": null,
+            "matchedForm": "casa",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ny7a9kosgj0ihk9",
+        "order": 1,
+        "definition": "A company in a particular trade, especially publishing, fashion, or music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "company",
+              "house",
+              "firm"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "smnyw6njgmt20aa",
+            "text": "Questo libro è pubblicato da una casa editrice famosa.",
+            "textLang": "it",
+            "translation": "This book is published by a famous publishing house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter of fact",
+            "note": null,
+            "matchedForm": "casa",
+            "matchedTranslationForm": "house"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la casa",
+    "lemma": "casa",
+    "reading": null,
     "ipa": "/ˈka.za/",
     "pos": "noun",
     "gender": "feminine",
@@ -183,5 +315,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A building where a family lives.",
+        "why": "Excludes apartments and the 'home' meaning shown in the glosses and example[1]."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈka.za/",
+        "why": "Standard Italian transcription is /ˈka.sa/ (or both); /ˈka.za/ alone is northern regional."
+      }
+    ],
+    "growth": 1.155
   }
 }

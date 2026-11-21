@@ -68,6 +68,73 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "yesterday",
+    "primaryGloss": "yesterday",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'anteayer' (or 'antes de ayer'), which means 'the day before yesterday'."
+    ],
+    "senses": [
+      {
+        "id": "ncuczblenwnvn82",
+        "order": 0,
+        "definition": "On the day before today.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yesterday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "955v5bbkzpuviit",
+            "text": "Ayer fui al mercado con mi madre.",
+            "textLang": "es",
+            "translation": "Yesterday I went to the market with my mother.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Ayer",
+            "matchedTranslationForm": "Yesterday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ayer",
+    "lemma": "ayer",
+    "reading": null,
+    "ipa": "/aˈʝeɾ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "yesterday; the recent past",
     "primaryGloss": "yesterday",
     "emotion": null,
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(past) In the recent past; very recently.",
+        "why": "Poetic or literary sense ('the past/yesteryear'); the example just uses figurative 'yesterday'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "yesterday; the recent past",
+        "why": "'The recent past' is a noun phrase and corresponds to a marginal literary sense."
+      }
+    ],
+    "growth": 0.508
   }
 }

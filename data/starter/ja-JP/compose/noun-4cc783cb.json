@@ -58,6 +58,115 @@
     "headword": "バス",
     "lemma": "バス",
     "reading": null,
+    "ipa": "basɯ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bus; bath",
+    "primaryGloss": "bus",
+    "emotion": "matter-of-fact and ordinary, waiting for a ride to arrive",
+    "notes": [
+      "For 'bath' or 'bathroom', お風呂 (ofuro) is the everyday word; バス is mainly used in hotel and real-estate descriptions (e.g., バス・トイレ付き, 'with bath and toilet')."
+    ],
+    "senses": [
+      {
+        "id": "1cdarb7kosjq0d7",
+        "order": 0,
+        "definition": "A large motor vehicle that carries passengers along a fixed route.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bus"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "ptkm6km64ra3v9p",
+            "text": "バスで駅に行きます。",
+            "textLang": "ja",
+            "translation": "I go to the station by bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and focused on getting to the destination",
+            "note": null,
+            "matchedForm": "バス",
+            "matchedTranslationForm": "bus"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z777v67n36pllwr",
+        "order": 1,
+        "definition": "A bathtub or bathroom, especially in a hotel or apartment listing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bath",
+              "bathtub",
+              "bathroom"
+            ]
+          }
+        ],
+        "domain": "home",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "k1s0jsii8qy5wg4",
+            "text": "バス付きの部屋を予約しました。",
+            "textLang": "ja",
+            "translation": "I booked a room with a bath.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "バス",
+            "matchedTranslationForm": "bath"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "バス",
+    "lemma": "バス",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "バスにお湯をためます。",
+        "why": "Unnatural; お風呂 is used in daily life, while バス is mainly for hotel/real-estate contexts."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The Japanese word 'basu' can mean both a motor vehicle and",
+        "why": "Merely restates the glosses without adding usage advice on バス vs. お風呂."
+      }
+    ],
+    "growth": 1.096
   }
 }

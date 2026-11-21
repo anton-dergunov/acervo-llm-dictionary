@@ -68,6 +68,155 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "primavera; resorte; manantial",
+    "primaryGloss": "primavera",
+    "emotion": "cheerful and warm, looking forward to the sunny weather after the cold",
+    "notes": [
+      "Para decir 'en primavera', se usa 'in spring' o 'in the spring', generalmente con minúscula."
+    ],
+    "senses": [
+      {
+        "id": "zf456l2wsith5xa",
+        "order": 0,
+        "definition": "Estación del año que va después del invierno y antes del verano.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "primavera"
+            ]
+          }
+        ],
+        "domain": "estación",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "6yvpbhxw6na81vx",
+            "text": "The flowers bloom in spring.",
+            "textLang": "en",
+            "translation": "Las flores florecen en primavera.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and bright, enjoying the colorful flowers",
+            "note": null,
+            "matchedForm": "spring",
+            "matchedTranslationForm": "primavera"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "23z6ynpjo27yxg2",
+        "order": 1,
+        "definition": "Pieza elástica, generalmente de metal en espiral, que recupera su forma después de presionarla.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "resorte",
+              "muelle"
+            ]
+          }
+        ],
+        "domain": "objeto",
+        "emoji": "🌀",
+        "examples": [
+          {
+            "id": "uei5rm2aw2m1owl",
+            "text": "The old sofa has a broken spring.",
+            "textLang": "en",
+            "translation": "El sofá viejo tiene un resorte roto.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "spring",
+            "matchedTranslationForm": "resorte"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hvdne2mu1x1l1kk",
+        "order": 2,
+        "definition": "Lugar donde el agua brota de la tierra de forma natural.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "manantial",
+              "fuente"
+            ]
+          }
+        ],
+        "domain": "naturaleza",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "exxzecpwqxk1os5",
+            "text": "We drank cold water from a mountain spring.",
+            "textLang": "en",
+            "translation": "Bebimos agua fría de un manantial de montaña.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "spring",
+            "matchedTranslationForm": "manantial"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "spring",
+    "lemma": "spring",
+    "reading": null,
+    "ipa": "/sprɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "primavera; salto; muelle",
     "primaryGloss": "primavera",
     "emotion": "cheerful and warm, looking forward to the sunny weather after the cold",
@@ -200,5 +349,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La palabra 'spring' tiene varios significados muy comunes en inglés",
+        "why": "Filler note that only repeats the glosses already shown in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'water spring' (manantial / fuente), while keeping 'leap' (salto)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[2].examples[0].text",
+        "quote": "The mattress lost its spring.",
+        "why": "'Lost its spring' is uncountable 'elasticity/bounce', not a metal coil ('muelle'), and translates unnaturally."
+      }
+    ],
+    "growth": 0.938
   }
 }

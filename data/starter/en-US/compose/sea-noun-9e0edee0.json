@@ -74,6 +74,74 @@
     "primaryGloss": "mar",
     "emotion": "calm and peaceful, listening to the waves on a sunny beach",
     "notes": [
+      "En Estados Unidos es mucho más común usar 'ocean' o 'beach' en el habla cotidiana ('swim in the ocean', 'go to the beach').",
+      "Se pronuncia igual que el verbo 'see' (/siː/)."
+    ],
+    "senses": [
+      {
+        "id": "r9crzclxjj46xm3",
+        "order": 0,
+        "definition": "Gran masa de agua salada que cubre la mayor parte de la superficie de la Tierra.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mar"
+            ]
+          }
+        ],
+        "domain": "naturaleza",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "34srucc8a9iw3vu",
+            "text": "We love to walk by the sea on sunny days.",
+            "textLang": "en",
+            "translation": "Nos encanta caminar junto al mar en los días soleados.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, enjoying a pleasant afternoon walk",
+            "note": null,
+            "matchedForm": "sea",
+            "matchedTranslationForm": "mar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "sea",
+    "lemma": "sea",
+    "reading": null,
+    "ipa": "/siː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌊",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "mar",
+    "primaryGloss": "mar",
+    "emotion": "calm and peaceful, listening to the waves on a sunny beach",
+    "notes": [
       "Se usa para referirse tanto al mar abierto como a grandes lagos salados."
     ],
     "senses": [
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Nos encanta caminar por el mar en los días soleados.",
+        "why": "Mistranslates 'by the sea' as 'por el mar' instead of 'junto al mar'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para referirse tanto al mar abierto como a grandes",
+        "why": "Misses the essential US English note that 'ocean' is preferred over 'sea' in everyday speech."
+      }
+    ],
+    "growth": 1.423
   }
 }

@@ -72,6 +72,96 @@
     "primaryGloss": "without",
     "emotion": null,
     "notes": [
+      "Attaches directly after a noun, with no particle in between.",
+      "Often used when asking for food or drink items to be omitted, such as '砂糖なしで' (satō nashi de, 'without sugar')."
+    ],
+    "senses": [
+      {
+        "id": "16wzpw40azqpsuf",
+        "order": 0,
+        "definition": "Not having or not using something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without",
+              "not having"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "b5o272wh7jvs95y",
+            "text": "砂糖なしでコーヒーを飲みます。",
+            "textLang": "ja",
+            "translation": "I drink coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and straightforward when making a simple request",
+            "note": null,
+            "matchedForm": "なしで",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "o3xgnk5oh86cbr4",
+            "text": "彼なしでパーティーに行きました。",
+            "textLang": "ja",
+            "translation": "I went to the party without him.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and neutral when describing a past event",
+            "note": null,
+            "matchedForm": "なしで",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "なしで",
+    "lemma": "なしで",
+    "reading": null,
+    "ipa": null,
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
       "Used to indicate the absence of something. It is equivalent to 'ni/wo (mo)tsukenaide' or 'nashi ni'.",
       "It is often used when asking for food or drink items to be omitted, such as 'sato nashi de' (without sugar)."
     ],
@@ -141,5 +231,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It is equivalent to 'ni/wo (mo)tsukenaide' or 'nashi ni'.",
+        "why": "Gibberish romaji, and the first half of the note just restates the definition."
+      }
+    ],
+    "growth": 0.897
   }
 }

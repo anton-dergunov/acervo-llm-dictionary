@@ -57,6 +57,97 @@
     "language": "ja",
     "headword": "幸運",
     "lemma": "幸運",
+    "reading": "こううん",
+    "ipa": "koːɯɴ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍀",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "good luck; good fortune",
+    "primaryGloss": "good luck",
+    "emotion": "a warm, gentle sense of being blessed by circumstances, smiling to oneself",
+    "notes": [
+      "Also used as a na-adjective (幸運な, kōun na) meaning 'lucky' or 'fortunate'.",
+      "Distinguish from 幸せ (shiawase), which focuses on personal happiness and emotional well-being rather than luck."
+    ],
+    "senses": [
+      {
+        "id": "bkiknc1ive4v39h",
+        "order": 0,
+        "definition": "Good luck or favorable circumstances that bring a good result.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good luck",
+              "good fortune",
+              "fortune"
+            ]
+          }
+        ],
+        "domain": "luck",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "3vwirqdy7kbkyl3",
+            "text": "宝くじに当たったのはすごい幸運だ。",
+            "textLang": "ja",
+            "translation": "Winning the lottery is incredible good luck.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and slightly disbelieving, caught in a moment of pure serendipity",
+            "note": null,
+            "matchedForm": "幸運",
+            "matchedTranslationForm": "good luck"
+          },
+          {
+            "id": "mk8t5shk6370s7v",
+            "text": "良い友人に恵まれるのは幸運なことです。",
+            "textLang": "ja",
+            "translation": "It is fortunate to be blessed with good friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "grateful and reflective, speaking with genuine warmth and appreciation",
+            "note": null,
+            "matchedForm": "幸運",
+            "matchedTranslationForm": "fortunate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "幸運",
+    "lemma": "幸運",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading こううん for a kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(state) The state of being fortunate or having good things happen",
+        "why": "Oversplit of a single meaning; sense 1 just shows its na-adjective usage and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "幸運 (kōun) refers to the state or quality of having good luck",
+        "why": "Restates the definition without adding usage info like its na-adjective function."
+      }
+    ],
+    "growth": 0.75
   }
 }

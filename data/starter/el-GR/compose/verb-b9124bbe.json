@@ -74,6 +74,114 @@
     "primaryGloss": "read",
     "emotion": "focused and quiet, turning a page to see what happens next",
     "notes": [
+      "Covers both reading a text and studying for school or exams; used without an object, 'διαβάζω' usually means 'I am studying'.",
+      "Aorist: διάβασα (subjunctive: να διαβάσω)."
+    ],
+    "senses": [
+      {
+        "id": "nr4vlow1607w2rz",
+        "order": 0,
+        "definition": "To look at written words and understand what they mean.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "read"
+            ]
+          }
+        ],
+        "domain": "reading",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "p27vuxoiha7qule",
+            "text": "Διαβάζω ένα πολύ ενδιαφέρον βιβλίο.",
+            "textLang": "el",
+            "translation": "I am reading a very interesting book.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "absorbed in a good story, speaking in a calm and steady voice",
+            "note": null,
+            "matchedForm": "Διαβάζω",
+            "matchedTranslationForm": "reading"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mmvyleg8pksctqi",
+        "order": 1,
+        "definition": "To spend time learning and preparing for a class or exam.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "study"
+            ]
+          }
+        ],
+        "domain": "studying",
+        "emoji": "📚",
+        "examples": [
+          {
+            "id": "6scx2ulpj88xqwv",
+            "text": "Πρέπει να διαβάσω μαθηματικά για αύριο.",
+            "textLang": "el",
+            "translation": "I have to study math for tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "διαβάσω",
+            "matchedTranslationForm": "study"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "διαβάζω",
+    "lemma": "διαβάζω",
+    "reading": null,
+    "ipa": "/ði.aˈva.zo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📖",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to read; to study",
+    "primaryGloss": "read",
+    "emotion": "focused and quiet, turning a page to see what happens next",
+    "notes": [
       "Διαβάζω covers both reading a book or article and studying for school or university exams. Context will tell you which one is meant."
     ],
     "senses": [
@@ -160,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Πρέπει να διαβάζω για τα μαθηματικά αύριο.",
+        "why": "Wrong aspect: a single obligation for tomorrow requires the perfective subjunctive 'να διαβάσω', not imperfective 'να διαβάζω'."
+      }
+    ],
+    "growth": 1.059
   }
 }

@@ -68,6 +68,155 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "with; by; and",
+    "primaryGloss": "with",
+    "emotion": null,
+    "notes": [
+      "Usually attached to the preceding word as the suffix -(y)le or -(y)la according to vowel harmony (e.g., 'otobüsle', 'arabayla')."
+    ],
+    "senses": [
+      {
+        "id": "hw00614d72rhw5y",
+        "order": 0,
+        "definition": "Accompanied by or in the company of someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "with",
+              "together with"
+            ]
+          }
+        ],
+        "domain": "together",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "n4nfxz4o08ndcfn",
+            "text": "Arkadaşım ile sinemaya gittim.",
+            "textLang": "tr",
+            "translation": "I went to the cinema with my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and conversational, sharing a simple plan",
+            "note": null,
+            "matchedForm": "ile",
+            "matchedTranslationForm": "with"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u2priljnnbs9a8t",
+        "order": 1,
+        "definition": "By means of or using a tool, vehicle, or method.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "by",
+              "with"
+            ]
+          }
+        ],
+        "domain": "instrument",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "3nvkyq73h011nch",
+            "text": "İşe otobüs ile gidiyorum.",
+            "textLang": "tr",
+            "translation": "I go to work by bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a daily commute",
+            "note": null,
+            "matchedForm": "ile",
+            "matchedTranslationForm": "by"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "acmaqamxa8kp1pt",
+        "order": 2,
+        "definition": "Used to connect two nouns or pronouns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "and"
+            ]
+          }
+        ],
+        "domain": "conjunction",
+        "emoji": "➕",
+        "examples": [
+          {
+            "id": "mu6jp67vwy20k7e",
+            "text": "Çay ile kahve sipariş ettik.",
+            "textLang": "tr",
+            "translation": "We ordered tea and coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and polite, ordering at a café",
+            "note": null,
+            "matchedForm": "ile",
+            "matchedTranslationForm": "and"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ile",
+    "lemma": "ile",
+    "reading": null,
+    "ipa": "/iˈle/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "with; and; by means of",
     "primaryGloss": "with",
     "emotion": null,
@@ -201,5 +350,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "(-le/-la or -yile/-yila after vowels)",
+        "why": "The clitic form after vowels is -(y)le/-(y)la, not -yile/-yila."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[2].definition",
+        "quote": "Connecting words or clauses in the sense of 'and'.",
+        "why": "'İle' as a conjunction only connects nouns/pronouns, never clauses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used as 'and', it connects nouns similarly to 'and' in English.",
+        "why": "Repeats sense 2 without adding new grammar or usage help."
+      }
+    ],
+    "growth": 0.836
   }
 }

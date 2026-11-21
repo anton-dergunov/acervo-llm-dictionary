@@ -71,6 +71,75 @@
     "shortGloss": "plate; dish",
     "primaryGloss": "plate",
     "emotion": "setting the table with warm food for dinner, eager and welcoming",
+    "notes": [
+      "The final -k softens to -ğ- when a suffix starting with a vowel is added (e.g., tabağı, tabağa).",
+      "Often used as a measure word for a serving of food: bir tabak çorba (a bowl/plate of soup)."
+    ],
+    "senses": [
+      {
+        "id": "ktz1uit5h4tmspz",
+        "order": 0,
+        "definition": "A flat, usually round dish that you eat food from or serve food on, or the amount of food it holds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "plate",
+              "dish"
+            ]
+          }
+        ],
+        "domain": "tableware",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "w2a8uoy9d42umck",
+            "text": "Masaya sıcak bir tabak çorba koydu.",
+            "textLang": "tr",
+            "translation": "She put a warm bowl of soup on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tabak",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tabak",
+    "lemma": "tabak",
+    "reading": null,
+    "ipa": "/taˈbak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "plate; dish",
+    "primaryGloss": "plate",
+    "emotion": "setting the table with warm food for dinner, eager and welcoming",
     "notes": [],
     "senses": [
       {
@@ -159,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(layer) A layer of something spread over a surface",
+        "why": "Confuses 'tabak' (plate) with 'tabaka' (layer/sheet)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yemek masaya sıcak bir tabak çorba koydu.",
+        "why": "Ungrammatical noun compound; 'dining table' is 'yemek masasına', not 'yemek masaya'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs a note on consonant softening (tabak -> tabağı) before vowels."
+      }
+    ],
+    "growth": 1.137
   }
 }

@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "viejo; antiguo; de ... años",
+    "primaryGloss": "viejo",
+    "emotion": "warm and reflective, thinking about someone who has lived a long time",
+    "notes": [
+      "Para expresar la edad en inglés se usa el verbo 'be' (ser/estar) y no 'have' (tener): 'I am twenty years old' (Tengo veinte años).",
+      "También se usa delante de un sustantivo para referirse a algo anterior o del pasado (por ejemplo, 'my old job' = mi antiguo trabajo)."
+    ],
+    "senses": [
+      {
+        "id": "bpn6d8ojzjvzrtd",
+        "order": 0,
+        "definition": "Que ha vivido o existido durante mucho tiempo, o que ya no es nuevo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "viejo",
+              "antiguo",
+              "anciano"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "aeiu3lnuo72ww43",
+            "text": "My grandfather is a very old man.",
+            "textLang": "en",
+            "translation": "Mi abuelo es un hombre muy mayor.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and respectful, speaking of an elder",
+            "note": null,
+            "matchedForm": "old",
+            "matchedTranslationForm": "mayor"
+          },
+          {
+            "id": "ti23my6urumfjgw",
+            "text": "They live in an old house near the river.",
+            "textLang": "en",
+            "translation": "Viven en una casa antigua cerca del río.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "describing a charming place with history",
+            "note": null,
+            "matchedForm": "old",
+            "matchedTranslationForm": "antigua"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nfbq4esf0shatr0",
+        "order": 1,
+        "definition": "Que tiene una edad determinada.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "de ... años",
+              "de edad"
+            ]
+          }
+        ],
+        "domain": "años cumplidos",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "j64j4afxsj5w1ex",
+            "text": "My sister is ten years old.",
+            "textLang": "en",
+            "translation": "Mi hermana tiene diez años.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "simple and matter-of-fact, stating a child's age",
+            "note": null,
+            "matchedForm": "old",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "old",
+    "lemma": "old",
+    "reading": null,
+    "ipa": "/oʊld/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "viejo; de edad avanzada; antiguo",
     "primaryGloss": "viejo",
     "emotion": "warm and reflective, thinking about someone who has lived a long time",
@@ -202,5 +334,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (edad) Que ha vivido o existido... [1] (antigüedad) Que fue hecho",
+        "why": "Senses 0 and 1 overlap (both cover objects); better split as 'aged/not new' vs 'specific age'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para personas y animales como para cosas que llevan",
+        "why": "Restates the definitions; misses the key contrast for Spanish speakers (ser vs. tener años)."
+      }
+    ],
+    "growth": 1.254
   }
 }

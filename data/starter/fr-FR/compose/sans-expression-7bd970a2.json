@@ -68,6 +68,95 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Usually followed directly by a noun with no article where English uses 'a' or 'any' (sans sucre, sans veste). A definite article or possessive is kept when the noun is specific (sans le livre, sans mes clés).",
+      "Followed by the infinitive when it means 'without doing something' (sans dire un mot)."
+    ],
+    "senses": [
+      {
+        "id": "widjqrjw3gy1lpq",
+        "order": 0,
+        "definition": "Not having, using, or accompanied by someone or something; not doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "ls7ib30g2sih7w0",
+            "text": "Je prends mon café sans sucre.",
+            "textLang": "fr",
+            "translation": "I take my coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and casual, stating a simple personal preference",
+            "note": null,
+            "matchedForm": "sans",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "ot9z6j5okahwq73",
+            "text": "Il est parti sans dire au revoir.",
+            "textLang": "fr",
+            "translation": "He left without saying goodbye.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and slightly annoyed by someone's sudden departure",
+            "note": null,
+            "matchedForm": "sans",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "sans",
+    "lemma": "sans",
+    "reading": null,
+    "ipa": "/sɑ̃/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "without; lacking",
     "primaryGloss": "without",
     "emotion": null,
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'sans' is a single-word preposition, not an expression."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or plural with a determiner, you may see 'sans les' or 'sans des'",
+        "why": "'sans des' is normally ungrammatical; 'sans' drops indefinite and partitive articles."
+      }
+    ],
+    "growth": 1.249
   }
 }

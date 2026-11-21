@@ -70,6 +70,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "mountain; pile, heap",
+    "primaryGloss": "mountain",
+    "emotion": "standing in awe before a grand, towering landscape",
+    "notes": [
+      "Read さん (or ざん) after a mountain's name, as in 富士山 (ふじさん, Mt. Fuji)."
+    ],
+    "senses": [
+      {
+        "id": "seax44mxb617p0m",
+        "order": 0,
+        "definition": "A large natural elevation of the earth's surface; a mountain or hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "hill"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "1tolcneis3vn8ki",
+            "text": "高い山に登ります。",
+            "textLang": "ja",
+            "translation": "I will climb a high mountain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and looking forward to the challenge",
+            "note": null,
+            "matchedForm": "山",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2lbfj1mos337087",
+        "order": 1,
+        "definition": "A large pile or heap of things; a large amount of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pile",
+              "heap",
+              "mountain"
+            ]
+          }
+        ],
+        "domain": "amount",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vmtkg48cdid47ao",
+            "text": "机の上に本の山があります。",
+            "textLang": "ja",
+            "translation": "There is a pile of books on the desk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "山",
+            "matchedTranslationForm": "pile"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "山",
+    "lemma": "山",
+    "reading": "やま",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "mountain; a very high hill",
     "primaryGloss": "mountain",
     "emotion": "standing in awe before a grand, towering landscape",
@@ -160,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A very high, steep hill.",
+        "why": "Artificial split; 'mountain' and 'hill' are one sense of 山."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The village is surrounded by a very high hill.",
+        "why": "Unnatural English ('surrounded by a hill') forced to match the oversplit gloss."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common everyday sense 'pile, heap' (and figuratively 'climax/peak')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'yama' is primarily used for a mountain, it is also",
+        "why": "Restates the oversplit sense instead of noting the on'yomi reading さん for named mountains."
+      }
+    ],
+    "growth": 0.856
   }
 }

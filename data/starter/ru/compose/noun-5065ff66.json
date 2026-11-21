@@ -72,6 +72,73 @@
     "primaryGloss": "plant",
     "emotion": "calm and grounded, pointing out something green growing in the soil",
     "notes": [
+      "Used only for living plants; a 'plant' in the sense of a factory is 'завод' or 'фабрика'."
+    ],
+    "senses": [
+      {
+        "id": "1uimmdc5c8m3vw1",
+        "order": 0,
+        "definition": "A living thing that grows in soil or water and usually has leaves, stems, and roots.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "plant"
+            ]
+          }
+        ],
+        "domain": "biology",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "5j4js3dfaexuaps",
+            "text": "Комнатное растение стоит на подоконнике.",
+            "textLang": "ru",
+            "translation": "The houseplant is on the windowsill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and domestic, admiring a green shoot",
+            "note": null,
+            "matchedForm": "растение",
+            "matchedTranslationForm": "houseplant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "растение",
+    "lemma": "растение",
+    "reading": null,
+    "ipa": "/rɐˈstʲenʲɪɪ̯ə/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "plant",
+    "primaryGloss": "plant",
+    "emotion": "calm and grounded, pointing out something green growing in the soil",
+    "notes": [
       "Do not confuse with 'рост' (height or growth), which relates to how tall something is."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse with 'рост' (height or growth)",
+        "why": "Unlikely confusion for beginners; should instead contrast with 'завод' (factory/plant)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The houseplant is standing on the windowsill.",
+        "why": "Calque of Russian 'стоит'; in natural English a plant 'is' or 'sits' on a windowsill."
+      }
+    ],
+    "growth": 0.992
   }
 }

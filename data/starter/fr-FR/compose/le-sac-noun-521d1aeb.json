@@ -74,6 +74,95 @@
     "primaryGloss": "bag",
     "emotion": null,
     "notes": [
+      "Used for all kinds of bags, often specified with 'à' or 'de': 'un sac à main' (handbag), 'un sac à dos' (backpack), 'un sac de voyage' (travel bag)."
+    ],
+    "senses": [
+      {
+        "id": "6u1alx2kym04vdb",
+        "order": 0,
+        "definition": "A flexible container made of cloth, plastic, paper, or leather used for carrying things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bag",
+              "sack"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "rgk2bn7q5iblz80",
+            "text": "J'ai oublié mes clés dans mon sac.",
+            "textLang": "fr",
+            "translation": "I left my keys in my bag.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and searching frantically through pockets and belongings",
+            "note": null,
+            "matchedForm": "sac",
+            "matchedTranslationForm": "bag"
+          },
+          {
+            "id": "qjs0qbfo5e48fvc",
+            "text": "Il prépare son sac pour le week-end.",
+            "textLang": "fr",
+            "translation": "He is packing his bag for the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and hurried, tossing clothes into the luggage",
+            "note": null,
+            "matchedForm": "sac",
+            "matchedTranslationForm": "bag"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "le sac",
+    "lemma": "sac",
+    "reading": null,
+    "ipa": "/sak/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👜",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "bag; sack",
+    "primaryGloss": "bag",
+    "emotion": null,
+    "notes": [
       "Use 'le sac' for everything from a small handbag to a plastic grocery bag or a school backpack.",
       "Do not confuse with 'la poche', which means a pocket on your clothing."
     ],
@@ -163,5 +252,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:51Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(travel) A large piece of luggage used for traveling.",
+        "why": "A travel bag is just a specific use of sense 0, not a separate meaning."
+      }
+    ],
+    "growth": 0.852
   }
 }

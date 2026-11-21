@@ -59,6 +59,76 @@
     "language": "ja",
     "headword": "部屋",
     "lemma": "部屋",
+    "reading": "へや",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "room; apartment",
+    "primaryGloss": "room",
+    "emotion": null,
+    "notes": [
+      "The reading へや is irregular (jukujikun) and must be memorized as a whole.",
+      "Can also refer to a whole one-room apartment or rented flat (e.g., 部屋を借りる, to rent an apartment)."
+    ],
+    "senses": [
+      {
+        "id": "93vcs4q2czodx1e",
+        "order": 0,
+        "definition": "A space inside a building that is enclosed by walls, or an apartment unit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room",
+              "apartment",
+              "flat"
+            ]
+          }
+        ],
+        "domain": "housing",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "28iid1mgpun5mfw",
+            "text": "私の部屋は二階にあります。",
+            "textLang": "ja",
+            "translation": "My room is on the second floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "部屋",
+            "matchedTranslationForm": "room"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "部屋",
+    "lemma": "部屋",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -99,5 +169,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (へや) for a kanji headword (ateji reading)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use this for a general space within a building that is enclosed",
+        "why": "Restates the definition without adding linguistic information."
+      }
+    ],
+    "growth": 1.27
   }
 }

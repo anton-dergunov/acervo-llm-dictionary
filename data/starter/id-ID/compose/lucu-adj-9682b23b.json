@@ -72,6 +72,116 @@
     "primaryGloss": "funny",
     "emotion": "amused and smiling, ready to share a good joke",
     "notes": [
+      "Often used for small children, pets, or objects to mean 'cute' rather than 'humorous'; context makes the meaning clear."
+    ],
+    "senses": [
+      {
+        "id": "rmg0d2tl7cbqrny",
+        "order": 0,
+        "definition": "Causing laughter or amusement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "funny",
+              "amusing",
+              "hilarious"
+            ]
+          }
+        ],
+        "domain": "humor",
+        "emoji": "😂",
+        "examples": [
+          {
+            "id": "421mnd32mstw3c3",
+            "text": "Film itu sangat lucu sampai saya tertawa terbahak-bahak.",
+            "textLang": "id",
+            "translation": "That movie was so funny that I burst out laughing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "chuckling warmly, remembering a genuinely good comedy",
+            "note": null,
+            "matchedForm": "lucu",
+            "matchedTranslationForm": "funny"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wdp2dpc9rdp4zx9",
+        "order": 1,
+        "definition": "Endearing and charming, especially of children, animals, or small things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cute",
+              "adorable"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "🥺",
+        "examples": [
+          {
+            "id": "jkopnkwejpq6ace",
+            "text": "Lihat kucing kecil itu, lucu sekali!",
+            "textLang": "id",
+            "translation": "Look at that little cat, it is so cute!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lucu",
+            "matchedTranslationForm": "cute"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "lucu",
+    "lemma": "lucu",
+    "reading": null,
+    "ipa": "/ˈlutʃu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "funny; cute",
+    "primaryGloss": "funny",
+    "emotion": "amused and smiling, ready to share a good joke",
+    "notes": [
       "While 'lucu' primarily means funny, it is also frequently used to describe things or people that are cute or adorable in an endearing way.",
       "Do not confuse it with 'aneh', which means strange or weird rather than humorous."
     ],
@@ -162,5 +272,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "text.corrupt",
+        "path": "senses[0].glosses",
+        "quote": "funny, amusing, hilarous",
+        "why": "Typo in gloss: 'hilarous' instead of 'hilarious'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "That movie was so funny until I laughed out loud.",
+        "why": "Calqued 'sampai' as 'until'; in English result clauses it translates to 'that'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Lihat kucing kecil itu, sangat lucu sekali.",
+        "why": "'Sangat ... sekali' is a redundant double intensifier."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'lucu' primarily means funny, it is also frequently used",
+        "why": "merely restates the two senses already given in the entry."
+      }
+    ],
+    "growth": 0.856
   }
 }

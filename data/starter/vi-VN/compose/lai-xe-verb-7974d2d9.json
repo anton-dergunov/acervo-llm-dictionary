@@ -58,6 +58,97 @@
     "headword": "lái xe",
     "lemma": "lái xe",
     "reading": null,
+    "ipa": "/laːj˧˦ sɛ˧˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Actions",
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "to drive (a vehicle)",
+    "primaryGloss": "to drive",
+    "emotion": "focused and alert, watching the road ahead",
+    "notes": [
+      "Literally 'to steer a vehicle'; used for driving cars, buses, or trucks, and often for riding motorbikes.",
+      "Can also be used as a noun meaning 'driver' (e.g. 'người lái xe'), alongside 'tài xế'."
+    ],
+    "senses": [
+      {
+        "id": "2vgb1tcl7ak4wy7",
+        "order": 0,
+        "definition": "To operate and control the movement of a car or other road vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to drive",
+              "to drive a car"
+            ]
+          }
+        ],
+        "domain": "driving",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "8j2exk8iur32rmi",
+            "text": "Tôi học lái xe vào năm ngoái.",
+            "textLang": "vi",
+            "translation": "I learned to drive last year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud of a new skill, recalling the accomplishment",
+            "note": null,
+            "matchedForm": "lái xe",
+            "matchedTranslationForm": "drive"
+          },
+          {
+            "id": "blblo6qpijzv5pb",
+            "text": "Anh ấy lái xe buýt ở Hà Nội.",
+            "textLang": "vi",
+            "translation": "He drives a bus in Hanoi.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lái xe",
+            "matchedTranslationForm": "drives"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "lái xe",
+    "lemma": "lái xe",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -160,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A person whose job is to drive a vehicle",
+        "why": "Defines a noun inside a verb entry; the example uses 'lái xe' as a verb."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anh ấy là tài xế lái xe buýt.",
+        "why": "'Tài xế' means driver; 'lái xe buýt' here is a verb phrase modifying it."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Can function both as a verb meaning 'to drive'",
+        "why": "Merely restates the glosses without adding usage information."
+      }
+    ],
+    "growth": 1.22
   }
 }

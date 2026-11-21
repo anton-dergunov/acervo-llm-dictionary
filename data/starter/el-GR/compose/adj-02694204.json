@@ -58,6 +58,96 @@
     "headword": "επικίνδυνος",
     "lemma": "επικίνδυνος",
     "reading": null,
+    "ipa": "/e.piˈcin.ði.nos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "dangerous; risky",
+    "primaryGloss": "dangerous",
+    "emotion": "serious and cautious, warning someone of a real threat",
+    "notes": [
+      "Used both for physical danger and for risky actions or decisions."
+    ],
+    "senses": [
+      {
+        "id": "mrsjbqr7rjzxc6x",
+        "order": 0,
+        "definition": "Likely to cause harm, injury, or serious problems.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "hazardous",
+              "risky"
+            ]
+          }
+        ],
+        "domain": "safety",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "5ngerwnq75t09fp",
+            "text": "Ο παγωμένος δρόμος είναι επικίνδυνος για τους οδηγούς.",
+            "textLang": "el",
+            "translation": "The icy road is dangerous for drivers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "επικίνδυνος",
+            "matchedTranslationForm": "dangerous"
+          },
+          {
+            "id": "3sofl36l0i6ya8q",
+            "text": "Είναι επικίνδυνο να οδηγείς τόσο γρήγορα.",
+            "textLang": "el",
+            "translation": "It is dangerous to drive so fast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "επικίνδυνο",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "επικίνδυνος",
+    "lemma": "επικίνδυνος",
+    "reading": null,
     "ipa": "/e.piˈci.ði.nos/",
     "pos": "adj",
     "gender": null,
@@ -160,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Το ολισθηρό δρόμος είναι επικίνδυνος για τους οδηγούς.",
+        "why": "Ungrammatical gender agreement: 'δρόμος' is masculine ('Ο ολισθηρός δρόμος'), not neuter."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/e.piˈci.ði.nos/",
+        "why": "Missing nasal/stop for 'νδ'; standard pronunciation is /epiˈcinðinos/ or /epiˈciðinos/, best shown with nasal."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(risk) Involving a high level of risk or uncertainty",
+        "why": "Shades of one meaning ('dangerous / risky'); Note 0 even contradicts Sense 1."
+      }
+    ],
+    "growth": 0.534
   }
 }

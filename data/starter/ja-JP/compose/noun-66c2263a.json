@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "spider",
+    "primaryGloss": "spider",
+    "emotion": "matter-of-fact and slightly wary, perhaps pointing it out on a wall",
+    "notes": [
+      "Often written in katakana (クモ) or hiragana (くも) because the kanji 蜘蛛 is difficult. Not to be confused with 雲 (くも, 'cloud')."
+    ],
+    "senses": [
+      {
+        "id": "0g1vzag5fahrlcv",
+        "order": 0,
+        "definition": "A small eight-legged creature that spins webs to catch insects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spider"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🕷️",
+        "examples": [
+          {
+            "id": "ndqjz8ei9u6jj4k",
+            "text": "部屋の隅に小さなクモがいます。",
+            "textLang": "ja",
+            "translation": "There is a small spider in the corner of the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit startled or cautious, noticing something in the house",
+            "note": null,
+            "matchedForm": "クモ",
+            "matchedTranslationForm": "spider"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "クモ",
+    "lemma": "クモ",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕷️",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "spider; cloud",
     "primaryGloss": "spider",
     "emotion": "matter-of-fact and slightly wary, perhaps pointing it out on a wall",
@@ -158,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(cloud) Water vapor in the sky that forms white or grey masses.",
+        "why": "Katakana クモ is standard for the animal 'spider'; 'cloud' is written 雲 or くも, not クモ."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "空に白いクモが浮かんでいます。",
+        "why": "Writing 'cloud' in katakana (クモ) makes the sentence read 'white spiders floating in the sky'."
+      }
+    ],
+    "growth": 0.591
   }
 }

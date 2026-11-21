@@ -68,6 +68,95 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "corner",
+    "primaryGloss": "corner",
+    "emotion": "standing at the edge of a busy street waiting to cross",
+    "notes": [
+      "Because the word ends in a vowel, it takes the buffer consonant -y- before vowel-initial suffixes: köşeye (to the corner), köşeyi (the corner)."
+    ],
+    "senses": [
+      {
+        "id": "jdex9yq38l5kpqv",
+        "order": 0,
+        "definition": "A place or angle where two edges, walls, or streets meet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "corner",
+              "street corner"
+            ]
+          }
+        ],
+        "domain": "space",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "kbsxhm5vvgynme4",
+            "text": "Koltuğu odanın köşesine koyduk.",
+            "textLang": "tr",
+            "translation": "We put the armchair in the corner of the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied with how the furniture fits",
+            "note": null,
+            "matchedForm": "köşesine",
+            "matchedTranslationForm": "corner"
+          },
+          {
+            "id": "64gcm7wfr9u8x44",
+            "text": "Marketin köşesinde buluşalım.",
+            "textLang": "tr",
+            "translation": "Let's meet at the corner by the market.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and making plans with a friend",
+            "note": null,
+            "matchedForm": "köşesinde",
+            "matchedTranslationForm": "corner"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "köşe",
+    "lemma": "köşe",
+    "reading": null,
+    "ipa": "/cœˈʃe/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📐",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "corner; street corner",
     "primaryGloss": "corner",
     "emotion": "standing at the edge of a busy street waiting to cross",
@@ -159,5 +248,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Indoor, object, and street corners are all one concept in both Turkish and English."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both indoor corners of a room and outdoor street corners.",
+        "why": "Simply restates the two senses; English 'corner' works the exact same way."
+      }
+    ],
+    "growth": 1.022
   }
 }

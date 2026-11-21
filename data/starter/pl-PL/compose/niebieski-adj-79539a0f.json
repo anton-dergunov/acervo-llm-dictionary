@@ -72,6 +72,73 @@
     "primaryGloss": "blue",
     "emotion": "calm and bright, looking up at a cloudless summer sky",
     "notes": [
+      "Polish distinguishes between general blue ('niebieski'), dark/navy blue ('granatowy'), and sky/light blue ('błękitny')."
+    ],
+    "senses": [
+      {
+        "id": "sxh6ge9tpreiip7",
+        "order": 0,
+        "definition": "Having the colour of a clear daytime sky.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🟦",
+        "examples": [
+          {
+            "id": "8b4fzhkcg31lo5l",
+            "text": "Dzisiaj niebo jest całkowicie niebieskie.",
+            "textLang": "pl",
+            "translation": "Today the sky is completely blue.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and relaxed on a fine day outdoors",
+            "note": null,
+            "matchedForm": "niebieskie",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "niebieski",
+    "lemma": "niebieski",
+    "reading": null,
+    "ipa": "/ɲɛˈbjɛs.ki/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": "calm and bright, looking up at a cloudless summer sky",
+    "notes": [
       "In Polish, 'niebieski' is specifically used for light blue, like the color of the sky. For a darker, navy blue, Poles use 'granatowy'."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "In Polish, 'niebieski' is specifically used for light blue, like the",
+        "why": "False: 'niebieski' is general blue; light/sky blue is 'błękitny' or 'jasnoniebieski', while navy is 'granatowy'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of a clear daytime sky.",
+        "why": "Defined as a noun ('The colour...') instead of an adjective ('Having the colour...')."
+      }
+    ],
+    "growth": 0.968
   }
 }

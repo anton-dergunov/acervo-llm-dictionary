@@ -57,6 +57,73 @@
     "language": "ja",
     "headword": "歌う",
     "lemma": "歌う",
+    "reading": "うたう",
+    "ipa": "ɯtaɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sing",
+    "primaryGloss": "sing",
+    "emotion": "joyful and expressive, naturally sharing a melody with others",
+    "notes": [
+      "A godan verb: the negative form uses わ (歌わない, utawanai), and the te-form is 歌って (utatte)."
+    ],
+    "senses": [
+      {
+        "id": "uuvnqontvp8cwrs",
+        "order": 0,
+        "definition": "To make musical sounds with the voice; to perform a song.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sing"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎤",
+        "examples": [
+          {
+            "id": "zbgse09ptxm0ufc",
+            "text": "カラオケで歌うのが好きです。",
+            "textLang": "ja",
+            "translation": "I like singing at karaoke.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and relaxed, enjoying a fun hobby with friends",
+            "note": null,
+            "matchedForm": "歌う",
+            "matchedTranslationForm": "singing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "歌う",
+    "lemma": "歌う",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a word written with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To recite a poem or lyrics in a rhythmic, lyrical way.",
+        "why": "Poetic sense (usually written 詠う/謳う) is not for A2; example actually uses sense 0."
+      }
+    ],
+    "growth": 0.47
   }
 }

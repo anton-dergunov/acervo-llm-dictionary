@@ -72,6 +72,114 @@
     "primaryGloss": "grass",
     "emotion": "calm and fresh, sitting in a green park",
     "notes": [
+      "A collective noun; for a single blade of grass or a single herb, use عُشْبَة (ʿušba). The plural is أَعْشَاب (ʾaʿšāb), commonly used for herbs."
+    ],
+    "senses": [
+      {
+        "id": "vypymhbygtpun8a",
+        "order": 0,
+        "definition": "Low green plants that cover the ground in gardens, parks, and fields.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "grass",
+              "lawn"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "loa0fwxdsvcegjo",
+            "text": "جَلَسْنَا عَلَى الْعُشْبِ الْأَخْضَرِ فِي الْحَدِيقَةِ.",
+            "textLang": "ar",
+            "translation": "We sat on the green grass in the park.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْعُشْبِ",
+            "matchedTranslationForm": "grass"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qny78a4twlv1vx7",
+        "order": 1,
+        "definition": "Small plants used in cooking or medicine, especially in the plural أَعْشَاب.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "herb"
+            ]
+          }
+        ],
+        "domain": "cooking, medicine",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "yg8ibpfvl1f43b2",
+            "text": "تَنْمُو الْأَعْشَابُ الطِّبِّيَّةُ فِي الْجِبَالِ.",
+            "textLang": "ar",
+            "translation": "Medicinal herbs grow in the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "الْأَعْشَابُ",
+            "matchedTranslationForm": "herbs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "عُشْب",
+    "lemma": "عُشْب",
+    "reading": null,
+    "ipa": "/ʕuʃb/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "grass; herb",
+    "primaryGloss": "grass",
+    "emotion": "calm and fresh, sitting in a green park",
+    "notes": [
       "Used for grass and small green plants that cover the ground.",
       "For a single blade of grass, use عُشْبَة."
     ],
@@ -161,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for grass and small green plants that cover the ground.",
+        "why": "merely restates the definition of the first sense."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "herb, weeds",
+        "why": "'weeds' contradicts the definition of useful cooking or medicinal plants."
+      }
+    ],
+    "growth": 1.347
   }
 }

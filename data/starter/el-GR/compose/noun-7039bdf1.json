@@ -71,6 +71,115 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "beach; waterfront",
+    "primaryGloss": "beach",
+    "emotion": "relaxed and sunny, feeling the warm sand underfoot",
+    "notes": [],
+    "senses": [
+      {
+        "id": "l56zv0fjy5pg587",
+        "order": 0,
+        "definition": "The sandy or stony shore by the sea where people go to swim and sunbathe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beach",
+              "seashore"
+            ]
+          }
+        ],
+        "domain": "beach",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "k4molk2cuw3eksx",
+            "text": "Το καλοκαίρι πηγαίνουμε κάθε μέρα στην παραλία.",
+            "textLang": "el",
+            "translation": "In the summer we go to the beach every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and carefree, looking forward to a sunny day",
+            "note": null,
+            "matchedForm": "παραλία",
+            "matchedTranslationForm": "beach"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "g27qf7k3l7ichai",
+        "order": 1,
+        "definition": "A street or promenade running alongside the sea in a town or city, usually lined with cafés and shops.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "waterfront",
+              "promenade",
+              "seafront"
+            ]
+          }
+        ],
+        "domain": "waterfront",
+        "emoji": "🌊",
+        "examples": [
+          {
+            "id": "dro40stu5sf7nt0",
+            "text": "Κάνουμε μια βόλτα στην παραλία το απόγευμα.",
+            "textLang": "el",
+            "translation": "We are taking a walk along the waterfront in the afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and unhurried, enjoying an evening stroll",
+            "note": null,
+            "matchedForm": "παραλία",
+            "matchedTranslationForm": "waterfront"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "η παραλία",
+    "lemma": "παραλία",
+    "reading": null,
+    "ipa": "/paɾaˈli.a/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "beach; coast",
     "primaryGloss": "beach",
     "emotion": "relaxed and sunny, feeling the warm sand underfoot",
@@ -164,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "beach; coast",
+        "why": "'coast' does not match sense 1 (waterfront promenade), while 'waterfront' is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to talk about both the sandy shore where people sunbathe",
+        "why": "Merely repeats the definitions of the two senses without adding usage information."
+      }
+    ],
+    "growth": 0.819
   }
 }

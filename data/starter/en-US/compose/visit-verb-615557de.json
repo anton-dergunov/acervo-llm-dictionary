@@ -72,6 +72,96 @@
     "primaryGloss": "visitar",
     "emotion": "warm and welcoming, looking forward to seeing someone",
     "notes": [
+      "A diferencia del español (visitar a alguien), en inglés 'visit' se usa directamente sin preposición antes de la persona: 'visit my grandmother'."
+    ],
+    "senses": [
+      {
+        "id": "ww1cdpee1bn0hby",
+        "order": 0,
+        "definition": "Ir a ver a una persona o ir a pasar un tiempo en un lugar.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "visitar",
+              "ir a ver",
+              "conocer"
+            ]
+          }
+        ],
+        "domain": "general",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "a6b9810xafaqbv7",
+            "text": "I want to visit my grandmother this weekend.",
+            "textLang": "en",
+            "translation": "Quiero visitar a mi abuela este fin de semana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and excited about seeing family",
+            "note": null,
+            "matchedForm": "visit",
+            "matchedTranslationForm": "visitar"
+          },
+          {
+            "id": "eq4vh5ylqq6x1y8",
+            "text": "They plan to visit Paris next summer.",
+            "textLang": "en",
+            "translation": "Ellos planean visitar París el próximo verano.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic about an upcoming trip",
+            "note": null,
+            "matchedForm": "visit",
+            "matchedTranslationForm": "visitar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "visit",
+    "lemma": "visit",
+    "reading": null,
+    "ipa": "/ˈvɪzɪt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "visitar; ir a ver",
+    "primaryGloss": "visitar",
+    "emotion": "warm and welcoming, looking forward to seeing someone",
+    "notes": [
       "A diferencia del español, en inglés el verbo 'visit' se usa directamente sin la preposición 'to' cuando vas a un lugar o persona."
     ],
     "senses": [
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (person) Ir a ver a una persona ... [1] (place) Ir a un lugar",
+        "why": "Visiting a person and visiting a place are the same basic meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "sin la preposición 'to' cuando vas a un lugar",
+        "why": "Spanish 'visitar' does not use 'a' with places either, only with people."
+      }
+    ],
+    "growth": 0.904
   }
 }

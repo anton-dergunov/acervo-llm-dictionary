@@ -58,6 +58,84 @@
     "headword": "la toalla",
     "lemma": "toalla",
     "reading": null,
+    "ipa": "/toˈa.ʝa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧻",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "towel",
+    "primaryGloss": "towel",
+    "emotion": "fresh and relaxed, stepping out of a warm shower",
+    "notes": [
+      "In everyday Mexican speech, the 'oa' is often pronounced like 'ua' (/ˈtwa.ʝa/).",
+      "In compound phrases, 'toalla femenina' or 'toalla sanitaria' means 'sanitary pad'."
+    ],
+    "senses": [
+      {
+        "id": "xusmusor9rnjlzg",
+        "order": 0,
+        "definition": "A piece of absorbent cloth or paper used for drying your body or wet things.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "towel"
+            ]
+          }
+        ],
+        "domain": "bathroom",
+        "emoji": "🛁",
+        "examples": [
+          {
+            "id": "othvsdkehmzyuiz",
+            "text": "Necesito una toalla limpia para secarme después de bañarme.",
+            "textLang": "es",
+            "translation": "I need a clean towel to dry myself off after showering.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "toalla",
+            "matchedTranslationForm": "towel"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "xusmusor9rnjlzg",
+      "from": "Pieza de tela o papel absorbente que se usa para secar el cuerpo o las cosas mojadas.",
+      "to": "A piece of absorbent cloth or paper used to dry the body or wet things.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:11Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la toalla",
+    "lemma": "toalla",
+    "reading": null,
     "ipa": "/toˈa.ʎa/",
     "pos": "noun",
     "gender": "feminine",
@@ -119,14 +197,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "xusmusor9rnjlzg",
-      "from": "Pieza de tela o papel absorbente que se usa para secar el cuerpo o las cosas mojadas.",
-      "to": "A piece of absorbent cloth or paper used to dry the body or wet things.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:11Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/toˈa.ʎa/",
+        "why": "Mexican Spanish is yeísta (/ʝ/, not /ʎ/), and 'oa' typically forms a hiatus or glide."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'toalla higiénica', which specifically refers to a sanitary pad in Mexico",
+        "why": "In Mexico, a sanitary pad is called 'toalla femenina' or 'toalla sanitaria', not 'higiénica'."
+      }
+    ],
+    "growth": 1.094
+  }
 }

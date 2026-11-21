@@ -72,6 +72,113 @@
     "primaryGloss": "carta",
     "emotion": "excited and curious to open a handwritten envelope from a friend",
     "notes": [
+      "Falso amigo parcial: 'letter' es solo la letra del alfabeto. La 'letra' de una canción se dice 'lyrics', y la 'letra' (caligrafía) de una persona es 'handwriting'."
+    ],
+    "senses": [
+      {
+        "id": "8lnmnabudc854ci",
+        "order": 0,
+        "definition": "Mensaje escrito en papel que se envía a alguien, generalmente en un sobre por correo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "carta"
+            ]
+          }
+        ],
+        "domain": "correo",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "p9yc1ugkv62808m",
+            "text": "She received a lovely letter from her grandmother this morning.",
+            "textLang": "en",
+            "translation": "Recibió una hermosa carta de su abuela esta mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and nostalgic, reading news from family far away",
+            "note": null,
+            "matchedForm": "letter",
+            "matchedTranslationForm": "carta"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2ldktnwsi9h0euo",
+        "order": 1,
+        "definition": "Cada uno de los signos gráficos que representan un sonido y forman el alfabeto.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "letra"
+            ]
+          }
+        ],
+        "domain": "alfabeto",
+        "emoji": "🔤",
+        "examples": [
+          {
+            "id": "ucskyhizwqgt3wt",
+            "text": "The word \"cat\" begins with the letter C.",
+            "textLang": "en",
+            "translation": "La palabra «cat» empieza con la letra C.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "letter",
+            "matchedTranslationForm": "letra"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "letter",
+    "lemma": "letter",
+    "reading": null,
+    "ipa": "/ˈlɛtər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✉️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "carta; letra",
+    "primaryGloss": "carta",
+    "emotion": "excited and curious to open a handwritten envelope from a friend",
+    "notes": [
       "La palabra 'letter' tiene dos significados muy comunes: un mensaje escrito (carta) y un símbolo del alfabeto (letra).",
       "No se debe confundir con 'literature', que se refiere a los libros y escritos artísticos."
     ],
@@ -160,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La palabra 'letter' tiene dos significados muy comunes: un mensaje escrito",
+        "why": "Purely repeats the two senses and glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "No se debe confundir con 'literature', que se refiere a los",
+        "why": "Unlikely confusion for Spanish speakers; misses the real false friend 'letra de canción' (lyrics)."
+      },
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "La palabra gato empieza con la letra c.",
+        "why": "Translating the quoted word 'cat' to 'gato' makes the statement false ('gato' starts with g)."
+      }
+    ],
+    "growth": 0.98
   }
 }

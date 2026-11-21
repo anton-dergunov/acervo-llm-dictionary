@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to send; to hand out",
+    "primaryGloss": "send",
+    "emotion": "matter-of-fact and direct, describing an everyday action",
+    "notes": [
+      "Very common for sending digital messages, emails, or photos (e.g., 发短信, 发邮件, 发微信).",
+      "As a noun meaning 'hair' (as in 头发), this character is pronounced fà (fourth tone)."
+    ],
+    "senses": [
+      {
+        "id": "6il4276mydnqidb",
+        "order": 0,
+        "definition": "To send out a message, email, photo, or package.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "send",
+              "dispatch"
+            ]
+          }
+        ],
+        "domain": "sending",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "drtepcktecpjfqc",
+            "text": "我给你发一张照片。",
+            "textLang": "zh",
+            "translation": "I will send you a photo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and friendly, sharing something instantly",
+            "note": null,
+            "matchedForm": "发",
+            "matchedTranslationForm": "send"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y12zyz88541zbow",
+        "order": 1,
+        "definition": "To issue, distribute, or hand out something such as books or wages.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand out",
+              "distribute",
+              "issue"
+            ]
+          }
+        ],
+        "domain": "distribution",
+        "emoji": "📜",
+        "examples": [
+          {
+            "id": "o3vadl6ly32fa8d",
+            "text": "老师发了新书。",
+            "textLang": "zh",
+            "translation": "The teacher handed out the new books.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, reporting a routine classroom activity",
+            "note": null,
+            "matchedForm": "发",
+            "matchedTranslationForm": "handed out"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "发",
+    "lemma": "发",
+    "reading": "fā",
+    "ipa": "/fa˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to send; to issue; to develop",
     "primaryGloss": "to send",
     "emotion": "matter-of-fact and direct, describing an everyday action",
@@ -202,5 +313,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "To develop, expand, or come into being.",
+        "why": "发 does not mean 'develop' as a standalone verb; the example uses the compound 发展."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[2].examples[0].text",
+        "quote": "国家在快速发展。",
+        "why": "Uses the two-syllable word 发展 rather than the standalone verb 发."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Originally meaning to send out or give rise to",
+        "why": "Etymological filler; better to note common collocations or character homographs."
+      }
+    ],
+    "growth": 0.886
   }
 }

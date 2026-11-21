@@ -62,6 +62,75 @@
     "headword": "meja",
     "lemma": "meja",
     "reading": null,
+    "ipa": "/ˈme.dʒa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Home",
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "table; desk",
+    "primaryGloss": "table",
+    "emotion": "settled and comfortable, ready to sit down and eat or work",
+    "notes": [
+      "Covers both tables and desks. To be specific, compounds are used: 'meja makan' (dining table), 'meja tulis' or 'meja kerja' (desk)."
+    ],
+    "senses": [
+      {
+        "id": "6mnmte6zox0tpg0",
+        "order": 0,
+        "definition": "A piece of furniture with a flat top and legs, used for eating, working, or putting things on.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "table",
+              "desk"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪵",
+        "examples": [
+          {
+            "id": "gouneakvl6yw1lz",
+            "text": "Tolong letakkan buku itu di atas meja.",
+            "textLang": "id",
+            "translation": "Please put that book on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "meja",
+            "matchedTranslationForm": "table"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "meja",
+    "lemma": "meja",
+    "reading": null,
     "ipa": "/ˈmɛ.dʒa/",
     "pos": "noun",
     "gender": null,
@@ -163,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A table you work, write, or study at.",
+        "why": "Indonesian does not distinguish 'table' and 'desk' as separate senses of 'meja'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Kami makan malam di meja bersama keluarga.",
+        "why": "Unnatural phrasing; in Indonesian one eats at the 'meja makan' (dining table), not plain 'meja'."
+      }
+    ],
+    "growth": 0.635
   }
 }

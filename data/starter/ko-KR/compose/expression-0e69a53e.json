@@ -58,6 +58,95 @@
     "headword": "없이",
     "lemma": "없이",
     "reading": null,
+    "ipa": "/ʌp̚.ɕ͈i/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
+      "Formed from the adjective 없다 (to not exist, to not have) + adverbial suffix -이.",
+      "Placed directly after a noun (often dropping object/subject particles) to mean 'without [noun]'."
+    ],
+    "senses": [
+      {
+        "id": "pavu634idnyv02c",
+        "order": 0,
+        "definition": "In the absence of someone or something; not having or doing something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "8l8ec69hxzb6g9u",
+            "text": "고민 없이 결정을 내렸다.",
+            "textLang": "ko",
+            "translation": "I made a decision without hesitation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "confident and resolute, sure of the choice",
+            "note": null,
+            "matchedForm": "없이",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "1lsl24bh038jjiu",
+            "text": "너 없이 어떻게 살겠니?",
+            "textLang": "ko",
+            "translation": "How could I live without you?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "deeply affectionate and slightly dramatic, expressing strong attachment",
+            "note": null,
+            "matchedForm": "없이",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "없이",
+    "lemma": "없이",
+    "reading": null,
     "ipa": null,
     "pos": "expression",
     "gender": null,
@@ -161,5 +250,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "adding the adverbial suffix -이 to the noun root 없-",
+        "why": "없- is an adjective stem, not a noun root."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "commonly paired with particles like -없이",
+        "why": "Nonsensical statement claiming 없이 is paired with a particle '-없이'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are identical in meaning ('without'); example 1 even translates as 'without'."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "없이 is an adverb, not an expression."
+      }
+    ],
+    "growth": 0.856
   }
 }

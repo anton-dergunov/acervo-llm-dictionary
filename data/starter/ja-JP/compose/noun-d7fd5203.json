@@ -74,6 +74,74 @@
     "primaryGloss": "leg",
     "emotion": "matter-of-fact and grounded, referring to a basic part of oneself",
     "notes": [
+      "Covers both 'leg' and 'foot' in Japanese; when specifying the leg as opposed to the foot, the kanji 脚 (also read あし) is sometimes used."
+    ],
+    "senses": [
+      {
+        "id": "qotb1iegm17dza0",
+        "order": 0,
+        "definition": "The lower limb of the body, or its bottom part that touches the ground, used for standing and walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg",
+              "foot"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "za7s1xvkltb0083",
+            "text": "たくさん歩いたので、足が痛いです。",
+            "textLang": "ja",
+            "translation": "My feet hurt because I walked a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "足",
+            "matchedTranslationForm": "feet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "足",
+    "lemma": "足",
+    "reading": "あし",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "leg; foot",
+    "primaryGloss": "leg",
+    "emotion": "matter-of-fact and grounded, referring to a basic part of oneself",
+    "notes": [
       "In Japanese, the word 'ashi' (足) is used for both the leg and the foot. Context usually clarifies which is meant, but if you need to be specific, you can use 'ashi-kubi' (足首) for ankle or 'tsumasaki' (つま先) for toes/tip of the foot."
     ],
     "senses": [
@@ -116,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (leg) The limb ... [1] (foot) The bottom part",
+        "why": "Japanese 足 is a single concept covering both leg and foot; splitting follows English, not Japanese."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing an example sentence for a core A1/A2 word with common collocations."
+      }
+    ],
+    "growth": 0.887
   }
 }

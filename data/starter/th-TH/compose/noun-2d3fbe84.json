@@ -68,6 +68,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "egg",
+    "primaryGloss": "egg",
+    "emotion": "fresh and wholesome, picking up a smooth round egg from the counter",
+    "notes": [
+      "The classifier for eggs is ฟอง (or colloquially ใบ): ไข่สองฟอง (two eggs). Chicken egg is ไข่ไก่."
+    ],
+    "senses": [
+      {
+        "id": "etvlw0krnz9khry",
+        "order": 0,
+        "definition": "An oval object laid by a bird, especially a chicken, or by a fish or reptile, often eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "egg"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥚",
+        "examples": [
+          {
+            "id": "14klviiuwd04odg",
+            "text": "ฉันชอบกินไข่ต้มทุกเช้า",
+            "textLang": "th",
+            "translation": "I like to eat a boiled egg every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and looking forward to a simple breakfast",
+            "note": null,
+            "matchedForm": "ไข่",
+            "matchedTranslationForm": "egg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ไข่",
+    "lemma": "ไข่",
+    "reading": null,
+    "ipa": "/kʰàj/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "egg; testicle",
     "primaryGloss": "egg",
     "emotion": "fresh and wholesome, picking up a smooth round egg from the counter",
@@ -137,5 +204,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The male reproductive organ of humans and animals.",
+        "why": "Colloquial slang sense is unnecessary and distracting for an A1-A2 learner's entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, ไข่ most commonly refers to bird eggs used",
+        "why": "Merely restates the senses; misses the essential classifier (ฟอง / ใบ)."
+      }
+    ],
+    "growth": 0.776
   }
 }

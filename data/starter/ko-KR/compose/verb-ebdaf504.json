@@ -58,6 +58,158 @@
     "headword": "짓다",
     "lemma": "짓다",
     "reading": null,
+    "ipa": "tɕit͈a",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏗️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to build; to cook (rice); to make",
+    "primaryGloss": "to build",
+    "emotion": "purposeful and industrious, taking satisfaction in creating something from scratch",
+    "notes": [
+      "ㅅ-irregular verb: the final ㅅ drops before a vowel (짓다 → 지어요, 지었습니다, 지은).",
+      "Unlike 만들다 (to make in general), 짓다 is used with specific nouns: 집을 짓다 (build a house), 밥을 짓다 (cook rice), 이름을 짓다 (give a name), 미소를 짓다 (smile), 죄를 짓다 (commit a sin)."
+    ],
+    "senses": [
+      {
+        "id": "gtq5i6708qc4o42",
+        "order": 0,
+        "definition": "To build a house, building, or nest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to build",
+              "to construct"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "4mi968vhei2kcaw",
+            "text": "그들은 새로운 집을 짓고 있어요.",
+            "textLang": "ko",
+            "translation": "They are building a new house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "짓고",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5doypw2g5hy9zn9",
+        "order": 1,
+        "definition": "To cook rice or prepare herbal medicine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook",
+              "to prepare"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "meh2qcp5n4zp6vf",
+            "text": "어머니께서 밥을 짓고 계십니다.",
+            "textLang": "ko",
+            "translation": "My mother is cooking rice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and domestic, noting a common household chore",
+            "note": null,
+            "matchedForm": "짓고",
+            "matchedTranslationForm": "cooking"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rqt3p3slng7fjnr",
+        "order": 2,
+        "definition": "To form a facial expression, come up with a name, or compose poetry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to make",
+              "to form",
+              "to compose"
+            ]
+          }
+        ],
+        "domain": "creation",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "qt1mq4dr5l5dman",
+            "text": "그는 밝은 미소를 지었다.",
+            "textLang": "ko",
+            "translation": "He gave a bright smile.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "지었다",
+            "matchedTranslationForm": "gave"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "짓다",
+    "lemma": "짓다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -203,5 +355,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not use 짓다 for abstract 'making' like 'making a mistake'",
+        "why": "False: 짓다 IS used for abstract things like 죄를 짓다 (commit a sin/crime), 이름을 짓다 (name), 표정을 짓다."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the crucial ㅅ-irregular conjugation note (짓다 → 지어요, 지었다)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[2].examples[0].translation",
+        "quote": "He made a smile / He smiled.",
+        "why": "Includes an unnatural calque ('He made a smile') and a slash alternative."
+      }
+    ],
+    "growth": 0.971
   }
 }

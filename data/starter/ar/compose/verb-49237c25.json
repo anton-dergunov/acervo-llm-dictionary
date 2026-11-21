@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to watch; to witness",
+    "primaryGloss": "watch",
+    "emotion": "attentive and engaged, focused on the screen or the event unfolding",
+    "notes": [
+      "Unlike نَظَرَ إِلَى (to look at) and رَأَى (to see), شَاهَدَ implies watching something attentively over a period of time, such as a film or a match, and takes a direct object without a preposition."
+    ],
+    "senses": [
+      {
+        "id": "mdbke10alj7c09n",
+        "order": 0,
+        "definition": "To look at something attentively for a period of time, such as a television program, a film, or a performance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "watch",
+              "view"
+            ]
+          }
+        ],
+        "domain": "watch",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "e79za8913yskk20",
+            "text": "شَاهَدْتُ فِيلْمًا جَمِيلًا مَعَ أَصْدِقَائِي.",
+            "textLang": "ar",
+            "translation": "I watched a beautiful film with my friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying time spent with friends",
+            "note": null,
+            "matchedForm": "شَاهَدْتُ",
+            "matchedTranslationForm": "watched"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pn1vbs4z3llfzny",
+        "order": 1,
+        "definition": "To see an event or incident happen with one's own eyes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "witness",
+              "see"
+            ]
+          }
+        ],
+        "domain": "witness",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "qd43st65hsyev99",
+            "text": "شَاهَدَ المَارَّةُ الحَادِثَ فِي الشَّارِعِ.",
+            "textLang": "ar",
+            "translation": "The passersby witnessed the accident in the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "شَاهَدَ",
+            "matchedTranslationForm": "witnessed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "شَاهَدَ",
+    "lemma": "شَاهَدَ",
+    "reading": null,
+    "ipa": "/ˈʃaːhada/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to watch; to view",
     "primaryGloss": "watch",
     "emotion": "attentive and engaged, focused on the screen or the event unfolding",
@@ -159,5 +268,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "شَاهَدَ النَّاسُ العَرْضَ فِي الشَّارِعِ.",
+        "why": "Watching a street show belongs to sense 0 ('to watch a performance'), not 'to witness'."
+      }
+    ],
+    "growth": 1.12
   }
 }

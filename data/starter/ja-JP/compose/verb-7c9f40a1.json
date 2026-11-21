@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to stop; to come to a halt",
+    "primaryGloss": "stop",
+    "emotion": "a sharp, decisive moment where motion ceases, feeling calm but firm",
+    "notes": [
+      "Godan (group 1) intransitive verb: describes something stopping on its own. Use the transitive pair 止める (とめる) when someone stops something.",
+      "Do not confuse with the homophone 泊まる (とまる, to stay overnight at a hotel or someone's home)."
+    ],
+    "senses": [
+      {
+        "id": "v02kzdixj7s19oh",
+        "order": 0,
+        "definition": "To cease moving or operating; to come to a halt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "come to a halt",
+              "cease"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "ulpilr928dvzgqm",
+            "text": "駅の前でバスが止まった。",
+            "textLang": "ja",
+            "translation": "The bus stopped in front of the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "止まった",
+            "matchedTranslationForm": "stopped"
+          },
+          {
+            "id": "zs51mwq2xlafbjq",
+            "text": "急に時計が止まった。",
+            "textLang": "ja",
+            "translation": "The clock suddenly stopped.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and slightly confused, noting the sudden quiet",
+            "note": null,
+            "matchedForm": "止まった",
+            "matchedTranslationForm": "stopped"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "止まる",
+    "lemma": "止まる",
+    "reading": "とまる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to stop; to come to a halt; to be switched off",
     "primaryGloss": "stop",
     "emotion": "a sharp, decisive moment where motion ceases, feeling calm but firm",
@@ -182,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(travel) To stay at a place for a period of time, such",
+        "why": "Homophone confusion: staying at a hotel is written 泊まる, not 止まる."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "来月、京都のホテルに止まる予定です。",
+        "why": "Wrong kanji: staying overnight at a hotel is written 泊まる, never 止まる."
+      }
+    ],
+    "growth": 0.702
   }
 }

@@ -58,6 +58,74 @@
     "headword": "جَوْرَب",
     "lemma": "جَوْرَب",
     "reading": null,
+    "ipa": "/ˈd͡ʒaw.rab/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧦",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "sock",
+    "primaryGloss": "sock",
+    "emotion": "neat and practical, getting dressed for the day",
+    "notes": [
+      "The broken plural جَوَارِب (jawārib) is usually used when referring to a pair of socks."
+    ],
+    "senses": [
+      {
+        "id": "s9ikf84q6kq33o0",
+        "order": 0,
+        "definition": "A soft piece of clothing worn on the foot inside a shoe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sock",
+              "stocking"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "🧦",
+        "examples": [
+          {
+            "id": "3kt403hjr15m4jv",
+            "text": "لَبِسْتُ جَوَارِبَ نَظِيفَةً قَبْلَ أَنْ أَرْتَدِيَ حِذَائِي.",
+            "textLang": "ar",
+            "translation": "I put on clean socks before putting on my shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "جَوَارِبَ",
+            "matchedTranslationForm": "socks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "جَوْرَب",
+    "lemma": "جَوْرَب",
+    "reading": null,
     "ipa": "/ˈʒaw.rab/",
     "pos": "noun",
     "gender": "masculine",
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The plural form is jarārib (جوارب)",
+        "why": "Wrong transliteration of the plural: جَوَارِب is jawārib, not jarārib."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "لبستُ جورباً نظيفاً قبل أن أرتدي حذائي.",
+        "why": "Putting on 'a sock' (singular) before 'my shoes' sounds odd; plural is natural."
+      }
+    ],
+    "growth": 1.15
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "city",
     "emotion": "matter-of-fact and neutral, describing the place where one lives or visits",
     "notes": [
+      "In everyday expressions like เมืองไทย (Thailand) or เมืองนอก (abroad), เมือง means 'country' or 'land'. The formal word for a nation is ประเทศ.",
+      "Placed before a place name to mean 'the city of ...', or after อำเภอ to mean the capital district of a province (อำเภอเมือง)."
+    ],
+    "senses": [
+      {
+        "id": "z28po7xlc112fsw",
+        "order": 0,
+        "definition": "A large town or urban area with many people and buildings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "city",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "r6m6zq1c5uf8okq",
+            "text": "ฉันชอบอยู่ในเมือง",
+            "textLang": "th",
+            "translation": "I like living in the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, expressing a preference for urban life",
+            "note": null,
+            "matchedForm": "เมือง",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qpu4box2i222knn",
+        "order": 1,
+        "definition": "A country, nation, or land, especially in common place expressions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "country",
+              "land"
+            ]
+          }
+        ],
+        "domain": "country",
+        "emoji": "🇹🇭",
+        "examples": [
+          {
+            "id": "3m5mpb2ug9jpbq2",
+            "text": "ฉันรักเมืองไทย",
+            "textLang": "th",
+            "translation": "I love Thailand.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and proud, showing love for one's nation",
+            "note": null,
+            "matchedForm": "เมือง",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เมือง",
+    "lemma": "เมือง",
+    "reading": null,
+    "ipa": "/mɯaŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town; country",
+    "primaryGloss": "city",
+    "emotion": "matter-of-fact and neutral, describing the place where one lives or visits",
+    "notes": [
       "While 'mueang' is commonly used for a large city or town, it can also refer to a 'country' or 'nation' in more formal or poetic contexts, such as 'mueang thai' (Thailand).",
       "It is often used as a suffix for city names, like 'Chiang Mai', meaning 'New City'."
     ],
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It is often used as a suffix for city names, like 'Chiang Mai'",
+        "why": "False: เมือง is a prefix (not suffix), and Chiang Mai contains เชียง, not เมือง."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "in more formal or poetic contexts, such as 'mueang thai' (Thailand).",
+        "why": "เมืองไทย is the everyday colloquial name for Thailand, whereas ประเทศ (country) is formal."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "I love the country of Thailand.",
+        "why": "Unnatural calque; เมืองไทย simply translates to 'Thailand'."
+      }
+    ],
+    "growth": 1.02
   }
 }

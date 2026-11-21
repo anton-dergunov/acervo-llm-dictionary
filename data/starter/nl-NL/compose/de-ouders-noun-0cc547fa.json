@@ -72,6 +72,73 @@
     "primaryGloss": "parents",
     "emotion": "warm and grounding, speaking about one's foundation or family unit",
     "notes": [
+      "Plural of 'de ouder' (parent). In everyday speech, the plural 'ouders' is much more common than the singular, where 'vader' (father) or 'moeder' (mother) is usually preferred."
+    ],
+    "senses": [
+      {
+        "id": "7zwl6tvdfxtyz84",
+        "order": 0,
+        "definition": "A person's mother and father, or the mothers and fathers of children.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "parents"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👪",
+        "examples": [
+          {
+            "id": "u73u77sbycqoe5e",
+            "text": "Mijn ouders gaan dit weekend op bezoek bij mijn grootouders.",
+            "textLang": "nl",
+            "translation": "My parents are visiting my grandparents this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and informative, sharing weekend plans with a friend",
+            "note": null,
+            "matchedForm": "ouders",
+            "matchedTranslationForm": "parents"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de ouders",
+    "lemma": "ouder",
+    "reading": null,
+    "ipa": "/ˈʌu.dərs/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👪",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "parents",
+    "primaryGloss": "parents",
+    "emotion": "warm and grounding, speaking about one's foundation or family unit",
+    "notes": [
       "Note that 'ouder' is the plural form. The singular is 'ouder', meaning either a mother or a father, but it is much more common to use 'vader' or 'moeder' when referring to just one parent.",
       "Use 'ouders' exclusively when talking about the pair."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note that 'ouder' is the plural form.",
+        "why": "Self-contradictory and false: 'ouders' is the plural form, 'ouder' is the singular."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use 'ouders' exclusively when talking about the pair.",
+        "why": "Misleading: 'ouders' is also standard plural for parents of multiple children (e.g. school parents)."
+      }
+    ],
+    "growth": 0.93
   }
 }

@@ -60,6 +60,73 @@
     "headword": "nigdy",
     "lemma": "nigdy",
     "reading": null,
+    "ipa": "/ˈɲiɡ.dɨ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "never",
+    "primaryGloss": "never",
+    "emotion": null,
+    "notes": [
+      "Requires a negated verb with 'nie' in Polish (double negation), e.g., 'nigdy nie wiem' (I never know)."
+    ],
+    "senses": [
+      {
+        "id": "yukfk94tqy92e5o",
+        "order": 0,
+        "definition": "At no time in the past or future; on no occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "never"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "gniyi04hzmewlyc",
+            "text": "Nigdy nie zapomnę tego dnia.",
+            "textLang": "pl",
+            "translation": "I will never forget this day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and deeply sincere, promising to hold onto a memory forever",
+            "note": null,
+            "matchedForm": "Nigdy",
+            "matchedTranslationForm": "never"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "nigdy",
+    "lemma": "nigdy",
+    "reading": null,
     "ipa": "/ˈniɡ.dɨ/",
     "pos": "adv",
     "gender": null,
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈniɡ.dɨ/",
+        "why": "In Polish, 'n' before 'i' is palatalized to /ɲ/: /ˈɲiɡ.dɨ/."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "At any time (used in questions or after certain conjunctions",
+        "why": "False sense: 'nigdy' means 'never', not 'ever' (which is 'kiedykolwiek')."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Czy byłeś kiedykolwiek w Warszawie?",
+        "why": "Example uses 'kiedykolwiek' instead of the headword 'nigdy'."
+      }
+    ],
+    "growth": 0.497
   }
 }

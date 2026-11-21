@@ -68,6 +68,155 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "black; without milk; illegal",
+    "primaryGloss": "black",
+    "emotion": "a sharp, definite, and serious tone, highlighting a clear visual contrast",
+    "notes": [
+      "In informal German, 'schwarz' often refers to illegal or unregistered activities, especially in compounds like 'schwarzfahren' (riding without a ticket) or 'Schwarzarbeit' (undeclared work)."
+    ],
+    "senses": [
+      {
+        "id": "0urwpzve5uzsvbr",
+        "order": 0,
+        "definition": "Of the darkest color, like coal or soot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "gcvwjnvdmz2dc1c",
+            "text": "Sie trägt heute ein schwarzes Kleid.",
+            "textLang": "de",
+            "translation": "She is wearing a black dress today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schwarzes",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gveghzoz97aivtc",
+        "order": 1,
+        "definition": "Of coffee or tea: served without milk or cream.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "black"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "y1bptms8uvwmymo",
+            "text": "Ich trinke meinen Kaffee immer schwarz.",
+            "textLang": "de",
+            "translation": "I always drink my coffee black.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schwarz",
+            "matchedTranslationForm": "black"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mgsin1pmhsextxo",
+        "order": 2,
+        "definition": "Done illegally, without official permission, or without paying tax or a fare.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "illegal",
+              "undeclared",
+              "under the table"
+            ]
+          }
+        ],
+        "domain": "law",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "b9tpgc0d1eve6b3",
+            "text": "Er arbeitet schwarz auf dem Bau.",
+            "textLang": "de",
+            "translation": "He works under the table in construction.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schwarz",
+            "matchedTranslationForm": "under the table"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "schwarz",
+    "lemma": "schwarz",
+    "reading": null,
+    "ipa": "/ʃvaʁt͡s/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "black; dark",
     "primaryGloss": "black",
     "emotion": "a sharp, definite, and serious tone, highlighting a clear visual contrast",
@@ -160,5 +309,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Not bright; dim or lacking light. | glosses en: dark, dim",
+        "why": "'schwarz' does not mean 'dim'; 'dunkel' means dark/dim."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The darkest color, like the color of coal or the night sky.",
+        "why": "Adjective defined as a noun instead of a quality."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Die Nacht ist heute sehr schwarz.",
+        "why": "Unnatural collocation; Germans say 'dunkel' for the night."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Schwarz is the absolute darkest color. It is often used to describe",
+        "why": "Restates the definition without adding learner value."
+      }
+    ],
+    "growth": 1.258
   }
 }

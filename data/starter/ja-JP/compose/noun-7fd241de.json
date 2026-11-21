@@ -57,6 +57,95 @@
     "language": "ja",
     "headword": "週",
     "lemma": "週",
+    "reading": "しゅう",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "week",
+    "primaryGloss": "week",
+    "emotion": null,
+    "notes": [
+      "To count weeks, add 間 (かん): 一週間 (いっしゅうかん, 'one week'), 二週間 (にしゅうかん, 'two weeks').",
+      "Often used with に to express frequency: 週に二回 ('twice a week')."
+    ],
+    "senses": [
+      {
+        "id": "yc2n1x6kso1gggo",
+        "order": 0,
+        "definition": "A period of seven days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "nc4p3sw4rdgtzdl",
+            "text": "週に二回、ジムに行きます。",
+            "textLang": "ja",
+            "translation": "I go to the gym twice a week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "週",
+            "matchedTranslationForm": "week"
+          },
+          {
+            "id": "76labckcudr9bx0",
+            "text": "次の週は予定がいっぱいです。",
+            "textLang": "ja",
+            "translation": "My schedule is full next week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "週",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "週",
+    "lemma": "週",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (しゅう) for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "来週、日本へ行きます。",
+        "why": "Uses the compound words 来週 and 一週間 instead of standalone noun 週."
+      }
+    ],
+    "growth": 0.72
   }
 }

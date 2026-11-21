@@ -68,6 +68,71 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "espejo",
+    "primaryGloss": "espejo",
+    "emotion": "checking your appearance quickly before heading out the door, practical and everyday",
+    "notes": [],
+    "senses": [
+      {
+        "id": "p79yjocqon17lxx",
+        "order": 0,
+        "definition": "Superficie de vidrio que refleja la luz y permite ver la imagen de lo que tiene delante.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "espejo"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🪞",
+        "examples": [
+          {
+            "id": "dbkvgmdzy64iaf0",
+            "text": "She looked at herself in the mirror before leaving the house.",
+            "textLang": "en",
+            "translation": "Se miró en el espejo antes de salir de casa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurried and self-conscious, checking details just in time",
+            "note": null,
+            "matchedForm": "mirror",
+            "matchedTranslationForm": "espejo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "mirror",
+    "lemma": "mirror",
+    "reading": null,
+    "ipa": "/ˈmɪrər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪞",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "espejo; reflejar",
     "primaryGloss": "espejo",
     "emotion": "checking your appearance quickly before heading out the door, practical and everyday",
@@ -159,5 +224,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "espejo; reflejar",
+        "why": "Includes verb 'reflejar' for a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Cosa que refleja o muestra con claridad las características",
+        "why": "Figurative literary sense is unnecessary for an A2 beginner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia de 'glass' (el vidrio como material), 'mirror' se refiere",
+        "why": "Spanish learners do not confuse 'mirror' (espejo) with 'glass' (vidrio)."
+      }
+    ],
+    "growth": 0.384
   }
 }

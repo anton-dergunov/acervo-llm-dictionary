@@ -58,6 +58,137 @@
     "headword": "στέκομαι",
     "lemma": "στέκομαι",
     "reading": null,
+    "ipa": "/ˈstekome/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand; to stop",
+    "primaryGloss": "stand",
+    "emotion": "composed and still, feeling the weight of the body on the ground",
+    "notes": [
+      "Deponent verb (passive form, active meaning) with an irregular past tense: στάθηκα, and imperative: στάσου! (wait! / stop!)."
+    ],
+    "senses": [
+      {
+        "id": "qx1vipobj6wh27b",
+        "order": 0,
+        "definition": "To be in an upright position on your feet, or to remain upright.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stand",
+              "be standing"
+            ]
+          }
+        ],
+        "domain": "position",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "8hft2cdxbom22ht",
+            "text": "Στέκομαι στη στάση του λεωφορείου.",
+            "textLang": "el",
+            "translation": "I am standing at the bus stop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impatient and restless, waiting for the bus to arrive",
+            "note": null,
+            "matchedForm": "Στέκομαι",
+            "matchedTranslationForm": "standing"
+          },
+          {
+            "id": "l3ozt6iskd26dfb",
+            "text": "Το παλιό σπίτι στέκεται ακόμα όρθιο.",
+            "textLang": "el",
+            "translation": "The old house is still standing.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and nostalgic, looking at the old building",
+            "note": null,
+            "matchedForm": "στέκεται",
+            "matchedTranslationForm": "standing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "he26iwfv6rrgm7h",
+        "order": 1,
+        "definition": "To stop moving or pause briefly, or to dwell on a topic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "pause",
+              "wait"
+            ]
+          }
+        ],
+        "domain": "stop",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "3gw5lmv90brwevg",
+            "text": "Στάσου μια στιγμή να σου πω κάτι.",
+            "textLang": "el",
+            "translation": "Wait a moment so I can tell you something.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Στάσου",
+            "matchedTranslationForm": "Wait"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "στέκομαι",
+    "lemma": "στέκομαι",
+    "reading": null,
     "ipa": "/ˈstecome/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈstecome/",
+        "why": "Wrong velar palatalization before /o/; must be /ˈstekome/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(endurance) To last, to endure, or to remain in a certain state.",
+        "why": "Example means literal 'stand upright'; missing the actual everyday sense 'to stop/pause' (e.g. στάσου)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Do not confuse this with the verb 'κάθομαι' (to sit).",
+        "why": "Both notes are filler; missing essential irregular past/perfective stem 'σταθ-' (στάθηκα)."
+      }
+    ],
+    "growth": 0.915
   }
 }

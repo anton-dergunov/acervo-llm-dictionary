@@ -58,6 +58,75 @@
     "headword": "그리워하다",
     "lemma": "그리워하다",
     "reading": null,
+    "ipa": "/kɯɾiwʌɦada/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to miss, to long for",
+    "primaryGloss": "to miss",
+    "emotion": "melancholic and longing, remembering someone dear with a heavy heart",
+    "notes": [
+      "Takes the object marker -을/를. Unlike the adjective 그립다 (which mainly expresses first-person longing with -이/가), 그리워하다 is an active verb and can also describe a third person missing someone or something."
+    ],
+    "senses": [
+      {
+        "id": "vzy3o50beaxsrvj",
+        "order": 0,
+        "definition": "To feel sad because someone or something is absent; to long for.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to miss",
+              "to long for",
+              "to yearn for"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "anmi55i0fxiswgx",
+            "text": "그는 고향에 계신 부모님을 그리워해요.",
+            "textLang": "ko",
+            "translation": "He misses his parents back in his hometown.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "그리워해요",
+            "matchedTranslationForm": "misses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "그리워하다",
+    "lemma": "그리워하다",
+    "reading": null,
     "ipa": "/ɡuɾiwohada/",
     "pos": "verb",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡuɾiwohada/",
+        "why": "Wrong vowels: ㅡ is /ɯ/ (not /u/) and 워 is /wʌ/ (not /wo/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "고향에 계신 부모님을 그리워하다.",
+        "why": "Dictionary infinitive phrase instead of a natural conjugated sentence."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should contrast with the adjective 그립다, which A2 learners confuse with 그리워하다."
+      }
+    ],
+    "growth": 1.52
   }
 }

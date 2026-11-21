@@ -57,6 +57,73 @@
     "language": "zh",
     "headword": "今天",
     "lemma": "今天",
+    "reading": "jīntiān",
+    "ipa": "/tɕin˥ tʰi̯ɛn˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "today",
+    "primaryGloss": "today",
+    "emotion": null,
+    "notes": [
+      "Time words like 今天 are placed either at the start of the sentence or directly after the subject (e.g., 我今天很忙 or 今天我很忙), never at the end as in English."
+    ],
+    "senses": [
+      {
+        "id": "whtmuy3rne7jb6c",
+        "order": 0,
+        "definition": "On or during this present day; the day happening now.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "today"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "b84k6m73iuo6x8x",
+            "text": "今天天气很好。",
+            "textLang": "zh",
+            "translation": "The weather is very good today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and pleasant, observing the nice weather",
+            "note": null,
+            "matchedForm": "今天",
+            "matchedTranslationForm": "today"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "今天",
+    "lemma": "今天",
     "reading": "jīn tiān",
     "ipa": "/tɕin˥ tʰi̯ɛn˥/",
     "pos": "adv",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "adv",
+        "why": "Time words (时间名词) in Chinese are nouns, even when used adverbially; defined as a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with '现在' (xiàn zài), which means 'now'",
+        "why": "Learners do not confuse 'today' with 'now'; replace with standard word-order note."
+      }
+    ],
+    "growth": 0.645
   }
 }

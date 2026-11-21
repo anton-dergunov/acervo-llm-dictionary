@@ -68,6 +68,156 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "painting; square; chart",
+    "primaryGloss": "painting",
+    "emotion": "appreciative and admiring, looking at something beautiful on the wall",
+    "notes": [
+      "Refers to the whole framed picture or painting on a wall; the frame itself is 'el marco'."
+    ],
+    "senses": [
+      {
+        "id": "8moe0jbvbtk3slr",
+        "order": 0,
+        "definition": "A painting or framed picture hung on a wall.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "painting",
+              "picture"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "🖼️",
+        "examples": [
+          {
+            "id": "4o67vpfry0ljpal",
+            "text": "Compró un cuadro muy bonito para la sala.",
+            "textLang": "es",
+            "translation": "She bought a very pretty painting for the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and proud of a new home decoration",
+            "note": null,
+            "matchedForm": "cuadro",
+            "matchedTranslationForm": "painting"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "edyunqmmgmk9b3i",
+        "order": 1,
+        "definition": "A four-sided shape with four equal sides, or one of the squares in a checkered pattern.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "square",
+              "check"
+            ]
+          }
+        ],
+        "domain": "shape",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "kkly0i65bvf3dqa",
+            "text": "Lleva una camisa de cuadros rojos y negros.",
+            "textLang": "es",
+            "translation": "He is wearing a red and black plaid shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cuadros",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qqt4zee8ap7jp68",
+        "order": 2,
+        "definition": "A table or chart with information arranged in rows and columns.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chart",
+              "table"
+            ]
+          }
+        ],
+        "domain": "data",
+        "emoji": "📊",
+        "examples": [
+          {
+            "id": "cpxpxaxbhoz5psr",
+            "text": "Los datos están resumidos en este cuadro.",
+            "textLang": "es",
+            "translation": "The data is summarized in this chart.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and informative, pointing something out on a page",
+            "note": null,
+            "matchedForm": "cuadro",
+            "matchedTranslationForm": "chart"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el cuadro",
+    "lemma": "cuadro",
+    "reading": null,
+    "ipa": "/ˈkwadɾo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖼️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "painting; picture; frame; chart",
     "primaryGloss": "painting",
     "emotion": "appreciative and admiring, looking at something beautiful on the wall",
@@ -200,5 +350,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "The wooden or metal structure that surrounds a door, window, or picture.",
+        "why": "A door, window, or picture frame is 'marco', not 'cuadro'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "El cuadro de la ventana necesita una nueva capa de pintura.",
+        "why": "Wrong word choice; a window frame is 'el marco de la ventana'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense 'square / check' (e.g., 'camisa de cuadros')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse it with 'fotografía'",
+        "why": "Learners do not confuse 'cuadro' with 'fotografía'; misses confusion with 'marco'."
+      }
+    ],
+    "growth": 0.905
   }
 }

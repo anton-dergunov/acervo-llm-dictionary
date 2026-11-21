@@ -58,6 +58,74 @@
     "headword": "chuyến đi",
     "lemma": "chuyến đi",
     "reading": null,
+    "ipa": "/t͡ɕuən˧˦ ɗi˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "trip, journey",
+    "primaryGloss": "trip",
+    "emotion": "excited and anticipating an adventure away from home",
+    "notes": [
+      "formed from the classifier 'chuyến' (for trips, flights, or vehicle runs) and the verb 'đi' (to go); often followed by another verb or noun to specify the type of trip (e.g., 'chuyến đi chơi' — pleasure trip, 'chuyến đi công tác' — business trip)"
+    ],
+    "senses": [
+      {
+        "id": "o92u7zkrwd5b495",
+        "order": 0,
+        "definition": "An act of traveling from one place to another, especially and back again.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🧳",
+        "examples": [
+          {
+            "id": "egadzlj7dtt658m",
+            "text": "Chuyến đi tới thành phố mất hai giờ.",
+            "textLang": "vi",
+            "translation": "The trip to the city takes two hours.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and planning the logistics of travel",
+            "note": null,
+            "matchedForm": "Chuyến đi",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "chuyến đi",
+    "lemma": "chuyến đi",
+    "reading": null,
     "ipa": "/t͡ɕwən˧˥ ɗi˧/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/t͡ɕwən˧˥ ɗi˧/",
+        "why": "Wrong vowel in 'chuyến'; should be the diphthong /uə/ (/t͡ɕuən˧˦ ɗi˧˧/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(tour) An organized tour or excursion.",
+        "why": "Oversplit; in the example, 'khám phá' carries the 'explore/excursion' meaning, not 'chuyến đi'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'chuyến đi' when talking about a trip or journey as",
+        "why": "Restates the definition without adding grammar or usage help."
+      }
+    ],
+    "growth": 0.825
   }
 }

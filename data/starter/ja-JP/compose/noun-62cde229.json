@@ -70,6 +70,96 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "oil",
+    "primaryGloss": "oil",
+    "emotion": null,
+    "notes": [
+      "油 refers to liquid oils (cooking oil, fuel, machine oil). Solid animal fat and skin grease are written with the homophone 脂 (あぶら).",
+      "The loanword オイル (oiru) is also common for cosmetic oils, motor oil, and certain culinary oils like olive oil."
+    ],
+    "senses": [
+      {
+        "id": "jdyrh2443k1cian",
+        "order": 0,
+        "definition": "A thick, slippery liquid from plants, animals, or petroleum, used for cooking, fuel, or lubrication.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "oil",
+              "cooking oil"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "0ergsqqmgg1qxj1",
+            "text": "フライパンに油をひく。",
+            "textLang": "ja",
+            "translation": "Coat the frying pan with oil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and careful, preparing to start cooking",
+            "note": null,
+            "matchedForm": "油",
+            "matchedTranslationForm": "oil"
+          },
+          {
+            "id": "ca7ai1z3g17eey6",
+            "text": "機械の油が足りない。",
+            "textLang": "ja",
+            "translation": "The machine needs more oil.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and practical, noticing a mechanical problem",
+            "note": null,
+            "matchedForm": "油",
+            "matchedTranslationForm": "oil"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "油",
+    "lemma": "油",
+    "reading": "あぶら",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "oil; fat",
     "primaryGloss": "oil",
     "emotion": null,
@@ -164,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A viscous liquid derived from plants or animals",
+        "why": "Cooking oil and machine/petroleum oil are both liquid oil (油); solid fat is 脂."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "Used for cooking oil, but also for any thick liquid fat",
+        "why": "Should distinguish 油 (liquid oil) from homophone 脂 (solid animal fat, sebum)."
+      }
+    ],
+    "growth": 0.893
   }
 }

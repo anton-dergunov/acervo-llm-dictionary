@@ -60,6 +60,74 @@
     "headword": "nấu",
     "lemma": "nấu",
     "reading": null,
+    "ipa": "/nəw˧˦/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍲",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "to cook",
+    "primaryGloss": "cook",
+    "emotion": "busy in the kitchen, focused on the food on the stove",
+    "notes": [
+      "Often paired with 'ăn' as 'nấu ăn' (to cook food/meals in general). For boiling water, northern speakers usually say 'đun nước', while 'nấu nước' is common in the south."
+    ],
+    "senses": [
+      {
+        "id": "cfejch68kdrbznk",
+        "order": 0,
+        "definition": "To prepare food or a meal by heating it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cook",
+              "make"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "shtmmj0moae46mi",
+            "text": "Mẹ đang nấu bữa tối trong bếp.",
+            "textLang": "vi",
+            "translation": "Mother is cooking dinner in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and domestic, speaking of family life",
+            "note": null,
+            "matchedForm": "nấu",
+            "matchedTranslationForm": "cooking"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "nấu",
+    "lemma": "nấu",
+    "reading": null,
     "ipa": "/nəu˧˥/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(boiling) To heat a liquid until it boils",
+        "why": "In northern Vietnamese, boiling water is typically 'đun nước'; 'nấu' is general cooking."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'nấu' for preparing hot food by heating",
+        "why": "Restates the definition without adding grammar or usage information."
+      }
+    ],
+    "growth": 0.6
   }
 }

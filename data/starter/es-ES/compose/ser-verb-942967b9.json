@@ -68,6 +68,136 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to be",
+    "primaryGloss": "to be",
+    "emotion": null,
+    "notes": [
+      "Highly irregular. Present: soy, eres, es, somos, sois, son. Preterite: fui, fuiste, fue, fuimos, fuisteis, fueron.",
+      "Use 'ser' for identity, permanent traits, origin, time, and event locations; use 'estar' for temporary states and physical locations."
+    ],
+    "senses": [
+      {
+        "id": "glgu8qd0d10u4x7",
+        "order": 0,
+        "definition": "To have a particular identity, origin, or permanent quality.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be"
+            ]
+          }
+        ],
+        "domain": "identity",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "wqibswz9i8zgmzz",
+            "text": "Ella es profesora de español.",
+            "textLang": "es",
+            "translation": "She is a Spanish teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, sharing a simple truth about someone",
+            "note": null,
+            "matchedForm": "es",
+            "matchedTranslationForm": "is"
+          },
+          {
+            "id": "p9ag6kzhfvx0xwb",
+            "text": "Nosotros somos de Madrid.",
+            "textLang": "es",
+            "translation": "We are from Madrid.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and open, stating one's origin to a new acquaintance",
+            "note": null,
+            "matchedForm": "somos",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fads5939avadfe9",
+        "order": 1,
+        "definition": "To happen at a particular time or place, or to indicate the time or date.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be",
+              "to take place"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "⏰",
+        "examples": [
+          {
+            "id": "9u3825xykybefc7",
+            "text": "La fiesta es en mi casa a las ocho.",
+            "textLang": "es",
+            "translation": "The party is at my house at eight o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "es",
+            "matchedTranslationForm": "is"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ser",
+    "lemma": "ser",
+    "reading": null,
+    "ipa": "/seɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to be; to exist",
     "primaryGloss": "to be",
     "emotion": null,
@@ -180,5 +310,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to be; to exist",
+        "why": "Names 'to exist', which is not covered by the senses or glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Think of 'ser' as the core essence of a person or object",
+        "why": "Repeats note[0] and sense[0], while failing to mention that 'ser' is highly irregular."
+      }
+    ],
+    "growth": 0.705
   }
 }

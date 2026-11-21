@@ -68,6 +68,113 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "pasta; paste",
+    "primaryGloss": "pasta",
+    "emotion": "hungry and looking forward to a warm, satisfying meal",
+    "notes": [
+      "In the sense of 'paste', it is most commonly met in pasta gigi (toothpaste). For baking dough or batter, use adonan."
+    ],
+    "senses": [
+      {
+        "id": "a4zsiw2emmo8tlt",
+        "order": 0,
+        "definition": "Italian-style food made from flour and water, such as spaghetti or macaroni.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pasta"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍝",
+        "examples": [
+          {
+            "id": "gizmrbkx0njpqf7",
+            "text": "Saya suka makan pasta dengan saus tomat.",
+            "textLang": "id",
+            "translation": "I like eating pasta with tomato sauce.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased and eager to dig into a favorite dish",
+            "note": null,
+            "matchedForm": "pasta",
+            "matchedTranslationForm": "pasta"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qetep8fbtjp9qdt",
+        "order": 1,
+        "definition": "A thick, soft, moist mixture or substance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paste"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "🥣",
+        "examples": [
+          {
+            "id": "pi8v8owe9ed6pzj",
+            "text": "Jangan lupa membeli sabun dan pasta gigi di toko.",
+            "textLang": "id",
+            "translation": "Don't forget to buy soap and toothpaste at the shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pasta",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "pasta",
+    "lemma": "pasta",
+    "reading": null,
+    "ipa": "/ˈpasta/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "pasta; pastry dough; toothpaste",
     "primaryGloss": "pasta",
     "emotion": "hungry and looking forward to a warm, satisfying meal",
@@ -159,5 +266,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "paste, dough",
+        "why": "Indonesian 'pasta' does not mean pastry dough ('adonan'); it means a thick paste."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pasta; pastry dough; toothpaste",
+        "why": "'Pasta' alone does not mean pastry dough or toothpaste (which is 'pasta gigi')."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Adonan kue itu seperti pasta sebelum dipanggang.",
+        "why": "Awkward example; 'pasta' in this sense is overwhelmingly met in compounds like 'pasta gigi'."
+      }
+    ],
+    "growth": 0.884
   }
 }

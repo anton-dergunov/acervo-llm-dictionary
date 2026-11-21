@@ -72,6 +72,75 @@
     "primaryGloss": "brave",
     "emotion": "proud and encouraging, speaking with warm admiration",
     "notes": [
+      "False friend: unlike English 'dapper' (neatly dressed), Dutch 'dapper' only means brave."
+    ],
+    "senses": [
+      {
+        "id": "44seqnrbjbpibba",
+        "order": 0,
+        "definition": "Not afraid of danger; showing courage in difficult situations.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "brave",
+              "courageous",
+              "fearless"
+            ]
+          }
+        ],
+        "domain": "bravery",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "m8wusajztswwsg7",
+            "text": "Het dappere meisje durfde in de achtbaan.",
+            "textLang": "nl",
+            "translation": "The brave girl dared to go on the roller coaster.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dappere",
+            "matchedTranslationForm": "brave"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "dapper",
+    "lemma": "dapper",
+    "reading": null,
+    "ipa": "/ˈdɑpər/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "brave; courageous",
+    "primaryGloss": "brave",
+    "emotion": "proud and encouraging, speaking with warm admiration",
+    "notes": [
       "Dapper is used to describe people who face danger or difficult situations without showing fear.",
       "Unlike English 'dapper' (which refers to neat clothing), the Dutch word strictly means brave."
     ],
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Het dapper meisje durfde in de achtbaan.",
+        "why": "Ungrammatical adjective inflection: after definite 'het', 'dapper' must be 'dappere'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Dapper is used to describe people who face danger or difficult situations",
+        "why": "merely restates the definition."
+      }
+    ],
+    "growth": 0.739
   }
 }

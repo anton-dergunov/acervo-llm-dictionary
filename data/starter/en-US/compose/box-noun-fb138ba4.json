@@ -68,6 +68,115 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "caja; casilla",
+    "primaryGloss": "caja",
+    "emotion": "practical and organized, storing things away neatly",
+    "notes": [
+      "El plural es 'boxes' (/ˈbɑksɪz/)."
+    ],
+    "senses": [
+      {
+        "id": "6kx10bvawktcwi0",
+        "order": 0,
+        "definition": "Recipiente rígido con lados planos, generalmente de cartón, madera o plástico, que sirve para guardar o transportar cosas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "caja"
+            ]
+          }
+        ],
+        "domain": "recipiente",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "9m0g23e7n7r1rrb",
+            "text": "Put the shoes in the box.",
+            "textLang": "en",
+            "translation": "Pon los zapatos en la caja.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and direct, telling someone where to put something",
+            "note": null,
+            "matchedForm": "box",
+            "matchedTranslationForm": "caja"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d2e2r1qa8fsk3x8",
+        "order": 1,
+        "definition": "Pequeño cuadro en una página o pantalla donde se escribe información o se pone una marca.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "casilla",
+              "recuadro",
+              "cuadro"
+            ]
+          }
+        ],
+        "domain": "formulario",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "be4adh5w6tq9lja",
+            "text": "Check the box if you agree with the rules.",
+            "textLang": "en",
+            "translation": "Marca la casilla si estás de acuerdo con las reglas.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "box",
+            "matchedTranslationForm": "casilla"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "box",
+    "lemma": "box",
+    "reading": null,
+    "ipa": "/bɑks/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "caja; palco; caseta",
     "primaryGloss": "caja",
     "emotion": "practical and organized, storing things away neatly",
@@ -159,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "caja; palco; caseta",
+        "why": "'caseta' is in shortGloss, but no sense defines or glosses it as 'caseta'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "La palabra 'box' se refiere principalmente a una caja con lados planos",
+        "why": "Restates the definitions instead of giving useful grammatical or usage information (like the plural 'boxes')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "Pequeño compartimento o asiento privado en un teatro o estadio.",
+        "why": "Theater box is marginal for A2 compared to the everyday sense of a checkbox/square on a form."
+      }
+    ],
+    "growth": 0.888
   }
 }

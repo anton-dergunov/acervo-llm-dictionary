@@ -71,6 +71,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to cook; to prepare",
+    "primaryGloss": "to cook",
+    "emotion": "focused and purposeful, like someone humming while cutting vegetables for dinner",
+    "notes": [
+      "Imperfective; the perfective is приготовить.",
+      "Готовить is used for preparing food or a thing (takes the accusative). To say 'to get ready' or 'to study for an exam', use the reflexive готовиться (к + dative)."
+    ],
+    "senses": [
+      {
+        "id": "pds7br0nlvp67q3",
+        "order": 0,
+        "definition": "To make food or a meal ready to eat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to cook",
+              "to make",
+              "to prepare"
+            ]
+          }
+        ],
+        "domain": "cooking",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "4bdnal4tm9hfw0w",
+            "text": "Я люблю готовить ужин для друзей.",
+            "textLang": "ru",
+            "translation": "I love cooking dinner for friends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, looking forward to a pleasant evening",
+            "note": null,
+            "matchedForm": "готовить",
+            "matchedTranslationForm": "cooking"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "8wa2eln5t0r19h8",
+        "order": 1,
+        "definition": "To make something ready for use or for a future event.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to prepare",
+              "to get ready"
+            ]
+          }
+        ],
+        "domain": "preparation",
+        "emoji": "📝",
+        "examples": [
+          {
+            "id": "uz9f2dqv5a303e7",
+            "text": "Мы готовим презентацию к завтрашнему дню.",
+            "textLang": "ru",
+            "translation": "We are preparing a presentation for tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and productive, managing a schedule",
+            "note": null,
+            "matchedForm": "готовим",
+            "matchedTranslationForm": "are preparing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "готовить",
+    "lemma": "готовить",
+    "reading": null,
+    "ipa": "/ɡɐˈtovʲɪtʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to cook; to prepare; to get ready",
     "primaryGloss": "to cook",
     "emotion": "focused and purposeful, like someone humming while cutting vegetables for dinner",
@@ -164,5 +276,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to get ready",
+        "why": "Transitive готовить means to prepare something; 'to get ready' (intransitive) is готовиться."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to get ready",
+        "why": "Intransitive 'to get ready' is готовиться, not готовить."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To prepare food by heating it so that it is ready to eat.",
+        "why": "Готовить includes making cold dishes like salads, not only heating food."
+      }
+    ],
+    "growth": 0.874
   }
 }

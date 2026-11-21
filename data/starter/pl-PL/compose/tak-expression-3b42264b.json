@@ -68,6 +68,155 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "yes; like this; so",
+    "primaryGloss": "yes",
+    "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "dv6uez82to1lgsz",
+        "order": 0,
+        "definition": "Used to give an affirmative answer or show agreement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "yes",
+              "yeah"
+            ]
+          }
+        ],
+        "domain": "agreement",
+        "emoji": "👍",
+        "examples": [
+          {
+            "id": "mk7fzgl1xvvfgi5",
+            "text": "Tak, lubię kawę.",
+            "textLang": "pl",
+            "translation": "Yes, I like coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Tak",
+            "matchedTranslationForm": "Yes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c7azl09e2pgfn6j",
+        "order": 1,
+        "definition": "In this way or manner.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "like this",
+              "so",
+              "this way"
+            ]
+          }
+        ],
+        "domain": "manner",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "ia0pvsj1d25aby3",
+            "text": "Zrób to tak.",
+            "textLang": "pl",
+            "translation": "Do it like this.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and patient, showing someone how something is done",
+            "note": null,
+            "matchedForm": "tak",
+            "matchedTranslationForm": "like this"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hx4qhw53dacjtr3",
+        "order": 2,
+        "definition": "To such a high degree or extent, used before adjectives and adverbs for emphasis.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "so",
+              "that"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "xq3o7qh8rzxpv11",
+            "text": "Dlaczego to jest tak drogie?",
+            "textLang": "pl",
+            "translation": "Why is this so expensive?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tak",
+            "matchedTranslationForm": "so"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "tak",
+    "lemma": "tak",
+    "reading": null,
+    "ipa": "/tak/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👍",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "yes; so; like this",
     "primaryGloss": "yes",
     "emotion": null,
@@ -158,5 +307,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tak, lubiękawę.",
+        "why": "Missing space between 'lubię' and 'kawę'."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday degree adverb sense ('so', as in 'tak bardzo' / 'tak dobry')."
+      }
+    ],
+    "growth": 2.077
   }
 }

@@ -71,6 +71,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to laugh; to joke",
+    "primaryGloss": "laugh",
+    "emotion": "warm and amused, sharing a lighthearted moment with a friend",
+    "notes": [
+      "The uncontracted form 'γελάω' is more common in everyday speech; both share the past tense 'γέλασα'.",
+      "Takes 'με' + accusative for what you are laughing at: 'γελάω με το αστείο' (I laugh at the joke)."
+    ],
+    "senses": [
+      {
+        "id": "8ratnhd0axasfhd",
+        "order": 0,
+        "definition": "To make the sounds and movements of the face that show you find something funny or are happy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "laugh"
+            ]
+          }
+        ],
+        "domain": "laughter",
+        "emoji": "😂",
+        "examples": [
+          {
+            "id": "4hn9aiglmywar1u",
+            "text": "Όταν ακούω αυτό το αστείο, γελώ δυνατά.",
+            "textLang": "el",
+            "translation": "When I hear this joke, I laugh out loud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "joyful and carefree, sharing a hearty laugh",
+            "note": null,
+            "matchedForm": "γελώ",
+            "matchedTranslationForm": "laugh"
+          },
+          {
+            "id": "9tsi8a5b3kqwary",
+            "text": "Η Μαρία κοιτάζει τη φωτογραφία και γελάει.",
+            "textLang": "el",
+            "translation": "Maria looks at the photograph and laughs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and affectionate, remembering a fond memory",
+            "note": null,
+            "matchedForm": "γελάει",
+            "matchedTranslationForm": "laughs"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "γελώ",
+    "lemma": "γελώ",
+    "reading": null,
+    "ipa": "/ʝeˈlo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to laugh; to smile",
     "primaryGloss": "laugh",
     "emotion": "warm and amused, sharing a lighthearted moment with a friend",
@@ -161,5 +251,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "with the more common everyday form γλάω or γελάω",
+        "why": "'γλάω' is not a standard Modern Greek form (typo for γελάω)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To smile or look happy without making sound.",
+        "why": "'γελώ' means to laugh; 'to smile' without sound is 'χαμογελώ'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to laugh; to smile",
+        "why": "Includes false sense 'to smile'."
+      }
+    ],
+    "growth": 1.011
   }
 }

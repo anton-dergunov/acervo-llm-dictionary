@@ -58,6 +58,116 @@
     "headword": "밀다",
     "lemma": "밀다",
     "reading": null,
+    "ipa": "milda",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to push; to shave",
+    "primaryGloss": "push",
+    "emotion": "determined and focused, applying steady pressure with one's body",
+    "notes": [
+      "As a ㄹ-irregular verb, the stem vowel's final ㄹ drops before endings starting with ㄴ, ㅂ, or ㅅ (e.g., 미는, 밉니다).",
+      "Its opposite is 당기다 ('to pull'), often seen together on doors as 밀다/당기다."
+    ],
+    "senses": [
+      {
+        "id": "m4dnl6fbsmrdljq",
+        "order": 0,
+        "definition": "To press against something with force to move it away from you.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "push",
+              "shove"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "mo49o7kpamxt5cl",
+            "text": "무거운 문을 힘껏 밀었다.",
+            "textLang": "ko",
+            "translation": "I pushed the heavy door with all my might.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "strained and focused, exerting physical effort to open something",
+            "note": null,
+            "matchedForm": "밀었다",
+            "matchedTranslationForm": "pushed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xbge8ictm3jba7r",
+        "order": 1,
+        "definition": "To shave hair or scrub dirt off by rubbing closely along a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shave",
+              "scrub"
+            ]
+          }
+        ],
+        "domain": "grooming",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5iwa7lyxbvnuush",
+            "text": "아침에 깔끔하게 수염을 밀었어요.",
+            "textLang": "ko",
+            "translation": "I cleanly shaved my beard in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "밀었어요",
+            "matchedTranslationForm": "shaved"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "밀다",
+    "lemma": "밀다",
+    "reading": null,
     "ipa": "/mil.da/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "회의를 내일로 밀자.",
+        "why": "Postponing a schedule is 미루다 (미루자), not 밀다; this confuses two different verbs."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When talking about time or appointments, this verb is used to mean",
+        "why": "Confuses 밀다 (to push) with 미루다 (to postpone)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note on ㄹ-irregular conjugation before ㄴ, ㅂ, ㅅ."
+      }
+    ],
+    "growth": 1.015
   }
 }

@@ -58,6 +58,71 @@
     "headword": "gajah",
     "lemma": "gajah",
     "reading": null,
+    "ipa": "/ˈɡadʒah/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐘",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "elephant",
+    "primaryGloss": "elephant",
+    "emotion": "awed and quiet, looking up at something massive and calm",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ygld1w83tgeg50x",
+        "order": 0,
+        "definition": "A very large grey mammal with a long trunk and tusks.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "elephant"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐘",
+        "examples": [
+          {
+            "id": "gr6e16w4cjbt1yn",
+            "text": "Gajah itu minum air menggunakan belalainya yang panjang.",
+            "textLang": "id",
+            "translation": "That elephant drinks water using its long trunk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fascinated and observant, watching a gentle giant at the waterhole",
+            "note": null,
+            "matchedForm": "Gajah",
+            "matchedTranslationForm": "elephant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "gajah",
+    "lemma": "gajah",
+    "reading": null,
     "ipa": "/ˈɡajah/",
     "pos": "noun",
     "gender": null,
@@ -158,5 +223,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈɡajah/",
+        "why": "Indonesian 'j' is the voiced palatal affricate /dʒ/, not the approximant /j/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(chess) The bishop piece in the game of chess.",
+        "why": "Chess terminology is marginal for an A2 beginner and clutters a simple animal word."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In chess, the bishop piece is called 'gajah' in Indonesian, reflecting the",
+        "why": "Restates the marginal chess sense with historical trivia."
+      }
+    ],
+    "growth": 0.319
   }
 }

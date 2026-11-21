@@ -58,6 +58,73 @@
     "headword": "l'oignon",
     "lemma": "oignon",
     "reading": null,
+    "ipa": "/ɔ.ɲɔ̃/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "onion",
+    "primaryGloss": "onion",
+    "emotion": "earthy and pungent, slicing through a fresh meal",
+    "notes": [
+      "The 'i' is silent: 'oi' is pronounced /ɔ/ here, not /wa/. Because of this, the spelling 'ognon' is also accepted."
+    ],
+    "senses": [
+      {
+        "id": "8i5th9pbl15v0kl",
+        "order": 0,
+        "definition": "A round vegetable with a strong smell and flavour, made up of many layers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "onion"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧅",
+        "examples": [
+          {
+            "id": "oo6zjedzc0nkb5s",
+            "text": "Je coupe un oignon pour la soupe.",
+            "textLang": "fr",
+            "translation": "I am cutting an onion for the soup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and teary-eyed in the kitchen",
+            "note": null,
+            "matchedForm": "oignon",
+            "matchedTranslationForm": "onion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'oignon",
+    "lemma": "oignon",
+    "reading": null,
     "ipa": "/l‿wɔ.ɲɔ̃/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/l‿wɔ.ɲɔ̃/",
+        "why": "IPA includes the article 'l'' and gives a non-standard vowel (/wɔ/ instead of /ɔ/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "Note the traditional spelling 'oignon', though the reformed spelling 'ognon'",
+        "why": "Fails to explicitly state the misleading pronunciation: the 'i' is silent (/ɔ.ɲɔ̃/)."
+      }
+    ],
+    "growth": 0.993
   }
 }

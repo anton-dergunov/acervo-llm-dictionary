@@ -68,6 +68,114 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "spoon; spoonful",
+    "primaryGloss": "spoon",
+    "emotion": "warm and domestic, setting the table for a hearty meal",
+    "notes": [
+      "Commonly used in 'cuillère à soupe' (tablespoon) and 'cuillère à café' (teaspoon).",
+      "Also spelled 'cuiller' (pronounced the same), though 'cuillère' is the standard modern spelling."
+    ],
+    "senses": [
+      {
+        "id": "fx7k0z7fie1iy34",
+        "order": 0,
+        "definition": "A small utensil with a shallow bowl used for eating or stirring.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spoon"
+            ]
+          }
+        ],
+        "domain": "tableware",
+        "emoji": "🥄",
+        "examples": [
+          {
+            "id": "d3migvirx69qmqf",
+            "text": "Elle mange sa soupe avec une grande cuillère.",
+            "textLang": "fr",
+            "translation": "She eats her soup with a large spoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and satisfied, enjoying a hot meal",
+            "note": null,
+            "matchedForm": "cuillère",
+            "matchedTranslationForm": "spoon"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "z0rzkstqa5scn8j",
+        "order": 1,
+        "definition": "The amount that a spoon can hold, used as a measure.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spoonful"
+            ]
+          }
+        ],
+        "domain": "measure",
+        "emoji": "🥄",
+        "examples": [
+          {
+            "id": "z9zxjlnahf7cl1b",
+            "text": "Ajoutez une cuillère de sucre dans le café.",
+            "textLang": "fr",
+            "translation": "Add a spoonful of sugar to the coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and precise while following a recipe",
+            "note": null,
+            "matchedForm": "cuillère",
+            "matchedTranslationForm": "spoonful"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la cuillère",
+    "lemma": "cuillère",
+    "reading": null,
+    "ipa": "/kɥijɛʁ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥄",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "spoon",
     "primaryGloss": "spoon",
     "emotion": "warm and domestic, setting the table for a hearty meal",
@@ -158,5 +266,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "spoon",
+        "why": "Does not cover sense 1 (spoonful)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Add a spoonful of sugar in the coffee.",
+        "why": "Calque of 'dans'; natural English is 'to the coffee'."
+      }
+    ],
+    "growth": 1.133
   }
 }

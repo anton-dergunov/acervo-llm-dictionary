@@ -57,6 +57,73 @@
     "language": "ja",
     "headword": "泳ぐ",
     "lemma": "泳ぐ",
+    "reading": "およぐ",
+    "ipa": "ojoɡɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏊",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to swim",
+    "primaryGloss": "swim",
+    "emotion": "energetic and refreshing, feeling the movement of the water",
+    "notes": [
+      "A godan verb ending in -gu: the te-form is 泳いで (oyoide) and the past tense is 泳いだ (oyoida)."
+    ],
+    "senses": [
+      {
+        "id": "5jjl7nn78800v71",
+        "order": 0,
+        "definition": "To move through water by moving the body and limbs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "swim"
+            ]
+          }
+        ],
+        "domain": "swimming",
+        "emoji": "🏊",
+        "examples": [
+          {
+            "id": "3mdro99ldp8zljj",
+            "text": "夏に海で泳ぐのが大好きです。",
+            "textLang": "ja",
+            "translation": "I love to swim in the ocean in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and looking forward to a warm, sunny day",
+            "note": null,
+            "matchedForm": "泳ぐ",
+            "matchedTranslationForm": "swim"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "泳ぐ",
+    "lemma": "泳ぐ",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a word written with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To navigate through a dense crowd or a complicated situation.",
+        "why": "Figurative use is marginal for A2; the example is just a literal simile (泳ぐように)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb describes the act of propelling oneself through water.",
+        "why": "Restates the definition without adding grammar or usage help."
+      }
+    ],
+    "growth": 0.426
   }
 }

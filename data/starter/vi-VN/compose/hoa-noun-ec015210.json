@@ -58,6 +58,75 @@
     "headword": "hoa",
     "lemma": "hoa",
     "reading": null,
+    "ipa": "/hwaː˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "flower; blossom",
+    "primaryGloss": "flower",
+    "emotion": "gentle and appreciative, noticing something pretty in a garden",
+    "notes": [
+      "Takes the classifier 'bông' or 'đóa' for a single flower, and 'bó' for a bouquet.",
+      "In central and southern Vietnam, the word 'bông' is often used instead of 'hoa' in everyday speech."
+    ],
+    "senses": [
+      {
+        "id": "9cxm7ef8qdap1bq",
+        "order": 0,
+        "definition": "The coloured part of a plant that produces seeds or fruit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "blossom"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "5t7b6qjz5eu1lrf",
+            "text": "Cây này ra rất nhiều hoa đẹp vào mùa xuân.",
+            "textLang": "vi",
+            "translation": "This plant produces many beautiful flowers in the spring.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and warm, pointing out a lovely blooming plant",
+            "note": null,
+            "matchedForm": "hoa",
+            "matchedTranslationForm": "flowers"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "hoa",
+    "lemma": "hoa",
+    "reading": null,
     "ipa": "/hwaː/",
     "pos": "noun",
     "gender": null,
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/hwaː/",
+        "why": "Missing the level tone mark (/˧˧/) in Hanoi IPA transcription."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "this word is often pronounced and written as 'bông'",
+        "why": "'Bông' is a different word (a regional synonym), not a pronunciation of 'hoa'."
+      }
+    ],
+    "growth": 0.951
   }
 }

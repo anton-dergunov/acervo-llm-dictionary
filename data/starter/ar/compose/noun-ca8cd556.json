@@ -68,6 +68,73 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "village",
+    "primaryGloss": "village",
+    "emotion": "quiet and peaceful, thinking of a calm countryside home",
+    "notes": [
+      "The plural is قُرًى (quran)."
+    ],
+    "senses": [
+      {
+        "id": "49x14208krzbg3f",
+        "order": 0,
+        "definition": "A small settlement in the countryside, smaller than a town.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "village"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "dagoobrc2mzwl6s",
+            "text": "أَعِيشُ فِي قَرْيَةٍ صَغِيرَةٍ هَادِئَةٍ.",
+            "textLang": "ar",
+            "translation": "I live in a small, quiet village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and content, describing a peaceful home",
+            "note": null,
+            "matchedForm": "قَرْيَةٍ",
+            "matchedTranslationForm": "village"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "قَرْيَة",
+    "lemma": "قرية",
+    "reading": null,
+    "ipa": "/ˈqar.ja/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "village; small town",
     "primaryGloss": "village",
     "emotion": "quiet and peaceful, thinking of a calm countryside home",
@@ -120,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for settlements smaller than a city (مَدِينَة).",
+        "why": "Both notes merely restate the definition; the broken plural (قُرًى) is needed instead."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A very small town in the country, typically smaller than a town.",
+        "why": "Circular wording ('a very small town... smaller than a town')."
+      }
+    ],
+    "growth": 0.643
   }
 }

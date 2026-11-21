@@ -72,6 +72,73 @@
     "primaryGloss": "sing",
     "emotion": "joyful and expressive, naturally sharing a melody or mood",
     "notes": [
+      "Also commonly used in the uncontracted form τραγουδάω (-άω/-ώ conjugation); aorist: τραγούδησα."
+    ],
+    "senses": [
+      {
+        "id": "7zu5pyz4v5wq41q",
+        "order": 0,
+        "definition": "To make musical sounds with the voice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sing"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎤",
+        "examples": [
+          {
+            "id": "tdrevxw214tcd7f",
+            "text": "Μου αρέσει να τραγουδώ στο μπάνιο.",
+            "textLang": "el",
+            "translation": "I like to sing in the shower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lighthearted, amused, and completely relaxed",
+            "note": null,
+            "matchedForm": "τραγουδώ",
+            "matchedTranslationForm": "sing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "τραγουδώ",
+    "lemma": "τραγουδώ",
+    "reading": null,
+    "ipa": "/traɣuˈðo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎤",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sing",
+    "primaryGloss": "sing",
+    "emotion": "joyful and expressive, naturally sharing a melody or mood",
+    "notes": [
       "Note that this verb can also be spelled 'τραγουδάω'. Both forms are completely interchangeable in everyday speech.",
       "Unlike some languages that use different verbs for singing professionally versus singing casually, 'τραγουδώ' covers all contexts, from humming in the shower to performing on stage."
     ],
@@ -160,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To praise or celebrate someone or something in a song or poem.",
+        "why": "Poetic sense ('sing of/celebrate') is not needed at A2; keep only the basic sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike some languages that use different verbs for singing professionally versus singing",
+        "why": "Pure filler; also falsely equates humming with τραγουδώ (humming is μουρμουρίζω)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the aorist stem (τραγούδησα), which is essential for Greek verbs."
+      }
+    ],
+    "growth": 0.35
   }
 }

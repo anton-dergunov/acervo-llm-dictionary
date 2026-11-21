@@ -58,6 +58,73 @@
     "headword": "l'été",
     "lemma": "été",
     "reading": null,
+    "ipa": "/e.te/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "summer",
+    "primaryGloss": "summer",
+    "emotion": "relaxed and warm, thinking of long days and sunshine",
+    "notes": [
+      "To say 'in summer', use the preposition 'en' without an article: 'en été'."
+    ],
+    "senses": [
+      {
+        "id": "i6i8hzbxbsxn35u",
+        "order": 0,
+        "definition": "The warmest season of the year, between spring and autumn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "summer"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "vvlaip0dfnkdbng",
+            "text": "J'adore partir en vacances en été.",
+            "textLang": "fr",
+            "translation": "I love going on holiday in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "été",
+            "matchedTranslationForm": "summer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'été",
+    "lemma": "été",
+    "reading": null,
     "ipa": "/le.te/",
     "pos": "noun",
     "gender": "masculine",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/le.te/",
+        "why": "IPA includes the definite article 'l''; must be lemma only (/e.te/)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Note that 'été' always takes the definite article 'l'' (l'été).",
+        "why": "False claim: 'été' takes 'un', 'cet', or no article after 'en' ('en été')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It is masculine, unlike many other words ending in 'é'",
+        "why": "Restates gender and misleads (most nouns in -é except -té/-tié are masculine)."
+      }
+    ],
+    "growth": 0.718
   }
 }

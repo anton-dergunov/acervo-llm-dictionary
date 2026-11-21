@@ -58,6 +58,75 @@
     "headword": "rau",
     "lemma": "rau",
     "reading": null,
+    "ipa": "/zaw˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥬",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "vegetable, greens, herb",
+    "primaryGloss": "vegetable",
+    "emotion": "crisp and earthy, fresh from the morning market stall",
+    "notes": [
+      "Refers specifically to leafy greens, stems, and culinary herbs, whereas root vegetables are often called 'củ' and fruiting vegetables 'quả' (as in 'rau củ quả', vegetables in general)."
+    ],
+    "senses": [
+      {
+        "id": "n80pq7ail7knr1x",
+        "order": 0,
+        "definition": "A plant or part of a plant eaten as food, especially a leafy green vegetable or fresh herb.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vegetable",
+              "greens",
+              "herb"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥬",
+        "examples": [
+          {
+            "id": "oxzhbkhadnz0ii8",
+            "text": "Chúng ta nên ăn nhiều rau xanh cho tốt cho sức khỏe.",
+            "textLang": "vi",
+            "translation": "We should eat plenty of green vegetables for good health.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rau",
+            "matchedTranslationForm": "vegetables"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "rau",
+    "lemma": "rau",
+    "reading": null,
     "ipa": "/raw/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +189,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/raw/",
+        "why": "Wrong initial consonant for Hanoi Vietnamese and missing tone (/zaw˧˧/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "We should eat a lot of green vegetables to be good for health.",
+        "why": "Calqued, unnatural English translation."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Rau is used generally for leafy greens and vegetables as a whole",
+        "why": "Mostly restates the definition instead of contrasting with 'củ' and 'quả'."
+      }
+    ],
+    "growth": 1.081
   }
 }

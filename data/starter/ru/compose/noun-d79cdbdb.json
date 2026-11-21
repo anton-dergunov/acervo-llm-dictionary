@@ -58,6 +58,74 @@
     "headword": "кролик",
     "lemma": "кролик",
     "reading": null,
+    "ipa": "/ˈkrolʲɪk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐇",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "rabbit",
+    "primaryGloss": "rabbit",
+    "emotion": "affectionate and lighthearted, watching a soft animal hop about",
+    "notes": [
+      "Refers to a rabbit (wild or domestic), whereas заяц means 'hare'.",
+      "Animate noun: in the accusative case, it takes the genitive form (кролика)."
+    ],
+    "senses": [
+      {
+        "id": "2yuzxywdesovn73",
+        "order": 0,
+        "definition": "A small mammal with long ears, a short tail, and soft fur.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rabbit"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐇",
+        "examples": [
+          {
+            "id": "opm777w5l4b8huy",
+            "text": "Мой маленький кролик любит есть морковку.",
+            "textLang": "ru",
+            "translation": "My little rabbit likes eating carrots.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and gentle, describing a beloved pet",
+            "note": null,
+            "matchedForm": "кролик",
+            "matchedTranslationForm": "rabbit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "кролик",
+    "lemma": "кролик",
+    "reading": null,
     "ipa": "/ˈkroɫʲɪk/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈkroɫʲɪk/",
+        "why": "Russian palatalized 'л' is [lʲ], not velarized [ɫʲ]."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'кролик' specifically refers to the domesticated animal",
+        "why": "Overstated: кролик also refers to wild rabbits, as opposed to hares (заяц)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "My little rabbit likes to eat a carrot.",
+        "why": "Collective singular морковку in Russian translates naturally as plural 'carrots' in English."
+      }
+    ],
+    "growth": 0.976
   }
 }

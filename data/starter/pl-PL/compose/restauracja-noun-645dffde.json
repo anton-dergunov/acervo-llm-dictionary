@@ -60,6 +60,72 @@
     "headword": "restauracja",
     "lemma": "restauracja",
     "reading": null,
+    "ipa": "/rɛ.stawˈra.t͡sja/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "City",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "restaurant",
+    "primaryGloss": "restaurant",
+    "emotion": "anticipatory and hungry, looking forward to a nice meal out",
+    "notes": [],
+    "senses": [
+      {
+        "id": "9fhhxlhmsp979sv",
+        "order": 0,
+        "definition": "A place where you pay to sit and eat a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "restaurant"
+            ]
+          }
+        ],
+        "domain": "dining",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "bab4styfqmshnls",
+            "text": "Czy znasz dobrą restaurację w centrum?",
+            "textLang": "pl",
+            "translation": "Do you know a good restaurant in the center?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and hopeful, seeking a recommendation for dinner",
+            "note": null,
+            "matchedForm": "restaurację",
+            "matchedTranslationForm": "restaurant"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "restauracja",
+    "lemma": "restauracja",
+    "reading": null,
     "ipa": "/rɛstaˈurat͡sja/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/rɛstaˈurat͡sja/",
+        "why": "Wrong stress and syllabification; 'au' is a diphthong here, pronounced /rɛ.stawˈra.t͡sja/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "[1] (restoration) The act of returning something to a previous, better condition",
+        "why": "Architectural or historical restoration is formal/specialist, not an A2 everyday sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While it most commonly refers to an eatery, the word can also",
+        "why": "Merely repeats the senses in the entry."
+      }
+    ],
+    "growth": 0.263
   }
 }

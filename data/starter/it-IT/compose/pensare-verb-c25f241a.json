@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to think; to believe; to plan to",
+    "primaryGloss": "to think",
+    "emotion": "reflective and steady, processing information in a calm moment",
+    "notes": [
+      "Use 'pensare a' when directing your thoughts to someone or something (Penso sempre a te = I always think about you), and 'pensare di' when asking for or giving an opinion about it (Cosa pensi di lui? = What do you think of him?).",
+      "Followed by 'di' + infinitive, it means to plan or intend to do something (Penso di partire = I plan to leave)."
+    ],
+    "senses": [
+      {
+        "id": "23maict9czvuc2r",
+        "order": 0,
+        "definition": "To use your mind to consider something, or to have a particular opinion or belief.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to think",
+              "to believe"
+            ]
+          }
+        ],
+        "domain": "cognition",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "00f3krm9rqadryf",
+            "text": "Cosa pensi di questo film?",
+            "textLang": "it",
+            "translation": "What do you think of this movie?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and engaged, inviting an opinion from a friend",
+            "note": null,
+            "matchedForm": "pensi",
+            "matchedTranslationForm": "think"
+          },
+          {
+            "id": "ij89lkxbigj1te1",
+            "text": "Penso sempre a te.",
+            "textLang": "it",
+            "translation": "I always think about you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Penso",
+            "matchedTranslationForm": "think"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fddn7i74v2sqr5s",
+        "order": 1,
+        "definition": "To intend or plan to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to plan to",
+              "to intend to",
+              "to think of"
+            ]
+          }
+        ],
+        "domain": "intention",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "x05f0r1lo712ms8",
+            "text": "Penso di andare in vacanza a luglio.",
+            "textLang": "it",
+            "translation": "I plan to go on vacation in July.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and hopeful, looking forward to future plans",
+            "note": null,
+            "matchedForm": "Penso",
+            "matchedTranslationForm": "plan"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "pensare",
+    "lemma": "pensare",
+    "reading": null,
+    "ipa": "/penˈsa.re/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to think; to have an opinion",
     "primaryGloss": "think",
     "emotion": "reflective and steady, processing information in a calm moment",
@@ -161,5 +293,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to think; to have an opinion",
+        "why": "Omits sense 1 ('to plan/intend to') and splits sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Misses the essential A1/A2 rule: 'pensare a' (not 'di') for thinking about someone/something."
+      }
+    ],
+    "growth": 1.32
   }
 }

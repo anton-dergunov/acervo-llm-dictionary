@@ -68,6 +68,73 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "guest",
+    "primaryGloss": "guest",
+    "emotion": "warm and welcoming, glad to see someone arrive at the door",
+    "notes": [
+      "The feminine form is 'l'invitée' (pronounced the same). Do not confuse with the false friend 'l'hôte', which can mean either 'host' or 'guest'."
+    ],
+    "senses": [
+      {
+        "id": "28mgmiwxoww6wvu",
+        "order": 0,
+        "definition": "A person invited to a home, an event, or a television or radio show.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "guest"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "wwxeomeemz3w07g",
+            "text": "Nous préparons le dîner pour nos invités.",
+            "textLang": "fr",
+            "translation": "We are preparing dinner for our guests.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "invités",
+            "matchedTranslationForm": "guests"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'invité",
+    "lemma": "invité",
+    "reading": null,
+    "ipa": "/ɛ̃.vi.te/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑‍🤝‍🧑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "guest; caller",
     "primaryGloss": "guest",
     "emotion": "warm and welcoming, glad to see someone arrive at the door",
@@ -161,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "guest; caller",
+        "why": "'Caller' is not in the senses and is not a standard meaning of 'invité'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "A guest on a show is the same core meaning as a guest at an event."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with client, which is a customer",
+        "why": "Filler note; there is no reason a learner would confuse 'invité' with 'client'."
+      }
+    ],
+    "growth": 0.626
   }
 }

@@ -58,6 +58,116 @@
     "headword": "pijn doen",
     "lemma": "pijn doen",
     "reading": null,
+    "ipa": "/ˈpɛi̯n ˌdun/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "to hurt; to ache",
+    "primaryGloss": "to hurt",
+    "emotion": "wincing slightly and rubbing a sore spot",
+    "notes": [
+      "Irregular verb ('doen'): hij doet pijn, deed pijn, heeft pijn gedaan.",
+      "Do not confuse with 'pijn hebben' (to be in pain): 'Mijn voet doet pijn' (My foot hurts) vs. 'Ik heb pijn' (I am in pain)."
+    ],
+    "senses": [
+      {
+        "id": "fz61nlwwilag94a",
+        "order": 0,
+        "definition": "Of a body part: to be sore or painful.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "ykbr16t7ljedqzz",
+            "text": "Mijn hoofd doet pijn na een lange dag.",
+            "textLang": "nl",
+            "translation": "My head hurts after a long day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and rubbing the temples with a weary sigh",
+            "note": null,
+            "matchedForm": "doet pijn",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3beb9sr93jlijpe",
+        "order": 1,
+        "definition": "To cause physical or emotional pain to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to cause pain"
+            ]
+          }
+        ],
+        "domain": "harm",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "7gat4ks47xhaihd",
+            "text": "Die woorden deden me echt pijn.",
+            "textLang": "nl",
+            "translation": "Those words really hurt me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quietly sad and looking away with hurt feelings",
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "hurt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "pijn doen",
+    "lemma": "pijn doen",
+    "reading": null,
     "ipa": "/ˈpɛi̯n ˌdu.n/",
     "pos": "verb",
     "gender": null,
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈpɛi̯n ˌdu.n/",
+        "why": "'doen' is a monosyllable /dun/, not disyllabic /du.n/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Pijn doen can mean both to feel pain (like an ache)",
+        "why": "'Pijn doen' means to be painful; 'to feel pain' is 'pijn hebben'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Pay attention to the context to know whether it is active",
+        "why": "Restates the senses and gives unhelpful advice instead of irregular forms and contrast."
+      }
+    ],
+    "growth": 1.013
   }
 }

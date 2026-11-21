@@ -58,6 +58,95 @@
     "headword": "hiểu",
     "lemma": "hiểu",
     "reading": null,
+    "ipa": "/hiəw˧˩˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to understand",
+    "primaryGloss": "understand",
+    "emotion": "nodding slowly in realization, feeling the fog lift",
+    "notes": [
+      "Do not confuse with 'biết' (to know a fact or have information); 'biết' is about having knowledge, while 'hiểu' is about comprehending how or why."
+    ],
+    "senses": [
+      {
+        "id": "2p4hu0l7wvmsaf9",
+        "order": 0,
+        "definition": "To grasp the meaning of words, a language, or an idea, or to comprehend someone's feelings or situation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "understand",
+              "comprehend"
+            ]
+          }
+        ],
+        "domain": "cognition",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "ngr1x95e0ahhr6l",
+            "text": "Tôi chưa hiểu từ này nghĩa là gì.",
+            "textLang": "vi",
+            "translation": "I don't understand what this word means yet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "puzzled and seeking clarification, frowning slightly at the textbook",
+            "note": null,
+            "matchedForm": "hiểu",
+            "matchedTranslationForm": "understand"
+          },
+          {
+            "id": "3ayia7wst87u1xi",
+            "text": "Bạn có hiểu cảm giác của tôi không?",
+            "textLang": "vi",
+            "translation": "Do you understand how I feel?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hiểu",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "hiểu",
+    "lemma": "hiểu",
+    "reading": null,
     "ipa": "/hiw˧˩/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/hiw˧˩/",
+        "why": "Southern pronunciation; northern (Hanoi) Vietnamese retains the diphthong /iə/ (/hiəw˧˩˧/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use hiểu when you grasp the meaning of something, whether it is",
+        "why": "Repeats sense 0's definition verbatim without adding usage information."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Understanding meaning and understanding a person/situation are shades of one everyday sense."
+      }
+    ],
+    "growth": 0.675
   }
 }

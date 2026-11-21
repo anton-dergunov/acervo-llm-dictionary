@@ -71,6 +71,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "sell",
+    "emotion": "businesslike and brisk, making a transaction",
+    "notes": [
+      "Opposite of 买 (mǎi, to buy). Be careful with the tones: 卖 (mài, falling tone) means 'to sell', while 买 (mǎi, dipping tone) means 'to buy'."
+    ],
+    "senses": [
+      {
+        "id": "qr3mggqvse3qums",
+        "order": 0,
+        "definition": "To give something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sell"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "irt3o8qspl6wr2s",
+            "text": "这家店卖新鲜的水果。",
+            "textLang": "zh",
+            "translation": "This shop sells fresh fruit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and matter-of-fact, pointing out goods to a customer",
+            "note": null,
+            "matchedForm": "卖",
+            "matchedTranslationForm": "sells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "卖",
+    "lemma": "卖",
+    "reading": "mài",
+    "ipa": "/mai̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to sell; to betray",
     "primaryGloss": "sell",
     "emotion": "businesslike and brisk, making a transaction",
@@ -162,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To be unfaithful to someone or betray a secret for personal",
+        "why": "'Betray' is the separate compound word 出卖 (chūmài) in modern Mandarin, not standalone A2 卖."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "他为了钱出卖了朋友。",
+        "why": "Example uses the compound verb 出卖 (chūmài) instead of the headword 卖."
+      }
+    ],
+    "growth": 0.58
   }
 }

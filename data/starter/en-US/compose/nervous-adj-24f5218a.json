@@ -68,6 +68,76 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "nervioso, ansioso",
+    "primaryGloss": "nervioso",
+    "emotion": "inseguro y un poco tenso, con la mente dando vueltas a algo",
+    "notes": [
+      "Se usa con la preposición 'about' para indicar la causa: 'nervous about the exam' (nervioso por el examen).",
+      "En inglés, 'nervous' expresa ansiedad o preocupación; no se usa para decir que alguien está enojado o alterado (para eso se usa 'upset' o 'angry')."
+    ],
+    "senses": [
+      {
+        "id": "9rzms9kzq2r994g",
+        "order": 0,
+        "definition": "Que siente inquietud, preocupación o miedo, especialmente ante algo que va a ocurrir.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "nervioso",
+              "ansioso",
+              "inquieto"
+            ]
+          }
+        ],
+        "domain": "emoción",
+        "emoji": "😰",
+        "examples": [
+          {
+            "id": "hnutxtc38lqxhb0",
+            "text": "I was very nervous before my job interview.",
+            "textLang": "en",
+            "translation": "Estaba muy nervioso antes de mi entrevista de trabajo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ansioso y con mariposas en el estómago por el resultado",
+            "note": null,
+            "matchedForm": "nervous",
+            "matchedTranslationForm": "nervioso"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "nervous",
+    "lemma": "nervous",
+    "reading": null,
+    "ipa": "/ˈnɜːrvəs/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😰",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "nervioso; inquieto",
     "primaryGloss": "nervioso",
     "emotion": "inseguro y un poco tenso, con la mente dando vueltas a algo",
@@ -161,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Estado de inquietud o ansiedad antes de hacer algo importante",
+        "why": "Adjective defined as a noun ('Estado de inquietud') and as an infinitive in sense 1 ('Sentir miedo')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Feeling anxious before an event and being easily worried are shades of the same everyday meaning."
+      }
+    ],
+    "growth": 0.586
   }
 }

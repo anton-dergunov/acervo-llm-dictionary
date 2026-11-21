@@ -58,6 +58,75 @@
     "headword": "ngủ",
     "lemma": "ngủ",
     "reading": null,
+    "ipa": "/ŋu˧˩˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sleep",
+    "primaryGloss": "sleep",
+    "emotion": "tired and heavy, settling down for the night",
+    "notes": [
+      "Common combinations include 'đi ngủ' (to go to bed / go to sleep), 'buồn ngủ' (sleepy), and 'ngủ trưa' (to take a midday nap)."
+    ],
+    "senses": [
+      {
+        "id": "6swwamjhubh3p5m",
+        "order": 0,
+        "definition": "To rest the mind and body in a natural state of unconsciousness with eyes closed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleep",
+              "go to sleep",
+              "nap"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "a9z5qriyh2k5gp4",
+            "text": "Tôi muốn đi ngủ sớm tối nay.",
+            "textLang": "vi",
+            "translation": "I want to go to sleep early tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ngủ",
+            "matchedTranslationForm": "sleep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ngủ",
+    "lemma": "ngủ",
+    "reading": null,
     "ipa": "/ŋu˧˥/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋu˧˥/",
+        "why": "Wrong tone: 'ngủ' has hỏi tone (/˧˩˧/), not sắc (/˧˥/)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To rest with your eyes closed without necessarily being in a deep",
+        "why": "Artificial split; 'ngủ một chút' simply means to sleep a bit / take a nap."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use \"ngủ\" when referring to normal nighttime sleep or taking a nap.",
+        "why": "Pure filler restating the basic meaning of 'sleep'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with \"thức\", which means to stay awake.",
+        "why": "English speakers do not confuse 'sleep' with 'stay awake'."
+      }
+    ],
+    "growth": 0.598
   }
 }

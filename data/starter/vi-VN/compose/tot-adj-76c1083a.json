@@ -58,6 +58,116 @@
     "headword": "tốt",
     "lemma": "tốt",
     "reading": null,
+    "ipa": "/tot̚˧˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "good; kind",
+    "primaryGloss": "good",
+    "emotion": "warm and approving, nodding with a slight smile",
+    "notes": [
+      "Used for quality, health, or moral character. For tasty food use 'ngon'; for skill or ability use 'giỏi'; for good looks use 'đẹp'."
+    ],
+    "senses": [
+      {
+        "id": "2fybngpk924n6x6",
+        "order": 0,
+        "definition": "Of high quality, or having positive and favourable qualities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "fine"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "64v6a21xxkxh5i2",
+            "text": "Thời tiết hôm nay rất tốt.",
+            "textLang": "vi",
+            "translation": "The weather is very good today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerfully looking out at a sunny window",
+            "note": null,
+            "matchedForm": "tốt",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "be37pi3yvbuogvu",
+        "order": 1,
+        "definition": "Kind, helpful, or morally upright in character.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "kind",
+              "nice"
+            ]
+          }
+        ],
+        "domain": "character",
+        "emoji": "💛",
+        "examples": [
+          {
+            "id": "1on2kb4foiyidn8",
+            "text": "Anh ấy là một người bạn rất tốt.",
+            "textLang": "vi",
+            "translation": "He is a very good friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tốt",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "tốt",
+    "lemma": "tốt",
+    "reading": null,
     "ipa": "/tnot̚˧˥/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tnot̚˧˥/",
+        "why": "Corrupted IPA with an extra 'n'; should be /tot̚˧˦/."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cô ấy là một người rất tốt bụng.",
+        "why": "Uses the compound 'tốt bụng' instead of 'tốt' on its own."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "\"Tốt\" is the standard, everyday word for good",
+        "why": "Restates the gloss and definitions instead of contrasting with 'ngon' or 'giỏi'."
+      }
+    ],
+    "growth": 0.745
   }
 }

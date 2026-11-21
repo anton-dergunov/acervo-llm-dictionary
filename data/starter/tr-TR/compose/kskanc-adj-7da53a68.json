@@ -58,6 +58,74 @@
     "headword": "kıskanç",
     "lemma": "kıskanç",
     "reading": null,
+    "ipa": "/kɯsˈkantʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😒",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "jealous; envious",
+    "primaryGloss": "jealous",
+    "emotion": "suspicious and tight-lipped, glaring at someone else's success",
+    "notes": [
+      "Usually describes a person's character or disposition. To express feeling jealous or envious in a specific moment, Turkish uses the verb 'kıskanmak' rather than 'kıskanç'."
+    ],
+    "senses": [
+      {
+        "id": "k0x0jouk8nx01es",
+        "order": 0,
+        "definition": "Unhappy and possessive because someone you love might give attention to others, or resentful of what others have.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "jealous",
+              "envious"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😒",
+        "examples": [
+          {
+            "id": "znelv270hua1ldd",
+            "text": "Kocası çok kıskanç olduğu için başka erkeklerle konuşmasına izin vermiyor.",
+            "textLang": "tr",
+            "translation": "Because her husband is very jealous, he doesn't let her talk to other men.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and trapped by unreasonable control",
+            "note": null,
+            "matchedForm": "kıskanç",
+            "matchedTranslationForm": "jealous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "kıskanç",
+    "lemma": "kıskanç",
+    "reading": null,
     "ipa": "/kɯsˈɡantʃ/",
     "pos": "adj",
     "gender": null,
@@ -141,5 +209,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kɯsˈɡantʃ/",
+        "why": "Contains a typo ('ɡ' instead of 'k'); the second consonant is voiceless /k/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Arkadaşımın yeni arabasını görünce biraz kıskanç hissettim.",
+        "why": "'Kıskanç' describes a personality trait; 'kıskanç hissettim' is an unnatural English calque (say 'kıskandım')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kıskanç covers both romantic jealousy and envious longing",
+        "why": "Merely repeats the definition and glosses."
+      }
+    ],
+    "growth": 0.755
   }
 }

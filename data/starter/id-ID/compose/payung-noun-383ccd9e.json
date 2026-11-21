@@ -58,6 +58,72 @@
     "headword": "payung",
     "lemma": "payung",
     "reading": null,
+    "ipa": "/ˈpajuŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌂",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "umbrella, parasol",
+    "primaryGloss": "umbrella",
+    "emotion": "prepared for a sudden downpour, holding the handle firmly",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ncwwew1omi0iz4a",
+        "order": 0,
+        "definition": "A folding canopy on a stick held to protect oneself from rain or sunlight.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "umbrella",
+              "parasol"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🌂",
+        "examples": [
+          {
+            "id": "kye56utlmdzf17j",
+            "text": "Bawa payung karena hari ini mau hujan.",
+            "textLang": "id",
+            "translation": "Bring an umbrella because it's going to rain today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned about the dark clouds overhead, warning a friend",
+            "note": null,
+            "matchedForm": "payung",
+            "matchedTranslationForm": "umbrella"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "payung",
+    "lemma": "payung",
+    "reading": null,
     "ipa": "/paˈjuŋ/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/paˈjuŋ/",
+        "why": "Stress is penultimate (/ˈpajuŋ/), not on the final syllable."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person or organization that protects or shields others.",
+        "why": "Figurative/formal sense not needed at A2; cluttering shortGloss with 'protector'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Often carried daily during the rainy season in Indonesia.",
+        "why": "Trivial cultural filler that adds no linguistic value."
+      }
+    ],
+    "growth": 0.436
   }
 }

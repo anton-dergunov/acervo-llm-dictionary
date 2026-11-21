@@ -58,6 +58,117 @@
     "headword": "kłaść",
     "lemma": "kłaść",
     "reading": null,
+    "ipa": "/kwaɕt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📥",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to put; to lay; to put to bed",
+    "primaryGloss": "to put",
+    "emotion": "focused and deliberate, setting something down in its proper place",
+    "notes": [
+      "Imperfective verb (irregular present: 'kładę', 'kładziesz'). Its perfective pair is 'położyć'.",
+      "With 'się' ('kłaść się'), it means 'to lie down' or 'to go to bed'."
+    ],
+    "senses": [
+      {
+        "id": "jyrjncvq59o2m6x",
+        "order": 0,
+        "definition": "To place something somewhere, especially in a flat or horizontal position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put",
+              "to lay",
+              "to place"
+            ]
+          }
+        ],
+        "domain": "placing",
+        "emoji": "📥",
+        "examples": [
+          {
+            "id": "ra2ow6q2l5x2tt0",
+            "text": "Zawsze kładę klucze na stole.",
+            "textLang": "pl",
+            "translation": "I always put the keys on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kładę",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4fq5z0kde24yfj7",
+        "order": 1,
+        "definition": "To put someone into bed to sleep or rest.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to put to bed",
+              "to lay down"
+            ]
+          }
+        ],
+        "domain": "bedtime",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "dp4lpwilsnnhpok",
+            "text": "Czas kłaść dzieci spać.",
+            "textLang": "pl",
+            "translation": "It is time to put the children to bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and tired at the end of a long day",
+            "note": null,
+            "matchedForm": "kłaść",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kłaść",
+    "lemma": "kłaść",
+    "reading": null,
     "ipa": "/kwɔɕt͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +273,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kwɔɕt͡ɕ/",
+        "why": "Wrong vowel: 'kłaść' has /a/, not /ɔ/ (/kwaɕt͡ɕ/)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To cause someone or oneself to lie down.",
+        "why": "Without 'się', 'kłaść' is transitive and cannot mean 'to lie down' oneself."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "to lie down, to put to bed",
+        "why": "'To lie down' requires the reflexive 'kłaść się'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to put; to lay; to lie down",
+        "why": "'To lie down' is 'kłaść się', not transitive 'kłaść'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse kłaść (to put/lay) with położyć się (to lie down)",
+        "why": "Mismatches aspect in comparison (imperfective reflexive is 'kłaść się') and contradicts sense 1."
+      }
+    ],
+    "growth": 0.898
   }
 }

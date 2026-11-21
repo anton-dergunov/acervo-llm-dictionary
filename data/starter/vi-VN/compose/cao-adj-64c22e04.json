@@ -58,6 +58,135 @@
     "headword": "cao",
     "lemma": "cao",
     "reading": null,
+    "ipa": "/kaːw˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦒",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "tall; high",
+    "primaryGloss": "tall",
+    "emotion": "looking up and pointing something out, bright and casual",
+    "notes": [
+      "Covers both English 'tall' (people, trees, buildings) and 'high' (mountains, prices, temperatures)."
+    ],
+    "senses": [
+      {
+        "id": "zkldzf436rozm3i",
+        "order": 0,
+        "definition": "of great vertical height, or having a specified height",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "🦒",
+        "examples": [
+          {
+            "id": "agbi6mjia7rs3iu",
+            "text": "Anh ấy rất cao.",
+            "textLang": "vi",
+            "translation": "He is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation about someone's appearance",
+            "note": null,
+            "matchedForm": "cao",
+            "matchedTranslationForm": "tall"
+          },
+          {
+            "id": "x10bcsi688wsdvh",
+            "text": "Tòa nhà này rất cao.",
+            "textLang": "vi",
+            "translation": "This building is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed by the scale of the structure",
+            "note": null,
+            "matchedForm": "cao",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "w60cajwjw2yovwl",
+        "order": 1,
+        "definition": "above normal in amount, level, degree, or value",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "high"
+            ]
+          }
+        ],
+        "domain": "degree",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "v7sfys5sfm6vas1",
+            "text": "Giá ở đây hơi cao.",
+            "textLang": "vi",
+            "translation": "The prices here are a bit high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cao",
+            "matchedTranslationForm": "high"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cao",
+    "lemma": "cao",
+    "reading": null,
     "ipa": "/kaːw/",
     "pos": "adj",
     "gender": null,
@@ -159,5 +288,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kaːw/",
+        "why": "Missing tone mark in Vietnamese IPA transcription."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Physical height of people and buildings is one Vietnamese sense; English 'tall/high' is translation difference."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense 'high' in level, price, temperature, or quality."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "This building is very high.",
+        "why": "Unnatural English; buildings are usually 'tall', contradicting note[0] as well."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When describing buildings, mountains, or prices, it means high.",
+        "why": "In English, 'tall' is standard for buildings, not just 'high'."
+      }
+    ],
+    "growth": 1.137
   }
 }

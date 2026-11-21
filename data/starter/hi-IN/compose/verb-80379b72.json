@@ -58,6 +58,119 @@
     "headword": "पाना",
     "lemma": "पाना",
     "reading": null,
+    "ipa": "/pɑː.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be able to; to get; to find",
+    "primaryGloss": "to get",
+    "emotion": "content and satisfied, like holding something you finally received",
+    "notes": [
+      "After a verb stem, 'पाना' means 'to manage to' or 'to be able to', especially in negative sentences, and does not take 'ने' (मैं नहीं आ पाया — I could not come).",
+      "For passively receiving something or finding a lost item, everyday Hindi usually uses 'मिलना' (मुझे चाबी मिली), whereas 'पाना' implies achieving or finding after effort."
+    ],
+    "senses": [
+      {
+        "id": "852nrvajljwp30p",
+        "order": 0,
+        "definition": "Used after a verb stem to show that someone manages or has the opportunity to do something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be able to",
+              "to manage to",
+              "to get to"
+            ]
+          }
+        ],
+        "domain": "ability",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "resa2xsmtf5r1ok",
+            "text": "मैं आज बाहर नहीं जा पाया।",
+            "textLang": "hi",
+            "translation": "I could not go out today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and slightly disappointed, explaining a missed opportunity",
+            "note": null,
+            "matchedForm": "पाया",
+            "matchedTranslationForm": "could"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pj0optxnn115mse",
+        "order": 1,
+        "definition": "To obtain, achieve, or find something, often after effort or searching.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get",
+              "to find",
+              "to obtain",
+              "to achieve"
+            ]
+          }
+        ],
+        "domain": "obtaining",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "0fpb60855rvfk9c",
+            "text": "कड़ी मेहनत के बाद उसने सफलता पाई।",
+            "textLang": "hi",
+            "translation": "After hard work, he achieved success.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "पाई",
+            "matchedTranslationForm": "achieved"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "पाना",
+    "lemma": "पाना",
+    "reading": null,
     "ipa": "/pɑːnɑː/",
     "pos": "verb",
     "gender": null,
@@ -203,5 +316,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "मुझे कल तुम्हारा पत्र मिला।",
+        "why": "Uses मिलना (मिला) instead of the headword पाना."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "आखिरकार मैंने अपनी चाबियाँ पा लीं।",
+        "why": "Unnatural; finding lost keys is expressed with मिलना in everyday Hindi, not पा लेना."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Paana is a versatile verb. It often indicates receiving something",
+        "why": "Restates the definitions instead of explaining grammar and contrast with मिलना."
+      }
+    ],
+    "growth": 0.828
   }
 }

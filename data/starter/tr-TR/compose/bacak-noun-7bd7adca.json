@@ -68,6 +68,114 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "leg",
+    "primaryGloss": "leg",
+    "emotion": "heavy and tired after standing all day",
+    "notes": [
+      "The final -k softens to -ğ before a vowel suffix: bacak → bacağı (his/her leg).",
+      "For furniture legs, ayak is also very commonly used (masanın ayağı)."
+    ],
+    "senses": [
+      {
+        "id": "fslrjsgl5kfwrjf",
+        "order": 0,
+        "definition": "The lower limb of a human or animal body used for standing and walking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🦵",
+        "examples": [
+          {
+            "id": "tizu605cdzhrf4m",
+            "text": "Uzun bir yürüyüşten sonra bacaklarım ağrıyor.",
+            "textLang": "tr",
+            "translation": "My legs are aching after a long walk.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exhausted and complaining to a friend",
+            "note": null,
+            "matchedForm": "bacaklarım",
+            "matchedTranslationForm": "legs"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tzvls326wi35ohj",
+        "order": 1,
+        "definition": "A vertical support of a piece of furniture or structure, or the part of trousers that covers a leg.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leg"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "5j392ji37q1kxxa",
+            "text": "Masanın bir bacağı kırılmış, hemen tamir etmeliyiz.",
+            "textLang": "tr",
+            "translation": "One leg of the table is broken; we must fix it immediately.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed at finding something broken",
+            "note": null,
+            "matchedForm": "bacağı",
+            "matchedTranslationForm": "leg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "bacak",
+    "lemma": "bacak",
+    "reading": null,
+    "ipa": "/baˈdʒak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦵",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "leg; stalk",
     "primaryGloss": "leg",
     "emotion": "heavy and tired after standing all day",
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "leg, stalk",
+        "why": "'bacak' does not mean plant stalk (that is 'sap')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "leg; stalk",
+        "why": "Includes the false gloss 'stalk'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also refer to the thin supporting part of a piece of",
+        "why": "Merely repeats sense 1; notes should mention consonant softening (bacak -> bacağı) instead."
+      }
+    ],
+    "growth": 1.006
   }
 }

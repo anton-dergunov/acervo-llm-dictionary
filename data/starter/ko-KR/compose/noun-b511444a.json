@@ -58,6 +58,114 @@
     "headword": "코",
     "lemma": "코",
     "reading": null,
+    "ipa": "/kʰo/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👃",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "nose; snot",
+    "primaryGloss": "nose",
+    "emotion": "matter-of-fact and straightforward when pointing to a part of the face",
+    "notes": [
+      "In the expression '코가 높다' (lit. 'the nose is high'), it describes a prominent, high-bridged nose, or figuratively someone who is proud or stuck-up."
+    ],
+    "senses": [
+      {
+        "id": "2f9ndkng3xdrr3b",
+        "order": 0,
+        "definition": "The part of the face above the mouth used for breathing and smelling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nose"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👃",
+        "examples": [
+          {
+            "id": "3no4kfjkbpph1t0",
+            "text": "동생은 코가 아주 높아요.",
+            "textLang": "ko",
+            "translation": "My younger sibling has a very prominent nose.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "코",
+            "matchedTranslationForm": "nose"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gghoc8c8u09cq2e",
+        "order": 1,
+        "definition": "The liquid or mucus produced inside the nose, especially in expressions about a runny or stuffy nose.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snot",
+              "nasal mucus"
+            ]
+          }
+        ],
+        "domain": "mucus",
+        "emoji": "🤧",
+        "examples": [
+          {
+            "id": "zt1iqvtpj1yi7sv",
+            "text": "감기에 걸려서 코가 계속 나와요.",
+            "textLang": "ko",
+            "translation": "I have a cold, so my nose keeps running.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and uncomfortable, explaining symptoms of a cold",
+            "note": null,
+            "matchedForm": "코",
+            "matchedTranslationForm": "nose"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "코",
+    "lemma": "코",
+    "reading": null,
     "ipa": "/ko/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +267,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ko/",
+        "why": "Korean ㅋ (aspirated k) is transcribed as /kʰ/, so 코 is /kʰo/."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The nose is very high.",
+        "why": "Literal calque; in Korean '코가 높다' means having a prominent or sharp nose."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for the body part, but also commonly refers to the mucus",
+        "why": "Restates the two senses and the example in sense 1."
+      }
+    ],
+    "growth": 1.209
   }
 }

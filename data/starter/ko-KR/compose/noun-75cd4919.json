@@ -60,6 +60,73 @@
     "headword": "버스",
     "lemma": "버스",
     "reading": null,
+    "ipa": "[p͈ʌsɯ]",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚌",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "bus",
+    "primaryGloss": "bus",
+    "emotion": null,
+    "notes": [
+      "Often pronounced with a tense initial sound, like [뻐쓰]. Use 버스를 타다 for 'to take/ride a bus' and 버스에서 내리다 for 'to get off a bus'."
+    ],
+    "senses": [
+      {
+        "id": "aj57ojoxv8kmh7c",
+        "order": 0,
+        "definition": "A large motor vehicle that carries passengers along a fixed route.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bus"
+            ]
+          }
+        ],
+        "domain": "transportation",
+        "emoji": "🚌",
+        "examples": [
+          {
+            "id": "8z7xmxv6ukuurqz",
+            "text": "버스를 기다려요.",
+            "textLang": "ko",
+            "translation": "I am waiting for the bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and bored, standing on the sidewalk waiting",
+            "note": null,
+            "matchedForm": "버스",
+            "matchedTranslationForm": "bus"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "버스",
+    "lemma": "버스",
+    "reading": null,
     "ipa": "/pʌsɯ/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʌsɯ/",
+        "why": "Standard Korean pronunciation of 버스 has a tense initial consonant: [p͈ʌsɯ] (뻐쓰)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a loanword, it is pronounced similarly to the English word.",
+        "why": "Trivial filler, and misses that initial ㅂ is pronounced tense [p͈] and '버스를 타다' is used."
+      }
+    ],
+    "growth": 0.921
   }
 }

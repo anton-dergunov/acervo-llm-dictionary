@@ -71,6 +71,158 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to pay; to hand in; to make or put out",
+    "primaryGloss": "pay",
+    "emotion": "matter-of-fact and direct, simply stating a cost or an action",
+    "notes": [
+      "내다 is used in many common expressions where something is put forth or produced, such as 소리를 내다 (to make a sound), 시간을 내다 (to make time), and 용기를 내다 (to muster courage)."
+    ],
+    "senses": [
+      {
+        "id": "pguvv70yea92vvi",
+        "order": 0,
+        "definition": "To give money for goods, services, or a fee.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "38b79q6xpn57mf9",
+            "text": "밥값은 제가 낼게요.",
+            "textLang": "ko",
+            "translation": "I will pay for the meal.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "낼게요",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "78qj1oq5oi4abb0",
+        "order": 1,
+        "definition": "To hand in or submit something, such as homework, a report, or an application.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hand in",
+              "turn in",
+              "submit"
+            ]
+          }
+        ],
+        "domain": "submitting",
+        "emoji": "📤",
+        "examples": [
+          {
+            "id": "lpskf22mvgadx2e",
+            "text": "내일까지 숙제를 내야 해요.",
+            "textLang": "ko",
+            "translation": "I have to turn in my homework by tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "내야",
+            "matchedTranslationForm": "turn in"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9hgw0s8k3sq1dc2",
+        "order": 2,
+        "definition": "To produce, make, or bring forth something such as a sound, time, or effort.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "make",
+              "produce",
+              "put out"
+            ]
+          }
+        ],
+        "domain": "producing",
+        "emoji": "📤",
+        "examples": [
+          {
+            "id": "x6qbgit4rx86cfx",
+            "text": "도서관에서는 큰 소리를 내면 안 돼요.",
+            "textLang": "ko",
+            "translation": "You must not make loud noises in the library.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "내면",
+            "matchedTranslationForm": "make"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "내다",
+    "lemma": "내다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to pay; to produce; to send out",
     "primaryGloss": "pay",
     "emotion": "matter-of-fact and direct, simply stating a cost or an action",
@@ -164,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "계산서 좀 내주세요.",
+        "why": "In Korean you pay money/price (돈/값을 내다) or do the bill (계산하다), not 계산서를 내다."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To cause something to appear or come out from within.",
+        "why": "Conflates 'submitting/handing in' with 'producing/making (a sound, time, courage)'."
+      }
+    ],
+    "growth": 1.211
   }
 }

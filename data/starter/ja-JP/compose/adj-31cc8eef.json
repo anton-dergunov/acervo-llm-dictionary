@@ -70,6 +70,98 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "boring; bored",
+    "primaryGloss": "boring",
+    "emotion": null,
+    "notes": [
+      "A na-adjective (退屈な) that also works as a noun meaning 'boredom' and a suru-verb (退屈する, 'to be bored').",
+      "Compared with つまらない ('uninteresting, not worth it'), 退屈 focuses on the restless feeling of having nothing to do."
+    ],
+    "senses": [
+      {
+        "id": "zyh29vhsah1mw29",
+        "order": 0,
+        "definition": "Uninteresting and monotonous; feeling weary and restless from having nothing to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boring",
+              "bored",
+              "dull",
+              "tedious"
+            ]
+          }
+        ],
+        "domain": "boredom",
+        "emoji": "🥱",
+        "examples": [
+          {
+            "id": "xh4368lpj79toea",
+            "text": "退屈な会議がやっと終わった。",
+            "textLang": "ja",
+            "translation": "The boring meeting finally ended.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and slightly grumpy, having finally escaped a tedious task",
+            "note": null,
+            "matchedForm": "退屈な",
+            "matchedTranslationForm": "boring"
+          },
+          {
+            "id": "phpyci9fr8zmw1u",
+            "text": "あまりに退屈で、昼寝をしてしまった。",
+            "textLang": "ja",
+            "translation": "I was so bored that I took a nap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "mildly self-deprecating, explaining why they gave up on the afternoon",
+            "note": null,
+            "matchedForm": "退屈で",
+            "matchedTranslationForm": "bored"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "退屈",
+    "lemma": "退屈",
+    "reading": "たいくつ",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥱",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "bored; boring",
     "primaryGloss": "bored",
     "emotion": null,
@@ -164,5 +256,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The state of being weary or restless",
+        "why": "Boredom and boringness are one adjective sense in Japanese; also defined as a noun."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Describing something that is uninteresting, dull, or monotonous.",
+        "why": "Meta-language ('Describing...'); define the quality directly."
+      }
+    ],
+    "growth": 0.695
   }
 }

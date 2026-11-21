@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to give; to hand over; to provide",
+    "primaryGloss": "give",
+    "emotion": "helpful and direct, like placing an object into someone's waiting hand",
+    "notes": [
+      "The recipient takes the dative case (-a/-e): 'bana ver' (give to me).",
+      "Forms many common light-verb expressions, such as 'karar vermek' (to decide) and 'cevap vermek' (to answer)."
+    ],
+    "senses": [
+      {
+        "id": "ffw7vjp3y0h1txy",
+        "order": 0,
+        "definition": "To hand or pass an object to someone, or let them have it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "give",
+              "hand over"
+            ]
+          }
+        ],
+        "domain": "transfer",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "j7lp0c5rju00519",
+            "text": "Lütfen bana kalemi ver.",
+            "textLang": "tr",
+            "translation": "Please give me the pen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite but firm, needing the tool to complete a task",
+            "note": null,
+            "matchedForm": "ver",
+            "matchedTranslationForm": "give"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "emobk46vpixfyjp",
+        "order": 1,
+        "definition": "To provide, grant, or assign something non-physical, such as homework, permission, or an answer.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "give",
+              "provide",
+              "grant"
+            ]
+          }
+        ],
+        "domain": "provide",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "rrj7602h8w0asf3",
+            "text": "Öğretmen bize çok ödev verdi.",
+            "textLang": "tr",
+            "translation": "The teacher gave us a lot of homework.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly burdened by the weight of the work",
+            "note": null,
+            "matchedForm": "verdi",
+            "matchedTranslationForm": "gave"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "vermek",
+    "lemma": "vermek",
+    "reading": null,
+    "ipa": "/veɾˈmek/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to give; to hand over",
     "primaryGloss": "give",
     "emotion": "helpful and direct, like placing an object into someone's waiting hand",
@@ -162,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ver- is the root. You will see it in many compound verbs",
+        "why": "Vague filler without examples, and misses the required dative case (-a/-e) for the recipient."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'verilmek' (to be given), which adds",
+        "why": "Generic regular grammar statement that applies to almost any Turkish verb."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to give; to hand over",
+        "why": "Misses the second sense ('to provide; to grant')."
+      }
+    ],
+    "growth": 0.996
   }
 }

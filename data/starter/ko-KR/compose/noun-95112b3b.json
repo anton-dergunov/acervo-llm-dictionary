@@ -58,6 +58,71 @@
     "headword": "오리",
     "lemma": "오리",
     "reading": null,
+    "ipa": "oɾi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦆",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "duck",
+    "primaryGloss": "duck",
+    "emotion": "calm and rural, watching birds float peacefully on a pond",
+    "notes": [],
+    "senses": [
+      {
+        "id": "0y57412f0jvpxte",
+        "order": 0,
+        "definition": "A water bird with a flat beak, webbed feet, and short legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "duck"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦆",
+        "examples": [
+          {
+            "id": "u9ut8b8o584lxsx",
+            "text": "호수에 오리들이 헤엄치고 있어요.",
+            "textLang": "ko",
+            "translation": "Ducks are swimming in the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching nature in a park",
+            "note": null,
+            "matchedForm": "오리",
+            "matchedTranslationForm": "Ducks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "오리",
+    "lemma": "오리",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +225,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(distance) A traditional Korean unit of distance equal to about two kilometers.",
+        "why": "'오 리' (five li) is two separate words, not a lexicalized sense of '오리', and archaic for A2."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "duck; five li (distance)",
+        "why": "Includes the spurious 'five li' sense."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes",
+        "quote": "오리 has two completely unrelated meanings that share the exact same spelling",
+        "why": "Explains the spurious '오 리' (five li) sense, which is written with a space."
+      }
+    ],
+    "growth": 0.184
   }
 }

@@ -71,6 +71,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to wear; to put on; to pass through",
+    "primaryGloss": "to wear",
+    "emotion": "matter-of-fact and helpful, describing a daily routine",
+    "notes": [
+      "Use 穿 for clothing, shoes, and socks. For hats, glasses, scarves, gloves, and jewelry, use 戴 (dài) instead."
+    ],
+    "senses": [
+      {
+        "id": "79mwfxvjv9sr3k5",
+        "order": 0,
+        "definition": "To put or have clothing or footwear on one's body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to wear",
+              "to put on"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "uda5ridhccvhgkd",
+            "text": "他今天穿了一件红色的毛衣。",
+            "textLang": "zh",
+            "translation": "He is wearing a red sweater today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and casual, noting someone's appearance",
+            "note": null,
+            "matchedForm": "穿",
+            "matchedTranslationForm": "wearing"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "04m4qb1wd2u061n",
+        "order": 1,
+        "definition": "To pass through an opening or space, or to pierce through something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pass through",
+              "to pierce",
+              "to thread"
+            ]
+          }
+        ],
+        "domain": "passage",
+        "emoji": "🪡",
+        "examples": [
+          {
+            "id": "rgth2u87sezm2bo",
+            "text": "这根线太粗，穿不过针眼。",
+            "textLang": "zh",
+            "translation": "This thread is too thick to pass through the eye of the needle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "穿",
+            "matchedTranslationForm": "pass through"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "穿",
+    "lemma": "穿",
+    "reading": "chuān",
+    "ipa": "/ʈʂʰu̯an˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to wear; to put on; to pierce",
     "primaryGloss": "to wear",
     "emotion": "matter-of-fact and helpful, describing a daily routine",
@@ -164,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use 穿 for clothes, shoes, hats, and glasses.",
+        "why": "False: hats and glasses take 戴 (dài) in Mandarin, never 穿."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "穿 can also mean 'to pierce' or 'to pass through', like threading",
+        "why": "Merely repeats the second sense instead of adding new usage guidance."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To have clothes, shoes, or accessories on one's body.",
+        "why": "Misleading: accessories take 戴 (dài), whereas 穿 is only for garments and footwear."
+      }
+    ],
+    "growth": 0.917
   }
 }

@@ -68,6 +68,156 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "negro; oscuro; solo (café)",
+    "primaryGloss": "negro",
+    "emotion": "matter-of-fact and straightforward, describing something exactly as it is",
+    "notes": [
+      "Cuando se refiere a personas o cultura afrodescendiente, en inglés estadounidense suele escribirse con mayúscula ('Black')."
+    ],
+    "senses": [
+      {
+        "id": "a93m777lfo0krcx",
+        "order": 0,
+        "definition": "Del color más oscuro, como el carbón o la noche sin luz.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "negro",
+              "oscuro"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "⚫",
+        "examples": [
+          {
+            "id": "2lbur0mgy079n30",
+            "text": "The cat has soft black fur.",
+            "textLang": "en",
+            "translation": "El gato tiene un pelaje negro y suave.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and observant, noticing the cat's features",
+            "note": null,
+            "matchedForm": "black",
+            "matchedTranslationForm": "negro"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6feuxrmvlwwguru",
+        "order": 1,
+        "definition": "Perteneciente o relativo a las personas de origen africano o afroamericano.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "negro",
+              "afroamericano"
+            ]
+          }
+        ],
+        "domain": "identidad",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6y6nr9hugf3t8vv",
+            "text": "She is a famous Black writer.",
+            "textLang": "en",
+            "translation": "Ella es una famosa escritora negra.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Black",
+            "matchedTranslationForm": "negra"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vz998i3gngle8f7",
+        "order": 2,
+        "definition": "Dicho del café o del té: que se sirve sin leche ni crema.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "solo",
+              "negro"
+            ]
+          }
+        ],
+        "domain": "bebida",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5gie6en17tnqq21",
+            "text": "I always drink my coffee black.",
+            "textLang": "en",
+            "translation": "Siempre tomo el café solo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "black",
+            "matchedTranslationForm": "solo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "black",
+    "lemma": "black",
+    "reading": null,
+    "ipa": "/blæk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "negro; oscuro",
     "primaryGloss": "negro",
     "emotion": "matter-of-fact and straightforward, describing something exactly as it is",
@@ -159,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday senses: coffee/tea without milk, and Black (race/ethnicity)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "El color más oscuro de todos, como el de la noche",
+        "why": "Adjective defined as a noun ('El color...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Aunque 'black' es el color negro, también se usa para describir",
+        "why": "Merely restates the senses."
+      }
+    ],
+    "growth": 1.069
   }
 }

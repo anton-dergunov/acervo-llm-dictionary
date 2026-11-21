@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to draw; to paint",
+    "primaryGloss": "draw",
+    "emotion": "focused and quiet, fully absorbed in creating an image",
+    "notes": [
+      "Covers both drawing (with a pencil or pen) and painting (with a brush). It often appears in the phrase 그림을 그리다 ('to draw/paint a picture')."
+    ],
+    "senses": [
+      {
+        "id": "qgzmsoexaz558xj",
+        "order": 0,
+        "definition": "To make a picture or image using a pencil, pen, or brush.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "draw",
+              "paint"
+            ]
+          }
+        ],
+        "domain": "art",
+        "emoji": "✏️",
+        "examples": [
+          {
+            "id": "eqq41w73z72qu4v",
+            "text": "아이들이 공책에 연필로 꽃을 그려요.",
+            "textLang": "ko",
+            "translation": "The children draw flowers in their notebooks with pencils.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "그려요",
+            "matchedTranslationForm": "draw"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "그리다",
+    "lemma": "그리다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎨",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to draw; to paint; to miss/long for",
     "primaryGloss": "to draw",
     "emotion": "focused and quiet, fully absorbed in creating an image",
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To feel a deep desire for someone or something that is not present.",
+        "why": "Literary/poetic sense; A2 learners meet 그리워하다 and 보고 싶다 for 'to miss', not 그리다."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This verb has two primary meanings that are context-dependent.",
+        "why": "Restates the senses instead of giving useful grammar or collocation help."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "연필로 꽃을 그리다.",
+        "why": "Sentence fragment in dictionary form instead of a natural conjugated sentence."
+      }
+    ],
+    "growth": 0.599
   }
 }

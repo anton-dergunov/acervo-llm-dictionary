@@ -59,6 +59,74 @@
     "language": "ja",
     "headword": "誕生日",
     "lemma": "誕生日",
+    "reading": "たんじょうび",
+    "ipa": "tandʑoːbi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎂",
+    "topics": [
+      "Time",
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "birthday",
+    "primaryGloss": "birthday",
+    "emotion": "joyful and expectant, thinking of a celebration or special attention",
+    "notes": [
+      "Often takes the polite prefix お when referring to someone else's birthday, as in お誕生日おめでとうございます ('Happy birthday')."
+    ],
+    "senses": [
+      {
+        "id": "w8ba0vcxxh4fvzh",
+        "order": 0,
+        "definition": "The anniversary of the day on which someone was born.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "birthday"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🎂",
+        "examples": [
+          {
+            "id": "hf1e9mzfr2swdho",
+            "text": "来週は私の誕生日です。",
+            "textLang": "ja",
+            "translation": "Next week is my birthday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and anticipating a fun celebration",
+            "note": null,
+            "matchedForm": "誕生日",
+            "matchedTranslationForm": "birthday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "誕生日",
+    "lemma": "誕生日",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -122,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for Japanese word with kanji."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "誕生日 is used for both the specific calendar date (e.g., April 5th)",
+        "why": "True of English 'birthday' too; adds no useful information for the learner."
+      }
+    ],
+    "growth": 0.775
   }
 }

@@ -74,6 +74,96 @@
     "primaryGloss": "highway",
     "emotion": null,
     "notes": [
+      "While 'calle' is used for streets within a city, 'carretera' refers to paved roads connecting different cities or towns.",
+      "In Mexico, a major multi-lane or toll highway is often called an 'autopista'."
+    ],
+    "senses": [
+      {
+        "id": "ny95eg2b9t7p65z",
+        "order": 0,
+        "definition": "A main paved road connecting towns or cities, meant for fast traffic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "highway",
+              "road"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🛣️",
+        "examples": [
+          {
+            "id": "0k61oyn60kt9eiv",
+            "text": "La carretera estaba cerrada por mantenimiento.",
+            "textLang": "es",
+            "translation": "The highway was closed for maintenance.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit annoyed at the unexpected delay during a trip",
+            "note": null,
+            "matchedForm": "carretera",
+            "matchedTranslationForm": "highway"
+          },
+          {
+            "id": "hy7l547swtshzpy",
+            "text": "Manejamos muchas horas por la carretera.",
+            "textLang": "es",
+            "translation": "We drove for many hours on the highway.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "carretera",
+            "matchedTranslationForm": "highway"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la carretera",
+    "lemma": "carretera",
+    "reading": null,
+    "ipa": "/ka.reˈte.ɾa/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛣️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "highway; road",
+    "primaryGloss": "highway",
+    "emotion": null,
+    "notes": [
       "While 'calle' is used for streets within a city, 'carretera' specifically refers to the roads connecting different cities or towns.",
       "In Mexico, you might also hear 'autopista' when referring specifically to a major toll highway or freeway."
     ],
@@ -144,5 +234,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Condujimos muchas horas por la carretera.",
+        "why": "In Mexican Spanish, 'manejar' is standard for driving a vehicle, not 'conducir'."
+      }
+    ],
+    "growth": 0.925
   }
 }

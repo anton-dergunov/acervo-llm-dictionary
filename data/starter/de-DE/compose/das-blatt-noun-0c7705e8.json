@@ -68,6 +68,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "leaf; sheet of paper",
+    "primaryGloss": "leaf",
+    "emotion": "peaceful and observant, admiring the detail in nature",
+    "notes": [
+      "The plural is 'die Blätter'.",
+      "For paper, it is often used in the phrase 'ein Blatt Papier' (a sheet of paper)."
+    ],
+    "senses": [
+      {
+        "id": "09svlpiqx6ku66k",
+        "order": 0,
+        "definition": "A flat, usually green part of a plant or tree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leaf"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🍃",
+        "examples": [
+          {
+            "id": "vtga64ss1fplo4b",
+            "text": "Im Herbst fallen die Blätter von den Bäumen.",
+            "textLang": "de",
+            "translation": "In autumn, the leaves fall from the trees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Blätter",
+            "matchedTranslationForm": "leaves"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "y4s9t5swergsfyh",
+        "order": 1,
+        "definition": "A single, flat piece of paper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheet of paper",
+              "sheet",
+              "piece of paper"
+            ]
+          }
+        ],
+        "domain": "stationery",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "pwaka0ak6zzkxsv",
+            "text": "Ich brauche noch ein leeres Blatt für meine Notizen.",
+            "textLang": "de",
+            "translation": "I need another blank sheet of paper for my notes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "organized and ready to start working",
+            "note": null,
+            "matchedForm": "Blatt",
+            "matchedTranslationForm": "sheet of paper"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Blatt",
+    "lemma": "Blatt",
+    "reading": null,
+    "ipa": "/blat/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍃",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "leaf; sheet of paper; blade",
     "primaryGloss": "leaf",
     "emotion": "peaceful and observant, admiring the detail in nature",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "leaf; sheet of paper; blade",
+        "why": "Includes 'blade', which is not covered by any of the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Distinguish between 'Blatt' (a leaf on a tree) and 'Blatt Papier'",
+        "why": "Restates the two senses; better to give the umlaut plural 'die Blätter'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Im Herbst fällt das Blatt vom Baum.",
+        "why": "Singular 'the leaf falls' is unnatural as a general statement about autumn; plural is standard."
+      }
+    ],
+    "growth": 0.957
   }
 }

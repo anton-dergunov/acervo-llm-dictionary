@@ -72,6 +72,73 @@
     "primaryGloss": "bird",
     "emotion": "simple and descriptive, like pointing to something you just saw",
     "notes": [
+      "Takes the classifier ตัว (dtua) for individual birds and ฝูง (fǔung) for a flock."
+    ],
+    "senses": [
+      {
+        "id": "yvywdz6ov1g5u12",
+        "order": 0,
+        "definition": "A feathered animal with two wings and a beak that lays eggs and can usually fly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bird"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐦",
+        "examples": [
+          {
+            "id": "j76seyiqden2fll",
+            "text": "มีนกเกาะอยู่บนกิ่งไม้",
+            "textLang": "th",
+            "translation": "There is a bird perched on the tree branch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, noticing nature in the garden",
+            "note": null,
+            "matchedForm": "นก",
+            "matchedTranslationForm": "bird"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "นก",
+    "lemma": "นก",
+    "reading": null,
+    "ipa": "/nók/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐦",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bird",
+    "primaryGloss": "bird",
+    "emotion": "simple and descriptive, like pointing to something you just saw",
+    "notes": [
       "This is the general term for any kind of bird. It is a straightforward word used for all species, from tiny sparrows to large eagles."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the general term for any kind of bird.",
+        "why": "Pure filler restating the gloss; misses the required classifier ตัว."
+      }
+    ],
+    "growth": 0.844
   }
 }

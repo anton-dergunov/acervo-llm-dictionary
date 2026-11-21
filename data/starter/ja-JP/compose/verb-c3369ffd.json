@@ -68,6 +68,96 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to help; to assist",
+    "primaryGloss": "help",
+    "emotion": "kind and willing, reaching out to make someone's task a bit lighter",
+    "notes": [
+      "Godan verb (手伝わない, 手伝います, 手伝って). Takes を for the task or person you help (母を手伝う, 料理を手伝う).",
+      "Used for pitching in with work or chores. For saving someone from danger or trouble, use 助ける (tasukeru)."
+    ],
+    "senses": [
+      {
+        "id": "o72rssznc954bys",
+        "order": 0,
+        "definition": "To help someone by doing part of their work or chores with them.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "help",
+              "assist"
+            ]
+          }
+        ],
+        "domain": "assistance",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "v7ywwt0xi58tzxf",
+            "text": "母の料理を手伝います。",
+            "textLang": "ja",
+            "translation": "I help my mother with the cooking.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and dutiful, showing off a helpful habit",
+            "note": null,
+            "matchedForm": "手伝います",
+            "matchedTranslationForm": "help"
+          },
+          {
+            "id": "hlzn59ui504x43r",
+            "text": "引っ越しを手伝ってくれませんか。",
+            "textLang": "ja",
+            "translation": "Could you help me with my move?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "手伝って",
+            "matchedTranslationForm": "help"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "手伝う",
+    "lemma": "手伝う",
+    "reading": "てつだう",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to help; to assist; to make something easier",
     "primaryGloss": "help",
     "emotion": "kind and willing, reaching out to make someone's task a bit lighter",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(facilitate) To perform an action that makes a task or situation easier for someone else.",
+        "why": "手伝う means helping someone do a task, not an inanimate tool facilitating work."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "このツールは仕事を早く終わらせることを手伝います。",
+        "why": "Unnatural English calque; inanimate tools do not take 手伝う with a こと-clause."
+      }
+    ],
+    "growth": 0.707
   }
 }

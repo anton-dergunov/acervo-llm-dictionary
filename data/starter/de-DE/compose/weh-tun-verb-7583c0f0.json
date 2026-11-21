@@ -58,6 +58,97 @@
     "headword": "weh tun",
     "lemma": "weh tun",
     "reading": null,
+    "ipa": "/ˈveː ˌtuːn/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "to hurt; to ache",
+    "primaryGloss": "to hurt",
+    "emotion": "wincing slightly while pointing to a sore spot, pained and needing relief",
+    "notes": [
+      "Usually written as one separable verb ('wehtun': 'tut weh', 'wehzutun'), though 'weh tun' is also permitted.",
+      "Takes a dative object for the person feeling the pain: 'Der Kopf tut mir weh' (My head hurts).",
+      "Irregular forms of 'tun': er tut, er tat, er hat getan."
+    ],
+    "senses": [
+      {
+        "id": "bjpi0assxk8rjev",
+        "order": 0,
+        "definition": "To cause physical or emotional pain; to ache.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache"
+            ]
+          }
+        ],
+        "domain": "pain",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "ngnn12ikga0dfb3",
+            "text": "Mein Knie tut heute sehr weh.",
+            "textLang": "de",
+            "translation": "My knee hurts a lot today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tiring and slightly grumpy, feeling the constant nagging of an old injury",
+            "note": null,
+            "matchedForm": null,
+            "matchedTranslationForm": "hurts"
+          },
+          {
+            "id": "d1oxprncpkdoyl7",
+            "text": "Entschuldigung, ich wollte dir nicht weh tun.",
+            "textLang": "de",
+            "translation": "Sorry, I didn't mean to hurt you.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and apologetic, wanting to make amends after an accidental bump",
+            "note": null,
+            "matchedForm": "weh tun",
+            "matchedTranslationForm": "hurt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "weh tun",
+    "lemma": "weh tun",
+    "reading": null,
     "ipa": "/veː tuːn/",
     "pos": "verb",
     "gender": null,
@@ -141,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'weh' and 'tun' are written as two separate words",
+        "why": "Usually written as one word 'wehtun'; 'weh tun' is a less common variant."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To experience or cause physical pain or ache.",
+        "why": "The subject causes the pain; the person feeling it is in the dative, not subject."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular forms of 'tun' (tut, tat, hat getan)."
+      }
+    ],
+    "growth": 1.009
   }
 }

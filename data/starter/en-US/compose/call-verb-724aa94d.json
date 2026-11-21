@@ -68,6 +68,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "llamar; telefonear; gritar",
+    "primaryGloss": "llamar",
+    "emotion": "direct and urgent, getting someone's attention across a room",
+    "notes": [
+      "No lleva preposición antes de la persona a la que se llama ('call me', no 'call to me'). Con 'back' ('call someone back') significa devolver una llamada telefónica."
+    ],
+    "senses": [
+      {
+        "id": "t0ezyu8dnlcf9gz",
+        "order": 0,
+        "definition": "Comunicarse con alguien por teléfono.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llamar",
+              "telefonear"
+            ]
+          }
+        ],
+        "domain": "comunicación",
+        "emoji": "📱",
+        "examples": [
+          {
+            "id": "fnldj6qo2empzc8",
+            "text": "I will call you later today.",
+            "textLang": "en",
+            "translation": "Te llamaré más tarde hoy.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and reassuring, making plans for later",
+            "note": null,
+            "matchedForm": "call",
+            "matchedTranslationForm": "llamaré"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "012z3woiy4bjkja",
+        "order": 1,
+        "definition": "Hablar en voz alta o gritar para atraer la atención de alguien o pedir que venga.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llamar",
+              "gritar"
+            ]
+          }
+        ],
+        "domain": "voz",
+        "emoji": "🗣️",
+        "examples": [
+          {
+            "id": "t01oybvrg2hcfnw",
+            "text": "She called my name from across the street.",
+            "textLang": "en",
+            "translation": "Ella me llamó por mi nombre desde el otro lado de la calle.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "called",
+            "matchedTranslationForm": "llamó"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "guzzxnxdzx6wbbt",
+        "order": 2,
+        "definition": "Dar o usar un nombre o apodo para una persona o cosa.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "llamar",
+              "nombrar"
+            ]
+          }
+        ],
+        "domain": "nombre",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "8k9u97wyjklrcpb",
+            "text": "My friends call me Mike.",
+            "textLang": "en",
+            "translation": "Mis amigos me llaman Mike.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "call",
+            "matchedTranslationForm": "llaman"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "call",
+    "lemma": "call",
+    "reading": null,
+    "ipa": "/kɔl/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "llamar; telefonear; gritar; nombrar",
     "primaryGloss": "llamar",
     "emotion": "direct and urgent, getting someone's attention across a room",
@@ -201,5 +351,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Por favor llama su nombre para que nos escuche.",
+        "why": "'Llama su nombre' is an ungrammatical calque in Spanish; should be 'grita su nombre' or 'llámala por su nombre'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para el contacto telefónico como para gritar el nombre",
+        "why": "Restates senses 0 and 1 without adding grammar or usage info (e.g., direct object without preposition, 'call back')."
+      }
+    ],
+    "growth": 1.179
   }
 }

@@ -68,6 +68,114 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "nurse; caregiver",
+    "primaryGloss": "nurse",
+    "emotion": "respectful and appreciative, recognizing someone who helps others in need",
+    "notes": [
+      "Derived from 'rawat' (to care for). In everyday speech, nurses (especially female ones) are also very commonly called 'suster'."
+    ],
+    "senses": [
+      {
+        "id": "nzb8kqxuwvouhrm",
+        "order": 0,
+        "definition": "A healthcare professional who cares for sick or injured people in a hospital or clinic.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nurse"
+            ]
+          }
+        ],
+        "domain": "healthcare",
+        "emoji": "👩‍⚕️",
+        "examples": [
+          {
+            "id": "dxvmd0iwkazu17d",
+            "text": "Perawat itu sangat ramah kepada pasiennya.",
+            "textLang": "id",
+            "translation": "The nurse is very kind to her patients.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and grateful, acknowledging a pleasant interaction",
+            "note": null,
+            "matchedForm": "Perawat",
+            "matchedTranslationForm": "nurse"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tcmf9qt7939if5o",
+        "order": 1,
+        "definition": "A person who looks after someone who is elderly, ill, or unable to care for themselves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "caregiver",
+              "carer"
+            ]
+          }
+        ],
+        "domain": "caregiving",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "sqaucdna5ufkw8i",
+            "text": "Dia bekerja sebagai perawat lansia di rumah itu.",
+            "textLang": "id",
+            "translation": "He works as an elderly caregiver at that house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "perawat",
+            "matchedTranslationForm": "caregiver"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "perawat",
+    "lemma": "perawat",
+    "reading": null,
+    "ipa": "/pəˈrawat/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏥",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "nurse",
     "primaryGloss": "nurse",
     "emotion": "respectful and appreciative, recognizing someone who helps others in need",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse this with 'dokter', which refers specifically to a doctor",
+        "why": "No learner confuses 'perawat' with 'dokter'; mentioning the common synonym 'suster' is much more useful."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "nurse",
+        "why": "Omits 'caregiver' from sense 1."
+      }
+    ],
+    "growth": 0.906
   }
 }

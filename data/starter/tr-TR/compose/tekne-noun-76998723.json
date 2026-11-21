@@ -68,6 +68,74 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "boat",
+    "primaryGloss": "boat",
+    "emotion": "calm and breezy, looking out over the water",
+    "notes": [
+      "Usually refers to a small or medium-sized boat (such as a fishing boat or yacht), whereas 'gemi' refers to a large ship and 'kayık' to a small rowboat."
+    ],
+    "senses": [
+      {
+        "id": "di37550it0xn7ar",
+        "order": 0,
+        "definition": "A small or medium-sized watercraft for travelling on water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "boat",
+              "vessel"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "⛵",
+        "examples": [
+          {
+            "id": "3ytimby4d6wlyqu",
+            "text": "Yaz aylarında teknelerle denize açılıyorlar.",
+            "textLang": "tr",
+            "translation": "In the summer months, they go out to sea in boats.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "teknelerle",
+            "matchedTranslationForm": "boats"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tekne",
+    "lemma": "tekne",
+    "reading": null,
+    "ipa": "/tecˈne/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛵",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "boat; kneading trough",
     "primaryGloss": "boat",
     "emotion": "calm and breezy, looking out over the water",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yaz aylarında teknelerle den açılıyorlar.",
+        "why": "Corrupt word 'den' instead of 'denize' (to sea), making the sentence ungrammatical."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A large, shallow container used for mixing or kneading dough.",
+        "why": "Traditional kneading trough is a rare/rural sense not needed by an A2 learner."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While tekne most commonly means a boat or vessel, it can also",
+        "why": "Simply repeats the definitions in the senses."
+      }
+    ],
+    "growth": 0.55
   }
 }

@@ -72,6 +72,97 @@
     "primaryGloss": "holiday",
     "emotion": "excited and relieved, looking forward to a break",
     "notes": [
+      "Plural: عُطَل (ʿuṭal) or عُطْلَات (ʿuṭlāt). Used for both a single day off and a longer vacation; 'weekend' is عُطْلَة نِهَايَةِ الأُسْبُوع."
+    ],
+    "senses": [
+      {
+        "id": "8r3w2xdvcyy97x0",
+        "order": 0,
+        "definition": "A day or period of time when you do not have to work or go to school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "holiday",
+              "vacation",
+              "day off",
+              "time off"
+            ]
+          }
+        ],
+        "domain": "leisure",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "ey1a4tuz63fypgm",
+            "text": "قَضَيْتُ عُطْلَةً جَمِيلَةً عَلَى شَاطِئِ البَحْرِ.",
+            "textLang": "ar",
+            "translation": "I spent a nice holiday by the sea.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "عُطْلَةً",
+            "matchedTranslationForm": "holiday"
+          },
+          {
+            "id": "ndaqtsasfi8dxx4",
+            "text": "غَدًا عُطْلَةٌ رَسْمِيَّةٌ.",
+            "textLang": "ar",
+            "translation": "Tomorrow is a public holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "عُطْلَةٌ",
+            "matchedTranslationForm": "holiday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "عُطْلَة",
+    "lemma": "عُطْلَة",
+    "reading": null,
+    "ipa": "/ˈʕutˤ.la/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "holiday; vacation; day off",
+    "primaryGloss": "holiday",
+    "emotion": "excited and relieved, looking forward to a break",
+    "notes": [
       "Used for both a weekend day off and a longer holiday or vacation."
     ],
     "senses": [
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "weekend, day off",
+        "why": "عُطْلَة alone means 'day off' or 'holiday', not 'weekend' (which requires أُسْبُوعِيَّة or نِهَايَة الأُسْبُوع)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses mean time off work or school; a single day off and a longer vacation are one sense in Arabic."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "قَضَيْتُ عُطْلَةً جَمِيلَةً فِي البَحْرِ.",
+        "why": "فِي البَحْرِ means 'in the sea'; 'by the sea' is عَلَى شَاطِئِ البَحْرِ."
+      }
+    ],
+    "growth": 0.96
   }
 }

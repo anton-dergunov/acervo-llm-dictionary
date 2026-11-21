@@ -58,6 +58,75 @@
     "headword": "l'adolescente",
     "lemma": "adolescente",
     "reading": null,
+    "ipa": "/adoleʃˈʃɛnte/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "teenager; adolescent",
+    "primaryGloss": "teenager",
+    "emotion": "earnest and a little exasperated, talking about growing pains",
+    "notes": [
+      "Has the same form for masculine and feminine: 'un adolescente' (m.), 'un'adolescente' (f.); plural 'gli adolescenti' (m.), 'le adolescenti' (f.).",
+      "Also used as an adjective (e.g., 'un figlio adolescente')."
+    ],
+    "senses": [
+      {
+        "id": "8ax8ng35n99c6oa",
+        "order": 0,
+        "definition": "A young person who is developing from a child into an adult, roughly between thirteen and nineteen years old.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "teenager",
+              "adolescent"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "p03dka4x3o2rfpv",
+            "text": "L'adolescente ascolta la musica nella sua camera.",
+            "textLang": "it",
+            "translation": "The teenager is listening to music in his room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and understanding, watching someone grow up",
+            "note": null,
+            "matchedForm": "adolescente",
+            "matchedTranslationForm": "teenager"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'adolescente",
+    "lemma": "adolescente",
+    "reading": null,
     "ipa": "/adoleˈʃɛnte/",
     "pos": "noun",
     "gender": "common",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used with either masculine or feminine articles (il/lo/la)",
+        "why": "Takes 'l'' before a vowel in singular (l'adolescente), never 'il' or 'lo'."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/adoleˈʃɛnte/",
+        "why": "After a vowel, /ʃ/ is always geminated in standard Italian: /adoleʃˈʃɛnte/."
+      }
+    ],
+    "growth": 1.239
   }
 }

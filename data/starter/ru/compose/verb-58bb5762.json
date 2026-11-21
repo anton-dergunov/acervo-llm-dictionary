@@ -73,6 +73,115 @@
     "headword": "учиться",
     "lemma": "учиться",
     "reading": null,
+    "ipa": "/ʊˈt͡ɕit͡sːə/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📚",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to study; to learn",
+    "primaryGloss": "to study",
+    "emotion": "focused and determined, sitting down with books to get work done",
+    "notes": [
+      "Imperfective; the perfective is научиться (for acquiring a skill).",
+      "Used without a direct object (в школе, в университете), with an infinitive (учиться читать), or with the dative case (учиться музыке). To name a major or subject as a direct object, use изучать (+ accusative)."
+    ],
+    "senses": [
+      {
+        "id": "yhtyvb4m82ncg1v",
+        "order": 0,
+        "definition": "To be a student at a school or university; to do coursework.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to study",
+              "to go to school"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "yfzd2dpg4rt3yjs",
+            "text": "Моя сестра учится в университете на втором курсе.",
+            "textLang": "ru",
+            "translation": "My sister is in her second year at university.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "учится",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b711v60u3687aaj",
+        "order": 1,
+        "definition": "To gain a new skill or knowledge by practicing or being taught.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to learn"
+            ]
+          }
+        ],
+        "domain": "skills",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "b5j9rjiiui18uxl",
+            "text": "Мне нравится учиться играть на гитаре.",
+            "textLang": "ru",
+            "translation": "I like learning to play the guitar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and pleased with making music",
+            "note": null,
+            "matchedForm": "учиться",
+            "matchedTranslationForm": "learning"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "учиться",
+    "lemma": "учиться",
+    "reading": null,
     "ipa": "/uˈt͡ɕit͡sʲə/",
     "pos": "verb",
     "gender": null,
@@ -177,5 +286,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "new: field.ipa",
+        "path": "ipa",
+        "quote": "/uˈt͡ɕit͡sʲə/",
+        "why": "In Russian, reflexive -ться is pronounced with a hard /t͡sːə/, never palatalized /t͡sʲə/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Я буду учиться в университете каждый день.",
+        "why": "Unnatural sentence; 'учиться в университете' means 'to be a university student', not a daily routine."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Fails to mention that учиться takes the dative case for a subject/skill, or an infinitive."
+      }
+    ],
+    "growth": 1.09
   }
 }

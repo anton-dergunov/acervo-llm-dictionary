@@ -68,6 +68,157 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "barato; de mala calidad; tacaño",
+    "primaryGloss": "barato",
+    "emotion": "pleased with finding a good bargain, satisfied and pragmatic",
+    "notes": [
+      "A menudo tiene un matiz negativo (de poca calidad). Para decir que algo tiene buen precio sin ese matiz, se puede usar 'inexpensive'."
+    ],
+    "senses": [
+      {
+        "id": "x7ks9f0zi5x9zsb",
+        "order": 0,
+        "definition": "Que cuesta poco dinero o menos de lo normal.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "barato",
+              "económico"
+            ]
+          }
+        ],
+        "domain": "precio",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "s98iurnl9676jes",
+            "text": "I bought a cheap ticket for the train.",
+            "textLang": "en",
+            "translation": "Compré un boleto barato para el tren.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy to have saved some money on the trip",
+            "note": null,
+            "matchedForm": "cheap",
+            "matchedTranslationForm": "barato"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mt7qd5odib101ge",
+        "order": 1,
+        "definition": "De bajo precio y mala calidad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "barato",
+              "corriente",
+              "de mala calidad"
+            ]
+          }
+        ],
+        "domain": "calidad",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "62f1xb3j76wnbj3",
+            "text": "The bag is made of cheap plastic.",
+            "textLang": "en",
+            "translation": "La bolsa está hecha de plástico barato.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cheap",
+            "matchedTranslationForm": "barato"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "bpzl9281w2q1y6n",
+        "order": 2,
+        "definition": "Dicho de una persona: que no quiere gastar dinero.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tacaño",
+              "mezquino"
+            ]
+          }
+        ],
+        "domain": "persona",
+        "emoji": "🪙",
+        "examples": [
+          {
+            "id": "h6to1a0bq3gnce4",
+            "text": "He is too cheap to pay for coffee.",
+            "textLang": "en",
+            "translation": "Es demasiado tacaño como para pagar el café.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed by someone's unwillingness to spend a little",
+            "note": null,
+            "matchedForm": "cheap",
+            "matchedTranslationForm": "tacaño"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "cheap",
+    "lemma": "cheap",
+    "reading": null,
+    "ipa": "/tʃiːp/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "barato; tacaño",
     "primaryGloss": "barato",
     "emotion": "pleased with finding a good bargain, satisfied and pragmatic",
@@ -162,5 +313,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para indicar que algo cuesta poco dinero.",
+        "why": "Restates the definition and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "senses[0].domain",
+        "quote": "price",
+        "why": "Domain tags should be in Spanish like the rest of the metalanguage."
+      }
+    ],
+    "growth": 1.448
   }
 }

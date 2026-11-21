@@ -72,6 +72,136 @@
     "primaryGloss": "tall",
     "emotion": "looking up towards the top of something tall, impressed by the height",
     "notes": [
+      "Covers both English 'tall' (for people, trees, buildings) and 'high' (for mountains, walls, prices, temperatures).",
+      "Has an irregular comparative form: выше (taller, higher)."
+    ],
+    "senses": [
+      {
+        "id": "wq8nnhtt6ne6beg",
+        "order": 0,
+        "definition": "Of great vertical extent; extending far upward.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "height",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "l7x7t0zna4fmfwl",
+            "text": "Его брат очень высокий.",
+            "textLang": "ru",
+            "translation": "His brother is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "talking about a family member with a smile",
+            "note": null,
+            "matchedForm": "высокий",
+            "matchedTranslationForm": "tall"
+          },
+          {
+            "id": "3rd4bn0emrpj8me",
+            "text": "В городе много высоких зданий.",
+            "textLang": "ru",
+            "translation": "There are many tall buildings in the city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking around at a big city with wonder",
+            "note": null,
+            "matchedForm": "высоких",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hf5nrl043k82qjv",
+        "order": 1,
+        "definition": "Great, or greater than normal, in degree, level, value, or pitch.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "high"
+            ]
+          }
+        ],
+        "domain": "level",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "nzswzbqzxeesqqa",
+            "text": "В этом магазине очень высокие цены.",
+            "textLang": "ru",
+            "translation": "The prices in this shop are very high.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "высокие",
+            "matchedTranslationForm": "high"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "высокий",
+    "lemma": "высокий",
+    "reading": null,
+    "ipa": "/vɨˈsokʲɪj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦒",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "tall; high",
+    "primaryGloss": "tall",
+    "emotion": "looking up towards the top of something tall, impressed by the height",
+    "notes": [
       "Used for people as 'tall', and for physical objects, buildings, or mountains as 'high'."
     ],
     "senses": [
@@ -159,5 +289,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense of high in degree, level, or amount (prices, temperature, quality)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Extending far upward; of a building, mountain, or object.",
+        "why": "Splits one Russian meaning ('having great vertical height') along English translation lines ('tall' vs 'high')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "There are many high buildings in the city.",
+        "why": "In natural English, buildings are 'tall', not 'high'."
+      }
+    ],
+    "growth": 1.523
   }
 }

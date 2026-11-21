@@ -68,6 +68,117 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "but; yet",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
+      "Unlike 'però', 'ma' always stands at the beginning of its clause and cannot be moved to the end of a sentence."
+    ],
+    "senses": [
+      {
+        "id": "misyx6daf2tn5pw",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with or limits what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "yet",
+              "however"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "7ig7h1ej7oymbhy",
+            "text": "Vorrei uscire, ma piove.",
+            "textLang": "it",
+            "translation": "I would like to go out, but it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly disappointed, wanting to do something but prevented by the weather",
+            "note": null,
+            "matchedForm": "ma",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zmu24pjzt9zpv5k",
+        "order": 1,
+        "definition": "Used at the start of a sentence or exclamation to express surprise, protest, or emphasis.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "why",
+              "well",
+              "but"
+            ]
+          }
+        ],
+        "domain": "emphasis",
+        "emoji": "😲",
+        "examples": [
+          {
+            "id": "18lbbm807crf6wp",
+            "text": "Ma cosa dici!",
+            "textLang": "it",
+            "translation": "What on earth are you saying!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and slightly incredulous at what was just said",
+            "note": null,
+            "matchedForm": "Ma",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "ma",
+    "lemma": "ma",
+    "reading": null,
+    "ipa": "/ma/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚖️",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "but; yet; however",
     "primaryGloss": "but",
     "emotion": null,
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'ma' is a coordinating conjunction, not an expression."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ma cosa dici! — But what are you saying!",
+        "why": "Calqued translation; in English emphatic 'ma' here is 'What are you talking about!'"
+      }
+    ],
+    "growth": 0.818
   }
 }

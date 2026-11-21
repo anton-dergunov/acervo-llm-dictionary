@@ -58,6 +58,116 @@
     "headword": "สัตว์เลี้ยง",
     "lemma": "สัตว์เลี้ยง",
     "reading": null,
+    "ipa": "/sàt líaŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pet; domestic animal",
+    "primaryGloss": "pet",
+    "emotion": "affectionate and warm, speaking of a beloved companion at home",
+    "notes": [
+      "Combines สัตว์ (animal, with a silent ว) and เลี้ยง (to raise or feed). The classifier for individual animals is ตัว.",
+      "Contrast with สัตว์ป่า (wild animal)."
+    ],
+    "senses": [
+      {
+        "id": "iud5zz7ilbvitai",
+        "order": 0,
+        "definition": "An animal kept at home for companionship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pet"
+            ]
+          }
+        ],
+        "domain": "pet",
+        "emoji": "🐕",
+        "examples": [
+          {
+            "id": "5usngnd7tbl4e6u",
+            "text": "ฉันชอบสุนัขเพราะมันเป็นสัตว์เลี้ยงที่น่ารัก",
+            "textLang": "th",
+            "translation": "I like dogs because they are cute pets.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and smiling, thinking of a sweet animal",
+            "note": null,
+            "matchedForm": "สัตว์เลี้ยง",
+            "matchedTranslationForm": "pets"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jsrypg43zfdpj9i",
+        "order": 1,
+        "definition": "An animal raised on a farm for food, products, or work.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "domestic animal",
+              "livestock",
+              "farm animal"
+            ]
+          }
+        ],
+        "domain": "agriculture",
+        "emoji": "🐄",
+        "examples": [
+          {
+            "id": "vzfj2c738gu2h9e",
+            "text": "วัวและไก่เป็นสัตว์เลี้ยงในฟาร์มที่มีประโยชน์",
+            "textLang": "th",
+            "translation": "Cows and chickens are useful farm animals.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "สัตว์เลี้ยง",
+            "matchedTranslationForm": "farm animals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สัตว์เลี้ยง",
+    "lemma": "สัตว์เลี้ยง",
+    "reading": null,
     "ipa": "/sàt liang/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/sàt liang/",
+        "why": "Missing the high tone mark on the second syllable (/sàt líaŋ/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "ชาวนาเลี้ยงโคเป็นสัตว์เลี้ยงในไร่",
+        "why": "Unnatural mix of words: ชาวนา (rice farmer), โค (formal cattle), and ไร่ (crop field)."
+      }
+    ],
+    "growth": 1.042
   }
 }

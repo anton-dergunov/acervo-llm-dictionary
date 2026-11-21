@@ -68,6 +68,74 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": "a sense of calm and isolation, thinking of a peaceful getaway",
+    "notes": [
+      "The classifier is เกาะ (e.g., สองเกาะ 'two islands') or แห่ง. Placed before a name for islands: เกาะสมุย (Koh Samui).",
+      "Also used as a verb meaning 'to cling to' or 'to hold onto'."
+    ],
+    "senses": [
+      {
+        "id": "xu0a10xjtkzagom",
+        "order": 0,
+        "definition": "A piece of land completely surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "tqxx953aefrzp6g",
+            "text": "เราไปเที่ยวเกาะกัน",
+            "textLang": "th",
+            "translation": "Let's go visit an island.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and enthusiastic about planning a holiday",
+            "note": null,
+            "matchedForm": "เกาะ",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เกาะ",
+    "lemma": "เกาะ",
+    "reading": null,
+    "ipa": "/kɔ̀ʔ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "island; to cling/stick to",
     "primaryGloss": "island",
     "emotion": "a sense of calm and isolation, thinking of a peaceful getaway",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:16Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To hold onto something tightly or to attach oneself to a surface.",
+        "why": "Entry POS is noun; verb sense does not belong here."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word is versatile; it functions as a noun meaning 'island'",
+        "why": "Restates the glosses; classifier เกาะ is much more useful for a noun entry."
+      }
+    ],
+    "growth": 0.596
   }
 }

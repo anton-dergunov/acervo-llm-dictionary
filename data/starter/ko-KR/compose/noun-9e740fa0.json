@@ -68,6 +68,71 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "lion",
+    "primaryGloss": "lion",
+    "emotion": "awed and cautious, watching the great animal from a safe distance",
+    "notes": [],
+    "senses": [
+      {
+        "id": "tynbhjkstt0mfjn",
+        "order": 0,
+        "definition": "A large wild cat native to Africa and India, known for the male's heavy mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "d9s9uzsjpjut4l4",
+            "text": "사자가 초원에서 쉬고 있어요.",
+            "textLang": "ko",
+            "translation": "The lion is resting in the grassland.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "사자",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "사자",
+    "lemma": "사자",
+    "reading": null,
+    "ipa": "/sʰa̠dʑa̠/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "lion; messenger / envoy",
     "primaryGloss": "lion",
     "emotion": "awed and cautious, watching the great animal from a safe distance",
@@ -159,5 +224,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "저사자 (grim reaper) or 사자성어 (four-character idiom).",
+        "why": "Misspells 저승사자 as 저사자, and falsely claims 사자 in 사자성어 means messenger (it means four-character)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A person sent to deliver a message or represent someone; an envoy.",
+        "why": "Literary/historical homonym not needed as a main sense for an A2 beginner."
+      }
+    ],
+    "growth": 0.329
   }
 }

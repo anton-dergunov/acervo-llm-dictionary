@@ -70,6 +70,73 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "pasta",
+    "primaryGloss": "pasta",
+    "emotion": null,
+    "notes": [
+      "En inglés es un sustantivo incontable: se dice 'some pasta' o 'a bowl of pasta', nunca 'a pasta'."
+    ],
+    "senses": [
+      {
+        "id": "8ryo31sa671tqhl",
+        "order": 0,
+        "definition": "Alimento hecho a base de harina y agua, con forma de hilos o figuras, que se cuece en agua.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pasta"
+            ]
+          }
+        ],
+        "domain": "comida",
+        "emoji": "🍝",
+        "examples": [
+          {
+            "id": "z9w2gkx8svu3eds",
+            "text": "We are having pasta with tomato sauce for dinner.",
+            "textLang": "en",
+            "translation": "Vamos a cenar pasta con salsa de tomate.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pasta",
+            "matchedTranslationForm": "pasta"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "pasta",
+    "lemma": "pasta",
+    "reading": null,
+    "ipa": "/ˈpɑːstə/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍝",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "pasta; dinero (coloquial)",
     "primaryGloss": "pasta",
     "emotion": null,
@@ -117,5 +184,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "En España, manera informal de referirse al dinero.",
+        "why": "Describes Spanish slang 'pasta', not English 'pasta', which never means money."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "en contextos informales de España se usa como sinónimo de 'dinero'",
+        "why": "Confuses the Spanish word 'pasta' with the English headword."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pasta; dinero (coloquial)",
+        "why": "Includes false sense 'dinero' from Spanish slang."
+      }
+    ],
+    "growth": 0.73
   }
 }

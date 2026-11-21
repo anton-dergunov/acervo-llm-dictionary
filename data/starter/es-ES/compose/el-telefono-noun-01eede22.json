@@ -68,6 +68,125 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "phone; phone number",
+    "primaryGloss": "phone",
+    "emotion": "waiting for an important call, attentive and ready",
+    "notes": [
+      "In Spain, a mobile phone is usually called 'el móvil', while 'el teléfono' (or 'el fijo') refers to a landline or to phones in general."
+    ],
+    "senses": [
+      {
+        "id": "xrf2c939e5x30wf",
+        "order": 0,
+        "definition": "A device used to talk to other people over a distance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "phone",
+              "telephone"
+            ]
+          }
+        ],
+        "domain": "device",
+        "emoji": "☎️",
+        "examples": [
+          {
+            "id": "mfzsfchups9jfqi",
+            "text": "El teléfono está sonando en el salón.",
+            "textLang": "es",
+            "translation": "The phone is ringing in the living room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "teléfono",
+            "matchedTranslationForm": "phone"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "unx8q9tdkcceq5r",
+        "order": 1,
+        "definition": "The sequence of digits dialled to call someone's phone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "phone number",
+              "telephone number"
+            ]
+          }
+        ],
+        "domain": "number",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "fvzw9f0r5q1rv4m",
+            "text": "¿Me das tu teléfono para llamarte mañana?",
+            "textLang": "es",
+            "translation": "Can you give me your phone number so I can call you tomorrow?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "teléfono",
+            "matchedTranslationForm": "phone number"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "xrf2c939e5x30wf",
+      "from": "Aparato que se usa para hablar con otras personas a distancia.",
+      "to": "A device used to talk to other people over a distance.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:14Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el teléfono",
+    "lemma": "teléfono",
+    "reading": null,
+    "ipa": "/teˈlefono/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📱",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "telephone; phone",
     "primaryGloss": "telephone",
     "emotion": "waiting for an important call, attentive and ready",
@@ -120,14 +239,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "xrf2c939e5x30wf",
-      "from": "Aparato que se usa para hablar con otras personas a distancia.",
-      "to": "A device used to talk to other people over a distance.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:14Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday A1/A2 sense 'telephone number' (e.g., '¿Cuál es tu teléfono?')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "The telephone rings in the living room.",
+        "why": "Spanish simple present 'suena' here translates naturally as English present continuous 'is ringing'."
+      }
+    ],
+    "growth": 1.624
+  }
 }

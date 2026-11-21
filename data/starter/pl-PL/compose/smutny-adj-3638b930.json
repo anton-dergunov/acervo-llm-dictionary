@@ -68,6 +68,95 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "sad",
+    "primaryGloss": "sad",
+    "emotion": "quiet and downcast, with a heavy and slow tone",
+    "notes": [
+      "Unlike 'nieszczęśliwy' (unhappy, miserable), which describes a deeper or more permanent state, 'smutny' is used for a passing mood or something that causes sadness (like a film or song)."
+    ],
+    "senses": [
+      {
+        "id": "ltdbvim5g13kjxg",
+        "order": 0,
+        "definition": "Feeling, showing, or causing sadness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sad",
+              "unhappy"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😢",
+        "examples": [
+          {
+            "id": "jrza9p6ztwshy0t",
+            "text": "Dzisiaj czuję się bardzo smutny.",
+            "textLang": "pl",
+            "translation": "I feel very sad today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and vulnerable, speaking slowly to a friend",
+            "note": null,
+            "matchedForm": "smutny",
+            "matchedTranslationForm": "sad"
+          },
+          {
+            "id": "ckmu5s8ji8c5f15",
+            "text": "To był bardzo smutny film.",
+            "textLang": "pl",
+            "translation": "That was a very sad movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and reflective, thinking back on the story",
+            "note": null,
+            "matchedForm": "smutny",
+            "matchedTranslationForm": "sad"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "smutny",
+    "lemma": "smutny",
+    "reading": null,
+    "ipa": "/ˈsmut.nɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😢",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "sad; unhappy",
     "primaryGloss": "sad",
     "emotion": "quiet and downcast, with a heavy and slow tone",
@@ -141,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Smutny describes a state of sadness or unhappiness.",
+        "why": "Restates the definition and gloss without adding usage info."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "That was a very unhappy movie.",
+        "why": "Unnatural English translation; a movie is 'sad', not 'unhappy'."
+      }
+    ],
+    "growth": 0.691
   }
 }

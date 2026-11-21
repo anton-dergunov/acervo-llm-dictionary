@@ -74,6 +74,96 @@
     "primaryGloss": "expensive",
     "emotion": null,
     "notes": [
+      "The opposite of 'caro' is 'barato' (cheap).",
+      "Often used as an adverb with 'costar' or 'salir': 'Me salió muy caro' (It cost me a lot)."
+    ],
+    "senses": [
+      {
+        "id": "m8oizlojxwgi4gf",
+        "order": 0,
+        "definition": "Costing a lot of money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "expensive",
+              "costly"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "pa21gdkvd6v5kgu",
+            "text": "Este coche es muy caro.",
+            "textLang": "es",
+            "translation": "This car is very expensive.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation, stating the obvious about a luxury item",
+            "note": null,
+            "matchedForm": "caro",
+            "matchedTranslationForm": "expensive"
+          },
+          {
+            "id": "94ntrkn05qh64m6",
+            "text": "Los boletos de avión son caros en diciembre.",
+            "textLang": "es",
+            "translation": "Plane tickets are expensive in December.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated, acknowledging the reality of holiday travel costs",
+            "note": null,
+            "matchedForm": "caros",
+            "matchedTranslationForm": "expensive"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "caro",
+    "lemma": "caro",
+    "reading": null,
+    "ipa": "/ˈka.ɾo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "expensive; costly",
+    "primaryGloss": "expensive",
+    "emotion": null,
+    "notes": [
       "Used to describe something that has a high price. It is the direct opposite of 'barato' (cheap).",
       "In some contexts, 'caro' can also mean 'dear' in an emotional sense (e.g., 'el precio más caro' - the highest price paid for a sacrifice), but it is used primarily for money."
     ],
@@ -143,5 +233,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "That which costs a lot of money.",
+        "why": "Defines an adjective as a noun ('that which') instead of a quality."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "'caro' can also mean 'dear' in an emotional sense (e.g., 'el precio más caro'",
+        "why": "'El precio más caro' refers to high cost, not emotional affection."
+      }
+    ],
+    "growth": 0.686
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "telephone",
     "emotion": "casual and familiar, reaching for a device on a table",
     "notes": [
+      "Used for both landline and mobile phones, though 'cellulare' is also common for a mobile phone."
+    ],
+    "senses": [
+      {
+        "id": "ez5dmo8ome6ie35",
+        "order": 0,
+        "definition": "A device used for talking to people who are in another place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "telephone",
+              "phone"
+            ]
+          }
+        ],
+        "domain": "device",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "377m5xxd24hqtma",
+            "text": "Ho lasciato il telefono in cucina.",
+            "textLang": "it",
+            "translation": "I left the phone in the kitchen.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "telefono",
+            "matchedTranslationForm": "phone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il telefono",
+    "lemma": "telefono",
+    "reading": null,
+    "ipa": "/teˈlɛ.fo.no/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📱",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "telephone; phone",
+    "primaryGloss": "telephone",
+    "emotion": "casual and familiar, reaching for a device on a table",
+    "notes": [
       "Used for both landline phones and mobile phones, though 'cellulare' or 'smartphone' is more common for mobile devices."
     ],
     "senses": [
@@ -119,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ho lasciato il telefono sulla cucina.",
+        "why": "'Sulla cucina' means on the stove; 'in the kitchen' is 'in cucina'."
+      }
+    ],
+    "growth": 0.906
   }
 }

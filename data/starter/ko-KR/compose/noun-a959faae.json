@@ -58,6 +58,71 @@
     "headword": "별",
     "lemma": "별",
     "reading": null,
+    "ipa": "pjʌ̹ɭ",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "star",
+    "primaryGloss": "star",
+    "emotion": "wondering and calm, looking up at the night sky",
+    "notes": [],
+    "senses": [
+      {
+        "id": "1t6b59owrq4kxqf",
+        "order": 0,
+        "definition": "A bright point of light that you see in the night sky, or a shape with five or more points representing it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "astronomy",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "mtl3m4bl297b7kh",
+            "text": "밤하늘에 별이 많이 보여요.",
+            "textLang": "ko",
+            "translation": "I see many stars in the night sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the beautiful view",
+            "note": null,
+            "matchedForm": "별",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "별",
+    "lemma": "별",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +225,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "senses[1]",
+        "quote": "(describing) Being unusual, special, or different from the normal.",
+        "why": "Sense 1 is the determiner/prefix 별 (別), a different part of speech from the noun 별."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "오늘은 별일 없어요.",
+        "why": "Uses the lexicalized compound noun 별일 instead of the headword."
+      }
+    ],
+    "growth": 0.279
   }
 }

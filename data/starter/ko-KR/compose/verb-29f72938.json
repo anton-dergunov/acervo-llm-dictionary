@@ -60,6 +60,116 @@
     "headword": "마시다",
     "lemma": "마시다",
     "reading": null,
+    "ipa": "/ma.ɕi.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to drink; to breathe in",
+    "primaryGloss": "drink",
+    "emotion": "a refreshing, satisfying moment of quenching one's thirst after being parched",
+    "notes": [
+      "Note that taking medicine (even liquid medicine or pills with water) is usually expressed with 먹다 (약을 먹다), not 마시다."
+    ],
+    "senses": [
+      {
+        "id": "33z3wimixgah8xf",
+        "order": 0,
+        "definition": "To take a liquid into the mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink",
+              "have"
+            ]
+          }
+        ],
+        "domain": "drinking",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "wfvt4xmglt9y8t8",
+            "text": "나는 매일 아침 커피를 마셔요.",
+            "textLang": "ko",
+            "translation": "I drink coffee every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contented, routine, starting the day with a warm comfort",
+            "note": null,
+            "matchedForm": "마셔요",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "c4t5u9wtmr2g9kk",
+        "order": 1,
+        "definition": "To take air or gas into the lungs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "breathe in",
+              "inhale"
+            ]
+          }
+        ],
+        "domain": "breathing",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "tof9rwpprhobzgs",
+            "text": "산에 가서 신선한 공기를 마셨어요.",
+            "textLang": "ko",
+            "translation": "I went to the mountains and breathed in the fresh air.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "마셨어요",
+            "matchedTranslationForm": "breathed in"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "마시다",
+    "lemma": "마시다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -163,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "To swallow or consume a liquid.",
+        "why": "Identical to sense 0 ('to drink'); '약을 마시다' is only for liquid medicine."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "약을 물과 함께 마셨어요. — I swallowed the medicine with water.",
+        "why": "Taking medicine in Korean is 약을 먹다, not 약을 물과 함께 마시다."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use this for any liquid, from water and juice to tea",
+        "why": "Obvious filler note."
+      }
+    ],
+    "growth": 0.976
   }
 }

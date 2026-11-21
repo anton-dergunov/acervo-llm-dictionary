@@ -68,6 +68,159 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to put; to set; to turn on",
+    "primaryGloss": "put",
+    "emotion": "a simple, focused movement, calm and purposeful",
+    "notes": [
+      "Irregular in the present ('yo pongo'), preterite ('puse', 'pusiste', etc.), future/conditional ('pondré', 'pondría'), and past participle ('puesto').",
+      "The reflexive 'ponerse' means to put on clothing ('ponerse una chamarra') or to become ('ponerse triste')."
+    ],
+    "senses": [
+      {
+        "id": "desqpnssbaqcvis",
+        "order": 0,
+        "definition": "To place something in a particular location.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "put",
+              "place",
+              "set down"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "s4dpsm6t7klglgr",
+            "text": "Voy a poner las llaves en la mesa.",
+            "textLang": "es",
+            "translation": "I am going to put the keys on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, completing a simple task",
+            "note": null,
+            "matchedForm": "poner",
+            "matchedTranslationForm": "put"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e1vnx2elu4cekij",
+        "order": 1,
+        "definition": "To prepare or arrange things for use, such as a table for a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "set",
+              "lay"
+            ]
+          }
+        ],
+        "domain": "arrange",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "q7r6cqvfb3u5647",
+            "text": "¿Me puedes ayudar a poner la mesa, por favor?",
+            "textLang": "es",
+            "translation": "Can you help me set the table, please?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "poner",
+            "matchedTranslationForm": "set"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3zatzb3xkq6mx7d",
+        "order": 2,
+        "definition": "To turn on an appliance or play music, a show, or a video.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "put on",
+              "play",
+              "turn on"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "rfj8lzihru5s93l",
+            "text": "Voy a poner un poco de música.",
+            "textLang": "es",
+            "translation": "I am going to put on some music.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and eager to improve the mood",
+            "note": null,
+            "matchedForm": "poner",
+            "matchedTranslationForm": "put on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "poner",
+    "lemma": "poner",
+    "reading": null,
+    "ipa": "/poˈneɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to put; to place; to set",
     "primaryGloss": "put",
     "emotion": "a simple, focused movement, calm and purposeful",
@@ -203,5 +356,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Poner is extremely versatile. It is the go-to word for placing",
+        "why": "Repeats the senses without giving the irregular forms an A2 learner needs."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Lacks the irregular stems (pongo, puse, puesto) and reflexive 'ponerse'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Puedes ayudar a poner la mesa, por favor.",
+        "why": "Question lacks question marks and the indirect object pronoun 'me'."
+      }
+    ],
+    "growth": 1.081
   }
 }

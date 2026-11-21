@@ -75,6 +75,71 @@
     "shortGloss": "airport",
     "primaryGloss": "airport",
     "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "own1au9neoqitge",
+        "order": 0,
+        "definition": "A place where airplanes take off and land and where passengers board flights.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "airport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "3i3tf0yv1kcpqv0",
+            "text": "Tengo que llegar temprano al aeropuerto para documentar mi maleta.",
+            "textLang": "es",
+            "translation": "I have to arrive early at the airport to check my suitcase.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little anxious about the time, wanting to be organized and prepared",
+            "note": null,
+            "matchedForm": "aeropuerto",
+            "matchedTranslationForm": "airport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el aeropuerto",
+    "lemma": "aeropuerto",
+    "reading": null,
+    "ipa": "/aeɾoˈpweɾto/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "airport",
+    "primaryGloss": "airport",
+    "emotion": null,
     "notes": [
       "Note that while the word 'aeropuerto' describes the entire facility, you use 'terminal' when referring to a specific building inside a large airport."
     ],
@@ -122,5 +187,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that while the word 'aeropuerto' describes the entire facility",
+        "why": "Trivial real-world trivia; 'airport' vs 'terminal' works the same in English."
+      }
+    ],
+    "growth": 0.578
   }
 }

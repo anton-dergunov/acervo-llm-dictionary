@@ -58,6 +58,95 @@
     "headword": "koń",
     "lemma": "koń",
     "reading": null,
+    "ipa": "/kɔɲ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐎",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "horse",
+    "primaryGloss": "horse",
+    "emotion": "matter-of-fact, describing a familiar animal seen in a field",
+    "notes": [
+      "As an animate masculine noun, its accusative singular matches the genitive ('konia'), e.g. 'widzę konia' (I see a horse).",
+      "The irregular plural is 'konie' (genitive plural 'koni', instrumental plural 'końmi')."
+    ],
+    "senses": [
+      {
+        "id": "zly7q1w59nwiaz2",
+        "order": 0,
+        "definition": "A large domesticated animal with four legs and a mane, used for riding or pulling loads.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "horse"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐎",
+        "examples": [
+          {
+            "id": "k9swlmae361p652",
+            "text": "Na łące pasie się piękny koń.",
+            "textLang": "pl",
+            "translation": "A beautiful horse is grazing in the meadow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, appreciating a quiet scene in nature",
+            "note": null,
+            "matchedForm": "koń",
+            "matchedTranslationForm": "horse"
+          },
+          {
+            "id": "ay4hzkou66l0ug4",
+            "text": "Moja córka bardzo dobrze jeździ konno i kocha konie.",
+            "textLang": "pl",
+            "translation": "My daughter rides very well and loves horses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "konie",
+            "matchedTranslationForm": "horses"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "koń",
+    "lemma": "koń",
+    "reading": null,
     "ipa": "/koɲ/",
     "pos": "noun",
     "gender": "masculine",
@@ -180,5 +269,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/koɲ/",
+        "why": "Standard Polish vowel is open-mid /ɔ/, so /kɔɲ/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the genitive case form 'konia' is often used when talking about having or seeing",
+        "why": "'Mieć' and 'widzieć' take the accusative; animate masculine accusative equals genitive 'konia'."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[1].text",
+        "quote": "Jazda konna to moja wielka pasja.",
+        "why": "Uses the derived adjective 'konna' instead of the noun 'koń'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(chess) A piece in the game of chess",
+        "why": "Chess piece sense (colloquial for 'skoczek') is marginal for A2; omitted in shortGloss."
+      }
+    ],
+    "growth": 0.723
   }
 }

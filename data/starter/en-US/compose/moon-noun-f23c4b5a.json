@@ -72,6 +72,73 @@
     "primaryGloss": "luna",
     "emotion": "calm and quiet, looking up at the night sky",
     "notes": [
+      "Se usa con el artículo definido 'the' cuando nos referimos al satélite de la Tierra: 'the moon'."
+    ],
+    "senses": [
+      {
+        "id": "igpgfin1l2ukchx",
+        "order": 0,
+        "definition": "Satélite natural de la Tierra, que gira a su alrededor y se ve brillar en el cielo nocturno.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "luna"
+            ]
+          }
+        ],
+        "domain": "astronomía",
+        "emoji": "🌕",
+        "examples": [
+          {
+            "id": "ha6uxzm1xc3rey4",
+            "text": "The moon is very bright tonight.",
+            "textLang": "en",
+            "translation": "La luna está muy brillante esta noche.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, noticing the bright night sky",
+            "note": null,
+            "matchedForm": "moon",
+            "matchedTranslationForm": "luna"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "moon",
+    "lemma": "moon",
+    "reading": null,
+    "ipa": "/muːn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌕",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "luna",
+    "primaryGloss": "luna",
+    "emotion": "calm and quiet, looking up at the night sky",
+    "notes": [
       "Se usa con el artículo definido 'the' cuando nos referimos a nuestro satélite natural: 'the moon'."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Cuerpo celeste que brilla en el cielo por la noche.",
+        "why": "Too broad (stars and planets also shine at night); it is Earth's natural satellite."
+      }
+    ],
+    "growth": 1.172
   }
 }

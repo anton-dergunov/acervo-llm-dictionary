@@ -57,6 +57,118 @@
     "language": "zh",
     "headword": "不是",
     "lemma": "不是",
+    "reading": "bú shì",
+    "ipa": "/pu˧˥ ʂɻ̩˥˩/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "is not; no",
+    "primaryGloss": "is not",
+    "emotion": "firm and clear, correcting a misunderstanding",
+    "notes": [
+      "Because 是 (shì) is in the fourth tone, 不 (bù) changes to the rising second tone: bú shì (often with a neutral tone on shi in fast speech).",
+      "As a standalone 'no', 不是 corrects an assumption ('that's not true'); it is not used to refuse an offer or request."
+    ],
+    "senses": [
+      {
+        "id": "hgvmpvdymbtlb24",
+        "order": 0,
+        "definition": "The negative form of 是 (shì, 'to be'), linking a subject to what it is not.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "is not",
+              "am not",
+              "are not",
+              "not to be"
+            ]
+          }
+        ],
+        "domain": "negation",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "528l8nsy0uemdo7",
+            "text": "这本书不是我的。",
+            "textLang": "zh",
+            "translation": "This book is not mine.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and direct, stating a simple fact",
+            "note": null,
+            "matchedForm": "不是",
+            "matchedTranslationForm": "is not"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "evagwdrdts8e5ho",
+        "order": 1,
+        "definition": "Used alone to correct a mistaken assumption or statement.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no",
+              "that's not right"
+            ]
+          }
+        ],
+        "domain": "disagreement",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "3ls7bbl4cbs26iz",
+            "text": "不是，我没有去过那里。",
+            "textLang": "zh",
+            "translation": "No, I have never been there.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "defensive and clear, setting the record straight",
+            "note": null,
+            "matchedForm": "不是",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "不是",
+    "lemma": "不是",
     "reading": "bú shi",
     "ipa": "/pu˧˥ ʂɻ̩/",
     "pos": "expression",
@@ -163,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "no; not be; fault",
+        "why": "Includes 'fault', which is not covered in the senses (and is marginal for A2)."
+      },
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Used to express disagreement, refusal, or to say 'no'.",
+        "why": "不是 means 'no, that's not true', not refusal (which is 不要 or 不行)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a standalone expression to disagree or say 'no', as the",
+        "why": "Restates the senses and mentions an unincluded noun sense ('fault') without explaining pronunciation."
+      }
+    ],
+    "growth": 1.343
   }
 }

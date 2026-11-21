@@ -68,6 +68,97 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "quiet; silent; soft",
+    "primaryGloss": "quiet",
+    "emotion": "gentle and soft, lowered to avoid disturbing the peaceful atmosphere",
+    "notes": [
+      "To say 'be quiet' or 'it is quiet', Polish uses the adverb 'cicho' ('Bądź cicho!', 'W bibliotece jest cicho'), not the adjective.",
+      "Do not confuse with 'spokojny' (calm, peaceful), which refers to a lack of stress or movement rather than lack of sound."
+    ],
+    "senses": [
+      {
+        "id": "p2x1dppi1fcq69k",
+        "order": 0,
+        "definition": "Making very little noise, or having little noise.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "silent",
+              "soft"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "9xmilwe2xyvav8r",
+            "text": "Usłyszałem cichy głos za drzwiami.",
+            "textLang": "pl",
+            "translation": "I heard a quiet voice behind the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cichy",
+            "matchedTranslationForm": "quiet"
+          },
+          {
+            "id": "qzzfboywu3frx9r",
+            "text": "To bardzo ciche miejsce na odpoczynek.",
+            "textLang": "pl",
+            "translation": "It is a very quiet place for a rest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and appreciative of the tranquility",
+            "note": null,
+            "matchedForm": "ciche",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "cichy",
+    "lemma": "cichy",
+    "reading": null,
+    "ipa": "/ˈt͡ɕi.xɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "quiet; silent",
     "primaryGloss": "quiet",
     "emotion": "gentle and soft, lowered to avoid disturbing the peaceful atmosphere",
@@ -161,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "W bibliotece trzeba być cichym.",
+        "why": "Unnatural Polish; native speakers say 'trzeba być cicho' (adverb), not 'być cichym'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Quiet sound/person and quiet place are the same basic meaning of 'cichy'."
+      }
+    ],
+    "growth": 0.76
   }
 }

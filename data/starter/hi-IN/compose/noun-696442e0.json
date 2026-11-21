@@ -72,6 +72,73 @@
     "primaryGloss": "chopsticks",
     "emotion": "a simple, practical focus on the tool used to eat a meal",
     "notes": [
+      "Borrowed from English with the plural '-s' intact; singular चॉपस्टिक (copsṭik) is used for a single stick."
+    ],
+    "senses": [
+      {
+        "id": "i96erd4yinfl24g",
+        "order": 0,
+        "definition": "A pair of thin, tapered sticks held in one hand and used as eating utensils, especially in East Asian cuisine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chopsticks"
+            ]
+          }
+        ],
+        "domain": "eating",
+        "emoji": "🥢",
+        "examples": [
+          {
+            "id": "4ycod51jmbgotby",
+            "text": "क्या आपको चॉपस्टिक्स से खाना आता है?",
+            "textLang": "hi",
+            "translation": "Do you know how to eat with chopsticks?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "चॉपस्टिक्स",
+            "matchedTranslationForm": "chopsticks"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "चॉपस्टिक्स",
+    "lemma": "चॉपस्टिक्स",
+    "reading": null,
+    "ipa": "/tʃɔːp.sʈɪks/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥢",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "chopsticks",
+    "primaryGloss": "chopsticks",
+    "emotion": "a simple, practical focus on the tool used to eat a meal",
+    "notes": [
       "Even though it is a foreign word, it is commonly used in modern Hindi to describe the pair of sticks used for eating Asian cuisine.",
       "Note that 'चॉपस्टिक्स' is treated as feminine in Hindi."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Even though it is a foreign word, it is commonly used",
+        "why": "Both notes just restate the definition and the gender field."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "क्या आप चॉपस्टिक्स का उपयोग करना जानते हैं?",
+        "why": "Overly formal/Sanskritized ('उपयोग करना') for an everyday sentence; 'चॉपस्टिक्स से खाना' is natural."
+      }
+    ],
+    "growth": 0.838
   }
 }

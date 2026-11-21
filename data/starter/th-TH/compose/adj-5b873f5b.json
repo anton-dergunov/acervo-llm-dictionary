@@ -68,6 +68,98 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "polite; courteous; modest",
+    "primaryGloss": "polite",
+    "emotion": "gentle and respectful, speaking softly with a warm smile",
+    "notes": [
+      "Also used for clothing (แต่งกายสุภาพ 'to dress politely/modestly'), meaning neat and respectful for formal places like temples or government offices.",
+      "Often paired with เรียบร้อย ('neat, well-behaved') in the common phrase สุภาพเรียบร้อย."
+    ],
+    "senses": [
+      {
+        "id": "5xq4ag01u48ay67",
+        "order": 0,
+        "definition": "Showing good manners and respect in behavior, speech, or dress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "polite",
+              "courteous",
+              "respectful",
+              "modest"
+            ]
+          }
+        ],
+        "domain": "manners",
+        "emoji": "🙇",
+        "examples": [
+          {
+            "id": "zokm4twhawn0143",
+            "text": "เขาเป็นคนสุภาพและพูดจาดีกับทุกคน",
+            "textLang": "th",
+            "translation": "He is a polite person and speaks nicely to everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and approving, praising someone's good character",
+            "note": null,
+            "matchedForm": "สุภาพ",
+            "matchedTranslationForm": "polite"
+          },
+          {
+            "id": "tyf5fyvkhqgv2kw",
+            "text": "เราควรใช้ภาษาที่สุภาพในการเขียนอีเมลหาอาจารย์",
+            "textLang": "th",
+            "translation": "We should use polite language when writing an email to a teacher.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and thoughtful, giving helpful advice",
+            "note": null,
+            "matchedForm": "สุภาพ",
+            "matchedTranslationForm": "polite"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สุภาพ",
+    "lemma": "สุภาพ",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙇",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "polite; courteous",
     "primaryGloss": "polite",
     "emotion": "gentle and respectful, speaking softly with a warm smile",
@@ -163,5 +255,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "สุภาพ is used for someone who has good manners",
+        "why": "Restates the definition without adding usage info."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "in the common phrase เรียบร้อยสุภาพ",
+        "why": "The standard compound is สุภาพเรียบร้อย, not เรียบร้อยสุภาพ."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Polite people and polite language/dress are standard shades of one sense."
+      }
+    ],
+    "growth": 0.995
   }
 }

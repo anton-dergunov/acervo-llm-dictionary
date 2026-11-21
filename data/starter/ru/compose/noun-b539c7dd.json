@@ -68,6 +68,94 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "belly; stomach",
+    "primaryGloss": "stomach",
+    "emotion": "relaxed and comfortable, patting oneself after a good meal",
+    "notes": [
+      "The stress moves to the ending in all plural forms and the singular cases: болит живо́т, но нет живота́ (pl. животы́).",
+      "Refers to the whole outer belly or abdomen; the internal organ itself is желу́док."
+    ],
+    "senses": [
+      {
+        "id": "u35clntnjjxkly2",
+        "order": 0,
+        "definition": "The front part of the body between the chest and the hips; the abdomen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stomach",
+              "belly",
+              "abdomen"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🤰",
+        "examples": [
+          {
+            "id": "tcgwucbqp9sxdto",
+            "text": "После сытного обеда у меня болит живот.",
+            "textLang": "ru",
+            "translation": "My stomach hurts after a hearty lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slight discomfort, groaning softly while resting",
+            "note": null,
+            "matchedForm": "живот",
+            "matchedTranslationForm": "stomach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "u35clntnjjxkly2",
+      "from": "Часть тела человека или животного между грудью и тазом, где находятся органы пищеварения.",
+      "to": "The part of the body between the chest and the hips that contains the stomach and bowels.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:07:06Z"
+    },
+    {
+      "sense": "djtraovwkax2n3a",
+      "from": "Жизнь, существование (устаревшее или в устойчивых выражениях).",
+      "to": "The period of time when a person is alive, or existence itself.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:07:06Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "живот",
+    "lemma": "живот",
+    "reading": null,
+    "ipa": "/ʐɨˈvot/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤰",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "belly; stomach; life",
     "primaryGloss": "belly",
     "emotion": "relaxed and comfortable, patting oneself after a good meal",
@@ -162,22 +250,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "u35clntnjjxkly2",
-      "from": "Часть тела человека или животного между грудью и тазом, где находятся органы пищеварения.",
-      "to": "The part of the body between the chest and the hips that contains the stomach and bowels.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:07:06Z"
-    },
-    {
-      "sense": "djtraovwkax2n3a",
-      "from": "Жизнь, существование (устаревшее или в устойчивых выражениях).",
-      "to": "The period of time when a person is alive, or existence itself.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:07:06Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "The period of time when a person is alive",
+        "why": "Archaic meaning ('life'), only surviving in a couple of rare idioms, unsuitable for A2."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "не на жизнь, а на живот",
+        "why": "Corrupt idiom: the Russian phrase is 'не на живот, а на смерть'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In modern Russian, живот primarily means 'belly' or 'stomach'.",
+        "why": "Restates the glosses without adding usage information."
+      }
+    ],
+    "growth": 0.647
+  }
 }

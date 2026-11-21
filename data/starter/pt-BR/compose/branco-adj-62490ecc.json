@@ -68,6 +68,155 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "white; pale",
+    "primaryGloss": "white",
+    "emotion": "clean, bright and clear, like sunlight hitting a fresh wall",
+    "notes": [
+      "The feminine form is 'branca' (e.g., 'a camisa branca').",
+      "As a noun, 'em branco' means 'blank' (e.g., 'uma folha em branco' — a blank sheet)."
+    ],
+    "senses": [
+      {
+        "id": "0wgxkh0bpvf3rcs",
+        "order": 0,
+        "definition": "Of the colour of snow or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "❄️",
+        "examples": [
+          {
+            "id": "frbz3i8hjwdk0mo",
+            "text": "A neve fresca é muito branca.",
+            "textLang": "pt",
+            "translation": "Fresh snow is very white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the beauty of a winter scene",
+            "note": null,
+            "matchedForm": "branca",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "viw7b6xsg6xokf9",
+        "order": 1,
+        "definition": "Of a person: belonging to a light-skinned racial group.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "white"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "an33j32ikcclo4c",
+            "text": "A maioria da população daquela cidade é branca.",
+            "textLang": "pt",
+            "translation": "Most of the population of that city is white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "branca",
+            "matchedTranslationForm": "white"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "e66t2628qwxlf0c",
+        "order": 2,
+        "definition": "Of a person's face or skin: having lost its normal colour because of fear, shock, or illness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pale",
+              "white"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "whenjtvq46lhi2o",
+            "text": "Ele ficou branco de susto ao ver o acidente.",
+            "textLang": "pt",
+            "translation": "He went pale with shock when he saw the accident.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "alarmed and serious, describing a sudden physical reaction",
+            "note": null,
+            "matchedForm": "branco",
+            "matchedTranslationForm": "pale"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "branco",
+    "lemma": "branco",
+    "reading": null,
+    "ipa": "/ˈbɾɐ̃.ku/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "white",
     "primaryGloss": "white",
     "emotion": "clean, bright and clear, like sunlight hitting a fresh wall",
@@ -160,5 +309,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of snow, milk, or a blank piece of paper.",
+        "why": "Adjective defined as a noun ('The colour of...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Used to describe a person who is pale or has light-coloured skin.",
+        "why": "Conflates two distinct meanings: permanent light skin ('white') and temporary pallor ('pale')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "It is the most common way to describe anything without colour",
+        "why": "Filler restating the meaning, and inaccurate ('without colour' is 'incolor')."
+      }
+    ],
+    "growth": 1.039
   }
 }

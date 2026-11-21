@@ -58,6 +58,118 @@
     "headword": "cay",
     "lemma": "cay",
     "reading": null,
+    "ipa": "/kăj˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌶️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "spicy; stinging; bitter",
+    "primaryGloss": "spicy",
+    "emotion": "wincing slightly with a burning tongue, reaching for water",
+    "notes": [
+      "Unlike English 'hot', 'cay' only means spicy-hot (like chili), whereas 'nóng' means temperature-hot.",
+      "In informal speech, 'cay' or 'cay cú' means feeling salty or sore about losing."
+    ],
+    "senses": [
+      {
+        "id": "lhj2043i51qbkjm",
+        "order": 0,
+        "definition": "Having a sharp, burning taste like chili or pepper.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spicy",
+              "hot",
+              "peppery"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "🌶️",
+        "examples": [
+          {
+            "id": "kpms13kc2bruf2m",
+            "text": "Món ăn này rất cay.",
+            "textLang": "vi",
+            "translation": "This dish is very spicy.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gasping lightly from the heat while eating",
+            "note": null,
+            "matchedForm": "cay",
+            "matchedTranslationForm": "spicy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3svddoz3juz32rf",
+        "order": 1,
+        "definition": "Causing a stinging sensation in the eyes, or feeling sore and resentful after losing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stinging",
+              "sore",
+              "bitter"
+            ]
+          }
+        ],
+        "domain": "sensation",
+        "emoji": "🍋",
+        "examples": [
+          {
+            "id": "qcwinfu92iug4zn",
+            "text": "Khói bếp làm tôi cay mắt.",
+            "textLang": "vi",
+            "translation": "The kitchen smoke makes my eyes sting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cay",
+            "matchedTranslationForm": "sting"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cay",
+    "lemma": "cay",
+    "reading": null,
     "ipa": "/kaːj/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kaːj/",
+        "why": "Short vowel 'a' in 'cay' is /ăj˧˧/, not long /aːj/ (which is 'cai')."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Anh ấy cảm thấy cay đắng sau khi thất bại.",
+        "why": "Uses compound 'cay đắng' instead of standalone 'cay', or misses common 'cay mắt' (stinging)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for food that tastes hot like chilli or pepper.",
+        "why": "Both notes merely restate the definitions."
+      }
+    ],
+    "growth": 1.141
   }
 }

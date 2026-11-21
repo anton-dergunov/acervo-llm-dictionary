@@ -68,6 +68,97 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "fear; fright",
+    "primaryGloss": "fear",
+    "emotion": "tense and uneasy, feeling a sudden chill of dread",
+    "notes": [
+      "Use 'avere paura (di)' to mean 'to be afraid (of)': 'Ho paura dei cani' (I'm afraid of dogs).",
+      "Do not confuse with 'lo spavento', which is a sudden fright or scare."
+    ],
+    "senses": [
+      {
+        "id": "mg88c3tyr7mn4w9",
+        "order": 0,
+        "definition": "The unpleasant feeling you have when you think something dangerous or bad might happen, or when you worry about something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fear",
+              "fright",
+              "worry"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "lnlevjaids1kruo",
+            "text": "Ho paura del buio quando sono solo in casa.",
+            "textLang": "it",
+            "translation": "I'm afraid of the dark when I'm home alone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "nervous and hesitant, speaking softly about the dark",
+            "note": null,
+            "matchedForm": "paura",
+            "matchedTranslationForm": null
+          },
+          {
+            "id": "ptdjidngwsocqd5",
+            "text": "Ho paura di perdere il treno.",
+            "textLang": "it",
+            "translation": "I'm afraid of missing the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "paura",
+            "matchedTranslationForm": null
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la paura",
+    "lemma": "paura",
+    "reading": null,
+    "ipa": "/paˈu.ra/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "fear; fright; worry",
     "primaryGloss": "fear",
     "emotion": "tense and uneasy, feeling a sudden chill of dread",
@@ -163,5 +254,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'la spavento'",
+        "why": "'Spavento' is masculine ('lo spavento'), not 'la spavento'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Worry about a bad outcome is just a shade of fear in 'avere paura di/che'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ho la paura di perdere il treno.",
+        "why": "Unnatural with the definite article; Italian uses 'Ho paura di perdere il treno'."
+      }
+    ],
+    "growth": 0.822
   }
 }

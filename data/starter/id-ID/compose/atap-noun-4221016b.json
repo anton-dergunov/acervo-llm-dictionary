@@ -68,6 +68,73 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "roof",
+    "primaryGloss": "roof",
+    "emotion": "matter-of-fact, describing a simple, essential part of a house",
+    "notes": [
+      "Do not confuse with 'langit-langit' or 'plafon', which mean the ceiling (the inside surface of a room)."
+    ],
+    "senses": [
+      {
+        "id": "dgkvk1ltq5suz3c",
+        "order": 0,
+        "definition": "The structure that covers the top of a building or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "roof"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "dnyncttujl34m09",
+            "text": "Atap rumah itu bocor saat hujan deras.",
+            "textLang": "id",
+            "translation": "The roof of the house leaks during heavy rain.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and concerned about the water damage",
+            "note": null,
+            "matchedForm": "Atap",
+            "matchedTranslationForm": "roof"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "atap",
+    "lemma": "atap",
+    "reading": null,
+    "ipa": "/ˈatap/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "roof; covering",
     "primaryGloss": "roof",
     "emotion": "matter-of-fact, describing a simple, essential part of a house",
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A general covering or canopy used for shade or protection.",
+        "why": "Merely a figurative or extended use of 'roof', not a distinct A2 sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Atap is the word for the structural roof of a building.",
+        "why": "Merely repeats the definitions of the senses."
+      }
+    ],
+    "growth": 0.427
   }
 }

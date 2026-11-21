@@ -70,6 +70,137 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "new; brand-new; another",
+    "primaryGloss": "new",
+    "emotion": null,
+    "notes": [
+      "Position changes the nuance: after the noun ('un coche nuevo') it means brand-new; before the noun ('un nuevo coche') it means a different or replacement one.",
+      "The phrase 'de nuevo' means 'again'."
+    ],
+    "senses": [
+      {
+        "id": "sgjjby7b5z9wuwn",
+        "order": 0,
+        "definition": "Recently made, built, or created, and not used before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "brand-new"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🆕",
+        "examples": [
+          {
+            "id": "a1t7ns74hdo89n7",
+            "text": "Me compré un coche nuevo.",
+            "textLang": "es",
+            "translation": "I bought a brand-new car.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and enthusiastic about a recent purchase",
+            "note": null,
+            "matchedForm": "nuevo",
+            "matchedTranslationForm": "brand-new"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nvk7q4mxdpfch1n",
+        "order": 1,
+        "definition": "Not previously known, experienced, or used by someone; replacing a previous one.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "new",
+              "another"
+            ]
+          }
+        ],
+        "domain": "familiarity",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "syb58xswpzcl61n",
+            "text": "Es una experiencia totalmente nueva para mí.",
+            "textLang": "es",
+            "translation": "It is a totally new experience for me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and slightly surprised, adjusting to a change",
+            "note": null,
+            "matchedForm": "nueva",
+            "matchedTranslationForm": "new"
+          },
+          {
+            "id": "noaxiwrn2x3ely4",
+            "text": "Tenemos un nuevo profesor este año.",
+            "textLang": "es",
+            "translation": "We have a new teacher this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nuevo",
+            "matchedTranslationForm": "new"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "nuevo",
+    "lemma": "nuevo",
+    "reading": null,
+    "ipa": "/ˈnweβo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🆕",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "new; fresh; original",
     "primaryGloss": "new",
     "emotion": null,
@@ -162,5 +293,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Something that is being experienced or done for the first time.",
+        "why": "Adjective defined as a noun ('Something that...') rather than a quality."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Note explains the pre-nominal meaning ('another/additional'), which belongs as a sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "new; fresh; original",
+        "why": "'fresh' and 'original' do not appear in the sense glosses."
+      }
+    ],
+    "growth": 1.094
   }
 }

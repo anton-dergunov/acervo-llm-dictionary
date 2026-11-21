@@ -72,6 +72,75 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to hate",
+    "primaryGloss": "hate",
+    "emotion": "bitter and intense, holding onto deep resentment",
+    "notes": [
+      "'Haten' is much stronger in Dutch than 'to hate' in English. For everyday things you dislike, use 'een hekel hebben aan' or 'niet leuk/lekker vinden'."
+    ],
+    "senses": [
+      {
+        "id": "u4ppzrhcgij2hd6",
+        "order": 0,
+        "definition": "To feel intense dislike towards someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hate",
+              "detest",
+              "loathe"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "h",
+        "examples": [
+          {
+            "id": "c0qmtrk0nhioqv6",
+            "text": "Ik haat het om vroeg op te staan.",
+            "textLang": "nl",
+            "translation": "I hate getting up early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "haat",
+            "matchedTranslationForm": "hate"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "haten",
+    "lemma": "haten",
+    "reading": null,
+    "ipa": "/ˈɦaː.tə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😠",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to hate; to dislike very much",
     "primaryGloss": "hate",
     "emotion": "bitter and intense, holding onto deep resentment",
@@ -164,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik haten broccoli.",
+        "why": "Ungrammatical conjugation: first-person singular of 'haten' is 'Ik haat', not 'Ik haten'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ik haten vandaar opstaan in de ochtend.",
+        "why": "Completely ungrammatical ('Ik haten') and 'vandaar' means 'hence/from there', not 'early' ('vroeg')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the same meaning split artificially into two."
+      }
+    ],
+    "growth": 0.585
   }
 }

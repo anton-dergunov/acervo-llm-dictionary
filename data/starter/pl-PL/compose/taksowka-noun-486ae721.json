@@ -72,6 +72,75 @@
     "primaryGloss": "taxi",
     "emotion": "hurried and relieved, waiting on the curb with bags",
     "notes": [
+      "For travelling by taxi, use the instrumental case without a preposition: 'jechać taksówką' (to go by taxi).",
+      "Common collocations: 'brać/łapać taksówkę' (to take/catch a taxi), 'zamawiać taksówkę' (to order a taxi), 'czekać na taksówkę' (to wait for a taxi)."
+    ],
+    "senses": [
+      {
+        "id": "tdm2pa9ckb71vby",
+        "order": 0,
+        "definition": "A car with a driver that you pay to take you somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "taxi",
+              "cab"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚖",
+        "examples": [
+          {
+            "id": "xvva3l33yjebn4d",
+            "text": "Musimy złapać taksówkę, żeby nie spóźnić się na pociąg.",
+            "textLang": "pl",
+            "translation": "We need to catch a taxi so we don't miss the train.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "taksówkę",
+            "matchedTranslationForm": "taxi"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "taksówka",
+    "lemma": "taksówka",
+    "reading": null,
+    "ipa": "/takˈsuf.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚖",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "taxi; cab",
+    "primaryGloss": "taxi",
+    "emotion": "hurried and relieved, waiting on the curb with bags",
+    "notes": [
       "Use the preposition 'na' with the accusative when you are calling or waiting for one: 'brać taksówkę' (to take a taxi), 'zamawiać taksówkę' (to order a taxi)."
     ],
     "senses": [
@@ -119,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use the preposition 'na' with the accusative when you are calling",
+        "why": "'Dzwonić/zamawiać' do not take 'na', and the given examples lack 'na' entirely."
+      },
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[0].examples[0].text",
+        "quote": "żeby nie spóższyć się na pociąg.",
+        "why": "Non-existent spelling 'spóższyć'; the correct verb is 'spóźnić'."
+      }
+    ],
+    "growth": 1.286
   }
 }

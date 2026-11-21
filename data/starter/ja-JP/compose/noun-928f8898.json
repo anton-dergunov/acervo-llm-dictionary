@@ -57,6 +57,115 @@
     "language": "ja",
     "headword": "緑",
     "lemma": "緑",
+    "reading": "みどり",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌿",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "green; greenery",
+    "primaryGloss": "green",
+    "emotion": null,
+    "notes": [
+      "As a noun, 緑 connects to other nouns with の (e.g., 緑のシャツ, a green shirt).",
+      "Japanese traditionally uses 青 (あお, blue) for some green things, such as traffic lights, grass, and fresh leaves."
+    ],
+    "senses": [
+      {
+        "id": "s47jkphj4lihqiy",
+        "order": 0,
+        "definition": "The color between blue and yellow; the color of grass and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "green"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🌿",
+        "examples": [
+          {
+            "id": "aabx6mojr3daut5",
+            "text": "彼女は緑のセーターを着ています。",
+            "textLang": "ja",
+            "translation": "She is wearing a green sweater.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "緑",
+            "matchedTranslationForm": "green"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lihumkyecnvak5e",
+        "order": 1,
+        "definition": "Green plants, trees, and foliage, especially as part of the environment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "greenery",
+              "vegetation"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "m08w73vga7ob4xl",
+            "text": "この町は緑が多いです。",
+            "textLang": "ja",
+            "translation": "This town has a lot of greenery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "緑",
+            "matchedTranslationForm": "greenery"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "緑",
+    "lemma": "緑",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -115,5 +224,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading for a kanji word."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(nature) The color of grass... / (color) General term for the color",
+        "why": "Both senses describe the color green; the second sense should be greenery/plants."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 緑 takes の (緑の) to modify nouns, or that 青 is used for some green things."
+      }
+    ],
+    "growth": 1.415
   }
 }

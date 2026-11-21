@@ -68,6 +68,97 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "glass; cup",
+    "primaryGloss": "glass",
+    "emotion": "casual and everyday, reaching for a drink on the table",
+    "notes": [
+      "The final 'k' softens to 'ğ' before a vowel suffix: 'bardağı' (the glass), 'bardağa' (into the glass).",
+      "Covers drinking glasses as well as paper or plastic cups. A small cup with a handle (for coffee or tea) is 'fincan', and a large mug is 'kupa'."
+    ],
+    "senses": [
+      {
+        "id": "2lqv6swqdandz2l",
+        "order": 0,
+        "definition": "A container without a handle, made of glass, plastic, or paper, used for drinking liquids.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glass",
+              "cup",
+              "tumbler"
+            ]
+          }
+        ],
+        "domain": "vessel",
+        "emoji": "🥛",
+        "examples": [
+          {
+            "id": "g0xggoaw7j8v6xx",
+            "text": "Bardağa biraz su doldurdum.",
+            "textLang": "tr",
+            "translation": "I poured some water into the glass.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and everyday, pouring a fresh drink",
+            "note": null,
+            "matchedForm": "Bardağa",
+            "matchedTranslationForm": "glass"
+          },
+          {
+            "id": "bhen53mwnq3f37b",
+            "text": "Bir bardak çay içelim mi?",
+            "textLang": "tr",
+            "translation": "Shall we drink a glass of tea?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bardak",
+            "matchedTranslationForm": "glass"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "bardak",
+    "lemma": "bardak",
+    "reading": null,
+    "ipa": "/baɾˈdak/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥛",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "glass; cup; mug",
     "primaryGloss": "glass",
     "emotion": "casual and everyday, reaching for a drink on the table",
@@ -162,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A specific curved glass used traditionally in Turkey for drinking black tea.",
+        "why": "Oversplit: 'bardak' alone does not mean a tulip tea glass; the example uses 'çay bardağı'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "glass; cup; mug",
+        "why": "Includes 'mug', which is omitted from the senses and contrasted in the notes."
+      }
+    ],
+    "growth": 0.786
   }
 }

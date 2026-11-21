@@ -74,6 +74,115 @@
     "primaryGloss": "afternoon",
     "emotion": null,
     "notes": [
+      "In the Netherlands, 'middag' usually means the whole afternoon (roughly 12:00 to 18:00), not just 12 o'clock noon.",
+      "Commonly used in the adverbial form ''s middags' (in the afternoon)."
+    ],
+    "senses": [
+      {
+        "id": "kc4tjwytfj2ux6q",
+        "order": 0,
+        "definition": "The part of the day between noon and evening, roughly from 12:00 to 18:00.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afternoon"
+            ]
+          }
+        ],
+        "domain": "afternoon",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "9l5rrskgpp92e1q",
+            "text": "In de middag drink ik graag een kopje koffie.",
+            "textLang": "nl",
+            "translation": "In the afternoon I like to drink a cup of coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, taking a quiet moment in the middle of the day",
+            "note": null,
+            "matchedForm": "middag",
+            "matchedTranslationForm": "afternoon"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cxqc0yqmn849ja2",
+        "order": 1,
+        "definition": "Twelve o'clock in the daytime; the middle of the day.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "midday",
+              "noon"
+            ]
+          }
+        ],
+        "domain": "noon",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "afqk7fzjea1l4tu",
+            "text": "Rond het middaguur eten we meestal een broodje.",
+            "textLang": "nl",
+            "translation": "Around midday we usually eat a sandwich.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "middaguur",
+            "matchedTranslationForm": "midday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de middag",
+    "lemma": "middag",
+    "reading": null,
+    "ipa": "/ˈmɪ.dɑx/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "afternoon; midday",
+    "primaryGloss": "afternoon",
+    "emotion": null,
+    "notes": [
       "In Dutch, 'middag' specifically refers to the afternoon period following noon, roughly between 12:00 and 18:00.",
       "Do not confuse it with 'ochtend' (morning) or 'avond' (evening)."
     ],
@@ -122,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "afternoon; midday",
+        "why": "Definition and note only cover 'afternoon' (12:00–18:00), not the 12:00 point 'midday/noon'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'ochtend' (morning) or 'avond' (evening).",
+        "why": "Unhelpful filler; 'ochtend' and 'avond' look and sound nothing like 'middag'."
+      }
+    ],
+    "growth": 1.499
   }
 }

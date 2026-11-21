@@ -58,6 +58,73 @@
     "headword": "sól",
     "lemma": "sól",
     "reading": null,
+    "ipa": "/sul/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧂",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "salt",
+    "primaryGloss": "salt",
+    "emotion": "warm and appetizing, sitting down to a hot meal",
+    "notes": [
+      "The vowel 'ó' changes to 'o' in all inflected forms (e.g., genitive 'soli', instrumental 'solą')."
+    ],
+    "senses": [
+      {
+        "id": "caqo1tk2j8cu6aq",
+        "order": 0,
+        "definition": "A white crystalline substance used for seasoning or preserving food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "salt"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧂",
+        "examples": [
+          {
+            "id": "wfgu4sooogvir05",
+            "text": "Dodaj trochę soli do zupy.",
+            "textLang": "pl",
+            "translation": "Add a little salt to the soup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and encouraging in the kitchen",
+            "note": null,
+            "matchedForm": "soli",
+            "matchedTranslationForm": "salt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "sól",
+    "lemma": "sól",
+    "reading": null,
     "ipa": "/suw/",
     "pos": "noun",
     "gender": "feminine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/suw/",
+        "why": "Wrong IPA; 'sól' is pronounced /sul/, not /suw/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The noun 'sól' is feminine.",
+        "why": "Restates the gender field instead of just explaining the vowel alternation."
+      }
+    ],
+    "growth": 1.0
   }
 }

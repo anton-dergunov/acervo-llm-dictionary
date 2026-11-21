@@ -72,6 +72,116 @@
     "primaryGloss": "give",
     "emotion": "helpful and ready to share, with a sense of purpose",
     "notes": [
+      "Strong verb with a stem vowel change: du gibst, er gibt; past: gab; perfect: hat gegeben. Takes a dative recipient and an accusative object.",
+      "The impersonal phrase 'es gibt' + accusative means 'there is' or 'there are', for both singular and plural nouns."
+    ],
+    "senses": [
+      {
+        "id": "4zl0gnjp4zb7jfa",
+        "order": 0,
+        "definition": "To hand or transfer something to someone, or to provide something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "give",
+              "hand over"
+            ]
+          }
+        ],
+        "domain": "transfer",
+        "emoji": "✋",
+        "examples": [
+          {
+            "id": "6i0fmjhl5gaq45x",
+            "text": "Kannst du mir bitte das Buch geben?",
+            "textLang": "de",
+            "translation": "Can you please give me the book?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and curious, waiting for someone to help",
+            "note": null,
+            "matchedForm": "geben",
+            "matchedTranslationForm": "give"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qll0dulgm5vqpd2",
+        "order": 1,
+        "definition": "(as 'es gibt') Used to say that something exists or is available.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "there is",
+              "there are"
+            ]
+          }
+        ],
+        "domain": "existence",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "88s0g856tq5r64x",
+            "text": "Es gibt viele Äpfel auf dem Tisch.",
+            "textLang": "de",
+            "translation": "There are many apples on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and neutral, stating a fact about the room",
+            "note": null,
+            "matchedForm": "gibt",
+            "matchedTranslationForm": "There are"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "geben",
+    "lemma": "geben",
+    "reading": null,
+    "ipa": "/ˈɡeːbən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to give; there is/are",
+    "primaryGloss": "give",
+    "emotion": "helpful and ready to share, with a sense of purpose",
+    "notes": [
       "As a main verb, 'geben' behaves like English 'to give'.",
       "The phrase 'es gibt' is fixed and means 'there is' or 'there are', regardless of whether the noun that follows is singular or plural."
     ],
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a main verb, 'geben' behaves like English 'to give'.",
+        "why": "Filler; omits the irregular stem change (du gibst, er gibt, gab, gegeben) and dative+accusative cases."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To hand something to someone.",
+        "why": "Too narrow; 'geben' covers giving in general, not only handing things physically."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To exist or to be present.",
+        "why": " Fails to specify that this sense is restricted to the impersonal construction 'es gibt'."
+      }
+    ],
+    "growth": 1.328
   }
 }

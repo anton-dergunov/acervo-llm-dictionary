@@ -70,6 +70,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "doler; lastimar, herir",
+    "primaryGloss": "doler",
+    "emotion": null,
+    "notes": [
+      "Es un verbo irregular cuyas tres formas son iguales: 'hurt - hurt - hurt'.",
+      "También se usa como adjetivo ('Are you hurt?' — ¿Estás herido?)."
+    ],
+    "senses": [
+      {
+        "id": "cp9dip2go4b2j99",
+        "order": 0,
+        "definition": "Causar dolor una parte del cuerpo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "doler"
+            ]
+          }
+        ],
+        "domain": "dolor",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "b9bxckf4fefwkat",
+            "text": "My back hurts after sitting all day.",
+            "textLang": "en",
+            "translation": "Me duele la espalda después de estar sentado todo el día.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cansado y quejumbroso, frotándose la espalda con molestia",
+            "note": null,
+            "matchedForm": "hurts",
+            "matchedTranslationForm": "duele"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "258710bxx6rwv32",
+        "order": 1,
+        "definition": "Causar daño o dolor físico o emocional a alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "lastimar",
+              "herir",
+              "hacer daño"
+            ]
+          }
+        ],
+        "domain": "daño",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "du4ukw7m9wl1p1f",
+            "text": "Be careful, you might hurt yourself.",
+            "textLang": "en",
+            "translation": "Ten cuidado, podrías lastimarte.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "preocupado y advirtiendo a alguien con tono serio",
+            "note": null,
+            "matchedForm": "hurt",
+            "matchedTranslationForm": "lastimarte"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hurt",
+    "lemma": "hurt",
+    "reading": null,
+    "ipa": "/hɜrt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "doler; lastimar",
     "primaryGloss": "doler",
     "emotion": null,
@@ -143,5 +253,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Sentir un dolor físico o causar daño a alguien.",
+        "why": "Merges two distinct syntactic/semantic senses (intransitive 'be painful' vs transitive 'injure') and defines 'hurt' falsely as 'sentir dolor'."
+      }
+    ],
+    "growth": 1.041
   }
 }

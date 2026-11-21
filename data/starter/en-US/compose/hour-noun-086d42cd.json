@@ -68,6 +68,74 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "hora",
+    "primaryGloss": "hora",
+    "emotion": "measured and steady, marking the passing of the day",
+    "notes": [
+      "La 'h' inicial es muda (suena igual que 'our'). Por eso se usa el artículo 'an' y no 'a': 'an hour' (una hora).",
+      "Solo se usa para la duración de 60 minutos. Para preguntar o decir la hora del reloj, o decir 'es hora de', se usa 'time' ('What time is it?', 'It is time to go home')."
+    ],
+    "senses": [
+      {
+        "id": "hq1rtass68ksm1d",
+        "order": 0,
+        "definition": "Período de sesenta minutos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "hora"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": "⌛",
+        "examples": [
+          {
+            "id": "on764bvw5xdkowe",
+            "text": "The meeting will last for an hour.",
+            "textLang": "en",
+            "translation": "La reunión durará una hora.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hour",
+            "matchedTranslationForm": "hora"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hour",
+    "lemma": "hour",
+    "reading": null,
+    "ipa": "/ˈaʊər/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌛",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "hora; momento",
     "primaryGloss": "hora",
     "emotion": "measured and steady, marking the passing of the day",
@@ -160,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "It is finally the hour to go home.",
+        "why": "Unnatural calque of Spanish 'es la hora de'; English uses 'it is time to'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Un momento específico del día o un tiempo designado para algo.",
+        "why": "False friend trap for Spanish speakers; 'hour' is not generally used for 'hora' (point/time)."
+      }
+    ],
+    "growth": 0.776
   }
 }

@@ -72,6 +72,97 @@
     "primaryGloss": "sit down",
     "emotion": "relieved and settling into a comfortable spot after standing for a while",
     "notes": [
+      "Reflexive verb with a stem change in the present tense: mi siedo, ti siedi, si siede, ci sediamo, vi sedete, si siedono. Takes 'essere' in the past (mi sono seduto/a).",
+      "Describes the action of sitting down; for the state of already being seated, use 'essere seduto' or 'stare seduto'."
+    ],
+    "senses": [
+      {
+        "id": "wil3tg0hsrx8aqn",
+        "order": 0,
+        "definition": "To lower yourself into a sitting position, such as on a chair or bench.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sit down",
+              "take a seat",
+              "sit"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "9wfr0q2hwsdnhrq",
+            "text": "Voglio sedermi vicino alla finestra.",
+            "textLang": "it",
+            "translation": "I want to sit down near the window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sedermi",
+            "matchedTranslationForm": "sit down"
+          },
+          {
+            "id": "x4d2gpklryjv2j4",
+            "text": "Si siede sempre allo stesso posto.",
+            "textLang": "it",
+            "translation": "He always sits in the same seat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Si siede",
+            "matchedTranslationForm": "sits"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "sedersi",
+    "lemma": "sedersi",
+    "reading": null,
+    "ipa": "/seˈder.si/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sit down",
+    "primaryGloss": "sit down",
+    "emotion": "relieved and settling into a comfortable spot after standing for a while",
+    "notes": [
       "As a reflexive verb, sedersi changes its pronouns to match the subject: mi siedo (I sit), ti siedi (you sit), si siede (he/she sits), etc.",
       "Do not confuse it with stare, which means to stay or be, though you might stare seduto (stay seated)."
     ],
@@ -120,5 +211,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Voglio sedersi sulla sedia vicino alla finestra.",
+        "why": "Ungrammatical: with 1st-person 'voglio', the reflexive clitic must agree ('voglio sedermi', not 'sedersi')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the stem-vowel change in the present tense (mi siedo vs. ci sediamo) and auxiliary 'essere'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with stare, which means to stay or be",
+        "why": "Learners do not confuse 'sedersi' with 'stare'; contrast 'essere/stare seduto' (state) with 'sedersi' (action) instead."
+      }
+    ],
+    "growth": 1.273
   }
 }

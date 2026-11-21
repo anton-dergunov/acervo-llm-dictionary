@@ -68,6 +68,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "hungry",
+    "primaryGloss": "hungry",
+    "emotion": "faintly impatient and slightly hollow, thinking about the next meal",
+    "notes": [
+      "From 배 (stomach) + 고프다 (empty, hungry); also often written with a particle as 배가 고프다.",
+      "Drops ㅡ before -아/-어: 배고파요.",
+      "When speaking to or about someone older or of higher status, the honorific word 시장하시다 (시장하세요) is preferred over 배고프시다."
+    ],
+    "senses": [
+      {
+        "id": "ddkh4bsroh14p0j",
+        "order": 0,
+        "definition": "Feeling the need to eat food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hungry"
+            ]
+          }
+        ],
+        "domain": "hunger",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "7732nvvvn83lbp8",
+            "text": "점심을 안 먹어서 너무 배고파요.",
+            "textLang": "ko",
+            "translation": "I didn't eat lunch, so I am very hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit tired and earnest, explaining the reason for being hungry",
+            "note": null,
+            "matchedForm": "배고파요",
+            "matchedTranslationForm": "hungry"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "배고프다",
+    "lemma": "배고프다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "hungry; feeling a need for food",
     "primaryGloss": "hungry",
     "emotion": "faintly impatient and slightly hollow, thinking about the next meal",
@@ -120,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "use the polite form '배고파요' or the honorific '배고프세요'",
+        "why": "For elders or in formal settings, the honorific lexical form 시장하시다 (시장하세요) is normally used."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "You cannot say 'I hunger' as an action.",
+        "why": "Unhelpful remark about English; misses ㅡ-irregular conjugation and optional subject particle 가."
+      }
+    ],
+    "growth": 0.976
   }
 }

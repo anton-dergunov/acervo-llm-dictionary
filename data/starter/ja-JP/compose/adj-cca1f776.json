@@ -57,6 +57,115 @@
     "language": "ja",
     "headword": "早い",
     "lemma": "早い",
+    "reading": "はやい",
+    "ipa": "hajai",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏰",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "early; quick",
+    "primaryGloss": "early",
+    "emotion": "hurried and slightly breathless, glancing at a clock",
+    "notes": [
+      "早い mainly refers to an early point in time or something taking little time. For physical speed, the homophone 速い (hayai) is standard, though 早い is often used for both in everyday writing."
+    ],
+    "senses": [
+      {
+        "id": "rmoiz05dzl0ruys",
+        "order": 0,
+        "definition": "Happening or done before the usual or expected time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "early",
+              "soon"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "jqylj3z30epmj7w",
+            "text": "明日は朝が早いです。",
+            "textLang": "ja",
+            "translation": "I have an early morning tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "早い",
+            "matchedTranslationForm": "early"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6ogrpryutbv7h12",
+        "order": 1,
+        "definition": "Taking very little time, or done at a rapid pace.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quick",
+              "fast"
+            ]
+          }
+        ],
+        "domain": "pace",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "nt3ddewm0nbpejk",
+            "text": "母は仕事が早いです。",
+            "textLang": "ja",
+            "translation": "My mother is quick at her work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "早い",
+            "matchedTranslationForm": "quick"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "早い",
+    "lemma": "早い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (はやい) for a word written in kanji."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "あの車はとても速い。",
+        "why": "Uses the kanji 速い instead of the headword 早い."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use 早い when you arrive at a meeting ahead of schedule",
+        "why": "Restates the basic meaning 'early' instead of giving grammatical or usage help."
+      }
+    ],
+    "growth": 0.85
   }
 }

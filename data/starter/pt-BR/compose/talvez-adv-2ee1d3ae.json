@@ -58,6 +58,95 @@
     "headword": "talvez",
     "lemma": "talvez",
     "reading": null,
+    "ipa": "/tawˈves/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤔",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "maybe; perhaps",
+    "primaryGloss": "maybe",
+    "emotion": null,
+    "notes": [
+      "When 'talvez' comes before the verb, the verb must be in the subjunctive mood (e.g., 'Talvez ele venha' — Maybe he will come). If it comes after the verb, the indicative is used."
+    ],
+    "senses": [
+      {
+        "id": "xfn4wsr6hr5zbz3",
+        "order": 0,
+        "definition": "Used to say that something is possible, but not certain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "maybe",
+              "perhaps"
+            ]
+          }
+        ],
+        "domain": "possibility",
+        "emoji": "🤔",
+        "examples": [
+          {
+            "id": "22bjpkw0qve21sa",
+            "text": "Talvez ele chegue mais tarde.",
+            "textLang": "pt",
+            "translation": "Perhaps he will arrive later.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thoughtful and speculative, considering a future possibility",
+            "note": null,
+            "matchedForm": "Talvez",
+            "matchedTranslationForm": "Perhaps"
+          },
+          {
+            "id": "xa02qbu06lxmiay",
+            "text": "Não tenho certeza, talvez seja melhor esperar.",
+            "textLang": "pt",
+            "translation": "I am not sure, maybe it is better to wait.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hesitant and cautious, weighing an option",
+            "note": null,
+            "matchedForm": "talvez",
+            "matchedTranslationForm": "maybe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "talvez",
+    "lemma": "talvez",
+    "reading": null,
     "ipa": "/tawˈvɛs/",
     "pos": "adv",
     "gender": null,
@@ -141,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tawˈvɛs/",
+        "why": "Has closed-mid vowel /e/, not open-mid /ɛ/: /tawˈves/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike in English, 'talvez' is rarely used as a standalone answer",
+        "why": "False claim; 'Talvez.' is very common and natural as a standalone answer in Brazil."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "followed by a verb in the subjunctive mood when the uncertainty is higher",
+        "why": "Rule depends on word order (before vs. after the verb), not degree of uncertainty."
+      }
+    ],
+    "growth": 0.651
   }
 }

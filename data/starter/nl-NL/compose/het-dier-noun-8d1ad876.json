@@ -68,6 +68,74 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "animal",
+    "primaryGloss": "animal",
+    "emotion": "warm and fond, thinking of a pet",
+    "notes": [
+      "In everyday spoken Dutch, 'het beest' is often used instead of 'het dier' for animals."
+    ],
+    "senses": [
+      {
+        "id": "537mmdlmq6cddtr",
+        "order": 0,
+        "definition": "A living creature such as a dog, bird, or fish, that is not a human or a plant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "animal",
+              "creature"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🐾",
+        "examples": [
+          {
+            "id": "wxyy7d8rr8emgqm",
+            "text": "Welk dier vind jij het leukst?",
+            "textLang": "nl",
+            "translation": "Which animal do you like best?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dier",
+            "matchedTranslationForm": "animal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het dier",
+    "lemma": "dier",
+    "reading": null,
+    "ipa": "/diːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐾",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "animal; brute",
     "primaryGloss": "animal",
     "emotion": "warm and fond, thinking of a pet",
@@ -162,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(pejorative) A cruel or brutal person who acts without civilized restraint.",
+        "why": "Unnecessary figurative sense for A2; Dutch normally uses 'beest' for a brutal person."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Die man behandelt zijn hond als een dier.",
+        "why": "A dog literally is an animal, and this does not show sense 1 (a brutal person)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Takes the neuter article 'het' (het dier), with the plural 'dieren'.",
+        "why": "Restates gender/article from headword and regular plural."
+      }
+    ],
+    "growth": 0.609
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "aunt",
     "emotion": "warm and familiar, like talking about someone you know well",
     "notes": [
+      "Plural: 'die Tanten'. Children also sometimes use 'Tante' before a first name for close female family friends, similar to English 'Auntie'."
+    ],
+    "senses": [
+      {
+        "id": "67gjuhuo8v7lrwt",
+        "order": 0,
+        "definition": "The sister of one's father or mother, or the wife of one's uncle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "aunt",
+              "auntie"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👩",
+        "examples": [
+          {
+            "id": "pvgksdfq6k9qu6y",
+            "text": "Meine Tante kommt am Wochenende zu Besuch.",
+            "textLang": "de",
+            "translation": "My aunt is coming to visit this weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and anticipating a fun family visit",
+            "note": null,
+            "matchedForm": "Tante",
+            "matchedTranslationForm": "aunt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Tante",
+    "lemma": "Tante",
+    "reading": null,
+    "ipa": "/ˈtantə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "aunt",
+    "primaryGloss": "aunt",
+    "emotion": "warm and familiar, like talking about someone you know well",
+    "notes": [
       "In German, 'Tante' is specifically the sister of your mother or father, or the wife of your uncle. It is also common for children to address close female friends of their parents as 'Tante' as a sign of affection."
     ],
     "senses": [
@@ -158,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(social) A polite or affectionate term used by children",
+        "why": "Calling a family friend 'auntie' is a usage shade of 'aunt', not a distinct sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In German, 'Tante' is specifically the sister of your mother",
+        "why": "Note completely repeats the definitions of the two senses."
+      }
+    ],
+    "growth": 0.552
   }
 }

@@ -72,6 +72,117 @@
     "primaryGloss": "luz",
     "emotion": "bright and clear, illuminating the space",
     "notes": [
+      "Cuando se refiere a la claridad en general, es incontable (There is enough light). Cuando se refiere a una lámpara, bombilla o semáforo, es contable y tiene plural (Turn off the lights)."
+    ],
+    "senses": [
+      {
+        "id": "s1vp89rsryzf1mf",
+        "order": 0,
+        "definition": "Claridad que viene del sol, del fuego o de una lámpara y que permite ver las cosas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "luz",
+              "claridad"
+            ]
+          }
+        ],
+        "domain": "claridad",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "6m2rjymhwcc71y5",
+            "text": "The room gets a lot of natural light in the morning.",
+            "textLang": "en",
+            "translation": "La habitación recibe mucha luz natural por la mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "light",
+            "matchedTranslationForm": "luz"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mlk7yt3belj208j",
+        "order": 1,
+        "definition": "Aparato o bombilla que produce luz artificial en una habitación o en la calle.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "luz",
+              "lámpara",
+              "bombilla",
+              "foco"
+            ]
+          }
+        ],
+        "domain": "aparato",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "hduxvw28i4yha5m",
+            "text": "Turn on the light, please.",
+            "textLang": "en",
+            "translation": "Enciende la luz, por favor.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and practical, asking for assistance",
+            "note": null,
+            "matchedForm": "light",
+            "matchedTranslationForm": "luz"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "light",
+    "lemma": "light",
+    "reading": null,
+    "ipa": "/laɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "luz; lámpara",
+    "primaryGloss": "luz",
+    "emotion": "bright and clear, illuminating the space",
+    "notes": [
       "Como sustantivo, 'light' se refiere tanto a la claridad natural o artificial como a un aparato de iluminación (lámpara o bombilla)."
     ],
     "senses": [
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Como sustantivo, 'light' se refiere tanto a la claridad natural o artificial",
+        "why": "Restates the definitions instead of explaining the countable vs. uncountable grammar."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Turn on the light, please.",
+        "why": "'Turn on the light' refers to an electric lamp/fixture (sense 1), not illumination in general."
+      }
+    ],
+    "growth": 1.18
   }
 }

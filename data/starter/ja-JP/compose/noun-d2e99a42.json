@@ -57,6 +57,73 @@
     "language": "ja",
     "headword": "星",
     "lemma": "星",
+    "reading": "ほし",
+    "ipa": "hoɕi",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⭐",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "star",
+    "primaryGloss": "star",
+    "emotion": "wondering and calm, looking up at the night sky",
+    "notes": [
+      "In everyday speech, 星 (ほし) refers to any point of light in the night sky, including visible planets, as well as the five-pointed star shape (☆)."
+    ],
+    "senses": [
+      {
+        "id": "ydiuo8r2yfvvtyj",
+        "order": 0,
+        "definition": "A bright point of light seen in the night sky, or a large ball of burning gas in space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "star"
+            ]
+          }
+        ],
+        "domain": "sky",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "jwv5f5f74kqa2np",
+            "text": "夜空に星がたくさん見える。",
+            "textLang": "ja",
+            "translation": "I can see many stars in the night sky.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, admiring the clear night view",
+            "note": null,
+            "matchedForm": "星",
+            "matchedTranslationForm": "stars"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "星",
+    "lemma": "星",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (ほし) for kanji headword."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "star; heavenly body",
+        "why": "'heavenly body' is not in the sense glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can also be used metaphorically in Japanese to describe someone who",
+        "why": "Describes a marginal metaphorical use instead of everyday usage."
+      }
+    ],
+    "growth": 0.799
   }
 }

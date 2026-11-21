@@ -58,6 +58,73 @@
     "headword": "أَسَد",
     "lemma": "أَسَد",
     "reading": null,
+    "ipa": "/ˈʔa.sad/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "lion",
+    "primaryGloss": "lion",
+    "emotion": "awed and cautious, standing at a safe distance",
+    "notes": [
+      "Broken plural: أُسُود (ʾusūd). A female lion is لَبُؤَة (labuʾa)."
+    ],
+    "senses": [
+      {
+        "id": "ngi5we2i17dps6l",
+        "order": 0,
+        "definition": "A large wild cat that lives in prides, the male of which has a mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "iy9korp6tyvh2yr",
+            "text": "رَأَيْتُ أَسَدًا فِي حَدِيقَةِ الحَيَوَانَاتِ.",
+            "textLang": "ar",
+            "translation": "I saw a lion at the zoo.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "أَسَدًا",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "أَسَد",
+    "lemma": "أَسَد",
+    "reading": null,
     "ipa": "/ˈʔasad/",
     "pos": "noun",
     "gender": "masculine",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers to the large wild cat known as the king of",
+        "why": "Repeats the definition verbatim instead of giving useful grammar such as the broken plural."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "رأيت أسَدًا في الحديقة.",
+        "why": "'حَدِيقَة' alone means a park or garden; a zoo is 'حَدِيقَة الحَيَوَانَات'."
+      }
+    ],
+    "growth": 1.179
   }
 }

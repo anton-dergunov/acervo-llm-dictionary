@@ -71,6 +71,71 @@
     "shortGloss": "passport",
     "primaryGloss": "passport",
     "emotion": "excited and ready for a trip, holding the document tightly",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ar1y4ntt5e37y47",
+        "order": 0,
+        "definition": "An official document issued by a government certifying the holder's identity and citizenship, used for international travel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "passport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "📘",
+        "examples": [
+          {
+            "id": "nvsx4tdmkabmx7s",
+            "text": "Devo mostrare il passaporto alla frontiera.",
+            "textLang": "it",
+            "translation": "I must show my passport at the border.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and cooperative, handing the document over at immigration",
+            "note": null,
+            "matchedForm": "passaporto",
+            "matchedTranslationForm": "passport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il passaporto",
+    "lemma": "passaporto",
+    "reading": null,
+    "ipa": "/passaˈpɔrto/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📘",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "passport",
+    "primaryGloss": "passport",
+    "emotion": "excited and ready for a trip, holding the document tightly",
     "notes": [
       "Used when traveling internationally to prove your identity and nationality at borders."
     ],
@@ -118,5 +183,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when traveling internationally to prove your identity and nationality at borders.",
+        "why": "Repeats the definition of a passport; offers no linguistic help."
+      }
+    ],
+    "growth": 0.727
   }
 }

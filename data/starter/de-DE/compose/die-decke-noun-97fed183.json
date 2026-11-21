@@ -68,6 +68,115 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "blanket; ceiling",
+    "primaryGloss": "blanket",
+    "emotion": "cozy and sleepy, snuggling under covers on a cold night",
+    "notes": [
+      "Plural: 'die Decken'. Often found in compounds specifying the type of cover, such as 'die Bettdecke' (duvet) or 'die Tischdecke' (tablecloth)."
+    ],
+    "senses": [
+      {
+        "id": "tym5mrb8kmx5bkr",
+        "order": 0,
+        "definition": "A thick cloth cover used to keep warm, especially in bed.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blanket",
+              "duvet",
+              "cover"
+            ]
+          }
+        ],
+        "domain": "bedding",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "3io5ep6ujxjnouu",
+            "text": "Es ist so kalt, ich brauche eine zweite Decke.",
+            "textLang": "de",
+            "translation": "It is so cold, I need a second blanket.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shivering and slightly uncomfortable, seeking extra warmth",
+            "note": null,
+            "matchedForm": "Decke",
+            "matchedTranslationForm": "blanket"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "awb4didp2lwg3d9",
+        "order": 1,
+        "definition": "The upper interior surface of a room.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ceiling"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "610mglqeuphv1vq",
+            "text": "Die Lampe hängt an der Decke.",
+            "textLang": "de",
+            "translation": "The lamp is hanging from the ceiling.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, describing the layout of a room",
+            "note": null,
+            "matchedForm": "Decke",
+            "matchedTranslationForm": "ceiling"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "die Decke",
+    "lemma": "Decke",
+    "reading": null,
+    "ipa": "/ˈdɛkə/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛌",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "blanket; ceiling; cover",
     "primaryGloss": "blanket",
     "emotion": "cozy and sleepy, snuggling under covers on a cold night",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the gender: 'die Decke'.",
+        "why": "Restates the gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "This word is a classic example of a polysemous word in German.",
+        "why": "Repeats the senses already listed using unnecessary linguistic jargon."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "blanket; ceiling; cover",
+        "why": "'cover' is not in the sense glosses."
+      }
+    ],
+    "growth": 0.839
   }
 }

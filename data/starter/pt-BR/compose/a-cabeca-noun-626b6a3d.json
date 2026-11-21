@@ -72,6 +72,157 @@
     "primaryGloss": "head",
     "emotion": "matter-of-fact and neutral, like pointing out a part of the body",
     "notes": [
+      "When 'cabeça' refers to a leader or mastermind (sense 3), it becomes masculine ('o cabeça do grupo'), even if the person is female."
+    ],
+    "senses": [
+      {
+        "id": "s0lidk65wpydfmu",
+        "order": 0,
+        "definition": "The top part of the body that contains the brain, eyes, nose, and mouth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "head"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "l8kyyctjs60srxn",
+            "text": "Ela colocou o chapéu na cabeça.",
+            "textLang": "pt",
+            "translation": "She put the hat on her head.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and everyday, describing a simple routine action",
+            "note": null,
+            "matchedForm": "cabeça",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wa0zyjarauxe9ev",
+        "order": 1,
+        "definition": "A person's mind, intelligence, or way of thinking.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mind",
+              "head",
+              "brains"
+            ]
+          }
+        ],
+        "domain": "mind",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "6h0z4uana2r41sr",
+            "text": "Ele tem uma boa cabeça para os negócios.",
+            "textLang": "pt",
+            "translation": "He has a good head for business.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and appreciative, noting someone's natural talent",
+            "note": null,
+            "matchedForm": "cabeça",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "j5mj1q0kjg0rr2y",
+        "order": 2,
+        "definition": "The person in charge of planning or leading a group or activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leader",
+              "head",
+              "mastermind"
+            ]
+          }
+        ],
+        "domain": "leadership",
+        "emoji": "👑",
+        "examples": [
+          {
+            "id": "lohug14hjkzzvyc",
+            "text": "Quem é o cabeça deste projeto?",
+            "textLang": "pt",
+            "translation": "Who is the head of this project?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cabeça",
+            "matchedTranslationForm": "head"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a cabeça",
+    "lemma": "cabeça",
+    "reading": null,
+    "ipa": "/kaˈbɛ.sɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧠",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "head; mind; leader",
+    "primaryGloss": "head",
+    "emotion": "matter-of-fact and neutral, like pointing out a part of the body",
+    "notes": [
       "While 'cabeça' literally means the physical head, it is very often used to refer to someone's mind or state of intelligence.",
       "Do not confuse it with 'cabelo' (hair); 'cabeça' is the entire part of the body, whereas 'cabelo' is only the hair growing on it."
     ],
@@ -202,5 +353,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'cabeça' literally means the physical head, it is very often used...",
+        "why": "Merely restates senses 0 and 1."
+      },
+      {
+        "severity": 3,
+        "category": "field.gender",
+        "path": "senses[2].examples[0].text",
+        "quote": "Quem é a cabeça deste projeto?",
+        "why": "When meaning a leader, 'cabeça' is a masculine noun ('o cabeça')."
+      }
+    ],
+    "growth": 0.782
   }
 }

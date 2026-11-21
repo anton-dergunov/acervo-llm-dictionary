@@ -72,6 +72,97 @@
     "primaryGloss": "now",
     "emotion": null,
     "notes": [
+      "In informal spoken Dutch, 'nou' is often used instead of 'nu', especially as a filler word ('Nou, ik weet het niet' – Well, I don't know).",
+      "Can also be used as a conjunction meaning 'now that', which sends the verb to the end of the clause (Nu het regent, blijven we binnen)."
+    ],
+    "senses": [
+      {
+        "id": "71i0xa2j7ld90g7",
+        "order": 0,
+        "definition": "At the present time or moment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "now",
+              "right now",
+              "at this moment"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🕒",
+        "examples": [
+          {
+            "id": "qkaruq9onslu7ph",
+            "text": "Ik ben nu bezig met mijn werk.",
+            "textLang": "nl",
+            "translation": "I am busy with my work right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and matter-of-fact, stating one's current activity",
+            "note": null,
+            "matchedForm": "nu",
+            "matchedTranslationForm": "right now"
+          },
+          {
+            "id": "0980a51el8o7evs",
+            "text": "Nu weet ik wat ik moet doen.",
+            "textLang": "nl",
+            "translation": "Now I know what I have to do.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "decisive and relieved, finally understanding the situation",
+            "note": null,
+            "matchedForm": "Nu",
+            "matchedTranslationForm": "Now"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "nu",
+    "lemma": "nu",
+    "reading": null,
+    "ipa": "/ny/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "now; at this moment",
+    "primaryGloss": "now",
+    "emotion": null,
+    "notes": [
       "Nu is almost always used to indicate the current moment. In spoken Dutch, it is often placed early in a sentence to emphasize the 'right now' aspect."
     ],
     "senses": [
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Nu weet ik wat ik moet doen.",
+        "why": "Example shows the temporal sense ('now, at this point'), not the discourse marker 'well then'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Nu is almost always used to indicate the current moment.",
+        "why": "Restates the definition without useful usage advice."
+      }
+    ],
+    "growth": 1.033
   }
 }

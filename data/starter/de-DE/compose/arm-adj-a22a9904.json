@@ -72,6 +72,115 @@
     "primaryGloss": "poor",
     "emotion": "a mix of pity and humble reflection, recognizing a difficult situation",
     "notes": [
+      "Takes an umlaut in the comparative and superlative: ärmer, am ärmsten.",
+      "Do not confuse with the capitalized noun 'der Arm' (the body part)."
+    ],
+    "senses": [
+      {
+        "id": "ewn0c9jbbfbpk76",
+        "order": 0,
+        "definition": "Having very little money or few possessions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "poor"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "62q5ecwukanyj7g",
+            "text": "Er wurde in einer armen Familie geboren.",
+            "textLang": "de",
+            "translation": "He was born into a poor family.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somber and matter-of-fact, telling a life story",
+            "note": null,
+            "matchedForm": "armen",
+            "matchedTranslationForm": "poor"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fjz1st07768a5fx",
+        "order": 1,
+        "definition": "Deserving sympathy or pity; unfortunate.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "poor",
+              "unfortunate"
+            ]
+          }
+        ],
+        "domain": "sympathy",
+        "emoji": "🥺",
+        "examples": [
+          {
+            "id": "8uciwaw6om528nz",
+            "text": "Der arme Hund hat Hunger.",
+            "textLang": "de",
+            "translation": "The poor dog is hungry.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "soft and full of compassion, reacting to a sad sight",
+            "note": null,
+            "matchedForm": "arme",
+            "matchedTranslationForm": "poor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "arm",
+    "lemma": "arm",
+    "reading": null,
+    "ipa": "/aʁm/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💸",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "poor; unfortunate",
+    "primaryGloss": "poor",
+    "emotion": "a mix of pity and humble reflection, recognizing a difficult situation",
+    "notes": [
       "Do not confuse 'arm' (poor) with the noun 'der Arm' (the body part). Even though they are spelled the same, the noun starts with a capital letter in German.",
       "When used as an adjective, 'arm' changes its ending based on the noun it describes, such as 'ein armer Mann' (a poor man)."
     ],
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used as an adjective, 'arm' changes its ending based on the noun",
+        "why": "Generic rule true of every German adjective; misses the irregular umlaut in comparative/superlative."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "Used to express sympathy or pity for someone.",
+        "why": "Usage meta-note instead of an adjectival quality definition."
+      }
+    ],
+    "growth": 0.708
   }
 }

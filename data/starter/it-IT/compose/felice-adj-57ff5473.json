@@ -68,6 +68,93 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "happy",
+    "primaryGloss": "happy",
+    "emotion": "warm and smiling, sharing a genuinely good moment with someone",
+    "notes": [
+      "The singular form 'felice' is used for both masculine and feminine (plural 'felici').",
+      "Usually expresses a deeper joy than 'contento', which is more common for everyday satisfaction or being pleased with something."
+    ],
+    "senses": [
+      {
+        "id": "84nrv88oi1d4w8w",
+        "order": 0,
+        "definition": "Feeling or showing joy and contentment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "happy",
+              "glad"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "😊",
+        "examples": [
+          {
+            "id": "xm15u0fr9uhwtlc",
+            "text": "Sono molto felice di vederti qui oggi.",
+            "textLang": "it",
+            "translation": "I am very happy to see you here today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and welcoming, glad to see a friend",
+            "note": null,
+            "matchedForm": "felice",
+            "matchedTranslationForm": "happy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "84nrv88oi1d4w8w",
+      "from": "Che prova o esprime gioia e soddisfazione.",
+      "to": "Feeling or expressing joy and satisfaction.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "h371dp1g6nwhkop",
+      "from": "Che è favorevole o fortunato.",
+      "to": "Being favorable or lucky.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "felice",
+    "lemma": "felice",
+    "reading": null,
+    "ipa": "/feˈli.tʃe/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😊",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "happy; fortunate",
     "primaryGloss": "happy",
     "emotion": "warm and smiling, sharing a genuinely good moment with someone",
@@ -163,22 +250,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "84nrv88oi1d4w8w",
-      "from": "Che prova o esprime gioia e soddisfazione.",
-      "to": "Feeling or expressing joy and satisfaction.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "h371dp1g6nwhkop",
-      "from": "Che è favorevole o fortunato.",
-      "to": "Being favorable or lucky.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use felice for both general happiness ('essere felice') and fortunate circumstances",
+        "why": "Merely restates the two senses in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "Being favorable or lucky.",
+        "why": "Attributive 'un felice incontro' is literary/formal and marginal for A2; 'happy' covers greetings."
+      }
+    ],
+    "growth": 0.673
+  }
 }

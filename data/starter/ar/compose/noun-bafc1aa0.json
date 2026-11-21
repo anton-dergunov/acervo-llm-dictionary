@@ -68,6 +68,76 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "shoe, pair of shoes",
+    "primaryGloss": "shoe",
+    "emotion": "practical and grounded, getting ready to step outside",
+    "notes": [
+      "The singular حِذَاء usually refers to a pair of shoes, not just one shoe. The plural is أَحْذِيَة (ʾaḥdhiya).",
+      "حِذَاء رِيَاضِيّ (ḥidhāʾ riyāḍiyy) means 'trainers' or 'sneakers'."
+    ],
+    "senses": [
+      {
+        "id": "4ualuo542nwt8b5",
+        "order": 0,
+        "definition": "An outer covering for the foot, usually worn in pairs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shoe",
+              "pair of shoes",
+              "footwear"
+            ]
+          }
+        ],
+        "domain": "footwear",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "oblluz1iw3gmal9",
+            "text": "اشْتَرَيْتُ حِذَاءً جَدِيدًا لِلْعَمَلِ.",
+            "textLang": "ar",
+            "translation": "I bought a new pair of shoes for work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "حِذَاءً",
+            "matchedTranslationForm": "pair of shoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "حِذَاء",
+    "lemma": "حِذَاء",
+    "reading": null,
+    "ipa": "/ħiˈðaːʔ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👞",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "shoe",
     "primaryGloss": "shoe",
     "emotion": "practical and grounded, getting ready to step outside",
@@ -120,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The plural is أَحْذِيَة (aḥdiyyah), which you will often see",
+        "why": "Wrong transliteration: أَحْذِيَة is aḥdhiya (with dh and single y), not aḥdiyyah."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I bought a new shoe for work.",
+        "why": "In Arabic, singular حِذَاء regularly refers to a pair of shoes, not a single shoe."
+      }
+    ],
+    "growth": 1.032
   }
 }

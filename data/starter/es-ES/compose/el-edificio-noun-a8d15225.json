@@ -73,6 +73,82 @@
     "shortGloss": "building",
     "primaryGloss": "building",
     "emotion": null,
+    "notes": [],
+    "senses": [
+      {
+        "id": "bv1jjhcgq6mulmb",
+        "order": 0,
+        "definition": "A permanent structure with a roof and walls, such as a block of flats or an office block.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "building",
+              "structure"
+            ]
+          }
+        ],
+        "domain": "architecture",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "r16az07xt5m2b38",
+            "text": "El edificio nuevo tiene diez plantas y muchas oficinas.",
+            "textLang": "es",
+            "translation": "The new building has ten floors and many offices.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observing a tall new structure in the city with slight admiration",
+            "note": null,
+            "matchedForm": "edificio",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "bv1jjhcgq6mulmb",
+      "from": "Construcción fija, hecha con materiales resistentes, para habitarla o para otros usos.",
+      "to": "A permanent structure built with sturdy materials for living or other purposes.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:09:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el edificio",
+    "lemma": "edificio",
+    "reading": null,
+    "ipa": "/e.ðiˈfi.θjo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "building",
+    "primaryGloss": "building",
+    "emotion": null,
     "notes": [
       "Use 'edificio' for any substantial construction with walls and a roof, such as a block of flats, an office block, or a school.",
       "Do not confuse it with 'casa', which specifically refers to a house where someone lives."
@@ -123,14 +199,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "bv1jjhcgq6mulmb",
-      "from": "Construcción fija, hecha con materiales resistentes, para habitarla o para otros usos.",
-      "to": "A permanent structure built with sturdy materials for living or other purposes.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:09:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'edificio' for any substantial construction with walls and a roof",
+        "why": "Restates the definition without adding grammar or usage guidance."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'casa', which specifically refers to a house",
+        "why": "Unnecessary contrast; 'edificio' and 'casa' look nothing alike."
+      }
+    ],
+    "growth": 0.517
+  }
 }

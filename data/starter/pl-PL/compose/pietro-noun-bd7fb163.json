@@ -58,6 +58,76 @@
     "headword": "piętro",
     "lemma": "piętro",
     "reading": null,
+    "ipa": "/ˈpʲɛn.trɔ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "floor; story",
+    "primaryGloss": "floor",
+    "emotion": "matter-of-fact and helpful, pointing out where something is located",
+    "notes": [
+      "In Polish, the ground floor is 'parter', and 'pierwsze piętro' is the level above it (UK first floor, US second floor).",
+      "Do not confuse with 'podłoga', which is the physical surface you walk on inside a room."
+    ],
+    "senses": [
+      {
+        "id": "4j6wzjl1gdlaty6",
+        "order": 0,
+        "definition": "A level of a building above the ground floor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor",
+              "story",
+              "storey"
+            ]
+          }
+        ],
+        "domain": "architecture",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "wcdn39bnhbf688t",
+            "text": "Mieszkam na trzecim piętrze.",
+            "textLang": "pl",
+            "translation": "I live on the third floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and informative, simply stating where one lives",
+            "note": null,
+            "matchedForm": "piętrze",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "piętro",
+    "lemma": "piętro",
+    "reading": null,
     "ipa": "/ˈpʲjɛn.trɔ/",
     "pos": "noun",
     "gender": "neuter",
@@ -119,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the first floor (in American English) or second floor (in British English) is the 'pierwsze piętro'",
+        "why": "Reversed US and UK usage: 'pierwsze piętro' is the UK first floor / US second floor."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential contrast with 'podłoga' (the floor you walk on), a classic learner confusion."
+      }
+    ],
+    "growth": 1.044
   }
 }

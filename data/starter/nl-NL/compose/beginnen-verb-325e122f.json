@@ -68,6 +68,116 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to begin; to start",
+    "primaryGloss": "begin",
+    "emotion": "eager and forward-looking, ready to take the first step",
+    "notes": [
+      "Irregular verb: past tense 'begon / begonnen', past participle 'begonnen'. Always takes 'zijn' in the perfect tense ('ik ben begonnen').",
+      "Often used with 'met' ('beginnen met werken') or 'aan' when starting a task or item ('aan een boek beginnen')."
+    ],
+    "senses": [
+      {
+        "id": "ajt2l6lwrh2jm99",
+        "order": 0,
+        "definition": "To start doing something or taking part in an activity.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "begin",
+              "start"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "▶️",
+        "examples": [
+          {
+            "id": "7hjwx99ecv5fsc7",
+            "text": "We beginnen om acht uur met de les.",
+            "textLang": "nl",
+            "translation": "We start the lesson at eight o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "prompt and organized, getting down to business",
+            "note": null,
+            "matchedForm": "beginnen",
+            "matchedTranslationForm": "start"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "2eal9i1z0zjfpyc",
+        "order": 1,
+        "definition": "Of an event, period, or thing: to have its starting point in time or space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "start",
+              "begin"
+            ]
+          }
+        ],
+        "domain": "event",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "mktcjct7lxm2ulp",
+            "text": "De film begint over vijf minuten.",
+            "textLang": "nl",
+            "translation": "The movie starts in five minutes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "begint",
+            "matchedTranslationForm": "starts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "beginnen",
+    "lemma": "beginnen",
+    "reading": null,
+    "ipa": "/bəˈɣɪnə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to begin; to start; to originate",
     "primaryGloss": "begin",
     "emotion": "eager and forward-looking, ready to take the first step",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[1].examples[0].text",
+        "quote": "De film begint over five minuten.",
+        "why": "Contains the English word 'five' instead of Dutch 'vijf'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "but 'hebben' can sometimes be used when focusing purely on the action.",
+        "why": "'Beginnen' always takes 'zijn' in the perfect tense in standard Dutch, never 'hebben'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "To come into existence or have its starting point somewhere.",
+        "why": "Does not match the example ('the movie starts in five minutes', an event starting)."
+      }
+    ],
+    "growth": 0.854
   }
 }

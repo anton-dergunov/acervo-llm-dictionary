@@ -58,6 +58,115 @@
     "headword": "hayır",
     "lemma": "hayır",
     "reading": null,
+    "ipa": "/ˈhajɯɾ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "no; good, charity",
+    "primaryGloss": "no",
+    "emotion": null,
+    "notes": [
+      "As 'no', stress is on the first syllable (/ˈhajɯɾ/). As the noun meaning 'good, charity', stress is on the final syllable and the 'ı' drops before a vowel suffix (hayrı, hayra)."
+    ],
+    "senses": [
+      {
+        "id": "7oizxarkp16em0d",
+        "order": 0,
+        "definition": "Used to give a negative answer, refuse, or disagree.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no"
+            ]
+          }
+        ],
+        "domain": "refusal",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "5is2gam3nrbdw5d",
+            "text": "Hayır, ben kahve istemiyorum.",
+            "textLang": "tr",
+            "translation": "No, I don't want coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and polite, declining the offer",
+            "note": null,
+            "matchedForm": "Hayır",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "as5tts5stvu10wn",
+        "order": 1,
+        "definition": "Goodness, benefit, or a charitable act.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "good",
+              "charity",
+              "benefit"
+            ]
+          }
+        ],
+        "domain": "charity",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "7t3uqwskf2h79q8",
+            "text": "Bu işten kimseye hayır gelmez.",
+            "textLang": "tr",
+            "translation": "No good will come to anyone from this business.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hayır",
+            "matchedTranslationForm": "good"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hayır",
+    "lemma": "hayır",
+    "reading": null,
     "ipa": "/hajɯɾ/",
     "pos": "expression",
     "gender": null,
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/hajɯɾ/",
+        "why": "Missing primary stress mark ('hayır' meaning 'no' is stressed on the first syllable: /ˈhajɯɾ/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Hayır is most commonly used simply to say 'no'.",
+        "why": "Restates the glosses and misses the vowel drop in the noun homograph (hayrı) and pronunciation difference."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Her yıl bu vakfa hayır yaparım.",
+        "why": "'Vakfa hayır yapmak' is unidiomatic; 'hayır işlemek' or 'hayır işi yapmak' is natural."
+      }
+    ],
+    "growth": 0.948
   }
 }

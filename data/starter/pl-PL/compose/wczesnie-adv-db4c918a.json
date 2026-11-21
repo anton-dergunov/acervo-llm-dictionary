@@ -60,6 +60,94 @@
     "headword": "wcześnie",
     "lemma": "wcześnie",
     "reading": null,
+    "ipa": "/ˈft͡ʂɛɕ.ɲɛ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "early",
+    "primaryGloss": "early",
+    "emotion": null,
+    "notes": [
+      "The comparative form 'wcześniej' means 'earlier' or 'before/previously'. Notice that just like in English, 'wcześnie' is used in impersonal sentences to state the time: 'Jest jeszcze wcześnie' (It is still early)."
+    ],
+    "senses": [
+      {
+        "id": "5jszij0z3hxpdar",
+        "order": 0,
+        "definition": "Near the beginning of a day or period of time, or before the usual or expected time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "early"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🕰️",
+        "examples": [
+          {
+            "id": "o11vgiar6yasr07",
+            "text": "Jutro muszę wstać bardzo wcześnie.",
+            "textLang": "pl",
+            "translation": "Tomorrow I have to get up very early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wcześnie",
+            "matchedTranslationForm": "early"
+          },
+          {
+            "id": "ofs2n3pup0yjyu2",
+            "text": "Jest jeszcze za wcześnie na takie decyzje.",
+            "textLang": "pl",
+            "translation": "It is still too early for such decisions.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wcześnie",
+            "matchedTranslationForm": "early"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wcześnie",
+    "lemma": "wcześnie",
+    "reading": null,
     "ipa": "/ˈfʂɛɕ.ɲɛ/",
     "pos": "adv",
     "gender": null,
@@ -160,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈfʂɛɕ.ɲɛ/",
+        "why": "Missing the affricate /t͡ʂ/ from 'cz'; should be /ˈft͡ʂɛɕ.ɲɛ/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use it to describe when an action happens, not as a standalone",
+        "why": "False: 'Jest wcześnie' (It is early) is a standard standalone predicate in Polish."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses are shades of the single meaning 'early' and do not need splitting."
+      }
+    ],
+    "growth": 1.284
   }
 }

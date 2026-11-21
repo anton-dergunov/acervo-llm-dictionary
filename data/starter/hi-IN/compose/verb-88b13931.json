@@ -68,6 +68,139 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to take; to receive; to buy",
+    "primaryGloss": "to take",
+    "emotion": "helpful and ready, reaching out a hand to receive something",
+    "notes": [
+      "Irregular in the perfective (लिया, लिए, ली, लीं) and polite imperative (लीजिए). Takes ने in perfective tenses.",
+      "Often used after another verb's stem (e.g. रख लेना, पढ़ लेना) to show completeness or that the action benefits the subject."
+    ],
+    "senses": [
+      {
+        "id": "5j7vp5aa7l3a02y",
+        "order": 0,
+        "definition": "To get hold of something, or to accept something offered.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to take",
+              "to accept",
+              "to receive"
+            ]
+          }
+        ],
+        "domain": "take",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "9azyof8jqntbm7a",
+            "text": "उसने मेज़ से किताब ली।",
+            "textLang": "hi",
+            "translation": "She took the book from the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ली",
+            "matchedTranslationForm": "took"
+          },
+          {
+            "id": "4rf2mlap56ztpyt",
+            "text": "उसने मेरा उपहार खुशी से ले लिया।",
+            "textLang": "hi",
+            "translation": "He happily accepted my gift.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and appreciative, pleased with the exchange",
+            "note": null,
+            "matchedForm": "ले लिया",
+            "matchedTranslationForm": "accepted"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "63jf32rzlw7olz1",
+        "order": 1,
+        "definition": "To buy or get something, such as food, clothes, or tickets.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to buy",
+              "to get",
+              "to have"
+            ]
+          }
+        ],
+        "domain": "buy",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "77rake59j8htxe8",
+            "text": "मैं बाज़ार से फल लेने जा रहा हूँ।",
+            "textLang": "hi",
+            "translation": "I am going to the market to buy fruit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and purposeful, heading out for a quick errand",
+            "note": null,
+            "matchedForm": "लेने",
+            "matchedTranslationForm": "to buy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "लेना",
+    "lemma": "लेना",
+    "reading": null,
+    "ipa": "/leː.nɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤲",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to take; to buy; to accept",
     "primaryGloss": "to take",
     "emotion": "helpful and ready, reaching out a hand to receive something",
@@ -203,5 +336,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "missing irregular perfective stems (लिया, लिए, ली, लीं) and polite imperative (लीजिए)"
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "senses 0 (take) and 2 (accept/receive) are shades of the same basic meaning"
+      }
+    ],
+    "growth": 1.032
   }
 }

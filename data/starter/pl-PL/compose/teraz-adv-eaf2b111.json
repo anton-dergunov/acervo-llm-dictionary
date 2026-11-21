@@ -68,6 +68,96 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "now; at the moment",
+    "primaryGloss": "now",
+    "emotion": null,
+    "notes": [
+      "Do not confuse with 'wtedy' (then, at that time), which refers to a moment in the past or future."
+    ],
+    "senses": [
+      {
+        "id": "3w1jxy9xwhg47tc",
+        "order": 0,
+        "definition": "At the present time or moment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "now",
+              "at the moment",
+              "currently"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "⌚",
+        "examples": [
+          {
+            "id": "jqbnuzfou5yrr6r",
+            "text": "Teraz jestem w domu, ale zaraz wychodzę.",
+            "textLang": "pl",
+            "translation": "I am at home now, but I am leaving soon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Teraz",
+            "matchedTranslationForm": "now"
+          },
+          {
+            "id": "cpnblgja5uy09wj",
+            "text": "Co teraz robisz?",
+            "textLang": "pl",
+            "translation": "What are you doing now?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "teraz",
+            "matchedTranslationForm": "now"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "teraz",
+    "lemma": "teraz",
+    "reading": null,
+    "ipa": "/ˈtɛ.ras/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⌚",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "now; at this moment",
     "primaryGloss": "now",
     "emotion": null,
@@ -141,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Teraz specifically refers to the present moment.",
+        "why": "Restates the definition without adding useful grammar or usage advice."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Co robisz teraz?",
+        "why": "Slightly marked word order; 'Co teraz robisz?' is much more natural in neutral speech."
+      }
+    ],
+    "growth": 0.816
   }
 }

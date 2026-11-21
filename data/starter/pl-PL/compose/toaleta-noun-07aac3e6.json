@@ -58,6 +58,75 @@
     "headword": "toaleta",
     "lemma": "toaleta",
     "reading": null,
+    "ipa": "/tɔ.aˈlɛ.ta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚽",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "toilet; restroom",
+    "primaryGloss": "toilet",
+    "emotion": "matter-of-fact and necessary, a quick and functional errand",
+    "notes": [
+      "The standard, polite word used in public places. In a home, people often ask for 'łazienka' (bathroom), whereas 'toaleta' or colloquial 'ubikacja' refers more specifically to the toilet room."
+    ],
+    "senses": [
+      {
+        "id": "ou9opjgpl46d1l6",
+        "order": 0,
+        "definition": "A room with a toilet, especially in a public building, or the toilet itself.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "toilet",
+              "restroom",
+              "washroom"
+            ]
+          }
+        ],
+        "domain": "room",
+        "emoji": "🚻",
+        "examples": [
+          {
+            "id": "ztupa0v4kxkshoq",
+            "text": "Przepraszam, gdzie jest toaleta?",
+            "textLang": "pl",
+            "translation": "Excuse me, where is the restroom?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "toaleta",
+            "matchedTranslationForm": "restroom"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "toaleta",
+    "lemma": "toaleta",
+    "reading": null,
     "ipa": "/tɔˈa.lɛ.ta/",
     "pos": "noun",
     "gender": "feminine",
@@ -117,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/tɔˈa.lɛ.ta/",
+        "why": "Wrong stress placement; Polish stresses the penultimate syllable /tɔ.aˈlɛ.ta/."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Toaleta is the standard word for both the room and the fixture",
+        "why": "In Polish, 'toaleta' primarily means the room; the fixture is usually 'sedes' or 'muszla klozetowa'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "For a learner, the restroom and toilet are a single everyday sense, with room primary."
+      }
+    ],
+    "growth": 0.72
   }
 }

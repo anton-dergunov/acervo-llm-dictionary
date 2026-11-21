@@ -58,6 +58,117 @@
     "headword": "وَصَلَ",
     "lemma": "وَصَلَ",
     "reading": null,
+    "ipa": "/ˈwasˤala/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to arrive, to reach; to connect",
+    "primaryGloss": "to arrive",
+    "emotion": "a sense of relief and accomplishment at finishing a journey",
+    "notes": [
+      "The initial و (wāw) drops in the present tense: يَصِلُ (yaṣilu).Takes إِلَى (ʾilā) or a direct object for the destination.",
+      "When meaning 'to connect', the present tense is also يَصِلُ (yaṣilu), and it takes بـِ (bi-) for the thing connected to."
+    ],
+    "senses": [
+      {
+        "id": "6vs4pdbf1ye3gh7",
+        "order": 0,
+        "definition": "To reach a place at the end of a journey.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to arrive",
+              "to reach"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "t9sy02c3unbzpv3",
+            "text": "وَصَلَ الْقِطَارُ إِلَى الْمَحَطَّةِ.",
+            "textLang": "ar",
+            "translation": "The train arrived at the station.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact observation of a scheduled event",
+            "note": null,
+            "matchedForm": "وَصَلَ",
+            "matchedTranslationForm": "arrived"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "b3ffdnxwocj1ay0",
+        "order": 1,
+        "definition": "To join or link two things together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to connect",
+              "to join",
+              "to link"
+            ]
+          }
+        ],
+        "domain": "connection",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "v692mgi7ldesidh",
+            "text": "وَصَلَ الجِسْرُ بَيْنَ المَدِينَتَيْنِ.",
+            "textLang": "ar",
+            "translation": "The bridge connected the two cities.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "وَصَلَ",
+            "matchedTranslationForm": "connected"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "وَصَلَ",
+    "lemma": "وَصَلَ",
+    "reading": null,
     "ipa": "/waˈsˤala/",
     "pos": "verb",
     "gender": null,
@@ -120,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/waˈsˤala/",
+        "why": "Stress in Arabic 3-light-syllable words falls on the first syllable: /ˈwasˤala/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used when someone finishes a journey to a location.",
+        "why": "Restates the definition without adding grammatical or usage value."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'يصل' which is the present tense form.",
+        "why": "Weirdly warns not to confuse a verb with its own irregular present form."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common transitive sense 'to connect, join, link'."
+      }
+    ],
+    "growth": 2.038
   }
 }

@@ -68,6 +68,116 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "healthy; wholesome",
+    "primaryGloss": "healthy",
+    "emotion": "energetic and full of vitality, feeling strong and well",
+    "notes": [
+      "Often heard in the set phrase 'sano e salvo' (safe and sound): Sono arrivati sani e salvi (They arrived safe and sound)."
+    ],
+    "senses": [
+      {
+        "id": "4xwzcvynzxjk1qt",
+        "order": 0,
+        "definition": "In good physical or mental health, not sick or damaged.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "well",
+              "sound"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "clghh8wy5b1vkaq",
+            "text": "Il medico ha detto che il bambino è sano e forte.",
+            "textLang": "it",
+            "translation": "The doctor said that the child is healthy and strong.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sano",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xtfl072vpnuvmk1",
+        "order": 1,
+        "definition": "Good for your health and body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "healthy",
+              "wholesome"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "🥗",
+        "examples": [
+          {
+            "id": "3gaqruqfdau8116",
+            "text": "Cerco di mangiare cibi sani e di fare sport.",
+            "textLang": "it",
+            "translation": "I try to eat healthy foods and play sports.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sani",
+            "matchedTranslationForm": "healthy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "sano",
+    "lemma": "sano",
+    "reading": null,
+    "ipa": "/ˈsa.no/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "healthy; wholesome; safe and sound",
     "primaryGloss": "healthy",
     "emotion": "energetic and full of vitality, feeling strong and well",
@@ -163,5 +273,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "healthy; wholesome; safe and sound",
+        "why": "Includes 'safe and sound' (sano e salvo), which is not covered in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for people who are in good physical shape, as well as",
+        "why": "Merely repeats the two senses given right below."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Dopo tante settimane di riposo, ora mi sento sano e forte.",
+        "why": "'Mi sento sano' is unidiomatic in Italian; natives say 'mi sento bene' or 'sono sano'."
+      }
+    ],
+    "growth": 0.727
   }
 }

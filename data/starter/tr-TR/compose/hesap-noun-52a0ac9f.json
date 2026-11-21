@@ -74,6 +74,156 @@
     "primaryGloss": "bill",
     "emotion": null,
     "notes": [
+      "The final 'p' changes to 'b' when a vowel suffix is added: 'hesabı' (the bill), 'hesabım' (my account).",
+      "To ask for the bill at a restaurant, you can say 'Hesap, lütfen!'."
+    ],
+    "senses": [
+      {
+        "id": "umnj1z2vvtjmsq6",
+        "order": 0,
+        "definition": "A statement of how much you must pay for food and drinks at a restaurant or cafe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bill",
+              "check"
+            ]
+          }
+        ],
+        "domain": "restaurant",
+        "emoji": "🧾",
+        "examples": [
+          {
+            "id": "2y4zs12234a27zz",
+            "text": "Garson, hesabı getirir misiniz?",
+            "textLang": "tr",
+            "translation": "Waiter, could you bring the bill?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and ready to leave after finishing the meal",
+            "note": null,
+            "matchedForm": "hesabı",
+            "matchedTranslationForm": "bill"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ksuvnc88jzc28ey",
+        "order": 1,
+        "definition": "An arrangement with a bank to hold your money, or a personal profile on a website or app.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "account"
+            ]
+          }
+        ],
+        "domain": "banking, internet",
+        "emoji": "💳",
+        "examples": [
+          {
+            "id": "icm73fgxxiiafo1",
+            "text": "Bankada yeni bir hesap açtım.",
+            "textLang": "tr",
+            "translation": "I opened a new account at the bank.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and practical about managing money",
+            "note": null,
+            "matchedForm": "hesap",
+            "matchedTranslationForm": "account"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i4k8210sa6ztsow",
+        "order": 2,
+        "definition": "The act or result of working out an amount using numbers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "calculation",
+              "computation"
+            ]
+          }
+        ],
+        "domain": "calculation",
+        "emoji": "🔢",
+        "examples": [
+          {
+            "id": "1jbcfsldp6f4lvp",
+            "text": "Bu işte bir yanlış hesap var.",
+            "textLang": "tr",
+            "translation": "There is a miscalculation in this matter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "puzzled and double-checking the numbers",
+            "note": null,
+            "matchedForm": "hesap",
+            "matchedTranslationForm": "miscalculation"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "hesap",
+    "lemma": "hesap",
+    "reading": null,
+    "ipa": "/heˈsap/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bill; check; account; calculation",
+    "primaryGloss": "bill",
+    "emotion": null,
+    "notes": [
       "Hesap is used both for the restaurant bill and for bank or math accounts.",
       "When you want to pay at a restaurant, you typically call out 'Hesap, lütfen!'."
     ],
@@ -203,5 +353,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Hesap is used both for the restaurant bill and for bank or",
+        "why": "Restates the senses; misses the crucial consonant voicing rule (hesap -> hesabı)."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "An arrangement with a bank to keep your money safe.",
+        "why": "Too narrow; 'hesap' is equally used for user accounts on websites and social media."
+      }
+    ],
+    "growth": 1.097
   }
 }

@@ -72,6 +72,97 @@
     "primaryGloss": "tarde",
     "emotion": "calm and relaxed, winding down after a long day at work",
     "notes": [
+      "Cubre desde el final de la tarde (aproximadamente las 5 o 6 p. m.) hasta la hora de acostarse, por lo que en español se traduce como 'tarde' o 'noche' según la hora y el país.",
+      "Se usa con la preposición 'in' ('in the evening'), pero con 'on' si se especifica el día ('on Friday evening')."
+    ],
+    "senses": [
+      {
+        "id": "sr58pw5f2tsnwrv",
+        "order": 0,
+        "definition": "Parte final del día, que va desde el final de la tarde hasta el momento de ir a dormir.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tarde",
+              "noche",
+              "anochecer"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": "🌆",
+        "examples": [
+          {
+            "id": "0mv6b9jjwf66alm",
+            "text": "I like to read a book in the evening.",
+            "textLang": "en",
+            "translation": "Me gusta leer un libro por la tarde.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and cozy, enjoying a quiet moment at home",
+            "note": null,
+            "matchedForm": "evening",
+            "matchedTranslationForm": "tarde"
+          },
+          {
+            "id": "cjsvvmy894zny6r",
+            "text": "They went out for dinner on a cool autumn evening.",
+            "textLang": "en",
+            "translation": "Salieron a cenar en una fresca noche de otoño.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and social, looking forward to a nice meal out",
+            "note": null,
+            "matchedForm": "evening",
+            "matchedTranslationForm": "noche"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "evening",
+    "lemma": "evening",
+    "reading": null,
+    "ipa": "/ˈiːv.nɪŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌆",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "tarde; noche",
+    "primaryGloss": "tarde",
+    "emotion": "calm and relaxed, winding down after a long day at work",
+    "notes": [
       "Se usa para referirse a la última parte del día, desde que empieza a atardecer hasta que se hace de noche.",
       "A diferencia de 'afternoon', que cubre las horas después del mediodía, 'evening' empieza cuando el sol comienza a bajar."
     ],
@@ -160,5 +251,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses refer to the exact same time period in English, split only by Spanish translation."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para referirse a la última parte del día,",
+        "why": "Restates the definition without adding usage value; missing note on 'in the evening' vs 'on ... evening'."
+      }
+    ],
+    "growth": 1.018
   }
 }

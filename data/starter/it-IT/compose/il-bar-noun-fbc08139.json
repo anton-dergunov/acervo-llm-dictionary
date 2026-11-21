@@ -68,6 +68,97 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "café, coffee bar, bar",
+    "primaryGloss": "café",
+    "emotion": "warm and welcoming, inviting someone to grab a quick coffee",
+    "notes": [
+      "In Italy, a 'bar' is primarily a daytime café where people stop for an espresso and a pastry, though it also serves aperitifs and alcoholic drinks.",
+      "Invariable in the plural: 'i bar'."
+    ],
+    "senses": [
+      {
+        "id": "kwqt8a1juo81cfa",
+        "order": 0,
+        "definition": "A place where coffee, pastries, snacks, and alcoholic or non-alcoholic drinks are served at a counter or at tables.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "café",
+              "coffee bar",
+              "bar"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "du6jdj015yt0auv",
+            "text": "Prendiamo un caffè al bar prima di andare al lavoro.",
+            "textLang": "it",
+            "translation": "Let's grab a coffee at the café before going to work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and upbeat, suggesting a pleasant morning routine",
+            "note": null,
+            "matchedForm": "bar",
+            "matchedTranslationForm": "café"
+          },
+          {
+            "id": "z7l4w5tcbk1m7m5",
+            "text": "Venerdì sera andiamo al bar a bere una birra.",
+            "textLang": "it",
+            "translation": "On Friday night we're going to the bar to have a beer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "bar",
+            "matchedTranslationForm": "bar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il bar",
+    "lemma": "bar",
+    "reading": null,
+    "ipa": "/ˈbar/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "café, coffee bar; bar, pub",
     "primaryGloss": "café",
     "emotion": "warm and welcoming, inviting someone to grab a quick coffee",
@@ -161,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "[0] (café) A public establishment... [1] (drinks) An establishment licensed",
+        "why": "In Italian, 'bar' is a single concept serving both morning coffee and evening drinks."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention that 'bar' is invariable in the plural ('i bar')."
+      }
+    ],
+    "growth": 0.789
   }
 }

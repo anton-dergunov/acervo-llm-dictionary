@@ -58,6 +58,116 @@
     "headword": "no",
     "lemma": "no",
     "reading": null,
+    "ipa": "/ˈnɔ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "no; not; right?",
+    "primaryGloss": "no",
+    "emotion": null,
+    "notes": [
+      "Do not confuse 'no' with 'non'. Use 'no' on its own to answer a question or after a word for contrast ('Oggi no'), but use 'non' before a verb ('Non lo so')."
+    ],
+    "senses": [
+      {
+        "id": "pajs6xju9xoy8fc",
+        "order": 0,
+        "definition": "Used to give a negative answer, refuse, or disagree, or placed after a word to negate it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "no",
+              "not"
+            ]
+          }
+        ],
+        "domain": "refusal",
+        "emoji": "🙅",
+        "examples": [
+          {
+            "id": "r8dskytpvwfnaw7",
+            "text": "No, non posso venire stasera.",
+            "textLang": "it",
+            "translation": "No, I cannot come tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm but polite, setting a clear boundary",
+            "note": null,
+            "matchedForm": "No",
+            "matchedTranslationForm": "No"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1toyfnc3qdxmoww",
+        "order": 1,
+        "definition": "Used at the end of a statement to ask for confirmation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "right",
+              "isn't it",
+              "don't you"
+            ]
+          }
+        ],
+        "domain": "confirmation",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "uotk7nse23olopi",
+            "text": "Vieni anche tu alla festa, no?",
+            "textLang": "it",
+            "translation": "You're coming to the party too, right?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "no",
+            "matchedTranslationForm": "right"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "no",
+    "lemma": "no",
+    "reading": null,
     "ipa": "/nɔ/",
     "pos": "expression",
     "gender": null,
@@ -159,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Used before a verb to make a sentence negative.",
+        "why": "Confuses 'no' with 'non'. 'Non' goes before a verb; 'no' does not."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Io non mangio carne.",
+        "why": "Uses 'non', which is a different word from 'no' in Italian."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Used both to negate a verb ('Non lo so' - I don't know)",
+        "why": "Falsely states that 'no' is used to negate a verb, giving an example with 'non'."
+      }
+    ],
+    "growth": 1.379
   }
 }

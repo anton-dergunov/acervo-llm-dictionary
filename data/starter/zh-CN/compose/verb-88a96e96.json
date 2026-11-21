@@ -71,6 +71,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to smile; to laugh; to laugh at",
+    "primaryGloss": "smile",
+    "emotion": "warm and bright, sharing a genuine moment of joy",
+    "notes": [
+      "To specify 'to smile', use 微笑 (wēixiào); to specify 'to laugh out loud', use 大笑 (dàxiào).",
+      "When followed directly by a person or thing (笑某人), it means 'to laugh at' or 'to make fun of'."
+    ],
+    "senses": [
+      {
+        "id": "sl7iqirxyugunh7",
+        "order": 0,
+        "definition": "To smile or laugh when happy, amused, or being friendly.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "smile",
+              "laugh"
+            ]
+          }
+        ],
+        "domain": "expression",
+        "emoji": "😆",
+        "examples": [
+          {
+            "id": "95qc9y24ttz138i",
+            "text": "听到这个笑话大家都笑了。",
+            "textLang": "zh",
+            "translation": "Everyone laughed when they heard the joke.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "lighthearted and amused, sharing a good laugh with friends",
+            "note": null,
+            "matchedForm": "笑",
+            "matchedTranslationForm": "laughed"
+          },
+          {
+            "id": "jykvqhu9lxu455e",
+            "text": "她看着我笑了。",
+            "textLang": "zh",
+            "translation": "She looked at me and smiled.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "gentle and reassuring, remembering a kind encounter",
+            "note": null,
+            "matchedForm": "笑",
+            "matchedTranslationForm": "smiled"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7velodr3xwcmff9",
+        "order": 1,
+        "definition": "To laugh at or make fun of someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "laugh at",
+              "make fun of"
+            ]
+          }
+        ],
+        "domain": "mock",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "hx1e07gtfiwxlyb",
+            "text": "我的中文不好，请别笑我。",
+            "textLang": "zh",
+            "translation": "My Chinese isn't good, please don't laugh at me.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "笑",
+            "matchedTranslationForm": "laugh at"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "笑",
+    "lemma": "笑",
+    "reading": "xiào",
+    "ipa": "/ɕi̯au̯˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😄",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to smile; to laugh",
     "primaryGloss": "laugh",
     "emotion": "warm and bright, sharing a genuine moment of joy",
@@ -162,5 +294,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "笑 is one undifferentiated concept in Chinese covering both smiling and laughing."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common transitive sense 'to laugh at / make fun of' (笑我)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "笑 can mean both to smile and to laugh, depending on the context.",
+        "why": "Merely restates the glosses without adding usage guidance."
+      }
+    ],
+    "growth": 1.372
   }
 }

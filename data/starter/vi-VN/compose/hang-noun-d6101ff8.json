@@ -68,6 +68,159 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "goods; row, line; shop, stall",
+    "primaryGloss": "goods",
+    "emotion": "busy and bustling, sorting through items on display",
+    "notes": [
+      "Do not confuse with 'hãng', which means a company, brand, or firm (e.g. 'hãng hàng không' — airline)."
+    ],
+    "senses": [
+      {
+        "id": "v5cqy78o2efcgb6",
+        "order": 0,
+        "definition": "Things that are made to be bought and sold.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "goods",
+              "merchandise",
+              "items"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🛍️",
+        "examples": [
+          {
+            "id": "7oyj5pdsh4zlb1v",
+            "text": "Cửa hàng này bán nhiều hàng giảm giá.",
+            "textLang": "vi",
+            "translation": "This shop sells many discounted goods.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and pointing out a good bargain",
+            "note": null,
+            "matchedForm": "hàng",
+            "matchedTranslationForm": "goods"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "35t2il48yjro4qc",
+        "order": 1,
+        "definition": "A number of people or things arranged in a line.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "row",
+              "line",
+              "queue"
+            ]
+          }
+        ],
+        "domain": "arrangement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "c7szxfm7ef45s8y",
+            "text": "Mọi người xếp thành một hàng dài trước quầy.",
+            "textLang": "vi",
+            "translation": "Everyone formed a long line in front of the counter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "patient and observant while waiting for a turn",
+            "note": null,
+            "matchedForm": "hàng",
+            "matchedTranslationForm": "line"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x07w54w9cld5zo1",
+        "order": 2,
+        "definition": "A small shop, market stall, or street vendor.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shop",
+              "stall",
+              "stand"
+            ]
+          }
+        ],
+        "domain": "places",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "5yq0cjbno2790zg",
+            "text": "Bà ấy mở một hàng nước nhỏ ở đầu ngõ.",
+            "textLang": "vi",
+            "translation": "She opened a small drink stall at the end of the alley.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hàng",
+            "matchedTranslationForm": "stall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "hàng",
+    "lemma": "hàng",
+    "reading": null,
+    "ipa": "/haːŋ˨˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛍️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "goods; merchandise; queue; row",
     "primaryGloss": "goods",
     "emotion": "busy and bustling, sorting through items on display",
@@ -204,5 +357,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 1 (line/queue) and 2 (row/line) are both 'a row or line' and should merge."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense of 'shop, stall, or vendor' (as in 'hàng phở', 'cửa hàng')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "The word 'hàng' is highly versatile in Vietnamese, shifting meaning based on context.",
+        "why": "Pure filler restating that the word has multiple senses."
+      }
+    ],
+    "growth": 0.79
   }
 }

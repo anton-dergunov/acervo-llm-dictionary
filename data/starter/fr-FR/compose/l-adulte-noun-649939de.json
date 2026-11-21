@@ -72,6 +72,74 @@
     "primaryGloss": "adult",
     "emotion": "matter-of-fact and calm, describing a person who has reached full growth",
     "notes": [
+      "Has the same form in the masculine and feminine ('un adulte', 'une adulte'), and is also used as an adjective ('un chat adulte')."
+    ],
+    "senses": [
+      {
+        "id": "jxde51tfwse0zmg",
+        "order": 0,
+        "definition": "A person or animal that is fully grown.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "adult",
+              "grown-up"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "🧑",
+        "examples": [
+          {
+            "id": "v2h9umm8j0841il",
+            "text": "Il faut être un adulte pour signer ce document.",
+            "textLang": "fr",
+            "translation": "You need to be an adult to sign this document.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and firm, explaining a rule",
+            "note": null,
+            "matchedForm": "adulte",
+            "matchedTranslationForm": "adult"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "l'adulte",
+    "lemma": "adulte",
+    "reading": null,
+    "ipa": "/a.dylt/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "adult; grown-up",
+    "primaryGloss": "adult",
+    "emotion": "matter-of-fact and calm, describing a person who has reached full growth",
+    "notes": [
       "Adulte can function as both a noun (un/une adulte) and an adjective. When used as a noun, the same form serves for both masculine and feminine, though the article changes (un adulte / une adulte)."
     ],
     "senses": [
@@ -160,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(nature) An animal or plant that is fully grown.",
+        "why": "Shades of one meaning; moreover, the example uses 'adulte' as an adjective, not a noun."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cet arbre adulte produit des fruits chaque année.",
+        "why": "'Adulte' is used here as an adjective modifying 'arbre', whereas the entry is a noun."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "adult, fully grown",
+        "why": "'Fully grown' is an adjective, not a noun gloss."
+      }
+    ],
+    "growth": 0.555
   }
 }

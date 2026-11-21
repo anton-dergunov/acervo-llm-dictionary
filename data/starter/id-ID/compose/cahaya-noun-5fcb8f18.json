@@ -58,6 +58,75 @@
     "headword": "cahaya",
     "lemma": "cahaya",
     "reading": null,
+    "ipa": "/tʃaˈha.ja/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "light; glow",
+    "primaryGloss": "light",
+    "emotion": "a sense of wonder and clarity, soft and illuminating",
+    "notes": [
+      "Refers to the light or brightness itself (often from the sun, moon, fire, or a lamp), whereas 'lampu' refers to an electric light fixture or bulb, and 'sinar' refers to rays or beams of light."
+    ],
+    "senses": [
+      {
+        "id": "pvtef6uo42t9djh",
+        "order": 0,
+        "definition": "The brightness from the sun, fire, or a lamp that makes it possible to see.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "light",
+              "brightness",
+              "glow"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "6q3ifcl7gkm9lr0",
+            "text": "Cahaya matahari masuk melalui jendela.",
+            "textLang": "id",
+            "translation": "Sunlight comes in through the window.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and peaceful, observing the morning light",
+            "note": null,
+            "matchedForm": "Cahaya",
+            "matchedTranslationForm": "Sunlight"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "cahaya",
+    "lemma": "cahaya",
+    "reading": null,
     "ipa": "/tʃaˈhaja/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A narrow beam or ray of light.",
+        "why": "Shades of the same meaning; 'ray/beam' is usually 'berkas/sinar cahaya', not 'cahaya' alone."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Satu cahaya kecil muncul di kegelapan.",
+        "why": "Unnatural phrasing and count; 'cahaya' is uncountable and does not mean 'beam' by itself."
+      }
+    ],
+    "growth": 0.622
   }
 }

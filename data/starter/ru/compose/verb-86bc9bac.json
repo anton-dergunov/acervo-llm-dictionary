@@ -68,6 +68,137 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to give; to let",
+    "primaryGloss": "to give",
+    "emotion": "generous and outgoing, reaching out to offer something to someone",
+    "notes": [
+      "Imperfective; the perfective pair is дать.",
+      "Present tense drops -ва-: я даю, ты даёшь, они дают. The imperative давай / давайте is very commonly used to mean 'let's'."
+    ],
+    "senses": [
+      {
+        "id": "mb157vrb3j6bl1i",
+        "order": 0,
+        "definition": "To hand, provide, or offer something to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to give",
+              "to hand over"
+            ]
+          }
+        ],
+        "domain": "giving",
+        "emoji": "🤲",
+        "examples": [
+          {
+            "id": "l1c341vlncprb9f",
+            "text": "Бабушка всегда даёт детям конфеты.",
+            "textLang": "ru",
+            "translation": "Grandma always gives candy to the children.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "даёт",
+            "matchedTranslationForm": "gives"
+          },
+          {
+            "id": "rwd62kimqjlcnfr",
+            "text": "Он любит давать советы.",
+            "textLang": "ru",
+            "translation": "He likes to give advice.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "давать",
+            "matchedTranslationForm": "give"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uke9a9kzy0o6e0p",
+        "order": 1,
+        "definition": "To allow or permit someone to do something (with dative + infinitive).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to let",
+              "to allow"
+            ]
+          }
+        ],
+        "domain": "permission",
+        "emoji": "✅",
+        "examples": [
+          {
+            "id": "cvlns7mdb9drugd",
+            "text": "Мама не даёт мне смотреть телевизор поздно.",
+            "textLang": "ru",
+            "translation": "Mom does not let me watch TV late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and slightly rebellious, complaining about rules",
+            "note": null,
+            "matchedForm": "даёт",
+            "matchedTranslationForm": "let"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "давать",
+    "lemma": "давать",
+    "reading": null,
+    "ipa": "/dɐˈvatʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to give; to hand over; to allow",
     "primaryGloss": "give",
     "emotion": "generous and outgoing, reaching out to offer something to someone",
@@ -161,5 +292,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Он всегда любит давать советы.",
+        "why": "Definition says 'hand something to someone' (physical), but the example is 'give advice' (abstract)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular present tense stem (даю, даёшь) and everyday imperative forms (давай/давайте for 'let's')."
+      }
+    ],
+    "growth": 1.095
   }
 }

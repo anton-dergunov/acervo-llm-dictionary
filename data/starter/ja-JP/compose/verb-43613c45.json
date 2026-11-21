@@ -59,6 +59,116 @@
     "language": "ja",
     "headword": "聞く",
     "lemma": "聞く",
+    "reading": "きく",
+    "ipa": "/kʲikɯ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👂",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to listen; to hear; to ask",
+    "primaryGloss": "to listen",
+    "emotion": "attentive and engaged, waiting to catch every nuance of what is said",
+    "notes": [
+      "A godan verb (聞かない, 聞きます; past form 聞いた). Sometimes written 聴く when listening attentively (as to music), or 訊く when asking a question.",
+      "In the 'ask' sense, the person asked takes に or から (e.g., 先生に聞く)."
+    ],
+    "senses": [
+      {
+        "id": "bop3xaqo5auij8n",
+        "order": 0,
+        "definition": "To pay attention to a sound, music, or speech, or to perceive a sound or piece of news.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to listen",
+              "to hear"
+            ]
+          }
+        ],
+        "domain": "perception",
+        "emoji": "🎧",
+        "examples": [
+          {
+            "id": "i1eu483o9gec25e",
+            "text": "よく音楽を聞きます。",
+            "textLang": "ja",
+            "translation": "I often listen to music.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "聞きます",
+            "matchedTranslationForm": "listen"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i99607qt3l7irer",
+        "order": 1,
+        "definition": "To ask someone a question in order to get information.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ask",
+              "to inquire"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "kxze1owmqevlffb",
+            "text": "道がわからないので、駅員に聞きました。",
+            "textLang": "ja",
+            "translation": "I didn't know the way, so I asked the station attendant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and slightly hesitant, needing help from a stranger",
+            "note": null,
+            "matchedForm": "聞きました",
+            "matchedTranslationForm": "asked"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "聞く",
+    "lemma": "聞く",
     "reading": null,
     "ipa": "/kʲikɯ/",
     "pos": "verb",
@@ -163,5 +273,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (きく) for a headword containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To pay attention to a sound or to what someone is saying.",
+        "why": "Only defines active listening, omitting 'to hear', which the glosses and notes include."
+      }
+    ],
+    "growth": 0.88
   }
 }

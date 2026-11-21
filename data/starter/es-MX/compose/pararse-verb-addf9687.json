@@ -72,6 +72,116 @@
     "primaryGloss": "stand up",
     "emotion": "assertive and steady, ready to move",
     "notes": [
+      "In Mexico and most of Latin America, 'pararse' is the everyday way to say 'to stand up' (getting onto your feet).",
+      "In Spain, 'ponerse de pie' or 'levantarse' is used for standing up, while 'pararse' mainly means to stop moving."
+    ],
+    "senses": [
+      {
+        "id": "kjp0awq5m874b22",
+        "order": 0,
+        "definition": "To rise from a sitting or lying position onto one's feet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stand up",
+              "get up"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "tbg1fv64isuznyg",
+            "text": "Tiene que pararse para estirar las piernas.",
+            "textLang": "es",
+            "translation": "He has to stand up to stretch his legs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pararse",
+            "matchedTranslationForm": "stand up"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i46q56o15j71mlz",
+        "order": 1,
+        "definition": "To cease moving or come to a halt.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stop",
+              "halt"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🛑",
+        "examples": [
+          {
+            "id": "59zzr94zn8q55kk",
+            "text": "El carro va a pararse en la esquina.",
+            "textLang": "es",
+            "translation": "The car is going to stop at the corner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pararse",
+            "matchedTranslationForm": "stop"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pararse",
+    "lemma": "pararse",
+    "reading": null,
+    "ipa": "/paˈɾaɾse/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": "es-MX",
+    "emoji": "🧍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to stand up; to stop",
+    "primaryGloss": "stand up",
+    "emotion": "assertive and steady, ready to move",
+    "notes": [
       "In Mexico and many other parts of Latin America, 'pararse' is the standard way to say 'to stand up' (getting up onto your feet).",
       "In Spain and some other regions, 'levantarse' is more common for standing up, while 'pararse' usually means to stop moving or to halt."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tengo que pararse para estirar las piernas.",
+        "why": "Ungrammatical reflexive pronoun agreement: 'Tengo que' (1st person) requires 'pararme', not 'pararse'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "El carro se va a pararse en la esquina.",
+        "why": "Ungrammatical doubled clitic pronoun: 'se va a pararse' must be 'se va a parar' or 'va a pararse'."
+      }
+    ],
+    "growth": 0.879
   }
 }

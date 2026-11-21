@@ -70,6 +70,74 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "to pay",
+    "primaryGloss": "pay",
+    "emotion": "ready to hand over the money, practical and routine",
+    "notes": [
+      "A separable verb (离合词): words like 了 (le) or an indirect object go between 付 and 钱, as in 付了钱 (paid) or 付给他钱 (pay him)."
+    ],
+    "senses": [
+      {
+        "id": "k4zo46y6kmcfw0p",
+        "order": 0,
+        "definition": "To give money for goods or services.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay",
+              "pay money"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "osm9a7rz35035vv",
+            "text": "请先付钱，再拿咖啡。",
+            "textLang": "zh",
+            "translation": "Please pay first, then take your coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "付钱",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "付钱",
+    "lemma": "付钱",
+    "reading": "fù qián",
+    "ipa": "/fu˥˩ tɕʰi̯ɛn˧˥/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "to pay money",
     "primaryGloss": "pay",
     "emotion": "ready to hand over the money, practical and routine",
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "you can insert other words between 付 and 钱, such as 付现金",
+        "why": "付现金 replaces 钱 rather than inserting words between 付 and 钱."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我在买咖啡以后付钱。",
+        "why": "Unnatural Chinese grammar (在...以后 without aspect or modal) and illogical ('pay after buying')."
+      }
+    ],
+    "growth": 1.005
   }
 }

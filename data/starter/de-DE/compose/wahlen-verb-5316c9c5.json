@@ -68,6 +68,157 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to choose; to vote; to dial",
+    "primaryGloss": "choose",
+    "emotion": "thoughtful and deliberate, taking a moment to consider the options",
+    "notes": [
+      "For everyday picking out of items (like a gift or clothes), 'aussuchen' is more common; 'wählen' sounds slightly more formal or is used for options on a menu or list.",
+      "Unlike English 'vote for', 'wählen' takes a direct accusative object without a preposition: 'wen wählst du?' (who are you voting for?)."
+    ],
+    "senses": [
+      {
+        "id": "vfs0cnriz1tjhmo",
+        "order": 0,
+        "definition": "To decide which option you want from several possibilities.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "choose",
+              "select",
+              "pick"
+            ]
+          }
+        ],
+        "domain": "choice",
+        "emoji": "👆",
+        "examples": [
+          {
+            "id": "533lm6acy8058gy",
+            "text": "Sie können zwischen zwei Gerichten wählen.",
+            "textLang": "de",
+            "translation": "You can choose between two dishes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wählen",
+            "matchedTranslationForm": "choose"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ev22pbmdrkjec3x",
+        "order": 1,
+        "definition": "To cast a ballot for a candidate or party in an election.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "vote",
+              "elect"
+            ]
+          }
+        ],
+        "domain": "politics",
+        "emoji": "🗳️",
+        "examples": [
+          {
+            "id": "c6cp85kk5bx9wnp",
+            "text": "Die Bürger wählen am Sonntag einen neuen Bürgermeister.",
+            "textLang": "de",
+            "translation": "The citizens will vote for a new mayor on Sunday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and civic-minded, describing a public process",
+            "note": null,
+            "matchedForm": "wählen",
+            "matchedTranslationForm": "vote"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5trkwuyfhn2pa6j",
+        "order": 2,
+        "definition": "To enter a telephone number in order to make a call.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dial"
+            ]
+          }
+        ],
+        "domain": "telephone",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "vgciird3kig5i22",
+            "text": "Bei einem Notfall musst du die 112 wählen.",
+            "textLang": "de",
+            "translation": "In an emergency, you have to dial 112.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wählen",
+            "matchedTranslationForm": "dial"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "wählen",
+    "lemma": "wählen",
+    "reading": null,
+    "ipa": "/ˈvɛːlən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗳️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to choose; to select; to vote",
     "primaryGloss": "choose",
     "emotion": "thoughtful and deliberate, taking a moment to consider the options",
@@ -161,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'to dial (a phone number)'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'wählen' when you are picking something out of a set",
+        "why": "Both notes merely repeat the definitions without adding usage or grammar help."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Du kannst dir ein Geschenk wählen.",
+        "why": "With reflexive 'dir', 'aussuchen' is idiomatic; 'wählen' works better for menus or courses."
+      }
+    ],
+    "growth": 1.605
   }
 }

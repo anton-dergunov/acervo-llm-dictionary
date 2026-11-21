@@ -72,6 +72,114 @@
     "primaryGloss": "meat",
     "emotion": "a simple, utilitarian focus on what is for dinner, completely matter-of-fact",
     "notes": [
+      "To specify the animal, place its name before 肉: 牛肉 (beef), 鸡肉 (chicken), 猪肉 (pork). In everyday cooking, 肉 by itself often defaults to pork."
+    ],
+    "senses": [
+      {
+        "id": "ql84sgrrre3hg43",
+        "order": 0,
+        "definition": "The flesh of animals eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "meat"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🥩",
+        "examples": [
+          {
+            "id": "dtgak2o3m9ww0uu",
+            "text": "我今天不想吃肉。",
+            "textLang": "zh",
+            "translation": "I don't want to eat meat today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a little tired of the usual, looking for a change in diet",
+            "note": null,
+            "matchedForm": "肉",
+            "matchedTranslationForm": "meat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "daqn66aobs69lkz",
+        "order": 1,
+        "definition": "The soft part of the body of a person or animal, or the edible pulp of a fruit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flesh",
+              "pulp"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "iahvf4fwebzhpd1",
+            "text": "这个西瓜的肉很甜。",
+            "textLang": "zh",
+            "translation": "The flesh of this watermelon is very sweet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "肉",
+            "matchedTranslationForm": "flesh"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "肉",
+    "lemma": "肉",
+    "reading": "ròu",
+    "ipa": "/ʐou̯˥˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥩",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "meat; flesh",
+    "primaryGloss": "meat",
+    "emotion": "a simple, utilitarian focus on what is for dinner, completely matter-of-fact",
+    "notes": [
       "When talking about food, '肉' is used broadly for any kind of meat except for fish, which is usually '鱼'.",
       "If you need to specify the animal, place it before the character: '牛肉' (beef) or '猪肉' (pork)."
     ],
@@ -161,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 肉 by itself often defaults to pork (猪肉) in everyday cooking."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "他身上有很多肉。 — He has a lot of flesh on his body.",
+        "why": "Calqued translation; 身上有肉 idioms mean being plump/meaty, or use a clearer example for flesh/pulp."
+      }
+    ],
+    "growth": 0.944
   }
 }

@@ -71,6 +71,115 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "bank; stool, bench",
+    "primaryGloss": "bank",
+    "emotion": "matter-of-fact and ordinary, like pointing out a building or a seat",
+    "notes": [
+      "In Mexico, a raised seat for one person without a backrest is 'el banco' (stool), whereas a long park bench is usually called 'la banca'."
+    ],
+    "senses": [
+      {
+        "id": "aci859syzbs3sp3",
+        "order": 0,
+        "definition": "A financial institution where people keep, deposit, or borrow money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bank"
+            ]
+          }
+        ],
+        "domain": "finance",
+        "emoji": "🏦",
+        "examples": [
+          {
+            "id": "vxg3j2vesghl48y",
+            "text": "Necesito ir al banco para retirar algo de efectivo.",
+            "textLang": "es",
+            "translation": "I need to go to the bank to withdraw some cash.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and purposeful, like someone running a quick errand",
+            "note": null,
+            "matchedForm": "banco",
+            "matchedTranslationForm": "bank"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ps4un56436jeoj9",
+        "order": 1,
+        "definition": "A seat without a backrest or arms, typically for one person, or a simple wooden bench.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stool",
+              "bench"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "mbw580nd5iq5w1h",
+            "text": "Se sentó en un banco alto frente a la barra de la cocina.",
+            "textLang": "es",
+            "translation": "He sat on a high stool in front of the kitchen counter.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "banco",
+            "matchedTranslationForm": "stool"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el banco",
+    "lemma": "banco",
+    "reading": null,
+    "ipa": "/ˈbaŋko/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏦",
+    "topics": [
+      "City",
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "bank; bench",
     "primaryGloss": "bank",
     "emotion": "matter-of-fact and ordinary, like pointing out a building or a seat",
@@ -162,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A long seat for several people, usually made of wood or metal, found in parks",
+        "why": "In Mexico, a park bench is 'la banca'; 'el banco' is a stool."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "The physical object meaning (a bench) is common in parks",
+        "why": "Restates the definition and is false for Mexican Spanish ('la banca' is used)."
+      }
+    ],
+    "growth": 0.905
   }
 }

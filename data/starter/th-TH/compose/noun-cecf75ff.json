@@ -58,6 +58,75 @@
     "headword": "เก้าอี้",
     "lemma": "เก้าอี้",
     "reading": null,
+    "ipa": "/kâw.ʔîː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "chair; stool",
+    "primaryGloss": "chair",
+    "emotion": "a sense of settling into a space to rest or work",
+    "notes": [
+      "Counted with the classifier ตัว. Unlike English 'chair', เก้าอี้ is also used for backless stools."
+    ],
+    "senses": [
+      {
+        "id": "0ul0grc3qprjqjt",
+        "order": 0,
+        "definition": "A piece of furniture for one person to sit on, with or without a back.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chair",
+              "stool",
+              "seat"
+            ]
+          }
+        ],
+        "domain": "furniture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "1qb0v3bnvhf0rpe",
+            "text": "เชิญนั่งบนเก้าอี้ครับ",
+            "textLang": "th",
+            "translation": "Please have a seat on the chair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "เก้าอี้",
+            "matchedTranslationForm": "chair"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เก้าอี้",
+    "lemma": "เก้าอี้",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -96,5 +165,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "It does not include backless stools or benches, which have their own",
+        "why": "False: เก้าอี้ applies to stools (เก้าอี้กลม/เก้าอี้บาร์) and benches (เก้าอี้ยาว) as well."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A seat for one person, with a back.",
+        "why": "Too restrictive; in Thai, เก้าอี้ does not need to have a back."
+      }
+    ],
+    "growth": 1.056
   }
 }

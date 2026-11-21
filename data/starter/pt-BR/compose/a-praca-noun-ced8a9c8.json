@@ -72,6 +72,75 @@
     "primaryGloss": "square",
     "emotion": "relaxed and sunny, sitting on a park bench watching people walk by",
     "notes": [
+      "Common in compound terms for public areas, especially 'praça de alimentação' (food court) and 'praça de pedágio' (toll plaza)."
+    ],
+    "senses": [
+      {
+        "id": "kyipzjwk2ehkjkn",
+        "order": 0,
+        "definition": "An open public area in a town or city, usually with trees, benches, or walkways.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "square",
+              "plaza",
+              "town square"
+            ]
+          }
+        ],
+        "domain": "city",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "he434rxaeqhwy0k",
+            "text": "As crianças brincam na praça perto de casa.",
+            "textLang": "pt",
+            "translation": "The children play in the square near home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and warm, watching kids run around in the afternoon sun",
+            "note": null,
+            "matchedForm": "praça",
+            "matchedTranslationForm": "square"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a praça",
+    "lemma": "praça",
+    "reading": null,
+    "ipa": "/ˈpɾa.sɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "square; plaza",
+    "primaryGloss": "square",
+    "emotion": "relaxed and sunny, sitting on a park bench watching people walk by",
+    "notes": [
       "Not to be confused with 'lugar' (place in general). 'Praça' specifically refers to an open public space in a city, usually with trees, benches, or a monument."
     ],
     "senses": [
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A public market or marketplace.",
+        "why": "False friend with Spanish 'plaza'; in Brazil 'praça' does not mean fruit market."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Not to be confused with 'lugar' (place in general).",
+        "why": "Restates the definition; English speakers do not confuse 'praça' with 'lugar'."
+      }
+    ],
+    "growth": 0.669
   }
 }

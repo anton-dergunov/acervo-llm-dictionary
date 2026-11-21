@@ -72,6 +72,74 @@
     "primaryGloss": "chef",
     "emotion": "professional and focused, taking pride in creating a perfect dish",
     "notes": [
+      "Refers only to someone who cooks as a profession, counted with 个 (gè) or 位 (wèi, polite). For someone who cooks at home, say 做饭的人 (person who cooks)."
+    ],
+    "senses": [
+      {
+        "id": "4z3lbebm12pigbl",
+        "order": 0,
+        "definition": "A person whose job is to prepare and cook food in a restaurant or hotel.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "chef",
+              "cook"
+            ]
+          }
+        ],
+        "domain": "profession",
+        "emoji": "👨‍🍳",
+        "examples": [
+          {
+            "id": "k1hxlpadt812fmr",
+            "text": "这家餐厅的厨师很有名。",
+            "textLang": "zh",
+            "translation": "The chef at this restaurant is very famous.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "admiring and appreciative, recommending a great place to eat",
+            "note": null,
+            "matchedForm": "厨师",
+            "matchedTranslationForm": "chef"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "厨师",
+    "lemma": "厨师",
+    "reading": "chú shī",
+    "ipa": "/ʈʂʰu˧˥ ʂɻ̩˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍🍳",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "chef; cook",
+    "primaryGloss": "chef",
+    "emotion": "professional and focused, taking pride in creating a perfect dish",
+    "notes": [
       "Use 厨师 for a professional chef who works in a restaurant. If you are talking about someone who cooks at home as a hobby or a family member, it is more natural to use 厨子 (which can be informal) or simply describe them by saying 做饭的人 (the person who cooks)."
     ],
     "senses": [
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʈʂʰu˧˥ ʂɻ̩˥/",
+        "why": "Wrong vowel in 厨: chú is /ʈʂʰu˧˥/, not retroflex /ʈʂʰɻ̩˧˥/, and 师 is /ʂʅ˥/ or /ʂɻ̩˥/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "cooking at home as a hobby or a family member... use 厨子",
+        "why": "厨子 also means a professional cook (old-fashioned/informal), not a family member cooking at home."
+      }
+    ],
+    "growth": 0.733
   }
 }

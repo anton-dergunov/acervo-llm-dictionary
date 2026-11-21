@@ -58,6 +58,74 @@
     "headword": "căn hộ",
     "lemma": "căn hộ",
     "reading": null,
+    "ipa": "/kan˧˧ ho˧˨ʔ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "apartment; flat",
+    "primaryGloss": "apartment",
+    "emotion": "proud of a new place, welcoming someone inside",
+    "notes": [
+      "Refers to an individual apartment unit, whereas 'chung cư' refers to the whole apartment building or complex ('căn hộ chung cư')."
+    ],
+    "senses": [
+      {
+        "id": "e2mkr6sb3m7c5aj",
+        "order": 0,
+        "definition": "A set of rooms for living in, usually on one floor of a larger building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "apartment",
+              "flat"
+            ]
+          }
+        ],
+        "domain": "housing",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "0kh8o4zbyxwugw1",
+            "text": "Gia đình tôi vừa chuyển vào một căn hộ ở tầng mười.",
+            "textLang": "vi",
+            "translation": "My family just moved into an apartment on the tenth floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "căn hộ",
+            "matchedTranslationForm": "apartment"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "căn hộ",
+    "lemma": "căn hộ",
+    "reading": null,
     "ipa": "/kăn ˈhộ/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +188,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kăn ˈhộ/",
+        "why": "Contains Vietnamese orthographic characters and English stress mark instead of valid IPA."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe a self-contained housing unit in a larger residential building",
+        "why": "Merely restates the definition."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tôi mới chuyển vào căn hộ mới ở tầng mười.",
+        "why": "Awkward repetition of 'mới' (just ... new) in a five-word span."
+      }
+    ],
+    "growth": 0.835
   }
 }

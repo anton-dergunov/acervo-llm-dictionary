@@ -72,6 +72,74 @@
     "primaryGloss": "colleague",
     "emotion": "professional and friendly, acknowledging someone you see every day at the office",
     "notes": [
+      "Used for both genders with the appropriate article: ο συνάδελφος (male), η συνάδελφος (female)."
+    ],
+    "senses": [
+      {
+        "id": "py9vjlbut16opyh",
+        "order": 0,
+        "definition": "A person you work with or who shares the same profession.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "colleague",
+              "coworker"
+            ]
+          }
+        ],
+        "domain": "work",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "7s51spjooz968lx",
+            "text": "Ο συνάδελφός μου με βοήθησε με την αναφορά.",
+            "textLang": "el",
+            "translation": "My colleague helped me with the report.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "συνάδελφός",
+            "matchedTranslationForm": "colleague"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο συνάδελφος",
+    "lemma": "συνάδελφος",
+    "reading": null,
+    "ipa": "/siˈnaðelfos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "colleague; coworker",
+    "primaryGloss": "colleague",
+    "emotion": "professional and friendly, acknowledging someone you see every day at the office",
+    "notes": [
       "The word is gendered. Use 'η συνάδελφος' for a female colleague.",
       "Unlike some English terms, 'συνάδελφος' can imply a professional bond even outside of the immediate same-office environment, often used for people in the same profession."
     ],
@@ -120,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ο συνάδελφος μου με βοήθησε με την αναφορά.",
+        "why": "Missing second-syllable enclitic accent on proparoxytone noun; must be 'Ο συνάδελφός μου'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike some English terms, 'συνάδελφος' can imply a professional bond",
+        "why": "English 'colleague' has the exact same breadth of meaning; note is redundant with definition."
+      }
+    ],
+    "growth": 0.647
   }
 }

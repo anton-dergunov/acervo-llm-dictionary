@@ -72,6 +72,155 @@
     "primaryGloss": "sleep",
     "emotion": "a heavy, comfortable feeling of being ready to rest",
     "notes": [
+      "Use 'tener sueño' (literally 'to have sleepiness') to say 'to be sleepy'.",
+      "Note that 'sueño' is also the 'yo' present form of the verb 'soñar' (to dream): 'Sueño contigo' (I dream of you)."
+    ],
+    "senses": [
+      {
+        "id": "foqcwvizcgv8jr9",
+        "order": 0,
+        "definition": "The natural state of rest of the body and mind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleep"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "xixw0vgaj6pl0l2",
+            "text": "El sueño es muy importante para la salud.",
+            "textLang": "es",
+            "translation": "Sleep is very important for health.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, like sharing a health tip",
+            "note": null,
+            "matchedForm": "sueño",
+            "matchedTranslationForm": "Sleep"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "oji6no6a3uue2qe",
+        "order": 1,
+        "definition": "The images, ideas, or sounds in your mind while sleeping, or a strong hope for the future.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dream"
+            ]
+          }
+        ],
+        "domain": "dream",
+        "emoji": "💭",
+        "examples": [
+          {
+            "id": "dkvnkjro720ic8v",
+            "text": "Tuve un sueño muy extraño anoche.",
+            "textLang": "es",
+            "translation": "I had a very strange dream last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly puzzled and curious while recounting a memory",
+            "note": null,
+            "matchedForm": "sueño",
+            "matchedTranslationForm": "dream"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9hdlgpxeu3tjvem",
+        "order": 2,
+        "definition": "The feeling of needing to sleep.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sleepiness",
+              "drowsiness"
+            ]
+          }
+        ],
+        "domain": "sleepiness",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "6ihaippyuhzy6v2",
+            "text": "Tengo mucho sueño; me voy a la cama.",
+            "textLang": "es",
+            "translation": "I am very sleepy; I am going to bed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sueño",
+            "matchedTranslationForm": "sleepy"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el sueño",
+    "lemma": "sueño",
+    "reading": null,
+    "ipa": "/ˈsweɲo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😴",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "sleep; dream; sleepiness",
+    "primaryGloss": "sleep",
+    "emotion": "a heavy, comfortable feeling of being ready to rest",
+    "notes": [
       "You can use 'tener sueño' to say 'I am sleepy'. Note that this is different from 'dormir', which is the verb 'to sleep'.",
       "Be careful not to confuse 'sueño' (sleep/dream) with 'soñar' (the verb 'to dream')."
     ],
@@ -159,5 +308,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday sense 'sleepiness/drowsiness' (used in 'tener sueño') and figurative 'dream/goal'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "sleep; dream; sleepiness",
+        "why": "'sleepiness' is in shortGloss, but missing from the senses."
+      }
+    ],
+    "growth": 1.236
   }
 }

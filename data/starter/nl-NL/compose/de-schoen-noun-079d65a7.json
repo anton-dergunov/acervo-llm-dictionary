@@ -58,6 +58,73 @@
     "headword": "de schoen",
     "lemma": "schoen",
     "reading": null,
+    "ipa": "/sxun/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👞",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "shoe",
+    "primaryGloss": "shoe",
+    "emotion": "hurrying out the door, lacing up and grabbing keys",
+    "notes": [
+      "The plural is 'schoenen'. Take care with 'schoenen aantrekken' (to put on shoes) and 'schoenen uittrekken' (to take off shoes)."
+    ],
+    "senses": [
+      {
+        "id": "nirgpec9o77eueo",
+        "order": 0,
+        "definition": "A sturdy outer covering for the foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shoe"
+            ]
+          }
+        ],
+        "domain": "footwear",
+        "emoji": "👞",
+        "examples": [
+          {
+            "id": "x160215bsd88wan",
+            "text": "Trek je schoenen uit bij de deur.",
+            "textLang": "nl",
+            "translation": "Take off your shoes by the door.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schoenen",
+            "matchedTranslationForm": "shoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de schoen",
+    "lemma": "schoen",
+    "reading": null,
     "ipa": "/sχun/",
     "pos": "noun",
     "gender": "common",
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike in English, Dutch speakers typically use the plural when talking about",
+        "why": "False contrast: English also uses the plural ('buy new shoes')."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ik moet mijn linkerschoen nog strikken.",
+        "why": "Uses the compound 'linkerschoen' instead of the standalone lemma 'schoen'."
+      }
+    ],
+    "growth": 0.603
   }
 }

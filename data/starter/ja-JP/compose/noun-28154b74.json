@@ -58,6 +58,97 @@
     "headword": "間違い",
     "lemma": "間違い",
     "reading": "まちがい",
+    "ipa": "matɕiɡai",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❌",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "mistake; error",
+    "primaryGloss": "mistake",
+    "emotion": "a sharp, sinking feeling of realizing you have done something incorrectly",
+    "notes": [
+      "To say 'make a mistake', use the verb 間違える (machigaeru) or the phrase 間違いをする (machigai o suru).",
+      "Often used in the pattern 間違いありません (machigai arimasen) to mean 'there is no doubt' or 'that is correct'."
+    ],
+    "senses": [
+      {
+        "id": "9lc882vodsuvtfw",
+        "order": 0,
+        "definition": "Something done or thought incorrectly; an error or fault.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mistake",
+              "error",
+              "fault"
+            ]
+          }
+        ],
+        "domain": "error",
+        "emoji": "❌",
+        "examples": [
+          {
+            "id": "io3gvayp0otedpc",
+            "text": "計算に間違いがありました。",
+            "textLang": "ja",
+            "translation": "There was a mistake in the calculation.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a slightly apologetic, professional tone reporting an error",
+            "note": null,
+            "matchedForm": "間違い",
+            "matchedTranslationForm": "mistake"
+          },
+          {
+            "id": "t813lbo9rqei22p",
+            "text": "それは間違いです。",
+            "textLang": "ja",
+            "translation": "That is a mistake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "間違い",
+            "matchedTranslationForm": "mistake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "間違い",
+    "lemma": "間違い",
+    "reading": "まちがい",
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -161,5 +252,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'Machigai o okonaimashita' (I made a mistake).",
+        "why": "Ungrammatical and unnatural Japanese; 間違いをする or 間違える is used, never 間違いを行う."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "It differs from 'misuteru' (to fail)",
+        "why": "見捨てる (misuteru) means 'to abandon', not 'to fail' (which is 失敗する or ミスをする)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(accident) Something done wrong by accident, without intending to cause an error.",
+        "why": "Senses 0 and 1 are identical in meaning; 'blunder' is just a shade."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "mistake; error; accident",
+        "why": "Contains 'accident', which is a distinct sense not covered properly in the entry."
+      }
+    ],
+    "growth": 0.63
   }
 }

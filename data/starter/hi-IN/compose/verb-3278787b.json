@@ -58,6 +58,116 @@
     "headword": "बैठना",
     "lemma": "बैठना",
     "reading": null,
+    "ipa": "/bɛːʈʰnaː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sit; to sit down; to board",
+    "primaryGloss": "to sit",
+    "emotion": "relaxed and comfortable, like taking a break after being on your feet",
+    "notes": [
+      "To say someone 'is sitting' (a state), Hindi uses the perfective form बैठा है / बैठी है, whereas बैठ रहा है means 'is in the act of sitting down'."
+    ],
+    "senses": [
+      {
+        "id": "2kkyevhixqps7qn",
+        "order": 0,
+        "definition": "To be in or lower oneself into a sitting position.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to sit",
+              "to sit down"
+            ]
+          }
+        ],
+        "domain": "posture",
+        "emoji": "🪑",
+        "examples": [
+          {
+            "id": "o68n5bp3qye30ck",
+            "text": "कृपया कुर्सी पर बैठिए।",
+            "textLang": "hi",
+            "translation": "Please sit on the chair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and welcoming, offering a comfortable place to rest",
+            "note": null,
+            "matchedForm": "बैठिए",
+            "matchedTranslationForm": "sit"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "94kof401pg2zz71",
+        "order": 1,
+        "definition": "To get into or ride in a vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to get in",
+              "to board",
+              "to ride in"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚗",
+        "examples": [
+          {
+            "id": "nnamokfrtdp8chv",
+            "text": "हम सब बस में बैठ गए।",
+            "textLang": "hi",
+            "translation": "We all got on the bus.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बैठ",
+            "matchedTranslationForm": "got on"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बैठना",
+    "lemma": "बैठना",
+    "reading": null,
     "ipa": "/ˈbɛʈʰnaː/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to sit; to rest; to settle",
+        "why": "'to rest' and 'to settle' are not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for the physical act of sitting down on a chair",
+        "why": "Restates the definition without adding useful learner information."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs to explain that the stative 'is sitting' uses the perfective participle (बैठा है), not रहा है."
+      }
+    ],
+    "growth": 0.739
   }
 }

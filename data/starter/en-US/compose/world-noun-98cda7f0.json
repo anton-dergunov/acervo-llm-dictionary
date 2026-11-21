@@ -68,6 +68,136 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "mundo; planeta",
+    "primaryGloss": "mundo",
+    "emotion": "wide and expansive, thinking of everything out there",
+    "notes": [
+      "Casi siempre se usa con el artículo 'the' ('the world') cuando se refiere a nuestro planeta o a la humanidad en general."
+    ],
+    "senses": [
+      {
+        "id": "sclfmsliohy6zr2",
+        "order": 0,
+        "definition": "El planeta Tierra y todos los países, personas y elementos naturales que hay en él.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mundo",
+              "planeta"
+            ]
+          }
+        ],
+        "domain": "planeta",
+        "emoji": "🌍",
+        "examples": [
+          {
+            "id": "8snhe98fy1cygdj",
+            "text": "She wants to travel around the world.",
+            "textLang": "en",
+            "translation": "Ella quiere viajar por el mundo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "world",
+            "matchedTranslationForm": "mundo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "7yrkqymmcatwy1b",
+        "order": 1,
+        "definition": "Un ámbito de actividad, grupo social o época determinados, o la experiencia particular de alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "mundo",
+              "ámbito"
+            ]
+          }
+        ],
+        "domain": "ámbito",
+        "emoji": "👥",
+        "examples": [
+          {
+            "id": "hq2pnqflbmwogo6",
+            "text": "She is very famous in the music world.",
+            "textLang": "en",
+            "translation": "Ella es muy famosa en el mundo de la música.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "world",
+            "matchedTranslationForm": "mundo"
+          },
+          {
+            "id": "fl7x7i8z3v91xc7",
+            "text": "He lives in his own little world.",
+            "textLang": "en",
+            "translation": "Él vive en su propio mundillo.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "world",
+            "matchedTranslationForm": "mundillo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "world",
+    "lemma": "world",
+    "reading": null,
+    "ipa": "/wɜrld/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌍",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "mundo; planeta tierra; sociedad",
     "primaryGloss": "mundo",
     "emotion": "wide and expansive, thinking of everything out there",
@@ -161,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para hablar del planeta físico como de la sociedad",
+        "why": "Merely restates the two senses; misses the obligatory article 'the' in general use."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "He lives in his own world.",
+        "why": "Illustrates a figurative private mental realm, not society or a historical era as defined."
+      }
+    ],
+    "growth": 1.568
   }
 }

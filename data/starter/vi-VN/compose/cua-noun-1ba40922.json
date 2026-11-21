@@ -58,6 +58,97 @@
     "headword": "cửa",
     "lemma": "cửa",
     "reading": null,
+    "ipa": "/kɨə˧˩˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "door; gate; entrance",
+    "primaryGloss": "door",
+    "emotion": "welcoming and open, inviting someone to step inside a warm room",
+    "notes": [
+      "Used for both doors and entrances, and in compounds for other openings: 'cửa chính' (main door), 'cửa sổ' (window), 'cửa ra vào' (entrance/doorway)."
+    ],
+    "senses": [
+      {
+        "id": "7xhm41rab9q5v7v",
+        "order": 0,
+        "definition": "A movable barrier or opening used to enter or leave a room, building, or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "door",
+              "gate",
+              "entrance",
+              "doorway"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "3gtyy3b3cua30s7",
+            "text": "Hãy đóng cửa lại khi bạn rời khỏi phòng.",
+            "textLang": "vi",
+            "translation": "Please close the door when you leave the room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and firm, giving a practical instruction",
+            "note": null,
+            "matchedForm": "cửa",
+            "matchedTranslationForm": "door"
+          },
+          {
+            "id": "b3u8q0jg7fcofws",
+            "text": "Xe buýt dừng lại và mở cửa.",
+            "textLang": "vi",
+            "translation": "The bus stopped and opened its doors.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "cửa",
+            "matchedTranslationForm": "doors"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "cửa",
+    "lemma": "cửa",
+    "reading": null,
     "ipa": "/kɨə˧˥/",
     "pos": "noun",
     "gender": null,
@@ -162,5 +253,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Cô ấy nhìn ra ngoài qua cửa sổ.",
+        "why": "Uses the distinct compound noun 'cửa sổ' (window) rather than 'cửa'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Both senses describe an entrance/opening; splitting door and opening/window is artificial here."
+      }
+    ],
+    "growth": 0.684
   }
 }

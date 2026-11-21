@@ -58,6 +58,115 @@
     "headword": "น้ำ",
     "lemma": "น้ำ",
     "reading": null,
+    "ipa": "/náːm/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "water; liquid",
+    "primaryGloss": "water",
+    "emotion": "refreshing and essential, quenching a strong thirst",
+    "notes": [
+      "Used as the first word in compounds for drinks, juices, and sauces, such as น้ำส้ม (orange juice) and น้ำปลา (fish sauce)."
+    ],
+    "senses": [
+      {
+        "id": "cjsskiqq9si9ykh",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills rivers, and is drunk by people and animals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "water",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "iwcms6vuxlhim70",
+            "text": "ขอน้ำเปล่าหนึ่งแก้วครับ",
+            "textLang": "th",
+            "translation": "One glass of plain water, please.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "น้ำ",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h459r5izx48jxkr",
+        "order": 1,
+        "definition": "Any liquid, fluid, or drink, especially in compounds naming a kind of drink or sauce.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "liquid",
+              "juice",
+              "broth"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "🧃",
+        "examples": [
+          {
+            "id": "0araz9d8s4a507f",
+            "text": "ฉันชอบดื่มน้ำส้มทุกเช้า",
+            "textLang": "th",
+            "translation": "I like to drink orange juice every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "น้ำ",
+            "matchedTranslationForm": "juice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "น้ำ",
+    "lemma": "น้ำ",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ขอ น้ำ เปล่า หนึ่ง แก้ว ครับ",
+        "why": "Thai script does not put spaces between words."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "The liquid extract or juice of fruits or vegetables.",
+        "why": "น้ำ alone means any liquid or fluid; 'juice' is only in compounds like น้ำส้ม."
+      }
+    ],
+    "growth": 1.092
   }
 }

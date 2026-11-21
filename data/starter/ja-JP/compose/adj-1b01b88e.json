@@ -57,6 +57,75 @@
     "language": "ja",
     "headword": "安い",
     "lemma": "安い",
+    "reading": "やすい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
+    "shortGloss": "cheap; inexpensive",
+    "primaryGloss": "cheap",
+    "emotion": "a satisfied, practical feeling when finding a good bargain",
+    "notes": [
+      "Refers to a low price without necessarily implying poor quality (unlike English 'cheap'). Its opposite is 高い (takai, 'expensive')."
+    ],
+    "senses": [
+      {
+        "id": "if8amvabysm1bc0",
+        "order": 0,
+        "definition": "costing little money; low in price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "inexpensive",
+              "low-priced"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "goij9doa5sdfvyw",
+            "text": "この時計は安いです。",
+            "textLang": "ja",
+            "translation": "This watch is cheap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a simple observation about price",
+            "note": null,
+            "matchedForm": "安い",
+            "matchedTranslationForm": "cheap"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "安い",
+    "lemma": "安い",
     "reading": null,
     "ipa": null,
     "pos": "adj",
@@ -162,5 +231,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading やすい for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "心安らかな毎日を過ごす。",
+        "why": "Uses a different word (安らか, na-adjective) instead of the headword 安い."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(state) Free from worry or danger; peaceful.",
+        "why": "Archaic/idiomatic sense (found only in set phrases like お安い御用), not everyday A2 usage."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cheap; inexpensive; calm",
+        "why": "Includes 'calm', which is not an everyday sense of 安い."
+      }
+    ],
+    "growth": 0.627
   }
 }

@@ -72,6 +72,83 @@
     "primaryGloss": "tomato",
     "emotion": "fresh and crisp, holding a ripe red vegetable from the garden",
     "notes": [
+      "In standard Russian, the genitive plural is помидо́ров (пять помидо́ров), though the shortened form помидо́р is often heard in casual speech."
+    ],
+    "senses": [
+      {
+        "id": "gwyu7pdel3eeezv",
+        "order": 0,
+        "definition": "A soft, round, red fruit eaten raw in salads or cooked as a vegetable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tomato"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍅",
+        "examples": [
+          {
+            "id": "eolgwu62lb8qgs7",
+            "text": "Я режу спелый помидор для салата.",
+            "textLang": "ru",
+            "translation": "I am cutting a ripe tomato for the salad.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and domestic, preparing a simple meal in the kitchen",
+            "note": null,
+            "matchedForm": "помидор",
+            "matchedTranslationForm": "tomato"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "gwyu7pdel3eeezv",
+      "from": "Сочный красный овощ круглой формы, который добавляют в салаты.",
+      "to": "A juicy round red vegetable added to salads.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:07:03Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "помидор",
+    "lemma": "помидор",
+    "reading": null,
+    "ipa": "/pəmʲɪˈdor/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍅",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "tomato",
+    "primaryGloss": "tomato",
+    "emotion": "fresh and crisp, holding a ripe red vegetable from the garden",
+    "notes": [
       "Use the form помидоры in the genitive singular (нет помидоров) when talking about several of them, not помидор."
     ],
     "senses": [
@@ -119,14 +196,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "gwyu7pdel3eeezv",
-      "from": "Сочный красный овощ круглой формы, который добавляют в салаты.",
-      "to": "A juicy round red vegetable added to salads.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:07:03Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use the form помидоры in the genitive singular (нет помидоров)",
+        "why": "Confuses nominative plural (помидоры), genitive plural (помидоров), and calls it 'genitive singular'."
+      }
+    ],
+    "growth": 1.232
+  }
 }

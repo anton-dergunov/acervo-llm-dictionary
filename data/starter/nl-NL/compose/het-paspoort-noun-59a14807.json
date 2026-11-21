@@ -72,6 +72,73 @@
     "primaryGloss": "passport",
     "emotion": "responsible and slightly nervous, double-checking you have your documents ready",
     "notes": [
+      "Do not confuse with 'de pas' or 'het pasje', which refers to a plastic card (such as a bank card, ID card, or membership pass)."
+    ],
+    "senses": [
+      {
+        "id": "ngupjb7ntg1hffr",
+        "order": 0,
+        "definition": "An official document issued by a government that identifies you as a citizen and allows you to travel abroad.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "passport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🛂",
+        "examples": [
+          {
+            "id": "g2gp4f0my9jtmcb",
+            "text": "Mag ik uw paspoort zien?",
+            "textLang": "nl",
+            "translation": "May I see your passport?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "official and polite, asking someone for their identification",
+            "note": null,
+            "matchedForm": "paspoort",
+            "matchedTranslationForm": "passport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het paspoort",
+    "lemma": "paspoort",
+    "reading": null,
+    "ipa": "/ˈpɑs.poːrt/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛂",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "passport",
+    "primaryGloss": "passport",
+    "emotion": "responsible and slightly nervous, double-checking you have your documents ready",
+    "notes": [
       "Note the gender: it is 'het paspoort', so use 'het' or 'dat' when referring to it.",
       "People often shorten this to 'pas' in casual, spoken Dutch, but 'paspoort' is the standard word for the official document."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note the gender: it is 'het paspoort', so use 'het' or",
+        "why": "Restates the gender already shown in the headword and gender field."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "People often shorten this to 'pas' in casual, spoken Dutch",
+        "why": "'De pas' means a plastic card/pass (bank card, ID card), not a passport booklet."
+      }
+    ],
+    "growth": 0.796
   }
 }

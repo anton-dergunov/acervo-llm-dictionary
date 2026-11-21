@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dark; dim",
+    "primaryGloss": "dark",
+    "emotion": "a slightly hushed, cautious tone as if navigating a poorly lit space",
+    "notes": [
+      "In impersonal sentences about lighting or time of day ('It is dark'), use the adverb 'ciemno': 'Już jest ciemno'.",
+      "When combined with colour adjectives, it usually forms a single compound word, e.g., 'ciemnoniebieski' (dark blue)."
+    ],
+    "senses": [
+      {
+        "id": "qgu5oya3yl8s5xf",
+        "order": 0,
+        "definition": "Having little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "dim"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "bzjxu261b9p19be",
+            "text": "Szliśmy przez ciemny las.",
+            "textLang": "pl",
+            "translation": "We walked through a dark forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ciemny",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "f9v9gipwwnkhi6r",
+        "order": 1,
+        "definition": "Of a colour, hair, or skin: deep in shade, closer to black or brown than to white.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "s73hbebro1k50ko",
+            "text": "Mój brat ma ciemne włosy.",
+            "textLang": "pl",
+            "translation": "My brother has dark hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "ciemne",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "ciemny",
+    "lemma": "ciemny",
+    "reading": null,
+    "ipa": "/ˈt͡ɕɛm.nɨ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dark; dim; gloomy",
     "primaryGloss": "dark",
     "emotion": "a slightly hushed, cautious tone as if navigating a poorly lit space",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "W pokoju jest bardzo ciemno.",
+        "why": "Uses the adverb 'ciemno' instead of the adjective 'ciemny'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical lack of light, like 'ciemny pokój'",
+        "why": "Notes [0] and [1] merely repeat the two definitions."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "dark; dim; gloomy",
+        "why": "'gloomy' is not covered in the senses."
+      }
+    ],
+    "growth": 1.132
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "kiss",
     "emotion": "tender and affectionate, sharing a warm moment with someone close",
     "notes": [
+      "Do not confuse with the neuter noun 'het kussen', which means 'pillow' or 'cushion'."
+    ],
+    "senses": [
+      {
+        "id": "pbvbi7g49y2wanp",
+        "order": 0,
+        "definition": "To touch someone with your lips to show love, affection, or as a greeting.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "kiss",
+              "to kiss"
+            ]
+          }
+        ],
+        "domain": "affection",
+        "emoji": "💋",
+        "examples": [
+          {
+            "id": "xtv79o314mebeys",
+            "text": "Ze kusten elkaar bij het afscheid.",
+            "textLang": "nl",
+            "translation": "They kissed each other when saying goodbye.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kusten",
+            "matchedTranslationForm": "kissed"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "kussen",
+    "lemma": "kussen",
+    "reading": null,
+    "ipa": "/ˈkʏs.ə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to kiss",
+    "primaryGloss": "kiss",
+    "emotion": "tender and affectionate, sharing a warm moment with someone close",
+    "notes": [
       "Kussen is a regular verb in Dutch (kuste, kusten, gekust).",
       "Do not confuse it with 'kussen' as a noun, which means a pillow or cushion."
     ],
@@ -120,5 +188,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ze gingen elkaar bij het afscheid kussen.",
+        "why": "'Gingen ... kussen' is unnatural in Dutch; simple past 'kusten elkaar' is natural."
+      }
+    ],
+    "growth": 0.803
   }
 }

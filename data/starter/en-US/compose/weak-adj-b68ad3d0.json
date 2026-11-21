@@ -72,6 +72,116 @@
     "primaryGloss": "débil",
     "emotion": "a sense of fragility, speaking with gentle concern for someone's low energy",
     "notes": [
+      "No confundas 'weak' (débil) con 'week' (semana), que se pronuncian exactamente igual."
+    ],
+    "senses": [
+      {
+        "id": "cert5ui3x82jsjz",
+        "order": 0,
+        "definition": "Que tiene poca fuerza física, energía o resistencia.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "débil",
+              "flojo"
+            ]
+          }
+        ],
+        "domain": "fuerza",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "r5t5ntzh2uwxwv2",
+            "text": "He felt weak after being sick for a week.",
+            "textLang": "en",
+            "translation": "Se sintió débil después de estar enfermo una semana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and low, speaking slowly after a long illness",
+            "note": null,
+            "matchedForm": "weak",
+            "matchedTranslationForm": "débil"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "94f5sh9bxbv7g9h",
+        "order": 1,
+        "definition": "De una bebida o sustancia: que contiene mucha agua o tiene poco sabor o intensidad.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "flojo",
+              "suave",
+              "aguado"
+            ]
+          }
+        ],
+        "domain": "intensidad",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "36h77o2op0hxxlq",
+            "text": "This coffee is too weak for me.",
+            "textLang": "en",
+            "translation": "Este café está demasiado flojo para mí.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit disappointed, letting someone know it could be better",
+            "note": null,
+            "matchedForm": "weak",
+            "matchedTranslationForm": "flojo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "weak",
+    "lemma": "weak",
+    "reading": null,
+    "ipa": "/wiːk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💪",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "débil; flojo",
+    "primaryGloss": "débil",
+    "emotion": "a sense of fragility, speaking with gentle concern for someone's low energy",
+    "notes": [
       "Usa 'weak' para hablar de falta de fuerza física o resistencia.",
       "No confundas 'weak' (débil) con 'week' (semana), que se pronuncian exactamente igual."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Me sentí débil después de estar enfermo una semana.",
+        "why": "Mistranslates 'He felt' (3rd person) as 'Me sentí' (1st person)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Usa 'weak' para hablar de falta de fuerza física o resistencia.",
+        "why": "merely restates the definition of the first sense."
+      }
+    ],
+    "growth": 1.019
   }
 }

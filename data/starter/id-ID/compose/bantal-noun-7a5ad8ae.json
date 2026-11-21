@@ -60,6 +60,95 @@
     "headword": "bantal",
     "lemma": "bantal",
     "reading": null,
+    "ipa": "/ˈban.tal/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛏️",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "pillow; cushion",
+    "primaryGloss": "pillow",
+    "emotion": null,
+    "notes": [
+      "Covers both bed pillows and decorative cushions (often called 'bantal sofa' or 'bantal kursi'). A long bolster pillow used for hugging in bed is called a 'guling'."
+    ],
+    "senses": [
+      {
+        "id": "1e6pfyawbsq2w9x",
+        "order": 0,
+        "definition": "A soft bag filled with feathers, foam, or other soft material, used to support the head in bed or to make a seat comfortable.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pillow",
+              "cushion"
+            ]
+          }
+        ],
+        "domain": "furnishings",
+        "emoji": "🛌",
+        "examples": [
+          {
+            "id": "bja8hnukd2e2yl0",
+            "text": "Dia meletakkan kepalanya di atas bantal yang empuk.",
+            "textLang": "id",
+            "translation": "He laid his head on the soft pillow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tired and relieved, finally getting into bed",
+            "note": null,
+            "matchedForm": "bantal",
+            "matchedTranslationForm": "pillow"
+          },
+          {
+            "id": "qqqzdxhfmpoudqk",
+            "text": "Ada banyak bantal kecil di sofa ruang tamu.",
+            "textLang": "id",
+            "translation": "There are many small cushions on the living room sofa.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neat and welcoming, admiring the tidy living room",
+            "note": null,
+            "matchedForm": "bantal",
+            "matchedTranslationForm": "cushions"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "bantal",
+    "lemma": "bantal",
+    "reading": null,
     "ipa": "/ˈbantal/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Indonesian 'bantal' covers both bed pillows and sofa cushions as a single concept."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pillow; cushion; pad",
+        "why": "Includes 'pad', which is not in the senses (and translates to 'bantalan')."
+      }
+    ],
+    "growth": 0.898
   }
 }

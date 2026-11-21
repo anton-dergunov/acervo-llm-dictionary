@@ -75,6 +75,116 @@
     "primaryGloss": "police officer",
     "emotion": "authoritative and dependable, ensuring everyone follows the rules",
     "notes": [
+      "In everyday speech, 'agent' almost always refers to a police officer ('politieagent'). For a female officer, 'agente' is also used."
+    ],
+    "senses": [
+      {
+        "id": "3rjfm30ulh6lnwd",
+        "order": 0,
+        "definition": "A member of the police force who keeps public order.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "police officer",
+              "cop"
+            ]
+          }
+        ],
+        "domain": "police",
+        "emoji": "👮",
+        "examples": [
+          {
+            "id": "7ox1yl4d640gqvc",
+            "text": "De agent vroeg om mijn rijbewijs.",
+            "textLang": "nl",
+            "translation": "The police officer asked for my driver's license.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and cooperative, following instructions",
+            "note": null,
+            "matchedForm": "agent",
+            "matchedTranslationForm": "police officer"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fd26zutfp7mjb8t",
+        "order": 1,
+        "definition": "A person who does business or acts on behalf of another person or company.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "agent",
+              "representative"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "4lt9m3arxiotik2",
+            "text": "Zij werkt als lokaal agent voor een buitenlands bedrijf.",
+            "textLang": "nl",
+            "translation": "She works as a local agent for a foreign company.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "agent",
+            "matchedTranslationForm": "agent"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de agent",
+    "lemma": "agent",
+    "reading": null,
+    "ipa": "/aːˈɣɛnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👮",
+    "topics": [
+      "Work",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "police officer; representative",
+    "primaryGloss": "police officer",
+    "emotion": "authoritative and dependable, ensuring everyone follows the rules",
+    "notes": [
       "In everyday speech, 'agent' almost always refers to a police officer (politieagent)."
     ],
     "senses": [
@@ -163,5 +273,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hij werkt als reisaudit agent voor een groot bedrijf.",
+        "why": "'reisaudit agent' is a nonexistent, corrupted phrase; 'travel agent' is one word ('reisagent')."
+      }
+    ],
+    "growth": 1.09
   }
 }

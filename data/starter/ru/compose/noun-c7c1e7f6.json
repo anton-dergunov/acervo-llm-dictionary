@@ -68,6 +68,75 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "toilet; restroom",
+    "primaryGloss": "toilet",
+    "emotion": "matter-of-fact and direct, describing a place or an object needed",
+    "notes": [
+      "Туале́т is the normal polite word for the room (restroom/bathroom). The toilet bowl itself as a fixture is унита́з."
+    ],
+    "senses": [
+      {
+        "id": "3d6ypy8l55q2jhk",
+        "order": 0,
+        "definition": "A room with a toilet, in a home or a public building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "toilet",
+              "restroom",
+              "bathroom"
+            ]
+          }
+        ],
+        "domain": "facility",
+        "emoji": "🚽",
+        "examples": [
+          {
+            "id": "dc74abfxe4yve2r",
+            "text": "Извините, где здесь туалет?",
+            "textLang": "ru",
+            "translation": "Excuse me, where is the restroom here?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "туалет",
+            "matchedTranslationForm": "restroom"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "туалет",
+    "lemma": "туалет",
+    "reading": null,
+    "ipa": "/tʊɐˈlʲet/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚽",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "toilet; restroom; dressing table",
     "primaryGloss": "toilet",
     "emotion": "matter-of-fact and direct, describing a place or an object needed",
@@ -162,5 +231,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A piece of furniture with a mirror and drawers used for makeup",
+        "why": "Archaic 19th-century sense; modern Russian uses 'туалетный столик', never 'туалет' alone."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "toilet; restroom; dressing table",
+        "why": "Includes archaic 'dressing table' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "The word can also refer to a dressing table or one's overall",
+        "why": "Teaches archaic/literary meanings irrelevant and misleading to an A2 learner."
+      }
+    ],
+    "growth": 0.431
   }
 }

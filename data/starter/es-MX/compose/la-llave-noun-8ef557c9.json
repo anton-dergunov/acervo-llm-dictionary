@@ -72,6 +72,155 @@
     "primaryGloss": "key",
     "emotion": "a sense of relief and finality upon arriving home, secure and settled",
     "notes": [
+      "Do not confuse with 'clave', which means a secret code or password."
+    ],
+    "senses": [
+      {
+        "id": "93ic9wzqa7lh5vj",
+        "order": 0,
+        "definition": "A small metal object used to open or lock a door, car, or padlock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "key"
+            ]
+          }
+        ],
+        "domain": "security",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "cq1qwr9xicmaaes",
+            "text": "Busqué la llave en mi bolso para entrar a la casa.",
+            "textLang": "es",
+            "translation": "I looked for the key in my bag to get into the house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit hurried and slightly frustrated while searching through a bag",
+            "note": null,
+            "matchedForm": "llave",
+            "matchedTranslationForm": "key"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "yey8y8llux458k0",
+        "order": 1,
+        "definition": "A device that controls the flow of water from a pipe.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "faucet",
+              "tap"
+            ]
+          }
+        ],
+        "domain": "plumbing",
+        "emoji": "🚰",
+        "examples": [
+          {
+            "id": "oidvaoehbspst61",
+            "text": "Cierra bien la llave del agua para no desperdiciarla.",
+            "textLang": "es",
+            "translation": "Turn off the water faucet tightly so as not to waste it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "llave",
+            "matchedTranslationForm": "faucet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p8kbouc6v21ha9j",
+        "order": 2,
+        "definition": "A metal tool used for holding and turning nuts and bolts.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wrench",
+              "spanner"
+            ]
+          }
+        ],
+        "domain": "tools",
+        "emoji": "🔧",
+        "examples": [
+          {
+            "id": "hf638lss075wfql",
+            "text": "Necesito una llave para apretar esta tuerca.",
+            "textLang": "es",
+            "translation": "I need a wrench to tighten this nut.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "llave",
+            "matchedTranslationForm": "wrench"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la llave",
+    "lemma": "llave",
+    "reading": null,
+    "ipa": "/ˈʝaβe/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "key; faucet; wrench",
+    "primaryGloss": "key",
+    "emotion": "a sense of relief and finality upon arriving home, secure and settled",
+    "notes": [
       "While 'llave' is the word for a door key, it is also used for a water faucet (especially in Mexico) and for a wrench (the tool).",
       "Do not confuse this with 'clave', which means a secret code, password, or musical clef."
     ],
@@ -201,5 +350,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 'llave' is the word for a door key, it is also",
+        "why": "Merely restates the three senses and glosses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[2].examples[0].text",
+        "quote": "Necesito una llave para ajustar este tornillo.",
+        "why": "Wrenches ('llaves') are used on nuts ('tuercas') or bolts, whereas 'tornillo' usually takes a screwdriver."
+      }
+    ],
+    "growth": 0.85
   }
 }

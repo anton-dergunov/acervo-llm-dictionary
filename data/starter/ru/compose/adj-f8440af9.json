@@ -68,6 +68,156 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dark; shady",
+    "primaryGloss": "dark",
+    "emotion": "a quiet, slightly melancholic feeling, sensing shadows and the lack of light",
+    "notes": [
+      "In the short form and the adverb/predicative 'темно́' ('it is dark'), the stress shifts to the end and 'ё' becomes 'е'."
+    ],
+    "senses": [
+      {
+        "id": "j3nhunjj9wnw1fz",
+        "order": 0,
+        "definition": "Having little or no light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark"
+            ]
+          }
+        ],
+        "domain": "light",
+        "emoji": "🌑",
+        "examples": [
+          {
+            "id": "0tc88vx0v67bbqp",
+            "text": "Мы вошли в тёмную комнату.",
+            "textLang": "ru",
+            "translation": "We entered a dark room.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "тёмную",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "k4rb91omjv5knya",
+        "order": 1,
+        "definition": "Not light in color; deep in shade.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dark",
+              "deep"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🎨",
+        "examples": [
+          {
+            "id": "w22zmbxb4n9d9k1",
+            "text": "У него тёмные волосы.",
+            "textLang": "ru",
+            "translation": "He has dark hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral, simply stating a physical observation",
+            "note": null,
+            "matchedForm": "тёмные",
+            "matchedTranslationForm": "dark"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hquyoq8xhdarxj2",
+        "order": 2,
+        "definition": "Not clear or easily understood; mysterious or suspicious.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shady",
+              "obscure",
+              "mysterious"
+            ]
+          }
+        ],
+        "domain": "abstract",
+        "emoji": "❓",
+        "examples": [
+          {
+            "id": "hwcfh9dh2j8f2xr",
+            "text": "Это тёмное дело.",
+            "textLang": "ru",
+            "translation": "This is a shady affair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "suspicious, lowering the voice slightly",
+            "note": null,
+            "matchedForm": "тёмное",
+            "matchedTranslationForm": "shady"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "тёмный",
+    "lemma": "тёмный",
+    "reading": null,
+    "ipa": "/ˈtʲɵmnɨj/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌑",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dark; obscure",
     "primaryGloss": "dark",
     "emotion": "a quiet, slightly melancholic feeling, sensing shadows and the lack of light",
@@ -201,5 +351,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "В комнате было очень тёмно.",
+        "why": "'Тёмно' is incorrect; the short form/predicative is 'темно' (stressed on last syllable). Use adjective form."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical lack of light, dark colors, or metaphorical situations",
+        "why": "Restates the senses without adding grammatical or usage information."
+      }
+    ],
+    "growth": 0.8
   }
 }

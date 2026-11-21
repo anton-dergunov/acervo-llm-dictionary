@@ -72,6 +72,115 @@
     "primaryGloss": "plato",
     "emotion": "setting the table for a warm family meal, hospitable and ready",
     "notes": [
+      "Se refiere al plato extendido o llano; un plato hondo o tazón se llama 'bowl', mientras que 'dish' se usa para cualquier recipiente de cocina o para la comida preparada (platillo)."
+    ],
+    "senses": [
+      {
+        "id": "n2c9bank24gpk3j",
+        "order": 0,
+        "definition": "Recipiente bajo y generalmente redondo en el que se sirve o come la comida.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "plato"
+            ]
+          }
+        ],
+        "domain": "tableware",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "my04c6pwlfsnszi",
+            "text": "Put the food on the plate.",
+            "textLang": "en",
+            "translation": "Pon la comida en el plato.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and direct, guiding someone where to put the food",
+            "note": null,
+            "matchedForm": "plate",
+            "matchedTranslationForm": "plato"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xek2vw3wrs5uvzc",
+        "order": 1,
+        "definition": "Lámina plana y delgada de metal u otro material rígido, como la matrícula de un vehículo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "placa",
+              "lámina",
+              "matrícula"
+            ]
+          }
+        ],
+        "domain": "object",
+        "emoji": "🛡️",
+        "examples": [
+          {
+            "id": "vqjgmor0b3nx05w",
+            "text": "The door had a brass plate with his name.",
+            "textLang": "en",
+            "translation": "La puerta tenía una placa de latón con su nombre.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and precise, pointing out a detail on the door",
+            "note": null,
+            "matchedForm": "plate",
+            "matchedTranslationForm": "placa"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "plate",
+    "lemma": "plate",
+    "reading": null,
+    "ipa": "/pleɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "plato; placa",
+    "primaryGloss": "plato",
+    "emotion": "setting the table for a warm family meal, hospitable and ready",
+    "notes": [
       "Se usa principalmente para referirse al plato llano donde se sirve la comida."
     ],
     "senses": [
@@ -159,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "Recipiente plano y hondo o llano",
+        "why": "Contradictory ('plano y hondo'); 'plate' is specifically a flat/shallow dish, unlike a bowl."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa principalmente para referirse al plato llano donde se sirve la",
+        "why": "Restates the first sense without contrasting it with 'bowl' or 'dish'."
+      }
+    ],
+    "growth": 1.414
   }
 }

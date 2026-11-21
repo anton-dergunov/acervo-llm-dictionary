@@ -68,6 +68,97 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "jealous; possessive",
+    "primaryGloss": "jealous",
+    "emotion": "a sharp, bitter tone, reflecting a sense of inner resentment",
+    "notes": [
+      "Takes عَلَى ('alā) for the person or thing one is possessive over, and مِن (min) for the person one envies or sees as a rival.",
+      "As an adjective on the فَعُول (fa'ūl) pattern, it stays غَيُور for both masculine and feminine singular in formal Arabic (though غَيُورَة is common in everyday speech)."
+    ],
+    "senses": [
+      {
+        "id": "nlox7zha5mmmlnp",
+        "order": 0,
+        "definition": "Feeling unhappy, protective, or possessive because someone you love might be interested in others, or because someone else has what you want.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "jealous",
+              "possessive",
+              "envious"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "0amdta8phkirawj",
+            "text": "لَا تَكُنْ غَيُورًا جِدًّا عَلَى شَرِيكِ حَيَاتِكَ.",
+            "textLang": "ar",
+            "translation": "Do not be overly jealous and possessive of your life partner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "غَيُورًا",
+            "matchedTranslationForm": "jealous"
+          },
+          {
+            "id": "gl6blj7aareznll",
+            "text": "هُوَ غَيُورٌ مِنْ نَجَاحِ صَدِيقِهِ.",
+            "textLang": "ar",
+            "translation": "He is jealous of his friend's success.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a slightly bitter and resentful tone",
+            "note": null,
+            "matchedForm": "غَيُورٌ",
+            "matchedTranslationForm": "jealous"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "غَيُور",
+    "lemma": "غَيُور",
+    "reading": null,
+    "ipa": "/ɣaˈjuːr/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😒",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "jealous; envious",
     "primaryGloss": "jealous",
     "emotion": "a sharp, bitter tone, reflecting a sense of inner resentment",
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:33Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Feeling unhappy or angry because you want what someone else has.",
+        "why": "Oversplit senses, and puts envy first; غَيُور primarily means romantically/protectively jealous (حَسُود is envious)."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Do not be too jealous of your life partner.",
+        "why": "غَيُور عَلَى means 'jealous/possessive over' a partner, whereas English 'jealous of' means envying them."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs to explain the prepositions (عَلَى for protective/romantic jealousy, مِن for jealousy toward a rival) and invariant gender."
+      }
+    ],
+    "growth": 1.062
   }
 }

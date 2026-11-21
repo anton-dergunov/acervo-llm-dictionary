@@ -72,6 +72,73 @@
     "primaryGloss": "potato",
     "emotion": "simple and earthy, satisfying as a hearty meal",
     "notes": [
+      "Refers to regular white or yellow potatoes; sweet potato is 고구마. Counted with 개 or 알."
+    ],
+    "senses": [
+      {
+        "id": "0xdybdq7qqam2nd",
+        "order": 0,
+        "definition": "A round, starchy vegetable that grows underground.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "potato"
+            ]
+          }
+        ],
+        "domain": "vegetable",
+        "emoji": "🥔",
+        "examples": [
+          {
+            "id": "z9uwm4gtz5fxdeb",
+            "text": "감자를 쪄서 먹었어요.",
+            "textLang": "ko",
+            "translation": "I steamed some potatoes and ate them.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and full, enjoying a simple home-cooked snack",
+            "note": null,
+            "matchedForm": "감자",
+            "matchedTranslationForm": "potatoes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "감자",
+    "lemma": "감자",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥔",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "potato",
+    "primaryGloss": "potato",
+    "emotion": "simple and earthy, satisfying as a hearty meal",
+    "notes": [
       "Used as a staple food in many dishes, often boiled, fried, or used in stews.",
       "Do not confuse with '고구마' (sweet potato), which is much sweeter and usually eaten as a snack."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used as a staple food in many dishes, often boiled, fried,",
+        "why": "Culinary trivia rather than useful linguistic guidance."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "I steamed and ate the potato.",
+        "why": "Unnatural calque; in English this is 'I ate steamed potatoes'."
+      }
+    ],
+    "growth": 0.651
   }
 }

@@ -70,6 +70,157 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "estación; comisaría; emisora",
+    "primaryGloss": "estación",
+    "emotion": null,
+    "notes": [
+      "No confundir con 'season' (estación del año: primavera, verano, etc.).",
+      "Forma compuestos muy frecuentes como 'train station' (estación de tren), 'police station' (comisaría) y 'gas station' (gasolinera)."
+    ],
+    "senses": [
+      {
+        "id": "q5prjvorbybc0xh",
+        "order": 0,
+        "definition": "Lugar donde se detienen los trenes, el metro o los autobuses para que suban y bajen pasajeros.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "estación"
+            ]
+          }
+        ],
+        "domain": "transporte",
+        "emoji": "🚉",
+        "examples": [
+          {
+            "id": "8bx8wgplcoyyu1c",
+            "text": "We need to go to the train station before noon.",
+            "textLang": "en",
+            "translation": "Tenemos que ir a la estación de tren antes del mediodía.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hurrying along the platform with luggage, checking the time",
+            "note": null,
+            "matchedForm": "station",
+            "matchedTranslationForm": "estación"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sfoi4ofm7gw9ygb",
+        "order": 1,
+        "definition": "Edificio o instalación desde donde se presta un servicio, como el de policía, bomberos o venta de gasolina.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "comisaría",
+              "estación"
+            ]
+          }
+        ],
+        "domain": "servicios",
+        "emoji": "🚓",
+        "examples": [
+          {
+            "id": "4gwnriyilbfyidj",
+            "text": "The police station is around the corner.",
+            "textLang": "en",
+            "translation": "La comisaría está a la vuelta de la esquina.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pointing down a familiar city street calmly",
+            "note": null,
+            "matchedForm": "station",
+            "matchedTranslationForm": "comisaría"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tkovqyibbg9vf8z",
+        "order": 2,
+        "definition": "Canal o empresa que transmite programas de radio o televisión.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "emisora",
+              "estación",
+              "canal"
+            ]
+          }
+        ],
+        "domain": "medios",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "gz6vqecawv02ggk",
+            "text": "This radio station plays great music.",
+            "textLang": "en",
+            "translation": "Esta emisora de radio pone muy buena música.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "station",
+            "matchedTranslationForm": "emisora"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "station",
+    "lemma": "station",
+    "reading": null,
+    "ipa": "/ˈsteɪʃən/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "estación; comisaría",
     "primaryGloss": "estación",
     "emotion": null,
@@ -161,5 +312,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para trenes como para autobuses o el metro",
+        "why": "Note merely repeats the definitions and glosses of senses 0 and 1."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday sense of radio/TV station (emisora, canal) and gas station."
+      }
+    ],
+    "growth": 1.667
   }
 }

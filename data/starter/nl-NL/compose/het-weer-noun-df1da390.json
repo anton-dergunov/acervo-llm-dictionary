@@ -68,6 +68,94 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "weather",
+    "primaryGloss": "weather",
+    "emotion": "looking out the window in the morning to see what to wear",
+    "notes": [
+      "Always singular. Not to be confused with the very common adverb 'weer' ('again')."
+    ],
+    "senses": [
+      {
+        "id": "oeivdsbxovcyodi",
+        "order": 0,
+        "definition": "The conditions outside, such as sunshine, rain, wind, or temperature.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "jgn6v74ptri2ftp",
+            "text": "Het weer is vandaag heel mooi.",
+            "textLang": "nl",
+            "translation": "The weather is very nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleased about a sunny day",
+            "note": null,
+            "matchedForm": "weer",
+            "matchedTranslationForm": "weather"
+          },
+          {
+            "id": "21w7pw63e140whc",
+            "text": "Door het slechte weer blijven we thuis.",
+            "textLang": "nl",
+            "translation": "Because of the bad weather we are staying home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly disappointed to miss out on going outside",
+            "note": null,
+            "matchedForm": "weer",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het weer",
+    "lemma": "weer",
+    "reading": null,
+    "ipa": "/ˈʋeːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "weather; storm",
     "primaryGloss": "weather",
     "emotion": "looking out the window in the morning to see what to wear",
@@ -181,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(storm) Stormy or foul atmospheric conditions, especially wind and rain.",
+        "why": "'Het weer' alone does not mean 'storm' (that is 'onweer' or 'noodweer')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "weather; storm",
+        "why": "Includes false 'storm' sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Also shares a form with 'weer' meaning weir or dyke",
+        "why": "Rare homonym trivia not useful at A2."
+      }
+    ],
+    "growth": 0.496
   }
 }

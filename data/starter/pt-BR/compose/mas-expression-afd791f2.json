@@ -72,6 +72,96 @@
     "primaryGloss": "but",
     "emotion": null,
     "notes": [
+      "Do not confuse 'mas' (but) with 'mais' (more). In many regions of Brazil, both are pronounced /ˈmajs/, and native speakers sometimes mix them up in informal writing."
+    ],
+    "senses": [
+      {
+        "id": "rh263fc914w10mi",
+        "order": 0,
+        "definition": "Used to introduce a statement that contrasts with what was just said.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "but",
+              "yet",
+              "however"
+            ]
+          }
+        ],
+        "domain": "contrast",
+        "emoji": "↔️",
+        "examples": [
+          {
+            "id": "ia44n6nxhrh9jm5",
+            "text": "Eu queria sair, mas está chovendo.",
+            "textLang": "pt",
+            "translation": "I wanted to go out, but it is raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit disappointed, sharing a small change of plans",
+            "note": null,
+            "matchedForm": "mas",
+            "matchedTranslationForm": "but"
+          },
+          {
+            "id": "8h5l4jtavlxdpuj",
+            "text": "Ele estudou muito, mas não passou na prova.",
+            "textLang": "pt",
+            "translation": "He studied a lot, but he did not pass the test.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly frustrated and sympathetic",
+            "note": null,
+            "matchedForm": "mas",
+            "matchedTranslationForm": "but"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "mas",
+    "lemma": "mas",
+    "reading": null,
+    "ipa": "/ˈmas/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "↔️",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "but; yet",
+    "primaryGloss": "but",
+    "emotion": null,
+    "notes": [
       "Don't confuse 'mas' (but) with 'mais' (more). 'Mas' is used to connect two contrasting thoughts, while 'mais' is used to talk about quantity or increasing something.",
       "Native speakers will sometimes spell 'mais' as 'mas' in informal text messages, but they are grammatically different words."
     ],
@@ -142,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'mas' is a single-word coordinating conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "A conjunction used to join two contrasting ideas or statements.",
+        "why": "Metalanguage ('A conjunction used to...'); should define the function directly."
+      }
+    ],
+    "growth": 0.781
   }
 }

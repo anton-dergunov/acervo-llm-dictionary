@@ -58,6 +58,75 @@
     "headword": "de onbekende",
     "lemma": "onbekende",
     "reading": null,
+    "ipa": "/ˌɔn.bəˈkɛn.də/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "stranger; unknown person",
+    "primaryGloss": "stranger",
+    "emotion": "a mix of caution and curiosity, observing someone unfamiliar in the distance",
+    "notes": [
+      "Formed from the adjective 'onbekend' (unknown). Plural: 'onbekenden'.",
+      "More formal or written than 'een vreemde' (a stranger); for 'the unknown' as an abstract idea, Dutch uses neuter 'het onbekende'."
+    ],
+    "senses": [
+      {
+        "id": "m06qgyz6vs807wt",
+        "order": 0,
+        "definition": "A person who is not known to the speaker or to others.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stranger",
+              "unknown person"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "232ecx4vjhxhozo",
+            "text": "De onbekende stapte uit de trein en keek om zich heen.",
+            "textLang": "nl",
+            "translation": "The stranger stepped off the train and looked around.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly detached, noting a character entering a scene",
+            "note": null,
+            "matchedForm": "onbekende",
+            "matchedTranslationForm": "stranger"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de onbekende",
+    "lemma": "onbekende",
+    "reading": null,
     "ipa": "/ˌɔn.bəˈkeːn.də/",
     "pos": "noun",
     "gender": "common",
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˌɔn.bəˈkeːn.də/",
+        "why": "Wrong vowel in stressed syllable; 'e' in closed syllable 'ken' is short /ɛ/, not /eː/."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "the unknown, unknown factor",
+        "why": "'The unknown' in the abstract is neuter 'het onbekende', not common 'de onbekende'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Something or someone that is not yet identified or understood.",
+        "why": "Marginal figurative sense for A2; mixes 'someone' (sense 0) with 'unknown factor'."
+      }
+    ],
+    "growth": 0.587
   }
 }

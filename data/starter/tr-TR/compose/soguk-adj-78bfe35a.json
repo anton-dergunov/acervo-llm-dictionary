@@ -62,6 +62,139 @@
     "headword": "soğuk",
     "lemma": "soğuk",
     "reading": null,
+    "ipa": "/soˈuk/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "cold; chilly; unfriendly",
+    "primaryGloss": "cold",
+    "emotion": "shivering slightly and pulling a jacket tighter against the chill",
+    "notes": [
+      "The 'ğ' is silent. Before a vowel suffix, final 'k' becomes 'ğ': 'soğuğa' (to the cold).",
+      "Also used as a noun meaning 'cold weather' or 'the cold' (e.g., 'Soğuktan nefret ederim' — I hate the cold)."
+    ],
+    "senses": [
+      {
+        "id": "owa3pft1elyguiv",
+        "order": 0,
+        "definition": "Having a low temperature; not warm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "chilly"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "kkzdxpwnqv66l8y",
+            "text": "Bugün hava çok soğuk, kalın bir mont giymelisin.",
+            "textLang": "tr",
+            "translation": "The weather is very cold today; you should wear a thick coat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "concerned and warning someone about the chilly weather",
+            "note": null,
+            "matchedForm": "soğuk",
+            "matchedTranslationForm": "cold"
+          },
+          {
+            "id": "15qkgq68b04bvp6",
+            "text": "Lütfen bana bir bardak soğuk su ver.",
+            "textLang": "tr",
+            "translation": "Please give me a glass of cold water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thirsty and asking for a refreshing drink",
+            "note": null,
+            "matchedForm": "soğuk",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "om3ekun7mkvj6xj",
+        "order": 1,
+        "definition": "Of a person or their manner: unfriendly or lacking warmth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "distant",
+              "unfriendly"
+            ]
+          }
+        ],
+        "domain": "personality",
+        "emoji": "🧊",
+        "examples": [
+          {
+            "id": "370kjkvhvhvi7xa",
+            "text": "Yeni komşumuz biraz soğuk bir insan.",
+            "textLang": "tr",
+            "translation": "Our new neighbor is a bit of a cold person.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "soğuk",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "soğuk",
+    "lemma": "soğuk",
+    "reading": null,
     "ipa": "/soˈuɡ/",
     "pos": "adj",
     "gender": null,
@@ -207,5 +340,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/soˈuɡ/",
+        "why": "Final 'k' in 'soğuk' is voiceless /k/, never voiced /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Having a low temperature, of an object or food and drink.",
+        "why": "Cold weather and cold objects/drinks are shades of one literal temperature sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[2].examples[0].text",
+        "quote": "Yeni komşumuz bana biraz soğuk davrandı.",
+        "why": "'soğuk davrandı' uses 'soğuk' adverbially (acted coldly), not as an adjective."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for both weather and physical objects that have a low temperature.",
+        "why": "Both notes just repeat the sense definitions."
+      }
+    ],
+    "growth": 0.984
   }
 }

@@ -58,6 +58,73 @@
     "headword": "ada",
     "lemma": "ada",
     "reading": null,
+    "ipa": "/aˈda/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏝️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "island",
+    "primaryGloss": "island",
+    "emotion": "peaceful and isolated, looking out at the open water",
+    "notes": [
+      "Because 'ada' ends in a vowel, it takes the buffer consonant 'y' before vowel-initial suffixes: 'adaya' (to the island), 'adayı' (the island, accusative)."
+    ],
+    "senses": [
+      {
+        "id": "fsr3jyk7vqd9dog",
+        "order": 0,
+        "definition": "A piece of land completely surrounded by water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "island"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏝️",
+        "examples": [
+          {
+            "id": "bam1m3zcb1462hc",
+            "text": "Yaz aylarında bu küçük adaya gitmek çok huzurlu.",
+            "textLang": "tr",
+            "translation": "Going to this small island in the summer months is very peaceful.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and dreamy, imagining a quiet summer getaway",
+            "note": null,
+            "matchedForm": "adaya",
+            "matchedTranslationForm": "island"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ada",
+    "lemma": "ada",
+    "reading": null,
     "ipa": "/aːˈda/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +228,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "A solemn promise or vow made to God",
+        "why": "Hallucinated sense; the word for a religious vow/offering is 'adak', not 'ada'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dileği gerçekleşince türbeye gidip ada adadı.",
+        "why": "Ungrammatical; the expression is 'adak adadı', not 'ada adadı'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "In a different context, 'ada' can also mean a solemn vow",
+        "why": "False claim; 'ada' is the imperative of 'adamak', whereas the noun is 'adak'."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aːˈda/",
+        "why": "The first vowel in 'ada' is short, not long: /aˈda/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Do not confuse 'ada' (island) with 'adet' (piece or number).",
+        "why": "Unhelpful filler; 'ada' and 'adet' are not commonly confused."
+      }
+    ],
+    "growth": 0.535
   }
 }

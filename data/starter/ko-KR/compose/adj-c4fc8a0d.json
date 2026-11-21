@@ -68,6 +68,117 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "difficult; hard; financially tough",
+    "primaryGloss": "difficult",
+    "emotion": "frowning slightly while concentrating on a challenging task",
+    "notes": [
+      "ㅂ-irregular: ㅂ changes to 우 before a vowel (어려워요, 어려운). Opposite: 쉽다 (easy).",
+      "Compare with 힘들다, which focuses on physical or mental exhaustion rather than complexity."
+    ],
+    "senses": [
+      {
+        "id": "d8fypm70ivrw35f",
+        "order": 0,
+        "definition": "Not easy to do, understand, or deal with.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "difficult",
+              "hard"
+            ]
+          }
+        ],
+        "domain": "difficulty",
+        "emoji": "🧩",
+        "examples": [
+          {
+            "id": "j96l3tkavbcp02m",
+            "text": "이 수학 문제는 너무 어려워요.",
+            "textLang": "ko",
+            "translation": "This math problem is too difficult.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit frustrated while looking at a textbook",
+            "note": null,
+            "matchedForm": "어려워요",
+            "matchedTranslationForm": "difficult"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wtyvkkxgio5xuei",
+        "order": 1,
+        "definition": "Of a financial situation or a person's circumstances: poor or full of hardship.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tough",
+              "hard",
+              "poor"
+            ]
+          }
+        ],
+        "domain": "circumstance",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "foms3snrlezyg4z",
+            "text": "그 시절에는 살기가 정말 어려웠어요.",
+            "textLang": "ko",
+            "translation": "Life was really hard back then.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "어려웠어요",
+            "matchedTranslationForm": "hard"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "어렵다",
+    "lemma": "어렵다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧩",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "difficult; hard",
     "primaryGloss": "difficult",
     "emotion": "frowning slightly while concentrating on a challenging task",
@@ -161,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "요즘 경제 상황이 어려워요.",
+        "why": "Definition says 'in a poor financial situation or needing help', which describes people/households, not 'economic situation'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential A2 note on ㅂ-irregular conjugation (어려워요, 어려운)."
+      }
+    ],
+    "growth": 0.763
   }
 }

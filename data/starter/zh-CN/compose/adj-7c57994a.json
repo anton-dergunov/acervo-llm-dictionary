@@ -69,6 +69,161 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "old; long-standing; tough (food)",
+    "primaryGloss": "old",
+    "emotion": "warm and respectful, thinking of someone elderly and dear",
+    "notes": [
+      "For objects that are worn out or used (as opposed to new), use 旧 (jiù) rather than 老.",
+      "As an adverb (often 老是), it colloquially means 'always' or 'constantly' (e.g., 他老迟到)."
+    ],
+    "senses": [
+      {
+        "id": "8mjyc6h7ca0gdzv",
+        "order": 0,
+        "definition": "Of a person or living thing: having lived for a long time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "aged",
+              "elderly"
+            ]
+          }
+        ],
+        "domain": "age",
+        "emoji": "👴",
+        "examples": [
+          {
+            "id": "w9gq44qvv2cdbp0",
+            "text": "爷爷虽然老了，但是身体很健康。",
+            "textLang": "zh",
+            "translation": "Although Grandpa is old, he is in very good health.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "老",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6yo01micgiol2s1",
+        "order": 1,
+        "definition": "Having existed or been known for a long time; former.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "old",
+              "long-standing",
+              "veteran"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "1vfkomwxadwe9q4",
+            "text": "我们是认识十年的老朋友了。",
+            "textLang": "zh",
+            "translation": "We are old friends who have known each other for ten years.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "老",
+            "matchedTranslationForm": "old"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4t69mk2ud806gry",
+        "order": 2,
+        "definition": "Of food or vegetables: tough, overcooked, or past its prime.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tough",
+              "overcooked",
+              "old"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "58e7lp2kw90377a",
+            "text": "这块牛肉煮得太老了，咬不动。",
+            "textLang": "zh",
+            "translation": "This piece of beef is cooked too tough; I can't chew it.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "老",
+            "matchedTranslationForm": "tough"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "老",
+    "lemma": "老",
+    "reading": "lǎo",
+    "ipa": "/lau̯˨˩˦/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👴",
+    "topics": [
+      "Describing",
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "old; aged",
     "primaryGloss": "old",
     "emotion": "warm and respectful, thinking of someone elderly and dear",
@@ -120,5 +275,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "他年纪大了，头发全白了。",
+        "why": "The example does not contain the headword 老."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing common everyday senses: long-standing (e.g. old friend) and tough/overcooked food."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for people who have lived a long time, but also",
+        "why": "Restates the definition and misses key distinction between 老 and 旧."
+      }
+    ],
+    "growth": 2.827
   }
 }

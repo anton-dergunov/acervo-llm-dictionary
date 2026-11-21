@@ -68,6 +68,75 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip, journey",
+    "primaryGloss": "trip",
+    "emotion": "excited and expectant, thinking about packing bags and leaving",
+    "notes": [
+      "In the plural, the 's' changes to a 'z': de reizen (which is also the verb 'to travel').",
+      "Used in common expressions like 'Goede reis!' (Have a good trip!) and 'op reis zijn' (to be travelling / away on a trip)."
+    ],
+    "senses": [
+      {
+        "id": "2fi0hsbf5dnq5uq",
+        "order": 0,
+        "definition": "An act of travelling from one place to another, especially over a long distance or for a holiday.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🧳",
+        "examples": [
+          {
+            "id": "44ay3co6lg3la04",
+            "text": "De reis naar Spanje duurt lang.",
+            "textLang": "nl",
+            "translation": "The trip to Spain takes a long time.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "weary and impatient, waiting to arrive",
+            "note": null,
+            "matchedForm": "reis",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de reis",
+    "lemma": "reis",
+    "reading": null,
+    "ipa": "/rɛi̯s/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; journey; travel",
     "primaryGloss": "trip",
     "emotion": "excited and expectant, thinking about packing bags and leaving",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(travel) An act of going to a place and returning.",
+        "why": "'Reis' does not specifically mean a round trip; senses 0 and 1 are one meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'reis' for a specific trip, journey, or vacation.",
+        "why": "Restates the glosses without adding helpful contrast."
+      }
+    ],
+    "growth": 0.852
   }
 }

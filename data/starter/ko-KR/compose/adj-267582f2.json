@@ -58,6 +58,157 @@
     "headword": "크다",
     "lemma": "크다",
     "reading": null,
+    "ipa": "kʰɯda",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "big; tall; loud",
+    "primaryGloss": "big",
+    "emotion": "wide-eyed and pointing, measuring something impressive with both hands",
+    "notes": [
+      "ㅡ-irregular: ㅡ drops before -어 (커요, 컸어요). Modifying form before a noun is 큰.",
+      "For a person's height, use 키가 크다 ('to be tall'). Note that 크다 is also used as a verb meaning 'to grow (up)'."
+    ],
+    "senses": [
+      {
+        "id": "lizwyqxkhrm7lr6",
+        "order": 0,
+        "definition": "Of great physical size, area, or scale.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "big",
+              "large",
+              "great"
+            ]
+          }
+        ],
+        "domain": "size",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "75db6tie5cj3uam",
+            "text": "이 집은 방이 아주 크다.",
+            "textLang": "ko",
+            "translation": "The rooms in this house are very big.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed and satisfied while walking through a spacious room",
+            "note": null,
+            "matchedForm": "크다",
+            "matchedTranslationForm": "big"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uipgl6u6s865ub3",
+        "order": 1,
+        "definition": "Of a person, animal, or plant: of great height.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tall",
+              "high"
+            ]
+          }
+        ],
+        "domain": "height",
+        "emoji": "🦒",
+        "examples": [
+          {
+            "id": "9je80jxmphewxbu",
+            "text": "제 동생은 키가 아주 크다.",
+            "textLang": "ko",
+            "translation": "My younger sibling is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "크다",
+            "matchedTranslationForm": "tall"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "cqz0c8r943dq2ui",
+        "order": 2,
+        "definition": "Of a voice or sound: high in volume.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "loud"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "📢",
+        "examples": [
+          {
+            "id": "p03ryu62hvff3sc",
+            "text": "음악 소리가 너무 크다.",
+            "textLang": "ko",
+            "translation": "The music is too loud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed while covering ears against sudden noise",
+            "note": null,
+            "matchedForm": "크다",
+            "matchedTranslationForm": "loud"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "크다",
+    "lemma": "크다",
+    "reading": null,
     "ipa": "/kɯda/",
     "pos": "adj",
     "gender": null,
@@ -201,5 +352,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kɯda/",
+        "why": "Wrong initial consonant: 크다 is aspirated /kʰɯda/, not plain /kɯda/ (그다)."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "동생이 키가 많이 컸다.",
+        "why": "컸다 here is the past tense of the verb 크다 ('to grow'), not the adjective 'to be tall'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for physical size, height, and also abstract things like a big",
+        "why": "Restates the senses without mentioning the ㅡ-irregular conjugation."
+      }
+    ],
+    "growth": 1.015
   }
 }

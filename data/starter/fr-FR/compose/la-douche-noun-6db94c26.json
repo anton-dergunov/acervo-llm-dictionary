@@ -85,6 +85,73 @@
     "shortGloss": "shower",
     "primaryGloss": "shower",
     "emotion": "refreshing and habitual, the feeling of washing away the day",
+    "notes": [
+      "To say 'to take a shower', use 'prendre une douche' (or the reflexive verb 'se doucher')."
+    ],
+    "senses": [
+      {
+        "id": "whddki80np7vh6z",
+        "order": 0,
+        "definition": "A wash under a spray of water, or the stall or device used for it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "shower"
+            ]
+          }
+        ],
+        "domain": "hygiene",
+        "emoji": "🚿",
+        "examples": [
+          {
+            "id": "c2v8vikerhj6snt",
+            "text": "Je prends une douche tous les matins.",
+            "textLang": "fr",
+            "translation": "I take a shower every morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and energetic, starting the day with focus",
+            "note": null,
+            "matchedForm": "douche",
+            "matchedTranslationForm": "shower"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "la douche",
+    "lemma": "douche",
+    "reading": null,
+    "ipa": "/duʃ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚿",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "shower",
+    "primaryGloss": "shower",
+    "emotion": "refreshing and habitual, the feeling of washing away the day",
     "notes": [],
     "senses": [
       {
@@ -130,5 +197,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:50Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Je prends une douche tous les matins.",
+        "why": "Example shows the act of showering ('prendre une douche'), while the definition only describes the apparatus."
+      }
+    ],
+    "growth": 1.51
   }
 }

@@ -68,6 +68,75 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to help; to assist",
+    "primaryGloss": "help",
+    "emotion": "kind and helpful, ready to lend a hand without hesitation",
+    "notes": [
+      "ㅂ-irregular verb: unlike most ㅂ-irregular verbs, ㅂ changes to 오 before -아/-어 (도와요, 도와서), and to 우 before other vowel endings (도운, 도우면).",
+      "When offering or asking for help in everyday speech, the compound 도와주다 (or polite 도와드리다) is commonly used."
+    ],
+    "senses": [
+      {
+        "id": "f9ta164tf83drf8",
+        "order": 0,
+        "definition": "To do something for someone to make their work or situation easier.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "help",
+              "assist"
+            ]
+          }
+        ],
+        "domain": "assistance",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "xb3n3bek7ut1z5z",
+            "text": "숙제를 도와주세요.",
+            "textLang": "ko",
+            "translation": "Please help me with my homework.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and sincere, asking for a bit of support",
+            "note": null,
+            "matchedForm": "도와주세요",
+            "matchedTranslationForm": "help"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "돕다",
+    "lemma": "돕다",
+    "reading": null,
+    "ipa": "/top.t͈a/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to help; to assist; to make easier",
     "primaryGloss": "help",
     "emotion": "kind and helpful, ready to lend a hand without hesitation",
@@ -121,5 +190,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "When a vowel follows, the 'ㅂ' changes to '우' (e.g., 도와요, not 돕아요).",
+        "why": "False rule: 돕다 is a special ㅂ-irregular where ㅂ becomes 오 before -아/어 (도와요), not 우."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use this for physical tasks, financial aid, or simply making",
+        "why": "Restates the definition without adding useful learner guidance."
+      }
+    ],
+    "growth": 0.806
   }
 }

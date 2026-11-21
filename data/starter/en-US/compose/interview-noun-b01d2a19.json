@@ -68,6 +68,114 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "entrevista",
+    "primaryGloss": "entrevista",
+    "emotion": "nervous and hopeful, preparing for a professional meeting",
+    "notes": [
+      "Se usa a menudo con los verbos 'have' (tener una entrevista), 'go to' (ir a una entrevista) o 'give' (conceder una entrevista a los medios)."
+    ],
+    "senses": [
+      {
+        "id": "pk4z2r4k5rvqtb5",
+        "order": 0,
+        "definition": "Reunión formal en la que se hacen preguntas a un candidato para evaluar si es apto para un puesto de trabajo o de estudio.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "entrevista",
+              "entrevista de trabajo"
+            ]
+          }
+        ],
+        "domain": "trabajo",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "6ov3z0slzbzlwx3",
+            "text": "She has a job interview tomorrow morning.",
+            "textLang": "en",
+            "translation": "Ella tiene una entrevista de trabajo mañana por la mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anxious and hopeful about the upcoming meeting",
+            "note": null,
+            "matchedForm": "interview",
+            "matchedTranslationForm": "entrevista"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "zatuz9ehz554apn",
+        "order": 1,
+        "definition": "Conversación en la que un periodista hace preguntas a una persona para publicar o transmitir sus respuestas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "entrevista"
+            ]
+          }
+        ],
+        "domain": "medios",
+        "emoji": "🎤",
+        "examples": [
+          {
+            "id": "oe37co14hkas744",
+            "text": "The singer gave a short interview after the concert.",
+            "textLang": "en",
+            "translation": "El cantante concedió una breve entrevista después del concierto.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and attentive, listening to a famous person talk",
+            "note": null,
+            "matchedForm": "interview",
+            "matchedTranslationForm": "entrevista"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "interview",
+    "lemma": "interview",
+    "reading": null,
+    "ipa": "/ˈɪntərvju/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "entrevista; reunión",
     "primaryGloss": "entrevista",
     "emotion": "nervous and hopeful, preparing for a professional meeting",
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "entrevista; reunión",
+        "why": "'reunión' is not in the glosses and is too broad for 'interview'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para una entrevista de trabajo como para cuando le",
+        "why": "Merely restates the two senses; better to note common collocations."
+      }
+    ],
+    "growth": 1.029
   }
 }

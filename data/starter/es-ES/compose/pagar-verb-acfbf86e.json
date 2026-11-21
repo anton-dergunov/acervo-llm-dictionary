@@ -77,6 +77,97 @@
     "primaryGloss": "to pay",
     "emotion": null,
     "notes": [
+      "Unlike English 'pay for', 'pagar' takes the thing bought as a direct object without 'por' (e.g., 'pagar la cena', 'pagar las entradas').",
+      "Spelling changes from 'g' to 'gu' before 'e': 'pagué' (past), 'pague' (subjunctive)."
+    ],
+    "senses": [
+      {
+        "id": "ohgz6mjj5zhd9ck",
+        "order": 0,
+        "definition": "To give money in exchange for goods, services, or a bill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to pay",
+              "to pay for"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "0xcajb3bjlu6mcr",
+            "text": "Tengo que pagar la factura del agua.",
+            "textLang": "es",
+            "translation": "I have to pay the water bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and responsible, acknowledging a necessary task",
+            "note": null,
+            "matchedForm": "pagar",
+            "matchedTranslationForm": "pay"
+          },
+          {
+            "id": "0482nfm1n9y1q4a",
+            "text": "Yo pago los cafés.",
+            "textLang": "es",
+            "translation": "I'll pay for the coffees.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pago",
+            "matchedTranslationForm": "pay for"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pagar",
+    "lemma": "pagar",
+    "reading": null,
+    "ipa": "/paˈɣaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pay; to pay for",
+    "primaryGloss": "to pay",
+    "emotion": null,
+    "notes": [
       "Use 'pagar' when talking about paying money in general.",
       "Use 'pagar por' when you want to emphasize the specific object or service you are paying for, though 'pagar' alone often works for this too (e.g., 'pagar la cuenta')."
     ],
@@ -146,5 +237,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Use 'pagar por' when you want to emphasize the specific object",
+        "why": "Misleading: normal Spanish uses 'pagar' transitively ('pagar las entradas'), unlike English 'pay for'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Voy a pagar por los boletos.",
+        "why": "'Boletos' is not Castilian Spanish ('entradas'/'billetes'), and 'pagar por' is an Anglicism here."
+      }
+    ],
+    "growth": 0.968
   }
 }

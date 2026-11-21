@@ -68,6 +68,73 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "bear",
+    "primaryGloss": "bear",
+    "emotion": "awed and cautious, watching the heavy animal move through the trees",
+    "notes": [
+      "Spelled identically to 'beruang' (having money / wealthy, from 'ber-' + 'uang'), which is pronounced with a slight glottal stop (/bərˈʔu.aŋ/)."
+    ],
+    "senses": [
+      {
+        "id": "r612auwrx6qqncm",
+        "order": 0,
+        "definition": "A large, heavy wild mammal with thick fur and sharp claws.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bear"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐻",
+        "examples": [
+          {
+            "id": "dd4u70o8sz2itcs",
+            "text": "Beruang hitam mencari makan di hutan.",
+            "textLang": "id",
+            "translation": "The black bear is looking for food in the forest.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quietly warning a companion to stay back",
+            "note": null,
+            "matchedForm": "Beruang",
+            "matchedTranslationForm": "bear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "beruang",
+    "lemma": "beruang",
+    "reading": null,
+    "ipa": "/bəˈru.aŋ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐻",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "bear; to have money",
     "primaryGloss": "bear",
     "emotion": "awed and cautious, watching the heavy animal move through the trees",
@@ -161,5 +228,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(wealth) Having money; wealthy or well-off.",
+        "why": "The entry POS is noun; 'beruang' (wealthy) is a verb/adjective from a different lemma ('uang')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "bear; to have money",
+        "why": "'To have money' is not a noun sense."
+      }
+    ],
+    "growth": 0.492
   }
 }

@@ -58,6 +58,76 @@
     "headword": "φεύγω",
     "lemma": "φεύγω",
     "reading": null,
+    "ipa": "/ˈfevɣo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to leave; to go away",
+    "primaryGloss": "leave",
+    "emotion": "hurried and purposeful, ready to step out the door",
+    "notes": [
+      "Irregular aorist: έφυγα (subjunctive: να φύγω). Note that the combination ευ is pronounced /ev/ in the present tense, but /f/ in the aorist.",
+      "Takes από before the place you are leaving (e.g., φεύγω από το σπίτι, 'I leave the house')."
+    ],
+    "senses": [
+      {
+        "id": "0g3h2cwj56cjwez",
+        "order": 0,
+        "definition": "To go away from a place or person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "leave",
+              "go away",
+              "depart"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "00wu52w6upbwv8b",
+            "text": "Πρέπει να φύγω τώρα γιατί έχω δουλειά.",
+            "textLang": "el",
+            "translation": "I have to leave now because I have work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "apologetic and rushed, looking at the watch",
+            "note": null,
+            "matchedForm": "φύγω",
+            "matchedTranslationForm": "leave"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "φεύγω",
+    "lemma": "φεύγω",
+    "reading": null,
     "ipa": "/ˈfεύ.ɣω/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +233,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈfεύ.ɣω/",
+        "why": "Corrupt IPA containing Greek letters 'εύ' and 'ω' instead of /ˈfev.ɣo/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To escape or run away from danger or a situation.",
+        "why": "In the example, έφυγε simply means 'left/went away'; 'escape' is δραπετεύω or ξεφεύγω."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the highly irregular and essential aorist stem (έφυγα, subjunctive να φύγω)."
+      }
+    ],
+    "growth": 0.774
   }
 }

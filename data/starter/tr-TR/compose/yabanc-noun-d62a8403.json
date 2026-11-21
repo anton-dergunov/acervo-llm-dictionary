@@ -60,6 +60,113 @@
     "headword": "yabancı",
     "lemma": "yabancı",
     "reading": null,
+    "ipa": "/jabanˈdʒɯ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "stranger; foreigner",
+    "primaryGloss": "stranger",
+    "emotion": null,
+    "notes": [
+      "Also very commonly used as an adjective meaning 'foreign' or 'unfamiliar' (e.g., 'yabancı dil' — foreign language)."
+    ],
+    "senses": [
+      {
+        "id": "p1ey4f0sc9wprv0",
+        "order": 0,
+        "definition": "A person you do not know or have never met before.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stranger"
+            ]
+          }
+        ],
+        "domain": "stranger",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "nuarf1wse72tqc3",
+            "text": "Sokakta bir yabancı bana saati sordu.",
+            "textLang": "tr",
+            "translation": "A stranger asked me for the time on the street.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yabancı",
+            "matchedTranslationForm": "stranger"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tcyhy0phlxjhqc1",
+        "order": 1,
+        "definition": "A person who comes from another country.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "foreigner"
+            ]
+          }
+        ],
+        "domain": "foreigner",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "npzzf2bwiaohen1",
+            "text": "Bu mahallede çok yabancı yaşıyor.",
+            "textLang": "tr",
+            "translation": "Many foreigners live in this neighborhood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yabancı",
+            "matchedTranslationForm": "foreigners"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yabancı",
+    "lemma": "yabancı",
+    "reading": null,
     "ipa": "/jabaːnˈdʒɯ/",
     "pos": "noun",
     "gender": null,
@@ -163,5 +270,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/jabaːnˈdʒɯ/",
+        "why": "The second vowel is short in standard Turkish: /jabanˈdʒɯ/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "stranger; foreigner; unknown",
+        "why": "'unknown' is an adjective gloss, not a noun sense in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tanımadığım bir yabancı sokakta bana saat sordu.",
+        "why": "'Tanımadığım bir yabancı' is redundant, and asking the time is 'saati sormak'."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bu şehirde çok fazla yabancı turist var.",
+        "why": "Uses 'yabancı' as an attributive adjective ('foreign tourists'), not a noun ('foreigner')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for someone from another country (foreigner) and someone you have",
+        "why": "Restates the two senses; better to note its common use as an adjective ('foreign')."
+      }
+    ],
+    "growth": 0.763
   }
 }

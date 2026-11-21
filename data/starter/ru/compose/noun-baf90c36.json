@@ -68,6 +68,94 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and cool, holding a cold glass on a hot day",
+    "notes": [
+      "The stress shifts to the first syllable in the accusative singular (во́ду) and in the nominative/accusative plural (во́ды), vs. genitive singular (воды́)."
+    ],
+    "senses": [
+      {
+        "id": "usa0nm8quo3l70c",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, forms rivers and seas, and that people and animals drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "substance",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "r41r63opzo44r12",
+            "text": "Я хочу пить холодную воду.",
+            "textLang": "ru",
+            "translation": "I want to drink cold water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "thirsty and eager, looking forward to a refreshing drink",
+            "note": null,
+            "matchedForm": "воду",
+            "matchedTranslationForm": "water"
+          },
+          {
+            "id": "nco5k8nt6t05wgm",
+            "text": "Мы сидели у воды и смотрели на закат.",
+            "textLang": "ru",
+            "translation": "We sat by the water and watched the sunset.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and peaceful, enjoying the quiet scenery by the lake",
+            "note": null,
+            "matchedForm": "воды",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "вода",
+    "lemma": "вода",
+    "reading": null,
+    "ipa": "/vɐˈda/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "water; body of water",
     "primaryGloss": "water",
     "emotion": "refreshing and cool, holding a cold glass on a hot day",
@@ -159,5 +247,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "The stress shifts to the ending in the plural form (воды) and in most cases (воды, воде, воду).",
+        "why": "False stress claims: plural is 'во́ды' and accusative singular is 'во́ду' (both stem-stressed)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A large area of liquid, such as the sea, a lake, or a river.",
+        "why": "Shades of the same basic meaning 'water'; oversplit for an A2 entry."
+      }
+    ],
+    "growth": 0.992
   }
 }

@@ -58,6 +58,117 @@
     "headword": "βαριεστημένος",
     "lemma": "βαριεστημένος",
     "reading": null,
+    "ipa": "/vaɾjestiˈmenos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥱",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "bored; unenthusiastic, fed up",
+    "primaryGloss": "bored",
+    "emotion": "slumping back with a heavy sigh, completely fed up",
+    "notes": [
+      "Related to the common verb 'βαριέμαι' (to be bored, to not feel like doing something).",
+      "Unlike 'κουρασμένος' (physically tired), 'βαριεστημένος' refers to mental boredom or lack of interest."
+    ],
+    "senses": [
+      {
+        "id": "jo20wyw3rgem708",
+        "order": 0,
+        "definition": "Feeling tired and impatient because one has nothing interesting to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bored",
+              "listless"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🥱",
+        "examples": [
+          {
+            "id": "7u1zuyvcdzbzh0e",
+            "text": "Κάθεται στον καναπέ βαριεστημένος όλο το απόγευμα.",
+            "textLang": "el",
+            "translation": "He sits on the couch, bored, all afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slumping and staring blankly ahead with nothing to do",
+            "note": null,
+            "matchedForm": "βαριεστημένος",
+            "matchedTranslationForm": "bored"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ev8p39lo9cbo9bf",
+        "order": 1,
+        "definition": "Showing a lack of interest, effort, or enthusiasm.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "unenthusiastic",
+              "half-hearted",
+              "fed up"
+            ]
+          }
+        ],
+        "domain": "attitude",
+        "emoji": "😒",
+        "examples": [
+          {
+            "id": "jhjesv9ij7r5q35",
+            "text": "Μας έδωσε μια βαριεστημένη απάντηση και έφυγε.",
+            "textLang": "el",
+            "translation": "He gave us an unenthusiastic answer and left.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "dismissive and weary, wishing to be anywhere else",
+            "note": null,
+            "matchedForm": "βαριεστημένη",
+            "matchedTranslationForm": "unenthusiastic"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "βαριεστημένος",
+    "lemma": "βαριεστημένος",
+    "reading": null,
     "ipa": "/ba.ɾi.es.tiˈme.nos/",
     "pos": "adj",
     "gender": null,
@@ -163,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ba.ɾi.es.tiˈme.nos/",
+        "why": "Greek 'β' is /v/, not /b/, and 'ιε' is pronounced /je/: /vaɾjestiˈmenos/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Derived from the verb βαριεστριέμαι (to be bored)",
+        "why": "Misspelled verb with an intrusive 'ρ'; the verb is 'βαριέμαι' (or less common 'βαριεστίζω' / 'βαριεστιέμαι')."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "bored, weary of nothing to do, listless",
+        "why": "'weary of nothing to do' is ungrammatical English and not a usable gloss."
+      }
+    ],
+    "growth": 0.788
   }
 }

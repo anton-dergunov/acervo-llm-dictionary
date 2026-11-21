@@ -72,6 +72,116 @@
     "primaryGloss": "to call",
     "emotion": "focused and direct, reaching out to someone urgently",
     "notes": [
+      "Imperfective; its perfective pair is 'zadzwonić'.",
+      "To call someone on the phone is 'dzwonić do' + genitive (e.g. dzwonić do mamy)."
+    ],
+    "senses": [
+      {
+        "id": "9a618ramyg2dvyf",
+        "order": 0,
+        "definition": "To contact or speak to someone by telephone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to call",
+              "to phone",
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "phone",
+        "emoji": "📞",
+        "examples": [
+          {
+            "id": "ng7cxrmmgcw6rhv",
+            "text": "Często dzwonię do mamy.",
+            "textLang": "pl",
+            "translation": "I often call my mom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dzwonię",
+            "matchedTranslationForm": "call"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "i5xa8ai1f2cge3u",
+        "order": 1,
+        "definition": "To make a ringing sound, like a bell, phone, or alarm clock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to ring"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🔔",
+        "examples": [
+          {
+            "id": "irz644orx6q6ors",
+            "text": "Budzik dzwoni wcześnie rano.",
+            "textLang": "pl",
+            "translation": "The alarm clock rings early in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "dzwoni",
+            "matchedTranslationForm": "rings"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "dzwonić",
+    "lemma": "dzwonić",
+    "reading": null,
+    "ipa": "/ˈd͡zvɔɲit͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📞",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to call; to ring",
+    "primaryGloss": "to call",
+    "emotion": "focused and direct, reaching out to someone urgently",
+    "notes": [
       "When used to mean 'to call someone on the phone', dzwonić takes the dative case (dzwonić do kogoś).",
       "Do not confuse with 'dzwonić' meaning the literal ringing of a bell or alarm."
     ],
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "dzwonić takes the dative case (dzwonić do kogoś).",
+        "why": "'Do' takes the genitive case (do kogoś), not the dative."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę dzwonić do mamy.",
+        "why": "Single future action after 'muszę' requires the perfective 'zadzwonić', not imperfective 'dzwonić'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'dzwonić' meaning the literal ringing of a bell",
+        "why": "Tells the learner not to confuse the word with its own second sense."
+      }
+    ],
+    "growth": 0.881
   }
 }

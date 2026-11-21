@@ -58,6 +58,74 @@
     "headword": "la ciudad",
     "lemma": "ciudad",
     "reading": null,
+    "ipa": "/θjuˈðað/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏙️",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "city; town",
+    "primaryGloss": "city",
+    "emotion": "bustling and alive, feeling the energy of crowds and tall buildings",
+    "notes": [
+      "For a smaller town or village, use 'el pueblo' instead."
+    ],
+    "senses": [
+      {
+        "id": "t01m2m8o5a50vft",
+        "order": 0,
+        "definition": "A large, populated town with many streets and buildings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "city",
+              "town"
+            ]
+          }
+        ],
+        "domain": "city",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "z8pqyfwcx3nb0u5",
+            "text": "Vivimos en una ciudad muy grande.",
+            "textLang": "es",
+            "translation": "We live in a very large city.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and informative, sharing where you reside",
+            "note": null,
+            "matchedForm": "ciudad",
+            "matchedTranslationForm": "city"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la ciudad",
+    "lemma": "ciudad",
+    "reading": null,
     "ipa": "/θiuˈðað/",
     "pos": "noun",
     "gender": "feminine",
@@ -159,5 +227,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:45Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A large town.",
+        "why": "Senses 0 and 1 are identical; 'ciudad' has one meaning translated as city or town."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'ciudad' for large, populated areas with many buildings and streets.",
+        "why": "Restates the definition without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/θiuˈðað/",
+        "why": "Standard phonemic transcription uses the glide /j/ in the diphthong: /θjuˈðað/."
+      }
+    ],
+    "growth": 0.534
   }
 }

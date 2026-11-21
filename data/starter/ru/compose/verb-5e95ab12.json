@@ -60,6 +60,95 @@
     "headword": "приезжать",
     "lemma": "приезжать",
     "reading": null,
+    "ipa": "/prʲɪjɪˈʑːætʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚗",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "to arrive, to come (by vehicle)",
+    "primaryGloss": "to arrive",
+    "emotion": "a sense of movement and expectation, feeling refreshed after a journey",
+    "notes": [
+      "Imperfective (perfective приехать). Used for arriving by vehicle or from another city or country; for arriving on foot within the same town, use приходить / прийти."
+    ],
+    "senses": [
+      {
+        "id": "tth1mh9ao7csq1p",
+        "order": 0,
+        "definition": "To reach a place or come somewhere by vehicle, or from far away.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to arrive",
+              "to come"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🚝",
+        "examples": [
+          {
+            "id": "s16exwstn8dzkn5",
+            "text": "Я часто приезжаю в этот город по работе.",
+            "textLang": "ru",
+            "translation": "I often come to this city for work.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and routine, describing a regular travel habit",
+            "note": null,
+            "matchedForm": "приезжаю",
+            "matchedTranslationForm": "come"
+          },
+          {
+            "id": "eogecg5gr1z5xjy",
+            "text": "Мы приезжаем на вокзал ровно в пять.",
+            "textLang": "ru",
+            "translation": "We arrive at the station at exactly five.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "focused and punctual, anticipating the arrival time",
+            "note": null,
+            "matchedForm": "приезжаем",
+            "matchedTranslationForm": "arrive"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "приезжать",
+    "lemma": "приезжать",
+    "reading": null,
     "ipa": "/prʲɪˈjɛzʐətʲ/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/prʲɪˈjɛzʐətʲ/",
+        "why": "Wrong stress and vowel in IPA; приезжа́ть is pronounced /prʲɪ(j)ɪˈʑːætʲ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To reach a destination after a journey.",
+        "why": "Senses 0 and 1 are the exact same meaning ('to arrive/come by vehicle')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Note mentions it is imperfective without naming its perfective partner (приехать)."
+      }
+    ],
+    "growth": 0.846
   }
 }

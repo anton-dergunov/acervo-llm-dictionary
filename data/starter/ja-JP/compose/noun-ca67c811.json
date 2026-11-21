@@ -57,6 +57,94 @@
     "language": "ja",
     "headword": "夏",
     "lemma": "夏",
+    "reading": "なつ",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "summer",
+    "primaryGloss": "summer",
+    "emotion": "nostalgic and warm, recalling bright sunny days and festival air",
+    "notes": [
+      "Can be used directly as a time word without a particle (e.g., 夏、海へ行く), or with に (夏に). In compounds, it uses the reading か, as in 夏季 (かき, summer season)."
+    ],
+    "senses": [
+      {
+        "id": "tiennrxmucnl6h3",
+        "order": 0,
+        "definition": "The warmest season of the year, between spring and autumn.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "summer"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "atfkgqtgvmmmzxk",
+            "text": "今年の夏はとても暑いです。",
+            "textLang": "ja",
+            "translation": "This summer is very hot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary and sweaty, focusing on the heat",
+            "note": null,
+            "matchedForm": "夏",
+            "matchedTranslationForm": "summer"
+          },
+          {
+            "id": "hh5nd9v45rwab07",
+            "text": "夏になると海へ行きたくなります。",
+            "textLang": "ja",
+            "translation": "When summer comes, I want to go to the beach.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and longing, thinking of vacation plans",
+            "note": null,
+            "matchedForm": "夏",
+            "matchedTranslationForm": "summer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "夏",
+    "lemma": "夏",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -140,5 +228,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:02Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (なつ) for a kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with the counter for occurrences or times",
+        "why": "False claim; 夏 is never used as a counter for occurrences or times."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "夏 is used for the season of summer, which in Japan",
+        "why": "Restates the definition and adds encyclopedia trivia instead of linguistic usage."
+      }
+    ],
+    "growth": 0.761
   }
 }

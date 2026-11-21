@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "necesitar; hacer falta; tener que",
+    "primaryGloss": "necesitar",
+    "emotion": "sincere and direct, clearly stating a requirement or a lack",
+    "notes": [
+      "Se usa con un sustantivo ('I need a pen') o seguido de 'to' + infinitivo ('I need to go')."
+    ],
+    "senses": [
+      {
+        "id": "1ccqk0own5kgsgj",
+        "order": 0,
+        "definition": "Tener la necesidad de algo o de alguien.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "necesitar",
+              "hacer falta"
+            ]
+          }
+        ],
+        "domain": "necesidad",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "q66lgizdqk4duux",
+            "text": "I need more time to finish this project.",
+            "textLang": "en",
+            "translation": "Necesito más tiempo para terminar este proyecto.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit overwhelmed and focused, asking for more space to work",
+            "note": null,
+            "matchedForm": "need",
+            "matchedTranslationForm": "Necesito"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hsmxzu6704uem96",
+        "order": 1,
+        "definition": "Estar obligado a hacer algo o ser necesario hacerlo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "tener que",
+              "necesitar"
+            ]
+          }
+        ],
+        "domain": "obligación",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "wrwhoagtcgq59xa",
+            "text": "You need to have a valid ticket to board the train.",
+            "textLang": "en",
+            "translation": "Tienes que tener un billete válido para subir al tren.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, clarifying the rules of a situation",
+            "note": null,
+            "matchedForm": "need",
+            "matchedTranslationForm": "Tienes que"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "need",
+    "lemma": "need",
+    "reading": null,
+    "ipa": "/niːd/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🙏",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "necesitar; hacer falta",
     "primaryGloss": "necesitar",
     "emotion": "sincere and direct, clearly stating a requirement or a lack",
@@ -160,5 +269,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "tener que tener, hacer falta",
+        "why": "For 'need to + verb', the natural Spanish gloss is 'tener que' or 'necesitar', not 'tener que tener'."
+      }
+    ],
+    "growth": 0.811
   }
 }

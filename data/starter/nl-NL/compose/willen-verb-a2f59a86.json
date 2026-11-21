@@ -68,6 +68,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to want; to wish",
+    "primaryGloss": "to want",
+    "emotion": "focused and determined, stating a clear intention",
+    "notes": [
+      "Irregular modal verb: ik wil, jij/u wilt (or wil), hij/zij wil; past: wilde or wou; past participle: gewild.",
+      "On its own, 'Ik wil...' sounds blunt when ordering or asking; add 'graag' ('Ik wil graag...') or use 'Ik zou graag ... willen' to sound polite."
+    ],
+    "senses": [
+      {
+        "id": "f7lnhjdb8iacvtp",
+        "order": 0,
+        "definition": "To wish to have or do something, or to be willing to do it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to want",
+              "to wish",
+              "to be willing"
+            ]
+          }
+        ],
+        "domain": "desire",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "fefs189br2z74h9",
+            "text": "Ik wil graag een kopje koffie.",
+            "textLang": "nl",
+            "translation": "I would like a cup of coffee.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and eager, ordering a morning drink at a café",
+            "note": null,
+            "matchedForm": "wil",
+            "matchedTranslationForm": "would like"
+          },
+          {
+            "id": "6jcclf78pmxdlwn",
+            "text": "Wat wil je vanavond doen?",
+            "textLang": "nl",
+            "translation": "What do you want to do tonight?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "wil",
+            "matchedTranslationForm": "want"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "willen",
+    "lemma": "willen",
+    "reading": null,
+    "ipa": "/ˈʋɪlə(n)/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💭",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to want; to wish; to be willing",
     "primaryGloss": "want",
     "emotion": "focused and determined, stating a clear intention",
@@ -183,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[1].text",
+        "quote": "Wat wil je tonight doen?",
+        "why": "Contains the English word 'tonight' instead of Dutch 'vanavond'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To be willing or ready to do something.",
+        "why": "Shades of the same meaning; 'niet willen' is just 'to refuse / not want to'."
+      }
+    ],
+    "growth": 0.824
   }
 }

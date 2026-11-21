@@ -75,6 +75,138 @@
     "primaryGloss": "pay",
     "emotion": "matter-of-fact, focusing on the transaction at hand",
     "notes": [
+      "Unlike English 'to pay for', 'pagar' usually takes the item directly without a preposition (e.g., 'Pagué el café' = I paid for the coffee).",
+      "Do not confuse with 'gastar', which means 'to spend' (e.g., 'Gasté mucho dinero hoy')."
+    ],
+    "senses": [
+      {
+        "id": "8iyr9oxkis07urx",
+        "order": 0,
+        "definition": "To give money in exchange for something bought or a service received.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay",
+              "pay for"
+            ]
+          }
+        ],
+        "domain": "transaction",
+        "emoji": "💵",
+        "examples": [
+          {
+            "id": "v4p9iqsheq4sy84",
+            "text": "Tengo que pagar la cuenta del restaurante.",
+            "textLang": "es",
+            "translation": "I have to pay the restaurant bill.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit weary, sighing while reaching for the wallet",
+            "note": null,
+            "matchedForm": "pagar",
+            "matchedTranslationForm": "pay"
+          },
+          {
+            "id": "u1be6b440fatkxo",
+            "text": "Yo pago los boletos de cine.",
+            "textLang": "es",
+            "translation": "I'll pay for the movie tickets.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "pago",
+            "matchedTranslationForm": "pay for"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "jqdy0z0k5i4hy0u",
+        "order": 1,
+        "definition": "To suffer the unpleasant consequences of an action.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pay for",
+              "pay"
+            ]
+          }
+        ],
+        "domain": "consequence",
+        "emoji": "⚖️",
+        "examples": [
+          {
+            "id": "djgxkp7q21q17sh",
+            "text": "Vas a pagar por lo que hiciste.",
+            "textLang": "es",
+            "translation": "You are going to pay for what you did.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stern and serious, conveying a warning",
+            "note": null,
+            "matchedForm": "pagar",
+            "matchedTranslationForm": "pay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "pagar",
+    "lemma": "pagar",
+    "reading": null,
+    "ipa": "/paˈɣaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💳",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to pay; to pay for",
+    "primaryGloss": "pay",
+    "emotion": "matter-of-fact, focusing on the transaction at hand",
+    "notes": [
       "Use 'pagar' when you give money for a good or service. If you want to specify what you are paying for, use 'pagar por' (e.g., 'Pagué por el café').",
       "Do not confuse this with 'gastar', which means 'to spend' (e.g., 'Gasté mucho dinero hoy')."
     ],
@@ -185,5 +317,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "If you want to specify what you are paying for, use 'pagar por'",
+        "why": "False rule: Spanish normally takes a direct object ('pagar el café') without 'por'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[1].text",
+        "quote": "Voy a pagar por los boletos de cine.",
+        "why": "Calque from English 'pay for'; natural Spanish is 'pagar los boletos'."
+      }
+    ],
+    "growth": 0.903
   }
 }

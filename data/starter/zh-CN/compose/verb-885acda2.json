@@ -57,6 +57,75 @@
     "language": "zh",
     "headword": "走路",
     "lemma": "走路",
+    "reading": "zǒulù",
+    "ipa": "/tsou̯˨˩˦ lu˥˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to walk; to go on foot",
+    "primaryGloss": "walk",
+    "emotion": "steady and purposeful, setting off for a stroll",
+    "notes": [
+      "走路 is a separable verb (走 + 路, 'walk + road'), so modifiers go in the middle: 走了很多路 (walked a long way).",
+      "Do not confuse 走路 ('to walk / go on foot') with 走 alone, which often means 'to leave' (我们该走了, 'we should leave')."
+    ],
+    "senses": [
+      {
+        "id": "lg7789ffd36a6ju",
+        "order": 0,
+        "definition": "To move or travel on foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "walk",
+              "go on foot"
+            ]
+          }
+        ],
+        "domain": "walk",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "l0dpus1q137pfk3",
+            "text": "我每天走路去上学。",
+            "textLang": "zh",
+            "translation": "I walk to school every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "bright and routine, talking about a normal daily habit",
+            "note": null,
+            "matchedForm": "走路",
+            "matchedTranslationForm": "walk"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "走路",
+    "lemma": "走路",
     "reading": "zǒu lù",
     "ipa": "/tsou̯˨˩˦ lu˥˩/",
     "pos": "verb",
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To depart or leave a place.",
+        "why": "In Mandarin, 'to leave' is 走 (zǒu), not 走路 (zǒulù), which only means 'to walk'."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "时间不早了，我们该走路了。",
+        "why": "Unnatural Mandarin; a native speaker says 该走了 ('should leave'), not 该走路了."
+      }
+    ],
+    "growth": 0.887
   }
 }

@@ -72,6 +72,73 @@
     "primaryGloss": "noodles",
     "emotion": "craving a warm, simple, and comforting bowl of food",
     "notes": [
+      "Often shortened to 面 (miàn), especially in the names of dishes like 牛肉面 (niúròumiàn, beef noodles)."
+    ],
+    "senses": [
+      {
+        "id": "7ufyp2zk3sc4w3v",
+        "order": 0,
+        "definition": "A food made from flour and water, shaped into long, thin strips and boiled.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "noodles"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍜",
+        "examples": [
+          {
+            "id": "vhwf0t58827drfd",
+            "text": "今天晚上我们吃面条吧。",
+            "textLang": "zh",
+            "translation": "Let's eat noodles tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "面条",
+            "matchedTranslationForm": "noodles"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "面条",
+    "lemma": "面条",
+    "reading": "miàn tiáo",
+    "ipa": "/mi̯ɛn˥˩ tʰi̯au̯˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍜",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "noodles",
+    "primaryGloss": "noodles",
+    "emotion": "craving a warm, simple, and comforting bowl of food",
+    "notes": [
       "In spoken Chinese, you can often just say 'miàn' instead of the full 'miàntiáo'.",
       "Unlike the English word 'noodles' which can be plural, 'miàntiáo' can refer to a single strand or a whole bowl of them without changing form."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我想吃一碗牛肉面条。",
+        "why": "Unnatural; dish names use 面 (牛肉面), while 面条 refers to the food or uncooked noodles."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Unlike the English word 'noodles' which can be plural, 'miàntiáo' can",
+        "why": "Explains general Chinese grammar (lack of plural inflection) rather than this word."
+      }
+    ],
+    "growth": 0.616
   }
 }

@@ -74,6 +74,74 @@
     "primaryGloss": "jugo",
     "emotion": null,
     "notes": [
+      "Generalmente es incontable ('some juice', 'a glass of juice'), pero se usa como contable para pedir vasos o envases ('two orange juices')."
+    ],
+    "senses": [
+      {
+        "id": "a4fqeaparxvnfxq",
+        "order": 0,
+        "definition": "Líquido que se obtiene al exprimir frutas o verduras.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "jugo",
+              "zumo"
+            ]
+          }
+        ],
+        "domain": "bebida",
+        "emoji": "🍊",
+        "examples": [
+          {
+            "id": "hyg1r8qh84ozt51",
+            "text": "I like to drink orange juice in the morning.",
+            "textLang": "en",
+            "translation": "Me gusta tomar jugo de naranja por la mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "entusiasta y saludable, disfrutando del primer sorbo del día",
+            "note": null,
+            "matchedForm": "juice",
+            "matchedTranslationForm": "jugo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "juice",
+    "lemma": "juice",
+    "reading": null,
+    "ipa": "/dʒuːs/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "jugo; zumo",
+    "primaryGloss": "jugo",
+    "emotion": null,
+    "notes": [
       "En Estados Unidos se utiliza principalmente la palabra 'juice' para referirse a cualquier bebida extraída de frutas o verduras.",
       "En España, es mucho más común utilizar la palabra 'zumo' para referirse a la misma bebida.",
       "La palabra 'juice' también puede usarse de forma figurada para hablar de la energía o el poder de algo, como la batería de un dispositivo."
@@ -164,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "En Estados Unidos se utiliza principalmente la palabra 'juice'",
+        "why": "Notes restate the definitions/glosses instead of explaining grammar (e.g., uncountable vs countable use)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on uncountable usage ('some juice', 'a glass of juice')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "La energía o electricidad que hace funcionar un aparato electrónico.",
+        "why": "Colloquial slang sense ('battery power') is marginal for an A2 beginner."
+      }
+    ],
+    "growth": 0.433
   }
 }

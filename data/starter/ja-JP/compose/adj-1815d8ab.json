@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "wanted; desired; want (someone) to do",
+    "primaryGloss": "wanted",
+    "emotion": "eager and honest, expressing a simple personal desire",
+    "notes": [
+      "Takes the particle が for the desired thing (靴が欲しい 'I want shoes'), and connects to the て-form of a verb when wanting someone else to do something (来て欲しい 'I want you to come').",
+      "Used normally only for the speaker's own desires (or in questions to the listener). To say you want to do an action yourself, use the ～たい form of the verb instead (行きたい 'I want to go')."
+    ],
+    "senses": [
+      {
+        "id": "c2vkqi9h7sonbo1",
+        "order": 0,
+        "definition": "desired by the speaker; that one wants to have.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wanted",
+              "desired",
+              "want"
+            ]
+          }
+        ],
+        "domain": "desire",
+        "emoji": "💎",
+        "examples": [
+          {
+            "id": "4hvvl34564trfft",
+            "text": "新しい靴が欲しいです。",
+            "textLang": "ja",
+            "translation": "I want new shoes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hopeful and clear, looking forward to getting something new",
+            "note": null,
+            "matchedForm": "欲しい",
+            "matchedTranslationForm": "want"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qsxqpcxa1gy9kfd",
+        "order": 1,
+        "definition": "used after the て-form of a verb to mean that the speaker wants someone else to do that action.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "want (someone) to do",
+              "wish (someone) would do"
+            ]
+          }
+        ],
+        "domain": "request",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "ojmf3ccc42elnc5",
+            "text": "もっと早く来て欲しい。",
+            "textLang": "ja",
+            "translation": "I want you to come earlier.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly impatient but sincere, wanting a different outcome",
+            "note": null,
+            "matchedForm": "欲しい",
+            "matchedTranslationForm": "want"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "欲しい",
+    "lemma": "欲しい",
+    "reading": "ほしい",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "want; wish to have",
     "primaryGloss": "want",
     "emotion": "eager and honest, expressing a simple personal desire",
@@ -160,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "To feel that you would like to have or possess something.",
+        "why": "Adjective defined as a verb ('To feel...') instead of a quality or state."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "To wish for an outcome or to have someone perform an action.",
+        "why": "Adjective defined as a verb ('To wish...') instead of a construction or quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "(noun + 欲しい)",
+        "why": "Missing the required particle が (noun + が + 欲しい)."
+      }
+    ],
+    "growth": 1.255
   }
 }

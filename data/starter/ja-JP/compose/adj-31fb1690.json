@@ -68,6 +68,118 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "dangerous; risky; watch out!",
+    "primaryGloss": "dangerous",
+    "emotion": "alert and cautious, focusing on potential harm ahead",
+    "notes": [
+      "Shouted on its own as 危ない！ ('Watch out!'), or in the past tense 危なかった！ ('That was close!').",
+      "In casual speech, often pronounced あぶねえ."
+    ],
+    "senses": [
+      {
+        "id": "c3zqi5ywpzlfaeu",
+        "order": 0,
+        "definition": "Likely to cause harm, injury, or failure.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dangerous",
+              "risky",
+              "unsafe"
+            ]
+          }
+        ],
+        "domain": "danger",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "51f366o4enaps6r",
+            "text": "この道は夜になると危ないです。",
+            "textLang": "ja",
+            "translation": "This road is dangerous at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "serious and warning, advising caution about the route",
+            "note": null,
+            "matchedForm": "危ない",
+            "matchedTranslationForm": "dangerous"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "p8wwi98df4uclym",
+        "order": 1,
+        "definition": "Used as a warning of immediate danger, or in the past tense after barely avoiding an accident.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "watch out!",
+              "look out!",
+              "close"
+            ]
+          }
+        ],
+        "domain": "warning",
+        "emoji": "😰",
+        "examples": [
+          {
+            "id": "1wl8zbtey8n18oy",
+            "text": "あ、危ない！車が来ているよ。",
+            "textLang": "ja",
+            "translation": "Oh, watch out! A car is coming.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "危ない",
+            "matchedTranslationForm": "watch out"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "危ない",
+    "lemma": "危ない",
+    "reading": "あぶない",
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚠️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "dangerous; risky; close call",
     "primaryGloss": "dangerous",
     "emotion": "alert and cautious, focusing on potential harm ahead",
@@ -160,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:59Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "あ、危ない！ — Oh, that was close!",
+        "why": "Present-tense '危ない！' means 'Watch out!'; 'That was close!' is past tense '危なかった！'."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "A state of having barely avoided an accident or failure.",
+        "why": "Adjective defined as a noun ('A state of...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "危ない is used for both immediate physical danger and general risk.",
+        "why": "merely restates the senses."
+      }
+    ],
+    "growth": 0.935
   }
 }

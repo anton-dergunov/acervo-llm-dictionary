@@ -72,6 +72,94 @@
     "primaryGloss": "spring",
     "emotion": "breezy and optimistic, feeling the sun come out after a long winter",
     "notes": [
+      "To say 'in spring', use the instrumental case 'wiosną' or the phrase 'na wiosnę'."
+    ],
+    "senses": [
+      {
+        "id": "jzv422rk9414iud",
+        "order": 0,
+        "definition": "The season of the year between winter and summer, when the weather becomes warmer and plants grow.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "spring"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "z2tb96xlnee558w",
+            "text": "Wiosna to moja ulubiona pora roku.",
+            "textLang": "pl",
+            "translation": "Spring is my favorite season.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and bright, full of positive energy",
+            "note": null,
+            "matchedForm": "Wiosna",
+            "matchedTranslationForm": "Spring"
+          },
+          {
+            "id": "i4szmml1hpnynpz",
+            "text": "Wiosną wszystko zaczyna kwitnąć.",
+            "textLang": "pl",
+            "translation": "In spring everything starts to bloom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observant and serene, noticing new life",
+            "note": null,
+            "matchedForm": "Wiosną",
+            "matchedTranslationForm": "spring"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "wiosna",
+    "lemma": "wiosna",
+    "reading": null,
+    "ipa": "/ˈvʲɔs.na/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌱",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "spring",
+    "primaryGloss": "spring",
+    "emotion": "breezy and optimistic, feeling the sun come out after a long winter",
+    "notes": [
       "Wiosna is the season when nature wakes up, usually starting in late March in Poland. In Polish, months are masculine, but the names of the seasons are feminine.",
       "People often use the instrumental case when talking about the season: 'wiosną' (in spring).",
       "Don't confuse this with 'wczesna wiosna' (early spring), which is often used to describe the chilly, muddy period before the flowers bloom."
@@ -141,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "the names of the seasons are feminine.",
+        "why": "False grammar claim: 'lato' (summer) is neuter and 'przedwiośnie' is neuter."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[2]",
+        "quote": "Don't confuse this with 'wczesna wiosna' (early spring)",
+        "why": "Warning not to confuse a noun with its own transparent adjective+noun collocation is filler."
+      }
+    ],
+    "growth": 0.499
   }
 }

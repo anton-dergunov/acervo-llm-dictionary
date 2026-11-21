@@ -58,6 +58,115 @@
     "headword": "وَجْه",
     "lemma": "وَجْه",
     "reading": null,
+    "ipa": "/wadʒh/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👤",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "face; side, surface",
+    "primaryGloss": "face",
+    "emotion": "expressive and attentive, pointing toward someone's features",
+    "notes": [
+      "The plural is وُجُوه (wujūh) or أَوْجُه (awjuh)."
+    ],
+    "senses": [
+      {
+        "id": "xllczyfm7mfmdtk",
+        "order": 0,
+        "definition": "The front part of the head, from the forehead to the chin.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "face"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "2e3ch8zlegltgdf",
+            "text": "غَسَلَ وَجْهَهُ بِالْمَاءِ.",
+            "textLang": "ar",
+            "translation": "He washed his face with water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshed and calm, waking up in the morning",
+            "note": null,
+            "matchedForm": "وَجْهَهُ",
+            "matchedTranslationForm": "face"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nopj49onevhgvk5",
+        "order": 1,
+        "definition": "The outer surface, side, or aspect of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "side",
+              "surface",
+              "aspect"
+            ]
+          }
+        ],
+        "domain": "surface",
+        "emoji": "🧭",
+        "examples": [
+          {
+            "id": "6gtykhqpfsqi8fe",
+            "text": "لِلْحَقِيقَةِ وَجْهٌ آخَرُ.",
+            "textLang": "ar",
+            "translation": "Truth has another side.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "وَجْهٌ",
+            "matchedTranslationForm": "side"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "وَجْه",
+    "lemma": "وَجْه",
+    "reading": null,
     "ipa": "/wadj.ha/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/wadj.ha/",
+        "why": "Wrong transcription and superfluous final vowel; وَجْه is /wadʒh/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both literally for the front of the head and metaphorically",
+        "why": "Merely restates the senses; should give the broken plural وُجُوه (wujūh) instead."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "ذَهَبَ فِي وَجْهٍ آخَرَ.",
+        "why": "Unnatural phrasing in MSA; وَجْه more commonly means surface, side, or aspect."
+      }
+    ],
+    "growth": 0.87
   }
 }

@@ -58,6 +58,114 @@
     "headword": "il muro",
     "lemma": "muro",
     "reading": null,
+    "ipa": "/ˈmu.ro/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧱",
+    "topics": [
+      "Home",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "wall",
+    "primaryGloss": "wall",
+    "emotion": "solid and immovable, standing firm and quiet",
+    "notes": [
+      "Do not confuse with 'la parete', which usually refers to the inside surface of a room's wall.",
+      "Has two plurals: 'i muri' (individual walls, e.g., outdoor or garden walls) and the feminine 'le mura' (walls enclosing a city or the walls of a home collectively)."
+    ],
+    "senses": [
+      {
+        "id": "p6b8ke3zv89p3dx",
+        "order": 0,
+        "definition": "A vertical structure of brick, stone, or concrete that encloses, divides, or supports a building or outdoor area.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wall"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🧱",
+        "examples": [
+          {
+            "id": "yugb9n7ttqzjx1n",
+            "text": "Ho appeso un quadro sul muro della cucina.",
+            "textLang": "it",
+            "translation": "I hung a painting on the kitchen wall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleased with how the room looks now",
+            "note": null,
+            "matchedForm": "muro",
+            "matchedTranslationForm": "wall"
+          },
+          {
+            "id": "xqwf8v6l7lz78qf",
+            "text": "C'è un muro di pietra intorno al giardino.",
+            "textLang": "it",
+            "translation": "There is a stone wall around the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "muro",
+            "matchedTranslationForm": "wall"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "p6b8ke3zv89p3dx",
+      "from": "Struttura verticale di mattoni o pietra che divide o sostiene.",
+      "to": "A vertical structure made of bricks or stone that divides or supports parts of a building.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    },
+    {
+      "sense": "okbom5d0nhoh23t",
+      "from": "Costruzione alta all'aperto che delimita uno spazio o una proprietà.",
+      "to": "A tall outdoor structure that marks the boundary of a space or property.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:43Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il muro",
+    "lemma": "muro",
+    "reading": null,
     "ipa": "/ˈmuːro/",
     "pos": "noun",
     "gender": "masculine",
@@ -162,22 +270,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "p6b8ke3zv89p3dx",
-      "from": "Struttura verticale di mattoni o pietra che divide o sostiene.",
-      "to": "A vertical structure made of bricks or stone that divides or supports parts of a building.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    },
-    {
-      "sense": "okbom5d0nhoh23t",
-      "from": "Costruzione alta all'aperto che delimita uno spazio o una proprietà.",
-      "to": "A tall outdoor structure that marks the boundary of a space or property.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:43Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Indoor and outdoor masonry walls are the same basic meaning of 'muro'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "La vecchia città ha un muro alto intorno.",
+        "why": "City walls in Italian are called 'le mura' (feminine plural), not 'un muro'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on the common irregular plural 'le mura' for city/house walls."
+      }
+    ],
+    "growth": 0.991
+  }
 }

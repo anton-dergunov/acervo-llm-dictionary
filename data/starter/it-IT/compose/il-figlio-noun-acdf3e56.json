@@ -70,6 +70,115 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "son; child",
+    "primaryGloss": "son",
+    "emotion": "warm and affectionate, speaking of one's own child with quiet pride",
+    "notes": [
+      "The feminine is 'la figlia' (daughter). The masculine plural 'i figli' refers either to sons or to sons and daughters together.",
+      "Do not confuse 'figlio' (someone's son or child of any age, even an adult) with 'bambino' (a young child by age)."
+    ],
+    "senses": [
+      {
+        "id": "08n1cdqgrhog6ex",
+        "order": 0,
+        "definition": "A male child in relation to his parents.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "son"
+            ]
+          }
+        ],
+        "domain": "male",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "i8jflfvmm4grrt3",
+            "text": "Mio figlio studia all'università.",
+            "textLang": "it",
+            "translation": "My son studies at university.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and loving, speaking of family",
+            "note": null,
+            "matchedForm": "figlio",
+            "matchedTranslationForm": "son"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "lwnlrjqtzfco1se",
+        "order": 1,
+        "definition": "A person's offspring of any gender, especially in the plural ('i figli') or in general statements.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "child",
+              "children"
+            ]
+          }
+        ],
+        "domain": "offspring",
+        "emoji": "👨‍👩‍👦",
+        "examples": [
+          {
+            "id": "k4n08c3eimikqf3",
+            "text": "Ho due figli, un maschio e una femmina.",
+            "textLang": "it",
+            "translation": "I have two children, a boy and a girl.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and happy, talking about one's family",
+            "note": null,
+            "matchedForm": "figli",
+            "matchedTranslationForm": "children"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "il figlio",
+    "lemma": "figlio",
+    "reading": null,
+    "ipa": "/ˈfiʎ.ʎo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "son",
     "primaryGloss": "son",
     "emotion": "warm and affectionate, speaking of one's own child with quiet pride",
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "son",
+        "why": "Does not cover sense 1 ('child / children')."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "A person's child, regardless of gender, when speaking in the plural (figli).",
+        "why": "Singular 'figlio' also means 'child' of unspecified gender (e.g., 'figlio unico', 'avere un figlio')."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should point out the irregular plural article 'i figli' and the difference from 'bambino'."
+      }
+    ],
+    "growth": 1.272
   }
 }

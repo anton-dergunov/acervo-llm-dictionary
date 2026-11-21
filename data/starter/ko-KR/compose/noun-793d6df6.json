@@ -68,6 +68,114 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "week; state, province",
+    "primaryGloss": "week",
+    "emotion": null,
+    "notes": [
+      "As a counter for weeks, it takes Sino-Korean numbers (일 주, 이 주) or native Korean numbers with 주일 (한 주일, 두 주일)."
+    ],
+    "senses": [
+      {
+        "id": "xg06nzmoml6lu4l",
+        "order": 0,
+        "definition": "A period of seven days.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "week"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🗓️",
+        "examples": [
+          {
+            "id": "znfqxrvoknfigxc",
+            "text": "다음 주에 만나요.",
+            "textLang": "ko",
+            "translation": "Let's meet next week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and friendly, suggesting a future plan",
+            "note": null,
+            "matchedForm": "주",
+            "matchedTranslationForm": "week"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tl816h8z60rtfww",
+        "order": 1,
+        "definition": "A large administrative division of certain countries, such as the United States or Australia.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "state",
+              "province"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "lenikwultieob65",
+            "text": "미국에는 오십 개의 주가 있어요.",
+            "textLang": "ko",
+            "translation": "There are 50 states in the United States.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "주",
+            "matchedTranslationForm": "states"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "주",
+    "lemma": "주",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🗓️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "week",
     "primaryGloss": "week",
     "emotion": null,
@@ -119,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "combined with native Korean numbers (일주, 이주, etc.)",
+        "why": "'일', '이' are Sino-Korean numbers, not native Korean numbers."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the common A2 geography sense 'state, province' (e.g., US states)."
+      }
+    ],
+    "growth": 1.255
   }
 }

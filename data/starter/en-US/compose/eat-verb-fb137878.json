@@ -70,6 +70,75 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "comer",
+    "primaryGloss": "comer",
+    "emotion": "hungry and looking forward to the meal, warm and satisfied",
+    "notes": [
+      "Verbo irregular: pasado 'ate' (/eɪt/), participio 'eaten' (/ˈiːtən/).",
+      "En inglés estadounidense es muy común usar 'eat' con las comidas del día (eat breakfast, eat lunch, eat dinner), además de 'have'."
+    ],
+    "senses": [
+      {
+        "id": "yqppvee7ekxde63",
+        "order": 0,
+        "definition": "Tomar alimentos por la boca, masticarlos y tragarlos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "comer",
+              "alimentarse"
+            ]
+          }
+        ],
+        "domain": "alimentación",
+        "emoji": "🍲",
+        "examples": [
+          {
+            "id": "eeobj66elw0le5u",
+            "text": "I like to eat fruit in the morning.",
+            "textLang": "en",
+            "translation": "Me gusta comer fruta por la mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and healthy, sharing a good daily habit",
+            "note": null,
+            "matchedForm": "eat",
+            "matchedTranslationForm": "comer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "eat",
+    "lemma": "eat",
+    "reading": null,
+    "ipa": "/iːt/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "comer; consumir",
     "primaryGloss": "comer",
     "emotion": "hungry and looking forward to the meal, warm and satisfied",
@@ -164,5 +233,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "language.wrong",
+        "path": "notes[0]",
+        "quote": "Irregular verb: eat - ate - eaten.",
+        "why": "Note is written in English instead of Spanish."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Se usa para referirse a cualquier comida del día",
+        "why": "Filler note; could instead explain 'eat breakfast/lunch/dinner' vs 'have'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Destruir o gastar algo poco a poco, como el óxido",
+        "why": "Marginal sense for A2; typically expressed as phrasal verb 'eat away'."
+      },
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "corrosión, carcomer, consumir",
+        "why": "'corrosión' is a noun, but the headword is a verb."
+      }
+    ],
+    "growth": 0.823
   }
 }

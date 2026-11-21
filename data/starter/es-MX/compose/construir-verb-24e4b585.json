@@ -58,6 +58,75 @@
     "headword": "construir",
     "lemma": "construir",
     "reading": null,
+    "ipa": "/konstɾuˈiɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏗️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to build; to construct",
+    "primaryGloss": "build",
+    "emotion": "focused and purposeful, observing the progress of a project",
+    "notes": [
+      "Irregular in several tenses: a 'y' is added before 'o', 'e', and 'a' (construyo, construyes, construyó).",
+      "Used for buildings and large structures, as well as abstract things like relationships or ideas. For putting together furniture or toys, Mexican Spanish uses 'armar'."
+    ],
+    "senses": [
+      {
+        "id": "f88c39ki65vc7vh",
+        "order": 0,
+        "definition": "To make a building, structure, or system by putting parts or materials together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to build",
+              "to construct"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "ojvo9bwlqbxr739",
+            "text": "Ellos van a construir una casa nueva cerca del lago.",
+            "textLang": "es",
+            "translation": "They are going to build a new house near the lake.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and planning for the future",
+            "note": null,
+            "matchedForm": "construir",
+            "matchedTranslationForm": "build"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "construir",
+    "lemma": "construir",
+    "reading": null,
     "ipa": "/konsˈtwiɾ/",
     "pos": "verb",
     "gender": null,
@@ -161,5 +230,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/konsˈtwiɾ/",
+        "why": "Missing /ɾ/ in the second syllable; should be /kons.tɾuˈiɾ/ or /konstɾuˈiɾ/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To make something by putting different parts or elements together.",
+        "why": "Assembling a toy is 'armar' in Mexico; 'construir' has one core sense."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Es difícil construir este juguete sin las instrucciones.",
+        "why": "In Mexican Spanish, toys are assembled with 'armar', not 'construir'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on irregular stem change (construyo, construyes, construyó) in present and preterite."
+      }
+    ],
+    "growth": 0.783
   }
 }

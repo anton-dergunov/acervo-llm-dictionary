@@ -71,6 +71,117 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "mountain, hill; top",
+    "primaryGloss": "mountain",
+    "emotion": "inspired and awestruck, looking up at a massive peak",
+    "notes": [
+      "Notice how 'góra' means both a mountain and the top or upper part of something (e.g., 'na górze' – at the top / upstairs, 'do góry' – upwards). In the plural, 'góry' often refers to a mountain range (e.g., 'jechać w góry' – to go to the mountains)."
+    ],
+    "senses": [
+      {
+        "id": "ldks4fdvglz66ba",
+        "order": 0,
+        "definition": "A large natural elevation of the earth's surface; a mountain or large hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain",
+              "hill"
+            ]
+          }
+        ],
+        "domain": "landform",
+        "emoji": "⛰️",
+        "examples": [
+          {
+            "id": "7snz4rgfw6e2p05",
+            "text": "Ta góra jest bardzo wysoka i trudna do zdobycia.",
+            "textLang": "pl",
+            "translation": "This mountain is very high and difficult to climb.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and challenged, looking up at a steep slope",
+            "note": null,
+            "matchedForm": "góra",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ld5n3qp6gl12fqi",
+        "order": 1,
+        "definition": "The highest part, surface, or upper floor of something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "top",
+              "upper part",
+              "upstairs"
+            ]
+          }
+        ],
+        "domain": "position",
+        "emoji": "🔝",
+        "examples": [
+          {
+            "id": "2nmh2wlqeuzkiug",
+            "text": "Książka leży na górze szafki.",
+            "textLang": "pl",
+            "translation": "The book is lying on top of the cabinet.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and casual, pointing out where something was left",
+            "note": null,
+            "matchedForm": "górze",
+            "matchedTranslationForm": "top"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "góra",
+    "lemma": "góra",
+    "reading": null,
+    "ipa": "/ˈɡu.ra/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "mountain; top; hill",
     "primaryGloss": "mountain",
     "emotion": "inspired and awestruck, looking up at a massive peak",
@@ -203,5 +314,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "text.corrupt",
+        "path": "notes[0]",
+        "quote": "na górě - at the top / upstairs",
+        "why": "Uses Czech character 'ě' instead of Polish 'rz' ('na górze')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "A very high hill, standing prominently above the surrounding land.",
+        "why": "Shades of the same landform meaning as sense 0; 'high hill' is unnatural."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "We walked up to the green high hill",
+        "why": "Unnatural English ('green high hill')."
+      }
+    ],
+    "growth": 0.875
   }
 }

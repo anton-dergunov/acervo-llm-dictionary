@@ -58,6 +58,114 @@
     "headword": "शेर",
     "lemma": "शेर",
     "reading": null,
+    "ipa": "/ʃeːɾ/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦁",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "lion; brave person",
+    "primaryGloss": "lion",
+    "emotion": "awed and cautious, acknowledging the power of a mighty beast",
+    "notes": [
+      "In colloquial speech, शेर is also frequently used to refer to a tiger (which is बाघ in standard Hindi); the exact animal is sometimes clarified as बब्बर शेर (maned lion)."
+    ],
+    "senses": [
+      {
+        "id": "fo5yqqc5byxn0qr",
+        "order": 0,
+        "definition": "A large wild cat found in Africa and India, known for the male's thick mane.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦁",
+        "examples": [
+          {
+            "id": "79sgjnbvitlh7g2",
+            "text": "शेर जंगल का राजा होता है।",
+            "textLang": "hi",
+            "translation": "The lion is the king of the jungle.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "authoritative and grand, stating a well-known fact",
+            "note": null,
+            "matchedForm": "शेर",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rkw73okwsyy8pob",
+        "order": 1,
+        "definition": "A person who is very brave or courageous.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lion",
+              "brave person"
+            ]
+          }
+        ],
+        "domain": "metaphor",
+        "emoji": "💪",
+        "examples": [
+          {
+            "id": "gtnwholcm22k8fc",
+            "text": "तुम शेर हो, हार मत मानो।",
+            "textLang": "hi",
+            "translation": "You are a lion, do not give up.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "शेर",
+            "matchedTranslationForm": "lion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "शेर",
+    "lemma": "शेर",
+    "reading": null,
     "ipa": "/ʃeːr/",
     "pos": "noun",
     "gender": "masculine",
@@ -160,5 +268,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:53Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "lion; tiger (poetic/regional usage)",
+        "why": "Includes 'tiger', which is not covered as a sense, and lacks the figurative sense."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "lionhearted",
+        "why": "'Lionhearted' is an adjective, whereas the headword and sense are nouns."
+      }
+    ],
+    "growth": 0.804
   }
 }

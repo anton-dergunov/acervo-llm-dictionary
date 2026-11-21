@@ -68,6 +68,115 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "red; popular",
+    "primaryGloss": "red",
+    "emotion": "bright and striking, catching the eye immediately",
+    "notes": [
+      "Before a noun, 红色 (hóngsè) with 的 is often preferred (e.g., 红色的衣服), while 红 is used directly in common combinations like 红茶 ('black tea') or 红酒 ('red wine')."
+    ],
+    "senses": [
+      {
+        "id": "05w9558p6fnai49",
+        "order": 0,
+        "definition": "Having the color of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "gi0e2tkzwx8lzjs",
+            "text": "她的脸变得很红。",
+            "textLang": "zh",
+            "translation": "Her face turned very red.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "红",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "aazwn8r9qo9rbeo",
+        "order": 1,
+        "definition": "Popular, successful, or well-liked by the public.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "popular",
+              "trending",
+              "famous"
+            ]
+          }
+        ],
+        "domain": "popularity",
+        "emoji": "⭐",
+        "examples": [
+          {
+            "id": "sni3c18uvalkxsm",
+            "text": "这家新开的餐厅现在非常红。",
+            "textLang": "zh",
+            "translation": "This newly opened restaurant is very popular right now.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and up-to-date with the latest trends",
+            "note": null,
+            "matchedForm": "红",
+            "matchedTranslationForm": "popular"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "红",
+    "lemma": "红",
+    "reading": "hóng",
+    "ipa": "/xʊŋ˧˥/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "red; popular; revolutionary",
     "primaryGloss": "red",
     "emotion": "bright and striking, catching the eye immediately",
@@ -160,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:22Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "red; popular; revolutionary",
+        "why": "'revolutionary' is not covered by the senses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of blood or fire.",
+        "why": "Noun definition for an adjective; example also uses 红色 instead of bare 红."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Besides its literal color meaning, 红 is frequently used in modern",
+        "why": "Merely repeats Sense 1 instead of explaining usage like 红 vs 红色."
+      }
+    ],
+    "growth": 0.948
   }
 }

@@ -72,6 +72,116 @@
     "primaryGloss": "vivir",
     "emotion": "calm and settled, speaking of home and everyday life",
     "notes": [
+      "Como verbo se pronuncia /lɪv/ (con 'i' corta); no lo confundas con el adjetivo o adverbio 'live' ('en vivo'), que se pronuncia /laɪv/."
+    ],
+    "senses": [
+      {
+        "id": "6wro473babmn6n8",
+        "order": 0,
+        "definition": "Tener el hogar o la residencia en un lugar determinado.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "vivir",
+              "residir",
+              "habitar"
+            ]
+          }
+        ],
+        "domain": "residencia",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "vzecoxy58ew7ejq",
+            "text": "I live in a small apartment near the park.",
+            "textLang": "en",
+            "translation": "Vivo en un apartamento pequeño cerca del parque.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and comfortable, talking about where one stays",
+            "note": null,
+            "matchedForm": "live",
+            "matchedTranslationForm": "Vivo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "mwxs1fp9a6jccak",
+        "order": 1,
+        "definition": "Estar con vida o seguir existiendo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "vivir",
+              "estar vivo"
+            ]
+          }
+        ],
+        "domain": "vida",
+        "emoji": "🌱",
+        "examples": [
+          {
+            "id": "s59aav3okllq8ck",
+            "text": "My great-grandmother lived until she was ninety-eight.",
+            "textLang": "en",
+            "translation": "Mi bisabuela vivió hasta los noventa y ocho años.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "lived",
+            "matchedTranslationForm": "vivió"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "live",
+    "lemma": "live",
+    "reading": null,
+    "ipa": "/lɪv/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "vivir; habitar; estar vivo",
+    "primaryGloss": "vivir",
+    "emotion": "calm and settled, speaking of home and everyday life",
+    "notes": [
       "Se usa para indicar el lugar donde una persona tiene su hogar."
     ],
     "senses": [
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para indicar el lugar donde una persona tiene su hogar.",
+        "why": "Restates sense 0 definition; misses the crucial homograph pronunciation contrast with adjective 'live' (/laɪv/)."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "All living things need water.",
+        "why": "Uses the lexicalized adjective/noun phrase 'living things' instead of the verb 'live'."
+      }
+    ],
+    "growth": 1.34
   }
 }

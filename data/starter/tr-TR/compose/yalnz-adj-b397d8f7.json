@@ -58,6 +58,115 @@
     "headword": "yalnız",
     "lemma": "yalnız",
     "reading": null,
+    "ipa": "/jaɫˈnɯz/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪑",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "alone; lonely",
+    "primaryGloss": "alone",
+    "emotion": "quiet and melancholy, feeling the silence of an empty room",
+    "notes": [
+      "Also commonly used as an adverb meaning 'alone' ('yalnız yaşamak' — to live alone), meaning 'only' ('yalnız sen' — only you), or as a conjunction meaning 'but / however'."
+    ],
+    "senses": [
+      {
+        "id": "dxmorr8emkny6yg",
+        "order": 0,
+        "definition": "Without other people; on one's own.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "alone",
+              "by oneself"
+            ]
+          }
+        ],
+        "domain": "alone",
+        "emoji": "🧍",
+        "examples": [
+          {
+            "id": "lhx9oev8m9n93qq",
+            "text": "Evde bütün gün yalnız kaldım.",
+            "textLang": "tr",
+            "translation": "I was alone at home all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "somewhat dejected and quiet, looking out a rainy window",
+            "note": null,
+            "matchedForm": "yalnız",
+            "matchedTranslationForm": "alone"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ymrs0i5lma6xmzi",
+        "order": 1,
+        "definition": "Unhappy because one has no friends or company.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lonely",
+              "lonesome"
+            ]
+          }
+        ],
+        "domain": "lonely",
+        "emoji": "🌧️",
+        "examples": [
+          {
+            "id": "okitmxnr0jqtulg",
+            "text": "Yeni taşındığı şehirde kendini çok yalnız hissediyor.",
+            "textLang": "tr",
+            "translation": "She feels very lonely in the city she just moved to.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yalnız",
+            "matchedTranslationForm": "lonely"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yalnız",
+    "lemma": "yalnız",
+    "reading": null,
     "ipa": "/jalˈnɯz/",
     "pos": "adj",
     "gender": null,
@@ -202,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[2]",
+        "quote": "Bu odadaki yalnız sandalye kırılmış.",
+        "why": "'Yalnız' does not mean 'sole/only' as an attributive adjective before a noun ('tek' is used); it means 'only' as an adverb/particle."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Evde bütün gün yalnız kaldım. — I stayed lonely at home all day.",
+        "why": "'Yalnız kalmak' means 'to be left alone / stay by oneself', not 'stayed lonely' ('yalnız hissetmek' shows 'lonely')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Akşamları yalnız yürümeyi severim.",
+        "why": "In 'yalnız yürümek', 'yalnız' functions as an adverb modifying the verb, whereas the entry POS is adjective."
+      }
+    ],
+    "growth": 0.798
   }
 }

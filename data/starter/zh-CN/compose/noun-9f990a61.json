@@ -72,6 +72,114 @@
     "primaryGloss": "building",
     "emotion": "matter-of-fact and observational, looking up at the urban skyline",
     "notes": [
+      "Takes the classifier 座 (zuò) or 栋 (dòng) for a whole building. Put a number directly before 楼 to name a floor: 一楼 (first floor / ground floor), 二楼 (second floor)."
+    ],
+    "senses": [
+      {
+        "id": "i9aud0w7a90c42s",
+        "order": 0,
+        "definition": "A building with two or more stories.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "building"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "s3nx2zedbldz2cp",
+            "text": "那座楼很高。",
+            "textLang": "zh",
+            "translation": "That building is very tall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "impressed, noting the height of the architecture",
+            "note": null,
+            "matchedForm": "楼",
+            "matchedTranslationForm": "building"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3aweava5hk9m2dq",
+        "order": 1,
+        "definition": "A level or story of a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor",
+              "story"
+            ]
+          }
+        ],
+        "domain": "floor",
+        "emoji": "🪜",
+        "examples": [
+          {
+            "id": "v41h9hgulw3o84p",
+            "text": "我在二楼。",
+            "textLang": "zh",
+            "translation": "I am on the second floor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative, clarifying one's current location",
+            "note": null,
+            "matchedForm": "楼",
+            "matchedTranslationForm": "floor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "楼",
+    "lemma": "楼",
+    "reading": "lóu",
+    "ipa": "/lou̯˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "building; floor",
+    "primaryGloss": "building",
+    "emotion": "matter-of-fact and observational, looking up at the urban skyline",
+    "notes": [
       "While 楼 commonly refers to a building, it also refers to a specific floor or story within that building (e.g., 'the second floor').",
       "In Chinese, you often use a number before 楼 to indicate which floor someone is on, such as 一楼 (first floor) or 三楼 (third floor)."
     ],
@@ -161,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While 楼 commonly refers to a building, it also refers to a",
+        "why": "Merely restates the two senses already given in the entry."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "A structure with walls and a roof.",
+        "why": "Too broad; 楼 specifically refers to a multi-story building."
+      }
+    ],
+    "growth": 0.774
   }
 }

@@ -59,6 +59,96 @@
     "language": "ja",
     "headword": "医者",
     "lemma": "医者",
+    "reading": "いしゃ",
+    "ipa": "iɕa",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👨‍⚕️",
+    "topics": [
+      "Work",
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "doctor",
+    "primaryGloss": "doctor",
+    "emotion": "respectful and slightly cautious, acknowledging someone with authority and specialized knowledge",
+    "notes": [
+      "In conversation, people often say お医者さん (o-isha-san) when talking about a doctor. When speaking directly to a doctor, address them as 先生 (sensei)."
+    ],
+    "senses": [
+      {
+        "id": "kscgbzoy8dkuvf3",
+        "order": 0,
+        "definition": "A person whose job is to treat sick or injured people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "doctor",
+              "physician"
+            ]
+          }
+        ],
+        "domain": "profession",
+        "emoji": "🩺",
+        "examples": [
+          {
+            "id": "s0n0vu17779igjx",
+            "text": "私は将来、医者になりたいです。",
+            "textLang": "ja",
+            "translation": "I want to become a doctor in the future.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and ambitious, sharing a clear goal for the future",
+            "note": null,
+            "matchedForm": "医者",
+            "matchedTranslationForm": "doctor"
+          },
+          {
+            "id": "2sgo2p5mfcbz7nw",
+            "text": "熱が高いので、医者に行きます。",
+            "textLang": "ja",
+            "translation": "I have a high fever, so I am going to the doctor.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "feeling unwell and tired, seeking help to get better",
+            "note": null,
+            "matchedForm": "医者",
+            "matchedTranslationForm": "doctor"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "医者",
+    "lemma": "医者",
     "reading": null,
     "ipa": null,
     "pos": "noun",
@@ -144,5 +234,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading いしゃ for kanji headword."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "refer to a doctor when speaking to them or about them",
+        "why": "You do not address a doctor as お医者さん or use 医者 as a title; you call them 先生 (sensei)."
+      }
+    ],
+    "growth": 0.589
   }
 }

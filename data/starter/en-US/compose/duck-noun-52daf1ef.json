@@ -70,6 +70,74 @@
       "Animals"
     ],
     "status": "active",
+    "shortGloss": "pato",
+    "primaryGloss": "pato",
+    "emotion": null,
+    "notes": [
+      "Como sustantivo incontable, se refiere a la carne de esta ave ('roast duck').",
+      "También existe el verbo 'to duck', que significa 'agacharse' o 'esquivar'."
+    ],
+    "senses": [
+      {
+        "id": "0l1nnk8g9zhp8ty",
+        "order": 0,
+        "definition": "Ave acuática con el pico plano y patas palmeadas que vive en lagos y ríos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pato"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦆",
+        "examples": [
+          {
+            "id": "00zieqb8875q1ss",
+            "text": "The duck is swimming in the pond.",
+            "textLang": "en",
+            "translation": "El pato está nadando en el estanque.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "tranquilo y observador, describiendo una escena pacífica en la naturaleza",
+            "note": null,
+            "matchedForm": "duck",
+            "matchedTranslationForm": "pato"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "duck",
+    "lemma": "duck",
+    "reading": null,
+    "ipa": "/dʌk/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦆",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
     "shortGloss": "pato; agacharse",
     "primaryGloss": "pato",
     "emotion": null,
@@ -162,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "Acción de bajar la cabeza o el cuerpo rápidamente",
+        "why": "Verb sense ('to duck') with a verb example filed under a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "pato; agacharse",
+        "why": "Includes verb gloss 'agacharse' in a noun entry."
+      }
+    ],
+    "growth": 0.532
   }
 }

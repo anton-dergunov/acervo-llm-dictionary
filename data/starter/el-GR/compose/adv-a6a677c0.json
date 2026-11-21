@@ -58,6 +58,96 @@
     "headword": "πάντα",
     "lemma": "πάντα",
     "reading": null,
+    "ipa": "/ˈpanda/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⏳",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "always",
+    "primaryGloss": "always",
+    "emotion": "matter-of-fact, stating a routine or a constant state",
+    "notes": [
+      "More common in everyday speech than its formal synonym 'πάντοτε'.",
+      "Do not confuse with 'τα πάντα' (everything), where 'πάντα' is preceded by the neuter plural article 'τα'."
+    ],
+    "senses": [
+      {
+        "id": "plhgomo8z82kzxf",
+        "order": 0,
+        "definition": "At all times; on every occasion.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "always",
+              "at all times"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "♾️",
+        "examples": [
+          {
+            "id": "2lg17e8fp1qcu56",
+            "text": "Είναι πάντα ευγενικός με όλους.",
+            "textLang": "el",
+            "translation": "He is always polite to everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and sincere, describing a person's character",
+            "note": null,
+            "matchedForm": "πάντα",
+            "matchedTranslationForm": "always"
+          },
+          {
+            "id": "ryr0oo8qr3rslge",
+            "text": "Πάντα ξεχνάω πού αφήνω τα κλειδιά μου.",
+            "textLang": "el",
+            "translation": "I always forget where I leave my keys.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Πάντα",
+            "matchedTranslationForm": "always"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "πάντα",
+    "lemma": "πάντα",
+    "reading": null,
     "ipa": "/ˈpanta/",
     "pos": "adv",
     "gender": null,
@@ -160,5 +250,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Πάντα που τον βλέπω, μου χαμογελάει.",
+        "why": "'Πάντα που' is ungrammatical in Greek; 'every time that' is 'κάθε φορά που'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "'At all times' and 'on every occasion' are shades of one meaning ('always')."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈpanta/",
+        "why": "In standard Modern Greek, 'ντ' word-medially is voiced to [d] or [nd], not [nt]."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "When used to mean 'at all times', it implies a habitual action",
+        "why": "Restates what 'always' means without adding useful grammar or usage info."
+      }
+    ],
+    "growth": 0.778
   }
 }

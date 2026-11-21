@@ -58,6 +58,97 @@
     "headword": "tatil",
     "lemma": "tatil",
     "reading": null,
+    "ipa": "/tɑːˈtil/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏖️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
+    "shortGloss": "holiday; vacation; day off",
+    "primaryGloss": "holiday",
+    "emotion": "relaxed and happy, looking forward to a break",
+    "notes": [
+      "Common expressions: 'tatile çıkmak' or 'tatile gitmek' (to go on vacation), 'tatil yapmak' (to take a vacation), and 'resmî tatil' (public holiday)."
+    ],
+    "senses": [
+      {
+        "id": "vdpfbha59sod0qp",
+        "order": 0,
+        "definition": "A period of rest away from work or school, such as a vacation, school break, or public holiday.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "holiday",
+              "vacation",
+              "break",
+              "day off"
+            ]
+          }
+        ],
+        "domain": "leisure",
+        "emoji": "🏖️",
+        "examples": [
+          {
+            "id": "4b3oga5kay0xm1s",
+            "text": "Yaz tatilinde Antalya'ya gideceğiz.",
+            "textLang": "tr",
+            "translation": "We will go to Antalya during the summer holiday.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited about the upcoming trip",
+            "note": null,
+            "matchedForm": "tatilinde",
+            "matchedTranslationForm": "holiday"
+          },
+          {
+            "id": "dr9m82lpjvvgywr",
+            "text": "Yarın resmî tatil olduğu için bankalar kapalı.",
+            "textLang": "tr",
+            "translation": "Because tomorrow is a public holiday, the banks are closed.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tatil",
+            "matchedTranslationForm": "holiday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "tatil",
+    "lemma": "tatil",
+    "reading": null,
     "ipa": "/taˈtil/",
     "pos": "noun",
     "gender": null,
@@ -161,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/taˈtil/",
+        "why": "An Arabic loanword with a long first vowel: /tɑːˈtil/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Vacation, school break, and public holiday are shades of one meaning; 'closure' is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Tatil can refer to a holiday or vacation, but it is also",
+        "why": "Restates the senses; better to note common collocations like 'tatil yapmak' and 'tatile çıkmak'."
+      }
+    ],
+    "growth": 0.834
   }
 }

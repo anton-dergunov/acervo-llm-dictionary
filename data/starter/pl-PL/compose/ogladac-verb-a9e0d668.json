@@ -58,6 +58,118 @@
     "headword": "oglądać",
     "lemma": "oglądać",
     "reading": null,
+    "ipa": "/ɔˈɡlɔn.dat͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📺",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to watch; to look at; to examine",
+    "primaryGloss": "watch",
+    "emotion": "relaxed and attentive, focused on a screen or an object",
+    "notes": [
+      "Imperfective verb; its perfective partner is 'obejrzeć'.",
+      "Implies spending time watching or looking at something, unlike 'widzieć' (to see) or 'patrzeć' (to look)."
+    ],
+    "senses": [
+      {
+        "id": "n106xzpd15rl6kv",
+        "order": 0,
+        "definition": "To look at something for a period of time, such as a film, television programme, or match.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "watch",
+              "view"
+            ]
+          }
+        ],
+        "domain": "entertainment",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "le4hmicdqfx9k57",
+            "text": "Lubię oglądać filmy w weekendy.",
+            "textLang": "pl",
+            "translation": "I like to watch movies on weekends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and peaceful, describing a favorite leisure activity",
+            "note": null,
+            "matchedForm": "oglądać",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "pbanut4yhc65v7r",
+        "order": 1,
+        "definition": "To look at something carefully in order to inspect it or see what it is like.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look at",
+              "examine",
+              "inspect",
+              "view"
+            ]
+          }
+        ],
+        "domain": "inspection",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "c4ttfyg0js8u85f",
+            "text": "Klienci chętnie oglądają nowe produkty w sklepie.",
+            "textLang": "pl",
+            "translation": "Customers gladly look at the new products in the shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "oglądają",
+            "matchedTranslationForm": "look at"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "oglądać",
+    "lemma": "oglądać",
+    "reading": null,
     "ipa": "/ɔˈɡwɔ.dat͡ɕ/",
     "pos": "verb",
     "gender": null,
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɔˈɡwɔ.dat͡ɕ/",
+        "why": "Wrong transcription: 'ą' before 'd' is /ɔn/, so /ɔˈɡlɔn.dat͡ɕ/, not /ɔˈɡwɔ.dat͡ɕ/."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Muszę dokładnie oglądać ten produkt przed zakupem.",
+        "why": "Wrong aspect: a single completed action before buying requires perfective 'obejrzeć', not imperfective 'oglądać'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should give the perfective partner 'obejrzeć' instead of repeating the senses in note[1]."
+      }
+    ],
+    "growth": 1.009
   }
 }

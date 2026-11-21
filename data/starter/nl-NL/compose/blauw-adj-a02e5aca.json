@@ -74,6 +74,73 @@
     "primaryGloss": "blue",
     "emotion": null,
     "notes": [
+      "Also used for bruises on the skin: 'een blauwe plek' (a bruise) and 'een blauw oog' (a black eye)."
+    ],
+    "senses": [
+      {
+        "id": "igm0em2tmj39dwa",
+        "order": 0,
+        "definition": "Having the colour of a clear sky or the sea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "blue"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🌌",
+        "examples": [
+          {
+            "id": "wn6c6hzif5dloq5",
+            "text": "De lucht is vandaag erg blauw.",
+            "textLang": "nl",
+            "translation": "The sky is very blue today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and observant, looking up at a bright day",
+            "note": null,
+            "matchedForm": "blauw",
+            "matchedTranslationForm": "blue"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "blauw",
+    "lemma": "blauw",
+    "reading": null,
+    "ipa": "/blʌu/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔵",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "blue",
+    "primaryGloss": "blue",
+    "emotion": null,
+    "notes": [
       "Dutch speakers often use 'blauw' to describe the colour of the sky, just as in English.",
       "Be aware that 'blauw' can also be used colloquially to mean 'drunk' in some informal settings."
     ],
@@ -162,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The colour of a clear sky or the deep ocean.",
+        "why": "Defined as a noun ('The colour...') instead of an adjective ('Having the colour...')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "Being intoxicated by alcohol.",
+        "why": "Dated/marginal slang for A2, whereas 'bruised' ('een blauwe plek') is very common."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Dutch speakers often use 'blauw' to describe the colour of the sky",
+        "why": "Pointless filler note."
+      }
+    ],
+    "growth": 0.512
   }
 }

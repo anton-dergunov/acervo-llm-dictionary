@@ -68,6 +68,155 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to close; to shut; to lock",
+    "primaryGloss": "to close",
+    "emotion": "calm and practical, finishing a task",
+    "notes": [
+      "To specify locking with a key, use 'fermer à clé' (e.g., 'fermer la porte à clé')."
+    ],
+    "senses": [
+      {
+        "id": "7vtq8adu22wj0rr",
+        "order": 0,
+        "definition": "To move a door, window, or lid so that an opening is covered.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to close",
+              "to shut"
+            ]
+          }
+        ],
+        "domain": "opening",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "5imjm1rv9eu7yzv",
+            "text": "N'oublie pas de fermer la porte en sortant.",
+            "textLang": "fr",
+            "translation": "Don't forget to close the door when you leave.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and reminding someone gently before they leave",
+            "note": null,
+            "matchedForm": "fermer",
+            "matchedTranslationForm": "close"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sj2yi8xyl1x1f3g",
+        "order": 1,
+        "definition": "To lock a door, vehicle, or container so it cannot be opened.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to lock"
+            ]
+          }
+        ],
+        "domain": "locking",
+        "emoji": "🔐",
+        "examples": [
+          {
+            "id": "zu30du0pk374ffj",
+            "text": "Je dois fermer la voiture avant d'entrer dans le magasin.",
+            "textLang": "fr",
+            "translation": "I need to lock the car before going into the shop.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "practical and cautious, securing belongings",
+            "note": null,
+            "matchedForm": "fermer",
+            "matchedTranslationForm": "lock"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wkyci7v1w1gkcsg",
+        "order": 2,
+        "definition": "Of a shop or business: to stop operating for the day, or permanently; or to make it stop operating.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to close",
+              "to shut down"
+            ]
+          }
+        ],
+        "domain": "business",
+        "emoji": "🏪",
+        "examples": [
+          {
+            "id": "5lfpk2pq1grji3z",
+            "text": "La boulangerie ferme à vingt heures ce soir.",
+            "textLang": "fr",
+            "translation": "The bakery closes at eight tonight.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating the closing time",
+            "note": null,
+            "matchedForm": "ferme",
+            "matchedTranslationForm": "closes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "fr",
+    "headword": "fermer",
+    "lemma": "fermer",
+    "reading": null,
+    "ipa": "/fɛʁ.me/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to close; to shut",
     "primaryGloss": "to close",
     "emotion": "calm and practical, finishing a task",
@@ -201,5 +350,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'fermer' for doors, windows, shops, and applications on a computer.",
+        "why": "Restates the senses without adding helpful usage or grammar information."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'finir', which means to finish",
+        "why": "Unlikely confusion; filler note."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[2].definition",
+        "quote": "To stop a business, shop, or institution from operating for the day.",
+        "why": "Defined only transitively, whereas the example 'La boulangerie ferme' is intransitive."
+      }
+    ],
+    "growth": 0.974
   }
 }

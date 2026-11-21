@@ -58,6 +58,95 @@
     "headword": "inşa etmek",
     "lemma": "inşa etmek",
     "reading": null,
+    "ipa": "/inˈʃaː etˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏗️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to build; to construct",
+    "primaryGloss": "to build",
+    "emotion": "serious and industrious, focusing on the work being completed",
+    "notes": [
+      "More formal than 'yapmak' (to make/build), and used for large structures like buildings or bridges, or figuratively for a career or future."
+    ],
+    "senses": [
+      {
+        "id": "laahhr9vbfiphjf",
+        "order": 0,
+        "definition": "To build or construct a large physical structure, or figuratively a life or career.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to build",
+              "to construct"
+            ]
+          }
+        ],
+        "domain": "construction",
+        "emoji": "🏗️",
+        "examples": [
+          {
+            "id": "q4d2snb9j8y2g5q",
+            "text": "Şehrin merkezine yeni bir okul inşa ettiler.",
+            "textLang": "tr",
+            "translation": "They built a new school in the city center.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact, stating a clear development in the city",
+            "note": null,
+            "matchedForm": "inşa ettiler",
+            "matchedTranslationForm": "built"
+          },
+          {
+            "id": "j4w4cenc9yd0pdn",
+            "text": "Kendi kariyerini sıfırdan inşa etmek istiyor.",
+            "textLang": "tr",
+            "translation": "He wants to build his own career from scratch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ambitious and determined, looking toward a future goal",
+            "note": null,
+            "matchedForm": "inşa etmek",
+            "matchedTranslationForm": "build"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "inşa etmek",
+    "lemma": "inşa etmek",
+    "reading": null,
     "ipa": "/in.ˈʃa et.ˈmek/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/in.ˈʃa et.ˈmek/",
+        "why": "'İnşa' has a long 'a': /inˈʃaː etˈmec/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To make something by putting different parts or elements together. | glosses en: to assemble",
+        "why": "Does not mean 'to assemble'; the example shows figurative building (a career), which is an extension of sense 0."
+      }
+    ],
+    "growth": 0.627
   }
 }

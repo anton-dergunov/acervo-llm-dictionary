@@ -68,6 +68,76 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "photo; picture",
+    "primaryGloss": "photo",
+    "emotion": "nostalgic and warm, looking back at a fond memory",
+    "notes": [
+      "In northern Vietnam, 'ảnh' (chụp ảnh) is the standard word for a photograph, whereas southern speakers more often use 'hình' (chụp hình).",
+      "Common classifiers for 'ảnh' are 'bức' and 'tấm' (e.g., 'một bức ảnh' — a photo)."
+    ],
+    "senses": [
+      {
+        "id": "ha33iw0uzpesurx",
+        "order": 0,
+        "definition": "A picture or portrait taken with a camera.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "photo",
+              "photograph",
+              "picture"
+            ]
+          }
+        ],
+        "domain": "photography",
+        "emoji": "📷",
+        "examples": [
+          {
+            "id": "dyitgheb7h5nrco",
+            "text": "Tôi thích chụp ảnh khi đi du lịch.",
+            "textLang": "vi",
+            "translation": "I like to take photos when traveling.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and eager to capture a new place",
+            "note": null,
+            "matchedForm": "ảnh",
+            "matchedTranslationForm": "photos"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ảnh",
+    "lemma": "ảnh",
+    "reading": null,
+    "ipa": "/aɲ˧˩/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📷",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "photo; image; reflection",
     "primaryGloss": "photo",
     "emotion": "nostalgic and warm, looking back at a fond memory",
@@ -162,5 +232,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Bóng ảnh của cây in xuống mặt nước.",
+        "why": "'Bóng ảnh' is unnatural Vietnamese; reflections in water are 'bóng' or 'hình ảnh phản chiếu'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(reflection) An optical image reflected in a mirror or on a surface.",
+        "why": "Standalone 'ảnh' rarely means reflection in everyday Vietnamese; it belongs to compounds like 'phản ảnh'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Ảnh is a shortened form of hình ảnh",
+        "why": "'Ảnh' is a single Sino-Vietnamese word (影), not an abbreviation of the compound 'hình ảnh'."
+      }
+    ],
+    "growth": 0.717
   }
 }

@@ -58,6 +58,75 @@
     "headword": "το φλιτζάνι",
     "lemma": "φλιτζάνι",
     "reading": null,
+    "ipa": "/fliˈd͡zani/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☕",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cup",
+    "primaryGloss": "cup",
+    "emotion": "warm and cozy, holding a comforting hot drink on a slow morning",
+    "notes": [
+      "Refers to a smaller cup for coffee or tea; for a larger mug, use η κούπα."
+    ],
+    "senses": [
+      {
+        "id": "z9cx75ex940fbqu",
+        "order": 0,
+        "definition": "A small container with a handle, used for drinking hot beverages like coffee or tea.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cup",
+              "teacup",
+              "coffee cup"
+            ]
+          }
+        ],
+        "domain": "drinkware",
+        "emoji": "☕",
+        "examples": [
+          {
+            "id": "pfpmios6mtzav3f",
+            "text": "Ήπια έναν καφέ σε ένα μικρό φλιτζάνι.",
+            "textLang": "el",
+            "translation": "I drank a coffee in a small cup.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, savoring the warmth of the drink",
+            "note": null,
+            "matchedForm": "φλιτζάνι",
+            "matchedTranslationForm": "cup"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το φλιτζάνι",
+    "lemma": "φλιτζάνι",
+    "reading": null,
     "ipa": "/fliˈt͡sani/",
     "pos": "noun",
     "gender": "neuter",
@@ -121,5 +190,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/fliˈt͡sani/",
+        "why": "Greek 'τζ' is voiced /d͡z/, not voiceless /t͡s/: /fliˈd͡zani/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "cup; mug",
+        "why": "Includes 'mug', which is missing from sense glosses and contradicted by note[0]."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Note that 'φλιτζάνι' is neuter, so remember to use 'το' or 'ένα'.",
+        "why": "Restates the grammatical gender already given in the entry fields."
+      }
+    ],
+    "growth": 0.569
   }
 }

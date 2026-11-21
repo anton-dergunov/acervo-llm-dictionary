@@ -58,6 +58,115 @@
     "headword": "지다",
     "lemma": "지다",
     "reading": null,
+    "ipa": "/tɕi.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📉",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to lose; to set",
+    "primaryGloss": "lose",
+    "emotion": "defeat or decline, with a sense of giving way or losing ground",
+    "notes": [
+      "In a game or competition, it is the opposite of 이기다 (to win) and takes '~에게/한테' for the opponent or '~에서' for the match."
+    ],
+    "senses": [
+      {
+        "id": "3u24hk0ebfk95oi",
+        "order": 0,
+        "definition": "To be defeated in a game, competition, or struggle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lose",
+              "be defeated"
+            ]
+          }
+        ],
+        "domain": "competition",
+        "emoji": "🏆",
+        "examples": [
+          {
+            "id": "baf1u1r51sjnyyi",
+            "text": "우리 팀이 어제 경기에서 졌어요.",
+            "textLang": "ko",
+            "translation": "Our team lost in yesterday's game.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "졌어요",
+            "matchedTranslationForm": "lost"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "suqx7ln4l5njtmg",
+        "order": 1,
+        "definition": "Of the sun or moon: to go down below the horizon.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "set",
+              "go down"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌅",
+        "examples": [
+          {
+            "id": "a4ahtvqgpzd762s",
+            "text": "겨울에는 해가 일찍 져요.",
+            "textLang": "ko",
+            "translation": "In winter, the sun sets early.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "져요",
+            "matchedTranslationForm": "sets"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "지다",
+    "lemma": "지다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -159,5 +268,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "경기에 지다.",
+        "why": "Fragment in bare dictionary form rather than a natural, conjugated sentence."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "해가 지다.",
+        "why": "Bare dictionary form instead of a natural sentence."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[1].definition",
+        "quote": "When the sun, moon, or stars disappear below the horizon.",
+        "why": "Adverbial 'When...' clause instead of a verb definition."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Distinguish between '지다' meaning 'to lose' (a game or competition)",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.008
   }
 }

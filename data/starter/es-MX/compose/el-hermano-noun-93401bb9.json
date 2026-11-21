@@ -68,6 +68,113 @@
       "People"
     ],
     "status": "active",
+    "shortGloss": "brother; siblings (plural)",
+    "primaryGloss": "brother",
+    "emotion": "warm and familiar, speaking of someone close in the family",
+    "notes": [
+      "For a sister, use 'la hermana'. The masculine plural 'los hermanos' can mean either 'brothers' or 'siblings' (brothers and sisters together)."
+    ],
+    "senses": [
+      {
+        "id": "x3jffslv1xqbl9w",
+        "order": 0,
+        "definition": "A boy or man who has the same parents as another person; in the plural ('hermanos'), brothers and sisters.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "brother",
+              "siblings"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "2m7muikjf3tyuun",
+            "text": "Mi hermano menor vive en Guadalajara.",
+            "textLang": "es",
+            "translation": "My younger brother lives in Guadalajara.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and proud, talking about family",
+            "note": null,
+            "matchedForm": "hermano",
+            "matchedTranslationForm": "brother"
+          },
+          {
+            "id": "1jzl2x6pfbngxch",
+            "text": "¿Tienes hermanos?",
+            "textLang": "es",
+            "translation": "Do you have any siblings?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hermanos",
+            "matchedTranslationForm": "siblings"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "x3jffslv1xqbl9w",
+      "from": "Persona que tiene los mismos padres que otra.",
+      "to": "A person who shares the same parents as another.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:10Z"
+    },
+    {
+      "sense": "pktxuixxl3zjhdt",
+      "from": "Miembro de una cofradía, hermandad o comunidad religiosa.",
+      "to": "A member of a religious brotherhood or community.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:10Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el hermano",
+    "lemma": "hermano",
+    "reading": null,
+    "ipa": "/eɾˈmano/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
     "shortGloss": "brother; sibling in a religious or fraternal group",
     "primaryGloss": "brother",
     "emotion": "warm and familiar, speaking of someone close in the family",
@@ -161,22 +268,20 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "x3jffslv1xqbl9w",
-      "from": "Persona que tiene los mismos padres que otra.",
-      "to": "A person who shares the same parents as another.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:10Z"
-    },
-    {
-      "sense": "pktxuixxl3zjhdt",
-      "from": "Miembro de una cofradía, hermandad o comunidad religiosa.",
-      "to": "A member of a religious brotherhood or community.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:10Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A member of a religious brotherhood or community.",
+        "why": "Marginal sense for an A2 learner; informal 'bro/friend' or 'siblings' is much more useful."
+      }
+    ],
+    "growth": 0.859
+  }
 }

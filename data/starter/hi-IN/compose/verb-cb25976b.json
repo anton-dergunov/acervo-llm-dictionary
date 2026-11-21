@@ -60,6 +60,75 @@
     "headword": "प्यार करना",
     "lemma": "प्यार करना",
     "reading": null,
+    "ipa": "/ˈpjɑːɾ ˈkəɾnɑː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to love",
+    "primaryGloss": "to love",
+    "emotion": "warm and sincere, reflecting a deep personal connection",
+    "notes": [
+      "Takes either से (se) or को (ko) with the person loved: मैं तुमसे प्यार करता हूँ (I love you).",
+      "Used for people (family, partners) or pets. To say you 'love' an object, food, or activity, use बहुत पसंद होना instead."
+    ],
+    "senses": [
+      {
+        "id": "kh9hvllkvhb8s2e",
+        "order": 0,
+        "definition": "To feel deep affection or romantic love for someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to love"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "❤️",
+        "examples": [
+          {
+            "id": "6fwel6msta664j0",
+            "text": "मैं अपने परिवार से बहुत प्यार करता हूँ।",
+            "textLang": "hi",
+            "translation": "I love my family very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "earnest and affectionate, speaking from the heart",
+            "note": null,
+            "matchedForm": "प्यार करता",
+            "matchedTranslationForm": "love"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "प्यार करना",
+    "lemma": "प्यार करना",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To like someone or something very much.",
+        "why": "Artificial split; moreover, note[1] warns against using it for things, while sense[1]'s example uses it for a job."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "वह अपनी नई नौकरी से प्यार करती है।",
+        "why": "English calque ('loves her new job'); Hindi uses पसंद होना/करना or बहुत अच्छी लगना for a job."
+      }
+    ],
+    "growth": 0.593
   }
 }

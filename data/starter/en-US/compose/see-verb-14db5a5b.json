@@ -72,6 +72,158 @@
     "primaryGloss": "ver",
     "emotion": "attentive and present, noticing the world around you",
     "notes": [
+      "Es un verbo irregular: el pasado es 'saw' y el participio es 'seen'.",
+      "Para mirar algo de forma intencionada, se usa 'look at', no 'see'."
+    ],
+    "senses": [
+      {
+        "id": "nl764dvaddpuqx7",
+        "order": 0,
+        "definition": "Percibir algo o a alguien con los ojos.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ver"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "gmw5edirfyhosgn",
+            "text": "I can see a bird in the tree.",
+            "textLang": "en",
+            "translation": "Puedo ver un pájaro en el árbol.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and pleased, pointing something out to a friend",
+            "note": null,
+            "matchedForm": "see",
+            "matchedTranslationForm": "ver"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "usnmqvpc6gc695l",
+        "order": 1,
+        "definition": "Comprender o entender algo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "entender",
+              "comprender",
+              "ver"
+            ]
+          }
+        ],
+        "domain": "understanding",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "8kdvbtxfpkjqd5q",
+            "text": "Ah, I see what you mean.",
+            "textLang": "en",
+            "translation": "Ah, entiendo lo que quieres decir.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relieved and enlightened after a moment of confusion",
+            "note": null,
+            "matchedForm": "see",
+            "matchedTranslationForm": "entiendo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l1af3ueib17soya",
+        "order": 2,
+        "definition": "Encontrarse con alguien, visitarlo o consultar a un profesional.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ver",
+              "reunirse con",
+              "consultar"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "27g1a76us4hx7d9",
+            "text": "I will see you tomorrow.",
+            "textLang": "en",
+            "translation": "Nos vemos mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "friendly and casual, saying goodbye at the end of the day",
+            "note": null,
+            "matchedForm": "see",
+            "matchedTranslationForm": "vemos"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "see",
+    "lemma": "see",
+    "reading": null,
+    "ipa": "/siː/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👁️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "ver; entender; reunirse",
+    "primaryGloss": "ver",
+    "emotion": "attentive and present, noticing the world around you",
+    "notes": [
       "Es uno de los verbos más comunes y se usa tanto para la percepción visual como mental.",
       "Para mirar algo de forma intencionada durante un rato, es mejor usar 'look at'."
     ],
@@ -204,5 +356,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Es uno de los verbos más comunes y se usa",
+        "why": "Filler note restating the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular past 'saw' and past participle 'seen', essential at A2."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "ver, mirar",
+        "why": "'Mirar' is 'look', which note[1] explicitly contrasts with 'see'."
+      }
+    ],
+    "growth": 0.988
   }
 }

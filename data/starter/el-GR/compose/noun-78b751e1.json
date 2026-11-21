@@ -71,6 +71,74 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "mountain",
+    "primaryGloss": "mountain",
+    "emotion": "a sense of wonder and scale, looking up at something vast",
+    "notes": [
+      "Contrast with 'ο λόφος' (hill). Also used figuratively for a large pile or heavy workload (e.g., 'ένα βουνό δουλειά' — a mountain of work)."
+    ],
+    "senses": [
+      {
+        "id": "varn9mjhk49mtt3",
+        "order": 0,
+        "definition": "A very high, large natural rise of the earth's surface, larger than a hill.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "mountain"
+            ]
+          }
+        ],
+        "domain": "geography",
+        "emoji": "🏔️",
+        "examples": [
+          {
+            "id": "pha021t7lm16ct4",
+            "text": "Το βουνό είναι καλυμμένο με χιόνι.",
+            "textLang": "el",
+            "translation": "The mountain is covered in snow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and calm, describing a peaceful winter scene",
+            "note": null,
+            "matchedForm": "βουνό",
+            "matchedTranslationForm": "mountain"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το βουνό",
+    "lemma": "βουνό",
+    "reading": null,
+    "ipa": "/vuˈno/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⛰️",
+    "topics": [
+      "Nature",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "mountain; very high hill",
     "primaryGloss": "mountain",
     "emotion": "a sense of wonder and scale, looking up at something vast",
@@ -161,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "(landform) A very high hill that stands out prominently in the terrain.",
+        "why": "Invented sense; 'βουνό' simply means mountain (a small hill is 'λόφος')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it is often used colloquially to describe any very high, prominent hill",
+        "why": "Misleading note written to justify the fake second sense."
+      }
+    ],
+    "growth": 0.537
   }
 }

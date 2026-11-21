@@ -72,6 +72,117 @@
     "primaryGloss": "scary",
     "emotion": "wide-eyed and shrinking back slightly, feeling genuine trepidation",
     "notes": [
+      "ㅂ-irregular adjective: drops 'ㅂ' and adds '우' before a vowel (무서워요, 무서운).",
+      "Covers both 'scary' and 'scared': the thing causing fear takes 이/가 (개가 무서워요 = I am afraid of dogs / Dogs are scary).",
+      "Unlike '두렵다', which is more formal and refers to deep dread, '무섭다' is the everyday word for fear."
+    ],
+    "senses": [
+      {
+        "id": "cf6jd1t5mao9uib",
+        "order": 0,
+        "definition": "Causing fear or anxiety.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "scary",
+              "frightening"
+            ]
+          }
+        ],
+        "domain": "source",
+        "emoji": "👻",
+        "examples": [
+          {
+            "id": "6b4j8u1jmvvmyjl",
+            "text": "그 영화는 정말 무서웠어요.",
+            "textLang": "ko",
+            "translation": "That movie was really scary.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "shuddering slightly with a playful sense of after-the-fact nervousness",
+            "note": null,
+            "matchedForm": "무서웠어요",
+            "matchedTranslationForm": "scary"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5g22wkihnhb6mo0",
+        "order": 1,
+        "definition": "Feeling fear because of something or someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "afraid",
+              "scared"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "😨",
+        "examples": [
+          {
+            "id": "mhfil59q1pwieni",
+            "text": "저는 큰 개가 무서워요.",
+            "textLang": "ko",
+            "translation": "I am afraid of big dogs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "무서워요",
+            "matchedTranslationForm": "afraid"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "무섭다",
+    "lemma": "무섭다",
+    "reading": null,
+    "ipa": null,
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "scary; afraid",
+    "primaryGloss": "scary",
+    "emotion": "wide-eyed and shrinking back slightly, feeling genuine trepidation",
+    "notes": [
       "Used when something causes fear (scary) or when you personally feel afraid. It is very common to hear '무서워요' (I am afraid/it is scary) in everyday conversation.",
       "Do not confuse with '두렵다', which is more formal and typically refers to a deeper, more abstract sense of dread or anxiety about the future."
     ],
@@ -161,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Causing fear or anxiety; something that makes you want to avoid it.",
+        "why": "Defines an adjective partly as a noun ('something that...')."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "밤에 혼자 걷는 것은 무서워요.",
+        "why": "Uses '걷는 것은' (walking is scary) as subject instead of showing a fearful person."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential ㅂ-irregular conjugation note (무섭다 -> 무서워요, 무서운)."
+      }
+    ],
+    "growth": 0.865
   }
 }

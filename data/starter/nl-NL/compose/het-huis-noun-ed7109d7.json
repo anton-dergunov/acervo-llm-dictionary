@@ -70,6 +70,96 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "house, home",
+    "primaryGloss": "house",
+    "emotion": null,
+    "notes": [
+      "Note the voicing change in the plural: 'huizen' (/ˈɦœy̯zə(n)/).",
+      "For 'at home', Dutch uses the adverb 'thuis' ('Ik ben thuis'), but for 'going home', it uses 'naar huis' ('Ik ga naar huis')."
+    ],
+    "senses": [
+      {
+        "id": "s3kjls2yzui4a76",
+        "order": 0,
+        "definition": "A building where a person or family lives.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "house",
+              "home"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "778bbc00da3dgfi",
+            "text": "Ze hebben een mooi huis met een grote tuin.",
+            "textLang": "nl",
+            "translation": "They have a nice house with a large garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and pleased, showing someone around a new neighborhood",
+            "note": null,
+            "matchedForm": "huis",
+            "matchedTranslationForm": "house"
+          },
+          {
+            "id": "x8y05bqvakdpmxm",
+            "text": "Hoe laat ga je vanavond naar huis?",
+            "textLang": "nl",
+            "translation": "What time are you going home tonight?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "huis",
+            "matchedTranslationForm": "home"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het huis",
+    "lemma": "huis",
+    "reading": null,
+    "ipa": "/ɦœy̯s/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "house; home",
     "primaryGloss": "house",
     "emotion": null,
@@ -162,5 +252,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(organization) An institution, dynasty, or commercial firm.",
+        "why": "'Dynasty/firm' is not an everyday standalone A2 sense, and the example uses a compound ('modehuis')."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dit merk komt van een oud modehuis.",
+        "why": "Contains 'modehuis', not the standalone word 'huis'."
+      }
+    ],
+    "growth": 0.857
   }
 }

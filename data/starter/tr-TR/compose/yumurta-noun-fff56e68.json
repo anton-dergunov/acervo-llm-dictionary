@@ -72,6 +72,73 @@
     "primaryGloss": "egg",
     "emotion": "simple and satisfying, like a steady start to a morning",
     "notes": [
+      "Common breakfast terms include haşlanmış yumurta (boiled egg), sahanda yumurta (fried egg), and çırpılmış yumurta (scrambled eggs)."
+    ],
+    "senses": [
+      {
+        "id": "uf1ks6eleq6y2f8",
+        "order": 0,
+        "definition": "An oval object with a thin shell laid by a female bird, especially a chicken, often eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "egg"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍳",
+        "examples": [
+          {
+            "id": "jo5c7qvs9alzm8x",
+            "text": "Kahvaltıda bir yumurta yedim.",
+            "textLang": "tr",
+            "translation": "I ate an egg for breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfied and content after a simple, healthy meal",
+            "note": null,
+            "matchedForm": "yumurta",
+            "matchedTranslationForm": "egg"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yumurta",
+    "lemma": "yumurta",
+    "reading": null,
+    "ipa": "/juˈmuɾta/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "egg",
+    "primaryGloss": "egg",
+    "emotion": "simple and satisfying, like a steady start to a morning",
+    "notes": [
       "Used both for the food item and for the biological cell laid by birds and reptiles.",
       "In a culinary context, it is common to hear the type of cooking method attached, such as 'haşlanmış yumurta' (boiled egg)."
     ],
@@ -160,5 +227,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "The biological reproductive body produced by animals, containing the embryo.",
+        "why": "A bird's egg laid in nature and an egg eaten as food are one everyday concept."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the food item and for the biological cell",
+        "why": "Restates the oversplit definitions without adding useful learner information."
+      }
+    ],
+    "growth": 0.611
   }
 }

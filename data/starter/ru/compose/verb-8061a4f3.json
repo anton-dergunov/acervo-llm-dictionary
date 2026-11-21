@@ -68,6 +68,115 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to lose; to play (audio/video)",
+    "primaryGloss": "to lose",
+    "emotion": "frustrated and disappointed, accepting defeat",
+    "notes": [
+      "Imperfective; the perfective pair is проиграть. Do not confuse with терять, which means to lose (misplace) an object."
+    ],
+    "senses": [
+      {
+        "id": "s1wiz5vkrflm9ko",
+        "order": 0,
+        "definition": "To be defeated in a game, match, or competition, or to lose money in a bet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to lose",
+              "to be defeated"
+            ]
+          }
+        ],
+        "domain": "competition",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "alti6uxdz2rmib2",
+            "text": "Наша команда редко проигрывает.",
+            "textLang": "ru",
+            "translation": "Our team rarely loses.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "проигрывает",
+            "matchedTranslationForm": "loses"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "q1v5jblisbk382n",
+        "order": 1,
+        "definition": "To play an audio or video recording on a device.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play",
+              "to play back"
+            ]
+          }
+        ],
+        "domain": "media",
+        "emoji": "▶️",
+        "examples": [
+          {
+            "id": "q2efkhf9dyfpk6f",
+            "text": "Компьютер не может проигрывать этот файл.",
+            "textLang": "ru",
+            "translation": "The computer cannot play this file.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "проигрывать",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "проигрывать",
+    "lemma": "проигрывать",
+    "reading": null,
+    "ipa": "/prɐˈiɡrɨvətʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📉",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to lose; to replay; to play an instrument",
     "primaryGloss": "to lose",
     "emotion": "frustrated and disappointed, accepting defeat",
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to lose; to replay; to play an instrument",
+        "why": "Includes 'to play an instrument', which is not in the senses."
+      },
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "To play a recording or a musical piece again.",
+        "why": "Проигрывать means 'to play (a recording/track)', not 'to replay / play again'."
+      }
+    ],
+    "growth": 1.1
   }
 }

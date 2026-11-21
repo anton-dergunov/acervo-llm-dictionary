@@ -72,6 +72,73 @@
     "primaryGloss": "paper",
     "emotion": "matter-of-fact and utilitarian, like grabbing something off a desk",
     "notes": [
+      "Counted in sheets using the classifier 张 (zhāng), e.g., 一张纸 (a sheet of paper)."
+    ],
+    "senses": [
+      {
+        "id": "an6vuxwomd4vqsu",
+        "order": 0,
+        "definition": "A thin material used for writing, printing, or wrapping.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "paper"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "📄",
+        "examples": [
+          {
+            "id": "c841o7p865dru4y",
+            "text": "请给我一张纸。",
+            "textLang": "zh",
+            "translation": "Please give me a piece of paper.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, making a simple request at a desk",
+            "note": null,
+            "matchedForm": "纸",
+            "matchedTranslationForm": "paper"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "纸",
+    "lemma": "纸",
+    "reading": "zhǐ",
+    "ipa": "/ʈʂɻ̩˨˩˦/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📄",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "paper",
+    "primaryGloss": "paper",
+    "emotion": "matter-of-fact and utilitarian, like grabbing something off a desk",
+    "notes": [
       "纸 is a measure word (量词) for flat, thin items, so you will often see it used with units like 张 (zhāng).",
       "Do not confuse it with 支 (zhī), which is the measure word for stick-like objects like pens or cigarettes."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "纸 is a measure word (量词) for flat, thin items",
+        "why": "False: 纸 is an uncountable noun taking the classifier 张 (zhāng), not a common classifier."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 支 (zhī), which is the measure word",
+        "why": "Unhelpful comparison caused by falsely treating 纸 as a classifier in note 0."
+      }
+    ],
+    "growth": 0.433
   }
 }

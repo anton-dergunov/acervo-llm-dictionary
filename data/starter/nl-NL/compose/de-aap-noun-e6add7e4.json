@@ -58,6 +58,115 @@
     "headword": "de aap",
     "lemma": "aap",
     "reading": null,
+    "ipa": "/aːp/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐒",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "monkey, ape; little rascal",
+    "primaryGloss": "monkey",
+    "emotion": "curious and amused, watching something lively and playful",
+    "notes": [
+      "Plural: 'apen'. Dutch 'aap' covers both monkeys and apes (great apes are 'mensapen')."
+    ],
+    "senses": [
+      {
+        "id": "wkgxf8xh37q48j4",
+        "order": 0,
+        "definition": "An intelligent animal related to humans that lives in warm countries and often climbs trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "monkey",
+              "ape"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐒",
+        "examples": [
+          {
+            "id": "fe77f6zgb82xhx5",
+            "text": "De aap klimt in de boom.",
+            "textLang": "nl",
+            "translation": "The monkey climbs into the tree.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fascinated and happy, watching an animal move around",
+            "note": null,
+            "matchedForm": "aap",
+            "matchedTranslationForm": "monkey"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hdz9scvnm3860o5",
+        "order": 1,
+        "definition": "A playful or cheeky child.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rascal",
+              "little monkey"
+            ]
+          }
+        ],
+        "domain": "person",
+        "emoji": "🧒",
+        "examples": [
+          {
+            "id": "1kjivwzehqq9w2u",
+            "text": "Wat ben je toch een kleine aap!",
+            "textLang": "nl",
+            "translation": "You really are a little rascal!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "affectionate and smiling at someone's naughty behavior",
+            "note": null,
+            "matchedForm": "aap",
+            "matchedTranslationForm": "rascal"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de aap",
+    "lemma": "aap",
+    "reading": null,
     "ipa": "/daːp/",
     "pos": "noun",
     "gender": "common",
@@ -159,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/daːp/",
+        "why": "Includes the reduced article; the lemma 'aap' is pronounced /aːp/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses[0].glosses",
+        "quote": "monkey",
+        "why": "Dutch 'aap' covers both 'monkey' and 'ape'; 'ape' is missing from glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the literal animal and affectionately or jokingly",
+        "why": "Restates the two senses without adding new usage information."
+      }
+    ],
+    "growth": 0.94
   }
 }

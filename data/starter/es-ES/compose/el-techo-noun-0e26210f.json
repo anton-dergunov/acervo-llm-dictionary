@@ -72,6 +72,114 @@
     "primaryGloss": "ceiling",
     "emotion": "looking up at the solid, sheltering structure above your head",
     "notes": [
+      "In Spain, 'el techo' is the indoor ceiling (or the roof of a car, or figuratively a home/shelter), while the outer roof of a building is usually called 'el tejado'."
+    ],
+    "senses": [
+      {
+        "id": "z45sxumkjnboga3",
+        "order": 0,
+        "definition": "The upper interior surface of a room or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ceiling"
+            ]
+          }
+        ],
+        "domain": "ceiling",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "6ccwsi2ht8p9nnm",
+            "text": "He pintado el techo del salón de blanco.",
+            "textLang": "es",
+            "translation": "I have painted the living room ceiling white.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "techo",
+            "matchedTranslationForm": "ceiling"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ylhczowb3p25mbl",
+        "order": 1,
+        "definition": "The top covering of a building or vehicle, or a place that provides shelter.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "roof",
+              "shelter"
+            ]
+          }
+        ],
+        "domain": "roof",
+        "emoji": "🏚️",
+        "examples": [
+          {
+            "id": "iyb10wcae0yi7op",
+            "text": "Por suerte tenemos un techo donde dormir.",
+            "textLang": "es",
+            "translation": "Luckily we have a roof over our heads to sleep under.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "techo",
+            "matchedTranslationForm": "roof"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el techo",
+    "lemma": "techo",
+    "reading": null,
+    "ipa": "/ˈtetʃo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "ceiling; roof",
+    "primaryGloss": "ceiling",
+    "emotion": "looking up at the solid, sheltering structure above your head",
+    "notes": [
       "In Spanish, 'techo' is used for both the 'ceiling' (inside the room) and the 'roof' (the outside covering of the building).",
       "Use 'el techo' when you are indoors looking up, and 'el tejado' if you are specifically referring to the outer, slanted surface of a house."
     ],
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Spanish, 'techo' is used for both the 'ceiling'",
+        "why": "Restates the senses and duplicates note 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hay muchos pájaros sobre el techo de la casa.",
+        "why": "In Peninsular Spanish, the exterior roof of a house is 'tejado', whereas 'techo' for 'roof' is mainly figurative (a home/shelter) or used for vehicles."
+      }
+    ],
+    "growth": 0.952
   }
 }

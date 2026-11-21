@@ -68,6 +68,115 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to hurt; to ache",
+    "primaryGloss": "to hurt",
+    "emotion": "wincing slightly, holding a sore spot with a sympathetic sigh",
+    "notes": [
+      "Stem-changing verb (o > ue). Used like 'gustar' with indirect object pronouns: 'me duele la cabeza' (singular) vs. 'me duelen los pies' (plural)."
+    ],
+    "senses": [
+      {
+        "id": "g7ipryeitxtau98",
+        "order": 0,
+        "definition": "To cause physical pain in a part of the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to ache"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "inemhkuxrcqyba8",
+            "text": "Me duele la cabeza después de trabajar todo el día.",
+            "textLang": "es",
+            "translation": "My head hurts after working all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "rubbing the temples with eyes closed, weary and tired",
+            "note": null,
+            "matchedForm": "duele",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9vsjdxos9x4zgaf",
+        "order": 1,
+        "definition": "To cause emotional pain or sadness.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hurt",
+              "to pain"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "677koqikcpkekwi",
+            "text": "Me duele ver a mis amigos sufrir.",
+            "textLang": "es",
+            "translation": "It hurts me to see my friends suffer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "heavy-hearted and sorrowful, speaking with genuine compassion",
+            "note": null,
+            "matchedForm": "duele",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "doler",
+    "lemma": "doler",
+    "reading": null,
+    "ipa": "/doˈleɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to hurt; to ache; to care about",
     "primaryGloss": "hurt",
     "emotion": "wincing slightly, holding a sore spot with a sympathetic sigh",
@@ -162,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hurt; to ache; to care about",
+        "why": "'To care about' is not covered in the senses and is misleading."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "hurt, pain, regret",
+        "why": "With 'doler', the thing causes pain ('to hurt'); the subject does not 'regret'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should explicitly note the o > ue stem change and plural form 'duelen'."
+      }
+    ],
+    "growth": 0.945
   }
 }

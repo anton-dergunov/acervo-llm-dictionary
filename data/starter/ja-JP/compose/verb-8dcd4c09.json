@@ -59,6 +59,96 @@
     "language": "ja",
     "headword": "食べる",
     "lemma": "食べる",
+    "reading": "たべる",
+    "ipa": "tabeɾɯ",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍴",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to eat",
+    "primaryGloss": "to eat",
+    "emotion": "a simple, everyday comfort, satisfied and at ease",
+    "notes": [
+      "Ichidan (ru) verb. Takes the particle を (o) to mark the food or meal being eaten."
+    ],
+    "senses": [
+      {
+        "id": "70rck7efhtv4x79",
+        "order": 0,
+        "definition": "To put food into your mouth, chew it, and swallow it, or to have a meal.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to eat",
+              "to have (a meal)"
+            ]
+          }
+        ],
+        "domain": "eating",
+        "emoji": "🍴",
+        "examples": [
+          {
+            "id": "rt0i4qee2nldj3t",
+            "text": "毎日、朝ご飯を食べる。",
+            "textLang": "ja",
+            "translation": "I eat breakfast every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a routine, matter-of-fact start to the morning",
+            "note": null,
+            "matchedForm": "食べる",
+            "matchedTranslationForm": "eat"
+          },
+          {
+            "id": "p5sg10hv3q638xh",
+            "text": "りんごを食べている。",
+            "textLang": "ja",
+            "translation": "I am eating an apple.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and focused on the present snack",
+            "note": null,
+            "matchedForm": "食べている",
+            "matchedTranslationForm": "eating"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "食べる",
+    "lemma": "食べる",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -144,5 +234,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (たべる) for a headword containing kanji."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common and versatile verb for 'to eat'.",
+        "why": "Restates the gloss without giving useful grammatical information (e.g., verb group, particle)."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "you do not use this word to mean 'to have a meal'",
+        "why": "Misleading; ご飯を食べる is constantly used for having a meal socially."
+      }
+    ],
+    "growth": 0.647
   }
 }

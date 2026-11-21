@@ -58,6 +58,73 @@
     "headword": "mùa thu",
     "lemma": "mùa thu",
     "reading": null,
+    "ipa": "/muə˨˩ tʰu˧˧/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍂",
+    "topics": [
+      "Time",
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "autumn; fall",
+    "primaryGloss": "autumn",
+    "emotion": "nostalgic and calm, reflecting on the cooling air and changing light",
+    "notes": [],
+    "senses": [
+      {
+        "id": "1zsmea4u5kf6frf",
+        "order": 0,
+        "definition": "The season after summer and before winter, when temperatures drop and leaves fall from trees.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "autumn",
+              "fall"
+            ]
+          }
+        ],
+        "domain": "season",
+        "emoji": "🍂",
+        "examples": [
+          {
+            "id": "eiz3w0oyql9dyna",
+            "text": "Mùa thu là mùa lá rụng.",
+            "textLang": "vi",
+            "translation": "Autumn is the season when leaves fall.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "contemplative and observational, appreciating the natural cycle",
+            "note": null,
+            "matchedForm": "Mùa thu",
+            "matchedTranslationForm": "Autumn"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "mùa thu",
+    "lemma": "mùa thu",
+    "reading": null,
     "ipa": "/mūə tʰū/",
     "pos": "noun",
     "gender": null,
@@ -120,5 +187,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/mūə tʰū/",
+        "why": "Uses Pinyin-style macrons instead of IPA tone marks, giving the wrong tone for 'mùa'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "autumn; the season when leaves fall",
+        "why": "Contains a full definition phrase instead of concise translation glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In Vietnam, autumn is often associated with a gentle, refreshing breeze and",
+        "why": "Purely encyclopedic filler with no useful linguistic information."
+      }
+    ],
+    "growth": 0.44
   }
 }

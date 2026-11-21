@@ -70,6 +70,95 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "interview",
+    "primaryGloss": "interview",
+    "emotion": null,
+    "notes": [
+      "Often used in 'entrevista de trabajo' (job interview) and with the verbs 'tener' (to have) or 'hacer' (to do/conduct)."
+    ],
+    "senses": [
+      {
+        "id": "8dl0lhzscdcwidk",
+        "order": 0,
+        "definition": "A formal meeting in which someone is asked questions, especially for a job or by a journalist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "interview",
+              "job interview"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "5kj7jibettocknz",
+            "text": "Tengo una entrevista de trabajo mañana.",
+            "textLang": "es",
+            "translation": "I have a job interview tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit anxious, hoping to make a good impression",
+            "note": null,
+            "matchedForm": "entrevista",
+            "matchedTranslationForm": "interview"
+          },
+          {
+            "id": "ssn3ai4svx1271r",
+            "text": "La actriz dio una entrevista sobre su nueva película.",
+            "textLang": "es",
+            "translation": "The actress gave an interview about her new movie.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "professional and calm, like a public statement",
+            "note": null,
+            "matchedForm": "entrevista",
+            "matchedTranslationForm": "interview"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "la entrevista",
+    "lemma": "entrevista",
+    "reading": null,
+    "ipa": "/en.tɾeˈβis.ta/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "interview; meeting",
     "primaryGloss": "interview",
     "emotion": null,
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Job interviews and media interviews are shades of one meaning ('interview')."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "interview; meeting",
+        "why": "'Meeting' is not in the glosses and is too broad for 'entrevista'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "While this is commonly used for job interviews, it can also refer",
+        "why": "Simply repeats the definitions of the two senses."
+      }
+    ],
+    "growth": 0.793
   }
 }

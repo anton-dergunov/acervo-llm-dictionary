@@ -60,6 +60,75 @@
     "headword": "ดื่ม",
     "lemma": "ดื่ม",
     "reading": null,
+    "ipa": "dʉ̀ːm",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍹",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to drink",
+    "primaryGloss": "drink",
+    "emotion": "relaxed and refreshed, the satisfying feeling of quenching one's thirst",
+    "notes": [
+      "In everyday spoken Thai, กิน (gin, 'to eat/consume') is very often used for liquids too (e.g., กินน้ำ 'to drink water'), whereas ดื่ม is slightly more polite or formal.",
+      "Used without an object, ดื่ม often means to drink alcohol."
+    ],
+    "senses": [
+      {
+        "id": "0pmblitczjf1epg",
+        "order": 0,
+        "definition": "To take a liquid into the mouth and swallow it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "drink"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "🥤",
+        "examples": [
+          {
+            "id": "irlkpnzb1qhlm1c",
+            "text": "ฉันชอบดื่มน้ำเย็นในวันที่อากาศร้อน",
+            "textLang": "th",
+            "translation": "I like to drink cold water on a hot day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "happy and relieved, feeling the cooling effect of the water",
+            "note": null,
+            "matchedForm": "ดื่ม",
+            "matchedTranslationForm": "drink"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "ดื่ม",
+    "lemma": "ดื่ม",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -162,5 +231,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "while 'กิน' (kin) is used for eating food, 'ดื่ม' (dùm) is",
+        "why": "Wrong romanization 'dùm' (it is dʉ̀ʉm), and กิน is commonly used for liquids in speech."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "To swallow a liquid intentionally.",
+        "why": "Same meaning as sense 0; 'swallow' and 'guzzle' are inaccurate glosses for ดื่ม."
+      }
+    ],
+    "growth": 0.726
   }
 }

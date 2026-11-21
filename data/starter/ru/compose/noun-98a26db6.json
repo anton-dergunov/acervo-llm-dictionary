@@ -72,6 +72,73 @@
     "primaryGloss": "rice",
     "emotion": "hungry and looking forward to a warm dinner",
     "notes": [
+      "Uncountable in Russian and used only in the singular."
+    ],
+    "senses": [
+      {
+        "id": "ut1tecp499v01et",
+        "order": 0,
+        "definition": "Small white or brown grains eaten cooked as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rice"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "2bi5ndtnquzari6",
+            "text": "На ужин я буду есть рис с овощами.",
+            "textLang": "ru",
+            "translation": "For dinner I will eat rice with vegetables.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "hungry and satisfied, looking forward to a nice evening meal",
+            "note": null,
+            "matchedForm": "рис",
+            "matchedTranslationForm": "rice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "рис",
+    "lemma": "рис",
+    "reading": null,
+    "ipa": "/ˈrʲis/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "rice",
+    "primaryGloss": "rice",
+    "emotion": "hungry and looking forward to a warm dinner",
+    "notes": [
       "Refers to the harvested and cooked grains used for food, whereas the growing plant in the field is called 'рисовое поле' or simply the grass 'рис' in a botanical context."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "whereas the growing plant in the field is called 'рисовое поле'",
+        "why": "'Рисовое поле' means rice field, not the plant; 'рис' is also the plant."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should note that 'рис' is uncountable (singular only) in Russian."
+      }
+    ],
+    "growth": 0.584
   }
 }

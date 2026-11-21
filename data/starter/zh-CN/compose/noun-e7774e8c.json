@@ -68,6 +68,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "flower; to spend (money or time)",
+    "primaryGloss": "flower",
+    "emotion": "gentle and appreciative, noticing something pretty outdoors",
+    "notes": [
+      "The most common measure word for individual flowers is 朵 (duǒ), and for a bunch of flowers is 束 (shù).",
+      "In spoken Mandarin, 花儿 (huār) is very commonly used for 'flower' to distinguish it from the verb 'to spend'."
+    ],
+    "senses": [
+      {
+        "id": "mu1bv06s5zsqvdn",
+        "order": 0,
+        "definition": "The coloured part of a plant that produces seeds.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "blossom"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "oziwwsmpfrsfreb",
+            "text": "春天到了，公园里开满了花。",
+            "textLang": "zh",
+            "translation": "Spring has arrived, and the park is full of blooming flowers.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "花",
+            "matchedTranslationForm": "flowers"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1tbryiig41qvoo2",
+        "order": 1,
+        "definition": "To use money or time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to spend",
+              "to cost"
+            ]
+          }
+        ],
+        "domain": "spending",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "1y1191rwlqk2h8w",
+            "text": "买这件衣服花了我很多钱。",
+            "textLang": "zh",
+            "translation": "Buying this piece of clothing cost me a lot of money.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "花",
+            "matchedTranslationForm": "cost"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "花",
+    "lemma": "花",
+    "reading": "huā",
+    "ipa": "/xu̯a˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "flower; to spend (money/time)",
     "primaryGloss": "flower",
     "emotion": "gentle and appreciative, noticing something pretty outdoors",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "language.wrong",
+        "path": "senses[0].examples[0].text",
+        "quote": "春天到了， park 里开满了花。",
+        "why": "Contains the English word 'park' instead of Chinese 公园."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "Buying this piece of clothing spent a lot of money.",
+        "why": "Unnatural calque; in English, things 'cost' money, people 'spend' it."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 花 means flower. It is also commonly used",
+        "why": "Restates the glosses without adding usage information like its measure word 朵."
+      }
+    ],
+    "growth": 1.323
   }
 }

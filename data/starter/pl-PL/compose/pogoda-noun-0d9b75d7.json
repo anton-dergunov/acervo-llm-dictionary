@@ -68,6 +68,73 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "weather",
+    "primaryGloss": "weather",
+    "emotion": "casual and conversational, checking what to wear for the day",
+    "notes": [
+      "Usually singular and uncountable. Also appears in the set phrase 'pogoda ducha' (cheerfulness, serenity)."
+    ],
+    "senses": [
+      {
+        "id": "st26s6sffwm8s9o",
+        "order": 0,
+        "definition": "The state of the atmosphere at a particular time and place, such as sun, rain, or wind.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "bokjrvhavs9cr3r",
+            "text": "Dzisiaj jest ładna pogoda.",
+            "textLang": "pl",
+            "translation": "The weather is nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "pleasant and relaxed, noting a good day for a walk",
+            "note": null,
+            "matchedForm": "pogoda",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "pogoda",
+    "lemma": "pogoda",
+    "reading": null,
+    "ipa": "/pɔˈɡɔda/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "weather; mood",
     "primaryGloss": "weather",
     "emotion": "casual and conversational, checking what to wear for the day",
@@ -160,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:09Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The current mood or spirits of a person.",
+        "why": "Pogoda does not mean neutral 'mood'; only 'pogoda ducha' means cheerfulness/serenity."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "dzisiaj ma złą pogodę ducha.",
+        "why": "'Zła pogoda ducha' is unidiomatic; 'pogoda ducha' is inherently positive."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Pogoda is most commonly used to talk about the state",
+        "why": "Restates the definitions without adding useful grammar or usage notes."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "weather; mood",
+        "why": "'Mood' is inaccurate for pogoda."
+      }
+    ],
+    "growth": 0.407
   }
 }

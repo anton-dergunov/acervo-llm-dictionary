@@ -72,6 +72,74 @@
     "primaryGloss": "often",
     "emotion": "casual and conversational, mentioning a familiar habit",
     "notes": [
+      "Formed by repeating the adjective 'sık' (frequent, dense). Usually placed before the verb."
+    ],
+    "senses": [
+      {
+        "id": "4q51ug1cymbd3t6",
+        "order": 0,
+        "definition": "Many times or at short intervals.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "often",
+              "frequently"
+            ]
+          }
+        ],
+        "domain": "frequency",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "yvsx9cyy21su8e7",
+            "text": "Bu kafeye sık sık gidiyorum.",
+            "textLang": "tr",
+            "translation": "I go to this cafe often.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sık sık",
+            "matchedTranslationForm": "often"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sık sık",
+    "lemma": "sık sık",
+    "reading": null,
+    "ipa": "/sɯk sɯk/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔄",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "often; frequently",
+    "primaryGloss": "often",
+    "emotion": "casual and conversational, mentioning a familiar habit",
+    "notes": [
       "Derived from repeating the adjective 'sık' (frequent/tight), this reduplication is used just like 'often' in English.",
       "Do not confuse it with 'birdenbire' (suddenly) or 'bazen' (sometimes, which implies a lower frequency)."
     ],
@@ -121,5 +189,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bu kafe sık sık gidiyorum.",
+        "why": "Ungrammatical: 'gitmek' requires the dative case ('kafeye', not bare 'kafe')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 'birdenbire' (suddenly) or 'bazen'",
+        "why": "Unlikely confusion with unrelated words."
+      }
+    ],
+    "growth": 0.572
   }
 }

@@ -68,6 +68,116 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "day; date",
+    "primaryGloss": "day",
+    "emotion": "warm and bright, looking forward to a clear morning",
+    "notes": [
+      "Do not confuse with 'güneş' (sun).",
+      "Common in everyday greetings such as 'İyi günler!' (Good day! / Have a nice day!)."
+    ],
+    "senses": [
+      {
+        "id": "ggrl3pgrkx3icp4",
+        "order": 0,
+        "definition": "A period of twenty-four hours, or the hours of daylight.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "daytime"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "q8v9ufzjfmpln3s",
+            "text": "Bir haftada yedi gün vardır.",
+            "textLang": "tr",
+            "translation": "There are seven days in a week.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "gün",
+            "matchedTranslationForm": "days"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "v3lcl69y3yqksx1",
+        "order": 1,
+        "definition": "A particular day on which something happens or is celebrated.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "day",
+              "date"
+            ]
+          }
+        ],
+        "domain": "date",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "yjcqeau0y719uvr",
+            "text": "Doğum günün ne zaman?",
+            "textLang": "tr",
+            "translation": "When is your birthday?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "günün",
+            "matchedTranslationForm": "birthday"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "gün",
+    "lemma": "gün",
+    "reading": null,
+    "ipa": "/ɟyn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "☀️",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "day; sunlight",
     "primaryGloss": "day",
     "emotion": "warm and bright, looking forward to a clear morning",
@@ -161,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bugün hava çok güzel.",
+        "why": "Uses 'bugün' (today) instead of the headword 'gün'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(light) Sunlight or sunshine.",
+        "why": "Meaning 'sunlight' is mostly restricted to compounds/idioms; 'date/occasion' is much more useful at A2."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Gün means both the 24-hour day and daytime itself in contrast to",
+        "why": "Merely restates the definition of sense 0."
+      }
+    ],
+    "growth": 0.986
   }
 }

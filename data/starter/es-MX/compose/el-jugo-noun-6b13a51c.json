@@ -68,6 +68,91 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "juice",
+    "primaryGloss": "juice",
+    "emotion": "thirsty and eager, looking forward to a cold drink",
+    "notes": [
+      "In Mexico and Latin America, 'jugo' is the word for fruit juice. In Spain, 'zumo' is used for fruit juice, while 'jugo' refers mostly to liquid from meat or cooked food."
+    ],
+    "senses": [
+      {
+        "id": "atru3wlcg8nnj0a",
+        "order": 0,
+        "definition": "The liquid that comes from fruit, vegetables, or cooked meat, especially as a drink.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "juice"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🧃",
+        "examples": [
+          {
+            "id": "yd1zr7zuwn0a4tt",
+            "text": "Me gusta tomar un vaso de jugo de naranja por la mañana.",
+            "textLang": "es",
+            "translation": "I like to drink a glass of orange juice in the morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying a quiet morning routine",
+            "note": null,
+            "matchedForm": "jugo",
+            "matchedTranslationForm": "juice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "atru3wlcg8nnj0a",
+      "from": "Líquido que se extrae de las frutas u otras partes de las plantas.",
+      "to": "The liquid extracted from fruits or other parts of plants.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    },
+    {
+      "sense": "s1j7vqemvztc89l",
+      "from": "Líquido que contienen las carnes u otros alimentos.",
+      "to": "The liquid contained within meat or other food items.",
+      "model": "gemini-api:gemini-3.1-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:02:13Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el jugo",
+    "lemma": "jugo",
+    "reading": null,
+    "ipa": "/ˈxu.ɣo/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧃",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "juice; sap",
     "primaryGloss": "juice",
     "emotion": "thirsty and eager, looking forward to a cold drink",
@@ -160,22 +245,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "atru3wlcg8nnj0a",
-      "from": "Líquido que se extrae de las frutas u otras partes de las plantas.",
-      "to": "The liquid extracted from fruits or other parts of plants.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    },
-    {
-      "sense": "s1j7vqemvztc89l",
-      "from": "Líquido que contienen las carnes u otros alimentos.",
-      "to": "The liquid contained within meat or other food items.",
-      "model": "gemini-api:gemini-3.1-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:02:13Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "juice; sap",
+        "why": "'sap' is not in the senses (and is usually 'savia' in Spanish)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Fruit juice and meat juice are shades of one meaning; merge or focus on beverage."
+      }
+    ],
+    "growth": 0.726
+  }
 }

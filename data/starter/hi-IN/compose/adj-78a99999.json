@@ -68,6 +68,74 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "bright and vivid, pointing something out clearly",
+    "notes": [
+      "Invariable adjective: its form never changes for gender, number, or case.",
+      "Used in common expressions like गुस्से से लाल होना ('to turn red with anger')."
+    ],
+    "senses": [
+      {
+        "id": "sv5esyqbdje273y",
+        "order": 0,
+        "definition": "Having the colour of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "b1bjh7dxxewe5fh",
+            "text": "उसने लाल कमीज़ पहनी है।",
+            "textLang": "hi",
+            "translation": "He is wearing a red shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and descriptive, pointing out what someone has on",
+            "note": null,
+            "matchedForm": "लाल",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "लाल",
+    "lemma": "लाल",
+    "reading": null,
+    "ipa": "/lɑːl/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "red; beloved; ruby",
     "primaryGloss": "red",
     "emotion": "bright and vivid, pointing something out clearly",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "लाल generally agrees in gender and number with the noun it describes",
+        "why": "Completely false: लाल does not end in -आ and is strictly invariable as an adjective."
+      },
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "red; beloved; ruby",
+        "why": "Includes 'ruby' (a noun sense not in the entry), and sense 1 mixes noun ('son') into an adjective entry."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(affection) Dear, beloved, or cherished, often used affectionately for a child.",
+        "why": "Poetic noun ('dear son'), wrong POS for an adjective entry and not an everyday A2 sense."
+      }
+    ],
+    "growth": 0.401
   }
 }

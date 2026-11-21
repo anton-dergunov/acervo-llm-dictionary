@@ -70,6 +70,156 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to see; to watch; to meet",
+    "primaryGloss": "to see",
+    "emotion": "inquisitive and alert, taking in the world around you",
+    "notes": [
+      "In Mexico, 'ver' is standard for watching TV or movies ('ver la tele', 'ver una película'), whereas 'mirar' means to look at something intentionally.",
+      "Irregular in several forms: 'yo veo' (present), 'visto' (past participle), and 'vi', 'vio' (preterite, written without accent marks)."
+    ],
+    "senses": [
+      {
+        "id": "9fk0mzm9lri7jyb",
+        "order": 0,
+        "definition": "To notice with your eyes or have the ability to see.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see"
+            ]
+          }
+        ],
+        "domain": "perception",
+        "emoji": "👁️",
+        "examples": [
+          {
+            "id": "svifsx2jzow3wod",
+            "text": "Desde aquí puedo ver las montañas.",
+            "textLang": "es",
+            "translation": "From here I can see the mountains.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and appreciative, pointing out a view",
+            "note": null,
+            "matchedForm": "ver",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "odc44cc3u73gewv",
+        "order": 1,
+        "definition": "To look at something for a period of time, such as a movie, show, or game.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to watch",
+              "to see"
+            ]
+          }
+        ],
+        "domain": "entertainment",
+        "emoji": "📺",
+        "examples": [
+          {
+            "id": "fr2n3sn91upfl0y",
+            "text": "Me gusta ver películas los fines de semana.",
+            "textLang": "es",
+            "translation": "I like to watch movies on the weekends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a hobby",
+            "note": null,
+            "matchedForm": "ver",
+            "matchedTranslationForm": "watch"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "tzzagpaeirfdr3c",
+        "order": 2,
+        "definition": "To meet or visit someone, or to get together.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to see",
+              "to meet"
+            ]
+          }
+        ],
+        "domain": "social",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "2xrwio7mfpz6b0t",
+            "text": "Te veo mañana en la oficina.",
+            "textLang": "es",
+            "translation": "I'll see you tomorrow at the office.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "veo",
+            "matchedTranslationForm": "see"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "ver",
+    "lemma": "ver",
+    "reading": null,
+    "ipa": "/ˈbeɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to see; to watch",
     "primaryGloss": "to see",
     "emotion": "inquisitive and alert, taking in the world around you",
@@ -161,5 +311,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:49Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing everyday sense 'to meet with / see someone socially' (e.g. 'Te veo mañana')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Ver is used for both involuntary acts (like seeing) and intentional ones",
+        "why": "Redundant with note 1 and the two senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing note on irregular forms: 'veo' (present), 'vi/vio' (preterite, no accents), 'visto' (participle)."
+      }
+    ],
+    "growth": 1.237
   }
 }

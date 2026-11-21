@@ -68,6 +68,74 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "evening; night",
+    "primaryGloss": "evening",
+    "emotion": "a winding-down feeling, the sun setting and the day's work ending",
+    "notes": [
+      "Mostly used in set expressions like 今晩 (こんばん, tonight), 毎晩 (まいばん, every night), and 昨日の晩 (きのうのばん, last night), or as a counter for nights (一晩, ひとばん). On its own, 夜 (よる) is much more common."
+    ],
+    "senses": [
+      {
+        "id": "c15rz578aajuttb",
+        "order": 0,
+        "definition": "The part of the day from around dinner time through the night.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "evening",
+              "night"
+            ]
+          }
+        ],
+        "domain": "time",
+        "emoji": "🌆",
+        "examples": [
+          {
+            "id": "15b33iqmeu6gx5j",
+            "text": "昨日の晩は友達と食事をしました。",
+            "textLang": "ja",
+            "translation": "I had a meal with a friend last night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and pleasant, reflecting on a nice time spent together",
+            "note": null,
+            "matchedForm": "晩",
+            "matchedTranslationForm": "night"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "晩",
+    "lemma": "晩",
+    "reading": "ばん",
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌇",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "evening; late day; night",
     "primaryGloss": "evening",
     "emotion": "a winding-down feeling, the sun setting and the day's work ending",
@@ -161,5 +229,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:01Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The later part of the day in a general sense; often used to talk about one's later life",
+        "why": "Treats a bound kanji meaning (as in 晩年) as a standalone noun sense of 晩."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "from late afternoon until nightfall",
+        "why": "False: 晩 refers to the evening/night after dark, not late afternoon before nightfall."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "late day",
+        "why": "'Late day' is not a natural English gloss for 晩."
+      }
+    ],
+    "growth": 0.586
   }
 }

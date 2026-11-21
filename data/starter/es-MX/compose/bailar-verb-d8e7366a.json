@@ -83,6 +83,73 @@
     ],
     "status": "active",
     "shortGloss": "to dance",
+    "primaryGloss": "to dance",
+    "emotion": "joyful and rhythmic, feeling the music in your whole body",
+    "notes": [
+      "Can be used without an object ('me gusta bailar') or followed directly by the type of music or dance ('bailar salsa', 'bailar cumbia')."
+    ],
+    "senses": [
+      {
+        "id": "fiivbbszm1gf79l",
+        "order": 0,
+        "definition": "To move your body to the rhythm of music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to dance"
+            ]
+          }
+        ],
+        "domain": "dance",
+        "emoji": "💃",
+        "examples": [
+          {
+            "id": "dnxlg68d6fyiulj",
+            "text": "Me encanta bailar salsa los fines de semana.",
+            "textLang": "es",
+            "translation": "I love dancing salsa on the weekends.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and energetic, excited to share a hobby",
+            "note": null,
+            "matchedForm": "bailar",
+            "matchedTranslationForm": "dancing"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "bailar",
+    "lemma": "bailar",
+    "reading": null,
+    "ipa": "/baiˈlaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💃",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to dance",
     "primaryGloss": "dance",
     "emotion": "joyful and rhythmic, feeling the music in your whole body",
     "notes": [
@@ -174,5 +241,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:46Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Unlike English, where you might say 'I am going to dance",
+        "why": "Makes a false contrast; the Spanish sentence is a direct word-for-word parallel of the English."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'brincar' or 'saltar'",
+        "why": "Unlikely confusion for beginners; neither looks nor sounds like 'bailar'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "To move back and forth or shake slightly.",
+        "why": "Secondary figurative sense not needed at A2 level."
+      }
+    ],
+    "growth": 0.611
   }
 }

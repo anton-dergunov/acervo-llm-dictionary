@@ -58,6 +58,75 @@
     "headword": "kaus",
     "lemma": "kaus",
     "reading": null,
+    "ipa": "/ˈka.us/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👕",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
+    "shortGloss": "T-shirt",
+    "primaryGloss": "T-shirt",
+    "emotion": "casual and comfortable, describing something you wear every day",
+    "notes": [
+      "In everyday Indonesian, it is very often spelled and pronounced 'kaos'.",
+      "On its own, 'kaus' means a T-shirt (also called 'kaus oblong'). In compounds it is used for other knitted garments, such as 'kaus kaki' (sock) and 'kaus tangan' (glove)."
+    ],
+    "senses": [
+      {
+        "id": "ptbo9853qxongl2",
+        "order": 0,
+        "definition": "A casual short-sleeved cotton top without a collar.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "T-shirt",
+              "tee"
+            ]
+          }
+        ],
+        "domain": "clothing",
+        "emoji": "👕",
+        "examples": [
+          {
+            "id": "az4074x0upcic6r",
+            "text": "Dia memakai kaus putih yang nyaman di rumah.",
+            "textLang": "id",
+            "translation": "He is wearing a comfortable white T-shirt at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "kaus",
+            "matchedTranslationForm": "T-shirt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "kaus",
+    "lemma": "kaus",
+    "reading": null,
     "ipa": "/kaʊs/",
     "pos": "noun",
     "gender": null,
@@ -160,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "You must add a modifier to be specific: 'kaus oblong' for a t-shirt",
+        "why": "False for T-shirt: 'kaus' alone normally means T-shirt; only 'sock' requires 'kaus kaki'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(footwear) A knitted garment worn on the foot inside a shoe.",
+        "why": "In everyday use, 'sock' is 'kaus kaki' (has its own entry), not bare 'kaus'."
+      }
+    ],
+    "growth": 0.715
   }
 }

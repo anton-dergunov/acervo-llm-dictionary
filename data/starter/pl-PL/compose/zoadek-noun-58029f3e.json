@@ -60,6 +60,74 @@
     "headword": "żołądek",
     "lemma": "żołądek",
     "reading": null,
+    "ipa": "/ʐɔˈwɔn.dɛk/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🫄",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "stomach",
+    "primaryGloss": "stomach",
+    "emotion": null,
+    "notes": [
+      "Distinguish between 'żołądek' (the internal digestive organ) and 'brzuch' (the belly or abdomen as a body part).",
+      "The 'e' in the final syllable is a fleeting vowel and drops in all declined forms (e.g., genitive singular 'żołądka')."
+    ],
+    "senses": [
+      {
+        "id": "03uu6ki8gcod71t",
+        "order": 0,
+        "definition": "The internal organ in the body where food is digested.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "stomach"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "🫄",
+        "examples": [
+          {
+            "id": "p01r6b64qd9mxur",
+            "text": "Boli mnie żołądek po tym obiedzie.",
+            "textLang": "pl",
+            "translation": "My stomach hurts after that lunch.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly uncomfortable and complaining, rubbing the stomach",
+            "note": null,
+            "matchedForm": "żołądek",
+            "matchedTranslationForm": "stomach"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "żołądek",
+    "lemma": "żołądek",
+    "reading": null,
     "ipa": "/ʐɔˈwɔdɛk/",
     "pos": "noun",
     "gender": "masculine",
@@ -142,5 +210,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ʐɔˈwɔdɛk/",
+        "why": "Missing nasalization/consonant for 'ą' before 'd'; standard pronunciation is /ʐɔˈwɔn.dɛk/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "The genitive case of 'żołądek' is 'żołądka'. Be careful with the vowel change!",
+        "why": "False claim: the 'e' drops out (fleeting vowel), it does not change into another vowel."
+      }
+    ],
+    "growth": 0.745
   }
 }

@@ -58,6 +58,117 @@
     "headword": "ngon",
     "lemma": "ngon",
     "reading": null,
+    "ipa": "/ŋɔn˧˧/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😋",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "delicious, tasty; sound (of sleep)",
+    "primaryGloss": "delicious",
+    "emotion": "contented and appreciative, enjoying the flavor of something satisfying",
+    "notes": [
+      "Often used in the mealtime greeting 'Chúc ngon miệng!' (Enjoy your meal!) and at bedtime in 'Chúc ngủ ngon!' (Sleep well! / Good night!)."
+    ],
+    "senses": [
+      {
+        "id": "6oh1fm6uxv9az9l",
+        "order": 0,
+        "definition": "Of food or drink: having a pleasant or enjoyable taste.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "delicious",
+              "tasty",
+              "good"
+            ]
+          }
+        ],
+        "domain": "taste",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "310hk6dp9f8a9u3",
+            "text": "Món ăn này rất ngon.",
+            "textLang": "vi",
+            "translation": "This dish is very delicious.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warm and satisfied, sharing a positive opinion about a meal",
+            "note": null,
+            "matchedForm": "ngon",
+            "matchedTranslationForm": "delicious"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "waxc27172f5ghnf",
+        "order": 1,
+        "definition": "Of sleep or appetite: sound, restful, or hearty (usually following 'ngủ' or 'ăn').",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sound",
+              "restful",
+              "well"
+            ]
+          }
+        ],
+        "domain": "sleep",
+        "emoji": "😴",
+        "examples": [
+          {
+            "id": "ehg8bc5mkchvoim",
+            "text": "Chúc bạn ngủ ngon.",
+            "textLang": "vi",
+            "translation": "Sleep well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "kind and caring, wishing someone a peaceful night",
+            "note": null,
+            "matchedForm": "ngon",
+            "matchedTranslationForm": "well"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "ngon",
+    "lemma": "ngon",
+    "reading": null,
     "ipa": "/ŋɔn/",
     "pos": "adj",
     "gender": null,
@@ -161,5 +272,49 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ŋɔn/",
+        "why": "Missing tone mark; northern Vietnamese ngang tone is /˧˧/."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "delicious; tasty; good",
+        "why": "'good' is not covered by the senses, while 'sound' (sleep) is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'ngon' to describe food that tastes great.",
+        "why": "Restates the primary gloss and definition without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse this with 'đẹp', which describes something that is beautiful",
+        "why": "Learners do not confuse 'delicious' with 'beautiful'."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].text",
+        "quote": "Chúc bạn ngủ ngon. — I wish you a sound sleep.",
+        "why": "Calqued translation; natural English for this fixed phrase is 'Sleep well' or 'Good night'."
+      }
+    ],
+    "growth": 0.931
   }
 }

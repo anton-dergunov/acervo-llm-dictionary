@@ -58,6 +58,76 @@
     "headword": "kwiat",
     "lemma": "kwiat",
     "reading": null,
+    "ipa": "/kfjat/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌸",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "flower; blossom; houseplant",
+    "primaryGloss": "flower",
+    "emotion": "admiring and appreciative, stopping to look at something beautiful",
+    "notes": [
+      "Has a vowel shift in the locative singular: 'w kwiecie' (in a flower).",
+      "Also commonly used for a potted houseplant ('kwiat doniczkowy'), even one without blossoms (e.g., 'podlewać kwiaty' – to water the plants)."
+    ],
+    "senses": [
+      {
+        "id": "vw9pb33zdmx2qlr",
+        "order": 0,
+        "definition": "The coloured part of a plant, or a flowering plant grown in a pot or garden.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "flower",
+              "blossom",
+              "houseplant"
+            ]
+          }
+        ],
+        "domain": "plants",
+        "emoji": "🌸",
+        "examples": [
+          {
+            "id": "115sbca37zq1cc4",
+            "text": "W ogrodzie rośnie piękny czerwony kwiat.",
+            "textLang": "pl",
+            "translation": "A beautiful red flower is growing in the garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, pointing out a small pleasure in nature",
+            "note": null,
+            "matchedForm": "kwiat",
+            "matchedTranslationForm": "flower"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "kwiat",
+    "lemma": "kwiat",
+    "reading": null,
     "ipa": "/kviat/",
     "pos": "noun",
     "gender": "masculine",
@@ -120,5 +190,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/kviat/",
+        "why": "Wrong Polish IPA: 'w' after voiceless 'k' devoices to /f/, and 'i' palatalizes it (/kfjät/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'kwiaty' (plural)",
+        "why": "Trivial warning not to confuse a noun with its own regular plural; misses irregular locative."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Kwiat is the general term for both a single flower",
+        "why": "Merely restates the glosses without adding usage value."
+      }
+    ],
+    "growth": 1.058
   }
 }

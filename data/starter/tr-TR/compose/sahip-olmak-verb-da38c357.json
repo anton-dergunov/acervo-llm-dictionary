@@ -58,6 +58,76 @@
     "headword": "sahip olmak",
     "lemma": "sahip olmak",
     "reading": null,
+    "ipa": "/saːˈhip oɫˈmak/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔑",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to own; to possess",
+    "primaryGloss": "to own",
+    "emotion": "proud and confident, taking pride in what belongs to them",
+    "notes": [
+      "Takes the dative case (-e/-a) for the thing possessed.",
+      "In everyday speech, simple 'to have' is usually expressed with 'var' (e.g., 'Bir arabam var'). 'Sahip olmak' is more formal or needed where 'var' cannot be used, such as in infinitives or participles."
+    ],
+    "senses": [
+      {
+        "id": "493hbd20q85ya9y",
+        "order": 0,
+        "definition": "To have or own something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to own",
+              "to possess",
+              "to have"
+            ]
+          }
+        ],
+        "domain": "ownership",
+        "emoji": "🔑",
+        "examples": [
+          {
+            "id": "8qmf45rmmrebyqe",
+            "text": "Bahçeli bir eve sahip olmak istiyorum.",
+            "textLang": "tr",
+            "translation": "I want to own a house with a garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "sahip olmak",
+            "matchedTranslationForm": "to own"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "sahip olmak",
+    "lemma": "sahip olmak",
+    "reading": null,
     "ipa": "/sɑˈhip olˈmak/",
     "pos": "verb",
     "gender": null,
@@ -163,5 +233,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Ailesine her zaman sahip çıkar.",
+        "why": "Uses 'sahip çıkmak' (a different verb), not 'sahip olmak'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1].definition",
+        "quote": "To look after someone or something, or to take responsibility for them.",
+        "why": "Confuses 'sahip olmak' with 'sahip çıkmak'; 'sahip olmak' here mostly means self-control."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to own; to possess; to protect",
+        "why": "'to protect' is 'sahip çıkmak', not 'sahip olmak'."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bu büyük eve sahip.",
+        "why": "Lacks a form of 'olmak', and Turkish normally uses 'var' for simple ownership."
+      }
+    ],
+    "growth": 0.771
   }
 }

@@ -70,6 +70,96 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "finger; toe; digit",
+    "primaryGloss": "finger",
+    "emotion": "matter-of-fact and informative, like pointing something out to a child",
+    "notes": [
+      "By itself, 'jari' usually means a finger, though it covers both fingers and toes. To be specific, use 'jari tangan' (finger) or 'jari kaki' (toe)."
+    ],
+    "senses": [
+      {
+        "id": "95u8vgt74hsv4bq",
+        "order": 0,
+        "definition": "One of the five digits at the end of the hand or foot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "finger",
+              "toe",
+              "digit"
+            ]
+          }
+        ],
+        "domain": "anatomy",
+        "emoji": "👆",
+        "examples": [
+          {
+            "id": "9o142vzfhx3zpn6",
+            "text": "Dia menunjuk ke arah pintu dengan jari telunjuknya.",
+            "textLang": "id",
+            "translation": "She pointed toward the door with her index finger.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, guiding someone's attention to a location",
+            "note": null,
+            "matchedForm": "jari",
+            "matchedTranslationForm": "finger"
+          },
+          {
+            "id": "u4eiq4xj4rospnv",
+            "text": "Saya tersandung dan jari kaki saya sakit sekali.",
+            "textLang": "id",
+            "translation": "I tripped and my toe hurts a lot.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "wincing and sharp, feeling a sudden pang of physical pain",
+            "note": null,
+            "matchedForm": "jari",
+            "matchedTranslationForm": "toe"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "jari",
+    "lemma": "jari",
+    "reading": null,
+    "ipa": "/ˈdʒari/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🖐️",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "finger; digit",
     "primaryGloss": "finger",
     "emotion": "matter-of-fact and informative, like pointing something out to a child",
@@ -160,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "One of the digits at the end of the foot.",
+        "why": "Indonesian 'jari' is a single concept (digit); toes usually require 'jari kaki'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "finger; digit",
+        "why": "Sense 1 is 'toe', which is missing from shortGloss."
+      }
+    ],
+    "growth": 0.906
   }
 }

@@ -63,6 +63,95 @@
     "ipa": "/boːɾ/",
     "pos": "adj",
     "gender": null,
+    "register": null,
+    "dialect": null,
+    "emoji": "🥱",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "bored",
+    "primaryGloss": "bored",
+    "emotion": null,
+    "notes": [
+      "Invariable loanword from English, used almost always in the phrases बोर होना (to get bored) and बोर करना (to bore someone). To say 'boring', Hindi speakers usually use बोरिंग (boring)."
+    ],
+    "senses": [
+      {
+        "id": "jgxum0diy7mgk1b",
+        "order": 0,
+        "definition": "Feeling tired and impatient because something is not interesting or there is nothing to do.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bored",
+              "fed up"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": "🥱",
+        "examples": [
+          {
+            "id": "jzktn1h1ex9o7uu",
+            "text": "मैं घर पर बैठे-बैठे बोर हो गया हूँ।",
+            "textLang": "hi",
+            "translation": "I have gotten bored sitting at home.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बोर",
+            "matchedTranslationForm": "bored"
+          },
+          {
+            "id": "of9cas3f0f5ct6w",
+            "text": "उसकी लंबी बातों ने सबको बोर कर दिया।",
+            "textLang": "hi",
+            "translation": "His long talk bored everyone.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "बोर",
+            "matchedTranslationForm": "bored"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "hi",
+    "headword": "बोर",
+    "lemma": "बोर",
+    "reading": null,
+    "ipa": "/boːɾ/",
+    "pos": "adj",
+    "gender": null,
     "register": "neutral",
     "dialect": null,
     "emoji": "🥱",
@@ -163,5 +252,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:52Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "यह फिल्म बहुत बोर थी।",
+        "why": "Speakers say 'बोरिंग' (boring) or 'बोर करने वाली', not 'बोर थी' for a movie."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Causing weariness and restlessness; uninteresting.",
+        "why": "बोर is used in 'बोर होना' (be bored) and 'बोर करना' (bore someone), not as 'boring'."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "बोर can describe both how someone feels (bored) and what causes that",
+        "why": "Misleading; Hindi learners need the verbal phrases बोर होना and बोर करना, plus बोरिंग."
+      }
+    ],
+    "growth": 0.973
   }
 }

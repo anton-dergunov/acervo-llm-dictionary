@@ -74,6 +74,115 @@
     "primaryGloss": "clean",
     "emotion": null,
     "notes": [
+      "Used with 'estar' for things that are currently clean ('el plato está limpio'), and with 'ser' for a person who has neat, clean habits ('él es muy limpio').",
+      "Do not confuse with 'limpiado', the past participle of 'limpiar' ('he limpiado' = I have cleaned)."
+    ],
+    "senses": [
+      {
+        "id": "wehubz0zsb1wshr",
+        "order": 0,
+        "definition": "Free from dirt, marks, or stains.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clean"
+            ]
+          }
+        ],
+        "domain": "cleanliness",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "qj7zunz0t2lvzoz",
+            "text": "La cocina quedó muy limpia después de la fiesta.",
+            "textLang": "es",
+            "translation": "The kitchen was left very clean after the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "limpia",
+            "matchedTranslationForm": "clean"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9r7o2i05m3qcr6b",
+        "order": 1,
+        "definition": "Of the sky, water, or air: free of clouds, pollution, or obstructions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "clear",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "clarity",
+        "emoji": "☀️",
+        "examples": [
+          {
+            "id": "307vwo421916vzj",
+            "text": "Tuvimos un cielo limpio durante todo el viaje.",
+            "textLang": "es",
+            "translation": "We had a clear sky during the whole trip.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and calm, describing perfect weather",
+            "note": null,
+            "matchedForm": "limpio",
+            "matchedTranslationForm": "clear"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "limpio",
+    "lemma": "limpio",
+    "reading": null,
+    "ipa": "/ˈlimpjo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "clean; clear",
+    "primaryGloss": "clean",
+    "emotion": null,
+    "notes": [
       "Used to describe things that are not dirty, as well as things that are clear or transparent.",
       "Do not confuse with 'limpiado', which is the past participle of the verb 'limpiar' (to clean)."
     ],
@@ -161,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:48Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used to describe things that are not dirty, as well as",
+        "why": "Merely repeats the definitions of the two senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should explain the difference between 'estar limpio' (state) and 'ser limpio' (neat person)."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "La cocina está muy limpia después de lavarla.",
+        "why": "In Spanish, one uses 'limpiar la cocina', not 'lavar la cocina'."
+      }
+    ],
+    "growth": 1.268
   }
 }

@@ -70,6 +70,97 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to bring; to take; to carry",
+    "primaryGloss": "bring",
+    "emotion": "helpful and ready, assisting someone with their belongings",
+    "notes": [
+      "Formed from the root 'bawa' with the active prefix 'meN-'. In commands (e.g. after 'tolong' or 'jangan'), drop the prefix and use 'bawa'.",
+      "Unlike English, 'membawa' does not depend on direction: it translates as 'bring', 'take', or 'carry' depending on context."
+    ],
+    "senses": [
+      {
+        "id": "hph41jj44elhxp9",
+        "order": 0,
+        "definition": "To hold or have something with you when you go somewhere.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bring",
+              "take",
+              "carry"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "📥",
+        "examples": [
+          {
+            "id": "5oawpbu2vjj969z",
+            "text": "Jangan lupa membawa payung karena hari ini akan hujan.",
+            "textLang": "id",
+            "translation": "Don't forget to bring an umbrella because it is going to rain today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "membawa",
+            "matchedTranslationForm": "bring"
+          },
+          {
+            "id": "hx92ulsmjefhxdn",
+            "text": "Dia membawa tas berat ke sekolah.",
+            "textLang": "id",
+            "translation": "She is carrying a heavy bag to school.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "straining slightly under the weight of a heavy load",
+            "note": null,
+            "matchedForm": "membawa",
+            "matchedTranslationForm": "carrying"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "membawa",
+    "lemma": "bawa",
+    "reading": null,
+    "ipa": "/məmˈbawa/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📦",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to bring; to carry",
     "primaryGloss": "bring",
     "emotion": "helpful and ready, assisting someone with their belongings",
@@ -163,5 +254,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:55Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Tolong membawa buku itu ke sini.",
+        "why": "Direct imperatives in Indonesian drop the 'meN-' prefix; it should be 'Tolong bawa'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "To hold or support something while moving from one place to another.",
+        "why": "Indonesian 'membawa' covers both English 'bring/take' and 'carry' as a single concept."
+      }
+    ],
+    "growth": 1.183
   }
 }

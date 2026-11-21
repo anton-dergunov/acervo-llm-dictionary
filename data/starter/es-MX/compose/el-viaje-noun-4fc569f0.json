@@ -68,6 +68,75 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "trip; journey",
+    "primaryGloss": "trip",
+    "emotion": "anticipatory and bright, thinking of the places you will see",
+    "notes": [
+      "Commonly used in expressions like '¡Buen viaje!' (Have a good trip!) and 'estar de viaje' (to be away on a trip).",
+      "In Mexico, 'viaje' also refers to a single ride or fare in a taxi or rideshare."
+    ],
+    "senses": [
+      {
+        "id": "odwrt91r7b92z9n",
+        "order": 0,
+        "definition": "An act of traveling from one place to another, especially over a noticeable distance.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "trip",
+              "journey"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "🧳",
+        "examples": [
+          {
+            "id": "pxvva7dauft2bh4",
+            "text": "El viaje a la playa fue muy divertido.",
+            "textLang": "es",
+            "translation": "The trip to the beach was a lot of fun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and reminiscent, remembering a good time",
+            "note": null,
+            "matchedForm": "viaje",
+            "matchedTranslationForm": "trip"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "el viaje",
+    "lemma": "viaje",
+    "reading": null,
+    "ipa": "/ˈbja.xe/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "trip; journey; travel",
     "primaryGloss": "trip",
     "emotion": "anticipatory and bright, thinking of the places you will see",
@@ -161,5 +230,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:47Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(round-trip) A journey to a place and back again.",
+        "why": "'Viaje' alone does not mean 'round-trip'; that meaning comes from 'de ida y vuelta' in the example."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "Compré un viaje de ida y vuelta a Madrid.",
+        "why": "One buys a 'boleto' (ticket) de ida y vuelta, not a 'viaje'."
+      }
+    ],
+    "growth": 0.651
   }
 }

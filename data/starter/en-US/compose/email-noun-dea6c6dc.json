@@ -68,6 +68,160 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "correo electrónico; dirección de correo",
+    "primaryGloss": "correo electrónico",
+    "emotion": "quick and practical, getting through the work day",
+    "notes": [
+      "Es contable cuando se refiere a un mensaje ('an email') e incontable cuando se refiere al sistema ('by email').",
+      "También se usa como verbo ('to email someone': enviar un correo a alguien)."
+    ],
+    "senses": [
+      {
+        "id": "h4ikeffcklrmp1d",
+        "order": 0,
+        "definition": "Mensaje enviado a través de internet de una computadora o teléfono a otro.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "correo electrónico",
+              "correo",
+              "email"
+            ]
+          }
+        ],
+        "domain": "mensaje",
+        "emoji": "📧",
+        "examples": [
+          {
+            "id": "fckl6o7hax9wg48",
+            "text": "I sent an email to my boss this morning.",
+            "textLang": "en",
+            "translation": "Le envié un correo electrónico a mi jefe esta mañana.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "busy and matter-of-fact, checking tasks off a list",
+            "note": null,
+            "matchedForm": "email",
+            "matchedTranslationForm": "correo electrónico"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "incp887tc86ezos",
+        "order": 1,
+        "definition": "Sistema para enviar y recibir mensajes a través de internet.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "correo electrónico",
+              "correo",
+              "email"
+            ]
+          }
+        ],
+        "domain": "sistema",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "bt5nzg000pe2w1w",
+            "text": "You can contact us by email.",
+            "textLang": "en",
+            "translation": "Puedes contactarnos por correo electrónico.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "email",
+            "matchedTranslationForm": "correo electrónico"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3hwic6m9oy3ng8k",
+        "order": 2,
+        "definition": "Dirección digital personal que se usa para recibir y enviar estos mensajes.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "dirección de correo",
+              "correo",
+              "email"
+            ]
+          }
+        ],
+        "domain": "dirección",
+        "emoji": "🪪",
+        "examples": [
+          {
+            "id": "xsylg3ql7ta1jmt",
+            "text": "Can you give me your email?",
+            "textLang": "en",
+            "translation": "¿Me puedes dar tu correo?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "email",
+            "matchedTranslationForm": "correo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "email",
+    "lemma": "email",
+    "reading": null,
+    "ipa": "/ˈiːmeɪl/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📧",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "correo electrónico; mensaje",
     "primaryGloss": "correo electrónico",
     "emotion": "quick and practical, getting through the work day",
@@ -161,5 +315,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "En español se puede usar 'email', 'correo electrónico' o simplemente 'correo'.",
+        "why": "Explains Spanish usage and restates the glosses instead of explaining the English word."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "What is your email address?",
+        "why": "Uses 'email address', where 'address' carries the meaning, instead of standalone 'email'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the uncountable sense of the email system itself (e.g., 'by email')."
+      }
+    ],
+    "growth": 1.392
   }
 }

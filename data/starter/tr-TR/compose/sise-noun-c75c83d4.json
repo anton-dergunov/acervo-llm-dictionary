@@ -72,6 +72,73 @@
     "primaryGloss": "bottle",
     "emotion": "casual and everyday, grabbing a drink from the fridge",
     "notes": [
+      "Used directly after a number or bir as a measure word without 'of': bir şişe su (a bottle of water), compared to su şişesi (a water bottle)."
+    ],
+    "senses": [
+      {
+        "id": "euo6jg275be5m7t",
+        "order": 0,
+        "definition": "A glass or plastic container with a narrow neck for holding liquids.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bottle"
+            ]
+          }
+        ],
+        "domain": "container",
+        "emoji": "🍾",
+        "examples": [
+          {
+            "id": "sllknhepr1x5f59",
+            "text": "Masada bir şişe soğuk su var.",
+            "textLang": "tr",
+            "translation": "There is a bottle of cold water on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "şişe",
+            "matchedTranslationForm": "bottle"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "şişe",
+    "lemma": "şişe",
+    "reading": null,
+    "ipa": "/ʃiˈʃe/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍾",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "bottle",
+    "primaryGloss": "bottle",
+    "emotion": "casual and everyday, grabbing a drink from the fridge",
+    "notes": [
       "Used for any standard bottle made of glass or plastic that holds liquids like water, milk, or wine."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for any standard bottle made of glass or plastic",
+        "why": "Purely repeats the definition without adding grammatical or usage value."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "There is a cold water bottle on the table.",
+        "why": "'Bir su şişesi' is an empty water bottle; 'a bottle of cold water' is 'bir şişe soğuk su'."
+      }
+    ],
+    "growth": 1.122
   }
 }

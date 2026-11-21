@@ -58,6 +58,115 @@
     "headword": "바라다",
     "lemma": "바라다",
     "reading": null,
+    "ipa": "paɾada",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
+    "shortGloss": "to hope; to wish; to want",
+    "primaryGloss": "to hope",
+    "emotion": "warm and optimistic, looking forward to the future",
+    "notes": [
+      "Often used in the pattern -기를 바라다 ('to hope that...').",
+      "Conjugates with -아 as 바라요 / 바라 (not 바래요 / 바래, which is a common colloquial misspelling, or from the verb 바래다 'to fade')."
+    ],
+    "senses": [
+      {
+        "id": "5iz9oljgzruykz6",
+        "order": 0,
+        "definition": "To hope or wish for something to happen.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to hope",
+              "to wish",
+              "to want"
+            ]
+          }
+        ],
+        "domain": "hope",
+        "emoji": "🌟",
+        "examples": [
+          {
+            "id": "d6mpl823o9ehtcz",
+            "text": "시험에 합격하기를 바랍니다.",
+            "textLang": "ko",
+            "translation": "I hope you pass the exam.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sincere and encouraging, wishing someone well",
+            "note": null,
+            "matchedForm": "바랍니다",
+            "matchedTranslationForm": "hope"
+          },
+          {
+            "id": "dwuuxkgksm5s5wc",
+            "text": "좋은 결과가 있기를 바라요.",
+            "textLang": "ko",
+            "translation": "I hope for a good result.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "바라요",
+            "matchedTranslationForm": "hope"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "5iz9oljgzruykz6",
+      "from": "어떤 일이 이루어지기를 마음속으로 원하다.",
+      "to": "To desire in your heart for a certain thing to happen.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    },
+    {
+      "sense": "z2wxkw5xg69qxtg",
+      "from": "빛을 받아서 색이 바래거나 희미해지다.",
+      "to": "To lose color or become faint from exposure to light.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "바라다",
+    "lemma": "바라다",
+    "reading": null,
     "ipa": "/baɾada/",
     "pos": "verb",
     "gender": null,
@@ -184,22 +293,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "5iz9oljgzruykz6",
-      "from": "어떤 일이 이루어지기를 마음속으로 원하다.",
-      "to": "To desire in your heart for a certain thing to happen.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    },
-    {
-      "sense": "z2wxkw5xg69qxtg",
-      "from": "빛을 받아서 색이 바래거나 희미해지다.",
-      "to": "To lose color or become faint from exposure to light.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(fade) To lose color or become faint from exposure to light.",
+        "why": "'To fade' is a different verb, 바래다 (past 바랬다), not 바라다."
+      },
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "햇빛을 오래 받아서 커튼 색이 바랐다.",
+        "why": "Ungrammatical for 'faded'; the verb for fading is 바래다 (커튼 색이 바랬다)."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "or the shorter '-길 바래' in casual speech.",
+        "why": "바래 is a common misspelling; the standard casual form of 바라다 is 바라."
+      }
+    ],
+    "growth": 0.687
+  }
 }

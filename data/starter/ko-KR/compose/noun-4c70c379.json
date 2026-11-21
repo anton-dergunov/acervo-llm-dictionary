@@ -58,6 +58,133 @@
     "headword": "호수",
     "lemma": "호수",
     "reading": null,
+    "ipa": "ɦo̞sʰu",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏞️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "lake; room number; size",
+    "primaryGloss": "lake",
+    "emotion": "peaceful and quiet, looking out over calm water on a sunny day",
+    "notes": [
+      "These two meanings come from different Sino-Korean words: 湖水 (lake) and 號數 (assigned number or size)."
+    ],
+    "senses": [
+      {
+        "id": "2x4dvh93kf4fyf1",
+        "order": 0,
+        "definition": "A large area of water surrounded by land.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lake"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🏞️",
+        "examples": [
+          {
+            "id": "l9jypl67nbny2db",
+            "text": "주말에 공원 호수 근처에서 산책을 했다.",
+            "textLang": "ko",
+            "translation": "I took a walk near the park lake on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "호수",
+            "matchedTranslationForm": "lake"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "ofpiwj9zbgdji45",
+        "order": 1,
+        "definition": "An assigned number for a room or apartment, or a standard size for clothes, shoes, or rings.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room number",
+              "apartment number",
+              "size"
+            ]
+          }
+        ],
+        "domain": "numbering",
+        "emoji": "📖",
+        "examples": [
+          {
+            "id": "a3o55q1khfejtyb",
+            "text": "정확한 아파트 동과 호수를 적어 주세요.",
+            "textLang": "ko",
+            "translation": "Please write down your exact apartment building and unit number.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "호수를",
+            "matchedTranslationForm": "unit number"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "2x4dvh93kf4fyf1",
+      "from": "육지로 둘러싸인 넓고 큰 물의 구역.",
+      "to": "A large body of water surrounded by land.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:04Z"
+    },
+    {
+      "sense": "ofpiwj9zbgdji45",
+      "from": "간행물의 차례를 나타내는 번호.",
+      "to": "A number given to a particular edition of a magazine or newspaper.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:04Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "호수",
+    "lemma": "호수",
+    "reading": null,
     "ipa": "/ho.su/",
     "pos": "noun",
     "gender": null,
@@ -161,22 +288,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "2x4dvh93kf4fyf1",
-      "from": "육지로 둘러싸인 넓고 큰 물의 구역.",
-      "to": "A large body of water surrounded by land.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:04Z"
-    },
-    {
-      "sense": "ofpiwj9zbgdji45",
-      "from": "간행물의 차례를 나타내는 번호.",
-      "to": "A number given to a particular edition of a magazine or newspaper.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:04Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:04Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1].definition",
+        "quote": "A number given to a particular edition of a magazine or newspaper.",
+        "why": "호수 (號數) is primarily room/apartment number or clothing/shoe size, not magazine edition."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "잡지 이번 호수에 흥미로운 기사가 많이 실렸다.",
+        "why": "Ungrammatical word choice; 'this issue' is '이번 호', never '이번 호수'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse it with 오수, which means wastewater or drainage.",
+        "why": "오수 is an advanced word that A2 learners will not confuse with 호수."
+      }
+    ],
+    "growth": 0.847
+  }
 }

@@ -73,6 +73,73 @@
     "headword": "o arroz",
     "lemma": "arroz",
     "reading": null,
+    "ipa": "/aˈʁos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍚",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "rice",
+    "primaryGloss": "rice",
+    "emotion": null,
+    "notes": [
+      "Uncountable; use 'um grão de arroz' for a single grain. Commonly paired with beans ('arroz com feijão') at everyday meals."
+    ],
+    "senses": [
+      {
+        "id": "mytlnmui0oe4gfq",
+        "order": 0,
+        "definition": "Small white or brown grains from a cereal plant, cooked and eaten as food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rice"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍚",
+        "examples": [
+          {
+            "id": "s72pixtxzlz4ldc",
+            "text": "O arroz está quase pronto.",
+            "textLang": "pt",
+            "translation": "The rice is almost ready.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anticipatory and hungry, waiting for the meal to be served",
+            "note": null,
+            "matchedForm": "arroz",
+            "matchedTranslationForm": "rice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "o arroz",
+    "lemma": "arroz",
+    "reading": null,
     "ipa": "/aˈʁɔs/",
     "pos": "noun",
     "gender": "masculine",
@@ -134,5 +201,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aˈʁɔs/",
+        "why": "Wrong vowel: 'arroz' has a close-mid /o/ (/aˈʁos/ or /aˈʁojs/), not open /ɔ/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Unlike in English, where rice can be countable or uncountable",
+        "why": "False claim about English ('rice' is uncountable in both languages) and filler."
+      }
+    ],
+    "growth": 0.614
   }
 }

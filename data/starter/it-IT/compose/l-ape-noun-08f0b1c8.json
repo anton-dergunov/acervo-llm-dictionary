@@ -58,6 +58,91 @@
     "headword": "l'ape",
     "lemma": "ape",
     "reading": null,
+    "ipa": "/ˈape/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐝",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "bee",
+    "primaryGloss": "bee",
+    "emotion": "busy and buzzing, moving swiftly through a sunlit garden",
+    "notes": [
+      "Plural: 'le api'. Do not confuse with 'la vespa' (wasp)."
+    ],
+    "senses": [
+      {
+        "id": "8maaekn6np1lbfg",
+        "order": 0,
+        "definition": "A flying insect that makes honey and lives in a hive.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "bee"
+            ]
+          }
+        ],
+        "domain": "insect",
+        "emoji": "🐝",
+        "examples": [
+          {
+            "id": "uhvxtcdljjtmlrl",
+            "text": "Un'ape si è posata sul fiore.",
+            "textLang": "it",
+            "translation": "A bee landed on the flower.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted and watchful, pointing out a small creature in the garden",
+            "note": null,
+            "matchedForm": "ape",
+            "matchedTranslationForm": "bee"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "8maaekn6np1lbfg",
+      "from": "Insetto volante che produce il miele e vive in società.",
+      "to": "A flying insect that makes honey and lives in colonies.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    },
+    {
+      "sense": "wc2un3r1m8j8jj1",
+      "from": "Veicolo utilitario a tre ruote prodotto dalla Piaggio.",
+      "to": "A small utility vehicle with three wheels.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:45Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "l'ape",
+    "lemma": "ape",
+    "reading": null,
     "ipa": "/ˈlaːpe/",
     "pos": "noun",
     "gender": "feminine",
@@ -161,22 +246,34 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "8maaekn6np1lbfg",
-      "from": "Insetto volante che produce il miele e vive in società.",
-      "to": "A flying insect that makes honey and lives in colonies.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    },
-    {
-      "sense": "wc2un3r1m8j8jj1",
-      "from": "Veicolo utilitario a tre ruote prodotto dalla Piaggio.",
-      "to": "A small utility vehicle with three wheels.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:45Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:57Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈlaːpe/",
+        "why": "IPA includes the definite article 'l''; it must transcribe only the lemma 'ape'."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "A small utility vehicle with three wheels.",
+        "why": "Brand-specific vehicle sense ('Ape Piaggio') is marginal for an A2 beginner entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'capra' (goat) or 'pera' (pear).",
+        "why": "Arbitrary, unrelated words that learners do not confuse with 'ape'."
+      }
+    ],
+    "growth": 0.33
+  }
 }

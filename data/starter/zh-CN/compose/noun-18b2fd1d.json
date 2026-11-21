@@ -57,6 +57,97 @@
     "language": "zh",
     "headword": "楼层",
     "lemma": "楼层",
+    "reading": "lóucéng",
+    "ipa": "/lou̯˧˥ tsʰəŋ˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏢",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
+    "shortGloss": "floor; story (of a building)",
+    "primaryGloss": "floor",
+    "emotion": null,
+    "notes": [
+      "Refers to floors as a general concept (e.g., 高楼层 'high floors'). To name a specific floor or count floors, use 层 (céng) or 楼 (lóu) instead, as in 三楼 (3rd floor).",
+      "Do not confuse with 地板 (dìbǎn), which is the floor surface you walk on."
+    ],
+    "senses": [
+      {
+        "id": "0opgma3gryv3aez",
+        "order": 0,
+        "definition": "A level or story of a building.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "floor",
+              "story",
+              "level"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🏢",
+        "examples": [
+          {
+            "id": "3xrylemyqk5qjs5",
+            "text": "我喜欢住高楼层，因为视野很好。",
+            "textLang": "zh",
+            "translation": "I like living on a high floor because the view is great.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "楼层",
+            "matchedTranslationForm": "floor"
+          },
+          {
+            "id": "1rp4t1k5at8p08b",
+            "text": "这座大楼一共有二十个楼层。",
+            "textLang": "zh",
+            "translation": "This building has twenty floors in total.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and matter-of-fact",
+            "note": null,
+            "matchedForm": "楼层",
+            "matchedTranslationForm": "floors"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "楼层",
+    "lemma": "楼层",
     "reading": "lóu céng",
     "ipa": "/lou̯˧˥ tsʰəŋ˧˥/",
     "pos": "noun",
@@ -141,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:23Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "我家住在三楼，楼层很高，视野很好。",
+        "why": "The 3rd floor is not considered high; contradicts '楼层很高'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 楼层 to talk about which floor you are on",
+        "why": "Restates the definition; fails to clarify that 층/楼 are used for counting floors."
+      }
+    ],
+    "growth": 0.958
   }
 }

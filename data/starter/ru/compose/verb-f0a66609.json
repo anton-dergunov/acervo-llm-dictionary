@@ -58,6 +58,117 @@
     "headword": "заканчивать",
     "lemma": "заканчивать",
     "reading": null,
+    "ipa": "/zɐˈkantɕɪvətʲ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏁",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to finish; to graduate from",
+    "primaryGloss": "to finish",
+    "emotion": "focused and steady, bringing a task to its proper close",
+    "notes": [
+      "Imperfective; the perfective is закончить.",
+      "Takes a direct object in the accusative case, or an infinitive verb (e.g., заканчивать работать — to finish working). For an event ending by itself ('The movie is ending'), use the reflexive заканчиваться."
+    ],
+    "senses": [
+      {
+        "id": "r38okc2f4fios9r",
+        "order": 0,
+        "definition": "To bring an activity or task to an end.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to finish",
+              "to complete",
+              "to end"
+            ]
+          }
+        ],
+        "domain": "completion",
+        "emoji": "🏁",
+        "examples": [
+          {
+            "id": "jblxy2e88zoov7j",
+            "text": "Я обычно заканчиваю работу в шесть часов.",
+            "textLang": "ru",
+            "translation": "I usually finish work at six o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "routine and steady, looking forward to going home",
+            "note": null,
+            "matchedForm": "заканчиваю",
+            "matchedTranslationForm": "finish"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vjopg10e616ie4e",
+        "order": 1,
+        "definition": "To complete one's studies at a school or university.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to graduate from",
+              "to finish"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🎓",
+        "examples": [
+          {
+            "id": "untdfek4cqvfuzj",
+            "text": "Она заканчивает университет в этом году.",
+            "textLang": "ru",
+            "translation": "She is graduating from university this year.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and looking forward to the future",
+            "note": null,
+            "matchedForm": "заканчивает",
+            "matchedTranslationForm": "graduating from"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "заканчивать",
+    "lemma": "заканчивать",
+    "reading": null,
     "ipa": "/zɐˈkan.tɕɪ.vətʲ/",
     "pos": "verb",
     "gender": null,
@@ -202,5 +313,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "To come to the end of something naturally, or for an event",
+        "why": "Intransitive 'to come to an end' is the reflexive verb заканчиваться, not заканчивать."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Фильм уже заканчивается.",
+        "why": "Uses the reflexive verb заканчиваться instead of the headword заканчивать."
+      }
+    ],
+    "growth": 0.696
   }
 }

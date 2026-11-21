@@ -69,6 +69,160 @@
       "Travel"
     ],
     "status": "active",
+    "shortGloss": "to go; to leave; to go with; to be spent",
+    "primaryGloss": "to go",
+    "emotion": "purposeful and direct, moving toward a destination with steady intention",
+    "notes": [
+      "Takes the dative case (-a/-e) for a destination (e.g., 'eve gitmek' – to go home) and ablative (-dan/-den) for a starting point.",
+      "The final 't' softens to 'd' before a vowel-initial suffix (e.g., 'gidiyorum', 'gidecek')."
+    ],
+    "senses": [
+      {
+        "id": "5bmdgjalehopbto",
+        "order": 0,
+        "definition": "To move or travel from one place to another, or to leave a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go",
+              "to leave"
+            ]
+          }
+        ],
+        "domain": "movement",
+        "emoji": "🚶",
+        "examples": [
+          {
+            "id": "kg0z432leunzpex",
+            "text": "Yarın işe gideceğim.",
+            "textLang": "tr",
+            "translation": "I will go to work tomorrow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "determined and looking forward to the task",
+            "note": null,
+            "matchedForm": "gideceğim",
+            "matchedTranslationForm": "go"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "xn7jfp869ejipaj",
+        "order": 1,
+        "definition": "To match, suit, or look good with something else.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to go with",
+              "to match",
+              "to suit"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👔",
+        "examples": [
+          {
+            "id": "wbohv30yun6096u",
+            "text": "Bu kravat gömleğine çok iyi gidiyor.",
+            "textLang": "tr",
+            "translation": "This tie goes very well with your shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "complimentary and observant, noticing a good style choice",
+            "note": null,
+            "matchedForm": "gidiyor",
+            "matchedTranslationForm": "goes"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "u7xww0lxr7wjf87",
+        "order": 2,
+        "definition": "To be spent, used up, or lost.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be spent",
+              "to be used up",
+              "to go"
+            ]
+          }
+        ],
+        "domain": "consumption",
+        "emoji": "💸",
+        "examples": [
+          {
+            "id": "7pjebdi9rwl634z",
+            "text": "Tüm param bugün gitti.",
+            "textLang": "tr",
+            "translation": "All my money was spent today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated and slightly regretful about the cost",
+            "note": null,
+            "matchedForm": "gitti",
+            "matchedTranslationForm": "was spent"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "gitmek",
+    "lemma": "gitmek",
+    "reading": null,
+    "ipa": "/ɟitˈmec/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚶",
+    "topics": [
+      "Actions",
+      "Travel"
+    ],
+    "status": "active",
     "shortGloss": "to go; to move; to be compatible; to pass",
     "primaryGloss": "to go",
     "emotion": "purposeful and direct, moving toward a destination with steady intention",
@@ -202,5 +356,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:18Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to go; to move; to be compatible; to pass",
+        "why": "Lists 'to pass', which is absent from the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It has many figurative meanings, such as describing whether a shirt 'fits'",
+        "why": "Restates the senses while omitting the crucial t -> d stem consonant mutation."
+      }
+    ],
+    "growth": 0.901
   }
 }

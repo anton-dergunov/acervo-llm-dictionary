@@ -68,6 +68,95 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "piedra",
+    "primaryGloss": "piedra",
+    "emotion": "grounded and steady, touching something solid and lasting in the earth",
+    "notes": [
+      "En inglés estadounidense, en el habla cotidiana es más común decir 'rock' para una piedra suelta; 'stone' se usa sobre todo para el material de construcción (como sustantivo incontable: 'a wall made of stone') o para piedras preciosas."
+    ],
+    "senses": [
+      {
+        "id": "2smjd8dkcqnj9dl",
+        "order": 0,
+        "definition": "Pedazo pequeño y duro de roca, o el material mineral del que se compone.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "piedra",
+              "roca"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "🪨",
+        "examples": [
+          {
+            "id": "5wuoahu9ykztsji",
+            "text": "He stepped on a sharp stone.",
+            "textLang": "en",
+            "translation": "Pisó una piedra afilada.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "surprised and wincing from a sudden sharp pain",
+            "note": null,
+            "matchedForm": "stone",
+            "matchedTranslationForm": "piedra"
+          },
+          {
+            "id": "7pcbkeyuix72aw0",
+            "text": "The old church is built of stone.",
+            "textLang": "en",
+            "translation": "La iglesia antigua está construida de piedra.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "stone",
+            "matchedTranslationForm": "piedra"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "stone",
+    "lemma": "stone",
+    "reading": null,
+    "ipa": "/stoʊn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🪨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "piedra; hueso de fruta",
     "primaryGloss": "piedra",
     "emotion": "grounded and steady, touching something solid and lasting in the earth",
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "Pisé una piedra filosa.",
+        "why": "Mistranslates 'He stepped' (3rd person) as 'Pisé' (1st person)."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "Hueso duro que tienen en el centro algunas frutas como el melocotón.",
+        "why": "Chiefly British; in US English 'pit' is the everyday word for a fruit stone."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "No confundir con 'rock', que suele referirse a una masa de roca",
+        "why": "In US English, 'rock' is the everyday word for small stones too."
+      }
+    ],
+    "growth": 0.972
   }
 }

@@ -68,6 +68,138 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to write; to spell",
+    "primaryGloss": "write",
+    "emotion": "focused and steady, a quiet moment of creation or communication",
+    "notes": [
+      "Irregular verb: schrieb, hat geschrieben.",
+      "Used for both writing by hand and typing on a keyboard or phone, as well as for spelling ('Wie schreibt man das?' — How do you spell that?)."
+    ],
+    "senses": [
+      {
+        "id": "8zra8myadybn7kc",
+        "order": 0,
+        "definition": "To put words, letters, or numbers on paper or a screen, or to compose a text.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "write",
+              "spell"
+            ]
+          }
+        ],
+        "domain": "writing",
+        "emoji": "✍️",
+        "examples": [
+          {
+            "id": "qwmlxlexcty0jwg",
+            "text": "Bitte schreiben Sie Ihren Namen auf das Formular.",
+            "textLang": "de",
+            "translation": "Please write your name on the form.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schreiben",
+            "matchedTranslationForm": "write"
+          },
+          {
+            "id": "kk1qffb8kjrs83p",
+            "text": "Wie schreibt man dieses Wort?",
+            "textLang": "de",
+            "translation": "How do you spell this word?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "schreibt",
+            "matchedTranslationForm": "spell"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nhwkfvtqe80pull",
+        "order": 1,
+        "definition": "To send a letter, email, or text message to someone.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "write to",
+              "message",
+              "text"
+            ]
+          }
+        ],
+        "domain": "communication",
+        "emoji": "✉️",
+        "examples": [
+          {
+            "id": "a1xa6kj9i3gwocv",
+            "text": "Hast du ihm schon geschrieben?",
+            "textLang": "de",
+            "translation": "Have you written to him yet?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and waiting for an update",
+            "note": null,
+            "matchedForm": "geschrieben",
+            "matchedTranslationForm": "written"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "schreiben",
+    "lemma": "schreiben",
+    "reading": null,
+    "ipa": "/ˈʃʁaɪbən/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✍️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to write",
     "primaryGloss": "write",
     "emotion": "focused and steady, a quiet moment of creation or communication",
@@ -159,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Ich schreibe eine Nachricht an meine Freundin.",
+        "why": "Sending a message to someone belongs to sense 1 (communication), not sense 0."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing irregular principal parts (schrieb, hat geschrieben) and 'wie schreibt man' (spell)."
+      }
+    ],
+    "growth": 1.191
   }
 }

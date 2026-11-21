@@ -72,6 +72,95 @@
     "primaryGloss": "interview",
     "emotion": "nervous and formal, preparing carefully to make a good impression",
     "notes": [
+      "Also very commonly used as a verb ('to interview').",
+      "As a noun, it often takes the classifier 'cuộc' or 'buổi' (e.g., một buổi phỏng vấn — an interview session)."
+    ],
+    "senses": [
+      {
+        "id": "ghgemd5i7iqwbf5",
+        "order": 0,
+        "definition": "A formal meeting in which someone is asked questions, especially for a job or by a journalist.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "interview"
+            ]
+          }
+        ],
+        "domain": "meeting",
+        "emoji": "💼",
+        "examples": [
+          {
+            "id": "m322z8ig868wejm",
+            "text": "Tôi có một buổi phỏng vấn vào sáng mai.",
+            "textLang": "vi",
+            "translation": "I have an interview tomorrow morning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "anxious and focused, mentally reviewing qualifications before the big day",
+            "note": null,
+            "matchedForm": "phỏng vấn",
+            "matchedTranslationForm": "interview"
+          },
+          {
+            "id": "lf2pb7i71esa7vg",
+            "text": "Ca sĩ nổi tiếng đang trả lời phỏng vấn của nhà báo.",
+            "textLang": "vi",
+            "translation": "The famous singer is giving an interview to the journalist.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "curious and attentive, listening to a public figure speak",
+            "note": null,
+            "matchedForm": "phỏng vấn",
+            "matchedTranslationForm": "interview"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "phỏng vấn",
+    "lemma": "phỏng vấn",
+    "reading": null,
+    "ipa": "/fɔŋ˧˩ vən˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💼",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
+    "shortGloss": "interview",
+    "primaryGloss": "interview",
+    "emotion": "nervous and formal, preparing carefully to make a good impression",
+    "notes": [
       "Used both as a noun (an interview) and a verb (to interview).",
       "Often paired with verbs like đi (to go to), tham gia (to participate in), or có (to have)."
     ],
@@ -161,5 +250,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(job) A formal meeting ... (media) A meeting where a reporter",
+        "why": "Job and media interviews are one sense in Vietnamese; do not split by context."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The famous singer is answering the journalist's interview.",
+        "why": "Calqued translation; natural English is 'giving an interview to the journalist' or 'answering questions'."
+      }
+    ],
+    "growth": 0.806
   }
 }

@@ -58,6 +58,115 @@
     "headword": "ağaç",
     "lemma": "ağaç",
     "reading": null,
+    "ipa": "/aːtʃ/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "tree; wood",
+    "primaryGloss": "tree",
+    "emotion": "peaceful and grounded, looking up at the shade on a warm day",
+    "notes": [
+      "The 'ğ' is not pronounced as a consonant; the vowels blend into one long 'a' sound.",
+      "When a suffix starting with a vowel is added, the final 'ç' changes to 'c': ağacı (the tree), ağaca (to the tree)."
+    ],
+    "senses": [
+      {
+        "id": "b0hd6xq0rm8xc43",
+        "order": 0,
+        "definition": "A tall plant with a wooden trunk, branches, and leaves.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "tree"
+            ]
+          }
+        ],
+        "domain": "plant",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "rukthk3xl8o7z6r",
+            "text": "Büyük ağaç yazın çok güzel gölge verir.",
+            "textLang": "tr",
+            "translation": "The big tree gives very nice shade in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and grateful, enjoying the coolness in the heat",
+            "note": null,
+            "matchedForm": "ağaç",
+            "matchedTranslationForm": "tree"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "iyfc1pr5jgx6y3w",
+        "order": 1,
+        "definition": "The hard material from the trunk of a tree, used for making furniture and other objects.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wood",
+              "timber"
+            ]
+          }
+        ],
+        "domain": "material",
+        "emoji": "🪵",
+        "examples": [
+          {
+            "id": "tf44e6uxbdjrty9",
+            "text": "Bu masa sağlam ağaçtan yapılmış.",
+            "textLang": "tr",
+            "translation": "This table is made of solid wood.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative of quality, tapping a sturdy surface",
+            "note": null,
+            "matchedForm": "ağaçtan",
+            "matchedTranslationForm": "wood"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "ağaç",
+    "lemma": "ağaç",
+    "reading": null,
     "ipa": "/aːˈatʃ/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/aːˈatʃ/",
+        "why": "Standard pronunciation is monosyllabic /aːtʃ/ or disyllabic /a.atʃ/, without a long vowel before /a/."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the living plant (tree) and the material",
+        "why": "Restates the two senses; misses the crucial consonant mutation (ağaç -> ağacı)."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs to note that final 'ç' voices to 'c' before a vowel suffix."
+      }
+    ],
+    "growth": 1.289
   }
 }

@@ -72,6 +72,74 @@
     "primaryGloss": "wine",
     "emotion": "relaxed and appreciative, enjoying a quiet evening",
     "notes": [
+      "The final 'p' softens to 'b' before a vowel suffix: 'şarabı' (the wine), 'şarabım' (my wine).",
+      "Red wine is 'kırmızı şarap' and white wine is 'beyaz şarap'; a wineglass is 'şarap kadehi'."
+    ],
+    "senses": [
+      {
+        "id": "zpotoy3667w3xys",
+        "order": 0,
+        "definition": "An alcoholic drink made from fermented grape juice.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wine"
+            ]
+          }
+        ],
+        "domain": "drink",
+        "emoji": "🍷",
+        "examples": [
+          {
+            "id": "wo9cpkkjiwv9snr",
+            "text": "Akşam yemeğinde bir kadeh kırmızı şarap içtik.",
+            "textLang": "tr",
+            "translation": "We drank a glass of red wine at dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "şarap",
+            "matchedTranslationForm": "wine"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "şarap",
+    "lemma": "şarap",
+    "reading": null,
+    "ipa": "/ʃaˈɾap/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍷",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "wine",
+    "primaryGloss": "wine",
+    "emotion": "relaxed and appreciative, enjoying a quiet evening",
+    "notes": [
       "Used to refer generally to wine made from fermented grapes. Red wine is typically called 'kırmızı şarap' and white wine is 'beyaz şarap'."
     ],
     "senses": [
@@ -118,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes[0]",
+        "quote": "Used to refer generally to wine made from fermented grapes.",
+        "why": "First sentence repeats the definition; misses the crucial consonant voicing rule (şarap -> şarabı)."
+      },
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Akşam yemekte bir kadeh kırmızı şarap içtik.",
+        "why": "Should be 'akşam yemeğinde' (at dinner), not 'akşam yemekte'."
+      }
+    ],
+    "growth": 1.197
   }
 }

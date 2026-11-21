@@ -72,6 +72,95 @@
     "primaryGloss": "without",
     "emotion": null,
     "notes": [
+      "Often used without an article before countable nouns (e.g., 'zonder jas' – without a coat).",
+      "Before a verb, use 'zonder ... te' + infinitive (e.g., 'zonder iets te zeggen' – without saying anything)."
+    ],
+    "senses": [
+      {
+        "id": "vma3kt2pf1evisv",
+        "order": 0,
+        "definition": "Not having, using, or accompanied by something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "without"
+            ]
+          }
+        ],
+        "domain": "absence",
+        "emoji": "🚫",
+        "examples": [
+          {
+            "id": "qe61vguv4sewdsy",
+            "text": "Ik drink mijn koffie zonder suiker.",
+            "textLang": "nl",
+            "translation": "I drink my coffee without sugar.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, enjoying the drink",
+            "note": null,
+            "matchedForm": "zonder",
+            "matchedTranslationForm": "without"
+          },
+          {
+            "id": "yfcs8zbcd6o64ja",
+            "text": "Hij ging naar buiten zonder jas.",
+            "textLang": "nl",
+            "translation": "He went outside without a coat.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit worried about the chilly weather",
+            "note": null,
+            "matchedForm": "zonder",
+            "matchedTranslationForm": "without"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "zonder",
+    "lemma": "zonder",
+    "reading": null,
+    "ipa": "/ˈzɔndər/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚫",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "without",
+    "primaryGloss": "without",
+    "emotion": null,
+    "notes": [
       "Zonder always takes the bare noun or a noun with a determiner (like 'de' or 'een'), but never 'van'.",
       "Do not confuse it with 'onder' (under)."
     ],
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "'zonder' is a preposition (or conjunction with 'te'/'dat'), not a general expression."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the common infinitive construction 'zonder ... te + infinitive' (without doing)."
+      }
+    ],
+    "growth": 1.232
   }
 }

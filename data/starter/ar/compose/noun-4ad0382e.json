@@ -75,6 +75,75 @@
     "primaryGloss": "airport",
     "emotion": "busy and bustling, waiting for a flight to board",
     "notes": [
+      "Plural: مَطَارَات (maṭārāt).",
+      "From the root ط-ي-ر (ṭ-y-r), related to flying."
+    ],
+    "senses": [
+      {
+        "id": "us4f7wh2f06hr8x",
+        "order": 0,
+        "definition": "A place where airplanes take off and land, with buildings for passengers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "airport"
+            ]
+          }
+        ],
+        "domain": "travel",
+        "emoji": "✈️",
+        "examples": [
+          {
+            "id": "66ve1qx0g511215",
+            "text": "ذَهَبْتُ إِلَى المَطَارِ لِاسْتِقْبَالِ صَدِيقِي.",
+            "textLang": "ar",
+            "translation": "I went to the airport to meet my friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "المَطَارِ",
+            "matchedTranslationForm": "airport"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "مَطَار",
+    "lemma": "مَطَار",
+    "reading": null,
+    "ipa": "/ma.tˤaːr/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✈️",
+    "topics": [
+      "Travel",
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "airport",
+    "primaryGloss": "airport",
+    "emotion": "busy and bustling, waiting for a flight to board",
+    "notes": [
       "The word comes from the root ط ي ر (ṭ-y-r), which relates to flying.",
       "Use مَطَار for the entire facility where commercial planes take off and land."
     ],
@@ -122,5 +191,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "ذَهَبْتُ إِلَى المَطَارِ اسْتِقْبَالَ صَدِيقِي.",
+        "why": "Ungrammatical; needs the preposition لِـ (لِاسْتِقْبَالِ) to express purpose."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Use مَطَار for the entire facility where commercial planes take off and",
+        "why": "Restates the definition instead of giving useful grammar such as the plural."
+      }
+    ],
+    "growth": 0.78
   }
 }

@@ -58,6 +58,73 @@
     "headword": "de zoon",
     "lemma": "zoon",
     "reading": null,
+    "ipa": "/zoːn/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "son",
+    "primaryGloss": "son",
+    "emotion": "warm and proud, acknowledging a family bond",
+    "notes": [
+      "Both plural forms 'zonen' and 'zoons' are correct and common."
+    ],
+    "senses": [
+      {
+        "id": "vqedsgin8j0gmoi",
+        "order": 0,
+        "definition": "A person's male child.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "son"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👦",
+        "examples": [
+          {
+            "id": "x043qufqkooch8j",
+            "text": "Hij is hun oudste zoon.",
+            "textLang": "nl",
+            "translation": "He is their oldest son.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "zoon",
+            "matchedTranslationForm": "son"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de zoon",
+    "lemma": "zoon",
+    "reading": null,
     "ipa": "/ˈzoːn/",
     "pos": "noun",
     "gender": "common",
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "unlike in English where 'child' can be neutral.",
+        "why": "False contrast: English has 'son'/'daughter' and Dutch has gender-neutral 'het kind' too."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Hij is de oudste zoon van de familie.",
+        "why": "'Familie' means extended family; 'van het gezin' or naming the parents is natural."
+      }
+    ],
+    "growth": 0.525
   }
 }

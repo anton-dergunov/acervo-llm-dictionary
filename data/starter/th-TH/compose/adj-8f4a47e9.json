@@ -72,6 +72,116 @@
     "primaryGloss": "quiet",
     "emotion": "peaceful and undisturbed, resting in a quiet space",
     "notes": [
+      "Do not confuse with นิ่ง (nîng), which means still or motionless without necessarily implying silence."
+    ],
+    "senses": [
+      {
+        "id": "swoqyljfycvsxsj",
+        "order": 0,
+        "definition": "Making little or no noise; silent.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "silent"
+            ]
+          }
+        ],
+        "domain": "sound",
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "yo0eywx1ain36yk",
+            "text": "ห้องนี้เงียบมากตอนกลางคืน",
+            "textLang": "th",
+            "translation": "This room is very quiet at night.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and relaxed, appreciating the peaceful atmosphere",
+            "note": null,
+            "matchedForm": "เงียบ",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qbo3qe0sr2qt6r9",
+        "order": 1,
+        "definition": "Of a place or business: having little activity, traffic, or people.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "calm",
+              "deserted"
+            ]
+          }
+        ],
+        "domain": "activity",
+        "emoji": "🏙️",
+        "examples": [
+          {
+            "id": "6ayxppxhwg4wdzb",
+            "text": "ถนนสายนี้เงียบในวันหยุด",
+            "textLang": "th",
+            "translation": "This street is quiet on holidays.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observing a sleepy, empty street on a lazy afternoon",
+            "note": null,
+            "matchedForm": "เงียบ",
+            "matchedTranslationForm": "quiet"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "เงียบ",
+    "lemma": "เงียบ",
+    "reading": null,
+    "ipa": "/ŋîap/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤫",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "quiet; silent",
+    "primaryGloss": "quiet",
+    "emotion": "peaceful and undisturbed, resting in a quiet space",
+    "notes": [
       "เงียบ describes a place or person that is quiet, silent, or makes little noise.",
       "Do not confuse it with นิ่ง (nîng), which means still or motionless without necessarily implying a lack of sound."
     ],
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "เงียบ describes a place or person that is quiet, silent",
+        "why": "Restates the glosses without providing extra usage information."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[1].glosses",
+        "quote": "deserted, calm, lonesome",
+        "why": "'Lonesome' is a wrong translation; 'quiet' should be the first gloss."
+      }
+    ],
+    "growth": 0.801
   }
 }

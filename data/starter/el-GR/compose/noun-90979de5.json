@@ -72,6 +72,73 @@
     "primaryGloss": "fruit",
     "emotion": "fresh and healthy, enjoying a sweet bite",
     "notes": [
+      "Countable in Greek: 'ένα φρούτο' means 'a piece of fruit'. For botanical fruit or metaphorical 'fruit of one's labor', Greek uses 'ο καρπός'."
+    ],
+    "senses": [
+      {
+        "id": "k4ajqhnep1gxgvr",
+        "order": 0,
+        "definition": "The sweet, edible part of a tree or plant that contains seeds, such as an apple or orange.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "9gor1wtlhu7ilj1",
+            "text": "Τρώω ένα φρούτο κάθε μέρα.",
+            "textLang": "el",
+            "translation": "I eat a piece of fruit every day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "φρούτο",
+            "matchedTranslationForm": "fruit"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το φρούτο",
+    "lemma": "φρούτο",
+    "reading": null,
+    "ipa": "/ˈfɾu.to/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍎",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fruit",
+    "primaryGloss": "fruit",
+    "emotion": "fresh and healthy, enjoying a sweet bite",
+    "notes": [
       "Used both for the edible produce of plants and metaphorically for an outcome or result."
     ],
     "senses": [
@@ -160,5 +227,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The result or consequence of an action or effort.",
+        "why": "Metaphorical 'fruit/result' in Greek is 'ο καρπός', not 'το φρούτο'."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Αυτή η επιτυχία είναι ο καρπός των κόπων του.",
+        "why": "Example uses 'καρπός' instead of the headword 'φρούτο'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "and metaphorically for an outcome or result.",
+        "why": "'Φρούτο' is not used metaphorically for an outcome (that is 'καρπός')."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].text",
+        "quote": "Τρώω ένα φρούτο κάθε μέρα για υγεία.",
+        "why": "'Για υγεία' and 'eat a fruit' are unnatural; 'piece of fruit' in English."
+      }
+    ],
+    "growth": 0.718
   }
 }

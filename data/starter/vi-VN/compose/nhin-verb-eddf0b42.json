@@ -68,6 +68,117 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to look; to look like",
+    "primaryGloss": "look",
+    "emotion": "attentive and present, turning attention toward what is in front of you",
+    "notes": [
+      "Do not confuse with 'thấy' (to see, focusing on the result of perceiving) or 'xem' (to watch or examine, as with a movie or TV). They often combine as 'nhìn thấy' (to look and see; to spot)."
+    ],
+    "senses": [
+      {
+        "id": "w6iio500stcr6gr",
+        "order": 0,
+        "definition": "To direct your eyes toward someone or something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look",
+              "look at",
+              "gaze"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👀",
+        "examples": [
+          {
+            "id": "ubzfvu5k7rf0yku",
+            "text": "Hãy nhìn vào bức tranh này.",
+            "textLang": "vi",
+            "translation": "Look at this picture.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "encouraging and warm, pointing something out to a friend",
+            "note": null,
+            "matchedForm": "nhìn",
+            "matchedTranslationForm": "Look"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "r2wjsr501pk6bfo",
+        "order": 1,
+        "definition": "To have a particular appearance when seen (used before an adjective).",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "look",
+              "look like",
+              "seem"
+            ]
+          }
+        ],
+        "domain": "appearance",
+        "emoji": "👤",
+        "examples": [
+          {
+            "id": "fmb4gxi09ymytfm",
+            "text": "Hôm nay nhìn bạn có vẻ mệt mỏi.",
+            "textLang": "vi",
+            "translation": "You look tired today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "nhìn",
+            "matchedTranslationForm": "look"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "nhìn",
+    "lemma": "nhìn",
+    "reading": null,
+    "ipa": "/ɲin˨˩/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👀",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to look; to see; to watch",
     "primaryGloss": "look",
     "emotion": "attentive and present, turning attention toward what is in front of you",
@@ -163,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Hôm nay bạn trông có vẻ mệt mỏi.",
+        "why": "Example does not contain the headword 'nhìn'; it uses 'trông' instead."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to look; to see; to watch",
+        "why": "Includes 'to see' and 'to watch', which note[1] explicitly contrasts with 'nhìn'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Nhìn is the general, everyday verb for using your eyes to see",
+        "why": "Restates the basic definition."
+      }
+    ],
+    "growth": 0.645
   }
 }

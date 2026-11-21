@@ -68,6 +68,139 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "slow; quiet, gentle",
+    "primaryGloss": "slow",
+    "emotion": "calm and unhurried, taking things at an easy pace",
+    "notes": [
+      "Like most Turkish adjectives, yavaş is also used directly as an adverb ('slowly', 'quietly', 'gently') without changing form."
+    ],
+    "senses": [
+      {
+        "id": "fgtmahpfcugd7qh",
+        "order": 0,
+        "definition": "Moving or happening at a low speed, not fast.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "slow",
+              "slowly"
+            ]
+          }
+        ],
+        "domain": "speed",
+        "emoji": "🐢",
+        "examples": [
+          {
+            "id": "p3uhkrddfw18hh9",
+            "text": "Bu tren çok yavaş.",
+            "textLang": "tr",
+            "translation": "This train is very slow.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yavaş",
+            "matchedTranslationForm": "slow"
+          },
+          {
+            "id": "p9zlxgsluuxbcxq",
+            "text": "Bu araba çok yavaş gidiyor.",
+            "textLang": "tr",
+            "translation": "This car is going very slowly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "frustrated by how long the journey is taking",
+            "note": null,
+            "matchedForm": "yavaş",
+            "matchedTranslationForm": "slowly"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "j6vo3b75fwz9xnz",
+        "order": 1,
+        "definition": "Low in volume or gentle in manner.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "quiet",
+              "soft",
+              "gentle",
+              "quietly",
+              "gently"
+            ]
+          }
+        ],
+        "domain": null,
+        "emoji": "🤫",
+        "examples": [
+          {
+            "id": "tj1nyix2t758jwt",
+            "text": "Lütfen biraz daha yavaş konuş.",
+            "textLang": "tr",
+            "translation": "Please speak a little more quietly.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and considerate, asking someone to lower their voice",
+            "note": null,
+            "matchedForm": "yavaş",
+            "matchedTranslationForm": "quietly"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "yavaş",
+    "lemma": "yavaş",
+    "reading": null,
+    "ipa": "/jaˈvaʃ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐢",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "slow; soft, gentle",
     "primaryGloss": "slow",
     "emotion": "calm and unhurried, taking things at an easy pace",
@@ -160,5 +293,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for physical speed (moving slowly) and for volume or manner",
+        "why": "Restates the senses; fails to mention that Turkish adjectives also function directly as adverbs."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[0].examples[0].text",
+        "quote": "Bu araba çok yavaş gidiyor.",
+        "why": "Uses 'yavaş' as an adverb ('going slowly') under an adjective entry without explanation."
+      }
+    ],
+    "growth": 1.341
   }
 }

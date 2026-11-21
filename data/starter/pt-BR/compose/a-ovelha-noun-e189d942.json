@@ -72,6 +72,74 @@
     "primaryGloss": "sheep",
     "emotion": "gentle and peaceful, watching a quiet scene on the farm",
     "notes": [
+      "Strictly a female sheep (a ewe), though used generally for sheep of any sex. A male sheep (a ram) is 'o carneiro'."
+    ],
+    "senses": [
+      {
+        "id": "vt2ye5hsrce428y",
+        "order": 0,
+        "definition": "A farm animal with thick wool that is raised for its wool, meat, or milk.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sheep",
+              "ewe"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐑",
+        "examples": [
+          {
+            "id": "g4cnoz1uu60cunp",
+            "text": "A ovelha branca come grama no campo.",
+            "textLang": "pt",
+            "translation": "The white sheep eats grass in the field.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and observant, watching the animal graze",
+            "note": null,
+            "matchedForm": "ovelha",
+            "matchedTranslationForm": "sheep"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "a ovelha",
+    "lemma": "ovelha",
+    "reading": null,
+    "ipa": "/o.ˈvɛ.ʎɐ/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐑",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "sheep",
+    "primaryGloss": "sheep",
+    "emotion": "gentle and peaceful, watching a quiet scene on the farm",
+    "notes": [
       "Note that 'ovelha' is used for both the singular and plural forms when preceded by an article (e.g., 'a ovelha' vs 'as ovelhas').",
       "Unlike in English, where you might use 'sheep' for both singular and plural, Portuguese clearly marks the number with the article or the verb conjugation."
     ],
@@ -119,5 +187,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "'ovelha' is used for both the singular and plural forms",
+        "why": "False and self-contradictory: the plural is 'ovelhas', marked with '-s' on the noun itself."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Portuguese clearly marks the number with the article or the verb",
+        "why": "Misleading: the noun itself takes a regular plural in '-s' ('ovelhas')."
+      }
+    ],
+    "growth": 0.652
   }
 }

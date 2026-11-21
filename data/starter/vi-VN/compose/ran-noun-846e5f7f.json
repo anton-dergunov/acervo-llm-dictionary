@@ -58,6 +58,73 @@
     "headword": "rắn",
     "lemma": "rắn",
     "reading": null,
+    "ipa": "/zan˧˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐍",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "snake",
+    "primaryGloss": "snake",
+    "emotion": "caution and alertness in the tall grass",
+    "notes": [
+      "Takes the classifier 'con' (con rắn). Large constrictors like pythons and boas are usually called 'trăn' rather than 'rắn'."
+    ],
+    "senses": [
+      {
+        "id": "5uw2zhovw9wczim",
+        "order": 0,
+        "definition": "A long, legless reptile with a scaly body, often venomous.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "snake"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐍",
+        "examples": [
+          {
+            "id": "547jt88fxpr8ilh",
+            "text": "Con rắn bò qua đường.",
+            "textLang": "vi",
+            "translation": "The snake crawled across the road.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "warning someone quickly and quietly",
+            "note": null,
+            "matchedForm": "rắn",
+            "matchedTranslationForm": "snake"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "rắn",
+    "lemma": "rắn",
+    "reading": null,
     "ipa": "/răn/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +226,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:21Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/răn/",
+        "why": "Not valid IPA; uses Vietnamese orthography instead of Hanoi IPA /zan˧˥/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "(property) Firm, hard, or not easily bent or broken.",
+        "why": "Adjective sense does not belong in a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "snake; firm, hard",
+        "why": "Includes adjective meanings in a noun entry."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As a noun, 'rắn' refers to the reptile.",
+        "why": "Restates the glosses; better to give the classifier 'con' and contrast 'trăn'."
+      }
+    ],
+    "growth": 0.786
   }
 }

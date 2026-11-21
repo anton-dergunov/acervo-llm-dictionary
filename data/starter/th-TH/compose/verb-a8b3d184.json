@@ -71,6 +71,120 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to eat, drink, or consume",
+    "primaryGloss": "eat",
+    "emotion": "casual and natural, as you would speak during a daily meal",
+    "notes": [
+      "In Thai, 'กิน' is used not only for solid food, but also for drinking liquids (e.g., กินน้ำ 'drink water') and taking medicine (กินยา).",
+      "In polite everyday conversation, 'ทาน' (thaan) is very commonly used instead; in formal settings, use 'รับประทาน' (ráp-prà-thaan).",
+      "In very informal or vulgar slang, you may hear 'แดก' (dɛ̀ɛk), which is rude outside of close friends."
+    ],
+    "senses": [
+      {
+        "id": "liy4jmmsbtgxnvi",
+        "order": 0,
+        "definition": "To eat food, drink liquids, or take medicine.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "eat",
+              "drink",
+              "take"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "🍽️",
+        "examples": [
+          {
+            "id": "igotvmcwy7vimij",
+            "text": "ฉันกินข้าวเย็นตอนหกโมง",
+            "textLang": "th",
+            "translation": "I eat dinner at six o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral, stating a simple fact about your daily routine",
+            "note": null,
+            "matchedForm": "กิน",
+            "matchedTranslationForm": "eat"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6n1iwh3vk2zva0y",
+        "order": 1,
+        "definition": "To consume or use up a resource, time, or space.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "consume",
+              "use up",
+              "take up"
+            ]
+          }
+        ],
+        "domain": "usage",
+        "emoji": "🔋",
+        "examples": [
+          {
+            "id": "mnq4y6oyb1p4wcf",
+            "text": "แอปนี้กินแบตเตอรี่มาก",
+            "textLang": "th",
+            "translation": "This app uses up a lot of battery.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly annoyed, complaining about technical performance",
+            "note": null,
+            "matchedForm": "กิน",
+            "matchedTranslationForm": "uses up"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "กิน",
+    "lemma": "กิน",
+    "reading": null,
+    "ipa": "/kin/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍽️",
+    "topics": [
+      "Food and drink",
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to eat; to consume",
     "primaryGloss": "eat",
     "emotion": "casual and natural, as you would speak during a daily meal",
@@ -164,5 +278,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "To put food in your mouth and swallow it.",
+        "why": "In Thai, กิน is equally used for drinking liquids and taking medicine, not just solid food."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "This is the most common and standard way to say 'to eat'.",
+        "why": "Pure filler that adds nothing beyond the register and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Should mention the everyday polite alternative ทาน (thaan), which A2 learners hear constantly."
+      }
+    ],
+    "growth": 1.119
   }
 }

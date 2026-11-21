@@ -58,6 +58,116 @@
     "headword": "het vuur",
     "lemma": "vuur",
     "reading": null,
+    "ipa": "/vyːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "fire; passion",
+    "primaryGloss": "fire",
+    "emotion": "crackling and warm, staring into the flames on a cold evening",
+    "notes": [
+      "Use 'het vuur' for flames in general or a controlled fire (like a campfire). For a destructive, uncontrolled fire (like a house fire), use 'de brand'."
+    ],
+    "senses": [
+      {
+        "id": "fu0ia8rkd0qv14n",
+        "order": 0,
+        "definition": "Flames that burn and give off heat and light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "flames",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "e2qhte2vw5werl5",
+            "text": "We warmen ons aan het vuur.",
+            "textLang": "nl",
+            "translation": "We are warming ourselves by the fire.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and content, resting tired hands near the warmth",
+            "note": null,
+            "matchedForm": "vuur",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "je3sowh8ycu3gfp",
+        "order": 1,
+        "definition": "Strong enthusiasm, passion, or drive in a person.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "passion",
+              "drive",
+              "spirit"
+            ]
+          }
+        ],
+        "domain": "passion",
+        "emoji": "✨",
+        "examples": [
+          {
+            "id": "ydhb2yvscd0zbwi",
+            "text": "Ze spreekt met veel vuur over haar plannen.",
+            "textLang": "nl",
+            "translation": "She talks about her plans with a lot of passion.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "vuur",
+            "matchedTranslationForm": "passion"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het vuur",
+    "lemma": "vuur",
+    "reading": null,
     "ipa": "/ˈvʏy̯r/",
     "pos": "noun",
     "gender": "neuter",
@@ -162,5 +272,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ˈvʏy̯r/",
+        "why": "Wrong vowel transcription; 'uu' before 'r' in Dutch is /yːr/, not a diphthong."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'vuur' is a neuter noun, so it takes 'het vuur'.",
+        "why": "Restates the gender and article already given in the headword."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "It can refer to both literal flames and the abstract feeling",
+        "why": "Merely restates the two senses."
+      }
+    ],
+    "growth": 1.014
   }
 }

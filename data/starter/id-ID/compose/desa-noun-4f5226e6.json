@@ -58,6 +58,96 @@
     "headword": "desa",
     "lemma": "desa",
     "reading": null,
+    "ipa": "/de.sa/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏡",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
+    "shortGloss": "village; countryside",
+    "primaryGloss": "village",
+    "emotion": "relaxed and nostalgic, thinking of a slower pace of life",
+    "notes": [
+      "Often contrasted with 'kota' (city/town). 'Kampung' is also used for a village or a traditional neighborhood within a city."
+    ],
+    "senses": [
+      {
+        "id": "yddg41hhp8fz904",
+        "order": 0,
+        "definition": "A small community or settlement in a rural area, smaller than a town.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "village",
+              "countryside",
+              "rural area"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🌾",
+        "examples": [
+          {
+            "id": "co4qxhxw5hjpu9b",
+            "text": "Dia tinggal di desa yang tenang.",
+            "textLang": "id",
+            "translation": "He lives in a quiet village.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and content, describing a peaceful lifestyle",
+            "note": null,
+            "matchedForm": "desa",
+            "matchedTranslationForm": "village"
+          },
+          {
+            "id": "011odajy0otdohv",
+            "text": "Kepala desa sedang memimpin rapat.",
+            "textLang": "id",
+            "translation": "The village head is leading a meeting.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "formal and respectful, acknowledging a local authority",
+            "note": null,
+            "matchedForm": "desa",
+            "matchedTranslationForm": "village"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "desa",
+    "lemma": "desa",
+    "reading": null,
     "ipa": "/də.sa/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/də.sa/",
+        "why": "Wrong vowel: the 'e' in 'desa' is /e/ (or /ɛ/), not schwa /ə/."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The administrative unit below a sub-district in Indonesia.",
+        "why": "Oversplit and overly technical for A2; 'kepala desa' is just 'village head'."
+      }
+    ],
+    "growth": 0.741
   }
 }

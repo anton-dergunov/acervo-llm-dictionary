@@ -73,6 +73,75 @@
     "primaryGloss": "cook",
     "emotion": "busy and focused, calling out an order in a hot kitchen",
     "notes": [
+      "Used for anyone who cooks professionally, and for both men and women. For a head chef running a kitchen, шеф-повар is used."
+    ],
+    "senses": [
+      {
+        "id": "9qiylnz2gjnzm2c",
+        "order": 0,
+        "definition": "A person whose job is to prepare and cook food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cook",
+              "chef"
+            ]
+          }
+        ],
+        "domain": "job",
+        "emoji": "👨‍🍳",
+        "examples": [
+          {
+            "id": "zz8dogjky6xlkzf",
+            "text": "Мой брат работает поваром в новом ресторане.",
+            "textLang": "ru",
+            "translation": "My brother works as a cook in a new restaurant.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "поваром",
+            "matchedTranslationForm": "cook"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "повар",
+    "lemma": "повар",
+    "reading": null,
+    "ipa": "/ˈpovər/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍳",
+    "topics": [
+      "Work",
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "cook; chef",
+    "primaryGloss": "cook",
+    "emotion": "busy and focused, calling out an order in a hot kitchen",
+    "notes": [
       "Use повар for someone who prepares food professionally, whether in a restaurant, school, or canteen. For a head chef running a kitchen, the borrowed word шеф-повар is commonly used."
     ],
     "senses": [
@@ -120,5 +189,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:14Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Мой брат работает повар в новом ресторане.",
+        "why": "Ungrammatical: работать requires the instrumental case (работает поваром), not nominative."
+      }
+    ],
+    "growth": 0.799
   }
 }

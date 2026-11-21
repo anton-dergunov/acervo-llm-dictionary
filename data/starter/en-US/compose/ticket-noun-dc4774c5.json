@@ -68,6 +68,116 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "boleto, entrada; multa",
+    "primaryGloss": "boleto",
+    "emotion": "anticipatory and practical, holding something that grants access or permission",
+    "notes": [
+      "Abarca tanto billetes de transporte ('train ticket') como entradas a espectáculos ('concert ticket') y multas de tráfico ('speeding ticket'). No debe confundirse con el recibo de compra, que en inglés se llama 'receipt'."
+    ],
+    "senses": [
+      {
+        "id": "v6bbms3w8ehes5l",
+        "order": 0,
+        "definition": "Documento o comprobante que permite viajar en un transporte o entrar a un espectáculo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "boleto",
+              "billete",
+              "entrada"
+            ]
+          }
+        ],
+        "domain": "acceso",
+        "emoji": "🎫",
+        "examples": [
+          {
+            "id": "5cfd62pgwn5xpxk",
+            "text": "I bought a ticket for the train.",
+            "textLang": "en",
+            "translation": "Compré un boleto para el tren.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "satisfecho por tener todo listo para el viaje",
+            "note": null,
+            "matchedForm": "ticket",
+            "matchedTranslationForm": "boleto"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "6c49uyh1jzf2bmt",
+        "order": 1,
+        "definition": "Aviso oficial de que se ha cometido una infracción de tráfico y se debe pagar una sanción.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "multa",
+              "infracción"
+            ]
+          }
+        ],
+        "domain": "multa",
+        "emoji": "👮",
+        "examples": [
+          {
+            "id": "a9bqfq0upjkwyax",
+            "text": "The officer gave me a speeding ticket.",
+            "textLang": "en",
+            "translation": "El oficial me puso una multa por exceso de velocidad.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "molesto y frustrado por el error cometido",
+            "note": null,
+            "matchedForm": "ticket",
+            "matchedTranslationForm": "multa"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "ticket",
+    "lemma": "ticket",
+    "reading": null,
+    "ipa": "/ˈtɪkɪt/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎫",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "boleto; multa",
     "primaryGloss": "boleto",
     "emotion": "anticipatory and practical, holding something that grants access or permission",
@@ -161,5 +271,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "mientras que 'tíquet' o 'boleto' son más habituales para transporte.",
+        "why": "Confuses English and Spanish words, falsely claiming English uses 'tíquet' or 'boleto'."
+      }
+    ],
+    "growth": 0.973
   }
 }

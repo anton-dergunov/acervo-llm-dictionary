@@ -60,6 +60,158 @@
     "headword": "있다",
     "lemma": "있다",
     "reading": null,
+    "ipa": "it͈a",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📍",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to be; to exist; to have; to stay",
+    "primaryGloss": "to be",
+    "emotion": "matter-of-fact and steady, stating the reality of a situation without extra flair",
+    "notes": [
+      "The opposite of 있다 is 없다 (to not exist; to not have). Its honorific form is 계시다 for a person's location or existence, and 있으시다 for possession.",
+      "To say someone has something, mark the item with 이/가 (not 을/를): 시간이 있다 (to have time).",
+      "In the meaning 'to stay', 있다 behaves as an action verb (e.g. 집에 있는다); in other meanings it behaves like an adjective in the plain present tense (있다)."
+    ],
+    "senses": [
+      {
+        "id": "hsmartz9tyeeis9",
+        "order": 0,
+        "definition": "To exist or be present in a place.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to be",
+              "to exist"
+            ]
+          }
+        ],
+        "domain": "existence",
+        "emoji": "📍",
+        "examples": [
+          {
+            "id": "cvycrk5yc4pfrtg",
+            "text": "교실에 학생이 있어요.",
+            "textLang": "ko",
+            "translation": "There are students in the classroom.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "있어요",
+            "matchedTranslationForm": "are"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "dvfxpluye9r24s7",
+        "order": 1,
+        "definition": "To have or possess something.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have",
+              "to own"
+            ]
+          }
+        ],
+        "domain": "possession",
+        "emoji": "👜",
+        "examples": [
+          {
+            "id": "f2oegzcz10zm2h5",
+            "text": "질문이 있습니다.",
+            "textLang": "ko",
+            "translation": "I have a question.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "있습니다",
+            "matchedTranslationForm": "have"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "d09o95gvcr532o3",
+        "order": 2,
+        "definition": "To remain or stay in a place for a period of time.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to stay",
+              "to remain"
+            ]
+          }
+        ],
+        "domain": "staying",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "yfyou7exd42xh9z",
+            "text": "주말에는 집에 있을 거예요.",
+            "textLang": "ko",
+            "translation": "I will stay at home on the weekend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "있을",
+            "matchedTranslationForm": "stay"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "있다",
+    "lemma": "있다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -164,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "있다 is one of the most common verbs in Korean.",
+        "why": "Filler restating the senses; misses the opposite 없다 and honorific 계시다/있으시다."
+      },
+      {
+        "severity": 2,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Splits 'to stay, remain' (a verb taking 눈/고 and 에) into sense 0 instead of giving its own sense."
+      }
+    ],
+    "growth": 1.324
   }
 }

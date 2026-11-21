@@ -77,6 +77,97 @@
     "primaryGloss": "cold",
     "emotion": "shivering slightly and pulling a jacket closer, seeking comfort from the chill",
     "notes": [
+      "To say a person feels cold, use the noun phrase 'estar com frio' (e.g., 'Estou com frio' — I am cold), not 'estar frio'.",
+      "Also used as a masculine noun meaning 'cold weather' or 'the cold': 'Está fazendo frio hoje' (It is cold today)."
+    ],
+    "senses": [
+      {
+        "id": "oaaeaetlvkwhk5o",
+        "order": 0,
+        "definition": "Having a low temperature; not warm or hot.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cold",
+              "chilly"
+            ]
+          }
+        ],
+        "domain": "temperature",
+        "emoji": "🌡️",
+        "examples": [
+          {
+            "id": "wz1cyflrb1dse6d",
+            "text": "O tempo está muito frio hoje.",
+            "textLang": "pt",
+            "translation": "The weather is very cold today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "frio",
+            "matchedTranslationForm": "cold"
+          },
+          {
+            "id": "ng5jgl8cby1axx4",
+            "text": "A sopa já está fria.",
+            "textLang": "pt",
+            "translation": "The soup is already cold.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "fria",
+            "matchedTranslationForm": "cold"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "frio",
+    "lemma": "frio",
+    "reading": null,
+    "ipa": "/ˈfɾi.u/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❄️",
+    "topics": [
+      "Nature",
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "cold",
+    "primaryGloss": "cold",
+    "emotion": "shivering slightly and pulling a jacket closer, seeking comfort from the chill",
+    "notes": [
       "As an adjective, 'frio' agrees in gender and number with the noun it modifies (e.g., 'água fria', 'dias frios').",
       "It is also used as a noun meaning 'cold weather': 'O frio chegou' (The cold has arrived)."
     ],
@@ -164,5 +255,36 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:11Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(weather) Refers to the weather ... (temperature) Refers to an object",
+        "why": "'Having a low temperature' for weather and for objects is a single sense."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "Refers to the weather or climate when the temperature is low.",
+        "why": "Meta-language ('Refers to...'); an adjective should be defined directly as a quality."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "As an adjective, 'frio' agrees in gender and number with the noun",
+        "quote_extra": "",
+        "why": "Regular adjective agreement is basic grammar; note should explain 'estar com frio' vs 'estar frio'."
+      }
+    ],
+    "growth": 0.923
   }
 }

@@ -68,6 +68,115 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "wind; air",
+    "primaryGloss": "wind",
+    "emotion": "refreshing and cool, blowing gently on a hot afternoon",
+    "notes": [
+      "Unlike 'udara' (air we breathe or atmosphere), 'angin' refers to moving air or air pressure inside an object like a tire or balloon."
+    ],
+    "senses": [
+      {
+        "id": "qqi1qwazeg7ie0l",
+        "order": 0,
+        "definition": "Moving air outdoors, felt as a breeze or a strong gust.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wind",
+              "breeze"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "💨",
+        "examples": [
+          {
+            "id": "9yylkgs7vm95hf4",
+            "text": "Angin bertiup kencang di pantai sore ini.",
+            "textLang": "id",
+            "translation": "The wind is blowing hard at the beach this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "brisk and cool, feeling the force of the sea breeze",
+            "note": null,
+            "matchedForm": "Angin",
+            "matchedTranslationForm": "wind"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "5twvzov8y3wdrxx",
+        "order": 1,
+        "definition": "Air pumped inside an object such as a tire or ball, or gas trapped in the body.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "air",
+              "gas"
+            ]
+          }
+        ],
+        "domain": "air",
+        "emoji": "🌬️",
+        "examples": [
+          {
+            "id": "9w5n5e4hfj1ke5q",
+            "text": "Ban sepedaku kurang angin.",
+            "textLang": "id",
+            "translation": "My bicycle tire needs more air.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "angin",
+            "matchedTranslationForm": "air"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "id",
+    "headword": "angin",
+    "lemma": "angin",
+    "reading": null,
+    "ipa": "/ˈaŋɪn/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💨",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "wind; breeze",
     "primaryGloss": "wind",
     "emotion": "refreshing and cool, blowing gently on a hot afternoon",
@@ -161,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:54Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Tolong nyalakan kipas angin karena kamarnya panas.",
+        "why": "'Kipas angin' is a compound noun ('fan'); does not show the 'air inside' meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "wind; breeze",
+        "why": "Does not cover the second sense (air)."
+      }
+    ],
+    "growth": 0.957
   }
 }

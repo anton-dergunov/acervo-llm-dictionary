@@ -72,6 +72,115 @@
     "primaryGloss": "play",
     "emotion": "lighthearted and engaged, focused on the fun of the activity",
     "notes": [
+      "Stem-changing verb (u → ue): 'juego, juegas, juega...'",
+      "Followed by 'a' + definite article before a sport or game ('jugar al fútbol', 'jugar a las cartas'). For musical instruments, use 'tocar', not 'jugar'."
+    ],
+    "senses": [
+      {
+        "id": "spnn2fxb8w1f1yb",
+        "order": 0,
+        "definition": "To take part in a game or sport for enjoyment.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "play"
+            ]
+          }
+        ],
+        "domain": "game",
+        "emoji": "⚽",
+        "examples": [
+          {
+            "id": "awu6yvhxq9tbkia",
+            "text": "Ellos quieren jugar al baloncesto esta tarde.",
+            "textLang": "es",
+            "translation": "They want to play basketball this afternoon.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "energetic and eager, looking forward to the match",
+            "note": null,
+            "matchedForm": "jugar",
+            "matchedTranslationForm": "play"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "sd97vkpxd8v6tez",
+        "order": 1,
+        "definition": "To risk money on a game of chance or a bet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "gamble",
+              "bet"
+            ]
+          }
+        ],
+        "domain": "gambling",
+        "emoji": "🎰",
+        "examples": [
+          {
+            "id": "430csz4swp7d1cr",
+            "text": "Perdió mucho dinero por jugar en el casino.",
+            "textLang": "es",
+            "translation": "He lost a lot of money gambling at the casino.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "jugar",
+            "matchedTranslationForm": "gambling"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "jugar",
+    "lemma": "jugar",
+    "reading": null,
+    "ipa": "/xuˈɣaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚽",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to play; to gamble",
+    "primaryGloss": "play",
+    "emotion": "lighthearted and engaged, focused on the fun of the activity",
+    "notes": [
       "Jugar is used for both sports and games (jugar al fútbol, jugar a las cartas).",
       "Notice the preposition 'a' that follows: it is always 'jugar a' something, never just 'jugar algo'."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:44Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing two crucial learner points: stem change (u -> ue) and contrast with 'tocar' for musical instruments."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "No es bueno jugar con el dinero de los ahorros.",
+        "why": "'Jugar con el dinero' means to be reckless with money; gambling is 'jugar dinero' or 'jugarse el dinero'."
+      }
+    ],
+    "growth": 0.975
   }
 }

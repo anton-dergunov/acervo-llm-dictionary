@@ -57,6 +57,118 @@
     "language": "ja",
     "headword": "分かる",
     "lemma": "分かる",
+    "reading": "わかる",
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💡",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to understand; to know; to be clear",
+    "primaryGloss": "to understand",
+    "emotion": "a small, quiet shift in the mind when something becomes clear",
+    "notes": [
+      "An intransitive godan verb (分かります, 分かって). The thing understood is marked with が (or は), never を: 日本語が分かります (I understand Japanese).",
+      "Unlike 知る (しる, used as 知っている 'to know a fact or person' and 知っていますか 'do you know?'), 分かる involves comprehension or figuring something out. In the negative, however, compare 知っていますか (Do you know?) → いいえ、知りません, versus 分かりますか (Do you understand / Can you tell?) → いいえ、分かりません."
+    ],
+    "senses": [
+      {
+        "id": "clvlxjyv9qiy7tp",
+        "order": 0,
+        "definition": "To grasp the meaning of something or how something works.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to understand",
+              "to comprehend",
+              "to get"
+            ]
+          }
+        ],
+        "domain": "comprehension",
+        "emoji": "🧠",
+        "examples": [
+          {
+            "id": "cudgt8r6jxvtns9",
+            "text": "その意味が分かります。",
+            "textLang": "ja",
+            "translation": "I understand the meaning.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "calm and confident, confirming that you have followed the explanation",
+            "note": null,
+            "matchedForm": "分かります",
+            "matchedTranslationForm": "understand"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "s6jmhoj6e7bp6mv",
+        "order": 1,
+        "definition": "To know, be able to tell, or figure out a fact or piece of information.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to know",
+              "to tell",
+              "to find out"
+            ]
+          }
+        ],
+        "domain": "knowledge",
+        "emoji": "🔍",
+        "examples": [
+          {
+            "id": "jl5uyjnlivfsvlf",
+            "text": "駅までの道が分かりますか。",
+            "textLang": "ja",
+            "translation": "Do you know the way to the station?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "分かります",
+            "matchedTranslationForm": "know"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ja",
+    "headword": "分かる",
+    "lemma": "分かる",
     "reading": null,
     "ipa": null,
     "pos": "verb",
@@ -162,5 +274,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:03Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "",
+        "why": "Missing hiragana reading (わかる) for a word with kanji."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "once you have learned their name, you 'know' (shiru) them",
+        "why": "知る requires the ている form (知っている) for the state of knowing, and negative is 知らない."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Must explain that 分かる is intransitive and marks the thing understood with が, not を."
+      }
+    ],
+    "growth": 0.992
   }
 }

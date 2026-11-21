@@ -68,6 +68,116 @@
       "Nature"
     ],
     "status": "active",
+    "shortGloss": "fire; a light",
+    "primaryGloss": "fire",
+    "emotion": "crackling and warm, like settling in near a glowing hearth",
+    "notes": [
+      "When asking for or offering a light for a cigarette, 'Feuer' is used without an article (e.g., 'Haben Sie Feuer?').",
+      "Do not confuse it with 'der Brand', which refers to a destructive fire or a fire fought by emergency services."
+    ],
+    "senses": [
+      {
+        "id": "v2knb3yxy1gn60v",
+        "order": 0,
+        "definition": "Burning flames that give off heat and light.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fire",
+              "flames"
+            ]
+          }
+        ],
+        "domain": "flames",
+        "emoji": "🔥",
+        "examples": [
+          {
+            "id": "j6273hqry01wppx",
+            "text": "Das Feuer brennt sehr hell im Kamin.",
+            "textLang": "de",
+            "translation": "The fire is burning very brightly in the fireplace.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cozy and peaceful, watching the evening flames",
+            "note": null,
+            "matchedForm": "Feuer",
+            "matchedTranslationForm": "fire"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vd3eetti9hr10d0",
+        "order": 1,
+        "definition": "A match or lighter used to light something, especially a cigarette.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "a light",
+              "light"
+            ]
+          }
+        ],
+        "domain": "lighting",
+        "emoji": "🚬",
+        "examples": [
+          {
+            "id": "hkyjjv0spr84wym",
+            "text": "Haben Sie Feuer?",
+            "textLang": "de",
+            "translation": "Do you have a light?",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, approaching a stranger for help",
+            "note": null,
+            "matchedForm": "Feuer",
+            "matchedTranslationForm": "a light"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Feuer",
+    "lemma": "Feuer",
+    "reading": null,
+    "ipa": "/ˈfɔɪ̯ɐ/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔥",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
     "shortGloss": "fire; flames",
     "primaryGloss": "fire",
     "emotion": "crackling and warm, like settling in near a glowing hearth",
@@ -160,5 +270,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "fire; flames",
+        "why": "Does not cover sense 1 (a light)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "In German, 'Feuer' is used for both a small flame",
+        "why": "Restates what the senses already show; lacks article usage note for sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "definition.unclear",
+        "path": "senses[1].definition",
+        "quote": "The act or process of lighting something",
+        "why": "Refers to the means (a lighter or match) to light a cigarette, not the process."
+      }
+    ],
+    "growth": 0.954
   }
 }

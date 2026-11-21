@@ -72,6 +72,73 @@
     "primaryGloss": "beer",
     "emotion": "relaxed and social, anticipating a refreshing drink after a long day",
     "notes": [
+      "Counted with 잔 for glasses or mugs (맥주 한 잔, 'a glass of beer'), 병 for bottles, and 캔 for cans."
+    ],
+    "senses": [
+      {
+        "id": "90zgjcmpxubricu",
+        "order": 0,
+        "definition": "An alcoholic drink made from fermented grain such as barley and flavored with hops.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "beer"
+            ]
+          }
+        ],
+        "domain": "beverage",
+        "emoji": "🍺",
+        "examples": [
+          {
+            "id": "9gph85mo71u4gx6",
+            "text": "시원한 맥주 한 잔 마시고 싶어요.",
+            "textLang": "ko",
+            "translation": "I would like to drink a cold glass of beer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "refreshing and eager, thinking of a cold drink",
+            "note": null,
+            "matchedForm": "맥주",
+            "matchedTranslationForm": "beer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "맥주",
+    "lemma": "맥주",
+    "reading": null,
+    "ipa": null,
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍺",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "beer",
+    "primaryGloss": "beer",
+    "emotion": "relaxed and social, anticipating a refreshing drink after a long day",
+    "notes": [
       "맥주 (maekju) is the standard word for beer. If you are at a bar or restaurant, it is very common to order it by simply saying '맥주 한 잔' (one glass of beer)."
     ],
     "senses": [
@@ -118,5 +185,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "definition.unclear",
+        "path": "senses[0].definition",
+        "quote": "made from fermented grain, typically hops and barley.",
+        "why": "Hops are flowers used for flavoring, not a grain."
+      }
+    ],
+    "growth": 0.834
   }
 }

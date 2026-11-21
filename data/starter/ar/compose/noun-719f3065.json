@@ -72,6 +72,115 @@
     "primaryGloss": "weather",
     "emotion": "looking out the window in the morning to check the sky",
     "notes": [
+      "Do not confuse with مُنَاخ (munākh, 'climate'), which refers to long-term weather patterns.",
+      "In the sense of 'ritual', it is most often used in the plural: طُقُوس (ṭuqūs)."
+    ],
+    "senses": [
+      {
+        "id": "64k5ias476x1xb3",
+        "order": 0,
+        "definition": "The state of the air and atmosphere at a particular time and place, such as heat, wind, or rain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "weather"
+            ]
+          }
+        ],
+        "domain": "weather",
+        "emoji": "🌤️",
+        "examples": [
+          {
+            "id": "3jsyg7pnw27movw",
+            "text": "الطَّقْسُ جَمِيلٌ اليَوْمَ.",
+            "textLang": "ar",
+            "translation": "The weather is nice today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "cheerful and pleased with the sunny morning",
+            "note": null,
+            "matchedForm": "الطَّقْسُ",
+            "matchedTranslationForm": "weather"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "izx0uvbwz5ufd3p",
+        "order": 1,
+        "definition": "A religious or traditional ceremony performed in a set way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "ritual",
+              "rite"
+            ]
+          }
+        ],
+        "domain": "tradition",
+        "emoji": "🕯️",
+        "examples": [
+          {
+            "id": "y3ff5ypnovwtnaj",
+            "text": "لِكُلِّ عِيدٍ طُقُوسٌ خَاصَّةٌ.",
+            "textLang": "ar",
+            "translation": "Every holiday has special rituals.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "طُقُوسٌ",
+            "matchedTranslationForm": "rituals"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "طَقْس",
+    "lemma": "طَقْس",
+    "reading": null,
+    "ipa": "/tˤaqs/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌤️",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "weather; ritual",
+    "primaryGloss": "weather",
+    "emotion": "looking out the window in the morning to check the sky",
+    "notes": [
       "Used most frequently to talk about daily weather conditions like temperature, sun, and rain.",
       "Do not confuse with 'مُنَاخ' (climate), which refers to long-term weather patterns of a region."
     ],
@@ -160,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used most frequently to talk about daily weather conditions",
+        "why": "Restates the definition of sense 0 without adding usage value."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[1].examples[0].text",
+        "quote": "تَمُورُ البِلَادُ بِطُقُوسِ العِيدِ.",
+        "why": "Uses rare literary verb تَمُورُ, inappropriate and unnatural for A2."
+      }
+    ],
+    "growth": 0.862
   }
 }

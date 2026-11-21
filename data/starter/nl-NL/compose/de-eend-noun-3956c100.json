@@ -58,6 +58,73 @@
     "headword": "de eend",
     "lemma": "eend",
     "reading": null,
+    "ipa": "/eːnt/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🦆",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "duck",
+    "primaryGloss": "duck",
+    "emotion": "calm and pleasant, watching birds by the water",
+    "notes": [
+      "The final 'd' is pronounced like a 't' (/eːnt/), but becomes a 'd' in the plural 'eenden' (/ˈeːn.də(n)/)."
+    ],
+    "senses": [
+      {
+        "id": "dxye7v373od3mu4",
+        "order": 0,
+        "definition": "A water bird with a flat beak, webbed feet, and short legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "duck"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🦆",
+        "examples": [
+          {
+            "id": "alb07fol3juqiol",
+            "text": "De eend zwemt in de vijver met haar jongen.",
+            "textLang": "nl",
+            "translation": "The duck is swimming in the pond with her ducklings.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "peaceful and observant, watching a mother duck",
+            "note": null,
+            "matchedForm": "eend",
+            "matchedTranslationForm": "duck"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de eend",
+    "lemma": "eend",
+    "reading": null,
     "ipa": "/deːt/",
     "pos": "noun",
     "gender": "common",
@@ -119,5 +186,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/deːt/",
+        "why": "Wrong IPA transcription; 'eend' is pronounced /eːnt/."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "Do not confuse with 'de tand' (tooth) or 'de hand' (hand), which rhyme",
+        "why": "'Eend' (/eːnt/) does not rhyme with 'tand' (/tɑnt/) or 'hand' (/ɦɑnt/)."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Use 'de' because 'eend' is a de-word (common gender).",
+        "why": "Restates the grammatical gender already shown in the headword and gender field."
+      }
+    ],
+    "growth": 0.937
   }
 }

@@ -68,6 +68,74 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to play (an instrument); to perform (music)",
+    "primaryGloss": "to play",
+    "emotion": "focused and expressive, lost in the beauty of the melody",
+    "notes": [
+      "Used for playing musical instruments or performing music more formally. In casual speech, specific verbs are more common: '치다' (for piano, guitar, drums), '불다' (for wind instruments), and '켜다' (for bowed strings)."
+    ],
+    "senses": [
+      {
+        "id": "0qfyg2wo93m9xfn",
+        "order": 0,
+        "definition": "To play a musical instrument or perform a piece of music.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to play (an instrument)",
+              "to perform (music)"
+            ]
+          }
+        ],
+        "domain": "music",
+        "emoji": "🎹",
+        "examples": [
+          {
+            "id": "70l9ue8r8ww09wu",
+            "text": "그는 피아노를 아주 잘 연주해요.",
+            "textLang": "ko",
+            "translation": "He plays the piano very well.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "appreciative and warm, admiring the person's musical skill",
+            "note": null,
+            "matchedForm": "연주해요",
+            "matchedTranslationForm": "plays"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "연주하다",
+    "lemma": "연주하다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🎵",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to perform music; to play an instrument",
     "primaryGloss": "perform",
     "emotion": "focused and expressive, lost in the beauty of the melody",
@@ -140,5 +208,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[1].translation",
+        "quote": "To perform the guitar at a concert.",
+        "why": "Unnatural English translation ('perform the guitar') and sentence fragment instead of a full sentence."
+      }
+    ],
+    "growth": 1.105
   }
 }

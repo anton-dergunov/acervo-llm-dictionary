@@ -68,6 +68,94 @@
       "Food and drink"
     ],
     "status": "active",
+    "shortGloss": "water",
+    "primaryGloss": "water",
+    "emotion": "refreshing and essential, the simple relief of quenching a thirst",
+    "notes": [
+      "When ordering water in a restaurant, you will usually be asked whether you want it 'gazowana' (sparkling) or 'niegazowana' (still)."
+    ],
+    "senses": [
+      {
+        "id": "padlwglcvwoi70b",
+        "order": 0,
+        "definition": "The clear liquid that falls as rain, fills rivers and lakes, and is used for drinking and washing.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "water"
+            ]
+          }
+        ],
+        "domain": "liquid",
+        "emoji": "💧",
+        "examples": [
+          {
+            "id": "sgtpjysqmsdhz9p",
+            "text": "Poproszę szklankę wody.",
+            "textLang": "pl",
+            "translation": "I would like a glass of water.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "polite and direct, making a standard request at a table",
+            "note": null,
+            "matchedForm": "wody",
+            "matchedTranslationForm": "water"
+          },
+          {
+            "id": "sua2wj49z1bydbj",
+            "text": "Woda w jeziorze jest dzisiaj bardzo zimna.",
+            "textLang": "pl",
+            "translation": "The water in the lake is very cold today.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "observational and slightly shivering, noticing the cold temperature",
+            "note": null,
+            "matchedForm": "Woda",
+            "matchedTranslationForm": "water"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "woda",
+    "lemma": "woda",
+    "reading": null,
+    "ipa": "/ˈvɔ.da/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💧",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
     "shortGloss": "water; mineral water",
     "primaryGloss": "water",
     "emotion": "refreshing and essential, the simple relief of quenching a thirst",
@@ -160,5 +248,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:10Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Water in a glass and water in a lake are the same basic meaning."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "water; mineral water",
+        "why": "'Mineral water' is not a separate gloss in the senses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Woda is the fundamental word for water.",
+        "why": "Restates the gloss without adding useful information."
+      }
+    ],
+    "growth": 0.628
   }
 }

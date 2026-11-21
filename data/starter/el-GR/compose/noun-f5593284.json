@@ -58,6 +58,114 @@
     "headword": "το γουρούνι",
     "lemma": "γουρούνι",
     "reading": null,
+    "ipa": "/ɣuˈru.ni/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🐖",
+    "topics": [
+      "Animals"
+    ],
+    "status": "active",
+    "shortGloss": "pig; glutton, slob",
+    "primaryGloss": "pig",
+    "emotion": "cheerful and casual, talking about farm life",
+    "notes": [],
+    "senses": [
+      {
+        "id": "sflv1j3ckh83uft",
+        "order": 0,
+        "definition": "A heavy, pink or black farm animal kept for its meat.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "hog"
+            ]
+          }
+        ],
+        "domain": "animal",
+        "emoji": "🐖",
+        "examples": [
+          {
+            "id": "b1pa6kuvxthaji1",
+            "text": "Το γουρούνι κυλιέται στη λάσπη.",
+            "textLang": "el",
+            "translation": "The pig rolls in the mud.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "γουρούνι",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "v8abpb0nrn3x9yw",
+        "order": 1,
+        "definition": "A person who eats greedily or behaves in a dirty or unpleasant way.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "pig",
+              "glutton",
+              "slob"
+            ]
+          }
+        ],
+        "domain": "insult",
+        "emoji": "🐷",
+        "examples": [
+          {
+            "id": "v8q6shcdy79c71c",
+            "text": "Έφαγε όλο το φαγητό μόνος του σαν γουρούνι.",
+            "textLang": "el",
+            "translation": "He ate all the food by himself like a pig.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "annoyed and disgusted by someone's bad manners at the table",
+            "note": null,
+            "matchedForm": "γουρούνι",
+            "matchedTranslationForm": "pig"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "το γουρούνι",
+    "lemma": "γουρούνι",
+    "reading": null,
     "ipa": "/ɡuˈruni/",
     "pos": "noun",
     "gender": "neuter",
@@ -161,5 +269,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/ɡuˈruni/",
+        "why": "Initial 'γ' before back vowels is the velar fricative /ɣ/, not the stop /ɡ/."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Το γουρούνι τρώει λάσπη στη φάρμα.",
+        "why": "Nonsensical statement (pigs do not eat mud) and 'φάρμα' is less natural than 'αγρόκτημα'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used literally for the farm animal, but very commonly used as an",
+        "why": "Merely restates the two senses defined in the entry."
+      }
+    ],
+    "growth": 0.678
   }
 }

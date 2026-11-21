@@ -68,6 +68,117 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "garden, orchard; kindergarten",
+    "primaryGloss": "garden",
+    "emotion": "a peaceful and quiet moment spent outside in the fresh air",
+    "notes": [
+      "takes the stressed locative ending -у after 'в' and 'на': 'в саду' (in the garden)",
+      "denotes land with trees, shrubs, or flowers; a vegetable patch is 'огород'"
+    ],
+    "senses": [
+      {
+        "id": "z3bup50cv3c8u1n",
+        "order": 0,
+        "definition": "A piece of land planted with fruit trees, shrubs, or flowers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "garden",
+              "orchard"
+            ]
+          }
+        ],
+        "domain": "place",
+        "emoji": "🏡",
+        "examples": [
+          {
+            "id": "tzbfhnj15dja62b",
+            "text": "В нашем саду растут яблони и цветы.",
+            "textLang": "ru",
+            "translation": "Apple trees and flowers grow in our garden.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "саду",
+            "matchedTranslationForm": "garden"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "9rbb3wqnbncxda1",
+        "order": 1,
+        "definition": "Short for 'детский сад': a school or care centre for young children before primary school.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "kindergarten",
+              "preschool",
+              "nursery"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "0ofw0mg9tpgtfxi",
+            "text": "Утром я отвожу сына в сад.",
+            "textLang": "ru",
+            "translation": "In the morning I take my son to kindergarten.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "сад",
+            "matchedTranslationForm": "kindergarten"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ru",
+    "headword": "сад",
+    "lemma": "сад",
+    "reading": null,
+    "ipa": "/sat/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "garden; orchard",
     "primaryGloss": "garden",
     "emotion": "a peaceful and quiet moment spent outside in the fresh air",
@@ -159,5 +270,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:13Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "A place with fruit trees, such as apple or cherry trees.",
+        "why": "Russian 'сад' is one concept covering both garden and orchard; kindergarten sense is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "the word for a indoor houseplant is 'комнатное растение'",
+        "why": "Learners do not confuse 'сад' with houseplants; the locative 'в саду' is needed instead."
+      }
+    ],
+    "growth": 0.994
   }
 }

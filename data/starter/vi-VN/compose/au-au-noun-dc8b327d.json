@@ -58,6 +58,117 @@
     "headword": "đau đầu",
     "lemma": "đau đầu",
     "reading": null,
+    "ipa": "ɗaw˧˧ ɗəw˨˩",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤕",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "to have a headache; troublesome",
+    "primaryGloss": "to have a headache",
+    "emotion": "throbbing and weary, describing a physical or mental burden",
+    "notes": [
+      "Often preceded by 'bị' (e.g., 'bị đau đầu') because it is an unwanted condition.",
+      "Literally 'ache' (đau) + 'head' (đầu); also used as an adjective meaning 'troublesome' or 'stressful'."
+    ],
+    "senses": [
+      {
+        "id": "8nmqgukfnv1ctoz",
+        "order": 0,
+        "definition": "To feel a continuous pain in the head.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to have a headache",
+              "headache"
+            ]
+          }
+        ],
+        "domain": "health",
+        "emoji": "🤕",
+        "examples": [
+          {
+            "id": "5mj19d0on68chvc",
+            "text": "Tôi bị đau đầu sau khi làm việc cả ngày.",
+            "textLang": "vi",
+            "translation": "I have a headache after working all day.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "drained and seeking rest after a long shift",
+            "note": null,
+            "matchedForm": "đau đầu",
+            "matchedTranslationForm": "have a headache"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "uobd7jj1babg0w8",
+        "order": 1,
+        "definition": "Of a problem or situation: causing a lot of worry, difficulty, or stress.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "troublesome",
+              "stressful",
+              "a headache"
+            ]
+          }
+        ],
+        "domain": "figurative",
+        "emoji": "🤯",
+        "examples": [
+          {
+            "id": "gblq4seylwoxhqw",
+            "text": "Vấn đề này thật đau đầu.",
+            "textLang": "vi",
+            "translation": "This problem is a real headache.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "exasperated and overwhelmed by a complicated task",
+            "note": null,
+            "matchedForm": "đau đầu",
+            "matchedTranslationForm": "a real headache"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "vi",
+    "headword": "đau đầu",
+    "lemma": "đau đầu",
+    "reading": null,
     "ipa": null,
     "pos": "noun",
     "gender": null,
@@ -160,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:20Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "noun",
+        "why": "Đau đầu is a verb or stative verb ('to have a headache'), not a noun."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "As a noun, this refers to the physical sensation",
+        "why": "False grammar claim; 'đau đầu' functions as a predicate (verb/adjective) in both senses."
+      },
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "A continuous pain in the head.",
+        "why": "Defined as a noun rather than a verb/adjective."
+      }
+    ],
+    "growth": 1.086
   }
 }

@@ -68,6 +68,71 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "room",
+    "primaryGloss": "room",
+    "emotion": "cozy and domestic, standing inside a warm and comfortable space",
+    "notes": [],
+    "senses": [
+      {
+        "id": "ov6fh44oj0xjr97",
+        "order": 0,
+        "definition": "A separate part of a building with its own walls, floor, and ceiling.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "room"
+            ]
+          }
+        ],
+        "domain": "building",
+        "emoji": "🚪",
+        "examples": [
+          {
+            "id": "ark9j235ybtp5ch",
+            "text": "Bu evde üç oda var.",
+            "textLang": "tr",
+            "translation": "There are three rooms in this house.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "oda",
+            "matchedTranslationForm": "rooms"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "tr",
+    "headword": "oda",
+    "lemma": "oda",
+    "reading": null,
+    "ipa": "/oˈda/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚪",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "room; chamber",
     "primaryGloss": "room",
     "emotion": "cozy and domestic, standing inside a warm and comfortable space",
@@ -120,5 +185,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:19Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Oda refers to a single room inside a house, apartment, or building.",
+        "why": "Purely restates the definition and gloss."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Do not confuse with ev, which means the whole house or home.",
+        "why": "Unlikely confusion for a learner; filler note."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Yatak odası evin en güneşli yeridir.",
+        "why": "Tests the compound 'yatak odası' (bedroom) rather than showing 'oda' used as 'room'."
+      }
+    ],
+    "growth": 0.437
   }
 }

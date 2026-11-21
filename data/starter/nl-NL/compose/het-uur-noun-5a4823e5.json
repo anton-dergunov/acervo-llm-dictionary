@@ -68,6 +68,114 @@
       "Time"
     ],
     "status": "active",
+    "shortGloss": "hour; o'clock",
+    "primaryGloss": "hour",
+    "emotion": null,
+    "notes": [
+      "After a number, the singular form 'uur' is used instead of the plural 'uren' (e.g., 'twee uur' for two hours, 'om drie uur' for at three o'clock)."
+    ],
+    "senses": [
+      {
+        "id": "5gpxm9l3lrgttck",
+        "order": 0,
+        "definition": "A period of sixty minutes.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hour"
+            ]
+          }
+        ],
+        "domain": "duration",
+        "emoji": "⏳",
+        "examples": [
+          {
+            "id": "0pw92dja8ete9k6",
+            "text": "De les duurt een uur.",
+            "textLang": "nl",
+            "translation": "The class lasts an hour.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter-of-fact and informative, stating a simple duration",
+            "note": null,
+            "matchedForm": "uur",
+            "matchedTranslationForm": "hour"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "0otsprgzwxn60pt",
+        "order": 1,
+        "definition": "Used after a number to say the exact hour on the clock.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "o'clock",
+              "hour"
+            ]
+          }
+        ],
+        "domain": "clock time",
+        "emoji": "🕙",
+        "examples": [
+          {
+            "id": "11698478lncegzl",
+            "text": "De trein vertrekt om drie uur.",
+            "textLang": "nl",
+            "translation": "The train leaves at three o'clock.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "uur",
+            "matchedTranslationForm": "o'clock"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "het uur",
+    "lemma": "uur",
+    "reading": null,
+    "ipa": "/yːr/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕐",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
     "shortGloss": "hour; time of day",
     "primaryGloss": "hour",
     "emotion": null,
@@ -160,5 +268,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:07Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Het is nu het elfde uur.",
+        "why": "'Het elfde uur' is an idiom ('the eleventh hour'), not clock time ('o'clock')."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "we often use 'u' instead of 'uur'",
+        "why": "'u' (or 'u.') is only a written abbreviation, never used in speech."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Note [0] mentions 'twee uur' without explaining that 'uur' stays singular after numbers."
+      }
+    ],
+    "growth": 1.02
   }
 }

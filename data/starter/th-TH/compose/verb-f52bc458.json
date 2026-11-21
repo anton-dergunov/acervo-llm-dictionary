@@ -72,6 +72,118 @@
     "primaryGloss": "place",
     "emotion": "matter-of-fact and calm, setting an object down on a surface",
     "notes": [
+      "Do not confuse with ใส่ (sài), which is used for putting things into a container or putting on clothes and accessories.",
+      "Often used in everyday compounds like วางแผน (waang-phǎen, 'to plan') and วางสาย (waang-sǎai, 'to hang up the phone')."
+    ],
+    "senses": [
+      {
+        "id": "5eq8l7txkfv0wnt",
+        "order": 0,
+        "definition": "To put or set something down on a surface.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "place",
+              "put down",
+              "set"
+            ]
+          }
+        ],
+        "domain": "placement",
+        "emoji": "📥",
+        "examples": [
+          {
+            "id": "e85niva6m281kxa",
+            "text": "เขาวางหนังสือบนโต๊ะ",
+            "textLang": "th",
+            "translation": "He placed the book on the table.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "neutral and descriptive, just stating an action",
+            "note": null,
+            "matchedForm": "วาง",
+            "matchedTranslationForm": "placed"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "3gst74km68dkxer",
+        "order": 1,
+        "definition": "To set up, arrange, or lay out something, such as a plan or a system.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "lay out",
+              "set up",
+              "draw up"
+            ]
+          }
+        ],
+        "domain": "planning",
+        "emoji": "📉",
+        "examples": [
+          {
+            "id": "a2nnncfc71rua1v",
+            "text": "เขากำลังวางแผนการเดินทาง",
+            "textLang": "th",
+            "translation": "He is laying out a travel plan.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "วาง",
+            "matchedTranslationForm": "laying out"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "วาง",
+    "lemma": "วาง",
+    "reading": null,
+    "ipa": "/waːŋ˧/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✋",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to place; to put down; to set",
+    "primaryGloss": "place",
+    "emotion": "matter-of-fact and calm, setting an object down on a surface",
+    "notes": [
       "วาง (waang) is the most common way to say 'put' or 'place' an object onto a surface like a table or floor.",
       "Do not confuse it with ใส่ (sai), which is used for putting things 'into' a container or 'wearing' clothing/accessories."
     ],
@@ -162,5 +274,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:17Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "เขาวางแผนการเดินทาง — He is laying down a travel plan.",
+        "why": "Example means 'to draw up a plan', contradicting the sense 'to abandon or put aside'."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "วาง (waang) is the most common way to say 'put' or 'place'",
+        "why": "Restates the glosses and definition of sense 0."
+      }
+    ],
+    "growth": 1.116
   }
 }

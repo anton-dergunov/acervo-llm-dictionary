@@ -72,6 +72,116 @@
     "primaryGloss": "wash",
     "emotion": "routine and purposeful, like starting your day or finishing a chore",
     "notes": [
+      "Imperfective; the perfective pair is 'umyć'.With 'się' ('myć się'), it means to wash oneself.",
+      "Do not confuse with 'prać', which is used for washing clothes and fabrics (by hand or in a machine). Additionally, 'myć zęby' means 'to brush one's teeth'."
+    ],
+    "senses": [
+      {
+        "id": "k8c91yj3buf7sg1",
+        "order": 0,
+        "definition": "To clean a part of the body using water and soap.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wash",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "hygiene",
+        "emoji": "🚿",
+        "examples": [
+          {
+            "id": "xyu4qr39livqa8j",
+            "text": "Zawsze myję ręce przed obiadem.",
+            "textLang": "pl",
+            "translation": "I always wash my hands before dinner.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "myję",
+            "matchedTranslationForm": "wash"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "qyzp925dav1eesu",
+        "order": 1,
+        "definition": "To clean an object or surface using water.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "wash",
+              "clean"
+            ]
+          }
+        ],
+        "domain": "cleaning",
+        "emoji": "🧼",
+        "examples": [
+          {
+            "id": "a3pmgf8cjgevx2f",
+            "text": "Codziennie wieczorem myję naczynia.",
+            "textLang": "pl",
+            "translation": "Every evening I wash the dishes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "myję",
+            "matchedTranslationForm": "wash"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pl",
+    "headword": "myć",
+    "lemma": "myć",
+    "reading": null,
+    "ipa": "/mɨt͡ɕ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧼",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to wash; to clean with water",
+    "primaryGloss": "wash",
+    "emotion": "routine and purposeful, like starting your day or finishing a chore",
+    "notes": [
       "Myć is generally used for people or objects when you use water to clean them.",
       "Be careful not to confuse this with 'prać', which is specifically used for washing clothes in a washing machine."
     ],
@@ -160,5 +270,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:08Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[0].examples[0].text",
+        "quote": "Muszę umyć ręce przed obiadem.",
+        "why": "Uses the perfective verb 'umyć' instead of the headword 'myć'."
+      },
+      {
+        "severity": 2,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Dzisiaj muszę umyć naczynia.",
+        "why": "Uses the perfective verb 'umyć' instead of the headword 'myć'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the aspect pair ('umyć') and reflexive usage ('myć się')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Myć is generally used for people or objects",
+        "why": "Restates the definitions without adding useful grammar or usage advice."
+      }
+    ],
+    "growth": 1.166
   }
 }

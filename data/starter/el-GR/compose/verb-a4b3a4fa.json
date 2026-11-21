@@ -68,6 +68,117 @@
       "Body"
     ],
     "status": "active",
+    "shortGloss": "to hurt; to ache; to feel pain",
+    "primaryGloss": "hurt",
+    "emotion": "tender and aching, wincing slightly as you touch a sore spot",
+    "notes": [
+      "More commonly used in its everyday uncontracted form πονάω (3rd person singular: πονάει). Simple past: πόνεσα.",
+      "Used both intransitively (to feel pain, or of a body part: to ache) and transitively (to hurt someone)."
+    ],
+    "senses": [
+      {
+        "id": "5qhhh6q3zv1xfaf",
+        "order": 0,
+        "definition": "To feel physical pain, or (of a part of the body) to cause pain.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hurt",
+              "ache"
+            ]
+          }
+        ],
+        "domain": "body",
+        "emoji": "🩹",
+        "examples": [
+          {
+            "id": "5xcfnt08yvnhaay",
+            "text": "Με πονάει το κεφάλι μου.",
+            "textLang": "el",
+            "translation": "My head hurts.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "πονάει",
+            "matchedTranslationForm": "hurts"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l0tf4psont2wlvo",
+        "order": 1,
+        "definition": "To feel emotional pain, sadness, or sympathy.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "hurt",
+              "ache",
+              "feel pain"
+            ]
+          }
+        ],
+        "domain": "emotion",
+        "emoji": "💔",
+        "examples": [
+          {
+            "id": "adpdw6kozkbwa9f",
+            "text": "Πονάει η καρδιά μου όταν σε βλέπω έτσι.",
+            "textLang": "el",
+            "translation": "My heart aches when I see you like this.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Πονάει",
+            "matchedTranslationForm": "aches"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "πονώ",
+    "lemma": "πονώ",
+    "reading": null,
+    "ipa": "/poˈno/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🩹",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
     "shortGloss": "to hurt; to ache; to care deeply",
     "primaryGloss": "hurt",
     "emotion": "tender and aching, wincing slightly as you touch a sore spot",
@@ -160,5 +271,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:40Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "Το κεφάλι μου πονεί.",
+        "why": "In standard everyday Greek, 'Με πονάει το κεφάλι μου' is used; 'πονεί' is formal or poetic."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Needs to note that the everyday form is πονάω (3rd sg. πονάει)."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to hurt; to ache; to care deeply",
+        "why": "'to care deeply' is not in any sense's glosses."
+      }
+    ],
+    "growth": 1.307
   }
 }

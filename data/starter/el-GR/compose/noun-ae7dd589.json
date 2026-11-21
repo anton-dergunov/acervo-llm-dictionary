@@ -70,6 +70,115 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "station; milestone",
+    "primaryGloss": "station",
+    "emotion": null,
+    "notes": [
+      "Used for train, metro, and long-distance bus stations. A street-level bus or tram stop is 'η στάση'."
+    ],
+    "senses": [
+      {
+        "id": "s3wrirnqx7stld9",
+        "order": 0,
+        "definition": "A building or place where trains, metro trains, or long-distance buses stop for passengers.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "station",
+              "terminal"
+            ]
+          }
+        ],
+        "domain": "transport",
+        "emoji": "🚉",
+        "examples": [
+          {
+            "id": "j8icvix0r3ufrbp",
+            "text": "Ο κεντρικός σταθμός είναι γεμάτος κόσμο.",
+            "textLang": "el",
+            "translation": "The central station is full of people.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit hurried and overwhelmed by the crowd",
+            "note": null,
+            "matchedForm": "σταθμός",
+            "matchedTranslationForm": "station"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "x1zl7m9cistnpvu",
+        "order": 1,
+        "definition": "An important event or turning point in someone's life or in history.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "milestone",
+              "turning point"
+            ]
+          }
+        ],
+        "domain": "milestone",
+        "emoji": "🚩",
+        "examples": [
+          {
+            "id": "raexa10b5uqhiu2",
+            "text": "Αυτή η συμφωνία ήταν σταθμός στην καριέρα του.",
+            "textLang": "el",
+            "translation": "This agreement was a milestone in his career.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflective and serious, acknowledging a significant change",
+            "note": null,
+            "matchedForm": "σταθμός",
+            "matchedTranslationForm": "milestone"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο σταθμός",
+    "lemma": "σταθμός",
+    "reading": null,
+    "ipa": "/staθˈmos/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚉",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "station; stop; milestone",
     "primaryGloss": "station",
     "emotion": null,
@@ -163,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:39Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In a metaphorical sense, 'σταθμός' can also refer to a 'milestone'",
+        "why": "Restates sense 1 without adding grammar or usage information."
+      },
+      {
+        "severity": 2,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "station, stop",
+        "why": "Giving 'stop' as a gloss contradicts note 0, which explains that a stop is 'στάση'."
+      }
+    ],
+    "growth": 0.769
   }
 }

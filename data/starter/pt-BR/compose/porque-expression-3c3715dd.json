@@ -73,6 +73,73 @@
     "headword": "porque",
     "lemma": "porque",
     "reading": null,
+    "ipa": "/poʁˈke/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": "pt-BR",
+    "emoji": "❓",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
+    "shortGloss": "because",
+    "primaryGloss": "because",
+    "emotion": null,
+    "notes": [
+      "In Brazilian Portuguese, 'porque' (one word, no accent) is used in answers and explanations ('because'). In questions ('why'), it is written as two words: 'por que' (or 'por quê' at the end of a sentence)."
+    ],
+    "senses": [
+      {
+        "id": "exe2vhxd1xaqsvy",
+        "order": 0,
+        "definition": "For the reason that; used to introduce a cause or explanation.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "because"
+            ]
+          }
+        ],
+        "domain": "reason",
+        "emoji": "💡",
+        "examples": [
+          {
+            "id": "cio7doyczo5aiuy",
+            "text": "Não fui porque estava chovendo.",
+            "textLang": "pt",
+            "translation": "I didn't go because it was raining.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "matter of fact explanation given simply to a friend",
+            "note": null,
+            "matchedForm": "porque",
+            "matchedTranslationForm": "because"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "pt",
+    "headword": "porque",
+    "lemma": "porque",
+    "reading": null,
     "ipa": "/puʁˈki/",
     "pos": "expression",
     "gender": null,
@@ -173,5 +240,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:12Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "For what cause or reason; used in questions.",
+        "why": "In Brazilian Portuguese, 'porque' (one word) means 'because', never 'why' ('por que')."
+      },
+      {
+        "severity": 3,
+        "category": "example.missing-word",
+        "path": "senses[1].examples[0].text",
+        "quote": "Por que você não comeu?",
+        "why": "Uses 'por que' (two words) instead of the headword 'porque'."
+      },
+      {
+        "severity": 2,
+        "category": "field.pos",
+        "path": "pos",
+        "quote": "expression",
+        "why": "Single-word subordinating conjunction, not a multi-word expression."
+      },
+      {
+        "severity": 2,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/puʁˈki/",
+        "why": "As a lemma citation form, final 'e' is stressed /poʁˈke/ (orunstressed /ˈpoʁ.ki/)."
+      }
+    ],
+    "growth": 0.868
   }
 }

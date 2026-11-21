@@ -68,6 +68,96 @@
       "Little words"
     ],
     "status": "active",
+    "shortGloss": "hola; ¿diga?",
+    "primaryGloss": "hola",
+    "emotion": "friendly and welcoming, like opening a door to someone",
+    "notes": [
+      "Se usa tanto para saludar en persona como al contestar el teléfono o para preguntar si hay alguien escuchando."
+    ],
+    "senses": [
+      {
+        "id": "gxao7b2ihlkt9gf",
+        "order": 0,
+        "definition": "Expresión que se usa para saludar a alguien, al contestar el teléfono o para llamar la atención.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "hola",
+              "¿diga?",
+              "¿aló?"
+            ]
+          }
+        ],
+        "domain": "saludo",
+        "emoji": "👋",
+        "examples": [
+          {
+            "id": "1yfucq76dfmofo5",
+            "text": "Hello, it's nice to meet you.",
+            "textLang": "en",
+            "translation": "Hola, encantado de conocerte.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Hello",
+            "matchedTranslationForm": "Hola"
+          },
+          {
+            "id": "79v879qye14xor5",
+            "text": "Hello? Can you hear me?",
+            "textLang": "en",
+            "translation": "¿Hola? ¿Puedes oírme?",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "slightly unsure and checking the connection",
+            "note": null,
+            "matchedForm": "Hello",
+            "matchedTranslationForm": "Hola"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hello",
+    "lemma": "hello",
+    "reading": null,
+    "ipa": "/həˈloʊ/",
+    "pos": "expression",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👋",
+    "topics": [
+      "Little words"
+    ],
+    "status": "active",
     "shortGloss": "hola; saludo telefónico",
     "primaryGloss": "hola",
     "emotion": "friendly and welcoming, like opening a door to someone",
@@ -159,5 +249,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "Lo que se dice al contestar una llamada telefónica.",
+        "why": "Greeting in person and on the phone are the same basic greeting sense."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "hola; saludo telefónico",
+        "why": "'saludo telefónico' is a description, not a translation gloss."
+      }
+    ],
+    "growth": 0.815
   }
 }

@@ -68,6 +68,138 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "empty; blank; dead (battery)",
+    "primaryGloss": "empty",
+    "emotion": "matter-of-fact and straightforward, observing that something lacks its usual contents",
+    "notes": [
+      "In everyday German, 'leer' is also used for a battery that has run out of power ('Mein Akku ist leer')."
+    ],
+    "senses": [
+      {
+        "id": "sdwhhamlzdt3xo6",
+        "order": 0,
+        "definition": "Having nothing or nobody inside; not filled or occupied.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "empty",
+              "vacant",
+              "deserted"
+            ]
+          }
+        ],
+        "domain": "contents",
+        "emoji": "📦",
+        "examples": [
+          {
+            "id": "xqe1tyr2itq6pk2",
+            "text": "Das Glas ist schon wieder leer.",
+            "textLang": "de",
+            "translation": "The glass is already empty again.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit annoyed, pointing out that someone has finished their drink",
+            "note": null,
+            "matchedForm": "leer",
+            "matchedTranslationForm": "empty"
+          },
+          {
+            "id": "58livpiqar034oe",
+            "text": "Die Straßen waren spät am Abend vollkommen leer.",
+            "textLang": "de",
+            "translation": "The streets were completely empty late in the evening.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "quiet and observant, painting a picture of a still, desolate place",
+            "note": null,
+            "matchedForm": "leer",
+            "matchedTranslationForm": "empty"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "t22wehptrfbse2p",
+        "order": 1,
+        "definition": "Of a battery: out of power; of a page or screen: with nothing written on it.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "dead",
+              "flat",
+              "blank"
+            ]
+          }
+        ],
+        "domain": "state",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "rvqoswr6zwgsu4p",
+            "text": "Mein Handyakku ist fast leer.",
+            "textLang": "de",
+            "translation": "My phone battery is almost dead.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "leer",
+            "matchedTranslationForm": "dead"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "leer",
+    "lemma": "leer",
+    "reading": null,
+    "ipa": "/leːɐ̯/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🕳️",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "empty; vacant; blank",
     "primaryGloss": "empty",
     "emotion": "matter-of-fact and straightforward, observing that something lacks its usual contents",
@@ -203,5 +335,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:37Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Empty container and empty room/street are the same core meaning for A2."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[2]",
+        "quote": "(expression) Without expression or thought.",
+        "why": "Figurative 'blank stare' is too literary/marginal for an A2 entry when battery/page is missing."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "Used for physical objects that have nothing inside them (a box, a glass)",
+        "why": "Both notes merely repeat the sense definitions."
+      }
+    ],
+    "growth": 0.837
   }
 }

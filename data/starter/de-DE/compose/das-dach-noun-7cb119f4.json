@@ -68,6 +68,75 @@
       "Home"
     ],
     "status": "active",
+    "shortGloss": "roof",
+    "primaryGloss": "roof",
+    "emotion": "a sense of shelter and security, feeling safely enclosed beneath it",
+    "notes": [
+      "The plural is irregular: die Dächer.",
+      "Das Dach is the outside roof of a building or vehicle; the inside ceiling of a room is die Decke."
+    ],
+    "senses": [
+      {
+        "id": "6u5n9bpgfruxxbs",
+        "order": 0,
+        "definition": "The structure that covers the top of a building or vehicle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "roof",
+              "top"
+            ]
+          }
+        ],
+        "domain": "architecture",
+        "emoji": "🏠",
+        "examples": [
+          {
+            "id": "tu69tme5i56lbg3",
+            "text": "Nach dem Sturm mussten wir das Dach reparieren.",
+            "textLang": "de",
+            "translation": "After the storm we had to repair the roof.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "Dach",
+            "matchedTranslationForm": "roof"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "de",
+    "headword": "das Dach",
+    "lemma": "Dach",
+    "reading": null,
+    "ipa": "/dax/",
+    "pos": "noun",
+    "gender": "neuter",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏠",
+    "topics": [
+      "Home"
+    ],
+    "status": "active",
     "shortGloss": "roof; top",
     "primaryGloss": "roof",
     "emotion": "a sense of shelter and security, feeling safely enclosed beneath it",
@@ -115,5 +184,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:35Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "sense.wrong",
+        "path": "senses[1]",
+        "quote": "The upper interior surface of a space, like a car interior",
+        "why": "'Dach' is the exterior top (roof of a building/car); an interior ceiling is 'Decke'."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "metaphorically to mean a 'ceiling' in a car",
+        "why": "'Dach' does not mean interior ceiling ('Decke'); learners specifically need 'Dach' vs. 'Decke'."
+      }
+    ],
+    "growth": 0.915
   }
 }

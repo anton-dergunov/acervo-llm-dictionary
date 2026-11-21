@@ -72,6 +72,73 @@
     "primaryGloss": "árbol",
     "emotion": "tranquilo y agradecido, como al ver un árbol bajo el sol",
     "notes": [
+      "Para los árboles frutales se suele poner el nombre de la fruta delante: 'apple tree' (manzano), 'orange tree' (naranjo)."
+    ],
+    "senses": [
+      {
+        "id": "r9a3686m19nnk5j",
+        "order": 0,
+        "definition": "Planta grande y alta con un tronco de madera, ramas y hojas.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "árbol"
+            ]
+          }
+        ],
+        "domain": "naturaleza",
+        "emoji": "🌳",
+        "examples": [
+          {
+            "id": "ax374f8dbvb5mbn",
+            "text": "There is a tall tree in front of the house.",
+            "textLang": "en",
+            "translation": "Hay un árbol alto frente a la casa.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "tree",
+            "matchedTranslationForm": "árbol"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "tree",
+    "lemma": "tree",
+    "reading": null,
+    "ipa": "/triː/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🌳",
+    "topics": [
+      "Nature"
+    ],
+    "status": "active",
+    "shortGloss": "árbol",
+    "primaryGloss": "árbol",
+    "emotion": "tranquilo y agradecido, como al ver un árbol bajo el sol",
+    "notes": [
       "A diferencia del español, donde la palabra 'árbol' es masculina, 'tree' no tiene género gramatical.",
       "No confundir con 'wood', que se refiere al material (madera) o a un grupo pequeño de árboles (bosque/arboleda)."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "A diferencia del español, donde la palabra 'árbol' es masculina, 'tree' no",
+        "why": "Generic fact about English nouns having no grammatical gender; pure filler."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[0].examples[0].translation",
+        "quote": "El árbol de manzanas es alto.",
+        "why": "Unnatural calque; 'apple tree' is 'manzano' in natural Spanish."
+      }
+    ],
+    "growth": 0.856
   }
 }

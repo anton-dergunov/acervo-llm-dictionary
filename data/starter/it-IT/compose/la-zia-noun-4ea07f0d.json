@@ -72,6 +72,73 @@
     "primaryGloss": "aunt",
     "emotion": "warm and welcoming, happy to see family",
     "notes": [
+      "Like other singular family members, 'zia' does not take the definite article after a possessive adjective: 'mia zia' (my aunt), not 'la mia zia'. The article is kept in the plural ('le mie zie')."
+    ],
+    "senses": [
+      {
+        "id": "re52u8r689ntl6q",
+        "order": 0,
+        "definition": "The sister of your father or mother, or the wife of your uncle.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "aunt"
+            ]
+          }
+        ],
+        "domain": "family",
+        "emoji": "👩‍👧‍👦",
+        "examples": [
+          {
+            "id": "qi7bg5sq5uyjs5v",
+            "text": "Domani vado a trovare mia zia.",
+            "textLang": "it",
+            "translation": "Tomorrow I am going to visit my aunt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "looking forward to a nice visit with family",
+            "note": null,
+            "matchedForm": "zia",
+            "matchedTranslationForm": "aunt"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "la zia",
+    "lemma": "zia",
+    "reading": null,
+    "ipa": "/ˈt͡si.a/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👩‍👧‍👦",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "aunt",
+    "primaryGloss": "aunt",
+    "emotion": "warm and welcoming, happy to see family",
+    "notes": [
       "Used both for the sister of a parent and for the wife of an uncle.",
       "Often used before a first name as a term of affection, even for close family friends."
     ],
@@ -119,5 +186,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:58Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used both for the sister of a parent and for the wife of an uncle.",
+        "why": "Repeats the definition verbatim and behaves just like English 'aunt'."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the Italian article rule with singular family members ('mia zia', not 'la mia zia')."
+      }
+    ],
+    "growth": 1.152
   }
 }

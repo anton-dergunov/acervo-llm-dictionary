@@ -57,6 +57,95 @@
     "language": "zh",
     "headword": "朋友",
     "lemma": "朋友",
+    "reading": "péngyou",
+    "ipa": "/pʰəŋ˧˥ i̯ou̯/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🤝",
+    "topics": [
+      "People"
+    ],
+    "status": "active",
+    "shortGloss": "friend",
+    "primaryGloss": "friend",
+    "emotion": "warm and genuine, reflecting a familiar and comfortable connection",
+    "notes": [
+      "The second syllable is pronounced in the neutral tone (péngyou). Common measure words are 个 (gè) and 位 (wèi, polite).",
+      "For a romantic partner, say 男朋友 (nánpéngyou, boyfriend) or 女朋友 (nǚpéngyou, girlfriend)."
+    ],
+    "senses": [
+      {
+        "id": "s6ost3mfsy6za3g",
+        "order": 0,
+        "definition": "A person you know well and like, who is not a family member.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "friend"
+            ]
+          }
+        ],
+        "domain": "people",
+        "emoji": "🤝",
+        "examples": [
+          {
+            "id": "vj7dfmsnlm1s983",
+            "text": "他是我最好的朋友。",
+            "textLang": "zh",
+            "translation": "He is my best friend.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "fond and sincere, highlighting the closeness of the relationship",
+            "note": null,
+            "matchedForm": "朋友",
+            "matchedTranslationForm": "friend"
+          },
+          {
+            "id": "4ht8p8ks7hydb2l",
+            "text": "我们在聚会上认识了几个新朋友。",
+            "textLang": "zh",
+            "translation": "We made some new friends at the party.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "casual and lighthearted, recounting a social experience",
+            "note": null,
+            "matchedForm": "朋友",
+            "matchedTranslationForm": "friends"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "朋友",
+    "lemma": "朋友",
     "reading": "péng yǒu",
     "ipa": "/pʰəŋ˧˥ i̯ou̯˨˩˦/",
     "pos": "noun",
@@ -160,5 +249,42 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "field.reading",
+        "path": "reading",
+        "quote": "péng yǒu",
+        "why": "Standard Mandarin pronounces the second syllable in the neutral tone: péngyou."
+      },
+      {
+        "severity": 3,
+        "category": "field.ipa",
+        "path": "ipa",
+        "quote": "/pʰəŋ˧˥ i̯ou̯˨˩˦/",
+        "why": "Second syllable has a neutral tone in standard Mandarin, not third tone."
+      },
+      {
+        "severity": 3,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "it can sometimes feel a bit formal... call each other 朋",
+        "why": "朋友 is not formal, and nobody calls a friend 朋."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Close friend and casual friend are shades of one meaning; merge them."
+      }
+    ],
+    "growth": 0.556
   }
 }

@@ -60,6 +60,76 @@
     "headword": "팔다",
     "lemma": "팔다",
     "reading": null,
+    "ipa": "/pʰal.da/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Shopping",
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to sell",
+    "primaryGloss": "sell",
+    "emotion": "straightforward and professional, describing an exchange of goods for money",
+    "notes": [
+      "ㄹ-irregular verb: the final ㄹ drops before ㄴ, ㅂ, and ㅅ (e.g., 팝니다, 파는, 파세요).",
+      "The opposite verb is 사다 (to buy)."
+    ],
+    "senses": [
+      {
+        "id": "rs04oueup7a2m66",
+        "order": 0,
+        "definition": "To give or offer something to someone in exchange for money.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "sell",
+              "carry"
+            ]
+          }
+        ],
+        "domain": "commerce",
+        "emoji": "🛒",
+        "examples": [
+          {
+            "id": "ex9xymfw7jjqwkq",
+            "text": "그 가게는 신선한 과일을 팔아요.",
+            "textLang": "ko",
+            "translation": "That shop sells fresh fruit.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, pointing out a good place to shop",
+            "note": null,
+            "matchedForm": "팔아요",
+            "matchedTranslationForm": "sells"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "팔다",
+    "lemma": "팔다",
+    "reading": null,
     "ipa": null,
     "pos": "verb",
     "gender": null,
@@ -162,5 +232,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "",
+        "why": "Senses 0 and 1 are the exact same meaning ('to sell') with nearly identical examples."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Replaced needed grammar info (ㄹ-irregular conjugation) with a filler note."
+      }
+    ],
+    "growth": 0.603
   }
 }

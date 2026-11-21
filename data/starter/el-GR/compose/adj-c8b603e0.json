@@ -70,6 +70,95 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "long",
+    "primaryGloss": "long",
+    "emotion": "matter-of-fact and observational, noting physical extent without judgment",
+    "notes": [
+      "Used for physical length (hair, roads, clothes). For a person's height, use ψηλός (tall), and for duration in time, usually use μεγάλος ('μεγάλη συζήτηση').",
+      "Forms its feminine and neuter with -ιά and -ύ: μακρύς, μακριά, μακρύ."
+    ],
+    "senses": [
+      {
+        "id": "gw8709cosywtblm",
+        "order": 0,
+        "definition": "Measuring a great distance from one end to the other.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "long"
+            ]
+          }
+        ],
+        "domain": "length",
+        "emoji": "📏",
+        "examples": [
+          {
+            "id": "la8bluwdmpqxdry",
+            "text": "Αυτός ο δρόμος είναι πολύ μακρύς.",
+            "textLang": "el",
+            "translation": "This road is very long.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and helpful, pointing out distance to a traveler",
+            "note": null,
+            "matchedForm": "μακρύς",
+            "matchedTranslationForm": "long"
+          },
+          {
+            "id": "xnfdjqzs18at4p7",
+            "text": "Έχει μακριά μαλλιά.",
+            "textLang": "el",
+            "translation": "She has long hair.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "μακριά",
+            "matchedTranslationForm": "long"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "μακρύς",
+    "lemma": "μακρύς",
+    "reading": null,
+    "ipa": "/maˈkɾis/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📏",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "long; tall",
     "primaryGloss": "long",
     "emotion": "matter-of-fact and observational, noting physical extent without judgment",
@@ -161,5 +250,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:38Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "long; tall",
+        "why": "'Tall' is not a meaning of μακρύς, as the note itself explains."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(time) Lasting for a large amount of time.",
+        "why": "In Modern Greek, μακρύς is primarily physical; 'μεγάλος' or 'πολύωρος' is normal for duration."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "Use μακρύς for physical length in objects and time durations.",
+        "why": "Misleading; Greeks normally use μεγάλος (not μακρύς) for long durations."
+      }
+    ],
+    "growth": 0.783
   }
 }

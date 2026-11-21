@@ -68,6 +68,136 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "funny; fun, entertaining",
+    "primaryGloss": "funny",
+    "emotion": "smiling and lighthearted, remembering a really good joke",
+    "notes": [
+      "Like all adjectives ending in -e, it has the same form for masculine and feminine singular, changing only in the plural (divertenti).",
+      "Covers both things that make you laugh ('funny') and things that are enjoyable to do ('fun')."
+    ],
+    "senses": [
+      {
+        "id": "gv5gkp9ztnf599l",
+        "order": 0,
+        "definition": "Making people laugh.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "funny",
+              "amusing",
+              "hilarious"
+            ]
+          }
+        ],
+        "domain": "humor",
+        "emoji": "😂",
+        "examples": [
+          {
+            "id": "pu0h5ius6zod7yf",
+            "text": "Quel film comico è molto divertente.",
+            "textLang": "it",
+            "translation": "That comedy film is very funny.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "chuckling warmly, thinking about a favorite scene",
+            "note": null,
+            "matchedForm": "divertente",
+            "matchedTranslationForm": "funny"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "h2wvmbkre4p04js",
+        "order": 1,
+        "definition": "Enjoyable and pleasant to do or experience.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fun",
+              "entertaining",
+              "amusing"
+            ]
+          }
+        ],
+        "domain": "entertainment",
+        "emoji": "🎉",
+        "examples": [
+          {
+            "id": "9ljpa96ju4ix0eb",
+            "text": "La festa di ieri sera è stata davvero divertente.",
+            "textLang": "it",
+            "translation": "Last night's party was really fun.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "smiling happily while recalling a great night out",
+            "note": null,
+            "matchedForm": "divertente",
+            "matchedTranslationForm": "fun"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "gv5gkp9ztnf599l",
+      "from": "Che fa ridere o provoca allegria.",
+      "to": "Making people laugh or bringing joy.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    },
+    {
+      "sense": "h2wvmbkre4p04js",
+      "from": "Che offre svago e piacevole intrattenimento.",
+      "to": "Providing entertainment and pleasant amusement.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:16:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "it",
+    "headword": "divertente",
+    "lemma": "divertente",
+    "reading": null,
+    "ipa": "/diverˈtɛnte/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "😂",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "funny; amusing",
     "primaryGloss": "funny",
     "emotion": "smiling and lighthearted, remembering a really good joke",
@@ -163,22 +293,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "gv5gkp9ztnf599l",
-      "from": "Che fa ridere o provoca allegria.",
-      "to": "Making people laugh or bringing joy.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    },
-    {
-      "sense": "h2wvmbkre4p04js",
-      "from": "Che offre svago e piacevole intrattenimento.",
-      "to": "Providing entertainment and pleasant amusement.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:16:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:56Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "funny; amusing",
+        "why": "Omits 'fun / entertaining', the core translation of the second sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note that -e adjectives only change for number (-e / -i), not gender."
+      }
+    ],
+    "growth": 1.084
+  }
 }

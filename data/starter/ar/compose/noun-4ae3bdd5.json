@@ -72,6 +72,114 @@
     "primaryGloss": "fork",
     "emotion": "setting the table before a meal, quiet and domestic",
     "notes": [
+      "Plurals: شَوْكَات (šawkāt) or شُوَك (šuwak) for forks; أَشْوَاك (ʾašwāk) for thorns (collective: شَوْك)."
+    ],
+    "senses": [
+      {
+        "id": "r7iboddk8bojepl",
+        "order": 0,
+        "definition": "A tool with points used for eating food.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fork"
+            ]
+          }
+        ],
+        "domain": "utensil",
+        "emoji": "🍴",
+        "examples": [
+          {
+            "id": "pm6fo1cr9gau4yf",
+            "text": "تَفَضَّلْ، هٰذِهِ شَوْكَةٌ نَظِيفَةٌ.",
+            "textLang": "ar",
+            "translation": "Here you go, this is a clean fork.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "شَوْكَةٌ",
+            "matchedTranslationForm": "fork"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "vfbgztfh67xsyd2",
+        "order": 1,
+        "definition": "A sharp point on the stem of a plant.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "thorn",
+              "spine"
+            ]
+          }
+        ],
+        "domain": "nature",
+        "emoji": "🌵",
+        "examples": [
+          {
+            "id": "4yet1ej5qnnwd36",
+            "text": "اِحْذَرْ، هٰذِهِ النَّبْتَةُ لَهَا شَوْكَةٌ حَادَّةٌ.",
+            "textLang": "ar",
+            "translation": "Watch out, this plant has a sharp thorn.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "شَوْكَةٌ",
+            "matchedTranslationForm": "thorn"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "ar",
+    "headword": "شَوْكَة",
+    "lemma": "شَوْكَة",
+    "reading": null,
+    "ipa": "/ˈʃaw.ka/",
+    "pos": "noun",
+    "gender": "feminine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🍴",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fork; thorn",
+    "primaryGloss": "fork",
+    "emotion": "setting the table before a meal, quiet and domestic",
+    "notes": [
       "Used for both the eating utensil and the sharp part of a plant."
     ],
     "senses": [
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:34Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Used for both the eating utensil and the sharp part of a",
+        "why": "Restates the senses without adding grammatical information like the plural."
+      },
+      {
+        "severity": 2,
+        "category": "example.unnatural",
+        "path": "senses[0].examples[0].text",
+        "quote": "أهلاً، هذه شَوْكَة نظيفة.",
+        "why": "أهلاً ('hello/welcome') makes no sense when handing someone a fork; mistranslated as 'here is'."
+      }
+    ],
+    "growth": 1.298
   }
 }

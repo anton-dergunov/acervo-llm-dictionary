@@ -72,6 +72,74 @@
     "primaryGloss": "fruit juice",
     "emotion": "refreshing and pleasant, a light thirst-quenching moment",
     "notes": [
+      "To name a specific juice, put the fruit before 汁 (zhī), often dropping 果: 苹果汁 (píngguǒ zhī, apple juice), 橙汁 (chéngzhī, orange juice)."
+    ],
+    "senses": [
+      {
+        "id": "vdp741yicrvomyn",
+        "order": 0,
+        "definition": "A drink made from the liquid pressed from fruit.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "fruit juice",
+              "juice"
+            ]
+          }
+        ],
+        "domain": "beverage",
+        "emoji": "🍎",
+        "examples": [
+          {
+            "id": "8wg8ohwxtc5d0sx",
+            "text": "早饭时我喜欢喝果汁。",
+            "textLang": "zh",
+            "translation": "I like to drink fruit juice at breakfast.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and content, enjoying a calm morning routine",
+            "note": null,
+            "matchedForm": "果汁",
+            "matchedTranslationForm": "fruit juice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "zh",
+    "headword": "果汁",
+    "lemma": "果汁",
+    "reading": "guǒ zhī",
+    "ipa": "/ku̯o˨˩˦ ʈʂɻ̩˥/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🥤",
+    "topics": [
+      "Food and drink"
+    ],
+    "status": "active",
+    "shortGloss": "fruit juice",
+    "primaryGloss": "fruit juice",
+    "emotion": "refreshing and pleasant, a light thirst-quenching moment",
+    "notes": [
       "Used for drinks made from fruit. Remember to add the specific fruit name before it if you want to be specific, like 苹果汁 (apple juice) or 橙汁 (orange juice)."
     ],
     "senses": [
@@ -118,5 +186,21 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:24Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "add the specific fruit name before it ... like 苹果汁 ... or 橙汁",
+        "why": "Misleading: 橙汁 drops 果 (not *橙果汁); only some fruits keep 果 before 汁."
+      }
+    ],
+    "growth": 0.884
   }
 }

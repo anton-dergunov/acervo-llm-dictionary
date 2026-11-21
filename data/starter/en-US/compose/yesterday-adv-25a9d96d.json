@@ -72,6 +72,73 @@
     "primaryGloss": "ayer",
     "emotion": null,
     "notes": [
+      "Para las partes del día se dice 'yesterday morning' (ayer por la mañana) y 'yesterday afternoon' (ayer por la tarde), pero para la noche anterior se usa 'last night' (anoche)."
+    ],
+    "senses": [
+      {
+        "id": "4zaqk50fmy0gup1",
+        "order": 0,
+        "definition": "En el día inmediatamente anterior a hoy.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "ayer"
+            ]
+          }
+        ],
+        "domain": "tiempo",
+        "emoji": "📅",
+        "examples": [
+          {
+            "id": "dgzl1frync70am4",
+            "text": "I went to the store yesterday.",
+            "textLang": "en",
+            "translation": "Ayer fui a la tienda.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "yesterday",
+            "matchedTranslationForm": "Ayer"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "yesterday",
+    "lemma": "yesterday",
+    "reading": null,
+    "ipa": "/ˈjɛstərdeɪ/",
+    "pos": "adv",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "📅",
+    "topics": [
+      "Time"
+    ],
+    "status": "active",
+    "shortGloss": "ayer",
+    "primaryGloss": "ayer",
+    "emotion": null,
+    "notes": [
       "Se usa para referirse al día inmediatamente anterior al de hoy."
     ],
     "senses": [
@@ -118,5 +185,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:43Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "El día que precede inmediatamente al día de hoy.",
+        "why": "Defines the adverb as a noun ('El día...') instead of an adverb ('En el día...')."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa para referirse al día inmediatamente anterior al de hoy.",
+        "why": "Restates the definition word for word."
+      }
+    ],
+    "growth": 1.612
   }
 }

@@ -58,6 +58,73 @@
     "headword": "สีแดง",
     "lemma": "สีแดง",
     "reading": null,
+    "ipa": "/sǐː.dɛːŋ/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "matter-of-fact, as when identifying a colour on an object",
+    "notes": [
+      "Thai colour words usually begin with สี (sǐi, 'colour'). In casual speech or fixed compounds, สี is sometimes dropped (e.g., รถแดง 'red car')."
+    ],
+    "senses": [
+      {
+        "id": "1msckbrwly51q9e",
+        "order": 0,
+        "definition": "Of the colour of blood or a ripe strawberry.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "colour",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "vgd8este87v4ulw",
+            "text": "รถคันนั้นสีแดง",
+            "textLang": "th",
+            "translation": "That car is red.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "helpful and clear, pointing out an object",
+            "note": null,
+            "matchedForm": "สีแดง",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "th",
+    "headword": "สีแดง",
+    "lemma": "สีแดง",
+    "reading": null,
     "ipa": null,
     "pos": "adj",
     "gender": null,
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:15Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "The colour of human or animal blood.",
+        "why": "Artificial split; 'red' is a single colour sense."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "In Thai culture, red is traditionally associated with good luck",
+        "why": "Cultural trivia is not useful usage guidance for a beginner."
+      }
+    ],
+    "growth": 0.485
   }
 }

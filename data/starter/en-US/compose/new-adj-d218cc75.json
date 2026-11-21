@@ -70,6 +70,114 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "nuevo; diferente",
+    "primaryGloss": "nuevo",
+    "emotion": null,
+    "notes": [
+      "Con la preposición 'to' ('new to something'), significa tener poca experiencia en una actividad o lugar."
+    ],
+    "senses": [
+      {
+        "id": "9xdra0dve2rql9p",
+        "order": 0,
+        "definition": "Que acaba de ser hecho, fabricado o comprado, sin uso previo.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "nuevo"
+            ]
+          }
+        ],
+        "domain": "condición",
+        "emoji": "🎁",
+        "examples": [
+          {
+            "id": "11fx5qks81t06s6",
+            "text": "She bought a new car yesterday.",
+            "textLang": "en",
+            "translation": "Ella compró un coche nuevo ayer.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "proud and excited to share some great news",
+            "note": null,
+            "matchedForm": "new",
+            "matchedTranslationForm": "nuevo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "4eb9ihriwdepjiu",
+        "order": 1,
+        "definition": "Que es diferente, reciente o adicional a lo que ya había antes.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "nuevo",
+              "diferente"
+            ]
+          }
+        ],
+        "domain": "cambio",
+        "emoji": "🔄",
+        "examples": [
+          {
+            "id": "q235bc0xvth33wa",
+            "text": "We have a new teacher this semester.",
+            "textLang": "en",
+            "translation": "Tenemos un profesor nuevo este semestre.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "informative and slightly curious about the change",
+            "note": null,
+            "matchedForm": "new",
+            "matchedTranslationForm": "nuevo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "new",
+    "lemma": "new",
+    "reading": null,
+    "ipa": "/nuː/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "✨",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "nuevo; reciente; moderno",
     "primaryGloss": "nuevo",
     "emotion": null,
@@ -161,5 +269,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "nuevo; reciente; moderno",
+        "why": "Includes 'reciente' and 'moderno', which are not in the senses' glosses."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Se usa tanto para objetos que acaban de fabricarse o comprarse como",
+        "why": "Just restates the definitions of the two senses without adding usage information."
+      }
+    ],
+    "growth": 1.005
   }
 }

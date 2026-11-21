@@ -42,8 +42,9 @@ check, not as a verdict on compose.
 - `spend.jsonl`: every call's tokens and cost. `--max-usd` (default **$100**) caps all runs together
   and is checked against an estimate before anything is sent.
 - `apply.py`: puts each correction into the starter drafts, completing it with what the judge does
-  not write (emoji, emotions, topics). It runs it through compose's own check and enforces the
-  growth limit; a correction that fails either keeps the original, and the reason is listed. A sense
+  not write (emoji, emotions, topics). It runs it through compose's own check; a refusal, or a doubt
+  about the definitions' language, keeps the original, and the reason is listed. Growth is recorded,
+  not limited (see "Full run"). A sense
   keeps its id when `was` names it, so picture matches stand, and the topic's match file takes the
   new definitions. The compose file keeps `draftBefore` and the run's faults.
 - `report.py`: the inventory. Kinds by severity-weighted count, per vocabulary and per composing
@@ -107,7 +108,7 @@ cd experiments/compose-judge
 ../../.venv/bin/python apply.py --run full --dry-run      # then without --dry-run
 ```
 
-Run on 21 Nov 2026: two rounds, $26.67, 10,152 of 10,177 articles judged (25 left for a third round).
+Run on 21 Nov 2026: three rounds, $26.74, 10,172 of 10,177 articles judged.
 Six replies came back `MALFORMED_RESPONSE`, with no text; their articles are asked again.
 `runs/full/report.md` is the inventory. 29% of articles have a severity-3 fault, but without IPA and
 reading faults every vocabulary falls between 14% and 24%. The judge lists far more than serious
@@ -116,6 +117,25 @@ count, not by weight. The report compares the two composers only within vocabula
 composed, because which model composed a word depends on the vocabulary. What it asks for (checks,
 prompt lines, how to measure them) is the plan
 [`docs/plans/quality/compose-prompt-round.md`](../../docs/plans/quality/compose-prompt-round.md).
+
+**Applied the same day** (`runs/full/applied.json`): 9,478 corrections replace their starter drafts,
+and 17 keep the original. Of those, 15 were refused by compose's check: real mixed-script slips such
+as 因为 inside a Thai example, and false alarms such as IPA inside a note (`docs/plans/issues.md`).
+The other 2 had definitions doubted for their language. 66 were accepted with a dictionary's doubt,
+as compose accepts them. The 1.5× growth limit was dropped before applying. It would have kept 334
+originals, and every one read by hand (seven in es, ru, pt, fr, it) was an improvement: an everyday
+sense the original lacked (*alto* "loud", *высокий* for prices), a needed note (*orelha* vs *ouvido*,
+*nom* vs *prénom*), or filler replaced. They grew because their originals were short (median 261
+characters, against 420 for the corpus). 130 of them fixed a severity-3 fault. Median growth 0.91,
+largest 3.6. After the apply, every ja-JP kanji headword has a reading (187 had none), the compose
+audit's six rule counters stay at 0, and `build.py status` shows no wrong-language definitions.
+
+Picture coverage after the apply: 9,674 of 10,166 words (95%) have a sense matched to one of the 497
+pictured concepts, against 9,699 before. Senses with a shared picture went from 10,777 to 10,297
+(merged senses), and 597 new senses are not matched yet. Each vocabulary covers 485–496 of the
+concepts. The ones lost are where the concept list cuts a meaning finer than the language and the
+judge merged the two senses: `cold-touch` in 14 vocabularies (*frío*, *cold*: weather and objects
+in one sense, which keeps `cold-weather`), `watch` 8, `hot-touch` 7, `trip` 6.
 
 ## Files
 

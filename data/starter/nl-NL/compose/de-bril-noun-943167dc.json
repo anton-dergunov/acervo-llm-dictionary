@@ -68,6 +68,114 @@
       "Clothes"
     ],
     "status": "active",
+    "shortGloss": "glasses; toilet seat",
+    "primaryGloss": "glasses",
+    "emotion": "thoughtful and calm, adjusting the frames to see clearly",
+    "notes": [
+      "Unlike English 'glasses', 'de bril' is singular in Dutch for one pair ('Mijn bril is nieuw'). The plural is 'brillen'."
+    ],
+    "senses": [
+      {
+        "id": "kx8smntzr6btfmf",
+        "order": 0,
+        "definition": "A pair of lenses in a frame worn on the face to help someone see better.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "glasses",
+              "spectacles"
+            ]
+          }
+        ],
+        "domain": "vision",
+        "emoji": "👓",
+        "examples": [
+          {
+            "id": "bnulhmgab8vrlct",
+            "text": "Ik heb een nieuwe bril nodig omdat ik de borden niet meer kan lezen.",
+            "textLang": "nl",
+            "translation": "I need a new pair of glasses because I can no longer read the signs.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit frustrated with poor sight, but practical and looking for a solution",
+            "note": null,
+            "matchedForm": "bril",
+            "matchedTranslationForm": "glasses"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "j8sw2juzdqxs5z6",
+        "order": 1,
+        "definition": "The hinged circular seat on a toilet.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "toilet seat"
+            ]
+          }
+        ],
+        "domain": "bathroom",
+        "emoji": "🚽",
+        "examples": [
+          {
+            "id": "keci5jpt59ggyje",
+            "text": "Doe de bril naar beneden.",
+            "textLang": "nl",
+            "translation": "Put the toilet seat down.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "firm and direct, reminding someone of house rules",
+            "note": null,
+            "matchedForm": "bril",
+            "matchedTranslationForm": "toilet seat"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "nl",
+    "headword": "de bril",
+    "lemma": "bril",
+    "reading": null,
+    "ipa": "/brɪl/",
+    "pos": "noun",
+    "gender": "common",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "👓",
+    "topics": [
+      "Clothes"
+    ],
+    "status": "active",
     "shortGloss": "glasses; spectacles",
     "primaryGloss": "glasses",
     "emotion": "thoughtful and calm, adjusting the frames to see clearly",
@@ -159,5 +267,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:06Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Note that 'de bril' is a common gender noun",
+        "why": "Restates the gender instead of noting that 'bril' is singular where English 'glasses' is plural."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "glasses; spectacles",
+        "why": "Does not cover the second sense ('toilet seat')."
+      }
+    ],
+    "growth": 1.055
   }
 }

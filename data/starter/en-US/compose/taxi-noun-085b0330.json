@@ -70,6 +70,73 @@
       "City"
     ],
     "status": "active",
+    "shortGloss": "taxi",
+    "primaryGloss": "taxi",
+    "emotion": null,
+    "notes": [
+      "En Estados Unidos se suele usar la palabra 'cab' como sinónimo común de 'taxi'."
+    ],
+    "senses": [
+      {
+        "id": "qp9hftlj0zutvuq",
+        "order": 0,
+        "definition": "Automóvil con conductor que transporta pasajeros a cambio de dinero.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "taxi"
+            ]
+          }
+        ],
+        "domain": "transporte",
+        "emoji": "🚕",
+        "examples": [
+          {
+            "id": "ayff1gubrzm6tqk",
+            "text": "I need to catch a taxi to the airport.",
+            "textLang": "en",
+            "translation": "Necesito tomar un taxi para ir al aeropuerto.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "stressed about missing a flight, rushing to get moving",
+            "note": null,
+            "matchedForm": "taxi",
+            "matchedTranslationForm": "taxi"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "taxi",
+    "lemma": "taxi",
+    "reading": null,
+    "ipa": "/ˈtæksi/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🚕",
+    "topics": [
+      "City"
+    ],
+    "status": "active",
     "shortGloss": "coche de alquiler con conductor",
     "primaryGloss": "coche de alquiler",
     "emotion": null,
@@ -121,5 +188,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:42Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "gloss.wrong",
+        "path": "senses[0].glosses",
+        "quote": "coche de alquiler, taxi",
+        "why": "'Coche de alquiler' usually means a rental car in Spanish; the word is 'taxi'."
+      },
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "coche de alquiler con conductor",
+        "why": "Gives a definition instead of the direct Spanish equivalent 'taxi'."
+      }
+    ],
+    "growth": 0.933
   }
 }

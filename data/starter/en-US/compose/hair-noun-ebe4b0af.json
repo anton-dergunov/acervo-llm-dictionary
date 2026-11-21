@@ -58,6 +58,138 @@
     "headword": "hair",
     "lemma": "hair",
     "reading": null,
+    "ipa": "/hɛr/",
+    "pos": "noun",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💇",
+    "topics": [
+      "Body"
+    ],
+    "status": "active",
+    "shortGloss": "pelo; cabello; vello",
+    "primaryGloss": "pelo",
+    "emotion": "matter-of-fact and neutral, just describing a physical feature",
+    "notes": [
+      "Para referirse al conjunto del pelo de la cabeza o al vello del cuerpo, es incontable y se usa en singular: 'She has long hair' (nunca 'hairs').",
+      "Solo se usa como contable ('a hair', 'hairs') para hablar de una o varias hebras sueltas."
+    ],
+    "senses": [
+      {
+        "id": "2zv5ohi7kxj0nbc",
+        "order": 0,
+        "definition": "Conjunto de hebras finas que crecen en la cabeza o en el cuerpo de una persona o animal.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pelo",
+              "cabello",
+              "vello"
+            ]
+          }
+        ],
+        "domain": "conjunto",
+        "emoji": "💇",
+        "examples": [
+          {
+            "id": "15q97sm2bc5zkf2",
+            "text": "She has long blonde hair.",
+            "textLang": "en",
+            "translation": "Ella tiene el pelo largo y rubio.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "descriptive and casual, observing someone's appearance",
+            "note": null,
+            "matchedForm": "hair",
+            "matchedTranslationForm": "pelo"
+          },
+          {
+            "id": "m94tmus18se2u0g",
+            "text": "He has a lot of hair on his arms.",
+            "textLang": "en",
+            "translation": "Tiene mucho vello en los brazos.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hair",
+            "matchedTranslationForm": "vello"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "1li7ydv94lixxq3",
+        "order": 1,
+        "definition": "Cada una de las hebras finas que crecen en la piel.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "pelo",
+              "cabello"
+            ]
+          }
+        ],
+        "domain": "hebra",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "gfq28ly77fa0k1k",
+            "text": "Wait, there is a hair in my soup!",
+            "textLang": "en",
+            "translation": "¡Espera, hay un pelo en mi sopa!",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "hair",
+            "matchedTranslationForm": "pelo"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "hair",
+    "lemma": "hair",
+    "reading": null,
     "ipa": "/hɛər/",
     "pos": "noun",
     "gender": null,
@@ -159,5 +291,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:28:41Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing essential grammar note that 'hair' is uncountable when referring to a person's hair."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1]",
+        "quote": "Pelo corto y fino que crece en otras partes del cuerpo",
+        "why": "Splits one English concept along Spanish translation lines (cabello vs. vello) while missing countable 'a hair'."
+      }
+    ],
+    "growth": 1.209
   }
 }

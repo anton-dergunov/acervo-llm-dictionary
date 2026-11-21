@@ -70,6 +70,114 @@
       "Feelings"
     ],
     "status": "active",
+    "shortGloss": "to like; to enjoy",
+    "primaryGloss": "to like",
+    "emotion": "warm and affectionate, smiling while speaking",
+    "notes": [
+      "좋아하다 is a transitive action verb taking the object particle 을/를 (영화를 좋아해요). Compare with the descriptive verb 좋다 ('to be good/liked'), which takes 이/가 (영화가 좋아요) and is most often used for the speaker's own preferences."
+    ],
+    "senses": [
+      {
+        "id": "x24pa13zbp5tj8j",
+        "order": 0,
+        "definition": "To find a person, thing, or activity pleasant or enjoyable; to be fond of.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to like",
+              "to enjoy",
+              "to be fond of"
+            ]
+          }
+        ],
+        "domain": "preference",
+        "emoji": "💖",
+        "examples": [
+          {
+            "id": "pj0xd2upureo5ar",
+            "text": "나는 영화 보는 것을 좋아합니다.",
+            "textLang": "ko",
+            "translation": "I like watching movies.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "content and relaxed, sharing a personal hobby",
+            "note": null,
+            "matchedForm": "좋아합니다",
+            "matchedTranslationForm": "like"
+          },
+          {
+            "id": "wzys0xvopt0nqjz",
+            "text": "동생은 강아지를 아주 좋아해요.",
+            "textLang": "ko",
+            "translation": "My younger sibling likes puppies very much.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "vertex:gemini-4-argon",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "좋아해요",
+            "matchedTranslationForm": "likes"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "translations": [
+    {
+      "sense": "x24pa13zbp5tj8j",
+      "from": "마음에 들어 하거나 즐기다.",
+      "to": "To take pleasure in something or find it pleasing to the heart.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    },
+    {
+      "sense": "pjrwkgiqvvvqwb1",
+      "from": "어떤 대상이나 상태가 마음에 들어 유쾌하거나 기분 좋게 여기다.",
+      "to": "To feel cheerful and pleased because a person or situation is agreeable.",
+      "model": "gemini-api:gemini-3.5-flash-lite",
+      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
+      "at": "2026-11-21T08:18:19Z"
+    }
+  ],
+  "draftBefore": {
+    "id": null,
+    "language": "ko",
+    "headword": "좋아하다",
+    "lemma": "좋아하다",
+    "reading": null,
+    "ipa": null,
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "❤️",
+    "topics": [
+      "Feelings"
+    ],
+    "status": "active",
     "shortGloss": "to like; to be fond of; to find pleasant",
     "primaryGloss": "to like",
     "emotion": "warm and affectionate, smiling while speaking",
@@ -163,22 +271,27 @@
     "attestations": [],
     "images": []
   },
-  "translations": [
-    {
-      "sense": "x24pa13zbp5tj8j",
-      "from": "마음에 들어 하거나 즐기다.",
-      "to": "To take pleasure in something or find it pleasing to the heart.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    },
-    {
-      "sense": "pjrwkgiqvvvqwb1",
-      "from": "어떤 대상이나 상태가 마음에 들어 유쾌하거나 기분 좋게 여기다.",
-      "to": "To feel cheerful and pleased because a person or situation is agreeable.",
-      "model": "gemini-api:gemini-3.5-flash-lite",
-      "prompt": "eb3ada70728f91459dddd7804b4d11f00c1f2ac9667552d9f6fd9fc6b9f963e4",
-      "at": "2026-11-21T08:18:19Z"
-    }
-  ]
+  "corrected": {
+    "run": "full",
+    "model": "vertex:gemini-4-argon",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:29:05Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses",
+        "quote": "(affection) ... (pleasure)",
+        "why": "Both senses mean 'to like' (taking 을/를); they are the same everyday meaning."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Note should explain the grammatical difference: 좋아하다 takes 을/를, while 좋다 takes 이/가."
+      }
+    ],
+    "growth": 1.002
+  }
 }
