@@ -75,13 +75,69 @@ with either. The Spanish control, defined in Spanish, stays in Spanish (0 of 30 
   experience, or being taught." None of the dozen pairs read got vaguer.
 - Full numbers, per vocabulary and paired: [`runs/1/report.md`](runs/1/report.md).
 
+## Run 2: other definition languages, and the example (21 Nov 2026)
+
+**Question.** The four words still failing in run 1 were all Spanish, and the prompt's one JSON
+example is a Spanish word (*el disfraz*) **defined in Spanish** and glossed into English. Does the
+example invite them? And is a fix fair to vocabularies that define in some language other than
+English, which run 1 never asked about?
+
+**Setups**, the same stored requests with only the vocabulary record changed, so every arm sees the
+same words:
+
+| Set | Defined in | Words | Scored by |
+| --- | --- | ---: | --- |
+| `sample` | English (the starters) | 105, the run 1 words | lingua; script for ko, ru |
+| `control` | the word's own language: es-MX | 30 | lingua |
+| `own` | the word's own language: fr-FR, de-DE, ja-JP (glossed into English) | 45 | lingua; script for ja |
+| `russian` | Russian (glosses and notes too): es-ES, it-IT, de-DE, fr-FR words | 48 | script, exactly |
+| `spanish` | Spanish: the en-US starter as it is, and it-IT, fr-FR, pt-BR words | 60 | lingua |
+
+The scorer is compose's check, plus English as a language a definition may slip into even where the
+vocabulary does not name it (the model's default), and each reply also goes through compose's whole
+check, so an arm that breaks another field shows.
+
+**Arms,** each correct for any definition language except the one built to test the worry:
+
+- `after`: the prompt run 1 shipped;
+- `labelled`: `after`, with one line before the example saying what it is: a Spanish word in a
+  vocabulary that defines in Spanish and glosses into English, so write each field in the language
+  your own lines name;
+- `reminder`: `after`, with a closing line in the request made from the vocabulary's definition
+  language ("Write every definition in Russian, whatever language the word is in.");
+- `shape`: `after`, with the example's definition in English, which should help English-defined
+  vocabularies and might hurt the others.
+
+**Result: `labelled` is the only arm with nothing wrong anywhere, and it is shipped.** 1,152 calls on
+3.5 Flash-Lite, all answered, $2.73. Totals over the 288 words each arm saw:
+
+| Arm | Words with a definition in the wrong language | Replies not JSON | Other refusals by the check |
+| --- | ---: | ---: | ---: |
+| `after` | 2 (*la estación*, English setup; *saltar*, Russian setup) | 2 | 0 |
+| `labelled` | **0** | **0** | **0** |
+| `reminder` | 2 (*la estación*; *amar*, Russian setup) | 3 | 0 |
+| `shape` | 0 | 0 | 2 (*bruyant* with no senses; *sitzen*'s notes in Latin script for a Russian setup) |
+
+- **Every slip in both runs was a Spanish word defined in Spanish** (*la carne*, *la estación* twice,
+  *el huevo*, *joven*, *saltar*, *amar*), whatever the setup asked: what the example shows. Saying
+  what the example is removed them all, and needed no language of its own.
+- **The worry about `shape` did not come true where expected:** en-US, defined in Spanish, stayed
+  0/30 under every arm. But `shape` cost two other refusals, and it is the one arm that would mislead
+  a vocabulary defined in anything but English, so it is not shipped.
+- **The reminder line helped nothing** and had the most unreadable replies.
+- **The size of the win is small.** 2 words against 0 is no significant difference on its own (exact
+  McNemar p = 0.5); `labelled` is shipped because it is never worse on any measure, costs nothing,
+  and names the cause the slips share. All demotions in every arm were dictionary notation for a
+  transcription (`[ˈtiːnʔɛɪ̯d͡ʒɐ]` against `/ˈtiːnˌʔeːɡɐ/`), unrelated to the language.
+- Full numbers: [`runs/2/report.md`](runs/2/report.md).
+
 ### Method
 
 `run.py` re-sends the builder's stored requests, rebuilt by `compose_parts` (checked equal to what the
 builder sent, system prompt digest included), changing only the prompt or the language lines:
 
 - `before`: the prompt as shipped when the failure was found (`arms/before.md`);
-- `after`: the reworded prompt (`arms/after.md`, now `prompts/acervo_compose.md`): the two lines
+- `after`: the reworded prompt (`arms/after.md`): the two lines
   dropped, the rule stated on the `Define senses in:` line with *la silla* as the example;
 - `named`: `after`, with each language line naming its language (`Define senses in: English (en)`).
 

@@ -103,7 +103,9 @@ reply the same way. Each rule has one of five dispositions:
   the owner's 1,467 Spanish definitions was doubted
   (`experiments/definition-language/`). An identifier can be wrong, so this demotes softly, like a
   dictionary. The prompt now says it too: reworded, it took 3.5 Flash-Lite from 60% of words with a
-  definition in the wrong language to 2%, the rest left for this check.
+  definition in the wrong language to 2%, and saying what setup its Spanish example is written for
+  took the rest to none, whether the vocabulary defines in English, in the word's own language, in
+  Russian or in Spanish.
 - **A dictionary is asked, softly.** Compose reads every installed `fields` dictionary of the word's
   language once before the walk (`services/dictionaries/lookup.articles_for`), under the headword, the
   headword without its first word (`el asco`, `se va`) and the lemma. The comparisons are

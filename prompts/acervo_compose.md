@@ -8,6 +8,9 @@ Return one JSON object and nothing else. No prose, no code fences.
 
 ## The shape
 
+This example is a Spanish word in a vocabulary that defines its senses in Spanish and glosses into
+English. Yours may be set up differently: write each field in the language your own lines name.
+
 {
   "headword": "el disfraz",
   "lemma": "disfraz",

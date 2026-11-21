@@ -38,46 +38,50 @@ def main(argv: list[str] | None = None) -> int:
         groups[(record["set"], record["model"], record["arm"])].append(record)
 
     lines = [f"# Definition language: {args.run}", "",
-             "| Set | Model | Arm | Words | Senses | Wrong senses (certain) | Words with one wrong | Cost |",
-             "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |"]
+             "| Set | Model | Arm | Words | Senses | Wrong senses (certain) | Words with one wrong | "
+             "Check refused / demoted | Cost |",
+             "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for (which, model, arm), items in sorted(groups.items()):
         senses = sum(r["score"]["senses"] for r in items)
         wrong = sum(r["score"]["wrong"] for r in items)
         certain = sum(r["score"]["certain"] for r in items)
         words = sum(1 for r in items if r["score"]["wrong"])
         cost = sum(r.get("costUsd") or 0 for r in items)
+        verdicts = [r["score"].get("verdict", "") for r in items]
+        refused = sum(1 for v in verdicts if v.startswith(("unusable", "not JSON")))
+        demoted = sum(1 for v in verdicts if v.startswith("demoted"))
         lines.append(f"| {which} | {model} | {arm} | {len(items)} | {senses} | {wrong} ({certain}) | "
-                     f"{words} ({100 * words / max(1, len(items)):.0f}%) | ${cost:.3f} |")
+                     f"{words} ({100 * words / max(1, len(items)):.0f}%) | {refused} / {demoted} | ${cost:.3f} |")
 
-    lines += ["", "## Per vocabulary (sample, words with one wrong)", ""]
-    per: dict[tuple[str, str, str], list[int]] = defaultdict(lambda: [0, 0])
+    lines += ["", "## Per vocabulary (words with one wrong)", ""]
+    per: dict[tuple[str, str, str, str], list[int]] = defaultdict(lambda: [0, 0])
     for record in records:
-        if record["set"] == "sample":
-            cell = per[(record["model"], record["arm"], record["vocabulary"])]
-            cell[0] += bool(record["score"]["wrong"])
-            cell[1] += 1
-    vocabularies = sorted({key[2] for key in per})
-    lines.append("| Model | Arm | " + " | ".join(vocabularies) + " |")
-    lines.append("| --- | --- | " + " | ".join("---:" for _ in vocabularies) + " |")
-    for model, arm in sorted({key[:2] for key in per}):
-        cells = [per.get((model, arm, v), [0, 0]) for v in vocabularies]
-        lines.append(f"| {model} | {arm} | " + " | ".join(f"{a}/{b}" for a, b in cells) + " |")
+        cell = per[(record["set"], record["model"], record["arm"], record["vocabulary"])]
+        cell[0] += bool(record["score"]["wrong"])
+        cell[1] += 1
+    for which in sorted({key[0] for key in per}):
+        vocabularies = sorted({key[3] for key in per if key[0] == which})
+        lines += [f"**{which}**", "", "| Model | Arm | " + " | ".join(vocabularies) + " |",
+                  "| --- | --- | " + " | ".join("---:" for _ in vocabularies) + " |"]
+        for model, arm in sorted({key[1:3] for key in per if key[0] == which}):
+            cells = [per.get((which, model, arm, v), [0, 0]) for v in vocabularies]
+            lines.append(f"| {model} | {arm} | " + " | ".join(f"{a}/{b}" for a, b in cells) + " |")
+        lines.append("")
 
     lines += ["", "## Paired comparisons (same words, per-word outcome)", ""]
     outcome = {(r["set"], r["model"], r["arm"], r["vocabulary"], r["headword"]): bool(r["score"]["wrong"])
                for r in records}
     for (which, model, arm) in sorted(groups):
-        if arm == "before":
-            continue
-        pairs = [(outcome[k], outcome.get((which, model, "before", *k[3:])))
-                 for k in outcome if k[:3] == (which, model, arm)]
-        pairs = [(after, before) for after, before in pairs if before is not None]
-        if not pairs:
-            continue
-        fixed = sum(1 for after, before in pairs if before and not after)
-        broke = sum(1 for after, before in pairs if after and not before)
-        lines.append(f"- {which}, {model}, before → {arm}: {fixed} fixed, {broke} broken over {len(pairs)} "
-                     f"words; McNemar p = {mcnemar(fixed, broke):.2g}")
+        for base in [b for b in ("before", "after") if b != arm and (arm != "before")]:
+            pairs = [(outcome[k], outcome.get((which, model, base, *k[3:])))
+                     for k in outcome if k[:3] == (which, model, arm)]
+            pairs = [(after, before) for after, before in pairs if before is not None]
+            if not pairs:
+                continue
+            fixed = sum(1 for after, before in pairs if before and not after)
+            broke = sum(1 for after, before in pairs if after and not before)
+            lines.append(f"- {which}, {model}, {base} → {arm}: {fixed} fixed, {broke} broken over {len(pairs)} "
+                         f"words; McNemar p = {mcnemar(fixed, broke):.2g}")
 
     (run / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
