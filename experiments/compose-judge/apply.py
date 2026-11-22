@@ -17,7 +17,7 @@ For every article the run corrected (`runs/<run>/results.json`, `corrected` not 
    (experiments/compose-judge/README.md, "Full run").
 3. The draft is rebuilt by `draft_from`; a sense that `was` an original one keeps that sense's id, so
    the matches that name it stand. An unchanged example keeps its id and the model that wrote it;
-   a new or changed one is credited to the judge's model.
+   a new or changed one is credited to the run's corrector (the judge's model, or a session that corrected by hand).
 4. The compose file keeps the draft it replaced (`draftBefore`) and the run's faults (`corrected`),
    so the raw model output, the correction and its reasons stay three separate layers (starter plan
    step 5). Each topic's match file has the senses' new definitions; a sense that is gone leaves it,
@@ -47,7 +47,12 @@ _spec.loader.exec_module(build)
 
 from acervo.services.models import Demoted, Unusable  # noqa: E402
 
-CORRECTOR = f"vertex:{judge.MODEL}"
+
+
+def corrector_of(manifest: dict[str, Any]) -> str:
+    """Who wrote a run's corrections: the manifest's `corrector`, else the judge's own model.
+    A run read and corrected by hand in a session names itself (`runs/session-review/`)."""
+    return manifest.get("corrector") or f"vertex:{manifest['model']}"
 
 
 def prose_size(entry: dict[str, Any]) -> int:
@@ -86,11 +91,12 @@ def completed(corrected: dict[str, Any], draft: dict[str, Any]) -> dict[str, Any
     return answer
 
 
-def rebuilt(composed: dict[str, Any], answer: dict[str, Any], vocabulary: dict[str, Any]) -> dict[str, Any]:
+def rebuilt(composed: dict[str, Any], answer: dict[str, Any], vocabulary: dict[str, Any],
+            corrector: str) -> dict[str, Any]:
     """`draft_from` on the checked answer, with the ids and credits that must carry over."""
     resolution = composed["request"]["resolution"]
     draft = build.draft_from(answer, resolution, composed["request"]["request"], build.record_for(vocabulary),
-                             [], CORRECTOR)
+                             [], corrector)
     before = composed["draft"]
     draft["topics"] = list(before.get("topics") or [])
     examples_before = {e["text"]: e for s in before["senses"] for e in s.get("examples") or []}
@@ -136,6 +142,7 @@ def update_matches(folder: Path, before: dict[str, Any], after: dict[str, Any], 
 def apply(run: str, dry_run: bool) -> dict[str, Any]:
     results = judge.done_keys(run)
     manifest = json.loads((judge.run_dir(run) / "manifest.json").read_text())
+    corrector = corrector_of(manifest)
     vocabularies = {v["id"]: v for v in build.load_vocabularies()[0]}
     concepts = {c.id: c for items in build.load_concepts().values() for c in items}
     outcome = collections.Counter()
@@ -170,13 +177,13 @@ def apply(run: str, dry_run: bool) -> dict[str, Any]:
             continue
         ratio = prose_size(checked) / max(1, prose_size(before))
         growth.append(ratio)
-        after = rebuilt(composed, checked, vocabulary)
+        after = rebuilt(composed, checked, vocabulary, corrector)
         outcome["applied"] += 1
         if dry_run:
             continue
         composed.setdefault("draftBefore", before)  # the composer's own draft, kept once
         composed["draft"] = after
-        composed["corrected"] = {"run": run, "model": CORRECTOR, "rubric": manifest["rubric"], "at": judge.now(),
+        composed["corrected"] = {"run": run, "model": corrector, "rubric": manifest["rubric"], "at": judge.now(),
                                  "faults": result["faults"], "growth": round(ratio, 3)}
         build.write_json(path, composed)
         topic = concepts[composed["word"]["concepts"][0]].topic

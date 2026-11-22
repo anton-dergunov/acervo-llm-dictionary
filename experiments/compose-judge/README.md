@@ -130,6 +130,14 @@ characters, against 420 for the corpus). 130 of them fixed a severity-3 fault. M
 largest 3.6. After the apply, every ja-JP kanji headword has a reading (187 had none), the compose
 audit's six rule counters stay at 0, and `build.py status` shows no wrong-language definitions.
 
+**The 22 left over, corrected by hand** (`runs/session-review/`, credited `session:claude-opus-5-5`,
+applied by `apply.py` like the judge's): the 17 corrections the check refused, each with its one slip
+fixed, and the 5 es-MX articles the judge never answered, read and corrected. The slips were a word in
+another script (अَمْسِ inside an Arabic note, ಡಿขึ้น and 因为 in Thai, κai, yardım구), IPA inside a
+note, a Polish or Turkish word in an English definition, or a note mostly in Greek or Cyrillic. Two
+corrections had worse faults: *proszę*'s first example joined two sentences, and ดี's IPA had lost
+its tone (mid, ˧). Every starter article is now judged, and 9,500 carry a correction.
+
 Picture coverage after the apply: 9,674 of 10,166 words (95%) have a sense matched to one of the 497
 pictured concepts, against 9,699 before. Senses with a shared picture went from 10,777 to 10,297
 (merged senses), and 597 new senses are not matched yet. Each vocabulary covers 485–496 of the

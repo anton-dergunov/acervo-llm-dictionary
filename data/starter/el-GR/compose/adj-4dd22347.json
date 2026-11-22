@@ -68,6 +68,116 @@
       "Shopping"
     ],
     "status": "active",
+    "shortGloss": "cheap; inexpensive; shoddy",
+    "primaryGloss": "cheap",
+    "emotion": "pleased with a bargain, pointing out the low price",
+    "notes": [
+      "Also spelled φθηνός, the more formal spelling; both are standard."
+    ],
+    "senses": [
+      {
+        "id": "qcsgdeklalynqy2",
+        "order": 0,
+        "definition": "Costing little money; low in price.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "inexpensive"
+            ]
+          }
+        ],
+        "domain": "price",
+        "emoji": "🏷️",
+        "examples": [
+          {
+            "id": "kt1h3j8fosqn63w",
+            "text": "Αυτό το φόρεμα είναι πολύ φτηνό.",
+            "textLang": "el",
+            "translation": "This dress is very cheap.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "delighted to have found such a good price",
+            "note": null,
+            "matchedForm": "φτηνό",
+            "matchedTranslationForm": "cheap"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "wpy2vitb0kler4m",
+        "order": 1,
+        "definition": "Of low quality or little worth.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "cheap",
+              "shoddy",
+              "poor-quality"
+            ]
+          }
+        ],
+        "domain": "quality",
+        "emoji": "⚠️",
+        "examples": [
+          {
+            "id": "6yhmz5dmmkhppbd",
+            "text": "Δεν μου αρέσουν τα φτηνά αστεία.",
+            "textLang": "el",
+            "translation": "I don't like cheap jokes.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "session:claude-opus-5-5",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "φτηνά",
+            "matchedTranslationForm": "cheap"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "φτηνός",
+    "lemma": "φτηνός",
+    "reading": null,
+    "ipa": "/ftiˈnos/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏷️",
+    "topics": [
+      "Shopping"
+    ],
+    "status": "active",
     "shortGloss": "cheap; low quality",
     "primaryGloss": "cheap",
     "emotion": "pleased with a bargain, pointing out the low price",
@@ -162,5 +272,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[1]",
+        "quote": "Can sometimes carry a negative connotation of poor quality",
+        "why": "Restates sense 1."
+      },
+      {
+        "severity": 2,
+        "category": "example.wrong-sense",
+        "path": "senses[1].examples[0].text",
+        "quote": "Αγοράσαμε ένα φτηνό κινητό που χάλασε αμέσως.",
+        "why": "A cheap phone that broke still primarily means 'inexpensive' (sense 0)."
+      }
+    ],
+    "growth": 0.687
   }
 }

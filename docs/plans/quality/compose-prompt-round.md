@@ -92,7 +92,9 @@ Most are in languages whose phonology the session could not confirm, and some it
 doubtful (Turkish *dünya* with a long *a*, Arabic stress conventions). Two models from similar
 training data agreeing is not verification. Before any prompt or check change: compare the composers'
 IPA with Wiktionary's own (kaikki's `sounds`, where the compiled dictionaries keep it), per language,
-and treat the judge's IPA faults only as the list to compare first.
+and treat the judge's IPA faults only as the list to compare first. The starters run this
+comparison before release (`docs/plans/first-use/starter-vocabularies.md` step 5a); what it finds
+per language says whether compose should check those languages' IPA too.
 
 ## Not worth prompt space
 

@@ -142,7 +142,7 @@ whatever the default quota gives: about one picture a minute.
 | Item | Cost |
 | --- | ---: |
 | Shared concept pictures (497 of the 521 have one), at ~$0.034 | ~$17 |
-| A judge on Gemini Pro, if Claude is not used, at ~$0.01 a word | up to ~$100 |
+| The Argon judge and corrector, pilots included (step 5) | $28.92, spent |
 | Pictures for senses with no concept | none: ~4,500 senses, ~$150, many abstract or grammatical |
 | Ten shared stories, later | ~$2 |
 
@@ -168,21 +168,47 @@ whatever the default quota gives: about one picture a minute.
    coercions land in the drafts, and a word whose reply they now refuse is set aside with its topic's
    match file, to be composed and matched again by the next run. Run on 21 Nov 2026 after
    `experiments/compose-audit/`: 85 words set aside.
-5. **Judge and correct.** The checks already ran at compose. Then a judge from another family than
-   the composer flags words against fixed rubric items: wrong gloss, wrong gender, unnatural
-   example, above the level, a sense that misses its concept. It gives no score (in
-   `experiments/compose-lesson-line/` a judge marked identical pairs different half the time). It is
-   Claude on the subscription or Gemini Pro on credits, whichever is available, and is calibrated on
-   Spanish, English and Russian against about 50 owner-labelled words each. Drafting the rubric is
-   §0 of [`../quality/article-quality.md`](../quality/article-quality.md). **Keep all three layers**:
-   the raw model output (the builder's compose files), the corrections as diffs, and the owner's
-   corrections. Together they are the labelled dataset for §1 of `article-quality.md`, with the same
-   concepts across twenty vocabularies. Whoever corrects does not judge the corrections (§5).
+5. **Judge and correct.** ~~Done 21 Nov 2026~~ ([`experiments/compose-judge/`](../../../experiments/compose-judge/README.md)):
+   Gemini 4 Argon listed each article's serious faults (a closed set of kinds, no score) and returned
+   it corrected. 9,478 corrections replaced their drafts. The 22 left over were corrected by hand in
+   a session: 17 the check refused over one slip each, and 5 never judged. Each compose file keeps the
+   draft it replaced and the faults. **Keep all three layers**: the raw model output (the builder's
+   compose files), the corrections as diffs, and the owner's corrections. Together they are the
+   labelled dataset for §1 of [`../quality/article-quality.md`](../quality/article-quality.md), with
+   the same concepts across twenty vocabularies.
+   Argon is the composer's own family, and whoever corrects does not judge the corrections
+   (`article-quality.md` §5). So two checks come **before release**:
+   - **a. The Wiktionary pass, mechanical and free.** Compare every starter word's IPA and gender
+     with Wiktionary, using compose's own dictionary checks (`dictionary_check.ipa_verdict`, the
+     phone error rate; `gender_verdict`). Run them over the served dictionaries and the ten compiled
+     for the judge only (`data/dictionaries/judge/`: tr, pl, el, nl, ko, th, ar, hi, vi, id). Compose
+     never checked those ten, and they hold the worst transcriptions (vi-VN 43% of articles with an
+     IPA fault, tr-TR 25%, ar 18%, th-TH 17%). First count disagreements per language and read a
+     sample, to learn where the check's false alarms are (variety, broad vs narrow transcription,
+     tone notation). Then take Wiktionary's transcription where the two clearly disagree and
+     Wiktionary has one for the vocabulary's variety, and require tone in vi and th. Wiktionary is
+     CC BY-SA: a starter that carries its transcriptions says so. The Japanese readings the
+     corrections filled in (187 words) are compared with the dictionary's kana the same way; that
+     comparison is new, since `reading_verdict` reads only Pinyin.
+     This settles the 877 articles whose only severity-3 claim is IPA.
+   - **b. A second judge from another family** (Claude), on the severity-3 claims only: about 2,100
+     corrected articles, 2,567 claims, most in ja-JP (269). It sees the original, the correction and
+     each claim, and answers per claim: true, and fixed rightly; or not true, so the original part
+     stands; or fixed wrongly, with the right text. Its answers are applied like the session's own
+     (`apply.py`, a run of its own), and what it rejects is a measure of Argon's error rate.
 6. **Pictures**, alongside steps 3–5: a pilot of thirty concepts drawn from their concept cards with
    `src/acervo/images/` called directly, reviewed on the existing sheet
    (`scripts/generate_images.py sheet`), which also rejects any shared picture with lettering; then
    the shared ~500.
-7. **Bundles and import.** A bundle writer turns the drafts into `acervo-export/1` bundles
+7. **The package, then bundles and import.** The **starter package** (`data/starter-package/`,
+   tracked) is what ships, kept apart from the builder's record in `data/starter/` (requests,
+   replies, the drafts each correction replaced). It holds the shared pictures
+   (`pictures/<concept>.webp`, with a record per picture of its brief, style, seed and model) and,
+   per vocabulary, each word's final article with the concept each sense takes its picture from.
+   `build.py package` writes it from the builder's files. The pictures are its only original
+   content: they cost money and a seed to redraw, so they are never treated as a cache. Hand fixes
+   still go into the builder's files, so the three layers stay separate.
+   A bundle writer turns the package into `acervo-export/1` bundles
    ([`../../features/export.md`](../../features/export.md)). Each is imported into a starter
    account per support language (picture drawing off, no standing rules, no "About you"), where
    enrich makes the recordings. The shared pictures are then placed on the matched senses. Import
@@ -200,7 +226,7 @@ whatever the default quota gives: about one picture a minute.
   neither). This is product work, not a converter, and is useful beyond starters: it is how a story
   or loop moves between servers.
 - **The laptop builder**, `scripts/starter/`: word lists, compose and matching today; drawing concept
-  pictures, writing bundles and placing pictures to come. It is a tool, not part of the shipped app.
+  pictures, writing the package and bundles, and placing pictures to come. It is a tool, not part of the shipped app.
 - **A part of speech for conjunctions and prepositions.** The app's list has none, so *but* and
   *with* are filed as `expression`.
 - **A way to install a starter** from the first-run guide

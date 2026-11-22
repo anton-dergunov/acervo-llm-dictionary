@@ -68,6 +68,75 @@
       "Work"
     ],
     "status": "active",
+    "shortGloss": "school student; pupil",
+    "primaryGloss": "student",
+    "emotion": "focused and eager to learn, sitting at a desk with a notebook",
+    "notes": [
+      "Used for school pupils (primary or secondary) or anyone taking lessons from a teacher; for a university student, use ο φοιτητής / η φοιτήτρια.",
+      "The feminine is η μαθήτρια."
+    ],
+    "senses": [
+      {
+        "id": "zhtqg0tazvffn3o",
+        "order": 0,
+        "definition": "A person who goes to school or takes lessons from a teacher.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "student",
+              "pupil"
+            ]
+          }
+        ],
+        "domain": "education",
+        "emoji": "🧑‍🎓",
+        "examples": [
+          {
+            "id": "j7b8r6xcz0h1p2r",
+            "text": "Ο μαθητής διαβάζει το βιβλίο του για το μάθημα.",
+            "textLang": "el",
+            "translation": "The student is reading his book for the lesson.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "diligent and quiet, concentrating on the pages",
+            "note": null,
+            "matchedForm": "μαθητής",
+            "matchedTranslationForm": "student"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "ο μαθητής",
+    "lemma": "μαθητής",
+    "reading": null,
+    "ipa": "/ma.θiˈtis/",
+    "pos": "noun",
+    "gender": "masculine",
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🧑‍🎓",
+    "topics": [
+      "Work"
+    ],
+    "status": "active",
     "shortGloss": "student; pupil",
     "primaryGloss": "student",
     "emotion": "focused and eager to learn, sitting at a desk with a notebook",
@@ -161,5 +230,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes[0]",
+        "quote": "Refers specifically to a school student or learner",
+        "why": "Restates sense 0; can be merged with note 1 and feminine form added."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "(philosophy) A person who follows the teachings, philosophy, or method",
+        "why": "Historical/philosophical sense ('disciple') is not needed at A2."
+      },
+      {
+        "severity": 2,
+        "category": "example.translation",
+        "path": "senses[1].examples[0].translation",
+        "quote": "The philosopher was discussing with his disciples in the courtyard.",
+        "why": "Ungrammatical in English ('discussing' is transitive and cannot take 'with' alone)."
+      }
+    ],
+    "growth": 0.581
   }
 }

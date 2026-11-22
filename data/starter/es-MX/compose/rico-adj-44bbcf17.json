@@ -68,6 +68,157 @@
       "Describing"
     ],
     "status": "active",
+    "shortGloss": "rich; delicious; nice",
+    "primaryGloss": "rich",
+    "emotion": "content and satisfied, often lingering on the taste of something good",
+    "notes": [
+      "With ser it means wealthy (Es rico); with estar it means tasty or nice (¡Está rico!).",
+      "Said of a person with estar (está rico, está rica), it means 'attractive, hot', so it can sound flirtatious."
+    ],
+    "senses": [
+      {
+        "id": "fkwqf2nr8c38tqa",
+        "order": 0,
+        "definition": "Having a lot of money, property, or valuable possessions.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "rich",
+              "wealthy"
+            ]
+          }
+        ],
+        "domain": "money",
+        "emoji": "💰",
+        "examples": [
+          {
+            "id": "wbbqsdgcz413yhx",
+            "text": "Ella trabaja mucho porque quiere ser rica.",
+            "textLang": "es",
+            "translation": "She works a lot because she wants to be rich.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "ambitious and focused, speaking about a clear life goal",
+            "note": null,
+            "matchedForm": "rica",
+            "matchedTranslationForm": "rich"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hyj7gcu6p3vv5gf",
+        "order": 1,
+        "definition": "Having a very good flavor; delicious.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "delicious",
+              "tasty"
+            ]
+          }
+        ],
+        "domain": "food",
+        "emoji": "😋",
+        "examples": [
+          {
+            "id": "amq0cx69gryw55q",
+            "text": "¡Qué rico está este pastel!",
+            "textLang": "es",
+            "translation": "This cake is so delicious!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "enthusiastic and genuinely enjoying the food",
+            "note": null,
+            "matchedForm": "rico",
+            "matchedTranslationForm": "delicious"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "642e7192z7champ",
+        "order": 2,
+        "definition": "Pleasant to feel or experience.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "nice",
+              "lovely"
+            ]
+          }
+        ],
+        "domain": "feeling",
+        "emoji": null,
+        "examples": [
+          {
+            "id": "l0cc77d3ixp2ki8",
+            "text": "¡Qué rico se siente el aire fresco!",
+            "textLang": "es",
+            "translation": "The fresh air feels so nice!",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "session:claude-opus-5-5",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "rico",
+            "matchedTranslationForm": "nice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "rico",
+    "lemma": "rico",
+    "reading": null,
+    "ipa": "/ˈriko/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "💰",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
     "shortGloss": "rich; wealthy; delicious",
     "primaryGloss": "rich",
     "emotion": "content and satisfied, often lingering on the taste of something good",
@@ -161,5 +312,35 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 3,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the ser/estar split: es rico (wealthy) vs está rico (tasty)."
+      },
+      {
+        "severity": 3,
+        "category": "sense.missing",
+        "path": "senses",
+        "quote": "",
+        "why": "Missing the everyday Mexican sense 'nice, lovely' (¡Qué rico se siente el sol!)."
+      },
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[1]",
+        "quote": "it can occasionally be used to mean 'cute' or 'attractive'",
+        "why": "Of a person, está rico means 'hot, sexy' and sounds flirtatious, not 'cute'."
+      }
+    ],
+    "growth": 1.072
   }
 }

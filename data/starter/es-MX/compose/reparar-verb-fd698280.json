@@ -72,6 +72,116 @@
     "primaryGloss": "to repair",
     "emotion": "focused and capable, getting things back in working order",
     "notes": [
+      "In everyday Mexican Spanish, arreglar is the usual word for fixing something; reparar sounds more formal or technical, as at a repair shop.",
+      "In the sense 'notice' it always takes en (reparar en algo) and is formal; in speech people say fijarse en or darse cuenta de."
+    ],
+    "senses": [
+      {
+        "id": "u65dj39wwb75on2",
+        "order": 0,
+        "definition": "To make something that was broken or damaged work again.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to repair",
+              "to fix"
+            ]
+          }
+        ],
+        "domain": "fix",
+        "emoji": "🛠️",
+        "examples": [
+          {
+            "id": "9ho8sywx158owl7",
+            "text": "Necesito reparar mi computadora porque no enciende.",
+            "textLang": "es",
+            "translation": "I need to repair my computer because it doesn't turn on.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "a bit stressed and seeking a solution",
+            "note": null,
+            "matchedForm": "reparar",
+            "matchedTranslationForm": "repair"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "l0i0k0wzgvocgry",
+        "order": 1,
+        "definition": "To notice or pay attention to a small detail.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "to notice",
+              "to pay attention to"
+            ]
+          }
+        ],
+        "domain": "notice",
+        "emoji": "🧐",
+        "examples": [
+          {
+            "id": "zo2lzqkuq1z1iol",
+            "text": "No reparé en su cambio de actitud hasta tarde.",
+            "textLang": "es",
+            "translation": "I didn't notice his change in attitude until late.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "reflecting thoughtfully on a missed detail",
+            "note": null,
+            "matchedForm": "reparé",
+            "matchedTranslationForm": "notice"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "reparar",
+    "lemma": "reparar",
+    "reading": null,
+    "ipa": "/re.paˈɾaɾ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🛠️",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
+    "shortGloss": "to repair; to notice",
+    "primaryGloss": "to repair",
+    "emotion": "focused and capable, getting things back in working order",
+    "notes": [
       "While 'reparar' is widely used for fixing things, in Mexico and other regions you will also often hear 'arreglar' for the same purpose.",
       "The second sense, 'reparar en,' is a formal or literary way of saying to notice or pay attention to a detail."
     ],
@@ -161,5 +271,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.false",
+        "path": "notes[0]",
+        "quote": "in Mexico and other regions you will also often hear 'arreglar'",
+        "why": "In Mexico arreglar is the everyday word; reparar sounds formal or technical."
+      },
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "senses[1]",
+        "quote": "",
+        "why": "The 'notice' sense needs its preposition: reparar en algo."
+      }
+    ],
+    "growth": 0.969
   }
 }

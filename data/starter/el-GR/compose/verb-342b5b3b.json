@@ -68,6 +68,73 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "to swim",
+    "primaryGloss": "swim",
+    "emotion": "refreshing and energetic, enjoying the cool water on a warm day",
+    "notes": [
+      "Two present forms are both standard: κολυμπώ, and the more everyday κολυμπάω. The past tense is κολύμπησα (I swam)."
+    ],
+    "senses": [
+      {
+        "id": "hr6ucfpodugvsrc",
+        "order": 0,
+        "definition": "To move through water by using your arms and legs.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "swim"
+            ]
+          }
+        ],
+        "domain": "swimming",
+        "emoji": "🏊",
+        "examples": [
+          {
+            "id": "cfapp58aq70gnbb",
+            "text": "Μου αρέσει να κολυμπώ στη θάλασσα το καλοκαίρι.",
+            "textLang": "el",
+            "translation": "I like to swim in the sea in the summer.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "relaxed and happy, looking forward to a sunny day",
+            "note": null,
+            "matchedForm": "κολυμπώ",
+            "matchedTranslationForm": "swim"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "el",
+    "headword": "κολυμπώ",
+    "lemma": "κολυμπώ",
+    "reading": null,
+    "ipa": "/koliˈmbo/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🏊",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "to swim; to wade through",
     "primaryGloss": "swim",
     "emotion": "refreshing and energetic, enjoying the cool water on a warm day",
@@ -159,5 +226,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "shortgloss.mismatch",
+        "path": "shortGloss",
+        "quote": "to swim; to wade through",
+        "why": "'to wade through' is not in the senses and is not what 'κολυμπώ' means."
+      },
+      {
+        "severity": 2,
+        "category": "sense.marginal",
+        "path": "senses[1]",
+        "quote": "To be completely surrounded by or immersed in a liquid.",
+        "why": "Figurative/colloquial shade ('swimming in oil') is marginal for A2; keep the entry focused on swimming."
+      }
+    ],
+    "growth": 0.645
   }
 }

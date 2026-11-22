@@ -68,6 +68,118 @@
       "Actions"
     ],
     "status": "active",
+    "shortGloss": "lanzar, tirar; organizar",
+    "primaryGloss": "lanzar",
+    "emotion": "energetic and sudden, with a quick movement of the arm",
+    "notes": [
+      "Verbo irregular: el pasado es 'threw' y el participio, 'thrown'.",
+      "A diferencia de 'drop' (dejar caer algo), 'throw' implica impulsar el objeto con fuerza por el aire."
+    ],
+    "senses": [
+      {
+        "id": "do9lik88yzhhpy9",
+        "order": 0,
+        "definition": "Impulsar algo con la mano o con fuerza para que se mueva por el aire o caiga.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "lanzar",
+              "tirar",
+              "arrojar"
+            ]
+          }
+        ],
+        "domain": "lanzar",
+        "emoji": "⚾",
+        "examples": [
+          {
+            "id": "5k7d5kc3xs55jt5",
+            "text": "Throw the ball to me, please.",
+            "textLang": "en",
+            "translation": "Lánzame la pelota, por favor.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "session:claude-opus-5-5",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "playful and eager, calling out to a friend in the yard",
+            "note": null,
+            "matchedForm": "Throw",
+            "matchedTranslationForm": "Lánzame"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "fzsqq1x8ei5rpse",
+        "order": 1,
+        "definition": "Organizar o dar una fiesta o celebración.",
+        "definitionLang": "es",
+        "glosses": [
+          {
+            "lang": "es",
+            "terms": [
+              "organizar",
+              "dar",
+              "celebrar"
+            ]
+          }
+        ],
+        "domain": "evento",
+        "emoji": "🎉",
+        "examples": [
+          {
+            "id": "2jldce6f07ca3bb",
+            "text": "We want to throw a party for her birthday.",
+            "textLang": "en",
+            "translation": "Queremos organizar una fiesta para su cumpleaños.",
+            "translationLang": "es",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.5-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "excited and happy, planning a celebration with friends",
+            "note": null,
+            "matchedForm": "throw",
+            "matchedTranslationForm": "organizar"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "en",
+    "headword": "throw",
+    "lemma": "throw",
+    "reading": null,
+    "ipa": "/θroʊ/",
+    "pos": "verb",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "⚾",
+    "topics": [
+      "Actions"
+    ],
+    "status": "active",
     "shortGloss": "lanzar; arrojar; tirar",
     "primaryGloss": "lanzar",
     "emotion": "energetic and sudden, with a quick movement of the arm",
@@ -204,5 +316,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "note.missing",
+        "path": "notes",
+        "quote": "",
+        "why": "Missing the irregular past tense ('threw') and past participle ('thrown')."
+      },
+      {
+        "severity": 2,
+        "category": "sense.oversplit",
+        "path": "senses[1].definition",
+        "quote": "Hacer caer a alguien al suelo con violencia o fuerza.",
+        "why": "Throwing someone/something to the ground is just a sub-case of sense 0."
+      }
+    ],
+    "growth": 0.796
   }
 }

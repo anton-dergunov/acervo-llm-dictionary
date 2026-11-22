@@ -72,6 +72,95 @@
     "primaryGloss": "red",
     "emotion": "bold and eye-catching, standing out clearly from everything else",
     "notes": [
+      "Red wine is vino tinto, and red hair is pelirrojo (Es pelirroja, she has red hair), not rojo.",
+      "As a noun, the color is masculine: el rojo es mi color favorito."
+    ],
+    "senses": [
+      {
+        "id": "gmzql9bcljrx3hz",
+        "order": 0,
+        "definition": "Of the color of blood or a ripe tomato.",
+        "definitionLang": "en",
+        "glosses": [
+          {
+            "lang": "en",
+            "terms": [
+              "red"
+            ]
+          }
+        ],
+        "domain": "color",
+        "emoji": "🔴",
+        "examples": [
+          {
+            "id": "o90fhgcn1jxf5y2",
+            "text": "Me compré una camisa roja.",
+            "textLang": "es",
+            "translation": "I bought myself a red shirt.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "session:claude-opus-5-5",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": null,
+            "note": null,
+            "matchedForm": "roja",
+            "matchedTranslationForm": "red"
+          },
+          {
+            "id": "i4jow5mhtfbd1vy",
+            "text": "Se puso rojo de vergüenza.",
+            "textLang": "es",
+            "translation": "He turned red with embarrassment.",
+            "translationLang": "en",
+            "origin": "llm",
+            "sourceAttestationId": null,
+            "modelId": "gemini-api:gemini-3.1-flash-lite",
+            "videoRef": null,
+            "videoTitle": null,
+            "videoChannel": null,
+            "videoStart": null,
+            "videoEnd": null,
+            "clipRef": null,
+            "imageRef": null,
+            "emotion": "sympathetic and slightly amused by the situation",
+            "note": null,
+            "matchedForm": "rojo",
+            "matchedTranslationForm": "red"
+          }
+        ],
+        "images": []
+      }
+    ],
+    "attestations": [],
+    "images": []
+  },
+  "draftBefore": {
+    "id": null,
+    "language": "es",
+    "headword": "rojo",
+    "lemma": "rojo",
+    "reading": null,
+    "ipa": "/ˈroxo/",
+    "pos": "adj",
+    "gender": null,
+    "register": "neutral",
+    "dialect": null,
+    "emoji": "🔴",
+    "topics": [
+      "Describing"
+    ],
+    "status": "active",
+    "shortGloss": "red",
+    "primaryGloss": "red",
+    "emotion": "bold and eye-catching, standing out clearly from everything else",
+    "notes": [
       "While 'rojo' is the standard word for red, remember that it changes to 'roja' when describing a feminine noun.",
       "In Mexico, just like in other Spanish-speaking countries, this word is used for everything from the color of a rose to the color of a stoplight."
     ],
@@ -140,5 +229,28 @@
     ],
     "attestations": [],
     "images": []
+  },
+  "corrected": {
+    "run": "session-review",
+    "model": "session:claude-opus-5-5",
+    "rubric": "49ead08cbecca2ec028890e528022f848d8bdd6aac5c64acb1b8ed6032f73d16",
+    "at": "2026-11-21T23:59:00Z",
+    "faults": [
+      {
+        "severity": 2,
+        "category": "definition.form",
+        "path": "senses[0].definition",
+        "quote": "The color of blood or a ripe tomato.",
+        "why": "Adjective defined as a noun."
+      },
+      {
+        "severity": 2,
+        "category": "note.filler",
+        "path": "notes",
+        "quote": "",
+        "why": "Both notes restate agreement and the meaning; red wine (tinto) and red hair (pelirrojo) are the traps."
+      }
+    ],
+    "growth": 0.655
   }
 }
