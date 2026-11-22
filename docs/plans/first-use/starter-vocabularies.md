@@ -196,10 +196,11 @@ whatever the default quota gives: about one picture a minute.
      each claim, and answers per claim: true, and fixed rightly; or not true, so the original part
      stands; or fixed wrongly, with the right text. Its answers are applied like the session's own
      (`apply.py`, a run of its own), and what it rejects is a measure of Argon's error rate.
-6. **Pictures**, alongside steps 3–5: a pilot of thirty concepts drawn from their concept cards with
-   `src/acervo/images/` called directly, reviewed on the existing sheet
-   (`scripts/generate_images.py sheet`), which also rejects any shared picture with lettering; then
-   the shared ~500.
+6. **Pictures**, alongside steps 3–5: all 497 shared pictures in one overnight run, reviewed concept
+   by concept on a tablet page that also catches lettering, and drawn again where marked.
+   `experiments/starter-pictures/` builds the concept cards: a one-sense English article for the
+   app's own brief writer, briefs by Flash-Lite. It draws them with Nano Banana 2.1 in Vertex batch
+   jobs on one pinned account, and holds the review page.
 7. **The package, then bundles and import.** The **starter package** (`data/starter-package/`,
    tracked) is what ships, kept apart from the builder's record in `data/starter/` (requests,
    replies, the drafts each correction replaced). It holds the shared pictures
