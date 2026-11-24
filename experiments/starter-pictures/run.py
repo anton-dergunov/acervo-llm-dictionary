@@ -360,15 +360,16 @@ def submit(plan: list[tuple[str, int]], state: dict[str, Any]) -> dict[str, Any]
         brief = read_brief(concept)
         have = takes(concept)
         source = prompt_for(brief, take, have[-1] if have else 0) if brief.get("variants") and have else brief
-        key = request_key(concept, take, source is not brief)
+        request = request_key(concept, take, source is not brief)
+        key = request.rsplit("/", 1)[0]   # what `vertex.harvest` calls the concept
         meta[key] = {"prompt": source["prompt"], "styleId": source.get("styleId") or brief["styleId"],
                      "promptVersion": brief["promptVersion"], "brief": source["brief"]}
-        requests.append(key)
+        requests.append(request)
     job = {"display": display, "prefix": f"jobs/{display}", "requests": requests,
            "meta": meta, "model": vertex.MODEL, "name": None, "state": "SUBMITTING", "harvested": False,
            "submitted": stamp()}
-    body = "".join(json.dumps(vertex.request_line(meta[key]["prompt"]), ensure_ascii=False) + "\n"
-                   for key in requests)
+    body = "".join(json.dumps(vertex.request_line(meta[request.rsplit("/", 1)[0]]["prompt"]), ensure_ascii=False) + "\n"
+                   for request in requests)
     state["jobs"].append(job)
     vertex.save(state, STATE)  # before creating it: a stop in between is found again by its name
     try:
@@ -450,7 +451,7 @@ def status(_: argparse.Namespace) -> None:
     refused = refusals()
     labelled = labels()
     marks = Counter(label.get("label") for concept, label in labelled.items()
-                    if takes(concept) and label.get("take") == takes(concept)[-1])
+                    if takes(concept) and label.get("through", label.get("take")) == takes(concept)[-1])
     print(f"concepts   {len(every)} pictured")
     print(f"briefs     {sum(1 for b in briefed if b and b.get('prompt'))} written, "
           f"{sum(1 for b in briefed if b and b.get('refused'))} refused by the writer, "
