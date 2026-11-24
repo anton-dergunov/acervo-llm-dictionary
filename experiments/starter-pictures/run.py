@@ -242,6 +242,20 @@ def spent() -> float:
     return sum(float(entry.get("costUsd") or 0) for path in (DRAWS, SMOKE) for entry in read_jsonl(path))
 
 
+def request_key(concept: str, take: int, variant: bool) -> str:
+    """A job's name for one picture. Several ideas for one concept share a concept, so each takes its own
+    key (`week~5/1`), which `store` turns back into concept and take."""
+    return f"{concept}~{take}/1" if variant else f"{concept}/{take}"
+
+
+def prompt_for(brief: dict[str, Any], concept_take: int, have_last: int) -> dict[str, Any]:
+    """The brief fields a picture is drawn from: the concept's own, or the variant for this take."""
+    variants = brief.get("variants") or []
+    if variants and concept_take > have_last:
+        return variants[(concept_take - have_last - 1) % len(variants)]
+    return brief
+
+
 def wanted(args: argparse.Namespace, state: dict[str, Any]) -> list[tuple[str, int]]:
     """(concept, take) for every picture to submit now, in the concept list's order."""
     import cards
@@ -256,20 +270,22 @@ def wanted(args: argparse.Namespace, state: dict[str, Any]) -> list[tuple[str, i
         if not brief or brief.get("refused") or not brief.get("prompt"):
             continue
         have = takes(card.id)
+        alternatives = brief.get("variants") or []
         if args.redraw:
             label = labelled.get(card.id) or {}
-            if not have or label.get("label") != "redraw" or label.get("take") != have[-1]:
+            if not have or label.get("label") != "redraw" or label.get("through", label.get("take")) != have[-1]:
                 continue
-            take = have[-1] + 1
+            # A concept the owner keeps rejecting carries several ideas in `variants`: one take for each.
+            new = range(have[-1] + 1, have[-1] + 1 + max(1, len(alternatives)))
         elif have:
             continue
         else:
-            take = 1
-        if f"{card.id}/{take}" in in_flight:
-            continue
+            new = range(1, 2)
         if refused[card.id] >= REFUSALS_TO_SKIP and not named:
             continue
-        plan.append((card.id, take))
+        for take in new:
+            if request_key(card.id, take, bool(args.redraw and alternatives)) not in in_flight:
+                plan.append((card.id, take))
     return plan
 
 
@@ -278,13 +294,17 @@ def store(job: dict[str, Any]):
     from acervo.images.render import encode_master
     import vertex
 
-    def write(concept: str, take: int, data: bytes, usage: dict[str, Any]) -> bool:
+    def write(key: str, take: int, data: bytes, usage: dict[str, Any]) -> bool:
+        concept = key
+        if "~" in key:   # one of several ideas for a concept: the take is in the key
+            concept, number = key.split("~")
+            take = int(number)
         target = picture_path(concept, take)
         if target.exists():
             return False
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(encode_master(data))
-        meta = job["meta"][concept]
+        meta = job["meta"][key]
         append(DRAWS, {"at": stamp(), "concept": concept, "take": take, "job": job["display"],
                        "model": vertex.MODEL, "route": "vertex-batch", "styleId": meta["styleId"],
                        "promptVersion": meta["promptVersion"], "brief": meta["brief"], "seed": None,
@@ -335,15 +355,20 @@ def submit(plan: list[tuple[str, int]], state: dict[str, Any]) -> dict[str, Any]
 
     vertex.bucket()
     display = f"starter-pictures-{len(state['jobs']) + 1:03d}-{datetime.now(timezone.utc).strftime('%Y%m%dt%H%M%S')}"
-    meta = {}
-    for concept, _take in plan:
+    meta, requests = {}, []
+    for concept, take in plan:
         brief = read_brief(concept)
-        meta[concept] = {key: brief[key] for key in ("prompt", "styleId", "promptVersion", "brief")}
-    job = {"display": display, "prefix": f"jobs/{display}", "requests": [f"{c}/{t}" for c, t in plan],
+        have = takes(concept)
+        source = prompt_for(brief, take, have[-1] if have else 0) if brief.get("variants") and have else brief
+        key = request_key(concept, take, source is not brief)
+        meta[key] = {"prompt": source["prompt"], "styleId": source.get("styleId") or brief["styleId"],
+                     "promptVersion": brief["promptVersion"], "brief": source["brief"]}
+        requests.append(key)
+    job = {"display": display, "prefix": f"jobs/{display}", "requests": requests,
            "meta": meta, "model": vertex.MODEL, "name": None, "state": "SUBMITTING", "harvested": False,
            "submitted": stamp()}
-    body = "".join(json.dumps(vertex.request_line(meta[concept]["prompt"]), ensure_ascii=False) + "\n"
-                   for concept, _take in plan)
+    body = "".join(json.dumps(vertex.request_line(meta[key]["prompt"]), ensure_ascii=False) + "\n"
+                   for key in requests)
     state["jobs"].append(job)
     vertex.save(state, STATE)  # before creating it: a stop in between is found again by its name
     try:

@@ -36,10 +36,12 @@ def items() -> list[dict[str, Any]]:
         brief = run.read_brief(card.id) or {}
         takes = run.takes(card.id)
         label = labelled.get(card.id) or {}
-        current = bool(takes) and label.get("take") == takes[-1]
+        current = bool(takes) and label.get("through", label.get("take")) == takes[-1]
+        # Several new takes since the last label are candidates: the owner picks one.
+        fresh = [t for t in takes if t > (label.get("through", label.get("take")) or 0)] if label else takes[-1:]
         out.append({**card.summary(), "styleLabel": brief.get("styleLabel"), "brief": brief.get("brief"),
                     "refused": brief.get("refusalReason") if brief.get("refused") else None,
-                    "takes": takes, "label": label.get("label") if current else None,
+                    "takes": takes, "fresh": fresh, "chosen": label.get("take") if current else None, "label": label.get("label") if current else None,
                     "note": label.get("note") if current else None,
                     "earlier": label if label and not current else None, "conceptNote": card.note})
     return out
@@ -89,7 +91,11 @@ class Handler(BaseHTTPRequestHandler):
             if label is None:
                 labelled.pop(concept, None)
             else:
-                labelled[concept] = {"label": label, "take": takes[-1], "note": str(body.get("note") or "").strip(),
+                take = int(body.get("take") or takes[-1])
+                if take not in takes:
+                    self._send(HTTPStatus.BAD_REQUEST, b"no such take", "text/plain")
+                    return
+                labelled[concept] = {"label": label, "take": take, "through": takes[-1], "note": str(body.get("note") or "").strip(),
                                      "at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
             run.write_json(run.LABELS, dict(sorted(labelled.items())))
         self._send(200, b'{"ok": true}', "application/json")
@@ -132,6 +138,7 @@ textarea { width:100%; font:inherit; padding:10px; border-radius:8px; border:1px
 .context dt { color:var(--muted); font-size:13px; margin-top:6px; }
 .context dd { margin:0; }
 .pin b { font-weight:600; }
+.cands{display:flex;gap:6px;margin-top:8px}.cands img{width:18%;border:3px solid transparent;border-radius:6px}.cands img.on{border-color:#2a7}
 </style></head>
 <body><main>
 <div class="bar"><span id="pos"></span><span id="tally"></span></div>
@@ -179,10 +186,14 @@ function show() {
   $("id").textContent = i.id;
   $("sense").textContent = i.sense;
   $("pos-topic").textContent = `${i.pos} · ${i.topic}`;
-  const take = i.takes[i.takes.length - 1];
+  if (!i.pick || !i.fresh.includes(i.pick)) i.pick = i.fresh.length ? i.fresh[i.fresh.length - 1] : (i.chosen || i.takes[i.takes.length - 1]);
+  const take = i.pick;
+  const many = !i.label && i.fresh.length > 1;
   $("figure").innerHTML = take
-    ? `<img alt="" src="/img/${i.id}/${take}">`
+    ? `<img alt="" src="/img/${i.id}/${take}">` + (many ? `<div class="cands">` + i.fresh.map(t =>
+        `<img class="${t === take ? "on" : ""}" data-take="${t}" alt="" src="/img/${i.id}/${t}">`).join("") + `</div>` : "")
     : `<div class="none">${i.refused ? "The brief writer refused: " + esc(i.refused) : "Not drawn yet"}</div>`;
+  document.querySelectorAll(".cands img").forEach(img => img.onclick = () => { i.pick = +img.dataset.take; show(); });
   $("good").disabled = $("redraw").disabled = !take;
   $("good").classList.toggle("on", i.label === "good");
   $("redraw").classList.toggle("on", i.label === "redraw");
@@ -204,7 +215,7 @@ function show() {
 async function save(label, note) {
   const i = items[at];
   const response = await fetch("/label", {method: "POST", headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({concept: i.id, label, note})});
+    body: JSON.stringify({concept: i.id, label, note, take: i.pick})});
   if (!response.ok) { $("status").textContent = "Not saved: " + await response.text(); return false; }
   i.label = label; i.note = note || "";
   return true;

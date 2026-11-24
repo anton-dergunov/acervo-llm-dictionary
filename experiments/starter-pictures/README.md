@@ -93,7 +93,9 @@ caffeinate -i .venv/bin/python experiments/starter-pictures/run.py draw 2>&1 | t
   the same command carries on.
 - **Redrawing:** `run.py draw --redraw` draws the next take of every concept labelled `redraw`
   (after its brief is revised from the note, if it needs revising). The new take shows on the page,
-  unlabelled.
+  unlabelled. A concept rejected again can carry several ideas in its brief file's `variants`
+  (each with its own brief, style and prompt); `--redraw` then draws one take per idea, and the page
+  shows the new takes as thumbnails to pick from.
 
 Files:
 - `results/`, tracked: the briefs, `draws.jsonl` (one line per take: brief, style, prompt version,
