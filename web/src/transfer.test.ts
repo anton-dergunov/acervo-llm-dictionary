@@ -175,7 +175,15 @@ describe("naming a word file", () => {
 
   it("falls back to the reading for a script with no Latin form", () => {
     expect(word("麻烦", "máfan")).toBe("mafan");
-    expect(word("麻烦")).toBe("word");
+  });
+
+  it("keeps a word in its own script when there is no Latin form to give it", () => {
+    expect(word("麻烦")).toBe("麻烦");
+    expect(word("약하다")).toBe("약하다");
+    expect(word("正しい", "ただしい")).toBe("正しい");
+    expect(word("महँगा")).toBe("महँगा"); // the vowel signs are the spelling, not accents
+    expect(word("Άρρωστος")).toBe("άρρωστος");
+    expect(word("?!")).toBe("word");
   });
 
   it("separates two words that would share a name", () => {

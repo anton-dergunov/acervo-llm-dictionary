@@ -9,7 +9,9 @@ A newly installed Acervo opens with nothing in it: no vocabulary, no topics, no 
 guide would take a new user through the three things that make it work:
 
 1. **A vocabulary**: the language they are learning and the languages to translate into.
-2. **Topics**, or the starter set.
+2. **Words to start with**: a starter vocabulary for the language chosen, installed from a list in the
+   app, or none ([`starter-vocabularies.md`](starter-vocabularies.md), "What the app needs", has the
+   design: a second source for the same import).
 3. **Providers**, with exactly two choices:
    - **Google Cloud does everything.** One account, a credentials file, a small bill. The guide asks
      for the file and the project and adds Google Cloud with its usual models. That set already

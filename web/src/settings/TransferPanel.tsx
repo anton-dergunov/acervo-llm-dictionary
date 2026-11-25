@@ -1,28 +1,28 @@
 /**
  * Export and import, as the Data page shows them.
  *
- * The panels own the two things a bundle needs that `transfer.ts` deliberately does not: the zip,
- * and the browser's way of handing a file in and out. Everything about what a bundle *is* stays in
- * `transfer.ts`, so a second transport would add a surface here and nothing else.
+ * The panels own what a bundle needs that `transfer.ts` deliberately does not: the browser's way of
+ * handing a file in and out. The zip is read by `bundleZip.ts` and an import is run by
+ * `importRun.ts`, both shared with the laptop's installer for the starter vocabularies. Everything
+ * about what a bundle *is* stays in `transfer.ts`, so a second transport would add a surface here
+ * and nothing else.
  */
 
 import { useMemo, useRef, useState } from "react";
-import { strFromU8, strToU8, unzipSync, zipSync } from "fflate";
+import { strToU8, zipSync } from "fflate";
+import { bundleArchive, type BundleArchive } from "../bundleZip";
 import { languageOf } from "../languages";
 import { repository, type ReplicaSnapshot } from "../repository";
 import { syncEngine } from "../sync";
 import { languageOptions } from "../selectors";
-import { backendSession } from "../api";
 import { bytesFor } from "../media";
-import { clipBytes, COLLECTIONS } from "../pronunciation";
+import { clipBytes } from "../pronunciation";
+import { importThroughServer } from "../importRun";
 import {
-  AUDIO_DIRECTORY, bundleName, exportBundle, importBundle, MEDIA_DIRECTORY, picturesIn, pronunciationsIn, readBundle,
-  type BundleFile, type BundlePlan, type ImportReport
+  bundleName, exportBundle, picturesIn, pronunciationsIn, readBundle,
+  type BundlePlan, type ImportReport
 } from "../transfer";
 import { Action, Group, Row, Select, Toggle } from "./kit";
-
-/** Whatever the archiver on the other machine felt like adding. None of it is vocabulary. */
-const NOISE = /(^|\/)(__MACOSX\/|\.DS_Store$|\._)/;
 
 function save(name: string, bytes: Uint8Array): void {
   const url = URL.createObjectURL(new Blob([bytes as unknown as BlobPart], { type: "application/zip" }));
@@ -36,36 +36,12 @@ function save(name: string, bytes: Uint8Array): void {
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-/**
- * The bundle's text files, and its pictures and clips kept as bytes.
- *
- * Split because `strFromU8` on a WebP or an MP3 produces mojibake — everything under `media/`, and
- * every recording under `audio/`, has to stay binary all the way to the route that stores it. A
- * clip's `clips.yaml` is text like any other.
- */
-async function filesIn(file: File): Promise<{ files: BundleFile[]; pictures: Map<string, Uint8Array>; recordings: Map<string, Uint8Array> }> {
-  const bytes = new Uint8Array(await file.arrayBuffer());
-  if (!/\.zip$/i.test(file.name)) {
-    return { files: [{ path: file.name, text: strFromU8(bytes) }], pictures: new Map(), recordings: new Map() };
-  }
-  const files: BundleFile[] = [];
-  const pictures = new Map<string, Uint8Array>();
-  const recordings = new Map<string, Uint8Array>();
-  Object.entries(unzipSync(bytes))
-    .filter(([path, content]) => !path.endsWith("/") && !NOISE.test(path) && content.length > 0)
-    .forEach(([path, content]) => {
-      if (path.startsWith(`${MEDIA_DIRECTORY}/`)) pictures.set(path, content);
-      else if (path.includes(`${AUDIO_DIRECTORY}/`) && !/\.ya?ml$/i.test(path)) recordings.set(path, content);
-      else files.push({ path, text: strFromU8(content) });
-    });
-  return { files, pictures, recordings };
+async function filesIn(file: File): Promise<BundleArchive> {
+  return bundleArchive(file.name, new Uint8Array(await file.arrayBuffer()));
 }
 
 /** ~110 KiB a picture, which is what makes the size worth warning about before it is asked for. */
 const PICTURE_BYTES = 110 * 1024;
-/** Pictures restored between pulls. Small enough that a long import fills in visibly, large enough
- *  that two thousand pictures do not cost two thousand extra round trips. */
-const RESTORED_PER_PULL = 20;
 
 export function ExportPanel({ snapshot }: { snapshot: ReplicaSnapshot }) {
   const [language, setLanguage] = useState<string>("all");
@@ -193,53 +169,17 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
     cancel.current = { cancelled: false };
     const chosen = stage;
     setStage({ at: "running", done: 0, total: 0 });
-    const deviceId = repository.state().deviceId;
-    let restored = 0;
-
-    const report = await importBundle(
-      repository, plan,
-      (done, total) => setStage({ at: "running", done, total }),
-      cancel.current,
-      pictures,
-      /* Putting a picture back is the same act, and the same route, as attaching one by hand —
-         naming the model that drew it is what makes it a restore rather than a file you chose. */
-      async (senseId, bytes, drawnBy) => {
-        const blob = new Blob([bytes as unknown as BlobPart], { type: "image/webp" });
-        await backendSession.attachImage(senseId, deviceId, blob, drawnBy);
-        restored += 1;
-        /* A word arrives in the replica by itself, because `saveArticle` merges what the server
-           answers. A *picture* does not: it is written by the image route, so the replica learns of
-           it only on a pull — which is why an imported article showed empty frames and a "waiting"
-           count until the next sync came round a minute later. Pulling in batches keeps a long
-           import filling in as it goes rather than all at the end. */
-        if (restored % RESTORED_PER_PULL === 0) await syncEngine.syncNow();
-      },
-      /* A clip is put back through its own route, naming who recorded it, and reaches the replica
-         on a pull exactly as a restored picture does. */
-      restoreClips && recordings.size ? {
-        files: recordings,
-        restore: async (target, id, bytes, entry) => {
-          const type = entry.file.endsWith(".wav") ? "audio/wav" : entry.file.endsWith(".ogg") ? "audio/ogg" : "audio/mpeg";
-          await backendSession.restorePronunciation(
-            COLLECTIONS[target], id, deviceId, new Blob([bytes as unknown as BlobPart], { type }), entry
-          );
-          restored += 1;
-          if (restored % RESTORED_PER_PULL === 0) await syncEngine.syncNow();
-        }
-      } : null,
-      (lexemeId) => backendSession.enqueueJob({
-        kind: "enrich", subject: { kind: "lexeme", id: lexemeId }, trigger: "import"
-      })
-    ).catch((error: unknown) => {
+    const report = await importThroughServer({
+      repository, pull: () => syncEngine.syncNow(), plan, pictures, recordings, restoreClips,
+      onProgress: (done, total) => setStage({ at: "running", done, total }),
+      signal: cancel.current
+    }).catch((error: unknown) => {
       // Refused because a run started earlier from this window is still going.
       setStage(chosen);
       setProblem(error instanceof Error ? error.message : String(error));
       return null;
     });
     if (!report) return;
-
-    // And once at the end, so "import finished" means every picture is here, not merely uploaded.
-    if (restored > 0) await syncEngine.syncNow();
     onChanged();
     setStage({ at: "done", report });
   }

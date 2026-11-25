@@ -102,24 +102,55 @@ function latinise(value: string): string {
  * there.
  *
  * A script with no Latin form falls back to the reading, which Chinese lexemes are already required
- * to carry and which is the pinyin — so the hardest case needs no dictionary and no guessing.
+ * to carry and which is the pinyin — so the hardest case needs no dictionary and no guessing. One
+ * with neither keeps the lemma in its own script (`약하다`, `正しい`, `سعيد`): a filename can hold
+ * any letter, and a directory of `word-1` … `word-516` is the directory of ids this naming exists
+ * to avoid.
  */
 export function slugFor(lexeme: Pick<Lexeme, "headword" | "lemma" | "reading">): string {
-  return latinise(lexeme.lemma) || latinise(lexeme.headword) || latinise(lexeme.reading ?? "") || "word";
+  return latinise(lexeme.lemma) || latinise(lexeme.headword) || latinise(lexeme.reading ?? "")
+    || ownScript(lexeme.lemma) || ownScript(lexeme.headword) || "word";
 }
 
-/** Two words that latinise the same still need two files. Deterministic, so re-exports are stable. */
-function uniqueNames(lexemes: Lexeme[]): Map<string, string> {
-  const taken = new Map<string, number>();
-  const names = new Map<string, string>();
-  lexemes.forEach((lexeme) => {
-    const base = slugFor(lexeme);
-    const seen = taken.get(base) ?? 0;
-    taken.set(base, seen + 1);
-    names.set(lexeme.id, seen === 0 ? base : `${base}-${seen + 1}`);
-  });
-  return names;
+/** Letters, marks and digits in whatever script, everything else a hyphen. Marks stay: in Devanagari
+ *  or Thai a vowel sign is part of the spelling, not an accent to strip. */
+function ownScript(value: string): string {
+  const kept = value
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{M}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "");
+  return Array.from(kept).slice(0, 60).join("").replace(/-+$/, "");
 }
+
+/** What naming a word's files needs to know about it. */
+export type NamedWord = Pick<Lexeme, "id" | "headword" | "lemma" | "reading">;
+
+/**
+ * One language's words in the order a bundle writes them, each with the base name of its files.
+ *
+ * Sorted before naming, so which of two colliding slugs gets the suffix never depends on the order
+ * the words were stored in; deterministic, so re-exports are stable. Every file a bundle names after
+ * its word — the word file, its pictures, its clips — takes the name from here.
+ */
+export function namedWords<T extends NamedWord>(lexemes: T[]): Array<{ lexeme: T; name: string }> {
+  const taken = new Map<string, number>();
+  return lexemes
+    .slice()
+    .sort((left, right) => left.lemma.localeCompare(right.lemma) || left.id.localeCompare(right.id))
+    .map((lexeme) => {
+      const base = slugFor(lexeme);
+      const seen = taken.get(base) ?? 0;
+      taken.set(base, seen + 1);
+      return { lexeme, name: seen === 0 ? base : `${base}-${seen + 1}` };
+    });
+}
+
+export const wordPath = (language: string, name: string) => `${language}/${name}.yaml`;
+
+/** `media/es/picar-2.webp`: the picture of the second sense of `es/picar.yaml`. */
+export const picturePath = (language: string, name: string, senseIndex: number) =>
+  `${MEDIA_DIRECTORY}/${language}/${name}-${senseIndex + 1}.webp`;
 
 /* ── writing ────────────────────────────────────────────────────────────*/
 
@@ -239,20 +270,13 @@ export function picturesIn(graph: VocabularyGraph, options: ExportOptions): Bund
 
   const pictures: BundlePicture[] = [];
   languages.forEach((language) => {
-    const words = lexemesIn(graph, language)
-      .slice()
-      .sort((left, right) => left.lemma.localeCompare(right.lemma) || left.id.localeCompare(right.id));
-    const names = uniqueNames(words);
-    words.forEach((lexeme) => {
+    namedWords(lexemesIn(graph, language)).forEach(({ lexeme, name }) => {
       const article = articleOf(lexeme.id);
       if (!article) return;
       article.senses.forEach((entry, index) => {
         entry.images.forEach((image) => {
           if (!image.imageRef) return;
-          pictures.push({
-            path: `${MEDIA_DIRECTORY}/${language}/${names.get(lexeme.id)}-${index + 1}.webp`,
-            reference: image.imageRef
-          });
+          pictures.push({ path: picturePath(language, name, index), reference: image.imageRef });
         });
       });
     });
@@ -300,14 +324,10 @@ export function pronunciationsIn(graph: VocabularyGraph, options: ExportOptions)
   const live = graph.pronunciations.filter((clip) => !clip.deleted);
 
   languages.forEach((language) => {
-    const words = lexemesIn(graph, language)
-      .slice()
-      .sort((left, right) => left.lemma.localeCompare(right.lemma) || left.id.localeCompare(right.id));
-    const names = uniqueNames(words);
-    words.forEach((lexeme) => {
+    namedWords(lexemesIn(graph, language)).forEach(({ lexeme, name }) => {
       const article = articleOf(lexeme.id);
       if (!article) return;
-      const directory = `${AUDIO_DIRECTORY}/${language}/${names.get(lexeme.id)}`;
+      const directory = `${AUDIO_DIRECTORY}/${language}/${name}`;
       const entries: ClipEntry[] = [];
       const carry = (target: PronunciationTarget, id: string, text: string, name: string) => {
         const clip = live.find((one) => one.targetKind === target && one.targetId === id && one.text === text);
@@ -332,44 +352,24 @@ export function pronunciationsIn(graph: VocabularyGraph, options: ExportOptions)
   return { files, clips };
 }
 
-export function exportBundle(graph: VocabularyGraph, options: ExportOptions, exportedAt: string): BundleFile[] {
-  const present = languageOptions(graph).map((option) => option.code);
-  const articleOf = articleReader(graph);
-  const languages = options.language === "all"
-    ? present
-    : present.filter((code) => code === options.language);
+/**
+ * What a bundle says, before it is files: the languages, their vocabulary and topic records, and
+ * each word's document under the name its files take (`namedWords`).
+ *
+ * Export fills it from the replica. The starter vocabularies fill it from the drafts their builder
+ * composed (`web/scripts/starter-bundle.ts`), so a starter is byte for byte the bundle an export of
+ * the same words would be, with no second writer of the layout.
+ */
+export interface BundleContent {
+  exportedAt: string;
+  languages: string[];
+  vocabularies: VocabularyInput[];
+  topics: TopicInput[];
+  words: Array<{ language: string; name: string; draft: ArticleDraft }>;
+}
 
-  const files: BundleFile[] = [];
-  let lexemes = 0;
-
-  languages.forEach((language) => {
-    // Sorted before naming, so which of two colliding slugs gets the suffix never depends on the
-    // order the replica happened to store them in.
-    const words = lexemesIn(graph, language)
-      .slice()
-      .sort((left, right) => left.lemma.localeCompare(right.lemma) || left.id.localeCompare(right.id));
-    const names = uniqueNames(words);
-    words.forEach((lexeme) => {
-      const article = articleOf(lexeme.id);
-      if (!article) return;
-      lexemes += 1;
-      files.push({
-        path: `${language}/${names.get(lexeme.id)}.yaml`,
-        // No study state: review history is irreplaceable but it is not vocabulary, and it is
-        // backed up with the Anki collection it belongs to (`docs/plans/backups.md`).
-        text: yamlForDraft(stripIds(draftFor(article)))
-      });
-    });
-    if (options.markdown) {
-      markdownFor(graph, language, exportedAt).forEach((file) => {
-        files.push({ path: `${MARKDOWN_DIRECTORY}/${file.path}`, text: file.text });
-      });
-    }
-  });
-
-  const vocabularyRecords = vocabularyContent(graph, languages);
-  const topicRecords = topicContent(graph);
-
+/** The manifest, the vocabulary and topic records, and one file per word. */
+export function bundleFiles(content: BundleContent): BundleFile[] {
   return [
     {
       path: MANIFEST_FILE,
@@ -378,14 +378,52 @@ export function exportBundle(graph: VocabularyGraph, options: ExportOptions, exp
       text: document({
         format: BUNDLE_FORMAT,
         schemaVersion: SCHEMA_VERSION,
-        exportedAt: quoted(exportedAt),
-        languages,
-        counts: { vocabularies: vocabularyRecords.length, topics: topicRecords.length, lexemes }
+        exportedAt: quoted(content.exportedAt),
+        languages: content.languages,
+        counts: {
+          vocabularies: content.vocabularies.length,
+          topics: content.topics.length,
+          lexemes: content.words.length
+        }
       })
     },
-    { path: VOCABULARIES_FILE, text: document(vocabularyRecords) },
-    { path: TOPICS_FILE, text: document(topicRecords) },
-    ...files,
+    { path: VOCABULARIES_FILE, text: document(content.vocabularies) },
+    { path: TOPICS_FILE, text: document(content.topics) },
+    ...content.words.map(({ language, name, draft }) => ({
+      path: wordPath(language, name),
+      text: yamlForDraft(stripIds(draft))
+    }))
+  ];
+}
+
+export function exportBundle(graph: VocabularyGraph, options: ExportOptions, exportedAt: string): BundleFile[] {
+  const present = languageOptions(graph).map((option) => option.code);
+  const articleOf = articleReader(graph);
+  const languages = options.language === "all"
+    ? present
+    : present.filter((code) => code === options.language);
+
+  // No study state: review history is irreplaceable but it is not vocabulary, and it is backed up
+  // with the Anki collection it belongs to (`docs/plans/backups.md`).
+  const words = languages.flatMap((language) =>
+    namedWords(lexemesIn(graph, language)).flatMap(({ lexeme, name }) => {
+      const article = articleOf(lexeme.id);
+      return article ? [{ language, name, draft: draftFor(article) }] : [];
+    }));
+  const markdown = options.markdown
+    ? languages.flatMap((language) => markdownFor(graph, language, exportedAt)
+      .map((file) => ({ path: `${MARKDOWN_DIRECTORY}/${file.path}`, text: file.text })))
+    : [];
+
+  return [
+    ...bundleFiles({
+      exportedAt,
+      languages,
+      vocabularies: vocabularyContent(graph, languages),
+      topics: topicContent(graph),
+      words
+    }),
+    ...markdown,
     ...(options.pronunciations ? pronunciationsIn(graph, options).files : [])
   ];
 }

@@ -449,6 +449,23 @@ from the terminal and never placed on a command line:
 ./deploy.sh --create-account
 ```
 
+Without a terminal it reads the two lines, address then password, from stdin, which is how scripts
+call it.
+
+**Testing accounts with every starter vocabulary**, run on the laptop once the zips are built
+(`vocabularies/README.md`):
+
+```bash
+scripts/starter/test_accounts.sh [--fresh] [--enrich] [--server URL]
+```
+
+It makes `starters@account.example.com` and `starters-es@account.example.com` if they are missing (password
+`starters1`) and installs the starters into them with the app's own import. Before the first word, each
+account is set to run nothing by itself: no pictures drawn on their own, no Anki, no nightly steps, and
+no per-word `enrich` unless `--enrich` (which opens about 500 jobs a vocabulary, and a deploy refuses
+while jobs are open). `--fresh` deletes the accounts' words first, so rebuilt starters replace the old
+ones. The address is the one a deploy prints, unless `--server` names it.
+
 ## Companion services
 
 - **The spoken-usage corpus** runs one pinned version (`deploy/acervo/speech/pin.json`).

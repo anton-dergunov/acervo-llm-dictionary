@@ -56,6 +56,10 @@ The interface is one web app: open it in a browser, install it on Android and iO
 
 ![The whole vocabulary on every device, readable with no connection. The word "sonar" on a phone and on a tablet, as cards to swipe, and in a desktop window as a page. It opens in a browser or installs as a web app on Android and iOS, and on macOS it is a native window that also lives in the menu bar.](assets/pictures/devices.png)
 
+## Starting with words already there
+
+Twenty starter vocabularies let you try Acervo the day you install it: about 500 everyday words each, at level A2, in Spanish (Mexico and Spain), English, French, German, Italian, Portuguese, Russian, Mandarin, Japanese, Korean, Arabic, Hindi, Turkish, Vietnamese, Indonesian, Polish, Dutch, Greek and Thai, with almost every word pictured. Download one and import it in Settings ▸ Data. See [`vocabularies/`](vocabularies/README.md).
+
 ## Models you choose
 
 Acervo calls models from the accounts you give it, or from models running on your own computer. Each one is added in Settings ▸ Providers with its key, checked on the spot, and asked in an order you set, falling through to the next when one is busy or out of its free allowance. One Google Cloud account does everything for a small bill. Four free accounts together (the Gemini API, Cloudflare, Google Cloud's free allowances and ElevenLabs) cost nothing. Ollama, Kokoro and Draw Things run on your own machines. See [the providers guide](docs/providers.md).
@@ -162,6 +166,7 @@ generated examples, prompts, study statistics, and a Chinese reading.
   on `src/acervo/models/`, so a route and a batch sweep share it.
 - `src/acervo/jobs/images/` — the unattended half: the run directory, the sweep, the import.
 - `src/acervo/consumers/anki/` — headless Anki consumer infrastructure.
+- `vocabularies/` — the starter vocabularies: their shared pictures and each one's word files; the zips are release assets.
 - `experiments/` — experiments, spikes and benchmark tooling, outside the distribution and never imported by the service.
 - `macos/` — native host for the shared web interface.
 

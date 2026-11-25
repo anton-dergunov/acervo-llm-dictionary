@@ -17,7 +17,7 @@
  */
 
 import { useSyncExternalStore } from "react";
-import { AcervoApiError, backendSession } from "./api";
+import { AcervoApiError, backendSession, COLLECTIONS } from "./api";
 import type { Pronunciation, PronunciationTarget, VocabularyGraph } from "./domain";
 import { pronunciationCacheEnabled } from "./editorPreferences";
 import { pronunciationId } from "./ids";
@@ -46,10 +46,6 @@ export interface Played {
   /** True when a stored clip played, which is what can be recorded again. */
   stored: boolean;
 }
-
-export const COLLECTIONS: Record<PronunciationTarget, string> = {
-  lexeme: "lexemes", sense: "senses", example: "examples", attestation: "attestations"
-};
 
 let store: MediaStore = createMediaStore("pronunciations");
 /** Clips heard this session while keeping is off, so a second press does not fetch again. Bounded. */

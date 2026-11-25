@@ -101,7 +101,7 @@ Files:
 - `results/`, tracked: the briefs, `draws.jsonl` (one line per take: brief, style, prompt version,
   model, tokens, cost, or the error) and `labels.json`.
 - `out/`, ignored: the masters, `out/pictures/<concept>/<take>.webp`, until the chosen ones move
-  into the starter package; the batch state, which names the project's number; and the logs.
+  into `vocabularies/pictures/`; the batch state, which names the project's number; and the logs.
 
 ## Results
 

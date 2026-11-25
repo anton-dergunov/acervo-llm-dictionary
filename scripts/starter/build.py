@@ -794,8 +794,41 @@ def read_matches(parsed: Any, candidates: list[Concept], senses: list[dict[str, 
     return matches
 
 
+SENSES_HEADER = "Senses (sense id"
+
+
+def asked_senses(matched: dict[str, Any]) -> set[str]:
+    """The sense ids some match call was sent: the first request's and every follow-up's. A sense
+    added after the topic was matched (the judge's corrections add some) is in neither."""
+    requests = [matched["request"], *(f["request"] for f in matched.get("followUps", []))]
+    return {sense for request in requests
+            for sense in re.findall(r"^([a-z0-9]{15}) \|", request.partition(SENSES_HEADER)[2], re.M)}
+
+
+def unasked_senses(folder: Path, topic: str, senses: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    asked = asked_senses(read_json(folder / "match" / f"{topic}.json"))
+    return [sense for sense in senses if sense["id"] not in asked]
+
+
+def record_follow_up(path: Path, senses: list[dict[str, Any]], matches: dict[str, str | None],
+                     asked: dict[str, Any]) -> None:
+    """A follow-up's matches land on the topic's entries (added where missing), and its request and
+    reply are kept beside the first, so every match still has the call that made it."""
+    with WRITING:
+        matched = read_json(path)
+        entries = {entry["id"]: entry for entry in matched["matches"]}
+        for sense in senses:
+            if sense["id"] in entries:
+                entries[sense["id"]]["concept"] = matches[sense["id"]]
+            else:
+                matched["matches"].append({**sense, "concept": matches[sense["id"]]})
+        matched.setdefault("followUps", []).append(asked)
+        write_json(path, matched)
+
+
 def match_job(caller: Caller, vocabulary: dict[str, Any], topic: str, candidates: list[Concept],
-              senses: list[dict[str, Any]], system: str, folder: Path) -> None:
+              senses: list[dict[str, Any]], system: str, folder: Path, *, follow_up: bool = False) -> None:
+    """Match a topic's senses to concepts. A follow-up sends only the senses no call was sent yet."""
     path = folder / "match" / f"{topic}.json"
     user = match_message(vocabulary, candidates, senses)
     tried: list[str] = []
@@ -815,12 +848,16 @@ def match_job(caller: Caller, vocabulary: dict[str, Any], topic: str, candidates
                          "model": asked.model, "unusable": str(why)})
             continue
         caller.succeeded()
-        # Import re-mints every id, so each match also says which sense it is in words.
-        write_json(path, {"vocabulary": vocabulary["id"], "topic": topic, "model": f"{PROVIDER}:{asked.model}",
-                          "at": now(), "prompt": digest(system), "request": user, "reply": asked.text,
-                          "matches": [{**sense, "concept": matches[sense["id"]]} for sense in senses]})
-        print(f"[{vocabulary['id']}] match {topic}: {sum(1 for v in matches.values() if v)} of "
-              f"{len(matches)} senses matched", flush=True)
+        call = {"model": f"{PROVIDER}:{asked.model}", "at": now(), "prompt": digest(system), "request": user,
+                "reply": asked.text}
+        if follow_up:
+            record_follow_up(path, senses, matches, call)
+        else:
+            # Each match also says which sense it is in words, so it reads without the draft.
+            write_json(path, {"vocabulary": vocabulary["id"], "topic": topic, **call,
+                              "matches": [{**sense, "concept": matches[sense["id"]]} for sense in senses]})
+        print(f"[{vocabulary['id']}] match {topic}{' (follow-up)' if follow_up else ''}: "
+              f"{sum(1 for v in matches.values() if v)} of {len(matches)} senses matched", flush=True)
         return
 
 
@@ -1218,9 +1255,15 @@ def one_pass(caller: Caller, workers: int, args: argparse.Namespace, out: Path, 
             if translate_batches(state.folder, vocabulary, concepts):
                 continue
             batches = match_batches(state.folder, concepts, topic_names)
-            each([lambda v=vocabulary, t=topic, c=cands, s=senses, f=state.folder:
-                  match_job(caller, v, t, c, s, match_system, f)
-                  for topic, (cands, senses) in batches.items() if topic not in state.matched])
+            jobs = []
+            for topic, (cands, senses) in batches.items():
+                if topic not in state.matched:
+                    jobs.append(lambda v=vocabulary, t=topic, c=cands, s=senses, f=state.folder:
+                                match_job(caller, v, t, c, s, match_system, f))
+                elif unasked := unasked_senses(state.folder, topic, senses):
+                    jobs.append(lambda v=vocabulary, t=topic, c=cands, s=unasked, f=state.folder:
+                                match_job(caller, v, t, c, s, match_system, f, follow_up=True))
+            each(jobs)
     except DayOver:
         return "limit" if caller.max_calls is not None and caller.calls >= caller.max_calls else "spent"
     except Broken as broken:

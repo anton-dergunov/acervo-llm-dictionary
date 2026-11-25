@@ -4,8 +4,16 @@ Settings ▸ Data writes the whole vocabulary — or one language of it — as a
 a zip back. Three needs, one mechanism: surviving a schema change without losing curation, mirroring
 the vocabulary into Obsidian, and handing a vocabulary to someone else. All three want the words as
 files, in a representation that outlives the database that produced them. The code is
-`web/src/transfer.ts` (what a bundle is) and `markdown.ts` (the Obsidian mirror); `TransferPanel.tsx`
-owns only the zip and the browser's file handling.
+`web/src/transfer.ts` (what a bundle is), `markdown.ts` (the Obsidian mirror), `bundleZip.ts` (the
+archive's bytes into text files, pictures and clips) and `importRun.ts` (an import against the
+server: the words, then each picture and clip through its route, then `enrich`). `TransferPanel.tsx`
+owns only the browser's file handling.
+
+**The starter vocabularies are bundles too** ([`../../vocabularies/README.md`](../../vocabularies/README.md)).
+Their writer (`web/scripts/starter-bundle.ts`) fills the same `bundleFiles` that export fills from the
+replica, so a starter is byte for byte what exporting the same words would write; and the laptop's
+installer for testing accounts (`web/scripts/install-bundle.ts`) reads it with `bundleZip.ts` and runs
+`importRun.ts`, so there is one writer of the layout and one import.
 
 > **DECISION: the database is the source of truth. Obsidian receives a generated, read-only mirror,
 > and nothing reads Markdown back.** Reconciling free-form Markdown against a structured store is the
@@ -27,10 +35,11 @@ owns only the zip and the browser's file handling.
 - **One word file is the article document** that `yaml.ts` writes, so there is no second format and no
   second parser. Attestation ids stay, because `sourceAttestationId` is a real reference between two
   records in the same file; import re-mints them.
-- **A word file is named after its latinised lemma** — accents stripped, Cyrillic transliterated, and a
-  script with no Latin form falling back to the reading — because a directory of ids is a directory
-  nobody can read, and the lemma rather than the headword, or half a Spanish vocabulary files under
-  `el-` and `la-`. One file per word also means that, kept in git, `git log` of one file is the whole
+- **A word file is named after its latinised lemma** — accents stripped, Cyrillic transliterated, a
+  script with no Latin form falling back to the reading (pinyin), and one with neither keeping the
+  lemma in its own script (`ko/약하다.yaml`, `ar/سعيد.yaml`) — because a directory of ids, or of
+  `word-1` … `word-516`, is a directory nobody can read, and the lemma rather than the headword, or
+  half a Spanish vocabulary files under `el-` and `la-`. One file per word also means that, kept in git, `git log` of one file is the whole
   edit history of that word.
 - **Pictures are off by default.** A bundle is a text archive you can read, and pictures are
   regenerable; what must not be lost is the brief that produced one, and that is in the word file

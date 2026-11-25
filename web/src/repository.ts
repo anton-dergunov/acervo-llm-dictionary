@@ -130,8 +130,10 @@ function refusalOf(graph: VocabularyGraph, ownerId: string): string | null {
   return foreign ? "Replica records do not belong to the authenticated owner." : null;
 }
 
-/** Frozen where a mutation can be caught by a test; production skips the walk. */
-const FREEZE = import.meta.env.DEV || import.meta.env.MODE === "test";
+/** Frozen where a mutation can be caught by a test; production skips the walk. Outside Vite (the
+ *  laptop's starter installer runs this module under plain Node) there is no `import.meta.env`, and
+ *  no test to catch anything, so it is skipped there too. */
+const FREEZE = import.meta.env?.DEV || import.meta.env?.MODE === "test";
 
 function frozen<T>(value: T): T {
   if (!FREEZE || value === null || typeof value !== "object" || Object.isFrozen(value)) return value;

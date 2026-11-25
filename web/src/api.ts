@@ -1,4 +1,4 @@
-import type { Bed, Loop, PartOfSpeech, PhotoRegion, Pronunciation, SourceKind, Story, StoryPart, VocabularyGraph } from "./domain";
+import type { Bed, Loop, PartOfSpeech, PhotoRegion, Pronunciation, PronunciationTarget, SourceKind, Story, StoryPart, VocabularyGraph } from "./domain";
 import { normalizeServerURL, sessionStore, type StoredSession } from "./session";
 import type { ArticleDraft } from "./yaml";
 import type { CharacterStrokes } from "./writing/strokeData";
@@ -1129,6 +1129,11 @@ class ApiClient {
 }
 
 const client = new ApiClient();
+
+/** The route segment a recording of each kind of record is stored under: `/pronunciations/{collection}/{id}`. */
+export const COLLECTIONS: Record<PronunciationTarget, string> = {
+  lexeme: "lexemes", sense: "senses", example: "examples", attestation: "attestations"
+};
 
 export const backendSession = {
   current: () => client.current(),

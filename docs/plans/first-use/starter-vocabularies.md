@@ -1,12 +1,9 @@
 # Starter vocabularies
 
-**Status:** the concept list ([`starter-concepts.yaml`](starter-concepts.yaml), 521 concepts in 16
-topics) was accepted unchanged on 20 Nov 2026. All twenty word lists are reviewed, and twelve
-vocabularies are composed. Composing them found compose writing definitions in the word's own
-language instead of English (Flash Lite 3.5, 30–50% of its senses), now caught by compose's check
-([`../../features/capture.md`](../../features/capture.md), "Compose's checks"). The words already
-composed are repaired by the builder's translate step. Next: the daily runs compose the other eight,
-translate, and match.
+**Status:** all twenty vocabularies are composed, judged and corrected (steps 1–5, all but 5a and 5b), their 497 shared
+pictures are chosen (step 6), and each is written as a bundle (step 7, [`vocabularies/`](../../../vocabularies/README.md)).
+Next: a preview pre-release and the owner's testing accounts; then 5a and 5b before the final
+release; then the in-app install ("What the app needs").
 
 A new user opens an empty Acervo, and every word costs model calls, pictures and recordings before it
 is pleasant to study ([`other-users.md`](other-users.md), "Starting with words already there"). A few
@@ -201,24 +198,45 @@ whatever the default quota gives: about one picture a minute.
    `experiments/starter-pictures/` builds the concept cards: a one-sense English article for the
    app's own brief writer, briefs by Flash-Lite. It draws them with Nano Banana 2.1 in Vertex batch
    jobs on one pinned account, and holds the review page.
-7. **The package, then bundles and import.** The **starter package** (`data/starter-package/`,
-   tracked) is what ships, kept apart from the builder's record in `data/starter/` (requests,
-   replies, the drafts each correction replaced). It holds the shared pictures
-   (`pictures/<concept>.webp`, with a record per picture of its brief, style, seed and model) and,
-   per vocabulary, each word's final article with the concept each sense takes its picture from.
-   `build.py package` writes it from the builder's files. The pictures are its only original
-   content: they cost money and a seed to redraw, so they are never treated as a cache. Hand fixes
-   still go into the builder's files, so the three layers stay separate.
-   A bundle writer turns the package into `acervo-export/1` bundles
-   ([`../../features/export.md`](../../features/export.md)). Each is imported into a starter
-   account per support language (picture drawing off, no standing rules, no "About you"), where
-   enrich makes the recordings. The shared pictures are then placed on the matched senses. Import
-   re-mints ids, so a match is found again by headword and definition. Importing into a fresh
-   account is the end-to-end test.
+7. **The package, bundles and release.** The package is the top-level
+   [`vocabularies/`](../../../vocabularies/README.md), tracked, kept apart from the builder's record in
+   `data/starter/` (requests, replies, the drafts each correction replaced). Hand fixes still go into
+   the builder's files, so the three layers stay separate.
+   - **A starter is an `acervo-export/1` bundle**, one per vocabulary
+     ([`../../features/export.md`](../../features/export.md)), with no format of its own.
+     `web/scripts/starter-bundle.ts` reads each word's final draft and its senses' concepts from
+     `data/starter/`, puts the concept's picture on the first sense matched to it (one picture of a
+     meaning per word), and writes the bundle with `bundleFiles`, the function export uses. It reads
+     every bundle back through `readBundle` and refuses one that does not parse.
+   - **What is tracked:** the shared pictures (`vocabularies/pictures/`, with `pictures.json`: brief,
+     style, template checksum, the models that wrote the brief and drew it) and each vocabulary's
+     bundle text, unzipped (`vocabularies/<id>/`, one file per word, readable on GitHub), with
+     `placement.json` saying which picture each bundle picture path takes. The pictures are the only
+     original content: chosen by hand and drawn without a seed, so they are never treated as a cache.
+   - **What is not:** the zips (`vocabularies/out/`, ignored), rebuilt byte for byte from the tracked
+     files and attached to a GitHub release (`vocabularies-YYYY.MM.N`, a series apart from the app's).
+     Each is ~125 MB, nearly all pictures; `vocabularies/catalogue.json` names the release, each zip's
+     size and SHA-256. A pre-release comes first; the final release follows steps 5a and 5b.
+   - **Placement is by bundle path**: `media/<lang>/<slug>-<n>.webp` is the nth sense of
+     `<lang>/<slug>.yaml`, as for any exported picture, so nothing is matched again after import.
+   - **Testing accounts.** `scripts/starter/test_accounts.sh [--fresh]` creates
+     `starters@account.example.com` (every starter but es-ES) and `starters-es@account.example.com` (es-ES: an
+     account holds one vocabulary per language) on the deployed server, and installs the zips with
+     the app's own import, run headless (`web/scripts/install-bundle.ts`). Each account is set first to
+     run nothing by itself: picture drawing, Anki and the nightly steps off, and no per-word `enrich`
+     unless `--enrich`, because twenty starters would open ten thousand jobs and a deploy refuses while
+     jobs are open. Importing into these accounts is the end-to-end test, and the first of them is
+     where the recordings, stories and loops are made later (step 9).
 8. **Support-language variants:** translate definitions, glosses and notes. The translation sees the
    target word and its sense, never the English alone: *conocer* glossed *know* would become
    Russian знать, which is wrong.
-9. **Later:** stories and loops, once bundles carry them; B1 sets per language.
+9. **Later:** recordings, three stories and three loops per vocabulary, once bundles carry stories and
+   loops. The release zip then becomes an export of the starter account, with recordings of the
+   target language only (headwords and examples). Audio lives in the release, never in Git: it is per
+   language (twenty copies, where a picture is one), regenerable, and ~20–50 MB a vocabulary, so
+   ~0.4–1 GB for twenty. Measured rates give per vocabulary: headwords ~3 MB (5.7 KB each), examples
+   +17–34 MB (34 KB each), three stories ~7 MB, three loops ~13 MB (4½ min of MP3 at 128 kbps each),
+   so ~150–180 MB in all. B1 sets per language follow.
 
 ## What the app needs
 
@@ -226,9 +244,24 @@ whatever the default quota gives: about one picture a minute.
   ([`../../features/export.md`](../../features/export.md) lists what a bundle holds; today it holds
   neither). This is product work, not a converter, and is useful beyond starters: it is how a story
   or loop moves between servers.
-- **The laptop builder**, `scripts/starter/`: word lists, compose and matching today; drawing concept
-  pictures, writing the package and bundles, and placing pictures to come. It is a tool, not part of the shipped app.
+- **The laptop tools**, not part of the shipped app: the builder `scripts/starter/` (word lists,
+  compose, translation, matching, and a follow-up match for senses added after a topic was matched),
+  the bundle writer and the headless installer in `web/scripts/`.
 - **A part of speech for conjunctions and prepositions.** The app's list has none, so *but* and
   *with* are filed as `expression`.
-- **A way to install a starter** from the first-run guide
-  ([`first-run-guide.md`](first-run-guide.md)). Until then, Settings ▸ Data ▸ Import is enough.
+- **A way to install a starter from inside the app**, built with the first-run guide
+  ([`first-run-guide.md`](first-run-guide.md), step 2) and the standalone app. Until then a person
+  downloads a zip from the release and uses Settings ▸ Data ▸ Import. The design, so it adds a source
+  and not a second import:
+  - The browser cannot fetch a release asset (github.com's redirect carries no CORS header), so the
+    server does. `GET /starters` answers the shipped `vocabularies/catalogue.json` and which zips it
+    holds; a `fetch-starter` job downloads the zip the catalogue names (the catalogue is the
+    allow-list), checks its SHA-256 and keeps it under `<data>/starters/` as a cache, with its failure
+    sentence in `admin log`; `GET /api/acervo/starters/{file}` serves it (bearer, `FileResponse`).
+  - The import panel lists the catalogue as a second source, "Start from a ready vocabulary". Choosing
+    one fetches through the server, then shows the same confirmation and runs the same
+    `importThroughServer`. The confirmation says when the account already has the language ("adds 487
+    words to your Spanish; 25 you have are skipped"), and that with **Draw pictures** on, the senses
+    without a picture are drawn (~280 a vocabulary, ~$10 on Google Cloud).
+  - Pictures then travel server → device → server (~125 MB each way). If that is slow on a tablet,
+    the picture route can take "from starter X, path P" instead of the bytes: the same route.

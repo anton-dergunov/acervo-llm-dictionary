@@ -121,6 +121,36 @@ def test_a_word_list_waits_for_review_then_composes_and_matches(setup: tuple[Pat
     assert len(model.calls) == asked, "a finished vocabulary is never asked again"
 
 
+def test_a_sense_added_after_its_topic_was_matched_is_matched_alone(setup: tuple[Path, Model]) -> None:
+    """The judge's corrections add senses to matched topics, filed with no concept and never asked."""
+    out, model = setup
+    assert run(out, model) == 0
+    build.review(argparse.Namespace(vocabulary="ru"), out=out)
+    assert run(out, model) == 0
+    path = next(p for p in (out / "ru" / "compose").glob("*.json") if "мать" in p.read_text())
+    composed = json.loads(path.read_text())
+    added = {**composed["draft"]["senses"][0], "id": "addedsense00001", "definition": "мать as a title"}
+    composed["draft"]["senses"].append(added)
+    path.write_text(json.dumps(composed, ensure_ascii=False))
+    (match_path,) = [p for p in (out / "ru" / "match").glob("*.json") if "мать" in p.read_text()]
+    matched = json.loads(match_path.read_text())
+    matched["matches"].append({"id": added["id"], "headword": "мать", "pos": "noun",
+                               "definition": added["definition"], "glosses": "word", "concept": None})
+    match_path.write_text(json.dumps(matched, ensure_ascii=False))
+
+    asked = len(model.calls)
+    assert run(out, model) == 0
+    (call,) = model.calls[asked:]
+    assert "addedsense00001" in call[1] and call[1].count(" | мать | ") == 1, "only the new sense is sent"
+    matched = json.loads(match_path.read_text())
+    assert next(m for m in matched["matches"] if m["id"] == added["id"])["concept"] == "mother"
+    assert len(matched["followUps"]) == 1 and matched["followUps"][0]["reply"]
+
+    asked = len(model.calls)
+    assert run(out, model) == 0
+    assert len(model.calls) == asked, "a sense a follow-up was sent is not sent again"
+
+
 def _composed_before_the_check(out: Path, model: Model, definition: str) -> None:
     """A composed, unmatched vocabulary whose drafts define in the wrong language, as the words
     composed before compose checked a definition's language do."""
