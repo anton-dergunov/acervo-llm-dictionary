@@ -112,8 +112,9 @@ come later, as translations (step 8).
   *wear*) and one word may serve two concepts (Russian рука, *arm* and *hand*). Each word is filed
   under its concepts' topics.
 - **Senses matched to concepts**, so a matched sense takes the concept's shared picture.
-- **Recordings**, made by the server's enrich after import, with clear voices for every headword,
-  definition and example in the target language. They come free under WaveNet's 4M characters a month.
+- **Recordings**, made once in the starter account with clear voices for every headword and example in
+  the target language, and carried in the bundle (step 9); an import never records anything. They come
+  free under WaveNet's 4M characters a month.
 - **Pictures**, as separate steps: shared ones first, then possibly a language's own senses.
 - **Not carried:** spoken clips from the corpus (other people's audio), and anything from the owner's
   own vocabulary or standing rules. Stories and loops come later (step 9).
@@ -216,17 +217,22 @@ whatever the default quota gives: about one picture a minute.
    - **What is not:** the zips (`vocabularies/out/`, ignored), rebuilt byte for byte from the tracked
      files and attached to a GitHub release (`vocabularies-YYYY.MM.N`, a series apart from the app's).
      Each is ~125 MB, nearly all pictures; `vocabularies/catalogue.json` names the release, each zip's
-     size and SHA-256. A pre-release comes first; the final release follows steps 5a and 5b.
+     size and SHA-256. A pre-release comes first; the final release follows steps 5a and 5b and a
+     chosen licence for the text and pictures, stated in `vocabularies/README.md`. Google does not claim
+     what Gemini generates, and machine-made content may carry no copyright at all, so the licence
+     mostly says what is allowed: CC BY 4.0 is the likely choice, or CC BY-SA if Wiktionary
+     transcriptions are folded in (5a).
    - **Placement is by bundle path**: `media/<lang>/<slug>-<n>.webp` is the nth sense of
      `<lang>/<slug>.yaml`, as for any exported picture, so nothing is matched again after import.
    - **Testing accounts.** `scripts/starter/test_accounts.sh [--fresh]` creates
      `starters@account.example.com` (every starter but es-ES) and `starters-es@account.example.com` (es-ES: an
      account holds one vocabulary per language) on the deployed server, and installs the zips with
      the app's own import, run headless (`web/scripts/install-bundle.ts`). Each account is set first to
-     run nothing by itself: picture drawing, Anki and the nightly steps off, and no per-word `enrich`
-     unless `--enrich`, because twenty starters would open ten thousand jobs and a deploy refuses while
-     jobs are open. Importing into these accounts is the end-to-end test, and the first of them is
-     where the recordings, stories and loops are made later (step 9).
+     run nothing else by itself (picture drawing, Anki and the nightly steps off); the import itself
+     queues nothing in any account. Importing into these accounts is the end-to-end test, and the first
+     of them is where the recordings, stories and loops are made later (step 9). They are an interim:
+     [`../several-vocabularies.md`](../several-vocabularies.md) puts testing vocabularies in the
+     owner's own account.
 8. **Support-language variants:** translate definitions, glosses and notes. The translation sees the
    target word and its sense, never the English alone: *conocer* glossed *know* would become
    Russian знать, which is wrong.
@@ -249,6 +255,8 @@ whatever the default quota gives: about one picture a minute.
   the bundle writer and the headless installer in `web/scripts/`.
 - **A part of speech for conjunctions and prepositions.** The app's list has none, so *but* and
   *with* are filed as `expression`.
+- **Several vocabularies per language**, so a starter can be tried beside the owner's own words
+  without the testing accounts ([`../several-vocabularies.md`](../several-vocabularies.md)).
 - **A way to install a starter from inside the app**, built with the first-run guide
   ([`first-run-guide.md`](first-run-guide.md), step 2) and the standalone app. Until then a person
   downloads a zip from the release and uses Settings ▸ Data ▸ Import. The design, so it adds a source
@@ -261,7 +269,7 @@ whatever the default quota gives: about one picture a minute.
   - The import panel lists the catalogue as a second source, "Start from a ready vocabulary". Choosing
     one fetches through the server, then shows the same confirmation and runs the same
     `importThroughServer`. The confirmation says when the account already has the language ("adds 487
-    words to your Spanish; 25 you have are skipped"), and that with **Draw pictures** on, the senses
-    without a picture are drawn (~280 a vocabulary, ~$10 on Google Cloud).
+    words to your Spanish; 25 you have are skipped"). An import spends nothing: no job, no model call,
+    and its senses without a picture stay without one ([`../../features/export.md`](../../features/export.md), "Import").
   - Pictures then travel server → device → server (~125 MB each way). If that is slow on a tablet,
     the picture route can take "from starter X, path P" instead of the bytes: the same route.

@@ -1,6 +1,7 @@
 /**
  * An import against the server: the words through the repository, then each picture and clip
- * through the route that stores it, then the word's `enrich`.
+ * through the route that stores it. Nothing else: an import asks for no enrichment and no model
+ * call, now or later (`docs/features/export.md`, "Import").
  *
  * `transfer.ts` decides what an import does and holds no transport; this module supplies the
  * transport, so Settings ▸ Data ▸ Import and the laptop's installer for the starter vocabularies
@@ -26,9 +27,6 @@ export interface ImportRun {
   recordings: Map<string, Uint8Array>;
   /** Whether the bundle's recordings are put back, or left for the server to record again. */
   restoreClips: boolean;
-  /** Whether each new word's `enrich` is queued, as every save queues it. Only the laptop's
-   *  installer for testing accounts turns it off, so twenty starters do not open ten thousand jobs. */
-  enrich?: boolean;
   onProgress?(done: number, total: number): void;
   signal?: ImportSignal;
 }
@@ -68,10 +66,7 @@ export async function importThroughServer(run: ImportRun): Promise<ImportReport>
         await backendSession.restorePronunciation(COLLECTIONS[target], id, deviceId, blob, entry);
         await counted();
       }
-    } : null,
-    run.enrich === false ? null : (lexemeId) => backendSession.enqueueJob({
-      kind: "enrich", subject: { kind: "lexeme", id: lexemeId }, trigger: "import"
-    })
+    } : null
   );
   // And once at the end, so "import finished" means every picture is here, not merely uploaded.
   if (restored > 0) await pull();

@@ -44,10 +44,14 @@ Wiktionary, and a model from a second family reviews the serious corrections
 The words, their topics and their pictures arrive in a few minutes. If you already study that
 language, the new words join your vocabulary, and any word you already have is left as it is.
 
-After the import, Acervo fills in what each word is missing, using the providers you have added:
-pronunciation recordings, and pictures for the senses that have none (about half of them). If you
-would rather not pay for those pictures, switch off **Settings ▸ Pictures ▸ Draw pictures** before
-you import. On Google Cloud, drawing them costs about $10 a vocabulary.
+Importing costs nothing. Acervo makes no model calls for imported words, and doesn't fill in what
+they lack. About half the senses have no picture, and they stay that way unless you draw one
+yourself from the sense's picture. Recordings are made only when you play a word.
+
+## Licence
+
+Not chosen yet. A licence for the text and the pictures will be stated here before the final
+release.
 
 ## What is in this folder
 

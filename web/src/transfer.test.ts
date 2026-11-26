@@ -557,41 +557,22 @@ describe("putting pictures back", () => {
     expect(restored).toEqual([senses[0].sense.id, senses[1].sense.id]);
   });
 
-  it("asks for enrichment only once the pictures are back, so nothing is drawn over them", async () => {
+  it("saves every word as an import, which asks the server for nothing", async () => {
     const repository = new LocalAcervoRepository(new MemoryDatabase());
     await repository.load(TEST_OWNER);
     const remote = fakeRemote();
     repository.attachRemote(remote);
-    const order: string[] = [];
 
     const report = await importBundle(
-      repository, readBundle(bundle()), undefined, undefined, media(),
-      async (senseId) => { order.push(`picture ${senseId}`); },
-      null,
-      async (lexemeId) => { order.push(`enrich ${lexemeId}`); }
+      repository, readBundle(bundle()), undefined, undefined, media(), async () => {}, null
     );
 
-    // Every word was saved asking the server not to enrich it on its own.
+    // No job is queued and no enrichment asked for: the save says it is an import, and the server
+    // marks the senses it leaves without a picture as having none (`docs/features/export.md`).
     const saves = remote.sent.map((changes, index) => ({ changes, options: remote.options[index] }))
       .filter(({ changes }) => changes.lexemes?.length);
     expect(saves).toHaveLength(report.added);
-    expect(saves.every(({ options }) => options?.enrich === false)).toBe(true);
-    // And asked afterwards, once per word, after that word's pictures.
-    const graph = repository.snapshot() as VocabularyGraph;
-    const picar = lexemesIn(graph, "es").find((lexeme) => lexeme.headword === "picar")!;
-    expect(order.filter((line) => line.startsWith("enrich"))).toHaveLength(report.added);
-    const lastPicture = Math.max(...order.map((line, index) => line.startsWith("picture") ? index : -1));
-    expect(order.indexOf(`enrich ${picar.id}`)).toBeGreaterThan(lastPicture);
-  });
-
-  it("keeps a word whose enrichment could not be asked for", async () => {
-    const repository = await emptyReplica();
-    const report = await importBundle(
-      repository, readBundle(bundle()), undefined, undefined, new Map(), null, null,
-      async () => { throw new Error("offline"); }
-    );
-    expect(report.added).toBe(4);
-    expect(report.failed).toEqual([]);
+    expect(saves.every(({ options }) => options?.imported === true)).toBe(true);
   });
 
   it("keeps the word when a picture cannot be put back", async () => {
@@ -716,12 +697,15 @@ describe("importing a bundle", () => {
     const plan = readBundle(bundle());
     const last = plan.articles[plan.articles.length - 1].draft;
     let savedElsewhere = false;
-    // Stands in for another tab's run, whose word a pull brings in mid-import.
-    const report = await importBundle(repository, plan, undefined, undefined, undefined, null, null, async () => {
+    // Stands in for another tab's run, whose word a pull brings in mid-import: it lands while the
+    // first word's picture is being put back.
+    const first = plan.articles[0].path.replace(/\.yaml$/, "");
+    const pictures = new Map([[`media/${first}-1.webp`, new Uint8Array([1, 2, 3])]]);
+    const report = await importBundle(repository, plan, undefined, undefined, pictures, async () => {
       if (savedElsewhere) return;
       savedElsewhere = true;
-      await repository.saveArticle(filed(remintIds(last)), undefined, { enrich: false });
-    });
+      await repository.saveArticle(filed(remintIds(last)), undefined, { imported: true });
+    }, null);
 
     expect(report.skipped.map((entry) => entry.headword)).toEqual([last.headword]);
     expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted && lexeme.headword === last.headword))

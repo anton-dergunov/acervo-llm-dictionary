@@ -50,7 +50,7 @@ INPUTS: dict[str, tuple[str, ...]] = {
     # the original in a way nobody asked for. `seed` is a change of music's (`POST /loops/{id}/music`).
     "loop": ("family", "seed"),
 }
-TRIGGERS = ("manual", "import")
+TRIGGERS = ("manual",)
 
 NOT_FOUND = ApiError(404, "not_found", "There is no such job.")
 
@@ -106,7 +106,7 @@ async def enqueue(request: Request) -> JSONResponse:
         raise ApiError(400, "invalid_input", f"A {kind or 'nameless'} job cannot be asked for.")
     trigger = str(body.get("trigger") or "manual")
     if trigger not in TRIGGERS:
-        raise ApiError(400, "invalid_input", "A job is asked for manually or by an import.")
+        raise ApiError(400, "invalid_input", "A job is asked for by hand.")
     subject = await run_in_threadpool(_subject, account, kind, body)
     given = body.get("input") if isinstance(body.get("input"), dict) else {}
     carried = {

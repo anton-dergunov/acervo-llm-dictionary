@@ -479,8 +479,8 @@ export interface BundlePlan {
  * `approved` is; a clip is its own record now, carried under `audio/` rather than in the word file.
  *
  * `clipsSearchedAt` is deliberately not in the format at all. It is state the server keeps, like a
- * picture's attempt counter, so an imported word arrives never-consulted and its enrichment finds it —
- * which is the right answer for a word that has just changed accounts.
+ * picture's attempt counter, so an imported word arrives never-consulted. An import queues no
+ * enrichment, so the clips are searched only if the owner later asks for that word.
  *
  * Note what is not here. A version 6 bundle carries no example ids, so a picture in one cannot name
  * the sentence it illustrates and does not get an anchor invented for it — matching by position or
@@ -814,8 +814,7 @@ async function importOnce(
   signal: ImportSignal = { cancelled: false },
   pictures: BundlePictures = new Map(),
   restore: RestorePicture | null = null,
-  recordings: BundleRecordings | null = null,
-  enrich: ((lexemeId: string) => Promise<unknown>) | null = null
+  recordings: BundleRecordings | null = null
 ): Promise<ImportReport> {
   const report: ImportReport = {
     vocabulariesAdded: 0, topicsAdded: 0, added: 0, picturesRestored: 0, pronunciationsRestored: 0,
@@ -880,9 +879,9 @@ async function importOnce(
       continue;
     }
     try {
-      // Enrichment is asked for once the bundle's pictures and clips are back, so the server fills
-      // in only what the bundle did not carry and never draws over a picture it is about to get.
-      const lexemeId = await repository.saveArticle(filed(remintIds(draft)), undefined, { enrich: false });
+      // An import asks for nothing: the save queues no job, and a sense it leaves without a picture is
+      // marked as having none, so nothing here or later spends a provider by itself.
+      const lexemeId = await repository.saveArticle(filed(remintIds(draft)), undefined, { imported: true });
       report.added += 1;
       // After the word exists, because a picture belongs to a sense that has to be there first —
       // and the sense ids are the ones just minted, which only the replica knows.
@@ -890,8 +889,6 @@ async function importOnce(
         repository, lexemeId, path, draft, pictures, restore, report
       );
       report.pronunciationsRestored += await restoreClips(repository, lexemeId, plan.clips.get(path) ?? [], path, recordings, report);
-      // A word whose enrichment could not be asked for is still imported; Try again is on its page.
-      if (enrich) await enrich(lexemeId).catch(() => undefined);
     } catch (error) {
       report.failed.push({ path, message: messageOf(error) });
       if (disconnected(error)) return { ...report, aborted: true };

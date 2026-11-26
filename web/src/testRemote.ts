@@ -53,10 +53,10 @@ export function fakeRemote(datasetId = "dataset00000001", ownerId = "owner000000
     sent: [],
     options: [],
     stored: EMPTY_GRAPH(),
-    async push(changes, options) {
+    async push(changes) {
       remote.calls += 1;
       remote.sent.push(structuredClone(changes));
-      remote.options.push(options);
+      remote.options.push(undefined);
       if (remote.fail) throw remote.fail;
       // The cursor is deliberately not advanced by a write: the engine leaves it alone so the
       // next pull re-delivers these rows rather than skipping anything written in between.

@@ -299,10 +299,10 @@ describe("saving an article edited as YAML", () => {
     expect(repository.snapshot().lexemes.find((lexeme) => lexeme.id === id)!.headword).toBe("sobremesa");
   });
 
-  it("passes on a request to hold enrichment back", async () => {
+  it("passes on that a save is an import", async () => {
     const { repository, remote, draft } = await seeded();
-    await repository.saveArticle(draft(), undefined, { enrich: false });
-    expect(remote.options.at(-1)).toEqual({ enrich: false });
+    await repository.saveArticle(draft(), undefined, { imported: true });
+    expect(remote.options.at(-1)).toEqual({ imported: true });
   });
 
   it("changes nothing locally when the server refuses the save", async () => {

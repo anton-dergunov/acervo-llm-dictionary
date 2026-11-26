@@ -268,6 +268,14 @@ function promptDraft(image: ImagePrompt): ImagePromptDraft {
   };
 }
 
+/**
+ * A picture record with neither a brief nor a picture says only that the sense has no picture and
+ * nothing should draw one — the record an import writes for a sense it brings in without one. That
+ * is state, like `suppressed` itself, so the document leaves it out and a save carries it through
+ * (`services/articles.py`).
+ */
+const isContent = (image: ImagePrompt) => Boolean(image.prompt.trim() || image.imageRef);
+
 export function draftFor(article: Article): ArticleDraft {
   const { lexeme, topics, senses, attestations, images } = article;
   return {
@@ -297,7 +305,7 @@ export function draftFor(article: Article): ArticleDraft {
       domain: sense.domain,
       emoji: sense.emoji,
       examples: examples.map(exampleDraft),
-      images: senseImages.map(promptDraft)
+      images: senseImages.filter(isContent).map(promptDraft)
     })),
     attestations: attestations.map((attestation) => ({
       id: attestation.id,
@@ -310,7 +318,7 @@ export function draftFor(article: Article): ArticleDraft {
       photoRef: attestation.photoRef,
       photoRegion: attestation.photoRegion
     })),
-    images: images.map(promptDraft)
+    images: images.filter(isContent).map(promptDraft)
   };
 }
 

@@ -140,16 +140,95 @@ def test_a_new_sense_on_a_held_word_queues_it_again(server, runner, corpus):
     assert [job["subject"]["id"] for job in jobs.open_jobs(server.owner)] == [entry["id"]]
 
 
-def test_a_writer_that_will_ask_later_queues_nothing(server):
-    """A bundle import restores its pictures first, then asks for the rest."""
-    entry = lexeme()
-    answer = server.post("/graph", {
-        "schemaVersion": SCHEMA_VERSION, "deviceId": "device000000001", "enrich": False,
-        "changes": {"vocabularies": [vocabulary()], "lexemes": [entry], "senses": [sense(entry["id"])]},
-    })
+# ── an import asks for nothing ──────────────────────────────────────────────
+
+
+def sense_document(order, definition, images):
+    return {"id": None, "order": order, "definition": definition, "definitionLang": "es",
+            "glosses": [{"lang": "en", "terms": ["word"]}], "domain": None, "emoji": None,
+            "examples": [], "images": images}
+
+
+def imported(server):
+    """A word as a bundle import saves it: a brief on its first sense, nothing on its second."""
+    assert server.push({"vocabularies": [vocabulary()]}).status_code == 200
+    brief = {"id": None, "exampleId": None, "prompt": "A hand scratching a back.", "styleId": "oil-painting",
+             "seed": 0, "modelId": "gemini-api:gemini-3.5-flash-lite", "promptVersion": "img-v1",
+             "imageRef": None, "imageModelId": None}
+    draft = {"id": None, "language": "es", "headword": "picar", "lemma": "picar", "pos": "verb",
+             "status": "active", "notes": [], "topics": [], "attestations": [], "images": [],
+             "senses": [sense_document(0, "Causar picor.", [brief]),
+                        sense_document(1, "Cortar en trozos.", [])]}
+    answer = server.post("/articles", {"schemaVersion": SCHEMA_VERSION, "deviceId": "device000000001",
+                                       "draft": draft, "minted": [], "imported": True})
     assert answer.status_code == 200, answer.json()
-    assert answer.json()["data"]["enrich"] == {}
+    data = answer.json()["data"]
+    senses = sorted((row for row in held(server, "senses") if row["lexemeId"] == data["lexemeId"]),
+                    key=lambda row: row["order"])
+    return data, senses
+
+
+def test_an_import_queues_nothing_and_nothing_draws_its_senses_later(server, runner, everything):
+    data, (itch, chop) = imported(server)
+    assert data["jobId"] is None and data["enrich"] == {}
     assert jobs.open_jobs(server.owner) == []
+    assert runner.run_until_idle() == 0
+
+    pictures = {row["senseId"]: row for row in held(server, "imagePrompts")}
+    # The brief the bundle carried, ruled out until its picture is put back; a bare record saying the
+    # other sense has none — at the id the sense would have had, so nothing briefs it either.
+    assert pictures[itch["id"]]["suppressed"] and pictures[itch["id"]]["prompt"]
+    bare = pictures[chop["id"]]
+    assert (bare["id"], bare["suppressed"], bare["prompt"], bare["imageRef"]) == \
+        (image_prompt_id(chop["id"]), True, "", None)
+    # So no later enrichment of the word would draw either: its pictures step has nothing to do.
+    from acervo.work.enrich import lacking
+    assert "pictures" not in lacking(server.settings, server.owner, data["lexemeId"])
+
+
+def test_a_picture_an_import_puts_back_is_an_ordinary_one(server):
+    from conftest import PNG
+    _, (itch, chop) = imported(server)
+    answer = server.send(f"/images/senses/{itch['id']}/picture", PNG, drawn_by="google-cloud:nano-banana")
+    assert answer.status_code == 200, answer.json()
+    pictures = {row["senseId"]: row for row in held(server, "imagePrompts")}
+    assert pictures[itch["id"]]["imageRef"] and not pictures[itch["id"]]["suppressed"]
+    assert pictures[chop["id"]]["suppressed"]
+    assert jobs.open_jobs(server.owner) == []
+
+
+def test_expanding_an_imported_word_draws_only_the_sense_the_owner_added(server, runner, everything):
+    data, (itch, chop) = imported(server)
+    word = next(row for row in held(server, "lexemes") if row["id"] == data["lexemeId"])
+    prompts = {row["senseId"]: row for row in held(server, "imagePrompts")}
+    shown = lambda row: [{key: row[key] for key in (  # noqa: E731 — what the projection writes
+        "id", "exampleId", "prompt", "styleId", "seed", "modelId", "promptVersion", "imageRef", "imageModelId")}
+        ] if row["prompt"].strip() or row["imageRef"] else []
+    later = {
+        "id": word["id"], "language": "es", "headword": "picar", "lemma": "picar", "pos": "verb",
+        "status": "active", "notes": [], "topics": [], "attestations": [], "images": [],
+        "senses": [{**sense_document(row["order"], row["definition"], shown(prompts[row["id"]])), "id": row["id"]}
+                   for row in (itch, chop)] + [sense_document(2, "Morder un pez el anzuelo.", [])],
+    }
+    answer = server.post("/articles", {"schemaVersion": SCHEMA_VERSION, "deviceId": "device000000001",
+                                       "draft": later, "minted": []})
+    assert answer.status_code == 200, answer.json()
+    assert answer.json()["data"]["jobId"] is not None
+    bite = next(row for row in held(server, "senses") if row["order"] == 2)
+    # The writers see every sense of the word, so they answer for all three; only the owner's is drawn.
+    server.model.selection = {"senses": [{"senseId": row["id"], "segmentId": None} for row in (itch, chop, bite)]}
+    server.model.brief = {"senses": [
+        {"senseId": row["id"], "styleId": "oil-painting", "anchorExampleId": None,
+         "situation": "a river", "subject": "a fish", "brief": f"A picture for {row['id']}"}
+        for row in (itch, chop, bite)]}
+
+    runner.run_until_idle()
+    pictures = {row["senseId"]: row for row in held(server, "imagePrompts")}
+    assert pictures[bite["id"]]["imageRef"]
+    # The bare record survived a save whose document did not show it, and neither imported sense
+    # was drawn.
+    assert not pictures[itch["id"]]["imageRef"] and pictures[itch["id"]]["suppressed"]
+    assert not pictures[chop["id"]]["imageRef"] and pictures[chop["id"]]["suppressed"]
 
 
 def test_a_word_saved_as_a_tombstone_queues_nothing(server):

@@ -56,8 +56,10 @@ waits moves it on a minute, never past ten minutes from the first; a write while
 more behind it. Study states, which a read writes, queue nothing, or every read would queue a push. **Inbox words are enriched on arrival**, before anyone has reviewed
 them, so the owner opens a complete entry; the calls spent on a word later rejected are the accepted
 cost. Editing a sense's text does not re-enrich: a picture that no longer
-fits is the owner's call, through Redraw. A bundle import saves without enrichment, restores its
-pictures, and then queues `enrich`, which skips what the restore put back.
+fits is the owner's call, through Redraw. **A bundle import queues nothing**: its saves say
+`imported`, so no `enrich` or `music`, and every sense that arrives without a picture is marked as
+having none, so no later `enrich` of the word draws it either ([`../features/export.md`](../features/export.md),
+"Import"). Only the Anki push follows an import, as it follows any write.
 
 **Why a durable job table is safe here.** The usual objections to a work queue, and what answers
 each:

@@ -6,7 +6,7 @@ the vocabulary into Obsidian, and handing a vocabulary to someone else. All thre
 files, in a representation that outlives the database that produced them. The code is
 `web/src/transfer.ts` (what a bundle is), `markdown.ts` (the Obsidian mirror), `bundleZip.ts` (the
 archive's bytes into text files, pictures and clips) and `importRun.ts` (an import against the
-server: the words, then each picture and clip through its route, then `enrich`). `TransferPanel.tsx`
+server: the words, then each picture and clip through its route, and nothing else). `TransferPanel.tsx`
 owns only the browser's file handling.
 
 **The starter vocabularies are bundles too** ([`../../vocabularies/README.md`](../../vocabularies/README.md)).
@@ -78,6 +78,18 @@ generated example are left out, so do not enrich it.
 **Import is ordinary writes**: each word is read through `parseArticle` and written through
 `repository.saveArticle`, one word per round trip — so it is online-only, fails loudly, and gets the
 diffing, validation and atomicity every other save gets.
+
+> **DECISION: an import spends nothing, and nothing it brings in is ever generated for by itself.**
+> Someone trying Acervo imports a vocabulary before anything else; an app that then spent their
+> provider's money filling it in would be the worst first hour possible. So an import's save says
+> `imported` and the server queues **no job** for it — no enrichment, no clip search, no picture, no
+> recording, no music — and the only provider calls an imported word ever causes are ones the owner
+> asks for by hand. Every sense that arrives without a picture gets a bare picture record that is
+> `suppressed` ("No picture"), so a later enrichment of the word, when the owner adds a sense of
+> their own, draws only that sense. The record has no brief and no file, so the document never shows
+> it and a save carries it through, like `suppressed` itself. A picture the import puts back clears
+> it: a restored picture is an ordinary drawn one. Drawing any of the others is the per-sense Draw,
+> which says the sense is set to have no picture and turns that off.
 
 - **A word already held is skipped**, never merged or overwritten: an import must not cost curation done
   after the export. "Held" is asked of the replica at each word, not of a list taken when the run

@@ -473,9 +473,9 @@ def test_an_added_sense_asks_again_and_an_edit_does_not(seeded):
     assert saved(seeded, grown)["jobId"] is not None
 
 
-def test_a_writer_that_will_ask_later_queues_nothing(seeded):
+def test_an_import_queues_nothing(seeded):
     article = {**draft_of(seeded), "id": None, "senses": [new_sense(order=0)], "attestations": []}
-    data = saved(seeded, article, enrich=False)
+    data = saved(seeded, article, imported=True)
     assert data["jobId"] is None
     assert jobs.open_jobs(seeded.owner) == []
 

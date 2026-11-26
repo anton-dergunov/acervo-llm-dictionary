@@ -13,10 +13,9 @@
  * topics): an import skips words already held, so a corrected word would otherwise never replace the
  * one installed before it.
  *
- * `--testing` makes it an account where nothing runs by itself, set before the first word arrives:
- * no pictures drawn on their own (a starter has thousands of senses without one), no Anki push or
- * pull, no nightly steps, and no `enrich` per word unless `--enrich` asks for it — twenty starters
- * would otherwise open ten thousand jobs, and a deploy refuses while jobs are open.
+ * An import never queues a job or spends a provider by itself, in any account. `--testing` also makes
+ * the account one where nothing else runs by itself, set before the first word arrives: no pictures
+ * drawn on their own for words added there later, no Anki push or pull, no nightly steps.
  */
 
 import { readFileSync } from "node:fs";
@@ -52,10 +51,9 @@ function options(argv: string[]) {
   const flags = new Set(["--server", "--email"]);
   const zips = argv.filter((arg, index) => !arg.startsWith("--") && !flags.has(argv[index - 1] ?? ""));
   if (!zips.length) throw new Error("name at least one bundle zip");
-  const testing = argv.includes("--testing");
   return {
-    server: value("--server"), email: value("--email"), fresh: argv.includes("--fresh"), testing,
-    enrich: !testing || argv.includes("--enrich"), zips
+    server: value("--server"), email: value("--email"), fresh: argv.includes("--fresh"),
+    testing: argv.includes("--testing"), zips
   };
 }
 
@@ -70,7 +68,7 @@ async function quiet(email: string): Promise<void> {
 }
 
 async function main(): Promise<number> {
-  const { server, email, fresh, testing, enrich, zips } = options(process.argv.slice(2));
+  const { server, email, fresh, testing, zips } = options(process.argv.slice(2));
   const password = readFileSync(0, "utf8").split("\n")[0];
   const session = await backendSession.login(server, email, password);
 
@@ -83,8 +81,8 @@ async function main(): Promise<number> {
     await repository.applyRemote(response.changes, response.cursor, response.datasetId);
   };
   const remote: RemoteGraph = {
-    async push(changes, writeOptions) {
-      const response = await backendSession.pushGraph(repository.state().deviceId, changes, writeOptions);
+    async push(changes) {
+      const response = await backendSession.pushGraph(repository.state().deviceId, changes);
       return { records: response.records, cursor: repository.state().cursor, datasetId: response.datasetId };
     },
     async saveArticle(draft, minted, base, writeOptions) {
@@ -118,7 +116,7 @@ async function main(): Promise<number> {
     const started = Date.now();
     let shown = 0;
     const report = await importThroughServer({
-      repository, pull, plan, pictures: archive.pictures, recordings: archive.recordings, restoreClips: true, enrich,
+      repository, pull, plan, pictures: archive.pictures, recordings: archive.recordings, restoreClips: true,
       onProgress: (done, total) => {
         if (done - shown >= 100 || done === total) {
           shown = done;

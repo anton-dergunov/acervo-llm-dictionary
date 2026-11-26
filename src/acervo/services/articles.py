@@ -49,6 +49,17 @@ IMAGE_FIELDS = (
 )
 
 
+# The record saying a sense has no picture and nothing should draw one: no brief, no file, ruled.
+NO_PICTURE = {
+    "exampleId": None, "prompt": "", "styleId": "", "seed": 0, "modelId": "", "promptVersion": "",
+    "imageRef": None, "imageModelId": None, "attempts": 0, "failureReason": None, "suppressed": True,
+}
+
+
+def _no_picture(row: Mapping[str, Any]) -> bool:
+    return bool(row.get("suppressed")) and not (row.get("prompt") or "").strip() and not row.get("imageRef")
+
+
 def refused(message: str) -> ApiError:
     return ApiError(400, "invalid_document", message)
 
@@ -127,6 +138,7 @@ def save_article(
     status: str | None = None,
     base: Any = None,
     place_photo: graph.PlacePhoto | None = None,
+    imported: bool = False,
 ) -> dict[str, Any]:
     """Apply one parsed document as one write. Returns the merge's answer and the lexeme id.
 
@@ -136,6 +148,13 @@ def save_article(
     exception is an **argument**, never a field, and a hand-typed document cannot claim it.
 
     `status` overrides the document's, for the headless capture that files everything in the Inbox.
+
+    `imported` is a bundle import's save, which the caller also gives no `enqueue`. Nothing an import
+    brings in may ever spend a provider by itself, so every picture record it writes is `suppressed`,
+    and a sense that arrives with none gets a bare one saying it has no picture: enrichment briefs only
+    senses with no record and draws only unsuppressed ones, so neither this save nor any later
+    enrichment of the word draws them. A picture the import then restores clears its record's
+    suppression (`images.attach_picture`); the owner can still draw any of the others by hand.
     """
     draft = _mapping(draft, "The document")
     if base is not None:
@@ -251,7 +270,7 @@ def save_article(
         work.change("imagePrompts", {
             "attempts": 0,
             "failureReason": None,
-            "suppressed": False,
+            "suppressed": imported,
             **(existing or {}),
             "id": identifier,
             "lexemeId": lexeme_id,
@@ -312,8 +331,21 @@ def save_article(
                 **work.stamp(current),
             })
 
-        for image in _list(sense.get("images"), "Pictures"):
+        images = _list(sense.get("images"), "Pictures")
+        for image in images:
             picture(_mapping(image, "A picture"), sense_id)
+        if imported and not images:
+            identifier = image_prompt_id(sense_id)
+            ruled = derived("imagePrompts", identifier)
+            kept["imagePrompts"].add(identifier)
+            work.change("imagePrompts", {
+                **(ruled or {}),
+                **NO_PICTURE,
+                "id": identifier,
+                "lexemeId": lexeme_id,
+                "senseId": sense_id,
+                **work.stamp(ruled),
+            })
 
     for image in loose_images:
         picture(image, None)
@@ -338,8 +370,10 @@ def save_article(
     for row in live("examples"):
         if row["senseId"] in stored_senses and row["id"] not in kept["examples"]:
             tombstone("examples", row)
+    # A bare "no picture" record is state, not content: the document never shows it (`draftFor`), so a
+    # save carries it through like `suppressed` itself, and drops it only with its sense.
     for row in live("imagePrompts"):
-        if row["id"] not in kept["imagePrompts"]:
+        if row["id"] not in kept["imagePrompts"] and not (_no_picture(row) and row.get("senseId") in kept["senses"]):
             tombstone("imagePrompts", row)
     # A clip of something the document removed reads words that no longer exist. The headword's
     # clip is never among them: the lexeme stays, and an edited headword only makes its clip stale.

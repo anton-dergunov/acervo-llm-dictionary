@@ -1,7 +1,7 @@
 #!/bin/sh
 # The owner's testing accounts, filled with every starter vocabulary, in one command (laptop):
 #
-#   scripts/starter/test_accounts.sh [--fresh] [--enrich] [--server URL]
+#   scripts/starter/test_accounts.sh [--fresh] [--server URL]
 #
 # Creates two accounts on the deployed server, if they are not there yet, and installs the zips in
 # vocabularies/out/ with the app's own import (web/scripts/install-bundle.ts):
@@ -14,10 +14,10 @@
 # accounts on a server reached only over the tailnet, holding nothing but published vocabularies.
 # Sign in as one in a second browser profile: signing out clears a device's copy of the words.
 #
-# Each account is set, before its first word, to run nothing by itself: no pictures drawn on their
-# own, no Anki, no nightly steps, and no per-word `enrich` (`--enrich` queues it, ~500 jobs a
-# vocabulary, and a deploy refuses while jobs are open). `--fresh` deletes every word first, so a
-# rebuilt starter replaces the one installed before it: an import skips words already held.
+# An import queues nothing and spends nothing. Each account is also set, before its first word, to
+# run nothing else by itself: no pictures drawn on their own, no Anki, no nightly steps. `--fresh`
+# deletes every word first, so a rebuilt starter replaces the one installed before it: an import
+# skips words already held.
 #
 # The server address is the one `./deploy.sh` prints, from .acervo-deploy and the tailnet, unless
 # `--server` names it. Accounts are made by `./deploy.sh --create-account`, so the same target.
@@ -35,7 +35,6 @@ install_flags=--testing
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --fresh) install_flags="$install_flags --fresh"; shift ;;
-    --enrich) install_flags="$install_flags --enrich"; shift ;;
     --server) [ "$#" -ge 2 ] || { echo "--server needs a URL" >&2; exit 2; }; server=$2; shift 2 ;;
     -h|--help) sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) echo "Unknown option: $1 (see --help)" >&2; exit 2 ;;

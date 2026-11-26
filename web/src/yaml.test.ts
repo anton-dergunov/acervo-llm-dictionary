@@ -15,6 +15,28 @@ const problemsOf = (text: string): string[] => {
 };
 
 describe("the YAML projection", () => {
+  it("leaves out a record that says only that a sense has no picture", () => {
+    const graph = testGraph();
+    const drawn = graph.imagePrompts[0];
+    graph.imagePrompts.push(
+      // What an import writes for a sense it brings in without a picture: state, not content.
+      { ...drawn, id: "imagepicar00020", senseId: "sensepicarchop0", prompt: "", styleId: "", modelId: "",
+        promptVersion: "", imageRef: null, imageModelId: null, exampleId: null, suppressed: true }
+    );
+    const senses = draftFor(articleFor(graph, "lexemepicar0001")!).senses;
+    expect(senses.find((sense) => sense.id === "sensepicarchop0")!.images).toEqual([]);
+    expect(senses.find((sense) => sense.id === "sensepicaritch0")!.images.map((image) => image.id))
+      .toEqual(["imagepicar00010"]);
+
+    // A ruled-out sense that still has a brief, or a chosen picture with none, is content and stays.
+    graph.imagePrompts[1] = { ...graph.imagePrompts[1], prompt: "A knife over a board." };
+    expect(draftFor(articleFor(graph, "lexemepicar0001")!).senses
+      .find((sense) => sense.id === "sensepicarchop0")!.images).toHaveLength(1);
+    graph.imagePrompts[1] = { ...graph.imagePrompts[1], prompt: "", imageRef: "images/x/chosen.webp" };
+    expect(draftFor(articleFor(graph, "lexemepicar0001")!).senses
+      .find((sense) => sense.id === "sensepicarchop0")!.images).toHaveLength(1);
+  });
+
   it("writes the record, its ids and the fields the reader will need back", () => {
     const document = yamlFor(articleFor(testGraph(), "lexemepicar0001")!);
     expect(document).toContain("id: lexemepicar0001");

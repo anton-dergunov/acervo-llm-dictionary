@@ -45,11 +45,12 @@ export interface RemoteWrite {
  * repository never reaches the network itself, and the interface never reaches past the repository.
  */
 /**
- * `enrich: false` asks the server not to queue enrichment for words this write creates. Only a
- * bundle import says so, because it restores the bundle's pictures first and asks afterwards.
+ * `imported: true` is a bundle import's save. It queues nothing, and every sense that arrives without
+ * a picture is marked as having none, so nothing an import brings in ever spends a provider by itself
+ * (`docs/features/export.md`, "Import").
  */
 export interface WriteOptions {
-  enrich?: boolean;
+  imported?: boolean;
 }
 
 export interface ArticleWrite extends RemoteWrite {
@@ -59,7 +60,7 @@ export interface ArticleWrite extends RemoteWrite {
 }
 
 export interface RemoteGraph {
-  push(changes: Partial<VocabularyGraph>, options?: WriteOptions): Promise<RemoteWrite>;
+  push(changes: Partial<VocabularyGraph>): Promise<RemoteWrite>;
   saveArticle(
     draft: ArticleDraft, minted: ReadonlySet<string>, base: Record<string, number>, options?: WriteOptions
   ): Promise<ArticleWrite>;
@@ -378,11 +379,11 @@ export class LocalAcervoRepository implements AcervoRepository {
    * Sends a change set to the server and stores what comes back. Nothing local moves until the
    * server has accepted it: offline, this throws and the replica is exactly as it was.
    */
-  private commit(changes: Partial<VocabularyGraph>, options?: WriteOptions): Promise<void> {
-    return this.serialize(() => this.send(changes, options));
+  private commit(changes: Partial<VocabularyGraph>): Promise<void> {
+    return this.serialize(() => this.send(changes));
   }
 
-  private async send(changes: Partial<VocabularyGraph>, options?: WriteOptions): Promise<void> {
+  private async send(changes: Partial<VocabularyGraph>): Promise<void> {
     if (!this.ready) throw new Error("Load the Acervo repository before writing.");
     (Object.values(changes) as Entity[][]).forEach((records) => records?.forEach((record) => {
       if (record.ownerId !== this.meta.ownerId) throw new Error("Cannot write a record owned by another account.");
@@ -391,7 +392,7 @@ export class LocalAcervoRepository implements AcervoRepository {
     if (!this.remote) {
       throw new Error("Acervo is not connected to the server, so this change was not saved.");
     }
-    const result = await this.remote.push(changes, options);
+    const result = await this.remote.push(changes);
     // One transaction for the records the server blessed and the stamp that says we wrote.
     await this.merge(result.records, result.cursor, result.datasetId, this.instant());
   }

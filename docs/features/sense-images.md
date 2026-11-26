@@ -302,7 +302,7 @@ permanently silent, so a style added to `config/image-styles.yaml` must be on by
 
 | Control | Shape | Default |
 |---|---|---|
-| **Draw pictures** | one switch, and it governs everything that draws *by itself* — the `enrich` job of a word that was just saved, and a backfill. It deliberately does not gate the per-sense buttons: switching it off is how you get a word with no pictures and then add the one you want by hand. Checked by the two drivers rather than by the routes, for that reason. | on |
+| **Draw pictures** | one switch, and it governs everything that draws *by itself* — the `enrich` job of a word that was just saved, and a backfill. Never an imported sense: an import queues nothing, and a sense it brings in without a picture is marked "No picture" ([`export.md`](export.md), "Import"). It deliberately does not gate the per-sense buttons: switching it off is how you get a word with no pictures and then add the one you want by hand. Checked by the two drivers rather than by the routes, for that reason. | on |
 | **The styles** | one switch per style, on or off. A style switched off is never offered. At least one must stay on — with none there is nothing to draw with, and "draw nothing" is the switch above rather than an empty list. | all on |
 | **Boost variety** | one switch. On, each style is presented with a few of its example subjects, sampled per word, which pushes the writer toward styles it would otherwise pass over. Off, styles are offered on their own descriptions alone. | **on** |
 
@@ -441,8 +441,11 @@ one export that is not offline-capable, which the panel says plainly.
 > attach one. One pipeline, two callers, exactly as with capture.
 >
 > `transfer.ts` still holds no transport: it *names* the pictures and takes a callback, and
-> `TransferPanel.tsx` supplies it along with the zip, because owning the zip and the browser's file
-> handling is already its job.
+> `importRun.ts` supplies it, the same for the Settings panel and the laptop's installer.
+>
+> **Nothing is drawn for what the bundle did not carry.** The import's save marks every sense that
+> arrives without a picture as having none, and a restore clears the mark on the ones it puts back,
+> so no picture is ever drawn because a word was imported.
 
 What travels with the bytes is `imageModelId`, and the distinction is the point. `imageRef` is a
 path on the server, embedding a lexeme id that will not exist after import, so it is stripped —

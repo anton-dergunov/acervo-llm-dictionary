@@ -456,15 +456,15 @@ call it.
 (`vocabularies/README.md`):
 
 ```bash
-scripts/starter/test_accounts.sh [--fresh] [--enrich] [--server URL]
+scripts/starter/test_accounts.sh [--fresh] [--server URL]
 ```
 
-It makes `starters@account.example.com` and `starters-es@account.example.com` if they are missing (password
-`starters1`) and installs the starters into them with the app's own import. Before the first word, each
-account is set to run nothing by itself: no pictures drawn on their own, no Anki, no nightly steps, and
-no per-word `enrich` unless `--enrich` (which opens about 500 jobs a vocabulary, and a deploy refuses
-while jobs are open). `--fresh` deletes the accounts' words first, so rebuilt starters replace the old
-ones. The address is the one a deploy prints, unless `--server` names it.
+It makes `starters@account.example.com` and `starters-es@account.example.com` if they are missing
+(password `starters1`) and installs the starters into them with the app's own import, which queues
+nothing and spends nothing. Before the first word, each account is also set to run nothing else by
+itself: no pictures drawn on their own, no Anki, no nightly steps. `--fresh` deletes the accounts'
+words first, so rebuilt starters replace the old ones. The address is the one a deploy prints, unless
+`--server` names it.
 
 ## Companion services
 

@@ -91,10 +91,12 @@ def test_asking_while_one_is_queued_returns_that_one(server):
     assert ask(server, entry).json()["data"]["id"] == job_id
 
 
-def test_an_import_says_so(server):
+def test_a_job_is_asked_for_only_by_hand(server):
+    """An import asks for nothing (`docs/features/export.md`), so there is no other trigger to name."""
     entry, job_id = save(server)
     jobs.request_cancel(server.owner, job_id)
-    assert ask(server, entry, trigger="import").json()["data"]["trigger"] == "import"
+    answer = ask(server, entry, trigger="import")
+    assert answer.status_code == 400, answer.json()
 
 
 def test_a_word_that_is_not_held_cannot_be_enriched(server, other):

@@ -1016,7 +1016,7 @@ export interface JobRequest {
   subject: { kind: string; id: string };
   /** What the job needs beyond its subject: an edited brief and style, for edit-and-draw. */
   input?: Record<string, string>;
-  trigger?: "manual" | "import";
+  trigger?: "manual";
 }
 
 export class AcervoApiError extends Error {
@@ -1216,7 +1216,6 @@ export const backendSession = {
   job(id: string): Promise<Job> {
     return client.call<Job>(`/jobs/${encodeURIComponent(id)}`);
   },
-  /** Try again, and an import's request for enrichment. A save never needs this. */
   loopSchema(): Promise<LoopSchema> { return client.call<LoopSchema>("/loops/schema"); },
   /* `have` is the version this device already holds; a map still current answers `current`. */
   readMap(language: string, have?: string | null): Promise<MapAnswer> {
@@ -1312,13 +1311,10 @@ export const backendSession = {
   pullGraph(since: number): Promise<PullResponse> {
     return client.call<PullResponse>(`/graph?schemaVersion=${SCHEMA_VERSION}&since=${since}`);
   },
-  pushGraph(deviceId: string, changes: Partial<VocabularyGraph>, options: { enrich?: boolean } = {}): Promise<PushResponse> {
+  pushGraph(deviceId: string, changes: Partial<VocabularyGraph>): Promise<PushResponse> {
     return client.call<PushResponse>("/graph", {
       method: "POST",
-      body: JSON.stringify({
-        schemaVersion: SCHEMA_VERSION, deviceId, changes,
-        ...(options.enrich === false ? { enrich: false } : {})
-      })
+      body: JSON.stringify({ schemaVersion: SCHEMA_VERSION, deviceId, changes })
     });
   },
   /**
@@ -1328,12 +1324,12 @@ export const backendSession = {
    * a newer one.
    */
   saveArticle(deviceId: string, draft: ArticleDraft, minted: string[], base: Record<string, number>,
-              options: { enrich?: boolean } = {}): Promise<ArticleSaveResponse> {
+              options: { imported?: boolean } = {}): Promise<ArticleSaveResponse> {
     return client.call<ArticleSaveResponse>("/articles", {
       method: "POST",
       body: JSON.stringify({
         schemaVersion: SCHEMA_VERSION, deviceId, draft, minted, base,
-        ...(options.enrich === false ? { enrich: false } : {})
+        ...(options.imported ? { imported: true } : {})
       })
     });
   },

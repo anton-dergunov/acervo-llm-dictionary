@@ -31,12 +31,14 @@ async def save(request: Request) -> JSONResponse:
     minted = body.get("minted") or []
     if not isinstance(minted, list):
         raise ApiError(400, "invalid_input", "minted must be a list of record ids.")
-    # A save enriches what it creates, unless the writer will ask later — a bundle import restoring
-    # its pictures first.
-    enqueue = None if body.get("enrich") is False else graph.SAVE
+    # A save enriches what it creates. An import's save asks for nothing, now or later: it queues no
+    # job and marks every sense that arrives without a picture as having none (`docs/features/export.md`,
+    # "Import"), so nothing an import brings in ever spends a provider by itself.
+    imported = body.get("imported") is True
     return data(await run_in_threadpool(
         lambda: save_article(
-            account, device, body.get("draft"), minted, enqueue=enqueue, base=body.get("base"),
+            account, device, body.get("draft"), minted, enqueue=None if imported else graph.SAVE,
+            imported=imported, base=body.get("base"),
             # A photo taken for this word is kept by the save that names it (`services/photo.py`).
             place_photo=photo.placer(request.app.state.settings),
         )
