@@ -3856,6 +3856,25 @@ button.pref-language:disabled .pref-label { color: var(--ink-3); }
    field, and whether a provider's key works. */
 .pref-label.mono { font-family: var(--mono); font-size: 14px; font-weight: 500; }
 .pref-input.mono { font-family: var(--mono); font-size: 13px; }
+
+/* A radio group whose options can carry fields of their own, such as the name of a new vocabulary:
+   the field belongs to its option, so it sits inside it, under the label, and only while it is
+   chosen. A drawn dot rather than a check at the end, because these are alternatives to pick between,
+   not a list with one marked. */
+.pref-option { background: var(--surface); }
+.pref-option > .pref-radio { background: transparent; }
+.pref-dot {
+  flex: none; width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--ink-3); background: var(--paper); display: grid; place-items: center;
+}
+.pref-radio[aria-checked="true"] .pref-dot { border-color: var(--core); }
+.pref-radio[aria-checked="true"] .pref-dot::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--core); }
+.pref-option-body { display: grid; gap: 10px; padding: 0 14px 14px 44px; }
+.pref-option:not(.on) > .pref-option-body { display: none; }
+.pref-option-body .pref-field { display: grid; gap: 6px; }
+.pref-option-body .pref-field > span { font-size: 13px; color: var(--ink-3); }
+.pref-option-body .pref-notice { padding: 9px 12px; border-radius: 9px; font-size: 13.5px; }
+.pref-input.clash { border-color: var(--warn); }
 .pref-row .pref-input + .tb-btn { margin-left: 4px; }
 /* A provider's own page opens as a link, and looks like the buttons beside it. */
 a.tb-btn { text-decoration: none; }

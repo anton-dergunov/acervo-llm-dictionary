@@ -81,8 +81,17 @@ const segmented = (label, hint, options, chosen) => `<div class="pref-row stack"
   <div class="seg" role="radiogroup" aria-label="${esc(label)}">${options.map((o) =>
     `<button role="radio" aria-checked="${o === chosen}" class="${o === chosen ? "on" : ""}">${esc(o)}</button>`).join("")}</div></div>`;
 const button = (label, primary = false, disabled = false) => `<button class="tb-btn ${primary ? "primary" : ""}" ${disabled ? "disabled" : ""}>${esc(label)}</button>`;
-/* One of a few exclusive choices, as a row: the kit's radio without a ▶, the check where the value goes. */
-const radio = (label, hint, checked) => `<button class="pref-row" role="radio" aria-checked="${checked}">${text(label, hint)}${checked ? `<span class="pref-check">${ICON.check}</span>` : ""}</button>`;
+/* One option of a radio group (`options`), with what belongs to it — fields, a warning — under its
+   label, shown while it is chosen. */
+const option = (label, hint, checked, body = "") => `<div class="pref-option${checked ? " on" : ""}">
+  <button class="pref-row pref-radio" role="radio" aria-checked="${checked}"><span class="pref-dot" aria-hidden="true"></span>${text(label, hint)}</button>
+  ${body ? `<div class="pref-option-body">${body}</div>` : ""}</div>`;
+const options = (title, label, rows) => `<section class="pref-group">
+  <h4>${esc(title)}</h4>
+  <div class="pref-card" role="radiogroup" aria-label="${esc(label)}">${rows.join("")}</div>
+</section>`;
+const nameField = (value, clash = false) => `<label class="pref-field"><span>Name</span>
+  <input class="pref-input${clash ? " clash" : ""}" value="${esc(value)}" ${clash ? 'aria-invalid="true"' : ""}></label>`;
 const notice = (message) => `<div class="pref-notice" role="status">${ICON.alert}<span>${message}</span></div>`;
 const skeletonRow = () => `<div class="pref-row"><span class="pref-text"><span class="pref-skel"></span><span class="pref-skel"></span></span></div>`;
 const reorder = (label, hint, on, badge = "") => `<div class="pref-row">
@@ -602,7 +611,8 @@ const SUBPAGES = {
       field("Name", "Spanish"),
       field("Flag", "", "🇪🇸"),
       select("Variety", "", ["None", "🇲🇽 Mexico", "🇦🇷 Argentina", "🇪🇸 Spain", "🇨🇴 Colombia", "🇺🇸 United States", "🌐 Latin America"], "🇪🇸 Spain")
-    ], "Your other Spanish vocabulary is called Spanish. Give this one a name of its own.", "", true),
+    ].map((one, i) => i === 0 ? one.replace('class="pref-input"', 'class="pref-input clash" aria-invalid="true"') : one), "", "", true),
+    notice("You already have a vocabulary called Spanish. Give this one a name of its own."),
     group("Written in", [
       link("Senses defined in", "🇪🇸 Spanish", "definitionLanguage"),
       link("Translated into", "🇬🇧 English", "glossLanguages"),
@@ -615,23 +625,22 @@ const SUBPAGES = {
      offered. A starter, where the name is free. */
   importStarter: { parent: "data", title: "Import", render: () => [
     group("", [row("acervo-starter-es-MX.zip", "510 entries, 16 topics, 484 pictures")]),
-    group("🇲🇽 Spanish (Mexico) · Everyday words", [
-      radio("As a new vocabulary", "", true),
-      field("Name", "Spanish (Mexico) · Everyday words"),
-      radio("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
-    ], "", "", true),
-    `<div class="pref-buttons">${button("Cancel")}${button("Import 510 entries", true)}</div>`
+    options("🇲🇽 Spanish (Mexico) · Everyday words", "Where Spanish (Mexico) · Everyday words goes", [
+      option("Add as a new vocabulary", "", true, nameField("Spanish (Mexico) · Everyday words")),
+      option("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
+    ]),
+    `<div class="pref-buttons">${button("Cancel")}<button class="tb-btn primary" data-import>Import 510 entries</button></div>`
   ] },
   /* Your own export brought back, where the name is taken: a new vocabulary needs another name, and
      adding to the one it came from is one tap away. */
   importOwn: { parent: "data", title: "Import", render: () => [
     group("", [row("acervo-spanish-2026-11-20.zip", "1,412 entries, 24 topics, 1,268 pictures")]),
-    group("🇦🇷 Spanish", [
-      radio("As a new vocabulary", "", true),
-      field("Name", "Spanish"),
-      radio("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
-    ], "You already have a vocabulary called Spanish. Name this one differently, or add it to yours.", "", true),
-    `<div class="pref-buttons">${button("Cancel")}${button("Import 1,412 entries", true, true)}</div>`
+    options("🇦🇷 Spanish", "Where Spanish goes", [
+      option("Add as a new vocabulary", "", true, nameField("Spanish", true)
+        + notice("You already have a vocabulary called Spanish. Give this one another name, or add it to yours.")),
+      option("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
+    ]),
+    `<div class="pref-buttons">${button("Cancel")}<button class="tb-btn primary" data-import disabled>Import 1,412 entries</button></div>`
   ] },
   glossLanguages: { parent: "vocabulary", title: "Translated into", render: () => [
     group("", [
@@ -751,6 +760,18 @@ function render() {
     else state.level = "list";
     render();
   };
+  /* Choosing an option: the dot moves, its fields show, and Import waits while a new vocabulary's
+     name is one you already have. */
+  root.querySelectorAll(".pref-radio").forEach((b) => b.onclick = () => {
+    const card = b.closest("[role=radiogroup]");
+    card.querySelectorAll(".pref-option").forEach((one) => {
+      const on = one.contains(b);
+      one.classList.toggle("on", on);
+      one.querySelector(".pref-radio").setAttribute("aria-checked", on);
+    });
+    const go = root.querySelector("[data-import]");
+    if (go) go.disabled = Boolean(card.querySelector(".pref-option.on .pref-input.clash"));
+  });
   root.querySelectorAll(".seg button").forEach((b) => b.onclick = () => {
     b.parentElement.querySelectorAll("button").forEach((o) => { o.classList.toggle("on", o === b); o.setAttribute("aria-checked", o === b); });
   });
