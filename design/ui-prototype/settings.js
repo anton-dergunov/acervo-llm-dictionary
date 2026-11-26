@@ -80,7 +80,9 @@ const select = (label, hint, options, chosen) => `<label class="pref-row">${text
 const segmented = (label, hint, options, chosen) => `<div class="pref-row stack">${label ? text(label, hint) : ""}
   <div class="seg" role="radiogroup" aria-label="${esc(label)}">${options.map((o) =>
     `<button role="radio" aria-checked="${o === chosen}" class="${o === chosen ? "on" : ""}">${esc(o)}</button>`).join("")}</div></div>`;
-const button = (label, primary = false) => `<button class="tb-btn ${primary ? "primary" : ""}">${esc(label)}</button>`;
+const button = (label, primary = false, disabled = false) => `<button class="tb-btn ${primary ? "primary" : ""}" ${disabled ? "disabled" : ""}>${esc(label)}</button>`;
+/* One of a few exclusive choices, as a row: the kit's radio without a ▶, the check where the value goes. */
+const radio = (label, hint, checked) => `<button class="pref-row" role="radio" aria-checked="${checked}">${text(label, hint)}${checked ? `<span class="pref-check">${ICON.check}</span>` : ""}</button>`;
 const notice = (message) => `<div class="pref-notice" role="status">${ICON.alert}<span>${message}</span></div>`;
 const skeletonRow = () => `<div class="pref-row"><span class="pref-text"><span class="pref-skel"></span><span class="pref-skel"></span></span></div>`;
 const reorder = (label, hint, on, badge = "") => `<div class="pref-row">
@@ -195,9 +197,10 @@ const PAGES = {
   vocabularies: () => [
     group("", [
       link("🇦🇷  Spanish", "1,412 words", "vocabulary", "Argentina · B1 · translated into English, Russian"),
+      link("🇲🇽  Spanish (Mexico) · Everyday words", "510 words", "vocabulary", "Mexico · A2 · translated into English"),
       link("🇨🇳  Chinese (Simplified)", "316 words", "vocabulary", "translated into Russian, English")
     ]),
-    `<section class="pref-group"><div class="pref-card"><button class="pref-row pref-action" data-sub="addLanguage">Add a language…</button></div></section>`
+    `<section class="pref-group"><div class="pref-card"><button class="pref-row pref-action" data-sub="addLanguage">Add a vocabulary…</button></div></section>`
   ],
 
   topics: () => [
@@ -348,7 +351,7 @@ Never use the word "literally" in a gloss.</textarea>
       toggle("Pronunciations", "", false),
       action("Export…")
     ]),
-    group("Import", [action("Choose a file…")], "Words already here are updated, not duplicated."),
+    group("Import", [action("Choose a file…")], "Each vocabulary in the file comes in as a new one, or joins one of yours. Words you already have are left as they are."),
     group("", [action("Delete all words…", "danger")])
   ],
 
@@ -581,15 +584,54 @@ const SUBPAGES = {
     `<div class="pref-buttons">${button("Cancel")}${button("Save", true)}</div>`,
     group("", [action("Remove this vocabulary", "danger")])
   ] },
-  addLanguage: { parent: "vocabularies", title: "Add a language", render: () => [
+  addLanguage: { parent: "vocabularies", title: "Add a vocabulary", render: () => [
     search("Search by name, such as Spanish or español", "fr"),
     group("", [
+      `<button class="pref-row pref-language" data-sub="newVocabulary"><span class="pref-flag" aria-hidden="true">🇪🇸</span>${text("Spanish", "español")}<span class="pref-value">You have 2</span></button>`,
       language("🇫🇷", "French", "français"),
       language("🇮🇷", "Persian", "فارسی"),
       language("🇿🇦", "Afrikaans", "Afrikaans"),
       language("🇫🇮", "Finnish", "suomi"),
       language("🇳🇱", "Western Frisian", "Frysk")
     ])
+  ] },
+  /* A second vocabulary of a language already kept: nothing tells them apart but the name, so the
+     name another one already shows is refused before anything is written. */
+  newVocabulary: { parent: "addLanguage", title: "Spanish", render: () => [
+    group("", [
+      field("Name", "Spanish"),
+      field("Flag", "", "🇪🇸"),
+      select("Variety", "", ["None", "🇲🇽 Mexico", "🇦🇷 Argentina", "🇪🇸 Spain", "🇨🇴 Colombia", "🇺🇸 United States", "🌐 Latin America"], "🇪🇸 Spain")
+    ], "Your other Spanish vocabulary is called Spanish. Give this one a name of its own.", "", true),
+    group("Written in", [
+      link("Senses defined in", "🇪🇸 Spanish", "definitionLanguage"),
+      link("Translated into", "🇬🇧 English", "glossLanguages"),
+      link("Notes written in", "🇬🇧 English", "definitionLanguage")
+    ]),
+    `<div class="pref-buttons">${button("Cancel")}${button("Add vocabulary", true, true)}</div>`
+  ] },
+  /* The import confirmation, once a file is chosen: each vocabulary in it comes in as a new one under
+     its own name, or joins one of yours of the same language and drops that name. Both are always
+     offered. A starter, where the name is free. */
+  importStarter: { parent: "data", title: "Import", render: () => [
+    group("", [row("acervo-starter-es-MX.zip", "510 entries, 16 topics, 484 pictures")]),
+    group("🇲🇽 Spanish (Mexico) · Everyday words", [
+      radio("As a new vocabulary", "", true),
+      field("Name", "Spanish (Mexico) · Everyday words"),
+      radio("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
+    ], "", "", true),
+    `<div class="pref-buttons">${button("Cancel")}${button("Import 510 entries", true)}</div>`
+  ] },
+  /* Your own export brought back, where the name is taken: a new vocabulary needs another name, and
+     adding to the one it came from is one tap away. */
+  importOwn: { parent: "data", title: "Import", render: () => [
+    group("", [row("acervo-spanish-2026-11-20.zip", "1,412 entries, 24 topics, 1,268 pictures")]),
+    group("🇦🇷 Spanish", [
+      radio("As a new vocabulary", "", true),
+      field("Name", "Spanish"),
+      radio("Add to 🇦🇷 Spanish", "Words you already have are left as they are", false)
+    ], "You already have a vocabulary called Spanish. Name this one differently, or add it to yours.", "", true),
+    `<div class="pref-buttons">${button("Cancel")}${button("Import 1,412 entries", true, true)}</div>`
   ] },
   glossLanguages: { parent: "vocabulary", title: "Translated into", render: () => [
     group("", [

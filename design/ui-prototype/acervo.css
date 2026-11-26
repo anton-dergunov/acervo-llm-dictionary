@@ -2093,6 +2093,11 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
   border-top: 1px solid var(--rule-soft);
 }
 .composer-actions .validation { margin: 0 0 12px; }
+/* Capture asking which vocabulary a word goes in: a question, not a fault, so it is drawn quiet. */
+.which-vocab { margin: 0 0 12px; border-radius: 8px; padding: 13px 16px; background: var(--surface-2); font-size: 14.5px; }
+.which-vocab p { margin: 0 0 10px; }
+.which-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.which-list .tb-btn { gap: 8px; }
 .composer-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .composer-buttons .spacer { flex: 1; }
 .capture-area {
@@ -3504,9 +3509,9 @@ body.framed .map-tool.pointer-only { display: none; }
    stays wherever it already shows, which is everywhere but a phone. */
 /* The prototype moves the map's row into the static top bar, so the bar's own contents step aside. */
 .app.map-open .topbar > :not(.map-bar) { display: none; }
-.map-lang { position: relative; flex: none; }
+.map-lang { position: relative; flex: none; margin-left: auto; }
 .map-lang .lang-btn { height: 34px; }
-.map-lang-menu { right: 0; top: calc(100% + 8px); }
+.map-lang-menu { right: 0; top: calc(100% + 8px); width: max-content; max-width: min(360px, calc(100vw - 32px)); }
 /* The counts go only where there is no room for them — a phone — and nothing is kept for them there:
    Find simply takes the width. */
 

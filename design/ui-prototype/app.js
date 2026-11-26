@@ -3,7 +3,8 @@
    network: buttons that would call the repository or a provider are stubs. */
 
 const state = {
-  lang: "es",
+  /* The vocabulary in view, by id. Its language is `state.lang`, read from it below. */
+  vocab: "vq4es7mk2d9xa1b",
   topic: "all",
   sort: "recent",
   query: "",
@@ -74,7 +75,14 @@ const state = {
 const $  = (sel, root = document) => root.querySelector(sel);
 const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 const topicOf = (key) => TOPICS.find((t) => t.key === key);
-const langOf  = (code) => LANGUAGES.find((l) => l.code === code);
+/* A language's name and flag, where the language itself is meant. */
+const langOf  = (code) => VOCABULARIES.find((l) => l.code === code);
+/* The vocabulary itself. Any number share a language, so everything that is per vocabulary — the
+   list, the selection, loops, stories, the map — goes by its id, and `state.lang` is only ever read:
+   for `lang=` attributes, segmenting, collation and a language's name. */
+const vocabOf = (id) => VOCABULARIES.find((v) => v.id === id);
+const shownName = (v) => v.displayName || v.name;
+Object.defineProperty(state, "lang", { get: () => vocabOf(state.vocab).code });
 const strip   = (s) => String(s).replace(/<[^>]+>/g, "");
 const esc     = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -258,9 +266,9 @@ function renderExternalArticle(x) {
 
 /* ── selection helpers ───────────────────────────────────────────────── */
 
-function inLanguage()  { return LEXEMES.filter((x) => x.language === state.lang); }
-function inboxCount()  { return inLanguage().filter((x) => x.status === "inbox").length; }
-function topicCount(k) { return inLanguage().filter((x) => x.topics.includes(k) && x.status === "active").length; }
+function inVocabulary() { return LEXEMES.filter((x) => x.vocabularyId === state.vocab); }
+function inboxCount()  { return inVocabulary().filter((x) => x.status === "inbox").length; }
+function topicCount(k) { return inVocabulary().filter((x) => x.topics.includes(k) && x.status === "active").length; }
 
 /**
  * Out of the Inbox and into its topics — one word, or the whole tab at once.
@@ -292,7 +300,7 @@ function setAside(ids, aside) {
 }
 
 function visible() {
-  let rows = inLanguage();
+  let rows = inVocabulary();
   const q = state.query.trim().toLowerCase();
   if (q) {
     rows = rows.filter((x) => {
@@ -322,7 +330,7 @@ function visible() {
 function shortGlossOf(x) {
   if (x.shortGloss) return x.shortGloss;
   const first = x.senses[0];
-  const pref = langOf(x.language).glossLangs[0];
+  const pref = vocabOf(x.vocabularyId).glossLangs[0];
   const g = first.glosses.find((y) => y.lang === pref) || first.glosses[0];
   return g ? g.terms.join("; ") : strip(first.definition);
 }
@@ -350,14 +358,14 @@ function pickEntry(key) {
   const m = pickedFromMap[key];
   return m ? { key, headword: m.headword, emoji: m.emoji, gloss: m.gloss, loopable: Boolean(m.gloss), article: null } : null;
 }
-function picked(lang = state.lang) { return (picks[lang] || []).map(pickEntry).filter(Boolean); }
-const isPicked = (key, lang = state.lang) => (picks[lang] || []).includes(key);
+function picked(vocab = state.vocab) { return (picks[vocab] || []).map(pickEntry).filter(Boolean); }
+const isPicked = (key, vocab = state.vocab) => (picks[vocab] || []).includes(key);
 const wordsCount = (n) => `${n} word${n === 1 ? "" : "s"}`;
 
 /* Toggle one word. Says so in a toast only where the bar is not on screen to say it — over an
    article on a phone — since everywhere else the mark and the bar changing is the answer. */
-function togglePick(key, lang = state.lang) {
-  const list = picks[lang] || (picks[lang] = []);
+function togglePick(key, vocab = state.vocab) {
+  const list = picks[vocab] || (picks[vocab] = []);
   const at = list.indexOf(key);
   if (at >= 0) list.splice(at, 1); else list.push(key);
   if (state.openId && !selBarOverArticle()) toast(at >= 0 ? "Removed from your selection" : `Added to your selection · ${wordsCount(list.length)}`);
@@ -365,12 +373,12 @@ function togglePick(key, lang = state.lang) {
   render();
 }
 /* Forgetting is one tap, so it is undoable: a selection can be twenty words gathered over an hour. */
-function clearPicks(lang = state.lang) {
-  const before = (picks[lang] || []).slice();
+function clearPicks(vocab = state.vocab) {
+  const before = (picks[vocab] || []).slice();
   if (!before.length) return;
-  picks[lang] = [];
+  picks[vocab] = [];
   state.selList = false;
-  pickUndo = () => { picks[lang] = before; render(); };
+  pickUndo = () => { picks[vocab] = before; render(); };
   render();
   toast("Selection cleared", { label: "Undo", run: () => pickUndo && pickUndo() });
 }
@@ -420,7 +428,7 @@ function renderRail() {
       <span class="ic">${icon}</span><span class="nm">${name}</span>
       ${count !== null ? `<span class="cnt">${count}</span>` : ""}
     </button>`;
-  const all = inLanguage().filter((x) => x.status === "active").length;
+  const all = inVocabulary().filter((x) => x.status === "active").length;
   /* A topic is "on" only while the list is what is showing, not behind a surface of its own. */
   const listing = !state.map && !state.loops && !state.stories;
   rail.innerHTML =
@@ -435,9 +443,9 @@ function renderRail() {
        without the archived ones, which are kept but are not what the list is for. */
     '<div class="rail-sep"></div>' +
     `<button class="tab ${state.loops ? "on" : ""}" data-surface="loops" title="Loops">
-      <span class="ic">\u266A</span><span class="nm">Loops</span><span class="cnt">${loopsIn(state.lang).filter((one) => !one.archived).length}</span></button>` +
+      <span class="ic">\u266A</span><span class="nm">Loops</span><span class="cnt">${loopsIn(state.vocab).filter((one) => !one.archived).length}</span></button>` +
     `<button class="tab ${state.stories ? "on" : ""}" data-surface="stories" title="Stories">
-      <span class="ic">\u{1F4D6}</span><span class="nm">Stories</span><span class="cnt">${storiesIn(state.lang).filter((one) => !one.archived).length}</span></button>` +
+      <span class="ic">\u{1F4D6}</span><span class="nm">Stories</span><span class="cnt">${storiesIn(state.vocab).filter((one) => !one.archived).length}</span></button>` +
     (nowLoaded() ? railNow() : "");
 }
 
@@ -453,14 +461,17 @@ function railNow() {
   </div>`;
 }
 
+/* The switcher lists vocabularies, not languages: two of one language are two rows, told apart by
+   their names. The button keeps the flag and the language's code. */
 function renderLangButton() {
-  const l = langOf(state.lang);
-  $("#langBtn").innerHTML = `<span class="flag">${l.flag}</span><span class="code">${l.code.toUpperCase()}</span>`;
+  const v = vocabOf(state.vocab);
+  $("#langBtn").innerHTML = `<span class="flag">${v.flag}</span><span class="code">${v.code.toUpperCase()}</span>`;
+  $("#langBtn").setAttribute("aria-label", `Vocabulary: ${shownName(v)}`);
   $("#langMenu").innerHTML =
-    '<div class="label menu-label">Vocabulary language</div>' +
-    LANGUAGES.map((x) => `<button data-lang="${x.code}" class="${x.code === state.lang ? "on" : ""}">
-        <span>${x.flag}</span><span>${x.name}</span>
-        <span class="cnt">${LEXEMES.filter((y) => y.language === x.code).length}</span>
+    '<div class="label menu-label">Vocabulary</div>' +
+    VOCABULARIES.map((x) => `<button data-vocab="${x.id}" class="${x.id === state.vocab ? "on" : ""}">
+        <span>${x.flag}</span><span>${esc(shownName(x))}</span>
+        <span class="cnt">${LEXEMES.filter((y) => y.vocabularyId === x.id).length}</span>
       </button>`).join("");
 }
 
@@ -473,17 +484,17 @@ function renderList() {
   if (q) {
     title = "Search"; icon = "\u{1F50D}";
     const found = rows.length + aside.length;
-    sub = `${found} match${found === 1 ? "" : "es"} for “${esc(q)}” in ${langOf(state.lang).name}`;
+    sub = `${found} match${found === 1 ? "" : "es"} for “${esc(q)}” in ${esc(shownName(vocabOf(state.vocab)))}`;
   } else if (state.topic === "inbox") {
     title = "Inbox"; icon = "\u{1F4E5}";
     sub = "Captured, processed, waiting for your review";
   } else if (state.topic === "all") {
     title = "All words"; icon = "\u{1F4D6}";
-    sub = `${rows.length} in ${langOf(state.lang).name}`;
+    sub = `${rows.length} in ${esc(shownName(vocabOf(state.vocab)))}`;
   } else {
     const t = topicOf(state.topic);
     title = t.name; icon = t.icon;
-    sub = `${rows.length} word${rows.length === 1 ? "" : "s"} in ${langOf(state.lang).name}`;
+    sub = `${rows.length} word${rows.length === 1 ? "" : "s"} in ${esc(shownName(vocabOf(state.vocab)))}`;
   }
 
   // Only the Inbox tab itself, never a search that happens to turn up unreviewed words: those rows
@@ -1358,6 +1369,11 @@ let addDraft = null;
    chooses — it is a provider whose key is missing — and the point of drawing it is that the button
    is dead *with a reason* rather than live and failing when it is finally pressed. */
 let captureBlocked = null;
+/* The vocabularies a capture could go in, while it asks which. A capture goes into the vocabulary in
+   view when the word is in its language, and into the only one of the word's language otherwise; it
+   asks only when there are several of that language and the one in view is not among them.
+   `?add=capture&which=1` shows the question. */
+let captureWhich = null;
 
 /* Photo capture (docs/features/photo-capture.md), drawn on the one photo the prototype has. Never
    where Add opens: the camera turns on only when asked, and here nothing turns on at all — "Take a
@@ -1493,6 +1509,11 @@ function renderSheet() {
           <span>It is set to ${captureBlocked.provider} with the model ${captureBlocked.model},
             and ${captureBlocked.reason}. You can still write the entry yourself.</span>
         </div>` : ""}
+        ${captureWhich ? `<div class="which-vocab" role="group" aria-labelledby="whichTitle">
+          <p id="whichTitle">This looks like ${esc(langOf(captureWhich[0].code).name)}. Which of your ${esc(langOf(captureWhich[0].code).name)} vocabularies does it go in?</p>
+          <div class="which-list">${captureWhich.map((v) => `<button class="tb-btn" data-which="${v.id}">
+            <span aria-hidden="true">${v.flag}</span><span>${esc(shownName(v))}</span></button>`).join("")}</div>
+        </div>` : ""}
         <div class="composer-buttons">
           <span class="spacer"></span>
           <button class="tb-btn" id="switchYaml">Write YAML instead</button>
@@ -1547,7 +1568,7 @@ function openPhotoViewer(src) {
     </section></div>`);
 }
 
-function openSheet(tab) { addTab = tab || "capture"; addDraft = null; state.loops = false; state.map = false; state.add = true; render(); }
+function openSheet(tab) { addTab = tab || "capture"; addDraft = null; captureWhich = null; state.loops = false; state.map = false; state.add = true; render(); }
 function closeSheet()   { state.add = false; $("#composer").innerHTML = ""; render(); }
 
 /* ── toast ───────────────────────────────────────────────────────────── */
@@ -1600,7 +1621,7 @@ const player = { loopId: null, at: 0, playing: false, speed: 1, frame: null, las
    started last. They stop each other, so there is never more than one sounding. */
 let listening = null;   // "loop" | "story" | null
 
-function loopsIn(lang) { return LOOPS.filter((l) => l.language === lang).sort((a, b) => a.position - b.position); }
+function loopsIn(vocab) { return LOOPS.filter((l) => l.vocabularyId === vocab).sort((a, b) => a.position - b.position); }
 function loopItemsOf(id) { return LOOP_ITEMS.filter((r) => r.loopId === id).sort((a, b) => a.position - b.position); }
 function loopCuesOf(id) { return LOOP_CUES.filter((r) => r.loopId === id).sort((a, b) => a.position - b.position); }
 
@@ -1907,7 +1928,7 @@ function madeMatches(kind, id, q) {
 }
 
 function madeList(kind) {
-  const all = kind === "loop" ? loopsIn(state.lang) : storiesIn(state.lang);
+  const all = kind === "loop" ? loopsIn(state.vocab) : storiesIn(state.vocab);
   const q = fold(state.query.trim());
   const matches = new Map();
   const rows = !q ? all : all.filter((one) => {
@@ -1950,7 +1971,7 @@ function madeHead(kind, list) {
   const found = list.rows.length + list.archived.length;
   const many = kind === "loop" ? (n) => (n === 1 ? "loop" : "loops") : (n) => (n === 1 ? "story" : "stories");
   const sub = list.q ? `${found} ${many(found)} with “${esc(state.query.trim())}”`
-    : `${list.rows.length} in ${langOf(state.lang).name}${list.archived.length ? ` · ${list.archived.length} archived` : ""}`;
+    : `${list.rows.length} in ${esc(shownName(vocabOf(state.vocab)))}${list.archived.length ? ` · ${list.archived.length} archived` : ""}`;
   return `<div class="list-head made-head">
       <div>
         <h1><span class="ic">${kind === "loop" ? "\u266A" : "\u{1F4D6}"}</span>${kind === "loop" ? "Loops" : "Stories"}</h1>
@@ -2034,8 +2055,8 @@ function loopRow(loop, hits) {
    made. The reader is a deck rather than a scroller — a part is a picture and a few sentences,
    which is about one screen, so a column of them is a page you scroll to see what a swipe shows
    whole. */
-function storiesIn(lang) {
-  return STORIES.filter((one) => one.language === lang).sort((a, b) => a.position - b.position);
+function storiesIn(vocab) {
+  return STORIES.filter((one) => one.vocabularyId === vocab).sort((a, b) => a.position - b.position);
 }
 function storyOf(id) { return STORIES.find((one) => one.id === id) || null; }
 function partsOf(id) {
@@ -2377,8 +2398,11 @@ const mapGrown = new Set();
 const mapSource = () => (state.mapSample || !window.MAP_LOCAL ? "sample" : "local");
 const mapData = () => {
   const all = mapSource() === "sample" ? window.MAP_SAMPLE : window.MAP_LOCAL;
-  return (all && all[state.lang]) || null;
+  return mapOf(all, vocabOf(state.vocab));
 };
+/* The fixtures hold one map per language, drawn from the owner's own words, so they stand for the
+   first vocabulary of each language; any other has no map in the prototype. */
+const mapOf = (all, v) => (all && VOCABULARIES.find((x) => x.code === v.code) === v && all[v.code]) || null;
 const fold = (s) => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 const count = (n) => n.toLocaleString("en-GB");
 /* What a shortcut is called on this machine, for the zoom buttons' titles. */
@@ -2403,10 +2427,10 @@ function teardownMap() {
 }
 
 function mapShell(d) {
-  const name = langOf(state.lang).name;
-  /* `data-map-lang`, not `data-lang`: the document's click handler reads any `[data-lang]` ancestor as
-     a pick from the language menu, and every tap on the map chose the language again. */
-  return `<section class="map" data-map-lang="${state.lang}" data-src="${mapSource()}" data-state="${state.mapState || ""}">
+  const name = shownName(vocabOf(state.vocab));
+  /* `data-map-vocab`, not `data-vocab`: the document's click handler reads any `[data-vocab]` ancestor
+     as a pick from the vocabulary menu, and every tap on the map chose the vocabulary again. */
+  return `<section class="map" data-map-vocab="${state.vocab}" data-src="${mapSource()}" data-state="${state.mapState || ""}">
     <canvas class="map-canvas" role="img" aria-label="A map of your ${esc(name)} words, arranged by meaning"></canvas>
     <div class="map-top">
       <button class="icon-btn" id="mapClose" aria-label="Back to your words">${ICON.back}</button>
@@ -2415,18 +2439,18 @@ function mapShell(d) {
         <input id="mapFind" type="search" placeholder="Find a word on the map" autocomplete="off" spellcheck="false" aria-label="Find a word on the map">
         <ol class="map-hits" id="mapHits" hidden></ol>
       </div>
-      <!-- The map's own language switcher: the top bar that holds the global one is hidden here, and
-           which language a map is of is the one thing that must never be in doubt. Its items are
-           ordinary [data-lang] buttons, so the document's handler does exactly what the global menu
+      <!-- The map's own vocabulary switcher: the top bar that holds the global one is hidden here, and
+           which vocabulary a map is of is the one thing that must never be in doubt. Its items are
+           ordinary [data-vocab] buttons, so the document's handler does exactly what the global menu
            does. -->
       <div class="map-lang">
-        <button class="tb-btn lang-btn" id="mapLangBtn" aria-haspopup="menu" aria-label="Vocabulary language">
-          <span class="flag">${langOf(state.lang).flag}</span><span class="code">${state.lang.toUpperCase()}</span></button>
+        <button class="tb-btn lang-btn" id="mapLangBtn" aria-haspopup="menu" aria-label="Vocabulary: ${esc(name)}">
+          <span class="flag">${vocabOf(state.vocab).flag}</span><span class="code">${state.lang.toUpperCase()}</span></button>
         <div class="menu map-lang-menu" id="mapLangMenu">
-          <div class="label menu-label">Vocabulary language</div>
-          ${LANGUAGES.map((x) => `<button data-lang="${x.code}" class="${x.code === state.lang ? "on" : ""}">
-            <span>${x.flag}</span><span>${x.name}</span>
-            <span class="cnt">${count(((mapSource() === "sample" ? window.MAP_SAMPLE : window.MAP_LOCAL) || {})[x.code]?.words || 0)}</span>
+          <div class="label menu-label">Vocabulary</div>
+          ${VOCABULARIES.map((x) => `<button data-vocab="${x.id}" class="${x.id === state.vocab ? "on" : ""}">
+            <span>${x.flag}</span><span>${esc(shownName(x))}</span>
+            <span class="cnt">${count(mapOf(mapSource() === "sample" ? window.MAP_SAMPLE : window.MAP_LOCAL, x)?.words || 0)}</span>
           </button>`).join("")}
         </div>
       </div>
@@ -2447,7 +2471,7 @@ function mapShell(d) {
 function renderMap() {
   const d = mapData();
   let root = $("#composer .map");
-  const stale = !root || root.dataset.mapLang !== state.lang || root.dataset.src !== mapSource() ||
+  const stale = !root || root.dataset.mapVocab !== state.vocab || root.dataset.src !== mapSource() ||
     root.dataset.state !== (state.mapState || "");
   if (stale) {
     teardownMap();
@@ -2461,7 +2485,7 @@ function renderMap() {
 
 /* The map's row goes into the top bar itself, so the bar keeps its own box, surface and rule and the
    row is its contents — search, Add and sync are hidden while it is there (`acervo.css`). Its Back and
-   language menu are wired here, for every state of the map, the first draw and "no map yet" included. */
+   vocabulary menu are wired here, for every state of the map, the first draw and "no map yet" included. */
 function mountMapBar(root) {
   const bar = el('<div class="map-bar"></div>');
   bar.appendChild($(".map-top", root));
@@ -2481,7 +2505,7 @@ function startMap(root, d) {
     note.hidden = false;
     note.className = "map-note center";
     note.innerHTML = `<h3>No map yet</h3><p>Your server draws the map, and this device has not reached it
-      since you added words in this language. It will appear here the first time it can.</p>`;
+      since you added words to this vocabulary. It will appear here the first time it can.</p>`;
     return;
   }
   if (state.mapState === "drawing") {
@@ -2491,25 +2515,25 @@ function startMap(root, d) {
       <h3>Drawing your map</h3><p>The first time takes about a minute, while every meaning is read.
       After that the map opens at once.</p>`;
     /* In the application this ends when the artifact arrives; here, after a moment, it grows. */
-    setTimeout(() => { if (state.map && state.mapState === "drawing") { state.mapState = null; mapGrown.delete(state.lang); render(); } }, 2600);
+    setTimeout(() => { if (state.map && state.mapState === "drawing") { state.mapState = null; mapGrown.delete(state.vocab); render(); } }, 2600);
     return;
   }
   meaningMap = MeaningMap($(".map-canvas", root), {
     onSelect: (point, i) => { state.mapSel = i; paintPeek(); if (i >= 0) meaningMap.reveal(i); },
-    onCamera: (cam) => { mapCameras[state.lang] = cam; },
+    onCamera: (cam) => { mapCameras[state.vocab] = cam; },
     onRegion: () => {}
   });
   meaningMap.setStyle(state.mapStyle);
   meaningMap.setLabels(state.mapLabels);
-  const returning = mapCameras[state.lang];
-  meaningMap.setData(d, returning ? { camera: returning } : { animate: mapGrown.has(state.lang) ? null : "grow" });
-  mapGrown.add(state.lang);
+  const returning = mapCameras[state.vocab];
+  meaningMap.setData(d, returning ? { camera: returning } : { animate: mapGrown.has(state.vocab) ? null : "grow" });
+  mapGrown.add(state.vocab);
   if (state.mapSel >= 0 && d.points[state.mapSel]) meaningMap.select(state.mapSel);
   paintChosen(d);
   if (!d.regions.length) {
     note.hidden = false;
     note.className = "map-note";
-    note.textContent = `Regions appear once a language has about 150 meanings. ${langOf(state.lang).name} has ${count(d.senses)}.`;
+    note.textContent = `Regions appear once a vocabulary has about 150 meanings. ${esc(shownName(vocabOf(state.vocab)))} has ${count(d.senses)}.`;
   }
   wireMap(root, d);
 }
@@ -2589,7 +2613,7 @@ function paintPeek() {
     return;
   }
   const siblings = d.points.map((q, i) => [q, i]).filter(([q]) => q.w === p.w);
-  const vocab = langOf(state.lang);
+  const vocab = vocabOf(state.vocab);
   peek.hidden = false;
   peek.innerHTML = `
     <div class="peek-head">
@@ -2626,7 +2650,7 @@ function paintPeek() {
    of senses. Indices, because the map component knows nothing of lexemes. */
 function paintChosen(d) {
   if (!meaningMap || !d) return;
-  const keys = new Set(picks[state.lang] || []);
+  const keys = new Set(picks[state.vocab] || []);
   const chosen = new Set();
   if (keys.size) d.points.forEach((p, i) => { if (keys.has(pointKey(p))) chosen.add(i); });
   meaningMap.choose(chosen);
@@ -2642,7 +2666,7 @@ function togglePointPick(p) {
 function openFromMap(p) {
   if (!p) return;
   const want = fold(p.headword);
-  const hit = LEXEMES.find((x) => x.language === state.lang &&
+  const hit = LEXEMES.find((x) => x.vocabularyId === state.vocab &&
     (fold(x.headword) === want || fold(x.lemma) === want));
   if (!hit) {
     toast(`In the application this opens “${p.headword}”. The prototype has articles for only a few words.`);
@@ -2701,7 +2725,7 @@ function renderLoops() {
 /* The bar at the foot for a phone or a tablet, and the chip in the top bar for a desktop. Two skins
    of one thing, so what they say can never disagree; `acervo.css` picks which is drawn. */
 function renderLoopBar() {
-  const loops = loopsIn(state.lang).filter((one) => !one.archived);
+  const loops = loopsIn(state.vocab).filter((one) => !one.archived);
   if (!nowLoaded()) {
     /* Split in two, and **no `+`**: both surfaces carry their own Make button in their own header,
        and a bar whose job is to be a way in should not also be a way to start something. */
@@ -2713,7 +2737,7 @@ function renderLoopBar() {
       <button class="madebar-half" id="openStories">
         <span class="madebar-ic">\u{1F4D6}</span>
         <span class="loopbar-title">Stories</span>
-        <span class="loopbar-sub">${storiesIn(state.lang).filter((one) => !one.archived).length}</span>
+        <span class="loopbar-sub">${storiesIn(state.vocab).filter((one) => !one.archived).length}</span>
       </button>
       <button class="madebar-half" id="openMap">
         <span class="madebar-ic">${ICON.map}</span>
@@ -2872,7 +2896,7 @@ function renderSelBar() {
     <button class="tb-btn selbar-make" id="selStory" aria-label="Make a story from these words"><span class="selbar-ic" aria-hidden="true">\u{1F4D6}</span><span>Story</span></button>
     <button class="icon-btn selbar-clear" id="selClear" aria-label="Forget the selection" title="Forget the selection">${ICON.close}</button>
     ${state.selList ? `<div class="menu open sel-menu" role="menu" aria-label="Selected words">
-      <div class="label menu-label">Your selection · ${esc(langOf(state.lang).name)}</div>
+      <div class="label menu-label">Your selection · ${esc(shownName(vocabOf(state.vocab)))}</div>
       <div class="sel-items">${words.map((w) => `<div class="sel-item">
         <button class="sel-open" data-sel-open="${w.key}" role="menuitem">
           <span class="plate" aria-hidden="true">${w.emoji || "\u{1F4C4}"}</span>
@@ -3052,7 +3076,7 @@ function drawOrder(kind, order, seed) {
   const used = new Map();
   const rows = kind === "loop" ? LOOP_ITEMS.map((i) => [i.loopId, i.lexemeId]) : STORY_WORDS.map((w) => [w.storyId, w.lexemeId]);
   for (const [, id] of new Map(rows.map(([owner, id]) => [`${owner}:${id}`, [owner, id]])).values()) used.set(id, (used.get(id) || 0) + 1);
-  const pool = LEXEMES.filter((x) => x.language === state.lang && x.status !== "aside" && MAKE[kind].usable(x)
+  const pool = LEXEMES.filter((x) => x.vocabularyId === state.vocab && x.status !== "aside" && MAKE[kind].usable(x)
     && (state.topic === "all" || x.topics.includes(state.topic)));
   let s = seed;
   const shuffled = pool.map((x) => { s = (s * 1103515245 + 12345) % 2147483648; return [s, x]; }).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
@@ -3650,7 +3674,7 @@ $("#main").addEventListener("click", (ev) => {
   if (dropWord) {
     const id = dropWord.dataset.wordDelete;
     LEXEMES.splice(LEXEMES.findIndex((row) => row.id === id), 1);
-    Object.keys(picks).forEach((lang) => { picks[lang] = picks[lang].filter((key) => key !== id); });
+    Object.keys(picks).forEach((vocab) => { picks[vocab] = picks[vocab].filter((key) => key !== id); });
     state.rowMenu = null;
     render();
     toast("Deleted everywhere \u2014 the entry is kept as a tombstone");
@@ -3869,12 +3893,21 @@ function wireSheet() {
   const pb = $("#processBtn");
   // The real app calls the capture route and lands on the rendered proposal. Here there is nothing
   // to call, so a canned entry stands in for one — the point being the surface, not the generation.
-  if (pb) pb.onclick = () => {
+  const land = (vocab) => {
+    captureWhich = null;
     addDraft = LEXEMES[0];
     addTab = "article";
     renderSheet();
-    toast("Generation is not wired up in this prototype — showing a stand-in entry");
+    toast(`Generation is not wired up in this prototype — a stand-in entry, for ${shownName(vocab)}`);
   };
+  if (pb) pb.onclick = () => {
+    const word = LEXEMES[0].language, here = vocabOf(state.vocab);
+    const fits = VOCABULARIES.filter((v) => v.code === word);
+    if (here.code === word || fits.length === 1) { land(here.code === word ? here : fits[0]); return; }
+    captureWhich = fits;
+    renderSheet();
+  };
+  $("#composer").querySelectorAll("[data-which]").forEach((b) => { b.onclick = () => land(vocabOf(b.dataset.which)); });
   const sd = $("#saveDraft");
   if (sd) sd.onclick = () => { toast("Saved to Inbox — prototype only"); setTimeout(closeSheet, 500); };
   const read = () => { photoStage = "read"; renderSheet(); };
@@ -3978,7 +4011,7 @@ document.addEventListener("click", (ev) => {
     const i = found >= 0 ? found : d ? d.points.findIndex((p) => fold(p.headword) === want) : -1;
     if (i < 0) { toast("This word is not on the prototype's map"); return; }
     state.mapSel = i;
-    mapGrown.add(state.lang);
+    mapGrown.add(state.vocab);
     openMap();
     meaningMap && meaningMap.select(i, { fly: true });
     return;
@@ -4058,9 +4091,9 @@ document.addEventListener("click", (ev) => {
   }
 
   if (hit("#langBtn")) { $("#langMenu").classList.toggle("open"); return; }
-  const langItem = hit("[data-lang]");
-  if (langItem) {
-    state.lang = langItem.dataset.lang; state.topic = "all"; state.openId = null; state.mapSel = -1;
+  const vocabItem = hit("[data-vocab]");
+  if (vocabItem) {
+    state.vocab = vocabItem.dataset.vocab; state.topic = "all"; state.openId = null; state.mapSel = -1;
     $("#langMenu").classList.remove("open"); render(); return;
   }
   $("#langMenu").classList.remove("open");
@@ -4184,7 +4217,7 @@ $("#harness").addEventListener("click", (ev) => {
     paintSwitches(); return;
   }
   else if (b.id === "mapUpdateBtn") { if (!state.map) openMap(); playMapUpdate(); paintSwitches(); return; }
-  else if (b.id === "mapSampleBtn") { state.mapSample = !state.mapSample; state.mapSel = -1; delete mapCameras[state.lang]; mapGrown.delete(state.lang); }
+  else if (b.id === "mapSampleBtn") { state.mapSample = !state.mapSample; state.mapSel = -1; delete mapCameras[state.vocab]; mapGrown.delete(state.vocab); }
   else if (b.id === "speedBtn") { player.speed = player.speed === 1 ? 4 : player.speed === 4 ? 12 : 1; }
 
   else if (b.dataset.frame) {
@@ -4370,7 +4403,7 @@ function heldWord(hit, surface) {
     if (told) return { id: told.lexemeId, headword: told.sourceText, gloss: told.gloss, noArticle: true };
   }
   const want = fold(hit.word);
-  const own = LEXEMES.find((x) => x.language === state.lang
+  const own = LEXEMES.find((x) => x.vocabularyId === state.vocab
     && [x.lemma, x.headword, x.headword.replace(ARTICLES, "")].some((form) => fold(form) === want));
   return own ? { id: own.id, headword: own.headword, gloss: own.shortGloss } : null;
 }
@@ -4624,7 +4657,7 @@ if (params.get("open")) {
   const want = params.get("open").toLowerCase();
   const hit = LEXEMES.find((x) => x.id === want || x.headword.toLowerCase() === want || x.lemma.toLowerCase() === want);
   const mode = params.get("mode");
-  if (hit) { state.openId = hit.id; state.lang = hit.language; state.mode = mode === "yaml" || mode === "edit" ? mode : "read"; }
+  if (hit) { state.openId = hit.id; state.vocab = hit.vocabularyId; state.mode = mode === "yaml" || mode === "edit" ? mode : "read"; }
   // `ask=half|full` and `review=1` make the conversation and a proposal under review reachable for
   // a screenshot, the way `mode` already does for the editor.
   const ask = params.get("ask");
@@ -4645,9 +4678,9 @@ if (params.get("loops") === "1" || params.get("loop") || params.get("t")) {
   state.loops = true;
   const wanted = params.get("loop");
   const picked = wanted ? LOOPS.find((l) => l.id === wanted)
-    : (params.get("t") || params.get("play")) ? loopsIn(state.lang).find(loopIsReady) : null;
+    : (params.get("t") || params.get("play")) ? loopsIn(state.vocab).find(loopIsReady) : null;
   if (picked) {
-    state.lang = picked.language;
+    state.vocab = picked.vocabularyId;
     state.loopOpen = picked.id;
     loopLoad(picked.id, { at: Number(params.get("t")) || 0 });
   }
@@ -4672,7 +4705,7 @@ if (params.get("tr") === "on") state.sayTranslations = true;
    the page it opens on (from 0, the last being the words), and `reveal=1` turns every translation over. */
 if (params.get("stories") === "1" || params.get("story")) {
   state.stories = true;
-  const written = storiesIn(state.lang).filter((one) => partsOf(one.id).length);
+  const written = storiesIn(state.vocab).filter((one) => partsOf(one.id).length);
   const picked = params.get("story") ? written[Number(params.get("story")) - 1] : null;
   if (picked) {
     state.storyOpen = picked.id;
@@ -4688,6 +4721,7 @@ if (params.get("numbers") === "on") editorNumbers = true;
 if (params.get("theme")) setTheme(params.get("theme"));
 if (["read", "screenshot"].includes(params.get("photo"))) photoStage = params.get("photo");
 if (params.get("add")) openSheet(params.get("add"));
+if (params.get("which") === "1") { captureWhich = VOCABULARIES.filter((v) => v.code === "es"); render(); }
 if (params.get("frame") === "phone" || params.get("frame") === "tablet") {
   const f = params.get("frame");
   document.body.className = `framed ${f}`;
@@ -4697,11 +4731,12 @@ if (params.get("frame") === "phone" || params.get("frame") === "tablet") {
 const size = (params.get("size") || "").match(/^(\d+)x(\d+)$/);
 if (size) Object.assign($(".viewport").style, { width: `${size[1]}px`, height: `${size[2]}px` });
 
-/* The map: `map=1` opens it; `lang=` picks the language; `style=` and `labels=` the two choices;
+/* The map: `map=1` opens it; `vocab=` picks the vocabulary, and `lang=` the first of a language; `style=` and `labels=` the two choices;
    `focus=<headword>` peeks at a word and flies to it; `z=` zooms in from the whole map; `sample=1`
    uses the committed fixture; `mapstate=drawing|offline` shows the first draw or a device that has
    never reached the server; `update=1` plays a new layout arriving. */
-if (params.get("lang") && langOf(params.get("lang"))) state.lang = params.get("lang");
+if (params.get("lang") && langOf(params.get("lang"))) state.vocab = langOf(params.get("lang")).id;
+if (params.get("vocab") && vocabOf(params.get("vocab"))) state.vocab = params.get("vocab");
 if (MAP_STYLES.includes(params.get("style"))) state.mapStyle = params.get("style");
 if (MAP_LABELS.includes(params.get("labels"))) state.mapLabels = params.get("labels");
 if (params.get("sample") === "1") state.mapSample = true;
@@ -4713,9 +4748,9 @@ if (params.get("map") === "1" || params.get("focus") || params.get("mapstate")) 
   if (d && want) {
     state.mapSel = d.points.findIndex((p) => fold(p.headword) === want);
     if (state.mapSel < 0) state.mapSel = d.points.findIndex((p) => fold(p.headword).startsWith(want));
-    mapGrown.add(state.lang);
+    mapGrown.add(state.vocab);
   }
-  if (params.get("z") || params.get("update") === "1") mapGrown.add(state.lang);
+  if (params.get("z") || params.get("update") === "1") mapGrown.add(state.vocab);
 }
 
 /* The made lists and listening: `msort=recent|hard|rare|least` the order of both lists; `q=` a search on

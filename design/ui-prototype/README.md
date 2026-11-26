@@ -52,6 +52,17 @@ The Write sheet opens over a Mandarin word: `?open=图书馆&write=trace` (or `w
 brush beside its listen button. It is a still, `writing.js`, with 书's real strokes in each mode; the
 checking is the application's ([`../../docs/features/writing.md`](../../docs/features/writing.md)).
 
+## Vocabularies
+
+The menu in the top bar lists vocabularies, not languages: any number may share a language, and a
+word names its vocabulary by id. The fixture keeps two Spanish ones, the owner's own and a starter,
+`Spanish (Mexico) · Everyday words`, told apart by nothing but the name. `?vocab=<id>` opens one, and
+`?lang=en` the first of a language. `?add=capture&which=1` shows capture asking which vocabulary a
+word goes in: it asks only when the word's language has several and the one in view is not among
+them. In Settings, `?page=vocabularies&sub=newVocabulary` is a second vocabulary of a language whose
+name is taken, and `?page=data&sub=importStarter` and `sub=importOwn` the import confirmation: each
+vocabulary in a file comes in as a new one, or joins one of yours.
+
 ## Loops and stories: the lists and listening
 
 Both lists are drawn the same way. **Starred ones lead, archived ones fold**: a starred row carries a
@@ -127,9 +138,9 @@ in the peek marks every sense of the word.
 
 ## The map
 
-`?map=1` opens the meaning map (`docs/features/meaning-map.md`): one language's senses, laid out by meaning,
+`?map=1` opens the meaning map (`docs/features/meaning-map.md`): one vocabulary's senses, laid out by meaning,
 with regions named at two levels. It is entered from the rail and, on a phone, from the third
-segment of the foot bar, and it follows the language menu. The application draws the `atlas` style;
+segment of the foot bar, and it follows the vocabulary menu. The application draws the `atlas` style;
 the other two exist only behind the harness switch.
 
 It draws the owner's real map when `map-data.local.js` exists, and the committed sample (about 85
@@ -144,7 +155,7 @@ uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -r requi
 `label_model.py` adds the model-written region names; see that directory's README.
 
 On the map the top bar carries the map's own row in place of search, Add and sync: Back, Map, the
-counts (not on a phone), Find and its own language switcher. ⌘K leaves the map for search. Each
+counts (not on a phone), Find and its own vocabulary switcher. ⌘K leaves the map for search. Each
 sense of an article has a button that shows it on the map, for the words the map holds.
 
 Pinch or scroll with two fingers to move; pinch, ⌘ + scroll or a mouse wheel to zoom; double-tap to
@@ -165,7 +176,7 @@ The harness switches are the questions this prototype exists to answer by lookin
   the new ones appear with a ring.
 - **Sample** — the committed sample, even when the real map is present.
 
-Deep links: `map=1`, `lang=en`, `style=clouds`, `labels=terms`, `focus=cobrar` (peek at a word and
+Deep links: `map=1`, `vocab=<id>` or `lang=en`, `style=clouds`, `labels=terms`, `focus=cobrar` (peek at a word and
 fly to it), `z=4` (zoom from the whole map), `update=1`, `sample=1`, and `mapstate=drawing` or
 `mapstate=offline` for the first draw and for a device that has never reached the server. Only the
 words that also exist in `data.js` open a real article from the peek; Back then returns to the map

@@ -13,10 +13,15 @@
    An example with a `clip` is a subtitle example: the sentence is the corpus's, the clip is where it
    was said. `approved` is gone from the picture because it carried no information. */
 
-const LANGUAGES = [
-  { code: "es",      flag: "\u{1F1EA}\u{1F1F8}", name: "Spanish",             definitionLang: "es", glossLangs: ["en"], notesLang: "en" },
-  { code: "en",      flag: "\u{1F1EC}\u{1F1E7}", name: "English",             definitionLang: "en", glossLangs: ["ru"], notesLang: "ru" },
-  { code: "zh-Hans", flag: "\u{1F1E8}\u{1F1F3}", name: "Chinese (Simplified)", definitionLang: "en", glossLangs: ["ru", "en"], notesLang: "ru" }
+/* The vocabularies, as `web/src/domain.ts` has them: a record with its own id, of which any number may
+   share a language. A word names its vocabulary by `vocabularyId` and keeps its `language` beside it.
+   `name` is the language's name; `displayName` is the owner's name for the vocabulary, or null for
+   the language's own. The second Spanish one is a starter, told apart by nothing but its name. */
+const VOCABULARIES = [
+  { id: "vq4es7mk2d9xa1b", code: "es",      flag: "\u{1F1EA}\u{1F1F8}", name: "Spanish",             displayName: null, definitionLang: "es", glossLangs: ["en"], notesLang: "en" },
+  { id: "vm8mx3rt6w2kc5p", code: "es",      flag: "\u{1F1F2}\u{1F1FD}", name: "Spanish",             displayName: "Spanish (Mexico) · Everyday words", definitionLang: "en", glossLangs: ["en"], notesLang: "en" },
+  { id: "vb2en5hz8q1ny4s", code: "en",      flag: "\u{1F1EC}\u{1F1E7}", name: "English",             displayName: null, definitionLang: "en", glossLangs: ["ru"], notesLang: "ru" },
+  { id: "vc6zh9pl4j7ve3t", code: "zh-Hans", flag: "\u{1F1E8}\u{1F1F3}", name: "Chinese (Simplified)", displayName: null, definitionLang: "en", glossLangs: ["ru", "en"], notesLang: "ru" }
 ];
 
 const TOPICS = [
@@ -37,7 +42,7 @@ const TOPICS = [
 
 const LEXEMES = [
   {
-    id: "k3m91xq7d0a2vbe", language: "es",
+    id: "k3m91xq7d0a2vbe", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "picar", lemma: "picar", reading: null,
     pos: "verb", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F336}️", topics: ["food", "health", "actions"],
@@ -130,7 +135,7 @@ const LEXEMES = [
 
   /* ── copied from a real account, 15 Sep 2026 ── */
   {
-    id: "3vu6u4sqccfs6fl", language: "es",
+    id: "3vu6u4sqccfs6fl", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "la obra", lemma: "obra", reading: null,
     pos: "noun", gender: "feminine", register: "neutral", dialect: null,
     emoji: "\u{1F3AD}", topics: [],
@@ -186,7 +191,7 @@ const LEXEMES = [
   },
 
   {
-    id: "9tmbiepw0yjey3j", language: "es",
+    id: "9tmbiepw0yjey3j", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "animarse", lemma: "animarse", reading: null,
     pos: "verb", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F9D7}", topics: [],
@@ -225,7 +230,7 @@ const LEXEMES = [
   },
 
   {
-    id: "b7t42naz9c6uk1p", language: "es",
+    id: "b7t42naz9c6uk1p", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "desmayarse", lemma: "desmayarse", reading: null,
     pos: "verb", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F635}‍\u{1F4AB}", topics: ["health", "actions"],
@@ -269,7 +274,7 @@ const LEXEMES = [
   },
 
   {
-    id: "q8v53mrb2e7wl4d", language: "es",
+    id: "q8v53mrb2e7wl4d", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "la sobremesa", lemma: "sobremesa", reading: null,
     pos: "noun", gender: "feminine", register: "neutral", dialect: null,
     emoji: "☕", topics: ["culture", "food", "social"],
@@ -305,7 +310,7 @@ const LEXEMES = [
   },
 
   {
-    id: "z1c64pdw8f3hj7s", language: "es",
+    id: "z1c64pdw8f3hj7s", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "que se mejoren", lemma: "que se mejoren", reading: null,
     pos: "expression", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F496}", topics: ["health", "social"],
@@ -338,7 +343,7 @@ const LEXEMES = [
   },
 
   {
-    id: "m5r18kts4b9gy2n", language: "es",
+    id: "m5r18kts4b9gy2n", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "el atasco", lemma: "atasco", reading: null,
     pos: "noun", gender: "masculine", register: "neutral", dialect: "es-ES",
     emoji: "\u{1F697}", topics: ["travel", "places"],
@@ -361,7 +366,7 @@ const LEXEMES = [
   },
 
   {
-    id: "w9h27fjc5d1qx8v", language: "es",
+    id: "w9h27fjc5d1qx8v", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "currar", lemma: "currar", reading: null,
     pos: "verb", gender: null, register: "colloquial", dialect: "es-ES",
     emoji: "\u{1F477}", topics: ["slang", "actions"],
@@ -384,7 +389,7 @@ const LEXEMES = [
   },
 
   {
-    id: "p2n85gvx7k4rt3c", language: "es",
+    id: "p2n85gvx7k4rt3c", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "espolvorear", lemma: "espolvorear", reading: null,
     pos: "verb", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F9C2}", topics: ["food", "actions"],
@@ -407,7 +412,7 @@ const LEXEMES = [
   },
 
   {
-    id: "d4y96wlq1m8sz5b", language: "es",
+    id: "d4y96wlq1m8sz5b", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "tirarse panza arriba", lemma: "tirarse panza arriba", reading: null,
     pos: "phrase", gender: null, register: "colloquial", dialect: null,
     emoji: "\u{1F3D6}️", topics: ["travel", "actions"],
@@ -430,7 +435,7 @@ const LEXEMES = [
   },
 
   {
-    id: "f6k39xzb8n2ph7m", language: "es",
+    id: "f6k39xzb8n2ph7m", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "la balsa", lemma: "balsa", reading: null,
     pos: "noun", gender: "feminine", register: "neutral", dialect: null,
     emoji: "\u{1F6F6}", topics: ["travel", "nature"],
@@ -454,7 +459,7 @@ const LEXEMES = [
   },
 
   {
-    id: "n7s24bqk6v9dm3t", language: "es",
+    id: "n7s24bqk6v9dm3t", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "ponerse malo", lemma: "ponerse malo", reading: null,
     pos: "phrase", gender: null, register: "colloquial", dialect: "es-ES",
     emoji: "\u{1F912}", topics: ["health"],
@@ -472,7 +477,7 @@ const LEXEMES = [
   },
 
   {
-    id: "v8j51ctr3x7bn6q", language: "es",
+    id: "v8j51ctr3x7bn6q", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "el tobillo", lemma: "tobillo", reading: null,
     pos: "noun", gender: "masculine", register: "neutral", dialect: null,
     emoji: "\u{1F9B5}", topics: ["health", "appearance"],
@@ -490,7 +495,7 @@ const LEXEMES = [
   },
 
   {
-    id: "g3q76mwd9j5fk1z", language: "es",
+    id: "g3q76mwd9j5fk1z", vocabularyId: "vq4es7mk2d9xa1b", language: "es",
     headword: "la azafata", lemma: "azafata", reading: null,
     pos: "noun", gender: "feminine", register: "neutral", dialect: null,
     emoji: "\u{1F469}‍✈️", topics: ["travel", "social"],
@@ -508,7 +513,79 @@ const LEXEMES = [
   },
 
   {
-    id: "h2l83nfy7c4vs9r", language: "en",
+    id: "x1c7lr4mz9qe2ta", vocabularyId: "vm8mx3rt6w2kc5p", language: "es",
+    headword: "el celular", lemma: "celular", reading: null,
+    pos: "noun", gender: "masculine", register: "neutral", dialect: null,
+    emoji: "\u{1F4F1}", topics: ["technology"],
+    status: "active", shortGloss: "mobile phone",
+    primaryGloss: "the mobile phone", emotion: "plainly",
+    ipa: "/seluˈlar/", notes: [],
+    createdAt: "2026-11-26", editedAt: "2026-11-26", revision: 1,
+    senses: [{
+      definition: "A small telephone you carry with you.",
+      definitionLang: "en", glosses: [{ lang: "en", terms: ["mobile phone", "cell phone"] }], domain: null,
+      examples: [{ text: "Se me olvidó el <b>celular</b> en la casa.", translation: "I left my <b>phone</b> at home.",
+        origin: "llm", modelId: "gemini-3-flash", approved: true, audio: false }], images: []
+    }],
+    attestations: [], study: null
+  },
+
+  {
+    id: "x5k2rr8nd3wb6cv", vocabularyId: "vm8mx3rt6w2kc5p", language: "es",
+    headword: "el carro", lemma: "carro", reading: null,
+    pos: "noun", gender: "masculine", register: "neutral", dialect: null,
+    emoji: "\u{1F697}", topics: ["travel"],
+    status: "active", shortGloss: "car",
+    primaryGloss: "the car", emotion: "plainly",
+    ipa: "/ˈkaro/", notes: [],
+    createdAt: "2026-11-26", editedAt: "2026-11-26", revision: 1,
+    senses: [{
+      definition: "A road vehicle with four wheels and an engine.",
+      definitionLang: "en", glosses: [{ lang: "en", terms: ["car"] }], domain: null,
+      examples: [{ text: "Vamos en <b>carro</b> al centro.", translation: "We're going downtown by <b>car</b>.",
+        origin: "llm", modelId: "gemini-3-flash", approved: true, audio: false }], images: []
+    }],
+    attestations: [], study: null
+  },
+
+  {
+    id: "x9p4tc1hk6sv8ma", vocabularyId: "vm8mx3rt6w2kc5p", language: "es",
+    headword: "platicar", lemma: "platicar", reading: null,
+    pos: "verb", gender: null, register: "neutral", dialect: null,
+    emoji: "\u{1F4AC}", topics: ["social"],
+    status: "active", shortGloss: "to chat",
+    primaryGloss: "to chat", emotion: "plainly",
+    ipa: "/platiˈkar/", notes: [],
+    createdAt: "2026-11-26", editedAt: "2026-11-26", revision: 1,
+    senses: [{
+      definition: "To talk with someone in a relaxed, friendly way.",
+      definitionLang: "en", glosses: [{ lang: "en", terms: ["to chat", "to talk"] }], domain: null,
+      examples: [{ text: "Nos quedamos <b>platicando</b> hasta tarde.", translation: "We stayed up <b>chatting</b> until late.",
+        origin: "llm", modelId: "gemini-3-flash", approved: true, audio: false }], images: []
+    }],
+    attestations: [], study: null
+  },
+
+  {
+    id: "x3m8lb5qa2dr7fu", vocabularyId: "vm8mx3rt6w2kc5p", language: "es",
+    headword: "la alberca", lemma: "alberca", reading: null,
+    pos: "noun", gender: "feminine", register: "neutral", dialect: null,
+    emoji: "\u{1F3CA}", topics: ["places"],
+    status: "active", shortGloss: "swimming pool",
+    primaryGloss: "the swimming pool", emotion: "plainly",
+    ipa: "/alˈβeɾka/", notes: [],
+    createdAt: "2026-11-26", editedAt: "2026-11-26", revision: 1,
+    senses: [{
+      definition: "A pool of water built for swimming.",
+      definitionLang: "en", glosses: [{ lang: "en", terms: ["swimming pool"] }], domain: null,
+      examples: [{ text: "Los niños están en la <b>alberca</b>.", translation: "The kids are in the <b>pool</b>.",
+        origin: "llm", modelId: "gemini-3-flash", approved: true, audio: false }], images: []
+    }],
+    attestations: [], study: null
+  },
+
+  {
+    id: "h2l83nfy7c4vs9r", vocabularyId: "vb2en5hz8q1ny4s", language: "en",
     headword: "turmoil", lemma: "turmoil", reading: null,
     pos: "noun", gender: null, register: "formal", dialect: null,
     emoji: "\u{1F32A}️", topics: ["emotions", "misc"],
@@ -535,7 +612,7 @@ const LEXEMES = [
   },
 
   {
-    id: "c9d47ztk2h6mp8w", language: "en",
+    id: "c9d47ztk2h6mp8w", vocabularyId: "vb2en5hz8q1ny4s", language: "en",
     headword: "hoax", lemma: "hoax", reading: null,
     pos: "noun", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F3AD}", topics: ["culture", "misc"],
@@ -554,7 +631,7 @@ const LEXEMES = [
   },
 
   {
-    id: "t5b62vqj9n3xw7f", language: "zh-Hans",
+    id: "t5b62vqj9n3xw7f", vocabularyId: "vc6zh9pl4j7ve3t", language: "zh-Hans",
     headword: "图书馆", lemma: "图书馆", reading: "tú shū guǎn",
     pos: "noun", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F4DA}", topics: ["places", "culture"],
@@ -793,13 +870,13 @@ const endOf = (loopId) => {
 
 const LOOPS = [
   {
-    id: "lp7k2md90xqv4b1", language: "es", position: 1,
+    id: "lp7k2md90xqv4b1", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 1,
     styleId: "gentle-game", seed: 104740, engineVersion: "0.7.0", bedFingerprint: "f35282aaf3c40245",
     format: "classic", switches: {}, fallbackFrom: null, audioRef: "loops/es/lp7k2md90xqv4b1-6ad2f019.mp3", audioMime: "audio/mpeg",
     durationSeconds: endOf("lp7k2md90xqv4b1"), starred: false, archived: false, createdAt: "2026-09-16", editedAt: "2026-09-16"
   },
   {
-    id: "lp3f81nzc6yh5t2", language: "es", position: 2,
+    id: "lp3f81nzc6yh5t2", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 2,
     styleId: "acoustic-flow", seed: 88213, engineVersion: "0.7.0", bedFingerprint: "b1d9042ce7f3aa88",
     format: "radio-lesson", switches: { repetitions: "3", remarks: true, quiz: true, review: false }, fallbackFrom: null,
     audioRef: "loops/es/lp3f81nzc6yh5t2-91c47b3e.mp3", audioMime: "audio/mpeg",
@@ -808,13 +885,13 @@ const LOOPS = [
   /* Asked for and not made: no reference, so no duration and no bed either — all three arrive
      together when the render lands. The job is what says how far along it is. */
   {
-    id: "lp9w45bqj2mk7d3", language: "es", position: 3,
+    id: "lp9w45bqj2mk7d3", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 3,
     styleId: null, seed: 41207, engineVersion: null, bedFingerprint: null,
     format: "story", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
     durationSeconds: null, starred: false, archived: false, createdAt: "2026-09-18", editedAt: "2026-09-18"
   },
   {
-    id: "lp2h63vxr8ns1g4", language: "es", position: 4,
+    id: "lp2h63vxr8ns1g4", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 4,
     styleId: "bright-pastoral", seed: 22910, engineVersion: "0.7.0", bedFingerprint: "44aa1c0b9e21f7d6",
     // Asked for as a radio lesson on a day the loop voice was the clear, even one: made as a drill.
     format: "classic", switches: {}, fallbackFrom: "radio-lesson", audioRef: "loops/es/lp2h63vxr8ns1g4-2f70d4aa.mp3", audioMime: "audio/mpeg",
@@ -877,24 +954,24 @@ const STORY_STYLES = [{"id": "cinematic-photoreal", "label": "Cinematic photogra
    has not been drawn. There is no status column on either. */
 const STORIES = [
   {
-    id: "st4m19pqb7wzx2c", language: "es", position: 1, typeId: "funny", styleId: "comic-book",
+    id: "st4m19pqb7wzx2c", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 1, typeId: "funny", styleId: "comic-book",
     title: "El perro de la panadería", titleTranslation: "The bakery dog", emoji: "\u{1F415}",
     modelId: "gemini/gemini-3.5-flash-lite", starred: false, archived: false, createdAt: "2026-09-21", editedAt: "2026-09-21"
   },
   {
-    id: "st8c50fkd3vnr6h", language: "es", position: 2, typeId: "everyday", styleId: "golden-hour",
+    id: "st8c50fkd3vnr6h", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 2, typeId: "everyday", styleId: "golden-hour",
     title: "El café de las siete", titleTranslation: "The seven o'clock coffee", emoji: "☕",
     modelId: "gemini/gemini-3.5-flash-lite", starred: true, archived: false, createdAt: "2026-09-19", editedAt: "2026-09-19"
   },
   /* Asked for and never written: no parts at all, which is the whole of what says so. */
   {
-    id: "st2v77hjs9blm4k", language: "es", position: 3, typeId: "mystery", styleId: "film-noir",
+    id: "st2v77hjs9blm4k", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 3, typeId: "mystery", styleId: "film-noir",
     title: null, titleTranslation: null, emoji: "\u{1F575}", modelId: null,
     starred: false, archived: false, createdAt: "2026-09-22", editedAt: "2026-09-22"
   },
   /* Archived: read, done with, and folded under the list rather than deleted. */
   {
-    id: "st6r02nwe5ckt8p", language: "es", position: 4, typeId: "travel", styleId: "watercolour-storybook",
+    id: "st6r02nwe5ckt8p", vocabularyId: "vq4es7mk2d9xa1b", language: "es", position: 4, typeId: "travel", styleId: "watercolour-storybook",
     title: "La balsa del río", titleTranslation: "The river raft", emoji: "\u{1F6F6}",
     modelId: "gemini/gemini-3.5-flash-lite", starred: false, archived: true, createdAt: "2026-09-02", editedAt: "2026-09-02"
   }
