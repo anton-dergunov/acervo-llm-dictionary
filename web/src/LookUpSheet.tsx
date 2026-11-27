@@ -21,6 +21,7 @@ import type { VocabularyGraph } from "./domain";
 import { CheckIcon, CloseIcon, OpenIcon, PlayIcon, PlusIcon } from "./icons";
 import { heldWord, type HeldWord } from "./selectors";
 import type { TappedWord } from "./tapWord";
+import { vocabularyQuestion, WhichVocabulary, type VocabularyQuestion } from "./WhichVocabulary";
 
 /** Where the owner was reading, so Back from an article opened here comes back to it. */
 export type ReadingPlace =
@@ -63,11 +64,15 @@ type Answer =
   | { state: "held"; held: HeldWord }
   | { state: "asking" }
   | { state: "done"; found: QuickLookUp }
+  /** A word in a language the owner keeps several vocabularies of, none of them this one. */
+  | { state: "which"; question: VocabularyQuestion }
   | { state: "failed"; message: string };
 
 interface Look extends LookUpRequest {
   answer: Answer;
   added: "no" | "adding" | "added";
+  /** The vocabulary the owner said the word goes in, which it is asked again with. */
+  chosen?: string | null;
 }
 
 const HIGHLIGHT = "look-up";
@@ -83,7 +88,7 @@ function highlights(): { registry: Highlights; make(range: Range): unknown } | n
 }
 
 const keyOf = (request: QuickLookUpRequest) =>
-  `${request.selection.start}:${request.selection.end}\u0000${request.text}`;
+  `${request.selection.start}:${request.selection.end}\u0000${request.text}\u0000${request.vocabulary ?? ""}`;
 
 export function useLookUp(services: LookUpServices | null) {
   const [look, setLook] = useState<Look | null>(null);
@@ -97,26 +102,29 @@ export function useLookUp(services: LookUpServices | null) {
     setLook(null);
   }, []);
 
-  const ask = useCallback((request: LookUpRequest) => {
+  const ask = useCallback((request: LookUpRequest, chosen: string | null = null) => {
     if (!services) return;
     asking.current?.abort();
-    const question: QuickLookUpRequest = { ...request.tapped.sentence, source: "reading", vocabulary: request.vocabularyId };
+    const question: QuickLookUpRequest = {
+      ...request.tapped.sentence, source: "reading", vocabulary: chosen ?? request.vocabularyId
+    };
     const key = keyOf(question);
     const known = answered.current.get(key);
     if (known) {
-      setLook({ ...request, answer: { state: "done", found: known }, added: "no" });
+      setLook({ ...request, chosen, answer: { state: "done", found: known }, added: "no" });
       return;
     }
     const controller = new AbortController();
     asking.current = controller;
-    setLook({ ...request, answer: { state: "asking" }, added: "no" });
+    setLook({ ...request, chosen, answer: { state: "asking" }, added: "no" });
     services.lookUp(question, controller.signal).then((found) => {
       answered.current.set(key, found);
       if (asking.current === controller) setLook((now) => now && { ...now, answer: { state: "done", found } });
     }, (error: unknown) => {
       if (controller.signal.aborted) return;
+      const which = vocabularyQuestion(error, services.graph);
       const message = error instanceof Error ? error.message : "That word could not be looked up.";
-      setLook((now) => now && { ...now, answer: { state: "failed", message } });
+      setLook((now) => now && { ...now, answer: which ? { state: "which", question: which } : { state: "failed", message } });
     });
   }, [services]);
 
@@ -130,7 +138,8 @@ export function useLookUp(services: LookUpServices | null) {
     } else ask(request);
   }, [services, ask]);
 
-  const retry = useCallback(() => { if (look) ask(look); }, [look, ask]);
+  const retry = useCallback(() => { if (look) ask(look, look.chosen ?? null); }, [look, ask]);
+  const choose = useCallback((vocabularyId: string) => { if (look) ask(look, vocabularyId); }, [look, ask]);
 
   const add = useCallback(() => {
     if (!services || !look || look.answer.state !== "done" || look.added !== "no") return;
@@ -173,7 +182,7 @@ export function useLookUp(services: LookUpServices | null) {
 
   useEffect(() => () => asking.current?.abort(), []);
 
-  return { look, open, close, retry, add, openHeld };
+  return { look, open, close, retry, choose, add, openHeld };
 }
 
 export type LookUpState = ReturnType<typeof useLookUp>;
@@ -198,7 +207,7 @@ export function LookUpSheet({ state, placement }: {
   state: LookUpState;
   placement: "over" | "flow" | "docked" | "stuck";
 }) {
-  const { look, close, retry, add, openHeld } = state;
+  const { look, close, retry, choose, add, openHeld } = state;
   const sheet = useRef<HTMLElement | null>(null);
   const [top, setTop] = useState(false);
   useLayoutEffect(() => {
@@ -225,7 +234,8 @@ export function LookUpSheet({ state, placement }: {
           <strong lang={look.language}>{held.headword}</strong>
           {held.gloss && <span> — {held.gloss}</span>}
           <span className="photo-held"> · {self ? "this word" : "in your words"}</span>
-        </> : answer.state === "failed" ? <span className="photo-meaning-failed">{answer.message}</span>
+        </> : answer.state === "which" ? <WhichVocabulary question={answer.question} onChoose={choose} />
+          : answer.state === "failed" ? <span className="photo-meaning-failed">{answer.message}</span>
           : answer.state === "done" ? <>
             <strong lang={look.language}>{answer.found.resolution.headword}</strong>
             {answer.found.resolution.gloss && <span> — {answer.found.resolution.gloss}</span>}

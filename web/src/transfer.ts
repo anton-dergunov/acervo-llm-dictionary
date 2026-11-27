@@ -22,7 +22,7 @@ import { CEFR_LEVELS, type CefrLevel, type Lexeme, type PronunciationTarget, typ
 import { newId } from "./ids";
 import { markdownFor } from "./markdown";
 import type { AcervoRepository } from "./repository";
-import { glossLanguagesFor, notesLanguageFor, presentationOf } from "./languages";
+import { glossLanguagesFor, languageName, notesLanguageFor, presentationOf } from "./languages";
 import { articleReader, lexemesIn, sensesOf, vocabularies } from "./selectors";
 import { draftFor, parseArticle, yamlForDraft, YamlProblems, type ArticleDraft } from "./yaml";
 
@@ -733,23 +733,70 @@ export function readBundle(input: BundleFile[]): BundlePlan {
 /* ── importing ──────────────────────────────────────────────────────────*/
 
 /**
- * Where one of a bundle's vocabularies goes: a new vocabulary, named as the bundle names it unless
- * renamed, or one the owner already keeps in the same language, whose name it then takes.
+ * Where one of a bundle's vocabularies goes: a new vocabulary under `name`, or one the owner already
+ * keeps in the same language, whose name it then takes (`docs/features/export.md`, "Import").
  */
 export type ImportTarget =
-  | { kind: "new"; name: string | null }
+  | { kind: "new"; name: string }
   | { kind: "existing"; vocabularyId: string };
 
+/** What one of a bundle's vocabularies is called: its own name, else its language's. */
+export function bundledName(entry: Pick<BundleVocabulary, "displayName" | "language">): string {
+  return entry.displayName?.trim() || languageName(entry.language);
+}
+
 /**
- * Where each of a bundle's vocabularies goes by default, by its directory: into the owner's
- * vocabulary of the same language when they keep one, else a new one.
+ * Where each of a bundle's vocabularies goes until the owner says otherwise, by its directory: in as
+ * a new vocabulary, named as the bundle names it. A starter arrives beside the owner's own words;
+ * adding it to theirs is the other choice, always offered (`intoChoices`).
  */
-export function defaultTargets(graph: VocabularyGraph, plan: Pick<BundlePlan, "vocabularies">): Map<string, ImportTarget> {
+export function defaultTargets(plan: Pick<BundlePlan, "vocabularies">): Map<string, ImportTarget> {
+  return new Map(plan.vocabularies.map((entry) => [entry.directory, { kind: "new", name: bundledName(entry) }]));
+}
+
+/** The owner's vocabularies a bundle's vocabulary may be added to: those of its language. */
+export function intoChoices(graph: VocabularyGraph, entry: Pick<BundleVocabulary, "language">): Vocabulary[] {
+  return vocabularies(graph).filter((one) => one.language === entry.language);
+}
+
+/**
+ * Why the choices made for a bundle cannot be imported, by directory; empty when they can.
+ *
+ * A new vocabulary may not take a name another one shows — one the owner keeps, or another the same
+ * import adds — because two vocabularies of a language are told apart by nothing else. An interface
+ * check, since a replicated collection carries no uniqueness rule, and asked of both transports
+ * (`importBundle` refuses what this refuses).
+ */
+export function targetProblems(
+  graph: VocabularyGraph, plan: Pick<BundlePlan, "vocabularies">, targets: ReadonlyMap<string, ImportTarget>
+): Map<string, string> {
+  const problems = new Map<string, string>();
   const kept = vocabularies(graph);
-  return new Map(plan.vocabularies.map((entry) => {
-    const same = kept.find((one) => one.language === entry.language);
-    return [entry.directory, same ? { kind: "existing", vocabularyId: same.id } : { kind: "new", name: null }];
-  }));
+  const shown = new Map(kept.map((one) => [presentationOf(one).name.toLocaleLowerCase(), one]));
+  const claimed = new Set<string>();
+  plan.vocabularies.forEach((entry) => {
+    const target = targets.get(entry.directory) ?? defaultTargets({ vocabularies: [entry] }).get(entry.directory)!;
+    if (target.kind === "existing") {
+      const into = kept.find((one) => one.id === target.vocabularyId);
+      if (!into) problems.set(entry.directory, "The vocabulary chosen for it is no longer there. Choose another.");
+      else if (into.language !== entry.language) {
+        problems.set(entry.directory, `${presentationOf(into).name} is in ${languageName(into.language)}, and these words are in ${languageName(entry.language)}.`);
+      }
+      return;
+    }
+    const name = target.name.trim();
+    const folded = name.toLocaleLowerCase();
+    const owned = shown.get(folded);
+    if (!name) problems.set(entry.directory, "Give the new vocabulary a name.");
+    else if (owned) {
+      problems.set(entry.directory, `You already have a vocabulary called ${presentationOf(owned).name}. `
+        + (intoChoices(graph, entry).length ? "Give this one another name, or add it to yours." : "Give this one another name."));
+    } else if (claimed.has(folded)) {
+      problems.set(entry.directory, `Another vocabulary in this file is to be called ${name} too. Give this one another name.`);
+    }
+    claimed.add(folded);
+  });
+  return problems;
 }
 
 export interface ImportReport {
@@ -760,7 +807,8 @@ export interface ImportReport {
   picturesRestored: number;
   /** Pronunciations put back from the bundle's `audio/` directory. */
   pronunciationsRestored: number;
-  skipped: { language: string; headword: string }[];
+  /** Words left out because the vocabulary they went in already held them, with that vocabulary's name. */
+  skipped: { vocabulary: string; headword: string }[];
   failed: BundleProblem[];
   /** True when the run stopped early: the server went away, or the owner cancelled. */
   aborted: boolean;
@@ -882,6 +930,9 @@ const key = (vocabularyId: string, headword: string) => `${vocabularyId}\n${head
  */
 export async function importBundle(...args: Parameters<typeof importOnce>): Promise<ImportReport> {
   if (importing) throw new Error(IMPORT_RUNNING);
+  const [repository, plan, targets] = args;
+  const [problem] = targetProblems(repository.snapshot(), plan, targets).values();
+  if (problem) throw new Error(problem);
   importing = true;
   try {
     return await importOnce(...args);
@@ -933,12 +984,12 @@ async function importOnce(
   // not hold, so a bundle would otherwise fail on every word that carries a new topic.
   for (const { directory, ...vocabulary } of plan.vocabularies) {
     if (signal.cancelled) return { ...report, aborted: true };
-    const target = targets.get(directory) ?? { kind: "new", name: null };
+    const target = targets.get(directory) ?? { kind: "new", name: bundledName(vocabulary) };
     if (target.kind === "existing" && kept.has(target.vocabularyId)) {
       into.set(directory, target.vocabularyId);
     } else {
       try {
-        const name = target.kind === "new" ? target.name?.trim() || vocabulary.displayName : vocabulary.displayName;
+        const name = target.kind === "new" ? target.name.trim() || vocabulary.displayName : vocabulary.displayName;
         // Last in the owner's order, whatever order it had where it came from.
         const saved = await repository.saveVocabulary({ ...vocabulary, displayName: name, order: order++ });
         into.set(directory, saved.id);
@@ -976,7 +1027,8 @@ async function importOnce(
     }
     const identity = key(vocabularyId, draft.headword);
     if (held(identity)) {
-      report.skipped.push({ language: draft.language, headword: draft.headword });
+      const holder = repository.snapshot().vocabularies.find((one) => one.id === vocabularyId);
+      report.skipped.push({ vocabulary: holder ? presentationOf(holder).name : languageName(draft.language), headword: draft.headword });
       step();
       continue;
     }

@@ -346,6 +346,24 @@ def test_a_story_passage_that_said_more_than_itself_is_what_admin_log_failed_sho
                and "said more than its passage; recorded once more" in text for _, _, _, text in failed), failed
 
 
+def test_a_queued_capture_between_two_vocabularies_is_what_admin_log_failed_shows(logs, server):
+    """Nobody is there to ask which vocabulary, so the job fails, and its line names both."""
+    from test_capture import ARTICLE, RESOLUTION
+
+    from acervo.domain import SCHEMA_VERSION
+    from acervo.work.runner import Runner
+
+    server.push({"vocabularies": [vocabulary(), vocabulary(id="vocabstarter001", displayName="Everyday", order=1)]})
+    server.model.resolution, server.model.article = dict(RESOLUTION), dict(ARTICLE)
+    answer = server.post("/captures", {"schemaVersion": SCHEMA_VERSION, "deviceId": "device000000001",
+                                       "mode": "single", "text": "El garfio."})
+    assert answer.status_code == 202, answer.json()
+    Runner(server.settings).run_until_idle()
+
+    failed = [text for _, _, _, text in activity.select(activity.entries(logs), failed=True)]
+    assert any("vocabulary_ambiguous" in text and "(Spanish, Everyday)" in text for text in failed), failed
+
+
 def test_a_refused_play_is_what_admin_log_shows_with_its_sentence(logs, server):
     """A play sent from a device's queue fails where nobody is watching: the line is the only witness."""
     from graph_records import play

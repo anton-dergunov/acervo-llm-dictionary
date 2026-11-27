@@ -87,6 +87,22 @@ function presented(code: string, kept: Vocabulary[]): string {
   return `${vocabulary ? flagFor(vocabulary) : flagOf(mainRegion(code))} ${languageName(code)}`;
 }
 
+/** What a vocabulary is called where it is shown: its own name, else its language's. */
+function shownName(displayName: string, language: string): string {
+  return displayName.trim() || languageName(language);
+}
+
+/**
+ * The vocabulary already called what `draft` would be, if one is. Two vocabularies of a language are
+ * told apart by nothing but their names, so a name another one shows is refused here — an interface
+ * check only, since a replicated collection carries no uniqueness rule.
+ */
+function nameTaken(draft: VocabularyDraft, kept: Vocabulary[]): Vocabulary | null {
+  const wanted = shownName(draft.displayName, draft.language).toLocaleLowerCase();
+  return kept.find((entry) => entry.id !== draft.id
+    && shownName(entry.displayName ?? "", entry.language).toLocaleLowerCase() === wanted) ?? null;
+}
+
 /** Vocabularies ▸ one of them: what it is called, its variety, its three languages and its learner. */
 function VocabularyForm({ draft, kept, busy, page, onChange, onSave, onCancel, onRemove }: {
   draft: VocabularyDraft;
@@ -110,10 +126,12 @@ function VocabularyForm({ draft, kept, busy, page, onChange, onSave, onCancel, o
   const varieties = varietyOptions(choices, declared, draft.region || null);
   const choose = (field: "definition" | "gloss" | "notes", title: string) =>
     open({ id: `${page.id}:${field}`, title, parent: page });
+  const taken = nameTaken(draft, kept);
 
   return <>
     <Group aligned>
-      <TextField label="Name" value={draft.displayName} onChange={(displayName) => onChange({ displayName })} />
+      <TextField label="Name" value={draft.displayName} clash={Boolean(taken)}
+        onChange={(displayName) => onChange({ displayName })} />
       <TextField
         label="Flag" value={draft.flag} maxLength={32}
         placeholder={automaticFlag(draft.language, draft.region || null)}
@@ -126,6 +144,9 @@ function VocabularyForm({ draft, kept, busy, page, onChange, onSave, onCancel, o
         onChange={(region) => onChange({ region, flag: "" })}
       />
     </Group>
+    {taken && <Notice>
+      You already have a vocabulary called {shownName(draft.displayName, draft.language)}. Give this one a name of its own.
+    </Notice>}
     <Group title="Written in">
       <Link label="Senses defined in" value={presented(draft.definitionLang, kept)}
         onOpen={() => choose("definition", "Senses defined in")} />
@@ -150,7 +171,7 @@ function VocabularyForm({ draft, kept, busy, page, onChange, onSave, onCancel, o
     </Group>
     <div className="pref-buttons">
       <button type="button" className="tb-btn" onClick={onCancel}>Cancel</button>
-      <button type="button" className="tb-btn primary" disabled={busy} onClick={onSave}>
+      <button type="button" className="tb-btn primary" disabled={busy || Boolean(taken)} onClick={onSave}>
         {draft.id ? "Save" : "Add vocabulary"}
       </button>
     </div>
@@ -202,7 +223,9 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
 
   const counts = new Map<string, number>();
   snapshot.lexemes.filter((lexeme) => !lexeme.deleted)
-    .forEach((lexeme) => counts.set(lexeme.language, (counts.get(lexeme.language) ?? 0) + 1));
+    .forEach((lexeme) => counts.set(lexeme.vocabularyId, (counts.get(lexeme.vocabularyId) ?? 0) + 1));
+  const ofLanguage = new Map<string, number>();
+  entries.forEach((entry) => ofLanguage.set(entry.language, (ofLanguage.get(entry.language) ?? 0) + 1));
 
   async function run(action: () => Promise<unknown>, failure: string): Promise<boolean> {
     setBusy(true);
@@ -228,6 +251,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
       onNotify(`What you say about yourself may be at most ${LEARNER_NOTE_LIMIT} characters.`);
       return;
     }
+    if (nameTaken(current, entries)) return;
     const record = current.id ? entries.find((entry) => entry.id === current.id) : undefined;
     const input: VocabularyInput = {
       language: current.language,
@@ -247,7 +271,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
   }
 
   function remove(vocabulary: Vocabulary) {
-    const words = counts.get(vocabulary.language) ?? 0;
+    const words = counts.get(vocabulary.id) ?? 0;
     if (words > 0) {
       // Removing the configuration would leave those words with no gloss preference and no way back
       // to it, which reads as data loss even though nothing was deleted.
@@ -258,9 +282,10 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
       .then((removed) => { if (removed) leave(); });
   }
 
+  /* A language already kept is offered again: a second vocabulary of it needs only a name of its own. */
   if (sub?.id === "vocabulary:add") return <LanguageSearch
     label="Find a language"
-    unavailable={Object.fromEntries(entries.map((entry) => [entry.language, "Already kept"]))}
+    noted={Object.fromEntries([...ofLanguage].map(([language, count]) => [language, `You have ${count}`]))}
     onChoose={(language) => {
       setDraft(newDraft(language, entries));
       open({ id: "vocabulary:new", title: language.name });
@@ -293,7 +318,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
     {entries.length ? <Group>
       {entries.map((vocabulary) => {
         const name = vocabulary.displayName ?? languageName(vocabulary.language);
-        const words = counts.get(vocabulary.language) ?? 0;
+        const words = counts.get(vocabulary.id) ?? 0;
         const hint = [
           vocabulary.region ? regionName(vocabulary.region) : null,
           vocabulary.level,
@@ -308,7 +333,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
         />;
       })}
     </Group> : <Notice>None yet. Add the first language you are learning: a word needs one to be captured.</Notice>}
-    <Group><Action onClick={() => open({ id: "vocabulary:add", title: "Add a language" })}>Add a language…</Action></Group>
+    <Group><Action onClick={() => open({ id: "vocabulary:add", title: "Add a vocabulary" })}>Add a vocabulary…</Action></Group>
   </>;
 }
 

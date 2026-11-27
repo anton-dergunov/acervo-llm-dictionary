@@ -3,7 +3,7 @@ import { normalizeServerURL, sessionStore, type StoredSession } from "./session"
 import type { ArticleDraft } from "./yaml";
 import type { CharacterStrokes } from "./writing/strokeData";
 
-type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
+type Envelope<T> = { data?: T; error?: { code?: string; message?: string; [asking: string]: unknown } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
@@ -1044,7 +1044,19 @@ export interface JobRequest {
 }
 
 export class AcervoApiError extends Error {
-  constructor(message: string, readonly status: number, readonly code: string) { super(message); }
+  /**
+   * What a refusal that asks the owner something carries for the device to ask it with, beside its
+   * code and sentence: a capture between two vocabularies names them (`docs/features/capture.md`,
+   * "Which vocabulary").
+   */
+  constructor(message: string, readonly status: number, readonly code: string,
+              readonly asking: Readonly<Record<string, unknown>> = {}) { super(message); }
+}
+
+/** The envelope's error as thrown: its sentence, its code, and anything it asks with. */
+function refusal(envelope: Envelope<unknown>, status: number): AcervoApiError {
+  const { code, message, ...asking } = envelope.error ?? {};
+  return new AcervoApiError(message || "The Acervo server returned an invalid response.", status, code || "request_failed", asking);
 }
 
 function timeoutSignal(milliseconds: number): AbortSignal | undefined {
@@ -1100,7 +1112,7 @@ class ApiClient {
     try { envelope = await response.json() as Envelope<T>; } catch { /* diagnosed below */ }
     if (!response.ok || envelope.error || envelope.data === undefined) {
       if (response.status === 401 && !anonymous) this.onUnauthorized?.();
-      throw new AcervoApiError(envelope.error?.message || "The Acervo server returned an invalid response.", response.status, envelope.error?.code || "request_failed");
+      throw refusal(envelope, response.status);
     }
     return envelope.data;
   }
@@ -1126,7 +1138,7 @@ class ApiClient {
       if (response.status === 401) this.onUnauthorized?.();
       let envelope: Envelope<unknown> = {};
       try { envelope = await response.json() as Envelope<unknown>; } catch { /* no body to read */ }
-      throw new AcervoApiError(envelope.error?.message || "The Acervo server returned an invalid response.", response.status, envelope.error?.code || "request_failed");
+      throw refusal(envelope, response.status);
     }
     return response;
   }
@@ -1146,7 +1158,7 @@ class ApiClient {
       if (response.status === 401) this.onUnauthorized?.();
       let envelope: Envelope<unknown> = {};
       try { envelope = await response.json() as Envelope<unknown>; } catch { /* no body to read */ }
-      throw new AcervoApiError(envelope.error?.message || "The Acervo server returned an invalid response.", response.status, envelope.error?.code || "request_failed");
+      throw refusal(envelope, response.status);
     }
     return response;
   }

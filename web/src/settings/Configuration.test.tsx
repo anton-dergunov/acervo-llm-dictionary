@@ -106,13 +106,8 @@ describe("Settings ▸ Vocabularies", () => {
 
   it("adds a language found by its name, opening it filled in rather than saving it at once", async () => {
     editor();
-    fireEvent.click(screen.getByRole("button", { name: "Add a language…" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add a vocabulary…" }));
     const box = await screen.findByRole("searchbox", { name: "Find a language" });
-    fireEvent.change(box, { target: { value: "span" } });
-    const spanish = await screen.findByRole("button", { name: /Spanish/ });
-    expect(spanish).toBeDisabled();
-    expect(spanish).toHaveTextContent("Already kept");
-
     fireEvent.change(box, { target: { value: "fran" } });
     fireEvent.click(await screen.findByRole("button", { name: /French/ }));
     expect(await screen.findByRole("heading", { name: "French" })).toBeInTheDocument();
@@ -147,9 +142,33 @@ describe("Settings ▸ Vocabularies", () => {
     expect(search(LANGUAGES, "anc")).toEqual([]);
   });
 
+  it("offers a language already kept again, and wants a name of its own for the second vocabulary", async () => {
+    editor();
+    fireEvent.click(screen.getByRole("button", { name: "Add a vocabulary…" }));
+    fireEvent.change(await screen.findByRole("searchbox", { name: "Find a language" }), { target: { value: "span" } });
+    const spanish = await screen.findByRole("button", { name: /Spanish/ });
+    expect(spanish).toBeEnabled();
+    expect(spanish).toHaveTextContent("You have 1");
+    fireEvent.click(spanish);
+
+    // Named like the one already kept, which nothing else would tell apart from it.
+    const name = await screen.findByRole("textbox", { name: "Name" });
+    expect(name).toHaveValue("Spanish");
+    expect(name).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("status")).toHaveTextContent("You already have a vocabulary called Spanish. Give this one a name of its own.");
+    expect(screen.getByRole("button", { name: "Add vocabulary" })).toBeDisabled();
+
+    fireEvent.change(name, { target: { value: "Spanish · Everyday words" } });
+    expect(screen.queryByRole("status")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Add vocabulary" }));
+    await waitFor(() => expect(saved).toHaveBeenCalledWith(expect.objectContaining({
+      language: "es", displayName: "Spanish · Everyday words"
+    }), undefined));
+  });
+
   it("names the window's page after the language while it is being added", async () => {
     editor();
-    fireEvent.click(screen.getByRole("button", { name: "Add a language…" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add a vocabulary…" }));
     fireEvent.change(await screen.findByRole("searchbox"), { target: { value: "russ" } });
     const list = (await screen.findByRole("button", { name: /Russian/ })).closest("section")!;
     expect(within(list).getAllByRole("button")).toHaveLength(1);

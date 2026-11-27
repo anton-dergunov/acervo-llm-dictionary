@@ -147,7 +147,15 @@ describe("the import panel", () => {
 
     render(<ImportPanel onChanged={() => {}} />);
     await choose(bundleFile());
-    fireEvent.click(screen.getByRole("button", { name: "Import 4 entries" }));
+    // As a new vocabulary, each would take a name already shown, so Import waits for another
+    // name or for the other choice.
+    const go = screen.getByRole("button", { name: "Import 4 entries" });
+    expect(go).toBeDisabled();
+    expect(screen.getAllByRole("status")[0]).toHaveTextContent(
+      "You already have a vocabulary called Spanish. Give this one another name, or add it to yours.");
+    screen.getAllByRole("radio", { name: /^Add to / }).forEach((into) => fireEvent.click(into));
+    expect(go).toBeEnabled();
+    fireEvent.click(go);
     await screen.findByText("Import finished");
 
     expect(screen.getByText("0 added, 4 already present")).toBeInTheDocument();

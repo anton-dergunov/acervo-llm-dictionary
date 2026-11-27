@@ -23,7 +23,7 @@ export interface ImportRun {
   /** Brings the server's records into the repository: `syncEngine.syncNow` in the app. */
   pull(): Promise<unknown>;
   plan: BundlePlan;
-  /** Where each of the bundle's vocabularies goes, by its directory (`transfer.defaultTargets`). */
+  /** Where each of the bundle's vocabularies goes, by its directory, as the owner chose (`transfer.targetProblems` must find nothing). */
   targets: ReadonlyMap<string, ImportTarget>;
   pictures: Map<string, Uint8Array>;
   recordings: Map<string, Uint8Array>;

@@ -8,9 +8,9 @@ import { articleFor, lexemesIn } from "./selectors";
 import { SPANISH, testGraph, TEST_OWNER } from "./testGraph";
 import { fakeRemote } from "./testRemote";
 import {
-  BUNDLE_FORMAT, bundleName, defaultTargets, exportBundle, filed, IMPORT_RUNNING, importBundle, MANIFEST_FILE, picturesIn,
-  pronunciationsIn, readBundle, remintIds, slugFor, TOPICS_FILE, VOCABULARIES_FILE, type BundleFile, type BundlePlan,
-  type ExportOptions
+  BUNDLE_FORMAT, bundleName, defaultTargets, exportBundle, filed, IMPORT_RUNNING, importBundle, intoChoices, MANIFEST_FILE, picturesIn,
+  pronunciationsIn, readBundle, remintIds, targetProblems, slugFor, TOPICS_FILE, VOCABULARIES_FILE, type BundleFile, type BundlePlan,
+  type ExportOptions, type ImportTarget
 } from "./transfer";
 import { imagePromptId } from "./ids";
 import { draftFor, parseArticle } from "./yaml";
@@ -32,10 +32,20 @@ const asVersion = (version: number) => (file: BundleFile): BundleFile =>
 /** The id of the replica's Spanish vocabulary: the one an import into an empty replica just made. */
 const spanishIn = (graph: VocabularyGraph) => graph.vocabularies.find((entry) => !entry.deleted && entry.language === "es")!.id;
 
-/** An import into where each vocabulary goes by default: the owner's own of its language, else a new one. */
+/** Into the owner's own vocabulary of each language, where they keep one, else as a new one. */
+const intoOwn = (graph: VocabularyGraph, plan: BundlePlan): Map<string, ImportTarget> => {
+  const targets = defaultTargets(plan);
+  plan.vocabularies.forEach((entry) => {
+    const [same] = intoChoices(graph, entry);
+    if (same) targets.set(entry.directory, { kind: "existing", vocabularyId: same.id });
+  });
+  return targets;
+};
+
+/** An import that adds each vocabulary to the owner's own of its language, else brings it in as new. */
 const importInto = (repository: AcervoRepository, plan: BundlePlan,
   ...rest: Parameters<typeof importBundle> extends [unknown, unknown, unknown, ...infer Rest] ? Rest : never) =>
-  importBundle(repository, plan, defaultTargets(repository.snapshot(), plan), ...rest);
+  importBundle(repository, plan, intoOwn(repository.snapshot(), plan), ...rest);
 
 async function emptyReplica() {
   const repository = new LocalAcervoRepository(new MemoryDatabase());
@@ -692,6 +702,55 @@ describe("importing a bundle", () => {
     expect(second.skipped.map((entry) => entry.headword).sort())
       .toEqual(["espolvorear", "la balsa", "picar", "turmoil"]);
     expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted)).toHaveLength(4);
+  });
+
+  it("brings each vocabulary in as a new one by default, under the bundle's name", () => {
+    const plan = readBundle(bundle());
+    expect([...defaultTargets(plan).values()]).toEqual(plan.vocabularies.map((entry) => ({
+      kind: "new", name: entry.displayName ?? (entry.language === "es" ? "Spanish" : "English")
+    })));
+  });
+
+  it("brings a vocabulary in beside the owner's own of that language, under a name of its own", async () => {
+    const repository = await emptyReplica();
+    const plan = readBundle(bundle());
+    await importInto(repository, plan);
+    const own = spanishIn(repository.snapshot());
+    const spanish = plan.vocabularies.find((entry) => entry.language === "es")!;
+    const targets = intoOwn(repository.snapshot(), plan).set(spanish.directory, { kind: "new", name: "Spanish · Everyday words" });
+    const report = await importBundle(repository, plan, targets);
+
+    expect(report).toMatchObject({ vocabulariesAdded: 1, added: 3 });
+    const graph = repository.snapshot();
+    const starter = graph.vocabularies.find((entry) => entry.displayName === "Spanish · Everyday words")!;
+    expect(starter.language).toBe("es");
+    expect(lexemesIn(graph, starter.id).map((lexeme) => lexeme.headword).sort()).toEqual(["espolvorear", "la balsa", "picar"]);
+    expect(lexemesIn(graph, own)).toHaveLength(3);
+    // The English words went into the English vocabulary already held, so they were all skipped there.
+    expect(report.skipped).toEqual([{ vocabulary: "English", headword: "turmoil" }]);
+  });
+
+  it("refuses a new vocabulary under a name another one already shows, and imports nothing", async () => {
+    const repository = await emptyReplica();
+    const plan = readBundle(bundle());
+    await importInto(repository, plan);
+    const [spanish, english] = ["es", "en"].map((language) => plan.vocabularies.find((entry) => entry.language === language)!);
+    const clashing = intoOwn(repository.snapshot(), plan).set(spanish.directory, { kind: "new", name: " spanish " });
+    expect(targetProblems(repository.snapshot(), plan, clashing).get(spanish.directory))
+      .toBe("You already have a vocabulary called Spanish. Give this one another name, or add it to yours.");
+    await expect(importBundle(repository, plan, clashing)).rejects.toThrow("You already have a vocabulary called Spanish.");
+    expect(repository.snapshot().vocabularies.filter((entry) => !entry.deleted)).toHaveLength(2);
+
+    // Nor two new ones the same import would add under one name.
+    const twice = new Map<string, ImportTarget>([
+      [spanish.directory, { kind: "new", name: "Words" }], [english.directory, { kind: "new", name: "Words" }]
+    ]);
+    expect(targetProblems(repository.snapshot(), plan, twice).get(english.directory))
+      .toBe("Another vocabulary in this file is to be called Words too. Give this one another name.");
+    // And adding to a vocabulary of another language is no choice at all.
+    const across = new Map<string, ImportTarget>([[english.directory, { kind: "existing", vocabularyId: spanishIn(repository.snapshot()) }]]);
+    expect(targetProblems(repository.snapshot(), plan, across).get(english.directory))
+      .toBe("Spanish is in Spanish, and these words are in English.");
   });
 
   it("refuses a second run while one is going, so no word is added twice", async () => {

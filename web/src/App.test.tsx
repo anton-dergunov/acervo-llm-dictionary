@@ -10,7 +10,7 @@ import { LocalAcervoRepository, repository } from "./repository";
 import { SETTINGS, store } from "./settings/cache";
 import type { LocalDatabase } from "./localDatabase";
 import { articleChanges } from "./testArticles";
-import { TEST_OWNER, testGraph } from "./testGraph";
+import { ENGLISH, SPANISH, TEST_OWNER, testGraph } from "./testGraph";
 import { aimAt, forgetTaps, TAP } from "./testTap";
 import { reloadSelectionForTests } from "./wordSelection";
 
@@ -87,8 +87,9 @@ function serverHealth(capture: Partial<CaptureHealth> = {}) {
   });
 }
 
-function signedIn() {
+function signedIn(adjust: (graph: ReturnType<typeof testGraph>) => void = () => {}) {
   const { graph, cursor } = numberedGraph();
+  adjust(graph);
   serverHealth();
   vi.spyOn(backendSession, "restore").mockResolvedValue(SESSION);
   vi.spyOn(backendSession, "current").mockReturnValue(SESSION);
@@ -927,6 +928,58 @@ describe("Acervo application", () => {
       expect.any(String), expect.objectContaining({ text: "picar", headword: "picar" }));
   });
 
+  it("asks which vocabulary a captured word goes in when the server could not tell, and sends it again", async () => {
+    signedIn(withStarter);
+    await openList();
+    const capture = vi.spyOn(backendSession, "captureText")
+      .mockRejectedValueOnce(new AcervoApiError(
+        "This looks like es, and you keep 2 vocabularies in it (Spanish, Spanish (Mexico) · Everyday words). Choose which one it goes in.",
+        409, "vocabulary_ambiguous", { language: "es", vocabularies: [SPANISH, STARTER] }))
+      .mockResolvedValueOnce({
+        vocabularyId: STARTER, resolution: {
+          language: "es", headword: "picar", lemma: "picar", pos: "verb", sentences: [], note: null,
+          consumedLines: 1, consumedText: null
+        },
+        duplicates: [{ id: "lexemepicar0001", headword: "picar", shortGloss: "to itch" }], draft: null
+      });
+
+    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    fireEvent.change(await screen.findByLabelText(/Which word/), { target: { value: "picar" } });
+    fireEvent.click(screen.getByRole("button", { name: "Process" }));
+
+    const question = await screen.findByRole("group", { name: /Which of your Spanish vocabularies does it go in/ });
+    expect(screen.queryByRole("alert")).toBeNull();
+    fireEvent.click(within(question).getByRole("button", { name: /Everyday words/ }));
+    await screen.findByText("You already have this word.");
+    expect(capture).toHaveBeenLastCalledWith(expect.any(String), expect.objectContaining({ text: "picar", vocabulary: STARTER }));
+  });
+
+  it("asks which vocabulary a typed word goes in when its language has several, none of them in view", async () => {
+    signedIn(withStarter);
+    acceptWrites();
+    await openList();
+    // English in view: its word is listed, and a new document starts in English.
+    fireEvent.click(screen.getByRole("button", { name: /^Vocabulary:/ }));
+    fireEvent.click(within(document.querySelector(".menu.open") as HTMLElement).getByRole("button", { name: /English/ }));
+    await screen.findByRole("button", { name: /turmoil/ });
+    fireEvent.click(await screen.findByRole("button", { name: "Add" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Write YAML instead" }));
+    await waitForEditor();
+    expect(editorView().state.doc.toString()).toContain("language: en");
+    // Until the document reads there is no language to ask about; a whole Spanish word is.
+    replaceInEditor("language: en", "language: es");
+    replaceInEditor('headword: ""', "headword: mareo");
+    replaceInEditor('definition: ""', 'definition: "Malestar."');
+    replaceInEditor('terms: [""]', "terms: [dizziness]");
+    replaceInEditor('- text: ""', '- text: "Siento mareo."');
+
+    const question = await screen.findByRole("group", { name: /This word is in Spanish/ });
+    expect(screen.getByRole("button", { name: "Validate & save" })).toBeDisabled();
+    fireEvent.click(within(question).getByRole("button", { name: /Everyday words/ }));
+    expect(screen.queryByRole("group", { name: /This word is in Spanish/ })).toBeNull();
+    expect(screen.getByRole("button", { name: "Validate & save" })).toBeEnabled();
+  });
+
   it("saves an article edited as YAML and shows the change", async () => {
     signedIn();
     await openList();
@@ -1629,6 +1682,13 @@ function mockChat(reply: string, proposal: unknown = null) {
 }
 
 /** Editing is offered from the YAML view, where the document is. */
+/** A second Spanish vocabulary, after the owner's own in their order. */
+const STARTER = "vocabstarter001";
+function withStarter(graph: ReturnType<typeof testGraph>) {
+  const spanish = graph.vocabularies.find((entry) => entry.id === SPANISH)!;
+  graph.vocabularies.push({ ...spanish, id: STARTER, displayName: "Spanish (Mexico) · Everyday words", region: "MX", order: 2 });
+}
+
 async function editAsYaml() {
   fireEvent.click(await screen.findByRole("button", { name: "YAML" }));
   fireEvent.click(await screen.findByRole("button", { name: "Edit as YAML" }));

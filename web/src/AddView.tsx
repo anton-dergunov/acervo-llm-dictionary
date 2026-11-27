@@ -17,6 +17,7 @@ import { seed as seedPicture } from "./media";
 import PhotoCapture, { type KeptPhoto, type PhotoAdd } from "./PhotoCapture";
 import ReviewBar from "./ReviewBar";
 import { articleFromDraft, targetVocabulary, vocabularyFor, type Article } from "./selectors";
+import { vocabularyQuestion, WhichVocabulary, type VocabularyQuestion } from "./WhichVocabulary";
 import { ValidationPanel } from "./ValidationPanel";
 import {
   parseArticle, yamlForDraft, yamlTemplate, YamlProblems,
@@ -126,6 +127,10 @@ export default function AddView({
   const [draft, setDraft] = useState(template);
   /** The vocabulary the last capture chose for its word, which its draft is saved in. */
   const [captured, setCaptured] = useState<string | null>(null);
+  /** A capture the server would not file without asking which vocabulary, and what it asked. */
+  const [asked, setAsked] = useState<{ question: VocabularyQuestion; request: CaptureRequest } | null>(null);
+  /** The vocabulary chosen for a typed document whose language has several. */
+  const [picked, setPicked] = useState<string | null>(null);
   const [working, setWorking] = useState(false);
   const [failure, setFailure] = useState<string | null>(null);
   const [duplicates, setDuplicates] = useState<CaptureResult["duplicates"]>([]);
@@ -170,17 +175,21 @@ export default function AddView({
   /**
    * The vocabulary this draft is saved in: the one its capture chose, while the document is still in
    * that vocabulary's language; else by capture's own rule for the language the document names
-   * (`targetVocabulary`); else the one in view, whose refusal then names what does not fit.
+   * (`targetVocabulary`), with the one the owner picked standing in for the one in view; else the one
+   * in view, whose refusal then names what does not fit. Several of the document's language, none of
+   * them in view or picked, is `which`: Save waits for the owner to say.
    */
-  const into = useMemo(() => {
-    if (!graph) return vocabularyId;
+  const { into, which } = useMemo<{ into: string; which: VocabularyQuestion | null }>(() => {
+    if (!graph) return { into: vocabularyId, which: null };
     let language: string | null = null;
     try { language = parseArticle(pending?.text ?? draft).language || null; } catch { /* as it stands */ }
-    if (!language) return captured ?? vocabularyId;
+    if (!language) return { into: captured ?? vocabularyId, which: null };
     const kept = captured ? vocabularyFor(graph, captured) : null;
-    if (kept?.language === language) return kept.id;
-    return targetVocabulary(graph, vocabularyId, language).chosen?.id ?? vocabularyId;
-  }, [graph, draft, pending, captured, vocabularyId]);
+    if (kept?.language === language) return { into: kept.id, which: null };
+    const target = targetVocabulary(graph, picked ?? vocabularyId, language);
+    if (target.chosen) return { into: target.chosen.id, which: null };
+    return { into: vocabularyId, which: target.choices.length > 1 ? { language, choices: target.choices } : null };
+  }, [graph, draft, pending, captured, picked, vocabularyId]);
 
   /** Every write to the document goes through here, and any write ends a review: the proposal was
    *  made against text that has now moved. A hand edit of the proposed text, on the YAML tab, starts
@@ -289,6 +298,7 @@ export default function AddView({
   async function submit(request: CaptureRequest) {
     setWorking(true);
     setFailure(null);
+    setAsked(null);
     setDuplicates([]);
     setPassedOver([]);
     try {
@@ -308,7 +318,11 @@ export default function AddView({
       rewrite(yamlForDraft(result.draft));
       onTab("article");
     } catch (error) {
-      setFailure(error instanceof Error ? error.message : "That text could not be processed.");
+      // Several vocabularies of the word's language, none of them in view: the owner says which, and
+      // the same capture is sent again naming it.
+      const question = vocabularyQuestion(error, graph);
+      if (question) setAsked({ question, request });
+      else setFailure(error instanceof Error ? error.message : "That text could not be processed.");
     } finally {
       setWorking(false);
     }
@@ -345,6 +359,8 @@ export default function AddView({
     await submit({
       text: add.text,
       resolution: add.resolution,
+      // The one its look-up chose, which may be one the owner was asked for.
+      vocabulary: add.vocabulary,
       photoRef: add.photoRef,
       photoRegion: add.photoRegion,
       sourceKind: add.sourceKind
@@ -431,12 +447,18 @@ export default function AddView({
       <span>{cannotBuild.reason}. You can still write the entry yourself.</span>
     </div>}
     {failure && <div className="validation bad" role="alert"><strong>{failure}</strong></div>}
+    {asked && !working && <WhichVocabulary
+      question={asked.question} onChoose={(id) => void submit({ ...asked.request, vocabulary: id })} />}
   </>;
+
+  /* A typed document's question, above the buttons that save it, which wait for the answer. */
+  const typedWhich = which && <WhichVocabulary question={which} typed onChoose={setPicked} />;
 
   if (tab === "photo" && onReadPhoto && onStorePhoto && onLookUp) {
     return <PhotoCapture
       head={head}
       notices={notices}
+      graph={graph}
       offline={offline}
       unavailable={noVocabularies ? "There is no vocabulary to add a word to yet" : cannotBuild?.reason ?? null}
       working={working}
@@ -544,6 +566,7 @@ export default function AddView({
       fill={false}
       actions={<>
         <ValidationPanel problems={preview.problems.length ? preview.problems : problems} notice={null} />
+        {typedWhich}
         <div className="composer-buttons">
           <span className="spacer" />
           <button className="tb-btn" onClick={onClose}>Cancel</button>
@@ -551,7 +574,7 @@ export default function AddView({
           {/* Not while a change waits to be accepted or discarded: saving then would decide it
               silently, one way or the other. */}
           <button
-            className="tb-btn primary" disabled={busy || !preview.article || Boolean(pending)}
+            className="tb-btn primary" disabled={busy || !preview.article || Boolean(pending) || Boolean(which)}
             onClick={() => onCreate(draft, into)}
           >
             {busy ? "Saving…" : "Save"}
@@ -611,10 +634,11 @@ export default function AddView({
         problems={problems}
         notice={pending ? "A proposed change is waiting on the Article tab. Accept or discard it there, or edit it here." : null}
       />
+      {typedWhich}
       <div className="composer-buttons">
         <span className="spacer" />
         <button className="tb-btn" onClick={onClose}>Cancel</button>
-        <button className="tb-btn primary" disabled={busy || Boolean(pending)} onClick={() => onCreate(draft, into)}>
+        <button className="tb-btn primary" disabled={busy || Boolean(pending) || Boolean(which)} onClick={() => onCreate(draft, into)}>
           {busy ? "Saving…" : "Validate & save"}
         </button>
       </div>

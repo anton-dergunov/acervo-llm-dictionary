@@ -3,12 +3,13 @@ import type {
   CaptureFoldable, CaptureResolution, PhotoPoint, PhotoReading, QuickLookUp, QuickLookUpRequest
 } from "./api";
 import Composer from "./Composer";
-import type { PhotoRegion, SourceKind } from "./domain";
+import type { PhotoRegion, SourceKind, VocabularyGraph } from "./domain";
 import { cropSquare, encodePhoto, still } from "./photoImage";
 import {
   cropRegion, hitTest, isWord, photoRegionFor, pointsOf, selectedText, selectionIn, sentenceOf,
   sentenceOutlines, span, tapped, UNCERTAIN, wordOutlines
 } from "./photoText";
+import { vocabularyQuestion, WhichVocabulary, type VocabularyQuestion } from "./WhichVocabulary";
 
 /** The photo as it will be kept, with the bytes behind it so the article under review can show it. */
 export interface KeptPhoto {
@@ -27,6 +28,8 @@ export interface PhotoAdd {
   sourceKind: SourceKind;
   /** The bytes that were uploaded, so the article under review can show the photo it keeps. */
   photo: Blob | null;
+  /** The vocabulary the look-up filed the word in, or the one the owner chose; null for the one in view. */
+  vocabulary: string | null;
 }
 
 type Stage =
@@ -39,6 +42,7 @@ type Stage =
 type LookUp =
   | { state: "loading" }
   | { state: "done"; result: QuickLookUp }
+  | { state: "which"; question: VocabularyQuestion }
   | { state: "failed"; message: string };
 
 /** Where the word was met, in the sheet's words. `sign` is a photo of the world rather than a page. */
@@ -84,10 +88,12 @@ const keyOf = (text: string, at: { start: number; end: number }) => `${at.start}
  * the pixel, and here there is one coordinate system and nothing to drift.
  */
 export default function PhotoCapture({
-  head, notices, offline, unavailable, working, onRead, onStore, onLookUp, onAdd, onOpenLexeme, onFoldIn,
+  head, notices, graph, offline, unavailable, working, onRead, onStore, onLookUp, onAdd, onOpenLexeme, onFoldIn,
   onWarm
 }: {
   head: ReactNode;
+  /** The replica, for the vocabularies a look-up may ask between. */
+  graph: VocabularyGraph | null;
   /** The Add view's own notices — a duplicate, a fall-through, a refusal — shown above the buttons. */
   notices: ReactNode;
   offline: boolean;
@@ -116,6 +122,8 @@ export default function PhotoCapture({
   const [settled, setSettled] = useState<{ text: string; result: QuickLookUp } | null>(null);
   const [keep, setKeep] = useState(true);
   const [source, setSource] = useState<SourceKind>("book");
+  /** The vocabulary the owner said this photo's words go in, when its language has several. */
+  const [chosen, setChosen] = useState<string | null>(null);
   const video = useRef<HTMLVideoElement | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const frame = useRef<HTMLDivElement | null>(null);
@@ -153,6 +161,7 @@ export default function PhotoCapture({
     setLookUps(new Map());
     setSettled(null);
     setTyped(false);
+    setChosen(null);
     try {
       setStage({ kind: "read", reading: await onRead(blob) });
     } catch (error) {
@@ -260,7 +269,7 @@ export default function PhotoCapture({
       const controller = new AbortController();
       asking.current = controller;
       setLookUps((was) => new Map(was).set(key, { state: "loading" }));
-      onLookUp({ text: asked.text, selection: asked.selection, source: "photo" }, controller.signal)
+      onLookUp({ text: asked.text, selection: asked.selection, source: "photo", vocabulary: chosen }, controller.signal)
         .then((result) => {
           setLookUps((was) => new Map(was).set(key, { state: "done", result }));
           // OCR damage the look-up repaired becomes the sentence in the box, and is not asked again.
@@ -275,14 +284,21 @@ export default function PhotoCapture({
             setLookUps((was) => { const next = new Map(was); next.delete(key); return next; });
             return;
           }
-          setLookUps((was) => new Map(was).set(key, {
+          const question = vocabularyQuestion(error, graph);
+          setLookUps((was) => new Map(was).set(key, question ? { state: "which", question } : {
             state: "failed", message: error instanceof Error ? error.message : "That word could not be looked up."
           }));
         });
     }, typed ? 600 : 0);
     return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, blocked]);
+  }, [key, blocked, chosen]);
+
+  /* The answer goes for every word of this photo, and the word that asked is asked again with it. */
+  function choose(vocabularyId: string) {
+    if (key) setLookUps((was) => { const next = new Map(was); next.delete(key); return next; });
+    setChosen(vocabularyId);
+  }
 
   function at(event: React.PointerEvent): PhotoPoint | null {
     const bounds = frame.current?.getBoundingClientRect();
@@ -385,7 +401,8 @@ export default function PhotoCapture({
     const resolution = found && !found.duplicates.length ? found.resolution : null;
     void withKeptPhoto((kept) => onAdd({
       text: sentence.trim(), resolution, photoRef: kept?.photoRef ?? null,
-      photoRegion: kept?.photoRegion ?? null, sourceKind: source, photo: kept?.photo ?? null
+      photoRegion: kept?.photoRegion ?? null, sourceKind: source, photo: kept?.photo ?? null,
+      vocabulary: found?.vocabularyId ?? chosen
     }));
   }
 
@@ -412,7 +429,8 @@ export default function PhotoCapture({
       ? <button className="tb-btn primary" aria-label={`Open ${held[0].headword}`} onClick={() => onOpenLexeme(held[0].id)}>Open</button>
       : <button
           className="tb-btn primary"
-          disabled={!reading || !selection.length || !sentence.trim() || working || keeping || blocked}
+          disabled={!reading || !selection.length || !sentence.trim() || working || keeping || blocked
+            || lookUp?.state === "which"}
           onClick={add}
         >{keeping ? "Keeping…" : working ? "Building…" : "Add"}</button>}
   </div>;
@@ -490,7 +508,7 @@ export default function PhotoCapture({
 
     {reading && <PhotoSheet
       reading={reading} selection={selection} current={current} sentence={sentence}
-      lookUp={lookUp} keep={keep} source={source}
+      lookUp={lookUp} keep={keep} source={source} onChoose={choose}
       onSentence={(text) => { setSentence(text); setTyped(true); }}
       onKeep={setKeep} onSource={setSource}
     />}
@@ -498,7 +516,7 @@ export default function PhotoCapture({
 }
 
 function PhotoSheet({
-  reading, selection, current, sentence, lookUp, keep, source, onSentence, onKeep, onSource
+  reading, selection, current, sentence, lookUp, keep, source, onChoose, onSentence, onKeep, onSource
 }: {
   reading: PhotoReading;
   selection: string[];
@@ -507,6 +525,7 @@ function PhotoSheet({
   lookUp: LookUp | null;
   keep: boolean;
   source: SourceKind;
+  onChoose(vocabularyId: string): void;
   onSentence(text: string): void;
   onKeep(keep: boolean): void;
   onSource(kind: SourceKind): void;
@@ -531,7 +550,9 @@ function PhotoSheet({
   return <div className="photo-sheet">
     {foreign}
     <div className="photo-meaning" aria-live="polite">
-      {lookUp?.state === "failed"
+      {lookUp?.state === "which"
+        ? <WhichVocabulary question={lookUp.question} onChoose={onChoose} />
+        : lookUp?.state === "failed"
         ? <span className="photo-meaning-failed">{lookUp.message}</span>
         : found
           ? <>

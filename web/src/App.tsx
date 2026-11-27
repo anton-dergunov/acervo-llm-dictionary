@@ -1224,10 +1224,11 @@ export default function App() {
    * Capture submits text and gets back a proposal — never a stored record. Everything that saves
    * still goes through `createFromYaml`, so a generated entry and a typed one are the same write.
    */
-  /* Both carry the vocabulary in view, which the word goes in when it is in its language. */
+  /* Both carry the vocabulary in view, which the word goes in when it is in its language — unless
+     the request names one, chosen by the owner or by an earlier look-up. */
   const captureText = useCallback((request: CaptureRequest) => {
     const deviceId = repository.state().deviceId;
-    return backendSession.captureText(deviceId, { vocabulary: vocabularyId, ...request });
+    return backendSession.captureText(deviceId, { ...request, vocabulary: request.vocabulary ?? vocabularyId });
   }, [vocabularyId]);
 
   /* Photo capture's round trips, which write nothing: a photo read into a page, the quick look-up a
@@ -1235,7 +1236,7 @@ export default function App() {
   const readPhoto = useCallback((photo: Blob) => backendSession.readPhoto(photo), []);
   const storePhoto = useCallback((photo: Blob) => backendSession.storePhoto(photo), []);
   const lookUp = useCallback((request: QuickLookUpRequest, signal: AbortSignal) =>
-    backendSession.resolveCapture(repository.state().deviceId, { vocabulary: vocabularyId, ...request }, signal), [vocabularyId]);
+    backendSession.resolveCapture(repository.state().deviceId, { ...request, vocabulary: request.vocabulary ?? vocabularyId }, signal), [vocabularyId]);
   const warmPhoto = useCallback(() => { void backendSession.warmPhoto().catch(() => undefined); }, []);
 
   /* A word tapped while reading (`LookUpSheet.tsx`): the same quick look-up, an Add that queues the

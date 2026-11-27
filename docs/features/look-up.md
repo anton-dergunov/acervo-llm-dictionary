@@ -26,6 +26,9 @@ headless `POST /captures` job carrying that answer ([`capture.md`](capture.md)).
   sentence as its attestation. `sourceTitle` says where it was met — `Story · …`, `Loop · …`,
   `Entry · …` — with the kind `unknown`, because a `story` kind would change a replicated enum for a
   label a title already carries.
+- **Filed in the vocabulary being read**, or, for a word in another language, the only vocabulary of
+  that one. Where the owner keeps several of it, the sheet asks which before it offers Add, and the
+  look-up is asked again naming the one chosen ([`capture.md`](capture.md), "Which vocabulary").
 - **Online-only, like every write.** A look-up with the server unreachable says so on the sheet, and
   Add queues nothing.
 

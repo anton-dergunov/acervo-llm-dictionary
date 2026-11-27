@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { QuickLookUp } from "./api";
+import { AcervoApiError, type QuickLookUp } from "./api";
 import type { VocabularyGraph } from "./domain";
 import { LookUpContext, type LookUpServices } from "./LookUpSheet";
 import StoryReader from "./StoryReader";
@@ -475,6 +475,30 @@ describe("the passages of a part read aloud", () => {
     });
     expect(await within(sheet).findByText("Added to your Inbox")).toBeInTheDocument();
     expect(playSegment).not.toHaveBeenCalled();
+  });
+
+  it("asks which vocabulary a word goes in when the server could not tell, and files it in the one chosen", async () => {
+    const STARTER = "vocabstarter001";
+    const { looking } = reader(undefined, (graph) => {
+      const spanish = graph.vocabularies.find((entry) => entry.id === SPANISH)!;
+      graph.vocabularies.push({ ...spanish, id: STARTER, displayName: "Spanish (Mexico) · Everyday words", order: 2 });
+    });
+    vi.mocked(looking.lookUp)
+      .mockRejectedValueOnce(new AcervoApiError("Choose which one it goes in.", 409, "vocabulary_ambiguous",
+        { language: "es", vocabularies: [SPANISH, STARTER] }))
+      .mockResolvedValueOnce({ ...ANSWER, vocabularyId: STARTER });
+    const text = document.querySelector(".story-text")!;
+    aimAt(text, "subió");
+    fireEvent.click(text, TAP);
+
+    const sheet = screen.getByRole("dialog", { name: "Look up a word" });
+    const question = await within(sheet).findByRole("group", { name: /Which of your Spanish vocabularies/ });
+    expect(within(sheet).getByRole("button", { name: "Add" })).toBeDisabled();
+    fireEvent.click(within(question).getByRole("button", { name: /Everyday words/ }));
+    await waitFor(() => expect(looking.lookUp).toHaveBeenCalledTimes(2));
+    expect(vi.mocked(looking.lookUp).mock.calls[1][0]).toMatchObject({ vocabulary: STARTER });
+    fireEvent.click(await within(sheet).findByRole("button", { name: "Add" }));
+    await waitFor(() => expect(looking.queue).toHaveBeenCalledWith(expect.objectContaining({ vocabulary: STARTER })));
   });
 
   it("says why a look-up failed, and offers to try again", async () => {

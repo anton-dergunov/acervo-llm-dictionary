@@ -143,11 +143,10 @@ describe("Acervo domain", () => {
       agrees(base, { senses: [{ ...sense, ownerId: "owner0000000002" }] }, "one owner only");
     });
 
-    it("refuses a second vocabulary for a language, and allows it once the first is deleted", () => {
-      const portuguese = vocabularyOf("vocabportugue01", "pt");
-      const withPortuguese = merged(base, { vocabularies: [portuguese] });
-      agrees(withPortuguese, { vocabularies: [{ ...portuguese, id: "vocabportugue02" }] }, "Two vocabularies claim pt");
-      agrees(withPortuguese, { vocabularies: [{ ...portuguese, deleted: true }, { ...portuguese, id: "vocabportugue02" }] });
+    it("accepts several vocabularies of one language, each holding its own words", () => {
+      const spanish = base.vocabularies[0];
+      const starter = { ...spanish, id: "vocabstarter001", displayName: "Spanish (Mexico) · Everyday words", order: 1 };
+      agrees(base, { vocabularies: [starter], lexemes: [{ ...lexeme, id: "lexeme000000002", vocabularyId: starter.id }] });
     });
 
     it("catches a word left in a vocabulary removed or moved to another language", () => {

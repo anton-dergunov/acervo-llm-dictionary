@@ -100,10 +100,13 @@ canonical form, so `eng` finds English rather than a second English; a tag whose
 lacks is offered as typed, if the platform can name it, so a smaller language can be kept. The same search chooses the languages a vocabulary is
 defined, translated and annotated in.
 
-**Add a language…** finds one and opens its page **unsaved**, filled in: named in English, defined in
-itself, translated into what the owner's other vocabularies translate into most (or the browser's
-language for the first), notes in the first of those. Nothing is written until *Add vocabulary*;
-Cancel leaves nothing behind.
+**Add a vocabulary…** finds a language and opens its page **unsaved**, filled in: named in English,
+defined in itself, translated into what the owner's other vocabularies translate into most (or the
+browser's language for the first), notes in the first of those. Nothing is written until *Add
+vocabulary*; Cancel leaves nothing behind. A language already kept is offered again, saying how many
+of it the owner has: a second vocabulary of a language is told apart from the first by nothing but its
+name, so a name another vocabulary already shows is refused on the page, with a notice, and *Add
+vocabulary* waits for another.
 
 A vocabulary's page has three groups:
 

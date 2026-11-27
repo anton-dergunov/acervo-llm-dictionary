@@ -98,12 +98,18 @@ diffing, validation and atomicity every other save gets.
 > it: a restored picture is an ordinary drawn one. Drawing any of the others is the per-sense Draw,
 > which says the sense is set to have no picture and turns that off.
 
-- **Each of the bundle's vocabularies goes into the owner's vocabulary of the same language**, taking
-  that one's name, or becomes a new vocabulary named as the bundle names it, last in the owner's
-  order, where they keep none of that language (`defaultTargets`). Asking which, per vocabulary, waits
-  on several vocabularies of one language ([`../plans/several-vocabularies.md`](../plans/several-vocabularies.md)).
+- **The owner chooses, per vocabulary in the bundle, where it goes**: *Add as a new vocabulary*, under
+  the name typed inside that option — the bundle's own to begin with — last in the owner's order; or
+  *Add to* one of their vocabularies of the same language, which keeps its own name and drops the
+  bundle's. Both are offered whenever they keep that language, and a new vocabulary is the default, so
+  a starter arrives beside the owner's own words rather than inside them. A new vocabulary may not take
+  a name another one shows — one kept, or another the same import adds — and Import waits until the
+  name is changed or the other option is chosen (`targetProblems` in `transfer.ts`, which the run
+  itself also refuses, so the laptop's installer is held to it too: there `--name NAME` renames and
+  `--into NAME` adds to the account's vocabulary of that name).
 - **A word already held in the vocabulary it goes into is skipped**, never merged or overwritten: an import must not cost curation done
-  after the export. "Held" is asked of the replica at each word, not of a list taken when the run
+  after the export. The report lists the skipped words with that vocabulary's name, and counts the
+  new vocabularies it added. "Held" is asked of the replica at each word, not of a list taken when the run
   started, and **one import runs at a time in a window**: a run outlives the Settings window that
   started it, and the replicated collections carry no uniqueness constraint
   ([`../architecture/data-model.md`](../architecture/data-model.md)), so two runs deciding from their

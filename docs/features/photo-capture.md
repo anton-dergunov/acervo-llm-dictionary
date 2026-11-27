@@ -138,7 +138,9 @@ sentence and selection, so tapping back is free. It is `pipeline.understand` —
 vocabulary checks and the duplicate check — with the tap marked in the text by asterisks, the way the
 resolve prompt already reads a pointer, and the prompt's `quick` and `photo` sections switched on. It
 returns the resolved unit, a short in-context gloss in `glossLangs[0]`, and `duplicates` and
-`foldable`.
+`foldable`. Where the photo's language has several of the owner's vocabularies, none of them in view,
+the sheet asks which in place of the gloss; the answer goes for every later tap on that photo, and Add
+carries the vocabulary its look-up settled on ([`capture.md`](capture.md), "Which vocabulary").
 
 **It runs on its own `quick` chain**, the text models in a second order. The owner's `text` chain is
 ordered for writing good entries; this call is ordered for answering while a finger is still on the

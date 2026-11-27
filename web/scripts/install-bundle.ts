@@ -1,13 +1,20 @@
 /**
  * Import bundles into an account from the laptop, with the app's own import:
  *
- *   printf '%s\n' "$PASSWORD" | npx tsx scripts/install-bundle.ts --server URL --email EMAIL [--fresh] ZIP...
+ *   printf '%s\n' "$PASSWORD" | npx tsx scripts/install-bundle.ts --server URL --email EMAIL \
+ *     [--fresh] [--name NAME | --into NAME] ZIP...
  *
  * (run from `web/`; the password is read from stdin, never an argument.) A laptop tool for filling
  * the owner's testing accounts with the starter vocabularies (`scripts/starter/test_accounts.sh`),
  * not part of the app. It signs in, keeps a replica in memory (`MemoryDatabase`, the one the tests
  * use), and runs `importThroughServer` — the code Settings ▸ Data ▸ Import runs — so filling an
  * account is also a test of what a person installing a starter gets.
+ *
+ * Each vocabulary in a bundle comes in as a new vocabulary under the bundle's name, as Settings ▸ Data
+ * ▸ Import does until told otherwise; a name the account already shows is refused, naming it, and
+ * nothing of that bundle is imported. `--name NAME` gives the new vocabulary another name, and
+ * `--into NAME` adds the words to the account's vocabulary of that name instead, skipping the ones it
+ * already holds. Both are for a bundle of one vocabulary, such as a starter.
  *
  * `--fresh` deletes every word in the account first (`POST /graph/reset`, which keeps languages and
  * topics): an import skips words already held, so a corrected word would otherwise never replace the
@@ -39,7 +46,12 @@ const { bundleArchive } = await import("../src/bundleZip");
 const { importThroughServer } = await import("../src/importRun");
 const { MemoryDatabase } = await import("../src/localDatabase");
 const { LocalAcervoRepository } = await import("../src/repository");
-const { defaultTargets, readBundle } = await import("../src/transfer");
+const { defaultTargets, readBundle, targetProblems } = await import("../src/transfer");
+const { presentationOf } = await import("../src/languages");
+const { vocabularies } = await import("../src/selectors");
+type ImportTarget = import("../src/transfer").ImportTarget;
+type BundlePlan = import("../src/transfer").BundlePlan;
+type VocabularyGraph = import("../src/domain").VocabularyGraph;
 type RemoteGraph = import("../src/repository").RemoteGraph;
 
 function options(argv: string[]) {
@@ -48,13 +60,37 @@ function options(argv: string[]) {
     if (at < 0 || !argv[at + 1]) throw new Error(`${flag} is required`);
     return argv[at + 1];
   };
-  const flags = new Set(["--server", "--email"]);
+  const given = (flag: string) => argv.includes(flag) ? value(flag) : null;
+  const flags = new Set(["--server", "--email", "--name", "--into"]);
   const zips = argv.filter((arg, index) => !arg.startsWith("--") && !flags.has(argv[index - 1] ?? ""));
   if (!zips.length) throw new Error("name at least one bundle zip");
+  const name = given("--name");
+  const into = given("--into");
+  if (name && into) throw new Error("--name and --into are two different answers; give one");
   return {
     server: value("--server"), email: value("--email"), fresh: argv.includes("--fresh"),
-    testing: argv.includes("--testing"), zips
+    testing: argv.includes("--testing"), name, into, zips
   };
+}
+
+/**
+ * Where each of the bundle's vocabularies goes: in as a new one under the bundle's name, unless the
+ * command line said another name, or the account's vocabulary to add it to.
+ */
+function targetsFor(graph: VocabularyGraph, plan: BundlePlan, name: string | null, into: string | null): Map<string, ImportTarget> {
+  const targets = defaultTargets(plan);
+  if (!name && !into) return targets;
+  if (plan.vocabularies.length !== 1) {
+    throw new Error(`this bundle holds ${plan.vocabularies.length} vocabularies; --name and --into are for a bundle of one`);
+  }
+  const [{ directory }] = plan.vocabularies;
+  if (name) return targets.set(directory, { kind: "new", name });
+  const held = vocabularies(graph).find((one) => presentationOf(one).name.toLocaleLowerCase() === into!.trim().toLocaleLowerCase());
+  if (!held) {
+    const names = vocabularies(graph).map((one) => presentationOf(one).name).join(", ") || "none";
+    throw new Error(`the account has no vocabulary called ${into} (it has: ${names})`);
+  }
+  return targets.set(directory, { kind: "existing", vocabularyId: held.id });
 }
 
 /** A testing account: nothing draws, syncs to Anki or runs at night by itself. */
@@ -68,7 +104,7 @@ async function quiet(email: string): Promise<void> {
 }
 
 async function main(): Promise<number> {
-  const { server, email, fresh, testing, zips } = options(process.argv.slice(2));
+  const { server, email, fresh, testing, name, into, zips } = options(process.argv.slice(2));
   const password = readFileSync(0, "utf8").split("\n")[0];
   const session = await backendSession.login(server, email, password);
 
@@ -113,10 +149,25 @@ async function main(): Promise<number> {
       plan.problems.slice(0, 5).forEach((problem) => console.error(`  ${problem.path}: ${problem.message}`));
       continue;
     }
+    let targets: Map<string, ImportTarget>;
+    try {
+      targets = targetsFor(repository.snapshot(), plan, name, into);
+    } catch (error) {
+      failures += 1;
+      console.error(`${basename(zip)}: ${error instanceof Error ? error.message : String(error)}; nothing imported`);
+      continue;
+    }
+    const refused = [...targetProblems(repository.snapshot(), plan, targets).values()];
+    if (refused.length) {
+      failures += 1;
+      console.error(`${basename(zip)}: nothing imported`);
+      refused.forEach((problem) => console.error(`  ${problem} (--name gives it another, --into adds it to yours)`));
+      continue;
+    }
     const started = Date.now();
     let shown = 0;
     const report = await importThroughServer({
-      repository, pull, plan, targets: defaultTargets(repository.snapshot(), plan),
+      repository, pull, plan, targets,
       pictures: archive.pictures, recordings: archive.recordings, restoreClips: true,
       onProgress: (done, total) => {
         if (done - shown >= 100 || done === total) {

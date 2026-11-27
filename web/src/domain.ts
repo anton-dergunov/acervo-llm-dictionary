@@ -1030,18 +1030,6 @@ function indexOf(graph: VocabularyGraph): GraphIndex {
   };
 }
 
-function checkVocabularyLanguages(vocabularies: readonly Vocabulary[]): void {
-  // Not a storage constraint (`docs/architecture/data-model.md` forbids those on replicated
-  // collections) — a graph-level one, so two devices that each added the same language offline
-  // cannot both be believed at once.
-  const claimed = new Set<string>();
-  vocabularies.forEach((record) => {
-    if (record.deleted) return;
-    invariant(!claimed.has(record.language), `Two vocabularies claim ${record.language}.`);
-    claimed.add(record.language);
-  });
-}
-
 export function validateGraph(graph: VocabularyGraph): void {
   const ids = new Set<string>();
   let ownerId: string | null = null;
@@ -1056,7 +1044,6 @@ export function validateGraph(graph: VocabularyGraph): void {
       (CHECKS[kind] as (record: AnyRecord, find: Find) => void)(record, find);
     });
   });
-  checkVocabularyLanguages(graph.vocabularies);
 }
 
 /**
@@ -1107,7 +1094,6 @@ export function validateChanges(
       (CHECKS[kind] as (record: AnyRecord, find: Find) => void)(record, find);
     });
   });
-  if (changes.vocabularies?.length) checkVocabularyLanguages(mergedGraph(graph, { vocabularies: changes.vocabularies }).vocabularies);
 }
 
 const EMPTY_KINDS = (): VocabularyGraph => ({

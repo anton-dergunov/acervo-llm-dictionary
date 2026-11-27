@@ -100,7 +100,7 @@ export function Select<T extends string>({ label, hint, value, options, disabled
 }
 
 /** A line of text to type or paste, its label on the left. */
-export function TextField({ label, hint, value, placeholder, maxLength, secret = false, mono = false, onChange }: {
+export function TextField({ label, hint, value, placeholder, maxLength, secret = false, mono = false, clash = false, onChange }: {
   label: string;
   hint?: ReactNode;
   value: string;
@@ -110,12 +110,15 @@ export function TextField({ label, hint, value, placeholder, maxLength, secret =
   secret?: boolean;
   /** Something spelled exactly: a key, a model's id, an address. */
   mono?: boolean;
+  /** What is typed is taken by something else; a notice beside the field says what. */
+  clash?: boolean;
   onChange(value: string): void;
 }) {
   return <label className="pref-row">
     <Text label={label} hint={hint} />
     <input
-      className={`pref-input${mono ? " mono" : ""}`} value={value} placeholder={placeholder} aria-label={label}
+      className={`pref-input${mono ? " mono" : ""}${clash ? " clash" : ""}`} aria-invalid={clash || undefined}
+      value={value} placeholder={placeholder} aria-label={label}
       maxLength={maxLength} type={secret ? "password" : "text"} autoComplete={secret ? "new-password" : "off"}
       spellCheck={false} onChange={(event) => onChange(event.target.value)}
     />
@@ -247,6 +250,49 @@ export function Reorder({ name, first, last, disabled, onMove }: {
     <button type="button" className="icon-btn" aria-label={`Move ${name} down`} disabled={disabled || last}
       onClick={(event) => { event.preventDefault(); onMove(1); }}><DownIcon /></button>
   </span>;
+}
+
+/**
+ * A radio group whose options may carry what belongs to them — a name to type, a warning — under
+ * the chosen one's label. A drawn dot rather than a check at the end: these are alternatives to pick
+ * between, not a list with one marked.
+ */
+export function Options({ title, label, children }: { title: string; label: string; children: ReactNode }) {
+  return <section className="pref-group" aria-label={title}>
+    <h4>{title}</h4>
+    <div className="pref-card" role="radiogroup" aria-label={label}>{children}</div>
+  </section>;
+}
+
+export function Option({ label, hint, checked, onChoose, children }: {
+  label: string;
+  hint?: string;
+  checked: boolean;
+  onChoose(): void;
+  /** Shown while this option is chosen. */
+  children?: ReactNode;
+}) {
+  return <div className={`pref-option${checked ? " on" : ""}`}>
+    <button type="button" className="pref-row pref-radio" role="radio" aria-checked={checked} onClick={onChoose}>
+      <span className="pref-dot" aria-hidden="true" /><Text label={label} hint={hint} />
+    </button>
+    {checked && children && <div className="pref-option-body">{children}</div>}
+  </div>;
+}
+
+/** A field inside an option, its label above it. */
+export function OptionField({ label, value, clash = false, onChange }: {
+  label: string;
+  value: string;
+  clash?: boolean;
+  onChange(value: string): void;
+}) {
+  return <label className="pref-field"><span>{label}</span>
+    <input
+      className={`pref-input${clash ? " clash" : ""}`} aria-invalid={clash || undefined} value={value}
+      autoComplete="off" spellCheck={false} onChange={(event) => onChange(event.target.value)}
+    />
+  </label>;
 }
 
 export function Notice({ children }: { children: ReactNode }) {

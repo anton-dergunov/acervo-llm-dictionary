@@ -69,6 +69,17 @@ describe("the Obsidian projection", () => {
     expect(fileNamed("Spanish vocab - Food.md")!.text).not.toContain("espolvorear");
   });
 
+  it("numbers a vocabulary named like one earlier in the owner's order, so their notes never mix", () => {
+    const graph = testGraph();
+    const spanish = vocabularyIn(graph, SPANISH);
+    const twin = { ...spanish, id: "vocabspanish002", order: spanish.order + 1 };
+    const both = { ...graph, vocabularies: [...graph.vocabularies, twin] };
+    expect(markdownFor(both, spanish, AT).map((file) => file.path)).toContain("Spanish vocab - Food.md");
+    expect(markdownFor(both, twin, AT).map((file) => file.path)).toEqual([]);
+    const moved = { ...both, lexemes: both.lexemes.map((lexeme) => lexeme.vocabularyId === SPANISH ? { ...lexeme, vocabularyId: twin.id } : lexeme) };
+    expect(markdownFor(moved, twin, AT).map((file) => file.path)).toContain("Spanish 2 vocab - Food.md");
+  });
+
   it("gives a vocabulary with no topics a Misc file", () => {
     const files = markdownFor(testGraph(), vocabularyIn(testGraph(), ENGLISH), AT);
     expect(files.map((file) => file.path)).toEqual(["English vocab - Misc.md"]);

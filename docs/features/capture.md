@@ -56,6 +56,16 @@ of that language (`choose_vocabulary` in `services/capture/pipeline.py`). None o
 `409 vocabulary_ambiguous`, naming them and carrying their ids for the device to ask with. The answer
 names the `vocabularyId` chosen, and Add and a queued capture save into it.
 
+The device asks the same question wherever a word is added, with one component (`WhichVocabulary.tsx`):
+"This looks like Spanish. Which of your Spanish vocabularies does it go in?", one button per
+vocabulary. A capture, a dictionary's Add and a photo's Add show it under the composer and send the
+same capture again naming the one chosen; a photo's or a reading look-up asks before Add is offered,
+and the chosen vocabulary goes for the rest of that photo. A document typed in YAML is held to the same
+rule on the device (`targetVocabulary` in `selectors.ts`): when it names a language with several
+vocabularies, none of them in view, Save waits for the answer. A queued capture has nobody to ask, so
+it fails with that sentence, which `admin log --failed` shows; the notes-file script names the
+vocabulary with `--vocabulary NAME`.
+
 The model answers in JSON mode and the shape is checked by Acervo's own parser — no schema is ever
 sent ([`../architecture/models.md`](../architecture/models.md)). Resolve and compose run on the
 owner's `text` chain; a tapped word's resolve — on a photo, or in something being read — runs alone on

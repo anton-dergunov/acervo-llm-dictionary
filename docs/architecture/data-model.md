@@ -47,10 +47,13 @@ provenance — when, and from which device — and never a merge key.
 
 A word names its vocabulary by id (`vocabularyId`), and a vocabulary is a thing in its own right
 rather than a language, so that two may share one — Argentine and Castilian Spanish kept apart, a
-class's word set beside one's own, a starter tried before it is adopted. The model and the server
-already allow it; the client still holds one vocabulary per language (`checkVocabularyLanguages` in
-`domain.ts`) until import and capture can ask which one a word goes in
-([`../plans/several-vocabularies.md`](../plans/several-vocabularies.md)). There is no kind of vocabulary: a
+class's word set beside one's own, a starter tried before it is adopted. Any number may share a
+language, and nothing but their names tells them apart, so the interface refuses a name another
+vocabulary already shows (Settings, an import) — an interface check only, since a replicated
+collection carries no uniqueness rule; where two devices offline still give two one name, the Anki
+deck and the Obsidian notes of the later in the owner's order get a number. Where a new word goes is
+one rule, on the server and the device alike ([`../features/capture.md`](../features/capture.md),
+"Which vocabulary"). There is no kind of vocabulary: a
 starter is an ordinary one told apart by its name (`Spanish (Mexico) · Everyday words`), and
 everything per vocabulary — the switcher, the map, stats, the Anki deck, the Obsidian notes, the
 remembered place, word selection, loop and story lists — treats it like any other.

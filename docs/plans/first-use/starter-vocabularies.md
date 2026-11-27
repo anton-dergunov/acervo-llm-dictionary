@@ -225,14 +225,15 @@ whatever the default quota gives: about one picture a minute.
    - **Placement is by bundle path**: `media/<lang>/<slug>-<n>.webp` is the nth sense of
      `<lang>/<slug>.yaml`, as for any exported picture, so nothing is matched again after import.
    - **Testing accounts.** `scripts/starter/test_accounts.sh [--fresh]` creates
-     `starters@account.example.com` (every starter but es-ES) and `starters-es@account.example.com` (es-ES: an
-     account holds one vocabulary per language) on the deployed server, and installs the zips with
+     `starters@account.example.com` (every starter but es-ES) and `starters-es@account.example.com` (es-ES,
+     so it is not imported into the first's Spanish) on the deployed server, and installs the zips with
      the app's own import, run headless (`web/scripts/install-bundle.ts`). Each account is set first to
      run nothing else by itself (picture drawing, Anki and the nightly steps off); the import itself
      queues nothing in any account. Importing into these accounts is the end-to-end test, and the first
      of them is where the recordings, stories and loops are made later (step 9). They are an interim:
-     [`../several-vocabularies.md`](../several-vocabularies.md) puts testing vocabularies in the
-     owner's own account.
+     an account now keeps several vocabularies of a language, so
+     [`../several-vocabularies.md`](../several-vocabularies.md) moves the starters into the owner's own
+     account and retires them.
 8. **Support-language variants:** translate definitions, glosses and notes. The translation sees the
    target word and its sense, never the English alone: *conocer* glossed *know* would become
    Russian знать, which is wrong.
@@ -255,8 +256,6 @@ whatever the default quota gives: about one picture a minute.
   the bundle writer and the headless installer in `web/scripts/`.
 - **A part of speech for conjunctions and prepositions.** The app's list has none, so *but* and
   *with* are filed as `expression`.
-- **Several vocabularies per language**, so a starter can be tried beside the owner's own words
-  without the testing accounts ([`../several-vocabularies.md`](../several-vocabularies.md)).
 - **A way to install a starter from inside the app**, built with the first-run guide
   ([`first-run-guide.md`](first-run-guide.md), step 2) and the standalone app. Until then a person
   downloads a zip from the release and uses Settings ▸ Data ▸ Import. The design, so it adds a source
@@ -267,9 +266,8 @@ whatever the default quota gives: about one picture a minute.
     allow-list), checks its SHA-256 and keeps it under `<data>/starters/` as a cache, with its failure
     sentence in `admin log`; `GET /api/acervo/starters/{file}` serves it (bearer, `FileResponse`).
   - The import panel lists the catalogue as a second source, "Start from a ready vocabulary". Choosing
-    one fetches through the server, then shows the same confirmation and runs the same
-    `importThroughServer`. The confirmation says when the account already has the language ("adds 487
-    words to your Spanish; 25 you have are skipped"). An import spends nothing: no job, no model call,
+    one fetches through the server, then shows the same confirmation — as a new vocabulary, or added
+    to one of the owner's of its language — and runs the same `importThroughServer`. An import spends nothing: no job, no model call,
     and its senses without a picture stay without one ([`../../features/export.md`](../../features/export.md), "Import").
   - Pictures then travel server → device → server (~125 MB each way). If that is slow on a tablet,
     the picture route can take "from starter X, path P" instead of the bytes: the same route.

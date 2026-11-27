@@ -1,6 +1,7 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { PhotoPoint, PhotoReading, QuickLookUp } from "./api";
+import { AcervoApiError, type PhotoPoint, type PhotoReading, type QuickLookUp } from "./api";
+import { SPANISH, testGraph } from "./testGraph";
 import PhotoCapture from "./PhotoCapture";
 
 vi.mock("./photoImage", () => ({
@@ -40,6 +41,7 @@ function setUp(overrides: Partial<Parameters<typeof PhotoCapture>[0]> = {}) {
   const props = {
     head: <h2>Add a word</h2>,
     notices: null,
+    graph: null,
     offline: false,
     unavailable: null,
     working: false,
@@ -122,7 +124,8 @@ describe("the Photo tab", () => {
 
     tap(frame, 290, 60);
     await waitFor(() => expect(props.onLookUp).toHaveBeenCalledTimes(1));
-    expect(vi.mocked(props.onLookUp).mock.calls[0][0]).toEqual({ text: "Lo llevó a cabo.", selection: { start: 3, end: 8 }, source: "photo" });
+    // No vocabulary asked for: the one in view goes, unless the owner was asked and chose another.
+    expect(vi.mocked(props.onLookUp).mock.calls[0][0]).toEqual({ text: "Lo llevó a cabo.", selection: { start: 3, end: 8 }, source: "photo", vocabulary: null });
     expect(await screen.findByText("llevar a cabo")).toBeInTheDocument();
     expect(screen.getByText(/to carry out/)).toBeInTheDocument();
     expect(screen.getByLabelText("The sentence, as it will be kept")).toHaveValue("Lo llevó a cabo.");
@@ -131,10 +134,33 @@ describe("the Photo tab", () => {
     const added = vi.mocked(props.onAdd).mock.calls[0][0];
     expect(added.text).toBe("Lo llevó a cabo.");
     expect(added.resolution).toEqual(FOUND.resolution);
+    expect(added.vocabulary).toBe(FOUND.vocabularyId);
     expect(added.photoRef).toBe(READING.photoRef);
     expect(added.photoRegion.words).toEqual([box(0.25, 0.1)]);
     expect(added.sourceKind).toBe("web");
     expect(added.photo).toBeInstanceOf(Blob);
+  });
+
+  it("asks which vocabulary when the photo's language has several, and looks the word up again in it", async () => {
+    const graph = testGraph();
+    const spanish = graph.vocabularies.find((entry) => entry.id === SPANISH)!;
+    graph.vocabularies.push({ ...spanish, id: "vocabstarter001", displayName: "Spanish (Mexico) · Everyday words", order: 2 });
+    const onLookUp = vi.fn()
+      .mockRejectedValueOnce(new AcervoApiError("Choose which one it goes in.", 409, "vocabulary_ambiguous",
+        { language: "es", vocabularies: [SPANISH, "vocabstarter001"] }))
+      .mockResolvedValueOnce({ ...FOUND, vocabularyId: "vocabstarter001" });
+    const { props, view } = setUp({ graph, onLookUp });
+    tap(await choose(view), 290, 60);
+
+    const question = await screen.findByRole("group", { name: /Which of your Spanish vocabularies/ });
+    expect(screen.getByRole("button", { name: "Add" })).toBeDisabled();
+    fireEvent.click(within(question).getByRole("button", { name: /Everyday words/ }));
+    await waitFor(() => expect(onLookUp).toHaveBeenCalledTimes(2));
+    expect(onLookUp.mock.calls[1][0]).toMatchObject({ vocabulary: "vocabstarter001" });
+    expect(await screen.findByText("llevar a cabo")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    await waitFor(() => expect(props.onAdd).toHaveBeenCalled());
+    expect(vi.mocked(props.onAdd).mock.calls[0][0].vocabulary).toBe("vocabstarter001");
   });
 
   it("asks nothing for a tap that lands on no word", async () => {

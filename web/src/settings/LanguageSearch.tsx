@@ -68,11 +68,13 @@ export function search(languages: readonly LanguageEntry[], query: string): Lang
   return found;
 }
 
-export function LanguageSearch({ label, unavailable = {}, onChoose }: {
+export function LanguageSearch({ label, unavailable = {}, noted = {}, onChoose }: {
   /** What the box is for, for a screen reader: "Find a language". */
   label: string;
-  /** Languages that cannot be chosen here, each with why: "Already kept". */
+  /** Languages that cannot be chosen here, each with why: "Already in the list". */
   unavailable?: Record<string, string>;
+  /** Languages that can, with something worth knowing beside them: "You have 2". */
+  noted?: Record<string, string>;
   onChoose(language: LanguageEntry): void;
 }) {
   const catalogue = useServerSetting(SETTINGS.languages);
@@ -105,7 +107,7 @@ export function LanguageSearch({ label, unavailable = {}, onChoose }: {
                 <span className="pref-label">{entry.name}</span>
                 {entry.autonym && entry.autonym !== entry.name && <span className="pref-hint">{entry.autonym}</span>}
               </span>
-              {why && <span className="pref-value">{why}</span>}
+              {(why ?? noted[entry.tag]) && <span className="pref-value">{why ?? noted[entry.tag]}</span>}
             </button>;
           })}
         </Group>

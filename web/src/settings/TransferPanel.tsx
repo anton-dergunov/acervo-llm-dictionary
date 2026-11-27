@@ -11,7 +11,7 @@
 import { useMemo, useRef, useState } from "react";
 import { strToU8, zipSync } from "fflate";
 import { bundleArchive, type BundleArchive } from "../bundleZip";
-import { languageOf } from "../languages";
+import { flagFor, presentationOf } from "../languages";
 import { repository, type ReplicaSnapshot } from "../repository";
 import { syncEngine } from "../sync";
 import { vocabularyOptions } from "../selectors";
@@ -19,10 +19,10 @@ import { bytesFor } from "../media";
 import { clipBytes } from "../pronunciation";
 import { importThroughServer } from "../importRun";
 import {
-  bundleName, defaultTargets, exportBundle, picturesIn, pronunciationsIn, readBundle,
-  type BundlePlan, type ImportReport
+  bundledName, bundleName, defaultTargets, exportBundle, intoChoices, picturesIn, pronunciationsIn, readBundle,
+  targetProblems, type BundlePlan, type BundleVocabulary, type ImportReport, type ImportTarget
 } from "../transfer";
-import { Action, Group, Row, Select, Toggle } from "./kit";
+import { Action, Group, Notice, Option, OptionField, Options, Row, Select, Toggle } from "./kit";
 
 function save(name: string, bytes: Uint8Array): void {
   const url = URL.createObjectURL(new Blob([bytes as unknown as BlobPart], { type: "application/zip" }));
@@ -142,7 +142,11 @@ export function ExportPanel({ snapshot }: { snapshot: ReplicaSnapshot }) {
 
 type Stage =
   | { at: "idle" }
-  | { at: "chosen"; name: string; plan: BundlePlan; pictures: Map<string, Uint8Array>; recordings: Map<string, Uint8Array> }
+  | {
+      at: "chosen"; name: string; plan: BundlePlan; pictures: Map<string, Uint8Array>; recordings: Map<string, Uint8Array>;
+      /** Where each of the bundle's vocabularies goes, by its directory, as the owner has chosen so far. */
+      targets: Map<string, ImportTarget>;
+    }
   | { at: "running"; done: number; total: number }
   | { at: "done"; report: ImportReport };
 
@@ -158,24 +162,27 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
     setProblem("");
     try {
       const { files, pictures, recordings } = await filesIn(file);
-      setStage({ at: "chosen", name: file.name, plan: readBundle(files), pictures, recordings });
+      const plan = readBundle(files);
+      setStage({ at: "chosen", name: file.name, plan, pictures, recordings, targets: defaultTargets(plan) });
     } catch (error) {
       setStage({ at: "idle" });
       setProblem(error instanceof Error ? error.message : "That file could not be read.");
     }
   }
 
-  async function run(plan: BundlePlan, pictures: Map<string, Uint8Array>, recordings: Map<string, Uint8Array>) {
+  async function run(plan: BundlePlan, pictures: Map<string, Uint8Array>, recordings: Map<string, Uint8Array>,
+                     targets: Map<string, ImportTarget>) {
     cancel.current = { cancelled: false };
     const chosen = stage;
     setStage({ at: "running", done: 0, total: 0 });
     const report = await importThroughServer({
-      repository, pull: () => syncEngine.syncNow(), plan, targets: defaultTargets(repository.snapshot(), plan),
+      repository, pull: () => syncEngine.syncNow(), plan, targets,
       pictures, recordings, restoreClips,
       onProgress: (done, total) => setStage({ at: "running", done, total }),
       signal: cancel.current
     }).catch((error: unknown) => {
-      // Refused because a run started earlier from this window is still going.
+      // Refused because a run started earlier from this window is still going, or because what was
+      // chosen no longer fits what the account holds.
       setStage(chosen);
       setProblem(error instanceof Error ? error.message : String(error));
       return null;
@@ -191,9 +198,15 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
     if (picker.current) picker.current.value = "";
   }
 
-  return <Group title="Import" foot={problem
+  const snapshot = repository.snapshot();
+  const problems = stage.at === "chosen" ? targetProblems(snapshot, stage.plan, stage.targets) : new Map<string, string>();
+  const retarget = (directory: string, target: ImportTarget) => {
+    if (stage.at === "chosen") setStage({ ...stage, targets: new Map(stage.targets).set(directory, target) });
+  };
+
+  return <><Group title="Import" foot={problem
     ? <span className="transfer-problem" role="alert">{problem}</span>
-    : "Adds the words in a bundle. A word you already have is left as it is."}>
+    : "Each vocabulary in the file comes in as a new one, or joins one of yours. Words you already have are left as they are."}>
     {stage.at === "idle" && <label className="pref-row stack">
       <span className="pref-text">
         <span className="pref-label">Choose a bundle</span>
@@ -221,13 +234,6 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
         title={`${stage.plan.problems.length} ${stage.plan.problems.length === 1 ? "file" : "files"} could not be read and will be left out`}
         problems={stage.plan.problems}
       /></div>}
-      <div className="pref-row pref-buttons">
-        <button type="button" className="tb-btn" onClick={reset}>Cancel</button>
-        <button
-          type="button" className="tb-btn primary" disabled={stage.plan.articles.length === 0}
-          onClick={() => void run(stage.plan, stage.pictures, stage.recordings)}
-        >Import {stage.plan.articles.length} {stage.plan.articles.length === 1 ? "entry" : "entries"}</button>
-      </div>
     </>}
 
     {stage.at === "running" && <Row
@@ -251,8 +257,8 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
       />
       {stage.report.skipped.length > 0 && <div className="pref-row stack"><details className="transfer-report">
         <summary>Already in your vocabulary</summary>
-        <ul>{stage.report.skipped.map((entry) => <li key={`${entry.language}/${entry.headword}`}>
-          {entry.headword} <span>{languageOf(entry.language).name}</span>
+        <ul>{bySkippedVocabulary(stage.report.skipped).map((entry) => <li key={`${entry.vocabulary}/${entry.headword}`}>
+          {entry.headword} <span>{entry.vocabulary}</span>
         </li>)}</ul>
       </details></div>}
       {stage.report.failed.length > 0 && <div className="pref-row stack">
@@ -260,7 +266,60 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
       </div>}
       <Action onClick={reset}>Import another file</Action>
     </>}
-  </Group>;
+  </Group>
+  {stage.at === "chosen" && <>
+    {stage.plan.vocabularies.map((entry) => <TargetChoice
+      key={entry.directory} entry={entry} target={stage.targets.get(entry.directory)!}
+      into={intoChoices(snapshot, entry)} problem={problems.get(entry.directory) ?? null}
+      onChange={(target) => retarget(entry.directory, target)}
+    />)}
+    <div className="pref-buttons">
+      <button type="button" className="tb-btn" onClick={reset}>Cancel</button>
+      <button
+        type="button" className="tb-btn primary" disabled={stage.plan.articles.length === 0 || problems.size > 0}
+        onClick={() => void run(stage.plan, stage.pictures, stage.recordings, stage.targets)}
+      >Import {stage.plan.articles.length} {stage.plan.articles.length === 1 ? "entry" : "entries"}</button>
+    </div>
+  </>}
+  </>;
+}
+
+/** The skipped words, a vocabulary's together, in the order the vocabularies first appear. */
+function bySkippedVocabulary(skipped: ImportReport["skipped"]): ImportReport["skipped"] {
+  const order = [...new Set(skipped.map((entry) => entry.vocabulary))];
+  return skipped.slice().sort((left, right) => order.indexOf(left.vocabulary) - order.indexOf(right.vocabulary));
+}
+
+/**
+ * Where one of the file's vocabularies goes: in as a new vocabulary, under the name typed inside that
+ * option, or into one of the owner's own of its language, which keeps its own name. Both are always
+ * offered when the owner keeps that language; a name already taken holds Import back until it is
+ * changed or the other option is chosen.
+ */
+function TargetChoice({ entry, target, into, problem, onChange }: {
+  entry: BundleVocabulary;
+  target: ImportTarget;
+  into: ReturnType<typeof intoChoices>;
+  problem: string | null;
+  onChange(target: ImportTarget): void;
+}) {
+  const named = bundledName(entry);
+  const [name, setName] = useState(target.kind === "new" ? target.name : named);
+  return <Options title={`${flagFor(entry)} ${named}`} label={`Where ${named} goes`}>
+    <Option label="Add as a new vocabulary" checked={target.kind === "new"} onChoose={() => onChange({ kind: "new", name })}>
+      <OptionField label="Name" value={name} clash={Boolean(problem)}
+        onChange={(typed) => { setName(typed); onChange({ kind: "new", name: typed }); }} />
+      {problem && <Notice>{problem}</Notice>}
+    </Option>
+    {into.map((vocabulary) => {
+      const shown = presentationOf(vocabulary);
+      const chosen = target.kind === "existing" && target.vocabularyId === vocabulary.id;
+      return <Option
+        key={vocabulary.id} label={`Add to ${shown.flag} ${shown.name}`} hint="Words you already have are left as they are"
+        checked={chosen} onChoose={() => onChange({ kind: "existing", vocabularyId: vocabulary.id })}
+      >{chosen && problem ? <Notice>{problem}</Notice> : null}</Option>;
+    })}
+  </Options>;
 }
 
 function ProblemList({ title, problems, open = false }: {

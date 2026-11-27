@@ -15,6 +15,10 @@ The source file is never modified unless you ask for it:
 
     # cuts each processed entry out of the file, so what is left is the queue
     scripts/ingest_vocabulary_file.py copy-of-notes.md --consume ...
+
+The words go in your only vocabulary of their language. Where you keep several — your own English and
+a starter — name the one they go in with `--vocabulary "English"`; without it the server stops and
+says which it was choosing between.
 """
 
 from __future__ import annotations
@@ -36,6 +40,19 @@ DEFAULT_CHECKPOINTS = Path.home() / ".acervo" / "ingest"
 TEXT_LIMIT = 20000
 POLL_SECONDS = 2.0
 OPEN = ("queued", "running")
+
+
+def vocabulary_named(client: AcervoClient, name: str) -> tuple[str | None, list[str]]:
+    """The id of the account's vocabulary shown as `name` (or kept for that language tag), and the
+    names it has, for saying what it could have been."""
+    held = [entry for entry in client.pull_graph()["changes"].get("vocabularies", [])
+            if not entry.get("deleted")]
+    wanted = name.strip().casefold()
+    shown = [str(entry.get("displayName") or entry["language"]) for entry in held]
+    for entry, label in zip(held, shown):
+        if wanted in (label.casefold(), str(entry["language"]).casefold()):
+            return str(entry["id"]), shown
+    return None, shown
 
 
 def checkpoint_path(directory: Path, source: Path) -> Path:
@@ -116,6 +133,7 @@ def dry_run(client: AcervoClient, source: Path, offset: int, args: argparse.Name
             result = client.capture(
                 device_id=DEVICE_ID, mode="stream", text="\n".join(window),
                 language=args.language or None, topics=args.topic, sourceKind="unknown",
+                vocabulary=args.vocabulary_id,
             )
         except AcervoError as error:
             print(f"\n{error}", file=sys.stderr)
@@ -145,6 +163,8 @@ def main() -> int:
                         help="how many lines each submission carries (default: 400)")
     parser.add_argument("--limit", type=int, default=0, help="stop after this many entries")
     parser.add_argument("--language", default="", help="a hint, verified by the server")
+    parser.add_argument("--vocabulary", default="",
+                        help="the vocabulary the words go in, by its name, where you keep several of their language")
     parser.add_argument("--topic", action="append", default=[],
                         help="the topic this file is already filed under; may be repeated")
     parser.add_argument("--checkpoint-dir", type=Path, default=DEFAULT_CHECKPOINTS,
@@ -178,6 +198,18 @@ def main() -> int:
         print(f"Could not sign in: {error}", file=sys.stderr)
         return 1
 
+    args.vocabulary_id = None
+    if args.vocabulary:
+        try:
+            args.vocabulary_id, names = vocabulary_named(client, args.vocabulary)
+        except AcervoError as error:
+            print(f"Could not read your vocabularies: {error}", file=sys.stderr)
+            return 1
+        if args.vocabulary_id is None:
+            print(f"You have no vocabulary called {args.vocabulary} (you have: {', '.join(names) or 'none'})",
+                  file=sys.stderr)
+            return 2
+
     marker = checkpoint_path(args.checkpoint_dir, source)
     # In consume mode the file itself is the progress, so an offset would double-count.
     offset = 0 if (args.consume or args.restart) else read_offset(marker, source)
@@ -204,6 +236,7 @@ def main() -> int:
                 window=args.window_lines, complete=complete,
                 limit=(args.limit - done) if args.limit else 0,
                 language=args.language or None, topics=args.topic, sourceKind="unknown",
+                vocabulary=args.vocabulary_id,
             )
             job, _ = follow(client, job["id"], 0)
         except AcervoError as error:
@@ -224,6 +257,8 @@ def main() -> int:
 
         if job.get("state") != "done":
             print(f"\nThe server stopped: {job.get('message') or job.get('error')}", file=sys.stderr)
+            if job.get("error") == "vocabulary_ambiguous":
+                print("Name the one the words go in with --vocabulary NAME.", file=sys.stderr)
             return 1
         if consumed == 0:
             # Nothing a whole window could hold was left in this chunk; the tail is the next one's.

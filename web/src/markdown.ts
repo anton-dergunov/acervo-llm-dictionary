@@ -24,7 +24,7 @@
 import type { Example, Lexeme, Vocabulary, VocabularyGraph } from "./domain";
 import { isMandarin, presentationOf } from "./languages";
 import { accentedPinyin } from "./pinyin";
-import { articleReader, lexemesIn, shortGlossOf, type Article } from "./selectors";
+import { articleReader, lexemesIn, shortGlossOf, vocabularies, type Article } from "./selectors";
 
 /** Words waiting to be filed, which the rail also keeps out of every topic. */
 const INBOX_FILE = "Inbox";
@@ -103,12 +103,29 @@ function sectionsFor(graph: VocabularyGraph, lexeme: Lexeme): string[] {
 export interface MarkdownFile { path: string; text: string }
 
 /**
+ * The name a vocabulary's notes are filed under: its shown name, numbered when one earlier in the
+ * owner's order shows the same. The interface keeps names apart, but two devices offline can each give
+ * one the same, and notes shared by two vocabularies would mix their words.
+ */
+function noteName(graph: VocabularyGraph, vocabulary: Vocabulary): string {
+  const taken = new Set<string>();
+  for (const entry of vocabularies(graph)) {
+    const shown = presentationOf(entry).name;
+    let chosen = shown;
+    for (let number = 2; taken.has(chosen.toLocaleLowerCase()); number += 1) chosen = `${shown} ${number}`;
+    taken.add(chosen.toLocaleLowerCase());
+    if (entry.id === vocabulary.id) return chosen;
+  }
+  return presentationOf(vocabulary).name;
+}
+
+/**
  * One file per vocabulary and section. A word filed under two topics appears in both — the file is a
  * view, not a home, and Obsidian is happier with a word present twice than absent once.
  */
 export function markdownFor(graph: VocabularyGraph, vocabulary: Vocabulary, exportedAt: string): MarkdownFile[] {
   const { language } = vocabulary;
-  const name = presentationOf(vocabulary).name;
+  const name = noteName(graph, vocabulary);
   const collator = new Intl.Collator(language);
   const sections = new Map<string, Article[]>();
   const articleOf = articleReader(graph);

@@ -75,6 +75,11 @@ class Stub:
         return {"error": {"code": "not_found", "message": path}}, 404
 
     def get(self, path: str) -> tuple[dict, int]:
+        if "/graph" in path:
+            return {"data": {"changes": {"vocabularies": [
+                {"id": "vocaben00000001", "language": "en", "displayName": "English", "deleted": False},
+                {"id": "vocabstarter001", "language": "en", "displayName": "English · Everyday words", "deleted": False},
+            ]}}}, 200
         self.polls += 1
         answer = self.current.pop(0) if len(self.current) > 1 else self.current[0]
         return {"data": answer}, 200
@@ -127,6 +132,24 @@ def notes(tmp_path) -> Path:
     source = tmp_path / "English vocabulary.md"
     source.write_text(NOTES, encoding="utf-8")
     return source
+
+
+def test_names_the_vocabulary_the_words_go_in_by_its_name(server, notes, tmp_path, monkeypatch, capsys):
+    server["stub"] = Stub(finished(LINES, saved("inquisitive", 2)))
+    assert run(server, notes, tmp_path / "state", monkeypatch, "--vocabulary", "english · everyday words") == 0
+    assert server["stub"].submissions[0]["vocabulary"] == "vocabstarter001"
+
+    server["stub"] = Stub()
+    assert run(server, notes, tmp_path / "other", monkeypatch, "--vocabulary", "Inglés") == 2
+    assert "You have no vocabulary called Inglés (you have: English, English · Everyday words)" in capsys.readouterr().err
+
+
+def test_says_how_to_name_the_vocabulary_when_the_server_could_not_choose(server, notes, tmp_path, monkeypatch, capsys):
+    server["stub"] = Stub(finished(0, state="failed", error="vocabulary_ambiguous",
+                                   message="This looks like en, and you keep 2 vocabularies in it (English, English · Everyday words). Choose which one it goes in."))
+    assert run(server, notes, tmp_path / "state", monkeypatch) == 1
+    err = capsys.readouterr().err
+    assert "(English, English · Everyday words)" in err and "--vocabulary NAME" in err
 
 
 def test_submits_the_file_and_follows_the_job_without_touching_the_notes(server, notes, tmp_path, monkeypatch, capsys):
