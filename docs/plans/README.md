@@ -17,7 +17,7 @@ what it said.
 
 - [`dictionaries.md`](dictionaries.md) — better sources, what the converters strip, and dictionaries shipped with the app.
 - [`word-discovery.md`](word-discovery.md) — finding the words worth knowing next.
-- [`several-vocabularies.md`](several-vocabularies.md) — the starters, now ordinary vocabularies beside the owner's own, moved into the owner's account.
+- [`several-vocabularies.md`](several-vocabularies.md) — the add-a-vocabulary page (the language stated, English defaults, its own flag), and the starters moved into the owner's account.
 - [`languages/language-support.md`](languages/language-support.md) — every feature in the languages people learn.
 - [`languages/cjk.md`](languages/cjk.md) — Chinese, Japanese and Korean: words without spaces (Rare, taps), the characters, the tones, and photos.
 - [`languages/character-pictures.md`](languages/character-pictures.md) — a picture over a pictographic character, after an experiment on whether a model can draw one.
