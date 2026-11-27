@@ -33,12 +33,12 @@ def changes() -> dict:
                           "glossLangs": ["en"], "notesLang": "en", **sync_fields()}],
         "topics": [{"id": "t00000000000001", "name": "Nature", **sync_fields()}],
         "lexemes": [
-            {"id": "l00000000000001", "language": "es", "headword": "el veneno", "lemma": "veneno",
+            {"id": "l00000000000001", "vocabularyId": "v00000000000001", "language": "es", "headword": "el veneno", "lemma": "veneno",
              "pos": "noun", "status": "inbox", "topicIds": ["t00000000000001"], "notes": [],
              "shortGloss": "venom", **sync_fields()},
-            {"id": "l00000000000002", "language": "es", "headword": "retirado", "lemma": "retirado",
+            {"id": "l00000000000002", "vocabularyId": "v00000000000001", "language": "es", "headword": "retirado", "lemma": "retirado",
              "pos": "adj", "status": "aside", "topicIds": [], "notes": [], **sync_fields()},
-            {"id": "l00000000000003", "language": "en", "headword": "venom", "lemma": "venom",
+            {"id": "l00000000000003", "vocabularyId": "v00000000000002", "language": "en", "headword": "venom", "lemma": "venom",
              "pos": "noun", "status": "active", "topicIds": [], "notes": [], **sync_fields()},
         ],
         "senses": [
@@ -122,7 +122,7 @@ def test_the_style_hints_are_a_shifting_sample():
     assert first != second                                     # varies per word
     assert first == styles.hints(clay, "lex000000000001")       # but is stable for one word
 
-    request = build_request(build_articles(changes(), "es")[0], styles)
+    request = build_request(build_articles(changes(), "v00000000000001")[0], styles)
     assert all(len(item["suits"]) == 3 for item in request["styles"])
 
 
@@ -132,13 +132,13 @@ def test_the_style_that_authored_scenes_is_gone():
 
 
 def test_only_the_senses_worth_drawing_are_in_scope():
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     assert [article.headword for article in articles] == ["el veneno"]      # retired is out, en is out
     assert len(articles[0].senses) == 2
 
 
 def test_the_learners_own_sentence_is_the_anchor():
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     anchor = anchor_for(articles[0].senses[0])
     assert anchor["id"] == "e00000000000002"                                 # attestation beats llm
 
@@ -148,13 +148,13 @@ def test_a_clip_anchors_a_picture_when_it_is_the_only_sentence():
 
     A clip's sentence makes a good scene, and the picture and the clip share one card.
     """
-    sense = build_articles(changes(), "es")[0].senses[1]
+    sense = build_articles(changes(), "v00000000000001")[0].senses[1]
     assert [example["origin"] for example in sense.examples] == ["subtitle"]
     assert anchor_for(sense)["origin"] == "subtitle"
 
 
 def test_a_written_sentence_outranks_a_clip():
-    sense = build_articles(changes(), "es")[0].senses[1]
+    sense = build_articles(changes(), "v00000000000001")[0].senses[1]
     written = {**sense.examples[0], "id": "e00000000000099", "origin": "tatoeba"}
     richer = type(sense)(**{**sense.__dict__, "examples": [sense.examples[0], written]})
     assert anchor_for(richer)["id"] == "e00000000000099"
@@ -171,13 +171,13 @@ def test_a_generated_sentence_outranks_a_borrowed_one():
 
 def test_the_owners_topics_do_not_steer_the_picture():
     """Topics are the owner's filing system, not a fact about the word."""
-    request = build_request(build_articles(changes(), "es")[0], load_styles(STYLES))
+    request = build_request(build_articles(changes(), "v00000000000001")[0], load_styles(STYLES))
     assert "topics" not in request
 
 
 def test_an_anchor_from_another_sense_is_dropped():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles, patch={1: {"anchorExampleId": "e00000000000002"}})
     briefs = parse_reply(payload, article, offered)
     assert briefs[1].anchor_example_id is None      # that example belongs to sense one
@@ -185,14 +185,14 @@ def test_an_anchor_from_another_sense_is_dropped():
 
 def test_an_anchor_from_this_sense_is_kept():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles, patch={0: {"anchorExampleId": "e00000000000002"}})
     assert parse_reply(payload, article, offered)[0].anchor_example_id == "e00000000000002"
 
 
 def test_the_request_offers_every_style_and_marks_the_anchor():
     styles = load_styles(STYLES)
-    request = build_request(build_articles(changes(), "es")[0], styles)
+    request = build_request(build_articles(changes(), "v00000000000001")[0], styles)
     assert len(request["senses"]) == 2
     assert len(request["styles"]) == len(styles.styles)
     marked = [item for item in request["senses"][0]["examples"] if item["isAnchor"]]
@@ -214,7 +214,7 @@ def _reply(article, styles, **overrides) -> tuple[dict, tuple[str, ...]]:
 
 def test_a_well_formed_reply_parses():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles)
     briefs = parse_reply(payload, article, offered)
     assert [item.sense_id for item in briefs] == [sense.id for sense in article.senses]
@@ -226,14 +226,14 @@ def test_a_well_formed_reply_parses():
 def test_a_reply_that_was_not_json_is_refused():
     """Unfencing and `json.loads` belong to `models.call`, which does them for every kind of reply
     and hands back None when the text was not readable. This is what that None means here."""
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     with pytest.raises(ValueError, match="did not return JSON"):
         parse_reply(None, article, ())
 
 
 def test_an_invented_style_is_refused():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles, patch={0: {"styleId": "no-such-style"}})
     with pytest.raises(ValueError, match="not a style"):
         parse_reply(payload, article, offered)
@@ -241,7 +241,7 @@ def test_an_invented_style_is_refused():
 
 def test_a_skipped_sense_is_refused():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles)
     payload["senses"] = payload["senses"][:1]
     with pytest.raises(ValueError, match="skipped"):
@@ -250,7 +250,7 @@ def test_a_skipped_sense_is_refused():
 
 def test_a_refusal_needs_no_style_or_brief():
     styles = load_styles(STYLES)
-    article = build_articles(changes(), "es")[0]
+    article = build_articles(changes(), "v00000000000001")[0]
     payload, offered = _reply(article, styles, patch={
         1: {"refused": True, "styleId": "", "brief": None, "refusalReason": "hate insignia"}})
     briefs = parse_reply(payload, article, offered)
@@ -275,7 +275,7 @@ def test_the_prompt_version_moves_when_the_styles_do(tmp_path: Path):
 
 
 def test_a_drawn_sense_is_not_planned_again(tmp_path: Path):
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     store = Store(tmp_path)
     assert len(plan(articles, store, drawn=set())) == 2
 
@@ -295,7 +295,7 @@ def test_a_sense_the_graph_already_holds_an_image_for_is_skipped(tmp_path: Path)
         "promptVersion": "v", "imageRef": "images/l1/p1.webp", "imageModelId": "m",
         **sync_fields(),
     }]
-    assert len(plan(build_articles(payload, "es"), Store(tmp_path), drawn=drawn_senses(payload))) == 1
+    assert len(plan(build_articles(payload, "v00000000000001"), Store(tmp_path), drawn=drawn_senses(payload))) == 1
 
 
 LITE = ("vertex", "lite")
@@ -332,7 +332,7 @@ def test_a_provider_that_says_how_long_to_wait_is_believed_over_the_doubling():
 def test_the_definition_is_labelled_with_its_own_language():
     """An English gloss carries metaphors the original word does not: `estar fundado` is not about
     earth, but "to be grounded in" is, and the picture followed the gloss."""
-    request = build_request(build_articles(changes(), "es")[0], load_styles(STYLES))
+    request = build_request(build_articles(changes(), "v00000000000001")[0], load_styles(STYLES))
     sense = request["senses"][0]
     assert sense["definitionLang"] == "es"
     assert sense["definition"] == "Fluido tóxico."
@@ -341,7 +341,7 @@ def test_the_definition_is_labelled_with_its_own_language():
 
 def test_a_refusal_is_not_planned_again(tmp_path: Path):
     """§06: declining a sense is a finished outcome. Re-planning it spends a call to rediscover it."""
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     store = Store(tmp_path)
     assert len(plan(articles, store, drawn=set())) == 2
 
@@ -354,7 +354,7 @@ def test_a_refusal_is_not_planned_again(tmp_path: Path):
 def test_a_provider_block_is_not_planned_again(tmp_path: Path):
     """A blocked prompt is terminal. Ten senses were lost to a text 429 and one to an image block;
     only the first kind should come back."""
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     store = Store(tmp_path)
     blocked = image_prompt_id("s00000000000001")
     store.write(store.record_path(blocked), {"id": blocked, "imageRef": None, "blocked": True})
@@ -384,7 +384,7 @@ def test_the_laptop_run_waits_out_a_chain_that_is_entirely_over_quota():
 
     runner, slept = Runner.__new__(Runner), []
     runner.writer, runner.wait = Flaky(), slept.append
-    briefs, _ = runner._write(build_articles(changes(), "es")[0])
+    briefs, _ = runner._write(build_articles(changes(), "v00000000000001")[0])
     assert briefs == ["ok"] and runner.writer.calls == 3
     assert slept == [15.0, 30.0]               # and it backs off rather than hammering
 
@@ -402,7 +402,7 @@ def test_a_brief_failure_that_is_not_quota_is_raised_at_once():
 
     writer = Broken()
     with pytest.raises(ValueError):
-        writer.write(build_articles(changes(), "es")[0])
+        writer.write(build_articles(changes(), "v00000000000001")[0])
     assert writer.calls == 1
 
 
@@ -546,7 +546,7 @@ def test_an_image_chain_falls_through_and_the_record_names_the_pair_that_drew(tm
         ("cloudflare", "klein"): _answer("cloudflare", "klein"),
     })
     runner, _ = _runner(tmp_path, renderer, candidates, _one_brief)
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     jobs = plan(articles, runner.store, drawn=set())[:1]
     result = runner.run(jobs)
 
@@ -564,7 +564,7 @@ def test_a_brief_kept_from_an_earlier_run_keeps_the_model_that_wrote_it(tmp_path
     _catalogue, candidates = _candidates(("cloudflare", "klein"))
     renderer = _drawing({("cloudflare", "klein"): _answer("cloudflare", "klein")})
     runner, styles = _runner(tmp_path, renderer, candidates, _one_brief)
-    articles = build_articles(changes(), "es")
+    articles = build_articles(changes(), "v00000000000001")
     jobs = plan(articles, runner.store, drawn=set())[:1]
 
     # A brief on disk, written by a model that is no longer in the chain.
@@ -589,7 +589,7 @@ def test_a_provider_that_declines_is_recorded_and_the_sweep_continues(tmp_path):
         ("cloudflare", "klein"): ProviderRefused("refused", "the prompt was blocked"),
     })
     runner, _ = _runner(tmp_path, renderer, candidates, _one_brief)
-    jobs = plan(build_articles(changes(), "es"), runner.store, drawn=set())[:1]
+    jobs = plan(build_articles(changes(), "v00000000000001"), runner.store, drawn=set())[:1]
     result = runner.run(jobs)
 
     assert result["refused"] == 1 and result["stopped"] is None
@@ -606,7 +606,7 @@ def test_a_bad_credential_stops_the_run_rather_than_blocking_every_sense(tmp_pat
         ("cloudflare", "klein"): ProviderRefused("authentication", "that token is not valid"),
     })
     runner, _ = _runner(tmp_path, renderer, candidates, _one_brief)
-    jobs = plan(build_articles(changes(), "es"), runner.store, drawn=set())
+    jobs = plan(build_articles(changes(), "v00000000000001"), runner.store, drawn=set())
     result = runner.run(jobs)
 
     assert result["stopped"] and "not valid" in result["stopped"]

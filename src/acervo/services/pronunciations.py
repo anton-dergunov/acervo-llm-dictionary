@@ -172,20 +172,32 @@ def _ordered(pairs: list[tuple[str, str]], preferences, order: str, language: st
     return [first, *(pair for pair in pairs if pair != first)]
 
 
-def _locale_in(vocabularies: list[dict[str, Any]], language: str) -> str:
-    """The locale `language` is heard in: its vocabulary's accent, or the bare language."""
+def _locale_in(vocabularies: list[dict[str, Any]], language: str, vocabulary_id: str | None = None) -> str:
+    """The locale `language` is heard in.
+
+    The variety of the vocabulary it is read for, when that vocabulary is in this language — two
+    Spanish vocabularies may be Argentine and Mexican, and each word is heard in its own. Otherwise,
+    for text with no vocabulary of its own in this language (a definition written in another of the
+    owner's languages, a loop's take), the variety of the first vocabulary in it that has one; else the
+    bare language.
+    """
+    own = next((one for one in vocabularies
+                if vocabulary_id and one["id"] == vocabulary_id and one["language"] == language), None)
+    if own is not None:
+        return locales.with_region(language, own["region"]) if own.get("region") else language
     for vocabulary in vocabularies:
         if vocabulary["language"] == language and vocabulary.get("region"):
             return locales.with_region(language, vocabulary["region"])
     return language
 
 
-def spoken_locale(owner: str, language: str) -> str:
-    """The locale this owner hears `language` in — `es-AR` once Spanish is set to Argentina. A
-    language already carrying a region is kept as it is."""
+def spoken_locale(owner: str, language: str, vocabulary_id: str | None = None) -> str:
+    """The locale this owner hears `language` in — `es-AR` once Spanish is set to Argentina — for a
+    word, a sentence or a story of the vocabulary `vocabulary_id` when one is named. A language
+    already carrying a region is kept as it is."""
     if locales.parse(language).region:
         return language
-    return _locale_in(graph.owner_vocabularies(owner), language)
+    return _locale_in(graph.owner_vocabularies(owner), language, vocabulary_id)
 
 
 def directed(settings: Settings, language: str, style: str | None) -> str | None:
@@ -331,7 +343,7 @@ def pronounce(settings: Settings, owner: str, device: str, route_kind: str, targ
     # for emotion — there is no second switch, which is why turning emotion off no longer leaves the
     # expensive voice reading every sentence.
     order = preferences.order_for(target.use)
-    locale = spoken_locale(owner, target.language)
+    locale = spoken_locale(owner, target.language, target.vocabulary_id)
     emotional = None
     if target.kind == "example" and target.emotion and order == "expressive":
         emotional = speaking.direction(

@@ -39,7 +39,7 @@ const { bundleArchive } = await import("../src/bundleZip");
 const { importThroughServer } = await import("../src/importRun");
 const { MemoryDatabase } = await import("../src/localDatabase");
 const { LocalAcervoRepository } = await import("../src/repository");
-const { readBundle } = await import("../src/transfer");
+const { defaultTargets, readBundle } = await import("../src/transfer");
 type RemoteGraph = import("../src/repository").RemoteGraph;
 
 function options(argv: string[]) {
@@ -116,7 +116,8 @@ async function main(): Promise<number> {
     const started = Date.now();
     let shown = 0;
     const report = await importThroughServer({
-      repository, pull, plan, pictures: archive.pictures, recordings: archive.recordings, restoreClips: true,
+      repository, pull, plan, targets: defaultTargets(repository.snapshot(), plan),
+      pictures: archive.pictures, recordings: archive.recordings, restoreClips: true,
       onProgress: (done, total) => {
         if (done - shown >= 100 || done === total) {
           shown = done;

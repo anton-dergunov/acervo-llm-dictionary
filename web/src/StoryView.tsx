@@ -19,7 +19,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { isRecording, jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
-import type { Story, VocabularyGraph } from "./domain";
+import type { Story, VocabularyGraph, Vocabulary } from "./domain";
 import { BackIcon, HourglassIcon, PauseIcon, PlayIcon } from "./icons";
 import { useListening } from "./listening";
 import FitWords from "./FitWords";
@@ -35,9 +35,11 @@ function count(amount: number, noun: string): string {
   return `${amount} ${noun}${amount === 1 ? "" : "s"}`;
 }
 
-export default function StoryView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onMark }: {
+export default function StoryView({ graph, vocabulary, languageName, query = "", opening = null, onClose, onDelete, onMark }: {
   graph: VocabularyGraph;
-  language: string;
+  /** The vocabulary in view: the stories listed are the ones made from its words. */
+  vocabulary: Vocabulary;
+  /** What the vocabulary is called, for the count under the title. */
   languageName: string;
   /** The top bar's search, which on this surface searches the words in its stories. */
   query?: string;
@@ -51,10 +53,11 @@ export default function StoryView({ graph, language, languageName, query = "", o
   onMark(storyId: string, marks: Partial<Pick<Story, "starred" | "archived">>): void;
 }) {
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
-  const order = useMadeList(graph, "story", language, query);
+  const language = vocabulary.language;
+  const order = useMadeList(graph, "story", vocabulary, query);
   const stories = order.list.rows;
   const [openId, setOpenId] = useState<string | null>(opening?.storyId ?? null);
-  const open = storiesIn(graph, language).find((story) => story.id === openId) ?? null;
+  const open = storiesIn(graph, vocabulary.id).find((story) => story.id === openId) ?? null;
   // Asked to open one — what is playing, from the bar or the rail — while already here.
   useEffect(() => { if (opening) setOpenId(opening.storyId); }, [opening]);
   // A search is answered by the list, so an open story gives way to it.

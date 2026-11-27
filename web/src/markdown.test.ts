@@ -1,21 +1,24 @@
 import { describe, expect, it } from "vitest";
 import { articleFor } from "./selectors";
 import { entryFor, fileNameFor, markdownFor } from "./markdown";
-import { testGraph } from "./testGraph";
+import { ENGLISH, SPANISH, testGraph } from "./testGraph";
+import type { VocabularyGraph } from "./domain";
+
+const vocabularyIn = (graph: VocabularyGraph, id: string) => graph.vocabularies.find((one) => one.id === id)!;
 
 const AT = "2026-09-01T12:00:00.000Z";
 
 const fileNamed = (name: string) =>
-  markdownFor(testGraph(), "es", AT).find((file) => file.path === name);
+  markdownFor(testGraph(), vocabularyIn(testGraph(), SPANISH), AT).find((file) => file.path === name);
 
 describe("the Obsidian projection", () => {
-  it("names a file the way the vault already does", () => {
-    expect(fileNameFor("es", "Technology")).toBe("Spanish vocab - Technology.md");
-    expect(fileNameFor("zh-Hans", "Food")).toBe("Chinese (Simplified) vocab - Food.md");
+  it("names a file for its vocabulary, the way the vault already does", () => {
+    expect(fileNameFor("Spanish", "Technology")).toBe("Spanish vocab - Technology.md");
+    expect(fileNameFor("Spanish (Mexico) · Everyday words", "Food")).toBe("Spanish (Mexico) · Everyday words vocab - Food.md");
   });
 
   it("keeps a topic that would be an illegal filename out of the path", () => {
-    expect(fileNameFor("es", "Health / Body")).toBe("Spanish vocab - Health Body.md");
+    expect(fileNameFor("Spanish", "Health / Body")).toBe("Spanish vocab - Health Body.md");
   });
 
   it("writes a word as a heading, one gloss line and nothing else it does not need", () => {
@@ -58,7 +61,7 @@ describe("the Obsidian projection", () => {
   });
 
   it("files a word by topic, an unfiled one under Misc and a waiting one under Inbox", () => {
-    const files = markdownFor(testGraph(), "es", AT).map((file) => file.path);
+    const files = markdownFor(testGraph(), vocabularyIn(testGraph(), SPANISH), AT).map((file) => file.path);
     expect(files).toContain("Spanish vocab - Food.md");
     expect(files).toContain("Spanish vocab - Travel.md");
     // espolvorear is still in the inbox, so it stays out of Food the way the rail keeps it out.
@@ -66,8 +69,8 @@ describe("the Obsidian projection", () => {
     expect(fileNamed("Spanish vocab - Food.md")!.text).not.toContain("espolvorear");
   });
 
-  it("gives a language with no topics a Misc file", () => {
-    const files = markdownFor(testGraph(), "en", AT);
+  it("gives a vocabulary with no topics a Misc file", () => {
+    const files = markdownFor(testGraph(), vocabularyIn(testGraph(), ENGLISH), AT);
     expect(files.map((file) => file.path)).toEqual(["English vocab - Misc.md"]);
     expect(files[0].text).toContain("##### **turmoil** 🌪️");
   });

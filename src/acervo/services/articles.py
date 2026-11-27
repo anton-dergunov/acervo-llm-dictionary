@@ -90,6 +90,29 @@ def _fields(source: Mapping[str, Any], names: Iterable[str]) -> dict[str, Any]:
     return {name: source.get(name) for name in names}
 
 
+def _vocabulary_of(owner: str, draft: Mapping[str, Any], existing: Mapping[str, Any] | None,
+                   asked: Any) -> str:
+    """The vocabulary this save writes the word into, refused in words before the merge would refuse
+    it as a record."""
+    if existing is not None:
+        if asked and asked != existing.get("vocabularyId"):
+            raise refused("This entry is in another of your vocabularies, so it was not saved here.")
+        return str(existing.get("vocabularyId"))
+    if not asked:
+        raise ApiError(400, "invalid_input", "Say which vocabulary this entry goes in.")
+    held = next((one for one in graph.owner_vocabularies(owner) if one["id"] == asked), None)
+    if held is None:
+        raise refused("The vocabulary this entry was being added to is no longer one of yours.")
+    # A document with no language at all is refused by the record's own rule, with the rest of what
+    # is wrong with it; one in a language the vocabulary is not in is refused here, in words.
+    language = str(draft.get("language") or "").strip()
+    if language and language != held["language"]:
+        name = held.get("displayName") or held["language"]
+        raise refused(f"This entry says it is in {language}, and {name} is a "
+                      f"{held['language']} vocabulary, so it was not saved there.")
+    return str(asked)
+
+
 class _Save:
     """One save's working state: what is stored, what the document keeps, and what changes."""
 
@@ -139,8 +162,13 @@ def save_article(
     base: Any = None,
     place_photo: graph.PlacePhoto | None = None,
     imported: bool = False,
+    vocabulary: str | None = None,
 ) -> dict[str, Any]:
     """Apply one parsed document as one write. Returns the merge's answer and the lexeme id.
+
+    `vocabulary` is where a new word goes, by id: the document says what language a word is in and
+    never which of the owner's vocabularies holds it, since that is where it was added rather than
+    anything about the word. A stored word stays in its own, and one named for it must be that one.
 
     `minted` names ids this save is *creating* rather than naming, and is empty for every caller but
     one. A document editing a stored entry may not carry ids its producer minted; a chat proposal that
@@ -170,6 +198,7 @@ def save_article(
         raise refused("This document names an entry that is not in your vocabulary, so it was not saved.")
     lexeme_id = draft_id or new_record_id()
     minting = draft_id is None
+    vocabulary_id = _vocabulary_of(owner, draft, existing_lexeme, vocabulary)
 
     topics = graph.owner_topics(owner)
     by_name = {topic["name"].strip().lower(): topic["id"] for topic in topics}
@@ -190,6 +219,7 @@ def save_article(
         "id": lexeme_id,
         **_fields(draft, LEXEME_FIELDS),
         **({"status": status} if status else {}),
+        "vocabularyId": vocabulary_id,
         "topicIds": topic_ids,
         "notes": _list(draft.get("notes"), "Notes"),
         # Server-written state: a document cannot assert it, so a save carries whatever is stored and

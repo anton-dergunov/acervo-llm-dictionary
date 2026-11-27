@@ -248,6 +248,8 @@ def merge_record(
 
     if collection.key == "attestations":
         _photo_in_place(row, stored, place_photo, undo)
+    if collection.key == "vocabularies" and stored is not None:
+        _keeps_what_it_holds(connection, stored, row)
 
     row["revision"] = allocate_revision(connection, owner)
     table = collection.table
@@ -265,6 +267,37 @@ def merge_record(
         )
     arrived = (stored is None or bool(stored["deleted"])) and not row["deleted"]
     return projected(collection, row), arrived
+
+
+# What names a vocabulary, and is held to its language and to its being alive.
+HELD_IN_A_VOCABULARY = ("lexemes", "loops", "stories")
+
+
+def _keeps_what_it_holds(connection: Connection, stored: Mapping[str, Any], row: Mapping[str, Any]) -> None:
+    """A vocabulary is not removed while it holds anything live, and its language never changes once
+    anything is in it.
+
+    Checked here rather than in validation, which sees one record: each is a fact about the records
+    that name this one. Without it a device could write a vocabulary away from under its words, and
+    every other device would then refuse the pull that brought the change.
+    """
+    def holding(conditions) -> int:
+        return sum(
+            connection.execute(
+                select(func.count()).select_from(tables.metadata.tables[name]).where(
+                    tables.metadata.tables[name].c.vocabulary == stored["id"], *conditions(name))
+            ).scalar_one()
+            for name in HELD_IN_A_VOCABULARY
+        )
+
+    if row["language"] != stored["language"] and holding(lambda name: ()):
+        raise ApiError(400, "invalid_record",
+                       f"vocabularies {stored['id']}: A vocabulary's language cannot change once it holds words.")
+    if row["deleted"] and not stored["deleted"] and holding(
+            lambda name: (tables.metadata.tables[name].c.deleted.is_(False),)):
+        raise ApiError(400, "invalid_record",
+                       f"vocabularies {stored['id']}: A vocabulary that still holds words, loops or "
+                       "stories cannot be removed.")
 
 
 def _photo_in_place(
@@ -452,6 +485,8 @@ def tombstone_all_words(owner: str, device: str) -> dict[str, Any]:
 
 
 def owner_vocabularies(owner: str) -> list[dict[str, Any]]:
+    """The owner's live vocabularies in their order. Any number may share a language, so a caller
+    that means one vocabulary names it by `id`, and one that means a language says so."""
     table = tables.vocabularies
     with reading() as connection:
         rows = connection.execute(
@@ -461,6 +496,7 @@ def owner_vocabularies(owner: str) -> list[dict[str, Any]]:
         ).mappings()
         return [
             {
+                "id": row["id"],
                 "language": row["language"],
                 "definitionLang": row["definition_lang"],
                 "glossLangs": list(row["gloss_langs"] or []),
@@ -485,8 +521,9 @@ def owner_topics(owner: str) -> list[dict[str, Any]]:
         return [{"id": row["id"], "name": row["name"]} for row in rows]
 
 
-def duplicate_lexemes(owner: str, language: str, headword: str, lemma: str) -> list[dict[str, Any]]:
-    """Words this owner already holds under either form.
+def duplicate_lexemes(owner: str, vocabulary: str, headword: str, lemma: str) -> list[dict[str, Any]]:
+    """Words this owner already holds under either form, in one vocabulary: the same word in another
+    vocabulary of the language is a word kept apart on purpose, not a duplicate.
 
     Case-insensitive, because the learner types `picar` and the store holds `Picar` just as often.
     """
@@ -499,7 +536,7 @@ def duplicate_lexemes(owner: str, language: str, headword: str, lemma: str) -> l
             select(table.c.id, table.c.headword, table.c.short_gloss)
             .where(
                 table.c.owner == owner,
-                table.c.language == language,
+                table.c.vocabulary == vocabulary,
                 table.c.deleted.is_(False),
                 or_(
                     func.lower(table.c.headword).in_(forms),
@@ -529,11 +566,11 @@ def headwords(owner: str, language: str) -> list[tuple[str, str]]:
         return [(row.id, row.headword) for row in rows]
 
 
-def map_senses(owner: str, language: str) -> list[dict[str, Any]]:
-    """Every live sense of every word this owner holds in one language, for the meaning map.
+def map_senses(owner: str, vocabulary: str) -> list[dict[str, Any]]:
+    """Every live sense of every word in one of this owner's vocabularies, for the meaning map.
 
     A word set aside is one the owner has put out of the way — known well enough, or not wanted — so
-    it is not on their map; every other status is a word they are learning. Senses carry no language of their own, so the word is joined in, and
+    it is not on their map; every other status is a word they are learning. Senses name no vocabulary of their own, so the word is joined in, and
     the rows come back in a stable order so a map's input is the same list every time it is read.
     """
     lexemes, senses = tables.lexemes, tables.senses
@@ -547,7 +584,7 @@ def map_senses(owner: str, language: str) -> list[dict[str, Any]]:
             .where(
                 lexemes.c.owner == owner,
                 senses.c.owner == owner,
-                lexemes.c.language == language,
+                lexemes.c.vocabulary == vocabulary,
                 lexemes.c.deleted.is_(False),
                 senses.c.deleted.is_(False),
                 lexemes.c.status != "aside",
@@ -745,8 +782,8 @@ def loop_cues(owner: str, loop_id: str) -> list[dict[str, Any]]:
         return [projected(collection, row) for row in rows]
 
 
-def next_loop_position(owner: str, language: str) -> int:
-    """Where a new loop goes: after the last one in this language.
+def next_loop_position(owner: str, vocabulary: str) -> int:
+    """Where a new loop goes: after the last one in this vocabulary.
 
     Sparse and renumbered on reorder, with no uniqueness constraint — that is the data rule, and two
     loops that happened to land on one number are an ordering to tidy rather than a write to refuse.
@@ -755,7 +792,7 @@ def next_loop_position(owner: str, language: str) -> int:
     with reading() as connection:
         highest = connection.execute(
             select(func.max(table.c.loop_order)).where(
-                table.c.owner == owner, table.c.language == language, table.c.deleted.is_(False)
+                table.c.owner == owner, table.c.vocabulary == vocabulary, table.c.deleted.is_(False)
             )
         ).scalar()
     return int(highest or 0) + 1
@@ -789,13 +826,13 @@ def story_words(owner: str, story_id: str) -> list[dict[str, Any]]:
     return _children_of(owner, "storyWords", "word_order", story_id)
 
 
-def next_story_position(owner: str, language: str) -> int:
-    """Where a new story goes: after the last one in this language. See `next_loop_position`."""
+def next_story_position(owner: str, vocabulary: str) -> int:
+    """Where a new story goes: after the last one in this vocabulary. See `next_loop_position`."""
     table = tables.stories
     with reading() as connection:
         highest = connection.execute(
             select(func.max(table.c.story_order)).where(
-                table.c.owner == owner, table.c.language == language, table.c.deleted.is_(False)
+                table.c.owner == owner, table.c.vocabulary == vocabulary, table.c.deleted.is_(False)
             )
         ).scalar()
     return int(highest or 0) + 1

@@ -32,7 +32,7 @@ import { KindChoices, formatUsable, switchesFor } from "./LoopFormat";
 import { MusicBrowse, MusicSections, musicChoices, musicKey, musicOf, useLoopSchema, type MusicBrowsing } from "./LoopMusic";
 import MakeDialog, { MakeSection } from "./MakeDialog";
 import { stopPreview } from "./pronunciation";
-import { loopCandidates, loopEligible, loopSecondsPerWord, favouriteBeds, type ListQuery, type SelectedWord } from "./selectors";
+import { loopCandidates, loopEligible, loopSecondsPerWord, favouriteBeds, vocabularyFor, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
 
 const DEFAULT_WORDS = 12;
@@ -88,7 +88,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     setAsking(true);
     try {
       const answer = await backendSession.makeLoop({
-        deviceId, language: query.language, lexemeIds: draw.ids,
+        deviceId, vocabularyId: query.vocabularyId, lexemeIds: draw.ids,
         ...(format ? { format: format.id, switches: values } : {}),
         ...musicOf(music)
       });
@@ -124,7 +124,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
 
   return <MakeDialog title="Make a loop" footer={footer} onClose={onClose}>
     <MakeSection label="Words">
-      <WordPicker draw={draw} kind="loop" language={query.language} counter="slider"
+      <WordPicker draw={draw} kind="loop" language={vocabularyFor(graph, query.vocabularyId)?.language ?? ""} counter="slider"
         secondsPerWord={format ? loopSecondsPerWord(graph, format.id, barsOf(schema!)) : null} />
     </MakeSection>
 

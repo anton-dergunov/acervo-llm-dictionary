@@ -68,7 +68,7 @@ def test_a_word_set_aside_has_no_notes_and_is_named_so_its_cards_are_suspended(g
     assert built.notes == []
     assert built.aside == [OBRA]
     assert built.manifest()["aside"] == [OBRA]
-    assert build(graph, media_root=media_root, languages=["en"]).aside == []
+    assert build(graph, media_root=media_root, vocabularies=["vocabenglish001"]).aside == []
 
 
 def test_clips_come_last_and_the_sense_shows_its_most_trusted_sentence(graph, media_root):
@@ -129,11 +129,24 @@ def test_a_mandarin_reading_reaches_the_card_with_tone_marks(graph, media_root):
     assert by_id(build(graph, media_root=media_root))[OBRA]["fields"]["Reading"] == "tou4 syu1 gun2"
 
 
-def test_decks_are_per_language_and_topics_are_tags(graph, media_root):
+def test_decks_are_per_vocabulary_and_topics_are_tags(graph, media_root):
     note = build(graph, media_root=media_root).notes[0]
     assert note["deck"] == "Spanish::Vocabulary"
     assert note["tags"] == ["acervo::note::example", "acervo::topic::culture"]
-    assert build(graph, media_root=media_root, languages=["fr"]).notes == []
+    assert build(graph, media_root=media_root, vocabularies=["vocabfrench0001"]).notes == []
+
+
+def test_a_vocabulary_is_its_own_deck_named_as_it_is(graph, media_root):
+    graph["vocabularies"][0]["displayName"] = "Spanish (Mexico) · Everyday words"
+    assert build(graph, media_root=media_root).notes[0]["deck"] == "Spanish (Mexico) · Everyday words::Vocabulary"
+
+
+def test_two_vocabularies_named_alike_never_share_a_deck(graph, media_root):
+    second = {**graph["vocabularies"][0], "id": "vocabspanish002", "order": 1}
+    graph["vocabularies"].append(second)
+    obra = next(record for record in graph["lexemes"] if record["id"] == OBRA)
+    obra["vocabularyId"] = second["id"]
+    assert {note["deck"] for note in build(graph, media_root=media_root).notes} == {"Spanish 2::Vocabulary"}
 
 
 def test_text_is_escaped_and_only_the_word_is_marked():

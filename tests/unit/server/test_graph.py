@@ -14,7 +14,9 @@ from graph_records import (
     example,
     image_prompt,
     lexeme,
+    loop,
     sense,
+    story,
     study_state,
     topic,
     vocabulary,
@@ -22,6 +24,13 @@ from graph_records import (
 
 from acervo.domain.ids import now_instant
 from acervo.domain import SCHEMA_VERSION
+
+
+@pytest.fixture
+def spanish(server):
+    """The owner's Spanish vocabulary, which every word below is in unless it says otherwise."""
+    assert server.push({"vocabularies": [vocabulary()]}).status_code == 200
+    return server
 
 
 def stored(server, key, index=0):
@@ -68,30 +77,31 @@ def test_a_whole_article_lands_in_one_batch_because_relations_resolve_in_order(s
     assert records["examples"][0]["sourceAttestationId"] == source["id"]
 
 
-def test_every_written_record_takes_the_next_revision_from_one_counter_per_owner(server):
+def test_every_written_record_takes_the_next_revision_from_one_counter_per_owner(server, spanish):
     """Never a per-table sequence: a record left at revision zero is invisible to every pull,
     permanently and silently."""
     changes, *_ = article()
     body = server.push(changes).json()["data"]
     revisions = sorted(record["revision"] for group in body["records"].values() for record in group)
-    assert revisions == [1, 2, 3, 4]
-    assert body["cursor"] == 4
+    # One after the vocabulary's.
+    assert revisions == [2, 3, 4, 5]
+    assert body["cursor"] == 5
     assert all(revision > 0 for revision in revisions)
 
 
-def test_a_pull_returns_records_in_revision_order_and_a_delta_only_carries_what_changed(server):
+def test_a_pull_returns_records_in_revision_order_and_a_delta_only_carries_what_changed(server, spanish):
     changes, word, *_ = article()
     server.push(changes)
     everything = server.pull().json()["data"]
-    assert [record["revision"] for record in everything["changes"]["senses"]] == [2]
+    assert [record["revision"] for record in everything["changes"]["senses"]] == [3]
 
     server.push({"lexemes": [{**word, "revision": stored(server, "lexemes")["revision"], "shortGloss": "to mince"}]})
-    delta = server.pull(since=4).json()["data"]
+    delta = server.pull(since=5).json()["data"]
     assert [record["shortGloss"] for record in delta["changes"]["lexemes"]] == ["to mince"]
     assert delta["changes"]["senses"] == []
 
 
-def test_a_tombstone_is_carried_to_the_client_rather_than_hidden_from_it(server):
+def test_a_tombstone_is_carried_to_the_client_rather_than_hidden_from_it(server, spanish):
     changes, word, *_ = article()
     server.push(changes)
     server.push({"lexemes": [{**word, "revision": stored(server, "lexemes")["revision"], "deleted": True}]})
@@ -102,7 +112,7 @@ def test_a_tombstone_is_carried_to_the_client_rather_than_hidden_from_it(server)
 # ── optimistic concurrency ──────────────────────────────────────────────────
 
 
-def test_an_edit_from_a_stale_revision_is_refused_rather_than_merged(server):
+def test_an_edit_from_a_stale_revision_is_refused_rather_than_merged(server, spanish):
     changes, word, *_ = article()
     server.push(changes)
     answer = server.push({"lexemes": [{**word, "revision": 0, "shortGloss": "stale"}]})
@@ -206,15 +216,16 @@ def test_a_write_needs_a_valid_device_identifier(server, bad):
 
 def test_a_chinese_lexeme_needs_a_reading_on_a_prefix_test(server):
     """`zh-Hant-TW` and `zho` both match, so narrowing this to equality lets an unreadable entry in."""
-    server.push({"vocabularies": [vocabulary(language="zh-Hans", definitionLang="en")]})
-    for language in ("zh", "zh-Hans", "zh-Hant-TW", "zho"):
+    languages = ("zh", "zh-Hans", "zh-Hant-TW", "zho")
+    server.push({"vocabularies": [vocabulary(language=language, definitionLang="en") for language in languages]})
+    for language in languages:
         refused = server.push({"lexemes": [lexeme(language=language, reading=None)]})
         assert refused.status_code == 400, language
         assert "reading" in refused.json()["error"]["message"]
     assert server.push({"lexemes": [lexeme(language="zh-Hant-TW", reading="chī")]}).status_code == 200
 
 
-def test_a_marked_form_must_occur_verbatim_in_the_text_it_marks(server):
+def test_a_marked_form_must_occur_verbatim_in_the_text_it_marks(server, spanish):
     """Untrimmed, uncased, un-normalised. Capture drops a form that fails this exact test, so
     loosening it breaks the drop and tightening it turns a good capture into a refusal."""
     changes, word, meaning, source, drawn = article()
@@ -228,7 +239,7 @@ def test_a_marked_form_must_occur_verbatim_in_the_text_it_marks(server):
     ).status_code == 200
 
 
-def test_a_marked_translation_form_must_occur_in_the_translation(server):
+def test_a_marked_translation_form_must_occur_in_the_translation(server, spanish):
     changes, word, meaning, source, drawn = article()
     server.push(changes)
     revision = stored(server, "examples")["revision"]
@@ -247,7 +258,7 @@ def test_a_translation_and_its_language_are_required_together(server):
     assert server.push({"examples": [only_language]}).status_code == 400
 
 
-def test_a_rendering_model_without_a_rendered_image_is_refused(server):
+def test_a_rendering_model_without_a_rendered_image_is_refused(server, spanish):
     """One direction, not both — and the direction matters.
 
     A model id with nothing rendered is a record of nothing. A picture with no model is the owner
@@ -265,7 +276,7 @@ def test_a_rendering_model_without_a_rendered_image_is_refused(server):
     ).status_code == 200
 
 
-def test_a_picture_the_owner_attached_needs_no_brief_and_no_model(server):
+def test_a_picture_the_owner_attached_needs_no_brief_and_no_model(server, spanish):
     changes, word, *_ = article()
     server.push(changes)
     assert server.push({"imagePrompts": [image_prompt(
@@ -290,7 +301,7 @@ def test_half_a_brief_is_refused_because_it_reproduces_nothing(server):
 CLIP_FIELDS = ("videoTitle", "videoChannel", "videoStart", "videoEnd", "clipRef")
 
 
-def test_every_clip_field_needs_a_video_reference_and_none_is_shown_without_one(server):
+def test_every_clip_field_needs_a_video_reference_and_none_is_shown_without_one(server, spanish):
     """Two mechanisms for one invariant: the validator refuses it in, the projection refuses it out."""
     changes, word, meaning, *_ = article()
     server.push(changes)
@@ -325,7 +336,7 @@ def test_every_clip_field_needs_a_video_reference_and_none_is_shown_without_one(
     assert all(cleared[field] is None for field in CLIP_FIELDS)
 
 
-def test_a_clip_must_end_after_it_starts(server):
+def test_a_clip_must_end_after_it_starts(server, spanish):
     """An end at or before the start describes no passage at all, and the corpus never produces one."""
     changes, word, meaning, *_ = article()
     server.push(changes)
@@ -342,7 +353,7 @@ def test_a_clip_must_end_after_it_starts(server):
     assert written["videoEnd"] == 0
 
 
-def test_a_clip_search_is_marked_with_an_instant_and_nothing_else(server):
+def test_a_clip_search_is_marked_with_an_instant_and_nothing_else(server, spanish):
     """`clipsSearchedAt` answers both "never consulted" and "consulted before the corpus grew", so it
     is a date rather than a flag — and a lexeme starts without one, which is what the sweep finds."""
     changes, word, *_ = article()
@@ -380,7 +391,7 @@ def test_a_clip_title_left_behind_by_another_writer_is_still_not_shown():
     assert all(shown[field] is None for field in CLIP_FIELDS)
 
 
-def test_an_attestation_example_needs_a_source_that_shares_the_owner_and_the_lexeme(server, other):
+def test_an_attestation_example_needs_a_source_that_shares_the_owner_and_the_lexeme(server, other, spanish):
     """A two-hop join: the right owner but the wrong word must not pass."""
     changes, word, meaning, source, drawn = article()
     server.push(changes)
@@ -408,7 +419,7 @@ def test_an_attestation_example_needs_a_source_that_shares_the_owner_and_the_lex
     assert "same lexeme" in wrong_word.json()["error"]["message"]
 
 
-def test_a_sense_keeps_its_label_and_its_own_emoji(server):
+def test_a_sense_keeps_its_label_and_its_own_emoji(server, spanish):
     changes, word, *_ = article()
     labelled = sense(word["id"], domain="theater", emoji="\U0001F3AD")
     changes["senses"] = [labelled]
@@ -431,7 +442,7 @@ def test_a_sense_belonging_to_another_owners_lexeme_is_refused(server, other):
     ]["message"]
 
 
-def test_a_lexeme_referencing_another_owners_topic_is_refused(server, other):
+def test_a_lexeme_referencing_another_owners_topic_is_refused(server, spanish, other):
     theirs = topic()
     other.push({"topics": [theirs]})
     answer = server.push({"lexemes": [lexeme(topicIds=[theirs["id"]])]})
@@ -457,14 +468,46 @@ def test_a_vocabulary_needs_at_least_one_gloss_language(server):
     assert server.push({"vocabularies": [vocabulary(language="not a tag")]}).status_code == 400
 
 
-def test_two_vocabularies_for_one_language_are_not_refused_by_the_server(server):
-    """Uniqueness is forbidden on a replicated collection: it is exactly the constraint two offline
-    devices can each satisfy on their own. The client refuses a duplicate at graph level instead."""
-    assert server.push({"vocabularies": [vocabulary()]}).status_code == 200
-    assert server.push({"vocabularies": [vocabulary()]}).status_code == 200
+def test_two_vocabularies_of_one_language_each_hold_their_own_words(server):
+    """Two varieties kept apart, a starter beside one's own words: any number of vocabularies may
+    share a language, and a word names its own by id."""
+    mine, starter = vocabulary(), vocabulary(id="vocabstarter001", displayName="Spanish (Mexico) · Everyday words")
+    assert server.push({"vocabularies": [mine, starter]}).status_code == 200
+    answer = server.push({"lexemes": [lexeme(), lexeme(vocabularyId=starter["id"], headword="el carro")]})
+    assert answer.status_code == 200
+    assert sorted(row["vocabularyId"] for row in answer.json()["data"]["records"]["lexemes"]) == sorted(
+        [mine["id"], starter["id"]])
 
 
-def test_study_state_card_ids_must_be_non_negative_integers(server):
+def test_a_word_is_in_its_vocabularys_language(server, spanish):
+    refused = server.push({"lexemes": [lexeme(vocabularyId=vocabulary()["id"], language="fr", headword="piquer")]})
+    assert refused.status_code == 400
+    assert "Lexeme language must be its vocabulary's: fr is not es." in refused.json()["error"]["message"]
+
+
+def test_a_word_loop_or_story_names_a_vocabulary_that_exists(server):
+    for changes in ({"lexemes": [lexeme()]}, {"loops": [loop()]}, {"stories": [story()]}):
+        refused = server.push(changes)
+        assert refused.status_code == 400
+        assert "vocabulary does not exist" in refused.json()["error"]["message"]
+
+
+def test_a_word_is_never_in_another_owners_vocabulary(server, other):
+    other.push({"vocabularies": [vocabulary()]})
+    refused = server.push({"lexemes": [lexeme()]})
+    assert refused.status_code == 400
+    assert "same owner" in refused.json()["error"]["message"]
+
+
+def test_a_live_word_is_never_in_a_removed_vocabulary(server, spanish):
+    removed = {**stored(server, "vocabularies"), "deleted": True}
+    assert server.push({"vocabularies": [removed]}).status_code == 200
+    refused = server.push({"lexemes": [lexeme()]})
+    assert refused.status_code == 400
+    assert "vocabulary has been removed" in refused.json()["error"]["message"]
+
+
+def test_study_state_card_ids_must_be_non_negative_integers(server, spanish):
     changes, word, *_ = article()
     server.push(changes)
     assert server.push({"studyStates": [study_state(word["id"], cardIds=[-1])]}).status_code == 400
@@ -472,7 +515,7 @@ def test_study_state_card_ids_must_be_non_negative_integers(server):
     assert server.push({"studyStates": [study_state(word["id"], cardIds=[7, 9])]}).status_code == 200
 
 
-def test_a_study_state_note_of_zero_reads_back_as_no_note(server):
+def test_a_study_state_note_of_zero_reads_back_as_no_note(server, spanish):
     """Alone among the numbers: there is no Anki note 0, so a stored zero means "not pushed yet"."""
     changes, word, *_ = article()
     server.push(changes)
@@ -482,7 +525,7 @@ def test_a_study_state_note_of_zero_reads_back_as_no_note(server):
     assert numbered.json()["data"]["records"]["studyStates"][0]["noteId"] == 1234
 
 
-def test_a_study_state_may_name_a_sense_of_its_own_word_only(server):
+def test_a_study_state_may_name_a_sense_of_its_own_word_only(server, spanish):
     changes, word, meaning, *_ = article()
     other, *_ = article()
     server.push(changes)
@@ -522,7 +565,7 @@ def test_the_reset_tombstones_words_and_descendants_and_keeps_languages_and_topi
         assert all(record["deleted"] for record in remaining[key]), key
 
 
-def test_a_second_reset_finds_nothing_left_to_tombstone(server):
+def test_a_second_reset_finds_nothing_left_to_tombstone(server, spanish):
     changes, *_ = article()
     server.push(changes)
     body = {"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE, "confirm": "delete-all-words"}
@@ -539,7 +582,7 @@ def test_the_reset_needs_its_confirmation_token(server):
         assert answer.json()["error"]["code"] == "confirmation_required"
 
 
-def test_an_edit_never_rewrites_a_records_key(server):
+def test_an_edit_never_rewrites_a_records_key(server, spanish):
     """With foreign keys on, SQLite reads `SET id = <the same id>` as a key change and scans every
     child index for rows that pointed at the old one — seven for a lexeme, the whole of
     `image_prompts` for an example — so an edit's cost grew with the database rather than the edit."""
@@ -569,3 +612,19 @@ def test_an_edit_never_rewrites_a_records_key(server):
     for statement in updates:
         assigned = statement.split(" SET ", 1)[1].split(" WHERE ", 1)[0]
         assert not re.search(r"\b(id|owner)\s*=", assigned), statement
+
+
+def test_a_vocabulary_holding_words_is_not_removed_nor_moved_to_another_language(server, spanish):
+    """Either would leave words in a vocabulary they cannot be in, and every other device would refuse
+    the pull that carried it."""
+    server.push({"lexemes": [lexeme()]})
+    held = stored(server, "vocabularies")
+    for change, said in (({"deleted": True}, "cannot be removed"), ({"language": "pt"}, "cannot change")):
+        refused = server.push({"vocabularies": [{**held, **change}]})
+        assert refused.status_code == 400
+        assert said in refused.json()["error"]["message"]
+
+
+def test_an_empty_vocabulary_may_be_removed(server, spanish):
+    removed = {**stored(server, "vocabularies"), "deleted": True}
+    assert server.push({"vocabularies": [removed]}).status_code == 200

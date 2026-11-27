@@ -68,7 +68,7 @@ def _require_text(body: dict[str, Any]) -> str:
 # again by the job exactly as `/capture` checks it (`pipeline.given_resolution`).
 CAPTURE_FIELDS = (
     "text", "mode", "headword", "language", "topics", "sourceKind", "sourceUrl", "sourceTitle",
-    "note", "reference", "referenceMode", "window", "complete", "limit", "resolution",
+    "note", "reference", "referenceMode", "window", "complete", "limit", "resolution", "vocabulary",
 )
 
 

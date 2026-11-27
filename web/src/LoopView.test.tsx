@@ -9,7 +9,7 @@
 
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { Loop, LoopItem, VocabularyGraph } from "./domain";
+import type { Loop, LoopItem, Vocabulary, VocabularyGraph } from "./domain";
 import LoopView from "./LoopView";
 
 const stamp = {
@@ -18,11 +18,16 @@ const stamp = {
 };
 
 const loop = (over: Partial<Loop>): Loop => ({
-  id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
+  id: "loop00000000001", vocabularyId: "vocabes00000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1, starred: false, archived: false, ...stamp, ...over
 });
+
+const spanish: Vocabulary = {
+  id: "vocabes00000001", language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en",
+  displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0, ...stamp
+};
 
 const item = (loopId: string): LoopItem => ({
   id: `loopitem${loopId.slice(-5)}`, loopId, lexemeId: "lexeme000000001", position: 0,
@@ -32,14 +37,14 @@ const item = (loopId: string): LoopItem => ({
 
 function view(loops: Loop[], query = "", onMark: (id: string, marks: object) => void = () => undefined) {
   const graph: VocabularyGraph = {
-    vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
+    vocabularies: [spanish], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
     imagePrompts: [], pronunciations: [], studyStates: [],
     loops, loopItems: loops.map((one) => item(one.id)), loopCues: [],
     stories: [], storyParts: [], storyWords: [], beds: [], plays: []
   };
   const onDelete = vi.fn();
   render(<LoopView
-    graph={graph} language="es" languageName="Spanish" query={query} onClose={() => undefined} onMark={onMark}
+    graph={graph} vocabulary={spanish} languageName="Spanish" query={query} onClose={() => undefined} onMark={onMark}
     onDelete={onDelete} onChooseMusic={() => undefined} onToggleKeep={() => undefined}
   />);
   return onDelete;

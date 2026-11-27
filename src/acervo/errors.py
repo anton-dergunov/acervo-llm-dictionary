@@ -11,7 +11,8 @@ class ApiError(Exception):
     """A deliberate refusal, with the status and code the client reads."""
 
     def __init__(self, status: int, code: str, message: str, waiting_on: str = "",
-                 noted: dict[str, object] | None = None) -> None:
+                 noted: dict[str, object] | None = None,
+                 asking: dict[str, object] | None = None) -> None:
         super().__init__(message)
         self.status = status
         self.code = code
@@ -24,6 +25,10 @@ class ApiError(Exception):
         # which record was stale and at which revisions, which way a token failed. It never reaches
         # the wire — the message is for a person, and these are for a `grep`.
         self.noted: dict[str, object] = dict(noted or {})
+        # For a refusal that asks the owner a question the device can put — which vocabulary a word
+        # goes in — the facts the device needs to put it, sent beside the code and the message.
+        # Never a credential or anything the owner should not see; empty for every other refusal.
+        self.asking: dict[str, object] = dict(asking or {})
 
 
 class RecordRefused(Exception):

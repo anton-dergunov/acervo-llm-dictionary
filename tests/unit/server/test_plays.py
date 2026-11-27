@@ -7,7 +7,14 @@ to being *of one thing this account holds* and nothing more — not that the thi
 
 from __future__ import annotations
 
-from graph_records import lexeme, loop, loop_item, play, story
+import pytest
+
+from graph_records import lexeme, loop, loop_item, play, story, vocabulary
+
+
+@pytest.fixture(autouse=True)
+def _spanish(spanish):
+    """Every loop and word here is in the owner's Spanish vocabulary."""
 
 
 def _pushed(server, *records_by_key):
@@ -67,8 +74,9 @@ def test_a_play_is_of_one_thing_never_both_or_neither(server):
 
 
 def test_a_play_of_another_accounts_loop_is_refused(server, other):
-    theirs = loop()
-    assert other.push({"loops": [theirs]}).status_code == 200
+    their_spanish = vocabulary(id="vocabtheirs0001")
+    theirs = loop(vocabularyId=their_spanish["id"])
+    assert other.push({"vocabularies": [their_spanish], "loops": [theirs]}).status_code == 200
     answer = server.push({"plays": [play(loopId=theirs["id"])]})
     assert answer.status_code == 400
 

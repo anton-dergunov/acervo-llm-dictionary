@@ -48,16 +48,16 @@ def latest(request: Request) -> JSONResponse:
 async def stats(request: Request) -> JSONResponse:
     owner = owner_id(request)
     settings = request.app.state.settings
-    language = (request.query_params.get("language") or "").strip() or None
+    vocabulary = (request.query_params.get("vocabulary") or "").strip() or None
     days = _bounded(request.query_params.get("days"), 365, 7, 3660)
     weeks = _bounded(request.query_params.get("weeks"), 12, 1, 520)
     local = zone(settings)
 
     def read() -> dict:
         figures = history.statistics(
-            reviews.history(owner, language=language), reviews.topic_names(owner),
+            reviews.history(owner, vocabulary=vocabulary), reviews.topic_names(owner),
             zone=local, today=datetime.now(local).date(), days=days, weeks=weeks,
         )
-        return {"language": language, "zone": zone_name(settings), **figures}
+        return {"vocabulary": vocabulary, "zone": zone_name(settings), **figures}
 
     return data(await run_in_threadpool(read))

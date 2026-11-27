@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { effectiveShortGloss, validateChanges, validateGraph, type Lexeme, type Sense, type Topic, type VocabularyGraph } from "./domain";
+import { effectiveShortGloss, validateChanges, validateGraph, type Lexeme, type Sense, type Topic, type Vocabulary, type VocabularyGraph } from "./domain";
 import { newId } from "./ids";
 
 const sync = {
@@ -7,10 +7,17 @@ const sync = {
   editedAt: "2026-08-28T12:00:00.000Z", editedBy: "device000000001", revision: 0
 };
 
+const vocabularyOf = (id: string, language: string): Vocabulary => ({
+  id, language, definitionLang: language, glossLangs: ["en"], notesLang: "en",
+  displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0, ...sync
+});
+
 function graph(): VocabularyGraph {
+  const spanish = vocabularyOf("vocab0000000001", "es");
+  const chinese = vocabularyOf("vocabchinese001", "zh-Hans");
   const topic: Topic = { id: "topic0000000001", name: "Travel", icon: "🧭", order: 0, ...sync };
   const lexeme: Lexeme = {
-    id: "lexeme000000001", language: "es", headword: "la balsa", lemma: "balsa", reading: null, ipa: "/ˈbalsa/",
+    id: "lexeme000000001", vocabularyId: spanish.id, language: "es", headword: "la balsa", lemma: "balsa", reading: null, ipa: "/ˈbalsa/",
     pos: "noun", gender: "feminine", register: "neutral", dialect: null, emoji: "🛶",
     topicIds: [topic.id], status: "active", shortGloss: null, notes: [], primaryGloss: null, emotion: null, clipsSearchedAt: null, ...sync
   };
@@ -18,7 +25,7 @@ function graph(): VocabularyGraph {
     id: "sense0000000001", lexemeId: lexeme.id, definition: "Una embarcación sencilla.", definitionLang: "es",
     glosses: [{ lang: "en", terms: ["raft"] }, { lang: "ru", terms: ["плот"] }], domain: null, emoji: null, order: 0, ...sync
   };
-  return { vocabularies: [], topics: [topic], lexemes: [lexeme], senses: [sense], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [], beds: [], plays: [] };
+  return { vocabularies: [spanish, chinese], topics: [topic], lexemes: [lexeme], senses: [sense], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [], beds: [], plays: [] };
 }
 
 describe("Acervo domain", () => {
@@ -32,7 +39,7 @@ describe("Acervo domain", () => {
 
   it("requires readings for Chinese lexemes", () => {
     const value = graph();
-    value.lexemes[0] = { ...value.lexemes[0], language: "zh-Hans", headword: "图书馆", lemma: "图书馆" };
+    value.lexemes[0] = { ...value.lexemes[0], vocabularyId: "vocabchinese001", language: "zh-Hans", headword: "图书馆", lemma: "图书馆" };
     expect(() => validateGraph(value)).toThrow("Chinese lexemes require a reading");
     value.lexemes[0].reading = "tu2 shu1 guan3";
     expect(() => validateGraph(value)).not.toThrow();
@@ -60,6 +67,19 @@ describe("Acervo domain", () => {
     const value = graph();
     value.senses[0].ownerId = "owner0000000002";
     expect(() => validateGraph(value)).toThrow("one owner only");
+  });
+
+  it("keeps a word in a vocabulary of its own language, alive while the word is", () => {
+    const value = graph();
+    value.lexemes[0].vocabularyId = "vocab0000000009";
+    expect(() => validateGraph(value)).toThrow("Lexeme references a missing vocabulary.");
+    value.lexemes[0].vocabularyId = "vocabchinese001";
+    expect(() => validateGraph(value)).toThrow("Lexeme language must be its vocabulary's: es is not zh-Hans.");
+    value.lexemes[0].vocabularyId = "vocab0000000001";
+    value.vocabularies[0].deleted = true;
+    expect(() => validateGraph(value)).toThrow("Lexeme vocabulary has been removed.");
+    value.lexemes[0].deleted = true;
+    expect(() => validateGraph(value)).not.toThrow();
   });
 
   it("rejects a lexeme that references a missing topic", () => {
@@ -124,13 +144,17 @@ describe("Acervo domain", () => {
     });
 
     it("refuses a second vocabulary for a language, and allows it once the first is deleted", () => {
-      const spanish = {
-        id: "vocab0000000001", language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en",
-        displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0, ...sync
-      };
-      const withSpanish = merged(base, { vocabularies: [spanish] });
-      agrees(withSpanish, { vocabularies: [{ ...spanish, id: "vocab0000000002" }] }, "Two vocabularies claim es");
-      agrees(withSpanish, { vocabularies: [{ ...spanish, deleted: true }, { ...spanish, id: "vocab0000000002" }] });
+      const portuguese = vocabularyOf("vocabportugue01", "pt");
+      const withPortuguese = merged(base, { vocabularies: [portuguese] });
+      agrees(withPortuguese, { vocabularies: [{ ...portuguese, id: "vocabportugue02" }] }, "Two vocabularies claim pt");
+      agrees(withPortuguese, { vocabularies: [{ ...portuguese, deleted: true }, { ...portuguese, id: "vocabportugue02" }] });
+    });
+
+    it("catches a word left in a vocabulary removed or moved to another language", () => {
+      // The word is not in the change set; removing its vocabulary, or changing its language, breaks it.
+      const spanish = base.vocabularies[0];
+      agrees(base, { vocabularies: [{ ...spanish, deleted: true }] }, "Lexeme vocabulary has been removed.");
+      agrees(base, { vocabularies: [{ ...spanish, language: "pt" }] }, "Lexeme language must be its vocabulary's");
     });
 
     it("catches a record left inconsistent by moving the one it points at", () => {

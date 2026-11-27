@@ -26,7 +26,7 @@ import { CloseIcon, GemIcon, PeakIcon, SelectIcon, ShuffleIcon, SparkleIcon, Syn
 import { languageOf } from "./languages";
 import { useRarity, type Rarity } from "./rarity";
 import {
-  chosenFor, drawOrder, drawWords, hasReviewState, usageCounts,
+  chosenFor, drawOrder, drawWords, hasReviewState, usageCounts, vocabularyFor,
   type ChosenWord, type DrawOrder, type ListQuery, type MadeKind, type SelectedWord
 } from "./selectors";
 
@@ -98,7 +98,8 @@ export function useWordDraw({ graph, query, kind, candidatesOf, eligible, why, m
   const candidates = useMemo(() => candidatesOf(graph, query), [candidatesOf, graph, query]);
   const usage = useMemo(() => usageCounts(graph, kind), [graph, kind]);
   const canHard = useMemo(() => hasReviewState(graph, candidates), [graph, candidates]);
-  const rarity = useRarity(query.language, order === "rare");
+  // How rare a word is, is a figure about its language, whichever vocabulary it is in.
+  const rarity = useRarity(vocabularyFor(graph, query.vocabularyId)?.language ?? "", order === "rare");
   const ordered = useMemo(() => drawOrder(graph, candidates, {
     order: order === "hard" && !canHard ? "random" : order, usage, seed,
     rarity: rarity.state === "ready" ? rarity.zipf : null

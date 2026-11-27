@@ -7,7 +7,7 @@ type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
-export const SCHEMA_VERSION = 24;
+export const SCHEMA_VERSION = 25;
 
 interface SyncEnvelope {
   schemaVersion: number;
@@ -459,6 +459,8 @@ export interface CapturePassedOver {
 
 export interface CaptureResult {
   resolution: CaptureResolution;
+  /** The vocabulary the word goes in, where `duplicates` were looked for and `draft` is saved. */
+  vocabularyId: string;
   duplicates: CaptureDuplicate[];
   draft: ArticleDraft | null;
   /** Only ever set alongside `duplicates`: what this capture could add to the word already held. */
@@ -473,6 +475,12 @@ export interface CaptureResult {
 
 export interface CaptureRequest {
   text: string;
+  /**
+   * The vocabulary in view, or the one the owner chose. The word goes in it when it is in its
+   * language; otherwise in the only vocabulary of the word's language (`docs/features/capture.md`,
+   * "Which vocabulary").
+   */
+  vocabulary?: string | null;
   /**
    * The word the submitter means, when they know it. A hint, not an instruction: the server still
    * corrects spelling and picks the lemma, and still overrides it if the text plainly says otherwise.
@@ -569,6 +577,12 @@ export interface QuickLookUpRequest {
    * a story, a loop, an article — which is finished text and comes back exactly as it was.
    */
   source: "photo" | "reading";
+  /**
+   * The vocabulary in view, or the one the owner chose. The word goes in it when it is in its
+   * language; otherwise in the only vocabulary of the word's language (`docs/features/capture.md`,
+   * "Which vocabulary").
+   */
+  vocabulary?: string | null;
 }
 
 /** A word tapped while reading, filed in the Inbox by the headless capture job. */
@@ -579,10 +593,14 @@ export interface InboxCapture {
   resolution: CaptureResolution;
   /** What the owner was reading: a story, a loop, a word's entry. */
   sourceTitle: string | null;
+  /** The vocabulary the look-up chose, which the job files the word in. */
+  vocabulary: string;
 }
 
 export interface QuickLookUp {
   resolution: CaptureResolution;
+  /** The vocabulary the word would go in, and where `duplicates` were looked for. */
+  vocabularyId: string;
   duplicates: CaptureDuplicate[];
   foldable: CaptureFoldable | null;
   passedOver?: CapturePassedOver[];
@@ -640,9 +658,13 @@ export interface LanguageEntry {
   varieties: string[];
 }
 
+/**
+ * What a conversation is about. `vocabularyId` is the vocabulary whose learner the writer is told
+ * about: the word's own, the one a draft is being added to, or the one a looked-up word would go in.
+ */
 export type ChatSubject =
-  | { kind: "article"; lexemeId: string; language: string | null; document: string; focus: string | null }
-  | { kind: "reference"; headword: string; language: string | null };
+  | { kind: "article"; lexemeId: string; language: string | null; vocabularyId: string | null; document: string; focus: string | null }
+  | { kind: "reference"; headword: string; language: string | null; vocabularyId: string | null };
 
 /** Headword and gloss only. Enough to say "you already have «el traje»", and nothing more. */
 export interface ChatNeighbour {
@@ -959,7 +981,8 @@ export interface LoopMusic {
 
 export interface LoopRequest {
   deviceId: string;
-  language: string;
+  /** The vocabulary its words are from. Every word must be in it. */
+  vocabularyId: string;
   /** Word ids, sampled from the scope on screen. The server never re-derives that scope. */
   lexemeIds: string[];
   format?: string;
@@ -1000,7 +1023,8 @@ export interface WordRarity {
 
 export interface StoryRequest {
   deviceId: string;
-  language: string;
+  /** The vocabulary its words are from. Every word must be in it. */
+  vocabularyId: string;
   /** Word ids, sampled from the scope on screen. The server never re-derives that scope. */
   lexemeIds: string[];
   typeId?: string;
@@ -1218,9 +1242,9 @@ export const backendSession = {
   },
   loopSchema(): Promise<LoopSchema> { return client.call<LoopSchema>("/loops/schema"); },
   /* `have` is the version this device already holds; a map still current answers `current`. */
-  readMap(language: string, have?: string | null): Promise<MapAnswer> {
+  readMap(vocabularyId: string, have?: string | null): Promise<MapAnswer> {
     const query = have ? `?have=${encodeURIComponent(have)}` : "";
-    return client.call<MapAnswer>(`/map/${encodeURIComponent(language)}${query}`, {}, false, MAP_TIMEOUT);
+    return client.call<MapAnswer>(`/map/${encodeURIComponent(vocabularyId)}${query}`, {}, false, MAP_TIMEOUT);
   },
   /* Answers 202 with the row and the job that will render it. The row exists either way: a loop
      that was asked for and not made is one with no `audioRef`, which is all "not ready" means. */
@@ -1324,12 +1348,14 @@ export const backendSession = {
    * a newer one.
    */
   saveArticle(deviceId: string, draft: ArticleDraft, minted: string[], base: Record<string, number>,
-              options: { imported?: boolean } = {}): Promise<ArticleSaveResponse> {
+              options: { imported?: boolean; vocabularyId?: string } = {}): Promise<ArticleSaveResponse> {
     return client.call<ArticleSaveResponse>("/articles", {
       method: "POST",
       body: JSON.stringify({
         schemaVersion: SCHEMA_VERSION, deviceId, draft, minted, base,
-        ...(options.imported ? { imported: true } : {})
+        ...(options.imported ? { imported: true } : {}),
+        // Where a new word goes. A document names its language, never its vocabulary.
+        ...(options.vocabularyId ? { vocabularyId: options.vocabularyId } : {})
       })
     });
   },
@@ -1396,7 +1422,8 @@ export const backendSession = {
         resolution: request.resolution ?? null,
         photoRef: request.photoRef ?? null,
         photoRegion: request.photoRegion ?? null,
-        sourceKind: request.sourceKind ?? null
+        sourceKind: request.sourceKind ?? null,
+        vocabulary: request.vocabulary ?? null
       })
     }, false, CAPTURE_TIMEOUT);
   },
@@ -1432,7 +1459,8 @@ export const backendSession = {
         mode: "single",
         source: request.source,
         text: request.text,
-        selection: request.selection
+        selection: request.selection,
+        vocabulary: request.vocabulary ?? null
       })
     }, false, QUICK_TIMEOUT);
   },
@@ -1451,7 +1479,8 @@ export const backendSession = {
         headword: request.resolution.headword,
         language: request.resolution.language,
         resolution: request.resolution,
-        sourceTitle: request.sourceTitle
+        sourceTitle: request.sourceTitle,
+        vocabulary: request.vocabulary
       })
     });
   },

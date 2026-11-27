@@ -49,6 +49,8 @@ export interface LookUpRequest {
   tapped: TappedWord;
   /** The language being learned on this surface. */
   language: string;
+  /** The vocabulary of what is being read: a word held is looked for in it, and Add files there. */
+  vocabularyId: string;
   /** What the owner is reading, which the word's attestation will name. */
   sourceTitle: string | null;
   play?: LookUpAction | null;
@@ -98,7 +100,7 @@ export function useLookUp(services: LookUpServices | null) {
   const ask = useCallback((request: LookUpRequest) => {
     if (!services) return;
     asking.current?.abort();
-    const question: QuickLookUpRequest = { ...request.tapped.sentence, source: "reading" };
+    const question: QuickLookUpRequest = { ...request.tapped.sentence, source: "reading", vocabulary: request.vocabularyId };
     const key = keyOf(question);
     const known = answered.current.get(key);
     if (known) {
@@ -120,7 +122,7 @@ export function useLookUp(services: LookUpServices | null) {
 
   const open = useCallback((request: LookUpRequest) => {
     const held = services?.graph
-      ? heldWord(services.graph, request.language, request.tapped.word, request.tapped.lexemeId)
+      ? heldWord(services.graph, request.vocabularyId, request.tapped.word, request.tapped.lexemeId)
       : null;
     if (held) {
       asking.current?.abort();
@@ -132,9 +134,9 @@ export function useLookUp(services: LookUpServices | null) {
 
   const add = useCallback(() => {
     if (!services || !look || look.answer.state !== "done" || look.added !== "no") return;
-    const { resolution } = look.answer.found;
+    const { resolution, vocabularyId } = look.answer.found;
     setLook({ ...look, added: "adding" });
-    services.queue({ text: look.tapped.sentence.text, resolution, sourceTitle: look.sourceTitle }).then(
+    services.queue({ text: look.tapped.sentence.text, resolution, sourceTitle: look.sourceTitle, vocabulary: vocabularyId }).then(
       () => setLook((now) => now && now.tapped === look.tapped ? { ...now, added: "added" } : now),
       (error: unknown) => {
         setLook((now) => now && now.tapped === look.tapped ? { ...now, added: "no" } : now);

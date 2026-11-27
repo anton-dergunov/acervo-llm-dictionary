@@ -56,7 +56,7 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
     },
     "topics": {"name": (True, 120), "icon": (False, 120)},
     "lexemes": {
-        "language": (True, 35), "headword": (True, 240), "lemma": (True, 240),
+        "vocabulary": (True, 15), "language": (True, 35), "headword": (True, 240), "lemma": (True, 240),
         "reading": (False, 240), "ipa": (False, 240), "dialect": (False, 35),
         "emoji": (False, 32), "short_gloss": (False, 500), "primary_gloss": (False, 240),
         "emotion": (False, 300), "clips_searched_at": (False, 24),
@@ -93,7 +93,7 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
     },
     "study_states": {"system": (True, 80)},
     "loops": {
-        "language": (True, 35), "style_id": (False, 120), "engine_version": (False, 64),
+        "vocabulary": (True, 15), "language": (True, 35), "style_id": (False, 120), "engine_version": (False, 64),
         "bed_fingerprint": (False, 64), "format": (True, 64), "fallback_from": (False, 64),
         "audio_ref": (False, 500), "audio_mime": (False, 80),
     },
@@ -105,7 +105,7 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
         "language": (True, 35), "text": (True, 600),
     },
     "stories": {
-        "language": (True, 35), "type_id": (False, 64), "style_id": (False, 120),
+        "vocabulary": (True, 15), "language": (True, 35), "type_id": (False, 64), "style_id": (False, 120),
         "title": (False, 240), "title_translation": (False, 240), "emoji": (False, 16),
         "model_id": (False, 120), "guidance": (False, GUIDANCE_LIMIT),
     },
@@ -284,6 +284,19 @@ def _same_owner(row: Mapping[str, Any], parent: Mapping[str, Any], label: str) -
         refuse(f"{label} must belong to the same owner.")
 
 
+def _in_vocabulary(row: Mapping[str, Any], lookup: Lookup, label: str) -> str:
+    """Hold a word, a loop or a story to its vocabulary: the owner's, alive while the record is, and
+    in the language the record says it is in. Returns that language."""
+    language = valid_language(row.get("language"), f"{label} language")
+    vocabulary = _related(lookup, "vocabularies", _text(row, "vocabulary"), f"{label} vocabulary")
+    _same_owner(row, vocabulary, f"{label} vocabulary")
+    if vocabulary.get("deleted") and not row.get("deleted"):
+        refuse(f"{label} vocabulary has been removed.")
+    if language != vocabulary.get("language"):
+        refuse(f"{label} language must be its vocabulary's: {language} is not {vocabulary.get('language')}.")
+    return language
+
+
 def _check_declared_bounds(name: str, row: Mapping[str, Any]) -> None:
     for field, (required, maximum) in TEXT_RULES.get(name, {}).items():
         value = _text(row, field)
@@ -341,7 +354,7 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         return
 
     if name == "lexemes":
-        language = valid_language(row.get("language"), "Lexeme language")
+        language = _in_vocabulary(row, lookup, "Lexeme")
         # A prefix test, so `zh-Hant-TW` and `zho` both match. Narrowing this to equality would let a
         # Chinese entry through with no way to read it.
         if language.lower().startswith("zh") and not _text(row, "reading"):
@@ -477,7 +490,7 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         return
 
     if name == "loops":
-        valid_language(row.get("language"), "Loop language")
+        _in_vocabulary(row, lookup, "Loop")
         # A rendered track is bytes plus the type of those bytes. A mime with no reference describes
         # nothing, and a reference with no mime is a file nothing can decide how to play — and the
         # projection hides both when there is no reference, so this is the same invariant asserted
@@ -546,7 +559,7 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         return
 
     if name == "stories":
-        valid_language(row.get("language"), "Story language")
+        _in_vocabulary(row, lookup, "Story")
         return
 
     if name == "story_parts":

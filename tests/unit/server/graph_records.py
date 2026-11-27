@@ -2,11 +2,20 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from acervo.domain.ids import new_record_id, now_instant
 
 DEVICE = "device000000001"
+
+
+def vocabulary_id(language: str = "es") -> str:
+    """The id `vocabulary()` gives a language's vocabulary unless told otherwise, and the one a word,
+    a loop or a story in that language names by default: one vocabulary per language is what most
+    tests are about, so they need not thread an id through. A test of two vocabularies of one
+    language passes ids of its own."""
+    return ("vocab" + re.sub(r"[^a-z0-9]", "", language.lower())).ljust(15, "0")[:15]
 
 
 def stamp(**overrides: Any) -> dict[str, Any]:
@@ -23,7 +32,7 @@ def stamp(**overrides: Any) -> dict[str, Any]:
 
 def vocabulary(**overrides: Any) -> dict[str, Any]:
     return {
-        "id": new_record_id(), "language": "es", "definitionLang": "es", "glossLangs": ["en"],
+        "id": vocabulary_id(overrides.get("language", "es")), "language": "es", "definitionLang": "es", "glossLangs": ["en"],
         "notesLang": "en", "displayName": "Spanish", "flag": "\U0001F1EA\U0001F1F8", "order": 0,
         **stamp(), **overrides,
     }
@@ -35,7 +44,7 @@ def topic(**overrides: Any) -> dict[str, Any]:
 
 def lexeme(**overrides: Any) -> dict[str, Any]:
     return {
-        "id": new_record_id(), "language": "es", "headword": "picar", "lemma": "picar",
+        "id": new_record_id(), "vocabularyId": vocabulary_id(overrides.get("language", "es")), "language": "es", "headword": "picar", "lemma": "picar",
         "reading": None, "ipa": None, "pos": "verb", "gender": None, "register": "neutral",
         "dialect": None, "emoji": None, "topicIds": [], "status": "inbox",
         "shortGloss": "to chop", "primaryGloss": None, "emotion": None, "notes": [],
@@ -91,7 +100,8 @@ def study_state(lexeme_id: str, **overrides: Any) -> dict[str, Any]:
 def loop(**overrides: Any) -> dict[str, Any]:
     """A rendered loop. Pass `audioRef=None, audioMime=None` for one the job has not finished."""
     return {
-        "id": new_record_id(), "language": "es", "styleId": "sunlit-acoustic", "seed": 104740,
+        "id": new_record_id(), "vocabularyId": vocabulary_id(overrides.get("language", "es")), "language": "es",
+        "styleId": "sunlit-acoustic", "seed": 104740,
         "engineVersion": "1.4.0", "bedFingerprint": "90c6ad267d159b0e", "format": "classic", "switches": {}, "fallbackFrom": None,
         "audioRef": "loops/es/90c6ad267d159b0e.mp3", "audioMime": "audio/mpeg",
         "durationSeconds": 124.5, "position": 0, "starred": False, "archived": False, **stamp(), **overrides,
@@ -110,7 +120,8 @@ def loop_item(loop_id: str, lexeme_id: str, **overrides: Any) -> dict[str, Any]:
 def story(**overrides: Any) -> dict[str, Any]:
     """A story as it is asked for, before anything is written."""
     return {
-        "id": new_record_id(), "language": "es", "typeId": "funny", "styleId": "comic-book",
+        "id": new_record_id(), "vocabularyId": vocabulary_id(overrides.get("language", "es")), "language": "es",
+        "typeId": "funny", "styleId": "comic-book",
         "title": None, "titleTranslation": None, "emoji": None, "modelId": None, "position": 0,
         "guidance": None, "parts": 4, "starred": False, "archived": False, **stamp(), **overrides,
     }

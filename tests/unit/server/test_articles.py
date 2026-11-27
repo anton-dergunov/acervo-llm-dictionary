@@ -19,7 +19,7 @@ from acervo.pronunciation.ids import pronunciation_id
 from acervo.repository import jobs
 
 from graph_records import (
-    DEVICE, example, image_prompt, lexeme, sense, stamp, study_state, topic, vocabulary,
+    DEVICE, example, image_prompt, lexeme, sense, stamp, study_state, topic, vocabulary, vocabulary_id,
 )
 
 LEXEME = "lexeme000000001"
@@ -29,6 +29,9 @@ TOPIC = "topic0000000001"
 
 
 def save(server, draft, minted=(), **extra):
+    """A new word goes in its language's vocabulary unless the test names another."""
+    if isinstance(draft, dict) and not draft.get("id") and "vocabularyId" not in extra:
+        extra["vocabularyId"] = vocabulary_id(draft.get("language") or "es")
     return server.post("/articles", {
         "schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE, "draft": draft,
         "minted": list(minted), **extra,
@@ -347,7 +350,9 @@ def test_somebody_elses_record_is_never_reached(seeded, other):
     article = draft_of(seeded)
     article["id"] = None
     # A new entry may carry ids it minted — but not one another account holds.
-    answer = save(other, {**article, "topics": []})
+    their_spanish = vocabulary(id="vocabtheirs0001")
+    assert other.push({"vocabularies": [their_spanish]}).status_code == 200
+    answer = save(other, {**article, "topics": []}, vocabularyId=their_spanish["id"])
     assert answer.status_code == 400
     assert answer.json()["error"]["code"] == "id_conflict"
 

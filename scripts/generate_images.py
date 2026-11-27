@@ -135,7 +135,9 @@ def load_graph(args: argparse.Namespace):
         client.sign_in(args.owner_email, password)
         # One pull, and nothing else: this stage reads the graph and writes only to the filesystem.
         changes = client.pull_graph()["changes"]
-    return build_articles(changes, args.language), drawn_senses(changes)
+    articles = [article for article in build_articles(changes)
+                if not args.language or article.language == args.language]
+    return articles, drawn_senses(changes)
 
 
 def command_check(args: argparse.Namespace) -> int:
@@ -278,7 +280,7 @@ def main() -> int:
         target.add_argument("--server-url", default=os.environ.get("ACERVO_SERVER_URL", ""))
         target.add_argument("--owner-email", default=os.environ.get("ACERVO_OWNER_EMAIL", ""))
         target.add_argument("--language", default="es",
-                            help="Only this vocabulary language. Empty string for all.")
+                            help="Only words in this language. Empty string for all.")
         target.add_argument("--limit", type=int, default=0)
         target.add_argument("--redo", action="store_true",
                             help="Include senses that already have a picture.")

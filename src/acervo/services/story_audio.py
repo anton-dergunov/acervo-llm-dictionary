@@ -128,7 +128,7 @@ def narrate_part(
         raise ApiError(404, "not_found", "That part is not in this story.")
     # Heard in the accent of the story's vocabulary: `es-AR` once Spanish is set to Argentina. Every
     # voice, cache key and direction below follows it, so a story in an accent is a story of its own.
-    language = pronunciations.spoken_locale(owner, story["language"])
+    language = pronunciations.spoken_locale(owner, story["language"], story["vocabularyId"])
 
     preferences = pronunciation_settings.settings(owner)
     order = preferences.order_for("stories")

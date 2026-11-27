@@ -20,7 +20,7 @@ from acervo.models.results import OcrWord
 from acervo.ocr import segment
 from acervo.services import photo as photo_service
 
-from graph_records import DEVICE, lexeme, vocabulary
+from graph_records import DEVICE, lexeme, vocabulary, vocabulary_id
 from provider_rows import GOOGLE
 
 SENTENCE = "Esta operación, llevada a cabo en secreto, fue ordenada por el rey."
@@ -240,7 +240,8 @@ def test_a_sign_with_no_sentence_keeps_the_photo_by_itself(reader):
 
 
 def save(server, draft):
-    return server.post("/articles", {"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE, "draft": draft})
+    return server.post("/articles", {"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE, "draft": draft,
+                                      "vocabularyId": vocabulary_id(draft.get("language") or "es")})
 
 
 def drafted(reader, reference, resolution=RESOLUTION):

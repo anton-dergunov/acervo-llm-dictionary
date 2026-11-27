@@ -121,11 +121,11 @@ function acceptWrites() {
   });
   /* An article is diffed by the server. The replica mirrors it here, so it stands in for what the
      server holds. */
-  vi.spyOn(backendSession, "saveArticle").mockImplementation(async (deviceId, draft, minted) => {
+  vi.spyOn(backendSession, "saveArticle").mockImplementation(async (deviceId, draft, minted, _base, options) => {
     const snapshot = repository.snapshot();
     const { lexemeId, changes } = articleChanges(
       snapshot, draft, new Set(minted), { ownerId: snapshot.ownerId, deviceId },
-      new Date(Date.parse("2026-08-29T12:00:01.000Z") + allocated).toISOString()
+      new Date(Date.parse("2026-08-29T12:00:01.000Z") + allocated).toISOString(), options?.vocabularyId
     );
     const records = Object.fromEntries(Object.entries(changes).map(([kind, list]) =>
       [kind, (list ?? []).map((record) => ({ ...record, revision: ++allocated }))]));
@@ -167,7 +167,7 @@ async function waitForEditor() {
  */
 function mockGarfioCapture() {
   vi.spyOn(backendSession, "captureText").mockResolvedValue({
-    resolution: {
+    vocabularyId: "vocabes00000001", resolution: {
       language: "es", headword: "el garfio", lemma: "garfio", pos: "noun",
       sentences: [{ text: "El disfraz de pirata viene con un garfio.", translation: null }],
       note: null, consumedLines: 1, consumedText: null
@@ -786,7 +786,7 @@ describe("Acervo application", () => {
     signedIn();
     await openList();
     const capture = vi.spyOn(backendSession, "captureText").mockResolvedValue({
-      resolution: {
+      vocabularyId: "vocabes00000001", resolution: {
         language: "es", headword: "picar", lemma: "picar", pos: "verb",
         sentences: [], note: null, consumedLines: 1, consumedText: null
       },
@@ -909,7 +909,7 @@ describe("Acervo application", () => {
     signedIn();
     await openList();
     const capture = vi.spyOn(backendSession, "captureText").mockResolvedValue({
-      resolution: {
+      vocabularyId: "vocabes00000001", resolution: {
         language: "es", headword: "picar", lemma: "picar", pos: "verb",
         sentences: [], note: null, consumedLines: 1, consumedText: null
       },
@@ -1490,10 +1490,10 @@ describe("Acervo application", () => {
     expect(repository.snapshot().lexemes.find((lexeme) => lexeme.id === "lexemebalsa0001")?.deleted).toBe(false);
   });
 
-  it("switches between the languages the replica holds", async () => {
+  it("switches between the vocabularies the replica holds", async () => {
     signedIn();
     await openList();
-    fireEvent.click(screen.getByRole("button", { name: "Vocabulary language" }));
+    fireEvent.click(screen.getByRole("button", { name: "Vocabulary: Spanish" }));
     fireEvent.click(await screen.findByRole("button", { name: /English/ }));
     expect(await screen.findByRole("button", { name: /turmoil/ })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /picar/ })).not.toBeInTheDocument();
@@ -2190,7 +2190,7 @@ describe("folding a photographed sentence into a word already held", () => {
         truncatedStart: false, truncatedEnd: false }]
     });
     vi.spyOn(backendSession, "resolveCapture").mockResolvedValue({
-      resolution: {
+      vocabularyId: "vocabes00000001", resolution: {
         language: "es", headword: "picar", lemma: "picar", pos: "verb",
         sentences: [{ text: "Me pica mucho.", translation: null }], note: null, consumedLines: 1,
         consumedText: null, gloss: "to itch"

@@ -12,7 +12,7 @@
 
 import { backendSession, COLLECTIONS } from "./api";
 import type { AcervoRepository } from "./repository";
-import { importBundle, type BundlePlan, type ImportReport, type ImportSignal } from "./transfer";
+import { importBundle, type BundlePlan, type ImportReport, type ImportSignal, type ImportTarget } from "./transfer";
 
 /** Pictures and clips restored between pulls. Small enough that a long import fills in visibly,
  *  large enough that two thousand pictures do not cost two thousand extra round trips. */
@@ -23,6 +23,8 @@ export interface ImportRun {
   /** Brings the server's records into the repository: `syncEngine.syncNow` in the app. */
   pull(): Promise<unknown>;
   plan: BundlePlan;
+  /** Where each of the bundle's vocabularies goes, by its directory (`transfer.defaultTargets`). */
+  targets: ReadonlyMap<string, ImportTarget>;
   pictures: Map<string, Uint8Array>;
   recordings: Map<string, Uint8Array>;
   /** Whether the bundle's recordings are put back, or left for the server to record again. */
@@ -50,7 +52,7 @@ export async function importThroughServer(run: ImportRun): Promise<ImportReport>
   };
 
   const report = await importBundle(
-    repository, plan, run.onProgress, run.signal, pictures,
+    repository, plan, run.targets, run.onProgress, run.signal, pictures,
     /* Putting a picture back is the same act, and the same route, as attaching one by hand —
        naming the model that drew it is what makes it a restore rather than a file you chose. */
     async (senseId, bytes, drawnBy) => {

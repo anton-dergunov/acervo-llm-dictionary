@@ -12,7 +12,7 @@
  */
 
 import { useMemo, useState, type ReactNode } from "react";
-import type { Loop, Story, VocabularyGraph } from "./domain";
+import type { Loop, Story, VocabularyGraph, Vocabulary } from "./domain";
 import { madeSortFor, rememberMadeSort } from "./editorPreferences";
 import { CaretIcon } from "./icons";
 import { usePendingPlays } from "./plays";
@@ -40,18 +40,20 @@ export interface MadeOrder<T> {
 }
 
 /** A made list in the order chosen, remembered per list on this device, and filtered by the surface's search. */
-export function useMadeList(graph: VocabularyGraph, kind: "loop", language: string, query: string): MadeOrder<Loop>;
-export function useMadeList(graph: VocabularyGraph, kind: "story", language: string, query: string): MadeOrder<Story>;
-export function useMadeList(graph: VocabularyGraph, kind: MadeKind, language: string, query: string): MadeOrder<Loop | Story> {
+export function useMadeList(graph: VocabularyGraph, kind: "loop", vocabulary: Vocabulary, query: string): MadeOrder<Loop>;
+export function useMadeList(graph: VocabularyGraph, kind: "story", vocabulary: Vocabulary, query: string): MadeOrder<Story>;
+export function useMadeList(graph: VocabularyGraph, kind: MadeKind, vocabulary: Vocabulary, query: string): MadeOrder<Loop | Story> {
   const [sort, setSortState] = useState<MadeSort>(() => storedSort(kind));
-  const rarity = useRarity(language, sort === "rare");
+  // How rare a word is, is a figure about its language, not about the vocabulary it is in.
+  const rarity = useRarity(vocabulary.language, sort === "rare");
+  const vocabularyId = vocabulary.id;
   const zipf = rarity.state === "ready" ? rarity.zipf : null;
   const pending = usePendingPlays();
   const plays = useMemo(() => playCounts(graph, pending), [graph, pending]);
   const list = useMemo(() => {
-    const made = { language, query, sort, rarity: zipf, plays };
+    const made = { vocabularyId, query, sort, rarity: zipf, plays };
     return kind === "loop" ? madeLoops(graph, made) : madeStories(graph, made);
-  }, [graph, kind, language, query, sort, zipf, plays]);
+  }, [graph, kind, vocabularyId, query, sort, zipf, plays]);
   const reviewed = useMemo(() => graph.studyStates.some((state) => !state.deleted && state.reps > 0), [graph]);
   const note = sort === "hard" && !reviewed ? "Hardest needs Anki’s review history, and none has come back yet."
     : sort === "rare" && rarity.state === "refused" ? rarity.why

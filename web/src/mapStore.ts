@@ -1,10 +1,11 @@
-/* The last meaning map this device was given, per account and language.
+/* The last meaning map this device was given, per account and vocabulary.
 
    Its own IndexedDB database, like `dictionaryStore.ts`, so wiping the replica leaves it alone and
    wiping it leaves the replica alone. It is what makes the map open at once and offline: the map drawn
    last time is on screen before the server has been asked whether it is still current. Keyed by the
-   account as well as the language, so a device signed into another account never draws the first
-   account's map, even for the moment before the server answers. */
+   account as well as the vocabulary, so a device signed into another account never draws the first
+   account's map, even for the moment before the server answers. A map is of one vocabulary, so it
+   is kept under that vocabulary's id. */
 
 import type { ServerMap } from "./api";
 
@@ -13,12 +14,12 @@ const DATABASE_VERSION = 1;
 const STORE = "maps";
 
 export interface MapStore {
-  read(owner: string, language: string): Promise<ServerMap | null>;
-  save(owner: string, map: ServerMap): Promise<void>;
+  read(owner: string, vocabularyId: string): Promise<ServerMap | null>;
+  save(owner: string, vocabularyId: string, map: ServerMap): Promise<void>;
   clear(): Promise<void>;
 }
 
-const keyOf = (owner: string, language: string) => `${owner}\u001f${language}`;
+const keyOf = (owner: string, vocabularyId: string) => `${owner}\u001f${vocabularyId}`;
 
 function request<T>(value: IDBRequest<T>): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -52,16 +53,16 @@ class IndexedMapStore implements MapStore {
     return this.handle;
   }
 
-  async read(owner: string, language: string): Promise<ServerMap | null> {
+  async read(owner: string, vocabularyId: string): Promise<ServerMap | null> {
     const database = await this.open();
-    const record = await request(database.transaction(STORE, "readonly").objectStore(STORE).get(keyOf(owner, language)));
+    const record = await request(database.transaction(STORE, "readonly").objectStore(STORE).get(keyOf(owner, vocabularyId)));
     return (record as { map: ServerMap } | undefined)?.map ?? null;
   }
 
-  async save(owner: string, map: ServerMap): Promise<void> {
+  async save(owner: string, vocabularyId: string, map: ServerMap): Promise<void> {
     const database = await this.open();
     const transaction = database.transaction(STORE, "readwrite");
-    transaction.objectStore(STORE).put({ key: keyOf(owner, map.language), map, savedAt: new Date().toISOString() });
+    transaction.objectStore(STORE).put({ key: keyOf(owner, vocabularyId), map, savedAt: new Date().toISOString() });
     return settled(transaction);
   }
 
@@ -76,8 +77,8 @@ class IndexedMapStore implements MapStore {
 /* Where IndexedDB is unavailable the map still works; it is simply asked for each time. */
 export class MemoryMapStore implements MapStore {
   private maps = new Map<string, ServerMap>();
-  async read(owner: string, language: string) { return this.maps.get(keyOf(owner, language)) ?? null; }
-  async save(owner: string, map: ServerMap) { this.maps.set(keyOf(owner, map.language), map); }
+  async read(owner: string, vocabularyId: string) { return this.maps.get(keyOf(owner, vocabularyId)) ?? null; }
+  async save(owner: string, vocabularyId: string, map: ServerMap) { this.maps.set(keyOf(owner, vocabularyId), map); }
   async clear() { this.maps.clear(); }
 }
 

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import pytest
 
-from graph_records import DEVICE, lexeme
+from graph_records import DEVICE, lexeme, vocabulary
 from acervo.domain import SCHEMA_VERSION
 
 
@@ -88,7 +88,7 @@ def test_the_macos_host_gets_the_cors_headers_its_preflight_needs(server, origin
 
 def test_a_malformed_record_names_the_collection_and_the_id(server):
     word = lexeme(language="zh-Hans", reading=None)
-    answer = server.push({"lexemes": [word]})
+    answer = server.push({"vocabularies": [vocabulary(language="zh-Hans", definitionLang="en")], "lexemes": [word]})
     assert answer.status_code == 400
     error = answer.json()["error"]
     assert error["code"] == "invalid_record"

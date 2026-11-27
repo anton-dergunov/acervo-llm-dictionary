@@ -286,7 +286,8 @@ def test_a_rejected_credential_is_not_routed_around(server):
 
 def test_a_language_no_model_in_the_order_speaks_is_its_own_refusal(server):
     entry = lexeme(language="fr", headword="piquer", lemma="piquer", status="active")
-    assert server.push({"lexemes": [entry]}).status_code == 200
+    french = vocabulary(language="fr", definitionLang="fr")
+    assert server.push({"vocabularies": [french], "lexemes": [entry]}).status_code == 200
     server.put("/models/selection", {"chains": {"audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}]}})
     answer = say(server, "lexemes", entry["id"])
     assert answer.status_code == 422
@@ -466,8 +467,19 @@ def test_a_vocabulary_accent_is_replicated_and_must_be_a_region_code(server):
     accented_word(server, "AR")
     pulled = server.pull().json()["data"]["changes"]["vocabularies"]
     assert pulled[0]["region"] == "AR"
-    refused = server.push({"vocabularies": [vocabulary(region="Arg")]})
+    refused = server.push({"vocabularies": [vocabulary(id="vocabsecond0001", region="Arg")]})
     assert refused.status_code == 400 and "region code" in refused.json()["error"]["message"]
+
+
+def test_each_word_is_heard_in_its_own_vocabularys_variety(server):
+    """Two Spanish vocabularies, Argentine and Mexican: a word is read in the accent of the one it is
+    in, never in the first one's."""
+    accented_word(server, "AR")
+    mexican = vocabulary(id="vocabstarter001", region="MX", displayName="Spanish (Mexico) · Everyday words")
+    carro = lexeme(vocabularyId=mexican["id"], headword="el carro", lemma="carro", status="active")
+    assert server.push({"vocabularies": [mexican], "lexemes": [carro]}).status_code == 200
+    assert say(server, "lexemes", carro["id"]).status_code == 200
+    assert server.speech.calls[-1]["language"] == "es-MX"
 
 
 def test_an_accent_picks_the_nearest_clear_voice_and_tells_an_expressive_one(server):

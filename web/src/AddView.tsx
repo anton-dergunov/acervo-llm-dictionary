@@ -16,10 +16,10 @@ import { newId } from "./ids";
 import { seed as seedPicture } from "./media";
 import PhotoCapture, { type KeptPhoto, type PhotoAdd } from "./PhotoCapture";
 import ReviewBar from "./ReviewBar";
-import { articleFromDraft, type Article } from "./selectors";
+import { articleFromDraft, targetVocabulary, vocabularyFor, type Article } from "./selectors";
 import { ValidationPanel } from "./ValidationPanel";
 import {
-  parseArticle, YAML_TEMPLATE, yamlForDraft, YamlProblems,
+  parseArticle, yamlForDraft, yamlTemplate, YamlProblems,
   type ArticleDraft, type YamlProblem
 } from "./yaml";
 
@@ -72,7 +72,7 @@ export interface CaptureSeed {
  * hand-written document takes, so there is one writer, one validator and one diff.
  */
 export default function AddView({
-  tab, onTab, graph, problems, busy, seed, captureHealth,
+  tab, onTab, graph, vocabularyId, problems, busy, seed, captureHealth,
   onClose, onCreate, onCapture, onOpenLexeme, onFoldIn, onChat, onChatRefused, onReadPhoto, onStorePhoto, onLookUp, onWarmPhoto,
   offline = false, onNotify
 }: {
@@ -88,16 +88,20 @@ export default function AddView({
   captureHealth?: CaptureHealth;
   /** The replica, for resolving the topic names a document carries. Null only during startup. */
   graph: VocabularyGraph | null;
+  /** The vocabulary in view, which a new word goes in when it is in its language. */
+  vocabularyId: string;
   problems: YamlProblem[];
   busy: boolean;
   onClose(): void;
-  onCreate(draft: string): void;
+  /** Save the document as a new word in `into`, the vocabulary chosen for it. */
+  onCreate(draft: string, into: string): void;
   onCapture(request: CaptureRequest): Promise<CaptureResult>;
   onOpenLexeme(id: string): void;
   /** Open the word already held and ask one question against it, seeded with what was captured. */
   onFoldIn?(lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null): void;
   /** One turn about the unsaved document. Absent when the server has no model, like Capture itself. */
-  onChat?(document: string, turns: ChatTurn[], options?: AskOptions, language?: string | null): Promise<ChatResult>;
+  onChat?(document: string, turns: ChatTurn[], options?: AskOptions, language?: string | null,
+          into?: string | null): Promise<ChatResult>;
   /** A proposal still refused once the dock's repairs ran out, for the server's log. */
   onChatRefused?(requestId: string, problem: string, proposal: unknown): void;
   /** Photo capture's three round trips. Without them there is no Photo tab. */
@@ -114,7 +118,14 @@ export default function AddView({
   const [sourceUrl, setSourceUrl] = useState("");
   const [sourceTitle, setSourceTitle] = useState("");
   const [note, setNote] = useState(seed?.note ?? "");
-  const [draft, setDraft] = useState(YAML_TEMPLATE);
+  /* Started in the vocabulary in view; a capture may then file it elsewhere (`captured`). */
+  const [template] = useState(() => {
+    const inView = graph ? vocabularyFor(graph, vocabularyId) : null;
+    return inView ? yamlTemplate(inView) : "";
+  });
+  const [draft, setDraft] = useState(template);
+  /** The vocabulary the last capture chose for its word, which its draft is saved in. */
+  const [captured, setCaptured] = useState<string | null>(null);
   const [working, setWorking] = useState(false);
   const [failure, setFailure] = useState<string | null>(null);
   const [duplicates, setDuplicates] = useState<CaptureResult["duplicates"]>([]);
@@ -154,7 +165,22 @@ export default function AddView({
   const noVocabularies = graph !== null && graph.vocabularies.every((entry) => entry.deleted);
 
   /** Nothing has been proposed or written yet, so there is nothing to render. */
-  const untouched = draft === YAML_TEMPLATE;
+  const untouched = draft === template;
+
+  /**
+   * The vocabulary this draft is saved in: the one its capture chose, while the document is still in
+   * that vocabulary's language; else by capture's own rule for the language the document names
+   * (`targetVocabulary`); else the one in view, whose refusal then names what does not fit.
+   */
+  const into = useMemo(() => {
+    if (!graph) return vocabularyId;
+    let language: string | null = null;
+    try { language = parseArticle(pending?.text ?? draft).language || null; } catch { /* as it stands */ }
+    if (!language) return captured ?? vocabularyId;
+    const kept = captured ? vocabularyFor(graph, captured) : null;
+    if (kept?.language === language) return kept.id;
+    return targetVocabulary(graph, vocabularyId, language).chosen?.id ?? vocabularyId;
+  }, [graph, draft, pending, captured, vocabularyId]);
 
   /** Every write to the document goes through here, and any write ends a review: the proposal was
    *  made against text that has now moved. A hand edit of the proposed text, on the YAML tab, starts
@@ -189,7 +215,7 @@ export default function AddView({
     // about all the same, for no learner in particular.
     let language: string | null = null;
     try { language = parseArticle(text).language || null; } catch { /* asked about as it stands */ }
-    return onChat!(text, turns, options, language);
+    return onChat!(text, turns, options, language, into);
   };
 
   /**
@@ -253,12 +279,12 @@ export default function AddView({
   const preview = useMemo<{ article: Article | null; problems: YamlProblem[] }>(() => {
     if (!graph || untouched) return { article: null, problems: [] };
     try {
-      return { article: articleFromDraft(graph, pending ? pending.diff.shown : parseArticle(draft)), problems: [] };
+      return { article: articleFromDraft(graph, pending ? pending.diff.shown : parseArticle(draft), into), problems: [] };
     } catch (error) {
       if (error instanceof YamlProblems) return { article: null, problems: error.problems };
       return { article: null, problems: [{ line: null, message: String(error) }] };
     }
-  }, [graph, draft, untouched, pending]);
+  }, [graph, draft, untouched, pending, into]);
 
   async function submit(request: CaptureRequest) {
     setWorking(true);
@@ -268,6 +294,7 @@ export default function AddView({
     try {
       const result = await onCapture(request);
       setPassedOver(result.passedOver ?? []);
+      setCaptured(result.vocabularyId);
       if (result.duplicates.length) {
         setDuplicates(result.duplicates);
         setFoldable(result.foldable ?? null);
@@ -525,7 +552,7 @@ export default function AddView({
               silently, one way or the other. */}
           <button
             className="tb-btn primary" disabled={busy || !preview.article || Boolean(pending)}
-            onClick={() => onCreate(draft)}
+            onClick={() => onCreate(draft, into)}
           >
             {busy ? "Saving…" : "Save"}
           </button>
@@ -587,7 +614,7 @@ export default function AddView({
       <div className="composer-buttons">
         <span className="spacer" />
         <button className="tb-btn" onClick={onClose}>Cancel</button>
-        <button className="tb-btn primary" disabled={busy || Boolean(pending)} onClick={() => onCreate(draft)}>
+        <button className="tb-btn primary" disabled={busy || Boolean(pending)} onClick={() => onCreate(draft, into)}>
           {busy ? "Saving…" : "Validate & save"}
         </button>
       </div>

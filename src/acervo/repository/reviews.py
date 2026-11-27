@@ -74,8 +74,9 @@ def _count(connection, owner: str, system: str) -> int:
     ).scalar_one()
 
 
-def history(owner: str, *, language: str | None = None, since: str | None = None) -> list[dict[str, Any]]:
-    """This owner's reviews, oldest first, each with its word's language and topics."""
+def history(owner: str, *, vocabulary: str | None = None, since: str | None = None) -> list[dict[str, Any]]:
+    """This owner's reviews, oldest first — of one vocabulary's words when one is named, by id — each
+    with its word's language and topics."""
     table, lexemes = tables.reviews, tables.lexemes
     query = (
         select(table.c.system, table.c.review_id, table.c.lexeme, table.c.sense, table.c.card_type,
@@ -85,8 +86,8 @@ def history(owner: str, *, language: str | None = None, since: str | None = None
         .where(table.c.owner == owner)
         .order_by(table.c.reviewed_at, table.c.review_id)
     )
-    if language:
-        query = query.where(lexemes.c.language == language)
+    if vocabulary:
+        query = query.where(lexemes.c.vocabulary == vocabulary)
     if since:
         query = query.where(table.c.reviewed_at >= since)
     with reading() as connection:

@@ -1,49 +1,66 @@
 import { describe, expect, it } from "vitest";
 import { validateGraph, type Lexeme, type LoopCue, type LoopItem, type StudyState, type VocabularyGraph } from "./domain";
 import {
-  articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
+  articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
-  storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf,
+  storyCandidates, storyEligible, strengthOf, targetVocabulary, topicOptions, visibleRows, vocabularyOptions, voiceSample, weakestOf,
   drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts, madeLoops, madeStories, playCounts
 } from "./selectors";
-import { drillCues, testGraph } from "./testGraph";
+import { drillCues, ENGLISH, SPANISH, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
 
-const query = { language: "es", topic: "all" as const, query: "", sort: "recent" as const };
+const query = { vocabularyId: SPANISH, topic: "all" as const, query: "", sort: "recent" as const };
 
 describe("vocabulary selectors", () => {
   it("keeps the fixture graph valid against the canonical model", () => {
     expect(() => validateGraph(testGraph())).not.toThrow();
   });
 
-  it("offers a configured language that holds no words yet", () => {
+  it("offers a vocabulary that holds no words yet", () => {
     const graph = testGraph();
     graph.vocabularies.push({
       ...graph.vocabularies[0], id: "vocabru00000001", language: "ru", definitionLang: "ru", notesLang: "en",
-      glossLangs: ["en"], order: 2
+      displayName: null, glossLangs: ["en"], order: 2
     });
-    const options = languageOptions(graph);
+    const options = vocabularyOptions(graph);
     // Without this a vocabulary could never be filled: there would be nowhere to switch to before
     // its first word, and capture is the thing that would have created that word.
     const russian = options.find((option) => option.code === "ru");
-    expect(russian).toMatchObject({ count: 0, configured: true, name: "Russian" });
-    // Configured languages keep the owner's order rather than being ranked by size.
+    expect(russian).toMatchObject({ id: "vocabru00000001", count: 0, name: "Russian" });
+    // Vocabularies keep the owner's order rather than being ranked by size.
     expect(options.map((option) => option.code)).toEqual(["es", "en", "ru"]);
   });
 
-  it("keeps showing a language whose vocabulary record has been removed", () => {
+  it("lists two vocabularies of one language apart, each with its own words", () => {
     const graph = testGraph();
-    graph.vocabularies = graph.vocabularies.filter((entry) => entry.language !== "en");
-    const options = languageOptions(graph);
-    expect(options.find((option) => option.code === "en")).toMatchObject({ configured: false });
+    const starter = { ...graph.vocabularies[0], id: "vocabstarter001", displayName: "Spanish (Mexico) · Everyday words", order: 2 };
+    graph.vocabularies.push(starter);
+    graph.lexemes.push({ ...graph.lexemes[0], id: "lexemecarro0001", vocabularyId: starter.id, headword: "el carro", lemma: "carro" });
+    expect(vocabularyOptions(graph).map((option) => [option.name, option.count]))
+      .toEqual([["Spanish", 3], ["English", 1], ["Spanish (Mexico) · Everyday words", 1]]);
+    expect(visibleRows(graph, { ...query, vocabularyId: starter.id }).rows.map((row) => row.headword)).toEqual(["el carro"]);
+    // The same headword in the other vocabulary is not this one's.
+    expect(heldWord(graph, starter.id, "picar")).toBeNull();
+  });
+
+  it("files a new word in the vocabulary in view when it fits, else the only one of its language", () => {
+    const graph = testGraph();
+    expect(targetVocabulary(graph, SPANISH, "es").chosen?.id).toBe(SPANISH);
+    expect(targetVocabulary(graph, ENGLISH, "es").chosen?.id).toBe(SPANISH);
+    expect(targetVocabulary(graph, SPANISH, "fr")).toEqual({ chosen: null, choices: [] });
+    const starter = { ...graph.vocabularies[0], id: "vocabstarter001", displayName: "Spanish (Mexico)", order: 2 };
+    graph.vocabularies.push(starter);
+    // Several of the word's language, none in view: the owner chooses.
+    expect(targetVocabulary(graph, ENGLISH, "es")).toMatchObject({ chosen: null, choices: [{ id: SPANISH }, { id: starter.id }] });
+    expect(targetVocabulary(graph, starter.id, "es").chosen?.id).toBe(starter.id);
   });
 
   it("lists one language at a time and keeps the inbox out of the filed collections", () => {
     const graph = testGraph();
     expect(visibleRows(graph, query).rows.map((row) => row.headword)).toEqual(["picar", "la balsa"]);
-    expect(inboxCount(graph, "es")).toBe(1);
+    expect(inboxCount(graph, SPANISH)).toBe(1);
     expect(visibleRows(graph, { ...query, topic: "inbox" }).rows.map((row) => row.headword)).toEqual(["espolvorear"]);
-    expect(visibleRows(graph, { ...query, language: "en" }).rows.map((row) => row.headword)).toEqual(["turmoil"]);
+    expect(visibleRows(graph, { ...query, vocabularyId: ENGLISH }).rows.map((row) => row.headword)).toEqual(["turmoil"]);
   });
 
   it("sorts recently added first, alphabetically past the article, and hardest first", () => {
@@ -71,7 +88,7 @@ describe("vocabulary selectors", () => {
     // In its topics still, under the rule, and found by a search — but not counted with the rest.
     const topic = balsa.topicIds[0];
     expect(visibleRows(graph, { ...query, topic }).aside.map((row) => row.id)).toEqual([balsa.id]);
-    expect(topicOptions(graph, "es").find((option) => option.id === topic)?.count)
+    expect(topicOptions(graph, SPANISH).find((option) => option.id === topic)?.count)
       .toBe(visibleRows(graph, { ...query, topic }).rows.length || null);
     expect(visibleRows(graph, { ...query, query: "embarcación" }).aside).toHaveLength(1);
     // The Inbox is the Inbox.
@@ -86,7 +103,7 @@ describe("vocabulary selectors", () => {
     picar.status = "aside";
     expect(loopCandidates(graph, query).map((lexeme) => lexeme.id)).not.toContain(picar.id);
     expect(storyCandidates(graph, query).map((lexeme) => lexeme.id)).not.toContain(picar.id);
-    const chosen = chosenFor(graph, selectedWords(graph, "es", [picar.id]),
+    const chosen = chosenFor(graph, selectedWords(graph, SPANISH, [picar.id]),
       { eligible: storyEligible, why: "", max: 10, noun: "story" });
     expect(chosen.map((word) => word.skip)).toEqual([""]);
   });
@@ -112,15 +129,15 @@ describe("vocabulary selectors", () => {
 
   it("orders topics by their stored order and counts only filed words", () => {
     const graph = testGraph();
-    const topics = topicOptions(graph, "es");
+    const topics = topicOptions(graph, SPANISH);
     expect(topics.map((topic) => topic.name)).toEqual(["Food", "Travel"]);
     // espolvorear is Food but still in the inbox, so it is not counted.
     expect(topics[0].count).toBe(1);
   });
 
-  it("offers only the languages the replica actually holds", () => {
-    expect(languageOptions(testGraph()).map((option) => [option.code, option.count]))
-      .toEqual([["es", 3], ["en", 1]]);
+  it("offers only the vocabularies the replica actually holds", () => {
+    expect(vocabularyOptions(testGraph()).map((option) => [option.id, option.count]))
+      .toEqual([[SPANISH, 3], [ENGLISH, 1]]);
   });
 
   it("assembles an article with its senses, examples, images, lineage and schedule", () => {
@@ -140,7 +157,7 @@ describe("vocabulary selectors", () => {
     // What capture returns: no lexeme id, a topic the owner keeps, and one the owner does not.
     const proposal = { ...draft, id: null, topics: ["food", "Cetrería"] };
 
-    const article = articleFromDraft(graph, proposal);
+    const article = articleFromDraft(graph, proposal, SPANISH);
     expect(article.lexeme.headword).toBe("picar");
     // Topic names are matched the way a save matches them, so what you review is what will be filed.
     expect(article.topics.map((topic) => topic.id)).toEqual(["topicfood000001", "draft:topic:Cetrería"]);
@@ -157,7 +174,7 @@ describe("vocabulary selectors", () => {
   it("keeps a proposal's placeholder ids out of the shape the server accepts", () => {
     const graph = testGraph();
     const stripped = { ...draftFor(articleFor(graph, "lexemepicar0001")!), id: null };
-    const lexemeId = articleFromDraft(graph, stripped).lexeme.id;
+    const lexemeId = articleFromDraft(graph, stripped, SPANISH).lexeme.id;
     // Render-only: nothing assembled here may be written, and a leak has to fail loudly rather
     // than land in the store, so a placeholder is deliberately not a valid record id.
     expect(lexemeId).toBe("draft:lexeme");
@@ -170,7 +187,7 @@ describe("vocabulary selectors", () => {
     const draft = parseArticle(document);
     // The preview is a lossless reading of the document — the other half of the round trip
     // `yaml.test.ts` pins — which is what makes reviewing the article equivalent to reviewing YAML.
-    expect(draftFor(articleFromDraft(graph, draft))).toEqual(draft);
+    expect(draftFor(articleFromDraft(graph, draft, SPANISH))).toEqual(draft);
   });
 
   it("scales study strength from stability and leaves unscheduled words empty", () => {
@@ -184,23 +201,23 @@ describe("vocabulary selectors", () => {
 describe("a word you hold, found from a tapped form", () => {
   it("matches a headword without its article, a lemma, and accents or case", () => {
     const graph = testGraph();
-    expect(heldWord(graph, "es", "balsa")?.id).toBe("lexemebalsa0001");
-    expect(heldWord(graph, "es", "La Balsa")?.id).toBe("lexemebalsa0001");
-    expect(heldWord(graph, "es", "Espolvoreár")?.id).toBe("lexemeespolv001");
-    expect(heldWord(graph, "es", "picar")).toMatchObject({ headword: "picar", gloss: expect.any(String) });
+    expect(heldWord(graph, SPANISH, "balsa")?.id).toBe("lexemebalsa0001");
+    expect(heldWord(graph, SPANISH, "La Balsa")?.id).toBe("lexemebalsa0001");
+    expect(heldWord(graph, SPANISH, "Espolvoreár")?.id).toBe("lexemeespolv001");
+    expect(heldWord(graph, SPANISH, "picar")).toMatchObject({ headword: "picar", gloss: expect.any(String) });
   });
 
   it("takes the word a mark names, and only in the language being read", () => {
     const graph = testGraph();
-    expect(heldWord(graph, "es", "pica", "lexemepicar0001")?.id).toBe("lexemepicar0001");
-    expect(heldWord(graph, "es", "pica")).toBeNull();
-    expect(heldWord(graph, "es", "turmoil")).toBeNull();
+    expect(heldWord(graph, SPANISH, "pica", "lexemepicar0001")?.id).toBe("lexemepicar0001");
+    expect(heldWord(graph, SPANISH, "pica")).toBeNull();
+    expect(heldWord(graph, SPANISH, "turmoil")).toBeNull();
   });
 
   it("leaves out a word that has been deleted", () => {
     const graph = testGraph();
     graph.lexemes = graph.lexemes.map((one) => one.id === "lexemebalsa0001" ? { ...one, deleted: true } : one);
-    expect(heldWord(graph, "es", "balsa")).toBeNull();
+    expect(heldWord(graph, SPANISH, "balsa")).toBeNull();
   });
 });
 
@@ -260,22 +277,22 @@ describe("loops", () => {
   });
 
   it("orders loops by position and their items by the order they are heard", () => {
-    const loops = loopsIn(graph, "es");
+    const loops = loopsIn(graph, SPANISH);
     expect(loops.map((loop) => loop.id)).toEqual(["loopmorning0001", "loopqueued00001"]);
     expect(loopItemsOf(graph, "loopmorning0001").map((item) => item.sourceText))
       .toEqual(["picar", "la balsa"]);
     // Another language's loops are not this language's.
-    expect(loopsIn(graph, "en")).toEqual([]);
+    expect(loopsIn(graph, ENGLISH)).toEqual([]);
   });
 
   it("reads readiness off the reference and nothing else", () => {
-    const [rendered, queued] = loopsIn(graph, "es");
+    const [rendered, queued] = loopsIn(graph, SPANISH);
     expect(loopIsReady(rendered)).toBe(true);
     expect(loopIsReady(queued)).toBe(false);
   });
 
   it("finds the kept bed a loop's music is, by style and seed", () => {
-    const [rendered, queued] = loopsIn(graph, "es");
+    const [rendered, queued] = loopsIn(graph, SPANISH);
     expect(bedOfLoop(graph, rendered)?.id).toBe("bedmorning00001");
     expect(bedOfLoop(graph, queued)).toBeUndefined();
     expect(bedOfLoop(graph, { ...rendered, seed: rendered.seed + 1 })).toBeUndefined();
@@ -299,10 +316,10 @@ describe("loops", () => {
   });
 
   it("derives a title from the words rather than storing one", () => {
-    expect(loopTitle(graph, loopsIn(graph, "es")[0])).toBe("picar, la balsa");
-    expect(loopTitle(graph, loopsIn(graph, "es")[1])).toBe("Empty loop");
+    expect(loopTitle(graph, loopsIn(graph, SPANISH)[0])).toBe("picar, la balsa");
+    expect(loopTitle(graph, loopsIn(graph, SPANISH)[1])).toBe("Empty loop");
     // Past the limit it counts the rest, so two loops over the same words still read differently.
-    expect(loopTitle(graph, loopsIn(graph, "es")[0], 1)).toBe("picar +1");
+    expect(loopTitle(graph, loopsIn(graph, SPANISH)[0], 1)).toBe("picar +1");
   });
 
   it("captions what was said, so editing the word afterwards changes nothing", () => {
@@ -311,7 +328,7 @@ describe("loops", () => {
     picar.headword = "picotear";
     picar.primaryGloss = "to peck";
     expect(loopItemsOf(edited, "loopmorning0001")[0].sourceText).toBe("picar");
-    expect(loopTitle(edited, loopsIn(edited, "es")[0])).toBe("picar, la balsa");
+    expect(loopTitle(edited, loopsIn(edited, SPANISH)[0])).toBe("picar, la balsa");
   });
 
   it("offers only words a loop could actually speak", () => {
@@ -340,12 +357,12 @@ describe("the selection", () => {
     const deleted = testGraph();
     deleted.lexemes.find((one) => one.id === "lexemebalsa0001")!.deleted = true;
     const ids = ["lexemeturmoil01", "lexemebalsa0001", "lexemepicar0001", "lexemenothere01"];
-    expect(selectedWords(graph, "es", ids).map((word) => word.id)).toEqual(["lexemebalsa0001", "lexemepicar0001"]);
-    expect(selectedWords(deleted, "es", ids).map((word) => word.id)).toEqual(["lexemepicar0001"]);
+    expect(selectedWords(graph, SPANISH, ids).map((word) => word.id)).toEqual(["lexemebalsa0001", "lexemepicar0001"]);
+    expect(selectedWords(deleted, SPANISH, ids).map((word) => word.id)).toEqual(["lexemepicar0001"]);
   });
 
   it("says which chosen words a kind will leave out, and why", () => {
-    const words = selectedWords(graph, "es", ["lexemeespolv001", "lexemebalsa0001", "lexemepicar0001"]);
+    const words = selectedWords(graph, SPANISH, ["lexemeespolv001", "lexemebalsa0001", "lexemepicar0001"]);
     const chosen = chosenFor(graph, words, { eligible: loopEligible, why: "no single term to say", max: 1, noun: "loop" });
     expect(chosen.map((word) => [word.id, word.skip])).toEqual([
       ["lexemeespolv001", "no single term to say"],
@@ -566,13 +583,13 @@ describe("made lists", () => {
   const ids = (rows: { id: string }[]) => rows.map((one) => one.id);
 
   it("puts the newest first under Recent", () => {
-    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "recent" }).rows))
+    expect(ids(madeLoops(testGraph(), { vocabularyId: SPANISH, query: "", sort: "recent" }).rows))
       .toEqual(["loopqueued00001", "loopmorning0001"]);
   });
 
   /* A loop with no figure for any of its words has nothing to sort by, so it goes last. */
   it("puts a loop whose words Anki finds hard first, and one with nothing to go by last", () => {
-    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "hard" }).rows))
+    expect(ids(madeLoops(testGraph(), { vocabularyId: SPANISH, query: "", sort: "hard" }).rows))
       .toEqual(["loopmorning0001", "loopqueued00001"]);
   });
 
@@ -582,13 +599,13 @@ describe("made lists", () => {
     const withTwo = { ...graph, loops: [...graph.loops, second],
       loopItems: [...graph.loopItems, { ...graph.loopItems[1], id: "loopitemsecond1", loopId: second.id }] };
     const rarity = { lexemepicar0001: 3.5, lexemebalsa0001: 2.1 };
-    expect(ids(madeLoops(withTwo, { language: "es", query: "", sort: "rare", rarity }).rows))
+    expect(ids(madeLoops(withTwo, { vocabularyId: SPANISH, query: "", sort: "rare", rarity }).rows))
       .toEqual(["loopsecond00001", "loopmorning0001", "loopqueued00001"]);
-    expect(ids(madeLoops(withTwo, { language: "es", query: "", sort: "rare", rarity: null }).rows)[0]).toBe("loopqueued00001");
+    expect(ids(madeLoops(withTwo, { vocabularyId: SPANISH, query: "", sort: "rare", rarity: null }).rows)[0]).toBe("loopqueued00001");
   });
 
   it("keeps the loops with a matching word, and says which word matched", () => {
-    const made = madeLoops(testGraph(), { language: "es", query: "STING", sort: "recent" });
+    const made = madeLoops(testGraph(), { vocabularyId: SPANISH, query: "STING", sort: "recent" });
     expect(ids(made.rows)).toEqual(["loopmorning0001"]);
     expect(made.matches.get("loopmorning0001")).toEqual([{ lexemeId: "lexemepicar0001", source: "picar", target: "to sting" }]);
   });
@@ -596,12 +613,12 @@ describe("made lists", () => {
   /* The word as you hold it counts — another of its glosses — but not its definition, which talks
      about other words and would match for no reason the row could show. */
   it("finds a loop by another gloss of a word in it, but not by the word's definition", () => {
-    expect(ids(madeLoops(testGraph(), { language: "es", query: "chop", sort: "recent" }).rows)).toEqual(["loopmorning0001"]);
-    expect(madeLoops(testGraph(), { language: "es", query: "comezón", sort: "recent" }).rows).toEqual([]);
+    expect(ids(madeLoops(testGraph(), { vocabularyId: SPANISH, query: "chop", sort: "recent" }).rows)).toEqual(["loopmorning0001"]);
+    expect(madeLoops(testGraph(), { vocabularyId: SPANISH, query: "comezón", sort: "recent" }).rows).toEqual([]);
   });
 
   it("searches the forms a story used and what they became", () => {
-    const made = madeStories(testGraph(), { language: "es", query: "raft", sort: "recent" });
+    const made = madeStories(testGraph(), { vocabularyId: SPANISH, query: "raft", sort: "recent" });
     expect(ids(made.rows)).toEqual(["storypicada0001"]);
     expect(made.matches.get("storypicada0001")?.[0]).toMatchObject({ source: "la balsa", target: "raft" });
   });
@@ -611,17 +628,17 @@ describe("made lists", () => {
     const graph = testGraph();
     const [morning, queued] = graph.loops;
     const marked = { ...graph, loops: [{ ...morning, starred: true }, { ...queued, archived: true }] };
-    const made = madeLoops(marked, { language: "es", query: "", sort: "recent" });
+    const made = madeLoops(marked, { vocabularyId: SPANISH, query: "", sort: "recent" });
     expect(ids(made.rows)).toEqual(["loopmorning0001"]);
     expect(ids(made.archived)).toEqual(["loopqueued00001"]);
     const both = { ...graph, loops: [{ ...morning, starred: true }, queued] };
-    expect(ids(madeLoops(both, { language: "es", query: "", sort: "recent" }).rows)).toEqual(["loopmorning0001", "loopqueued00001"]);
+    expect(ids(madeLoops(both, { vocabularyId: SPANISH, query: "", sort: "recent" }).rows)).toEqual(["loopmorning0001", "loopqueued00001"]);
   });
 
   /* For variety: what has had its turn least comes first. */
   it("orders Least played by the plays counted, fewest first", () => {
     const plays = new Map([["loopqueued00001", 3]]);
-    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "least", plays }).rows))
+    expect(ids(madeLoops(testGraph(), { vocabularyId: SPANISH, query: "", sort: "least", plays }).rows))
       .toEqual(["loopmorning0001", "loopqueued00001"]);
   });
 

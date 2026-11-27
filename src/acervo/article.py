@@ -78,9 +78,10 @@ class ArticleView:
         return (self.vocabulary or {}).get("glossLangs") or []
 
 
-def build_articles(changes: dict[str, list[dict]], language: str | None = None) -> list[ArticleView]:
-    """Every lexeme worth considering, with its senses and their examples attached."""
-    vocabularies = {record["language"]: record for record in live(changes.get("vocabularies", []))}
+def build_articles(changes: dict[str, list[dict]], vocabulary: str | None = None) -> list[ArticleView]:
+    """Every lexeme worth considering — or only those of one vocabulary, by id — with its senses and
+    their examples attached."""
+    vocabularies = {record["id"]: record for record in live(changes.get("vocabularies", []))}
     topics = {record["id"]: record for record in live(changes.get("topics", []))}
     lexemes = live(changes.get("lexemes", []))
     senses = live(changes.get("senses", []))
@@ -106,7 +107,7 @@ def build_articles(changes: dict[str, list[dict]], language: str | None = None) 
 
     articles = []
     for lexeme in sorted(lexemes, key=lambda record: (record.get("headword", ""), record.get("id", ""))):
-        if language and lexeme.get("language") != language:
+        if vocabulary and lexeme.get("vocabularyId") != vocabulary:
             continue
         if lexeme.get("status") not in GENERATED_STATUSES:
             continue
@@ -116,7 +117,7 @@ def build_articles(changes: dict[str, list[dict]], language: str | None = None) 
         articles.append(
             ArticleView(
                 lexeme=lexeme,
-                vocabulary=vocabularies.get(lexeme.get("language", "")),
+                vocabulary=vocabularies.get(lexeme.get("vocabularyId", "")),
                 topics=[topics[topic]["name"] for topic in lexeme.get("topicIds", []) if topic in topics],
                 senses=views,
             )

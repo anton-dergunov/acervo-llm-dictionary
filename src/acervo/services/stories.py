@@ -124,7 +124,7 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
     sampled them from the scope on screen, and choosing words by hand later is the same route with
     a different list.
     """
-    language = str(body.get("language") or "").strip()
+    vocabulary = str(body.get("vocabularyId") or "").strip()
     ids = body.get("lexemeIds")
     if not isinstance(ids, list) or not all(isinstance(one, str) for one in ids):
         raise ApiError(400, "invalid_input", "A story is made from a list of word ids.")
@@ -163,9 +163,12 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
         lexeme = held.get(identifier)
         if lexeme is None or lexeme.get("deleted"):
             raise ApiError(404, "not_found", "One of those words is not in your vocabulary.")
-        if language and lexeme.get("language") != language:
-            raise ApiError(400, "invalid_input", "Every word in a story is in one language.")
-        language = language or str(lexeme.get("language") or "")
+        # One vocabulary, not merely one language: the story is listed, numbered and read with the
+        # words of the vocabulary it was made from.
+        if vocabulary and lexeme.get("vocabularyId") != vocabulary:
+            raise ApiError(400, "invalid_input", "Every word in a story is from one vocabulary.")
+        vocabulary = vocabulary or str(lexeme.get("vocabularyId") or "")
+        language = str(lexeme.get("language") or "")
         words.append(lexeme)
 
     story_id = new_record_id()
@@ -181,12 +184,12 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
              "editedBy": device, "revision": 0}
     graph.merge_graph(owner, device, {
         "stories": [{
-            "id": story_id, "language": language,
+            "id": story_id, "vocabularyId": vocabulary, "language": language,
             "typeId": chosen_type.id, "styleId": chosen_style,
             # Everything the writer decides is empty until it has. No parts at all is the whole of
             # what "not written yet" means.
             "title": "", "titleTranslation": "", "emoji": chosen_type.emoji, "modelId": "",
-            "position": graph.next_story_position(owner, language),
+            "position": graph.next_story_position(owner, vocabulary),
             "guidance": guidance, "parts": parts,
             **stamp,
         }],
@@ -212,7 +215,7 @@ def _story(owner: str, story_id: str) -> dict[str, Any]:
     return story
 
 
-def _gloss_language(owner: str, language: str) -> str:
+def _gloss_language(owner: str, vocabulary_id: str) -> str:
     """The language a story is translated into: the first the vocabulary is glossed into.
 
     The same one a loop speaks (`services/loops.render_request`), and deliberately not `notesLang`.
@@ -220,9 +223,7 @@ def _gloss_language(owner: str, language: str) -> str:
     text, which is what a gloss language means. `notesLang` already defaults to this, so the two
     agree unless the owner has deliberately split them.
     """
-    vocabulary = next(
-        (one for one in graph.owner_vocabularies(owner) if one["language"] == language), None
-    )
+    vocabulary = vocabulary_for(graph.owner_vocabularies(owner), vocabulary_id)
     return ((vocabulary or {}).get("glossLangs") or ["en"])[0]
 
 
@@ -283,7 +284,7 @@ def write_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     writer = write.StoryWriter(
         load_providers(settings), candidates,
         with_reader(_template(settings, WRITE_TEMPLATE), owner,
-                    vocabulary_for(graph.owner_vocabularies(owner), story["language"])),
+                    vocabulary_for(graph.owner_vocabularies(owner), story["vocabularyId"])),
     )
     request = write.build_request(
         language=story["language"], language_name=language_name(story["language"]),
@@ -339,7 +340,7 @@ def translate_story(settings: Settings, owner: str, device: str, story_id: str) 
     """Translate the whole story at once. See `stories/translate.py` for why not part by part."""
     story = _story(owner, story_id)
     rows = _parts(owner, story_id)
-    into = _gloss_language(owner, story["language"])
+    into = _gloss_language(owner, story["vocabularyId"])
     # The words the story really used, with the forms it used them in: the translator is asked what
     # became of each so the reader can mark it. A word the writer could not work in has nothing to
     # find a counterpart of, so it is not asked about.

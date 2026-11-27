@@ -128,6 +128,11 @@ def drive(runner, clock, rounds: int = 30) -> None:
         clock.advance(music_jobs.POLL_SECONDS * 4)
 
 
+@pytest.fixture(autouse=True)
+def _spanish(spanish):
+    """Every loop here is in the owner's Spanish vocabulary."""
+
+
 def keep(server, **overrides) -> dict:
     """A rendered loop and the bed the owner kept from it, written as the player's star writes it."""
     source = loop(styleId="organic", seed=7, engineVersion="1.5.0", bedFingerprint=FINGERPRINT,

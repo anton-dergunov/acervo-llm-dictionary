@@ -20,9 +20,10 @@ import type { ArticleDraft } from "./yaml";
  * `durationSeconds`) instead of times into one joined file, and nothing bumped this. 17: `beds`,
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
  * state's `senseId`. 26: a kept bed's own music (`audioRef`, `audioMime`, `durationSeconds`). 27: a
- * loop's and a story's `starred` and `archived`, and `plays`.
+ * loop's and a story's `starred` and `archived`, and `plays`. 28: a word's, a loop's and a story's
+ * `vocabularyId`, since several vocabularies may share a language.
  */
-export const LOCAL_SCHEMA_VERSION = 27;
+export const LOCAL_SCHEMA_VERSION = 28;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
@@ -51,6 +52,8 @@ export interface RemoteWrite {
  */
 export interface WriteOptions {
   imported?: boolean;
+  /** The vocabulary a new word goes in. A stored word stays in its own. */
+  vocabularyId?: string;
 }
 
 export interface ArticleWrite extends RemoteWrite {

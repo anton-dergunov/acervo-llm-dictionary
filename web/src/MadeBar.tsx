@@ -50,9 +50,10 @@ interface Playing {
   open(): void;
 }
 
-export default function MadeBar({ graph, language, skin, playerOnly = false, onLoops, onStories, onMap, onOpenStory }: {
+export default function MadeBar({ graph, vocabularyId, skin, playerOnly = false, onLoops, onStories, onMap, onOpenStory }: {
   graph: VocabularyGraph;
-  language: string;
+  /** The vocabulary in view, whose loops, stories and words the bar counts. */
+  vocabularyId: string;
   skin: "bar" | "rail" | "chip";
   /* The foot bar with a selection over it, or on the Loops and Stories lists: only what is playing,
      and nothing while nothing is. */
@@ -88,7 +89,7 @@ export default function MadeBar({ graph, language, skin, playerOnly = false, onL
       };
     }
     if (listening === "loop" && playback.loopId) {
-      const loop = loopsIn(graph, language).find((one) => one.id === playback.loopId)
+      const loop = loopsIn(graph, vocabularyId).find((one) => one.id === playback.loopId)
         ?? graph.loops.find((one) => one.id === playback.loopId && !one.deleted);
       if (!loop) return null;
       const track = loopTrackOf(graph, loop);
@@ -145,17 +146,17 @@ export default function MadeBar({ graph, language, skin, playerOnly = false, onL
     <button className="madebar-half" onClick={onLoops}>
       <span className="madebar-ic"><NoteIcon /></span>
       <span className="loopbar-title">Loops</span>
-      <span className="loopbar-sub">{loopsIn(graph, language).filter((one) => !one.archived).length}</span>
+      <span className="loopbar-sub">{loopsIn(graph, vocabularyId).filter((one) => !one.archived).length}</span>
     </button>
     <button className="madebar-half" onClick={onStories}>
       <span className="madebar-ic">📖</span>
       <span className="loopbar-title">Stories</span>
-      <span className="loopbar-sub">{storiesIn(graph, language).filter((one) => !one.archived).length}</span>
+      <span className="loopbar-sub">{storiesIn(graph, vocabularyId).filter((one) => !one.archived).length}</span>
     </button>
     {onMap && <button className="madebar-half" onClick={onMap}>
       <span className="madebar-ic"><MapIcon /></span>
       <span className="loopbar-title">Map</span>
-      <span className="loopbar-sub">{lexemesIn(graph, language).length}</span>
+      <span className="loopbar-sub">{lexemesIn(graph, vocabularyId).length}</span>
     </button>}
   </div>;
 

@@ -6,7 +6,7 @@ import { LookUpContext, type LookUpServices } from "./LookUpSheet";
 import StoryReader from "./StoryReader";
 import type { StoryPlayback } from "./storyAudio";
 import { storyPartsOf, storyWordEntries, storyWordsOf } from "./selectors";
-import { testGraph } from "./testGraph";
+import { SPANISH, testGraph } from "./testGraph";
 import { aimAt, forgetTaps, TAP } from "./testTap";
 
 const picture = vi.fn((reference: string | null) => ({
@@ -54,7 +54,7 @@ beforeEach(() => {
 afterEach(forgetTaps);
 
 const ANSWER: QuickLookUp = {
-  resolution: {
+  vocabularyId: "vocabes00000001", resolution: {
     language: "es", headword: "subir", lemma: "subir", pos: "verb",
     sentences: [{ text: "Marcos subió a la balsa al amanecer.", translation: null }],
     note: null, consumedLines: 1, consumedText: null, gloss: "climbed onto"
@@ -462,7 +462,7 @@ describe("the passages of a part read aloud", () => {
     fireEvent.click(text, TAP);
 
     expect(looking.lookUp).toHaveBeenCalledWith(
-      { text: "Marcos subió a la balsa al amanecer.", selection: { start: 7, end: 12 }, source: "reading" },
+      { text: "Marcos subió a la balsa al amanecer.", selection: { start: 7, end: 12 }, source: "reading", vocabulary: SPANISH },
       expect.any(AbortSignal));
     const sheet = screen.getByRole("dialog", { name: "Look up a word" });
     expect(await within(sheet).findByText("subir")).toBeInTheDocument();
@@ -471,7 +471,7 @@ describe("the passages of a part read aloud", () => {
     fireEvent.click(within(sheet).getByRole("button", { name: "Add" }));
     expect(looking.queue).toHaveBeenCalledWith({
       text: "Marcos subió a la balsa al amanecer.", resolution: ANSWER.resolution,
-      sourceTitle: "Story · La balsa que picaba"
+      sourceTitle: "Story · La balsa que picaba", vocabulary: SPANISH
     });
     expect(await within(sheet).findByText("Added to your Inbox")).toBeInTheDocument();
     expect(playSegment).not.toHaveBeenCalled();

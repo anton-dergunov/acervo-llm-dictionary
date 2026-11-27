@@ -1,6 +1,7 @@
 """The one envelope.
 
-Every response is `{"data": …}` or `{"error": {"code", "message"}}`. The client treats *any* body
+Every response is `{"data": …}` or `{"error": {"code", "message"}}` — with, for the few refusals that
+ask the owner something, what the device needs to ask it (`ApiError.asking`). The client treats *any* body
 without `data` as a generic failure, so FastAPI's `{"detail": …}` must never reach it — which is what
 these three handlers are for.
 
@@ -47,8 +48,8 @@ def data(payload: Any, status: int = 200) -> JSONResponse:
     return JSONResponse({"data": payload}, status_code=status)
 
 
-def error(status: int, code: str, message: str) -> JSONResponse:
-    return JSONResponse({"error": {"code": code, "message": message}}, status_code=status)
+def error(status: int, code: str, message: str, asking: dict[str, Any] | None = None) -> JSONResponse:
+    return JSONResponse({"error": {"code": code, "message": message, **(asking or {})}}, status_code=status)
 
 
 def install(app: FastAPI) -> None:
@@ -57,7 +58,7 @@ def install(app: FastAPI) -> None:
         if raised.status >= 500:
             _crashed(raised)
         _note(request, raised.status, raised.code, raised.message, **raised.noted)
-        return error(raised.status, raised.code, raised.message)
+        return error(raised.status, raised.code, raised.message, raised.asking)
 
     @app.exception_handler(RequestValidationError)
     async def _invalid_input(request: Request, raised: RequestValidationError) -> JSONResponse:

@@ -14,7 +14,7 @@ import { testGraph } from "./testGraph";
 import MadeBar from "./MadeBar";
 
 const loop: Loop = {
-  id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
+  id: "loop00000000001", vocabularyId: "vocabes00000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1, starred: false, archived: false,
@@ -38,7 +38,7 @@ describe("the phone's now-playing bar", () => {
       loopId, at: 12, duration: 90, playing: false, loading: false, failed: null
     }));
     const stop = vi.spyOn(playerModule, "stop").mockImplementation(() => { loopId = null; });
-    const bar = () => <MadeBar graph={graph} language="es" skin="bar"
+    const bar = () => <MadeBar graph={graph} vocabularyId="vocabes00000001" skin="bar"
       onLoops={vi.fn()} onStories={vi.fn()} onMap={vi.fn()} onOpenStory={vi.fn()} />;
     const { rerender } = render(bar());
 
@@ -58,7 +58,7 @@ describe("the phone's now-playing bar", () => {
       storyId: "storypicada0001", partId: "storypart000002", partIndex: 1, status: "playing", segment: 0, passages: 2, failed: null
     });
     const onOpenStory = vi.fn();
-    render(<MadeBar graph={testGraph()} language="es" skin="bar"
+    render(<MadeBar graph={testGraph()} vocabularyId="vocabes00000001" skin="bar"
       onLoops={vi.fn()} onStories={vi.fn()} onOpenStory={onOpenStory} />);
 
     expect(screen.getByText("La balsa que picaba")).toBeInTheDocument();
@@ -76,14 +76,14 @@ describe("the phone's now-playing bar", () => {
     vi.spyOn(readerModule, "useStoryAudio").mockReturnValue({
       storyId: "storypicada0001", partId: "storypart000001", partIndex: 0, status: "paused", segment: 0, passages: 2, failed: null
     });
-    render(<MadeBar graph={testGraph()} language="es" skin="bar"
+    render(<MadeBar graph={testGraph()} vocabularyId="vocabes00000001" skin="bar"
       onLoops={vi.fn()} onStories={vi.fn()} onOpenStory={vi.fn()} />);
     expect(screen.getByText("Story · part 1 of 2")).toBeInTheDocument();
   });
 
   it("draws nothing at all on the lists while nothing plays", () => {
     vi.spyOn(listeningModule, "useListening").mockReturnValue(null);
-    const { container } = render(<MadeBar graph={graph} language="es" skin="bar" playerOnly
+    const { container } = render(<MadeBar graph={graph} vocabularyId="vocabes00000001" skin="bar" playerOnly
       onLoops={vi.fn()} onStories={vi.fn()} onOpenStory={vi.fn()} />);
     expect(container).toBeEmptyDOMElement();
   });
@@ -98,7 +98,7 @@ describe("the rail's card", () => {
     vi.spyOn(playerModule, "hasNeighbour").mockReturnValue(true);
     const pause = vi.spyOn(playerModule, "pause").mockImplementation(() => undefined);
     const step = vi.spyOn(playerModule, "stepLoop").mockImplementation(() => undefined);
-    render(<MadeBar graph={graph} language="es" skin="rail" onLoops={vi.fn()} onStories={vi.fn()} onOpenStory={vi.fn()} />);
+    render(<MadeBar graph={graph} vocabularyId="vocabes00000001" skin="rail" onLoops={vi.fn()} onStories={vi.fn()} onOpenStory={vi.fn()} />);
 
     fireEvent.click(screen.getByRole("button", { name: "Pause" }));
     expect(pause).toHaveBeenCalled();

@@ -2,13 +2,14 @@
 
 `acervo.meaning` knows how to draw a map and nothing about whose. This module reads the owner's
 senses, keeps the embedding cache and the drawn map beside the database (`Settings.maps_path`), and
-says on the wire what a missing language is called.
+says on the wire what a missing vocabulary is called. A map is of one vocabulary, by id: two of one
+language are two maps.
 
 **A map is computed when it is asked for and its input has changed**, never on a timer and never as a
 job. It is local CPU for seconds — no model call, no allowance to wait on — and the job runner does
 one thing at a time, so a map queued behind an import's enrichment would be an hour out of date. The
-one slow draw is the first, when every sense of a language is embedded; after that only the senses
-whose words changed are. One lock per owner and language keeps two devices from drawing the same map.
+one slow draw is the first, when every sense of a vocabulary is embedded; after that only the senses
+whose words changed are. One lock per owner and vocabulary keeps two devices from drawing the same map.
 
 **Names come after, from a job**, because they are a model call: the map is stored with the words
 nearest each region's centre as its labels and `names: "pending"`, and `map.name` fills the names in
@@ -64,13 +65,13 @@ def use_encoder(replacement: Encoder | None) -> None:
         _encoder = replacement
 
 
-def _lock(owner: str, language: str) -> threading.Lock:
+def _lock(owner: str, vocabulary: str) -> threading.Lock:
     with _locks_guard:
-        return _locks.setdefault((owner, language), threading.Lock())
+        return _locks.setdefault((owner, vocabulary), threading.Lock())
 
 
-def _map_path(settings: Settings, owner: str, language: str) -> Path:
-    return Path(settings.maps_path) / "artifacts" / owner / f"{language}.json"
+def _map_path(settings: Settings, owner: str, vocabulary: str) -> Path:
+    return Path(settings.maps_path) / "artifacts" / owner / f"{vocabulary}.json"
 
 
 def _cache(settings: Settings, model: str) -> EmbeddingCache:
@@ -91,18 +92,19 @@ def _write(path: Path, body: dict[str, Any]) -> None:
     os.replace(partial, path)
 
 
-def _vocabulary(owner: str, language: str) -> dict[str, Any]:
+def _vocabulary(owner: str, vocabulary_id: str) -> dict[str, Any]:
     for vocabulary in graph.owner_vocabularies(owner):
-        if vocabulary["language"] == language:
+        if vocabulary["id"] == vocabulary_id:
             return vocabulary
-    raise ApiError(404, "unknown_language", f"There is no vocabulary in {language!r} to draw a map of.")
+    raise ApiError(404, "unknown_vocabulary", "That vocabulary is not one of yours, so there is no map of it.",
+                   noted={"vocabulary": vocabulary_id})
 
 
-def _senses(owner: str, language: str) -> list[MapSense]:
+def _senses(owner: str, vocabulary: str) -> list[MapSense]:
     return [
         MapSense(sense=row["sense"], lexeme=row["lexeme"], headword=row["headword"], pos=row["pos"] or "",
                  definition=row["definition"] or "", glosses=tuple(row["glosses"]))
-        for row in graph.map_senses(owner, language)
+        for row in graph.map_senses(owner, vocabulary)
     ]
 
 
@@ -135,23 +137,24 @@ def _answer(body: dict[str, Any], have: str | None) -> dict[str, Any]:
     return {**body, "version": version(body)}
 
 
-def current_map(settings: Settings, owner: str, language: str, *,
+def current_map(settings: Settings, owner: str, vocabulary_id: str, *,
                 have: str | None = None) -> tuple[dict[str, Any], bool]:
-    """This language's map as it stands now, and whether it was drawn by this call.
+    """This vocabulary's map as it stands now, and whether it was drawn by this call.
 
     `have` is the `version` a device already holds; when it is still current the answer says so and
     carries nothing else.
     """
-    vocabulary = _vocabulary(owner, language)
-    senses = _senses(owner, language)
+    vocabulary = _vocabulary(owner, vocabulary_id)
+    language = vocabulary["language"]
+    senses = _senses(owner, vocabulary_id)
     model = encoder()
     keys = [digest(model.model, sense.text) for sense in senses]
     wanted = artifact.fingerprint(model.model, [(sense.sense, key) for sense, key in zip(senses, keys)])
-    path = _map_path(settings, owner, language)
+    path = _map_path(settings, owner, vocabulary_id)
     stored = _read(path)
     if stored and stored.get("fingerprint") == wanted:
         return _answer(stored, have), False
-    with _lock(owner, language):
+    with _lock(owner, vocabulary_id):
         stored = _read(path)
         if stored and stored.get("fingerprint") == wanted:
             return _answer(stored, have), False
@@ -165,9 +168,9 @@ def current_map(settings: Settings, owner: str, language: str, *,
     return _answer(body, have), True
 
 
-def _members(stored: dict[str, Any], owner: str, language: str, gloss_lang: str | None) -> dict[str, list[str]]:
+def _members(stored: dict[str, Any], owner: str, vocabulary: str, gloss_lang: str | None) -> dict[str, list[str]]:
     """Each region's senses as `headword — gloss`, most central first."""
-    rows = {row["sense"]: row for row in graph.map_senses(owner, language)}
+    rows = {row["sense"]: row for row in graph.map_senses(owner, vocabulary)}
 
     def line(sense: str) -> str | None:
         row = rows.get(sense)
@@ -186,29 +189,29 @@ def _members(stored: dict[str, Any], owner: str, language: str, gloss_lang: str 
     return out
 
 
-def name_regions(settings: Settings, owner: str, language: str, wanted: str) -> str:
+def name_regions(settings: Settings, owner: str, vocabulary_id: str, wanted: str) -> str:
     """Ask a model to name the regions of the map drawn with fingerprint `wanted`.
 
     Returns `stale` when that map has been replaced, `nothing` when it has no regions, and `named`.
     The owner's standing rules are not appended: like resolve, this only labels, and a rule about how
     notes are written has no business deciding what a region is called.
     """
-    path = _map_path(settings, owner, language)
+    path = _map_path(settings, owner, vocabulary_id)
     stored = _read(path)
     if not stored or stored.get("fingerprint") != wanted:
         return "stale"
     if not stored.get("regions"):
         return "nothing"
-    vocabulary = _vocabulary(owner, language)
-    definition_lang = vocabulary.get("definitionLang") or language
+    vocabulary = _vocabulary(owner, vocabulary_id)
+    definition_lang = vocabulary.get("definitionLang") or vocabulary["language"]
     named_in = next((v.get("displayName") for v in graph.owner_vocabularies(owner)
                      if v["language"] == definition_lang and v.get("displayName")), definition_lang)
-    members = _members(stored, owner, language, (vocabulary.get("glossLangs") or [None])[0])
+    members = _members(stored, owner, vocabulary_id, (vocabulary.get("glossLangs") or [None])[0])
     user = f"Write every name in {named_in}.\n\n{names.groups(stored['regions'], members)}"
     reply, _ = llm_json(settings, owner, prompt_text(settings.prompts_path, NAMES_PROMPT), user,
                         caller="map_names")
     named = names.parse_reply(reply, [region["id"] for region in stored["regions"]])
-    with _lock(owner, language):
+    with _lock(owner, vocabulary_id):
         current = _read(path)
         if not current or current.get("fingerprint") != wanted:
             return "stale"
@@ -220,26 +223,26 @@ def name_regions(settings: Settings, owner: str, language: str, wanted: str) -> 
     return "named"
 
 
-def give_up_naming(settings: Settings, owner: str, language: str, wanted: str) -> None:
+def give_up_naming(settings: Settings, owner: str, vocabulary: str, wanted: str) -> None:
     """A naming that failed for good leaves the map with its central words, and says so, so a device
     stops waiting for names that are not coming."""
-    path = _map_path(settings, owner, language)
-    with _lock(owner, language):
+    path = _map_path(settings, owner, vocabulary)
+    with _lock(owner, vocabulary):
         current = _read(path)
         if current and current.get("fingerprint") == wanted and current.get("names") == "pending":
             current["names"] = "none"
             _write(path, current)
 
 
-def stored_map(settings: Settings, owner: str, language: str) -> dict[str, Any] | None:
+def stored_map(settings: Settings, owner: str, vocabulary: str) -> dict[str, Any] | None:
     """The map as last drawn, without drawing — for `admin map show`."""
-    return _read(_map_path(settings, owner, language))
+    return _read(_map_path(settings, owner, vocabulary))
 
 
-def vectors(settings: Settings, owner: str, language: str) -> list[dict[str, Any]]:
+def vectors(settings: Settings, owner: str, vocabulary: str) -> list[dict[str, Any]]:
     """Every sense with its text and vector, for the discovery experiment (`admin map export`)."""
-    _vocabulary(owner, language)
-    senses = _senses(owner, language)
+    _vocabulary(owner, vocabulary)
+    senses = _senses(owner, vocabulary)
     model = encoder()
     keys = [digest(model.model, sense.text) for sense in senses]
     matrix = _embed(settings, model, senses, keys)

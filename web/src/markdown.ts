@@ -21,8 +21,8 @@
  * Pure: no storage, no network, no DOM.
  */
 
-import type { Example, Lexeme, VocabularyGraph } from "./domain";
-import { isMandarin, languageOf } from "./languages";
+import type { Example, Lexeme, Vocabulary, VocabularyGraph } from "./domain";
+import { isMandarin, presentationOf } from "./languages";
 import { accentedPinyin } from "./pinyin";
 import { articleReader, lexemesIn, shortGlossOf, type Article } from "./selectors";
 
@@ -39,14 +39,14 @@ function safeName(value: string): string {
 }
 
 /**
- * `Spanish vocab - Technology.md`.
+ * `Spanish vocab - Technology.md`, named for the vocabulary as the switcher names it.
  *
- * The language is in the name rather than only in the directory, because Obsidian is searched by
- * note name: two languages with a Technology topic would otherwise be two notes called Technology,
- * and neither would be distinguishable from ordinary notes about technology.
+ * The vocabulary is in the name rather than only in the directory, because Obsidian is searched by
+ * note name: two vocabularies with a Technology topic would otherwise be two notes called
+ * Technology, and neither would be distinguishable from ordinary notes about technology.
  */
-export function fileNameFor(language: string, section: string): string {
-  return `${safeName(languageOf(language).name)} vocab - ${safeName(section)}.md`;
+export function fileNameFor(vocabularyName: string, section: string): string {
+  return `${safeName(vocabularyName)} vocab - ${safeName(section)}.md`;
 }
 
 /** Bolds the form the example was matched on, which is what `matchedForm` is for. */
@@ -103,15 +103,17 @@ function sectionsFor(graph: VocabularyGraph, lexeme: Lexeme): string[] {
 export interface MarkdownFile { path: string; text: string }
 
 /**
- * One file per language and section. A word filed under two topics appears in both — the file is a
+ * One file per vocabulary and section. A word filed under two topics appears in both — the file is a
  * view, not a home, and Obsidian is happier with a word present twice than absent once.
  */
-export function markdownFor(graph: VocabularyGraph, language: string, exportedAt: string): MarkdownFile[] {
+export function markdownFor(graph: VocabularyGraph, vocabulary: Vocabulary, exportedAt: string): MarkdownFile[] {
+  const { language } = vocabulary;
+  const name = presentationOf(vocabulary).name;
   const collator = new Intl.Collator(language);
   const sections = new Map<string, Article[]>();
   const articleOf = articleReader(graph);
 
-  lexemesIn(graph, language).forEach((lexeme) => {
+  lexemesIn(graph, vocabulary.id).forEach((lexeme) => {
     const article = articleOf(lexeme.id);
     if (!article) return;
     sectionsFor(graph, lexeme).forEach((section) => {
@@ -137,6 +139,6 @@ export function markdownFor(graph: VocabularyGraph, language: string, exportedAt
         ""
       ].join("\n");
       const body = sorted.map((article) => entryFor(graph, article)).join("\n\n");
-      return { path: fileNameFor(language, section), text: `${frontMatter}\n${body}\n` };
+      return { path: fileNameFor(name, section), text: `${frontMatter}\n${body}\n` };
     });
 }

@@ -377,10 +377,9 @@ jobs = Table(
     ),
 )
 
-# The languages this owner studies, and how they want each presented. Replicated like any other
-# record and deliberately without a unique index on `language`: uniqueness is forbidden on a
-# replicated collection, because it is exactly the constraint two offline devices can each satisfy on
-# their own. The client refuses a duplicate at graph level instead.
+# The vocabularies this owner keeps, and how they want each presented. Any number may share a
+# language — two varieties kept apart, a class's word set beside one's own, a starter — so a word,
+# a loop and a story name theirs by id, and `language` is what the vocabulary is in.
 vocabularies = Table(
     "vocabularies",
     metadata,
@@ -427,6 +426,10 @@ lexemes = Table(
     metadata,
     Column("id", String(15), primary_key=True),
     _owner(),
+    # The vocabulary this word is in. Its `language` beside it is the word's own and always the
+    # vocabulary's: kept on the word because everything that needs the language itself — a reading
+    # rule, a voice, a corpus — reads the word alone.
+    Column("vocabulary", String(15), ForeignKey("vocabularies.id", ondelete="CASCADE"), nullable=False),
     Column("language", String(35), nullable=False),
     Column("headword", String(240), nullable=False),
     Column("lemma", String(240), nullable=False),
@@ -455,7 +458,7 @@ lexemes = Table(
     Column("clips_searched_at", String(24), nullable=False, default=""),
     *_sync_fields(),
     Index("idx_lexemes_owner_revision", "owner", "revision"),
-    Index("idx_lexemes_owner_language_headword", "owner", "language", "headword"),
+    Index("idx_lexemes_owner_vocabulary_headword", "owner", "vocabulary", "headword"),
 )
 
 senses = Table(
@@ -648,6 +651,8 @@ loops = Table(
     metadata,
     Column("id", String(15), primary_key=True),
     _owner(),
+    # The vocabulary its words are from, and that vocabulary's language, as on `lexemes`.
+    Column("vocabulary", String(15), ForeignKey("vocabularies.id", ondelete="CASCADE"), nullable=False),
     Column("language", String(35), nullable=False),
     # Style, seed and engine version replay the bed byte-identically, and `bed_fingerprint` is what
     # proves a replay produced the same one. That is why the resolved BedSpec is not stored: nothing
@@ -680,7 +685,7 @@ loops = Table(
     Column("starred", Boolean, nullable=False, default=False),
     Column("archived", Boolean, nullable=False, default=False),
     Index("idx_loops_owner_revision", "owner", "revision"),
-    Index("idx_loops_owner_language_order", "owner", "language", "loop_order"),
+    Index("idx_loops_owner_vocabulary_order", "owner", "vocabulary", "loop_order"),
 )
 
 loop_items = Table(
@@ -801,6 +806,8 @@ stories = Table(
     metadata,
     Column("id", String(15), primary_key=True),
     _owner(),
+    # The vocabulary its words are from, and that vocabulary's language, as on `lexemes`.
+    Column("vocabulary", String(15), ForeignKey("vocabularies.id", ondelete="CASCADE"), nullable=False),
     Column("language", String(35), nullable=False),
     # Which kind of story was asked for, and what it is drawn in. Both are ids into tracked config
     # files rather than enums in the code, exactly as `image_prompts.style_id` is: a type added to
@@ -830,7 +837,7 @@ stories = Table(
     Column("starred", Boolean, nullable=False, default=False),
     Column("archived", Boolean, nullable=False, default=False),
     Index("idx_stories_owner_revision", "owner", "revision"),
-    Index("idx_stories_owner_language_order", "owner", "language", "story_order"),
+    Index("idx_stories_owner_vocabulary_order", "owner", "vocabulary", "story_order"),
 )
 
 story_parts = Table(

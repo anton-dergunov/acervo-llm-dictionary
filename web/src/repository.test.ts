@@ -3,10 +3,18 @@ import { MemoryDatabase } from "./localDatabase";
 import { LOCAL_SCHEMA_VERSION, LocalAcervoRepository } from "./repository";
 import { fakeRemote } from "./testRemote";
 import { articleFor } from "./selectors";
-import { parseArticle, YAML_TEMPLATE, yamlFor } from "./yaml";
+import { parseArticle, yamlFor, yamlTemplate } from "./yaml";
+
+/** The Spanish vocabulary every word below is in, written first wherever a test writes words. */
+const SPANISH = "vocabes00000001";
+const spanish = {
+  language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null,
+  region: null, level: null, learnerNote: null, order: 0
+};
+const YAML_TEMPLATE = yamlTemplate(spanish);
 
 const lexemeInput = {
-  language: "es", headword: "desmayarse", lemma: "desmayarse", reading: null, ipa: null, pos: "verb" as const,
+  vocabularyId: SPANISH, language: "es", headword: "desmayarse", lemma: "desmayarse", reading: null, ipa: null, pos: "verb" as const,
   gender: null, register: "neutral" as const, dialect: null, emoji: "😵‍💫", topicIds: [],
   status: "active" as const, shortGloss: null, notes: [], primaryGloss: null, emotion: null, clipsSearchedAt: null
 };
@@ -17,6 +25,7 @@ describe("the Acervo repository", () => {
     const repository = new LocalAcervoRepository(database);
     await repository.load("owner0000000001");
     repository.attachRemote(fakeRemote());
+    await repository.saveVocabulary(spanish, SPANISH);
     const sync = {
       ownerId: "owner0000000001", deleted: false, createdAt: "2026-08-28T12:00:00.000Z",
       editedAt: "2026-08-28T12:00:00.000Z", editedBy: repository.snapshot().deviceId, revision: 0
@@ -39,6 +48,7 @@ describe("the Acervo repository", () => {
     const repository = new LocalAcervoRepository(database);
     await repository.load("owner0000000001");
     repository.attachRemote(fakeRemote());
+    await repository.saveVocabulary(spanish, SPANISH);
     const sync = {
       ownerId: "owner0000000001", deleted: false, createdAt: "2026-08-28T12:00:00.000Z",
       editedAt: "2026-08-28T12:00:00.000Z", editedBy: repository.snapshot().deviceId, revision: 0
@@ -55,6 +65,7 @@ describe("the Acervo repository", () => {
     const repository = new LocalAcervoRepository(database);
     await repository.load("owner0000000001");
     repository.attachRemote(fakeRemote());
+    await repository.saveVocabulary(spanish, SPANISH);
     const topic = await repository.saveTopic({ name: "Health", icon: "🩺", order: 0 }, "topic0000000001");
     const lexeme = await repository.saveLexeme({ ...lexemeInput, topicIds: [topic.id] }, "lexeme000000001");
     const sense = await repository.saveSense({
@@ -76,8 +87,8 @@ describe("the Acervo repository", () => {
     expect(repository.snapshot()).toMatchObject({ ready: true, ownerId: "owner0000000001" });
     // Every stored record carries the revision the server allocated, never a locally invented one.
     const stored = await database.read();
-    expect([...stored.topics, ...stored.lexemes, ...stored.senses, ...stored.attestations, ...stored.examples]
-      .map((record) => record.revision).sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5]);
+    expect([...stored.vocabularies, ...stored.topics, ...stored.lexemes, ...stored.senses, ...stored.attestations, ...stored.examples]
+      .map((record) => record.revision).sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   it("atomically refuses invalid relations and Chinese records without readings", async () => {
@@ -85,12 +96,15 @@ describe("the Acervo repository", () => {
     const repository = new LocalAcervoRepository(database);
     await repository.load("owner0000000001");
     repository.attachRemote(fakeRemote());
+    await repository.saveVocabulary(spanish, SPANISH);
     await expect(repository.saveSense({
       lexemeId: "missing00000001", definition: "Missing", definitionLang: "en",
       glosses: [{ lang: "en", terms: ["missing"] }], domain: null, emoji: null, order: 0
     })).rejects.toThrow("missing lexeme");
-    await expect(repository.saveLexeme({ ...lexemeInput, language: "zh-Hans", headword: "图书馆", lemma: "图书馆" }))
-      .rejects.toThrow("require a reading");
+    await repository.saveVocabulary({ ...spanish, language: "zh-Hans", definitionLang: "en" }, "vocabzh00000001");
+    await expect(repository.saveLexeme({
+      ...lexemeInput, vocabularyId: "vocabzh00000001", language: "zh-Hans", headword: "图书馆", lemma: "图书馆"
+    })).rejects.toThrow("require a reading");
     expect(repository.snapshot().senses).toHaveLength(0);
     expect(repository.snapshot().lexemes).toHaveLength(0);
   });
@@ -101,6 +115,7 @@ describe("the Acervo repository", () => {
     await repository.load("owner0000000001");
     const remote = fakeRemote();
     repository.attachRemote(remote);
+    await repository.saveVocabulary(spanish, SPANISH);
     const lexeme = await repository.saveLexeme(lexemeInput, "lexeme000000001");
     await repository.saveSense({
       lexemeId: lexeme.id, definition: "Perder el conocimiento.", definitionLang: "es",
@@ -119,6 +134,7 @@ describe("the Acervo repository", () => {
     await repository.load("owner0000000001");
     const remote = fakeRemote();
     repository.attachRemote(remote);
+    await repository.saveVocabulary(spanish, SPANISH);
     const topic = await repository.saveTopic({ name: "Health", icon: "🩺", order: 0 }, "topic0000000001");
     await repository.saveLexeme({ ...lexemeInput, topicIds: [topic.id] }, "lexeme000000001");
     await repository.delete("topics", topic.id);
@@ -133,6 +149,7 @@ describe("the Acervo repository", () => {
     await repository.load("owner0000000001");
     const remote = fakeRemote();
     repository.attachRemote(remote);
+    await repository.saveVocabulary(spanish, SPANISH);
     await repository.saveLexeme(lexemeInput, "lexeme000000001");
     const before = await database.read();
 
@@ -147,8 +164,8 @@ describe("the Acervo repository", () => {
     const database = new MemoryDatabase();
     const repository = new LocalAcervoRepository(database);
     await repository.load("owner0000000001");
-    await expect(repository.saveLexeme(lexemeInput, "lexeme000000001")).rejects.toThrow("not connected");
-    expect((await database.read()).lexemes).toEqual([]);
+    await expect(repository.saveVocabulary(spanish, SPANISH)).rejects.toThrow("not connected");
+    expect((await database.read()).vocabularies).toEqual([]);
   });
 
   it("does not let two graph writes landing at once drop each other's records", async () => {
@@ -185,6 +202,7 @@ describe("the Acervo repository", () => {
     const first = new LocalAcervoRepository(database);
     await first.load("owner0000000001");
     first.attachRemote(fakeRemote());
+    await first.saveVocabulary(spanish, SPANISH);
     await first.saveLexeme(lexemeInput, "lexeme000000001");
     const deviceId = first.snapshot().deviceId;
     const second = new LocalAcervoRepository(database);
@@ -202,6 +220,7 @@ describe("the Acervo repository", () => {
     const first = new LocalAcervoRepository(database);
     await first.load("owner0000000001");
     first.attachRemote(fakeRemote());
+    await first.saveVocabulary(spanish, SPANISH);
     await first.saveLexeme(lexemeInput, "lexeme000000001");
     const stored = await database.read();
     await database.write({ senses: [{
@@ -248,6 +267,7 @@ describe("saving an article edited as YAML", () => {
     await repository.load("owner0000000001");
     const remote = fakeRemote();
     repository.attachRemote(remote);
+    await repository.saveVocabulary(spanish, SPANISH);
     await repository.saveTopic({ name: "Health", icon: "🩺", order: 0 }, "topic0000000001");
     await repository.saveLexeme({ ...lexemeInput, topicIds: ["topic0000000001"] }, "lexeme000000001");
     await repository.saveSense({
@@ -294,8 +314,9 @@ describe("saving an article edited as YAML", () => {
       .replace('terms: [""]', "terms: [after-dinner talk]")
       .replace('- text: ""', "- text: La sobremesa duró dos horas.")
       .replace('translation: ""', "translation: The talk lasted two hours."));
-    const id = await repository.saveArticle(article);
+    const id = await repository.saveArticle(article, undefined, { vocabularyId: SPANISH });
     expect(save.mock.calls[0][2]).toEqual({});
+    expect(save.mock.calls[0][3]).toEqual({ vocabularyId: SPANISH });
     expect(repository.snapshot().lexemes.find((lexeme) => lexeme.id === id)!.headword).toBe("sobremesa");
   });
 
@@ -330,6 +351,7 @@ describe("loops", () => {
     const repository = new LocalAcervoRepository(new MemoryDatabase());
     await repository.load("owner0000000001");
     repository.attachRemote(fakeRemote());
+    await repository.saveVocabulary(spanish, SPANISH);
     await repository.saveVocabulary({
       language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en",
       displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0
@@ -339,7 +361,7 @@ describe("loops", () => {
   };
 
   const loopInput = {
-    language: "es", styleId: "sunlit-acoustic", seed: 104740, engineVersion: "1.4.0",
+    vocabularyId: SPANISH, language: "es", styleId: "sunlit-acoustic", seed: 104740, engineVersion: "1.4.0",
     bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
     audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
     durationSeconds: 124.5, position: 0, starred: false, archived: false
@@ -410,6 +432,7 @@ describe("taking words out of the Inbox", () => {
     await repository.load("owner0000000001");
     const remote = fakeRemote();
     repository.attachRemote(remote);
+    await repository.saveVocabulary(spanish, SPANISH);
     const ids = await Promise.all(statuses.map((status, index) =>
       repository.saveLexeme({ ...lexemeInput, headword: `word${index}`, status },
         `lexeme00000000${index}`).then((lexeme) => lexeme.id)));

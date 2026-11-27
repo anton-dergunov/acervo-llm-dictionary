@@ -89,6 +89,13 @@ export interface Topic extends SyncFields, OwnedFields {
 
 export interface Lexeme extends SyncFields, OwnedFields {
   id: string;
+  /**
+   * The vocabulary this word is in. Any number of an owner's vocabularies may share a language, so
+   * this — never `language` — says which list, map, loop or deck a word belongs to. `language` is the
+   * word's own and always its vocabulary's: kept on the word for everything that needs the language
+   * itself (a reading rule, a voice, a dictionary), which reads the word alone.
+   */
+  vocabularyId: string;
   language: string;
   headword: string;
   lemma: string;
@@ -284,6 +291,8 @@ export interface StudyState extends SyncFields, OwnedFields {
  */
 export interface Loop extends SyncFields, OwnedFields {
   id: string;
+  /** The vocabulary its words are from, and that vocabulary's language, as on `Lexeme`. */
+  vocabularyId: string;
   language: string;
   styleId: string | null;
   seed: number;
@@ -410,6 +419,8 @@ export interface Play extends SyncFields, OwnedFields {
  */
 export interface Story extends SyncFields, OwnedFields {
   id: string;
+  /** The vocabulary its words are from, and that vocabulary's language, as on `Lexeme`. */
+  vocabularyId: string;
   language: string;
   typeId: string | null;
   styleId: string | null;
@@ -617,6 +628,7 @@ function syncFields(record: SyncFields & OwnedFields & { id: string }) {
 type AnyRecord = VocabularyGraph[EntityKind][number];
 
 interface Find {
+  vocabularies(id: string): Vocabulary | undefined;
   topics(id: string): Topic | undefined;
   lexemes(id: string): Lexeme | undefined;
   senses(id: string): Sense | undefined;
@@ -625,6 +637,21 @@ interface Find {
   loops(id: string): Loop | undefined;
   loopItems(id: string): LoopItem | undefined;
   stories(id: string): Story | undefined;
+}
+
+/**
+ * A word, a loop or a story held to its vocabulary: the owner's, alive while the record is, and in the
+ * language the record says it is in. The server holds the same rule (`domain/validation.py`).
+ */
+function inVocabulary(record: Lexeme | Loop | Story, find: Find, label: string): void {
+  language(record.language, `${label} language`);
+  validateRecordId(record.vocabularyId);
+  const vocabulary = find.vocabularies(record.vocabularyId);
+  invariant(vocabulary, `${label} references a missing vocabulary.`);
+  invariant(vocabulary.ownerId === record.ownerId, `${label} and vocabulary must have the same owner.`);
+  invariant(record.deleted || !vocabulary.deleted, `${label} vocabulary has been removed.`);
+  invariant(record.language === vocabulary.language,
+    `${label} language must be its vocabulary's: ${record.language} is not ${vocabulary.language}.`);
 }
 
 /** What one record must satisfy on its own and against the records it names, per kind. */
@@ -652,7 +679,7 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     invariant(Number.isSafeInteger(record.order) && record.order >= 0, "Topic order is invalid.");
   },
   lexemes(record: Lexeme, find: Find): void {
-    language(record.language, "Lexeme language");
+    inVocabulary(record, find, "Lexeme");
     invariant(record.headword.trim().length > 0 && record.lemma.trim().length > 0, "Lexeme headword and lemma are required.");
     optionalString(record.reading, "Reading");
     optionalString(record.ipa, "IPA");
@@ -811,8 +838,8 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     if (record.lastReview) validateInstant(record.lastReview, "Last review");
     if (record.syncedAt) validateInstant(record.syncedAt, "Study sync time");
   },
-  loops(record: Loop): void {
-    language(record.language, "Loop language");
+  loops(record: Loop, find: Find): void {
+    inVocabulary(record, find, "Loop");
     [record.styleId, record.engineVersion, record.bedFingerprint]
       .forEach((value) => optionalString(value, "Loop bed field"));
     invariant(typeof record.format === "string" && record.format.trim().length > 0, "A loop names its format.");
@@ -876,8 +903,8 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     invariant(Number.isFinite(record.startSeconds) && record.startSeconds >= 0
       && Number.isFinite(record.endSeconds) && record.endSeconds >= record.startSeconds, "A loop line's times must not run backwards.");
   },
-  stories(record: Story): void {
-    language(record.language, "Story language");
+  stories(record: Story, find: Find): void {
+    inVocabulary(record, find, "Story");
     optionalString(record.typeId, "Story kind");
     optionalString(record.styleId, "Story style");
     optionalString(record.title, "Story title");
@@ -977,6 +1004,7 @@ export type GraphIndex = { get<K extends EntityKind>(kind: K, id: string): Vocab
 
 function findIn(index: GraphIndex): Find {
   return {
+    vocabularies: (id) => index.get("vocabularies", id),
     topics: (id) => index.get("topics", id),
     lexemes: (id) => index.get("lexemes", id),
     senses: (id) => index.get("senses", id),
@@ -1037,6 +1065,7 @@ export function validateGraph(graph: VocabularyGraph): void {
  * falls back to the whole graph — re-parenting is rare, and a replica that no longer loads is not.
  */
 const REREAD: { [K in EntityKind]?: readonly (keyof VocabularyGraph[K][number])[] } = {
+  vocabularies: ["language", "deleted"],
   senses: ["lexemeId"],
   attestations: ["lexemeId"],
   examples: ["senseId"]

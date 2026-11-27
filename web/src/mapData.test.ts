@@ -22,7 +22,7 @@ function serverMap(overrides: Partial<ServerMap> = {}): ServerMap {
 
 describe("the map joined to the replica", () => {
   it("labels each point from the replica, with the sense's emoji and first gloss", () => {
-    const data = mapDataFor(testGraph(), serverMap());
+    const data = mapDataFor(testGraph(), serverMap(), "vocabes00000001");
     expect(data.points.map((p) => [p.headword, p.emoji, p.gloss])).toEqual([
       ["picar", "🌶️", "to itch"], ["picar", "🔪", "to chop"], ["la balsa", "🛶", "raft"], ["espolvorear", "🧀", "to sprinkle"]
     ]);
@@ -32,7 +32,7 @@ describe("the map joined to the replica", () => {
   it("drops a sense deleted since the map was drawn and re-indexes everyone's neighbours", () => {
     const graph = testGraph();
     graph.senses = graph.senses.map((s) => (s.id === "sensepicarchop0" ? { ...s, deleted: true } : s));
-    const data = mapDataFor(graph, serverMap());
+    const data = mapDataFor(graph, serverMap(), "vocabes00000001");
     expect(data.points.map((p) => p.id)).toEqual(["sensepicaritch0", "sensebalsaraft0", "senseespolvor10"]);
     // Point 0 was near [2, 3] — the raft and the sprinkling, now at 1 and 2.
     expect(data.points[0].near).toEqual([1, 2]);
@@ -43,7 +43,7 @@ describe("the map joined to the replica", () => {
   it("carries the server's regions and contours as they are", () => {
     const regions = [{ id: "r0", level: "region" as const, index: 0, x: 1, y: 2, count: 4,
                        labels: { words: ["picar"], terms: ["cortar"], name: "cocina" } }];
-    const data = mapDataFor(testGraph(), serverMap({ regions, contours: [[0, [1, 2, 3, 4, 5, 6]]] }));
+    const data = mapDataFor(testGraph(), serverMap({ regions, contours: [[0, [1, 2, 3, 4, 5, 6]]] }), "vocabes00000001");
     expect(data.regions).toBe(regions);
     expect(data.contours).toEqual([[0, [1, 2, 3, 4, 5, 6]]]);
   });
@@ -69,22 +69,22 @@ describe("the map store", () => {
     Object.defineProperty(globalThis, "indexedDB", { configurable: true, value: new IDBFactory() });
   });
 
-  it("keeps the last map per account and language", async () => {
+  it("keeps the last map per account and vocabulary, two of one language apart", async () => {
     const store = createMapStore();
-    await store.save("owner-a", serverMap());
-    await store.save("owner-a", serverMap({ language: "en", fingerprint: "fp-en" }));
-    expect((await store.read("owner-a", "es"))?.fingerprint).toBe("fp-1");
-    expect((await store.read("owner-a", "en"))?.fingerprint).toBe("fp-en");
-    expect(await store.read("owner-b", "es")).toBeNull();
-    await store.save("owner-a", serverMap({ fingerprint: "fp-2" }));
-    expect((await store.read("owner-a", "es"))?.fingerprint).toBe("fp-2");
+    await store.save("owner-a", "vocabes00000001", serverMap());
+    await store.save("owner-a", "vocabstarter001", serverMap({ fingerprint: "fp-starter" }));
+    expect((await store.read("owner-a", "vocabes00000001"))?.fingerprint).toBe("fp-1");
+    expect((await store.read("owner-a", "vocabstarter001"))?.fingerprint).toBe("fp-starter");
+    expect(await store.read("owner-b", "vocabes00000001")).toBeNull();
+    await store.save("owner-a", "vocabes00000001", serverMap({ fingerprint: "fp-2" }));
+    expect((await store.read("owner-a", "vocabes00000001"))?.fingerprint).toBe("fp-2");
   });
 
   it("falls back to memory where there is no IndexedDB", async () => {
     Object.defineProperty(globalThis, "indexedDB", { configurable: true, value: undefined });
     const store = createMapStore();
     expect(store).toBeInstanceOf(MemoryMapStore);
-    await store.save("owner-a", serverMap());
-    expect((await store.read("owner-a", "es"))?.fingerprint).toBe("fp-1");
+    await store.save("owner-a", "vocabes00000001", serverMap());
+    expect((await store.read("owner-a", "vocabes00000001"))?.fingerprint).toBe("fp-1");
   });
 });

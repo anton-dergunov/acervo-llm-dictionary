@@ -113,18 +113,9 @@ def understand(
         resolution, resolving = resolve(settings, account, body, vocabularies, quick=quick)
         calls = (resolving,)
 
-    vocabulary = next(
-        (entry for entry in vocabularies if entry["language"] == resolution["language"]), None
-    )
-    if vocabulary is None:
-        # Deliberately before generation: building an article for a language the owner does not keep
-        # would spend a model call on something with nowhere to go.
-        raise ApiError(
-            409,
-            "language_not_configured",
-            f"This looks like {resolution['language']}, which you have no vocabulary for yet. "
-            "Add it in Settings, then capture this again.",
-        )
+    # Deliberately before generation: building an article for a language the owner does not keep, or
+    # for a vocabulary not yet chosen, would spend a model call on something with nowhere to go.
+    vocabulary = choose_vocabulary(vocabularies, resolution["language"], body.get("vocabulary"))
     if not vocabulary["glossLangs"]:
         raise ApiError(
             409,
@@ -134,9 +125,40 @@ def understand(
         )
 
     duplicates = graph.duplicate_lexemes(
-        account, resolution["language"], resolution["headword"], resolution["lemma"]
+        account, vocabulary["id"], resolution["headword"], resolution["lemma"]
     )
     return Understanding(resolution, vocabulary, duplicates, calls)
+
+
+def choose_vocabulary(vocabularies: list[dict[str, Any]], language: str, asked: Any) -> dict[str, Any]:
+    """The vocabulary a word in `language` goes in (`docs/features/capture.md`, "Which vocabulary").
+
+    The one asked for — the vocabulary in view, or the one the owner chose — when it is in the word's
+    language; otherwise the only vocabulary of that language. Several, none of them asked for, is a
+    question only the owner can answer, so it is refused with them named and asked again with one.
+    """
+    fitting = [entry for entry in vocabularies if entry["language"] == language]
+    chosen = next((entry for entry in fitting if entry["id"] == asked), None)
+    if chosen is not None:
+        return chosen
+    if len(fitting) == 1:
+        return fitting[0]
+    if not fitting:
+        raise ApiError(
+            409,
+            "language_not_configured",
+            f"This looks like {language}, which you have no vocabulary for yet. "
+            "Add it in Settings, then capture this again.",
+        )
+    names = [entry.get("displayName") or entry["language"] for entry in fitting]
+    raise ApiError(
+        409,
+        "vocabulary_ambiguous",
+        f"This looks like {language}, and you keep {len(fitting)} vocabularies in it "
+        f"({', '.join(names)}). Choose which one it goes in.",
+        noted={"language": language, "vocabularies": ",".join(entry["id"] for entry in fitting)},
+        asking={"language": language, "vocabularies": [entry["id"] for entry in fitting]},
+    )
 
 
 def given_resolution(body: dict[str, Any]) -> dict[str, Any] | None:
@@ -192,6 +214,8 @@ def look_up(settings: Settings, account: str, body: dict[str, Any]) -> dict[str,
     return {
         "resolution": understood.resolution,
         "duplicates": understood.duplicates,
+        # Where Add files the word, and where `duplicates` were looked for.
+        "vocabularyId": understood.vocabulary["id"],
         "foldable": _foldable(understood.resolution, body) if understood.duplicates else None,
         "passedOver": _passed_over(*understood.calls),
     }
@@ -213,6 +237,7 @@ def propose(settings: Settings, account: str, body: dict[str, Any]) -> dict[str,
         # path here — the interface opens the stored article and asks one ordinary question.
         return {
             "resolution": resolution, "duplicates": understood.duplicates, "draft": None,
+            "vocabularyId": understood.vocabulary["id"],
             "passedOver": _passed_over(*understood.calls),
             "foldable": _foldable(resolution, body),
         }
@@ -225,6 +250,7 @@ def propose(settings: Settings, account: str, body: dict[str, Any]) -> dict[str,
 
     return {
         "resolution": resolution, "duplicates": [], "draft": draft,
+        "vocabularyId": understood.vocabulary["id"],
         "passedOver": _passed_over(*understood.calls, composing),
         # Total rather than conditional: a field that is sometimes absent is a field every reader
         # has to guess about.

@@ -7,7 +7,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import LexemeList from "./LexemeList";
 import { visibleRows } from "./selectors";
-import { testGraph } from "./testGraph";
+import { SPANISH, testGraph } from "./testGraph";
 
 afterEach(() => {
   cleanup();
@@ -17,7 +17,7 @@ afterEach(() => {
 function list(selected: string[] = [], { aside = [] as string[], query = "" } = {}) {
   const graph = testGraph();
   for (const lexeme of graph.lexemes) if (aside.includes(lexeme.id)) lexeme.status = "aside";
-  const view = visibleRows(graph, { language: "es", topic: "all", query, sort: "alpha" });
+  const view = visibleRows(graph, { vocabularyId: SPANISH, topic: "all", query, sort: "alpha" });
   const handlers = { onOpen: vi.fn(), onToggleSelected: vi.fn(), onSetAside: vi.fn(), onDelete: vi.fn() };
   render(<LexemeList
     rows={view.rows} aside={view.aside} languageName="Spanish" topic="all" topicLabel="All words" topicIcon="📖"
@@ -82,8 +82,10 @@ describe("a Mandarin word's row", () => {
   function chineseList(query = "") {
     const graph = testGraph();
     const word = graph.lexemes.find((lexeme) => lexeme.id === "lexemepicar0001")!;
+    // A word is in a vocabulary of its own language, so the fixture's Spanish one becomes Chinese.
+    Object.assign(graph.vocabularies.find((entry) => entry.id === SPANISH)!, { language: "zh-Hans" });
     Object.assign(word, { language: "zh-Hans", headword: "图书馆", reading: "tu2 shu1 guan3" });
-    const view = visibleRows(graph, { language: "zh-Hans", topic: "all", query, sort: "alpha" });
+    const view = visibleRows(graph, { vocabularyId: SPANISH, topic: "all", query, sort: "alpha" });
     render(<LexemeList
       rows={view.rows} aside={view.aside} languageName="Chinese" topic="all" topicLabel="All words" topicIcon="📖"
       query={query} sort="alpha" onSort={() => undefined} selected={() => false}

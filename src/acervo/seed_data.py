@@ -488,6 +488,7 @@ def demo_records(owner_id: str) -> list[tuple[str, dict]]:
         lexeme_id = rid("lexemes", key)
         records.append(("lexemes", {
             "id": lexeme_id, **base,
+            "vocabulary": rid("vocabularies", entry["language"]),
             "language": entry["language"], "headword": entry["headword"], "lemma": entry["lemma"],
             "reading": entry.get("reading", ""), "ipa": entry.get("ipa", ""), "pos": entry["pos"],
             "gender": entry.get("gender", ""), "register": entry.get("register", ""),

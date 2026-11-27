@@ -15,7 +15,7 @@ import litellm
 import pytest
 from acervo.models import call as provider_call
 from acervo.models import journal
-from graph_records import lexeme, topic, vocabulary
+from graph_records import lexeme, topic, vocabulary, vocabulary_id
 from provider_rows import CLOUDFLARE, CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, GEMINI, GEMINI_KEY
 
 # What a provider says when it refuses. Every classification test asserts this never reaches
@@ -102,6 +102,45 @@ def test_it_refuses_a_language_with_no_vocabulary_and_does_not_generate_for_it(s
     assert len(seeded.model.calls) == 1
 
 
+STARTER = "vocabstarter001"
+ENGLISH = vocabulary_id("en")
+
+
+def with_a_starter_and_english(server):
+    """A second Spanish vocabulary, holding nothing yet, and an English one."""
+    assert server.push({"vocabularies": [
+        vocabulary(id=STARTER, displayName="Spanish (Mexico) · Everyday words", order=1),
+        vocabulary(language="en", definitionLang="en", displayName="English", order=2),
+    ]}).status_code == 200
+
+
+def test_a_word_goes_in_the_vocabulary_in_view_when_it_is_in_its_language(seeded):
+    with_a_starter_and_english(seeded)
+    body = seeded.capture(text="¿Te pica?", vocabulary=STARTER).json()["data"]
+    # The one in view is a vocabulary of its own: `picar` held in the other is not a duplicate here.
+    assert body["vocabularyId"] == STARTER and body["duplicates"] == [] and body["draft"] is not None
+
+
+def test_a_word_in_another_language_goes_in_the_only_vocabulary_of_it(seeded):
+    seeded.push({"vocabularies": [vocabulary(language="en", definitionLang="en", displayName="English")]})
+    body = seeded.capture(text="¿Te pica?", vocabulary=ENGLISH).json()["data"]
+    assert body["vocabularyId"] == vocabulary_id("es")
+
+
+def test_several_vocabularies_of_the_word_s_language_none_in_view_are_asked_about(seeded):
+    """Never a guess between two of the owner's vocabularies: refused before anything is written,
+    with what the device needs to ask which, and asked again with one."""
+    with_a_starter_and_english(seeded)
+    answer = seeded.capture(text="¿Te pica?", vocabulary=ENGLISH)
+    assert answer.status_code == 409
+    error = answer.json()["error"]
+    assert error["code"] == "vocabulary_ambiguous"
+    assert error["language"] == "es" and error["vocabularies"] == [vocabulary_id("es"), STARTER]
+    assert "Spanish (Mexico) · Everyday words" in error["message"]
+    assert len(seeded.model.calls) == 1, "nothing is composed for a word with nowhere to go"
+    assert seeded.capture(text="¿Te pica?", vocabulary=STARTER).json()["data"]["vocabularyId"] == STARTER
+
+
 def test_it_refuses_a_vocabulary_with_no_translation_language(seeded, monkeypatch):
     """The validator will not let this state be written through the graph, so the guard is reached
     only by a vocabulary that got there another way — which is exactly why it is still checked."""
@@ -111,8 +150,8 @@ def test_it_refuses_a_vocabulary_with_no_translation_language(seeded, monkeypatc
         graph,
         "owner_vocabularies",
         lambda _owner: [
-            {"language": "es", "definitionLang": "es", "glossLangs": [], "notesLang": "en",
-             "displayName": "Spanish"}
+            {"id": vocabulary_id("es"), "language": "es", "definitionLang": "es", "glossLangs": [],
+             "notesLang": "en", "displayName": "Spanish"}
         ],
     )
     answer = seeded.capture(text="El disfraz de pirata viene con un garfio.")
@@ -735,8 +774,8 @@ def test_a_provider_that_refused_both_calls_is_reported_once(seeded, cloudflare_
 
 # ── compose's checks run inside the chain ───────────────────────────────────
 
-RUSSIAN_FIRST = {"language": "es", "definitionLang": "es", "glossLangs": ["ru", "en"], "notesLang": "ru",
-                 "displayName": "Spanish"}
+RUSSIAN_FIRST = {"id": vocabulary_id("es"), "language": "es", "definitionLang": "es",
+                 "glossLangs": ["ru", "en"], "notesLang": "ru", "displayName": "Spanish"}
 
 IN_RUSSIAN = {
     **ARTICLE, "shortGloss": "крюк", "primaryGloss": "крюк", "notes": ["Не путать с el gancho."],

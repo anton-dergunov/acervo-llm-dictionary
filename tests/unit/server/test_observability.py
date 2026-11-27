@@ -477,3 +477,16 @@ def test_a_mandarin_word_saved_without_ipa_is_what_admin_log_failed_shows(logs, 
     assert any("compose outcome" in text and "ipa=unparsed" in text and 'reading="dou fu"' in text
                and "the reading is not Pinyin syllables, so the word has no IPA" in text
                for text in failed), failed
+
+
+def test_a_capture_with_two_vocabularies_to_choose_from_is_what_admin_log_shows(logs, server):
+    """The device asks which vocabulary; if it never does, the line is what says why nothing was
+    added, naming the vocabularies it was between."""
+    from test_capture import ARTICLE, RESOLUTION
+
+    server.push({"vocabularies": [vocabulary(), vocabulary(id="vocabstarter001", displayName="Everyday", order=1)]})
+    server.model.resolution, server.model.article = dict(RESOLUTION), dict(ARTICLE)
+    assert server.capture(text="El garfio.").status_code == 409
+    (line,) = refusals(logs)
+    assert "code=vocabulary_ambiguous" in line and "vocabstarter001" in line
+    assert "you keep 2 vocabularies in it (Spanish, Everyday). Choose which one it goes in." in line

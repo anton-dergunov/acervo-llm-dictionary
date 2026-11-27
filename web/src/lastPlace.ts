@@ -1,5 +1,5 @@
 import type { VocabularyGraph } from "./domain";
-import { languageOptions, type TopicSelection } from "./selectors";
+import { vocabularyFor, type TopicSelection } from "./selectors";
 
 /**
  * Where you were, remembered per device, so a cold start reopens it.
@@ -11,7 +11,7 @@ import { languageOptions, type TopicSelection } from "./selectors";
  * rather than trusted.
  */
 export interface Place {
-  language: string;
+  vocabularyId: string;
   topic: TopicSelection;
   openId: string | null;
 }
@@ -30,9 +30,9 @@ export function forgetPlace(): void {
 export function lastPlace(): Place | null {
   try {
     const stored = JSON.parse(localStorage.getItem(KEY) ?? "null") as Partial<Place> | null;
-    if (!stored || typeof stored.language !== "string" || typeof stored.topic !== "string") return null;
+    if (!stored || typeof stored.vocabularyId !== "string" || typeof stored.topic !== "string") return null;
     return {
-      language: stored.language,
+      vocabularyId: stored.vocabularyId,
       topic: stored.topic,
       openId: typeof stored.openId === "string" ? stored.openId : null
     };
@@ -42,16 +42,16 @@ export function lastPlace(): Place | null {
 }
 
 /**
- * The remembered place, as far as this graph still holds it: a language it no longer has means no
- * place at all, a topic that has gone falls back to all words, and a word that has gone, or has
- * moved to another language, is simply not reopened.
+ * The remembered place, as far as this graph still holds it: a vocabulary it no longer has means no
+ * place at all, a topic that has gone falls back to all words, and a word that has gone, or is in
+ * another vocabulary, is simply not reopened.
  */
 export function placeIn(graph: VocabularyGraph, place: Place | null): Place | null {
-  if (!place || !languageOptions(graph).some((option) => option.code === place.language)) return null;
+  if (!place || !vocabularyFor(graph, place.vocabularyId)) return null;
   const topic = place.topic === "all" || place.topic === "inbox"
     || graph.topics.some((one) => one.id === place.topic && !one.deleted) ? place.topic : "all";
   const word = place.openId
-    ? graph.lexemes.find((one) => one.id === place.openId && !one.deleted && one.language === place.language)
+    ? graph.lexemes.find((one) => one.id === place.openId && !one.deleted && one.vocabularyId === place.vocabularyId)
     : undefined;
-  return { language: place.language, topic, openId: word ? word.id : null };
+  return { vocabularyId: place.vocabularyId, topic, openId: word ? word.id : null };
 }

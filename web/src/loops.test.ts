@@ -17,7 +17,7 @@ import { MemoryMediaStore } from "./mediaStore";
 import { drillCues } from "./testGraph";
 
 const loop: Loop = {
-  id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
+  id: "loop00000000001", vocabularyId: "vocabes00000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1, starred: false, archived: false,

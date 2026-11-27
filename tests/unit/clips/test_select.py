@@ -33,7 +33,7 @@ def changes() -> dict:
                           "glossLangs": ["en"], "notesLang": "en", **sync_fields()}],
         "topics": [],
         "lexemes": [
-            {"id": "l00000000000001", "language": "es", "headword": "picar", "lemma": "picar",
+            {"id": "l00000000000001", "vocabularyId": "v00000000000001", "language": "es", "headword": "picar", "lemma": "picar",
              "pos": "verb", "status": "inbox", "topicIds": [], "notes": [],
              "shortGloss": "to itch; to chop", **sync_fields()},
         ],
@@ -58,7 +58,7 @@ def changes() -> dict:
 
 
 def article():
-    return build_articles(changes(), "es")[0]
+    return build_articles(changes(), "v00000000000001")[0]
 
 
 def candidates():

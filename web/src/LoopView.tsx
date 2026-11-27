@@ -22,7 +22,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
-import type { Loop, VocabularyGraph } from "./domain";
+import type { Loop, VocabularyGraph, Vocabulary } from "./domain";
 import { BackIcon, HourglassIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
 import { useListening } from "./listening";
 import { formatIcon } from "./LoopFormat";
@@ -38,9 +38,11 @@ function clock(seconds: number | null): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onMark, onChooseMusic, onToggleKeep }: {
+export default function LoopView({ graph, vocabulary, languageName, query = "", opening = null, onClose, onDelete, onMark, onChooseMusic, onToggleKeep }: {
   graph: VocabularyGraph;
-  language: string;
+  /** The vocabulary in view: the loops listed are the ones made from its words. */
+  vocabulary: Vocabulary;
+  /** What the vocabulary is called, for the count under the title. */
   languageName: string;
   /** The top bar's search, which on this surface searches the words in its loops. */
   query?: string;
@@ -60,10 +62,11 @@ export default function LoopView({ graph, language, languageName, query = "", op
   const playback = player.usePlayback();
   const listening = useListening();
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
-  const order = useMadeList(graph, "loop", language, query);
+  const language = vocabulary.language;
+  const order = useMadeList(graph, "loop", vocabulary, query);
   const loops = order.list.rows;
   const [openId, setOpenId] = useState<string | null>(opening ?? playback.loopId);
-  const open = loopsIn(graph, language).find((loop) => loop.id === openId) ?? null;
+  const open = loopsIn(graph, vocabulary.id).find((loop) => loop.id === openId) ?? null;
   const { schema } = useLoopSchema();
   // A search is answered by the list, so an open player gives way to it.
   useEffect(() => { if (query.trim()) setOpenId(null); }, [query]);

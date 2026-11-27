@@ -23,7 +23,9 @@ export function articleChanges(
   draft: ArticleDraft,
   minted: ReadonlySet<string>,
   who: { ownerId: string; deviceId: string },
-  at = new Date().toISOString()
+  at = new Date().toISOString(),
+  /** Where a new word goes, as the save names it; a stored word stays in its own, as on the server. */
+  vocabularyId?: string
 ): ArticleChanges {
   const changed: Partial<VocabularyGraph> = {};
   const change = <T extends Entity>(store: EntityKind, value: T) => {
@@ -44,6 +46,8 @@ export function articleChanges(
   if (draft.id && (!existingLexeme || existingLexeme.deleted)) {
     throw new Error("This document names an entry that is not in your vocabulary, so it was not saved.");
   }
+  const into = existingLexeme?.vocabularyId ?? vocabularyId;
+  if (!into) throw new Error("Say which vocabulary this entry goes in.");
   const topicIds = draft.topics.map((name) => {
     const topic = live(graph.topics).find((one) => one.name.toLowerCase() === name.trim().toLowerCase());
     if (!topic) {
@@ -53,7 +57,7 @@ export function articleChanges(
     return topic.id;
   });
   change("lexemes", {
-    ...existingLexeme, id: lexemeId, language: draft.language, headword: draft.headword,
+    ...existingLexeme, id: lexemeId, vocabularyId: into, language: draft.language, headword: draft.headword,
     lemma: draft.lemma, reading: draft.reading, ipa: draft.ipa, pos: draft.pos, gender: draft.gender,
     register: draft.register, dialect: draft.dialect, emoji: draft.emoji, topicIds,
     status: draft.status, shortGloss: draft.shortGloss, primaryGloss: draft.primaryGloss,

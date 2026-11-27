@@ -4,8 +4,14 @@ import { createLocalDatabase } from "./localDatabase";
 import { LocalAcervoRepository } from "./repository";
 import { fakeRemote } from "./testRemote";
 
+const SPANISH = "vocabes00000001";
+const spanish = {
+  language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null,
+  region: null, level: null, learnerNote: null, order: 0
+};
+
 const lexemeInput = {
-  language: "es", headword: "la balsa", lemma: "balsa", reading: null, ipa: null, pos: "noun" as const,
+  vocabularyId: SPANISH, language: "es", headword: "la balsa", lemma: "balsa", reading: null, ipa: null, pos: "noun" as const,
   gender: "feminine" as const, register: "neutral" as const, dialect: null, emoji: "🛶",
   topicIds: [], status: "active" as const, shortGloss: null, notes: [], primaryGloss: null, emotion: null, clipsSearchedAt: null
 };
@@ -19,6 +25,7 @@ describe("IndexedDB Acervo repository", () => {
     const first = new LocalAcervoRepository(createLocalDatabase());
     await first.load("owner0000000001");
     first.attachRemote(fakeRemote());
+    await first.saveVocabulary(spanish, SPANISH);
     const sync = {
       ownerId: "owner0000000001", deleted: false, createdAt: "2026-08-28T12:00:00.000Z",
       editedAt: "2026-08-28T12:00:00.000Z", editedBy: first.snapshot().deviceId, revision: 0
@@ -48,6 +55,7 @@ describe("IndexedDB Acervo repository", () => {
     const first = new LocalAcervoRepository(createLocalDatabase());
     await first.load("owner0000000001");
     first.attachRemote(fakeRemote());
+    await first.saveVocabulary(spanish, SPANISH);
     await first.saveLexeme(lexemeInput, "lexeme000000001");
     const deviceId = first.snapshot().deviceId;
 

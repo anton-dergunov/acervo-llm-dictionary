@@ -4,7 +4,7 @@ import { strToU8, zipSync } from "fflate";
 import { backendSession } from "../api";
 import { MemoryDatabase } from "../localDatabase";
 import { LocalAcervoRepository, repository, type ReplicaSnapshot } from "../repository";
-import { testGraph, TEST_OWNER } from "../testGraph";
+import { SPANISH, testGraph, TEST_OWNER } from "../testGraph";
 import { fakeRemote } from "../testRemote";
 import { syncEngine } from "../sync";
 import { exportBundle } from "../transfer";
@@ -28,7 +28,7 @@ function fileOf(bytes: Uint8Array, name: string): File {
 
 function bundleFile(name = "acervo-all-2026-09-01.zip"): File {
   const archive: Record<string, Uint8Array> = {};
-  exportBundle(testGraph(), { language: "all", markdown: false, images: false, pronunciations: false }, AT)
+  exportBundle(testGraph(), { vocabularyId: "all", markdown: false, images: false, pronunciations: false }, AT)
     .forEach((file) => { archive[file.path] = strToU8(file.text); });
   return fileOf(zipSync(archive), name);
 }
@@ -36,9 +36,9 @@ function bundleFile(name = "acervo-all-2026-09-01.zip"): File {
 /** The same bundle with a picture beside a word file, the way an export with pictures writes it. */
 function bundleWithPicture(): File {
   const archive: Record<string, Uint8Array> = {};
-  exportBundle(testGraph(), { language: "all", markdown: false, images: false, pronunciations: false }, AT)
+  exportBundle(testGraph(), { vocabularyId: "all", markdown: false, images: false, pronunciations: false }, AT)
     .forEach((file) => { archive[file.path] = strToU8(file.text); });
-  archive["media/es/picar-1.webp"] = new Uint8Array([1, 2, 3]);
+  archive["media/spanish/picar-1.webp"] = new Uint8Array([1, 2, 3]);
   return fileOf(zipSync(archive), "acervo-all-2026-09-01.zip");
 }
 
@@ -55,11 +55,11 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe("the export panel", () => {
-  it("offers every language the replica holds, and all of them together", () => {
+  it("offers every vocabulary the replica holds, and all of them together", () => {
     render(<ExportPanel snapshot={snapshotOf()} />);
     const options = within(screen.getByRole("combobox")).getAllByRole("option");
     expect(options.map((option) => option.textContent)).toEqual([
-      "All languages", "Spanish · 3 entries", "English · 1 entry"
+      "All vocabularies", "Spanish · 3 entries", "English · 1 entry"
     ]);
   });
 
@@ -69,9 +69,9 @@ describe("the export panel", () => {
     // Not synchronous any more: the clips this device does not hold are fetched before it is zipped.
     await waitFor(() => expect(saved!.name).toMatch(/^acervo-all-\d{4}-\d{2}-\d{2}\.zip$/));
 
-    fireEvent.change(screen.getByRole("combobox"), { target: { value: "es" } });
+    fireEvent.change(screen.getByRole("combobox"), { target: { value: SPANISH } });
     fireEvent.click(screen.getByRole("button", { name: "Export…" }));
-    await waitFor(() => expect(saved!.name).toMatch(/^acervo-es-\d{4}-\d{2}-\d{2}\.zip$/));
+    await waitFor(() => expect(saved!.name).toMatch(/^acervo-spanish-\d{4}-\d{2}-\d{2}\.zip$/));
   });
 });
 
@@ -93,7 +93,7 @@ describe("the import panel", () => {
   it("says what a bundle holds before writing any of it", async () => {
     render(<ImportPanel onChanged={() => {}} />);
     await choose(bundleFile());
-    expect(screen.getByText("4 entries, 2 topics, 2 languages")).toBeInTheDocument();
+    expect(screen.getByText("4 entries, 2 topics, 2 vocabularies")).toBeInTheDocument();
     expect(repository.snapshot().lexemes).toEqual([]);
   });
 
@@ -104,7 +104,7 @@ describe("the import panel", () => {
     fireEvent.click(screen.getByRole("button", { name: "Import 4 entries" }));
 
     expect(await screen.findByText("Import finished")).toBeInTheDocument();
-    expect(screen.getByText("4 added, 2 new topics, 2 new languages")).toBeInTheDocument();
+    expect(screen.getByText("4 added, 2 new topics, 2 new vocabularies")).toBeInTheDocument();
     expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted)).toHaveLength(4);
     expect(changed).toHaveBeenCalled();
   });

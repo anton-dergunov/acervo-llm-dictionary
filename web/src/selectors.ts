@@ -12,7 +12,7 @@ import {
   type StoryWord, type StudyState, type SyncFields,
   type Topic, type Vocabulary, type VocabularyGraph
 } from "./domain";
-import { glossLanguagesFor, isMandarin, languageOf, notesLanguageFor, presentationOf, type LanguagePresentation } from "./languages";
+import { glossLanguagesFor, isMandarin, notesLanguageFor, presentationOf, type LanguagePresentation } from "./languages";
 import { pinyinSearchForms } from "./pinyin";
 // Type-only, so it is erased at build time and the cycle with `yaml.ts` — which imports `Article`
 // from here — never exists at runtime.
@@ -65,10 +65,10 @@ export interface Article {
   notesLang: string;
 }
 
-export interface LanguageOption extends LanguagePresentation {
+/** One of the owner's vocabularies as the switcher offers it: `code` is its language, `id` itself. */
+export interface VocabularyOption extends LanguagePresentation {
+  id: string;
   count: number;
-  /** False for a language that has words but no vocabulary record behind it any more. */
-  configured: boolean;
 }
 
 export interface TopicOption {
@@ -91,8 +91,9 @@ export function strengthOf(study: StudyState | null): number {
   return Math.min(4, Math.max(1, Math.round(Math.log10(Math.max(study.stability, 1.1)) * 1.7 + 1)));
 }
 
-export function lexemesIn(graph: VocabularyGraph, language: string): Lexeme[] {
-  return live(graph.lexemes).filter((lexeme) => lexeme.language === language);
+/** The live words of one vocabulary. Never by language: several vocabularies may share one. */
+export function lexemesIn(graph: VocabularyGraph, vocabularyId: string): Lexeme[] {
+  return live(graph.lexemes).filter((lexeme) => lexeme.vocabularyId === vocabularyId);
 }
 
 /** What a look-up sheet says about a word the owner already has. */
@@ -110,9 +111,9 @@ const bare = (form: string) => form.normalize("NFD").replace(/\p{Mn}/gu, "").toL
  * otherwise the form is compared with each headword, with and without its article, and each lemma.
  * An inflected form this misses is found by the server's look-up, which answers with the word held.
  */
-export function heldWord(graph: VocabularyGraph, language: string, form: string,
+export function heldWord(graph: VocabularyGraph, vocabularyId: string, form: string,
                          lexemeId: string | null = null): HeldWord | null {
-  const words = lexemesIn(graph, language);
+  const words = lexemesIn(graph, vocabularyId);
   const want = bare(form);
   const found = (lexemeId ? words.find((lexeme) => lexeme.id === lexemeId) : undefined)
     ?? words.find((lexeme) => [lexeme.headword, lexeme.lemma, lexeme.headword.replace(LEADING_ARTICLE, "")]
@@ -126,39 +127,53 @@ export function vocabularies(graph: VocabularyGraph): Vocabulary[] {
     .sort((left, right) => left.order - right.order || left.language.localeCompare(right.language));
 }
 
-export function vocabularyFor(graph: VocabularyGraph, language: string): Vocabulary | null {
-  return live(graph.vocabularies).find((entry) => entry.language === language) ?? null;
+/** One live vocabulary, by id, or null for one removed or never held. */
+export function vocabularyFor(graph: VocabularyGraph, vocabularyId: string | null | undefined): Vocabulary | null {
+  return live(graph.vocabularies).find((entry) => entry.id === vocabularyId) ?? null;
+}
+
+/** The vocabulary a word, a loop or a story is in — the source of its gloss and note languages. */
+export function vocabularyOf(graph: VocabularyGraph, record: { vocabularyId: string }): Vocabulary | null {
+  return vocabularyFor(graph, record.vocabularyId);
 }
 
 /**
- * Every language the switcher offers: the ones configured, in the owner's order, plus any that
- * still hold words without a record behind them.
- *
- * A configured language with no words has to appear, or a vocabulary could never be filled — there
- * would be nowhere to switch to before the first capture. That is why this is no longer derived
- * from the lexemes alone.
+ * Every vocabulary the switcher offers, in the owner's order, each with its own words counted. A
+ * vocabulary with no words appears too, or it could never be filled: there would be nowhere to switch
+ * to before its first word. Two of one language are two rows, told apart by their names.
  */
-export function languageOptions(graph: VocabularyGraph): LanguageOption[] {
+export function vocabularyOptions(graph: VocabularyGraph): VocabularyOption[] {
   const counts = new Map<string, number>();
-  live(graph.lexemes).forEach((lexeme) => counts.set(lexeme.language, (counts.get(lexeme.language) ?? 0) + 1));
-  const configured = vocabularies(graph).map((entry) => ({
-    ...presentationOf(entry), count: counts.get(entry.language) ?? 0, configured: true
-  }));
-  const known = new Set(configured.map((option) => option.code));
-  const orphaned = [...counts.entries()]
-    .filter(([code]) => !known.has(code))
-    .map(([code, count]) => ({ ...languageOf(code), count, configured: false }))
-    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name));
-  return [...configured, ...orphaned];
+  live(graph.lexemes).forEach((lexeme) => counts.set(lexeme.vocabularyId, (counts.get(lexeme.vocabularyId) ?? 0) + 1));
+  return vocabularies(graph).map((entry) => ({ ...presentationOf(entry), id: entry.id, count: counts.get(entry.id) ?? 0 }));
 }
 
-export function inboxCount(graph: VocabularyGraph, language: string): number {
-  return lexemesIn(graph, language).filter((lexeme) => lexeme.status === "inbox").length;
+/**
+ * Where a word in `language` goes when it is added with `inViewId` on screen (`docs/features/capture.md`,
+ * "Which vocabulary"): the vocabulary in view when the word is in its language; otherwise the only
+ * vocabulary of that language. Several, none of them in view, is the owner's to choose — `choices` —
+ * and none at all is a language they keep no vocabulary of.
+ */
+export interface VocabularyTarget {
+  chosen: Vocabulary | null;
+  choices: Vocabulary[];
+}
+
+export function targetVocabulary(graph: VocabularyGraph, inViewId: string | null, language: string): VocabularyTarget {
+  const fitting = vocabularies(graph).filter((entry) => entry.language === language);
+  const inView = fitting.find((entry) => entry.id === inViewId);
+  if (inView) return { chosen: inView, choices: [] };
+  if (fitting.length === 1) return { chosen: fitting[0], choices: [] };
+  return { chosen: null, choices: fitting };
+}
+
+export function inboxCount(graph: VocabularyGraph, vocabularyId: string): number {
+  return lexemesIn(graph, vocabularyId).filter((lexeme) => lexeme.status === "inbox").length;
 }
 
 /** A topic counts the words being learned in it: not the Inbox's, and not those set aside. */
-export function topicOptions(graph: VocabularyGraph, language: string): TopicOption[] {
-  const filed = lexemesIn(graph, language).filter((lexeme) => lexeme.status === "active");
+export function topicOptions(graph: VocabularyGraph, vocabularyId: string): TopicOption[] {
+  const filed = lexemesIn(graph, vocabularyId).filter((lexeme) => lexeme.status === "active");
   return live(graph.topics)
     .slice()
     .sort((left, right) => left.order - right.order || left.name.localeCompare(right.name))
@@ -186,7 +201,7 @@ export function shortGlossOf(graph: VocabularyGraph, lexeme: Lexeme): string {
   if (lexeme.shortGloss?.trim()) return lexeme.shortGloss.trim();
   const sense = sensesOf(graph, lexeme.id)[0];
   if (sense) {
-    const preferred = glossLanguagesFor(lexeme.language, graph.vocabularies)
+    const preferred = glossLanguagesFor(vocabularyOf(graph, lexeme), lexeme.language)
       .map((lang) => sense.glosses.find((gloss) => gloss.lang === lang))
       .find(Boolean);
     const gloss = preferred ?? sense.glosses[0];
@@ -215,7 +230,7 @@ function searchHaystack(graph: VocabularyGraph, lexeme: Lexeme): string {
 }
 
 export interface ListQuery {
-  language: string;
+  vocabularyId: string;
   topic: TopicSelection;
   query: string;
   sort: SortKey;
@@ -230,9 +245,10 @@ export interface ListView {
   aside: ListRow[];
 }
 
-export function visibleRows(graph: VocabularyGraph, { language, topic, query, sort }: ListQuery): ListView {
+export function visibleRows(graph: VocabularyGraph, { vocabularyId, topic, query, sort }: ListQuery): ListView {
   const search = query.trim().toLowerCase();
-  let rows = lexemesIn(graph, language);
+  const language = vocabularyFor(graph, vocabularyId)?.language;
+  let rows = lexemesIn(graph, vocabularyId);
   if (search) {
     rows = rows.filter((lexeme) => searchHaystack(graph, lexeme).includes(search));
   } else if (topic === "inbox") {
@@ -323,10 +339,10 @@ function onePicture(images: ImagePrompt[]): ImagePrompt[] {
  * and every other point's neighbours are re-indexed around it — rather than drawn as a ghost; the
  * next map from the server will not have it either.
  */
-export function mapDataFor(graph: VocabularyGraph, map: ServerMap): MapData {
+export function mapDataFor(graph: VocabularyGraph, map: ServerMap, vocabularyId: string): MapData {
   const lexemes = new Map(live(graph.lexemes).map((lexeme) => [lexeme.id, lexeme]));
   const senses = new Map(live(graph.senses).map((sense) => [sense.id, sense]));
-  const glossLang = glossLanguagesFor(map.language, graph.vocabularies)[0];
+  const glossLang = glossLanguagesFor(vocabularyFor(graph, vocabularyId), map.language)[0];
   const kept = new Map<number, number>();
   map.points.forEach((point, index) => {
     const sense = senses.get(point.sense);
@@ -366,7 +382,7 @@ export function mapPeekFor(graph: VocabularyGraph, senseId: string): MapPeek | n
   const sense = live(graph.senses).find((entry) => entry.id === senseId);
   const lexeme = sense && live(graph.lexemes).find((entry) => entry.id === sense.lexemeId);
   if (!sense || !lexeme) return null;
-  const glossLang = glossLanguagesFor(lexeme.language, graph.vocabularies)[0] ?? null;
+  const glossLang = glossLanguagesFor(vocabularyOf(graph, lexeme), lexeme.language)[0] ?? null;
   const gloss = sense.glosses.find((entry) => entry.lang === glossLang) ?? sense.glosses[0];
   return {
     sense,
@@ -425,8 +441,8 @@ export function articleReader(graph: VocabularyGraph): (lexemeId: string) => Art
       // Without these the card image is invisible in the projection, so saving would orphan it.
       images: byAge(own.filter((image) => image.senseId === null)),
       study: weakestOf(study.get(lexemeId) ?? []),
-      glossLangs: glossLanguagesFor(lexeme.language, graph.vocabularies),
-      notesLang: notesLanguageFor(lexeme.language, graph.vocabularies)
+      glossLangs: glossLanguagesFor(vocabularyOf(graph, lexeme), lexeme.language),
+      notesLang: notesLanguageFor(vocabularyOf(graph, lexeme), lexeme.language)
     };
   };
 }
@@ -476,12 +492,18 @@ function topicsFromNames(graph: VocabularyGraph, names: string[]): Topic[] {
   });
 }
 
-export function articleFromDraft(graph: VocabularyGraph, draft: ArticleDraft): Article {
+/**
+ * A draft as the article it would be once saved, in `vocabularyId`: the vocabulary it is being added
+ * to, or the one the word it edits is in. The document names a language and never a vocabulary.
+ */
+export function articleFromDraft(graph: VocabularyGraph, draft: ArticleDraft, vocabularyId: string): Article {
   const lexemeId = draftKeys.lexeme(draft);
   const topics = topicsFromNames(graph, draft.topics);
+  const vocabulary = vocabularyFor(graph, vocabularyId);
   const lexeme: Lexeme = {
     ...UNSAVED,
     id: lexemeId,
+    vocabularyId,
     language: draft.language,
     headword: draft.headword,
     lemma: draft.lemma,
@@ -584,8 +606,8 @@ export function articleFromDraft(graph: VocabularyGraph, draft: ArticleDraft): A
     images: promptsOf(draft.images, null, "image"),
     // A document cannot carry study state, so a proposal never has any to show.
     study: null,
-    glossLangs: glossLanguagesFor(draft.language, graph.vocabularies),
-    notesLang: notesLanguageFor(draft.language, graph.vocabularies)
+    glossLangs: glossLanguagesFor(vocabulary, draft.language),
+    notesLang: notesLanguageFor(vocabulary, draft.language)
   };
 }
 
@@ -595,10 +617,10 @@ export function articleFromDraft(graph: VocabularyGraph, draft: ArticleDraft): A
    one is derived here: there is no title column, no status column, and no stored list of which words
    were eligible. */
 
-/** The loops of one language, in the order the owner put them. */
-export function loopsIn(graph: VocabularyGraph, language: string): Loop[] {
+/** The loops of one vocabulary, in the order the owner put them. */
+export function loopsIn(graph: VocabularyGraph, vocabularyId: string): Loop[] {
   return live(graph.loops)
-    .filter((loop) => loop.language === language)
+    .filter((loop) => loop.vocabularyId === vocabularyId)
     .sort((left, right) => left.position - right.position || left.id.localeCompare(right.id));
 }
 
@@ -952,10 +974,10 @@ export function formatLabel(formats: readonly { id: string; label: string }[] | 
    A story is a handful of words told back as a short illustrated tale. As with a loop, everything
    the interface shows is derived: there is no status column and no stored list of marks. */
 
-/** The stories of one language, in the order the owner put them. */
-export function storiesIn(graph: VocabularyGraph, language: string): Story[] {
+/** The stories of one vocabulary, in the order the owner put them. */
+export function storiesIn(graph: VocabularyGraph, vocabularyId: string): Story[] {
   return live(graph.stories)
-    .filter((story) => story.language === language)
+    .filter((story) => story.vocabularyId === vocabularyId)
     .sort((left, right) => left.position - right.position || left.id.localeCompare(right.id));
 }
 
@@ -993,7 +1015,7 @@ export interface MadeWord {
 }
 
 export interface MadeQuery {
-  language: string;
+  vocabularyId: string;
   query: string;
   sort: MadeSort;
   /** Zipf figure per word, lower is rarer (`GET /words/rarity`); without it Rarest has nothing to go by. */
@@ -1022,7 +1044,7 @@ export function madeLoops(graph: VocabularyGraph, query: MadeQuery): MadeList<Lo
     list.push({ lexemeId: item.lexemeId, source: item.sourceText, target: item.targetText, also: [] });
     words.set(item.loopId, list);
   }
-  return madeRows(graph, loopsIn(graph, query.language), words, query);
+  return madeRows(graph, loopsIn(graph, query.vocabularyId), words, query);
 }
 
 export function madeStories(graph: VocabularyGraph, query: MadeQuery): MadeList<Story> {
@@ -1035,7 +1057,7 @@ export function madeStories(graph: VocabularyGraph, query: MadeQuery): MadeList<
     });
     words.set(word.storyId, list);
   }
-  return madeRows(graph, storiesIn(graph, query.language), words, query);
+  return madeRows(graph, storiesIn(graph, query.vocabularyId), words, query);
 }
 
 function madeRows<T extends { id: string; createdAt: string; starred: boolean; archived: boolean }>(
@@ -1227,15 +1249,15 @@ export interface SelectedWord {
 }
 
 /**
- * The selected words that still exist in this language, in the order they were chosen. A word
+ * The selected words that still exist in this vocabulary, in the order they were chosen. A word
  * deleted since, or one whose id this replica does not hold, simply is not here: nothing repairs the
  * stored selection, because nothing needs to.
  */
-export function selectedWords(graph: VocabularyGraph, language: string, ids: readonly string[]): SelectedWord[] {
+export function selectedWords(graph: VocabularyGraph, vocabularyId: string, ids: readonly string[]): SelectedWord[] {
   const byId = new Map(live(graph.lexemes).map((lexeme) => [lexeme.id, lexeme]));
   return ids.flatMap((id) => {
     const lexeme = byId.get(id);
-    if (!lexeme || lexeme.language !== language) return [];
+    if (!lexeme || lexeme.vocabularyId !== vocabularyId) return [];
     return [{ id, headword: lexeme.headword, emoji: lexeme.emoji, shortGloss: shortGlossOf(graph, lexeme), lexeme }];
   });
 }

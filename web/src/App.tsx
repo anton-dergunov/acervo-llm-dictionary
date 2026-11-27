@@ -50,9 +50,9 @@ import {
 } from "./pwa";
 import { repository, type ReplicaSnapshot } from "./repository";
 import {
-  articleFor, articleFromDraft, inboxCount, languageOptions, lexemesIn, selectedWords, shortGlossOf,
-  topicOptions, visibleRows, type SortKey, type TopicSelection
-, loopsIn, storiesIn } from "./selectors";
+  articleFor, articleFromDraft, inboxCount, lexemesIn, loopsIn, selectedWords, shortGlossOf, storiesIn,
+  targetVocabulary, topicOptions, visibleRows, vocabularyFor, vocabularyOptions, type SortKey, type TopicSelection
+} from "./selectors";
 import Settings, { type Page as SettingsPage } from "./settings/Settings";
 import { forgetServerSettings, onSaved, SETTINGS } from "./settings/cache";
 import { receiveHostState } from "./host";
@@ -174,7 +174,9 @@ export default function App() {
   /** Whether the first sync after opening has finished, however it ended. */
   const [settled, setSettled] = useState(false);
 
-  const [language, setLanguage] = useState("");
+  /* The vocabulary in view, by id. Its language — `language` below — is read from it wherever the
+     language itself is meant: a dictionary, a `lang` attribute, a tapped word. */
+  const [vocabularyId, setVocabularyId] = useState("");
   const [topic, setTopic] = useState<TopicSelection>("all");
   const [sort, setSort] = useState<SortKey>("recent");
   const [query, setQuery] = useState("");
@@ -455,7 +457,7 @@ export default function App() {
   }, []);
 
   /* The first frame with words in it, for the launch timing in Settings ▸ Sync. */
-  const showing = snapshot !== null && language !== "";
+  const showing = snapshot !== null && vocabularyId !== "";
   useEffect(() => {
     if (showing) requestAnimationFrame(() => markStartup("shown"));
   }, [showing]);
@@ -485,9 +487,9 @@ export default function App() {
       // In the same render as the words themselves, so a cold start opens on the page you left
       // rather than flashing the first vocabulary's list on the way there.
       const place = placeIn(loaded, lastPlace());
-      // The language is chosen here too, never by an effect a render later: a first frame with no
-      // language drew every count as 0, and the tablet then sat on it while the real list rendered.
-      setLanguage(place?.language ?? languageOptions(loaded)[0]?.code ?? "");
+      // The vocabulary is chosen here too, never by an effect a render later: a first frame with no
+      // vocabulary drew every count as 0, and the tablet then sat on it while the real list rendered.
+      setVocabularyId(place?.vocabularyId ?? vocabularyOptions(loaded)[0]?.id ?? "");
       if (place) {
         setTopic(place.topic);
         setOpenId(place.openId);
@@ -508,41 +510,43 @@ export default function App() {
     if (session && repository.snapshot().ready) setSnapshot(repository.snapshot());
   }, [session, syncStatus]);
 
-  const languages = useMemo(() => (snapshot ? languageOptions(snapshot) : []), [snapshot]);
+  const vocabularyChoices = useMemo(() => (snapshot ? vocabularyOptions(snapshot) : []), [snapshot]);
+  const vocabulary = useMemo(() => (snapshot ? vocabularyFor(snapshot, vocabularyId) : null), [snapshot, vocabularyId]);
+  const language = vocabulary?.language ?? "";
 
   /* Only once there are words: before that, the empty defaults would overwrite the place a cold
      start is about to reopen. */
   const loaded = snapshot !== null;
   useEffect(() => {
-    if (loaded && language) rememberPlace({ language, topic, openId });
-  }, [loaded, language, topic, openId]);
+    if (loaded && vocabularyId) rememberPlace({ vocabularyId, topic, openId });
+  }, [loaded, vocabularyId, topic, openId]);
 
   useEffect(() => {
-    if (!languages.length) return;
-    if (!languages.some((option) => option.code === language)) setLanguage(languages[0].code);
-  }, [languages, language]);
+    if (!vocabularyChoices.length) return;
+    if (!vocabularyChoices.some((option) => option.id === vocabularyId)) setVocabularyId(vocabularyChoices[0].id);
+  }, [vocabularyChoices, vocabularyId]);
 
   const listed = useMemo(
-    () => (snapshot && language ? visibleRows(snapshot, { language, topic, query, sort }) : { rows: [], aside: [] }),
-    [snapshot, language, topic, query, sort]
+    () => (snapshot && vocabularyId ? visibleRows(snapshot, { vocabularyId, topic, query, sort }) : { rows: [], aside: [] }),
+    [snapshot, vocabularyId, topic, query, sort]
   );
   /* The rail's "All" count. Memoized like `rows`: it walks every word, and the rail repaints on every
      job the server reports. */
   const allCount = useMemo(
-    () => (snapshot && language ? visibleRows(snapshot, { language, topic: "all", query: "", sort: "recent" }).rows.length : 0),
-    [snapshot, language]
+    () => (snapshot && vocabularyId ? visibleRows(snapshot, { vocabularyId, topic: "all", query: "", sort: "recent" }).rows.length : 0),
+    [snapshot, vocabularyId]
   );
   const topics = useMemo(
-    () => (snapshot && language ? topicOptions(snapshot, language) : []),
-    [snapshot, language]
+    () => (snapshot && vocabularyId ? topicOptions(snapshot, vocabularyId) : []),
+    [snapshot, vocabularyId]
   );
-  /* The selection: this device's, per language, in the order chosen (`wordSelection.ts`). What each
+  /* The selection: this device's, per vocabulary, in the order chosen (`wordSelection.ts`). What each
      id is comes from the replica, so a word deleted since simply is not here. */
   const owner = snapshot?.ownerId ?? "";
-  const selectedIds = useSelectedIds(owner, language);
+  const selectedIds = useSelectedIds(owner, vocabularyId);
   const selection = useMemo(
-    () => (snapshot && language ? selectedWords(snapshot, language, selectedIds) : []),
-    [snapshot, language, selectedIds]
+    () => (snapshot && vocabularyId ? selectedWords(snapshot, vocabularyId, selectedIds) : []),
+    [snapshot, vocabularyId, selectedIds]
   );
   const selectedSet = useMemo(() => new Set(selection.map((word) => word.id)), [selection]);
   /* Two feeders, one renderer. A stored article is `articleFor`; a live proposal is an unsaved
@@ -551,9 +555,12 @@ export default function App() {
      for as long as it lasts and leaves it the moment it is saved or discarded — same component,
      same rule, no third feeder. */
   const article = useMemo(
-    () => (proposal && snapshot ? articleFromDraft(snapshot, proposal.diff.shown)
+    () => (proposal && snapshot
+      // A proposal edits the open word, so it is in that word's vocabulary.
+      ? articleFromDraft(snapshot, proposal.diff.shown,
+        snapshot.lexemes.find((one) => one.id === openId)?.vocabularyId ?? vocabularyId)
       : snapshot && openId ? articleFor(snapshot, openId) : null),
-    [snapshot, openId, proposal]
+    [snapshot, openId, proposal, vocabularyId]
   );
 
   const markSlot = useMemo<MarkSlot | null>(() => {
@@ -915,11 +922,11 @@ export default function App() {
    * removal and sends the lot as one write. A refusal leaves both the replica and the draft alone,
    * so nothing typed is lost to a failed save.
    */
-  async function applyYaml(text: string, minted?: ReadonlySet<string>): Promise<string | null> {
+  async function applyYaml(text: string, minted?: ReadonlySet<string>, into?: string): Promise<string | null> {
     setSaving(true);
     setProblems([]);
     try {
-      const id = await repository.saveArticle(parseArticle(text), minted);
+      const id = await repository.saveArticle(parseArticle(text), minted, into ? { vocabularyId: into } : undefined);
       setSnapshot(repository.snapshot());
       return id;
     } catch (error) {
@@ -938,8 +945,8 @@ export default function App() {
     notify("Saved to the server");
   }
 
-  async function createFromYaml(text: string) {
-    const id = await applyYaml(text);
+  async function createFromYaml(text: string, into: string) {
+    const id = await applyYaml(text, undefined, into);
     if (!id) return;
     closeCapture();
     openLexeme(id);
@@ -992,6 +999,7 @@ export default function App() {
         kind: "article",
         lexemeId: article.lexeme.id,
         language: article.lexeme.language,
+        vocabularyId: article.lexeme.vocabularyId,
         // What the proposal would save, when one is live — not `diff.shown`, which carries removed
         // records back for the reader's sake and would show the model records it just took away.
         document: proposal ? yamlForDraft(proposal.after) : yamlFor(article),
@@ -1001,7 +1009,7 @@ export default function App() {
       // why there is no tool loop. Topic-mates, capped at twenty, headword and gloss only.
       if (snapshot) {
         const mates = new Set(article.lexeme.topicIds);
-        neighbours = lexemesIn(snapshot, article.lexeme.language)
+        neighbours = lexemesIn(snapshot, article.lexeme.vocabularyId)
           .filter((lexeme) => lexeme.id !== article.lexeme.id
             && lexeme.topicIds.some((id) => mates.has(id)))
           .slice(0, 20)
@@ -1009,7 +1017,11 @@ export default function App() {
       }
     } else if (external) {
       // They do not hold this word, so there is no replica of it to send and nothing to propose.
-      subject = { kind: "reference", headword: external.word, language: external.language };
+      subject = {
+        kind: "reference", headword: external.word, language: external.language,
+        // The vocabulary it would go in, whose learner the answer is written for.
+        vocabularyId: snapshot ? targetVocabulary(snapshot, vocabularyId, external.language ?? language).chosen?.id ?? null : null
+      };
     } else {
       return Promise.reject(new Error("There is nothing to ask about."));
     }
@@ -1022,7 +1034,7 @@ export default function App() {
       turns,
       repair: options?.repair ?? null
     }, options?.requestId);
-  }, [article, askFocus, snapshot, external, reference, proposal]);
+  }, [article, askFocus, snapshot, external, reference, proposal, vocabularyId]);
 
   /** A proposal the device would not apply after the repairs, for the server's log. Writes nothing. */
   const reportProposal = useCallback((requestId: string, problem: string, found: unknown) => {
@@ -1169,10 +1181,11 @@ export default function App() {
    * nothing to read it out of — and the neighbours are left empty: a word being added has no topics
    * chosen yet, and guessing at them would be conditioning on nothing.
    */
-  const askAboutDraft = useCallback((document: string, turns: ChatTurn[], options?: AskOptions, language?: string | null) => {
+  const askAboutDraft = useCallback((document: string, turns: ChatTurn[], options?: AskOptions,
+                                      language?: string | null, into?: string | null) => {
     const deviceId = repository.state().deviceId;
     return backendSession.chat(deviceId, {
-      subject: { kind: "article", lexemeId: "", language: language ?? null, document, focus: null },
+      subject: { kind: "article", lexemeId: "", language: language ?? null, vocabularyId: into ?? null, document, focus: null },
       turns,
       repair: options?.repair ?? null
     }, options?.requestId);
@@ -1211,17 +1224,18 @@ export default function App() {
    * Capture submits text and gets back a proposal — never a stored record. Everything that saves
    * still goes through `createFromYaml`, so a generated entry and a typed one are the same write.
    */
+  /* Both carry the vocabulary in view, which the word goes in when it is in its language. */
   const captureText = useCallback((request: CaptureRequest) => {
     const deviceId = repository.state().deviceId;
-    return backendSession.captureText(deviceId, request);
-  }, []);
+    return backendSession.captureText(deviceId, { vocabulary: vocabularyId, ...request });
+  }, [vocabularyId]);
 
   /* Photo capture's round trips, which write nothing: a photo read into a page, the quick look-up a
      tap makes, and the warm-up the Photo tab sends so the first photo is not the one that waits. */
   const readPhoto = useCallback((photo: Blob) => backendSession.readPhoto(photo), []);
   const storePhoto = useCallback((photo: Blob) => backendSession.storePhoto(photo), []);
   const lookUp = useCallback((request: QuickLookUpRequest, signal: AbortSignal) =>
-    backendSession.resolveCapture(repository.state().deviceId, request, signal), []);
+    backendSession.resolveCapture(repository.state().deviceId, { vocabulary: vocabularyId, ...request }, signal), [vocabularyId]);
   const warmPhoto = useCallback(() => { void backendSession.warmPhoto().catch(() => undefined); }, []);
 
   /* A word tapped while reading (`LookUpSheet.tsx`): the same quick look-up, an Add that queues the
@@ -1272,20 +1286,20 @@ export default function App() {
   function toggleSelection(id: string, fromArticle = false) {
     const lexeme = snapshot?.lexemes.find((one) => one.id === id);
     if (!owner || !lexeme) return;
-    const on = toggleSelected(owner, lexeme.language, id);
+    const on = toggleSelected(owner, lexeme.vocabularyId, id);
     const narrow = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 720px)").matches;
     if (fromArticle && narrow) {
-      const count = selectedWords(snapshot!, lexeme.language, [...selectedIds, id]).length;
+      const count = selectedWords(snapshot!, lexeme.vocabularyId, [...selectedIds, id]).length;
       notify(on ? `Added to your selection · ${count} word${count === 1 ? "" : "s"}` : "Removed from your selection");
     }
   }
 
   /* Forgetting is one tap, so it can be undone: a selection can be twenty words gathered over an hour. */
   function clearSelection() {
-    if (!owner || !language) return;
-    const before = clearSelected(owner, language);
-    const lang = language;
-    notify("Selection cleared", { label: "Undo", run: () => restoreSelected(owner, lang, before) });
+    if (!owner || !vocabularyId) return;
+    const before = clearSelected(owner, vocabularyId);
+    const from = vocabularyId;
+    notify("Selection cleared", { label: "Undo", run: () => restoreSelected(owner, from, before) });
   }
 
   async function removeLexeme(id: string) {
@@ -1446,7 +1460,7 @@ export default function App() {
     if (!moved) return;
     // The rail drops the Inbox tab once it is empty, so standing on it would leave you looking at a
     // list with no way back to itself. Only the tab moves; an open word stays open.
-    if (topic === "inbox" && language && !inboxCount(next, language)) setTopic("all");
+    if (topic === "inbox" && vocabularyId && !inboxCount(next, vocabularyId)) setTopic("all");
     notify(moved === 1 ? "Filed — it is in its topics now" : `Filed ${moved} words`);
   }
 
@@ -1465,7 +1479,7 @@ export default function App() {
     const next = repository.snapshot();
     setSnapshot(next);
     if (!moved) return;
-    if (topic === "inbox" && language && !inboxCount(next, language)) setTopic("all");
+    if (topic === "inbox" && vocabularyId && !inboxCount(next, vocabularyId)) setTopic("all");
     if (aside) notify(moved === 1 ? "Set aside — it waits at the foot of its topics" : `Set ${moved} words aside`,
       { label: "Undo", run: () => void setAside(ids, false) });
     else notify(moved === 1 ? "Brought back" : `Brought back ${moved} words`);
@@ -1515,18 +1529,18 @@ export default function App() {
   if (showInstall) return <InstallGate onContinue={dismissInstall} />;
   if (session === undefined) return <Launch />;
   if (session === null) return <SignIn onSignedIn={setSession} />;
-  /* The interface waits for the replica **and a chosen language** rather than being drawn empty:
+  /* The interface waits for the replica **and a chosen vocabulary** rather than being drawn empty:
      counts of zero and no vocabulary are a statement about the owner's words, not a loading state.
      A replica with nothing in it waits for the first sync too — a first sign-in, or a stored copy
      being downloaded again — and opens as it is once that has ended, whether it worked or not. */
-  if (!snapshot || (!language && (languages.length > 0 || !settled))) return <Launch />;
+  if (!snapshot || (!vocabularyId && (vocabularyChoices.length > 0 || !settled))) return <Launch />;
 
-  const active = languages.find((option) => option.code === language) ?? languageOf(language || "en");
+  const active = vocabularyChoices.find((option) => option.id === vocabularyId) ?? languageOf(language || "en");
   /** Both surfaces you compose in. The main region stops scrolling and hands that to the view. */
   /* `asking` joins this for the same reason the other two are here: a surface that owns the height
      and scrolls itself must not sit inside a region that also scrolls. */
   const composing = Boolean(addTab) || Boolean(article && mode === "edit") || asking || loops || stories || map;
-  const inbox = snapshot && language ? inboxCount(snapshot, language) : 0;
+  const inbox = snapshot && vocabularyId ? inboxCount(snapshot, vocabularyId) : 0;
   const surfaced = map || loops || stories;
   /* The selection bar: over the list, the map and an article, never over Add, the loops or the
      stories, whose own Make buttons offer the selection. Over an article `styles.css` keeps it to a
@@ -1611,8 +1625,8 @@ export default function App() {
 
           {/* What is playing, here only on a tablet-sized window whose rail an article has hidden: a
               phone has the bar at the foot and a wider window the rail's card. `styles.css` picks. */}
-          {snapshot && language && <MadeBar
-            graph={snapshot} language={language} skin="chip"
+          {snapshot && vocabularyId && <MadeBar
+            graph={snapshot} vocabularyId={vocabularyId} skin="chip"
             onLoops={openLoops} onStories={openStories} onOpenStory={openPlayingStory}
           />}
 
@@ -1625,18 +1639,20 @@ export default function App() {
             aria-label={update === "ready" ? "Open settings; an update is ready" : "Open settings"}
           ><GearIcon /></button>
 
+          {/* The vocabulary in view. Any number may share a language, so the menu lists vocabularies by
+              name, and the button keeps the flag and the language's code. */}
           <button
-            className="tb-btn lang-btn" aria-haspopup="menu" aria-label="Vocabulary language"
+            className="tb-btn lang-btn" aria-haspopup="menu" aria-label={`Vocabulary: ${active.name}`}
             onClick={(event) => { event.stopPropagation(); setLangMenu((open) => !open); }}
           >
             <span className="flag">{active.flag}</span>
             <span className="code">{active.code.toUpperCase()}</span>
           </button>
           <div className={`menu ${langMenu ? "open" : ""}`}>
-            <div className="label menu-label">Vocabulary language</div>
-            {languages.map((option) => <button
-              key={option.code} className={option.code === language ? "on" : ""}
-              onClick={() => { setLanguage(option.code); chooseTopic("all"); setLangMenu(false); }}
+            <div className="label menu-label">Vocabulary</div>
+            {vocabularyChoices.map((option) => <button
+              key={option.id} className={option.id === vocabularyId ? "on" : ""}
+              onClick={() => { setVocabularyId(option.id); chooseTopic("all"); setLangMenu(false); }}
             >
               <span>{option.flag}</span><span>{option.name}</span><span className="cnt">{option.count}</span>
             </button>)}
@@ -1678,19 +1694,19 @@ export default function App() {
             onClick={openLoops}
           >
             <span className="ic">♪</span><span className="nm">Loops</span>
-            <span className="cnt">{snapshot && language ? loopsIn(snapshot, language).filter((one) => !one.archived).length : 0}</span>
+            <span className="cnt">{snapshot && vocabularyId ? loopsIn(snapshot, vocabularyId).filter((one) => !one.archived).length : 0}</span>
           </button>
           <button
             className={`tab ${stories ? "on" : ""}`} title="Stories" aria-label="Stories"
             onClick={openStories}
           >
             <span className="ic">📖</span><span className="nm">Stories</span>
-            <span className="cnt">{snapshot && language ? storiesIn(snapshot, language).filter((one) => !one.archived).length : 0}</span>
+            <span className="cnt">{snapshot && vocabularyId ? storiesIn(snapshot, vocabularyId).filter((one) => !one.archived).length : 0}</span>
           </button>
           {/* What is playing, at the foot of the rail: where the ways in are, and on screen at every
               width a list is. A phone draws the bar at the foot instead. */}
-          {snapshot && language && <MadeBar
-            graph={snapshot} language={language} skin="rail"
+          {snapshot && vocabularyId && <MadeBar
+            graph={snapshot} vocabularyId={vocabularyId} skin="rail"
             onLoops={openLoops} onStories={openStories} onOpenStory={openPlayingStory}
           />}
         </nav>
@@ -1699,12 +1715,13 @@ export default function App() {
             work, the list behind it is not, and a bounded column is the only shape that keeps a
             title and a save button on screen at every window size. */}
         <main className={`main ${composing ? "composing" : ""}${carding && !composing ? " cards-on" : ""}`} ref={main}>
-          {map && snapshot && language ? <MapView
-          graph={snapshot} owner={snapshot.ownerId} language={language} languages={languages} bar={mapBar}
-          camera={mapCameras.current.get(language) ?? null}
-          onCamera={(camera) => mapCameras.current.set(language, camera)}
+          {map && snapshot && vocabulary ? <MapView
+          graph={snapshot} owner={snapshot.ownerId} vocabularyId={vocabulary.id} language={vocabulary.language}
+          vocabularies={vocabularyChoices} bar={mapBar}
+          camera={mapCameras.current.get(vocabulary.id) ?? null}
+          onCamera={(camera) => mapCameras.current.set(vocabulary.id, camera)}
           selected={mapSense} onSelect={setMapSense}
-          onLanguage={(code) => { setMapSense(null); setLanguage(code); }}
+          onVocabulary={(id) => { setMapSense(null); setVocabularyId(id); }}
           fly={mapFly} onFlown={() => setMapFly(null)}
           onOpen={(lexemeId, senseId) => { mapReturn.current = true; setMap(false); openLexeme(lexemeId, senseId); }}
           chosen={selectedSet} onToggleChosen={(lexemeId) => toggleSelection(lexemeId)}
@@ -1715,13 +1732,13 @@ export default function App() {
             articleReturn.current = null;
             if (back) openLexeme(back.lexeme, back.sense);
           }}
-        /> : stories && snapshot && language ? <StoryView
-          graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={storyPlace}
+        /> : stories && snapshot && vocabulary ? <StoryView
+          graph={snapshot} vocabulary={vocabulary} languageName={active.name} query={madeQuery} opening={storyPlace}
           onClose={() => { setStories(false); setMadeQuery(""); }}
           onMark={(id, marks) => void markMade("stories", id, marks)}
           onDelete={removeStory}
-        /> : loops && snapshot && language ? <LoopView
-          graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={loopPlace}
+        /> : loops && snapshot && vocabulary ? <LoopView
+          graph={snapshot} vocabulary={vocabulary} languageName={active.name} query={madeQuery} opening={loopPlace}
           onClose={() => { setLoops(false); setMadeQuery(""); }}
           onMark={(id, marks) => void markMade("loops", id, marks)}
           onDelete={removeLoop}
@@ -1737,7 +1754,8 @@ export default function App() {
             tab={addTab} onTab={setAddTab} graph={snapshot} problems={problems} busy={saving}
             seed={addSeed} captureHealth={captureHealth}
             onClose={closeCapture}
-            onCreate={(draft) => void createFromYaml(draft)}
+            vocabularyId={vocabularyId}
+            onCreate={(draft, into) => void createFromYaml(draft, into)}
             onCapture={captureText}
             onOpenLexeme={(id) => { closeCapture(); openLexeme(id); }}
             onFoldIn={foldIn}
@@ -1880,14 +1898,15 @@ export default function App() {
                     onDismiss={() => dismissEnrichment(article.lexeme.id)}
                   />}
                   onWordTap={(tapped) => articleLook.open({
-                    tapped, language: article.lexeme.language, sourceTitle: `Entry · ${article.lexeme.headword}`,
+                    tapped, language: article.lexeme.language, vocabularyId: article.lexeme.vocabularyId,
+                    sourceTitle: `Entry · ${article.lexeme.headword}`,
                     self: proposal ? null : article.lexeme.id
                   })}
                   onTapAway={closeArticleLook}
                   lookSheet={docked ? null
                     : <LookUpSheet state={articleLook} placement={view === "cards" ? "over" : "stuck"} />}
                   onMap={proposal || article.lexeme.status === "aside" ? null : (senseId) => {
-                    if (article.lexeme.language !== language) setLanguage(article.lexeme.language);
+                    if (article.lexeme.vocabularyId !== vocabularyId) setVocabularyId(article.lexeme.vocabularyId);
                     setMapSense(senseId);
                     setMapFly(senseId);
                     openMap();
@@ -1936,9 +1955,9 @@ export default function App() {
         </main>
 
         {/* The foot of the window: a row of `.app`, holding the selection bar and the Made bar. */}
-        {snapshot && language && <div className="foot">
+        {snapshot && vocabularyId && <div className="foot">
           {showSelection && <SelectionBar
-            words={selection} language={language}
+            words={selection} language={language} name={active.name}
             onOpen={(id) => {
               if (map) { mapReturn.current = true; setMap(false); }
               openLexeme(id);
@@ -1955,16 +1974,16 @@ export default function App() {
               picks; it steps aside while what is playing is open in its own player. With a selection
               it gives the selection bar its place and draws only what is playing. */}
           {!article && !external && !addTab && !map && <MadeBar
-            graph={snapshot} language={language} skin="bar" playerOnly={showSelection || made}
+            graph={snapshot} vocabularyId={vocabularyId} skin="bar" playerOnly={showSelection || made}
             onLoops={openLoops} onStories={openStories} onMap={openMap} onOpenStory={openPlayingStory}
           />}
         </div>}
       </div>
     </div>
 
-    {makingStory && snapshot && language && <StoryDialog
+    {makingStory && snapshot && vocabularyId && <StoryDialog
       graph={snapshot}
-      query={{ language, topic, query: made ? "" : query, sort }}
+      query={{ vocabularyId, topic, query: made ? "" : query, sort }}
       selection={selection} from={makingStory}
       deviceId={snapshot.deviceId ?? ""}
       onClose={() => setMakingStory(null)}
@@ -1972,8 +1991,8 @@ export default function App() {
       onNotify={notify}
     />}
 
-    {makingLoop && snapshot && language && <LoopDialog
-      graph={snapshot} query={{ language, topic, query: made ? "" : query, sort }} deviceId={snapshot.deviceId}
+    {makingLoop && snapshot && vocabularyId && <LoopDialog
+      graph={snapshot} query={{ vocabularyId, topic, query: made ? "" : query, sort }} deviceId={snapshot.deviceId}
       selection={selection} from={makingLoop}
       onClose={() => setMakingLoop(null)}
       onMade={() => notify("Making your loop — it takes a few minutes")}

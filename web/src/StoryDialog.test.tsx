@@ -10,7 +10,7 @@ import { backendSession, type Job, type StoryTypes } from "./api";
 import type { Story } from "./domain";
 import StoryDialog, { resetStoryTypesForTests } from "./StoryDialog";
 import { selectedWords } from "./selectors";
-import { testGraph } from "./testGraph";
+import { SPANISH, testGraph } from "./testGraph";
 
 const TYPES = {
   types: [
@@ -24,7 +24,7 @@ const TYPES = {
 
 function open() {
   render(<StoryDialog
-    graph={testGraph()} query={{ language: "es", topic: "all", query: "", sort: "recent" }}
+    graph={testGraph()} query={{ vocabularyId: SPANISH, topic: "all", query: "", sort: "recent" }}
     deviceId="device000000001" onClose={() => undefined} onMade={() => undefined}
     onNotify={() => undefined}
   />);
@@ -93,7 +93,7 @@ describe("the words", () => {
     // The Inbox holds one word, espolvorear, which has no single term to say: a loop can use none of
     // it, a story can. Drawing from a loop's words sent a story no words at all.
     render(<StoryDialog
-      graph={testGraph()} query={{ language: "es", topic: "inbox", query: "", sort: "recent" }}
+      graph={testGraph()} query={{ vocabularyId: SPANISH, topic: "inbox", query: "", sort: "recent" }}
       deviceId="device000000001" onClose={() => undefined} onMade={() => undefined}
       onNotify={() => undefined}
     />);
@@ -106,8 +106,8 @@ describe("the words", () => {
   it("sends the selection as chosen when opened from it", async () => {
     const graph = testGraph();
     render(<StoryDialog
-      graph={graph} query={{ language: "es", topic: "all", query: "", sort: "recent" }}
-      selection={selectedWords(graph, "es", ["lexemeespolv001", "lexemepicar0001"])} from="selection"
+      graph={graph} query={{ vocabularyId: SPANISH, topic: "all", query: "", sort: "recent" }}
+      selection={selectedWords(graph, SPANISH, ["lexemeespolv001", "lexemepicar0001"])} from="selection"
       deviceId="device000000001" onClose={() => undefined} onMade={() => undefined}
       onNotify={() => undefined}
     />);

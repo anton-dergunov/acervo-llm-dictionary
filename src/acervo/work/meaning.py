@@ -2,7 +2,7 @@
 
 A job because it is a model call, and a map must never wait on one: the map is already on screen with
 the words nearest each region's centre, and the names replace them when this finishes. The subject is
-the language, so a second drawing before the first is named queues nothing new — and a job whose map
+the vocabulary, so a second drawing before the first is named queues nothing new — and a job whose map
 has since been redrawn finds it stale and does nothing.
 """
 

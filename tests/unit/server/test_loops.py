@@ -199,14 +199,20 @@ def test_a_list_that_is_not_words_is_refused(server, generator, ids):
     assert ask(server, ids).status_code in (400, 404)
 
 
-def test_two_languages_in_one_loop_are_refused(server, generator):
+def test_two_vocabularies_in_one_loop_are_refused_even_of_one_language(server, generator):
     made = words(server, 1)
     server.push({"vocabularies": [vocabulary(id="vocaben00000001", language="en",
-                                             definitionLang="en", glossLangs=["ru"], notesLang="ru")]})
-    english = lexeme(language="en", headword="turmoil", lemma="turmoil", status="active",
-                     primaryGloss="turmoil")
-    server.push({"lexemes": [english], "senses": [sense(english["id"], definitionLang="en")]})
-    assert ask(server, [made[0]["id"], english["id"]]).status_code == 400
+                                             definitionLang="en", glossLangs=["ru"], notesLang="ru"),
+                                  vocabulary(id="vocabstarter001", displayName="Spanish · Everyday words")]})
+    english = lexeme(vocabularyId="vocaben00000001", language="en", headword="turmoil", lemma="turmoil",
+                     status="active", primaryGloss="turmoil")
+    carro = lexeme(vocabularyId="vocabstarter001", headword="el carro", lemma="carro", status="active",
+                   primaryGloss="the car")
+    server.push({"lexemes": [english, carro], "senses": [sense(english["id"], definitionLang="en"), sense(carro["id"])]})
+    for mixed in ([made[0]["id"], english["id"]], [made[0]["id"], carro["id"]]):
+        refused = ask(server, mixed)
+        assert refused.status_code == 400
+        assert refused.json()["error"]["message"] == "Every word in a loop is from one vocabulary."
 
 
 # ── trying again ────────────────────────────────────────────────────────────

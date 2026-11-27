@@ -32,6 +32,9 @@ class Target:
     kind: str
     id: str
     lexeme_id: str
+    # The vocabulary of the word it belongs to, whose variety it is heard in when it is in that
+    # vocabulary's language.
+    vocabulary_id: str
     text: str
     language: str
     # The example's own emotion, whether or not it will be sent: that is the service's decision.
@@ -75,6 +78,7 @@ def target_in(changes: Mapping[str, list[dict]], kind: str, identifier: str) -> 
         kind=kind,
         id=identifier,
         lexeme_id=lexeme["id"],
+        vocabulary_id=str(lexeme.get("vocabularyId") or ""),
         text=str(text),
         language=str(language),
         emotion=(emotion or "").strip() or None,

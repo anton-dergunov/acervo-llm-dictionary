@@ -13,7 +13,7 @@ usage() {
   echo "              build-dictionary --all --language es,en,zh" >&2
   echo "       run-worker.sh [--root PATH] backfill <arguments...>" >&2
   echo "         e.g. backfill --owner-email learner@account.example.com --limit 50" >&2
-  echo "              backfill --owner-email learner@account.example.com --language es --dry-run" >&2
+  echo "              backfill --owner-email learner@account.example.com --vocabulary Spanish --dry-run" >&2
   exit 2
 }
 

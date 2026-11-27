@@ -245,7 +245,7 @@ export default function StoryReader({ story, title, parts, words, entries, recor
   // The sheet belongs to the page it was opened on.
   useEffect(() => lookAway(), [at, lookAway]);
   const lookAt = (tapped: TappedWord, play: LookUpAction | null) => look({
-    tapped, play, language: story.language, sourceTitle: `Story · ${title}`,
+    tapped, play, language: story.language, vocabularyId: story.vocabularyId, sourceTitle: `Story · ${title}`,
     from: { kind: "story", storyId: story.id, page: at }
   });
   const listenToSelection = (range: Range) => {

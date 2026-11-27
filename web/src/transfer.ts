@@ -18,11 +18,12 @@
 
 import { Document, isScalar, isSeq, parse, Scalar, visit } from "yaml";
 import { SCHEMA_VERSION } from "./api";
-import { CEFR_LEVELS, type CefrLevel, type Lexeme, type PronunciationTarget, type TopicInput, type VocabularyGraph, type VocabularyInput } from "./domain";
+import { CEFR_LEVELS, type CefrLevel, type Lexeme, type PronunciationTarget, type TopicInput, type Vocabulary, type VocabularyGraph, type VocabularyInput } from "./domain";
 import { newId } from "./ids";
 import { markdownFor } from "./markdown";
 import type { AcervoRepository } from "./repository";
-import { articleReader, lexemesIn, languageOptions, sensesOf, vocabularies } from "./selectors";
+import { glossLanguagesFor, notesLanguageFor, presentationOf } from "./languages";
+import { articleReader, lexemesIn, sensesOf, vocabularies } from "./selectors";
 import { draftFor, parseArticle, yamlForDraft, YamlProblems, type ArticleDraft } from "./yaml";
 
 /**
@@ -48,8 +49,8 @@ export interface BundleFile {
 }
 
 export interface ExportOptions {
-  /** A language tag, or every language the replica holds. */
-  language: string | "all";
+  /** A vocabulary's id, or every vocabulary the replica holds. */
+  vocabularyId: string | "all";
   markdown: boolean;
   /**
    * Whether to carry the picture files as well as the records that name them.
@@ -146,11 +147,34 @@ export function namedWords<T extends NamedWord>(lexemes: T[]): Array<{ lexeme: T
     });
 }
 
-export const wordPath = (language: string, name: string) => `${language}/${name}.yaml`;
+/** `spanish/picar.yaml`: a word file, in its vocabulary's directory (`BundleVocabulary.directory`). */
+export const wordPath = (directory: string, name: string) => `${directory}/${name}.yaml`;
 
-/** `media/es/picar-2.webp`: the picture of the second sense of `es/picar.yaml`. */
-export const picturePath = (language: string, name: string, senseIndex: number) =>
-  `${MEDIA_DIRECTORY}/${language}/${name}-${senseIndex + 1}.webp`;
+/** `media/spanish/picar-2.webp`: the picture of the second sense of `spanish/picar.yaml`. */
+export const picturePath = (directory: string, name: string, senseIndex: number) =>
+  `${MEDIA_DIRECTORY}/${directory}/${name}-${senseIndex + 1}.webp`;
+
+/**
+ * A vocabulary as a bundle carries it: its record, and the directory its words are filed under.
+ * Named rather than numbered, so an archive opened in Finder says what is in it — `spanish/`,
+ * `spanish-mexico-everyday-words/` — and two vocabularies of one language never share one.
+ */
+export type BundleVocabulary = VocabularyInput & { directory: string };
+
+/**
+ * Each vocabulary's directory: its name as a slug, numbered when two names make the same one. A name
+ * with no Latin form keeps its own script, as a word's file name does (`slugFor`).
+ */
+export function directoriesFor(entries: Pick<Vocabulary, "language" | "displayName">[]): string[] {
+  const taken = new Map<string, number>();
+  return entries.map((entry) => {
+    const name = entry.displayName ?? presentationOf({ ...entry, flag: null, region: null } as Vocabulary).name;
+    const base = latinise(name) || ownScript(name) || latinise(entry.language) || "vocabulary";
+    const seen = taken.get(base) ?? 0;
+    taken.set(base, seen + 1);
+    return seen === 0 ? base : `${base}-${seen + 1}`;
+  });
+}
 
 /* ── writing ────────────────────────────────────────────────────────────*/
 
@@ -214,10 +238,19 @@ export function stripIds(draft: ArticleDraft): ArticleDraft {
   };
 }
 
-function vocabularyContent(graph: VocabularyGraph, languages: string[]): VocabularyInput[] {
-  return vocabularies(graph)
-    .filter((entry) => languages.includes(entry.language))
-    .map((entry) => ({
+/** The vocabularies an export carries, each with its directory, in the owner's order. */
+function exported(graph: VocabularyGraph, options: Pick<ExportOptions, "vocabularyId">): Array<{ vocabulary: Vocabulary; directory: string }> {
+  const all = vocabularies(graph);
+  const directories = directoriesFor(all);
+  return all
+    .map((vocabulary, index) => ({ vocabulary, directory: directories[index] }))
+    .filter(({ vocabulary }) => options.vocabularyId === "all" || vocabulary.id === options.vocabularyId);
+}
+
+function vocabularyContent(chosen: Array<{ vocabulary: Vocabulary; directory: string }>): BundleVocabulary[] {
+  return chosen
+    .map(({ vocabulary: entry, directory }) => ({
+      directory,
       language: entry.language,
       definitionLang: entry.definitionLang,
       glossLangs: entry.glossLangs,
@@ -262,21 +295,16 @@ export interface BundlePicture {
  * "the second sense of picar" is a thing you can find in the word file.
  */
 export function picturesIn(graph: VocabularyGraph, options: ExportOptions): BundlePicture[] {
-  const present = languageOptions(graph).map((option) => option.code);
   const articleOf = articleReader(graph);
-  const languages = options.language === "all"
-    ? present
-    : present.filter((code) => code === options.language);
-
   const pictures: BundlePicture[] = [];
-  languages.forEach((language) => {
-    namedWords(lexemesIn(graph, language)).forEach(({ lexeme, name }) => {
+  exported(graph, options).forEach(({ vocabulary, directory }) => {
+    namedWords(lexemesIn(graph, vocabulary.id)).forEach(({ lexeme, name }) => {
       const article = articleOf(lexeme.id);
       if (!article) return;
       article.senses.forEach((entry, index) => {
         entry.images.forEach((image) => {
           if (!image.imageRef) return;
-          pictures.push({ path: picturePath(language, name, index), reference: image.imageRef });
+          pictures.push({ path: picturePath(directory, name, index), reference: image.imageRef });
         });
       });
     });
@@ -310,24 +338,22 @@ const extensionOf = (reference: string) => reference.split(".").pop() || "mp3";
 /**
  * Which clips a bundle would carry, and the per-word `clips.yaml` that describes them.
  *
- * Under `audio/<language>/<slug>/`, beside the word file of the same slug, and named for what they
+ * Under `audio/<directory>/<slug>/`, beside the word file of the same slug, and named for what they
  * read — `headword.mp3`, `example-2-1.mp3` — so the directory can be browsed and played by ear.
  * Only a clip that still says what its record says: a stale one is a recording of words the word no
  * longer has, and carrying it would import it as current.
  */
 export function pronunciationsIn(graph: VocabularyGraph, options: ExportOptions): { files: BundleFile[]; clips: BundleClip[] } {
-  const present = languageOptions(graph).map((option) => option.code);
   const articleOf = articleReader(graph);
-  const languages = options.language === "all" ? present : present.filter((code) => code === options.language);
   const files: BundleFile[] = [];
   const clips: BundleClip[] = [];
   const live = graph.pronunciations.filter((clip) => !clip.deleted);
 
-  languages.forEach((language) => {
-    namedWords(lexemesIn(graph, language)).forEach(({ lexeme, name }) => {
+  exported(graph, options).forEach(({ vocabulary, directory: home }) => {
+    namedWords(lexemesIn(graph, vocabulary.id)).forEach(({ lexeme, name }) => {
       const article = articleOf(lexeme.id);
       if (!article) return;
-      const directory = `${AUDIO_DIRECTORY}/${language}/${name}`;
+      const directory = `${AUDIO_DIRECTORY}/${home}/${name}`;
       const entries: ClipEntry[] = [];
       const carry = (target: PronunciationTarget, id: string, text: string, name: string) => {
         const clip = live.find((one) => one.targetKind === target && one.targetId === id && one.text === text);
@@ -353,8 +379,8 @@ export function pronunciationsIn(graph: VocabularyGraph, options: ExportOptions)
 }
 
 /**
- * What a bundle says, before it is files: the languages, their vocabulary and topic records, and
- * each word's document under the name its files take (`namedWords`).
+ * What a bundle says, before it is files: its vocabularies and topics, and each word's document under
+ * its vocabulary's directory and the name its files take (`namedWords`).
  *
  * Export fills it from the replica. The starter vocabularies fill it from the drafts their builder
  * composed (`web/scripts/starter-bundle.ts`), so a starter is byte for byte the bundle an export of
@@ -362,10 +388,9 @@ export function pronunciationsIn(graph: VocabularyGraph, options: ExportOptions)
  */
 export interface BundleContent {
   exportedAt: string;
-  languages: string[];
-  vocabularies: VocabularyInput[];
+  vocabularies: BundleVocabulary[];
   topics: TopicInput[];
-  words: Array<{ language: string; name: string; draft: ArticleDraft }>;
+  words: Array<{ directory: string; name: string; draft: ArticleDraft }>;
 }
 
 /** The manifest, the vocabulary and topic records, and one file per word. */
@@ -379,7 +404,7 @@ export function bundleFiles(content: BundleContent): BundleFile[] {
         format: BUNDLE_FORMAT,
         schemaVersion: SCHEMA_VERSION,
         exportedAt: quoted(content.exportedAt),
-        languages: content.languages,
+        languages: [...new Set(content.vocabularies.map((entry) => entry.language))],
         counts: {
           vocabularies: content.vocabularies.length,
           topics: content.topics.length,
@@ -389,37 +414,33 @@ export function bundleFiles(content: BundleContent): BundleFile[] {
     },
     { path: VOCABULARIES_FILE, text: document(content.vocabularies) },
     { path: TOPICS_FILE, text: document(content.topics) },
-    ...content.words.map(({ language, name, draft }) => ({
-      path: wordPath(language, name),
+    ...content.words.map(({ directory, name, draft }) => ({
+      path: wordPath(directory, name),
       text: yamlForDraft(stripIds(draft))
     }))
   ];
 }
 
 export function exportBundle(graph: VocabularyGraph, options: ExportOptions, exportedAt: string): BundleFile[] {
-  const present = languageOptions(graph).map((option) => option.code);
   const articleOf = articleReader(graph);
-  const languages = options.language === "all"
-    ? present
-    : present.filter((code) => code === options.language);
+  const chosen = exported(graph, options);
 
   // No study state: review history is irreplaceable but it is not vocabulary, and it is backed up
   // with the Anki collection it belongs to (`docs/plans/backups.md`).
-  const words = languages.flatMap((language) =>
-    namedWords(lexemesIn(graph, language)).flatMap(({ lexeme, name }) => {
+  const words = chosen.flatMap(({ vocabulary, directory }) =>
+    namedWords(lexemesIn(graph, vocabulary.id)).flatMap(({ lexeme, name }) => {
       const article = articleOf(lexeme.id);
-      return article ? [{ language, name, draft: draftFor(article) }] : [];
+      return article ? [{ directory, name, draft: draftFor(article) }] : [];
     }));
   const markdown = options.markdown
-    ? languages.flatMap((language) => markdownFor(graph, language, exportedAt)
+    ? chosen.flatMap(({ vocabulary }) => markdownFor(graph, vocabulary, exportedAt)
       .map((file) => ({ path: `${MARKDOWN_DIRECTORY}/${file.path}`, text: file.text })))
     : [];
 
   return [
     ...bundleFiles({
       exportedAt,
-      languages,
-      vocabularies: vocabularyContent(graph, languages),
+      vocabularies: vocabularyContent(chosen),
       topics: topicContent(graph),
       words
     }),
@@ -428,8 +449,10 @@ export function exportBundle(graph: VocabularyGraph, options: ExportOptions, exp
   ];
 }
 
-export function bundleName(language: string | "all", exportedAt: string): string {
-  return `acervo-${language === "all" ? "all" : language}-${exportedAt.slice(0, 10)}.zip`;
+/** `acervo-spanish-2026-11-20.zip`, or `acervo-all-…` for every vocabulary. */
+export function bundleName(graph: VocabularyGraph, vocabularyId: string | "all", exportedAt: string): string {
+  const chosen = vocabularyId === "all" ? null : exported(graph, { vocabularyId })[0];
+  return `acervo-${chosen?.directory ?? "all"}-${exportedAt.slice(0, 10)}.zip`;
 }
 
 /* ── reading ────────────────────────────────────────────────────────────*/
@@ -441,9 +464,10 @@ export interface BundleProblem {
 
 export interface BundlePlan {
   schemaVersion: number;
-  vocabularies: VocabularyInput[];
+  vocabularies: BundleVocabulary[];
   topics: TopicInput[];
-  articles: { path: string; draft: ArticleDraft }[];
+  /** Each word file, with the directory that says which of `vocabularies` it is in. */
+  articles: { path: string; directory: string; draft: ArticleDraft }[];
   /** Word file path (`es/picar.yaml`) → the clips its `clips.yaml` describes. */
   clips: Map<string, ClipEntry[]>;
   problems: BundleProblem[];
@@ -486,7 +510,7 @@ export interface BundlePlan {
  * the sentence it illustrates and does not get an anchor invented for it — matching by position or
  * by text would be a guess, and a wrong anchor puts the picture under the wrong sentence.
  */
-const READABLE = new Set([SCHEMA_VERSION, 21, 20, 19, 14, 9, 8, 7, 6]);
+const READABLE = new Set([SCHEMA_VERSION, 24, 21, 20, 19, 14, 9, 8, 7, 6]);
 
 /**
  * Version 15 gave a story part a recording. A story is not in a bundle and no word file changed, so
@@ -503,12 +527,18 @@ const READABLE = new Set([SCHEMA_VERSION, 21, 20, 19, 14, 9, 8, 7, 6]);
  *
  * Version 22 folded a word's `learned`, `retired` and `suppressed` into one status, `aside`: each
  * meant the owner had put the word out of the way, so each reads as it.
+ *
+ * Version 25 let several vocabularies share a language, so a vocabulary names the directory its words
+ * are under. Before it a bundle held at most one vocabulary per language, with its words under the
+ * language's code, so each is given `directory: <its language>` — a new field whose value is certain,
+ * not guessed.
  */
 function upgradeBundle(files: BundleFile[], from: number): BundleFile[] {
   if (from === SCHEMA_VERSION) return files;
   if (READABLE.has(from)) {
     const stripped = from <= 9;
-    return files.map((file) => isWordFile(file.path)
+    return files.map((file) => file.path === VOCABULARIES_FILE ? { ...file, text: withDirectories(file.text) }
+      : isWordFile(file.path)
       ? {
           ...file,
           text: (stripped
@@ -524,6 +554,18 @@ function upgradeBundle(files: BundleFile[], from: number): BundleFile[] {
     `This bundle was exported from schema version ${from} and Acervo now uses version ${SCHEMA_VERSION}. `
     + "Convert its YAML files to the current shape and import it again."
   );
+}
+
+/** Version 25's adaptation: each vocabulary under the directory named for its language. Text that
+ *  does not read as a list of records is left as it is, for `readRecords` to report. */
+function withDirectories(text: string): string {
+  let parsed: unknown;
+  try { parsed = parse(text); } catch { return text; }
+  if (!Array.isArray(parsed)) return text;
+  return document(parsed.map((entry) => entry && typeof entry === "object" && !Array.isArray(entry)
+    && typeof (entry as Record<string, unknown>).language === "string" && !("directory" in entry)
+    ? { directory: (entry as Record<string, unknown>).language, ...entry }
+    : entry));
 }
 
 /** macOS zips a folder as a folder. Strip the wrapper so a re-zipped export still reads. */
@@ -603,14 +645,17 @@ export function readBundle(input: BundleFile[]): BundlePlan {
 
   const files = upgradeBundle(unwrapped, schemaVersion);
 
-  const vocabularyRecords = readRecords<VocabularyInput>(files, VOCABULARIES_FILE, problems, (raw) => {
+  const vocabularyRecords = readRecords<BundleVocabulary>(files, VOCABULARIES_FILE, problems, (raw) => {
     const language = text(raw.language);
     if (!language) throw new Error("has no language.");
+    const directory = text(raw.directory);
+    if (!directory || directory.includes("/")) throw new Error("names no directory for its words.");
     const glossLangs = Array.isArray(raw.glossLangs)
       ? raw.glossLangs.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
       : [];
     if (!glossLangs.length) throw new Error("has no gloss languages.");
     return {
+      directory,
       language,
       definitionLang: text(raw.definitionLang) ?? language,
       glossLangs,
@@ -630,11 +675,23 @@ export function readBundle(input: BundleFile[]): BundlePlan {
     return { name, icon: text(raw.icon), order: typeof raw.order === "number" ? raw.order : 0 };
   });
 
+  /* Word documents with no vocabulary list beside them — one handed over on its own — each go by
+     their own language: the directory a word is in names nothing then. */
+  const listed = files.some((file) => file.path === VOCABULARIES_FILE);
+  const directories = new Set(vocabularyRecords.map((entry) => entry.directory));
   const articles = files
     .filter((file) => isWordFile(file.path))
     .sort((left, right) => left.path.localeCompare(right.path))
     .flatMap(({ path, text: source }) => {
-      try { return [{ path, draft: parseArticle(source) }]; }
+      const directory = path.includes("/") ? path.split("/")[0] : "";
+      if (listed && !directories.has(directory)) {
+        problems.push({ path, message: `is in no vocabulary: ${VOCABULARIES_FILE} names no directory ${directory || "for words outside one"}.` });
+        return [];
+      }
+      try {
+        const draft = parseArticle(source);
+        return [{ path, directory: listed ? directory : draft.language, draft }];
+      }
       catch (error) {
         const message = error instanceof YamlProblems
           ? error.problems.map((problem) => problem.message).join("; ")
@@ -661,10 +718,39 @@ export function readBundle(input: BundleFile[]): BundlePlan {
       if (entries.length) clips.set(word, entries);
     });
 
-  return { schemaVersion, vocabularies: vocabularyRecords, topics: topicRecords, articles, clips, problems };
+  /* Unlisted words stand for a vocabulary of their language with that language's defaults: the
+     owner's own of it by default (`defaultTargets`), or a new one where they keep none. */
+  const vocabularies = listed ? vocabularyRecords : [...new Set(articles.map((article) => article.directory))]
+    .map((language, order): BundleVocabulary => ({
+      directory: language, language, definitionLang: language, glossLangs: glossLanguagesFor(null, language),
+      notesLang: notesLanguageFor(null, language), displayName: null, flag: null, region: null, level: null,
+      learnerNote: null, order
+    }));
+
+  return { schemaVersion, vocabularies, topics: topicRecords, articles, clips, problems };
 }
 
 /* ── importing ──────────────────────────────────────────────────────────*/
+
+/**
+ * Where one of a bundle's vocabularies goes: a new vocabulary, named as the bundle names it unless
+ * renamed, or one the owner already keeps in the same language, whose name it then takes.
+ */
+export type ImportTarget =
+  | { kind: "new"; name: string | null }
+  | { kind: "existing"; vocabularyId: string };
+
+/**
+ * Where each of a bundle's vocabularies goes by default, by its directory: into the owner's
+ * vocabulary of the same language when they keep one, else a new one.
+ */
+export function defaultTargets(graph: VocabularyGraph, plan: Pick<BundlePlan, "vocabularies">): Map<string, ImportTarget> {
+  const kept = vocabularies(graph);
+  return new Map(plan.vocabularies.map((entry) => {
+    const same = kept.find((one) => one.language === entry.language);
+    return [entry.directory, same ? { kind: "existing", vocabularyId: same.id } : { kind: "new", name: null }];
+  }));
+}
 
 export interface ImportReport {
   vocabulariesAdded: number;
@@ -777,12 +863,12 @@ export function filed(draft: ArticleDraft): ArticleDraft {
   return draft.status === "inbox" ? { ...draft, status: "active" } : draft;
 }
 
-const key = (language: string, headword: string) => `${language}\n${headword.trim().toLowerCase()}`;
+const key = (vocabularyId: string, headword: string) => `${vocabularyId}\n${headword.trim().toLowerCase()}`;
 
 /**
  * Applies a bundle, one word at a time, through the one write path.
  *
- * A word already in the vocabulary is skipped rather than merged or duplicated: an import must
+ * A word already in the vocabulary it goes into is skipped rather than merged or duplicated: an import must
  * never cost you curation you did after the export, and the report says exactly what it left alone.
  * A word that fails is reported by file and the run continues — during the phase where the schema
  * moves, knowing which three of four hundred entries were refused is the whole value.
@@ -810,6 +896,8 @@ let importing = false;
 async function importOnce(
   repository: AcervoRepository,
   plan: BundlePlan,
+  /** Where each of the bundle's vocabularies goes, by its directory (`defaultTargets`). */
+  targets: ReadonlyMap<string, ImportTarget>,
   onProgress: (done: number, total: number) => void = () => {},
   signal: ImportSignal = { cancelled: false },
   pictures: BundlePictures = new Map(),
@@ -823,12 +911,15 @@ async function importOnce(
 
   const snapshot = repository.snapshot();
   const live = <T extends { deleted: boolean }>(records: T[]) => records.filter((record) => !record.deleted);
-  const languages = new Set(live(snapshot.vocabularies).map((entry) => entry.language));
+  const kept = new Set(live(snapshot.vocabularies).map((entry) => entry.id));
+  let order = Math.max(-1, ...live(snapshot.vocabularies).map((entry) => entry.order)) + 1;
   const topics = new Set(live(snapshot.topics).map((topic) => topic.name.trim().toLowerCase()));
+  /** Each bundle directory's vocabulary in this account, once it has one. */
+  const into = new Map<string, string>();
   /* Asked of the replica as it is now, never of the snapshot above: this run's own saves and
      whatever a pull brought in since it started both count. */
   const held = (identity: string) => repository.snapshot().lexemes
-    .some((lexeme) => !lexeme.deleted && key(lexeme.language, lexeme.headword) === identity);
+    .some((lexeme) => !lexeme.deleted && key(lexeme.vocabularyId, lexeme.headword) === identity);
 
   const total = plan.vocabularies.length + plan.topics.length + plan.articles.length;
   let done = 0;
@@ -840,15 +931,20 @@ async function importOnce(
 
   // Vocabularies and topics first: `saveArticle` resolves topics by name and refuses one it does
   // not hold, so a bundle would otherwise fail on every word that carries a new topic.
-  for (const vocabulary of plan.vocabularies) {
+  for (const { directory, ...vocabulary } of plan.vocabularies) {
     if (signal.cancelled) return { ...report, aborted: true };
-    if (!languages.has(vocabulary.language)) {
+    const target = targets.get(directory) ?? { kind: "new", name: null };
+    if (target.kind === "existing" && kept.has(target.vocabularyId)) {
+      into.set(directory, target.vocabularyId);
+    } else {
       try {
-        await repository.saveVocabulary(vocabulary);
-        languages.add(vocabulary.language);
+        const name = target.kind === "new" ? target.name?.trim() || vocabulary.displayName : vocabulary.displayName;
+        // Last in the owner's order, whatever order it had where it came from.
+        const saved = await repository.saveVocabulary({ ...vocabulary, displayName: name, order: order++ });
+        into.set(directory, saved.id);
         report.vocabulariesAdded += 1;
       } catch (error) {
-        report.failed.push({ path: VOCABULARIES_FILE, message: `${vocabulary.language}: ${messageOf(error)}` });
+        report.failed.push({ path: VOCABULARIES_FILE, message: `${vocabulary.displayName ?? vocabulary.language}: ${messageOf(error)}` });
         if (disconnected(error)) return { ...report, aborted: true };
       }
     }
@@ -870,9 +966,15 @@ async function importOnce(
     step();
   }
 
-  for (const { path, draft } of plan.articles) {
+  for (const { path, directory, draft } of plan.articles) {
     if (signal.cancelled) return { ...report, aborted: true };
-    const identity = key(draft.language, draft.headword);
+    const vocabularyId = into.get(directory);
+    if (!vocabularyId) {
+      report.failed.push({ path, message: "its vocabulary could not be added, so it was left out." });
+      step();
+      continue;
+    }
+    const identity = key(vocabularyId, draft.headword);
     if (held(identity)) {
       report.skipped.push({ language: draft.language, headword: draft.headword });
       step();
@@ -881,7 +983,7 @@ async function importOnce(
     try {
       // An import asks for nothing: the save queues no job, and a sense it leaves without a picture is
       // marked as having none, so nothing here or later spends a provider by itself.
-      const lexemeId = await repository.saveArticle(filed(remintIds(draft)), undefined, { imported: true });
+      const lexemeId = await repository.saveArticle(filed(remintIds(draft)), undefined, { imported: true, vocabularyId });
       report.added += 1;
       // After the word exists, because a picture belongs to a sense that has to be there first —
       // and the sense ids are the ones just minted, which only the replica knows.

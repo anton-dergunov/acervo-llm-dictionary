@@ -405,7 +405,7 @@ describe("the diff", () => {
   });
 
   it("keys every mark to a record the renderer will actually draw", () => {
-    // The marks are consumed by a component rendering `articleFromDraft(graph, shown)`, which mints
+    // The marks are consumed by a component rendering `articleFromDraft(graph, shown, vocabularyId)`, which mints
     // its placeholder ids from positions. If the two disagreed, a mark would silently land on the
     // wrong block — or on nothing.
     const before = draft();
@@ -415,7 +415,7 @@ describe("the diff", () => {
       { op: "set", target: "lexeme", field: "emoji", value: "🌶" }
     ], context);
     const diff = diffDrafts(before, after);
-    const rendered = articleFromDraft(graph, diff.shown);
+    const rendered = articleFromDraft(graph, diff.shown, "vocabes00000001");
     const drawn = new Set<string>([
       rendered.lexeme.id,
       ...rendered.senses.map((entry) => entry.sense.id),

@@ -1,4 +1,4 @@
-"""The meaning map of one language (docs/features/meaning-map.md).
+"""The meaning map of one vocabulary (docs/features/meaning-map.md).
 
 `?have=` is the `version` the device already holds — the fingerprint and whether the regions are
 named — and a map still current answers `{"current": true}` alone. A plain `def`, so the drawing — seconds of CPU when the vocabulary changed, nothing when it did not —
@@ -20,13 +20,13 @@ from acervo.services import meaning
 router = APIRouter()
 
 
-@router.get("/map/{language}")
-def read_map(request: Request, language: str) -> JSONResponse:
+@router.get("/map/{vocabulary}")
+def read_map(request: Request, vocabulary: str) -> JSONResponse:
     owner = owner_id(request)
     answer, drawn = meaning.current_map(
-        request.app.state.settings, owner, language, have=request.query_params.get("have") or None
+        request.app.state.settings, owner, vocabulary, have=request.query_params.get("have") or None
     )
     if drawn and answer.get("names") == "pending":
-        jobs.enqueue(owner, "map.name", trigger="manual", subject_kind="language", subject_id=language,
+        jobs.enqueue(owner, "map.name", trigger="manual", subject_kind="vocabulary", subject_id=vocabulary,
                      input={"fingerprint": answer["fingerprint"]})
     return data(answer)

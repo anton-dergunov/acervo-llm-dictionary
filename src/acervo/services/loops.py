@@ -192,7 +192,7 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
     the server does not re-derive that scope. Which also makes choosing words by hand the same route
     with a different list, and therefore no server change at all.
     """
-    language = str(body.get("language") or "").strip()
+    vocabulary = str(body.get("vocabularyId") or "").strip()
     ids = body.get("lexemeIds")
     if not isinstance(ids, list) or not all(isinstance(one, str) for one in ids):
         raise ApiError(400, "invalid_input", "A loop is made from a list of word ids.")
@@ -223,9 +223,12 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
         lexeme = held.get(identifier)
         if lexeme is None or lexeme.get("deleted"):
             raise ApiError(404, "not_found", "One of those words is not in your vocabulary.")
-        if language and lexeme.get("language") != language:
-            raise ApiError(400, "invalid_input", "Every word in a loop is in one language.")
-        language = language or str(lexeme.get("language") or "")
+        # One vocabulary, not merely one language: the loop is listed, numbered and read with the
+        # words of the vocabulary it was made from.
+        if vocabulary and lexeme.get("vocabularyId") != vocabulary:
+            raise ApiError(400, "invalid_input", "Every word in a loop is from one vocabulary.")
+        vocabulary = vocabulary or str(lexeme.get("vocabularyId") or "")
+        language = str(lexeme.get("language") or "")
         gloss = (lexeme.get("primaryGloss") or "").strip()
         if not gloss:
             # Refused **by name** rather than silently dropped from the track: a loop of eleven words
@@ -243,14 +246,14 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
              "editedBy": device, "revision": 0}
     changes = {
         "loops": [{
-            "id": loop_id, "language": language,
+            "id": loop_id, "vocabularyId": vocabulary, "language": language,
             # Everything the render decides is empty until it has. An absent `audioRef` is the whole
             # of what "not made yet" means.
             "styleId": None, "seed": seed, "engineVersion": None,
             "bedFingerprint": None,
             "format": format_id, "switches": switches, "fallbackFrom": None,
             "audioRef": None, "audioMime": None, "durationSeconds": None,
-            "position": graph.next_loop_position(owner, language),
+            "position": graph.next_loop_position(owner, vocabulary),
             **stamp,
         }],
         "loopItems": [{
@@ -311,9 +314,7 @@ def render_request(settings: Settings, owner: str, loop_id: str,
     if not rows:
         raise ApiError(422, "empty_loop", "That loop has no words left in it.")
 
-    vocabulary = next(
-        (one for one in graph.owner_vocabularies(owner) if one["language"] == loop["language"]), None
-    )
+    vocabulary = vocabulary_for(graph.owner_vocabularies(owner), loop["vocabularyId"])
     gloss_language = (vocabulary or {}).get("glossLangs") or ["en"]
     account = accounts.by_id(owner)
     if account is None:
@@ -521,7 +522,7 @@ def write(settings: Settings, owner: str, body: dict[str, Any], loop_id: str | N
     from acervo.services.models import llm_text
 
     loop = graph.owned_records(owner, "loops", [loop_id]).get(loop_id) if loop_id else None
-    vocabulary = vocabulary_for(graph.owner_vocabularies(owner), loop["language"]) if loop else None
+    vocabulary = vocabulary_for(graph.owner_vocabularies(owner), loop["vocabularyId"]) if loop else None
     prompt = with_reader(prompt, owner, vocabulary, note=False)
     text, answer = llm_text(settings, owner, prompt, caller=f"loop-{purpose}")
     return {"text": text, "provider": answer.provider_id, "model": answer.model}

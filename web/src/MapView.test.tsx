@@ -7,8 +7,8 @@ import { jobStream } from "./jobs";
 import { MemoryMapStore } from "./mapStore";
 import { MapView, replaceMapStoreForTests } from "./MapView";
 import type { MapData, MapPoint } from "./meaningMap";
-import { languageOptions } from "./selectors";
-import { TEST_OWNER, testGraph } from "./testGraph";
+import { vocabularyOptions } from "./selectors";
+import { ENGLISH, SPANISH, TEST_OWNER, testGraph } from "./testGraph";
 
 /* jsdom has no canvas, so the drawing is stood in for by its points as buttons: everything around it
    — which map, the peek, Find, the way to an article — is what this checks. */
@@ -47,8 +47,8 @@ function view(overrides: Partial<Parameters<typeof MapView>[0]> = {}) {
   /* The map's row goes into the top bar, which the application hands it; here, a stand-in. */
   const bar = document.body.appendChild(document.createElement("div"));
   const props = {
-    graph, owner: TEST_OWNER, language: "es", languages: languageOptions(graph), camera: null, bar,
-    onCamera: vi.fn(), selected: null as string | null, onSelect: vi.fn(), onLanguage: vi.fn(),
+    graph, owner: TEST_OWNER, vocabularyId: SPANISH, language: "es", vocabularies: vocabularyOptions(graph), camera: null, bar,
+    onCamera: vi.fn(), selected: null as string | null, onSelect: vi.fn(), onVocabulary: vi.fn(),
     onOpen: vi.fn(), onClose: vi.fn(), ...overrides
   };
   const rendered = render(<MapView {...props} />);
@@ -67,21 +67,21 @@ describe("the map surface", () => {
     const read = vi.spyOn(backendSession, "readMap").mockResolvedValue(serverMap());
     view();
     expect(await screen.findByRole("button", { name: /point la balsa/ })).toBeInTheDocument();
-    expect(read).toHaveBeenCalledWith("es", undefined);
+    expect(read).toHaveBeenCalledWith(SPANISH, undefined);
     expect(screen.getByText(/3 meanings · 2 words/)).toBeInTheDocument();
-    expect((await store.read(TEST_OWNER, "es"))?.fingerprint).toBe("fp-1");
+    expect((await store.read(TEST_OWNER, SPANISH))?.fingerprint).toBe("fp-1");
   });
 
   it("opens on the map this device holds, and sends its fingerprint to ask whether it is current", async () => {
-    await store.save(TEST_OWNER, serverMap());
+    await store.save(TEST_OWNER, SPANISH, serverMap());
     const read = vi.spyOn(backendSession, "readMap").mockResolvedValue({ current: true, version: "fp-1.none" });
     view();
     expect(await screen.findByRole("button", { name: /point la balsa/ })).toBeInTheDocument();
-    await waitFor(() => expect(read).toHaveBeenCalledWith("es", "fp-1.none"));
+    await waitFor(() => expect(read).toHaveBeenCalledWith(SPANISH, "fp-1.none"));
   });
 
   it("keeps a map it holds on screen when the server cannot be reached", async () => {
-    await store.save(TEST_OWNER, serverMap());
+    await store.save(TEST_OWNER, SPANISH, serverMap());
     vi.spyOn(backendSession, "readMap").mockRejectedValue(new AcervoApiError("unreachable", 0, "offline"));
     view();
     expect(await screen.findByRole("button", { name: /point la balsa/ })).toBeInTheDocument();
@@ -94,10 +94,10 @@ describe("the map surface", () => {
     expect(await screen.findByText("No map yet")).toBeInTheDocument();
   });
 
-  it("names a young language's map as words, without regions", async () => {
+  it("names a young vocabulary's map as words, without regions", async () => {
     vi.spyOn(backendSession, "readMap").mockResolvedValue(serverMap());
     view();
-    expect(await screen.findByText(/Regions appear once a language has about 150 meanings/)).toBeInTheDocument();
+    expect(await screen.findByText(/Regions appear once a vocabulary has about 150 meanings/)).toBeInTheDocument();
   });
 
   it("peeks at a tapped sense and opens its article from there", async () => {
@@ -145,12 +145,12 @@ describe("the map surface", () => {
     expect(props.onSelect).toHaveBeenCalledWith("sensepicaritch0");
   });
 
-  it("switches language from its own row, the top bar being hidden", async () => {
+  it("switches vocabulary from its own row, the top bar being hidden", async () => {
     vi.spyOn(backendSession, "readMap").mockResolvedValue(serverMap());
     const { props } = view();
-    fireEvent.click(await screen.findByRole("button", { name: "Vocabulary language" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Vocabulary: Spanish" }));
     fireEvent.click(screen.getByRole("button", { name: /English/ }));
-    expect(props.onLanguage).toHaveBeenCalledWith("en");
+    expect(props.onVocabulary).toHaveBeenCalledWith(ENGLISH);
   });
 
   it("puts the peek away with Escape, and then leaves", async () => {
@@ -185,12 +185,12 @@ describe("the map surface", () => {
     const read = vi.spyOn(backendSession, "readMap").mockResolvedValue(serverMap({ names: "pending", version: "fp-1.pending" }));
     view();
     await screen.findByRole("button", { name: /point la balsa/ });
-    const job = (state: Job["state"]) => ({ id: "job1", kind: "map.name", state, subject: { kind: "language", id: "es" } }) as Job;
+    const job = (state: Job["state"]) => ({ id: "job1", kind: "map.name", state, subject: { kind: "vocabulary", id: SPANISH } }) as Job;
     act(() => jobStream.apply(job("running")));
     read.mockResolvedValue(serverMap({ names: "ready", version: "fp-1.ready" }));
     act(() => jobStream.apply(job("done")));
     await waitFor(() => expect(read).toHaveBeenCalledTimes(2));
     // The unnamed map's version, which the server no longer calls current.
-    expect(read).toHaveBeenLastCalledWith("es", "fp-1.pending");
+    expect(read).toHaveBeenLastCalledWith(SPANISH, "fp-1.pending");
   });
 });

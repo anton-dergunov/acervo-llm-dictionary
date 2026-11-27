@@ -18,7 +18,7 @@ from acervo.repository import jobs
 from acervo.work.runner import Runner
 
 from conftest import OWNER_EMAIL
-from graph_records import example, lexeme, sense, vocabulary
+from graph_records import example, lexeme, sense, vocabulary, vocabulary_id
 from test_clips import SPEECH_URL, CorpusStub, recorded
 from test_pronunciations import wav
 from provider_rows import GOOGLE, VERTEX_IMAGE
@@ -160,7 +160,8 @@ def imported(server):
              "senses": [sense_document(0, "Causar picor.", [brief]),
                         sense_document(1, "Cortar en trozos.", [])]}
     answer = server.post("/articles", {"schemaVersion": SCHEMA_VERSION, "deviceId": "device000000001",
-                                       "draft": draft, "minted": [], "imported": True})
+                                       "draft": draft, "minted": [], "imported": True,
+                                       "vocabularyId": vocabulary_id("es")})
     assert answer.status_code == 200, answer.json()
     data = answer.json()["data"]
     senses = sorted((row for row in held(server, "senses") if row["lexemeId"] == data["lexemeId"]),
@@ -455,7 +456,7 @@ def test_the_backfill_queues_an_ordinary_enrich_for_what_is_missing(server, runn
     ]
 
 
-def test_the_backfill_can_be_looked_at_first_and_bounded(server, everything, capsys):
+def test_the_backfill_can_be_looked_at_first_and_bounded(server, spanish, everything, capsys):
     for headword in ("toalla", "sobremesa"):
         word = lexeme(headword=headword, lemma=headword)
         assert server.push({"lexemes": [word], "senses": [sense(word["id"])]}).status_code == 200
@@ -472,7 +473,7 @@ def test_the_backfill_can_be_looked_at_first_and_bounded(server, everything, cap
     assert len(jobs.open_jobs(server.owner)) == 1
 
 
-def test_the_backfill_leaves_out_a_word_set_aside(server, everything, capsys):
+def test_the_backfill_leaves_out_a_word_set_aside(server, spanish, everything, capsys):
     word = lexeme(headword="toalla", lemma="toalla", status="aside")
     assert server.push({"lexemes": [word], "senses": [sense(word["id"])]}).status_code == 200
     for job in jobs.open_jobs(server.owner):
@@ -483,19 +484,28 @@ def test_the_backfill_leaves_out_a_word_set_aside(server, everything, capsys):
     assert jobs.open_jobs(server.owner) == []
 
 
-def test_the_backfill_takes_one_vocabulary_at_a_time(server, everything, capsys):
-    assert server.push({"vocabularies": [vocabulary(language="en", definitionLang="en", order=1)]}).status_code == 200
+def test_the_backfill_takes_one_vocabulary_at_a_time(server, spanish, everything, capsys):
+    english_vocabulary = vocabulary(language="en", definitionLang="en", displayName="English", order=1)
+    assert server.push({"vocabularies": [english_vocabulary]}).status_code == 200
     english = lexeme(language="en", headword="towel", lemma="towel", reading=None)
     assert server.push({"lexemes": [english], "senses": [sense(english["id"], definitionLang="en")]}).status_code == 200
     for job in jobs.open_jobs(server.owner):
         jobs.request_cancel(server.owner, job["id"])
 
     assert admin.main(["jobs", "enqueue", "enrich", "--missing", "--owner-email", OWNER_EMAIL,
-                       "--language", "es"]) == 0
+                       "--vocabulary", "es"]) == 0
     assert jobs.open_jobs(server.owner) == []
     assert admin.main(["jobs", "enqueue", "enrich", "--missing", "--owner-email", OWNER_EMAIL,
-                       "--language", "en"]) == 0
+                       "--vocabulary", "English"]) == 0
     assert [job["subject"]["id"] for job in jobs.open_jobs(server.owner)] == [english["id"]]
+
+
+def test_the_backfill_names_the_vocabularies_when_it_cannot_tell_which(server, spanish, capsys):
+    assert server.push({"vocabularies": [vocabulary(id="vocabstarter001", displayName="Everyday")]}).status_code == 200
+    assert admin.main(["jobs", "enqueue", "enrich", "--missing", "--owner-email", OWNER_EMAIL,
+                       "--vocabulary", "es"]) == 2
+    said = capsys.readouterr().err
+    assert "No one vocabulary is called 'es'" in said and "vocabstarter001" in said and "Everyday" in said
 
 
 def test_the_backfill_says_when_the_account_is_not_one(server, capsys):

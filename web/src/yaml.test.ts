@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { articleFor } from "./selectors";
 import { testGraph } from "./testGraph";
-import { draftFor, parseArticle, YAML_TEMPLATE, YamlProblems, yamlFor, yamlForDraft, type ArticleDraft } from "./yaml";
+import { draftFor, parseArticle, YamlProblems, yamlFor, yamlForDraft, yamlTemplate, type ArticleDraft } from "./yaml";
+
+/** A new entry in a Spanish vocabulary glossed into English. */
+const YAML_TEMPLATE = yamlTemplate({ language: "es", definitionLang: "es", glossLangs: ["en"] });
 
 const articles = () => {
   const graph = testGraph();
@@ -110,7 +113,7 @@ describe("reading YAML back", () => {
     // The Inbox holds what arrived without anyone reading it. A document is typed or reviewed.
     expect(parseArticle(YAML_TEMPLATE.replace("status: active\n", "").replace('headword: ""', "headword: casa")
       .replace('lemma: ""              # leave empty to reuse the headword', "lemma: casa")
-      .replace('definition: ""     # in the target language', "definition: Edificio.")
+      .replace('definition: ""     # in Spanish', "definition: Edificio.")
       .replace('terms: [""]', "terms: [house]").replace('- text: ""', "- text: Mi casa.")).status).toBe("active");
   });
 

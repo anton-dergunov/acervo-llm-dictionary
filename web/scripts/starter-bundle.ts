@@ -28,7 +28,7 @@ import { zipSync, type Zippable } from "fflate";
 import { parse } from "yaml";
 import type { VocabularyInput, TopicInput } from "../src/domain";
 import { automaticFlag, languageOf } from "../src/languages";
-import { bundleFiles, namedWords, picturePath, readBundle, type BundleFile } from "../src/transfer";
+import { bundleFiles, directoriesFor, namedWords, picturePath, readBundle, type BundleFile } from "../src/transfer";
 import type { ArticleDraft, ImagePromptDraft } from "../src/yaml";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -156,7 +156,10 @@ function build(entry: Config["vocabularies"][number], config: Config, pictures: 
                tag: string | null): Starter {
   const id = entry.id;
   const folder = join(BUILDER, id);
-  const vocabulary = vocabularyRecord(entry, config.defaults);
+  const record = vocabularyRecord(entry, config.defaults);
+  // The words sit under the vocabulary's own directory, named as an export would name it.
+  const [directory] = directoriesFor([record]);
+  const vocabulary = { ...record, directory };
   const language = vocabulary.language;
   const { byId: conceptOf, at: matchedAt } = concepts(folder);
 
@@ -177,10 +180,10 @@ function build(entry: Config["vocabularies"][number], config: Config, pictures: 
       // One picture of a meaning per word: two senses matched to one concept show it once, on the first.
       if (!concept || !pictures[concept] || placed.has(concept)) return sense;
       placed.add(concept);
-      placement[picturePath(language, name, index)] = concept;
+      placement[picturePath(directory, name, index)] = concept;
       return { ...sense, images: [pictureEntry(pictures[concept])] };
     });
-    return { language, name, draft: { ...draft, senses } };
+    return { directory, name, draft: { ...draft, senses } };
   });
 
   const topics: TopicInput[] = Object.entries(config.topics).map(([key, name], order) => ({
@@ -191,7 +194,7 @@ function build(entry: Config["vocabularies"][number], config: Config, pictures: 
     ...matchedAt,
     ...Object.values(placement).map((concept) => pictures[concept].drawnAt)
   ]);
-  const files = bundleFiles({ exportedAt, languages: [language], vocabularies: [vocabulary], topics, words });
+  const files = bundleFiles({ exportedAt, vocabularies: [vocabulary], topics, words });
 
   const plan = readBundle(files);
   if (plan.problems.length || plan.articles.length !== words.length) {

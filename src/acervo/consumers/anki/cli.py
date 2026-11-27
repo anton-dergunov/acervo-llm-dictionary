@@ -81,10 +81,10 @@ def build_parser() -> argparse.ArgumentParser:
     written.add_argument("output", type=Path)
     written.add_argument("--graph", type=Path, required=True,
                          help="A saved graph pull (GET /graph) to make the cards from")
-    written.add_argument("--language", action="append", default=[],
-                         help="A language to include (repeatable); every language by default")
+    written.add_argument("--vocabulary", action="append", default=[],
+                         help="A vocabulary to include, by id (repeatable); every vocabulary by default")
     written.add_argument("--deck", default=DEFAULT_DECK,
-                         help="Deck name; {language} is the language's name")
+                         help="Deck name; {vocabulary} is the vocabulary's name")
     written.add_argument("--picture-size", type=int, default=768,
                          help="Longest side of a picture in pixels; 0 keeps the master")
     written.add_argument("--media-root", type=Path,
@@ -113,7 +113,7 @@ def build_payload(args: argparse.Namespace, output: Path, progress: Progress) ->
     changes = payload.get("changes", payload)
     built = build(
         changes,
-        languages=args.language or None,
+        vocabularies=args.vocabulary or None,
         media_root=args.media_root,
         deck=args.deck,
     )

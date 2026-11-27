@@ -27,7 +27,7 @@ const READING: PhotoReading = {
 };
 
 const FOUND: QuickLookUp = {
-  resolution: {
+  vocabularyId: "vocabes00000001", resolution: {
     language: "es", headword: "llevar a cabo", lemma: "llevar a cabo", pos: "idiom",
     sentences: [{ text: "Lo llevó a cabo.", translation: null }], note: null, consumedLines: 1, consumedText: null,
     gloss: "to carry out"

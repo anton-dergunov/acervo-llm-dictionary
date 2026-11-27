@@ -131,7 +131,7 @@ export default function LoopPlayer({ track, graph, onChooseMusic, onToggleKeep }
     const tapped = wordAtPoint(event, event.currentTarget, loop.language);
     if (tapped) {
       lookUp.open({
-        tapped, language: loop.language, sourceTitle: `Loop · ${loopTitle(graph, loop)}`,
+        tapped, language: loop.language, vocabularyId: loop.vocabularyId, sourceTitle: `Loop · ${loopTitle(graph, loop)}`,
         play: { label: "Play from this line", run: () => void player.play(track, { at: card.start }) },
         from: { kind: "loop", loopId: loop.id }
       });

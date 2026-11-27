@@ -14,12 +14,12 @@ import { bundleArchive, type BundleArchive } from "../bundleZip";
 import { languageOf } from "../languages";
 import { repository, type ReplicaSnapshot } from "../repository";
 import { syncEngine } from "../sync";
-import { languageOptions } from "../selectors";
+import { vocabularyOptions } from "../selectors";
 import { bytesFor } from "../media";
 import { clipBytes } from "../pronunciation";
 import { importThroughServer } from "../importRun";
 import {
-  bundleName, exportBundle, picturesIn, pronunciationsIn, readBundle,
+  bundleName, defaultTargets, exportBundle, picturesIn, pronunciationsIn, readBundle,
   type BundlePlan, type ImportReport
 } from "../transfer";
 import { Action, Group, Row, Select, Toggle } from "./kit";
@@ -44,29 +44,29 @@ async function filesIn(file: File): Promise<BundleArchive> {
 const PICTURE_BYTES = 110 * 1024;
 
 export function ExportPanel({ snapshot }: { snapshot: ReplicaSnapshot }) {
-  const [language, setLanguage] = useState<string>("all");
+  const [vocabularyId, setVocabularyId] = useState<string>("all");
   const [markdown, setMarkdown] = useState(true);
   const [images, setImages] = useState(false);
   const [pronunciations, setPronunciations] = useState(true);
   const [problem, setProblem] = useState("");
   const [busy, setBusy] = useState("");
-  const languages = languageOptions(snapshot);
-  /* Only the language changes what these find, and they walk every word: memoized, because this
+  const choices = vocabularyOptions(snapshot);
+  /* Only the vocabulary changes what these find, and they walk every word: memoized, because this
      panel repaints with everything else while an import beside it is running. */
   const pictures = useMemo(
-    () => picturesIn(snapshot, { language, markdown: false, images: true, pronunciations: false }),
-    [snapshot, language]
+    () => picturesIn(snapshot, { vocabularyId, markdown: false, images: true, pronunciations: false }),
+    [snapshot, vocabularyId]
   );
   const clips = useMemo(
-    () => pronunciationsIn(snapshot, { language, markdown: false, images: false, pronunciations: true }).clips,
-    [snapshot, language]
+    () => pronunciationsIn(snapshot, { vocabularyId, markdown: false, images: false, pronunciations: true }).clips,
+    [snapshot, vocabularyId]
   );
 
   async function run() {
     setBusy("Writing…");
     try {
       const at = new Date().toISOString();
-      const files = exportBundle(snapshot, { language, markdown, images, pronunciations }, at);
+      const files = exportBundle(snapshot, { vocabularyId, markdown, images, pronunciations }, at);
       const archive: Record<string, Uint8Array> = {};
       files.forEach((file) => { archive[file.path] = strToU8(file.text); });
 
@@ -99,7 +99,7 @@ export function ExportPanel({ snapshot }: { snapshot: ReplicaSnapshot }) {
       }
 
       setBusy("Writing…");
-      save(bundleName(language, at), zipSync(archive));
+      save(bundleName(snapshot, vocabularyId, at), zipSync(archive));
       setProblem([
         missing ? `${missing} picture(s) could not be read and were left out.` : "",
         silent ? `${silent} pronunciation(s) could not be read and were left out.` : ""
@@ -116,11 +116,11 @@ export function ExportPanel({ snapshot }: { snapshot: ReplicaSnapshot }) {
     ? <span className="transfer-problem" role="alert">{problem}</span>
     : "A zip of YAML files, one per word, made from this device’s copy."}>
     <Select
-      label="Vocabulary" value={language}
-      options={[{ value: "all", label: "All languages" }, ...languages.map((option) => ({
-        value: option.code, label: `${option.name} · ${option.count} ${option.count === 1 ? "entry" : "entries"}`
+      label="Vocabulary" value={vocabularyId}
+      options={[{ value: "all", label: "All vocabularies" }, ...choices.map((option) => ({
+        value: option.id, label: `${option.name} · ${option.count} ${option.count === 1 ? "entry" : "entries"}`
       }))]}
-      onChange={setLanguage}
+      onChange={setVocabularyId}
     />
     <Toggle
       label="Include Obsidian markdown" hint="A readable file per topic, for a vault"
@@ -170,7 +170,8 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
     const chosen = stage;
     setStage({ at: "running", done: 0, total: 0 });
     const report = await importThroughServer({
-      repository, pull: () => syncEngine.syncNow(), plan, pictures, recordings, restoreClips,
+      repository, pull: () => syncEngine.syncNow(), plan, targets: defaultTargets(repository.snapshot(), plan),
+      pictures, recordings, restoreClips,
       onProgress: (done, total) => setStage({ at: "running", done, total }),
       signal: cancel.current
     }).catch((error: unknown) => {
@@ -208,7 +209,7 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
       <Row label={stage.name} hint={[
         `${stage.plan.articles.length} ${stage.plan.articles.length === 1 ? "entry" : "entries"}`,
         stage.plan.topics.length ? `${stage.plan.topics.length} topics` : "",
-        stage.plan.vocabularies.length ? `${stage.plan.vocabularies.length} languages` : "",
+        stage.plan.vocabularies.length ? `${stage.plan.vocabularies.length} ${stage.plan.vocabularies.length === 1 ? "vocabulary" : "vocabularies"}` : "",
         stage.pictures.size ? `${stage.pictures.size} pictures` : "",
         stage.recordings.size ? `${stage.recordings.size} pronunciations` : ""
       ].filter(Boolean).join(", ")} />
@@ -245,7 +246,7 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
           stage.report.skipped.length > 0 ? `${stage.report.skipped.length} already present` : "",
           stage.report.failed.length > 0 ? `${stage.report.failed.length} refused` : "",
           stage.report.topicsAdded > 0 ? `${stage.report.topicsAdded} new topics` : "",
-          stage.report.vocabulariesAdded > 0 ? `${stage.report.vocabulariesAdded} new languages` : ""
+          stage.report.vocabulariesAdded > 0 ? `${stage.report.vocabulariesAdded} new vocabularies` : ""
         ].filter(Boolean).join(", ")}
       />
       {stage.report.skipped.length > 0 && <div className="pref-row stack"><details className="transfer-report">

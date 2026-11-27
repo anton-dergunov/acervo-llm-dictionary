@@ -3,15 +3,16 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Job } from "./api";
 import { jobStream } from "./jobs";
 import StoryView from "./StoryView";
-import { testGraph } from "./testGraph";
+import { ENGLISH, SPANISH, testGraph } from "./testGraph";
 
 vi.mock("./picture", () => ({
   usePicture: () => ({ url: "blob:picture", error: null })
 }));
 
 function view(overrides: Partial<Parameters<typeof StoryView>[0]> = {}) {
+  const graph = overrides.graph ?? testGraph();
   const props = {
-    graph: testGraph(), language: "es", languageName: "Spanish",
+    graph, vocabulary: graph.vocabularies.find((entry) => entry.id === SPANISH)!, languageName: "Spanish",
     onClose: vi.fn(), onDelete: vi.fn(), onMark: vi.fn(),
     ...overrides
   };
@@ -102,7 +103,8 @@ describe("the stories surface", () => {
   });
 
   it("says so when there are no stories at all", () => {
-    view({ language: "de" });
+    const graph = testGraph();
+    view({ graph, vocabulary: graph.vocabularies.find((entry) => entry.id === ENGLISH)! });
     expect(screen.getByText(/No stories yet/)).toBeInTheDocument();
   });
 });

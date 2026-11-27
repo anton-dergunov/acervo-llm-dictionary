@@ -16,7 +16,7 @@ import { MemoryMediaStore } from "./mediaStore";
 import { replaceMusicStoreForTests } from "./music";
 import { replaceStoreForTests as resetSpeechForTests } from "./pronunciation";
 import { selectedWords } from "./selectors";
-import { testGraph } from "./testGraph";
+import { SPANISH, testGraph } from "./testGraph";
 import { resetRarityForTests } from "./rarity";
 
 const SCHEMA: LoopSchema = {
@@ -43,7 +43,7 @@ const SCHEMA: LoopSchema = {
   ]
 };
 
-const query = { language: "es", topic: "all" as const, query: "", sort: "recent" as const };
+const query = { vocabularyId: SPANISH, topic: "all" as const, query: "", sort: "recent" as const };
 
 function open(graph: VocabularyGraph = testGraph(), extra: Partial<Parameters<typeof LoopDialog>[0]> = {}) {
   render(<LoopDialog
@@ -328,7 +328,7 @@ describe("choosing the music", () => {
 describe("making a loop from the selection", () => {
   function openWith(ids: string[], from: "selection" | "scope" = "selection") {
     const graph = testGraph();
-    open(graph, { selection: selectedWords(graph, "es", ids), from });
+    open(graph, { selection: selectedWords(graph, SPANISH, ids), from });
   }
 
   it("sends exactly the selected words, in the order chosen, leaving out one a loop cannot say", async () => {

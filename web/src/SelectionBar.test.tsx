@@ -7,7 +7,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import SelectionBar from "./SelectionBar";
 import { selectedWords } from "./selectors";
-import { testGraph } from "./testGraph";
+import { SPANISH, testGraph } from "./testGraph";
 
 afterEach(cleanup);
 
@@ -15,7 +15,7 @@ function bar() {
   const graph = testGraph();
   const handlers = { onOpen: vi.fn(), onRemove: vi.fn(), onClear: vi.fn(), onLoop: vi.fn(), onStory: vi.fn() };
   render(<SelectionBar
-    words={selectedWords(graph, "es", ["lexemebalsa0001", "lexemepicar0001"])} language="es" {...handlers}
+    words={selectedWords(graph, SPANISH, ["lexemebalsa0001", "lexemepicar0001"])} language="es" name="Spanish" {...handlers}
   />);
   return handlers;
 }

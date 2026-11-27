@@ -380,6 +380,17 @@ def server(tmp_path, monkeypatch) -> Server:
 
 
 @pytest.fixture
+def spanish(server) -> Server:
+    """The owner's Spanish vocabulary, which a word, a loop or a story in Spanish names by default
+    (`graph_records.vocabulary_id`). A file whose records are all Spanish turns it on for every test."""
+    from graph_records import vocabulary
+
+    answer = server.push({"vocabularies": [vocabulary()]})
+    assert answer.status_code == 200, answer.text
+    return server
+
+
+@pytest.fixture
 def other(server) -> Server:
     """A second account on the same server, for the cross-owner rules."""
     from acervo.repository import accounts

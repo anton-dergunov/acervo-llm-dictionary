@@ -34,7 +34,7 @@ const SCHEMA: LoopSchema = {
 };
 
 const loop: Loop = {
-  id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
+  id: "loop00000000001", vocabularyId: "vocabes00000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1, starred: false, archived: false,
@@ -79,7 +79,7 @@ const onToggleKeep = vi.fn();
 const looking: LookUpServices = {
   graph: null,
   lookUp: vi.fn(async (): Promise<QuickLookUp> => ({
-    resolution: { language: "es", headword: "el asco", lemma: "asco", pos: "noun", sentences: [], note: null,
+    vocabularyId: "vocabes00000001", resolution: { language: "es", headword: "el asco", lemma: "asco", pos: "noun", sentences: [], note: null,
                   consumedLines: 1, consumedText: null, gloss: "disgust" },
     duplicates: [], foldable: null
   })),
@@ -199,7 +199,7 @@ describe("playing a loop", () => {
 
     expect(play).not.toHaveBeenCalled();
     expect(looking.lookUp).toHaveBeenCalledWith(
-      { text: "asco", selection: { start: 0, end: 4 }, source: "reading" }, expect.any(AbortSignal));
+      { text: "asco", selection: { start: 0, end: 4 }, source: "reading", vocabulary: "vocabes00000001" }, expect.any(AbortSignal));
     const sheet = screen.getByRole("dialog", { name: "Look up a word" });
     expect(await within(sheet).findByText("el asco")).toBeInTheDocument();
     fireEvent.click(within(sheet).getByRole("button", { name: "Play from this line" }));

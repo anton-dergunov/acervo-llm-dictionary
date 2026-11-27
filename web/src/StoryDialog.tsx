@@ -27,7 +27,7 @@ import { AllChoices, ChoiceCarousel, ChoiceGrid, centred, type CatalogueChoice }
 import type { VocabularyGraph } from "./domain";
 import { DiceIcon, PictureIcon } from "./icons";
 import MakeDialog, { MakeSection } from "./MakeDialog";
-import { storyCandidates, storyEligible, type ListQuery, type SelectedWord } from "./selectors";
+import { storyCandidates, storyEligible, vocabularyFor, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
 import { lastStoryParts, rememberStoryParts } from "./editorPreferences";
 
@@ -99,7 +99,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
     setAsking(true);
     try {
       const answer = await backendSession.makeStory({
-        deviceId, language: query.language, lexemeIds: draw.ids,
+        deviceId, vocabularyId: query.vocabularyId, lexemeIds: draw.ids,
         ...(kind === "auto" ? {} : { typeId: kind }),
         ...(style === "auto" ? {} : { styleId: style }),
         ...(guidance.trim() ? { guidance: guidance.trim() } : {}),
@@ -152,7 +152,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
 
   return <MakeDialog title="Make a story" footer={footer} onClose={onClose}>
     <MakeSection label="Words">
-      <WordPicker draw={draw} kind="story" language={query.language} counter="segments" />
+      <WordPicker draw={draw} kind="story" language={vocabularyFor(graph, query.vocabularyId)?.language ?? ""} counter="segments" />
     </MakeSection>
 
     {parts !== null && lengths.length > 1 && <MakeSection label="Parts">

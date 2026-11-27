@@ -71,7 +71,8 @@ def word(server, *, status="active"):
     """A word the cards are made from, written the way an enrichment writes: queuing no enrich."""
     held = lexeme(status=status)
     meaning = sense(held["id"])
-    graph.merge_graph(server.owner, DEVICE, {"vocabularies": [vocabulary()], "lexemes": [held],
+    kept = graph.pull(server.owner, 0)["changes"]["vocabularies"]
+    graph.merge_graph(server.owner, DEVICE, {"vocabularies": [] if kept else [vocabulary()], "lexemes": [held],
                                              "senses": [meaning]}, enqueue=None)
     return held, meaning
 

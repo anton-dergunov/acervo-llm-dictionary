@@ -74,24 +74,16 @@ export function presentationOf(vocabulary: Vocabulary): LanguagePresentation {
 }
 
 /**
- * Which languages to reach for when reducing a sense to one line. The owner's own preference wins;
- * the defaults answer for a lexeme in a language they have since removed.
+ * Which languages to reach for when reducing a sense to one line: the vocabulary's own, most
+ * preferred first, else the defaults for `code`, for something in no vocabulary of the owner's.
  */
-export function glossLanguagesFor(code: string, vocabularies: Vocabulary[] = []): string[] {
-  const configured = vocabularies.find((entry) => !entry.deleted && entry.language === code);
-  if (configured) return configured.glossLangs;
-  return languageOf(code).glossLangs;
+export function glossLanguagesFor(vocabulary: Vocabulary | null | undefined, code: string): string[] {
+  return vocabulary?.glossLangs ?? languageOf(code).glossLangs;
 }
 
-/** The language usage notes are written in: the owner's choice, else the first gloss language. */
-export function notesLanguageFor(code: string, vocabularies: Vocabulary[] = []): string {
-  const configured = vocabularies.find((entry) => !entry.deleted && entry.language === code);
-  return configured?.notesLang ?? glossLanguagesFor(code, vocabularies)[0] ?? code;
-}
-
-/** The definition language for a new sense: the owner's choice, else the target language itself. */
-export function definitionLanguageFor(code: string, vocabularies: Vocabulary[] = []): string {
-  return vocabularies.find((entry) => !entry.deleted && entry.language === code)?.definitionLang ?? code;
+/** The language usage notes are written in: the vocabulary's choice, else the first gloss language. */
+export function notesLanguageFor(vocabulary: Vocabulary | null | undefined, code: string): string {
+  return vocabulary?.notesLang ?? glossLanguagesFor(vocabulary, code)[0] ?? code;
 }
 
 /* ── varieties ───────────────────────────────────────────────────────── */

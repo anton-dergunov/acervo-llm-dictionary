@@ -117,6 +117,7 @@ def _assign_topic(value: Mapping[str, Any]) -> dict[str, Any]:
 
 def _project_lexeme(row: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabularyId": row["vocabulary"],
         "language": row["language"],
         "headword": row["headword"],
         "lemma": row["lemma"],
@@ -139,6 +140,7 @@ def _project_lexeme(row: Mapping[str, Any]) -> dict[str, Any]:
 
 def _assign_lexeme(value: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabulary": trimmed(value.get("vocabularyId")),
         "language": trimmed(value.get("language")),
         "headword": trimmed(value.get("headword")),
         "lemma": trimmed(value.get("lemma")),
@@ -373,6 +375,7 @@ def _assign_study_state(value: Mapping[str, Any]) -> dict[str, Any]:
 
 def _project_loop(row: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabularyId": row["vocabulary"],
         "language": row["language"],
         "styleId": text_or_none(row["style_id"]),
         "seed": to_int(row["seed"]),
@@ -394,6 +397,7 @@ def _project_loop(row: Mapping[str, Any]) -> dict[str, Any]:
 
 def _assign_loop(value: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabulary": trimmed(value.get("vocabularyId")),
         "language": trimmed(value.get("language")),
         "style_id": trimmed(value.get("styleId")),
         "seed": to_int(value.get("seed")),
@@ -527,6 +531,7 @@ def _assign_loop_cue(value: Mapping[str, Any]) -> dict[str, Any]:
 
 def _project_story(row: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabularyId": row["vocabulary"],
         "language": row["language"],
         "typeId": text_or_none(row["type_id"]),
         "styleId": text_or_none(row["style_id"]),
@@ -544,6 +549,7 @@ def _project_story(row: Mapping[str, Any]) -> dict[str, Any]:
 
 def _assign_story(value: Mapping[str, Any]) -> dict[str, Any]:
     return {
+        "vocabulary": trimmed(value.get("vocabularyId")),
         "language": trimmed(value.get("language")),
         "type_id": trimmed(value.get("typeId")),
         "style_id": trimmed(value.get("styleId")),

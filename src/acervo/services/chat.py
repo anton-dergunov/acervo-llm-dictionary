@@ -105,7 +105,7 @@ def run_chat(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, 
         answer, call = llm_json(
             settings, owner,
             with_reader(prompt_text(settings.prompts_path, name), owner,
-                        vocabulary_for(graph.owner_vocabularies(owner), subject["language"])),
+                        vocabulary_for(graph.owner_vocabularies(owner), subject["vocabularyId"])),
             _user_turn(subject, body), caller="chat", hedge_after=HEDGE_SECONDS,
         )
     except ApiError as refused:
@@ -190,6 +190,9 @@ def _subject(body: dict[str, Any]) -> dict[str, Any]:
             "kind": "article",
             "lexemeId": trimmed(raw.get("lexemeId")),
             "language": trimmed(raw.get("language")) or None,
+            # Whose learner section the writer reads: the vocabulary the word is in, or is being
+            # added to. Its language alone cannot say, since several may share one.
+            "vocabularyId": trimmed(raw.get("vocabularyId")) or None,
             "document": document[:DOCUMENT_LIMIT],
             "focus": trimmed(raw.get("focus")) or None,
         }
@@ -201,6 +204,7 @@ def _subject(body: dict[str, Any]) -> dict[str, Any]:
             "kind": "reference",
             "headword": headword,
             "language": trimmed(raw.get("language")) or None,
+            "vocabularyId": trimmed(raw.get("vocabularyId")) or None,
         }
     raise ApiError(400, "invalid_input", "That request is about something Acervo does not recognise.")
 

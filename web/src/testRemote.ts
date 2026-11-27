@@ -66,7 +66,7 @@ export function fakeRemote(datasetId = "dataset00000001", ownerId = "owner000000
       remote.calls += 1;
       if (remote.fail) throw remote.fail;
       const { lexemeId, changes } = articleChanges(
-        remote.stored, draft, minted, { ownerId, deviceId: "device000000001" }, later()
+        remote.stored, draft, minted, { ownerId, deviceId: "device000000001" }, later(), options?.vocabularyId
       );
       remote.sent.push(structuredClone(changes));
       remote.options.push(options);

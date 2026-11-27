@@ -216,7 +216,7 @@ def lacking(settings: Settings, owner: str, lexeme_id: str) -> list[str]:
     return found
 
 
-def incomplete(settings: Settings, owner: str, *, language: str = "",
+def incomplete(settings: Settings, owner: str, *, vocabulary: str = "",
                limit: int = 0) -> list[dict[str, Any]]:
     """The owner's words that are missing something, newest first.
 
@@ -225,7 +225,7 @@ def incomplete(settings: Settings, owner: str, *, language: str = "",
     """
     words = sorted(
         (row for row in live(graph.pull(owner, 0)["changes"]["lexemes"])
-         if not language or row["language"] == language),
+         if not vocabulary or row["vocabularyId"] == vocabulary),
         key=lambda row: (row["createdAt"], row["id"]),
         reverse=True,
     )

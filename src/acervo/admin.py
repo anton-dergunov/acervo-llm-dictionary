@@ -388,8 +388,28 @@ def cancel_jobs(settings: Settings, job_id: str | None, wait: float) -> int:
     return 0
 
 
-def show_map(settings: Settings, email: str, language: str) -> int:
-    """A language's map as last drawn: its fingerprint, its size, and whether its regions are named.
+def vocabulary_named(owner: str, given: str) -> dict[str, Any] | None:
+    """One of the owner's vocabularies, by id, by name, or by a language code only one of them has.
+
+    Anything else prints the vocabularies there are, so the next try can name one.
+    """
+    kept = graph.owner_vocabularies(owner)
+    wanted = given.strip().lower()
+    for match in (
+        [one for one in kept if one["id"] == given.strip()],
+        [one for one in kept if (one.get("displayName") or "").lower() == wanted],
+        [one for one in kept if one["language"].lower() == wanted],
+    ):
+        if len(match) == 1:
+            return match[0]
+    print(f"No one vocabulary is called {given!r}. The vocabularies are:", file=sys.stderr)
+    for one in kept:
+        print(f"  {one['id']}  {one['language']:<8}  {one.get('displayName') or ''}", file=sys.stderr)
+    return None
+
+
+def show_map(settings: Settings, email: str, given: str) -> int:
+    """A vocabulary's map as last drawn: its fingerprint, its size, and whether its regions are named.
 
     Reading only. It never draws: that is the route's, which is the one place that knows when a map
     is out of date.
@@ -401,12 +421,16 @@ def show_map(settings: Settings, email: str, language: str) -> int:
     if owner is None:
         print(f"No account for {email}.", file=sys.stderr)
         return 2
-    stored = meaning.stored_map(settings, owner["id"], language)
+    vocabulary = vocabulary_named(owner["id"], given)
+    if vocabulary is None:
+        return 2
+    name = vocabulary.get("displayName") or vocabulary["language"]
+    stored = meaning.stored_map(settings, owner["id"], vocabulary["id"])
     if stored is None:
-        print(f"No {language} map has been drawn for {email} yet; opening the map draws it.")
+        print(f"No map of {name} has been drawn for {email} yet; opening the map draws it.")
         return 0
     regions = [r for r in stored["regions"] if r["level"] == "region"]
-    print(f"{language}  ·  {stored['senses']} senses  ·  {stored['words']} words  ·  "
+    print(f"{name}  ·  {stored['senses']} senses  ·  {stored['words']} words  ·  "
           f"{len(regions)} regions  ·  names {stored['names']}")
     print(f"fingerprint {stored['fingerprint']}  ·  model {stored['model']}")
     for region in stored["regions"]:
@@ -417,8 +441,8 @@ def show_map(settings: Settings, email: str, language: str) -> int:
     return 0
 
 
-def export_map(settings: Settings, email: str, language: str, output: str) -> int:
-    """Every sense of a language with the text and the vector the map was drawn from, one JSON line
+def export_map(settings: Settings, email: str, given: str, output: str) -> int:
+    """Every sense of a vocabulary with the text and the vector the map was drawn from, one JSON line
     each — for the discovery experiment, which then needs no encoder of its own."""
     import json
 
@@ -429,7 +453,10 @@ def export_map(settings: Settings, email: str, language: str, output: str) -> in
     if owner is None:
         print(f"No account for {email}.", file=sys.stderr)
         return 2
-    rows = meaning.vectors(settings, owner["id"], language)
+    vocabulary = vocabulary_named(owner["id"], given)
+    if vocabulary is None:
+        return 2
+    rows = meaning.vectors(settings, owner["id"], vocabulary["id"])
     with open(output, "w", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -437,7 +464,7 @@ def export_map(settings: Settings, email: str, language: str, output: str) -> in
     return 0
 
 
-def enqueue_missing(settings: Settings, email: str, language: str, limit: int, dry_run: bool) -> int:
+def enqueue_missing(settings: Settings, email: str, given: str, limit: int, dry_run: bool) -> int:
     """Queue ordinary `enrich` jobs for words that are missing something.
 
     The corner case the event-driven design leaves: words that existed before it, or an import that
@@ -451,7 +478,10 @@ def enqueue_missing(settings: Settings, email: str, language: str, limit: int, d
     if owner is None:
         print(f"No account for {email}.", file=sys.stderr)
         return 2
-    words = incomplete(settings, owner["id"], language=language, limit=limit)
+    vocabulary = vocabulary_named(owner["id"], given) if given else None
+    if given and vocabulary is None:
+        return 2
+    words = incomplete(settings, owner["id"], vocabulary=vocabulary["id"] if vocabulary else "", limit=limit)
     for word in words:
         print(f"{word['headword']}  {', '.join(word['lacking'])}")
         if not dry_run:
@@ -461,7 +491,7 @@ def enqueue_missing(settings: Settings, email: str, language: str, limit: int, d
     print(f"{len(words)} word(s) {what}.")
 
     # And the music kept before a kept bed was given its own: the same `music` job keeping one
-    # queues, replaying the bed from its family and seed. Not per language — a bed belongs to none.
+    # queues, replaying the bed from its family and seed. Not per vocabulary — a bed belongs to none.
     beds = [bed for bed in graph.owner_beds(owner["id"]) if not bed.get("audioRef")]
     for bed in beds:
         print(f"music  {bed['styleId']}  seed {bed['seed']}  kept {bed['createdAt'][:10]}")
@@ -547,7 +577,7 @@ def main(argv: list[str] | None = None) -> int:
                                 help="every word missing a clip search, a picture or a recording, "
                                      "and every kept bed missing its music")
     enqueue_parser.add_argument("--owner-email", required=True)
-    enqueue_parser.add_argument("--language", default="", help="only this vocabulary")
+    enqueue_parser.add_argument("--vocabulary", default="", help="only this vocabulary: its id, its name, or its language")
     enqueue_parser.add_argument("--limit", type=int, default=0, help="at most this many words")
     enqueue_parser.add_argument("--dry-run", action="store_true", help="print them and queue nothing")
 
@@ -574,11 +604,11 @@ def main(argv: list[str] | None = None) -> int:
 
     map_parser = commands.add_parser("map", help="the meaning map")
     map_commands = map_parser.add_subparsers(dest="map_command", required=True)
-    show_map_parser = map_commands.add_parser("show", help="a language's map as last drawn")
+    show_map_parser = map_commands.add_parser("show", help="a vocabulary's map as last drawn")
     export_map_parser = map_commands.add_parser("export", help="texts and vectors, for the discovery experiment")
     for one in (show_map_parser, export_map_parser):
         one.add_argument("--owner-email", required=True)
-        one.add_argument("--language", required=True)
+        one.add_argument("--vocabulary", required=True, help="its id, its name, or its language")
     export_map_parser.add_argument("--output", required=True, help="a JSON-lines file to write")
 
     serve_parser = commands.add_parser("serve", help="run the HTTP service")
@@ -603,8 +633,8 @@ def main(argv: list[str] | None = None) -> int:
         return show_story(settings, arguments.story_id, arguments.owner_email)
     if arguments.command == "map":
         if arguments.map_command == "show":
-            return show_map(settings, arguments.owner_email, arguments.language)
-        return export_map(settings, arguments.owner_email, arguments.language, arguments.output)
+            return show_map(settings, arguments.owner_email, arguments.vocabulary)
+        return export_map(settings, arguments.owner_email, arguments.vocabulary, arguments.output)
     if arguments.command == "takes":
         if arguments.take_command == "show":
             return show_takes(settings)
@@ -619,7 +649,7 @@ def main(argv: list[str] | None = None) -> int:
         if arguments.job_command == "list":
             return list_jobs(settings)
         if arguments.job_command == "enqueue":
-            return enqueue_missing(settings, arguments.owner_email, arguments.language,
+            return enqueue_missing(settings, arguments.owner_email, arguments.vocabulary,
                                    arguments.limit, arguments.dry_run)
         return cancel_jobs(settings, None if arguments.all else arguments.job_id, arguments.wait)
     return serve(settings, arguments.host, arguments.port)

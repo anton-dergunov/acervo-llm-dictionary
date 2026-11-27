@@ -1,10 +1,10 @@
-/* The Map surface: one language's senses laid out by meaning (docs/features/meaning-map.md).
+/* The Map surface: one vocabulary's senses laid out by meaning (docs/features/meaning-map.md).
 
    The picture is `meaningMap/`, which knows nothing of Acervo; this is the host around it — which map,
    the header, the peek, Find, and the way to an article and back. It is the prototype's `?map=1`
    (`design/ui-prototype/`), which is the design.
 
-   **It opens on the map this device already holds.** The last map for each language is kept in
+   **It opens on the map this device already holds.** The last map for each vocabulary is kept in
    `mapStore.ts`, so a map seen once is on screen at once, offline included, and the server is asked
    in the background whether it is still current — with its version, so an unchanged map costs a line
    of JSON. A newer one arrives as an update: the words already there glide to where they now
@@ -21,7 +21,7 @@ import { languageOf } from "./languages";
 import { createMapStore, type MapStore } from "./mapStore";
 import { MeaningMap, type MapCamera, type MeaningMapHandle } from "./meaningMap";
 import { usePicture } from "./picture";
-import { mapDataFor, mapPeekFor, type LanguageOption } from "./selectors";
+import { mapDataFor, mapPeekFor, type VocabularyOption } from "./selectors";
 
 let store: MapStore = createMapStore();
 export function replaceMapStoreForTests(replacement: MapStore): void { store = replacement; }
@@ -37,17 +37,20 @@ type Phase = "reading" | "drawing" | "ready" | "offline" | "failed";
 export interface MapViewProps {
   graph: VocabularyGraph;
   owner: string;
+  /** The vocabulary the map is of. */
+  vocabularyId: string;
+  /** Its language, for drawing and reading its words. */
   language: string;
-  languages: LanguageOption[];
+  vocabularies: VocabularyOption[];
   /* The top bar's slot, where the map's row goes: the bar is the top bar, not a card over the map. */
   bar?: HTMLElement | null;
-  /* Where the map was left in this language, so coming back from an article puts it back exactly. */
+  /* Where the map was left in this vocabulary, so coming back from an article puts it back exactly. */
   camera: MapCamera | null;
   onCamera(camera: MapCamera): void;
   /* The sense being peeked at, held by the host so it survives a trip to the article. */
   selected: string | null;
   onSelect(senseId: string | null): void;
-  onLanguage(code: string): void;
+  onVocabulary(id: string): void;
   /* A sense to fly to and select once it is on the map — from its article's "show on the map". */
   fly?: string | null;
   onFlown?(): void;
@@ -60,7 +63,7 @@ export interface MapViewProps {
 }
 
 export function MapView(props: MapViewProps) {
-  const { graph, owner, language, selected, onSelect } = props;
+  const { graph, owner, vocabularyId, language, selected, onSelect } = props;
   const [map, setMap] = useState<ServerMap | null>(null);
   const [phase, setPhase] = useState<Phase>("reading");
   const [arrived, setArrived] = useState(0);
@@ -73,7 +76,10 @@ export function MapView(props: MapViewProps) {
   const held = useRef<ServerMap | null>(null);
   const asking = useRef<Promise<void> | null>(null);
 
-  /* Ask the server for this language's map, sending the fingerprint of the one on screen. */
+  /* Ask the server for this vocabulary's map, sending the fingerprint of the one on screen. An answer
+     for a vocabulary no longer on screen is dropped: the switcher may have moved on while it came. */
+  const showing = useRef(vocabularyId);
+  showing.current = vocabularyId;
   const refresh = useRef<(quiet: boolean) => Promise<void>>(async () => undefined);
   refresh.current = async (quiet: boolean) => {
     if (asking.current) return asking.current;
@@ -81,12 +87,13 @@ export function MapView(props: MapViewProps) {
     const slow = have || quiet ? 0 : window.setTimeout(() => setPhase((now) => (now === "reading" ? "drawing" : now)), 500);
     asking.current = (async () => {
       try {
-        const answer = await backendSession.readMap(language, have?.version);
-        if ("current" in answer || answer.language !== language) return;
+        const asked = vocabularyId;
+        const answer = await backendSession.readMap(asked, have?.version);
+        if ("current" in answer || showing.current !== asked) return;
         held.current = answer;
         setMap(answer);
         setPhase("ready");
-        await store.save(owner, answer).catch(() => undefined);
+        await store.save(owner, asked, answer).catch(() => undefined);
       } catch (error) {
         if (have) return; // A map on screen stays on screen; being offline is not news here.
         setPhase(error instanceof AcervoApiError && (error.code === "offline" || error.code === "not_configured") ? "offline" : "failed");
@@ -106,13 +113,13 @@ export function MapView(props: MapViewProps) {
     setArrived(0);
     setFind("");
     (async () => {
-      const kept = await store.read(owner, language).catch(() => null);
+      const kept = await store.read(owner, vocabularyId).catch(() => null);
       if (cancelled) return;
       if (kept) { held.current = kept; setMap(kept); setPhase("ready"); }
       await refresh.current(false);
     })();
     return () => { cancelled = true; };
-  }, [owner, language]);
+  }, [owner, vocabularyId]);
 
   /* A sync that brought changes may have moved the map; ask, once things have settled. */
   const first = useRef(true);
@@ -124,7 +131,7 @@ export function MapView(props: MapViewProps) {
 
   /* The regions' names arrive after the map, from a job; when it finishes, ask again. */
   const jobs = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
-  const naming = jobFor(jobs, "map.name", language);
+  const naming = jobFor(jobs, "map.name", vocabularyId);
   const wasNaming = useRef(false);
   useEffect(() => {
     const open = isOpen(naming);
@@ -139,7 +146,7 @@ export function MapView(props: MapViewProps) {
     return () => window.clearTimeout(timer);
   }, [arrived]);
 
-  const data = useMemo(() => (map ? mapDataFor(graph, map) : null), [graph, map]);
+  const data = useMemo(() => (map ? mapDataFor(graph, map, vocabularyId) : null), [graph, map, vocabularyId]);
   const index = useMemo(() => (data && selected ? data.points.findIndex((p) => p.id === selected) : -1), [data, selected]);
   const view = useMemo(() => (index >= 0 ? mapPeekFor(graph, selected as string) : null), [graph, selected, index]);
 
@@ -209,7 +216,7 @@ export function MapView(props: MapViewProps) {
     return () => document.removeEventListener("keydown", onKey);
   });
 
-  const option = props.languages.find((entry) => entry.code === language) ?? { ...languageOf(language), count: 0, configured: false };
+  const option = props.vocabularies.find((entry) => entry.id === vocabularyId) ?? { ...languageOf(language), id: vocabularyId, count: 0 };
   const small = data !== null && map !== null && map.regions.length === 0 && data.points.length < REGIONS_FROM;
 
   return <section className={`map${view ? " peeking" : ""}`} ref={surface} onClick={(event) => {
@@ -219,7 +226,7 @@ export function MapView(props: MapViewProps) {
     {data && <MeaningMap
       ref={handle}
       data={data}
-      dataKey={language}
+      dataKey={vocabularyId}
       initialCamera={props.camera}
       selected={index}
       highlighted={lit}
@@ -264,14 +271,14 @@ export function MapView(props: MapViewProps) {
         </ol>}
       </div>}
       <div className="map-lang">
-        <button className="tb-btn lang-btn" aria-haspopup="menu" aria-label="Vocabulary language"
+        <button className="tb-btn lang-btn" aria-haspopup="menu" aria-label={`Vocabulary: ${option.name}`}
           onClick={() => setLangMenu((open) => !open)}>
           <span className="flag">{option.flag}</span><span className="code">{option.code.toUpperCase()}</span>
         </button>
         <div className={`menu map-lang-menu ${langMenu ? "open" : ""}`} role="menu">
-          <div className="label menu-label">Vocabulary language</div>
-          {props.languages.map((entry) => <button key={entry.code} className={entry.code === language ? "on" : ""}
-            onClick={() => { setLangMenu(false); props.onLanguage(entry.code); }}>
+          <div className="label menu-label">Vocabulary</div>
+          {props.vocabularies.map((entry) => <button key={entry.id} className={entry.id === vocabularyId ? "on" : ""}
+            onClick={() => { setLangMenu(false); props.onVocabulary(entry.id); }}>
             <span>{entry.flag}</span><span>{entry.name}</span><span className="cnt">{entry.count}</span>
           </button>)}
         </div>
@@ -306,15 +313,15 @@ export function MapView(props: MapViewProps) {
     </div>}
     {phase === "offline" && !data && <div className="map-note center">
       <h3>No map yet</h3>
-      <p>Your server draws the map, and this device has not reached it since you added words in this
-        language. It will appear here the first time it can.</p>
+      <p>Your server draws the map, and this device has not reached it since you added words to this
+        vocabulary. It will appear here the first time it can.</p>
     </div>}
     {phase === "failed" && !data && <div className="map-note center">
       <h3>The map could not be drawn</h3>
       <p>The server did not manage it this time. Open the map again to ask once more.</p>
     </div>}
     {small && <div className="map-note">
-      Regions appear once a language has about {REGIONS_FROM} meanings. {option.name} has {data?.points.length}.
+      Regions appear once a vocabulary has about {REGIONS_FROM} meanings. {option.name} has {data?.points.length}.
     </div>}
     {arrived > 0 && <div className="map-note arrived">
       {plural(arrived, "new meaning", "new meanings")} since you last opened the map

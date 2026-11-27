@@ -102,6 +102,7 @@ def walk(context: JobContext, step: Step) -> str | None:
         else:
             saved = save_article(
                 context.owner, DEVICE, proposal["draft"], status="inbox",
+                vocabulary=proposal["vocabularyId"],
                 enqueue=graph.Enqueue("ingest", parent=context.id),
             )
             outcome.update(outcome="saved", lexemeId=saved["lexemeId"],

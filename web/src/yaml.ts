@@ -16,9 +16,10 @@ import { Document, isMap, isNode, isScalar, isSeq, LineCounter, parseDocument, S
 import {
   EXAMPLE_ORIGINS, GENDERS, LEXEME_STATUSES, PARTS_OF_SPEECH, REGISTERS, SOURCE_KINDS,
   type Example, type ExampleOrigin, type Gender, type Gloss, type ImagePrompt,
-  type LexemeStatus, type PartOfSpeech, type PhotoRegion, type Register, type SourceKind, type StudyState
+  type LexemeStatus, type PartOfSpeech, type PhotoRegion, type Register, type SourceKind, type StudyState,
+  type Vocabulary
 } from "./domain";
-import { languageOf } from "./languages";
+import { languageName, languageOf } from "./languages";
 import type { Article } from "./selectors";
 
 /* ── the draft ──────────────────────────────────────────────────────────
@@ -776,13 +777,17 @@ export function parseArticle(text: string): ArticleDraft {
 }
 
 /**
- * The starting point for a new entry. It carries no ids, so everything in it is created — which is
- * the only difference between this and an edit. Asserted to parse, so the shape someone is invited
- * to fill in can never fall behind the shape the reader accepts.
+ * The starting point for a new entry in `vocabulary`: its language, the language its senses are
+ * defined in, and the first it is translated into. It carries no ids, so everything in it is created —
+ * which is the only difference between this and an edit. Asserted to parse, so the shape someone is
+ * invited to fill in can never fall behind the shape the reader accepts.
  */
-export const YAML_TEMPLATE = `# New entry — fill in what you know and delete the rest.
+export function yamlTemplate(vocabulary: Pick<Vocabulary, "language" | "definitionLang" | "glossLangs">): string {
+  const { language, definitionLang } = vocabulary;
+  const gloss = vocabulary.glossLangs[0] ?? definitionLang;
+  return `# New entry — fill in what you know and delete the rest.
 # No ids here: everything in this document is created when you save.
-language: es
+language: ${language}
 headword: ""
 lemma: ""              # leave empty to reuse the headword
 pos: noun              # noun verb adj adv phrase idiom expression
@@ -796,16 +801,17 @@ emotion: null          # how the word itself sounds, e.g. repulsed, recoiling sl
 notes: []
 senses:
   - order: 0
-    definition: ""     # in the target language
-    definitionLang: es
+    definition: ""     # in ${languageName(definitionLang)}
+    definitionLang: ${definitionLang}
     domain: ""         # one word for this meaning, e.g. cooking
     emoji: ""
     glosses:
-      - { lang: en, terms: [""] }
+      - { lang: ${gloss}, terms: [""] }
     examples:
       - text: ""
         translation: ""
-        translationLang: en
+        translationLang: ${gloss}
         origin: manual
 attestations: []       # the sentence you actually met it in, verbatim
 `;
+}

@@ -16,17 +16,19 @@
 import { useEffect, useRef, useState } from "react";
 import FitWords from "./FitWords";
 import { CloseIcon, NoteIcon, SelectIcon } from "./icons";
-import { languageOf } from "./languages";
 import type { SelectedWord } from "./selectors";
 
 function wordsCount(count: number): string {
   return `${count} word${count === 1 ? "" : "s"}`;
 }
 
-export default function SelectionBar({ words, language, onOpen, onRemove, onClear, onLoop, onStory }: {
+export default function SelectionBar({ words, language, name, onOpen, onRemove, onClear, onLoop, onStory }: {
   /** The selected words that still exist, in the order they were chosen. Never empty. */
   words: SelectedWord[];
+  /** The language the words are in, for reading and drawing them. */
   language: string;
+  /** What the vocabulary they are from is called. */
+  name: string;
   onOpen(lexemeId: string): void;
   onRemove(lexemeId: string): void;
   onClear(): void;
@@ -76,7 +78,7 @@ export default function SelectionBar({ words, language, onOpen, onRemove, onClea
     </button>
 
     {listing && <div className="menu open sel-menu" role="menu" aria-label="Selected words">
-      <div className="label menu-label">Your selection · {languageOf(language).name}</div>
+      <div className="label menu-label">Your selection · {name}</div>
       <div className="sel-items">
         {words.map((word) => <div className="sel-item" key={word.id}>
           <button className="sel-open" role="menuitem" onClick={() => { setListing(false); onOpen(word.id); }}>

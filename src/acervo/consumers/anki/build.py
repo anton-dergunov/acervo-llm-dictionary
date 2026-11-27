@@ -43,7 +43,7 @@ from .progress import Progress
 # A word set aside, or not yet taken in, has no cards; one set aside is named in the manifest so the
 # cards it already has are suspended.
 CARD_STATUSES = ("active",)
-DEFAULT_DECK = "{language}::Vocabulary"
+DEFAULT_DECK = "{vocabulary}::Vocabulary"
 LANGUAGE_NAMES = {
     "es": "Spanish", "en": "English", "ru": "Russian", "zh": "Chinese", "pt": "Portuguese",
     "fr": "French", "de": "German", "it": "Italian", "ja": "Japanese", "ko": "Korean",
@@ -196,37 +196,54 @@ class _Media:
 def build(
     changes: dict[str, list[dict]],
     *,
-    languages: Iterable[str] | None = None,
+    vocabularies: Iterable[str] | None = None,
     media_root: Path | None = None,
     statuses: Iterable[str] = CARD_STATUSES,
     deck: str = DEFAULT_DECK,
 ) -> BuiltManifest:
-    """Every note for these languages' words (all of them by default), in the order new cards
-    should be introduced. Each language is its own deck."""
+    """Every note for these vocabularies' words (all of them by default, by id), in the order new
+    cards should be introduced. Each vocabulary is its own deck, named as the vocabulary is."""
     graph = _Graph(changes)
     built = BuiltManifest()
     media = _Media(media_root, built)
     wanted = set(statuses)
-    chosen = set(languages) if languages else None
+    chosen = set(vocabularies) if vocabularies else None
     articles = [
         article for article in build_articles(changes)
-        if article.lexeme.get("status") in wanted and (chosen is None or article.language in chosen)
+        if article.lexeme.get("status") in wanted
+        and (chosen is None or article.lexeme.get("vocabularyId") in chosen)
     ]
     articles.sort(key=lambda article: (article.lexeme.get("createdAt") or "", article.id))
     built.aside = sorted(
         lexeme["id"] for lexeme in live(changes.get("lexemes", []))
-        if lexeme.get("status") == "aside" and (chosen is None or lexeme.get("language") in chosen)
+        if lexeme.get("status") == "aside" and (chosen is None or lexeme.get("vocabularyId") in chosen)
     )
-    rounds = [_notes_of(article, graph, media, deck) for article in articles]
+    decks = _decks(live(changes.get("vocabularies", [])), deck)
+    rounds = [_notes_of(article, graph, media, decks[article.lexeme["vocabularyId"]]) for article in articles]
     for index in range(max((len(notes) for notes in rounds), default=0)):
         built.notes.extend(notes[index] for notes in rounds if index < len(notes))
     return built
 
 
-def _deck_for(article: ArticleView, deck: str) -> str:
-    vocabulary = article.vocabulary or {}
-    name = vocabulary.get("displayName") or LANGUAGE_NAMES.get(article.language.split("-")[0], article.language)
-    return deck.format(language=name)
+def _decks(vocabularies: list[dict], deck: str) -> dict[str, str]:
+    """Each vocabulary's deck, by its id: its name, or its language's where it has none.
+
+    The interface keeps the names of one owner's vocabularies apart, but two devices offline can each
+    name one the same; the later in the owner's order then gets a number rather than sharing a deck,
+    since a deck shared by two vocabularies would mix their cards for good.
+    """
+    decks: dict[str, str] = {}
+    taken: set[str] = set()
+    for vocabulary in sorted(vocabularies, key=lambda one: (one.get("order", 0), one.get("id", ""))):
+        language = vocabulary.get("language", "")
+        name = vocabulary.get("displayName") or LANGUAGE_NAMES.get(language.split("-")[0], language)
+        chosen, number = deck.format(vocabulary=name), 1
+        while chosen.lower() in taken:
+            number += 1
+            chosen = deck.format(vocabulary=f"{name} {number}")
+        taken.add(chosen.lower())
+        decks[vocabulary["id"]] = chosen
+    return decks
 
 
 def _tags(article: ArticleView, graph: _Graph, note: str) -> list[str]:
@@ -238,10 +255,9 @@ def _tags(article: ArticleView, graph: _Graph, note: str) -> list[str]:
     return sorted(tags)
 
 
-def _notes_of(article: ArticleView, graph: _Graph, media: _Media, deck: str) -> list[dict[str, Any]]:
+def _notes_of(article: ArticleView, graph: _Graph, media: _Media, deck_name: str) -> list[dict[str, Any]]:
     lexeme = article.lexeme
     gloss_langs = article.gloss_langs
-    deck_name = _deck_for(article, deck)
     article_word, bare = split_article(lexeme)
     headword_audio = media.add(
         (graph.recording("lexeme", article.id, lexeme.get("headword") or "") or {}).get("audioRef"))

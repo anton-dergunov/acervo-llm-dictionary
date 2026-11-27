@@ -14,6 +14,9 @@ const sync = (created: string, edited = created) => ({
 });
 
 export const TEST_OWNER = OWNER;
+/** The fixture's two vocabularies, which every word, loop and story in it is in. */
+export const SPANISH = "vocabes00000001";
+export const ENGLISH = "vocaben00000001";
 
 /**
  * A drill's lines for its words, as a render reports them: each word, its translation after the
@@ -66,7 +69,7 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
     ],
     lexemes: [
       {
-        id: "lexemepicar0001", language: "es", headword: "picar", lemma: "picar", reading: null,
+        id: "lexemepicar0001", vocabularyId: "vocabes00000001", language: "es", headword: "picar", lemma: "picar", reading: null,
         ipa: "/piˈkaɾ/", pos: "verb", gender: null, register: "neutral", dialect: null, emoji: "🌶️",
         topicIds: ["topicfood000001"], status: "active", shortGloss: "to itch; to chop",
         primaryGloss: "to sting", emotion: "wincing slightly, as if something just bit you",
@@ -74,20 +77,20 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
         clipsSearchedAt: stamp("08-24"), ...sync("02-11", "08-24")
       },
       {
-        id: "lexemebalsa0001", language: "es", headword: "la balsa", lemma: "balsa", reading: null,
+        id: "lexemebalsa0001", vocabularyId: "vocabes00000001", language: "es", headword: "la balsa", lemma: "balsa", reading: null,
         ipa: null, pos: "noun", gender: "feminine", register: "neutral", dialect: null, emoji: "🛶",
         topicIds: ["topictravel0001"], status: "active", shortGloss: null,
         primaryGloss: "raft", emotion: null, notes: [],
         clipsSearchedAt: null, ...sync("01-22")
       },
       {
-        id: "lexemeespolv001", language: "es", headword: "espolvorear", lemma: "espolvorear",
+        id: "lexemeespolv001", vocabularyId: "vocabes00000001", language: "es", headword: "espolvorear", lemma: "espolvorear",
         reading: null, ipa: null, pos: "verb", gender: null, register: "neutral", dialect: null,
         emoji: "🧀", topicIds: ["topicfood000001"], status: "inbox", shortGloss: "to sprinkle",
         primaryGloss: null, emotion: null, notes: [], clipsSearchedAt: null, ...sync("08-27")
       },
       {
-        id: "lexemeturmoil01", language: "en", headword: "turmoil", lemma: "turmoil", reading: null,
+        id: "lexemeturmoil01", vocabularyId: "vocaben00000001", language: "en", headword: "turmoil", lemma: "turmoil", reading: null,
         ipa: "/ˈtɜːmɔɪl/", pos: "noun", gender: null, register: "formal", dialect: null, emoji: "🌪️",
         topicIds: [], status: "active", shortGloss: null, primaryGloss: "turmoil",
         emotion: "unsettled and churning", notes: [], clipsSearchedAt: null,
@@ -192,14 +195,14 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
     ],
     loops: [
       {
-        id: "loopmorning0001", language: "es", styleId: "sunlit-acoustic", seed: 104740,
+        id: "loopmorning0001", vocabularyId: "vocabes00000001", language: "es", styleId: "sunlit-acoustic", seed: 104740,
         engineVersion: "1.4.0", bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
         audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
         durationSeconds: 124.5, position: 0, starred: false, archived: false, ...sync("09-01")
       },
       {
         // Queued but not rendered: an absent reference is the whole of what says so.
-        id: "loopqueued00001", language: "es", styleId: null, seed: 0, engineVersion: null,
+        id: "loopqueued00001", vocabularyId: "vocabes00000001", language: "es", styleId: null, seed: 0, engineVersion: null,
         bedFingerprint: null, format: "classic", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
         durationSeconds: null, position: 1, starred: false, archived: false, ...sync("09-02")
       }
@@ -221,14 +224,14 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
     ],
     stories: [
       {
-        id: "storypicada0001", language: "es", typeId: "funny", styleId: "comic-book",
+        id: "storypicada0001", vocabularyId: "vocabes00000001", language: "es", typeId: "funny", styleId: "comic-book",
         title: "La balsa que picaba", titleTranslation: "The raft that stung",
         emoji: "\u{1F6F6}", modelId: "gemini/gemini-3.5-flash-lite", position: 0, guidance: null, parts: 4, starred: false, archived: false,
         ...sync("09-03")
       },
       {
         // Asked for and never written: having no parts is the whole of what says so.
-        id: "storyqueued0001", language: "es", typeId: "mystery", styleId: "film-noir",
+        id: "storyqueued0001", vocabularyId: "vocabes00000001", language: "es", typeId: "mystery", styleId: "film-noir",
         title: null, titleTranslation: null, emoji: "\u{1F575}", modelId: null, guidance: null, parts: 4, starred: false, archived: false,
         position: 1, ...sync("09-04")
       }

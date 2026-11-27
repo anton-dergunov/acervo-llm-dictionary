@@ -22,8 +22,9 @@ def review(word: str, number: int, **overrides) -> dict:
 def held(server) -> tuple[dict, dict]:
     word = lexeme(headword="picar", lemma="picar")
     meaning = sense(word["id"])
-    assert server.push({"vocabularies": [vocabulary()], "lexemes": [word],
-                        "senses": [meaning]}).status_code == 200
+    if not server.pull().json()["data"]["changes"]["vocabularies"]:
+        assert server.push({"vocabularies": [vocabulary()]}).status_code == 200
+    assert server.push({"lexemes": [word], "senses": [meaning]}).status_code == 200
     return word, meaning
 
 
@@ -78,7 +79,8 @@ def test_the_history_reads_back_as_figures(server):
     assert figures["retention"]["answered"] == 2 and figures["retention"]["rate"] == 0.5
     assert figures["retention"]["byTopic"] == [
         {"topic": "Kitchen", "answered": 2, "passed": 1, "rate": 0.5}]
-    assert server.get("/stats?language=zh").json()["data"]["totals"]["reviews"] == 0
+    assert server.get(f"/stats?vocabulary={vocabulary()['id']}").json()["data"]["totals"]["reviews"] == 3
+    assert server.get("/stats?vocabulary=vocabstarter001").json()["data"]["totals"]["reviews"] == 0
 
 
 def row(day: str, **overrides) -> dict:

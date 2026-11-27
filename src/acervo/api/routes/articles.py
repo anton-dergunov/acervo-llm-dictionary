@@ -39,6 +39,8 @@ async def save(request: Request) -> JSONResponse:
         lambda: save_article(
             account, device, body.get("draft"), minted, enqueue=None if imported else graph.SAVE,
             imported=imported, base=body.get("base"),
+            # Where a new word goes: the vocabulary in view, or the one chosen for it.
+            vocabulary=body.get("vocabularyId"),
             # A photo taken for this word is kept by the save that names it (`services/photo.py`).
             place_photo=photo.placer(request.app.state.settings),
         )

@@ -17,7 +17,7 @@ from acervo.repository import jobs
 from acervo.work import capture as capture_kind
 from acervo.work.runner import Runner
 
-from graph_records import DEVICE, lexeme, topic, vocabulary
+from graph_records import DEVICE, lexeme, topic, vocabulary, vocabulary_id
 from test_capture import ARTICLE, RESOLUTION
 
 
@@ -80,6 +80,7 @@ class Script:
             "resolution": {**RESOLUTION, "headword": headword, "consumedLines": consumed},
             "duplicates": [{"id": "x" * 15, "headword": headword}] if duplicate else [],
             "draft": None if duplicate else draft,
+            "vocabularyId": vocabulary_id("es"),
         }
 
 

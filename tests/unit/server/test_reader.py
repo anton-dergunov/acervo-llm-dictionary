@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from acervo.services.reader import reader_section, with_reader
 
-from graph_records import vocabulary
+from graph_records import vocabulary, vocabulary_id
 from test_prompt_rules import RULES, systems_of
 
 NOTE = "Preparing for a trip to Argentina in March.\nThe subjunctive is my weak spot."
@@ -64,15 +64,15 @@ def test_capture_writes_the_entry_for_the_reader_and_resolves_the_word_without(s
     assert compose.endswith(reader_section({**LEARNER}))
 
 
-def test_the_article_conversation_is_had_with_the_reader_of_its_language(server):
+def test_the_article_conversation_is_had_with_the_reader_of_its_vocabulary(server):
     server.push({"vocabularies": [vocabulary(level="B1", region="AR", learnerNote=NOTE),
                                   vocabulary(language="ru", level="A1")]})
     server.model.chat = {"reply": "Una respuesta.", "followUps": []}
-    subject = {"kind": "article", "lexemeId": "", "language": "es",
+    subject = {"kind": "article", "lexemeId": "", "language": "es", "vocabularyId": vocabulary_id("es"),
                "document": "headword: picar\nlanguage: es\n", "focus": None}
     assert server.chat(subject=subject).status_code == 200
     system = systems_of(server)[0]
     assert "learning Spanish" in system and "A1" not in system
 
-    assert server.chat(subject={**subject, "language": None}).status_code == 200
-    assert "## The reader" not in systems_of(server)[1], "a draft that names no language has no reader"
+    assert server.chat(subject={**subject, "vocabularyId": None}).status_code == 200
+    assert "## The reader" not in systems_of(server)[1], "a draft in no vocabulary has no reader"

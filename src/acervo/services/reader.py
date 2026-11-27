@@ -92,6 +92,6 @@ def with_reader(text: str, owner: str, vocabulary: Mapping[str, Any] | None, *, 
     return with_rules(f"{text}\n\n{section}" if section else text, owner)
 
 
-def vocabulary_for(vocabularies: list[dict[str, Any]], language: str | None) -> dict[str, Any] | None:
-    """The owner's vocabulary for `language`, or None — a word in a language they no longer keep."""
-    return next((one for one in vocabularies if language and one["language"] == language), None)
+def vocabulary_for(vocabularies: list[dict[str, Any]], vocabulary_id: str | None) -> dict[str, Any] | None:
+    """The owner's vocabulary with this id, or None — one they have since removed."""
+    return next((one for one in vocabularies if vocabulary_id and one["id"] == vocabulary_id), None)
