@@ -40,15 +40,21 @@ Two model calls, assembled on the server from tracked prompts (`prompts/acervo_r
 
 1. **Resolve** decides what the text is about — which word or phrase, which language, which of the
    sentences are the learner's own, and, walking a file, how many lines that entry occupied. That answer
-   is what makes the rest safe: a language with no `vocabularies` record is refused before anything is
-   generated, and a word the account already holds returns the entry it has rather than a
-   near-duplicate. The submitter may name the word (`headword`), which is a hint resolve still
+   is what makes the rest safe: the word's vocabulary is chosen before anything is generated (below),
+   and a word that vocabulary already holds returns the entry it has rather than a near-duplicate. The submitter may name the word (`headword`), which is a hint resolve still
    corrects, not a bypass of it.
 2. **Compose** writes the article from the definition and the learner's own sentences, choosing from
    the owner's real topics and glossing into the languages the vocabulary asks for. Every prose field in
    its prompt states which language it is written in. The owner's standing rules (Settings ▸ Rules,
    [`standing-rules.md`](standing-rules.md)) are appended to it, and an optional request in Add
    ("Anything to ask the generator") travels with it.
+
+**Which vocabulary.** A device sends the vocabulary in view as `vocabulary`; resolve says the language.
+The word goes in the vocabulary sent when it is in that language, else in the owner's only vocabulary
+of that language (`choose_vocabulary` in `services/capture/pipeline.py`). None of that language is
+`409 language_not_configured` ("Add it in Settings"); several, none of them sent, is
+`409 vocabulary_ambiguous`, naming them and carrying their ids for the device to ask with. The answer
+names the `vocabularyId` chosen, and Add and a queued capture save into it.
 
 The model answers in JSON mode and the shape is checked by Acervo's own parser — no schema is ever
 sent ([`../architecture/models.md`](../architecture/models.md)). Resolve and compose run on the

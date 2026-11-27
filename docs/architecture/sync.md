@@ -117,7 +117,7 @@ the graph and is pure, so the interface is testable without a replica.
   grows with every word ([`performance.md`](performance.md)).
 - **The interface is not drawn until the replica has been read.** A cold start shows the launch screen
   (`Launch.tsx`, with the same markup in `index.html`) rather than a shell reporting an empty
-  vocabulary — "All 0" about a vocabulary of 1,700 — then reopens the place `lastPlace.ts` remembered;
+  vocabulary — "All 0" about a vocabulary of 1,700 — then reopens the vocabulary, topic and word `lastPlace.ts` remembered;
   Settings ▸ Sync says how long that took.
 - **A replica belonging to another account or another `LOCAL_SCHEMA_VERSION` is wiped and pulled
   again**, into storage — never kept in memory instead, or every cold start would download the whole

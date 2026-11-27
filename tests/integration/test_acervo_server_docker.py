@@ -254,7 +254,7 @@ def test_a_map_is_drawn_inside_the_image_with_the_encoder_it_carries(running):
     lexemes, senses = [], []
     for index, (headword, definition) in enumerate(words):
         lexeme_id, sense_id = f"lexememap{index:06d}", f"sensemapx{index:06d}"
-        lexemes.append({"id": lexeme_id, "language": "es", "headword": headword, "lemma": headword,
+        lexemes.append({"id": lexeme_id, "vocabularyId": "vocabularymapes", "language": "es", "headword": headword, "lemma": headword,
                         "reading": None, "ipa": None, "pos": "verb", "gender": None, "register": "neutral",
                         "dialect": None, "emoji": None, "topicIds": [], "status": "active",
                         "shortGloss": headword, "primaryGloss": None, "emotion": None, "notes": [],
@@ -272,7 +272,7 @@ def test_a_map_is_drawn_inside_the_image_with_the_encoder_it_carries(running):
     # The first map loads the encoder, which takes a while on a small machine.
     with AcervoClient(running.base, timeout=240.0) as client:
         client.token = token
-        status, drawn = client.raw("GET", f"{API}/map/es")
+        status, drawn = client.raw("GET", f"{API}/map/{vocabulary['id']}")
     assert status == 200, drawn
     assert drawn["data"]["model"] == "intfloat/multilingual-e5-small"
     assert {point["sense"] for point in drawn["data"]["points"]} == {s["id"] for s in senses}

@@ -423,7 +423,7 @@ round-trip through the YAML projection, so `prompt`, `styleId` and `seed` surviv
 picture, and `imageRef` embeds a lexeme id that will not exist after import — keeping it imported a
 live-looking reference to a file nobody has.
 
-The bytes are an opt-in `media/<language>/<slug>-<n>.webp` directory. Named after the word file so
+The bytes are an opt-in `media/<vocabulary directory>/<slug>-<n>.webp` directory. Named after the word file so
 the two pair by eye, and suffixed by sense order rather than by prompt id, because a bundle carries
 no ids a person or a second account could use — which also makes position the only pairing a restore
 can key on. It defaults to off: a bundle should stay a text archive you can read, pictures are

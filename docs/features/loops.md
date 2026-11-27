@@ -393,7 +393,7 @@ wrong, and a comparison of two arms is blind to a defect they share.
 
 ### 9 · A loop is three collections, and its state is derived
 
-`loops` — `language`, `format`, `switches`, `fallbackFrom`, `styleId`, `seed`, `engineVersion`,
+`loops` — `vocabularyId`, `language` (the vocabulary's), `format`, `switches`, `fallbackFrom`, `styleId`, `seed`, `engineVersion`,
 `bedFingerprint`, `audioRef`, `audioMime`, `durationSeconds`, `position`, `starred`, `archived`.
 `loopItems` — `loopId`,
 `lexemeId`, `position`, `sourceText`, `targetText`, `emotion`, `startSeconds`,
@@ -424,8 +424,9 @@ wrong, and a comparison of two arms is blind to a defect they share.
   replicated rules like `jobs`. It exists so new music says the same lines (§2.18).
 - **No title.** `selectors.ts` derives one from the source words that fit, as `effectiveShortGloss`
   derives a gloss.
-- **`position` orders them**, sparse and renumbered on reorder, with no uniqueness constraint — that
-  is the data rule, and ordering is respected rather than enforced.
+- **`position` orders them within their vocabulary**, sparse and renumbered on reorder, with no
+  uniqueness constraint — that is the data rule, and ordering is respected rather than enforced. A
+  loop is of one vocabulary, whose words it speaks and whose list it is in.
 
 `pronunciations` gains nothing: no new target kinds, no new derived ids. Reordering and deleting are
 ordinary graph writes, so online-only and loud when they fail, like every other write.

@@ -1,22 +1,23 @@
 # The meaning map · a vocabulary laid out by what it means
 
-One language's senses on one map. Senses that mean related things sit together; zoomed out, the map
+One vocabulary's senses on one map. Senses that mean related things sit together; zoomed out, the map
 names its regions — the learner's interests, as their own words reveal them — and zoomed in it shows
 the words and then what each means. Tapping a word peeks at it, and the peek opens the article.
 
-The package is `src/acervo/meaning/`, drawn by `GET /map/{language}`; the look and the interaction are
+The package is `src/acervo/meaning/`, drawn by `GET /map/{vocabulary}` (by id); the look and the interaction are
 the prototype's (`design/ui-prototype/README.md`, "The map"); the measurements are
 [`experiments/meaning-space/`](../../experiments/meaning-space/README.md). What the map might become
 — ghosts, other layers — is [`../plans/word-discovery.md`](../plans/word-discovery.md).
 
 ---
 
-## One map per language, one point per sense
+## One map per vocabulary, one point per sense
 
-A learner's languages serve different purposes — one for travel, one for work, one for everyday life —
-so the words held in each are a different set of interests. Pooled into one space they would make
-regions that describe no single language's vocabulary. The map follows the language switcher, as
-loops and stories do.
+A learner's vocabularies serve different purposes — one for travel, one for work, one for everyday
+life — so the words held in each are a different set of interests. Pooled into one space they would
+make regions that describe no single vocabulary. Two vocabularies of one language are two maps for the
+same reason: a starter's everyday words would blur the regions of the owner's own. The map follows the
+vocabulary switcher, as loops and stories do.
 
 **A point is a sense, not a word**, because polysemy is exactly what a word-level map collapses. A
 word with two meanings appears in two places, and selecting one draws faint arcs to the word's other
@@ -124,7 +125,7 @@ appended to this prompt, since it only labels.
 
 ## The artifact
 
-The server keeps one drawn map per owner and language, `maps/artifacts/<owner>/<language>.json`:
+The server keeps one drawn map per owner and vocabulary, `maps/artifacts/<owner>/<vocabulary id>.json`:
 `{fingerprint, model, side, words, senses, names, points, regions, contours}`.
 
 - A point is `{sense, lexeme, x, y, r, h, rank, nb}` — the ids, the position, its region and
@@ -144,22 +145,22 @@ a current map answers `{"current": true}` and nothing else.
 
 ## Drawn on request, not by a job
 
-A map is redrawn when its fingerprint has changed, under one lock per owner and language, in the
+A map is redrawn when its fingerprint has changed, under one lock per owner and vocabulary, in the
 request's thread pool. It is seconds of local CPU with no model call, and the one-at-a-time job runner
-would leave it an hour behind an import. The one cold cost is the first embedding of a language: on a
+would leave it an hour behind an import. The one cold cost is the first embedding of a vocabulary: on a
 laptop, 1,443 Spanish senses took 35 s cold and 3.4 s warm; the NAS is several times slower. It is paid
 once, behind *Drawing your map*.
 
 ## On the device
 
-The last map per language is kept in `mapStore.ts`, an IndexedDB store separate from the replica, so
+The last map per vocabulary is kept in `mapStore.ts`, an IndexedDB store separate from the replica, so
 neither wipe touches the other and the map opens at once and offline. The current one then arrives,
 new points fade in and moved ones glide to their places — the map visibly grows by the words added
 since it was last opened. With no stored map and no server it says so, and never shows a spinner that
 cannot finish.
 
 **The surface.** It is entered from the rail and, on a phone, the foot bar, and it replaces the list.
-On the map the top bar carries the map's own row — Back, the name, the counts, Find, its own language
+On the map the top bar carries the map's own row — Back, the name, the counts, Find, its own vocabulary
 switcher — drawn by `MapView` through a portal into the bar's slot, so it is the top bar and not a card
 over the map. ⌘ + scroll and ⌘= / ⌘− / ⌘0 zoom it — taking over the browser's page zoom while the map
 is open, which works in the macOS host only because it binds no View ▸ Zoom item; adding one would
@@ -171,6 +172,6 @@ faint density contours, and teal kept for the selection.
 **Built so it can move out.** `web/src/meaningMap/` imports nothing of Acervo's (`boundary.test.ts`)
 and takes its own `MapData`; `selectors.ts`'s adapter joins the artifact to the replica. On the server
 `src/acervo/meaning/` stands alone like `images/`, with `services/meaning.py` as the binding layer and
-`admin map export` giving texts and vectors to the discovery experiment (`admin map show` prints a
-language's map as last drawn). Either half can move to the
+`admin map export` giving texts and vectors to the discovery experiment (`admin map show --vocabulary` prints a
+vocabulary's map as last drawn, named by id, name or a language only one has). Either half can move to the
 discovery repository and come back as a package.

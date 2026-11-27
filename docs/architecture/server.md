@@ -195,15 +195,15 @@ The routes, under `/api/acervo/v1` unless shown:
 | Area | Routes |
 |---|---|
 | Session and health | `GET /health` (none), `POST /session`, `POST /session/refresh` |
-| The graph | `GET /graph?since=` (pure read), `POST /graph` (one transaction, all or nothing), `POST /graph/reset` (confirmation token `delete-all-words`), `POST /articles` (one parsed document, diffed on the server) |
+| The graph | `GET /graph?since=` (pure read), `POST /graph` (one transaction, all or nothing), `POST /graph/reset` (confirmation token `delete-all-words`), `POST /articles` (one parsed document, diffed on the server, and the `vocabularyId` a new word goes in) |
 | Capture | `POST /capture`, `POST /capture/resolve`, `POST /captures` (a job), `POST /photo/read`, `POST /photo/store`, `POST /photo/warm` |
 | Chat | `POST /chat` |
 | Work | `GET /jobs`, `POST /jobs`, `GET /jobs/{id}`, `POST /jobs/{id}/cancel`, `POST /jobs/{id}/dismiss`, `GET /events` (a stream) |
 | Pictures | `GET`/`DELETE /images/prompts/{id}`, `PUT /images/senses/{id}/picture`, `GET`/`PUT /images/settings` |
 | Pronunciation | `POST /pronunciations/utterance`, `POST /pronunciations/take`, `POST /pronunciations/{collection}/{id}`, `PUT …/{id}/audio`, `GET`/`PUT /pronunciations/settings` |
 | Loops and stories | `POST /loops`, `GET /loops/schema`, `POST /loops/{id}/music`, `DELETE /loops/{id}`, `POST /stories`, `GET /stories/types`, `DELETE /stories/{id}`, `POST /stories/{id}/parts/{part}/audio`, `GET /words/rarity` |
-| The map | `GET /map/{language}` |
-| Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?language=&days=&weeks=` |
+| The map | `GET /map/{vocabulary}` (by id) |
+| Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?vocabulary=&days=&weeks=` |
 | Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
 | Clips and the corpus | `GET`/`PUT /clips/settings`, `GET /clips/corpus` (what the corpus holds, asked of it with a short timeout), and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |

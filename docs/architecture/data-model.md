@@ -15,7 +15,7 @@ order always resolves, and tombstones cascade in the reverse order.
 
 | Collection | One row is | Notes |
 |---|---|---|
-| `vocabularies` | one language the owner studies, and how it is presented | exists before its first word, which is what makes a new language fillable |
+| `vocabularies` | one set of words the owner keeps in one language, and how it is presented | exists before its first word, which is what makes a new language fillable; any number may share a language |
 | `topics` | an editable grouping, with an icon and an order | data, never a fixed enum |
 | `lexemes` | the thing being learned | a word or a phrase: `ponerse malo` is a lexeme with `pos: phrase` |
 | `senses` | one meaning, ordered | definition in one language, glosses in several |
@@ -24,8 +24,8 @@ order always resolves, and tombstones cascade in the reverse order.
 | `imagePrompts` | one sense's picture and how it came to exist | id derived from the sense |
 | `pronunciations` | one spoken field's recording | id derived from what it reads |
 | `studyStates` | a word's, or one of its senses', review state in one learning system | written back from Anki |
-| `loops`, `loopItems`, `loopCues` | a rendered track, each word in it, and every line it says | hang off no word |
-| `stories`, `storyParts`, `storyWords` | an illustrated story, its parts, and the words it was asked to teach | |
+| `loops`, `loopItems`, `loopCues` | a rendered track, each word in it, and every line it says | hang off no word; a loop is of one vocabulary |
+| `stories`, `storyParts`, `storyWords` | an illustrated story, its parts, and the words it was asked to teach | a story is of one vocabulary |
 | `beds` | a loop's music, kept to be asked for again | outlives the loop it came from |
 | `plays` | one play of a loop, or one read of a story | made once and never edited; the one write a device may hold back |
 
@@ -43,6 +43,27 @@ provenance — when, and from which device — and never a merge key.
 
 ## The word
 
+### Vocabulary: a set of words, not a language
+
+A word names its vocabulary by id (`vocabularyId`), and a vocabulary is a thing in its own right
+rather than a language, so that two may share one — Argentine and Castilian Spanish kept apart, a
+class's word set beside one's own, a starter tried before it is adopted. The model and the server
+already allow it; the client still holds one vocabulary per language (`checkVocabularyLanguages` in
+`domain.ts`) until import and capture can ask which one a word goes in
+([`../plans/several-vocabularies.md`](../plans/several-vocabularies.md)). There is no kind of vocabulary: a
+starter is an ordinary one told apart by its name (`Spanish (Mexico) · Everyday words`), and
+everything per vocabulary — the switcher, the map, stats, the Anki deck, the Obsidian notes, the
+remembered place, word selection, loop and story lists — treats it like any other.
+
+The language still does the jobs that need the language itself, and is keyed on it: voices and
+locale, dictionaries, rarity, IPA and pinyin, the article stripped before an Anki headword, script
+hints for reading a photo, and the language capture detects. So **a lexeme keeps `language`** beside
+`vocabularyId`, and both validators refuse one whose language is not its vocabulary's; a loop and a
+story carry both under the same rule. The vocabulary is **not in the article YAML**: which one holds a
+word is where it was added, like its revision, so a document says what language a word is in and a
+save says separately where a new word goes (`POST /articles`, `vocabularyId`, required when the
+document creates its word and refused when it names another than a stored word's).
+
 ### Vocabulary: three languages, not interchangeable
 
 | Field | Is | Why it is separate |
@@ -53,7 +74,8 @@ provenance — when, and from which device — and never a merge key.
 
 A vocabulary also carries its **variety**, `region`: a BCP-47 region subtag (`AR`, `GB`, `419`) or
 null. It is not a fourth language — Argentine Spanish is still `es`, so a lexeme's `language` and every
-lookup keyed on it are unchanged — but the regional form learned, which the voices read it in
+lookup keyed on it are unchanged — but the regional form learned, which the voices read each word of
+that vocabulary in
 ([`../features/pronunciation.md`](../features/pronunciation.md)) and the writers prefer. A lexeme's
 `dialect` is the opposite case: one word that belongs to a variety, whatever the vocabulary's.
 
@@ -78,7 +100,7 @@ pivot Spanish is glossed in. Every language-bearing field names *which* language
 
 ### Lexeme
 
-`language` (BCP-47), `headword`, `lemma` (the dictionary form, and the key a corpus or dictionary is
+`vocabularyId`, `language` (BCP-47, the vocabulary's), `headword`, `lemma` (the dictionary form, and the key a corpus or dictionary is
 searched on), `reading` (pinyin or another script aid — **required for Chinese**, on a prefix test; Pinyin is
 written with tone marks, one spaced syllable per character, but digits are read too — see
 [`../features/articles.md`](../features/articles.md), "Readings"),
@@ -238,6 +260,8 @@ Three rules they share:
 - **No uniqueness constraints on replicated collections.** Server-only tables that never replicate —
   `sync_state`, `model_selection`, `jobs`, `loop_scripts`, `providers`, `model_usage` — are exempt.
 - **A vocabulary language is a record, not a table in the code.** `languages.ts` derives only names
-  and flags, from the platform's locale data.
+  and flags, from the platform's locale data. A vocabulary's name is kept apart from the others' by
+  the interface only, never by a uniqueness rule; where a clash would merge two things for good (an
+  Anki deck), the later in the owner's order gets a number.
 - **Any change to a replicated record's shape bumps `LOCAL_SCHEMA_VERSION`** in `repository.ts`, and a
   replica written under another version is wiped and pulled again ([`sync.md`](sync.md)).

@@ -140,9 +140,12 @@ after the robot already had — that card comes back with the word.
 content. A content-derived GUID breaks the day a template improves or a typo is fixed, quietly and
 after the fact; an explicit id survives every edit, template change and re-import.
 
-**One deck per language, topics as tags.** Per-topic decks multiply scheduling configuration — each
-deck carries its own daily limits, fragmenting the queue — and do not reduce media, since every deck
-in a collection shares one media folder.
+**One deck per vocabulary, topics as tags.** The deck is named as the vocabulary is
+(`Spanish::Vocabulary`, `Spanish (Mexico) · Everyday words::Vocabulary`), so two vocabularies of one
+language are two queues; a name two vocabularies share, which only two offline devices can produce,
+numbers the later one rather than mixing their cards in one deck for good. Per-topic decks multiply
+scheduling configuration — each deck carries its own daily limits, fragmenting the queue — and do not
+reduce media, since every deck in a collection shares one media folder.
 
 ## Review state back
 

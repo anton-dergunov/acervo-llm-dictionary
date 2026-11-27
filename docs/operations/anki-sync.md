@@ -320,7 +320,7 @@ not minutes. The first collection is made by hand, on an empty Anki, and switche
 ./deploy.sh --worker anki-push-vocabulary        # the same push the server runs, now
 ```
 
-Every word that is `active` becomes notes, in one deck per language
+Every word that is `active` becomes notes, in one deck per vocabulary, named as it is
 (`Spanish::Vocabulary`) with its topics as `acervo::topic::…` tags; a word still in the inbox has
 none, and one set aside has none and is named so its cards are suspended. Pictures go at 768 px rather than the 1024 master. Notes are listed in rounds — every
 word's first note, then every word's second — so a first push of many words does not bring one
@@ -333,7 +333,7 @@ python scripts/acervo_worker.py anki build-manifest OUT --graph graph.json --med
 python scripts/preview_anki_cards.py OUT/manifest.json OUT/preview
 ```
 
-`--language es` limits either command to one language; `--picture-size 0` keeps the masters.
+`--vocabulary <id>` (repeatable) limits either command to those vocabularies; `--picture-size 0` keeps the masters.
 
 ## FSRS state back into Acervo
 

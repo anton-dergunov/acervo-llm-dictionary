@@ -13,6 +13,14 @@ What is left:
    corpus to know where each channel's speakers are from — whether it records that is to be checked
    first. Either way it is a change in `spoken-usage-retrieval` (a field on the search request), made
    there and re-pinned, not filtered on this side.
+2. **Voice choice per variety.** Two vocabularies of one language may be two varieties — Argentine and
+   Castilian Spanish — and each word is already asked for in its own vocabulary's locale. But the voice
+   chosen in Settings ▸ Pronunciation is per language (`pronunciation_settings.voices`, `first_voices`,
+   `guide_voices`), and the page draws each language in the accent of the first of its vocabularies that has one, so the owner
+   cannot pick a Castilian voice for one and an Argentine voice for the other. Keying the choice by
+   locale (`es-AR`, `es-ES`) rather than by language, with the bare language as the fallback, would do
+   it without naming a vocabulary in the settings. Wanted once two varieties of one language can be
+   kept ([`../several-vocabularies.md`](../several-vocabularies.md)).
 
 Two questions to answer before building more:
 

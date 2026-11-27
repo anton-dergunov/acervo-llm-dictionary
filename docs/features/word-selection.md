@@ -24,8 +24,8 @@ most of the design:
   route. A pile gathered on the tablet is not on the phone; that is the price, and a pile is short-lived
   enough to pay it. The record carries the account it was made in: another account on the device reads
   an empty selection and its first write replaces the record, the rule the replica follows.
-- **There is one selection per vocabulary language**, because a loop and a story are each in one
-  language. The bar shows the selection for the language on screen.
+- **There is one selection per vocabulary**, because a loop and a story are each made from one
+  vocabulary's words. The bar shows the selection for the vocabulary on screen.
 - **It is ordered, in the order words were chosen**, because when a dialog cannot take them all, the
   first chosen are the ones used. Order is intent.
 - **An entry is a lexeme id and nothing else.** What the word is — its headword, whether it still

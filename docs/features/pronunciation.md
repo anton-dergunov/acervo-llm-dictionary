@@ -90,7 +90,10 @@ Settings ▸ Vocabularies, because it is a fact about what is learned rather tha
 writers follow it too ([`standing-rules.md`](standing-rules.md), "The reader"), and the clip search may
 ([`../plans/languages/accents.md`](../plans/languages/accents.md)).
 The voices are its first reader: everything spoken in that vocabulary is asked for in its locale,
-`es-AR`, and a vocabulary with no accent is asked for in the bare language exactly as before.
+`es-AR`, and a vocabulary with no accent is asked for in the bare language exactly as before. A word,
+an example or a story is heard in its own vocabulary's variety; text with no vocabulary of its own in
+that language (a definition written in another of the owner's languages, a loop's take) takes the
+variety of the first of that language's vocabularies that has one.
 **Which accents a language is offered is CLDR's answer, not a list in the code**
 (`locales.accents`): every region where CLDR says the language is official, de facto official or
 official in part of the country, with at least 200,000 speakers, most speakers first — Mexico,
@@ -117,7 +120,9 @@ its accent is the one it was made for. The accent alone is not an emotion, so a 
 emotion only when the emotion was what was sent.
 
 **Which voice reads each language is the owner's choice, per order** — one clear voice and one
-expressive voice per language, in Settings ▸ Pronunciation. Choosing a voice sets two things:
+expressive voice per language, in Settings ▸ Pronunciation; per language, not per variety, so the page
+shows each language in the accent of the first of its vocabularies that has one
+([`../plans/languages/accents.md`](../plans/languages/accents.md), item 2). Choosing a voice sets two things:
 the voice that pair says the language in (`pronunciation_settings.voices`, per pair and language),
 and that the pair **reads first** for that language (`first_voices`, `{order: {language: [provider,
 model]}}`). The rest of the order are its backups, in Providers order; a backup that offers the same
